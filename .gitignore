@@ -1,2 +1,4 @@
 AutoTester-Aug15-VS2015/AutoTester/AutoTesterINUse.VC.VC.opendb
 AutoTester-Aug15-VS2015/AutoTester/AutoTesterINUse.VC.db
+*.obj
+
