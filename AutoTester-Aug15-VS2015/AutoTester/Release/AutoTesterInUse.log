@@ -1,2 +1,0 @@
-﻿TestWrapper.obj : error LNK2001: unresolved external symbol "int __cdecl Parse(void)" (?Parse@@YAHXZ)
-C:\CS3201\AutoTester-Aug15-VS2015\AutoTester\Release\AutoTesterInUse.exe : fatal error LNK1120: 1 unresolved externals
