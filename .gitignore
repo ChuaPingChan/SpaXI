@@ -7,3 +7,8 @@
 *.ipch
 *.opendb
 *.db
+*.exe
+*.dll
+*.exp
+*.pch
+*.lib
