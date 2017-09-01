@@ -12,3 +12,4 @@
 *.exp
 *.pch
 *.lib
+*.suo
