@@ -6,60 +6,137 @@ QueryValidator::QueryValidator()
 {
 }
 
-
 QueryValidator::~QueryValidator()
 {
 }
 
-//Public methods
+
+/******************** Public methods ********************/
+
 bool QueryValidator::isValidQuery()
 {
-    return false;
+    string stub;
+    return isValidDeclaration(stub) && isValidSelect();
 }
 
-//For Testing Private Methods
-bool QueryValidator::isValidEntityTest(string input)
+/*--------------- For UnitTesting ---------------*/
+void QueryValidator::stubMethod()
 {
-    return isValidEnitity(input);
 }
 
-bool QueryValidator::isValidSynonymTest(string input)
+bool QueryValidator::isValidDeclarationTest(string str)
 {
-    return isValidSynonym(input);
+    return isValidDeclaration(str);
 }
 
-
-//Private methods
-
-vector<string> QueryValidator::getQueryToBeValidated()
+bool QueryValidator::isValidEntityTest(string str)
 {
-    return vector<string>();
+    return isValidEntity(str);
 }
 
-//Validation of Declaration
-bool QueryValidator::isValidDeclaration()
+bool QueryValidator::isValidSynonymTest(string str)
 {
-    return false;
+    return isValidSynonym(str);
 }
 
-bool QueryValidator::isValidEnitity(string input)
+void QueryValidator::setUnvalidatedQueryVector(vector<string> inputVector)
+{
+    _unvalidatedQueryVector = inputVector;
+}
+
+
+
+/******************** Private methods ********************/
+
+/*--------------- Validation of Declaration ---------------*/
+//Pre-Cond: Semi-colon has to be removed
+bool QueryValidator::isValidDeclaration(string str)
+{
+    string entity;
+    string synonym;
+    int numWord = 0;
+    int numComma = 0;
+    int expectedNumComma = 0;
+
+    string EVERYTHING_EXCEPT_SPACE = "[^[:space:]]+";
+    regex exceptSpaceRegex(EVERYTHING_EXCEPT_SPACE);
+    sregex_iterator pos(str.cbegin(), str.cend(), exceptSpaceRegex);
+    sregex_iterator end;
+
+    int counter = 0;
+    for (; pos != end; pos++) {
+        string token = pos->str(0);
+
+        if (counter == 0 && isValidEntity(token)) {
+            numWord++;
+            entity = token;
+            counter++;
+            continue;
+        }
+        else if (counter == 0 && !isValidEntity(token)) {
+            return false;
+        }
+
+        if (token == ",") {
+            numComma++;
+            counter++;
+            continue;
+        }
+        else if (token.back() == ',') {
+            numComma++;
+            regex removeCommaRegex("([[:w:]]+),");
+            smatch m;
+            regex_search(token, m, removeCommaRegex);
+            string extracted = m[1].str();
+            if (isValidSynonym(extracted)) {
+                numWord++;
+                synonym = extracted;
+            }
+            else {
+                return false;
+            }
+        }
+        else if (isValidSynonym(token)) {
+            numWord++;
+            synonym = token;
+        }
+        else {
+            return false;
+        }
+
+        if (_synonymBank.find(synonym) == _synonymBank.end()) {
+            _synonymBank.insert(synonym);
+            stubMethod();   //Call QueryTree.insertVariable(entity, synonym)
+        }
+        else {
+            return false;
+        }
+
+        counter++;
+    }
+
+    expectedNumComma = numWord - 2;
+
+    return numComma == expectedNumComma;
+}
+
+bool QueryValidator::isValidEntity(string str)
 {
     string entityRegexString = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
     regex entityRegex(entityRegexString);
 
-    return regex_match(input, entityRegex);
+    return regex_match(str, entityRegex);
 }
 
-bool QueryValidator::isValidSynonym(string input)
+bool QueryValidator::isValidSynonym(string str)
 {
     string synonymRegexString = "([[:alpha:]]{1})([[:alpha:]|[:digit:]|#]*)";
     regex synonymRegex(synonymRegexString);
 
-    return regex_match(input, synonymRegex);
+    return regex_match(str, synonymRegex);
 }
 
-
-//Validation of Select
+/*--------------- Validation of Select ---------------*/
 bool QueryValidator::isValidSelect()
 {
     return false;

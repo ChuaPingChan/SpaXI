@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <list>
+#include <unordered_set>
 #include <regex>
 
 using namespace std;
@@ -14,23 +14,26 @@ public:
 
     bool isValidQuery();
 
-    //For Testing Private Methods
-    bool isValidEntityTest(string input);
-    bool isValidSynonymTest(string input);
+    /*--------------- For Unit Testing ---------------*/
+    void stubMethod();  //Just a placeholder
+    bool isValidDeclarationTest(string str);
+    bool isValidEntityTest(string str);
+    bool isValidSynonymTest(string str);
+    void setUnvalidatedQueryVector(vector<string> inputVector);
+
 
 private: 
-    list<string> _synonymNameBank;
+    unordered_set<string> _synonymBank;   //Contains list of used synonyms
+    vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
 
-    vector<string> getQueryToBeValidated();
-
-    //Validation of Declaration
-    bool isValidDeclaration();
+    /*--------------- Validation of Declaration ---------------*/
+    bool isValidDeclaration(string str);
     
-    bool isValidEnitity(string input);
-    bool isValidSynonym(string input);
+    bool isValidEntity(string str);
+    bool isValidSynonym(string str);
 
-
-    //Validation of Select
+    /*--------------- Validation of Select ---------------*/
     bool isValidSelect();
+
 };
 
