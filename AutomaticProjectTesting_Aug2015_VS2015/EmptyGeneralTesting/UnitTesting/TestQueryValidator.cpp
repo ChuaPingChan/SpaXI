@@ -127,5 +127,22 @@ namespace UnitTesting
             Assert::IsFalse(qv.isValidDeclarationTest(str));
         }
 
+        TEST_METHOD(TestQuerySelectValidity)
+        {
+        }
+
+        TEST_METHOD(TestQueryValidity)
+        {
+            QueryValidator qv;
+            vector<string> inputVector;
+
+            inputVector.push_back("assign a");
+            inputVector.push_back("variable v");
+            inputVector.push_back("Select v");
+
+            Assert::IsTrue(qv.isValidQuery(inputVector));
+        }
+
+
     };
 }
