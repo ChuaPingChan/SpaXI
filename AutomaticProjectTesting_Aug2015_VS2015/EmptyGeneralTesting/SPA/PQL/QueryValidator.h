@@ -12,14 +12,13 @@ public:
     QueryValidator();
     ~QueryValidator();
 
-    bool isValidQuery();
+    bool isValidQuery(vector<string> inputVector);
 
     /*--------------- For Unit Testing ---------------*/
     void stubMethod();  //Just a placeholder
     bool isValidDeclarationTest(string str);
     bool isValidEntityTest(string str);
     bool isValidSynonymTest(string str);
-    void setUnvalidatedQueryVector(vector<string> inputVector);
 
 
 private: 
@@ -33,7 +32,7 @@ private:
     bool isValidSynonym(string str);
 
     /*--------------- Validation of Select ---------------*/
-    bool isValidSelect();
+    bool isValidSelect(string str);
 
 };
 

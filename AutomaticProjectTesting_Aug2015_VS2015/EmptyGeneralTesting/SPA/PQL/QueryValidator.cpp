@@ -13,10 +13,23 @@ QueryValidator::~QueryValidator()
 
 /******************** Public methods ********************/
 
-bool QueryValidator::isValidQuery()
+bool QueryValidator::isValidQuery(vector<string> inputVector)
 {
-    string stub;
-    return isValidDeclaration(stub) && isValidSelect();
+    for (vector<string>::iterator iter = inputVector.begin(); iter != inputVector.end(); ++iter) {
+        string currentLine = *iter;
+        if (currentLine == inputVector.back()) {
+            if (!isValidSelect(currentLine)) {
+                return false;
+            }
+        }
+        else {
+            if (!isValidDeclaration(currentLine)) {
+                return false;
+            }
+        }
+    }
+    
+    return true; // && isValidSelect();
 }
 
 /*--------------- For UnitTesting ---------------*/
@@ -39,10 +52,7 @@ bool QueryValidator::isValidSynonymTest(string str)
     return isValidSynonym(str);
 }
 
-void QueryValidator::setUnvalidatedQueryVector(vector<string> inputVector)
-{
-    _unvalidatedQueryVector = inputVector;
-}
+
 
 
 
@@ -137,7 +147,7 @@ bool QueryValidator::isValidSynonym(string str)
 }
 
 /*--------------- Validation of Select ---------------*/
-bool QueryValidator::isValidSelect()
+bool QueryValidator::isValidSelect(string str)
 {
-    return false;
+    return true;    //stub
 }
