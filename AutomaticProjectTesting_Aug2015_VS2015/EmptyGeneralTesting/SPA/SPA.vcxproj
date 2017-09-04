@@ -13,11 +13,11 @@
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
-    <ClCompile Include="..\source\PKB.cpp" />
+    <ClCompile Include="..\source\PKBMain.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\PKB.h" />
+    <ClInclude Include="..\source\PKBMain.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="Parser.h" />
   </ItemGroup>
