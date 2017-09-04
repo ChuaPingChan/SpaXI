@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\PKB">
-      <UniqueIdentifier>{d388d843-64bb-464b-82f2-1ae62a65fc2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\PKB">
-      <UniqueIdentifier>{ec778cdd-61f4-4a1d-87f3-765effc3c850}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp">
@@ -30,8 +24,8 @@
     <ClCompile Include="..\source\TNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\PKBMain.cpp">
-      <Filter>Source Files\PKB</Filter>
+    <ClCompile Include="PKBMain.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +35,7 @@
     <ClInclude Include="Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\PKBMain.h">
+    <ClInclude Include="PKBMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
