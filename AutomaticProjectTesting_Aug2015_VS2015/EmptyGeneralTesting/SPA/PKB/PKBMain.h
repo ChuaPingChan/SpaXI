@@ -7,9 +7,7 @@
 
 using namespace std;
 
-
-#include "PKBMain.h"
-
-int DesignExtractor () {
-	return 0;
-}
+class PKBMain {
+public:
+	PKBMain();
+};

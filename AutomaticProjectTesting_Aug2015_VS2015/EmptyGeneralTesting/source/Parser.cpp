@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#include "PKB.h"
+#include "PKBMain.h"
 #include "TNode.h"
 #include "Parser.h"
 

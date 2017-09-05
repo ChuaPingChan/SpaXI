@@ -13,13 +13,29 @@
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
-    <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="PKB\ModTableProcToVar.cpp" />
+    <ClCompile Include="PKB\ModTableStmtToVar.cpp" />
+    <ClCompile Include="PKB\ModTableVarToStmt.cpp" />
+    <ClCompile Include="PKB\PKBMain.cpp" />
+    <ClCompile Include="PKB\FollowsTable.cpp" />
+    <ClCompile Include="PKB\ProcIndexTable.cpp" />
+    <ClCompile Include="PKB\UsesTableProcToVar.cpp" />
+    <ClCompile Include="PKB\UsesTableStmtToVar.cpp" />
+    <ClCompile Include="PKB\UsesTableVarToStmt.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="PKB\FollowsTable.h" />
+    <ClInclude Include="PKB\ModTableProcToVar.h" />
+    <ClInclude Include="PKB\ModTableStmtToVar.h" />
+    <ClInclude Include="PKB\ModTableVarToStmt.h" />
+    <ClInclude Include="PKB\ProcIndexTable.h" />
+    <ClInclude Include="PKB\PKBMain.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="PKB\UsesTableProcToVar.h" />
+    <ClInclude Include="PKB\UsesTableStmtToVar.h" />
+    <ClInclude Include="PKB\UsesTableVarToStmt.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
