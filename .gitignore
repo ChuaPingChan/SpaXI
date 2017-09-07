@@ -7,3 +7,14 @@
 *.ipch
 *.opendb
 *.db
+*.dll
+*.exp
+*.lib
+*.user
+*.suo
+*.exe
+*.pch
+*.vcxproj
+*.vcxproj.filters
+*.lastbuildstate
+
