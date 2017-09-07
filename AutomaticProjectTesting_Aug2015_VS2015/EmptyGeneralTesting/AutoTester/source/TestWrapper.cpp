@@ -19,7 +19,8 @@ TestWrapper::TestWrapper() {
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
-	Parse();
+    Parser parser;
+    parser.parse();
   // ...rest of your code...
 }
 
