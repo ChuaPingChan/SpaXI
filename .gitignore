@@ -14,7 +14,11 @@
 *.suo
 *.exe
 *.pch
-*.vcxproj
-*.vcxproj.filters
 *.lastbuildstate
+*/Debug*
+*/debug*
+*/Release*
+*/release*
+*.vcxproj.filters
+# Don't ignore .sln and .vcxproj, .ico, .rc, .rc2
 
