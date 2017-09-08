@@ -32,7 +32,7 @@ void Parser::parse() {
 // TODO: For unit testing, to be removed later.
 bool Parser::mainForUnitTest() {
     concatenateLines("../UnitTesting/ParserTestDependencies/getTokenTest.txt");
-    ofstream outfile("../UnitTesting/ParserTestDependencies/getTokenResult.txt");
+    ofstream outfile("../UnitTesting/ParserTestDependencies/getTokenResult.log");
 
     while (getNextToken()) {
         outfile << _nextToken << endl;
