@@ -18,21 +18,19 @@ Parser::Parser()
 void Parser::parse() {
 }
 
-void Parser::mainForUnitTest() {
-
+bool Parser::mainForUnitTest() {
+    concatenateLines("C:/Users/user/Downloads/prototype_sample_SIMPLE_source.txt");
+    return _concatenatedSourceCode == "procedure ABC {  i=1; b=200 ;	c= a   ;\u007D";
 }
 
-string Parser::concatenateLines(string filename) {
+void Parser::concatenateLines(string filename) {
     ifstream infile(filename.c_str());
     
     string line;
-    string concatenatedString;
 
     while (getline(infile, line)) {
-        concatenatedString += line;
+        _concatenatedSourceCode += line;
     }
-
-    return concatenatedString;
 }
 
 string Parser::getNextToken()

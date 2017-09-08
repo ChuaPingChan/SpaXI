@@ -15,10 +15,7 @@ namespace UnitTesting
         TEST_METHOD(testMainForUnitTest)
         {
             Parser parser;
-        }
-
-        TEST_METHOD(testDefaultConstructor) {
-            Parser parser;
+            Assert::IsTrue(parser.mainForUnitTest());
         }
 
     };

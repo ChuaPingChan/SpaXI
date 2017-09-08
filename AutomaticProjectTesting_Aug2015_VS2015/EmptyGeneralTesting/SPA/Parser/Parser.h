@@ -9,7 +9,7 @@ public:
     Parser();
 
     void parse();
-    void mainForUnitTest();
+    bool mainForUnitTest();
 
     // ***** For unit testing, to be removed *****
     // *******************************************
@@ -24,7 +24,7 @@ private:
     std::string _nextToken;
     bool _isValidSyntax;
 
-    std::string concatenateLines(std::string);
+    void concatenateLines(std::string);
     std::string getNextToken();
 
     /*
