@@ -2,6 +2,7 @@
 
 #include <string>
 #include <fstream>
+#include <regex>
 
 class Parser
 {
@@ -16,8 +17,16 @@ public:
 
 private:
 
-    const int INT_INITIAL_STMT_NUMBER = 0;
-    const std::string STRING_EMPTY_STRING = "";
+    static const int INT_INITIAL_STMT_NUMBER = 0;
+    static const std::string STRING_EMPTY_STRING;
+
+    static const std::regex REGEX_VALID_ENTITY_NAME;
+    static const std::regex REGEX_EXTRACT_NEXT_TOKEN;
+    static const std::regex REGEX_VALID_PROCEDURE_KEYWORD;
+    static const std::regex REGEX_VALID_WHILE_KEYWORD;
+    static const std::regex REGEX_MATCH_OPEN_BRACE;
+    static const std::regex REGEX_MATCH_CLOSE_BRACE;
+    static const std::regex REGEX_MATCH_SEMICOLON;
 
     int _currentStmtNumber;
     std::string _concatenatedSourceCode;
@@ -25,7 +34,7 @@ private:
     bool _isValidSyntax;
 
     void concatenateLines(std::string);
-    std::string getNextToken();
+    bool getNextToken();
 
     /*
     bool matchToken(string regexPattern);
