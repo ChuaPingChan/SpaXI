@@ -10,6 +10,7 @@
 *.dll
 *.exp
 *.lib
+!*AutoTester*lib
 *.user
 *.suo
 *.exe
