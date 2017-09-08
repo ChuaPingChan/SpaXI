@@ -21,7 +21,7 @@ void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
     Parser parser;
     parser.parse();
-  // ...rest of your code...
+    // ...rest of your code...
 }
 
 // method to evaluating a query
