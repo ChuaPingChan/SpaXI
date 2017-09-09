@@ -9,11 +9,11 @@ class Parser
 public:
     Parser();
 
-    void parse();
-    bool mainForUnitTest();
+    void parse(std::string filename);
 
     // ***** For unit testing, to be removed *****
     // *******************************************
+    std::vector<std::string> getTokenTest(std::string filename);
 
 private:
 

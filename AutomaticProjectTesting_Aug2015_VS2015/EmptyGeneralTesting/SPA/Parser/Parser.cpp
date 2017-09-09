@@ -26,20 +26,19 @@ Parser::Parser()
     _isValidSyntax = true;
 }
 
-void Parser::parse() {
+void Parser::parse(string filename) {
 }
 
 // TODO: For unit testing, to be removed later.
-bool Parser::mainForUnitTest() {
-    concatenateLines("../UnitTesting/ParserTestDependencies/getTokenTest.txt");
-    ofstream outfile("../UnitTesting/ParserTestDependencies/getTokenResult.log");
+vector<string> Parser::getTokenTest(string infile) {
+    concatenateLines(infile);
+    vector<string> accumulatedToken;
 
     while (getNextToken()) {
-        outfile << _nextToken << endl;
+        accumulatedToken.push_back(_nextToken);
     }
-    outfile << "end" << endl;
-    outfile.close();
-    return true;
+
+    return accumulatedToken;
 }
 
 void Parser::concatenateLines(string filename) {
