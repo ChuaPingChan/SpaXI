@@ -13,13 +13,46 @@ public:
     ~QueryValidator();
 
     bool isValidQuery(vector<string> inputVector);
+  
 
     /*--------------- For Unit Testing ---------------*/
-    void stubMethod();  //Just a placeholder
-    bool isValidDeclarationTest(string str);
-    bool isValidEntityTest(string str);
+    /*--------------- Grammar Regex Test---------------*/
+    bool isValidLetterTest(string str);
+    bool isValidIntegerTest(string str);
     bool isValidSynonymTest(string str);
+    bool isValidStmtRefTest(string str);
+    bool isValidEntRefTest(string str);
+    bool isValidNameTest(string str);
 
+    /*--------------- Declaration Test---------------*/
+    bool isValidEntityTest(string str);
+    bool isValidDeclarationTest(string str);
+    void stubMethod();  //Just a placeholder
+
+    /*--------------- Pattern Test---------------*/
+    bool isValidFactorTest(string str);
+    bool isValidExpressionSpecTest(string str);
+    bool isValidPatternRegexTest(string str);
+
+    bool isValidPatternTest(string str);
+
+    /*--------------- Relationship Test---------------*/
+    bool isValidModifiesRegexTest(string str);
+    bool isValidUsesRegexTest(string str);
+    bool isValidFollowsRegexTest(string str);
+    bool isValidParentRegexTest(string str);
+
+    bool isValidModifiesTest(string str);
+    bool isValidUsesTest(string str);
+    bool isValidFollowsTest(string str);
+    bool isValidParentTest(string str);
+
+    /*--------------- Select Test---------------*/
+    bool isValidSelectTest(string str);
+    bool isValidSelectOverallRegexTest(string str);
+   
+
+    
 
 private: 
     unordered_set<string> _synonymBank;   //Contains list of used synonyms
@@ -34,5 +67,6 @@ private:
     /*--------------- Validation of Select ---------------*/
     bool isValidSelect(string str);
 
+    bool isValidSelectOverallRegex(string str);
 };
 
