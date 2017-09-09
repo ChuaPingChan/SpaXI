@@ -27,10 +27,25 @@ namespace UnitTesting
             std::vector<std::string> expectedTokens(expectedTokenArray, expectedTokenArray + sizeof(expectedTokenArray) / sizeof(expectedTokenArray[0]));
             std::vector<std::string> actualTokens = parser.getTokenTest(newFilePath);
 
-
-            // Remove file created
-            Assert::IsTrue(std::remove(newFilePath.c_str()) == 0);
+            Assert::IsTrue(std::remove(newFilePath.c_str()) == 0);      // Remove file created
             Assert::IsTrue(expectedTokens == actualTokens);
+        }
+
+        TEST_METHOD(matchTokenTest)
+        {
+            Parser parser;
+
+            // Set up file for Parser to parse
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/getTokenInput.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString("procedure    while \n { \t }\n");
+            outfile << inputString;
+            outfile.close();
+
+            // Parser's temporary test method
+            Assert::IsTrue(parser.matchTokenTest(newFilePath));
+
+            Assert::IsTrue(std::remove(newFilePath.c_str()) == 0);      // Remove file created
         }
 
     };

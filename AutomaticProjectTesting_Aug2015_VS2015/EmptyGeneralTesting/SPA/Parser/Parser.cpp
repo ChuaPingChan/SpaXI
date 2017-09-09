@@ -5,6 +5,7 @@
 #include <cassert>
 
 #include "Parser.h"
+#include "SyntaxErrorException.h"
 
 using namespace std;
 
@@ -24,32 +25,24 @@ Parser::Parser()
     _concatenatedSourceCode = Parser::STRING_EMPTY_STRING;
     _nextToken = Parser::STRING_EMPTY_STRING;
     _isValidSyntax = true;
+    _errorMessage = string();
 }
 
 void Parser::parse(string filename) {
 }
 
-// TODO: For unit testing, to be removed later.
-vector<string> Parser::getTokenTest(string infile) {
-    concatenateLines(infile);
-    vector<string> accumulatedToken;
-
-    while (getNextToken()) {
-        accumulatedToken.push_back(_nextToken);
-    }
-
-    return accumulatedToken;
-}
-
-void Parser::concatenateLines(string filename) {
+string Parser::concatenateLines(string filename) {
     ifstream infile(filename.c_str());
     
+    string stringAccumulator;
+
     string line;
     while (getline(infile, line)) {
-        _concatenatedSourceCode += line;
+        stringAccumulator += line;
     }
 
     infile.close();
+    return stringAccumulator;
 }
 
 bool Parser::getNextToken()
@@ -65,3 +58,63 @@ bool Parser::getNextToken()
         return false;
     }
 }
+
+/*
+Matches a given regex expression to the next token.
+If the match is successful, return true and move the next token forward.
+*/
+bool Parser::matchToken(regex re) {
+    if (regex_match(_nextToken, re)) {
+        getNextToken();
+        return true;
+    }
+    else {
+        _isValidSyntax = false;
+        return false;
+    }
+}
+
+
+/*
+* Hereon are methods for unit testing, all of them
+* are to be removed when permanent non-hacky unit test can be done.
+*/
+vector<string> Parser::getTokenTest(string infile) {
+    _concatenatedSourceCode = concatenateLines(infile);
+    vector<string> accumulatedToken;
+
+    while (getNextToken()) {
+        accumulatedToken.push_back(_nextToken);
+    }
+
+    return accumulatedToken;
+}
+
+bool Parser::matchTokenTest(string infile) {
+    _concatenatedSourceCode = concatenateLines(infile);
+    
+    // Not strictly necessary, but improves readability
+    bool methodIsWorkingFine = true;
+
+    // Manually set this when content of input file changes
+    const int numOfValues = 4;
+
+    // Manually set this when content of input file changes
+    regex regexArray[numOfValues] = {
+        Parser::REGEX_VALID_PROCEDURE_KEYWORD,
+        Parser::REGEX_VALID_WHILE_KEYWORD,
+        Parser::REGEX_MATCH_OPEN_BRACE,
+        Parser::REGEX_MATCH_CLOSE_BRACE
+    };
+
+    for (int i = 0; methodIsWorkingFine && (i < numOfValues); i++) {
+        getNextToken();
+        if (!(regex_match(_nextToken, regexArray[i]))) {
+            methodIsWorkingFine = false;
+            return false;
+        }
+    }
+
+    return methodIsWorkingFine;
+}
+
