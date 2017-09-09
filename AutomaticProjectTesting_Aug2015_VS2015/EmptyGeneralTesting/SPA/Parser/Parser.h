@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <regex>
+#include <stack>
 
 class Parser
 {
@@ -11,8 +12,9 @@ public:
 
     void parse(std::string filename);
 
-    // ***** For unit testing, to be removed *****
-    // *******************************************
+    /**********************************
+    * For unit testing, to be removed *
+    ***********************************/
     std::vector<std::string> getTokenTest(std::string filename);
     bool matchTokenTest(std::string filename);
 
@@ -21,7 +23,7 @@ private:
     /************
     * Constants *
     *************/
-    static const int INT_INITIAL_STMT_NUMBER = 0;
+    static const int INT_INITIAL_STMT_NUMBER;
 
     static const std::string STRING_EMPTY_STRING;
     
@@ -43,17 +45,21 @@ private:
     std::string _nextToken;
     bool _isValidSyntax;
     std::string _errorMessage;
+    std::stack<std::string> _callStack;     //Contains only procedures
+    std::stack<int> _parentStack;   //Contains only container stmts
 
-    /**********
-    * Methods *
-    ***********/
+    /******************
+    * Private Methods *
+    *******************/
     std::string concatenateLines(std::string filename);
     bool getNextToken();
+    bool assertMatchAndIncrementToken(std::regex re);
     bool matchToken(std::regex re);
 
-    /*
     void parseProgram();
     void parseProcedure();
+
+    /*
     void parseStmtList();
     void parseStmt();
 

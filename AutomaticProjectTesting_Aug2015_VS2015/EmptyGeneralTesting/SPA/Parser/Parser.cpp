@@ -1,6 +1,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <stack>
 #include <regex>
 #include <cassert>
 
@@ -9,7 +10,9 @@
 
 using namespace std;
 
+const int Parser::INT_INITIAL_STMT_NUMBER = 1;
 const string Parser::STRING_EMPTY_STRING = "";
+
 const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\b([A-Za-z][A-Za-z0-9]*)[^A-Za-z0-9]\b");
 const regex Parser::REGEX_EXTRACT_NEXT_TOKEN = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|[^a-zA-Z0-9\\w]|\\d+).*");
 const regex Parser::REGEX_VALID_PROCEDURE_KEYWORD = regex("procedure");
@@ -26,6 +29,8 @@ Parser::Parser()
     _nextToken = Parser::STRING_EMPTY_STRING;
     _isValidSyntax = true;
     _errorMessage = string();
+    _callStack = stack<string>();
+    _parentStack = stack<int>();
 }
 
 void Parser::parse(string filename) {
@@ -60,20 +65,59 @@ bool Parser::getNextToken()
 }
 
 /*
-Matches a given regex expression to the next token.
-If the match is successful, return true and move the next token forward.
+Asserts that the next token must match the given regex.
+If the match is successful, move _nextToken forward and return true.
+If match is unsuccessful, indicate syntax error.
 */
-bool Parser::matchToken(regex re) {
+bool Parser::assertMatchAndIncrementToken(regex re) {
     if (regex_match(_nextToken, re)) {
         getNextToken();
         return true;
     }
     else {
+        // TODO: consider throwing exception.
         _isValidSyntax = false;
         return false;
     }
 }
 
+/*
+Matches the given regex with the next token.
+*/
+bool Parser::matchToken(regex re) {
+    return regex_match(_nextToken, re);
+}
+
+void Parser::parseProgram() {
+    /*
+    TODO:
+
+    */
+    getNextToken();
+    
+    //TODO: put this in a while loop after iteration 1.
+    parseProcedure();
+}
+
+// Expects _nextToken to be "procedure" keyword
+void Parser::parseProcedure() {
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_PROCEDURE_KEYWORD);
+    
+    string procName;
+    if (matchToken(Parser::REGEX_VALID_ENTITY_NAME)) {
+        procName = _nextToken;
+        getNextToken();
+        /*
+        TODO:
+        - Populate procToIdxMap
+        - (done) push to local procedure stack
+        - Pupulate callsTable
+        */
+        _callStack.push(procName);
+    }
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+}
 
 /*
 * Hereon are methods for unit testing, all of them
