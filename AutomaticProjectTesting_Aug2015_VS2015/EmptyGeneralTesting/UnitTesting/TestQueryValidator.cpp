@@ -152,6 +152,43 @@ namespace UnitTesting
             Assert::IsFalse(qv.isValidNameTest(str));
         }
 
+        /*--------------- Splitting Query Test---------------*/
+
+        TEST_METHOD(TestSplitQuery)
+        { 
+            QueryValidator qv;
+            string str;
+            vector<string> splitted;
+
+            //Equality test
+            qv = QueryValidator();
+            str = "assign a;select a;";
+            splitted = qv.initialSplitTest(str);
+            Assert::AreEqual((std::string) "assign a", splitted.at(0));
+            Assert::AreEqual((std::string) "select a", splitted.at(1));
+
+            //Equality test with spaces
+            qv = QueryValidator();
+            str = "assign a     ; select a     ;";
+            splitted = qv.initialSplitTest(str);
+            Assert::AreEqual((std::string) "assign a     ", splitted.at(0));
+            Assert::AreEqual((std::string) " select a     ", splitted.at(1));
+
+            //Inequality test with spaces
+            qv = QueryValidator();
+            str = "assign a     ; select a     ;";
+            splitted = qv.initialSplitTest(str);
+            Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
+            Assert::AreNotEqual((std::string) " select a", splitted.at(1));
+
+            //Inequality test with new declaration at beginning
+            qv = QueryValidator();
+            str = "while w;assign a;select a;";
+            splitted = qv.initialSplitTest(str);
+            Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
+            Assert::AreNotEqual((std::string) " select a", splitted.at(1));
+
+        }
 
         /*--------------- Declaration Test---------------*/
         TEST_METHOD(TestEntityRegex)
