@@ -12,7 +12,6 @@ bool ParentToChildTable::addParentChild(int parentStmt, int childStmt)
 	if (parentToChildMap.find(parentStmt) == parentToChildMap.end()) {
 		parentToChildMap[parentStmt] = list<int>();
 		parentToChildMap[parentStmt].push_back(childStmt);
-		parentToChildMap[parentStmt].unique();
 		return true;
 	}
 
