@@ -143,63 +143,54 @@ bool QueryValidator::isValidExpressionSpecTest(string str)
 
 bool QueryValidator::isValidPatternRegexTest(string str)
 {
-    regex patternRegexCheck(PATTERN_REGEX);
-    return regex_match(str, patternRegexCheck);
+    return isValidPatternRegex(str);
 }
 
 bool QueryValidator::isValidPatternTest(string str)
 {
-    return false; //TO-DO: Check real validity of pattern clause
+    return isValidPattern(str);
 }
 
 
 /*--------------- Relationship Test---------------*/
 bool QueryValidator::isValidModifiesRegexTest(string str)
 {
-    regex modifiesRegexCheck(MODIFIES_REGEX);
-    return regex_match(str, modifiesRegexCheck);
+    return isValidModifiesRegex(str);
 }
 
 bool QueryValidator::isValidUsesRegexTest(string str)
 {
-    regex usesRegexCheck(USES_REGEX);
-    return regex_match(str, usesRegexCheck);
+    return isValidUsesRegex(str);
 }
 
 bool QueryValidator::isValidFollowsRegexTest(string str)
 {
-    regex followsRegexCheck(FOLLOWS_REGEX);
-    return regex_match(str, followsRegexCheck);
+    return isValidFollowsRegex(str);
 }
 
 bool QueryValidator::isValidParentRegexTest(string str)
 {
-    regex parentRegexCheck(PARENT_REGEX);
-    return regex_match(str, parentRegexCheck);
+    return isValidParentRegex(str);
 }
 
 bool QueryValidator::isValidModifiesTest(string str)
 {
-    return false;   //stub
-                    //TODO: Check the real validity of modifies clause
+    return isValidModifies(str);
 }
 
 bool QueryValidator::isValidUsesTest(string str)
 {
-    return false;   //stub
-                    //TODO: Check the real validity of modifies clause
+    return isValidUses(str);
 }
 
 bool QueryValidator::isValidFollowsTest(string str)
 {
-    return false;   //stub
-                    //TODO: Check the real validity of modifies clause
+    return isValidFollows(str);
 }
 
 bool QueryValidator::isValidParentTest(string str)
 {
-    return false;   //stub
-                    //TODO: Check the real validity of modifies clause
+    return isvalidParent(str);
 }
 
 /*--------------- Select Test---------------*/
@@ -320,12 +311,75 @@ bool QueryValidator::isValidSynonym(string str)
 /*--------------- Validation of Select --------------*/
 bool QueryValidator::isValidSelect(string str)
 {
+    //TODO: split str into the different clauses
+    //TODO: Check each validity of the cluases
+    //TODO: This is true when all the clauses are true
+
     return true;  //stub
-                                            //TODO: This is to check the overall validity, not just syntax
+}
+
+bool QueryValidator::isValidModifies(string str)
+{
+    return false;   //stub
+                    //TODO: This is to check the overall validity, not just syntax
+}
+
+bool QueryValidator::isValidUses(string str)
+{
+    return false;   //stub
+                    //TODO: This is to check the overall validity, not just syntax
+}
+
+bool QueryValidator::isValidFollows(string str)
+{
+    return false;   //stub
+                    //TODO: This is to check the overall validity, not just syntax
+}
+
+bool QueryValidator::isvalidParent(string str)
+{
+    return false;   //stub
+                    //TODO: This is to check the overall validity, not just syntax
+}
+
+bool QueryValidator::isValidPattern(string str)
+{
+    return false;   //stub
+                    //TODO: This is to check the overall validity, not just syntax
 }
 
 bool QueryValidator::isValidSelectOverallRegex(string str)
 {
     regex overallSelectRegexCheck(SELECT_OVERALL_REGEX);
     return regex_match(str, overallSelectRegexCheck);
+}
+
+bool QueryValidator::isValidModifiesRegex(string str)
+{
+    regex modifiesRegexCheck(MODIFIES_REGEX);
+    return regex_match(str, modifiesRegexCheck);
+}
+
+bool QueryValidator::isValidUsesRegex(string str)
+{
+    regex usesRegexCheck(USES_REGEX);
+    return regex_match(str, usesRegexCheck);
+}
+
+bool QueryValidator::isValidFollowsRegex(string str)
+{
+    regex followsRegexCheck(FOLLOWS_REGEX);
+    return regex_match(str, followsRegexCheck);
+}
+
+bool QueryValidator::isValidParentRegex(string str)
+{
+    regex parentRegexCheck(PARENT_REGEX);
+    return regex_match(str, parentRegexCheck);
+}
+
+bool QueryValidator::isValidPatternRegex(string str)
+{
+    regex patternRegexCheck(PATTERN_REGEX);
+    return regex_match(str, patternRegexCheck);
 }

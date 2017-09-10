@@ -71,6 +71,18 @@ private:
 
     /*--------------- Validation of Select ---------------*/
     bool isValidSelect(string str);
+
+    bool isValidModifies(string str);
+    bool isValidUses(string str);
+    bool isValidFollows(string str);
+    bool isvalidParent(string str);
+    bool isValidPattern(string str);
+
     bool isValidSelectOverallRegex(string str);
+    bool isValidModifiesRegex(string str);
+    bool isValidUsesRegex(string str);
+    bool isValidFollowsRegex(string str);
+    bool isValidParentRegex(string str);
+    bool isValidPatternRegex(string str);
 };
 
