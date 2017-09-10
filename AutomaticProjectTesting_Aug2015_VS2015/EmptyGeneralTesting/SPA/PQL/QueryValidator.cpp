@@ -106,6 +106,13 @@ bool QueryValidator::isValidNameTest(string str)
     return regex_match(str, nameRegexCheck);
 }
 
+/*--------------- Splitting Query Test---------------*/
+
+vector<string> QueryValidator::initialSplitTest(string query)
+{
+    return initialSplit(query);
+}
+
 /*--------------- Declaration Test---------------*/
 bool QueryValidator::isValidEntityTest(string str)
 {
@@ -140,6 +147,10 @@ bool QueryValidator::isValidPatternRegexTest(string str)
     return regex_match(str, patternRegexCheck);
 }
 
+bool QueryValidator::isValidPatternTest(string str)
+{
+    return false; //TO-DO: Check real validity of pattern clause
+}
 
 
 /*--------------- Relationship Test---------------*/
@@ -205,6 +216,22 @@ bool QueryValidator::isValidSelectOverallRegexTest(string str)
 
 
 /******************** Private methods ********************/
+
+/*--------------- Split initial query ---------------*/
+
+//split query using ';' as delimiter
+vector<string> QueryValidator::initialSplit(string query)
+{
+    char delimiter = ';';
+    stringstream ss(query);
+    vector<string> tokens;
+    string arguments;
+
+    while (getline(ss, arguments, delimiter)) {
+        tokens.push_back(arguments);
+    }
+    return tokens;
+}
 
 /*--------------- Validation of Declaration ---------------*/
 //Pre-Cond: Semi-colon has to be removed

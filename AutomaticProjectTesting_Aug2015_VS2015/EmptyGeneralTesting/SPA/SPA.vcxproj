@@ -16,7 +16,6 @@
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="PQL\PQLMain.cpp" />
-    <ClCompile Include="PQL\QuerySplitter.cpp" />
     <ClCompile Include="PQL\QueryValidator.cpp" />
     <ClCompile Include="PQL\QueryTree.cpp" />
     <ClCompile Include="PQL\QueryEvaluator.cpp" />
@@ -27,7 +26,6 @@
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="PQL\PQLMain.h" />
-    <ClInclude Include="PQL\QuerySplitter.h" />
     <ClInclude Include="PQL\QueryValidator.h" />
     <ClInclude Include="PQL\QueryTree.h" />
     <ClInclude Include="PQL\QueryEvaluator.h" />

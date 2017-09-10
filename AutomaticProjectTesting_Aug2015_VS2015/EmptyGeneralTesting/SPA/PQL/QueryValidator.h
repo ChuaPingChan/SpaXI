@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include <sstream>
 #include <regex>
 
 using namespace std;
@@ -24,6 +25,9 @@ public:
     bool isValidEntRefTest(string str);
     bool isValidNameTest(string str);
 
+    /*--------------- Splitting Query Test---------------*/
+    vector<string> initialSplitTest(string query);
+
     /*--------------- Declaration Test---------------*/
     bool isValidEntityTest(string str);
     bool isValidDeclarationTest(string str);
@@ -33,7 +37,6 @@ public:
     bool isValidFactorTest(string str);
     bool isValidExpressionSpecTest(string str);
     bool isValidPatternRegexTest(string str);
-
     bool isValidPatternTest(string str);
 
     /*--------------- Relationship Test---------------*/
@@ -58,15 +61,16 @@ private:
     unordered_set<string> _synonymBank;   //Contains list of used synonyms
     vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
 
+    /*--------------- Splitting Query ---------------*/
+    vector<string> initialSplit(string query);
+
     /*--------------- Validation of Declaration ---------------*/
-    bool isValidDeclaration(string str);
-    
+    bool isValidDeclaration(string str);   
     bool isValidEntity(string str);
     bool isValidSynonym(string str);
 
     /*--------------- Validation of Select ---------------*/
     bool isValidSelect(string str);
-
     bool isValidSelectOverallRegex(string str);
 };
 
