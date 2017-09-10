@@ -312,6 +312,14 @@ namespace UnitTesting
             Assert::IsFalse(qv.isValidPatternRegexTest(str));
         }
 
+        TEST_METHOD(TestPatternValidity)
+        {
+            QueryValidator qv;
+            string str;
+
+            //TODO: Test the validity for pattern
+        }
+
 
         /*--------------- Relationship Test---------------*/
         TEST_METHOD(TestModifiesRegex)
@@ -434,6 +442,37 @@ namespace UnitTesting
             Assert::IsFalse(qv.isValidParentRegexTest(str));
         }
 
+        TEST_METHOD(TestModifiesValidity)
+        {
+            QueryValidator qv;
+            string str;
+
+            //TODO: Test validity of modifies
+        }
+
+        TEST_METHOD(TestUsesValidity)
+        {
+            QueryValidator qv;
+            string str;
+
+            //TODO: Test validity of uses
+        }
+
+        TEST_METHOD(TestFollowsValidity)
+        {
+            QueryValidator qv;
+            string str;
+
+            //TODO: Test validity of follows
+        }
+
+        TEST_METHOD(TestParentValidity)
+        {
+            QueryValidator qv;
+            string str;
+
+            //TODO: Test validity of parent
+        }
 
         /*--------------- Select Test---------------*/
         TEST_METHOD(TestSelectOverallRegex)
