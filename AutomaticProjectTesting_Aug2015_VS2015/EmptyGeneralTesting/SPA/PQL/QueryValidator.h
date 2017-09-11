@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include <sstream>
 #include <regex>
+#include <algorithm>
 
 using namespace std;
 
@@ -63,7 +64,7 @@ public:
 private: 
     unordered_set<string> _synonymBank;   //Contains list of used synonyms
     vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
-
+    
     /*--------------- Splitting Query ---------------*/
     vector<string> tokenizer(string query);
 
@@ -72,6 +73,9 @@ private:
 
     /*--------------- Get string between two delimiters ---------------*/
     string getBetweenTwoStrings(const string & str, const string & firstDelim, const string & secondDelim);
+   
+    /*--------------- Find argument in a clause ---------------*/
+    bool findArgument(string arg, vector<string> clause);
 
     /*--------------- Validation of Declaration ---------------*/
     bool isValidDeclaration(string str);   

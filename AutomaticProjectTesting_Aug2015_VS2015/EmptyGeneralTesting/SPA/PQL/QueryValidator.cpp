@@ -248,6 +248,15 @@ string QueryValidator::getBetweenTwoStrings(const string &str, const string &fir
         lastDelimPos - middleDelimPos);
 }
 
+/*--------------- Find argument in a clause ---------------*/
+
+bool QueryValidator::findArgument(string arg, vector<string> clause)
+{
+    if (find(clause.begin(), clause.end(), arg) != clause.end())
+        return true;
+    else
+        return false;
+}
 
 /*--------------- Validation of Declaration ---------------*/
 //Pre-Cond: Semi-colon has to be removed
@@ -369,11 +378,25 @@ bool QueryValidator::isvalidParent(string str)
                     //TODO: This is to check the overall validity, not just syntax
 }
 
+//PRE-COND: patternarg1(arg2,arg3)
 bool QueryValidator::isValidPattern(string str)
 {
     removeAllSpaces(str);
-    return false;   //stub
-                    //TODO: This is to check the overall validity, not just syntax
+    string arg1 = getBetweenTwoStrings(str,"pattern","(");
+    string arg2 = getBetweenTwoStrings(str, "(", ",");
+    string arg3 = getBetweenTwoStrings(str, ",", ")");
+
+    //if (findArgument(arg1, qt.getAssigns()))
+    //    if (findArgument(arg2, qt.getVars()))
+    //        //store in appropriate type
+    //        return true;
+    //    else
+    //        //store in second apt type
+    //        return true;
+    //else
+    //    return false;
+
+    return false;
 }
 
 bool QueryValidator::isValidSelectOverallRegex(string str)
