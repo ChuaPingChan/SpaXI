@@ -386,17 +386,22 @@ bool QueryValidator::isValidPattern(string str)
     string arg2 = getBetweenTwoStrings(str, "(", ",");
     string arg3 = getBetweenTwoStrings(str, ",", ")");
 
-    //if (findArgument(arg1, qt.getAssigns()))
-    //    if (findArgument(arg2, qt.getVars()))
-    //        //store in appropriate type
-    //        return true;
-    //    else
-    //        //store in second apt type
-    //        return true;
-    //else
-    //    return false;
+    if (findArgument(arg1, qt.getAssigns())) 
+    {
+        if (findArgument(arg2, qt.getVars())) {
+            //store in appropriate type with VARIABLE synonym
+            return true;
+        }
+        else {
+            //store in appropriate data type without VARIABLE synonym
+            return true;
+        }
+    }
+
+    else             
 
     return false;
+
 }
 
 bool QueryValidator::isValidSelectOverallRegex(string str)

@@ -5,6 +5,7 @@
 #include <sstream>
 #include <regex>
 #include <algorithm>
+#include "../PQL/QueryTree.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ public:
     QueryValidator();
     ~QueryValidator();
 
+    QueryTree qt;
     bool isValidQuery(vector<string> inputVector);
   
 
