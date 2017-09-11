@@ -42,7 +42,7 @@ const string PARENT_REGEX = SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE
 const string SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM;
 const string RELREF = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
 const string SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF;
-const string SELECT_OVERALL_REGEX = SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0;
+const string SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
 
 //string relCond = relRef + "(" + andRegex + relRef + ")*";
 //string patternCond = patternRegex + "(" + andRegex + patternRegex + ")*";
@@ -224,6 +224,13 @@ vector<string> QueryValidator::initialSplit(string query)
     return tokens;
 }
 
+/*--------------- Remove all spaces ---------------*/
+
+void QueryValidator::removeAllSpaces(string str) 
+{ 
+
+}
+
 /*--------------- Validation of Declaration ---------------*/
 //Pre-Cond: Semi-colon has to be removed
 bool QueryValidator::isValidDeclaration(string str)
@@ -312,12 +319,13 @@ bool QueryValidator::isValidSynonym(string str)
 bool QueryValidator::isValidSelect(string str)
 {
     //TODO: split str into the different clauses
-    //TODO: Check each validity of the cluases
+    //TODO: Check each syntactic validity of the cluases
     //TODO: This is true when all the clauses are true
 
     return true;  //stub
 }
 
+//PRE-COND: Modifies(b,c) with any spaces
 bool QueryValidator::isValidModifies(string str)
 {
     return false;   //stub

@@ -64,6 +64,9 @@ private:
     /*--------------- Splitting Query ---------------*/
     vector<string> initialSplit(string query);
 
+    /*--------------- Remove all spaces ---------------*/
+    void removeAllSpaces(string str);
+
     /*--------------- Validation of Declaration ---------------*/
     bool isValidDeclaration(string str);   
     bool isValidEntity(string str);
