@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="PKB\ChildToParentTable.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
     <ClCompile Include="PKB\ModTableProcToVar.cpp" />
     <ClCompile Include="PKB\ModTableStmtToVar.cpp" />
@@ -28,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
     <ClInclude Include="PKB\FollowsTable.h" />
     <ClInclude Include="PKB\ModTableProcToVar.h" />

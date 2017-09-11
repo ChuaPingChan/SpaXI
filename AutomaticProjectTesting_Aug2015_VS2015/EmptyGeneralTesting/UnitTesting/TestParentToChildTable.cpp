@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../SPA/PKB/ParentToChildTable.h"
+#include "../SPA/PKB/ChildToParentTable.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -21,6 +22,10 @@ namespace UnitTesting
 			Assert::IsTrue(table.addParentChild(2, 3));
 			//Test adding to same parent
 			Assert::IsTrue(table.addParentChild(2, 4));
+
+			//Create ChildToParentTable
+			ChildToParentTable ctpt;
+			Assert::IsTrue(ctpt.addChildParent(1, 2));
 
 		}
 
