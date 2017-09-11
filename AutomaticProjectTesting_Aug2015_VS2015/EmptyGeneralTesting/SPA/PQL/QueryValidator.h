@@ -25,8 +25,11 @@ public:
     bool isValidEntRefTest(string str);
     bool isValidNameTest(string str);
 
-    /*--------------- Splitting Query Test---------------*/
-    vector<string> initialSplitTest(string query);
+    /*--------------- Tokenizer Test---------------*/
+    vector<string> tokenizerTest(string query);
+
+    /*--------------- Substring Test---------------*/
+    bool isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result);
 
     /*--------------- Declaration Test---------------*/
     bool isValidEntityTest(string str);
@@ -62,7 +65,7 @@ private:
     vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
 
     /*--------------- Splitting Query ---------------*/
-    vector<string> initialSplit(string query);
+    vector<string> tokenizer(string query);
 
     /*--------------- Remove all spaces ---------------*/
     void removeAllSpaces(string str);
