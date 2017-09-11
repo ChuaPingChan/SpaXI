@@ -231,6 +231,18 @@ void QueryValidator::removeAllSpaces(string str)
 
 }
 
+/*--------------- Get string between two delimiters ---------------*/
+string QueryValidator::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)
+{
+    unsigned firstDelimPos = str.find(firstDelim);
+    unsigned middleDelimPos = firstDelimPos + firstDelim.length();
+    unsigned lastDelimPos = str.find(secondDelim);
+
+    return str.substr(middleDelimPos,
+        lastDelimPos - middleDelimPos);
+}
+
+
 /*--------------- Validation of Declaration ---------------*/
 //Pre-Cond: Semi-colon has to be removed
 bool QueryValidator::isValidDeclaration(string str)
@@ -328,6 +340,7 @@ bool QueryValidator::isValidSelect(string str)
 //PRE-COND: Modifies(b,c) with any spaces
 bool QueryValidator::isValidModifies(string str)
 {
+
     return false;   //stub
                     //TODO: This is to check the overall validity, not just syntax
 }
@@ -352,6 +365,7 @@ bool QueryValidator::isvalidParent(string str)
 
 bool QueryValidator::isValidPattern(string str)
 {
+    removeAllSpaces(str);
     return false;   //stub
                     //TODO: This is to check the overall validity, not just syntax
 }

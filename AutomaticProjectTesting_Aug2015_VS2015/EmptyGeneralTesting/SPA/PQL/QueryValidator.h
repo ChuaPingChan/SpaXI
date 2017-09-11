@@ -67,6 +67,9 @@ private:
     /*--------------- Remove all spaces ---------------*/
     void removeAllSpaces(string str);
 
+    /*--------------- Get string between two delimiters ---------------*/
+    string getBetweenTwoStrings(const string & str, const string & firstDelim, const string & secondDelim);
+
     /*--------------- Validation of Declaration ---------------*/
     bool isValidDeclaration(string str);   
     bool isValidEntity(string str);
