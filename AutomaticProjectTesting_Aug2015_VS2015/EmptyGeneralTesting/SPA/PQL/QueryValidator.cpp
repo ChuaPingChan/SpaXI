@@ -108,9 +108,15 @@ bool QueryValidator::isValidNameTest(string str)
 
 /*--------------- Splitting Query Test---------------*/
 
-vector<string> QueryValidator::initialSplitTest(string query)
+vector<string> QueryValidator::tokenizerTest(string query)
 {
-    return initialSplit(query);
+    return tokenizer(query);
+}
+/*--------------- Splitting Query Test---------------*/
+
+bool QueryValidator::isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result)
+{
+    return (QueryValidator::getBetweenTwoStrings(str, firstDelim, secondDelim) == result);
 }
 
 /*--------------- Declaration Test---------------*/
@@ -211,7 +217,7 @@ bool QueryValidator::isValidSelectOverallRegexTest(string str)
 /*--------------- Split initial query ---------------*/
 
 //split query using ';' as delimiter
-vector<string> QueryValidator::initialSplit(string query)
+vector<string> QueryValidator::tokenizer(string query)
 {
     char delimiter = ';';
     stringstream ss(query);
