@@ -5,7 +5,7 @@
 #include <sstream>
 #include <regex>
 #include <algorithm>
-#include "../PQL/QueryTree.h"
+#include "QueryTree.h"
 
 using namespace std;
 

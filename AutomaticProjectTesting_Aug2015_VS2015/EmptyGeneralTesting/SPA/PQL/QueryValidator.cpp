@@ -13,6 +13,7 @@ QueryValidator::~QueryValidator()
 /******************** Grammar ********************/
 const string LETTER = "([a-zA-Z])";
 const string DIGIT = "([0-9])";
+const string DIGIT_STAR = "(" + DIGIT + "*)";
 const string INTEGER = "(" + DIGIT + "+)";
 const string HASH = "(#)";
 const string UNDERSCORE = "(_)";
@@ -352,18 +353,134 @@ bool QueryValidator::isValidSelect(string str)
     return true;  //stub
 }
 
-//PRE-COND: Modifies(b,c) with any spaces
+//PRE-COND: Modifies(a,b)
 bool QueryValidator::isValidModifies(string str)
 {
+    removeAllSpaces(str);
+    string arg1 = getBetweenTwoStrings(str, "Modifies(", ",");
+    string arg2 = getBetweenTwoStrings(str, ",", ")");
+    regex checkInt = regex(DIGIT_STAR);
 
-    return false;   //stub
-                    //TODO: This is to check the overall validity, not just syntax
+    //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
+    if (findArgument(arg1, qt.getAssigns) || findArgument(arg1, qt.getStmts) || findArgument(arg1, qt.getWhiles) || regex_match(arg1, checkInt))
+    {
+        if (findArgument(arg2, qt.getVars)) { //if arg2 is a variable synonym
+
+            if (findArgument(arg1, qt.getAssigns))
+            {
+                //store in data type for assignment synonym
+            }
+
+            if (findArgument(arg1, qt.getStmts))
+            {
+                //store in data type for statement synonym
+            }
+
+            if (findArgument(arg1, qt.getWhiles))
+            {
+                //store in data type for whiles synonym
+            }
+
+            if (regex_match(arg1, checkInt))
+            {
+                //store in data type for statement number 
+            }
+            return true;
+        }
+
+        else //arg2 is not in synonym bank but is a valid variable
+
+        {
+            if (findArgument(arg1, qt.getAssigns))
+            {
+                //store in data type for assignment synonym
+            }
+
+            if (findArgument(arg1, qt.getStmts))
+            {
+                //store in data type for statement synonym
+            }
+
+            if (findArgument(arg1, qt.getWhiles))
+            {
+                //store in data type for whiles synonym
+            }
+
+            if (regex_match(arg1, checkInt))
+            {
+                //store in data type for statement number 
+            }
+            //store in data type for 
+            return true;
+        }
+    }
+
+    return false;
+                    
 }
 
 bool QueryValidator::isValidUses(string str)
 {
-    return false;   //stub
-                    //TODO: This is to check the overall validity, not just syntax
+    removeAllSpaces(str);
+    string arg1 = getBetweenTwoStrings(str, "Uses(", ",");
+    string arg2 = getBetweenTwoStrings(str, ",", ")");
+    regex checkInt = regex(DIGIT_STAR);
+
+    //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
+    if (findArgument(arg1, qt.getAssigns) || findArgument(arg1, qt.getStmts) || findArgument(arg1, qt.getWhiles) || regex_match(arg1, checkInt))
+    {
+        if (findArgument(arg2, qt.getVars)) { //if arg2 is a variable synonym
+
+            if (findArgument(arg1, qt.getAssigns))
+            {
+                //store in data type for assignment synonym
+            }
+
+            if (findArgument(arg1, qt.getStmts))
+            {
+                //store in data type for statement synonym
+            }
+
+            if (findArgument(arg1, qt.getWhiles))
+            {
+                //store in data type for whiles synonym
+            }
+
+            if (regex_match(arg1, checkInt))
+            {
+                //store in data type for statement number 
+            }
+            return true;
+        }
+
+        else //arg2 is not in synonym bank but is a valid variable
+
+        {
+            if (findArgument(arg1, qt.getAssigns))
+            {
+                //store in data type for assignment synonym
+            }
+
+            if (findArgument(arg1, qt.getStmts))
+            {
+                //store in data type for statement synonym
+            }
+
+            if (findArgument(arg1, qt.getWhiles))
+            {
+                //store in data type for whiles synonym
+            }
+
+            if (regex_match(arg1, checkInt))
+            {
+                //store in data type for statement number 
+            }
+            //store in data type for 
+            return true;
+        }
+    }
+
+    return false;
 }
 
 bool QueryValidator::isValidFollows(string str)
@@ -378,7 +495,7 @@ bool QueryValidator::isvalidParent(string str)
                     //TODO: This is to check the overall validity, not just syntax
 }
 
-//PRE-COND: patternarg1(arg2,arg3)
+//PRE-COND: patternarg1(arg2,arg3) arg1 = assignment synonym, arg2 = variable synonym/"entRef", arg3 = "EXPRESSION"
 bool QueryValidator::isValidPattern(string str)
 {
     removeAllSpaces(str);
