@@ -13,7 +13,6 @@ QueryValidator::~QueryValidator()
 /******************** Grammar ********************/
 const string LETTER = "([a-zA-Z])";
 const string DIGIT = "([0-9])";
-const string DIGIT_STAR = "(" + DIGIT + "*)";
 const string INTEGER = "(" + DIGIT + "+)";
 const string HASH = "(#)";
 const string UNDERSCORE = "(_)";
@@ -69,6 +68,14 @@ bool QueryValidator::isValidQuery(vector<string> inputVector)
 
     return true; // && isValidSelect();
 }
+
+/*--------------- For IntegrationTesting ---------------*/
+
+bool QueryValidator::isValidDeclarationTest(string str)
+{
+    return isValidDeclaration(str);
+}
+
 
 /*--------------- For UnitTesting ---------------*/
 
@@ -139,11 +146,6 @@ bool QueryValidator::isGetBetweenTwoStringsTest(string str, string firstDelim, s
 bool QueryValidator::isValidEntityTest(string str)
 {
     return isValidEntity(str);
-}
-
-bool QueryValidator::isValidDeclarationTest(string str)
-{
-    return isValidDeclaration(str);
 }
 
 void QueryValidator::stubMethod()
@@ -278,7 +280,7 @@ bool QueryValidator::isArgumentInClause(string arg, vector<string> clause)
 /*--------------- Check if string is an integer ---------------*/
 bool QueryValidator::isIntegerRegexCheck(string arg)
 {
-    regex checkInt = regex(DIGIT_STAR);
+    regex checkInt = regex(INTEGER);
     return regex_match(arg, checkInt);
 }
 
@@ -372,6 +374,8 @@ bool QueryValidator::isValidSelect(string str)
     //TODO: split str into the different clauses
     //TODO: Check each syntactic validity of the cluases
     //TODO: This is true when all the clauses are true
+    if (isValidSelectOverallRegex(str)==false)
+        return false;
 
 	regex clauseRegex(FOLLOWS_REGEX + "|" + PARENT_REGEX + "|" + USES_REGEX + "|" + MODIFIES_REGEX + "|" + PATTERN_REGEX, regex_constants::icase);
 	sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
@@ -437,13 +441,16 @@ bool QueryValidator::isValidSelect(string str)
 //PRE-COND: Modifies(a,b)
 bool QueryValidator::isValidModifies(string str)
 {
-    removeAllSpaces(str);
+    if (!isValidModifiesRegex(str))
+        return false;
+
+    str = removeAllSpaces(str);
     string arg1 = getBetweenTwoStrings(str, "Modifies(", ",");
     string arg2 = getBetweenTwoStrings(str, ",", ")");
     string result[4];
 
     //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
-    if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg2))
+    if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg1))
     {
         if (isArgumentInClause(arg2, qt.getVars())) { //if arg2 is a variable synonym
             result[2] = "var";
@@ -525,13 +532,15 @@ bool QueryValidator::isValidModifies(string str)
 
 bool QueryValidator::isValidUses(string str)
 {
-    removeAllSpaces(str);
+    if (!isValidUsesRegex(str))
+        return false;
+    str = removeAllSpaces(str);
     string arg1 = getBetweenTwoStrings(str, "Uses(", ",");
     string arg2 = getBetweenTwoStrings(str, ",", ")");
     string result[4];
 
     //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
-    if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg2))
+    if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg1))
     {
         if (isArgumentInClause(arg2, qt.getVars())) { //if arg2 is a variable synonym
             result[2] = "var";
@@ -613,6 +622,9 @@ bool QueryValidator::isValidUses(string str)
 //PRE-COND: arg1: stmt, assign, while, if, prog_line
 bool QueryValidator::isValidFollows(string str)
 {
+    if (!isValidFollowsRegex(str))
+        return false;
+    str = removeAllSpaces(str);
     string arg1, arg2;
     string result[4];
     if (regex_match(str, regex("\*"))) { //contains *, means its Follows*
@@ -713,6 +725,9 @@ bool QueryValidator::isValidFollows(string str)
 
 bool QueryValidator::isValidParent(string str)
 {
+    if (!isValidParentRegex(str))
+        return false;
+    str = removeAllSpaces(str);
     string arg1, arg2;
     string result[4];
     if (regex_match(str, regex("\*"))) { //contains *, means its Parent*
@@ -814,7 +829,9 @@ bool QueryValidator::isValidParent(string str)
 //PRE-COND: patternarg1(arg2,arg3) arg1 = assignment synonym, arg2 = variable synonym/"entRef", arg3 = "EXPRESSION"
 bool QueryValidator::isValidPattern(string str)
 {
-    removeAllSpaces(str);
+    if (!isValidPatternRegex(str))
+        return false;
+    str = removeAllSpaces(str);
     string arg1 = getBetweenTwoStrings(str,"pattern","(");
     string arg2 = getBetweenTwoStrings(str, "(", ",");
     string arg3 = getBetweenTwoStrings(str, ",", ")");

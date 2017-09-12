@@ -11,17 +11,16 @@ namespace IntegrationTesting
     TEST_CLASS(TestPQLValidatorAndTree)
     {
     public:
-
+        QueryTree qt;
         TEST_METHOD(TestQueryTreeDeclaration)
         {
-            QueryTree qt;
             QueryValidator qv;
             string str;
 
             qv = QueryValidator();   
-            str = "assign a; variable v; stmt s; while w; constant c; prog_line pl; Select a such that Uses(a, v) pattern a(v, _)";
+            str = "assign a; variable v; stmt s; while w; constant c; prog_line pl;";
             vector<string> tokenizer = qv.tokenizerTest(str);
-            for (int i = 0; i < tokenizer.size()-1; i++)
+            for (int i = 0; i < tokenizer.size(); i++)
             {
                 bool testDeclaration = qv.isValidDeclarationTest(tokenizer.at(i));
                 Assert::IsTrue(testDeclaration);
@@ -46,7 +45,29 @@ namespace IntegrationTesting
 
         TEST_METHOD(TestQueryTreeSelect)
         {
-            // TODO: Your test code here
+            
+            QueryValidator qv;
+            string str;
+
+            qv = QueryValidator();
+            str = "Select s such that Uses(1,s)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertSelect(str);         
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select s such that Uses(s,_)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select s such that Uses(s,\"x\")";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+
         }
     };
 }
