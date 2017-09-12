@@ -5,6 +5,8 @@
 #include <sstream>
 #include <regex>
 #include <algorithm>
+#include "QueryTree.h"
+
 
 using namespace std;
 
@@ -14,6 +16,7 @@ public:
     QueryValidator();
     ~QueryValidator();
 
+    QueryTree qt;
     bool isValidQuery(vector<string> inputVector);
 
     /*--------------- For Unit Testing ---------------*/
@@ -27,8 +30,11 @@ public:
     bool isValidEntRefTest(string str);
     bool isValidNameTest(string str);
 
-    /*--------------- Splitting Query Test---------------*/
-    vector<string> initialSplitTest(string query);
+    /*--------------- Tokenizer Test---------------*/
+    vector<string> tokenizerTest(string query);
+
+    /*--------------- Substring Test---------------*/
+    bool isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result);
 
     /*--------------- Declaration Test---------------*/
     bool isValidEntityTest(string str);
@@ -62,12 +68,21 @@ public:
 private: 
     unordered_set<string> _synonymBank;   //Contains list of used synonyms
     vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
-
+    
     /*--------------- Splitting Query ---------------*/
-    vector<string> initialSplit(string query);
+    vector<string> tokenizer(string query);
 
     /*--------------- Remove all spaces ---------------*/
     string removeAllSpaces(string str);
+
+    /*--------------- Get string between two delimiters ---------------*/
+    string getBetweenTwoStrings(const string & str, const string & firstDelim, const string & secondDelim);
+   
+    /*--------------- Check if argument is in a clause ---------------*/
+    bool isArgumentInClause(string arg, vector<string> clause);
+
+    /*--------------- Check if string is an integer ---------------*/
+    bool isIntegerRegexCheck(string arg);
 
     /*--------------- Validation of Declaration ---------------*/
     bool isValidDeclaration(string str);   

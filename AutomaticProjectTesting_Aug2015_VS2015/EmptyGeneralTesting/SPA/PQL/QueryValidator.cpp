@@ -13,6 +13,7 @@ QueryValidator::~QueryValidator()
 /******************** Grammar ********************/
 const string LETTER = "([a-zA-Z])";
 const string DIGIT = "([0-9])";
+const string DIGIT_STAR = "(" + DIGIT + "*)";
 const string INTEGER = "(" + DIGIT + "+)";
 const string HASH = "(#)";
 const string UNDERSCORE = "(_)";
@@ -114,9 +115,15 @@ bool QueryValidator::isValidNameTest(string str)
 
 /*--------------- Splitting Query Test---------------*/
 
-vector<string> QueryValidator::initialSplitTest(string query)
+vector<string> QueryValidator::tokenizerTest(string query)
 {
-    return initialSplit(query);
+    return tokenizer(query);
+}
+/*--------------- Splitting Query Test---------------*/
+
+bool QueryValidator::isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result)
+{
+    return (QueryValidator::getBetweenTwoStrings(str, firstDelim, secondDelim) == result);
 }
 
 /*--------------- Declaration Test---------------*/
@@ -217,7 +224,7 @@ bool QueryValidator::isValidSelectOverallRegexTest(string str)
 /*--------------- Split initial query ---------------*/
 
 //split query using ';' as delimiter
-vector<string> QueryValidator::initialSplit(string query)
+vector<string> QueryValidator::tokenizer(string query)
 {
     char delimiter = ';';
     stringstream ss(query);
@@ -236,6 +243,34 @@ string QueryValidator::removeAllSpaces(string str)
 { 
 	str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
 	return str;
+}
+
+/*--------------- Get string between two delimiters ---------------*/
+string QueryValidator::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)
+{
+    unsigned firstDelimPos = str.find(firstDelim);
+    unsigned middleDelimPos = firstDelimPos + firstDelim.length();
+    unsigned lastDelimPos = str.find(secondDelim);
+
+    return str.substr(middleDelimPos,
+        lastDelimPos - middleDelimPos);
+}
+
+/*--------------- Check if argument is in a clause ---------------*/
+
+bool QueryValidator::isArgumentInClause(string arg, vector<string> clause)
+{
+    if (find(clause.begin(), clause.end(), arg) != clause.end())
+        return true;
+    else
+        return false;
+}
+
+/*--------------- Check if string is an integer ---------------*/
+bool QueryValidator::isIntegerRegexCheck(string arg)
+{
+    regex checkInt = regex(DIGIT_STAR);
+    return regex_match(arg, checkInt);
 }
 
 /*--------------- Validation of Declaration ---------------*/
@@ -296,7 +331,7 @@ bool QueryValidator::isValidDeclaration(string str)
 
         if (_synonymBank.find(synonym) == _synonymBank.end()) {
             _synonymBank.insert(synonym);
-            stubMethod();   //Call QueryTree.insertVariable(entity, synonym)
+            qt.insertVariable(entity, synonym);
         }
         else {
             return false;
@@ -390,40 +425,416 @@ bool QueryValidator::isValidSelect(string str)
     return true;  //stub
 }
 
-bool QueryValidator::isValidClause(string str)
-{
-	return false;
-}
-
-//PRE-COND: Modifies(b,c) with any spaces
+//PRE-COND: Modifies(a,b)
 bool QueryValidator::isValidModifies(string str)
 {
-    return false;   //stub
-                    //TODO: This is to check the overall validity, not just syntax
+    removeAllSpaces(str);
+    string arg1 = getBetweenTwoStrings(str, "Modifies(", ",");
+    string arg2 = getBetweenTwoStrings(str, ",", ")");
+    string result[4];
+
+    //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
+    if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg2))
+    {
+        if (isArgumentInClause(arg2, qt.getVars())) { //if arg2 is a variable synonym
+            result[2] = "var";
+            result[3] = arg2;
+
+            if (isArgumentInClause(arg1, qt.getAssigns()))
+            {
+                result[0] = "assign";
+                result[1] = arg1;
+
+                //store in data type for assignment synonym
+            }
+
+            if (isArgumentInClause(arg1, qt.getStmts()))
+            {
+                result[0] = "stmt";
+                result[1] = arg1;
+
+                //store in data type for statement synonym
+            }
+
+            if (isArgumentInClause(arg1, qt.getWhiles()))
+            {
+                result[0] = "while";
+                result[1] = arg1;
+                //store in data type for whiles synonym
+            }
+
+            if (isIntegerRegexCheck(arg2))
+            {
+                result[0] = "stmt";
+                result[1] = arg1;
+                //store in data type for statement number 
+            }
+            return true;
+        }
+
+        else //arg2 is not in synonym bank but is a valid variable
+
+        {
+            result[2] = "";
+            result[3] = arg2;
+            if (isArgumentInClause(arg1, qt.getAssigns()))
+            {
+                result[0] = "assign";
+                result[1] = arg1;
+
+                //store in data type for assignment synonym
+            }
+
+            if (isArgumentInClause(arg1, qt.getStmts()))
+            {
+                result[0] = "stmt";
+                result[1] = arg1;
+
+                //store in data type for statement synonym
+            }
+
+            if (isArgumentInClause(arg1, qt.getWhiles()))
+            {
+                result[0] = "while";
+                result[1] = arg1;
+                //store in data type for whiles synonym
+            }
+
+            if (isIntegerRegexCheck(arg2))
+            {
+                result[0] = "stmt";
+                result[1] = arg1;
+                //store in data type for statement number 
+            }
+            return true;
+        }
+    }
+
+    return false;
+                    
 }
 
 bool QueryValidator::isValidUses(string str)
 {
-    return false;   //stub
-                    //TODO: This is to check the overall validity, not just syntax
+    removeAllSpaces(str);
+    string arg1 = getBetweenTwoStrings(str, "Uses(", ",");
+    string arg2 = getBetweenTwoStrings(str, ",", ")");
+    string result[4];
+
+    //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
+    if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg2))
+    {
+        if (isArgumentInClause(arg2, qt.getVars())) { //if arg2 is a variable synonym
+            result[2] = "var";
+            result[3] = arg2;
+
+            if (isArgumentInClause(arg1, qt.getAssigns()))
+            {
+                result[0] = "assign";
+                result[1] = arg1;
+
+                //store in data type for assignment synonym
+            }
+
+            if (isArgumentInClause(arg1, qt.getStmts()))
+            {
+                result[0] = "stmt";
+                result[1] = arg1;
+
+                //store in data type for statement synonym
+            }
+
+            if (isArgumentInClause(arg1, qt.getWhiles()))
+            {
+                result[0] = "while";
+                result[1] = arg1;
+                //store in data type for whiles synonym
+            }
+
+            if (isIntegerRegexCheck(arg2))
+            {
+                result[0] = "stmt";
+                result[1] = arg1;
+                //store in data type for statement number 
+            }
+            return true;
+        }
+
+        else //arg2 is not in synonym bank but is a valid variable
+
+        {
+            result[2] = "";
+            result[3] = arg2;
+            if (isArgumentInClause(arg1, qt.getAssigns()))
+            {
+                result[0] = "assign";
+                result[1] = arg1;
+
+                //store in data type for assignment synonym
+            }
+
+            if (isArgumentInClause(arg1, qt.getStmts()))
+            {
+                result[0] = "stmt";
+                result[1] = arg1;
+
+                //store in data type for statement synonym
+            }
+
+            if (isArgumentInClause(arg1, qt.getWhiles()))
+            {
+                result[0] = "while";
+                result[1] = arg1;
+                //store in data type for whiles synonym
+            }
+
+            if (isIntegerRegexCheck(arg2))
+            {
+                result[0] = "stmt";
+                result[1] = arg1;
+                //store in data type for statement number 
+            }
+            return true;
+        }
+    }
+
+    return false;
 }
 
+//PRE-COND: arg1: stmt, assign, while, if, prog_line
 bool QueryValidator::isValidFollows(string str)
 {
-    return false;   //stub
-                    //TODO: This is to check the overall validity, not just syntax
+    string arg1, arg2;
+    string result[4];
+    if (regex_match(str, regex("\*"))) { //contains *, means its Follows*
+        arg1 = getBetweenTwoStrings(str, "Follows*(", ",");
+        arg2 = getBetweenTwoStrings(str, ",", ")");
+
+        if (isIntegerRegexCheck(arg1)) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getStmts())) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getAssigns())) {
+            result[0] = "assign";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getWhiles())) {
+            result[0] = "while";
+            result[1] = arg1;
+        }
+        else {
+            return false;
+        }
+
+        if (isIntegerRegexCheck(arg2)) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getStmts())) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getAssigns())) {
+            result[2] = "assign";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getWhiles())) {
+            result[2] = "while";
+            result[3] = arg2;
+        }
+        else {
+            return false;
+        }
+        //Store string array into query tree in Follows()
+    }
+    else {
+
+        arg1 = getBetweenTwoStrings(str, "Follows(", ",");
+        arg2 = getBetweenTwoStrings(str, ",", ")");
+
+        if (isIntegerRegexCheck(arg1)) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getStmts())) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getAssigns())) {
+            result[0] = "assign";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getWhiles())) {
+            result[0] = "while";
+            result[1] = arg1;
+        }
+        else {
+            return false;
+        }
+
+        if (isIntegerRegexCheck(arg2)) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getStmts())) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getAssigns())) {
+            result[2] = "assign";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getWhiles())) {
+            result[2] = "while";
+            result[3] = arg2;
+        }
+        else {
+            return false;
+        }
+
+        //Store string array into query tree in Follows()
+    }
+        return true;
+    
 }
 
 bool QueryValidator::isValidParent(string str)
 {
-    return false;   //stub
-                    //TODO: This is to check the overall validity, not just syntax
+    string arg1, arg2;
+    string result[4];
+    if (regex_match(str, regex("\*"))) { //contains *, means its Parent*
+        arg1 = getBetweenTwoStrings(str, "Parent*(", ",");
+        arg2 = getBetweenTwoStrings(str, ",", ")");
+
+        if (isIntegerRegexCheck(arg1)) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getStmts())) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getAssigns())) {
+            result[0] = "assign";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getWhiles())) {
+            result[0] = "while";
+            result[1] = arg1;
+        }
+        else {
+            return false;
+        }
+
+        if (isIntegerRegexCheck(arg2)) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getStmts())) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getAssigns())) {
+            result[2] = "assign";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getWhiles())) {
+            result[2] = "while";
+            result[3] = arg2;
+        }
+        else {
+            return false;
+        }
+        //Store string array into query tree in Parent()
+    }
+    else {
+
+        arg1 = getBetweenTwoStrings(str, "Parent(", ",");
+        arg2 = getBetweenTwoStrings(str, ",", ")");
+
+        if (isIntegerRegexCheck(arg1)) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getStmts())) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getAssigns())) {
+            result[0] = "assign";
+            result[1] = arg1;
+        }
+        else if (isArgumentInClause(arg1, qt.getWhiles())) {
+            result[0] = "while";
+            result[1] = arg1;
+        }
+        else {
+            return false;
+        }
+
+        if (isIntegerRegexCheck(arg2)) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getStmts())) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getAssigns())) {
+            result[2] = "assign";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qt.getWhiles())) {
+            result[2] = "while";
+            result[3] = arg2;
+        }
+        else {
+            return false;
+        }
+
+        //Store string array into query tree in Follows()
+    }
+    return true;
+
 }
 
+//PRE-COND: patternarg1(arg2,arg3) arg1 = assignment synonym, arg2 = variable synonym/"entRef", arg3 = "EXPRESSION"
 bool QueryValidator::isValidPattern(string str)
 {
-    return false;   //stub
-                    //TODO: This is to check the overall validity, not just syntax
+    removeAllSpaces(str);
+    string arg1 = getBetweenTwoStrings(str,"pattern","(");
+    string arg2 = getBetweenTwoStrings(str, "(", ",");
+    string arg3 = getBetweenTwoStrings(str, ",", ")");
+    string result[6];
+    result[4] = "";
+    result[5] = arg3;
+
+    if (isArgumentInClause(arg1, qt.getAssigns())) 
+    {
+        result[0] = "assign";
+        result[1] = arg1;
+        if (isArgumentInClause(arg2, qt.getVars())) {
+            //store in appropriate type with VARIABLE synonym
+            result[2] = "var";
+            result[3] = arg2;
+            return true;
+        }
+        else {
+            //store in appropriate data type without VARIABLE synonym
+            result[2] = "";
+            result[3] = arg2;
+            return true;
+        }
+    }
+
+    else             
+
+    return false;
+
 }
 
 bool QueryValidator::isValidSelectOverallRegex(string str)
