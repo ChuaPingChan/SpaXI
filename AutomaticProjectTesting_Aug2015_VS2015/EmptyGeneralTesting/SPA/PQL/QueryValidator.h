@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "QueryTree.h"
 
+
 using namespace std;
 
 class QueryValidator
@@ -17,9 +18,10 @@ public:
 
     QueryTree qt;
     bool isValidQuery(vector<string> inputVector);
-  
 
     /*--------------- For Unit Testing ---------------*/
+	string removeAllSpacesTest(string str);
+
     /*--------------- Grammar Regex Test---------------*/
     bool isValidLetterTest(string str);
     bool isValidIntegerTest(string str);
@@ -71,7 +73,7 @@ private:
     vector<string> tokenizer(string query);
 
     /*--------------- Remove all spaces ---------------*/
-    void removeAllSpaces(string str);
+    string removeAllSpaces(string str);
 
     /*--------------- Get string between two delimiters ---------------*/
     string getBetweenTwoStrings(const string & str, const string & firstDelim, const string & secondDelim);
@@ -89,7 +91,7 @@ private:
 
     /*--------------- Validation of Select ---------------*/
     bool isValidSelect(string str);
-
+	bool isValidClause(string str);
     bool isValidModifies(string str);
     bool isValidUses(string str);
     bool isValidFollows(string str);

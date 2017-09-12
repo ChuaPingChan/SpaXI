@@ -11,6 +11,16 @@ namespace UnitTesting
     TEST_CLASS(TestQueryValidator)
     {
     public:
+
+		TEST_METHOD(TestRemoveAllSpaces)
+		{
+			QueryValidator qv;
+			string str;
+
+			str = " a  b    c  ";
+			Assert::IsTrue(qv.removeAllSpacesTest(str) == "abc");
+		}
+
         /*--------------- Grammar Regex Test---------------*/
         TEST_METHOD(TestLetterRegex)
         {

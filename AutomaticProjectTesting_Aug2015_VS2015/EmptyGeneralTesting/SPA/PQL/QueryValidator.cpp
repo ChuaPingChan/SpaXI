@@ -31,13 +31,13 @@ const string DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if
 /*--------------- Pattern Clause Regex ---------------*/
 const string FACTOR = "(" + NAME + "|" + INTEGER + ")";
 const string EXPRESSION_SPEC = "(" + UNDERSCORE + "|" + UNDERSCORE + "\"" + FACTOR + "\"" + UNDERSCORE + ")";
-const string PATTERN_REGEX = SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM + SPACE_0 + "[(]" + SPACE_0 + ENTREF + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0;
+const string PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM + SPACE_0 + "[(]" + SPACE_0 + ENTREF + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Relationship Clause Regex ---------------*/
-const string MODIFIES_REGEX = SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0;
-const string USES_REGEX = SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0;
-const string FOLLOWS_REGEX = SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0;
-const string PARENT_REGEX = SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0;
+const string MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Select Regex ---------------*/
 const string SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM;
@@ -71,6 +71,12 @@ bool QueryValidator::isValidQuery(vector<string> inputVector)
 }
 
 /*--------------- For UnitTesting ---------------*/
+
+string QueryValidator::removeAllSpacesTest(string str)
+{
+	return removeAllSpaces(str);
+}
+
 /*--------------- Grammar Regex Test---------------*/
 bool QueryValidator::isValidLetterTest(string str)
 {
@@ -233,9 +239,10 @@ vector<string> QueryValidator::tokenizer(string query)
 
 /*--------------- Remove all spaces ---------------*/
 
-void QueryValidator::removeAllSpaces(string str) 
+string QueryValidator::removeAllSpaces(string str) 
 { 
-
+	str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+	return str;
 }
 
 /*--------------- Get string between two delimiters ---------------*/
@@ -357,6 +364,64 @@ bool QueryValidator::isValidSelect(string str)
     //TODO: Check each syntactic validity of the cluases
     //TODO: This is true when all the clauses are true
 
+	regex clauseRegex(FOLLOWS_REGEX + "|" + PARENT_REGEX + "|" + USES_REGEX + "|" + MODIFIES_REGEX + "|" + PATTERN_REGEX, regex_constants::icase);
+	sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
+	sregex_iterator it_end;
+
+	for (; it != it_end; it++)
+	{
+		string currentClause = it->str(0);
+		bool isCurrentClauseValid;
+
+		if (currentClause.find("Follows") != std::string::npos) 
+		{
+			isCurrentClauseValid = isValidFollows(currentClause);
+			if (!isCurrentClauseValid)
+			{
+				return false;
+			}
+		}
+		else if (currentClause.find("Parent") != std::string::npos)
+		{
+			isCurrentClauseValid = isValidParent(currentClause);
+			if (!isCurrentClauseValid)
+			{
+				return false;
+			}
+		}
+		else if (currentClause.find("Uses") != std::string::npos)
+		{
+			isCurrentClauseValid = isValidUses(currentClause);
+			if (!isCurrentClauseValid)
+			{
+				return false;
+			}
+		}
+		else if (currentClause.find("Modifies") != std::string::npos)
+		{
+			isCurrentClauseValid = isValidModifies(currentClause);
+			if (!isCurrentClauseValid)
+			{
+				return false;
+			}
+		}
+		else if (currentClause.find("pattern") != std::string::npos)
+		{
+			isCurrentClauseValid = isValidPattern(currentClause);
+			if (!isCurrentClauseValid)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+
+		return true;
+
+	}
+		
     return true;  //stub
 }
 
