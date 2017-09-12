@@ -414,24 +414,33 @@ bool QueryValidator::isValidModifies(string str)
             result[3] = arg2;
             if (isArgumentInClause(arg1, qt.getAssigns()))
             {
+                result[0] = "assign";
+                result[1] = arg1;
+
                 //store in data type for assignment synonym
             }
 
             if (isArgumentInClause(arg1, qt.getStmts()))
             {
+                result[0] = "stmt";
+                result[1] = arg1;
+
                 //store in data type for statement synonym
             }
 
             if (isArgumentInClause(arg1, qt.getWhiles()))
             {
+                result[0] = "while";
+                result[1] = arg1;
                 //store in data type for whiles synonym
             }
 
             if (isIntegerRegexCheck(arg2))
             {
+                result[0] = "stmt";
+                result[1] = arg1;
                 //store in data type for statement number 
             }
-            //store in data type for 
             return true;
         }
     }
@@ -493,24 +502,33 @@ bool QueryValidator::isValidUses(string str)
             result[3] = arg2;
             if (isArgumentInClause(arg1, qt.getAssigns()))
             {
+                result[0] = "assign";
+                result[1] = arg1;
+
                 //store in data type for assignment synonym
             }
 
             if (isArgumentInClause(arg1, qt.getStmts()))
             {
+                result[0] = "stmt";
+                result[1] = arg1;
+
                 //store in data type for statement synonym
             }
 
             if (isArgumentInClause(arg1, qt.getWhiles()))
             {
+                result[0] = "while";
+                result[1] = arg1;
                 //store in data type for whiles synonym
             }
 
             if (isIntegerRegexCheck(arg2))
             {
+                result[0] = "stmt";
+                result[1] = arg1;
                 //store in data type for statement number 
             }
-            //store in data type for 
             return true;
         }
     }
@@ -523,7 +541,7 @@ bool QueryValidator::isValidFollows(string str)
 {
     string arg1, arg2;
     string result[4];
-    if (regex_match(str, regex("*"))) { //contains *, means its Follows*
+    if (regex_match(str, regex("\*"))) { //contains *, means its Follows*
         arg1 = getBetweenTwoStrings(str, "Follows*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
@@ -623,7 +641,7 @@ bool QueryValidator::isValidParent(string str)
 {
     string arg1, arg2;
     string result[4];
-    if (regex_match(str, regex("*"))) { //contains *, means its Parent*
+    if (regex_match(str, regex("\*"))) { //contains *, means its Parent*
         arg1 = getBetweenTwoStrings(str, "Parent*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
