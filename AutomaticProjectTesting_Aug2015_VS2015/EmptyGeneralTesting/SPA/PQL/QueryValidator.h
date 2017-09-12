@@ -32,6 +32,9 @@ public:
 
     /*--------------- Tokenizer Test---------------*/
     vector<string> tokenizerTest(string query);
+ 
+    /*--------------- Finding Argument in Clause Test---------------*/
+    bool isArgumentInClauseTest(string arg, vector<string> clause);
 
     /*--------------- Substring Test---------------*/
     bool isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result);

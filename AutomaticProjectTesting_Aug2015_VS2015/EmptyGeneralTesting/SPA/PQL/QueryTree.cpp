@@ -28,32 +28,32 @@ void QueryTree::storeUnvalidatedStmts(vector<string> splittedVec)
 
 void QueryTree::insertVariable(string type, string var)
 {
-	if (type.compare("stmt")) 
+	if (type == "stmt") 
 	{
 		stmts.push_back(var);
 	}
 
-	else if (type.compare("assign"))
+	else if (type == "assign")
 	{
 		assigns.push_back(var);
 	}
 
-	else if (type.compare("while"))
+	else if (type == "while")
 	{
 		whiles.push_back(var);
 	}
 
-	else if (type.compare("var"))
+	else if (type == "variable")
 	{
 		vars.push_back(var);
 	}
 
-	else if (type.compare("const"))
+	else if (type == "constant")
 	{
 		consts.push_back(var);
 	}
 
-	else if (type.compare("prog_line"))
+	else if (type == "prog_line")
 	{
 		progLines.push_back(var);
 	}

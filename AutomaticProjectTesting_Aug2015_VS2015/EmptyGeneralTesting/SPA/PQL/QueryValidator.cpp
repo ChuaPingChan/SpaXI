@@ -119,6 +119,14 @@ vector<string> QueryValidator::tokenizerTest(string query)
 {
     return tokenizer(query);
 }
+
+/*--------------- Finding Argument in Clause Test---------------*/
+
+bool QueryValidator::isArgumentInClauseTest(string arg, vector<string> clause)
+{
+    return isArgumentInClause(arg, clause);
+}
+
 /*--------------- Splitting Query Test---------------*/
 
 bool QueryValidator::isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result)
@@ -127,6 +135,7 @@ bool QueryValidator::isGetBetweenTwoStringsTest(string str, string firstDelim, s
 }
 
 /*--------------- Declaration Test---------------*/
+
 bool QueryValidator::isValidEntityTest(string str)
 {
     return isValidEntity(str);
