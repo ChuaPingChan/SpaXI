@@ -249,7 +249,7 @@ string QueryValidator::getBetweenTwoStrings(const string &str, const string &fir
         lastDelimPos - middleDelimPos);
 }
 
-/*--------------- Find argument in a clause ---------------*/
+/*--------------- Check if argument is in a clause ---------------*/
 
 bool QueryValidator::isArgumentInClause(string arg, vector<string> clause)
 {
@@ -324,7 +324,7 @@ bool QueryValidator::isValidDeclaration(string str)
 
         if (_synonymBank.find(synonym) == _synonymBank.end()) {
             _synonymBank.insert(synonym);
-            stubMethod();   //Call QueryTree.insertVariable(entity, synonym)
+            qt.insertVariable(entity, synonym);
         }
         else {
             return false;

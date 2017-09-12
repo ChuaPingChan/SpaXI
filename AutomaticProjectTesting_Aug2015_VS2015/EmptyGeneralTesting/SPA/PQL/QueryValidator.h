@@ -76,8 +76,8 @@ private:
     /*--------------- Get string between two delimiters ---------------*/
     string getBetweenTwoStrings(const string & str, const string & firstDelim, const string & secondDelim);
    
-    /*--------------- Find argument in a clause ---------------*/
-    bool findArgument(string arg, vector<string> clause);
+    /*--------------- Check if argument is in a clause ---------------*/
+    bool isArgumentInClause(string arg, vector<string> clause);
 
     /*--------------- Check if string is an integer ---------------*/
     bool isIntegerRegexCheck(string arg);
@@ -93,7 +93,7 @@ private:
     bool isValidModifies(string str);
     bool isValidUses(string str);
     bool isValidFollows(string str);
-    bool isvalidParent(string str);
+    bool isValidParent(string str);
     bool isValidPattern(string str);
 
     bool isValidSelectOverallRegex(string str);
