@@ -79,6 +79,9 @@ private:
     /*--------------- Find argument in a clause ---------------*/
     bool findArgument(string arg, vector<string> clause);
 
+    /*--------------- Check if string is an integer ---------------*/
+    bool isIntegerRegexCheck(string arg);
+
     /*--------------- Validation of Declaration ---------------*/
     bool isValidDeclaration(string str);   
     bool isValidEntity(string str);
