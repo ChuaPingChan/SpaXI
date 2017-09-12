@@ -70,6 +70,12 @@ bool QueryValidator::isValidQuery(vector<string> inputVector)
 }
 
 /*--------------- For UnitTesting ---------------*/
+
+string QueryValidator::removeAllSpacesTest(string str)
+{
+	return removeAllSpaces(str);
+}
+
 /*--------------- Grammar Regex Test---------------*/
 bool QueryValidator::isValidLetterTest(string str)
 {
@@ -226,9 +232,10 @@ vector<string> QueryValidator::initialSplit(string query)
 
 /*--------------- Remove all spaces ---------------*/
 
-void QueryValidator::removeAllSpaces(string str) 
+string QueryValidator::removeAllSpaces(string str) 
 { 
-
+	str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+	return str;
 }
 
 /*--------------- Validation of Declaration ---------------*/

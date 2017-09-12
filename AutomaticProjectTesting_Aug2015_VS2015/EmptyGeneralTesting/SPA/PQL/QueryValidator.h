@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include <sstream>
 #include <regex>
+#include <algorithm>
 
 using namespace std;
 
@@ -14,9 +15,10 @@ public:
     ~QueryValidator();
 
     bool isValidQuery(vector<string> inputVector);
-  
 
     /*--------------- For Unit Testing ---------------*/
+	string removeAllSpacesTest(string str);
+
     /*--------------- Grammar Regex Test---------------*/
     bool isValidLetterTest(string str);
     bool isValidIntegerTest(string str);
@@ -65,7 +67,7 @@ private:
     vector<string> initialSplit(string query);
 
     /*--------------- Remove all spaces ---------------*/
-    void removeAllSpaces(string str);
+    string removeAllSpaces(string str);
 
     /*--------------- Validation of Declaration ---------------*/
     bool isValidDeclaration(string str);   
