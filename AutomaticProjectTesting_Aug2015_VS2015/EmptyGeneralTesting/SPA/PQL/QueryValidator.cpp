@@ -13,7 +13,7 @@ QueryValidator::~QueryValidator()
 /******************** Grammar ********************/
 const string LETTER = "([a-zA-Z])";
 const string DIGIT = "([0-9])";
-const string DIGIT_STAR = "(" + DIGIT + "*)";;
+const string DIGIT_STAR = "(" + DIGIT + "*)";
 const string INTEGER = "(" + DIGIT + "+)";
 const string HASH = "(#)";
 const string UNDERSCORE = "(_)";
