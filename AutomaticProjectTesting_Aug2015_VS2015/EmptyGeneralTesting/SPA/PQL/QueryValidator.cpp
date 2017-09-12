@@ -13,6 +13,7 @@ QueryValidator::~QueryValidator()
 /******************** Grammar ********************/
 const string LETTER = "([a-zA-Z])";
 const string DIGIT = "([0-9])";
+const string DIGIT_STAR = "(" + DIGIT + "*)";;
 const string INTEGER = "(" + DIGIT + "+)";
 const string HASH = "(#)";
 const string UNDERSCORE = "(_)";
@@ -351,9 +352,113 @@ bool QueryValidator::isValidUses(string str)
                     //TODO: This is to check the overall validity, not just syntax
 }
 
+//PRE-COND: arg1: stmt, assign, while, if, prog_line
 bool QueryValidator::isValidFollows(string str)
 {
-    return false;   //stub
+    string arg1 = "";
+    string arg2 = "";
+    string result[4];
+    if ("") { //contains *, means its follows*
+        arg1 = getBetweenTwoStrings(str, "Follows*(", ",");
+        arg2 = getBetweenTwoStrings(str, ",", ")");
+        
+        regex isIntegerRegexCheck(DIGIT_STAR);
+        
+        /*
+        if (regex_match(arg1, isIntegerRegexCheck)) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (findArgument(arg1, qt.getStmts())) {
+            result[0] = "stmt";
+            result[1] = arg1;
+        }
+        else if (findArgument(arg1, qt.getAssigns()) {
+            result[0] = "assign";
+            result[1] = arg1;
+        }
+        else if (findArgument(arg1, qt.getWhiless()) {
+            result[0] = "while";
+            result[1] = arg1;
+        }
+        else {
+            return false;
+        }
+
+        if (regex_match(arg2, isIntegerRegexCheck)) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (findArgument(arg2, qt.getStmts())) {
+            result[2] = "stmt";
+            result[3] = arg2;
+        }
+        else if (findArgument(arg2, qt.getAssigns()) {
+            result[2] = "assign";
+            result[3] = arg2;
+        }
+        else if (findArgument(arg2, qt.getWhiless()) {
+            result[2] = "while";
+            result[3] = arg2;
+        }
+        else {
+            return false;
+        }
+        */
+
+        //Store string array into query tree in Follows()
+    }
+    else {
+        arg1 = getBetweenTwoStrings(str, "Follows(", ",");
+        arg2 = getBetweenTwoStrings(str, ",", ")");
+        regex isIntegerRegexCheck(DIGIT_STAR);
+
+        /*
+        if (regex_match(arg1, isIntegerRegexCheck)) {
+        result[0] = "stmt";
+        result[1] = arg1;
+        }
+        else if (findArgument(arg1, qt.getStmts())) {
+        result[0] = "stmt";
+        result[1] = arg1;
+        }
+        else if (findArgument(arg1, qt.getAssigns()) {
+        result[0] = "assign";
+        result[1] = arg1;
+        }
+        else if (findArgument(arg1, qt.getWhiless()) {
+        result[0] = "while";
+        result[1] = arg1;
+        }
+        else {
+        return false;
+        }
+
+        if (regex_match(arg2, isIntegerRegexCheck)) {
+        result[2] = "stmt";
+        result[3] = arg2;
+        }
+        else if (findArgument(arg2, qt.getStmts())) {
+        result[2] = "stmt";
+        result[3] = arg2;
+        }
+        else if (findArgument(arg2, qt.getAssigns()) {
+        result[2] = "assign";
+        result[3] = arg2;
+        }
+        else if (findArgument(arg2, qt.getWhiless()) {
+        result[2] = "while";
+        result[3] = arg2;
+        }
+        else {
+        return false;
+        }
+        */
+
+        //Store string array into query tree in Follows()
+    }
+    
+    return true;   //stub
                     //TODO: This is to check the overall validity, not just syntax
 }
 
