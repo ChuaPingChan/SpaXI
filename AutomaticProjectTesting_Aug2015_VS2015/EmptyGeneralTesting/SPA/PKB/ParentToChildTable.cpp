@@ -27,3 +27,7 @@ bool ParentToChildTable::addParentChild(int parentStmt, int childStmt)
 list<int> ParentToChildTable::getChildren(int parentStmt) {
 	return parentToChildMap[parentStmt];
 }
+
+unordered_map<int, list<int>> ParentToChildTable::getTable() {
+	return parentToChildMap;
+}

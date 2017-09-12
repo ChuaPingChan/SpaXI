@@ -11,13 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="PKB\ChildToParentTable.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
+    <ClCompile Include="PKB\DesignExtractor.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\SPA\PKB;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="PKB\ModTableProcToVar.cpp" />
     <ClCompile Include="PKB\ModTableStmtToVar.cpp" />
     <ClCompile Include="PKB\ModTableVarToStmt.cpp" />
+    <ClCompile Include="PKB\ParentToChildStarTable.cpp" />
     <ClCompile Include="PKB\ParentToChildTable.cpp" />
     <ClCompile Include="PKB\PKBMain.cpp" />
     <ClCompile Include="PKB\FollowsTable.cpp" />
@@ -31,10 +34,12 @@
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
+    <ClInclude Include="PKB\DesignExtractor.h" />
     <ClInclude Include="PKB\FollowsTable.h" />
     <ClInclude Include="PKB\ModTableProcToVar.h" />
     <ClInclude Include="PKB\ModTableStmtToVar.h" />
     <ClInclude Include="PKB\ModTableVarToStmt.h" />
+    <ClInclude Include="PKB\ParentToChildStarTable.h" />
     <ClInclude Include="PKB\ParentToChildTable.h" />
     <ClInclude Include="PKB\ProcIndexTable.h" />
     <ClInclude Include="PKB\PKBMain.h" />
