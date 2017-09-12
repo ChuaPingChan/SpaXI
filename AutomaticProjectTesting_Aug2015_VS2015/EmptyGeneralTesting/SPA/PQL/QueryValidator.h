@@ -76,11 +76,11 @@ private:
 
     /*--------------- Validation of Select ---------------*/
     bool isValidSelect(string str);
-
+	bool isValidClause(string str);
     bool isValidModifies(string str);
     bool isValidUses(string str);
     bool isValidFollows(string str);
-    bool isvalidParent(string str);
+    bool isValidParent(string str);
     bool isValidPattern(string str);
 
     bool isValidSelectOverallRegex(string str);
