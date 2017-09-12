@@ -8,6 +8,26 @@
 class Parser
 {
 public:
+    /********
+    * REGEX *
+    *********/
+    
+    static const std::regex REGEX_VALID_ENTITY_NAME;
+    static const std::regex REGEX_MATCH_CONSTANT;
+    static const std::regex REGEX_EXTRACT_NEXT_TOKEN;
+    static const std::regex REGEX_EXTRACT_UP_TO_SEMICOLON;
+    static const std::regex REGEX_MATCH_PROCEDURE_KEYWORD;
+    static const std::regex REGEX_MATCH_WHILE_KEYWORD;
+    static const std::regex REGEX_MATCH_OPEN_BRACE;
+    static const std::regex REGEX_MATCH_CLOSE_BRACE;
+    static const std::regex REGEX_MATCH_SEMICOLON;
+    static const std::regex REGEX_EXTRACT_ASSIGNMENT_LHS_RHS;
+    //static const std::regex REGEX_VALID_ASSIGNMENT;
+    static const std::regex REGEX_EXTRACT_EXPRESSION_LHS_RHS;
+    static const std::regex REGEX_VALID_EXPRESSION;
+    static const std::regex REGEX_MATCH_EQUAL;
+    static const std::regex REGEX_VALID_OPERATOR;
+
     Parser();
 
     void parse(std::string filename);
@@ -25,22 +45,6 @@ private:
     *************/
     static const int INT_INITIAL_STMT_NUMBER;
     static const std::string STRING_EMPTY_STRING;
-    
-    static const std::regex REGEX_VALID_ENTITY_NAME;
-    static const std::regex REGEX_MATCH_CONSTANT;
-    static const std::regex REGEX_EXTRACT_NEXT_TOKEN;
-    static const std::regex REGEX_EXTRACT_UP_TO_SEMICOLON;
-    static const std::regex REGEX_MATCH_PROCEDURE_KEYWORD;
-    static const std::regex REGEX_MATCH_WHILE_KEYWORD;
-    static const std::regex REGEX_MATCH_OPEN_BRACE;
-    static const std::regex REGEX_MATCH_CLOSE_BRACE;
-    static const std::regex REGEX_MATCH_SEMICOLON;
-    static const std::regex REGEX_EXTRACT_ASSIGNMENT_LHS_RHS;
-    //static const std::regex REGEX_VALID_ASSIGNMENT;
-    static const std::regex REGEX_EXTRACT_EXPRESSION_LHS_RHS;
-    static const std::regex REGEX_VALID_EXPRESSION;
-    static const std::regex REGEX_MATCH_EQUAL;
-    static const std::regex REGEX_VALID_OPERATOR;
 
     /********************
     * Member Attributes *

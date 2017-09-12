@@ -13,7 +13,7 @@ using namespace std;
 const int Parser::INT_INITIAL_STMT_NUMBER = 1;
 const string Parser::STRING_EMPTY_STRING = "";
 
-const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)[^A-Za-z0-9]\\b\\s*");
+const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
 const regex Parser::REGEX_MATCH_CONSTANT = regex("\\s*\\d+\\s*");
 const regex Parser::REGEX_EXTRACT_NEXT_TOKEN = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|[^a-zA-Z0-9]|\\d+).*");
 const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\A\\s*([a-zA-Z0-9 +\\-*/]+)\\s*;.*");
