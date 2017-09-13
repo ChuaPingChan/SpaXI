@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <iostream>
+#include <array>
 
 using namespace std;
 
@@ -13,9 +15,14 @@ public:
 	void init();
 	void storeUnvalidatedStmts(vector<string> splitted);
 	void insertVariable(string type, string var);
-	void insertSuchThat(string clause);
+	void insertFollows(array<string, 4> arr);
+	void insertFollowsStar(array<string, 4> arr);
+	void insertParent(array<string, 4> arr);
+	void insertParentStar(array<string, 4> arr);
+	void insertUses(array<string, 4> arr);
+	void insertModifies(array<string, 4> arr);
+	void insertPattern(array<string, 6> arr);
 	void insertSelect(string stmt);
-	void insertPattern(string pattern);
 	
 	vector<string> getUnvalidatedStmts();
 	vector<string> getStmts();
@@ -24,6 +31,14 @@ public:
 	vector<string> getVars();
 	vector<string> getConsts();
 	vector<string> getProgLines();
+
+	vector<array<string, 4>> getFollows();
+	vector<array<string, 4>> getFollowsStar();
+	vector<array<string, 4>> getParent();
+	vector<array<string, 4>> getParentStar();
+	vector<array<string, 4>> getUses();
+	vector<array<string, 4>> getModifies();
+	vector<array<string, 6>> getPatterns();
 	
 	int getNumVar();
 	int getNumSuchThat();
@@ -48,8 +63,14 @@ private:
 	vector<string> progLines; 
 
 	string selectStmt;
-	string patternStmt;
 	vector<string> suchThatClauses;
+	vector<array<string, 4>> followsClauses;
+	vector<array<string, 4>> followsStarClauses;
+	vector<array<string, 4>> parentClauses;
+	vector<array<string, 4>> parentStarClauses;
+	vector<array<string, 4>> usesClauses;
+	vector<array<string, 4>> modifiesClauses;
+	vector<array<string, 6>> patternClauses;
 
 	int numVar = 0;
 

@@ -1,6 +1,6 @@
 #include "QueryTree.h"
-#include <iostream>
 
+using namespace std;
 
 QueryTree::QueryTree()
 {
@@ -66,19 +66,44 @@ void QueryTree::insertVariable(string type, string var)
 	this->numVar++;
 }
 
-void QueryTree::insertSuchThat(string clause)
+void QueryTree::insertFollows(array<string, 4> arr)
 {
-	suchThatClauses.push_back(clause);
+	followsClauses.push_back(arr);
+}
+
+void QueryTree::insertFollowsStar(array<string, 4> arr)
+{
+	followsStarClauses.push_back(arr);
+}
+
+void QueryTree::insertParent(array<string, 4> arr)
+{
+	parentClauses.push_back(arr);
+}
+
+void QueryTree::insertParentStar(array<string, 4> arr)
+{
+	parentStarClauses.push_back(arr);
+}
+
+void QueryTree::insertUses(array<string, 4> arr)
+{
+	usesClauses.push_back(arr);
+}
+
+void QueryTree::insertModifies(array<string, 4> arr)
+{
+	modifiesClauses.push_back(arr);
+}
+
+void QueryTree::insertPattern(array<string, 6> arr)
+{
+	patternClauses.push_back(arr);
 }
 
 void QueryTree::insertSelect(string stmt)
 {
 	selectStmt = stmt;
-}
-
-void QueryTree::insertPattern(string pattern)
-{
-	patternStmt = pattern;
 }
 
 vector<string> QueryTree::getUnvalidatedStmts()
@@ -114,6 +139,41 @@ vector<string> QueryTree::getConsts()
 vector<string> QueryTree::getProgLines()
 {
 	return progLines;
+}
+
+vector<array<string, 4>> QueryTree::getFollows()
+{
+	return followsClauses;
+}
+
+vector<array<string, 4>> QueryTree::getFollowsStar()
+{
+	return followsStarClauses;
+}
+
+vector<array<string, 4>> QueryTree::getParent()
+{
+	return parentClauses;
+}
+
+vector<array<string, 4>> QueryTree::getParentStar()
+{
+	return parentStarClauses;
+}
+
+vector<array<string, 4>> QueryTree::getUses()
+{
+	return usesClauses;
+}
+
+vector<array<string, 4>> QueryTree::getModifies()
+{
+	return modifiesClauses;
+}
+
+vector<array<string, 6>> QueryTree::getPatterns()
+{
+	return patternClauses;
 }
 
 int QueryTree::getNumVar()
