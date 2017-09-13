@@ -45,7 +45,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     *********************/
     int _currentStmtNumber;
     std::string _concatenatedSourceCode;
-    std::string _nextToken;
+    std::string _currentTokenPtr;
     bool _isValidSyntax;
     std::string _errorMessage;
     std::stack<std::string> _callStack;     //Contains only procedures
@@ -56,6 +56,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     *******************/
     bool concatenateLines(std::string filename);
     bool getNextToken();
+    std::vector<std::string> tokenizeString(std::string stringToTokenize);
     bool assertMatchAndIncrementToken(std::regex re);
     bool matchToken(std::regex re);
     std::string extractStringUpToSemicolon();

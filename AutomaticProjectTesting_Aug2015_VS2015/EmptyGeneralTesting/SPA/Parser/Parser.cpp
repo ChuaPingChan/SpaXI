@@ -16,7 +16,8 @@ const string Parser::STRING_EMPTY_STRING = "";
 const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
 const regex Parser::REGEX_MATCH_CONSTANT = regex("\\s*\\d+\\s*");
 const regex Parser::REGEX_EXTRACT_NEXT_TOKEN = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|[^a-zA-Z0-9]|\\d+).*");
-const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([a-zA-Z0-9+\\-*/][a-zA-Z0-9+\\s\\-*/]*)\\s*;.*");
+//const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([a-zA-Z0-9+\\-*/=][a-zA-Z0-9+\\s\\-*/=]*)\\s*;.*");
+const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([^;\\s][^;]*)\\s*;.*");
 const regex Parser::REGEX_MATCH_PROCEDURE_KEYWORD = regex("\\s*procedure\\s*");
 const regex Parser::REGEX_MATCH_WHILE_KEYWORD = regex("\\s*while\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACE = regex("\\s*\\u007B\\s*");
@@ -37,7 +38,7 @@ Parser::Parser()
 {
     _currentStmtNumber = Parser::INT_INITIAL_STMT_NUMBER;
     _concatenatedSourceCode = Parser::STRING_EMPTY_STRING;
-    _nextToken = Parser::STRING_EMPTY_STRING;
+    _currentTokenPtr = Parser::STRING_EMPTY_STRING;
     _isValidSyntax = true;
     _errorMessage = string();
     _callStack = stack<string>();
@@ -67,15 +68,37 @@ bool Parser::concatenateLines(string filename) {
 bool Parser::getNextToken()
 {
     smatch match;
-    if (regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
-        _nextToken = match.str(1);
-        _concatenatedSourceCode.erase(0, match.position(1)+match.length(1));
+    // At the very beginning of a SIMPLE source file, just increment token pointer.
+    if (_currentTokenPtr == "" && regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
+        _currentTokenPtr = match.str(1);
         return true;
     }
+    
+    // If at the middle of a SIMPLE source file, discard the first token and move to the next.
+    if (regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
+        _currentTokenPtr = match.str(1);
+        _concatenatedSourceCode.erase(0, match.position(1)+match.length(1));
+        if (regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
+            _currentTokenPtr = match.str(1);
+            return true;
+        }
+    }
     else {
-        _nextToken = Parser::STRING_EMPTY_STRING;
+        _currentTokenPtr = Parser::STRING_EMPTY_STRING;
         return false;
     }
+}
+
+// Tokenize a given string into a vector of strings.
+vector<string> Parser::tokenizeString(string stringToTokenize)
+{
+    vector<string> tokenVector;
+    smatch match;
+    while (regex_match(stringToTokenize, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
+        tokenVector.push_back(match.str(1));
+        stringToTokenize.erase(0, match.position(1) + match.length(1));
+    }
+    return tokenVector;
 }
 
 /*
@@ -101,7 +124,7 @@ If the match is successful, move _nextToken forward and return true.
 If match is unsuccessful, indicate syntax error.
 */
 bool Parser::assertMatchAndIncrementToken(regex re) {
-    if (regex_match(_nextToken, re)) {
+    if (regex_match(_currentTokenPtr, re)) {
         getNextToken();
         return true;
     }
@@ -116,7 +139,7 @@ bool Parser::assertMatchAndIncrementToken(regex re) {
 Matches the given regex with the next token. Does not proceed to the next token.
 */
 bool Parser::matchToken(regex re) {
-    return regex_match(_nextToken, re);
+    return regex_match(_currentTokenPtr, re);
 }
 
 void Parser::parseProgram() {
@@ -137,7 +160,7 @@ void Parser::parseProcedure() {
         //TODO: Remove this line after determining how to signal user on syntax error.
         return;
     }
-    procName = _nextToken;
+    procName = _currentTokenPtr;
     _callStack.push(procName);
     // TODO: Add to ProcToIdxMap
     // TODO: Populate CallsTable using _callStack;
@@ -204,7 +227,7 @@ Parses an assignment statement. When this method ends, _nextToken is ';'.
 void Parser::parseAssignment() {
     // LHS
     assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
-    string lhsVar = _nextToken;
+    string lhsVar = _currentTokenPtr;
     // TODO: Add lhsVar to VarToIdxMap
     // TODO: Update ModTableStmtToVar using currentStmtNumber
     // TODO: Update ModTableStmtToVar using parentStack

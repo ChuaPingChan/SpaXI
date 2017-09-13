@@ -57,6 +57,11 @@ namespace UnitTesting
             Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
             Assert::IsTrue((match.str(1) == expectedString));
 
+            targetString = " a = 1;";
+            expectedString = "a = 1";
+            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
+            Assert::IsTrue((match.str(1) == expectedString));
+
             targetString = ";";
             Assert::IsFalse(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
             targetString = "should fail";
@@ -127,9 +132,8 @@ namespace UnitTesting
 
         TEST_METHOD(getNextTokenTest_matchTokenTest_assertMatchAndIncrTokenTest)
         {
-            ParserChildForTest parser;
-
             // Set up
+            ParserChildForTest parser; 
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
             Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
             
@@ -154,6 +158,77 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(tokenizeStringTest)
+        {
+            ParserChildForTest parser;
+            std::string stringToTokenize = "one two three ; 123 { } a45=";
+            std::vector<std::string> expectedTokens = { "one", "two", "three", ";", "123", "{", "}", "a45", "=" };
+            std::vector<std::string> actualTokens = parser.tokenizeString(stringToTokenize);
+            Assert::IsTrue(actualTokens == expectedTokens);
+        }
+
+        TEST_METHOD(extractStringUpToSemicolonTest)
+        {         
+            // Set up
+            ParserChildForTest parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
+            Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
+
+            // Testing begins
+            for (int i = 0; i < 4; i++) {
+                parser.getNextToken();  // Skip procedure header to assignment stmt.
+            }
+
+            std::string charsUpTillSemiColon = parser.extractStringUpToSemicolon();
+            std::vector<std::string> expectedTokens = { "a", "=", "1" };
+            std::vector<std::string> actualTokens = parser.tokenizeString(charsUpTillSemiColon);
+            Assert::IsTrue(actualTokens == expectedTokens);
+
+            // Going to the next assignment stmt
+            while (!parser.matchToken(Parser::REGEX_MATCH_SEMICOLON)) {
+                parser.getNextToken();
+            }
+            Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON));
+
+            charsUpTillSemiColon = parser.extractStringUpToSemicolon();
+            expectedTokens = { "b", "=", "2" };
+            actualTokens = parser.tokenizeString(charsUpTillSemiColon);
+            Assert::IsTrue(actualTokens == expectedTokens);
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(assertIsValidExpressionTest)
+        {
+            ParserChildForTest parser;
+            Assert::IsTrue(parser.assertIsValidExpression("a"));
+            Assert::IsTrue(parser.assertIsValidExpression("1"));
+            Assert::IsFalse(parser.assertIsValidExpression(""));
+            Assert::IsFalse(parser.assertIsValidExpression(" "));
+            Assert::IsFalse(parser.assertIsValidExpression("+"));
+            Assert::IsFalse(parser.assertIsValidExpression("$"));
+            Assert::IsFalse(parser.assertIsValidExpression("\n\t\r"));
+            Assert::IsTrue(parser.assertIsValidExpression("a+b"));
+            Assert::IsTrue(parser.assertIsValidExpression("a + b  "));
+            Assert::IsFalse(parser.assertIsValidExpression("a + 3b  "));
+            Assert::IsFalse(parser.assertIsValidExpression("a + a%b  "));
+            Assert::IsFalse(parser.assertIsValidExpression("a_c + b  "));
+            Assert::IsTrue(parser.assertIsValidExpression("\n\t\r a \n\n\t + \t\r\n\fb  \n\t\r"));
+            Assert::IsTrue(parser.assertIsValidExpression("a - b  "));
+            Assert::IsTrue(parser.assertIsValidExpression("a * b  "));
+            Assert::IsTrue(parser.assertIsValidExpression("a / b  "));
+            Assert::IsFalse(parser.assertIsValidExpression("a +/ b  "));
+            Assert::IsTrue(parser.assertIsValidExpression("a + b  - 3"));
+            Assert::IsTrue(parser.assertIsValidExpression("a + b/3 * 2 / d + b  "));
+            Assert::IsTrue(parser.assertIsValidExpression("a134124 + b/3 * 2  "));
+            Assert::IsFalse(parser.assertIsValidExpression(" a = 3 + 4 "));
+            Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
+        }
+
+        /******************************
+        * Utility Methods for Testing *
+        *******************************/
         TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
         {
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());

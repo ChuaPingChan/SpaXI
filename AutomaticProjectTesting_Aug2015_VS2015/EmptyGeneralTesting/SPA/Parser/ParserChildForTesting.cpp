@@ -12,10 +12,16 @@
 
 using namespace std;
 
+/*
+This class's sole purpose in life is to allow unit testing
+for the private methods of the Parser class :O
+
+DO NOT use this class in the real SPA.
+*/
 ParserChildForTest::ParserChildForTest() {
     _currentStmtNumber = ParserChildForTest::INT_INITIAL_STMT_NUMBER;
     _concatenatedSourceCode = ParserChildForTest::STRING_EMPTY_STRING;
-    _nextToken = ParserChildForTest::STRING_EMPTY_STRING;
+    _currentTokenPtr = ParserChildForTest::STRING_EMPTY_STRING;
     _isValidSyntax = true;
     _errorMessage = string();
     _callStack = stack<string>();
@@ -29,6 +35,11 @@ bool ParserChildForTest::concatenateLines(string filename) {
 bool ParserChildForTest::getNextToken()
 {
     return Parser::getNextToken();
+}
+
+vector<string> ParserChildForTest::tokenizeString(string stringToTokenize)
+{
+    return Parser::tokenizeString(stringToTokenize);
 }
 
 bool ParserChildForTest::assertMatchAndIncrementToken(std::regex re)
