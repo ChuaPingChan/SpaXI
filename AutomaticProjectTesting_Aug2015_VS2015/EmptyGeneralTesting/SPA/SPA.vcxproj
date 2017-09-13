@@ -14,6 +14,7 @@
     <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
+    <ClCompile Include="Parser\ParserChildForTesting.cpp" />
     <ClCompile Include="PKB\ModTableProcToVar.cpp" />
     <ClCompile Include="PKB\ModTableStmtToVar.cpp" />
     <ClCompile Include="PKB\ModTableVarToStmt.cpp" />
@@ -29,6 +30,7 @@
   <ItemGroup>
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="Parser\Parser.h" />
+    <ClInclude Include="Parser\ParserChildForTesting.h" />
     <ClInclude Include="PKB\FollowsTable.h" />
     <ClInclude Include="PKB\ModTableProcToVar.h" />
     <ClInclude Include="PKB\ModTableStmtToVar.h" />

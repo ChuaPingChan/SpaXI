@@ -11,7 +11,7 @@ class ParserChildForTest :
 public:
     ParserChildForTest();
 
-    std::string concatenateLines(std::string filename);
+    bool concatenateLines(std::string filename);
     bool getNextToken();
     bool assertMatchAndIncrementToken(std::regex re);
     bool matchToken(std::regex re);
@@ -27,12 +27,6 @@ public:
     bool whileExpected();
     void parseAssignment();
     void parseWhile();
-
-    /**********************************
-    * For unit testing, to be removed *
-    ***********************************/
-    std::vector<std::string> getTokenTest(std::string filename);
-    bool matchTokenTest(std::string filename);
 
 };
 

@@ -5,8 +5,11 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../SPA/Parser/Parser.h"
+#include "../SPA/Parser/ParserChildForTesting.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+const std::string dummySimpleSourcePath = "../UnitTesting/ParserTestDependencies/dummySimpleSource.txt";
 
 namespace UnitTesting
 {
@@ -122,44 +125,107 @@ namespace UnitTesting
             Assert::IsFalse(std::regex_match("-;", Parser::REGEX_VALID_OPERATOR));
         }
 
-        TEST_METHOD(getTokenTest_dummyFile_tokenizedCorrectly)
+        TEST_METHOD(getNextTokenTest_matchTokenTest_assertMatchAndIncrTokenTest)
         {
-            Parser parser;
-            std::string newFilePath("../UnitTesting/ParserTestDependencies/getTokenInput.txt");
-            std::ofstream outfile(newFilePath);
+            ParserChildForTest parser;
 
-            std::string inputString("procedure F1rst {\n  a =10;\n while i {\n while a {\n var123= 190;}\n c = 20;}}\n");
-            outfile << inputString;
-            outfile.close();
+            // Set up
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
+            Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
+            
+            // Testing begins
+            Assert::IsTrue(parser.getNextToken());
+            Assert::IsTrue(parser.matchToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+            Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+            Assert::IsTrue(parser.matchToken(Parser::REGEX_VALID_ENTITY_NAME));
+            Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME));
+            Assert::IsTrue(parser.matchToken(Parser::REGEX_MATCH_OPEN_BRACE));
+            Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE));
+            Assert::IsTrue(parser.matchToken(Parser::REGEX_VALID_ENTITY_NAME));
+            Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME));
+            Assert::IsTrue(parser.matchToken(Parser::REGEX_MATCH_EQUAL));
+            Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_EQUAL));
+            Assert::IsTrue(parser.matchToken(Parser::REGEX_MATCH_CONSTANT));
+            Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_CONSTANT));
+            Assert::IsTrue(parser.matchToken(Parser::REGEX_MATCH_SEMICOLON));
+            Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON));
 
-            std::string expectedTokenArray[24] = { 
-                "procedure", "F1rst", "{", "a", "=", "10", ";", "while",
-                "i", "{", "while", "a", "{", "var123", "=", "190", ";",
-                "}", "c", "=", "20", ";", "}", "}"
-            };
-            std::vector<std::string> expectedTokens(expectedTokenArray, expectedTokenArray + sizeof(expectedTokenArray) / sizeof(expectedTokenArray[0]));
-            std::vector<std::string> actualTokens = parser.getTokenTest(newFilePath);
-
-            Assert::IsTrue(std::remove(newFilePath.c_str()) == 0);      // Remove file created
-            Assert::IsTrue(expectedTokens == actualTokens);
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-        TEST_METHOD(matchTokenTest)
+        TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
         {
-            Parser parser;
-
-            // Set up file for Parser to parse
-            std::string newFilePath("../UnitTesting/ParserTestDependencies/getTokenInput.txt");
-            std::ofstream outfile(newFilePath);
-            std::string inputString("procedure    while \n { \t }\n");
-            outfile << inputString;
-            outfile.close();
-
-            // Parser's temporary test method
-            Assert::IsTrue(parser.matchTokenTest(newFilePath));
-
-            Assert::IsTrue(std::remove(newFilePath.c_str()) == 0);      // Remove file created
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_nonNestedWhile());
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_2LevelNestedWhile());
+            Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements only.
+        */
+        bool createDummySimpleSourceFile_assignmentsOnly() {
+            std::string content = "procedure ABC{\n  a = 1;\n b = 2;\n	c = a;\n }\n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text 
+        containing assignment statements and a while loop without nesting.
+        */
+        bool createDummySimpleSourceFile_assignments_nonNestedWhile() {
+            std::string content = "procedure ABC { \n  i=1; \n b=200 ; \n	c= a   ; \nwhile a \n{ \n	a = 3; \n   w = w+1  ; \n} \n} \n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements and 1-level nested while loops.
+        */
+        bool createDummySimpleSourceFile_assignments_1LevelNestedWhile() {
+            std::string content = "procedure ABC { \n  i=1; \n b=200 ; \n	c= a   ; \nwhile a \n{ \n   while beta { \n        oSCar  = 1 + beta + tmp; \n        while tmp{ \n          oSCar = I + k + j1k + chArlie; } \n	while x { \n        x = x + 1;} \n          a=   2; } \n   w = w+1  ; \n} \n} \n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements and 2-level nested while loops.
+        */
+        bool createDummySimpleSourceFile_assignments_2LevelNestedWhile() {
+            std::string content = "procedure ABC { \n  i=1; \n b=200 ; \n	c= a   ; \nwhile a \n{ \n   while beta { \n        oSCar  = 1 + beta + tmp; \n        while tmp{ \n          oSCar = I + k + j1k + chArlie; } \n	while x { \n        x = x + 1; \n        while left { \n            x = x+ 1	; }} \n          a=   2; } \n   w = w+1  ; \n} \n} \n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        // This is a utility method to destroy the dummy text file created by createDummyTextFile()
+        bool deleteDummySimpleSourceFile() {
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            return std::remove(newFilePath.c_str()) == 0;
+        }
     };
 }

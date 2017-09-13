@@ -32,13 +32,7 @@ public:
 
     void parse(std::string filename);
 
-    /**********************************
-    * For unit testing, to be removed *
-    ***********************************/
-    std::vector<std::string> getTokenTest(std::string filename);
-    bool matchTokenTest(std::string filename);
-
-private:
+protected:  // TODO: Temporarily use "protected" to ease unit testing.
 
     /************
     * Constants *
@@ -60,7 +54,7 @@ private:
     /******************
     * Private Methods *
     *******************/
-    std::string concatenateLines(std::string filename);
+    bool concatenateLines(std::string filename);
     bool getNextToken();
     bool assertMatchAndIncrementToken(std::regex re);
     bool matchToken(std::regex re);
