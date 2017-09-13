@@ -30,8 +30,8 @@ const regex Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS = regex("\\s*([a-zA-Z][a-zA
 // Does not confirm the whole expression is valid. Only checks for: [item1][add/minus/times/divide][item2] OR [item1]
 const regex Parser::REGEX_VALID_EXPRESSION = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|\\d+)\\s*[+\\-*/]\\s*([a-zA-z][ a-zA-Z0-9+\\-*/]*)\\s*");
 
-const regex Parser::REGEX_MATCH_EQUAL = regex("=");
-const regex Parser::REGEX_VALID_OPERATOR = regex("[+\\-*/]");
+const regex Parser::REGEX_MATCH_EQUAL = regex("\\s*=\\s*");
+const regex Parser::REGEX_VALID_OPERATOR = regex("\\s*[+\\-*/]\\s*");
 
 Parser::Parser()
 {

@@ -61,21 +61,68 @@ namespace UnitTesting
             
             targetString = "   ;";
             Assert::IsFalse(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
-            
-            /*
-            targetString = "    this\t\n should \t\npass\n;";
-            expectedString = "this\t\n should \t\npass";
-            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
-            Assert::IsTrue((match.str(1) == expectedString));
-            */
 
-            targetString = "    this\t\n\r \t\n\rshould\f \fpass\n;";
+            targetString = "    this\t\n\r \t\n\rshould\f \fpass\n; redundant words and semicolons ; ; ; ";
             expectedString = "this\t\n\r \t\n\rshould\f \fpass\n";
             Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
             Assert::IsTrue((match.str(1) == expectedString));
         }
 
-        TEST_METHOD(getTokenTest_inputFile_tokenizedCorrectly)
+        TEST_METHOD(regexMatchProcedureKeywordTest)
+        {
+            Assert::IsTrue(std::regex_match("procedure", Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+            Assert::IsTrue(std::regex_match(" \t\n\r\fprocedure\t\n\r\f ", Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+            Assert::IsFalse(std::regex_match("procedureFirst", Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+            Assert::IsFalse(std::regex_match("procedur", Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+            Assert::IsFalse(std::regex_match("proc3dure", Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+            Assert::IsFalse(std::regex_match("", Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+            Assert::IsFalse(std::regex_match("   ", Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
+        }
+
+        TEST_METHOD(regexMatchWhileKeywordTest)
+        {
+            Assert::IsTrue(std::regex_match("while", Parser::REGEX_MATCH_WHILE_KEYWORD));
+            Assert::IsTrue(std::regex_match(" \t\n\r\fwhile\t\n\r\f ", Parser::REGEX_MATCH_WHILE_KEYWORD));
+            Assert::IsFalse(std::regex_match("whilei", Parser::REGEX_MATCH_WHILE_KEYWORD));
+            Assert::IsFalse(std::regex_match("whil", Parser::REGEX_MATCH_WHILE_KEYWORD));
+            Assert::IsFalse(std::regex_match("whi le", Parser::REGEX_MATCH_WHILE_KEYWORD));
+            Assert::IsFalse(std::regex_match("", Parser::REGEX_MATCH_WHILE_KEYWORD));
+            Assert::IsFalse(std::regex_match("   ", Parser::REGEX_MATCH_WHILE_KEYWORD));
+        }
+
+        TEST_METHOD(regexMatchBracesAndSemiColonsTest)
+        {
+            Assert::IsTrue(std::regex_match(";", Parser::REGEX_MATCH_SEMICOLON));
+            Assert::IsTrue(std::regex_match(" \t\n\r\f;\t\n\r\f ", Parser::REGEX_MATCH_SEMICOLON));
+            Assert::IsFalse(std::regex_match(" ;a ", Parser::REGEX_MATCH_SEMICOLON));
+            Assert::IsFalse(std::regex_match(" a; ", Parser::REGEX_MATCH_SEMICOLON));
+
+            Assert::IsTrue(std::regex_match("{", Parser::REGEX_MATCH_OPEN_BRACE));
+            Assert::IsTrue(std::regex_match(" \t\n\r\f{\t\n\r\f ", Parser::REGEX_MATCH_OPEN_BRACE));
+            Assert::IsFalse(std::regex_match(" {a ", Parser::REGEX_MATCH_OPEN_BRACE));
+            Assert::IsFalse(std::regex_match(" a{ ", Parser::REGEX_MATCH_OPEN_BRACE));
+            
+            Assert::IsTrue(std::regex_match("}", Parser::REGEX_MATCH_CLOSE_BRACE));
+            Assert::IsTrue(std::regex_match(" \t\n\r\f}\t\n\r\f ", Parser::REGEX_MATCH_CLOSE_BRACE));
+            Assert::IsFalse(std::regex_match(" }a ", Parser::REGEX_MATCH_CLOSE_BRACE));
+            Assert::IsFalse(std::regex_match(" a} ", Parser::REGEX_MATCH_CLOSE_BRACE));
+        }
+
+        TEST_METHOD(regexMatchEqualAndOtherOperatorsTest)
+        {
+            Assert::IsTrue(std::regex_match("=", Parser::REGEX_MATCH_EQUAL));
+            Assert::IsTrue(std::regex_match("+ ", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsTrue(std::regex_match(" -", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsTrue(std::regex_match("\n\t*\n\t", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsTrue(std::regex_match("\r\f/\r\f", Parser::REGEX_VALID_OPERATOR));
+            
+            Assert::IsFalse(std::regex_match("a=4", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsFalse(std::regex_match("+-", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsFalse(std::regex_match("9+3", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsFalse(std::regex_match("-;", Parser::REGEX_VALID_OPERATOR));
+        }
+
+        TEST_METHOD(getTokenTest_dummyFile_tokenizedCorrectly)
         {
             Parser parser;
             std::string newFilePath("../UnitTesting/ParserTestDependencies/getTokenInput.txt");
