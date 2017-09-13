@@ -39,7 +39,16 @@ namespace IntegrationTesting
             Assert::IsTrue(qv.isArgumentInClauseTest("s", qt.getStmts()));
             Assert::IsTrue(qv.isArgumentInClauseTest("w", qt.getWhiles()));
             Assert::IsTrue(qv.isArgumentInClauseTest("c", qt.getConsts()));
-            Assert::IsTrue(qv.isArgumentInClauseTest("pl", qt.getProgLines()));         
+            Assert::IsTrue(qv.isArgumentInClauseTest("pl", qt.getProgLines()));   
+
+            Assert::IsFalse(qv.isArgumentInClauseTest("a1", qt.getAssigns()));
+            Assert::IsFalse(qv.isArgumentInClauseTest("v1", qt.getVars()));
+            Assert::IsFalse(qv.isArgumentInClauseTest("s1", qt.getStmts()));
+            Assert::IsFalse(qv.isArgumentInClauseTest("w1", qt.getWhiles()));
+            Assert::IsFalse(qv.isArgumentInClauseTest("c1", qt.getConsts()));
+            Assert::IsFalse(qv.isArgumentInClauseTest("pl1", qt.getProgLines()));
+
+
 
         }
 
@@ -49,23 +58,463 @@ namespace IntegrationTesting
             QueryValidator qv;
             string str;
 
+            /*--------------- Uses Clause --------------*/
+            //Valid query
             qv = QueryValidator();
-            str = "Select s such that Uses(1,s)";
-            qv.qt.insertVariable("stmt", "s");
+            str = "Select v such that Uses(1,v)";
+            qv.qt.insertVariable("variable", "v");
             qv.qt.insertSelect(str);         
             Assert::IsTrue(qv.isValidSelectTest(str));
 
             qv = QueryValidator();
-            str = "Select s such that Uses(s,_)";
-            qv.qt.insertVariable("stmt", "s");
+            str = "Select v such that Uses(a,v)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
             qv.qt.insertSelect(str);
             Assert::IsTrue(qv.isValidSelectTest(str));
 
             qv = QueryValidator();
-            str = "Select s such that Uses(s,\"x\")";
-            qv.qt.insertVariable("stmt", "s");
+            str = "Select v such that Uses(w,v)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
             qv.qt.insertSelect(str);
             Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(s,v)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(1,\"x\")";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(a,\"x\")";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(w,\"x\")";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(s,\"x\")";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(1,_)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(a,_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(w,_)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(s,_)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            //Invalid query
+            qv = QueryValidator();
+            str = "Select s such that Uses(1,s)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Uses(s,\"_x_\")";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select w such that Uses(w,\"_x_\")";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            /*--------------- Modifies Clause --------------*/
+            //Valid query
+            qv = QueryValidator();
+            str = "Select v such that Modifies(1,v)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(a,v)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(w,v)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(s,v)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(1,\"x\")";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(a,\"x\")";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(w,\"x\")";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(s,\"x\")";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(1,_)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(a,_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(w,_)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(s,_)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            //Invalid query
+            qv = QueryValidator();
+            str = "Select s such that Modifies(1,s)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Modifies(s,\"_x_\")";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select w such that Modifies(w,\"_x_\")";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            /*--------------- Follows/Follows* Clause --------------*/
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(1,2)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(1,s)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(s,2)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(s1,s2)";
+            qv.qt.insertVariable("stmt", "s1");
+            qv.qt.insertVariable("stmt", "s2");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(1,w)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(w,2)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(w1,w2)";
+            qv.qt.insertVariable("while", "w1");
+            qv.qt.insertVariable("while", "w2");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows*(1,2)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows*(1,s)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows*(s,2)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows*(s1,s2)";
+            qv.qt.insertVariable("stmt", "s1");
+            qv.qt.insertVariable("stmt", "s2");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows*(1,w)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows*(w,2)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows*(w1,w2)";
+            qv.qt.insertVariable("while", "w1");
+            qv.qt.insertVariable("while", "w2");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows*(1,_)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(x,y)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(\"x\",y)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(\"x\",\"y\")";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            /*--------------- Parent/Parent* Clause --------------*/
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(1,2)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(1,s)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(s,2)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(s1,s2)";
+            qv.qt.insertVariable("stmt", "s1");
+            qv.qt.insertVariable("stmt", "s2");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(1,w)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(w,2)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(w1,w2)";
+            qv.qt.insertVariable("while", "w1");
+            qv.qt.insertVariable("while", "w2");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent*(1,2)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent*(1,s)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent*(s,2)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent*(s1,s2)";
+            qv.qt.insertVariable("stmt", "s1");
+            qv.qt.insertVariable("stmt", "s2");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent*(1,w)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent*(w,2)";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent*(w1,w2)";
+            qv.qt.insertVariable("while", "w1");
+            qv.qt.insertVariable("while", "w2");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent*(1,_)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(x,y)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(\"x\",y)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(\"x\",\"y\")";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
 
 
         }

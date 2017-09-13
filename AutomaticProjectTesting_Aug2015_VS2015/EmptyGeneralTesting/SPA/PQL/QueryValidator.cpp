@@ -35,8 +35,8 @@ const string PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM + S
 /*--------------- Relationship Clause Regex ---------------*/
 const string MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-const string FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-const string PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Select Regex ---------------*/
 const string SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM;
@@ -447,7 +447,10 @@ bool QueryValidator::isValidModifies(string str)
     str = removeAllSpaces(str);
     string arg1 = getBetweenTwoStrings(str, "Modifies(", ",");
     string arg2 = getBetweenTwoStrings(str, ",", ")");
-    string result[4];
+    array<string,4> result;
+
+    if (qt.varExists(arg2) && !isArgumentInClause(arg2, qt.getVars())) //arg2 is a synonym and is NOT a variable
+        return false;
 
     //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
     if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg1))
@@ -485,6 +488,7 @@ bool QueryValidator::isValidModifies(string str)
                 result[1] = arg1;
                 //store in data type for statement number 
             }
+            qt.insertModifies(result); //store clause in query tree
             return true;
         }
 
@@ -522,6 +526,7 @@ bool QueryValidator::isValidModifies(string str)
                 result[1] = arg1;
                 //store in data type for statement number 
             }
+            qt.insertModifies(result);
             return true;
         }
     }
@@ -537,7 +542,10 @@ bool QueryValidator::isValidUses(string str)
     str = removeAllSpaces(str);
     string arg1 = getBetweenTwoStrings(str, "Uses(", ",");
     string arg2 = getBetweenTwoStrings(str, ",", ")");
-    string result[4];
+    array<string,4> result;
+
+    if (qt.varExists(arg2) && !isArgumentInClause(arg2, qt.getVars())) //arg2 is a synonym and is NOT a variable
+        return false;
 
     //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
     if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg1))
@@ -575,6 +583,7 @@ bool QueryValidator::isValidUses(string str)
                 result[1] = arg1;
                 //store in data type for statement number 
             }
+            qt.insertUses(result);
             return true;
         }
 
@@ -612,6 +621,7 @@ bool QueryValidator::isValidUses(string str)
                 result[1] = arg1;
                 //store in data type for statement number 
             }
+            qt.insertUses(result);
             return true;
         }
     }
@@ -624,10 +634,12 @@ bool QueryValidator::isValidFollows(string str)
 {
     if (!isValidFollowsRegex(str))
         return false;
+
     str = removeAllSpaces(str);
     string arg1, arg2;
-    string result[4];
-    if (regex_match(str, regex("\*"))) { //contains *, means its Follows*
+    array<string,4> result;
+
+    if (regex_search(str, regex("\\*"))) { //contains *, means it is Follows*
         arg1 = getBetweenTwoStrings(str, "Follows*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
@@ -645,6 +657,10 @@ bool QueryValidator::isValidFollows(string str)
         }
         else if (isArgumentInClause(arg1, qt.getWhiles())) {
             result[0] = "while";
+            result[1] = arg1;
+        }
+        else if (arg1 == "_") {
+            result[0] = "";
             result[1] = arg1;
         }
         else {
@@ -667,12 +683,19 @@ bool QueryValidator::isValidFollows(string str)
             result[2] = "while";
             result[3] = arg2;
         }
+        else if (arg2 == "_") {
+            result[2] = "";
+            result[3] = arg2;
+        }
+
         else {
             return false;
         }
-        //Store string array into query tree in Follows()
+        qt.insertFollowsStar(result);
+        return true;
+       
     }
-    else {
+    else { 
 
         arg1 = getBetweenTwoStrings(str, "Follows(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
@@ -693,6 +716,10 @@ bool QueryValidator::isValidFollows(string str)
             result[0] = "while";
             result[1] = arg1;
         }
+        else if (arg1 == "_") {
+            result[0] = "";
+            result[1] = arg1;
+        }
         else {
             return false;
         }
@@ -713,13 +740,17 @@ bool QueryValidator::isValidFollows(string str)
             result[2] = "while";
             result[3] = arg2;
         }
+        else if (arg2 == "_") {
+            result[2] = "";
+            result[3] = arg1;
+        }
         else {
             return false;
         }
-
+        qt.insertFollows(result);
+        return true;
         //Store string array into query tree in Follows()
     }
-        return true;
     
 }
 
@@ -727,10 +758,12 @@ bool QueryValidator::isValidParent(string str)
 {
     if (!isValidParentRegex(str))
         return false;
+
     str = removeAllSpaces(str);
     string arg1, arg2;
-    string result[4];
-    if (regex_match(str, regex("\*"))) { //contains *, means its Parent*
+    array<string, 4> result;
+
+    if (regex_search(str, regex("\\*"))) { //contains *, means it is Parent*
         arg1 = getBetweenTwoStrings(str, "Parent*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
@@ -750,6 +783,10 @@ bool QueryValidator::isValidParent(string str)
             result[0] = "while";
             result[1] = arg1;
         }
+        else if (arg1 == "_") {
+            result[0] = "";
+            result[1] = arg1;
+        }
         else {
             return false;
         }
@@ -770,10 +807,17 @@ bool QueryValidator::isValidParent(string str)
             result[2] = "while";
             result[3] = arg2;
         }
+        else if (arg2 == "_") {
+            result[2] = "";
+            result[3] = arg2;
+        }
+
         else {
             return false;
         }
-        //Store string array into query tree in Parent()
+        qt.insertParentStar(result);
+        return true;
+
     }
     else {
 
@@ -796,6 +840,10 @@ bool QueryValidator::isValidParent(string str)
             result[0] = "while";
             result[1] = arg1;
         }
+        else if (arg1 == "_") {
+            result[0] = "";
+            result[1] = arg1;
+        }
         else {
             return false;
         }
@@ -816,13 +864,18 @@ bool QueryValidator::isValidParent(string str)
             result[2] = "while";
             result[3] = arg2;
         }
+        else if (arg2 == "_") {
+            result[2] = "";
+            result[3] = arg1;
+        }
         else {
             return false;
         }
-
-        //Store string array into query tree in Follows()
+        qt.insertParent(result);
+        return true;
+        //Store string array into query tree in Parent()
     }
-    return true;
+
 
 }
 
@@ -835,7 +888,11 @@ bool QueryValidator::isValidPattern(string str)
     string arg1 = getBetweenTwoStrings(str,"pattern","(");
     string arg2 = getBetweenTwoStrings(str, "(", ",");
     string arg3 = getBetweenTwoStrings(str, ",", ")");
-    string result[6];
+    array<string,6> result;
+
+    if (qt.varExists(arg3)) //check if argument 3 is a synonym; not allowed.
+        return false;
+
     result[4] = "";
     result[5] = arg3;
 
@@ -847,12 +904,14 @@ bool QueryValidator::isValidPattern(string str)
             //store in appropriate type with VARIABLE synonym
             result[2] = "var";
             result[3] = arg2;
+            qt.insertPattern(result);
             return true;
         }
         else {
             //store in appropriate data type without VARIABLE synonym
             result[2] = "";
             result[3] = arg2;
+            qt.insertPattern(result);
             return true;
         }
     }
