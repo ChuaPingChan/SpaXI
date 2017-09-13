@@ -16,7 +16,7 @@ const string Parser::STRING_EMPTY_STRING = "";
 const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
 const regex Parser::REGEX_MATCH_CONSTANT = regex("\\s*\\d+\\s*");
 const regex Parser::REGEX_EXTRACT_NEXT_TOKEN = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|[^a-zA-Z0-9]|\\d+).*");
-const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\A\\s*([a-zA-Z0-9 +\\-*/]+)\\s*;.*");
+const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([a-zA-Z0-9+\\-*/][a-zA-Z0-9+\\s\\-*/]*)\\s*;.*");
 const regex Parser::REGEX_MATCH_PROCEDURE_KEYWORD = regex("\\s*procedure\\s*");
 const regex Parser::REGEX_MATCH_WHILE_KEYWORD = regex("\\s*while\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACE = regex("\\s*\\u007B\\s*");
@@ -80,7 +80,7 @@ bool Parser::getNextToken()
 /*
 Returns a string from the current _nextToken to the character before the first semicolon encountered.
 Indicate SIMPLE syntax error if no semicolon is encountered in the remaining of the string.
-Note that this method does not move _nextToken forward.
+Note that this method does not remove whitespaces and does not move _nextToken forward.
 */
 string Parser::extractStringUpToSemicolon() {
     smatch match;
