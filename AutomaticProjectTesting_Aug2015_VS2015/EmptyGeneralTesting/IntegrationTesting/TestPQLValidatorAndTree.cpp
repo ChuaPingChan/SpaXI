@@ -499,6 +499,12 @@ namespace IntegrationTesting
             Assert::IsTrue(qv.isValidSelectTest(str));
 
             qv = QueryValidator();
+            str = "Select v such that Parent*(_,_)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
             str = "Select v such that Parent(x,y)";
             qv.qt.insertVariable("variable", "v");
             qv.qt.insertSelect(str);
@@ -516,6 +522,99 @@ namespace IntegrationTesting
             qv.qt.insertSelect(str);
             Assert::IsFalse(qv.isValidSelectTest(str));
 
+
+            /*--------------- Pattern Clause --------------*/
+
+            //Valid Queries
+
+            qv = QueryValidator();
+            str = "Select a pattern a(v,_\"x\"_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(v,_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(v,_\"1\"_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(_,_\"x\"_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(\"y\",_\"x\"_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(\"y\",_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(_,_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertSelect(str);
+            Assert::IsTrue(qv.isValidSelectTest(str));
+
+            //Invalid Queries
+
+            qv = QueryValidator();
+            str = "Select a pattern a(s,\"x\")";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(v,\"x+y\")";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select s  pattern s(v,\"x\")";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(\"x+y\",_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(\"123\",_)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select a  pattern a(_,a1)";
+            qv.qt.insertVariable("assign", "a");
+            qv.qt.insertVariable("assign", "a1");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
 
         }
     };

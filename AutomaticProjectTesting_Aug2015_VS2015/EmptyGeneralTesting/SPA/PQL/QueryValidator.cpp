@@ -371,9 +371,8 @@ bool QueryValidator::isValidSynonym(string str)
 /*--------------- Validation of Select --------------*/
 bool QueryValidator::isValidSelect(string str)
 {
-    //TODO: split str into the different clauses
-    //TODO: Check each syntactic validity of the cluases
-    //TODO: This is true when all the clauses are true
+    //TODO: Store select synonym at the beginning (check validity first)
+
     if (isValidSelectOverallRegex(str)==false)
         return false;
 
@@ -884,6 +883,7 @@ bool QueryValidator::isValidPattern(string str)
 {
     if (!isValidPatternRegex(str))
         return false;
+
     str = removeAllSpaces(str);
     string arg1 = getBetweenTwoStrings(str,"pattern","(");
     string arg2 = getBetweenTwoStrings(str, "(", ",");
@@ -891,6 +891,9 @@ bool QueryValidator::isValidPattern(string str)
     array<string,6> result;
 
     if (qt.varExists(arg3)) //check if argument 3 is a synonym; not allowed.
+        return false;
+
+    if (qt.varExists(arg2)&&!isArgumentInClause(arg2,qt.getVars())) //check if argument 2 is declared as a synonym other than a variable; not allowed.
         return false;
 
     result[4] = "";
