@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "Parser.h"
-#include "ParserChildForTesting.h"
+#include "ParserChildForTest.h"
 #include "SyntaxErrorException.h"
 
 using namespace std;
@@ -32,9 +32,9 @@ bool ParserChildForTest::concatenateLines(string filename) {
     return Parser::concatenateLines(filename);
 }
 
-bool ParserChildForTest::getNextToken()
+bool ParserChildForTest::incrCurrentTokenPtr()
 {
-    return Parser::getNextToken();
+    return Parser::incrCurrentTokenPtr();
 }
 
 vector<string> ParserChildForTest::tokenizeString(string stringToTokenize)

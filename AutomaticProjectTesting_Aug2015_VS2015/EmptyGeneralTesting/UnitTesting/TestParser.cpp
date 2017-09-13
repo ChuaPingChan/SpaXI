@@ -5,7 +5,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../SPA/Parser/Parser.h"
-#include "../SPA/Parser/ParserChildForTesting.h"
+#include "../SPA/Parser/ParserChildForTest.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -98,13 +98,8 @@ namespace UnitTesting
             Assert::IsFalse(std::regex_match("   ", Parser::REGEX_MATCH_WHILE_KEYWORD));
         }
 
-        TEST_METHOD(regexMatchBracesAndSemiColonsTest)
+        TEST_METHOD(regexMatchBracesBracketsAndSemiColonsTest)
         {
-            Assert::IsTrue(std::regex_match(";", Parser::REGEX_MATCH_SEMICOLON));
-            Assert::IsTrue(std::regex_match(" \t\n\r\f;\t\n\r\f ", Parser::REGEX_MATCH_SEMICOLON));
-            Assert::IsFalse(std::regex_match(" ;a ", Parser::REGEX_MATCH_SEMICOLON));
-            Assert::IsFalse(std::regex_match(" a; ", Parser::REGEX_MATCH_SEMICOLON));
-
             Assert::IsTrue(std::regex_match("{", Parser::REGEX_MATCH_OPEN_BRACE));
             Assert::IsTrue(std::regex_match(" \t\n\r\f{\t\n\r\f ", Parser::REGEX_MATCH_OPEN_BRACE));
             Assert::IsFalse(std::regex_match(" {a ", Parser::REGEX_MATCH_OPEN_BRACE));
@@ -114,6 +109,21 @@ namespace UnitTesting
             Assert::IsTrue(std::regex_match(" \t\n\r\f}\t\n\r\f ", Parser::REGEX_MATCH_CLOSE_BRACE));
             Assert::IsFalse(std::regex_match(" }a ", Parser::REGEX_MATCH_CLOSE_BRACE));
             Assert::IsFalse(std::regex_match(" a} ", Parser::REGEX_MATCH_CLOSE_BRACE));
+            
+            Assert::IsTrue(std::regex_match("(", Parser::REGEX_MATCH_OPEN_BRACKET));
+            Assert::IsTrue(std::regex_match(" \t\n\r\f(\t\n\r\f ", Parser::REGEX_MATCH_OPEN_BRACKET));
+            Assert::IsFalse(std::regex_match(" (a ", Parser::REGEX_MATCH_OPEN_BRACKET));
+            Assert::IsFalse(std::regex_match(" a( ", Parser::REGEX_MATCH_OPEN_BRACKET));
+
+            Assert::IsTrue(std::regex_match(")", Parser::REGEX_MATCH_CLOSE_BRACKET));
+            Assert::IsTrue(std::regex_match(" \t\n\r\f)\t\n\r\f ", Parser::REGEX_MATCH_CLOSE_BRACKET));
+            Assert::IsFalse(std::regex_match(" )a ", Parser::REGEX_MATCH_CLOSE_BRACKET));
+            Assert::IsFalse(std::regex_match(" a) ", Parser::REGEX_MATCH_CLOSE_BRACKET));
+
+            Assert::IsTrue(std::regex_match(";", Parser::REGEX_MATCH_SEMICOLON));
+            Assert::IsTrue(std::regex_match(" \t\n\r\f;\t\n\r\f ", Parser::REGEX_MATCH_SEMICOLON));
+            Assert::IsFalse(std::regex_match(" ;a ", Parser::REGEX_MATCH_SEMICOLON));
+            Assert::IsFalse(std::regex_match(" a; ", Parser::REGEX_MATCH_SEMICOLON));
         }
 
         TEST_METHOD(regexMatchEqualAndOtherOperatorsTest)
@@ -138,7 +148,7 @@ namespace UnitTesting
             Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
             
             // Testing begins
-            Assert::IsTrue(parser.getNextToken());
+            Assert::IsTrue(parser.incrCurrentTokenPtr());
             Assert::IsTrue(parser.matchToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
             Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
             Assert::IsTrue(parser.matchToken(Parser::REGEX_VALID_ENTITY_NAME));
@@ -176,7 +186,7 @@ namespace UnitTesting
 
             // Testing begins
             for (int i = 0; i < 4; i++) {
-                parser.getNextToken();  // Skip procedure header to assignment stmt.
+                parser.incrCurrentTokenPtr();  // Skip procedure header to assignment stmt.
             }
 
             std::string charsUpTillSemiColon = parser.extractStringUpToSemicolon();
@@ -186,7 +196,7 @@ namespace UnitTesting
 
             // Going to the next assignment stmt
             while (!parser.matchToken(Parser::REGEX_MATCH_SEMICOLON)) {
-                parser.getNextToken();
+                parser.incrCurrentTokenPtr();
             }
             Assert::IsTrue(parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON));
 
@@ -194,6 +204,47 @@ namespace UnitTesting
             expectedTokens = { "b", "=", "2" };
             actualTokens = parser.tokenizeString(charsUpTillSemiColon);
             Assert::IsTrue(actualTokens == expectedTokens);
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(assignmentAndWhileExpectedTest)
+        {
+            // Set up
+            ParserChildForTest parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
+            Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
+
+            // Go to first assignment statement
+            while (!parser.matchToken(Parser::REGEX_MATCH_OPEN_BRACE)) {
+                parser.incrCurrentTokenPtr();
+            }
+            parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+            Assert::IsTrue(parser.assignmentExpected());
+
+            // Go to next assignment statement
+            while (!parser.matchToken(Parser::REGEX_MATCH_SEMICOLON)) {
+                parser.incrCurrentTokenPtr();
+            }
+            parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
+            Assert::IsTrue(parser.assignmentExpected());
+
+            // Go to while statement
+            for (int i = 0; i < 2; i++) {
+                while (!parser.matchToken(Parser::REGEX_MATCH_SEMICOLON)) {
+                    parser.incrCurrentTokenPtr();
+                }
+                parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
+            }
+            Assert::IsTrue(parser.whileExpected());
+
+            // Go to another while statement
+            while (!parser.matchToken(Parser::REGEX_MATCH_CLOSE_BRACE)) {
+                parser.incrCurrentTokenPtr();
+            }
+            parser.assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+            Assert::IsTrue(parser.whileExpected());
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());

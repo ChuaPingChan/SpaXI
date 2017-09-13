@@ -20,6 +20,8 @@ public:
     static const std::regex REGEX_MATCH_WHILE_KEYWORD;
     static const std::regex REGEX_MATCH_OPEN_BRACE;
     static const std::regex REGEX_MATCH_CLOSE_BRACE;
+    static const std::regex REGEX_MATCH_OPEN_BRACKET;
+    static const std::regex REGEX_MATCH_CLOSE_BRACKET;
     static const std::regex REGEX_MATCH_SEMICOLON;
     static const std::regex REGEX_EXTRACT_ASSIGNMENT_LHS_RHS;
     //static const std::regex REGEX_VALID_ASSIGNMENT;
@@ -55,20 +57,22 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     * Private Methods *
     *******************/
     bool concatenateLines(std::string filename);
-    bool getNextToken();
+    bool incrCurrentTokenPtr();
     std::vector<std::string> tokenizeString(std::string stringToTokenize);
     bool assertMatchAndIncrementToken(std::regex re);
     bool matchToken(std::regex re);
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
+    //bool bracketPresentInExpr(std::string expression);
+    //bool properlyBracketedExpr(std::string expression);
+
+    bool assignmentExpected();
+    bool whileExpected();
 
     void parseProgram();
     void parseProcedure();
     void parseStmtList();
     void parseStmt();
-
-    bool assignmentExpected();
-    bool whileExpected();
     void parseAssignment();
     void parseWhile();
 

@@ -15,7 +15,7 @@
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="PKB\ChildToParentTable.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
-    <ClCompile Include="Parser\ParserChildForTesting.cpp" />
+    <ClCompile Include="Parser\ParserChildForTest.cpp" />
     <ClCompile Include="PKB\ModTableProcToVar.cpp" />
     <ClCompile Include="PKB\ModTableStmtToVar.cpp" />
     <ClCompile Include="PKB\ModTableVarToStmt.cpp" />
@@ -32,7 +32,7 @@
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
-    <ClInclude Include="Parser\ParserChildForTesting.h" />
+    <ClInclude Include="Parser\ParserChildForTest.h" />
     <ClInclude Include="PKB\FollowsTable.h" />
     <ClInclude Include="PKB\ModTableProcToVar.h" />
     <ClInclude Include="PKB\ModTableStmtToVar.h" />

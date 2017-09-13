@@ -14,7 +14,7 @@ public:
     ParserChildForTest();
 
     bool concatenateLines(std::string filename);
-    bool getNextToken();
+    bool incrCurrentTokenPtr();
     std::vector<std::string> tokenizeString(std::string stringToTokenize);
     bool assertMatchAndIncrementToken(std::regex re);
     bool matchToken(std::regex re);

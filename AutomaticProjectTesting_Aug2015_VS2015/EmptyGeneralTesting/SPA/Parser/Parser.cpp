@@ -22,6 +22,8 @@ const regex Parser::REGEX_MATCH_PROCEDURE_KEYWORD = regex("\\s*procedure\\s*");
 const regex Parser::REGEX_MATCH_WHILE_KEYWORD = regex("\\s*while\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACE = regex("\\s*\\u007B\\s*");
 const regex Parser::REGEX_MATCH_CLOSE_BRACE = regex("\\s*\\u007D\\s*");
+const regex Parser::REGEX_MATCH_OPEN_BRACKET = regex("\\s*\\(\\s*");
+const regex Parser::REGEX_MATCH_CLOSE_BRACKET = regex("\\s*\\)\\s*");
 const regex Parser::REGEX_MATCH_SEMICOLON = regex("\\s*;\\s*");
 
 // Char sequence to match should be a statement up to but not including semicolon.
@@ -65,7 +67,7 @@ bool Parser::concatenateLines(string filename) {
 }
 
 // Proceed to next token.
-bool Parser::getNextToken()
+bool Parser::incrCurrentTokenPtr()
 {
     smatch match;
     // At the very beginning of a SIMPLE source file, just increment token pointer.
@@ -125,7 +127,7 @@ If match is unsuccessful, indicate syntax error.
 */
 bool Parser::assertMatchAndIncrementToken(regex re) {
     if (regex_match(_currentTokenPtr, re)) {
-        getNextToken();
+        incrCurrentTokenPtr();
         return true;
     }
     else {
@@ -143,7 +145,7 @@ bool Parser::matchToken(regex re) {
 }
 
 void Parser::parseProgram() {
-    getNextToken();
+    incrCurrentTokenPtr();
 
     //TODO: put this in a while loop after iteration 1.
     parseProcedure();
@@ -165,7 +167,7 @@ void Parser::parseProcedure() {
     // TODO: Add to ProcToIdxMap
     // TODO: Populate CallsTable using _callStack;
 
-    getNextToken();
+    incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     parseStmtList();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
@@ -236,7 +238,7 @@ void Parser::parseAssignment() {
     // TODO: Update ModTableVar using parentStack
     // TODO: Update ModTableVar using callStack
     
-    getNextToken();
+    incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_EQUAL);
 
     // RHS
@@ -255,7 +257,7 @@ void Parser::parseAssignment() {
                 Update UsesTableVar using callStack
                 */
             }
-            getNextToken();
+            incrCurrentTokenPtr();
         }
         // TODO: Remove whitespace in rhsExpression and add to pattern table.
     }
