@@ -22,7 +22,7 @@ ParserChildForTest::ParserChildForTest() {
     _parentStack = stack<int>();
 }
 
-string ParserChildForTest::concatenateLines(string filename) {
+bool ParserChildForTest::concatenateLines(string filename) {
     return Parser::concatenateLines(filename);
 }
 
@@ -89,49 +89,4 @@ void ParserChildForTest::parseAssignment()
 void ParserChildForTest::parseWhile()
 {
     Parser::parseWhile();
-}
-
-
-
-/*******************************************************************
-* Here on are methods for unit testing, all of them                 *
-* are to be removed when permanent non-hacky unit test can be done.*
-********************************************************************/
-vector<string> ParserChildForTest::getTokenTest(string infile) {
-    _concatenatedSourceCode = concatenateLines(infile);
-    vector<string> accumulatedToken;
-
-    while (getNextToken()) {
-        accumulatedToken.push_back(_nextToken);
-    }
-
-    return accumulatedToken;
-}
-
-bool ParserChildForTest::matchTokenTest(string infile) {
-    _concatenatedSourceCode = concatenateLines(infile);
-
-    // Not strictly necessary, but improves readability
-    bool methodIsWorkingFine = true;
-
-    // Manually set this when content of input file changes
-    const int numOfValues = 4;
-
-    // Manually set this when content of input file changes
-    regex regexArray[numOfValues] = {
-        ParserChildForTest::REGEX_MATCH_PROCEDURE_KEYWORD,
-        ParserChildForTest::REGEX_MATCH_WHILE_KEYWORD,
-        ParserChildForTest::REGEX_MATCH_OPEN_BRACE,
-        ParserChildForTest::REGEX_MATCH_CLOSE_BRACE
-    };
-
-    for (int i = 0; methodIsWorkingFine && (i < numOfValues); i++) {
-        getNextToken();
-        if (!(regex_match(_nextToken, regexArray[i]))) {
-            methodIsWorkingFine = false;
-            return false;
-        }
-    }
-
-    return methodIsWorkingFine;
 }

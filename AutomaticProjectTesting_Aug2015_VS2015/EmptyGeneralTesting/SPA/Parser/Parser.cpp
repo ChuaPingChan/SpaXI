@@ -48,7 +48,7 @@ void Parser::parse(string filename) {
     // TODO: Implement this when all other methods are tested.
 }
 
-string Parser::concatenateLines(string filename) {
+bool Parser::concatenateLines(string filename) {
     ifstream infile(filename.c_str());
     
     string stringAccumulator;
@@ -57,9 +57,10 @@ string Parser::concatenateLines(string filename) {
     while (getline(infile, line)) {
         stringAccumulator += line;
     }
-
+    
+    _concatenatedSourceCode = stringAccumulator;
     infile.close();
-    return stringAccumulator;
+    return true;
 }
 
 // Proceed to next token.
@@ -266,47 +267,3 @@ Parses a while statement. When this method ends, _nextToken is ';'.
 void Parser::parseWhile() {
 
 }
-
-/*******************************************************************
-* Here on are methods for unit testing, all of them                 *
-* are to be removed when permanent non-hacky unit test can be done.*
-********************************************************************/
-vector<string> Parser::getTokenTest(string infile) {
-    _concatenatedSourceCode = concatenateLines(infile);
-    vector<string> accumulatedToken;
-
-    while (getNextToken()) {
-        accumulatedToken.push_back(_nextToken);
-    }
-
-    return accumulatedToken;
-}
-
-bool Parser::matchTokenTest(string infile) {
-    _concatenatedSourceCode = concatenateLines(infile);
-    
-    // Not strictly necessary, but improves readability
-    bool methodIsWorkingFine = true;
-
-    // Manually set this when content of input file changes
-    const int numOfValues = 4;
-
-    // Manually set this when content of input file changes
-    regex regexArray[numOfValues] = {
-        Parser::REGEX_MATCH_PROCEDURE_KEYWORD,
-        Parser::REGEX_MATCH_WHILE_KEYWORD,
-        Parser::REGEX_MATCH_OPEN_BRACE,
-        Parser::REGEX_MATCH_CLOSE_BRACE
-    };
-
-    for (int i = 0; methodIsWorkingFine && (i < numOfValues); i++) {
-        getNextToken();
-        if (!(regex_match(_nextToken, regexArray[i]))) {
-            methodIsWorkingFine = false;
-            return false;
-        }
-    }
-
-    return methodIsWorkingFine;
-}
-
