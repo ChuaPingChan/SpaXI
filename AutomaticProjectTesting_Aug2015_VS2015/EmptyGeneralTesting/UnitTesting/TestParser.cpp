@@ -287,6 +287,8 @@ namespace UnitTesting
             Assert::IsFalse(parser.assertIsValidExpression(""));
             Assert::IsFalse(parser.assertIsValidExpression(" "));
             Assert::IsFalse(parser.assertIsValidExpression("+"));
+            Assert::IsFalse(parser.assertIsValidExpression("+a"));
+            Assert::IsFalse(parser.assertIsValidExpression("b +"));
             Assert::IsFalse(parser.assertIsValidExpression("$"));
             Assert::IsFalse(parser.assertIsValidExpression("\n\t\r"));
             Assert::IsTrue(parser.assertIsValidExpression("a+b"));
@@ -379,6 +381,10 @@ namespace UnitTesting
             Assert::IsTrue(parser.isBracketedCorrectly(expression));
             expression = "3 + 4";
             Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = " ( ";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
+            expression = " ) ";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
             expression = "(3 + 4)";
             Assert::IsTrue(parser.isBracketedCorrectly(expression));
             expression = "(3 + 4";
