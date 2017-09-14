@@ -3,67 +3,78 @@
 #include <string>
 #include <fstream>
 #include <regex>
+#include <stack>
 
 class Parser
 {
 public:
+    /********
+    * REGEX *
+    *********/
+    
+    static const std::regex REGEX_VALID_ENTITY_NAME;
+    static const std::regex REGEX_MATCH_CONSTANT;
+    static const std::regex REGEX_EXTRACT_NEXT_TOKEN;
+    static const std::regex REGEX_EXTRACT_UP_TO_SEMICOLON;
+    static const std::regex REGEX_MATCH_PROCEDURE_KEYWORD;
+    static const std::regex REGEX_MATCH_WHILE_KEYWORD;
+    static const std::regex REGEX_MATCH_OPEN_BRACE;
+    static const std::regex REGEX_MATCH_CLOSE_BRACE;
+    static const std::regex REGEX_MATCH_OPEN_BRACKET;
+    static const std::regex REGEX_MATCH_CLOSE_BRACKET;
+    static const std::regex REGEX_MATCH_SEMICOLON;
+    static const std::regex REGEX_EXTRACT_ASSIGNMENT_LHS_RHS;
+    //static const std::regex REGEX_VALID_ASSIGNMENT;
+    static const std::regex REGEX_EXTRACT_EXPRESSION_LHS_RHS;
+    static const std::regex REGEX_VALID_EXPRESSION;
+    static const std::regex REGEX_MATCH_EQUAL;
+    static const std::regex REGEX_VALID_OPERATOR;
+
     Parser();
 
     void parse(std::string filename);
 
-    // ***** For unit testing, to be removed *****
-    // *******************************************
-    std::vector<std::string> getTokenTest(std::string filename);
-    bool matchTokenTest(std::string filename);
-
-private:
+protected:  // TODO: Temporarily use "protected" to ease unit testing.
 
     /************
     * Constants *
     *************/
-    static const int INT_INITIAL_STMT_NUMBER = 0;
-
+    static const int INT_INITIAL_STMT_NUMBER;
     static const std::string STRING_EMPTY_STRING;
-    
-    static const std::regex REGEX_VALID_ENTITY_NAME;
-    static const std::regex REGEX_EXTRACT_NEXT_TOKEN;
-    static const std::regex REGEX_VALID_PROCEDURE_KEYWORD;
-    static const std::regex REGEX_VALID_WHILE_KEYWORD;
-    static const std::regex REGEX_MATCH_OPEN_BRACE;
-    static const std::regex REGEX_MATCH_CLOSE_BRACE;
-    static const std::regex REGEX_MATCH_SEMICOLON;
-
-    //static const std::string STRING_ERROR_MSG;
 
     /********************
     * Member Attributes *
     *********************/
     int _currentStmtNumber;
     std::string _concatenatedSourceCode;
-    std::string _nextToken;
+    std::string _currentTokenPtr;
     bool _isValidSyntax;
     std::string _errorMessage;
-
-    /**********
-    * Methods *
-    ***********/
-    std::string concatenateLines(std::string filename);
-    bool getNextToken();
+    std::stack<std::string> _callStack;     //Contains only procedures
+    std::stack<int> _parentStack;           //Contains only container stmts
+    
+    /******************
+    * Private Methods *
+    *******************/
+    bool concatenateLines(std::string filename);
+    bool incrCurrentTokenPtr();
+    std::vector<std::string> tokenizeString(std::string stringToTokenize);
+    bool assertMatchAndIncrementToken(std::regex re);
     bool matchToken(std::regex re);
+    std::string extractStringUpToSemicolon();
+    bool assertIsValidExpression(std::string expression);
+    //bool bracketPresentInExpr(std::string expression);
+    //bool properlyBracketedExpr(std::string expression);
 
-    /*
+    bool assignmentExpected();
+    bool whileExpected();
+
     void parseProgram();
     void parseProcedure();
     void parseStmtList();
     void parseStmt();
-
-    void parseAssignmentStmt();
-    void parseWhileStmt();
-
-    int getStmtTypeIdx();
-    bool isAssignmentStmt();
-    bool isWhileStmt();
-    */
+    void parseAssignment();
+    void parseWhile();
 
 };
 
