@@ -509,7 +509,7 @@ bool QueryValidator::isValidModifies(string str)
 
             if (isIntegerRegexCheck(arg2))
             {
-                result[0] = "stmt";
+                result[0] = "int";
                 result[1] = arg1;
                 //store in data type for statement number 
             }
@@ -520,8 +520,16 @@ bool QueryValidator::isValidModifies(string str)
         else //arg2 is not in synonym bank but is a valid variable
 
         {
-            result[2] = "";
-            result[3] = arg2;
+            if (arg2 == "_") {
+                result[2] = arg2;
+                result[3] = "";
+            }
+            else
+            {
+                result[2] = "ident";
+                result[3] = arg2;
+            }
+
             if (isArgumentInClause(arg1, qt.getAssigns()))
             {
                 result[0] = "assign";
@@ -547,7 +555,7 @@ bool QueryValidator::isValidModifies(string str)
 
             if (isIntegerRegexCheck(arg2))
             {
-                result[0] = "stmt";
+                result[0] = "int";
                 result[1] = arg1;
                 //store in data type for statement number 
             }
@@ -604,7 +612,7 @@ bool QueryValidator::isValidUses(string str)
 
             if (isIntegerRegexCheck(arg2))
             {
-                result[0] = "stmt";
+                result[0] = "int";
                 result[1] = arg1;
                 //store in data type for statement number 
             }
@@ -615,8 +623,16 @@ bool QueryValidator::isValidUses(string str)
         else //arg2 is not in synonym bank but is a valid variable
 
         {
-            result[2] = "";
-            result[3] = arg2;
+            if (arg2 == "_") {
+                result[2] = arg2;
+                result[3] = "";
+            }
+            else
+            {
+                result[2] = "ident";
+                result[3] = arg2;
+            }
+
             if (isArgumentInClause(arg1, qt.getAssigns()))
             {
                 result[0] = "assign";
@@ -642,7 +658,7 @@ bool QueryValidator::isValidUses(string str)
 
             if (isIntegerRegexCheck(arg2))
             {
-                result[0] = "stmt";
+                result[0] = "int";
                 result[1] = arg1;
                 //store in data type for statement number 
             }
@@ -672,7 +688,7 @@ bool QueryValidator::isValidFollows(string str)
             return false;
 
         if (isIntegerRegexCheck(arg1)) {
-            result[0] = "stmt";
+            result[0] = "int";
             result[1] = arg1;
         }
         else if (isArgumentInClause(arg1, qt.getStmts())) {
@@ -688,15 +704,15 @@ bool QueryValidator::isValidFollows(string str)
             result[1] = arg1;
         }
         else if (arg1 == "_") {
-            result[0] = "";
-            result[1] = arg1;
+            result[0] = arg1;
+            result[1] = "";
         }
         else {
             return false;
         }
 
         if (isIntegerRegexCheck(arg2)) {
-            result[2] = "stmt";
+            result[2] = "int";
             result[3] = arg2;
         }
         else if (isArgumentInClause(arg2, qt.getStmts())) {
@@ -712,8 +728,8 @@ bool QueryValidator::isValidFollows(string str)
             result[3] = arg2;
         }
         else if (arg2 == "_") {
-            result[2] = "";
-            result[3] = arg2;
+            result[2] = arg2;
+            result[3] = "";
         }
 
         else {
@@ -732,7 +748,7 @@ bool QueryValidator::isValidFollows(string str)
             return false;
 
         if (isIntegerRegexCheck(arg1)) {
-            result[0] = "stmt";
+            result[0] = "int";
             result[1] = arg1;
         }
         else if (isArgumentInClause(arg1, qt.getStmts())) {
@@ -748,15 +764,15 @@ bool QueryValidator::isValidFollows(string str)
             result[1] = arg1;
         }
         else if (arg1 == "_") {
-            result[0] = "";
-            result[1] = arg1;
+            result[0] = arg1;
+            result[1] = "";
         }
         else {
             return false;
         }
 
         if (isIntegerRegexCheck(arg2)) {
-            result[2] = "stmt";
+            result[2] = "int";
             result[3] = arg2;
         }
         else if (isArgumentInClause(arg2, qt.getStmts())) {
@@ -772,8 +788,8 @@ bool QueryValidator::isValidFollows(string str)
             result[3] = arg2;
         }
         else if (arg2 == "_") {
-            result[2] = "";
-            result[3] = arg1;
+            result[2] = arg2;
+            result[3] = "";
         }
         else {
             return false;
@@ -802,7 +818,7 @@ bool QueryValidator::isValidParent(string str)
             return false;
 
         if (isIntegerRegexCheck(arg1)) {
-            result[0] = "stmt";
+            result[0] = "int";
             result[1] = arg1;
         }
         else if (isArgumentInClause(arg1, qt.getStmts())) {
@@ -814,15 +830,15 @@ bool QueryValidator::isValidParent(string str)
             result[1] = arg1;
         }
         else if (arg1 == "_") {
-            result[0] = "";
-            result[1] = arg1;
+            result[0] = arg1;
+            result[1] = "";
         }
         else {
             return false;
         }
 
         if (isIntegerRegexCheck(arg2)) {
-            result[2] = "stmt";
+            result[2] = "int";
             result[3] = arg2;
         }
         else if (isArgumentInClause(arg2, qt.getStmts())) {
@@ -834,8 +850,8 @@ bool QueryValidator::isValidParent(string str)
             result[3] = arg2;
         }
         else if (arg2 == "_") {
-            result[2] = "";
-            result[3] = arg2;
+            result[2] = arg2;
+            result[3] = "";
         }
 
         else {
@@ -854,7 +870,7 @@ bool QueryValidator::isValidParent(string str)
             return false;
 
         if (isIntegerRegexCheck(arg1)) {
-            result[0] = "stmt";
+            result[0] = "int";
             result[1] = arg1;
         }
         else if (isArgumentInClause(arg1, qt.getStmts())) {
@@ -866,15 +882,15 @@ bool QueryValidator::isValidParent(string str)
             result[1] = arg1;
         }
         else if (arg1 == "_") {
-            result[0] = "";
-            result[1] = arg1;
+            result[0] = arg1;
+            result[1] = "";
         }
         else {
             return false;
         }
 
         if (isIntegerRegexCheck(arg2)) {
-            result[2] = "stmt";
+            result[2] = "int";
             result[3] = arg2;
         }
         else if (isArgumentInClause(arg2, qt.getStmts())) {
@@ -886,8 +902,8 @@ bool QueryValidator::isValidParent(string str)
             result[3] = arg2;
         }
         else if (arg2 == "_") {
-            result[2] = "";
-            result[3] = arg1;
+            result[2] = arg2;
+            result[3] = "";
         }
         else {
             return false;
@@ -918,8 +934,16 @@ bool QueryValidator::isValidPattern(string str)
     if (qt.varExists(arg2)&&!isArgumentInClause(arg2,qt.getVars())) //check if argument 2 is declared as a synonym other than a variable; not allowed.
         return false;
 
-    result[4] = "";
-    result[5] = arg3;
+    if (arg3 == "_")
+    {
+        result[4] = arg3;
+        result[5] = "";
+    }
+    else
+    {
+        result[4] = "ident";
+        result[5] = arg3;
+    }
 
     if (isArgumentInClause(arg1, qt.getAssigns())) 
     {
@@ -934,8 +958,17 @@ bool QueryValidator::isValidPattern(string str)
         }
         else {
             //store in appropriate data type without VARIABLE synonym
-            result[2] = "";
-            result[3] = arg2;
+            if (arg2 == "_")
+            {
+                result[2] = arg2;
+                result[3] = "";
+            }
+            else
+            {
+                result[2] = "ident";
+                result[3] = arg2;
+            }
+
             qt.insertPattern(result);
             return true;
         }
