@@ -373,9 +373,21 @@ bool QueryValidator::isValidSelect(string str)
 {
     //TODO: Store select synonym at the beginning (check validity first)
 
-    if (isValidSelectOverallRegex(str)==false)
+    if (isValidSelectOverallRegex(str) == false)
         return false;
 
+	/* Extracting the Select portion */
+	regex selectRegex(SELECT_REGEX);
+	sregex_iterator it(str.begin(), str.end(), selectRegex);
+	sregex_iterator it_end;
+
+	for (; it != it_end; it++)
+	{
+		string current = it->str(0);
+		isValidSelectBeginning(current);
+	}
+
+	/* Extracting the clauses portion */
 	regex clauseRegex(FOLLOWS_REGEX + "|" + PARENT_REGEX + "|" + USES_REGEX + "|" + MODIFIES_REGEX + "|" + PATTERN_REGEX, regex_constants::icase);
 	sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
 	sregex_iterator it_end;
@@ -387,40 +399,35 @@ bool QueryValidator::isValidSelect(string str)
 
 		if (currentClause.find("Follows") != std::string::npos) 
 		{
-			isCurrentClauseValid = isValidFollows(currentClause);
-			if (!isCurrentClauseValid)
+			if (!isValidFollows(currentClause))
 			{
 				return false;
 			}
 		}
 		else if (currentClause.find("Parent") != std::string::npos)
 		{
-			isCurrentClauseValid = isValidParent(currentClause);
-			if (!isCurrentClauseValid)
+			if (!isValidParent(currentClause))
 			{
 				return false;
 			}
 		}
 		else if (currentClause.find("Uses") != std::string::npos)
 		{
-			isCurrentClauseValid = isValidUses(currentClause);
-			if (!isCurrentClauseValid)
+			if (!isValidUses(currentClause))
 			{
 				return false;
 			}
 		}
 		else if (currentClause.find("Modifies") != std::string::npos)
 		{
-			isCurrentClauseValid = isValidModifies(currentClause);
-			if (!isCurrentClauseValid)
+			if (!isValidModifies(currentClause))
 			{
 				return false;
 			}
 		}
 		else if (currentClause.find("pattern") != std::string::npos)
 		{
-			isCurrentClauseValid = isValidPattern(currentClause);
-			if (!isCurrentClauseValid)
+			if (!isValidPattern(currentClause))
 			{
 				return false;
 			}
@@ -435,6 +442,11 @@ bool QueryValidator::isValidSelect(string str)
 	}
 		
     return true;  //stub
+}
+
+bool QueryValidator::isValidSelectBeginning(string str)
+{
+	return false;
 }
 
 //PRE-COND: Modifies(a,b)

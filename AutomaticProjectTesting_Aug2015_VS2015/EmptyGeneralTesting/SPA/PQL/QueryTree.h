@@ -14,6 +14,7 @@ public:
 
 	void init();
 	void storeUnvalidatedStmts(vector<string> splitted);
+	void insertSelect(array<string, 2> arr);
 	void insertVariable(string type, string var);
 	void insertFollows(array<string, 4> arr);
 	void insertFollowsStar(array<string, 4> arr);
@@ -22,7 +23,6 @@ public:
 	void insertUses(array<string, 4> arr);
 	void insertModifies(array<string, 4> arr);
 	void insertPattern(array<string, 6> arr);
-	void insertSelect(string stmt);
 	
 	vector<string> getUnvalidatedStmts();
 	vector<string> getStmts();
@@ -62,7 +62,7 @@ private:
 	vector<string> consts;
 	vector<string> progLines; 
 
-	string selectStmt;
+	array<string, 2> selectStmt;
 	vector<string> suchThatClauses;
 	vector<array<string, 4>> followsClauses;
 	vector<array<string, 4>> followsStarClauses;

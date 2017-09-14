@@ -101,9 +101,9 @@ void QueryTree::insertPattern(array<string, 6> arr)
 	patternClauses.push_back(arr);
 }
 
-void QueryTree::insertSelect(string stmt)
+void QueryTree::insertSelect(array<string, 2> arr)
 {
-	selectStmt = stmt;
+	selectStmt = arr;
 }
 
 vector<string> QueryTree::getUnvalidatedStmts()

@@ -94,6 +94,7 @@ private:
 
     /*--------------- Validation of Select ---------------*/
     bool isValidSelect(string str);
+	bool isValidSelectBeginning(string str);
     bool isValidModifies(string str);
     bool isValidUses(string str);
     bool isValidFollows(string str);
