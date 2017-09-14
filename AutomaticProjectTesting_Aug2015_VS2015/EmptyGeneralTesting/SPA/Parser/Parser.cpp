@@ -318,6 +318,38 @@ string Parser::removeAllWhitespaces(string targetString)
 }
 
 /*
+Checks if the brackets in a given string pairs up properly.
+Does not ensure correctness other than brackets pairing.
+*/
+bool Parser::isBracketedCorrectly(std::string expression)
+{
+    stack<char> openBracketStack;
+    string targetString = removeAllWhitespaces(expression);
+    for (int i = 0; i < targetString.size(); i++) {
+        switch (targetString[i]) {
+        case '(':
+            openBracketStack.push(targetString[i]);
+            break;
+        case ')':
+            if (openBracketStack.empty()) {
+                return false;
+            } else {
+                openBracketStack.pop();
+                break;
+            }
+        default:
+            break;
+        }
+    }
+
+    if (!openBracketStack.empty()) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/*
 Parses a while statement. When this method ends,
 _currentTokenPtr will be advanced after '}'.
 */

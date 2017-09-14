@@ -298,6 +298,35 @@ namespace UnitTesting
             withWhiteSpace = " a + (c-\n   \td) *e    \n\t";
             noWhiteSpace = "a+(c-d)*e";
             Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+            withWhiteSpace = noWhiteSpace;
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+        }
+
+        TEST_METHOD(isBracketedCorrectlyTest)
+        {
+            ParserChildForTest parser;
+            std::string expression;
+
+            expression = "  \n3\r\f + 4 \n\t ";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "3 + 4";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "(3 + 4)";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "(3 + 4";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
+            expression = "3 + 4)";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
+            expression = "(3 - (4 / \t\n(2) * 5)+ 4)";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "((()))";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "(()())";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "((())))";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
         }
 
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_success)

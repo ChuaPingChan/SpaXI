@@ -21,6 +21,7 @@ public:
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
     std::string removeAllWhitespaces(std::string targetString);
+    bool isBracketedCorrectly(std::string expression);
 
     void parseProgram();
     void parseProcedure();

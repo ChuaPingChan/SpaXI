@@ -67,6 +67,11 @@ std::string ParserChildForTest::removeAllWhitespaces(std::string targetString)
     return Parser::removeAllWhitespaces(targetString);
 }
 
+bool ParserChildForTest::isBracketedCorrectly(std::string expression)
+{
+    return Parser::isBracketedCorrectly(expression);
+}
+
 void ParserChildForTest::parseProgram()
 {
     Parser::parseProgram();
