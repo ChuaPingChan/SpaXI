@@ -8,6 +8,9 @@
 #include "Parser.h"
 #include "SyntaxErrorException.h"
 
+// TODO: Remove this output debug string before submission
+#include "Windows.h"
+
 using namespace std;
 
 const int Parser::INT_INITIAL_STMT_NUMBER = 1;
@@ -41,14 +44,18 @@ Parser::Parser()
     _currentStmtNumber = Parser::INT_INITIAL_STMT_NUMBER;
     _concatenatedSourceCode = Parser::STRING_EMPTY_STRING;
     _currentTokenPtr = Parser::STRING_EMPTY_STRING;
-    _isValidSyntax = true;
+    _isValidSyntax = false;
     _errorMessage = string();
     _callStack = stack<string>();
     _parentStack = stack<int>();
 }
 
-void Parser::parse(string filename) {
+bool Parser::parse(string filename) {
     // TODO: Implement this when all other methods are tested.
+    _isValidSyntax = true;
+    concatenateLines(filename);
+    parseProgram();
+    return _isValidSyntax;
 }
 
 bool Parser::concatenateLines(string filename) {
@@ -115,6 +122,7 @@ string Parser::extractStringUpToSemicolon() {
         targetSubstring = match.str(1);
     } else {
         _isValidSyntax = false;
+        OutputDebugString("WARNING: Invalid line, no semicolon found.\n");
         // TODO: Throw exception?
     }
     return targetSubstring;
@@ -133,6 +141,7 @@ bool Parser::assertMatchAndIncrementToken(regex re) {
     else {
         // TODO: consider throwing exception.
         _isValidSyntax = false;
+        OutputDebugString("WARNING: Matching of token failed.\n");
         return false;
     }
 }
@@ -147,26 +156,30 @@ bool Parser::matchToken(regex re) {
 void Parser::parseProgram() {
     incrCurrentTokenPtr();
 
-    //TODO: put this in a while loop after iteration 1.
+    //TODO: put this in a while loop after iteration 1,
+    //      when there are multiple procedures.
     parseProcedure();
+    OutputDebugString("FINE: End of program reached.\n");
 }
 
 // Expects _nextToken to be "procedure" keyword
 void Parser::parseProcedure() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD);
+    OutputDebugString("FINE: Parsing procedure.\n");
     
     string procName;
     if (!(matchToken(Parser::REGEX_VALID_ENTITY_NAME))) {
         // TODO: Throw exception?
         _isValidSyntax = false;
         //TODO: Remove this line after determining how to signal user on syntax error.
+        OutputDebugString("WARNING: Parsing procedure. Invalid procedure name.\n");
         return;
     }
     procName = _currentTokenPtr;
     _callStack.push(procName);
     // TODO: Add to ProcToIdxMap
     // TODO: Populate CallsTable using _callStack;
-
+    
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     parseStmtList();
@@ -179,8 +192,8 @@ void Parser::parseProcedure() {
 Parses the statment list within a scope. At the end of this method, _nextToken is '}'.
 */
 void Parser::parseStmtList() {
-    parseStmt();
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
+    OutputDebugString("FINE: Entering new statement list.\n");
+    parseStmt();    // End of statement characters like ';' and '}' are handled in parseStmt().
     if (matchToken(Parser::REGEX_MATCH_CLOSE_BRACE)) {
         return;
     } else {
@@ -189,20 +202,24 @@ void Parser::parseStmtList() {
 }
 
 /*
-Parses a statement. When this method ends, _nextToken is ';'.
+Parses a statement up to the point after ';' for call and assignment statements,
+and '}' for while and if-else statements.
 */
 void Parser::parseStmt() {
     _currentStmtNumber++;
+    OutputDebugString("FINE: Identifying next statement type...\n");
+    
     // TODO: Updates FollowsTable
     // TODO: Update ParentToChildTable (if applicable)
     // TODO: Update ChildToParentTable (if applicable)
-
+    
     // Check statement type and call appropriate function
     // (i.e. call, assignment, if-else, while)
-    if (Parser::assignmentExpected()) {
-        parseAssignment();
-    } else if (Parser::whileExpected()) {
+    if (Parser::whileExpected()) {
         parseWhile();
+    } else if (Parser::assignmentExpected()) {
+        // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords
+        parseAssignment();
     }
 }
 
@@ -224,9 +241,11 @@ bool Parser::whileExpected() {
 }
 
 /*
-Parses an assignment statement. When this method ends, _nextToken is ';'.
+Parses an assignment statement. When this method ends,
+_currentTokenPtr will be advanced after ';'.
 */
 void Parser::parseAssignment() {
+    OutputDebugString("FINE: Assignment statement identified.\n");
     // LHS
     assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
     string lhsVar = _currentTokenPtr;
@@ -261,14 +280,17 @@ void Parser::parseAssignment() {
         }
         // TODO: Remove whitespace in rhsExpression and add to pattern table.
     }
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
 }
 
 /*
 Asserts that an expression is syntactically valid.
 */
 bool Parser::assertIsValidExpression(string expression) {
+    OutputDebugString("FINE: Validating expression...\n");
     // Base case
     if (regex_match(expression, Parser::REGEX_VALID_ENTITY_NAME) || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)) {
+        OutputDebugString("FINE: Expression is valid.\n");
         return true;
     }
 
@@ -280,6 +302,7 @@ bool Parser::assertIsValidExpression(string expression) {
         rightExpression = match.str(2);
     } else {
         _isValidSyntax = false;
+        OutputDebugString("WARNING: Invalid Expression.\n");
         // TODO: Throw exception?
         return false;
     }
@@ -287,8 +310,31 @@ bool Parser::assertIsValidExpression(string expression) {
 }
 
 /*
-Parses a while statement. When this method ends, _nextToken is ';'.
+Parses a while statement. When this method ends,
+_currentTokenPtr will be advanced after '}'.
 */
 void Parser::parseWhile() {
+    OutputDebugString("FINE: While statement identified.\n");
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
+    // TODO: Push currentStmtNumber to parentStack.
 
+    assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
+    string whileVar = _currentTokenPtr;
+    /* TODO
+    Update VarToIdxMap
+    Update ModTableStmtToVar using currentStmtNumber
+    Update ModTableStmtToVar using parentStack
+    Update ModTableProcToVar using callStack
+    Update ModTableVar using currentStmtNumber
+    Update ModTableVar using parentStack
+    Update ModTableVar using callStack
+    */
+    
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+
+    parseStmtList();
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    // TODO: ParentStack.pop()
 }

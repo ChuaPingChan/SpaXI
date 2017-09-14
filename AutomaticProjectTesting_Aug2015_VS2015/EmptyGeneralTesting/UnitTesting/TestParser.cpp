@@ -277,6 +277,54 @@ namespace UnitTesting
             Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
         }
 
+        TEST_METHOD(testParsingSimpleSource_assignmentsOnly_success)
+        {
+            // Set up
+            ParserChildForTest parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_assignmentsOnly_equalSignMissing)
+        {
+            // Set up
+            ParserChildForTest parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_error());
+
+            Assert::IsFalse(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_whileOnly_success)
+        {
+            // Set up
+            ParserChildForTest parser;
+            Assert::IsTrue(createDummySimpleSourceFile_whileOnly());
+            
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_assignmentAndNestedWhile_success)
+        {
+            // Set up
+            ParserChildForTest parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         /******************************
         * Utility Methods for Testing *
         *******************************/
@@ -298,6 +346,34 @@ namespace UnitTesting
         */
         bool createDummySimpleSourceFile_assignmentsOnly() {
             std::string content = "procedure ABC{\n  a = 1;\n b = 2;\n	c = a;\n }\n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements only, with syntax error.
+        */
+        bool createDummySimpleSourceFile_assignmentsOnly_error() {
+            std::string content = "procedure ABC{\n  a  1;\n b = 2;\n	c = a;\n }\n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements and a while loop without nesting.
+        */
+        bool createDummySimpleSourceFile_whileOnly() {
+            std::string content = "procedure ABC { \nwhile a \n{ \n	a = 3; \n   b = 2  ; \n} \n} \n";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

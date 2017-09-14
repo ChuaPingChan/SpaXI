@@ -32,7 +32,7 @@ public:
 
     Parser();
 
-    void parse(std::string filename);
+    bool parse(std::string filename);
 
 protected:  // TODO: Temporarily use "protected" to ease unit testing.
 
