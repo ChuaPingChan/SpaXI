@@ -62,6 +62,11 @@ bool ParserChildForTest::assertIsValidExpression(std::string expression)
     return Parser::assertIsValidExpression(expression);
 }
 
+std::string ParserChildForTest::removeAllWhitespaces(std::string targetString)
+{
+    return Parser::removeAllWhitespaces(targetString);
+}
+
 void ParserChildForTest::parseProgram()
 {
     Parser::parseProgram();

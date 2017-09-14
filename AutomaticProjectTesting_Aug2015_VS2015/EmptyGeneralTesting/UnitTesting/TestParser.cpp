@@ -277,10 +277,33 @@ namespace UnitTesting
             Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
         }
 
+        TEST_METHOD(removeAllWhiteSpacesTest)
+        {
+            ParserChildForTest parser;
+            std::string withWhiteSpace;
+            std::string noWhiteSpace;
+
+            withWhiteSpace = "  \n3\r\f + 4 \n\t ";
+            noWhiteSpace = "3+4";
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+
+            withWhiteSpace = "    ";
+            noWhiteSpace = "";
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+
+            withWhiteSpace = "3+4*8/5";
+            noWhiteSpace = "3+4*8/5";
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+
+            withWhiteSpace = " a + (c-\n   \td) *e    \n\t";
+            noWhiteSpace = "a+(c-d)*e";
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+        }
+
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_success)
         {
             // Set up
-            ParserChildForTest parser;
+            Parser parser;
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -292,7 +315,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_equalSignMissing)
         {
             // Set up
-            ParserChildForTest parser;
+            Parser parser;
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_error());
 
             Assert::IsFalse(parser.parse(dummySimpleSourcePath));
@@ -304,7 +327,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_whileOnly_success)
         {
             // Set up
-            ParserChildForTest parser;
+            Parser parser;
             Assert::IsTrue(createDummySimpleSourceFile_whileOnly());
             
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -316,7 +339,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentAndNestedWhile_success)
         {
             // Set up
-            ParserChildForTest parser;
+            Parser parser;
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));

@@ -310,6 +310,14 @@ bool Parser::assertIsValidExpression(string expression) {
 }
 
 /*
+Removes all the whitespace in a given string
+*/
+string Parser::removeAllWhitespaces(string targetString)
+{
+    return regex_replace(targetString, regex("\\s"), "");
+}
+
+/*
 Parses a while statement. When this method ends,
 _currentTokenPtr will be advanced after '}'.
 */

@@ -63,8 +63,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     bool matchToken(std::regex re);
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
-    //bool bracketPresentInExpr(std::string expression);
-    //bool properlyBracketedExpr(std::string expression);
+    std::string removeAllWhitespaces(std::string targetString);
 
     bool assignmentExpected();
     bool whileExpected();

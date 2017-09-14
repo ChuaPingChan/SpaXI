@@ -20,6 +20,7 @@ public:
     bool matchToken(std::regex re);
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
+    std::string removeAllWhitespaces(std::string targetString);
 
     void parseProgram();
     void parseProcedure();
