@@ -17,7 +17,12 @@ const std::string dummySimpleSourcePath = "../UnitTesting/ParserTestDependencies
 namespace UnitTesting
 {
 
-    TEST_CLASS(testName)
+    TEST_CLASS(ParserPkbIntegrationTest)
     {
-    }
+    public:
+
+        TEST_METHOD(testMethodName)
+        {
+        }
+    };
 }
