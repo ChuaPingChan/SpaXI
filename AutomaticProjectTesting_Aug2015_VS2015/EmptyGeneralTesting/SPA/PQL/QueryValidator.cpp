@@ -642,6 +642,9 @@ bool QueryValidator::isValidFollows(string str)
         arg1 = getBetweenTwoStrings(str, "Follows*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
+        if (arg1 == arg2) //arg1 cannot be the same as arg2
+            return false;
+
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "stmt";
             result[1] = arg1;
@@ -698,6 +701,9 @@ bool QueryValidator::isValidFollows(string str)
 
         arg1 = getBetweenTwoStrings(str, "Follows(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
+
+        if (arg1 == arg2) //arg1 cannot be the same as arg2
+            return false;
 
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "stmt";
@@ -766,16 +772,15 @@ bool QueryValidator::isValidParent(string str)
         arg1 = getBetweenTwoStrings(str, "Parent*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
+        if (arg1 == arg2) //arg1 cannot be the same as arg2
+            return false;
+
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "stmt";
             result[1] = arg1;
         }
         else if (isArgumentInClause(arg1, qt.getStmts())) {
             result[0] = "stmt";
-            result[1] = arg1;
-        }
-        else if (isArgumentInClause(arg1, qt.getAssigns())) {
-            result[0] = "assign";
             result[1] = arg1;
         }
         else if (isArgumentInClause(arg1, qt.getWhiles())) {
@@ -796,10 +801,6 @@ bool QueryValidator::isValidParent(string str)
         }
         else if (isArgumentInClause(arg2, qt.getStmts())) {
             result[2] = "stmt";
-            result[3] = arg2;
-        }
-        else if (isArgumentInClause(arg2, qt.getAssigns())) {
-            result[2] = "assign";
             result[3] = arg2;
         }
         else if (isArgumentInClause(arg2, qt.getWhiles())) {
@@ -823,16 +824,15 @@ bool QueryValidator::isValidParent(string str)
         arg1 = getBetweenTwoStrings(str, "Parent(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
+        if (arg1 == arg2) //arg1 cannot be the same as arg2
+            return false;
+
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "stmt";
             result[1] = arg1;
         }
         else if (isArgumentInClause(arg1, qt.getStmts())) {
             result[0] = "stmt";
-            result[1] = arg1;
-        }
-        else if (isArgumentInClause(arg1, qt.getAssigns())) {
-            result[0] = "assign";
             result[1] = arg1;
         }
         else if (isArgumentInClause(arg1, qt.getWhiles())) {
@@ -853,10 +853,6 @@ bool QueryValidator::isValidParent(string str)
         }
         else if (isArgumentInClause(arg2, qt.getStmts())) {
             result[2] = "stmt";
-            result[3] = arg2;
-        }
-        else if (isArgumentInClause(arg2, qt.getAssigns())) {
-            result[2] = "assign";
             result[3] = arg2;
         }
         else if (isArgumentInClause(arg2, qt.getWhiles())) {
