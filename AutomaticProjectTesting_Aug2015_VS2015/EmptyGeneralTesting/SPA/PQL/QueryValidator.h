@@ -4,6 +4,9 @@
 #include <unordered_set>
 #include <sstream>
 #include <regex>
+#include <algorithm>
+#include "QueryTree.h"
+
 
 using namespace std;
 
@@ -13,10 +16,12 @@ public:
     QueryValidator();
     ~QueryValidator();
 
+    QueryTree qt;
     bool isValidQuery(vector<string> inputVector);
-  
 
     /*--------------- For Unit Testing ---------------*/
+	string removeAllSpacesTest(string str);
+
     /*--------------- Grammar Regex Test---------------*/
     bool isValidLetterTest(string str);
     bool isValidIntegerTest(string str);
@@ -25,8 +30,14 @@ public:
     bool isValidEntRefTest(string str);
     bool isValidNameTest(string str);
 
-    /*--------------- Splitting Query Test---------------*/
-    vector<string> initialSplitTest(string query);
+    /*--------------- Tokenizer Test---------------*/
+    vector<string> tokenizerTest(string query);
+ 
+    /*--------------- Finding Argument in Clause Test---------------*/
+    bool isArgumentInClauseTest(string arg, vector<string> clause);
+
+    /*--------------- Substring Test---------------*/
+    bool isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result);
 
     /*--------------- Declaration Test---------------*/
     bool isValidEntityTest(string str);
@@ -60,15 +71,21 @@ public:
 private: 
     unordered_set<string> _synonymBank;   //Contains list of used synonyms
     vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
-
+    
     /*--------------- Splitting Query ---------------*/
-    vector<string> initialSplit(string query);
+    vector<string> tokenizer(string query);
 
     /*--------------- Remove all spaces ---------------*/
-    void removeAllSpaces(string str);
+    string removeAllSpaces(string str);
 
     /*--------------- Get string between two delimiters ---------------*/
     string getBetweenTwoStrings(const string & str, const string & firstDelim, const string & secondDelim);
+   
+    /*--------------- Check if argument is in a clause ---------------*/
+    bool isArgumentInClause(string arg, vector<string> clause);
+
+    /*--------------- Check if string is an integer ---------------*/
+    bool isIntegerRegexCheck(string arg);
 
     /*--------------- Validation of Declaration ---------------*/
     bool isValidDeclaration(string str);   
@@ -77,11 +94,11 @@ private:
 
     /*--------------- Validation of Select ---------------*/
     bool isValidSelect(string str);
-
+	bool isValidSelectBeginning(string str);
     bool isValidModifies(string str);
     bool isValidUses(string str);
     bool isValidFollows(string str);
-    bool isvalidParent(string str);
+    bool isValidParent(string str);
     bool isValidPattern(string str);
 
     bool isValidSelectOverallRegex(string str);
