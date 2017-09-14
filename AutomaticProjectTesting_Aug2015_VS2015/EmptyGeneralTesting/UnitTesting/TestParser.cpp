@@ -140,6 +140,35 @@ namespace UnitTesting
             Assert::IsFalse(std::regex_match("-;", Parser::REGEX_VALID_OPERATOR));
         }
 
+        TEST_METHOD(regexMatchExpressionLhsRhsTest)
+        {
+            Assert::IsTrue(std::regex_match("a+b", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match("a -   b", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match("\na\t*\nb\t", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match(" \ra\f /  \rb\f ", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match(" 6 + 3 * 4", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match(" 6 + 3 \t\r\n* \t\r\n4\t\r\n", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+
+            Assert::IsFalse(std::regex_match("=4", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsFalse(std::regex_match("+-", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsFalse(std::regex_match("9+", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsFalse(std::regex_match("-;", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+        }
+
+        TEST_METHOD(regexExtractExpressionLhsRhsTest)
+        {
+            ParserChildForTest parser;
+            std::cmatch match;
+            Assert::IsTrue(std::regex_match("a+b", match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue("a" == match.str(1));
+            Assert::IsTrue("b" == match.str(2));
+
+            Assert::IsTrue(std::regex_match("\t\n  \ra\r\t\f + \f\t\r b\t", match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match(match.str(1), Parser::REGEX_VALID_ENTITY_NAME));
+            Assert::IsTrue(std::regex_match(match.str(2), Parser::REGEX_VALID_ENTITY_NAME));
+            
+        }
+
         TEST_METHOD(getNextTokenTest_matchTokenTest_assertMatchAndIncrTokenTest)
         {
             // Set up
@@ -275,6 +304,16 @@ namespace UnitTesting
             Assert::IsTrue(parser.assertIsValidExpression("a134124 + b/3 * 2  "));
             Assert::IsFalse(parser.assertIsValidExpression(" a = 3 + 4 "));
             Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
+            Assert::IsFalse(parser.assertIsValidExpression("()"));
+            Assert::IsTrue(parser.assertIsValidExpression("(a)"));
+            Assert::IsTrue(parser.assertIsValidExpression(" (3+4) "));
+            Assert::IsTrue(parser.assertIsValidExpression(" 3 +  4 "));
+            Assert::IsTrue(parser.assertIsValidExpression(" ( 3 +  4 ) "));
+            Assert::IsFalse(parser.assertIsValidExpression("( 3 +  4 - () )"));
+            Assert::IsTrue(parser.assertIsValidExpression(" 4 - 3 * \n\t6\t "));
+            Assert::IsTrue(parser.assertIsValidExpression("3 * \n\t6\t "));
+            Assert::IsTrue(parser.assertIsValidExpression("((2) + (4 - 3) * \n\t(6)\t )\t\n"));
+            Assert::IsFalse(parser.assertIsValidExpression("((2) + (4 - 3)) * \n\t((6)\t \t\n"));
         }
 
         TEST_METHOD(removeAllWhiteSpacesTest)
@@ -300,6 +339,35 @@ namespace UnitTesting
             Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
             withWhiteSpace = noWhiteSpace;
             Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+        }
+
+        TEST_METHOD(removeAllBracketsTest)
+        {
+            ParserChildForTest parser;
+            std::string withBrackets;
+            std::string noBrackets;
+
+            withBrackets = "  \n(3\r\f + 4) \n\t ";
+            noBrackets = "  \n3\r\f + 4 \n\t ";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+
+            withBrackets = "()";
+            noBrackets = "";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+
+            withBrackets = "3+4*8/5";
+            noBrackets = "3+4*8/5";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+
+            withBrackets = " (3 +  4) ";
+            noBrackets = " 3 +  4 ";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+
+            withBrackets = "(a+(((c)-(d))*e))";
+            noBrackets = "a+c-d*e";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+            withBrackets = noBrackets;
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
         }
 
         TEST_METHOD(isBracketedCorrectlyTest)

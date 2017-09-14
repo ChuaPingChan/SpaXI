@@ -23,8 +23,6 @@ public:
     static const std::regex REGEX_MATCH_OPEN_BRACKET;
     static const std::regex REGEX_MATCH_CLOSE_BRACKET;
     static const std::regex REGEX_MATCH_SEMICOLON;
-    static const std::regex REGEX_EXTRACT_ASSIGNMENT_LHS_RHS;
-    //static const std::regex REGEX_VALID_ASSIGNMENT;
     static const std::regex REGEX_EXTRACT_EXPRESSION_LHS_RHS;
     static const std::regex REGEX_VALID_EXPRESSION;
     static const std::regex REGEX_MATCH_EQUAL;
@@ -64,6 +62,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
     std::string removeAllWhitespaces(std::string targetString);
+    std::string removeAllBrackets(std::string targetString);
     bool isBracketedCorrectly(std::string expression);
 
     bool assignmentExpected();
