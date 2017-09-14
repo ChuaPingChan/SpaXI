@@ -31,3 +31,13 @@ list<int> ParentToChildTable::getChildren(int parentStmt) {
 unordered_map<int, list<int>> ParentToChildTable::getTable() {
 	return parentToChildMap;
 }
+
+bool ParentToChildTable::isParentChild(int parentStmt, int childStmt) {
+	if (parentToChildMap.find(parentStmt) != parentToChildMap.end()) {
+		unordered_map<int, list<int>>::iterator it;
+		it = parentToChildMap.find(parentStmt);
+		if (std::find(it->second.begin(), it->second.end(), childStmt) != it->second.end()) {
+				return true;
+		}
+	}
+}

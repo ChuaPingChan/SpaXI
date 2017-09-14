@@ -12,11 +12,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="PKB\ChildToParentStarTable.cpp" />
     <ClCompile Include="PKB\ChildToParentTable.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
-    <ClCompile Include="PKB\DesignExtractor.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\SPA\PKB;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
+    <ClCompile Include="PKB\DesignExtractor.cpp" />
     <ClCompile Include="PKB\ModTableProcToVar.cpp" />
     <ClCompile Include="PKB\ModTableStmtToVar.cpp" />
     <ClCompile Include="PKB\ModTableVarToStmt.cpp" />
@@ -32,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="PKB\ChildToParentStarTable.h" />
     <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
     <ClInclude Include="PKB\DesignExtractor.h" />

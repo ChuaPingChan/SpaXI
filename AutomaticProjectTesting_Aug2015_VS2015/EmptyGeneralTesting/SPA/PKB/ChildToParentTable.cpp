@@ -26,6 +26,6 @@ int ChildToParentTable::getParent(int childStmt) {
 	return childToParentMap[childStmt];
 }
 
-unordered_map<int, list<int>> ChildToParentTable::getTable() {
+unordered_map<int, int> ChildToParentTable::getTable() {
 	return childToParentMap;
 }

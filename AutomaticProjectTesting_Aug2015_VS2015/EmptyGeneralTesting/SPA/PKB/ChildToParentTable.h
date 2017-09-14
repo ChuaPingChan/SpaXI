@@ -16,7 +16,7 @@ public:
 
 	int getParent(int childStmt);
 
-	unordered_map<int, list<int>> getTable();
+	unordered_map<int, int> getTable();
 
 private:
 	unordered_map<int, int> childToParentMap;

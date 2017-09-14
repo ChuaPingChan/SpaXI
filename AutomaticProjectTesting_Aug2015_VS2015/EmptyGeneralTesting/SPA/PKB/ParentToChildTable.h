@@ -19,6 +19,8 @@ public:
 
 	unordered_map<int, list<int>> getTable();
 
+	bool isParentChild(int parentStmt, int childStmt);
+
 private:
 	unordered_map<int, list<int>> parentToChildMap;
 };
