@@ -156,7 +156,20 @@ namespace IntegrationTesting
             Assert::IsFalse(qv.isValidSelectTest(str));
 
             qv = QueryValidator();
+            str = "Select v such that Uses(v,v)";
+            qv.qt.insertVariable("stmt", "s");
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
             str = "Select w such that Uses(w,\"_x_\")";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select w such that Uses(_,\"_x_\")";
             qv.qt.insertVariable("while", "w");
             qv.qt.insertSelect(str);
             Assert::IsFalse(qv.isValidSelectTest(str));
@@ -260,6 +273,12 @@ namespace IntegrationTesting
 
             qv = QueryValidator();
             str = "Select w such that Modifies(w,\"_x_\")";
+            qv.qt.insertVariable("while", "w");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select w such that Uses(_,\"_x_\")";
             qv.qt.insertVariable("while", "w");
             qv.qt.insertSelect(str);
             Assert::IsFalse(qv.isValidSelectTest(str));
@@ -372,8 +391,15 @@ namespace IntegrationTesting
             qv.qt.insertSelect(str);
             Assert::IsTrue(qv.isValidSelectTest(str));
 
+            //Invalid query
             qv = QueryValidator();
             str = "Select v such that Follows(x,y)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Follows(1,1)";
             qv.qt.insertVariable("variable", "v");
             qv.qt.insertSelect(str);
             Assert::IsFalse(qv.isValidSelectTest(str));
@@ -504,9 +530,17 @@ namespace IntegrationTesting
             qv.qt.insertSelect(str);
             Assert::IsTrue(qv.isValidSelectTest(str));
 
+            //Invalid queries
             qv = QueryValidator();
             str = "Select v such that Parent(x,y)";
             qv.qt.insertVariable("variable", "v");
+            qv.qt.insertSelect(str);
+            Assert::IsFalse(qv.isValidSelectTest(str));
+
+            qv = QueryValidator();
+            str = "Select v such that Parent(a,4)";
+            qv.qt.insertVariable("variable", "v");
+            qv.qt.insertVariable("assign", "a");
             qv.qt.insertSelect(str);
             Assert::IsFalse(qv.isValidSelectTest(str));
 

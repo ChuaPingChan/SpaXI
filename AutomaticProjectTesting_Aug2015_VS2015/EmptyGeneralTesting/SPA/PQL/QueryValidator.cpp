@@ -642,7 +642,7 @@ bool QueryValidator::isValidFollows(string str)
         arg1 = getBetweenTwoStrings(str, "Follows*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
-        if (arg1 == arg2) //arg1 cannot be the same as arg2
+        if (arg1 == arg2 && arg1!="_") //arg1 cannot be the same as arg2
             return false;
 
         if (isIntegerRegexCheck(arg1)) {
@@ -772,7 +772,7 @@ bool QueryValidator::isValidParent(string str)
         arg1 = getBetweenTwoStrings(str, "Parent*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
-        if (arg1 == arg2) //arg1 cannot be the same as arg2
+        if (arg1 == arg2 && arg1!="_") //arg1 cannot be the same as arg2
             return false;
 
         if (isIntegerRegexCheck(arg1)) {
