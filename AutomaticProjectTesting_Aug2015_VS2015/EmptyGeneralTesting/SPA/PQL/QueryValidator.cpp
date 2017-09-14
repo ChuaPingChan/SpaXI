@@ -371,20 +371,19 @@ bool QueryValidator::isValidSynonym(string str)
 /*--------------- Validation of Select --------------*/
 bool QueryValidator::isValidSelect(string str)
 {
-    //TODO: Store select synonym at the beginning (check validity first)
-
     if (isValidSelectOverallRegex(str) == false)
         return false;
 
 	/* Extracting the Select portion */
 	regex selectRegex(SELECT_REGEX);
-	sregex_iterator it(str.begin(), str.end(), selectRegex);
-	sregex_iterator it_end;
+	sregex_iterator sel(str.begin(), str.end(), selectRegex);
+	sregex_iterator sel_end;
 
-	for (; it != it_end; it++)
+	for (; sel != sel_end; sel++)
 	{
-		string current = it->str(0);
-		isValidSelectBeginning(current);
+		string current = sel->str(0);
+        if (!isValidSelectBeginning(current))
+            return false;
 	}
 
 	/* Extracting the clauses portion */
@@ -395,7 +394,6 @@ bool QueryValidator::isValidSelect(string str)
 	for (; it != it_end; it++)
 	{
 		string currentClause = it->str(0);
-		bool isCurrentClauseValid;
 
 		if (currentClause.find("Follows") != std::string::npos) 
 		{
@@ -446,7 +444,23 @@ bool QueryValidator::isValidSelect(string str)
 
 bool QueryValidator::isValidSelectBeginning(string str)
 {
-	return false;
+    size_t f = str.find("Select");
+    str.replace(f, std::string("Select").length(), "");
+
+    /* Extracting the synonym */
+    regex synonymRegex(SYNONYM);
+    sregex_iterator it(str.begin(), str.end(), synonymRegex);
+    sregex_iterator it_end;
+
+    for (; it != it_end; it++)
+    {
+        string current = it->str(0);
+        if (!qt.varExists(current))
+            return false;
+    }
+
+
+    return true;
 }
 
 //PRE-COND: Modifies(a,b)
