@@ -11,6 +11,16 @@ namespace UnitTesting
     TEST_CLASS(TestQueryValidator)
     {
     public:
+
+		TEST_METHOD(TestRemoveAllSpaces)
+		{
+			QueryValidator qv;
+			string str;
+
+			str = " a  b    c  ";
+			Assert::IsTrue(qv.removeAllSpacesTest(str) == "abc");
+		}
+
         /*--------------- Grammar Regex Test---------------*/
         TEST_METHOD(TestLetterRegex)
         {
@@ -152,9 +162,9 @@ namespace UnitTesting
             Assert::IsFalse(qv.isValidNameTest(str));
         }
 
-        /*--------------- Splitting Query Test---------------*/
+        /*--------------- Tokenizer Test---------------*/
 
-        TEST_METHOD(TestSplitQuery)
+        TEST_METHOD(TestTokenizer)
         { 
             QueryValidator qv;
             string str;
@@ -163,30 +173,87 @@ namespace UnitTesting
             //Equality test
             qv = QueryValidator();
             str = "assign a;select a;";
-            splitted = qv.initialSplitTest(str);
+            splitted = qv.tokenizerTest(str);
             Assert::AreEqual((std::string) "assign a", splitted.at(0));
             Assert::AreEqual((std::string) "select a", splitted.at(1));
 
             //Equality test with spaces
             qv = QueryValidator();
             str = "assign a     ; select a     ;";
-            splitted = qv.initialSplitTest(str);
+            splitted = qv.tokenizerTest(str);
             Assert::AreEqual((std::string) "assign a     ", splitted.at(0));
             Assert::AreEqual((std::string) " select a     ", splitted.at(1));
 
             //Inequality test with spaces
             qv = QueryValidator();
             str = "assign a     ; select a     ;";
-            splitted = qv.initialSplitTest(str);
+            splitted = qv.tokenizerTest(str);
             Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
             Assert::AreNotEqual((std::string) " select a", splitted.at(1));
 
             //Inequality test with new declaration at beginning
             qv = QueryValidator();
             str = "while w;assign a;select a;";
-            splitted = qv.initialSplitTest(str);
+            splitted = qv.tokenizerTest(str);
             Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
             Assert::AreNotEqual((std::string) " select a", splitted.at(1));
+
+        }
+
+        /*--------------- Substring Test---------------*/
+
+        TEST_METHOD(TestSubstringBetweenDelims) 
+        {
+            QueryValidator qv;
+            string str;
+            
+            //Uses clause test
+            qv = QueryValidator();
+            str = "Uses(a,b)";
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str,"(",",","a"));
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, ",", ")", "b"));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, "(", ",", "(a"));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", ",", "a"));
+
+            //Modifies clause test
+            qv = QueryValidator();
+            str = "Modifes(abc,def)";
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "abc"));
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, ",", ")", "def"));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, "(", ",", "(awf"));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "31", "awfwf"));
+
+            //Follows and Follows* clause test
+            qv = QueryValidator();
+            str = "Follows(a,b)";
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "a"));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", ",", "qeeq"));
+            qv = QueryValidator();
+            str = "Follows*(123,456)";
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "123"));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "rwr", "3121"));
+
+            //Parent and Parent* clause test
+            qv = QueryValidator();
+            str = "Parent(abc123,def)";
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "abc123"));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "\"", "qeeq"));
+            qv = QueryValidator();
+            str = "Parent*(1,2)";
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "Parent", "(", "*"));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "2", ","));
+
+            //Pattern clause test
+            qv = QueryValidator();
+            str = "patternarg1(arg2,arg3)";
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "pattern", "(", "arg1"));
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "arg2"));
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, ",", ")", "arg3"));
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "ern", "(", "arg1"));
+            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "arg2", "arg3", ","));
+            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", ")", "arg2"));
+
+
 
         }
 
