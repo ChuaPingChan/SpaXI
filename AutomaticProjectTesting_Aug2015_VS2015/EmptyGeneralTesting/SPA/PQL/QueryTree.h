@@ -12,6 +12,8 @@ public:
 	QueryTree();
 	~QueryTree();
 
+	static QueryTree* getInstance();
+
 	void init();
 	void storeUnvalidatedStmts(vector<string> splitted);
 	void insertVariable(string type, string var);
@@ -54,6 +56,9 @@ public:
 	bool varExists(string var);
 
 private:
+
+	static QueryTree* instance;
+
 	vector<string> unvalidatedStmts;
 	vector<string> stmts;
 	vector<string> assigns;
