@@ -13,15 +13,21 @@ bool StmtTypeList::addToAssignStmtList(int stmt) {
     return false;
 }
 
-bool StmtTypeList::addToWhileStmtList(int stmt, string var) {
+bool StmtTypeList::addToWhileStmtList(int stmt) {
     // if stmt number does not exists in assignment list, add to list
-    if (whileStmtList.find(stmt) == whileStmtList.end()) {
-        whileStmtList[stmt] = var;
+    if (find(whileStmtList.begin(), whileStmtList.end(), stmt) == whileStmtList.end()) {
+        whileStmtList.push_back(stmt);
         return true;
     }
     return false;
 }
 
-string StmtTypeList::getVarFromWhile(int stmt) {
-    return whileStmtList[stmt];
+bool StmtTypeList::isAssignStmt(int stmt)
+{
+    return find(assignStmtList.begin(), assignStmtList.end(), stmt) != assignStmtList.end();
+}
+
+bool StmtTypeList::isWhileStmt(int stmt)
+{
+    return find(whileStmtList.begin(), whileStmtList.end(), stmt) != whileStmtList.end();
 }

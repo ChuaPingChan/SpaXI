@@ -12,28 +12,70 @@ PatternTable::PatternTable() {
     Pre-condition: expression must be a valid expression taking operands
     (0-9, a-z, A-Z) and operators(+,-,*,/) between operands
 */
-bool PatternTable::addToPatternTable(int stmtNumber, string expression) {
+bool PatternTable::addToPatternTable(int stmtNumber, string var, string expression) {
     // to convert infix to postfix expression
     string postfixExpression = infixToPostfix(expression);
     // if stmt number does not exist as a key, insert data to hash map
     if (patternTableMap.find(stmtNumber) == patternTableMap.end()) {
-        patternTableMap[stmtNumber] = postfixExpression;
+        patternTableMap[stmtNumber] = make_pair(var, postfixExpression);
         return true;
     }
     return false;
 }
 
-string PatternTable::getExpression(int stmtNumber) {
+pair<string,string> PatternTable::getExpression(int stmtNumber) {
     return patternTableMap[stmtNumber];
 }
 
+list<pair<int, string>> PatternTable::getLeftVariables()
+{
+    list<pair<int,string>> varList;
+    unordered_map<int, pair<string, string>>::iterator it;
+    for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
+    {
+        varList.push_back(make_pair(it->first,it->second.first));
+    }
+}
+
+
+list<int> PatternTable::getExactMatchStmt(string expression)
+{
+    list<int> stmtList;
+    unordered_map<int, pair<string, string>>::iterator it;
+    for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
+    {
+        int stmt = it->first;
+        if (hasExactMatch(stmt, expression)) {
+            stmtList.push_back(stmt);
+        }
+    }
+    return stmtList;
+}
+
+list<int> PatternTable::getPartialMatchStmt(string expression)
+{
+    list<int> stmtList;
+    unordered_map<int, pair<string, string>>::iterator it;
+    for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
+    {
+        int stmt = it->first;
+        if (hasPartialMatch(stmt, expression)) {
+            stmtList.push_back(stmt);
+        }
+    }
+    return stmtList;
+}
+
+
+
+//////////////////////////////////////////////////////////
 bool PatternTable::hasExactMatch(int stmtNumber, string expression) {
     // returns true if postfix of expression exactly matches with patternTableMap[stmtNumber]
-    return patternTableMap[stmtNumber].compare(infixToPostfix(expression)) == 0;
+    return patternTableMap[stmtNumber].second.compare(infixToPostfix(expression)) == 0;
 }
 
 bool PatternTable::hasPartialMatch(int stmtNumber, string expression) {
-    size_t found = patternTableMap[stmtNumber].find(infixToPostfix(expression));
+    size_t found = patternTableMap[stmtNumber].second.find(infixToPostfix(expression));
     // returns true if postfix of expression is the substring of patternTableMap[stmtNumber]
     return found != string::npos;
 }

@@ -5,6 +5,7 @@
 #include <vector>
 #include <unordered_map>
 #include <list>
+#include <utility>
 
 using namespace std;
 
@@ -12,7 +13,14 @@ class ModTableStmtToVar {
 public:
     ModTableStmtToVar();
     bool addModStmtToVarList(int stmtNumber, string var);
+    //
+    bool isMod(int stmtNumber, string var);
+    bool isModifyingAnything(int stmtNumber);
     list<string> getModVariablesFromStmt(int stmtNumber);
+    //
+    list<int> getStmtThatModifies();
+    list<pair<int, string>> getModPairs();
+    
 private:
     unordered_map<int, list<string>>modStmtToVarMap;
 };

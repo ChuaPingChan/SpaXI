@@ -6,6 +6,7 @@
 #include <vector>
 #include <list>
 #include <unordered_map>
+#include <utility>
 
 using namespace std;
 
@@ -13,9 +14,10 @@ class StmtTypeList {
 public:
     StmtTypeList();
     bool addToAssignStmtList(int stmt);
-    bool addToWhileStmtList(int stmt, string var);
-    string getVarFromWhile(int stmt);
+    bool addToWhileStmtList(int stmt);
+    bool isAssignStmt(int stmt);
+    bool isWhileStmt(int stmt);
 private:
-    vector<int> assignStmtList;
-    unordered_map<int, string> whileStmtList;
+    list<int> assignStmtList;
+    list<int> whileStmtList;
 };
