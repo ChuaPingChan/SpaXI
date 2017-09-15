@@ -17,10 +17,12 @@ public:
 private:
     bool hasResult = true;
 
+    list<string> resultSelect;
 	pair<list<string>, list<string>> resultSuchThat;
     pair<list<string>, list<string>> resultPattern;
 
     /*--------------- Evaluator clauses ---------------*/
+    void evaluateSelect(array<string, 2> arr);
 	void evaluateFollows(array<string, 4> arr);
 	void evaluateFollowsT(array<string, 4> arr);
 	void evaluateParent(array<string, 4> arr);

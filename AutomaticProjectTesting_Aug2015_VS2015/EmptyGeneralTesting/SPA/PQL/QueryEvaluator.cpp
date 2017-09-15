@@ -16,6 +16,12 @@ void QueryEvaluator::evaluate()
 
 }
 
+/*--------------- Evaluator private methods clauses ---------------*/
+
+void QueryEvaluator::evaluateSelect(array<string, 2> arr)
+{
+}
+
 void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 {
     string type1 = arr[0];
