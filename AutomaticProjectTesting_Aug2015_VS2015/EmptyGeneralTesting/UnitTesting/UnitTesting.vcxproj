@@ -176,6 +176,7 @@
     <ClCompile Include="TestParentToChildTable.cpp" />
     <ClCompile Include="TestParser.cpp" />
     <ClCompile Include="TestParserPKB.cpp" />
+    <ClCompile Include="TestPatternTable.cpp" />
     <ClCompile Include="TestPKBMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
