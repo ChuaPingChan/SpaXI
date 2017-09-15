@@ -18,6 +18,8 @@ namespace UnitTesting
 			//Test adding one parent child relation
 			Assert::IsTrue(table.addFollows(2, 1, 3));
 			Assert::IsTrue(table.addFollows(3, 2, 4));
+			//Test rewriting over
+			Assert::IsTrue(table.addFollows(3, 2, 5));
 
 		}
 		

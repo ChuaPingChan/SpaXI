@@ -18,6 +18,14 @@ class FollowsTable {
 		int getStmtBef(int stmt);
 
 		int getStmtAft(int stmt);
+
+		unordered_map<int, pair<int, int>> getMap();
+
+		bool hasBefore(int afterStmt);
+
+		bool hasAfter(int beforeStmt);
+
+		bool isFollows(int stmt1, int stmt2);
 	
 	private:
 		unordered_map<int, pair<int, int>> followsMap;

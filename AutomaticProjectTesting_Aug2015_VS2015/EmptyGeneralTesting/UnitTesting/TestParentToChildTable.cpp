@@ -39,7 +39,7 @@ namespace UnitTesting
 
 			Assert::IsTrue(table.isParentChild(1, 2));
 			Assert::IsTrue(table.isParentChild(1, 3));
-
+			
 			list<int> temp;
 			list<int> childrenList;
 			temp.push_back(2);
