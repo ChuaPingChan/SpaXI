@@ -50,6 +50,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::string _errorMessage;
     std::stack<std::string> _callStack;     //Contains only procedures
     std::stack<int> _parentStack;           //Contains only container stmts
+    int _firstStmtInProc;
     
     /******************
     * Private Methods *

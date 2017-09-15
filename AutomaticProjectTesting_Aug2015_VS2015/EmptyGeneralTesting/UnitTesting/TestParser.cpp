@@ -439,11 +439,23 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-        TEST_METHOD(testParsingSimpleSource_assignmentAndNestedWhile_success)
+        TEST_METHOD(testParsingSimpleSource_assignmentAnd1LevelNestedWhile_success)
         {
             // Set up
             Parser parser;
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_assignmentAnd2LevelNestedWhile_success)
+        {
+            // Set up
+            Parser parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_2LevelNestedWhile());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
