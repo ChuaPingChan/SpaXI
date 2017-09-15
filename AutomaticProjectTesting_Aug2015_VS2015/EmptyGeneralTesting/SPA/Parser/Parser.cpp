@@ -182,20 +182,12 @@ void Parser::parseProcedure() {
     procName = _currentTokenPtr;
     // PKB TODO: Add to ProcToIdxMap
     OutputDebugString("PKB: Add procedure.\n");
-
-    if (!_callStack.empty()) {
-        // PKB TODO: Populate CallsTable using _callStack;
-        OutputDebugString("PKB: Update calls relation.\n");
-    }
-    _callStack.push(procName);
     
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     _firstStmtInProc++;
     parseStmtList();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
-    assert(_callStack.top() == procName);
-    _callStack.pop();
 }
 
 /*
@@ -219,7 +211,12 @@ void Parser::parseStmt() {
     _currentStmtNumber++;
     OutputDebugString("FINE: Identifying next statement type...\n");
 
-    // PKB TODO: Set parent child relation. 0 if no parent.
+    // Set parent child relation. 0 if no parent.
+    if (_parentStack.empty()) {
+        (*_pkbMainPtr).setParentChildRel(0, _currentStmtNumber);
+    } else {
+        (*_pkbMainPtr).setParentChildRel(_parentStack.top(), _currentStmtNumber);
+    }
     OutputDebugString("PKB: Update parent-child relation.\n");
     
     // Check statement type and call appropriate function
@@ -267,12 +264,15 @@ void Parser::parseAssignment() {
     */
     if (_parentStack.empty() && ((_currentStmtNumber-_firstStmtInProc) == 0)) {
         // PKB TODO: Add follows relationship (0, currentStmt)
+        (*_pkbMainPtr).setFollowsRel(0, _currentStmtNumber);
         OutputDebugString("PKB: Add follows(0, currStmtNum)\n");
     } else if (!_parentStack.empty() && (_currentStmtNumber - _parentStack.top() == 1)) {
         // PKB TODO: Add follows relationship (0, currentStmt)
+        (*_pkbMainPtr).setFollowsRel(0, _currentStmtNumber);
         OutputDebugString("PKB: Add follows(0, currStmtNum)\n");
     } else {
         // PKB TODO: Add follows relationship (currStmt - 1, currStmt)
+        (*_pkbMainPtr).setFollowsRel(_currentStmtNumber - 1, _currentStmtNumber);
         OutputDebugString("PKB: Add follows(currStmtNum-1, currentStmtNum)\n");
     }
 

@@ -161,6 +161,7 @@ namespace UnitTesting
         TEST_METHOD(regexExtractExpressionLhsRhsTest)
         {
             ParserChildForTest parser(dummyPkbMainPtr);
+
             std::cmatch match;
             Assert::IsTrue(std::regex_match("a+b", match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
             Assert::IsTrue("a" == match.str(1));
