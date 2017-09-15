@@ -35,7 +35,12 @@ private:
 	void evaluateModifies(array<string, 4> arr);
 	void evaluatePattern(array<string, 6> arr);
 
+
     /*--------------- Evaluator helper methods ---------------*/
+
+    /*--------------- Get result from common synonym ---------------*/
+    list<string> getCommonSynonymResult(list<string> select, pair<list<string>, list<string>> suchThat, pair<list<string>, list<string>> pattern);
+
     /*--------------- Find set intersection between two lists---------------*/
     list<string> getIntersection(list<string> list1, list<string> list2);
 };
