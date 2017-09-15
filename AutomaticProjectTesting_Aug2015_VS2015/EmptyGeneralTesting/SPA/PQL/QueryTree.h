@@ -34,10 +34,11 @@ public:
 	vector<string> getConsts();
 	vector<string> getProgLines();
 
+	array<string, 2> getSelect();
 	vector<array<string, 4>> getFollows();
-	vector<array<string, 4>> getFollowsStar();
+	vector<array<string, 4>> getFollowsT();
 	vector<array<string, 4>> getParent();
-	vector<array<string, 4>> getParentStar();
+	vector<array<string, 4>> getParentT();
 	vector<array<string, 4>> getUses();
 	vector<array<string, 4>> getModifies();
 	vector<array<string, 6>> getPatterns();

@@ -153,12 +153,17 @@ vector<string> QueryTree::getProgLines()
 	return progLines;
 }
 
+array<string, 2> QueryTree::getSelect()
+{
+	return selectStmt;
+}
+
 vector<array<string, 4>> QueryTree::getFollows()
 {
 	return followsClauses;
 }
 
-vector<array<string, 4>> QueryTree::getFollowsStar()
+vector<array<string, 4>> QueryTree::getFollowsT()
 {
 	return followsStarClauses;
 }
@@ -168,7 +173,7 @@ vector<array<string, 4>> QueryTree::getParent()
 	return parentClauses;
 }
 
-vector<array<string, 4>> QueryTree::getParentStar()
+vector<array<string, 4>> QueryTree::getParentT()
 {
 	return parentStarClauses;
 }
