@@ -49,6 +49,7 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _parentStack = stack<int>();
     _firstStmtInProc = Parser::INT_INITIAL_STMT_NUMBER;
     _pkbMainPtr = pkbMainPtr;
+    _headerToStmtsMap = unordered_map<int, list<int>>();
 }
 
 bool Parser::parse(string filename) {
@@ -92,8 +93,7 @@ bool Parser::incrCurrentTokenPtr()
             _currentTokenPtr = match.str(1);
             return true;
         }
-    }
-    else {
+    } else {
         _currentTokenPtr = Parser::STRING_EMPTY_STRING;
         return false;
     }
@@ -138,8 +138,7 @@ bool Parser::assertMatchAndIncrementToken(regex re) {
     if (regex_match(_currentTokenPtr, re)) {
         incrCurrentTokenPtr();
         return true;
-    }
-    else {
+    } else {
         // TODO: consider throwing exception.
         _isValidSyntax = false;
         OutputDebugString("WARNING: Matching of token failed.\n");
@@ -162,7 +161,9 @@ void Parser::parseProgram() {
     parseProcedure();
     OutputDebugString("FINE: End of program reached.\n");
 
-    //PKB TODO: Tell PKB to start design extractor.
+    // PKB TODO: Populate FollowsTable.
+    OutputDebugString("PKB: Add follows relationship.\n");
+    // PKB TODO: Tell PKB to start design extractor.
     OutputDebugString("PKB: Tell PKB to start design extractor.\n");
 }
 
@@ -254,27 +255,6 @@ void Parser::parseAssignment() {
     OutputDebugString("FINE: Assignment statement identified.\n");
     // PKB TODO: Add assignmentStmt to PKB
     OutputDebugString("PKB: Add assignment to PKB.\n");
-
-    // TODO: To update Follows Table. Might refactor to achieve SLAP
-    /*
-    Three cases:
-    1. First statement in procedure
-    2. First statement in container statement block
-    3. Middle or end of statement list
-    */
-    if (_parentStack.empty() && ((_currentStmtNumber-_firstStmtInProc) == 0)) {
-        // PKB TODO: Add follows relationship (0, currentStmt)
-        (*_pkbMainPtr).setFollowsRel(0, _currentStmtNumber);
-        OutputDebugString("PKB: Add follows(0, currStmtNum)\n");
-    } else if (!_parentStack.empty() && (_currentStmtNumber - _parentStack.top() == 1)) {
-        // PKB TODO: Add follows relationship (0, currentStmt)
-        (*_pkbMainPtr).setFollowsRel(0, _currentStmtNumber);
-        OutputDebugString("PKB: Add follows(0, currStmtNum)\n");
-    } else {
-        // PKB TODO: Add follows relationship (currStmt - 1, currStmt)
-        (*_pkbMainPtr).setFollowsRel(_currentStmtNumber - 1, _currentStmtNumber);
-        OutputDebugString("PKB: Add follows(currStmtNum-1, currentStmtNum)\n");
-    }
 
     // Process LHS
     assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
@@ -426,8 +406,6 @@ void Parser::parseWhile() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
     // PKB TODO: Add while stmt to PKB
     OutputDebugString("PKB: Add while statement to PKB.\n");
-    // PKB TODO: Add follows relationship
-    OutputDebugString("PKB: Add follows (currStmtNum-1, currentStmtNum)\n");
 
     _parentStack.push(_currentStmtNumber);
 
@@ -453,6 +431,5 @@ void Parser::parseWhile() {
     OutputDebugString("FINE: Exiting while block.\n");
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
-    _currentStmtNumber = _parentStack.top();    // For next setFollows to work correctly.
     _parentStack.pop();
 }

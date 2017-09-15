@@ -54,6 +54,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::stack<int> _parentStack;           //Contains only container stmts
     int _firstStmtInProc;
     PKBMain* _pkbMainPtr;
+    unordered_map<int, list<int>> _headerToStmtsMap;
     
     /******************
     * Private Methods *
