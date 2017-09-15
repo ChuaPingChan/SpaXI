@@ -1,7 +1,8 @@
 #pragma once
-#include <vector>
+#include <list>
 #include <array>
 #include <string>
+#include <iostream>
 
 
 using namespace std;
@@ -15,9 +16,11 @@ public:
 	void evaluate();
 
 private:
-	vector<string> resultSelect;
-	vector<pair<string, string>> resultSuchThat;
-	vector<pair<string, string>> resultPattern;
+	bool hasResult = true;
+
+	list<string> resultSelect;
+	list<pair<string, string>> resultSuchThat;
+	list<pair<string, string>> resultPattern;
 
 	void evaluateFollows(array<string, 4> arr);
 	void evaluateFollowsT(array<string, 4> arr);
