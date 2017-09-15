@@ -17,10 +17,10 @@ public:
 private:
     bool hasResult = true;
 
-	list<string> resultSelect;
 	pair<list<string>, list<string>> resultSuchThat;
     pair<list<string>, list<string>> resultPattern;
 
+    /*--------------- Evaluator clauses ---------------*/
 	void evaluateFollows(array<string, 4> arr);
 	void evaluateFollowsT(array<string, 4> arr);
 	void evaluateParent(array<string, 4> arr);
@@ -28,5 +28,10 @@ private:
 	void evaluateUses(array<string, 4> arr);
 	void evaluateModifies(array<string, 4> arr);
 	void evaluatePattern(array<string, 6> arr);
+
+    /*--------------- Evaluator helper methods ---------------*/
+
+    /*--------------- Find set intersection between two lists---------------*/
+    list<string> getIntersection(list<string> list1, list<string> list2);
 };
 
