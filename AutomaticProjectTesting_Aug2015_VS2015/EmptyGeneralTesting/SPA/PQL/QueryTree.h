@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <array>
+#include <list>
 
 using namespace std;
 
@@ -42,17 +43,6 @@ public:
 	vector<array<string, 4>> getUses();
 	vector<array<string, 4>> getModifies();
 	vector<array<string, 6>> getPatterns();
-	
-	int getNumVar();
-	int getNumSuchThat();
-
-	bool isInit();
-	bool isSplitted();
-	bool isValidated();
-	bool isEvaluated();
-
-	void setValidatedTrue();
-	void setEvaluatedTrue();
 
 	bool varExists(string var);
 
@@ -78,16 +68,6 @@ private:
 	vector<array<string, 4>> modifiesClauses;
 	vector<array<string, 6>> patternClauses;
 
-	int numVar = 0;
-
-	bool inited;
-	bool splitted;
-	bool validated;
-	bool evaluated;
-
-	void setInited(bool b);
-	void setSplitted(bool b);
-	void setValidated(bool b);
-	void setEvaluated(bool b);
+	list<string> finalResult;
 };
 

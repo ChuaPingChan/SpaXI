@@ -50,8 +50,11 @@ const string SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "("
 
 /******************** Public methods ********************/
 
-bool QueryValidator::isValidQuery(vector<string> inputVector)
+bool QueryValidator::isValidQuery(string query)
 {
+
+	vector<string> inputVector = tokenize(query);
+
     for (vector<string>::iterator iter = inputVector.begin(); iter != inputVector.end(); ++iter) {
         string currentLine = *iter;
         if (currentLine == inputVector.back()) {
@@ -122,9 +125,9 @@ bool QueryValidator::isValidNameTest(string str)
 
 /*--------------- Splitting Query Test---------------*/
 
-vector<string> QueryValidator::tokenizerTest(string query)
+vector<string> QueryValidator::tokenizeTest(string query)
 {
-    return tokenizer(query);
+    return tokenize(query);
 }
 
 /*--------------- Finding Argument in Clause Test---------------*/
@@ -235,7 +238,7 @@ bool QueryValidator::isValidSelectOverallRegexTest(string str)
 /*--------------- Split initial query ---------------*/
 
 //split query using ';' as delimiter
-vector<string> QueryValidator::tokenizer(string query)
+vector<string> QueryValidator::tokenize(string query)
 {
     char delimiter = ';';
     stringstream ss(query);

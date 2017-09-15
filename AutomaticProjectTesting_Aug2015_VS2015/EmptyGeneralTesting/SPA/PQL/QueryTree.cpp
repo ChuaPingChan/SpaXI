@@ -26,16 +26,12 @@ QueryTree* QueryTree::getInstance()
 
 void QueryTree::init()
 {
-	setInited(true);
-	setSplitted(false);
-	setValidated(false);
-	setEvaluated(false);
+
 }
 
 void QueryTree::storeUnvalidatedStmts(vector<string> splittedVec)
 {
 	unvalidatedStmts = splittedVec;
-	setSplitted(true);
 }
 
 void QueryTree::insertVariable(string type, string var)
@@ -74,8 +70,6 @@ void QueryTree::insertVariable(string type, string var)
 	{
 		cerr << "Type not recognised!";
 	}
-
-	this->numVar++;
 }
 
 void QueryTree::insertFollows(array<string, 4> arr)
@@ -193,46 +187,6 @@ vector<array<string, 6>> QueryTree::getPatterns()
 	return patternClauses;
 }
 
-int QueryTree::getNumVar()
-{
-	return numVar;
-}
-
-int QueryTree::getNumSuchThat()
-{
-	return suchThatClauses.size();
-}
-
-bool QueryTree::isInit()
-{
-	return inited;
-}
-
-bool QueryTree::isSplitted()
-{
-	return splitted;
-}
-
-bool QueryTree::isValidated()
-{
-	return validated;
-}
-
-bool QueryTree::isEvaluated()
-{
-	return evaluated;
-}
-
-void QueryTree::setValidatedTrue()
-{
-	setValidated(true);
-}
-
-void QueryTree::setEvaluatedTrue()
-{
-	setEvaluated(true);
-}
-
 bool QueryTree::varExists(string var)
 {
 	if (find(stmts.begin(), stmts.end(), var) != stmts.end()) 
@@ -263,25 +217,5 @@ bool QueryTree::varExists(string var)
 	{
 		return false;
 	}
-}
-
-void QueryTree::setInited(bool b)
-{
-	inited = b;
-}
-
-void QueryTree::setSplitted(bool b)
-{
-	splitted = b;
-}
-
-void QueryTree::setValidated(bool b)
-{
-	validated = b;
-}
-
-void QueryTree::setEvaluated(bool b)
-{
-	evaluated = b;
 }
  

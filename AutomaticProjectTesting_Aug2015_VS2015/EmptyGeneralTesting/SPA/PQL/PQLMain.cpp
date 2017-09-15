@@ -3,8 +3,9 @@
 
 
 
-PQLMain::PQLMain()
+PQLMain::PQLMain(string query)
 {
+	this->query = query;
 }
 
 
@@ -12,7 +13,16 @@ PQLMain::~PQLMain()
 {
 }
 
-PQLMain::PQLMain(string query)
+list<string> PQLMain::run()
 {
+	QueryTree* qtInstance = QueryTree::getInstance();
+
+	QueryValidator validator;
+	validator.isValidQuery(query);
+
+	QueryEvaluator evaluator;
+	evaluator.evaluate();
+
+
 }
 

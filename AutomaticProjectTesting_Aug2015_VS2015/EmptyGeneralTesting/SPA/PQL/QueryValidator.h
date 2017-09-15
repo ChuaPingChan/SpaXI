@@ -17,7 +17,7 @@ public:
     ~QueryValidator();
 
     QueryTree qt;
-    bool isValidQuery(vector<string> inputVector);
+    bool isValidQuery(string query);
 
     /*--------------- For Unit Testing ---------------*/
 	string removeAllSpacesTest(string str);
@@ -31,7 +31,7 @@ public:
     bool isValidNameTest(string str);
 
     /*--------------- Tokenizer Test---------------*/
-    vector<string> tokenizerTest(string query);
+    vector<string> tokenizeTest(string query);
  
     /*--------------- Finding Argument in Clause Test---------------*/
     bool isArgumentInClauseTest(string arg, vector<string> clause);
@@ -73,7 +73,7 @@ private:
     vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
     
     /*--------------- Splitting Query ---------------*/
-    vector<string> tokenizer(string query);
+    vector<string> tokenize(string query);
 
     /*--------------- Remove all spaces ---------------*/
     string removeAllSpaces(string str);
