@@ -93,5 +93,74 @@ namespace UnitTesting {
                 expectedPartialMatchStmt.pop_front();
             }
         }
+
+        TEST_METHOD(TestGetLeftVariables)
+        {
+            PatternTable pt;
+            Assert::IsTrue(pt.addToPatternTable(1, "a", "a+b"));
+            Assert::IsTrue(pt.addToPatternTable(2, "b", "c-d"));
+            Assert::IsTrue(pt.addToPatternTable(3, "a", "a+b+c"));
+            Assert::IsTrue(pt.addToPatternTable(4, "c", "a-b-c"));
+            Assert::IsTrue(pt.addToPatternTable(5, "d", "a+b+c"));
+            Assert::IsTrue(pt.addToPatternTable(6, "e", "a+b+c"));
+            Assert::IsTrue(pt.addToPatternTable(7, "c", "a-b-c"));
+
+            // test getLeftVariables()
+            list<pair<int, string>> expectedVariables;
+            expectedVariables.push_back(make_pair(1, "a"));
+            expectedVariables.push_back(make_pair(2, "b"));
+            expectedVariables.push_back(make_pair(3, "a"));
+            expectedVariables.push_back(make_pair(4, "c"));
+            expectedVariables.push_back(make_pair(5, "d"));
+            expectedVariables.push_back(make_pair(6, "e"));
+            expectedVariables.push_back(make_pair(7, "c"));
+
+            list<pair<int, string>> testVariables = pt.getLeftVariables();
+            while (!expectedVariables.empty() && !testVariables.empty()) {
+                Assert::AreEqual(expectedVariables.front().first, testVariables.front().first);
+                Assert::AreEqual(expectedVariables.front().second, testVariables.front().second);
+                expectedVariables.pop_front();
+                testVariables.pop_front();
+            }
+
+            // test getLeftVariablesThatMatchWithString(string)
+            expectedVariables.push_back(make_pair(1, "a"));
+            expectedVariables.push_back(make_pair(3, "a"));
+            expectedVariables.push_back(make_pair(5, "d"));
+            expectedVariables.push_back(make_pair(6, "e"));
+            
+            testVariables = pt.getLeftVariableThatMatchWithString("a+b");
+            while (!expectedVariables.empty() && !testVariables.empty()) 
+            {
+                Assert::AreEqual(expectedVariables.front().first, testVariables.front().first);
+                Assert::AreEqual(expectedVariables.front().second, testVariables.front().second);
+                expectedVariables.pop_front();
+                testVariables.pop_front();
+            }
+
+            // test getExactBothMatches(string, string)
+            list<int> expectedAssignList;
+            expectedAssignList.push_back(4);
+            expectedAssignList.push_back(7);
+
+            list<int> testAssignList = pt.getExactBothMatches("c", "a-b-c");
+            while (!expectedAssignList.empty() && !testAssignList.empty())
+            {
+                Assert::AreEqual(expectedAssignList.front(), testAssignList.front());
+                expectedAssignList.pop_front();
+                testAssignList.pop_front();
+            }
+            // test getPartialBothMatches(string, string)
+            expectedAssignList.push_back(1);
+            expectedAssignList.push_back(3);
+
+            testAssignList = pt.getPartialBothMatches("a", "a+b");
+            while (!expectedAssignList.empty() && !testAssignList.empty())
+            {
+                Assert::AreEqual(expectedAssignList.front(), testAssignList.front());
+                expectedAssignList.pop_front();
+                testAssignList.pop_front();
+            }
+        }
     };
 }
