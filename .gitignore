@@ -7,12 +7,20 @@
 *.ipch
 *.opendb
 *.db
-*.exe
+.enc
 *.dll
 *.exp
-*.pch
 *.lib
-*.suo
-*.enc
+!*AutoTester*lib
 *.user
+*.suo
+*.exe
+*.pch
+*.lastbuildstate
+*/Debug*
+*/debug*
+*/Release*
+*/release*
+*.vcxproj.filters
+# Don't ignore .sln and .vcxproj, .ico, .rc, .rc2
 

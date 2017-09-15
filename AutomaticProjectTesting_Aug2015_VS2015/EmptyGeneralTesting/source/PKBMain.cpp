@@ -7,9 +7,9 @@
 
 using namespace std;
 
-
 #include "PKBMain.h"
+#include "TNode.h"
 
-int DesignExtractor () {
-	return 0;
+PKBMain::PKBMain() {
+
 }
