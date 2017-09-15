@@ -7,13 +7,9 @@ FollowsTable::FollowsTable(){
 
 bool FollowsTable::addFollows(int stmt1, int stmt2, int stmt3)
 {
-	//If parent doesnt exist in map, create new parent
-	if (followsMap.find(stmt1) == followsMap.end()) {
-		followsMap[stmt1] = std::make_pair(stmt2, stmt3);
-		return true;
-	}
-
-	return false;
+	//replace no matter what
+	followsMap[stmt1] = std::make_pair(stmt2, stmt3);
+	return true;
 }
 
 int FollowsTable::getStmtBef(int stmt) {
@@ -41,6 +37,16 @@ bool FollowsTable::hasBefore(int afterStmt) {
 bool FollowsTable::hasAfter(int beforeStmt) {
 	if (followsMap.find(beforeStmt) != followsMap.end()) {
 		if (followsMap[beforeStmt].second != 0) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool FollowsTable::isFollows(int stmt1, int stmt2) {
+	if (followsMap.find(stmt1) != followsMap.end()) {
+		if (followsMap[stmt1].second == stmt2) {
 			return true;
 		}
 	}
