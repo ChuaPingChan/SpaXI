@@ -3,6 +3,7 @@
 #include <array>
 #include <string>
 #include <iostream>
+#include <algorithm>
 #include "QueryTree.h"
 
 using namespace std;

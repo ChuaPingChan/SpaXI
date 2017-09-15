@@ -701,7 +701,7 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 /*--------------- Evaluator helper methods ---------------*/
 
 /*--------------- Find set intersection between two lists---------------*/
-list<string> getIntersection(list<string> list1, list<string> list2)
+list<string> QueryEvaluator::getIntersection(list<string> list1, list<string> list2)
 {
     list<string> tempList1 = list1;
     list<string> tempList2 = list2;
@@ -716,9 +716,9 @@ list<string> getIntersection(list<string> list1, list<string> list2)
     return result;
 }
 
-list<string> getCommonSynonymResult(list<string> select, pair<list<string>, list<string>> suchThat, pair<list<string>, list<string>> pattern)
+list<string> QueryEvaluator::getCommonSynonymResult(list<string> select, pair<list<string>, list<string>> suchThat, pair<list<string>, list<string>> pattern)
 {
-    list<string> tempResult = {};
+    list<string> tempResult = {"none"};
     list<string> tempResultSuchThat;
     list<string> tempResultPattern;
 
@@ -766,7 +766,6 @@ list<string> getCommonSynonymResult(list<string> select, pair<list<string>, list
                 tempResultPattern = getIntersection(select, pattern.second);
         }
     }
-
 
     set_intersection(tempResultSuchThat.begin(), tempResultSuchThat.end(), tempResultPattern.begin(), tempResultPattern.end(), back_inserter(tempResult));
     return tempResult;
