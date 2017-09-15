@@ -16,6 +16,57 @@ void QueryEvaluator::evaluate()
 
 }
 
+/*--------------- Unit Testing ---------------*/
+bool QueryEvaluator::getHasResult()
+{
+    return hasResult;
+}
+
+list<string> QueryEvaluator::getIntersectionTest(list<string> list1, list<string> list2)
+{
+    return getIntersection(list1, list2);
+}
+
+void QueryEvaluator::evaluateSelectTest(array<string, 2> arr)
+{
+    evaluateSelect(arr);
+}
+
+void QueryEvaluator::evaluateFollowsTest(array<string, 4> arr)
+{
+    evaluateFollows(arr);
+}
+
+void QueryEvaluator::evaluateFollowsTTest(array<string, 4> arr)
+{
+    evaluateFollowsT(arr);
+}
+
+void QueryEvaluator::evaluateParentTest(array<string, 4> arr)
+{
+    evaluateParent(arr);
+}
+
+void QueryEvaluator::evaluateParentTTest(array<string, 4> arr)
+{
+    evaluateParentT(arr);
+}
+
+void QueryEvaluator::evaluateUsesTest(array<string, 4> arr)
+{
+    evaluateUses(arr);
+}
+
+void QueryEvaluator::evaluateModifiesTest(array<string, 4> arr)
+{
+    evaluateModifies(arr);
+}
+
+void QueryEvaluator::evaluatePatternTest(array<string, 6> arr)
+{
+    evaluatePattern(arr);
+}
+
 /*--------------- Evaluator private methods clauses ---------------*/
 
 void QueryEvaluator::evaluateSelect(array<string, 2> arr)
@@ -559,9 +610,15 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 /*--------------- Find set intersection between two lists---------------*/
 list<string> QueryEvaluator::getIntersection(list<string> list1, list<string> list2)
 {
-    list1.pop_front();
-    list2.pop_front();
+    list<string> tempList1 = list1;
+    list<string> tempList2 = list2;
+
+    tempList1.pop_front();
+    tempList2.pop_front();
+    tempList1.sort();
+    tempList2.sort();
+
     list<string> result;
-    set_intersection(list1.begin(), list1.end(), list2.begin(), list2.end(), back_inserter(result));
+    set_intersection(tempList1.begin(), tempList1.end(), tempList2.begin(), tempList2.end(), back_inserter(result));
     return result;
 }

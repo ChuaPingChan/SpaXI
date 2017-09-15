@@ -14,6 +14,18 @@ public:
 
 	void evaluate();
 
+    /*--------------- Unit Testing ---------------*/
+    bool getHasResult();
+    list<string> getIntersectionTest(list<string> list1, list<string> list2);
+    void evaluateSelectTest(array<string, 2> arr);
+    void evaluateFollowsTest(array<string, 4> arr);
+    void evaluateFollowsTTest(array<string, 4> arr);
+    void evaluateParentTest(array<string, 4> arr);
+    void evaluateParentTTest(array<string, 4> arr);
+    void evaluateUsesTest(array<string, 4> arr);
+    void evaluateModifiesTest(array<string, 4> arr);
+    void evaluatePatternTest(array<string, 6> arr);
+
 private:
     bool hasResult = true;
     list<string> finalResult;
