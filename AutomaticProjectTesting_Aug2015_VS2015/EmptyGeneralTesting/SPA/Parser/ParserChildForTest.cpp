@@ -9,6 +9,7 @@
 #include "Parser.h"
 #include "ParserChildForTest.h"
 #include "SyntaxErrorException.h"
+#include "../PKB/PKBMain.h"
 
 using namespace std;
 
@@ -18,14 +19,7 @@ for the private methods of the Parser class :O
 
 DO NOT use this class in the real SPA.
 */
-ParserChildForTest::ParserChildForTest() {
-    _currentStmtNumber = ParserChildForTest::INT_INITIAL_STMT_NUMBER;
-    _concatenatedSourceCode = ParserChildForTest::STRING_EMPTY_STRING;
-    _currentTokenPtr = ParserChildForTest::STRING_EMPTY_STRING;
-    _isValidSyntax = true;
-    _errorMessage = string();
-    _callStack = stack<string>();
-    _parentStack = stack<int>();
+ParserChildForTest::ParserChildForTest(PKBMain* pkbMainPtr) : Parser(pkbMainPtr) {
 }
 
 bool ParserChildForTest::concatenateLines(string filename) {

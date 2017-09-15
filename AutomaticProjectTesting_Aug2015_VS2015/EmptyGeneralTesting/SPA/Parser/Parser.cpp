@@ -7,6 +7,7 @@
 
 #include "Parser.h"
 #include "SyntaxErrorException.h"
+#include "../PKB/PKBMain.h"
 
 // TODO: Remove this output debug string before submission
 #include "Windows.h"
@@ -37,7 +38,7 @@ const regex Parser::REGEX_VALID_EXPRESSION = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|\\
 const regex Parser::REGEX_MATCH_EQUAL = regex("\\s*=\\s*");
 const regex Parser::REGEX_VALID_OPERATOR = regex("\\s*[+\\-*/]\\s*");
 
-Parser::Parser()
+Parser::Parser(PKBMain* pkbMainPtr)
 {
     _currentStmtNumber = Parser::INT_INITIAL_STMT_NUMBER;
     _concatenatedSourceCode = Parser::STRING_EMPTY_STRING;
@@ -47,6 +48,7 @@ Parser::Parser()
     _callStack = stack<string>();
     _parentStack = stack<int>();
     _firstStmtInProc = Parser::INT_INITIAL_STMT_NUMBER;
+    _pkbMainPtr = pkbMainPtr;
 }
 
 bool Parser::parse(string filename) {
@@ -159,6 +161,9 @@ void Parser::parseProgram() {
     //      when there are multiple procedures.
     parseProcedure();
     OutputDebugString("FINE: End of program reached.\n");
+
+    //PKB TODO: Tell PKB to start design extractor.
+    OutputDebugString("PKB: Tell PKB to start design extractor.\n");
 }
 
 // Expects _nextToken to be "procedure" keyword

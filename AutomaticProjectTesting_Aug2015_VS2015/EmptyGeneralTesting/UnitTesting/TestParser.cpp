@@ -6,10 +6,13 @@
 #include "CppUnitTest.h"
 #include "../SPA/Parser/Parser.h"
 #include "../SPA/Parser/ParserChildForTest.h"
+#include "../SPA/PKB/PKBMain.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 const std::string dummySimpleSourcePath = "../UnitTesting/ParserTestDependencies/dummySimpleSource.txt";
+PKBMain dummyPkbMain;
+PKBMain* dummyPkbMainPtr = &dummyPkbMain;
 
 namespace UnitTesting
 {
@@ -157,7 +160,7 @@ namespace UnitTesting
 
         TEST_METHOD(regexExtractExpressionLhsRhsTest)
         {
-            ParserChildForTest parser;
+            ParserChildForTest parser(dummyPkbMainPtr);
             std::cmatch match;
             Assert::IsTrue(std::regex_match("a+b", match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
             Assert::IsTrue("a" == match.str(1));
@@ -172,7 +175,7 @@ namespace UnitTesting
         TEST_METHOD(getNextTokenTest_matchTokenTest_assertMatchAndIncrTokenTest)
         {
             // Set up
-            ParserChildForTest parser; 
+            ParserChildForTest parser(dummyPkbMainPtr); 
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
             Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
             
@@ -199,7 +202,7 @@ namespace UnitTesting
 
         TEST_METHOD(tokenizeStringTest)
         {
-            ParserChildForTest parser;
+            ParserChildForTest parser(dummyPkbMainPtr);
             std::string stringToTokenize = "one two three ; 123 { } a45=";
             std::vector<std::string> expectedTokens = { "one", "two", "three", ";", "123", "{", "}", "a45", "=" };
             std::vector<std::string> actualTokens = parser.tokenizeString(stringToTokenize);
@@ -209,7 +212,7 @@ namespace UnitTesting
         TEST_METHOD(extractStringUpToSemicolonTest)
         {         
             // Set up
-            ParserChildForTest parser;
+            ParserChildForTest parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
             Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
 
@@ -241,7 +244,7 @@ namespace UnitTesting
         TEST_METHOD(assignmentAndWhileExpectedTest)
         {
             // Set up
-            ParserChildForTest parser;
+            ParserChildForTest parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
             Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
 
@@ -281,7 +284,7 @@ namespace UnitTesting
 
         TEST_METHOD(assertIsValidExpressionTest)
         {
-            ParserChildForTest parser;
+            ParserChildForTest parser(dummyPkbMainPtr);
             Assert::IsTrue(parser.assertIsValidExpression("a"));
             Assert::IsTrue(parser.assertIsValidExpression("1"));
             Assert::IsFalse(parser.assertIsValidExpression(""));
@@ -320,7 +323,7 @@ namespace UnitTesting
 
         TEST_METHOD(removeAllWhiteSpacesTest)
         {
-            ParserChildForTest parser;
+            ParserChildForTest parser(dummyPkbMainPtr);
             std::string withWhiteSpace;
             std::string noWhiteSpace;
 
@@ -345,7 +348,7 @@ namespace UnitTesting
 
         TEST_METHOD(removeAllBracketsTest)
         {
-            ParserChildForTest parser;
+            ParserChildForTest parser(dummyPkbMainPtr);
             std::string withBrackets;
             std::string noBrackets;
 
@@ -374,7 +377,7 @@ namespace UnitTesting
 
         TEST_METHOD(isBracketedCorrectlyTest)
         {
-            ParserChildForTest parser;
+            ParserChildForTest parser(dummyPkbMainPtr);
             std::string expression;
 
             expression = "  \n3\r\f + 4 \n\t ";
@@ -406,7 +409,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_success)
         {
             // Set up
-            Parser parser;
+            Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -418,7 +421,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_equalSignMissing)
         {
             // Set up
-            Parser parser;
+            Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_error());
 
             Assert::IsFalse(parser.parse(dummySimpleSourcePath));
@@ -430,7 +433,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_whileOnly_success)
         {
             // Set up
-            Parser parser;
+            Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_whileOnly());
             
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -442,7 +445,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentAnd1LevelNestedWhile_success)
         {
             // Set up
-            Parser parser;
+            Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -454,7 +457,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentAnd2LevelNestedWhile_success)
         {
             // Set up
-            Parser parser;
+            Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_2LevelNestedWhile());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
