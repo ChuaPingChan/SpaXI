@@ -62,6 +62,21 @@ bool ParserChildForTest::assertIsValidExpression(std::string expression)
     return Parser::assertIsValidExpression(expression);
 }
 
+std::string ParserChildForTest::removeAllWhitespaces(std::string targetString)
+{
+    return Parser::removeAllWhitespaces(targetString);
+}
+
+std::string ParserChildForTest::removeAllBrackets(std::string targetString)
+{
+    return Parser::removeAllBrackets(targetString);
+}
+
+bool ParserChildForTest::isBracketedCorrectly(std::string expression)
+{
+    return Parser::isBracketedCorrectly(expression);
+}
+
 void ParserChildForTest::parseProgram()
 {
     Parser::parseProgram();

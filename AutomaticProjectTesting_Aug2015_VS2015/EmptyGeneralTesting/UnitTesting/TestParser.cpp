@@ -140,6 +140,35 @@ namespace UnitTesting
             Assert::IsFalse(std::regex_match("-;", Parser::REGEX_VALID_OPERATOR));
         }
 
+        TEST_METHOD(regexMatchExpressionLhsRhsTest)
+        {
+            Assert::IsTrue(std::regex_match("a+b", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match("a -   b", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match("\na\t*\nb\t", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match(" \ra\f /  \rb\f ", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match(" 6 + 3 * 4", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match(" 6 + 3 \t\r\n* \t\r\n4\t\r\n", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+
+            Assert::IsFalse(std::regex_match("=4", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsFalse(std::regex_match("+-", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsFalse(std::regex_match("9+", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsFalse(std::regex_match("-;", Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+        }
+
+        TEST_METHOD(regexExtractExpressionLhsRhsTest)
+        {
+            ParserChildForTest parser;
+            std::cmatch match;
+            Assert::IsTrue(std::regex_match("a+b", match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue("a" == match.str(1));
+            Assert::IsTrue("b" == match.str(2));
+
+            Assert::IsTrue(std::regex_match("\t\n  \ra\r\t\f + \f\t\r b\t", match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
+            Assert::IsTrue(std::regex_match(match.str(1), Parser::REGEX_VALID_ENTITY_NAME));
+            Assert::IsTrue(std::regex_match(match.str(2), Parser::REGEX_VALID_ENTITY_NAME));
+            
+        }
+
         TEST_METHOD(getNextTokenTest_matchTokenTest_assertMatchAndIncrTokenTest)
         {
             // Set up
@@ -258,6 +287,8 @@ namespace UnitTesting
             Assert::IsFalse(parser.assertIsValidExpression(""));
             Assert::IsFalse(parser.assertIsValidExpression(" "));
             Assert::IsFalse(parser.assertIsValidExpression("+"));
+            Assert::IsFalse(parser.assertIsValidExpression("+a"));
+            Assert::IsFalse(parser.assertIsValidExpression("b +"));
             Assert::IsFalse(parser.assertIsValidExpression("$"));
             Assert::IsFalse(parser.assertIsValidExpression("\n\t\r"));
             Assert::IsTrue(parser.assertIsValidExpression("a+b"));
@@ -275,6 +306,149 @@ namespace UnitTesting
             Assert::IsTrue(parser.assertIsValidExpression("a134124 + b/3 * 2  "));
             Assert::IsFalse(parser.assertIsValidExpression(" a = 3 + 4 "));
             Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
+            Assert::IsFalse(parser.assertIsValidExpression("()"));
+            Assert::IsTrue(parser.assertIsValidExpression("(a)"));
+            Assert::IsTrue(parser.assertIsValidExpression(" (3+4) "));
+            Assert::IsTrue(parser.assertIsValidExpression(" 3 +  4 "));
+            Assert::IsTrue(parser.assertIsValidExpression(" ( 3 +  4 ) "));
+            Assert::IsFalse(parser.assertIsValidExpression("( 3 +  4 - () )"));
+            Assert::IsTrue(parser.assertIsValidExpression(" 4 - 3 * \n\t6\t "));
+            Assert::IsTrue(parser.assertIsValidExpression("3 * \n\t6\t "));
+            Assert::IsTrue(parser.assertIsValidExpression("((2) + (4 - 3) * \n\t(6)\t )\t\n"));
+            Assert::IsFalse(parser.assertIsValidExpression("((2) + (4 - 3)) * \n\t((6)\t \t\n"));
+        }
+
+        TEST_METHOD(removeAllWhiteSpacesTest)
+        {
+            ParserChildForTest parser;
+            std::string withWhiteSpace;
+            std::string noWhiteSpace;
+
+            withWhiteSpace = "  \n3\r\f + 4 \n\t ";
+            noWhiteSpace = "3+4";
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+
+            withWhiteSpace = "    ";
+            noWhiteSpace = "";
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+
+            withWhiteSpace = "3+4*8/5";
+            noWhiteSpace = "3+4*8/5";
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+
+            withWhiteSpace = " a + (c-\n   \td) *e    \n\t";
+            noWhiteSpace = "a+(c-d)*e";
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+            withWhiteSpace = noWhiteSpace;
+            Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
+        }
+
+        TEST_METHOD(removeAllBracketsTest)
+        {
+            ParserChildForTest parser;
+            std::string withBrackets;
+            std::string noBrackets;
+
+            withBrackets = "  \n(3\r\f + 4) \n\t ";
+            noBrackets = "  \n3\r\f + 4 \n\t ";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+
+            withBrackets = "()";
+            noBrackets = "";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+
+            withBrackets = "3+4*8/5";
+            noBrackets = "3+4*8/5";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+
+            withBrackets = " (3 +  4) ";
+            noBrackets = " 3 +  4 ";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+
+            withBrackets = "(a+(((c)-(d))*e))";
+            noBrackets = "a+c-d*e";
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+            withBrackets = noBrackets;
+            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
+        }
+
+        TEST_METHOD(isBracketedCorrectlyTest)
+        {
+            ParserChildForTest parser;
+            std::string expression;
+
+            expression = "  \n3\r\f + 4 \n\t ";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "3 + 4";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = " ( ";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
+            expression = " ) ";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
+            expression = "(3 + 4)";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "(3 + 4";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
+            expression = "3 + 4)";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
+            expression = "(3 - (4 / \t\n(2) * 5)+ 4)";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "((()))";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "(()())";
+            Assert::IsTrue(parser.isBracketedCorrectly(expression));
+            expression = "((())))";
+            Assert::IsFalse(parser.isBracketedCorrectly(expression));
+        }
+
+        TEST_METHOD(testParsingSimpleSource_assignmentsOnly_success)
+        {
+            // Set up
+            Parser parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_assignmentsOnly_equalSignMissing)
+        {
+            // Set up
+            Parser parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_error());
+
+            Assert::IsFalse(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_whileOnly_success)
+        {
+            // Set up
+            Parser parser;
+            Assert::IsTrue(createDummySimpleSourceFile_whileOnly());
+            
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_assignmentAndNestedWhile_success)
+        {
+            // Set up
+            Parser parser;
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
         /******************************
@@ -298,6 +472,34 @@ namespace UnitTesting
         */
         bool createDummySimpleSourceFile_assignmentsOnly() {
             std::string content = "procedure ABC{\n  a = 1;\n b = 2;\n	c = a;\n }\n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements only, with syntax error.
+        */
+        bool createDummySimpleSourceFile_assignmentsOnly_error() {
+            std::string content = "procedure ABC{\n  a  1;\n b = 2;\n	c = a;\n }\n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements and a while loop without nesting.
+        */
+        bool createDummySimpleSourceFile_whileOnly() {
+            std::string content = "procedure ABC { \nwhile a \n{ \n	a = 3; \n   b = 2  ; \n} \n} \n";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

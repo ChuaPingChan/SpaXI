@@ -175,6 +175,7 @@
     <ClCompile Include="TestFollowsTable.cpp" />
     <ClCompile Include="TestParentToChildTable.cpp" />
     <ClCompile Include="TestParser.cpp" />
+    <ClCompile Include="TestParserPKB.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
