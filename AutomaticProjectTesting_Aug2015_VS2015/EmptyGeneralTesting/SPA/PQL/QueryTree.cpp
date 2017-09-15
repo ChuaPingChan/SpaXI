@@ -20,6 +20,8 @@ QueryTree* QueryTree::getInstance()
 	{
 		instance = new QueryTree();
 	}
+
+	return instance;
 }
 
 void QueryTree::init()
