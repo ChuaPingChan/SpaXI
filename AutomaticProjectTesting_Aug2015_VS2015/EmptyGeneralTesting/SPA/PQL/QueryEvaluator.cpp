@@ -13,13 +13,14 @@ QueryEvaluator::~QueryEvaluator()
 
 void QueryEvaluator::evaluate()
 {
-
+    finalResult = getCommonSynonymResult(resultSelect, resultSuchThat, resultPattern);
 }
 
 /*--------------- Evaluator private methods clauses ---------------*/
 
 void QueryEvaluator::evaluateSelect(array<string, 2> arr)
 {
+
 }
 
 void QueryEvaluator::evaluateFollows(array<string, 4> arr)
@@ -557,11 +558,73 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 /*--------------- Evaluator helper methods ---------------*/
 
 /*--------------- Find set intersection between two lists---------------*/
-list<string> QueryEvaluator::getIntersection(list<string> list1, list<string> list2)
+list<string> getIntersection(list<string> list1, list<string> list2)
 {
-    list1.pop_front();
-    list2.pop_front();
+    list<string> tempList1 = list1;
+    list<string> tempList2 = list2;
+
+    tempList1.pop_front();
+    tempList2.pop_front();
+    tempList1.sort();
+    tempList2.sort();
+
     list<string> result;
-    set_intersection(list1.begin(), list1.end(), list2.begin(), list2.end(), back_inserter(result));
+    set_intersection(tempList1.begin(), tempList1.end(), tempList2.begin(), tempList2.end(), back_inserter(result));
     return result;
+}
+
+list<string> getCommonSynonymResult(list<string> select, pair<list<string>, list<string>> suchThat, pair<list<string>, list<string>> pattern)
+{
+    list<string> tempResult = {};
+    list<string> tempResultSuchThat;
+    list<string> tempResultPattern;
+
+    if (select.empty())
+        return tempResult;
+
+    tempResultSuchThat = select;
+    tempResultPattern = select;
+
+    tempResultSuchThat.pop_front();
+    tempResultPattern.pop_front();
+    tempResultSuchThat.sort();
+    tempResultPattern.sort();
+
+    if (!suchThat.first.empty() || !suchThat.second.empty())
+    {
+        if (!suchThat.first.empty()) 
+        {
+            if (select.front() == suchThat.first.front())
+                tempResultSuchThat = getIntersection(select, suchThat.first);
+        }
+
+        if (!suchThat.second.empty())
+        {
+            if (select.front() == suchThat.second.front()) 
+            {
+                tempResultSuchThat = getIntersection(select, suchThat.second);
+            }
+        }
+    }
+
+    if (!pattern.first.empty() || !pattern.second.empty())
+    {
+        if (!pattern.first.empty())
+        {
+            if (select.front() == pattern.first.front()) 
+            {
+                tempResultPattern = getIntersection(select, pattern.first);
+            }
+        }
+
+        if (!pattern.second.empty())
+        {
+            if (select.front() == pattern.second.front())
+                tempResultPattern = getIntersection(select, pattern.second);
+        }
+    }
+
+
+    set_intersection(tempResultSuchThat.begin(), tempResultSuchThat.end(), tempResultPattern.begin(), tempResultPattern.end(), back_inserter(tempResult));
+    return tempResult;
 }
