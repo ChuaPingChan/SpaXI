@@ -67,7 +67,7 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isFollows(3, 9));
 			Assert::IsTrue(PKB.isFollows(9, 10));
 
-			pair<list<int>, list<int>> allFollows = PKB.getAllFollows();
+			pair<list<int>, list<int>> allFollows = PKB.getAllFollows("WHILE", "WHILE");
 			list<int> bef = allFollows.first;
 			list<int> aft = allFollows.second;
 
@@ -76,6 +76,9 @@ namespace UnitTesting
 				bef.pop_front();
 				aft.pop_front();
 			}
+
+			PKB.startProcessComplexRelations();
+			Assert::IsTrue(PKB.isFollowsStar(1, 10));
 		}
 
 		TEST_METHOD(TestPKBFollows2) 

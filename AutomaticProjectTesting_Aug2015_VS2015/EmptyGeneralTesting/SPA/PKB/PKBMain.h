@@ -46,6 +46,12 @@ public:
 
 	list<int> getAllAfter(string type);
 
+	bool isFollowsStar(int befStmt, int aftStmt);
+
+	list<int> getAfterStar(int befStmt, string type);
+
+	list<int> getBeforeStar(int aftStmt, string type);
+
 	bool startProcessComplexRelations();
 
 private:
@@ -54,6 +60,8 @@ private:
 	ParentToChildStarTable parentToChildStarTable;
 	ParentToChildTable parentToChildTable;
 	FollowsTable followsTable;
+	FollowsStarAfter followsStarAfter;
+	FollowsStarBefore followsStarBefore;
 	unordered_map<int, int> followsBeforeMap;
 	unordered_map<int, int> followsAfterMap;
 };
