@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 
-
 using namespace std;
 
 class QueryEvaluator
@@ -16,11 +15,11 @@ public:
 	void evaluate();
 
 private:
-	bool hasResult = true;
+    bool hasResult = true;
 
 	list<string> resultSelect;
 	pair<list<string>, list<string>> resultSuchThat;
-	pair<list<string>, list<string>> resultPattern;
+    pair<list<string>, list<string>> resultPattern;
 
 	void evaluateFollows(array<string, 4> arr);
 	void evaluateFollowsT(array<string, 4> arr);
@@ -29,7 +28,5 @@ private:
 	void evaluateUses(array<string, 4> arr);
 	void evaluateModifies(array<string, 4> arr);
 	void evaluatePattern(array<string, 6> arr);
-
-
 };
 
