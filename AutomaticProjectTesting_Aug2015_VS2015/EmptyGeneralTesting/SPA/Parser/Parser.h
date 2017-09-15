@@ -5,6 +5,8 @@
 #include <regex>
 #include <stack>
 
+#include "../PKB/PKBMain.h"
+
 class Parser
 {
 public:
@@ -28,7 +30,7 @@ public:
     static const std::regex REGEX_MATCH_EQUAL;
     static const std::regex REGEX_VALID_OPERATOR;
 
-    Parser();
+    Parser(PKBMain* pkbMainPtr);
 
     bool parse(std::string filename);
 
@@ -50,6 +52,8 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::string _errorMessage;
     std::stack<std::string> _callStack;     //Contains only procedures
     std::stack<int> _parentStack;           //Contains only container stmts
+    int _firstStmtInProc;
+    PKBMain* _pkbMainPtr;
     
     /******************
     * Private Methods *
@@ -76,4 +80,3 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     void parseWhile();
 
 };
-

@@ -1,5 +1,6 @@
 #pragma once
 #include "Parser.h"
+#include "../PKB/PKBMain.h"
 
 /*
 This class's sole purpose in life is to allow unit testing
@@ -11,7 +12,7 @@ class ParserChildForTest :
     public Parser
 {
 public:
-    ParserChildForTest();
+    ParserChildForTest(PKBMain* pkbMainPtr);
 
     bool concatenateLines(std::string filename);
     bool incrCurrentTokenPtr();
