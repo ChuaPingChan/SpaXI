@@ -15,11 +15,21 @@
     <ClCompile Include="..\source\Parser.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="PQL\PQLMain.cpp" />
+    <ClCompile Include="PQL\QueryValidator.cpp" />
+    <ClCompile Include="PQL\QueryTree.cpp" />
+    <ClCompile Include="PQL\QueryEvaluator.cpp" />
+    <ClCompile Include="PQL\ResultFormatter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="PQL\PQLMain.h" />
+    <ClInclude Include="PQL\QueryValidator.h" />
+    <ClInclude Include="PQL\QueryTree.h" />
+    <ClInclude Include="PQL\QueryEvaluator.h" />
+    <ClInclude Include="PQL\ResultFormatter.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
