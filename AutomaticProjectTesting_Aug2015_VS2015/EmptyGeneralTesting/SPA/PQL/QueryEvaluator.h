@@ -19,8 +19,8 @@ private:
 	bool hasResult = true;
 
 	list<string> resultSelect;
-	list<pair<string, string>> resultSuchThat;
-	list<pair<string, string>> resultPattern;
+	pair<list<string>, list<string>> resultSuchThat;
+	pair<list<string>, list<string>> resultPattern;
 
 	void evaluateFollows(array<string, 4> arr);
 	void evaluateFollowsT(array<string, 4> arr);

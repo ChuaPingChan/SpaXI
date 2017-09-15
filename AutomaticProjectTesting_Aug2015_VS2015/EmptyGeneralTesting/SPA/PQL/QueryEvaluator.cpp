@@ -13,6 +13,7 @@ QueryEvaluator::~QueryEvaluator()
 
 void QueryEvaluator::evaluate()
 {
+
 }
 
 void QueryEvaluator::evaluateFollows(array<string, 4> arr)
@@ -201,6 +202,10 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 		{
 			hasResult = false;
 		}
+		else 
+		{
+			resultSuchThat.first = result;
+		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
@@ -208,6 +213,10 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 		if (result.empty())
 		{
 			hasResult = false;
+		}
+		else
+		{
+			resultSuchThat.first = result;
 		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
@@ -217,6 +226,10 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 		{
 			hasResult = false;
 		}
+		else
+		{
+			resultSuchThat.first = result;
+		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
@@ -224,6 +237,10 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 		if (result.first.empty() && result.second.empty())
 		{
 			hasResult = false;
+		}
+		else
+		{
+			resultSuchThat = result;
 		}
 	}
 	else
@@ -257,6 +274,10 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 		{
 			hasResult = false;
 		}
+		else
+		{
+			resultSuchThat.first = result;
+		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
@@ -264,6 +285,10 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 		if (result.empty())
 		{
 			hasResult = false;
+		}
+		else
+		{
+			resultSuchThat.first = result;
 		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
@@ -273,6 +298,10 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 		{
 			hasResult = false;
 		}
+		else
+		{
+			resultSuchThat.first = result;
+		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
@@ -280,6 +309,10 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 		if (result.first.empty() && result.second.empty())
 		{
 			hasResult = false;
+		}
+		else
+		{
+			resultSuchThat = result;
 		}
 	}
 	else
