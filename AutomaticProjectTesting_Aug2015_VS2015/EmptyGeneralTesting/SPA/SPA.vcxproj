@@ -11,16 +11,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\DesignExtractor.cpp" />
+    <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="PKB\ChildToParentStarTable.cpp" />
+    <ClCompile Include="PKB\ChildToParentTable.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
+    <ClCompile Include="PKB\DesignExtractor.cpp" />
+    <ClCompile Include="Parser\ParserChildForTest.cpp" />
+    <ClCompile Include="PKB\FollowsStarAfter.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\SPA\PKB;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="PKB\FollowsStarBefore.cpp" />
     <ClCompile Include="PKB\ModTableProcToVar.cpp" />
     <ClCompile Include="PKB\ModTableStmtToVar.cpp" />
     <ClCompile Include="PKB\ModTableVar.cpp" />
+    <ClCompile Include="PKB\ParentToChildStarTable.cpp" />
     <ClCompile Include="PKB\ParentToChildTable.cpp" />
+    <ClCompile Include="PKB\PatternTable.cpp" />
     <ClCompile Include="PKB\PKBMain.cpp" />
     <ClCompile Include="PKB\FollowsTable.cpp" />
     <ClCompile Include="PKB\ProcIdxTable.cpp" />
-    <ClCompile Include="PKB\PatternTable.cpp" />
     <ClCompile Include="PKB\StmtTypeList.cpp" />
     <ClCompile Include="PKB\UsesTableProcToVar.cpp" />
     <ClCompile Include="PKB\UsesTableStmtToVar.cpp" />
@@ -29,11 +38,19 @@
     <ClCompile Include="PKB\VarIdxTable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="PKB\ChildToParentStarTable.h" />
+    <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
+    <ClInclude Include="PKB\DesignExtractor.h" />
+    <ClInclude Include="Parser\ParserChildForTest.h" />
+    <ClInclude Include="PKB\FollowsStarAfter.h" />
+    <ClInclude Include="PKB\FollowsStarBefore.h" />
     <ClInclude Include="PKB\FollowsTable.h" />
     <ClInclude Include="PKB\ModTableProcToVar.h" />
     <ClInclude Include="PKB\ModTableStmtToVar.h" />
     <ClInclude Include="PKB\ModTableVar.h" />
+    <ClInclude Include="PKB\ParentToChildStarTable.h" />
     <ClInclude Include="PKB\ParentToChildTable.h" />
     <ClInclude Include="PKB\PatternTable.h" />
     <ClInclude Include="PKB\ProcIdxTable.h" />

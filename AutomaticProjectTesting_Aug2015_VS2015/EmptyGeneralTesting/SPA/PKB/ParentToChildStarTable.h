@@ -8,19 +8,19 @@
 
 using namespace std;
 
-class ParentToChildTable 
+class ParentToChildStarTable
 {
 public:
-	ParentToChildTable();
+	ParentToChildStarTable();
 
 	bool addParentChild(int parentStmt, int childStmt);
 
 	list<int> getChildren(int parentStmt);
 
-	unordered_map<int, list<int>> getTable();
+	void setMap(unordered_map<int, list<int>> target);
 
-	bool isParentChild(int parentStmt, int childStmt);
+	bool isParentStarChild(int parentStmt, int childStmt);
 
 private:
-	unordered_map<int, list<int>> parentToChildMap;
+	unordered_map<int, list<int>> parentToChildStarMap;
 };
