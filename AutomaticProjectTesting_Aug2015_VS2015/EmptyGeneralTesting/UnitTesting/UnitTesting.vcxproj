@@ -179,6 +179,7 @@
     <ClCompile Include="TestParserPKB.cpp" />
     <ClCompile Include="TestPatternTable.cpp" />
     <ClCompile Include="TestPKBMain.cpp" />
+    <ClCompile Include="TestStmtTypeList.cpp" />
     <ClCompile Include="TestUsesTableStmtToVar.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
