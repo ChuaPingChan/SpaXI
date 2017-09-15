@@ -237,3 +237,15 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
     }
 
 }
+
+/*--------------- Evaluator helper methods ---------------*/
+
+/*--------------- Find set intersection between two lists---------------*/
+list<string> QueryEvaluator::getIntersection(list<string> list1, list<string> list2)
+{
+    list1.pop_front();
+    list2.pop_front();
+    list<string> result;
+    set_intersection(list1.begin(), list1.end(), list2.begin(), list2.end(), back_inserter(result));
+    return result;
+}
