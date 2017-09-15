@@ -11,8 +11,8 @@ using namespace std;
 class ModTableProcToVar {
 public:
     ModTableProcToVar();
-    bool addModProcToVarList(string proc, string var);
-    list<string> getModVariablesFromProc(string proc);
+    bool addModProcToVarList(int procIdx, string var);
+    list<string> getModVariablesFromProc(int procIdx);
 private:
-    unordered_map<string, list<string>> modProcToVarMap;
+    unordered_map<int, list<string>> modProcToVarMap;
 };

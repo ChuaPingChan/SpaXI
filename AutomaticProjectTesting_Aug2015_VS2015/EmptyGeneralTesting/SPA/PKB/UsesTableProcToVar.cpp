@@ -4,23 +4,23 @@ UsesTableProcToVar::UsesTableProcToVar() {
 
 }
 
-bool UsesTableProcToVar::addUsesProcToVarList(string proc, string var) {
+bool UsesTableProcToVar::addUsesProcToVarList(int procIdx, string var) {
     // if proc name does not exist as a key, create new list and insert data to hash map
-    if (usesProcToVarMap.find(proc) == usesProcToVarMap.end()) {
-        usesProcToVarMap[proc] = list<string>();
-        usesProcToVarMap[proc].push_back(var);
-        usesProcToVarMap[proc].unique();
+    if (usesProcToVarMap.find(procIdx) == usesProcToVarMap.end()) {
+        usesProcToVarMap[procIdx] = list<string>();
+        usesProcToVarMap[procIdx].push_back(var);
+        usesProcToVarMap[procIdx].unique();
         return true;
     }
     else {
         // else, expand the list of variables
-        usesProcToVarMap[proc].push_back(var);
-        usesProcToVarMap[proc].unique();
+        usesProcToVarMap[procIdx].push_back(var);
+        usesProcToVarMap[procIdx].unique();
         return true;
     }
     return false;
 }
 
-list<string> UsesTableProcToVar::getUsesVariablesFromProc(string proc) {
-    return usesProcToVarMap[proc];
+list<string> UsesTableProcToVar::getUsesVariablesFromProc(int procIdx) {
+    return usesProcToVarMap[procIdx];
 }

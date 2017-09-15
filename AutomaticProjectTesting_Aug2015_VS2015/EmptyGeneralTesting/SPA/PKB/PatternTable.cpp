@@ -8,6 +8,10 @@ PatternTable::PatternTable() {
     
 }
 
+/*
+    Pre-condition: expression must be a valid expression taking operands
+    (0-9, a-z, A-Z) and operators(+,-,*,/) between operands
+*/
 bool PatternTable::addToPatternTable(int stmtNumber, string expression) {
     // to convert infix to postfix expression
     string postfixExpression = infixToPostfix(expression);
@@ -34,10 +38,13 @@ bool PatternTable::hasPartialMatch(int stmtNumber, string expression) {
     return found != string::npos;
 }
 
+/*
+    Pre-cond: infix is a valid expression
+*/
 string infixToPostfix(string infix) {
     stack<char> signStack = stack<char>();
     string postfix = "";
-    for (int i = 0; i < infix.length(); i++) {
+    for (size_t i = 0; i < infix.length(); i++) {
         if (isalpha(infix[i]) || isdigit(infix[i])) {
             postfix += infix[i];
         }
@@ -74,6 +81,9 @@ bool isOperator(char c) {
     return (c == '+' || c == '-' || c == '*' || c == '/');
 }
 
+/*
+    Pre-cond: sign takes only operators(+, -, *, /)
+*/
 int getPrecedence(char sign) {
     int weight;
     if (sign == '+' || sign == '-')

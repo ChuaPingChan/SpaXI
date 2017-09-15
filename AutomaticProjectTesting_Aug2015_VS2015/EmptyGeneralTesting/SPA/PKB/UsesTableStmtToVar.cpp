@@ -15,7 +15,6 @@ bool UsesTableStmtToVar::addUsesStmtToVarList(int stmtNumber, string var) {
     else {
         // else, expand the list of variables
         usesStmtToVarMap[stmtNumber].push_back(var);
-        usesStmtToVarMap[stmtNumber].unique();
         return true;
     }
     return false;
