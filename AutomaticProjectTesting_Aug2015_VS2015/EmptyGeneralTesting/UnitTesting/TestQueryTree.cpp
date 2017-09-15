@@ -160,7 +160,7 @@ namespace UnitTesting
             string arg2 = "s2";
             array<string, 4> newFollowsStarArray = { arg1Type, arg1, arg2Type, arg2 };
             qt.insertFollowsStar(newFollowsStarArray);
-            checkInsertRelationshipRetrieveVector(arg1Type, arg1, arg2Type, arg2, qt.getFollowsStar(), 0);
+            checkInsertRelationshipRetrieveVector(arg1Type, arg1, arg2Type, arg2, qt.getFollowsT(), 0);
 
             arg1Type = "assign";
             arg1 = "a1";
@@ -168,7 +168,7 @@ namespace UnitTesting
             arg2 = "a2";
             newFollowsStarArray = { arg1Type, arg1, arg2Type, arg2 };
             qt.insertFollowsStar(newFollowsStarArray);
-            checkInsertRelationshipRetrieveVector(arg1Type, arg1, arg2Type, arg2, qt.getFollowsStar(), 1);
+            checkInsertRelationshipRetrieveVector(arg1Type, arg1, arg2Type, arg2, qt.getFollowsT(), 1);
         }
 
         TEST_METHOD(TestInsertParentRetrieveVector)
@@ -200,7 +200,7 @@ namespace UnitTesting
             string arg2 = "s2";
             array<string, 4> newParentStarArray = { arg1Type, arg1, arg2Type, arg2 };
             qt.insertParentStar(newParentStarArray);
-            checkInsertRelationshipRetrieveVector(arg1Type, arg1, arg2Type, arg2, qt.getParentStar(), 0);
+            checkInsertRelationshipRetrieveVector(arg1Type, arg1, arg2Type, arg2, qt.getParentT(), 0);
 
             arg1Type = "assign";
             arg1 = "a1";
@@ -208,7 +208,7 @@ namespace UnitTesting
             arg2 = "a2";
             newParentStarArray = { arg1Type, arg1, arg2Type, arg2 };
             qt.insertParentStar(newParentStarArray);
-            checkInsertRelationshipRetrieveVector(arg1Type, arg1, arg2Type, arg2, qt.getParentStar(), 1);
+            checkInsertRelationshipRetrieveVector(arg1Type, arg1, arg2Type, arg2, qt.getParentT(), 1);
         }
 
         TEST_METHOD(TestInsertUsesRetrieveVector)

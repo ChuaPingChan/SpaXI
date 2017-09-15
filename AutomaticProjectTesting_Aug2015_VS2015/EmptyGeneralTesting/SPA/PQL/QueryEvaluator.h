@@ -3,6 +3,7 @@
 #include <array>
 #include <string>
 #include <iostream>
+#include "QueryTree.h"
 
 using namespace std;
 
@@ -15,6 +16,9 @@ public:
 	void evaluate();
 
 private:
+
+	QueryTree* qtInstance;
+
     bool hasResult = true;
     list<string> finalResult;
     list<string> resultSelect;
