@@ -2,7 +2,7 @@
 #include <list>
 #include <array>
 #include <string>
-
+#include <iostream>
 
 using namespace std;
 
@@ -28,7 +28,5 @@ private:
 	void evaluateUses(array<string, 4> arr);
 	void evaluateModifies(array<string, 4> arr);
 	void evaluatePattern(array<string, 6> arr);
-
-
 };
 
