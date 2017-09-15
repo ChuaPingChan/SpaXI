@@ -16,7 +16,7 @@ public:
 
 private:
     bool hasResult = true;
-
+    list<string> finalResult;
     list<string> resultSelect;
 	pair<list<string>, list<string>> resultSuchThat;
     pair<list<string>, list<string>> resultPattern;
@@ -32,7 +32,6 @@ private:
 	void evaluatePattern(array<string, 6> arr);
 
     /*--------------- Evaluator helper methods ---------------*/
-
     /*--------------- Find set intersection between two lists---------------*/
     list<string> getIntersection(list<string> list1, list<string> list2);
 };
