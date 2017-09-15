@@ -5,6 +5,7 @@
 #include "../SPA/PKB/ParentToChildStarTable.h"
 #include "../SPA/PKB/ChildToParentStarTable.h"
 #include "../SPA/PKB/FollowsStarAfter.h"
+#include "../SPA/PKB/FollowsStarBefore.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -84,7 +85,7 @@ namespace UnitTesting
 			ft.addFollows(6, 5, 8);
 			ft.addFollows(7, 0, 0);
 			ft.addFollows(8, 6, 0);
-			ft.addFollows(9, 2, 10);
+			ft.addFollows(9, 3, 10);
 			ft.addFollows(10, 9, 0);
 
 			FollowsStarAfter fsa;
@@ -119,6 +120,25 @@ namespace UnitTesting
 			temp2.push_back(6);
 			temp2.push_back(8);
 			Assert::IsTrue(temp2 == fsa.getAfterStar(4));
+
+			FollowsStarBefore fsb;
+			fsb.setMap(de.computeFollowsStarBeforeTable(ft));
+
+			Assert::IsTrue(fsb.isBeforeStar(1, 2));
+			Assert::IsTrue(fsb.isBeforeStar(1, 3));
+			Assert::IsTrue(fsb.isBeforeStar(1, 9));
+			Assert::IsTrue(fsb.isBeforeStar(1, 10));
+			Assert::IsTrue(fsb.isBeforeStar(2, 3));
+			Assert::IsTrue(fsb.isBeforeStar(2, 9));
+			Assert::IsTrue(fsb.isBeforeStar(2, 10));
+			Assert::IsTrue(fsb.isBeforeStar(3, 9));
+			Assert::IsTrue(fsb.isBeforeStar(3, 10));
+			Assert::IsTrue(fsb.isBeforeStar(4, 5));
+			Assert::IsTrue(fsb.isBeforeStar(4, 6));
+			Assert::IsTrue(fsb.isBeforeStar(5, 6));
+			Assert::IsTrue(fsb.isBeforeStar(9, 10));
+			Assert::IsFalse(fsb.isBeforeStar(8, 10));
+			Assert::IsFalse(fsb.isBeforeStar(1, 8));
 		}
 
 	};

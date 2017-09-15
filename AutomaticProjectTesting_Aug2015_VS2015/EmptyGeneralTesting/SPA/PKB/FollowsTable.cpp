@@ -30,7 +30,7 @@ unordered_map<int, pair<int, int>> FollowsTable::getMap() {
 
 bool FollowsTable::hasBefore(int afterStmt) {
 	if (followsMap.find(afterStmt) != followsMap.end()) {
-		if (followsMap[afterStmt].second != 0) {
+		if (followsMap[afterStmt].first != 0) {
 			return true;
 		}
 	}

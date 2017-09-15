@@ -8,6 +8,10 @@ ParentToChildTable::ParentToChildTable()
 
 bool ParentToChildTable::addParentChild(int parentStmt, int childStmt) 
 {
+	if (parentStmt == 0) {
+		return true;
+	}
+
 	//If parent doesnt exist in map, create new parent
 	if (parentToChildMap.find(parentStmt) == parentToChildMap.end()) {
 		parentToChildMap[parentStmt] = list<int>();
@@ -40,4 +44,6 @@ bool ParentToChildTable::isParentChild(int parentStmt, int childStmt) {
 				return true;
 		}
 	}
+
+	return false;
 }

@@ -4,3 +4,17 @@
 #include <list>
 
 using namespace std;
+
+class FollowsStarBefore {
+public:
+	FollowsStarBefore();
+
+	void setMap(unordered_map<int, list<int>> targetMap);
+
+	list<int> getBeforeStar(int stmt);
+
+	bool isBeforeStar(int stmtBefore, int stmtAfter);
+
+private:
+	unordered_map<int, list<int>> followsStarBeforeMap;
+};
