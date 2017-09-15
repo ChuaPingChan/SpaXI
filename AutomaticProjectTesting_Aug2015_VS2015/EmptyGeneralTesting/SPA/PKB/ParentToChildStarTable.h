@@ -19,8 +19,6 @@ public:
 
 	void setMap(unordered_map<int, list<int>> target);
 
-	bool isParentStar(int stmt1, int stmt2);
-
 	bool isParentStarChild(int parentStmt, int childStmt);
 
 private:

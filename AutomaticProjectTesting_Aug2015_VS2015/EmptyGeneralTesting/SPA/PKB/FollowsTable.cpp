@@ -23,3 +23,27 @@ int FollowsTable::getStmtBef(int stmt) {
 int FollowsTable::getStmtAft(int stmt) {
 	return followsMap[stmt].second;
 }
+
+unordered_map<int, pair<int, int>> FollowsTable::getMap() {
+	return followsMap;
+}
+
+bool FollowsTable::hasBefore(int afterStmt) {
+	if (followsMap.find(afterStmt) != followsMap.end()) {
+		if (followsMap[afterStmt].second != 0) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool FollowsTable::hasAfter(int beforeStmt) {
+	if (followsMap.find(beforeStmt) != followsMap.end()) {
+		if (followsMap[beforeStmt].second != 0) {
+			return true;
+		}
+	}
+
+	return false;
+}

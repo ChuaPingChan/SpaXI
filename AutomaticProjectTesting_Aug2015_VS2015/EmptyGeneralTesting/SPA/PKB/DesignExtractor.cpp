@@ -73,3 +73,35 @@ unordered_map<int, list<int>> DesignExtractor::computeChildToParentStarTable(Chi
 
 	return childToParentStarMap;
 }
+
+unordered_map<int, list<int>> DesignExtractor::computeFollowsStarAfterTable(FollowsTable followsTable) {
+	unordered_map<int, pair<int, int>> followsMap = followsTable.getMap();
+	unordered_map<int, list<int>> followsStarAfterMap;
+	list<int> afterList;
+	queue<int> toVisit;
+
+	for (std::unordered_map<int, pair<int, int>>::iterator it = followsMap.begin(); it != followsMap.end(); ++it) {
+		int currStmt = (*it).first;
+		pair<int, int> followsPair = (*it).second;
+		int stmtAfter = followsPair.second;
+
+		if (stmtAfter != 0) {
+			toVisit.push(stmtAfter);
+		}
+
+		while (!toVisit.empty()) {
+			stmtAfter = toVisit.front(); // the first statement that is inside
+			toVisit.pop();
+			afterList.push_back(stmtAfter);
+			if (followsTable.hasAfter(stmtAfter)) {
+				stmtAfter = followsTable.getStmtAft(stmtAfter);
+				toVisit.push(stmtAfter);
+			}
+		}
+
+		followsStarAfterMap[currStmt] = afterList;
+		afterList.clear();
+	}
+
+	return followsStarAfterMap;
+}

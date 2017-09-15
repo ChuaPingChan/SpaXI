@@ -32,17 +32,6 @@ void ParentToChildStarTable::setMap(unordered_map<int, list<int>> target) {
 	parentToChildStarMap = target;
 }
 
-bool ParentToChildStarTable::isParentStar(int parentStmt, int childStmt) {
-	if (parentToChildStarMap.find(parentStmt) != parentToChildStarMap.end()) {
-		if (std::find(parentToChildStarMap[parentStmt].begin(), 
-			parentToChildStarMap[parentStmt].end(), childStmt) != parentToChildStarMap[parentStmt].end()) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
 bool ParentToChildStarTable::isParentStarChild(int parentStmt, int childStmt) {
 	if (parentToChildStarMap.find(parentStmt) != parentToChildStarMap.end()) {
 		unordered_map<int, list<int>>::iterator it;
