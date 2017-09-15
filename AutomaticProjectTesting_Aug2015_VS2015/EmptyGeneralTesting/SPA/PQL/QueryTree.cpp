@@ -2,6 +2,8 @@
 
 using namespace std;
 
+QueryTree* QueryTree::instance = 0;
+
 QueryTree::QueryTree()
 {
 	init();
@@ -10,6 +12,16 @@ QueryTree::QueryTree()
 
 QueryTree::~QueryTree()
 {
+}
+
+QueryTree* QueryTree::getInstance()
+{
+	if (instance == 0) 
+	{
+		instance = new QueryTree();
+	}
+
+	return instance;
 }
 
 void QueryTree::init()
