@@ -1,9 +1,8 @@
 #include "QueryEvaluator.h"
 
-
-
 QueryEvaluator::QueryEvaluator()
 {
+	qtInstance = QueryTree::getInstance();
 }
 
 
@@ -14,6 +13,74 @@ QueryEvaluator::~QueryEvaluator()
 void QueryEvaluator::evaluate()
 {
 
+	if (hasResult)
+	{
+		array<string, 2> arr = qtInstance->getSelect();
+		evaluateSelect(arr);
+	}
+
+	if (hasResult) 
+	{
+		vector<array<string, 4>> vec = qtInstance->getFollows();
+		for (int i = 0; i < vec.size(); i++)
+		{
+			evaluateFollows(vec.at(i));
+		}
+	}
+
+	if (hasResult)
+	{
+		vector<array<string, 4>> vec = qtInstance->getFollowsT();
+		for (int i = 0; i < vec.size(); i++)
+		{
+			evaluateFollowsT(vec.at(i));
+		}
+	}
+
+	if (hasResult)
+	{
+		vector<array<string, 4>> vec = qtInstance->getParent();
+		for (int i = 0; i < vec.size(); i++)
+		{
+			evaluateParent(vec.at(i));
+		}
+	}
+
+	if (hasResult)
+	{
+		vector<array<string, 4>> vec = qtInstance->getParentT();
+		for (int i = 0; i < vec.size(); i++)
+		{
+			evaluateParentT(vec.at(i));
+		}
+	}
+
+	if (hasResult)
+	{
+		vector<array<string, 4>> vec = qtInstance->getUses();
+		for (int i = 0; i < vec.size(); i++)
+		{
+			evaluateUses(vec.at(i));
+		}
+	}
+
+	if (hasResult)
+	{
+		vector<array<string, 4>> vec = qtInstance->getModifies();
+		for (int i = 0; i < vec.size(); i++)
+		{
+			evaluateModifies(vec.at(i));
+		}
+	}
+
+	if (hasResult)
+	{
+		vector<array<string, 6>> vec = qtInstance->getPatterns();
+		for (int i = 0; i < vec.size(); i++)
+		{
+			evaluatePattern(vec.at(i));
+		}
+	}
 }
 
 /*--------------- Unit Testing ---------------*/
@@ -71,6 +138,30 @@ void QueryEvaluator::evaluatePatternTest(array<string, 6> arr)
 
 void QueryEvaluator::evaluateSelect(array<string, 2> arr)
 {
+
+	string type = arr[0];
+	string synonym = arr[1];
+
+	if (type == "stmt")
+	{
+		// resultSelect = getAllStmts();
+	}
+	else if (type == "assign")
+	{
+		// resultSelect = getAllAssignments();
+	}
+	else if (type == "while")
+	{
+		// resultSelect = getAllWhiles();
+	}
+	else if (type == "variable")
+	{
+		// resultSelect = getAllVars();
+	}
+	else
+	{
+		cerr << "WTF JUST HAPPENED!" << endl;
+	}
 }
 
 void QueryEvaluator::evaluateFollows(array<string, 4> arr)

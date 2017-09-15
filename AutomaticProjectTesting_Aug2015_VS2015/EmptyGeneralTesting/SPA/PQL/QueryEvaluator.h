@@ -3,6 +3,7 @@
 #include <array>
 #include <string>
 #include <iostream>
+#include "QueryTree.h"
 
 using namespace std;
 
@@ -27,6 +28,9 @@ public:
     void evaluatePatternTest(array<string, 6> arr);
 
 private:
+
+	QueryTree* qtInstance;
+
     bool hasResult = true;
     list<string> finalResult;
     list<string> resultSelect;
