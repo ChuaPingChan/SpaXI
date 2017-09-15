@@ -26,6 +26,12 @@ class FollowsTable {
 		bool hasAfter(int beforeStmt);
 
 		bool isFollows(int stmt1, int stmt2);
+
+		list<int> getAllBefore();
+
+		list<int> getAllAfter();
+
+		pair<list<int>, list<int>> getAllFollows();
 	
 	private:
 		unordered_map<int, pair<int, int>> followsMap;

@@ -53,3 +53,45 @@ bool FollowsTable::isFollows(int stmt1, int stmt2) {
 
 	return false;
 }
+
+list<int> FollowsTable::getAllBefore() {
+	list<int> stmtList;
+	for (std::unordered_map<int, pair<int, int>>::iterator it = followsMap.begin(); it != followsMap.end(); ++it) {
+		int currStmt = (*it).first;
+		int after = (*it).second.second;
+		if (after != 0) {
+			stmtList.push_back(currStmt);
+		}
+	}
+	return stmtList;
+}
+
+list<int> FollowsTable::getAllAfter() {
+	list<int> stmtList;
+	for (std::unordered_map<int, pair<int, int>>::iterator it = followsMap.begin(); it != followsMap.end(); ++it) {
+		int currStmt = (*it).first;
+		int before = (*it).second.first;
+		if (before != 0) {
+			stmtList.push_back(currStmt);
+		}
+	}
+	return stmtList;
+}
+
+pair<list<int>, list<int>> FollowsTable::getAllFollows() {
+	list<int> bef;
+	list<int> aft;
+	pair <list<int>, list<int>> stmtPair;
+
+	for (std::unordered_map<int, pair<int, int>>::iterator it = followsMap.begin(); it != followsMap.end(); ++it) {
+		int before = (*it).first;
+		int after = (*it).second.second;
+		if (after != 0) {
+			bef.push_back(before);
+			aft.push_back(after);
+		}
+	}
+
+	stmtPair = std::make_pair(bef, aft);
+	return stmtPair;
+}
