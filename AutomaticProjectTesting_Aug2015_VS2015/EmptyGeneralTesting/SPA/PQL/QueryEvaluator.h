@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <list>
 #include <array>
 #include <string>
 
@@ -15,9 +15,11 @@ public:
 	void evaluate();
 
 private:
-	vector<string> resultSelect;
-	vector<pair<string, string>> resultSuchThat;
-	vector<pair<string, string>> resultPattern;
+    bool hasResult = true;
+
+	list<string> resultSelect;
+	pair<list<string>, list<string>> resultSuchThat;
+    pair<list<string>, list<string>> resultPattern;
 
 	void evaluateFollows(array<string, 4> arr);
 	void evaluateFollowsT(array<string, 4> arr);

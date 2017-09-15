@@ -17,160 +17,213 @@ void QueryEvaluator::evaluate()
 
 void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 {
+    string type1 = arr[0];
+    string type2 = arr[2];
+    string arg1 = arr[1];
+    string arg2 = arr[3];
 
-	if (arr[0] == "int" && arr[2] == "int")
+	if (type1 == "int" && type2 == "int")
 	{
-        //hasResult = isFollows(arr[1], arr[1]);
+        //hasResult = isFollows(arg1, arg2);
 	}
-	else if (arr[0] == "int" && arr[2] == "_")
+	else if (type1 == "int" && type2 == "_")
 	{
-        //hasResult = isBeingFollowed(arr[1]);
+        /*OK*/
+        //hasResult = isBefore(stoi(arg1));
 	}
-	else if (arr[0] == "int" && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while")) 
+	else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while")) 
 	{
-        //getAfter(arr[0], arr[2]);
+        /*OK*/
+        //if (getAfter(stoi(arg1), arg2).empty()) {
+        //    hasResult = false;
+        //}
 	}
-	else if (arr[0] == "_" && arr[2] == "int")
+	else if (type1 == "_" && type2 == "int")
 	{ 
-        //hasResult = isBeingFollowedBy(arr[3]);
+        //hasResult = isBeingFollowedBy(arg2);
 	}
-	else if (arr[0] == "_" && arr[2] == "_")
+	else if (type1 == "_" && type2 == "_")
 	{
         //hasResult = hasFollows();
 	}
-	else if (arr[0] == "_" && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+	else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        //isFollowedBy(arr[2]);
+        //if (isFollowedBy(arg2).empty()) {
+        //    hasResult = false;
+        //}
 	}
-	else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && arr[2] == "int")
+	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
 	{
-        //isFollowedBy(arr[0], arr[2]);
+        //if (isFollowedBy(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
 	}
-	else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && arr[2] == "_")
+	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-        //getAfter(arr[0], arr[2]);
+        //if (getAfter(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
 	}
-	else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        //getFollows(arr[0], arr[2];)
+        //if (getFollows(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
 	}
 }
 
 void QueryEvaluator::evaluateFollowsT(array<string, 4> arr)
 {
-    if (arr[0] == "int" && arr[2] == "int")
+    string type1 = arr[0];
+    string type2 = arr[1];
+    string arg1 = arr[2];
+    string arg2 = arr[3];
+
+    if (type1 == "int" && type2 == "int")
     {
-        //hasResult = isFollowsT(arr[1], arr[1]);
+        //hasResult = isFollowsT(arg1, arg2);
     }
-    else if (arr[0] == "int" && arr[2] == "_")
+    else if (type1 == "int" && type2 == "_")
     {
-        //hasResult = isBeingFollowedT(arr[1]);
+        //hasResult = isBeingFollowedT(arg1);
     }
-    else if (arr[0] == "int" && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+    else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        //getAfterStar(arr[0], arr[2]);
+        //if (getAfterStar(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
     }
-    else if (arr[0] == "_" && arr[2] == "int")
+    else if (type1 == "_" && type2 == "int")
     {
-        //hasResult = isBeingFollowedByStar(arr[3]);
+        //hasResult = isBeingFollowedByStar(arg2);
     }
-    else if (arr[0] == "_" && arr[2] == "_")
+    else if (type1 == "_" && type2 == "_")
     {
         //hasResult = hasFollowsT();
     }
-    else if (arr[0] == "_" && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+    else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        //isFollowedStarBy(arr[2]);
+        //if (isFollowedStarBy(arg2).empty()) {
+        //    hasResult = false;
+        //}
     }
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && arr[2] == "int")
+    else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
     {
-        //isFollowedBy(arr[0], arr[2]);
+        //if (isFollowedBy(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
     }
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && arr[2] == "_")
+    else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
     {
-        //getAfter(arr[0], arr[2]);
+        //if (getAfter(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
     }
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+    else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        //getFollows(arr[0], arr[2];)
+        //if (getFollows(arg1, arg2).empty()) {
+        //
+        //}
     }
 }
 
 void QueryEvaluator::evaluateParent(array<string, 4> arr)
 {
-	if (arr[0] == "int" && arr[2] == "int")
+    string type1 = arr[0];
+    string type2 = arr[1];
+    string arg1 = arr[2];
+    string arg2 = arr[3];
+
+    if (type1 == "int" && type2 == "int")
 	{
-        //hasResult = isParent(arr[0], arr[2]);
+        //hasResult = isParent(arg1, arg2);
 	}
-	else if (arr[0] == "int" && arr[2] == "_")
+	else if (type1 == "int" && type2 == "_")
 	{
-        //hasResult = isParent(arr[2]);
+        //hasResult = isParent(arg1);
 	}
-    else if (arr[0] == "int" && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+    else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        //getChildren(arr[0], arr[2]);
+        //if (getChildren(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
 	}
-	else if (arr[0] == "_" && arr[2] == "int")
+	else if (type1 == "_" && type2 == "int")
 	{
-        //hasResult = isChildren(arr[2]);
+        //hasResult = isChildren(arg2);
 	}
-	else if (arr[0] == "_" && arr[2] == "_")
+	else if (type1 == "_" && type2 == "_")
 	{
         //hasResult = hasParent();
 	}
-    else if (arr[0] == "_" && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+    else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        //isParentOf(arr[2]);
+        //if (isParentOf(arg2).empty()) {
+        //    hasResult = false;
+        //}
 	}
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && arr[2] == "int")
+    else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
 	{
-        //isParentOf(arr[0], arr[2]);
+        //if (isParentOf(arg1, arg2)) {
+        //    hasResult = false;
+        //}
 	}
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && arr[2] == "_")
+    else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
 	{
-        //getChildren(arr[0]);
+        //if (getChildren(arg1)) {
+        //    hasResult = false;
+        //}
 	}
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+    else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        //getParent(arr[0], arr[2]);
+        //if (getParent(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
 	}
 }
 
 void QueryEvaluator::evaluateParentT(array<string, 4> arr)
 {
-    if (arr[0] == "int" && arr[2] == "int")
+    string type1 = arr[0];
+    string type2 = arr[1];
+    string arg1 = arr[2];
+    string arg2 = arr[3];
+
+    if (type1 == "int" && type2 == "int")
+    {
+        //hasResult = isParentStar(arg1, arg2);
+    }
+    else if (type1 == "int" && type2 == "_")
+    {
+        //hasResult = isParentStar(arg2);
+    }
+    else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+    {
+        //if (getChildrenStar(arg1, arg2).empty()) {
+        //    hasResult = false;
+        //}
+    }
+    else if (type1 == "_" && type2 == "int")
     {
 
     }
-    else if (arr[0] == "int" && arr[2] == "_")
+    else if (type1 == "_" && type2 == "_")
     {
 
     }
-    else if (arr[0] == "int" && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+    else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
 
     }
-    else if (arr[0] == "_" && arr[2] == "int")
+    else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
     {
 
     }
-    else if (arr[0] == "_" && arr[2] == "_")
+    else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
     {
 
     }
-    else if (arr[0] == "_" && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
-    {
-
-    }
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && arr[2] == "int")
-    {
-
-    }
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && arr[2] == "_")
-    {
-
-    }
-    else if ((arr[0] == "stmt" || arr[0] == "assign" || arr[0] == "while") && (arr[2] == "stmt" || arr[2] == "assign" || arr[2] == "while"))
+    else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
 
     }
