@@ -213,16 +213,15 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 {
     if (arr[2] == "var" && arr[4] == "_")
     {
-        //resultPattern = getVariables(assign,variable);
+        //resultPattern = getLeftVariables(assign,variable);
     }
     else if (arr[2] == "var" && arr[4] == "ident")
     {
-        //resultPattern = getVariables(assign,variable);
+        //resultPattern = getLeftVariablesThatMatchWith(assign,variable);
     }
     else if (arr[2] == "_" && arr[4] == "ident")
     {
-        // get List of statements in List<string> assignments
-        //resultPattern = <<list<string> assignments, leave blank
+        //resultPattern = getPartialMatchStmt(arr[5])
     }
     else if (arr[2] == "ident" && arr[4] == "ident")
     {
@@ -234,7 +233,7 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
     }
     else if (arr[2] == "ident" && arr[4] == "_")
     {
-        //resultPattern = getAssignments();
+        //resultPattern = getAssignments(arr[3]);
     }
 
 }
