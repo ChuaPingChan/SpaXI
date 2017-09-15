@@ -85,6 +85,57 @@ void QueryEvaluator::evaluate()
     finalResult = getCommonSynonymResult(resultSelect, resultSuchThat, resultPattern);
 }
 
+/*--------------- Unit Testing ---------------*/
+bool QueryEvaluator::getHasResult()
+{
+    return hasResult;
+}
+
+list<string> QueryEvaluator::getIntersectionTest(list<string> list1, list<string> list2)
+{
+    return getIntersection(list1, list2);
+}
+
+void QueryEvaluator::evaluateSelectTest(array<string, 2> arr)
+{
+    evaluateSelect(arr);
+}
+
+void QueryEvaluator::evaluateFollowsTest(array<string, 4> arr)
+{
+    evaluateFollows(arr);
+}
+
+void QueryEvaluator::evaluateFollowsTTest(array<string, 4> arr)
+{
+    evaluateFollowsT(arr);
+}
+
+void QueryEvaluator::evaluateParentTest(array<string, 4> arr)
+{
+    evaluateParent(arr);
+}
+
+void QueryEvaluator::evaluateParentTTest(array<string, 4> arr)
+{
+    evaluateParentT(arr);
+}
+
+void QueryEvaluator::evaluateUsesTest(array<string, 4> arr)
+{
+    evaluateUses(arr);
+}
+
+void QueryEvaluator::evaluateModifiesTest(array<string, 4> arr)
+{
+    evaluateModifies(arr);
+}
+
+void QueryEvaluator::evaluatePatternTest(array<string, 6> arr)
+{
+    evaluatePattern(arr);
+}
+
 /*--------------- Evaluator private methods clauses ---------------*/
 
 void QueryEvaluator::evaluateSelect(array<string, 2> arr)
