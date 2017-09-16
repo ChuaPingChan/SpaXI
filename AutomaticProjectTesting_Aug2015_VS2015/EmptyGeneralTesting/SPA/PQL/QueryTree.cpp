@@ -24,6 +24,7 @@ QueryTree* QueryTree::getInstance()
 
 QueryTree* QueryTree::clear()
 {
+	delete instance;
 	instance = new QueryTree();
 	return instance;
 }
