@@ -12,6 +12,11 @@ namespace UnitTesting
     TEST_CLASS(TestEvaluatorAndPkb)
     {
     public:
+        list<string> expectedList1;
+        list<string> expectedList2;
+        pair<list<string>, list<string>> expectedPair;
+        pair<list<string>, list<string>> actualPair;
+
        // TEST_METHOD(TestEvaluatorSelect)
        // {
             
@@ -62,6 +67,10 @@ namespace UnitTesting
             //Case 3 - Positive: Follows(int, synonym)
             QueryEvaluator qe3Positive = QueryEvaluator();
             PKBMain PKB3Positive;
+            expectedList1.clear();
+            expectedList2.clear();
+            expectedPair = getEmptyPairOfListOfString();
+            actualPair = getEmptyPairOfListOfString();
             PKB3Positive.setFollowsRel(0, 1);
             PKB3Positive.setFollowsRel(1, 2);
             PKB3Positive.setFollowsRel(2, 3);
@@ -69,17 +78,29 @@ namespace UnitTesting
             qe3Positive.setPkb(PKB3Positive);
             array<string, 4> arrToEvaluate3Positive = { "int", "2", "assign", "a" };
             qe3Positive.evaluateFollowsTest(arrToEvaluate3Positive);
-            pair<list<string>, list<string>> expectedPair;
-            list<string> expectedList1;
             expectedList1.push_back("3");
-            list<string> expectedList2;
             expectedPair = make_pair(expectedList1, expectedList2);
-            pair<list<string>, list<string>> actualPair = qe3Positive.getResultSuchThat();
+            actualPair = qe3Positive.getResultSuchThat();
             Assert::IsTrue(qe3Positive.getHasResult());
             Assert::IsTrue(expectedPair == actualPair);
 
             //Case 3 - Negative: Follows(int, synonym)
-            //TODO
+            QueryEvaluator qe3Negative = QueryEvaluator();
+            PKBMain PKB3Negative;
+            expectedList1.clear();
+            expectedList2.clear();
+            expectedPair = getEmptyPairOfListOfString();
+            actualPair = getEmptyPairOfListOfString();
+            PKB3Negative.setFollowsRel(0, 1);
+            PKB3Negative.setFollowsRel(1, 2);
+            qe3Negative.setPkb(PKB3Negative);
+            array<string, 4> arrToEvaluate3Negative = { "int", "2", "assign", "a" };
+            qe3Negative.evaluateFollowsTest(arrToEvaluate3Negative);
+            expectedPair = make_pair(expectedList1, expectedList2);
+            actualPair = qe3Negative.getResultSuchThat();
+            Assert::IsFalse(qe3Negative.getHasResult());
+            Assert::IsTrue(expectedPair == actualPair);
+
 
             //Case 4 - Positive: Follows(_, int)
             //TODO
@@ -123,7 +144,12 @@ namespace UnitTesting
 
         }
         
-
+        pair<list<string>, list<string>> getEmptyPairOfListOfString()
+        {
+            list<string> list1;
+            list<string> list2;
+            return make_pair(list1, list2);
+        }
        
 
     };
