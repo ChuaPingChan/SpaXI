@@ -533,8 +533,8 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 
 bool PKBMain::startProcessComplexRelations() {
 	DesignExtractor de;
-	childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
-	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
+	//childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
+	//parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
 	followsStarBefore.setMap(de.computeFollowsStarBeforeTable(followsTable));
 	return true;
