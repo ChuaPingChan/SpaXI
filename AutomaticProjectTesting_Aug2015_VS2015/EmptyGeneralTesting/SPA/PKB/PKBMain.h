@@ -22,6 +22,24 @@ public:
 	//Parser API
 	bool setParentChildRel(int parentStmt, int childStmt);
 
+	bool isParentChild(int parentStmt, int childStmt);
+
+	bool isParent(int parentStmt);
+
+	list<int> getChildren(int parentStmt, string type);
+
+	bool isChild(int childStmt);
+
+	bool hasParentRel();
+
+	list<int> getParent(int childStmt, string type);
+
+	list<int> getAllParents(string type);
+
+	list<int> getAllChildren(string type);
+
+	pair<list<int>, list<int>> getAllParentsRel(string type1, string type2);
+
 	pair<list<int>, list<int>> getAllFollows(string type1, string type2);
 
 	bool hasFollows();
