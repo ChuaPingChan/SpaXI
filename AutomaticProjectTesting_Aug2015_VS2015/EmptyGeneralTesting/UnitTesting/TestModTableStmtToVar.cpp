@@ -81,23 +81,34 @@ namespace UnitTesting {
             }
 
             // test for pairs list
-            list<pair<int, string>> expectedPairsList;
-            expectedPairsList.push_back(make_pair(1, "a"));
-            expectedPairsList.push_back(make_pair(1, "b"));
-            expectedPairsList.push_back(make_pair(2, "a"));
-            expectedPairsList.push_back(make_pair(4, "c"));
-            expectedPairsList.push_back(make_pair(7, "d"));
-            expectedPairsList.push_back(make_pair(888, "e"));
+            list<int> stmtList;
+            stmtList.push_back(1);
+            stmtList.push_back(1);
+            stmtList.push_back(2);
+            stmtList.push_back(4);
+            stmtList.push_back(7);
+            stmtList.push_back(888);
 
-            list<pair<int, string>> testPairsList = modTable.getModPairs();
-            testPairsList.sort();
+            list<string> modList;
+            modList.push_back("a");
+            modList.push_back("b");
+            modList.push_back("a");
+            modList.push_back("c");
+            modList.push_back("d");
+            modList.push_back("e");
+
+            pair<list<int>, list<string>> expectedPairList = make_pair(stmtList, modList);
+            pair<list<int>,list<string>> testPairList = modTable.getModPair();
             
-            while (!expectedPairsList.empty() && !testPairsList.empty())
+            while (!expectedPairList.first.empty() && !testPairList.first.empty()
+                && !expectedPairList.second.empty() && !testPairList.second.empty())
             {
-                Assert::AreEqual(expectedPairsList.front().first, testPairsList.front().first);
-                Assert::AreEqual(expectedPairsList.front().second, testPairsList.front().second);
-                expectedPairsList.pop_front();
-                testPairsList.pop_front();
+                Assert::IsTrue(modTable.isMod(expectedPairList.first.front(), expectedPairList.second.front()));
+                Assert::IsTrue(modTable.isMod(testPairList.first.front(), testPairList.second.front()));
+                expectedPairList.first.pop_front();
+                expectedPairList.second.pop_front();
+                testPairList.first.pop_front();
+                testPairList.second.pop_front();
             }
             
         }
