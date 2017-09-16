@@ -111,11 +111,11 @@ namespace UnitTesting
 
 			// TESTPARENT
 
-			Assert::IsTrue(PKB.isParent(3, 4));
+			/*Assert::IsTrue(PKB.isParent(3, 4));
 			Assert::IsTrue(PKB.isParent(3, 5));
 			Assert::IsTrue(PKB.isParent(3, 6));
 			Assert::IsTrue(PKB.isParent(6, 7));
-			Assert::IsTrue(PKB.isParent(3, 8));
+			Assert::IsTrue(PKB.isParent(3, 8));*/
 			
 		}
 
