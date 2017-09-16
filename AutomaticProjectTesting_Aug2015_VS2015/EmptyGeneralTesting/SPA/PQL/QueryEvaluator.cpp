@@ -188,15 +188,17 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 	}
 	else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while")) 
 	{
-        /*OK*/
-        pair<list<string>, list<string>> result;// = getAfter(stoi(arg1), arg2)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAfter(stoi(arg1), type2);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
 	}
 	else if (type1 == "_" && type2 == "int")
@@ -773,4 +775,14 @@ list<string> QueryEvaluator::getCommonSynonymResult(list<string> select, pair<li
 
     set_intersection(tempResultSuchThat.begin(), tempResultSuchThat.end(), tempResultPattern.begin(), tempResultPattern.end(), back_inserter(tempResult));
     return tempResult;
+}
+
+list<string> QueryEvaluator::getListStringFromListInt(list<int> listOfInt)
+{
+    list<string> listOfString;
+    for (std::list<int>::iterator it = listOfInt.begin(); it != listOfInt.end(); ++it) {
+        string stringFromInt = to_string(*it);
+        listOfString.push_back(stringFromInt);
+    }
+    return listOfString;
 }
