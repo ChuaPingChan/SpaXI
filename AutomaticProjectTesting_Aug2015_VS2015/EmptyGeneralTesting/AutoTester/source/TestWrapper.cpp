@@ -16,14 +16,15 @@ volatile bool TestWrapper::GlobalStop = false;
 TestWrapper::TestWrapper() {
   // create any objects here as instance variables of this class
   // as well as any initialization required for your spa program
-    PKBMain pkbMain;
-    
 }
 
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
     // ...rest of your code...
+
+    Parser parser (&_pkbMain);
+    bool isParsedSuccessfully = parser.parse(filename);
 }
 
 // method to evaluating a query
@@ -34,4 +35,5 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 
   // store the answers to the query in the results list (it is initially empty)
   // each result must be a string.
+    results = pqlMain.run();
 }
