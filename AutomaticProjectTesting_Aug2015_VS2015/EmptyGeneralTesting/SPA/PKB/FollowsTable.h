@@ -21,6 +21,8 @@ class FollowsTable {
 
 		unordered_map<int, pair<int, int>> getMap();
 
+		void setMap(unordered_map<int, pair<int, int>> map);
+
 		bool hasBefore(int afterStmt);
 
 		bool hasAfter(int beforeStmt);

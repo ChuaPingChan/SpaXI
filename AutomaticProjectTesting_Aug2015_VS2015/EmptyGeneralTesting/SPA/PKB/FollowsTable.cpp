@@ -24,6 +24,10 @@ unordered_map<int, pair<int, int>> FollowsTable::getMap() {
 	return followsMap;
 }
 
+void FollowsTable::setMap(unordered_map<int, pair<int, int>> map) {
+	followsMap = map;
+}
+
 bool FollowsTable::hasBefore(int afterStmt) {
 	if (followsMap.find(afterStmt) != followsMap.end()) {
 		if (followsMap[afterStmt].first != 0) {

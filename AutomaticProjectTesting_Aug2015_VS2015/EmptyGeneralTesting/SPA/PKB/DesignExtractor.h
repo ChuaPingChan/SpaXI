@@ -15,4 +15,5 @@ class DesignExtractor {
 		unordered_map<int, list<int>> computeChildToParentStarTable(ChildToParentTable);
 		unordered_map<int, list<int>> computeFollowsStarAfterTable(FollowsTable followsTable);
 		unordered_map<int, list<int>> computeFollowsStarBeforeTable(FollowsTable followsTable);
+		unordered_map<int, pair<int, int>> computeFollowsTable(unordered_map<int, int> followsBefore, unordered_map<int, int> followsAfter);
 };
