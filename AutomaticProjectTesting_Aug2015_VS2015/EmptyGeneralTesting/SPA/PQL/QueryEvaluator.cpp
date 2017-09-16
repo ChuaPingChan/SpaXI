@@ -549,7 +549,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	string type1 = arr[0];
 	string type2 = arr[2];
 	string arg1 = arr[1];
-	string arr2 = arr[3];
+	string arg2 = arr[3];
 
 	if (type1 == "int" && type2 == "ident")
 	{
@@ -564,50 +564,67 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	else if (type1 == "int" && type2 == "var")
 	{
 		int num = stoi(arg1);
-		list<string> result;// = getUsesFromStmt(num);
-		if (result.empty())
+		list<string> pkbResult;// = getUsesFromStmt(num);
+
+		if (pkbResult.empty())
 		{
 			hasResult = false;
 		}
-		else 
+		else
 		{
-			resultSuchThat.first = result;
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg2);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
-		list<string> result;// = getUsesFromVar(arg1, arg2);
-		if (result.empty())
+
+		list<string> pkbResult;// = getUsesFromVar(arg1, arg2);
+
+		if (pkbResult.empty())
 		{
 			hasResult = false;
 		}
 		else
 		{
-			resultSuchThat.first = result;
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-		list<string> result;// = getStmtThatUsesAnything(arg1);
-		if (result.empty())
+		list<string> pkbResult;// = getStmtThatUsesAnything(arg1);
+
+		if (pkbResult.empty())
 		{
 			hasResult = false;
 		}
 		else
 		{
-			resultSuchThat.first = result;
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
-		pair<list<string>, list<string>> result;// = getUses(arg1);
-		if (result.first.empty() && result.second.empty())
+		pair<list<string>, list<string>> pkbResult;// = getUsesPairs(arg1);
+
+		if (pkbResult.first.empty() && pkbResult.second.empty())
 		{
 			hasResult = false;
 		}
 		else
 		{
-			resultSuchThat = result;
+			list<string> lst1 = resultSuchThat.first;
+			lst1.push_back(arg1);
+			lst1.insert(lst1.end(), pkbResult.first.begin(), pkbResult.first.end());
+
+			list<string> lst2 = resultSuchThat.second;
+			lst2.push_back(arg2);
+			lst2.insert(lst2.end(), pkbResult.first.begin(), pkbResult.first.end());
 		}
 	}
 	else
@@ -621,7 +638,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	string type1 = arr[0];
 	string type2 = arr[2];
 	string arg1 = arr[1];
-	string arr2 = arr[3];
+	string arg2 = arr[3];
 
 	if (type1 == "int" && type2 == "ident")
 	{
@@ -636,50 +653,67 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	else if (type1 == "int" && type2 == "var")
 	{
 		int num = stoi(arg1);
-		list<string> result;// = getModifiesFromStmt(num);
-		if (result.empty())
+		list<string> pkbResult;// = getModifiesFromStmt(num);
+
+		if (pkbResult.empty())
 		{
 			hasResult = false;
 		}
 		else
 		{
-			resultSuchThat.first = result;
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg2);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
-		list<string> result;// = getModifiesFromVar(arg1, arg2);
-		if (result.empty())
+
+		list<string> pkbResult;// = getModifiesFromVar(arg1, arg2);
+
+		if (pkbResult.empty())
 		{
 			hasResult = false;
 		}
 		else
 		{
-			resultSuchThat.first = result;
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-		list<string> result;// = getStmtThatModifiesAnything(arg1);
-		if (result.empty())
+		list<string> pkbResult;// = getStmtThatModifiesAnything(arg1);
+
+		if (pkbResult.empty())
 		{
 			hasResult = false;
 		}
 		else
 		{
-			resultSuchThat.first = result;
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
-		pair<list<string>, list<string>> result;// = getModifies(arg1);
-		if (result.first.empty() && result.second.empty())
+		pair<list<string>, list<string>> pkbResult;// = getModifiesPairs(arg1);
+
+		if (pkbResult.first.empty() && pkbResult.second.empty())
 		{
 			hasResult = false;
 		}
 		else
 		{
-			resultSuchThat = result;
+			list<string> lst1 = resultSuchThat.first;
+			lst1.push_back(arg1);
+			lst1.insert(lst1.end(), pkbResult.first.begin(), pkbResult.first.end());
+
+			list<string> lst2 = resultSuchThat.second;
+			lst2.push_back(arg2);
+			lst2.insert(lst2.end(), pkbResult.first.begin(), pkbResult.first.end());
 		}
 	}
 	else
