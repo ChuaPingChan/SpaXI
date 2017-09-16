@@ -24,10 +24,6 @@ bool ParentToChildStarTable::addParentChild(int parentStmt, int childStmt)
 	return false;
 }
 
-bool ParentToChildStarTable::isParentStar(int parentStmt) {
-	return (parentToChildStarMap.find(parentStmt) != parentToChildStarMap.end());
-}
-
 list<int> ParentToChildStarTable::getChildren(int parentStmt) {
 	return parentToChildStarMap[parentStmt];
 }
@@ -45,22 +41,4 @@ bool ParentToChildStarTable::isParentStarChild(int parentStmt, int childStmt) {
 		}
 	}
 	return false;
-}
-
-pair <list<int>, list<int>> ParentToChildStarTable::getAllParentStarRel() {
-	list<int> parent;
-	list<int> child;
-
-	for (std::unordered_map<int, list<int>>::iterator it = parentToChildStarMap.begin(); it != parentToChildStarMap.end(); ++it) {
-		int currStmt = (*it).first;
-		list<int> after = (*it).second;
-
-		for (std::list<int>::iterator it2 = after.begin(); it2 != after.end(); ++it2) {
-			parent.push_back(currStmt);
-			child.push_back((*it2));
-		}
-	}
-
-	pair<list<int>, list<int>> listPair = make_pair(parent, child);
-	return listPair;
 }
