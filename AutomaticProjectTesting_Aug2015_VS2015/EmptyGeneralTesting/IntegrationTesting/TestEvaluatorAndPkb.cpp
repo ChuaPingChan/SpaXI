@@ -69,10 +69,47 @@ namespace UnitTesting
             list<string> expectedList2;
             expectedPair = make_pair(expectedList1, expectedList2);
             pair<list<string>, list<string>> actualPair = qe3Positive.getResultSuchThat();
-            Assert::IsFalse(qe3Positive.getHasResult());
+            Assert::IsTrue(qe3Positive.getHasResult());
             Assert::IsTrue(expectedPair == actualPair);*/
 
-            //Case 4 - Negative: Follows(int, synonym)
+            //Case 3 - Negative: Follows(int, synonym)
+            //TODO
+
+            //Case 4 - Positive: Follows(_, int)
+            //TODO
+
+            //Case 4 - Negative: Follows(_, int)
+            //TODO
+
+            //Case 5 - Positive: Follows(_, _)
+            //TODO
+
+            //Case 5 - Negative: Follows(_, _)
+            //TODO
+
+            //Case 6 - Positive: Follows(_, synonym)
+            //TODO
+
+            //Case 6 - Negative: Follows(_, synonym)
+            //TODO
+
+            //Case 7 - Positive: Follows(synonym, int)
+            //TODO
+
+            //Case 7 - Negative: Follows(synonym, int)
+            //TODO
+
+            //Case 8 - Positive: Follows(synonym, _)
+            //TODO
+
+            //Case 8 - Negative: Follows(synonym, _)
+            //TODO
+
+            //Case 9 - Positive: Follows(synonym, synonym)
+            //TODO
+
+            //Case 9 - Negative: Follows(synonym, synonym)
+            //TODO
         }
 
         TEST_METHOD(TestEvaluateFollowsT)
