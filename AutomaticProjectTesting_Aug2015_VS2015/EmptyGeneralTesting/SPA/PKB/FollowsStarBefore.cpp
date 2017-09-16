@@ -28,3 +28,15 @@ bool FollowsStarBefore::isBeforeStar(int stmtBefore, int stmtAfter) {
 	}
 	return false;
 }
+
+list<int> FollowsStarBefore::getAllBeforeStar() {
+	list<int> stmtList;
+	for (std::unordered_map<int, list<int>>::iterator it = followsStarBeforeMap.begin(); it != followsStarBeforeMap.end(); ++it) {
+		int currStmt = (*it).first;
+		list<int> after = (*it).second;
+		stmtList.insert(stmtList.end(), after.begin(), after.end());
+		stmtList.sort();
+		stmtList.unique();
+	}
+	return stmtList;
+}

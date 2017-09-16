@@ -27,29 +27,32 @@ pair<string,string> PatternTable::getExpression(int stmtNumber) {
     return patternTableMap[stmtNumber];
 }
 
-list<pair<int, string>> PatternTable::getLeftVariables()
+pair<list<int>,list<string>> PatternTable::getLeftVariables()
 {
-    list<pair<int,string>> varList;
+    pair<list<int>, list<string>> pairOfList;
     unordered_map<int, pair<string, string>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
-        varList.push_back(make_pair(it->first,it->second.first));
+        //varList.push_back(make_pair(it->first,it->second.first));
+        pairOfList.first.push_back(it->first);
+        pairOfList.second.push_back(it->second.first);
     }
-    return varList;
+    return pairOfList;
 }
 
-list<pair<int, string>> PatternTable::getLeftVariableThatMatchWithString(string expression)
+pair<list<int>,list<string>> PatternTable::getLeftVariableThatMatchWithString(string expression)
 {
-    list<pair<int, string>> varList;
+    pair<list<int>, list<string>> pairOfList;
     unordered_map<int, pair<string, string>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
         if (hasPartialMatch(it->first, expression))
         {
-            varList.push_back(make_pair(it->first, it->second.first));
+            pairOfList.first.push_back(it->first);
+            pairOfList.second.push_back(it->second.first);
         }
     }
-    return varList;
+    return pairOfList;
 }
 
 list<int> PatternTable::getExactMatchStmt(string expression)

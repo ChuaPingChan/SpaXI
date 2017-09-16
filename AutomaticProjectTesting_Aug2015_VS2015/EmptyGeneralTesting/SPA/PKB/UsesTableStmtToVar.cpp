@@ -38,22 +38,24 @@ list<int> UsesTableStmtToVar::getStmtThatUses()
     return listOfStmt;
 }
 
-list<pair<int, string>> UsesTableStmtToVar::getUsesPairs()
+pair<list<int>, list<string>> UsesTableStmtToVar::getUsesPair()
 {
     unordered_map<int, list<string>>::iterator itr;
-    list<pair<int, string>> listOfPairs;
+    pair<list<int>, list<string>> pairOfList;
 
     for (itr = usesStmtToVarMap.begin(); itr != usesStmtToVarMap.end(); ++itr)
     {
         int stmtNumber = itr->first;
         list<string> usesVarList = itr->second;
+
         list<string>::iterator listitr;
         for (listitr = usesVarList.begin(); listitr != usesVarList.end(); ++listitr)
         {
-            listOfPairs.push_back(make_pair(stmtNumber, (*listitr)));
+            pairOfList.first.push_back(stmtNumber);
+            pairOfList.second.push_back(*listitr);
         }
     }
-    return listOfPairs;
+    return pairOfList;
 }
 
 bool UsesTableStmtToVar::isUses(int stmtNumber, string var)

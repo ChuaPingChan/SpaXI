@@ -19,7 +19,7 @@ public:
     list<string> getUsesVariablesFromStmt(int stmtNumber);
     //
     list<int> getStmtThatUses();
-    list<pair<int, string>> getUsesPairs();
+    pair<list<int>,list<string>> getUsesPair();
 private:
     unordered_map<int, list<string>>usesStmtToVarMap;
 };

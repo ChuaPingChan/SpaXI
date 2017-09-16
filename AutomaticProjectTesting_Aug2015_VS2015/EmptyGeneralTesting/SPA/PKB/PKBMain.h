@@ -12,6 +12,17 @@
 #include "FollowsTable.h"
 #include "FollowsStarAfter.h"
 #include "FollowsStarBefore.h"
+#include "ConstantTable.h"
+#include "ModTableProcToVar.h"
+#include "ModTableStmtToVar.h"
+#include "ModTableVar.h"
+#include "PatternTable.h"
+#include "ProcIdxTable.h"
+#include "StmtTypeList.h"
+#include "UsesTableProcToVar.h"
+#include "UsesTableStmtToVar.h"
+#include "UsesTableVar.h"
+#include "VarIdxTable.h"
 #include <string>
 
 using namespace std;
@@ -52,7 +63,23 @@ public:
 
 	list<int> getBeforeStar(int aftStmt, string type);
 
+	list<int> getAllBeforeStar(string type);
+
+	list<int> getAllAfterStar(string type);
+
+	pair<list<int>, list<int>> getAllFollowsStar(string type1, string type2);
+
 	bool startProcessComplexRelations();
+	
+	//PKB-QueryEvaluator
+    bool isPresent(string var);
+    bool isPresent(int stmtNum);
+    bool isAssignment(int stmtNum);
+    bool isWhile(int stmtNum);
+    list<int> getAllWhiles();
+
+
+    //PKB-Parser
 
 private:
 	ChildToParentStarTable childToParentStarTable;

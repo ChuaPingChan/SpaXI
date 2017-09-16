@@ -16,10 +16,9 @@
     <ClCompile Include="PKB\ChildToParentTable.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
     <ClCompile Include="PKB\DesignExtractor.cpp" />
+    <ClCompile Include="PKB\ConstantTable.cpp" />
     <ClCompile Include="Parser\ParserChildForTest.cpp" />
-    <ClCompile Include="PKB\FollowsStarAfter.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\SPA\PKB;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
+    <ClCompile Include="PKB\FollowsStarAfter.cpp" />
     <ClCompile Include="PKB\FollowsStarBefore.cpp" />
     <ClCompile Include="PKB\ModTableProcToVar.cpp" />
     <ClCompile Include="PKB\ModTableStmtToVar.cpp" />
@@ -47,6 +46,7 @@
     <ClInclude Include="PKB\ChildToParentStarTable.h" />
     <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
+    <ClInclude Include="PKB\ConstantTable.h" />
     <ClInclude Include="PKB\DesignExtractor.h" />
     <ClInclude Include="Parser\ParserChildForTest.h" />
     <ClInclude Include="PKB\FollowsStarAfter.h" />

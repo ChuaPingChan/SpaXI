@@ -16,8 +16,8 @@ public:
     bool addToPatternTable(int stmtNumber, string var, string expression);
     pair<string,string> getExpression(int stmtNumber);
     
-    list<pair<int,string>> getLeftVariables();
-    list<pair<int,string>> getLeftVariableThatMatchWithString(string expression);
+    pair<list<int>,list<string>> getLeftVariables();
+    pair<list<int>,list<string>> getLeftVariableThatMatchWithString(string expression);
     list<int> getExactMatchStmt(string expression);
     list<int> getPartialMatchStmt(string expression);
     list<int> getExactBothMatches(string var, string expression);
