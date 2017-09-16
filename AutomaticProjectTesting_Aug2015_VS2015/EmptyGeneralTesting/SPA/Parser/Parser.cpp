@@ -471,5 +471,6 @@ void Parser::processAndPopTopFollowStack()
     }
     (*_pkbMainPtr).setFollowsRel(0, stmtAfter);
 
+    // TODO: Free dynamically allocated memory with "delete" keyword.
     _stacksOfFollowsStacks.pop();
 }

@@ -86,7 +86,7 @@ void QueryEvaluator::evaluate()
 }
 
 /*--------------- Unit Testing ---------------*/
-void QueryEvaluator::setPkb(PKBMain pkb)
+void QueryEvaluator::setPkb(PKBMain& pkb)
 {
     PKB = pkb;
 }
