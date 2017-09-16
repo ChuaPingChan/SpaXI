@@ -21,6 +21,8 @@ public:
 
 	bool isParentStarChild(int parentStmt, int childStmt);
 
+	pair<list<int>, list<int>> getAllParentStarRel();
+
 private:
 	unordered_map<int, list<int>> parentToChildStarMap;
 };
