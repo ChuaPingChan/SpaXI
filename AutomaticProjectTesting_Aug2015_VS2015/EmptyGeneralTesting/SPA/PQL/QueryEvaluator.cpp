@@ -96,6 +96,11 @@ bool QueryEvaluator::getHasResult()
     return hasResult;
 }
 
+pair<list<string>, list<string>> QueryEvaluator::getResultSuchThat()
+{
+    return resultSuchThat;
+}
+
 list<string> QueryEvaluator::getIntersectionTest(list<string> list1, list<string> list2)
 {
     return getIntersection(list1, list2);
