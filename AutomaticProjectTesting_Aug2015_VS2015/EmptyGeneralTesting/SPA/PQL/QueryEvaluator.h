@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include "QueryTree.h"
+#include "../PKB/PKBMain.h"
 
 using namespace std;
 
@@ -17,7 +18,9 @@ public:
 	void evaluate();
 
     /*--------------- Unit Testing ---------------*/
+    void setPkb(PKBMain pkb);
     bool getHasResult();
+    pair<list<string>, list<string>> getResultSuchThat();
     list<string> getIntersectionTest(list<string> list1, list<string> list2);
     void evaluateSelectTest(array<string, 2> arr);
     void evaluateFollowsTest(array<string, 4> arr);
@@ -31,6 +34,7 @@ public:
 private:
 
 	QueryTree* qtInstance;
+    PKBMain PKB;        //TODO: Set this to static
 
     bool hasResult = true;
     list<string> finalResult;
@@ -56,5 +60,8 @@ private:
 
     /*--------------- Find set intersection between two lists---------------*/
     list<string> getIntersection(list<string> list1, list<string> list2);
+
+    /*--------------- Convert list of integers to list of strings ---------------*/
+    list<string> getListStringFromListInt(list<int> listOfInt);
 };
 

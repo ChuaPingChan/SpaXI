@@ -22,10 +22,28 @@ bool ChildToParentTable::addChildParent(int childStmt, int parentStmt)
 	return false;
 }
 
+bool ChildToParentTable::isChild(int childStmt) {
+	if (childToParentMap.find(childStmt) != childToParentMap.end()) {
+		return true;
+	}
+
+	return false;
+}
+
 int ChildToParentTable::getParent(int childStmt) {
 	return childToParentMap[childStmt];
 }
 
 unordered_map<int, int> ChildToParentTable::getTable() {
 	return childToParentMap;
+}
+
+list<int> ChildToParentTable::getAllChildren() {
+	list<int> stmtList;
+
+	for (std::unordered_map<int, int>::iterator it = childToParentMap.begin(); it != childToParentMap.end(); ++it) {
+		stmtList.push_back((*it).first);
+	}
+
+	return stmtList;
 }

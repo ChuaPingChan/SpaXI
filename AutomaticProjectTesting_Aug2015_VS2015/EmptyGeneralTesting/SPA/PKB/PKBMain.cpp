@@ -11,6 +11,137 @@ bool PKBMain::setParentChildRel(int parentStmt, int childStmt) {
 	return (parentToChildTable.addParentChild(parentStmt, childStmt) && childToParentTable.addChildParent(childStmt, parentStmt));
 }
 
+bool PKBMain::isParentChild(int parentStmt, int childStmt) {
+	return parentToChildTable.isParentChild(parentStmt, childStmt);
+}
+
+bool PKBMain::isParent(int parentStmt) {
+	return parentToChildTable.isParent(parentStmt);
+}
+
+list<int> PKBMain::getChildren(int parentStmt, string type) {
+	list<int> stmtList = parentToChildTable.getChildren(parentStmt);
+
+	if (type == "stmt") {
+		return stmtList;
+	}
+
+	/*if (type == "assign") {
+		int listSize = stmtList.size();
+		int first;
+		for (int i = 0; i < listSize; i++) {
+			first = stmtList.front();
+			stmtList.pop_front();
+			if (isAssign(first)) {
+				stmtList.push_back(first));
+			}
+		}
+	}*/
+
+	return stmtList;
+}
+
+bool PKBMain::isChild(int childStmt) {
+	return childToParentTable.isChild(childStmt);
+}
+
+bool PKBMain::hasParentRel() {
+	return parentToChildTable.empty();
+}
+
+list<int> PKBMain::getParent(int childStmt, string type) {
+	list<int> stmtList;
+	stmtList.push_back(childToParentTable.getParent(childStmt));
+	return stmtList;
+}
+
+list<int> PKBMain::getAllParents(string type) {
+	return parentToChildTable.getAllParents();
+}
+
+list<int> PKBMain::getAllChildren(string type) {
+	list<int> stmtList = childToParentTable.getAllChildren();
+
+	if (type == "stmt") {
+		return stmtList;
+	}
+
+	/*if (type == "assign") {
+	int listSize = stmtList.size();
+	int first;
+	for (int i = 0; i < listSize; i++) {
+	first = stmtList.front();
+	stmtList.pop_front();
+	if (isAssign(first)) {
+	stmtList.push_back(first));
+	}
+	}
+	}*/
+
+	return stmtList;
+}
+
+pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2) {
+	pair<list<int>, list<int>> allParentsRel = parentToChildTable.getAllParentsRel();
+	list<int> parent = allParentsRel.first;
+	list<int> children = allParentsRel.second;
+	//	int first;
+	//	int second;
+	/*
+	int listSize = parent.size();
+	for (int i = 0; i < listSize; i++) {
+	if (type1 == "WHILE") {
+	first = parent.front();
+	parent.pop_front();
+	second = children.front();
+	children.pop_front();
+	if (isWhile(first) {
+	parent.push_back(first);
+	children.push_back(second);
+	}
+	}
+
+	if (type1 == "ASSIGN") {
+	first = parent.front();
+	parent.pop_front();
+	second = children.front();
+	children.pop_front();
+	if (isAssign(first)) {
+	parent.push_back(first);
+	children.push_back(second);
+	}
+	}
+	}
+
+	int listSize = parent.size();
+	for (int i = 0; i < listSize; i++) {
+	if (type2 == "WHILE") {
+	first = parent.front();
+	parent.pop_front();
+	second = children.front();
+	children.pop_front();
+	if (isWhile(second)) {
+	parent.push_back(first);
+	children.push_back(second);
+	}
+	}
+
+	if (type2 == "ASSIGN") {
+	first = parent.front();
+	parent.pop_front();
+	second = children.front();
+	children.pop_front();
+	if (isAssign(second)) {
+	parent.push_back(first);
+	children.push_back(second);
+	}
+	}
+	}*/
+
+	return make_pair(parent, children);
+}
+
+//
 //FOLLOWS
 pair<list<int>, list<int>> PKBMain::getAllFollows(string type1, string type2) {
 	pair<list<int>, list<int>> allFollows = followsTable.getAllFollows();
@@ -242,7 +373,7 @@ list<int> PKBMain::getAfterStar(int befStmt, string type) {
 	list<int> aft = followsStarAfter.getAfterStar(befStmt);
 	int first;
 	int listSize = aft.size();
-	if (type == "STMT") {
+	if (type == "stmt") {
 		return aft;
 	}
 	/*
@@ -268,7 +399,7 @@ list<int> PKBMain::getBeforeStar(int aftStmt, string type) {
 	list<int> bef = followsStarBefore.getBeforeStar(aftStmt);
 	int first;
 	int listSize = bef.size();
-	if (type == "STMT") {
+	if (type == "stmt") {
 		return bef;
 	}
 	/*
@@ -293,7 +424,7 @@ list<int> PKBMain::getAllBeforeStar(string type) {
 	list<int> bef = followsStarBefore.getAllBeforeStar();
 	int first;
 	int listSize = bef.size();
-	if (type == "STMT") {
+	if (type == "stmt") {
 		return bef;
 	}
 	/*
@@ -318,7 +449,7 @@ list<int> PKBMain::getAllAfterStar(string type) {
 	list<int> aft = followsStarAfter.getAllAfterStar();
 	int first;
 	int listSize = aft.size();
-	if (type == "STMT") {
+	if (type == "stmt") {
 		return aft;
 	}
 

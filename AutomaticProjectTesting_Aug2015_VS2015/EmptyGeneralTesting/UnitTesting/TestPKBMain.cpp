@@ -26,6 +26,12 @@ namespace UnitTesting
 			PKB.setFollowsRel(3, 9);
 			PKB.setFollowsRel(9, 10);
 
+			PKB.setParentChildRel(3, 4);
+			PKB.setParentChildRel(3, 5);
+			PKB.setParentChildRel(3, 6);
+			PKB.setParentChildRel(6, 7);
+			PKB.setParentChildRel(3, 8);
+
 			Assert::AreEqual(PKB.getAfter(1), 2);
 			Assert::AreEqual(PKB.getAfter(10), 0);
 			list<int> allBefore = PKB.getAllBefore("STMT");
@@ -102,6 +108,15 @@ namespace UnitTesting
 
 			pair<list<int>, list<int>> allFollowsStar = PKB.getAllFollowsStar("STMT", "STMT");
 			Assert::IsTrue(allFollowsStar.first.size() == 16);
+
+			// TESTPARENT
+
+			/*Assert::IsTrue(PKB.isParent(3, 4));
+			Assert::IsTrue(PKB.isParent(3, 5));
+			Assert::IsTrue(PKB.isParent(3, 6));
+			Assert::IsTrue(PKB.isParent(6, 7));
+			Assert::IsTrue(PKB.isParent(3, 8));*/
+			
 		}
 
 		TEST_METHOD(TestPKBFollows2) 

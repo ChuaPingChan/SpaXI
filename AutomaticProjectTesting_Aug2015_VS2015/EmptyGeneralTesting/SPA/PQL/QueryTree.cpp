@@ -6,9 +6,7 @@ QueryTree* QueryTree::instance = 0;
 
 QueryTree::QueryTree()
 {
-	init();
 }
-
 
 QueryTree::~QueryTree()
 {
@@ -24,18 +22,16 @@ QueryTree* QueryTree::getInstance()
 	return instance;
 }
 
-void QueryTree::init()
+QueryTree* QueryTree::clear()
 {
-	setInited(true);
-	setSplitted(false);
-	setValidated(false);
-	setEvaluated(false);
+	delete instance;
+	instance = new QueryTree();
+	return instance;
 }
 
 void QueryTree::storeUnvalidatedStmts(vector<string> splittedVec)
 {
 	unvalidatedStmts = splittedVec;
-	setSplitted(true);
 }
 
 void QueryTree::insertVariable(string type, string var)
@@ -74,8 +70,6 @@ void QueryTree::insertVariable(string type, string var)
 	{
 		cerr << "Type not recognised!";
 	}
-
-	this->numVar++;
 }
 
 void QueryTree::insertFollows(array<string, 4> arr)
@@ -111,6 +105,11 @@ void QueryTree::insertModifies(array<string, 4> arr)
 void QueryTree::insertPattern(array<string, 6> arr)
 {
 	patternClauses.push_back(arr);
+}
+
+void QueryTree::storeEvaluatorResult(list<string> list)
+{
+	evaluatorResult = list;
 }
 
 void QueryTree::insertSelect(array<string, 2> arr)
@@ -193,44 +192,9 @@ vector<array<string, 6>> QueryTree::getPatterns()
 	return patternClauses;
 }
 
-int QueryTree::getNumVar()
+list<string> QueryTree::getEvaluatorResult()
 {
-	return numVar;
-}
-
-int QueryTree::getNumSuchThat()
-{
-	return suchThatClauses.size();
-}
-
-bool QueryTree::isInit()
-{
-	return inited;
-}
-
-bool QueryTree::isSplitted()
-{
-	return splitted;
-}
-
-bool QueryTree::isValidated()
-{
-	return validated;
-}
-
-bool QueryTree::isEvaluated()
-{
-	return evaluated;
-}
-
-void QueryTree::setValidatedTrue()
-{
-	setValidated(true);
-}
-
-void QueryTree::setEvaluatedTrue()
-{
-	setEvaluated(true);
+	return evaluatorResult;
 }
 
 bool QueryTree::varExists(string var)
@@ -263,25 +227,5 @@ bool QueryTree::varExists(string var)
 	{
 		return false;
 	}
-}
-
-void QueryTree::setInited(bool b)
-{
-	inited = b;
-}
-
-void QueryTree::setSplitted(bool b)
-{
-	splitted = b;
-}
-
-void QueryTree::setValidated(bool b)
-{
-	validated = b;
-}
-
-void QueryTree::setEvaluated(bool b)
-{
-	evaluated = b;
 }
  
