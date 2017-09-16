@@ -103,7 +103,18 @@ namespace UnitTesting
 
 
             //Case 4 - Positive: Follows(_, int)
-            //TODO
+            QueryEvaluator qe4Positive = QueryEvaluator();
+            PKBMain PKB4Positive;
+            expectedList1.clear();
+            expectedList2.clear();
+            expectedPair = getEmptyPairOfListOfString();
+            actualPair = getEmptyPairOfListOfString();
+            PKB4Positive.setFollowsRel(0, 1);
+            PKB4Positive.setFollowsRel(1, 2);
+            qe4Positive.setPkb(PKB4Positive);
+            array<string, 4> arrToEvaluate4Positive = { "_", "", "int", "2" };
+            qe4Positive.evaluateFollowsTest(arrToEvaluate4Positive);
+            Assert::IsTrue(qe4Positive.getHasResult());
 
             //Case 4 - Negative: Follows(_, int)
             //TODO
