@@ -222,6 +222,14 @@ bool PKBMain::setFollowsRel(int stmtBef, int stmtCurr) {
 
 	followsBeforeMap[stmtCurr] = stmtBef;
 
+	//if there is a statement before the stmtBef (not the first line of a new nest)
+	if (followsBeforeMap.find(stmtBef) != followsBeforeMap.end()) {
+		followsTable.addFollows(stmtBef, followsBeforeMap[stmtBef], stmtCurr);
+	}
+
+	//add next statement as 0 for all unless if statement if considered above
+	//which in that case will be overwritten
+	followsTable.addFollows(stmtCurr, stmtBef, 0); 
 	return true;
 }
 
@@ -525,7 +533,6 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 
 bool PKBMain::startProcessComplexRelations() {
 	DesignExtractor de;
-	followsTable.setMap(de.computeFollowsTable(followsBeforeMap, followsAfterMap)));
 	childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
 	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
