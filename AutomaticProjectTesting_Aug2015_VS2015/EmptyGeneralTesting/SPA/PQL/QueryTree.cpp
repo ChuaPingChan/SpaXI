@@ -6,9 +6,7 @@ QueryTree* QueryTree::instance = 0;
 
 QueryTree::QueryTree()
 {
-	init();
 }
-
 
 QueryTree::~QueryTree()
 {
@@ -24,9 +22,10 @@ QueryTree* QueryTree::getInstance()
 	return instance;
 }
 
-void QueryTree::init()
+QueryTree* QueryTree::clear()
 {
-
+	instance = new QueryTree();
+	return instance;
 }
 
 void QueryTree::storeUnvalidatedStmts(vector<string> splittedVec)
@@ -107,6 +106,11 @@ void QueryTree::insertPattern(array<string, 6> arr)
 	patternClauses.push_back(arr);
 }
 
+void QueryTree::storeEvaluatorResult(list<string> list)
+{
+	evaluatorResult = list;
+}
+
 void QueryTree::insertSelect(array<string, 2> arr)
 {
 	selectStmt = arr;
@@ -185,6 +189,11 @@ vector<array<string, 4>> QueryTree::getModifies()
 vector<array<string, 6>> QueryTree::getPatterns()
 {
 	return patternClauses;
+}
+
+list<string> QueryTree::getEvaluatorResult()
+{
+	return evaluatorResult;
 }
 
 bool QueryTree::varExists(string var)

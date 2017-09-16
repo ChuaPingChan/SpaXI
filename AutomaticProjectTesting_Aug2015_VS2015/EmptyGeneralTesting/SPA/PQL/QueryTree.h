@@ -14,8 +14,8 @@ public:
 	~QueryTree();
 
 	static QueryTree* getInstance();
+	QueryTree* clear();
 
-	void init();
 	void storeUnvalidatedStmts(vector<string> splitted);
 	void insertSelect(array<string, 2> arr);
 	void insertVariable(string type, string var);
@@ -26,6 +26,7 @@ public:
 	void insertUses(array<string, 4> arr);
 	void insertModifies(array<string, 4> arr);
 	void insertPattern(array<string, 6> arr);
+	void storeEvaluatorResult(list<string> list);
 	
 	vector<string> getUnvalidatedStmts();
 	vector<string> getStmts();
@@ -43,6 +44,7 @@ public:
 	vector<array<string, 4>> getUses();
 	vector<array<string, 4>> getModifies();
 	vector<array<string, 6>> getPatterns();
+	list<string> getEvaluatorResult();
 
 	bool varExists(string var);
 
@@ -68,6 +70,6 @@ private:
 	vector<array<string, 4>> modifiesClauses;
 	vector<array<string, 6>> patternClauses;
 
-	list<string> finalResult;
+	list<string> evaluatorResult;
 };
 

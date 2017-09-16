@@ -4,6 +4,7 @@ using namespace std;
 
 QueryValidator::QueryValidator()
 {
+	qtInstance = QueryTree::getInstance();
 }
 
 QueryValidator::~QueryValidator()
@@ -345,7 +346,7 @@ bool QueryValidator::isValidDeclaration(string str)
 
         if (_synonymBank.find(synonym) == _synonymBank.end()) {
             _synonymBank.insert(synonym);
-            qt.insertVariable(entity, synonym);
+            qtInstance->insertVariable(entity, synonym);
         }
         else {
             return false;
@@ -458,7 +459,7 @@ bool QueryValidator::isValidSelectBeginning(string str)
     for (; it != it_end; it++)
     {
         string current = it->str(0);
-        if (!qt.varExists(current))
+        if (!qtInstance->varExists(current))
             return false;
     }
 
@@ -477,17 +478,17 @@ bool QueryValidator::isValidModifies(string str)
     string arg2 = getBetweenTwoStrings(str, ",", ")");
     array<string,4> result;
 
-    if (qt.varExists(arg2) && !isArgumentInClause(arg2, qt.getVars())) //arg2 is a synonym and is NOT a variable
+    if (qtInstance->varExists(arg2) && !isArgumentInClause(arg2, qtInstance->getVars())) //arg2 is a synonym and is NOT a variable
         return false;
 
     //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
-    if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg1))
+    if (isArgumentInClause(arg1, qtInstance->getAssigns()) || isArgumentInClause(arg1, qtInstance->getStmts()) || isArgumentInClause(arg1, qtInstance->getWhiles()) || isIntegerRegexCheck(arg1))
     {
-        if (isArgumentInClause(arg2, qt.getVars())) { //if arg2 is a variable synonym
+        if (isArgumentInClause(arg2, qtInstance->getVars())) { //if arg2 is a variable synonym
             result[2] = "var";
             result[3] = arg2;
 
-            if (isArgumentInClause(arg1, qt.getAssigns()))
+            if (isArgumentInClause(arg1, qtInstance->getAssigns()))
             {
                 result[0] = "assign";
                 result[1] = arg1;
@@ -495,7 +496,7 @@ bool QueryValidator::isValidModifies(string str)
                 //store in data type for assignment synonym
             }
 
-            if (isArgumentInClause(arg1, qt.getStmts()))
+            if (isArgumentInClause(arg1, qtInstance->getStmts()))
             {
                 result[0] = "stmt";
                 result[1] = arg1;
@@ -503,7 +504,7 @@ bool QueryValidator::isValidModifies(string str)
                 //store in data type for statement synonym
             }
 
-            if (isArgumentInClause(arg1, qt.getWhiles()))
+            if (isArgumentInClause(arg1, qtInstance->getWhiles()))
             {
                 result[0] = "while";
                 result[1] = arg1;
@@ -516,7 +517,7 @@ bool QueryValidator::isValidModifies(string str)
                 result[1] = arg1;
                 //store in data type for statement number 
             }
-            qt.insertModifies(result); //store clause in query tree
+            qtInstance->insertModifies(result); //store clause in query tree
             return true;
         }
 
@@ -533,7 +534,7 @@ bool QueryValidator::isValidModifies(string str)
                 result[3] = arg2;
             }
 
-            if (isArgumentInClause(arg1, qt.getAssigns()))
+            if (isArgumentInClause(arg1, qtInstance->getAssigns()))
             {
                 result[0] = "assign";
                 result[1] = arg1;
@@ -541,7 +542,7 @@ bool QueryValidator::isValidModifies(string str)
                 //store in data type for assignment synonym
             }
 
-            if (isArgumentInClause(arg1, qt.getStmts()))
+            if (isArgumentInClause(arg1, qtInstance->getStmts()))
             {
                 result[0] = "stmt";
                 result[1] = arg1;
@@ -549,7 +550,7 @@ bool QueryValidator::isValidModifies(string str)
                 //store in data type for statement synonym
             }
 
-            if (isArgumentInClause(arg1, qt.getWhiles()))
+            if (isArgumentInClause(arg1, qtInstance->getWhiles()))
             {
                 result[0] = "while";
                 result[1] = arg1;
@@ -562,7 +563,7 @@ bool QueryValidator::isValidModifies(string str)
                 result[1] = arg1;
                 //store in data type for statement number 
             }
-            qt.insertModifies(result);
+            qtInstance->insertModifies(result);
             return true;
         }
     }
@@ -580,17 +581,17 @@ bool QueryValidator::isValidUses(string str)
     string arg2 = getBetweenTwoStrings(str, ",", ")");
     array<string,4> result;
 
-    if (qt.varExists(arg2) && !isArgumentInClause(arg2, qt.getVars())) //arg2 is a synonym and is NOT a variable
+    if (qtInstance->varExists(arg2) && !isArgumentInClause(arg2, qtInstance->getVars())) //arg2 is a synonym and is NOT a variable
         return false;
 
     //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
-    if (isArgumentInClause(arg1, qt.getAssigns()) || isArgumentInClause(arg1, qt.getStmts()) || isArgumentInClause(arg1, qt.getWhiles()) || isIntegerRegexCheck(arg1))
+    if (isArgumentInClause(arg1, qtInstance->getAssigns()) || isArgumentInClause(arg1, qtInstance->getStmts()) || isArgumentInClause(arg1, qtInstance->getWhiles()) || isIntegerRegexCheck(arg1))
     {
-        if (isArgumentInClause(arg2, qt.getVars())) { //if arg2 is a variable synonym
+        if (isArgumentInClause(arg2, qtInstance->getVars())) { //if arg2 is a variable synonym
             result[2] = "var";
             result[3] = arg2;
 
-            if (isArgumentInClause(arg1, qt.getAssigns()))
+            if (isArgumentInClause(arg1, qtInstance->getAssigns()))
             {
                 result[0] = "assign";
                 result[1] = arg1;
@@ -598,7 +599,7 @@ bool QueryValidator::isValidUses(string str)
                 //store in data type for assignment synonym
             }
 
-            if (isArgumentInClause(arg1, qt.getStmts()))
+            if (isArgumentInClause(arg1, qtInstance->getStmts()))
             {
                 result[0] = "stmt";
                 result[1] = arg1;
@@ -606,7 +607,7 @@ bool QueryValidator::isValidUses(string str)
                 //store in data type for statement synonym
             }
 
-            if (isArgumentInClause(arg1, qt.getWhiles()))
+            if (isArgumentInClause(arg1, qtInstance->getWhiles()))
             {
                 result[0] = "while";
                 result[1] = arg1;
@@ -619,7 +620,7 @@ bool QueryValidator::isValidUses(string str)
                 result[1] = arg1;
                 //store in data type for statement number 
             }
-            qt.insertUses(result);
+            qtInstance->insertUses(result);
             return true;
         }
 
@@ -636,7 +637,7 @@ bool QueryValidator::isValidUses(string str)
                 result[3] = arg2;
             }
 
-            if (isArgumentInClause(arg1, qt.getAssigns()))
+            if (isArgumentInClause(arg1, qtInstance->getAssigns()))
             {
                 result[0] = "assign";
                 result[1] = arg1;
@@ -644,7 +645,7 @@ bool QueryValidator::isValidUses(string str)
                 //store in data type for assignment synonym
             }
 
-            if (isArgumentInClause(arg1, qt.getStmts()))
+            if (isArgumentInClause(arg1, qtInstance->getStmts()))
             {
                 result[0] = "stmt";
                 result[1] = arg1;
@@ -652,7 +653,7 @@ bool QueryValidator::isValidUses(string str)
                 //store in data type for statement synonym
             }
 
-            if (isArgumentInClause(arg1, qt.getWhiles()))
+            if (isArgumentInClause(arg1, qtInstance->getWhiles()))
             {
                 result[0] = "while";
                 result[1] = arg1;
@@ -665,7 +666,7 @@ bool QueryValidator::isValidUses(string str)
                 result[1] = arg1;
                 //store in data type for statement number 
             }
-            qt.insertUses(result);
+            qtInstance->insertUses(result);
             return true;
         }
     }
@@ -694,15 +695,15 @@ bool QueryValidator::isValidFollows(string str)
             result[0] = "int";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getStmts())) {
+        else if (isArgumentInClause(arg1, qtInstance->getStmts())) {
             result[0] = "stmt";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getAssigns())) {
+        else if (isArgumentInClause(arg1, qtInstance->getAssigns())) {
             result[0] = "assign";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getWhiles())) {
+        else if (isArgumentInClause(arg1, qtInstance->getWhiles())) {
             result[0] = "while";
             result[1] = arg1;
         }
@@ -718,15 +719,15 @@ bool QueryValidator::isValidFollows(string str)
             result[2] = "int";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getStmts())) {
+        else if (isArgumentInClause(arg2, qtInstance->getStmts())) {
             result[2] = "stmt";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getAssigns())) {
+        else if (isArgumentInClause(arg2, qtInstance->getAssigns())) {
             result[2] = "assign";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getWhiles())) {
+        else if (isArgumentInClause(arg2, qtInstance->getWhiles())) {
             result[2] = "while";
             result[3] = arg2;
         }
@@ -738,7 +739,7 @@ bool QueryValidator::isValidFollows(string str)
         else {
             return false;
         }
-        qt.insertFollowsStar(result);
+        qtInstance->insertFollowsStar(result);
         return true;
        
     }
@@ -754,15 +755,15 @@ bool QueryValidator::isValidFollows(string str)
             result[0] = "int";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getStmts())) {
+        else if (isArgumentInClause(arg1, qtInstance->getStmts())) {
             result[0] = "stmt";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getAssigns())) {
+        else if (isArgumentInClause(arg1, qtInstance->getAssigns())) {
             result[0] = "assign";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getWhiles())) {
+        else if (isArgumentInClause(arg1, qtInstance->getWhiles())) {
             result[0] = "while";
             result[1] = arg1;
         }
@@ -778,15 +779,15 @@ bool QueryValidator::isValidFollows(string str)
             result[2] = "int";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getStmts())) {
+        else if (isArgumentInClause(arg2, qtInstance->getStmts())) {
             result[2] = "stmt";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getAssigns())) {
+        else if (isArgumentInClause(arg2, qtInstance->getAssigns())) {
             result[2] = "assign";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getWhiles())) {
+        else if (isArgumentInClause(arg2, qtInstance->getWhiles())) {
             result[2] = "while";
             result[3] = arg2;
         }
@@ -797,7 +798,7 @@ bool QueryValidator::isValidFollows(string str)
         else {
             return false;
         }
-        qt.insertFollows(result);
+        qtInstance->insertFollows(result);
         return true;
         //Store string array into query tree in Follows()
     }
@@ -824,11 +825,11 @@ bool QueryValidator::isValidParent(string str)
             result[0] = "int";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getStmts())) {
+        else if (isArgumentInClause(arg1, qtInstance->getStmts())) {
             result[0] = "stmt";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getWhiles())) {
+        else if (isArgumentInClause(arg1, qtInstance->getWhiles())) {
             result[0] = "while";
             result[1] = arg1;
         }
@@ -844,11 +845,11 @@ bool QueryValidator::isValidParent(string str)
             result[2] = "int";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getStmts())) {
+        else if (isArgumentInClause(arg2, qtInstance->getStmts())) {
             result[2] = "stmt";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getWhiles())) {
+        else if (isArgumentInClause(arg2, qtInstance->getWhiles())) {
             result[2] = "while";
             result[3] = arg2;
         }
@@ -860,7 +861,7 @@ bool QueryValidator::isValidParent(string str)
         else {
             return false;
         }
-        qt.insertParentStar(result);
+        qtInstance->insertParentStar(result);
         return true;
 
     }
@@ -876,11 +877,11 @@ bool QueryValidator::isValidParent(string str)
             result[0] = "int";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getStmts())) {
+        else if (isArgumentInClause(arg1, qtInstance->getStmts())) {
             result[0] = "stmt";
             result[1] = arg1;
         }
-        else if (isArgumentInClause(arg1, qt.getWhiles())) {
+        else if (isArgumentInClause(arg1, qtInstance->getWhiles())) {
             result[0] = "while";
             result[1] = arg1;
         }
@@ -896,11 +897,11 @@ bool QueryValidator::isValidParent(string str)
             result[2] = "int";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getStmts())) {
+        else if (isArgumentInClause(arg2, qtInstance->getStmts())) {
             result[2] = "stmt";
             result[3] = arg2;
         }
-        else if (isArgumentInClause(arg2, qt.getWhiles())) {
+        else if (isArgumentInClause(arg2, qtInstance->getWhiles())) {
             result[2] = "while";
             result[3] = arg2;
         }
@@ -911,7 +912,7 @@ bool QueryValidator::isValidParent(string str)
         else {
             return false;
         }
-        qt.insertParent(result);
+        qtInstance->insertParent(result);
         return true;
         //Store string array into query tree in Parent()
     }
@@ -931,10 +932,10 @@ bool QueryValidator::isValidPattern(string str)
     string arg3 = getBetweenTwoStrings(str, ",", ")");
     array<string,6> result;
 
-    if (qt.varExists(arg3)) //check if argument 3 is a synonym; not allowed.
+    if (qtInstance->varExists(arg3)) //check if argument 3 is a synonym; not allowed.
         return false;
 
-    if (qt.varExists(arg2)&&!isArgumentInClause(arg2,qt.getVars())) //check if argument 2 is declared as a synonym other than a variable; not allowed.
+    if (qtInstance->varExists(arg2)&&!isArgumentInClause(arg2,qtInstance->getVars())) //check if argument 2 is declared as a synonym other than a variable; not allowed.
         return false;
 
     if (arg3 == "_")
@@ -948,15 +949,15 @@ bool QueryValidator::isValidPattern(string str)
         result[5] = arg3;
     }
 
-    if (isArgumentInClause(arg1, qt.getAssigns())) 
+    if (isArgumentInClause(arg1, qtInstance->getAssigns())) 
     {
         result[0] = "assign";
         result[1] = arg1;
-        if (isArgumentInClause(arg2, qt.getVars())) {
+        if (isArgumentInClause(arg2, qtInstance->getVars())) {
             //store in appropriate type with VARIABLE synonym
             result[2] = "var";
             result[3] = arg2;
-            qt.insertPattern(result);
+            qtInstance->insertPattern(result);
             return true;
         }
         else {
@@ -972,7 +973,7 @@ bool QueryValidator::isValidPattern(string str)
                 result[3] = arg2;
             }
 
-            qt.insertPattern(result);
+            qtInstance->insertPattern(result);
             return true;
         }
     }

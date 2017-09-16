@@ -173,28 +173,28 @@ namespace UnitTesting
             //Equality test
             qv = QueryValidator();
             str = "assign a;select a;";
-            splitted = qv.tokenizerTest(str);
+            splitted = qv.tokenizeTest(str);
             Assert::AreEqual((std::string) "assign a", splitted.at(0));
             Assert::AreEqual((std::string) "select a", splitted.at(1));
 
             //Equality test with spaces
             qv = QueryValidator();
             str = "assign a     ; select a     ;";
-            splitted = qv.tokenizerTest(str);
+            splitted = qv.tokenizeTest(str);
             Assert::AreEqual((std::string) "assign a     ", splitted.at(0));
             Assert::AreEqual((std::string) " select a     ", splitted.at(1));
 
             //Inequality test with spaces
             qv = QueryValidator();
             str = "assign a     ; select a     ;";
-            splitted = qv.tokenizerTest(str);
+            splitted = qv.tokenizeTest(str);
             Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
             Assert::AreNotEqual((std::string) " select a", splitted.at(1));
 
             //Inequality test with new declaration at beginning
             qv = QueryValidator();
             str = "while w;assign a;select a;";
-            splitted = qv.tokenizerTest(str);
+            splitted = qv.tokenizeTest(str);
             Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
             Assert::AreNotEqual((std::string) " select a", splitted.at(1));
 
@@ -632,13 +632,9 @@ namespace UnitTesting
         TEST_METHOD(TestQueryValidity)
         {
             QueryValidator qv;
-            vector<string> inputVector;
+			string query = "assign a; variable v; Select v";
 
-            inputVector.push_back("assign a");
-            inputVector.push_back("variable v");
-            inputVector.push_back("Select v");
-
-            Assert::IsTrue(qv.isValidQuery(inputVector));
+            Assert::IsTrue(qv.isValidQuery(query));
         }
 
     };

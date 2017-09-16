@@ -18,11 +18,28 @@ list<string> PQLMain::run()
 	QueryTree* qtInstance = QueryTree::getInstance();
 
 	QueryValidator validator;
-	validator.isValidQuery(query);
+	bool isValid = validator.isValidQuery(query);
 
-	QueryEvaluator evaluator;
-	evaluator.evaluate();
+	if (isValid) 
+	{
+		QueryEvaluator evaluator;
+		evaluator.evaluate();
+
+		list<string> evaluatorResult = qtInstance->getEvaluatorResult();
+		if (evaluatorResult.empty())
+		{
+			return evaluatorResult;
+		}
+		else
+		{
+			ResultFormatter formatter;
+			return list<string>();
+		}
+	}
+	else
+	{
+		return list<string>();
+	}
 
 
 }
-

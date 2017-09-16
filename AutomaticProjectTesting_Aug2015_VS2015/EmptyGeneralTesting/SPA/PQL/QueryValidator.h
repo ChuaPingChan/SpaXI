@@ -16,7 +16,6 @@ public:
     QueryValidator();
     ~QueryValidator();
 
-    QueryTree qt;
     bool isValidQuery(string query);
 
     /*--------------- For Unit Testing ---------------*/
@@ -69,6 +68,9 @@ public:
     
 
 private: 
+
+	QueryTree* qtInstance;
+
     unordered_set<string> _synonymBank;   //Contains list of used synonyms
     vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
     
