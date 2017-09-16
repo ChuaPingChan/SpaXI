@@ -79,6 +79,29 @@ namespace UnitTesting
 
 			PKB.startProcessComplexRelations();
 			Assert::IsTrue(PKB.isFollowsStar(1, 10));
+
+			list<int> allAfterStar = PKB.getAllAfterStar("STMT");
+			allAfterStar.sort();
+			list<int> expectedAfterStar;
+			expectedAfterStar.push_back(2);
+			expectedAfterStar.push_back(3);
+			expectedAfterStar.push_back(5);
+			expectedAfterStar.push_back(6);
+			expectedAfterStar.push_back(8);
+			expectedAfterStar.push_back(9);
+			expectedAfterStar.push_back(10);
+
+			Assert::IsTrue(allAfterStar == expectedAfterStar);
+
+			list<int>allBeforeStar = PKB.getAllBeforeStar("STMT");
+			allBeforeStar.sort();
+			list<int> expectedBeforeStar;
+			expectedBeforeStar = { 1, 2, 3, 4, 5, 6, 9 };
+
+			Assert::IsTrue(expectedBeforeStar == allBeforeStar);
+
+			pair<list<int>, list<int>> allFollowsStar = PKB.getAllFollowsStar("STMT", "STMT");
+			Assert::IsTrue(allFollowsStar.first.size() == 16);
 		}
 
 		TEST_METHOD(TestPKBFollows2) 

@@ -15,6 +15,8 @@ public:
 
 	bool isBeforeStar(int stmtBefore, int stmtAfter);
 
+	list<int> getAllBeforeStar();
+
 private:
 	unordered_map<int, list<int>> followsStarBeforeMap;
 };
