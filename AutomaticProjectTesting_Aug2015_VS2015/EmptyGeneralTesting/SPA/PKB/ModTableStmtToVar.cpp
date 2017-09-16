@@ -40,22 +40,24 @@ list<int> ModTableStmtToVar::getStmtThatModifies()
     return listOfStmt;
 }
 
-list<pair<int, string>> ModTableStmtToVar::getModPairs()
+pair<list<int>,list<string>> ModTableStmtToVar::getModPair()
 {
     unordered_map<int, list<string>>::iterator itr;
-    list<pair<int, string>> listOfPairs;
-
+    pair<list<int>,list<string>> pairOfList;
+    
     for (itr = modStmtToVarMap.begin(); itr != modStmtToVarMap.end(); ++itr)
     {
         int stmtNumber = itr->first;
         list<string> modVarList = itr->second;
+
         list<string>::iterator listitr;
         for (listitr = modVarList.begin(); listitr != modVarList.end(); ++listitr)
         {
-            listOfPairs.push_back(make_pair(stmtNumber, (*listitr)));
+            pairOfList.first.push_back(stmtNumber);
+            pairOfList.second.push_back(*listitr);
         }
     }
-    return listOfPairs;
+    return pairOfList;
 }
 
 bool ModTableStmtToVar::isMod(int stmtNumber, string var)

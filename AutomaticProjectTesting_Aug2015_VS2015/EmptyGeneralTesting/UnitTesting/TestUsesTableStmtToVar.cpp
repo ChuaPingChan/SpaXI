@@ -81,23 +81,35 @@ namespace UnitTesting {
             }
 
             // test for pairs list
-            list<pair<int, string>> expectedPairsList;
-            expectedPairsList.push_back(make_pair(1, "a"));
-            expectedPairsList.push_back(make_pair(1, "b"));
-            expectedPairsList.push_back(make_pair(2, "a"));
-            expectedPairsList.push_back(make_pair(4, "c"));
-            expectedPairsList.push_back(make_pair(7, "d"));
-            expectedPairsList.push_back(make_pair(888, "e"));
+            // test for pairs list
+            list<int> stmtList;
+            stmtList.push_back(1);
+            stmtList.push_back(1);
+            stmtList.push_back(2);
+            stmtList.push_back(4);
+            stmtList.push_back(7);
+            stmtList.push_back(888);
 
-            list<pair<int, string>> testPairsList = usesTable.getUsesPairs();
-            testPairsList.sort();
+            list<string> usesList;
+            usesList.push_back("a");
+            usesList.push_back("b");
+            usesList.push_back("a");
+            usesList.push_back("c");
+            usesList.push_back("d");
+            usesList.push_back("e");
 
-            while (!expectedPairsList.empty() && !testPairsList.empty())
+            pair<list<int>, list<string>> expectedPairList = make_pair(stmtList, usesList);
+            pair<list<int>, list<string>> testPairList = usesTable.getUsesPair();
+
+            while (!expectedPairList.first.empty() && !testPairList.first.empty()
+                && !expectedPairList.second.empty() && !testPairList.second.empty())
             {
-                Assert::AreEqual(expectedPairsList.front().first, testPairsList.front().first);
-                Assert::AreEqual(expectedPairsList.front().second, testPairsList.front().second);
-                expectedPairsList.pop_front();
-                testPairsList.pop_front();
+                Assert::IsTrue(usesTable.isUses(expectedPairList.first.front(), expectedPairList.second.front()));
+                Assert::IsTrue(usesTable.isUses(testPairList.first.front(), testPairList.second.front()));
+                expectedPairList.first.pop_front();
+                expectedPairList.second.pop_front();
+                testPairList.first.pop_front();
+                testPairList.second.pop_front();
             }
 
         }

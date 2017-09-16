@@ -16,3 +16,16 @@ bool VarIdxTable::addToVarIdxTable(string var, int index) {
 int VarIdxTable::getIdxFromVar(string var) {
     return varIdxMap[var];
 }
+
+bool VarIdxTable::isVarPresent(string var)
+{
+    unordered_map<string, int>::iterator it;
+    for (it = varIdxMap.begin(); it != varIdxMap.end(); ++it)
+    {
+        if (it->first.compare(var) == 0)
+        {
+            return true;
+        }
+    }
+    return false;
+}
