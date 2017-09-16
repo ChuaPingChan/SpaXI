@@ -174,10 +174,14 @@
     <ClCompile Include="TestQueryTree.cpp" />
     <ClCompile Include="TestQueryValidator.cpp" />
     <ClCompile Include="TestFollowsTable.cpp" />
+    <ClCompile Include="TestModTableStmtToVar.cpp" />
     <ClCompile Include="TestParentToChildTable.cpp" />
     <ClCompile Include="TestParser.cpp" />
     <ClCompile Include="TestParserPKB.cpp" />
+    <ClCompile Include="TestPatternTable.cpp" />
     <ClCompile Include="TestPKBMain.cpp" />
+    <ClCompile Include="TestStmtTypeList.cpp" />
+    <ClCompile Include="TestUsesTableStmtToVar.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
