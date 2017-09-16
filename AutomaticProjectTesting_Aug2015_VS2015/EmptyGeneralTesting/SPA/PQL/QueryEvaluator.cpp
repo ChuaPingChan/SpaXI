@@ -280,28 +280,31 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 void QueryEvaluator::evaluateFollowsT(array<string, 4> arr)
 {
     string type1 = arr[0];
-    string type2 = arr[1];
-    string arg1 = arr[2];
+    string type2 = arr[2];
+    string arg1 = arr[1];
     string arg2 = arr[3];
 
     if (type1 == "int" && type2 == "int")
     {
-        //hasResult = isFollowsT(stoi(arg1), stoi(arg2));
+        hasResult = PKB.isFollowsStar(stoi(arg1), stoi(arg2));
     }
     else if (type1 == "int" && type2 == "_")
     {
-        //hasResult = isBeingFollowedT(stoi(arg1));
+        hasResult = PKB.isBefore(stoi(arg1));
     }
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        pair<list<string>, list<string>> result;// = getFollows(stoi(arg1), arg2)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAfterStar(stoi(arg1), type2);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
     }
     else if (type1 == "_" && type2 == "int")
@@ -369,8 +372,8 @@ void QueryEvaluator::evaluateFollowsT(array<string, 4> arr)
 void QueryEvaluator::evaluateParent(array<string, 4> arr)
 {
     string type1 = arr[0];
-    string type2 = arr[1];
-    string arg1 = arr[2];
+    string type2 = arr[2];
+    string arg1 = arr[1];
     string arg2 = arr[3];
 
     if (type1 == "int" && type2 == "int")
@@ -458,8 +461,8 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
 void QueryEvaluator::evaluateParentT(array<string, 4> arr)
 {
     string type1 = arr[0];
-    string type2 = arr[1];
-    string arg1 = arr[2];
+    string type2 = arr[2];
+    string arg1 = arr[1];
     string arg2 = arr[3];
 
     if (type1 == "int" && type2 == "int")
@@ -690,27 +693,31 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 
 void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 {
-    if (arr[2] == "var" && arr[4] == "_")
+    string type1 = arr[2];
+    string type2 = arr[4];
+    string arg1 = arr[3];
+    string arg2 = arr[5];
+    if (type2 == "var" && arg2 == "_")
     {
         //resultPattern = getLeftVariables(assign,variable);
     }
-    else if (arr[2] == "var" && arr[4] == "ident")
+    else if (type2 == "var" && arg2 == "ident")
     {
         //resultPattern = getLeftVariablesThatMatchWith(assign,variable);
     }
-    else if (arr[2] == "_" && arr[4] == "ident")
+    else if (type2 == "_" && arg2 == "ident")
     {
         //resultPattern = getPartialMatchStmt(arr[5])
     }
-    else if (arr[2] == "ident" && arr[4] == "ident")
+    else if (type2 == "ident" && arg2 == "ident")
     {
         //resultPattern = hasPartialBothMatches(arr[3],arr[5])
     }
-    else if (arr[2] == "_" && arr[4] == "_")
+    else if (type2 == "_" && arg2 == "_")
     {
         //resultPattern = getAssignments();
     }
-    else if (arr[2] == "ident" && arr[4] == "_")
+    else if (type2 == "ident" && arg2 == "_")
     {
         //resultPattern = getAssignments(arr[3]);
     }

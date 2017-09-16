@@ -14,16 +14,13 @@ namespace UnitTesting
     public:
         QueryTree* qtInstance = QueryTree::getInstance();
         QueryEvaluator qe;
-        list<string> expectedList1;
-        list<string> expectedList2;
-        pair<list<string>, list<string>> expectedPair;
-        pair<list<string>, list<string>> actualPair;
 
         // TEST_METHOD(TestEvaluatorSelect)
         // {
             
         // }
 
+        /*--------------- Evaluate Follow ---------------*/
         //Case 1 - Positive: Follows(int, int)
         TEST_METHOD(TestEvaluatorFollowCase1Positive)
         {
@@ -86,10 +83,10 @@ namespace UnitTesting
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
             PKBMain PKB;
-            expectedList1.clear();
-            expectedList2.clear();
-            expectedPair = getEmptyPairOfListOfString();
-            actualPair = getEmptyPairOfListOfString();
+            list<string> expectedList1;
+            list<string> expectedList2;
+            pair<list<string>, list<string>> expectedPair;
+            pair<list<string>, list<string>> actualPair;
             PKB.setFollowsRel(0, 1);
             PKB.setFollowsRel(1, 2);
             PKB.setFollowsRel(2, 3);
@@ -110,10 +107,10 @@ namespace UnitTesting
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
             PKBMain PKB;
-            expectedList1.clear();
-            expectedList2.clear();
-            expectedPair = getEmptyPairOfListOfString();
-            actualPair = getEmptyPairOfListOfString();
+            list<string> expectedList1;
+            list<string> expectedList2;
+            pair<list<string>, list<string>> expectedPair;
+            pair<list<string>, list<string>> actualPair;
             PKB.setFollowsRel(0, 1);
             PKB.setFollowsRel(1, 2);
             qe.setPkb(PKB);
@@ -190,10 +187,10 @@ namespace UnitTesting
             PKB.setFollowsRel(1, 2);
             PKB.setFollowsRel(2, 3);
             qe.setPkb(PKB);
-            expectedList1.clear();
-            expectedList2.clear();
-            expectedPair = getEmptyPairOfListOfString();
-            actualPair = getEmptyPairOfListOfString();
+            list<string> expectedList1;
+            list<string> expectedList2;
+            pair<list<string>, list<string>> expectedPair;
+            pair<list<string>, list<string>> actualPair;
             array<string, 4> arrToEvaluate = { "_", "", "stmt", "s" };
             qe.evaluateFollowsTest(arrToEvaluate);
             expectedList1.push_back("2");
@@ -226,16 +223,62 @@ namespace UnitTesting
             //TODO
         
 
-        TEST_METHOD(TestEvaluateFollowsT)
+        /*--------------- Evaluate FollowStar ---------------*/
+        //Case 1 - Positive: FollowsStar(int, int)
+        TEST_METHOD(TestEvaluateFollowsStarCase1Positive)
         {
-
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            PKB.startProcessComplexRelations();
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "int", "1", "int", "2" };
+            qe.evaluateFollowsTTest(arrToEvaluate);
+            Assert::IsTrue(qe.getHasResult());
         }
         
-        pair<list<string>, list<string>> getEmptyPairOfListOfString()
+        //Case 2 - Positive: Follows(int, _)
+        TEST_METHOD(TestEvaluateFollowStarCase2Positive)
         {
-            list<string> list1;
-            list<string> list2;
-            return make_pair(list1, list2);
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            PKB.startProcessComplexRelations();
+            array<string, 4> arrToEvaluate = { "int", "1", "_", "" };
+            qe.evaluateFollowsTTest(arrToEvaluate);
+            Assert::IsTrue(qe.getHasResult());
+        }
+
+        //Case 3 - Positive: FollowsStar(int, synonym)
+        TEST_METHOD(TestEvaluatorFollowStarCase3Positive)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            list<string> expectedList1;
+            list<string> expectedList2;
+            pair<list<string>, list<string>> expectedPair;
+            pair<list<string>, list<string>> actualPair;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            PKB.setFollowsRel(2, 3);
+            PKB.setFollowsRel(3, 4);
+            PKB.startProcessComplexRelations();
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "int", "1", "assign", "a" };
+            qe.evaluateFollowsTTest(arrToEvaluate);
+            expectedList1.push_back("2");
+            expectedList1.push_back("3");
+            expectedList1.push_back("4");
+            expectedPair = make_pair(expectedList1, expectedList2);
+            actualPair = qe.getResultSuchThat();
+            Assert::IsTrue(qe.getHasResult());
+            Assert::IsTrue(expectedPair == actualPair);
         }
        
 
