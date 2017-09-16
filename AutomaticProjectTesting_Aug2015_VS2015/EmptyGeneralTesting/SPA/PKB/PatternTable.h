@@ -22,6 +22,7 @@ public:
     list<int> getPartialMatchStmt(string expression);
     list<int> getExactBothMatches(string var, string expression);
     list<int> getPartialBothMatches(string var, string expression);
+    list<int> getLeftVariableMatchingStmts(string var);
 
     //////////////////////////////////////
     bool hasExactMatch(int stmtNumber, string expression);
