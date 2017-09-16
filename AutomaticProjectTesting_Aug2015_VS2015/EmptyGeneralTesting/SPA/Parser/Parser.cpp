@@ -49,7 +49,7 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _parentStack = stack<int>();
     _firstStmtInProc = Parser::INT_INITIAL_STMT_NUMBER;
     _pkbMainPtr = pkbMainPtr;
-    _headerToStmtsMap = unordered_map<int, list<int>>();
+    _stacksOfFollowsStacks = stack<stack<int>>();
 }
 
 bool Parser::parse(string filename) {
@@ -157,12 +157,10 @@ void Parser::parseProgram() {
     incrCurrentTokenPtr();
 
     // PKB TODO: put this in a while loop after iteration 1,
-    //      when there are multiple procedures.
+    //           when there are multiple procedures.
     parseProcedure();
     OutputDebugString("FINE: End of program reached.\n");
 
-    // PKB TODO: Populate FollowsTable.
-    OutputDebugString("PKB: Add follows relationship.\n");
     // PKB TODO: Tell PKB to start design extractor.
     OutputDebugString("PKB: Tell PKB to start design extractor.\n");
 }
@@ -186,9 +184,19 @@ void Parser::parseProcedure() {
     
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    OutputDebugString("FINE: Entering procedure...\n");
+    // Add new stmtList stack to follows stack
+    OutputDebugString("FINE: Push new stmtList stack to follows stack.\n");
+    stack<int>* newFollowsStack = new stack<int>();
+    _stacksOfFollowsStacks.push(*newFollowsStack);
     _firstStmtInProc++;
+    
     parseStmtList();
+
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    processAndPopTopFollowStack();
+    OutputDebugString("FINE: Processing and then pop top follows stack.\n");
+    OutputDebugString("FINE: Exiting procedure...\n");
 }
 
 /*
@@ -211,6 +219,10 @@ and '}' for while and if-else statements.
 void Parser::parseStmt() {
     _currentStmtNumber++;
     OutputDebugString("FINE: Identifying next statement type...\n");
+
+    // Push current statement to top of the top followsStack
+    _stacksOfFollowsStacks.top().push(_currentStmtNumber);
+    OutputDebugString("FINE: Pushing stmt to top stack of follows stack.\n");
 
     // Set parent child relation. 0 if no parent.
     if (_parentStack.empty()) {
@@ -404,6 +416,7 @@ _currentTokenPtr will be advanced after '}'.
 void Parser::parseWhile() {
     OutputDebugString("FINE: While statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
+
     // PKB TODO: Add while stmt to PKB
     OutputDebugString("PKB: Add while statement to PKB.\n");
 
@@ -424,12 +437,39 @@ void Parser::parseWhile() {
     OutputDebugString("PKB: Update uses relationship.\n");
     
     assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
 
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     OutputDebugString("FINE: Entering while block.\n");
+    // Add new stmtList stack to follows stack
+    OutputDebugString("Push new stmtList stack to follows stack.\n");
+    stack<int>* newFollowsStack = new stack<int>();
+    _stacksOfFollowsStacks.push(*newFollowsStack);
+    
     parseStmtList();
-    OutputDebugString("FINE: Exiting while block.\n");
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    OutputDebugString("FINE: Exiting while block.\n");
+    processAndPopTopFollowStack();
+    OutputDebugString("FINE: Processing and then pop top follows stack.\n");
+    
     _parentStack.pop();
+}
+
+void Parser::processAndPopTopFollowStack()
+{
+    assert(!_stacksOfFollowsStacks.empty() && !_stacksOfFollowsStacks.top().empty());
+    stack<int> topFollowsStack = _stacksOfFollowsStacks.top();
+
+    int stmtAfter = topFollowsStack.top();
+    topFollowsStack.pop();
+    int stmtBefore = 0;
+    while (!topFollowsStack.empty()) {
+        stmtBefore = topFollowsStack.top();
+        (*_pkbMainPtr).setFollowsRel(stmtBefore, stmtAfter);
+        stmtAfter = stmtBefore;
+        topFollowsStack.pop();
+    }
+    (*_pkbMainPtr).setFollowsRel(0, stmtAfter);
+
+    _stacksOfFollowsStacks.pop();
 }
