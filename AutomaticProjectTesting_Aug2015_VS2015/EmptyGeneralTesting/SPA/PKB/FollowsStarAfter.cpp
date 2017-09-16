@@ -1,5 +1,7 @@
 #include "FollowsStarAfter.h"
 
+using namespace std;
+
 FollowsStarAfter::FollowsStarAfter() {
 }
 
@@ -25,4 +27,33 @@ bool FollowsStarAfter::isAfterStar(int stmtBefore, int stmtAfter) {
 		}
 	}
 	return false;
+}
+
+list<int> FollowsStarAfter::getAllAfterStar() {
+	list<int> stmtList;
+	for (std::unordered_map<int, list<int>>::iterator it = followsStarAfterMap.begin(); it != followsStarAfterMap.end(); ++it) {
+		int currStmt = (*it).first;
+		list<int> after = (*it).second;
+		stmtList.insert(stmtList.end(), after.begin(), after.end());
+		stmtList.sort();
+		stmtList.unique();
+	}
+	return stmtList;
+}
+
+pair<list<int>, list<int>> FollowsStarAfter::getAllFollows() {
+	list<int> bef;
+	list<int> aft;
+
+	for (std::unordered_map<int, list<int>>::iterator it = followsStarAfterMap.begin(); it != followsStarAfterMap.end(); ++it) {
+		int currStmt = (*it).first;
+		list<int> after = (*it).second;
+
+		for (std::list<int>::iterator it2 = after.begin(); it2 != after.end(); ++it2) {
+			bef.push_back(currStmt);
+			aft.push_back((*it2));
+		}
+	}
+
+	return make_pair(bef, aft);
 }

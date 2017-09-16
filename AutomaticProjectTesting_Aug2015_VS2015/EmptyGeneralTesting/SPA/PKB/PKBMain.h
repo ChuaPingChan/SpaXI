@@ -52,6 +52,12 @@ public:
 
 	list<int> getBeforeStar(int aftStmt, string type);
 
+	list<int> getAllBeforeStar(string type);
+
+	list<int> getAllAfterStar(string type);
+
+	pair<list<int>, list<int>> getAllFollowsStar(string type1, string type2);
+
 	bool startProcessComplexRelations();
 
 private:

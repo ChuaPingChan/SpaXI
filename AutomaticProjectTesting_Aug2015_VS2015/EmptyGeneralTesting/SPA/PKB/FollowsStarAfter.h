@@ -15,6 +15,9 @@ public:
 
 	bool isAfterStar(int stmtBefore, int stmtAfter);
 
+	list<int> getAllAfterStar();
+
+	pair <list<int>, list<int>> getAllFollows();
 private:
 	unordered_map<int, list<int>> followsStarAfterMap;
 };
