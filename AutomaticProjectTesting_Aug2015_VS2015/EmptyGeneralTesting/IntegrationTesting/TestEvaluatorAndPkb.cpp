@@ -20,47 +20,53 @@ namespace UnitTesting
         TEST_METHOD(TestEvaluatorFollows)
         {
             //Case 1 - Positive: Follows(int, int)
-            /*QueryEvaluator qe1Positive = QueryEvaluator();
+            QueryEvaluator qe1Positive = QueryEvaluator();
             PKBMain PKB1Positive;
+            PKB1Positive.setFollowsRel(0, 1);
             PKB1Positive.setFollowsRel(1, 2);
             qe1Positive.setPkb(PKB1Positive);
             array<string, 4> arrToEvaluate1Positive = { "int", "1", "int", "2" };
             qe1Positive.evaluateFollowsTest(arrToEvaluate1Positive);
-            Assert::IsTrue(qe1Positive.getHasResult());*/
+            Assert::IsTrue(qe1Positive.getHasResult());
 
             //Case 1 - Negative: Follows(int, int)
-            /*QueryEvaluator qe1Negative = QueryEvaluator();
+            QueryEvaluator qe1Negative = QueryEvaluator();
             PKBMain PKB1Negative;
+            PKB1Negative.setFollowsRel(0, 1);
             PKB1Negative.setFollowsRel(1, 2);
             qe1Negative.setPkb(PKB1Negative);
             array<string, 4> arrToEvaluate1Negative = { "int", "3", "int", "4" };
             qe1Negative.evaluateFollowsTest(arrToEvaluate1Negative);
-            Assert::IsFalse(qe1Negative.getHasResult());*/
+            Assert::IsFalse(qe1Negative.getHasResult());
 
             //Case 2 - Positive: Follows(int, _)
-            /*QueryEvaluator qe2Positive = QueryEvaluator();
+            QueryEvaluator qe2Positive = QueryEvaluator();
             PKBMain PKB2Positive;
+            PKB2Positive.setFollowsRel(0, 1);
             PKB2Positive.setFollowsRel(1, 2);
             qe2Positive.setPkb(PKB2Positive);
             array<string, 4> arrToEvaluate2Positive = { "int", "1", "_", "" };
             qe2Positive.evaluateFollowsTest(arrToEvaluate2Positive);
-            Assert::IsTrue(qe2Positive.getHasResult());*/
+            Assert::IsTrue(qe2Positive.getHasResult());
 
             //Case 2 - Negative: Follows(int, _)
-            /*QueryEvaluator qe2Negative = QueryEvaluator();
+            QueryEvaluator qe2Negative = QueryEvaluator();
             PKBMain PKB2Negative;
+            PKB2Negative.setFollowsRel(0, 1);
             PKB2Negative.setFollowsRel(1, 2);
             qe2Negative.setPkb(PKB2Negative);
             array<string, 4> arrToEvaluate2Negative = { "int", "3", "_", "" };
             qe2Negative.evaluateFollowsTest(arrToEvaluate2Negative);
-            Assert::IsFalse(qe2Negative.getHasResult());*/
+            Assert::IsFalse(qe2Negative.getHasResult());
 
             //Case 3 - Positive: Follows(int, synonym)
-            /*QueryEvaluator qe3Positive = QueryEvaluator();
+            QueryEvaluator qe3Positive = QueryEvaluator();
             PKBMain PKB3Positive;
+            PKB3Positive.setFollowsRel(0, 1);
             PKB3Positive.setFollowsRel(1, 2);
             PKB3Positive.setFollowsRel(2, 3);
             PKB3Positive.setFollowsRel(3, 4);
+            qe3Positive.setPkb(PKB3Positive);
             array<string, 4> arrToEvaluate3Positive = { "int", "2", "assign", "a" };
             qe3Positive.evaluateFollowsTest(arrToEvaluate3Positive);
             pair<list<string>, list<string>> expectedPair;
@@ -70,7 +76,7 @@ namespace UnitTesting
             expectedPair = make_pair(expectedList1, expectedList2);
             pair<list<string>, list<string>> actualPair = qe3Positive.getResultSuchThat();
             Assert::IsTrue(qe3Positive.getHasResult());
-            Assert::IsTrue(expectedPair == actualPair);*/
+            Assert::IsTrue(expectedPair == actualPair);
 
             //Case 3 - Negative: Follows(int, synonym)
             //TODO
