@@ -106,38 +106,56 @@ namespace UnitTesting {
             Assert::IsTrue(pt.addToPatternTable(7, "c", "a-b-c"));
 
             // test getLeftVariables()
-            list<pair<int, string>> expectedVariables;
-            expectedVariables.push_back(make_pair(1, "a"));
-            expectedVariables.push_back(make_pair(2, "b"));
-            expectedVariables.push_back(make_pair(3, "a"));
-            expectedVariables.push_back(make_pair(4, "c"));
-            expectedVariables.push_back(make_pair(5, "d"));
-            expectedVariables.push_back(make_pair(6, "e"));
-            expectedVariables.push_back(make_pair(7, "c"));
+            list<int> expectedStmt;
+            expectedStmt.push_back(1);
+            expectedStmt.push_back(2);
+            expectedStmt.push_back(3);
+            expectedStmt.push_back(4);
+            expectedStmt.push_back(5);
+            expectedStmt.push_back(6);
+            expectedStmt.push_back(7);
 
-            list<pair<int, string>> testVariables = pt.getLeftVariables();
-            while (!expectedVariables.empty() && !testVariables.empty()) {
-                Assert::AreEqual(expectedVariables.front().first, testVariables.front().first);
-                Assert::AreEqual(expectedVariables.front().second, testVariables.front().second);
+            list<string> expectedVariables;
+            expectedVariables.push_back("a");
+            expectedVariables.push_back("b");
+            expectedVariables.push_back("a");
+            expectedVariables.push_back("c");
+            expectedVariables.push_back("d");
+            expectedVariables.push_back("e");
+            expectedVariables.push_back("c");
+
+            pair<list<int>,list<string>> testVariables = pt.getLeftVariables();
+            while (!expectedStmt.empty() && !expectedVariables.empty() && !testVariables.first.empty() && !testVariables.second.empty())
+            {
+                Assert::AreEqual(expectedStmt.front(), testVariables.first.front());
+                Assert::AreEqual(expectedVariables.front(), testVariables.second.front());
                 expectedVariables.pop_front();
-                testVariables.pop_front();
+                expectedStmt.pop_front();
+                testVariables.first.pop_front();
+                testVariables.second.pop_front();
             }
 
             // test getLeftVariablesThatMatchWithString(string)
-            expectedVariables.push_back(make_pair(1, "a"));
-            expectedVariables.push_back(make_pair(3, "a"));
-            expectedVariables.push_back(make_pair(5, "d"));
-            expectedVariables.push_back(make_pair(6, "e"));
+            expectedStmt.push_back(1);
+            expectedStmt.push_back(3);
+            expectedStmt.push_back(5);
+            expectedStmt.push_back(6);
+            expectedVariables.push_back("a");
+            expectedVariables.push_back("a");
+            expectedVariables.push_back("d");
+            expectedVariables.push_back("e");
             
             testVariables = pt.getLeftVariableThatMatchWithString("a+b");
-            while (!expectedVariables.empty() && !testVariables.empty()) 
+            while (!expectedStmt.empty() && !expectedVariables.empty() && !testVariables.first.empty() && !testVariables.second.empty())
             {
-                Assert::AreEqual(expectedVariables.front().first, testVariables.front().first);
-                Assert::AreEqual(expectedVariables.front().second, testVariables.front().second);
+                Assert::AreEqual(expectedStmt.front(), testVariables.first.front());
+                Assert::AreEqual(expectedVariables.front(), testVariables.second.front());
                 expectedVariables.pop_front();
-                testVariables.pop_front();
+                expectedStmt.pop_front();
+                testVariables.first.pop_front();
+                testVariables.second.pop_front();
             }
-
+            
             // test getExactBothMatches(string, string)
             list<int> expectedAssignList;
             expectedAssignList.push_back(4);

@@ -19,7 +19,7 @@ public:
     list<string> getModVariablesFromStmt(int stmtNumber);
     //
     list<int> getStmtThatModifies();
-    list<pair<int, string>> getModPairs();
+    pair<list<int>,list<string>> getModPair();
     
 private:
     unordered_map<int, list<string>>modStmtToVarMap;

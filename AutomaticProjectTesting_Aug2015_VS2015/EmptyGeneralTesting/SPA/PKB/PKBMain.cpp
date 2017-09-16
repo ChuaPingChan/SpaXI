@@ -82,3 +82,33 @@ int PKBMain::getAfter(int currStmt, string type) {
 
 	return statement;
 }
+
+bool PKBMain::isPresent(string var)
+{
+    VarIdxTable vit;
+    return vit.isVarPresent(var);
+}
+
+bool PKBMain::isPresent(int stmtNum)
+{
+    StmtTypeList stmtlist;
+    return stmtlist.isPresent(stmtNum);
+}
+
+bool PKBMain::isAssignment(int stmtNum)
+{
+    StmtTypeList list;
+    return list.isAssignStmt(stmtNum);
+}
+
+bool PKBMain::isWhile(int stmtNum)
+{
+    StmtTypeList list;
+    return list.isWhileStmt(stmtNum);
+}
+
+list<int> PKBMain::getAllWhiles()
+{
+    StmtTypeList list;
+    return list.getWhileStmtList();
+}

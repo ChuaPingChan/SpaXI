@@ -169,14 +169,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestAST.cpp" />
+    <ClCompile Include="TestConstantList.cpp" />
     <ClCompile Include="TestDesignExtractor.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\SPA\PKB;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="TestFollowsTable.cpp" />
+    <ClCompile Include="TestModTableStmtToVar.cpp" />
     <ClCompile Include="TestParentToChildTable.cpp" />
     <ClCompile Include="TestParser.cpp" />
     <ClCompile Include="TestParserPKB.cpp" />
+    <ClCompile Include="TestPatternTable.cpp" />
     <ClCompile Include="TestPKBMain.cpp" />
+    <ClCompile Include="TestStmtTypeList.cpp" />
+    <ClCompile Include="TestUsesTableStmtToVar.cpp" />
+    <ClCompile Include="TestVarIdxTable.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
