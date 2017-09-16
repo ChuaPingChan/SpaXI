@@ -86,6 +86,11 @@ void QueryEvaluator::evaluate()
 }
 
 /*--------------- Unit Testing ---------------*/
+void QueryEvaluator::setPkb(PKBMain pkb)
+{
+    PKB = pkb;
+}
+
 bool QueryEvaluator::getHasResult()
 {
     return hasResult;
@@ -175,12 +180,11 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 
 	if (type1 == "int" && type2 == "int")
 	{
-        //hasResult = isFollows(stoi(arg1), stoi(arg2));
+        hasResult = PKB.isFollows(stoi(arg1), stoi(arg2));
 	}
 	else if (type1 == "int" && type2 == "_")
 	{
-        /*OK*/
-        //hasResult = isBefore(stoi(arg1));
+        hasResult = PKB.isBefore(stoi(arg1));
 	}
 	else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while")) 
 	{
