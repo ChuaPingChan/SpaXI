@@ -771,7 +771,7 @@ list<string> QueryEvaluator::getIntersection(list<string> list1, list<string> li
 
 list<string> QueryEvaluator::getCommonSynonymResult(list<string> select, pair<list<string>, list<string>> suchThat, pair<list<string>, list<string>> pattern)
 {
-    list<string> tempResult = {"none"};
+    list<string> tempResult = {};
     list<string> tempResultSuchThat;
     list<string> tempResultPattern;
 
