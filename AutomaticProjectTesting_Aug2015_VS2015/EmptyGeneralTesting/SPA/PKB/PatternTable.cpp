@@ -119,6 +119,20 @@ list<int> PatternTable::getPartialBothMatches(string var, string expression)
     return assignList;
 }
 
+list<int> PatternTable::getLeftVariableMatchingStmts(string var)
+{
+    list<int> stmtList;
+    unordered_map<int, pair<string, string>>::iterator it;
+    for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
+    {
+        if (var.compare(it->second.first) == 0)
+        {
+            stmtList.push_back(it->first);
+        }
+    }
+    return stmtList;
+}
+
 
 
 //////////////////////////////////////////////////////////

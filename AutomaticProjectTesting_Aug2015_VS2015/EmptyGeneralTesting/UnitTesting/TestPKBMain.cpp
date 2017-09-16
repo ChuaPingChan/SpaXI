@@ -126,5 +126,125 @@ namespace UnitTesting
 
 			Assert::IsFalse(PKB.hasFollows());
 		}
+		
+		TEST_METHOD(TestGeneralPurposeAPI)
+        {
+            PKBMain PKB;
+            Assert::IsTrue(PKB.addAssignmentStmt(1));
+            Assert::IsTrue(PKB.addAssignmentStmt(3));
+            Assert::IsTrue(PKB.addAssignmentStmt(4));
+            Assert::IsTrue(PKB.addAssignmentStmt(6));
+            Assert::IsTrue(PKB.addAssignmentStmt(8));
+            Assert::IsTrue(PKB.addWhileStmt(2));
+            Assert::IsTrue(PKB.addWhileStmt(5));
+            Assert::IsTrue(PKB.addWhileStmt(7));
+            // test isAssignment
+            Assert::IsTrue(PKB.isAssignment(6));
+            Assert::IsFalse(PKB.isAssignment(7));
+            // test isWhile
+            Assert::IsTrue(PKB.isWhile(2));
+            Assert::IsFalse(PKB.isWhile(3));
+            // test isPresent
+            Assert::IsTrue(PKB.addVariable("hello"));
+            Assert::IsTrue(PKB.addVariable("kimochi"));
+            Assert::IsTrue(PKB.isPresent(5));
+            Assert::IsFalse(PKB.isPresent(9));
+            Assert::IsTrue(PKB.isPresent("hello"));
+            Assert::IsFalse(PKB.isPresent("world"));
+            // test getWhiles
+            Assert::IsFalse(PKB.addWhileStmt(5));
+            list<int> expected;
+            expected.push_back(2);
+            expected.push_back(5);
+            expected.push_back(7);
+            list<int> test = PKB.getAllWhiles();
+            while (!expected.empty() && !test.empty())
+            {
+                Assert::AreEqual(expected.front(), test.front());
+                expected.pop_front();
+                test.pop_front();
+            }
+        }
+
+        TEST_METHOD(TestModifiesTable) {
+            PKBMain PKB;
+            Assert::IsTrue(PKB.setModTableStmtToVar(1, "a"));
+            Assert::IsTrue(PKB.setModTableStmtToVar(1, "b"));
+            Assert::IsTrue(PKB.setModTableStmtToVar(2, "a"));
+            Assert::IsTrue(PKB.setModTableStmtToVar(4, "c"));
+            Assert::IsTrue(PKB.setModTableStmtToVar(7, "d"));
+            Assert::IsTrue(PKB.setModTableStmtToVar(888, "e"));
+
+            // test getModifiesFromStmt
+            list<string> templist;
+            templist.push_back("a");
+            templist.push_back("b");
+            list<string> testlist = PKB.getModifiesFromStmt(1);
+            while (!templist.empty() && !testlist.empty())
+            {
+                Assert::AreEqual(templist.front(), testlist.front());
+                testlist.pop_front();
+                templist.pop_front();
+            }
+
+            // check for zero duplicates
+            templist.push_back("a");
+            templist.push_back("b");
+            Assert::IsTrue(PKB.setModTableStmtToVar(1, "a"));
+            testlist = PKB.getModifiesFromStmt(2);
+            while (!templist.empty() && !testlist.empty())
+            {
+                Assert::AreEqual(templist.front(), testlist.front());
+                testlist.pop_front();
+                templist.pop_front();
+            }
+
+            // test isMod
+            Assert::IsTrue(PKB.isMod(1, "a"));
+            Assert::IsTrue(PKB.isMod(1, "b"));
+            Assert::IsTrue(PKB.isMod(2, "a"));
+            Assert::IsFalse(PKB.isMod(2, "abc"));
+
+            // test isModifyingAnything
+            Assert::IsTrue(PKB.isModifyingAnything(1));
+            Assert::IsFalse(PKB.isModifyingAnything(3));
+
+            // test getStmtFromVar
+            list<int> stmtList;
+            stmtList.push_back(1);
+            stmtList.push_back(2);
+            list<int> testStmtList;
+            testStmtList = PKB.getModifiesFromVar("a","stmt");
+            while (!stmtList.empty() && !testStmtList.empty())
+            {
+                Assert::AreEqual(stmtList.front(), testStmtList.front());
+                testStmtList.pop_front();
+                stmtList.pop_front();
+            }
+            // test getStmtThatModifiesAnything
+            
+            // test getModPairs
+
+            stmtList.push_back(1);
+            stmtList.push_back(1);
+            stmtList.push_back(2);
+            stmtList.push_back(4);
+            stmtList.push_back(7);
+            stmtList.push_back(888);
+
+            list<string> modList;
+            modList.push_back("a");
+            modList.push_back("b");
+            modList.push_back("a");
+            modList.push_back("c");
+            modList.push_back("d");
+            modList.push_back("e");
+
+
+        }
+
+        TEST_METHOD(TestUsesTable) {
+            PKBMain PKB;
+        }
 	};
 }

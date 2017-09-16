@@ -20,6 +20,8 @@ public:
     bool isPresent(int stmt);
     list<int> getAssignStmtList();
     list<int> getWhileStmtList();
+    list<int> getStmtType(list<int> stmtList, string type);
+    pair<list<int>, list<string>> getStmtType(pair<list<int>, list<string>> pairOfList, string type);
 private:
     list<int> assignStmtList;
     list<int> whileStmtList;

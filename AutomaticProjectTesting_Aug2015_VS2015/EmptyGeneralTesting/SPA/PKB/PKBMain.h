@@ -89,15 +89,48 @@ public:
 
 	bool startProcessComplexRelations();
 	
-	//PKB-QueryEvaluator
+	//General Purpose API for query evaluator
     bool isPresent(string var);
     bool isPresent(int stmtNum);
     bool isAssignment(int stmtNum);
     bool isWhile(int stmtNum);
     list<int> getAllWhiles();
-
-
+    
     //PKB-Parser
+    bool addVariable(string var);
+    bool addProcedure(string proc);
+    bool addAssignmentStmt(int stmt);
+    bool addWhileStmt(int stmt);
+    bool addConstant(int stmt, int constant);
+    bool setModTableStmtToVar(int stmt, string var);
+    bool setModTableProcToVar(string proc, string var);
+    bool setUseTableStmtToVar(int stmt, string var);
+    bool setUseTableProcToVar(string proc, string var);
+    bool setPatternRelation(int stmt, string var, string expression);
+
+    //PKB query evaluator (Uses, Modifies)
+    bool isUses(int stmt, string var);
+    bool isMod(int stmt, string var);
+    bool isUsingAnything(int stmt);
+    bool isModifyingAnything(int stmt);
+    list<string> getUsesFromStmt(int stmt);
+    list<string> getModifiesFromStmt(int stmt);
+    list<int> getUsesFromVar(string var, string type);
+    list<int> getModifiesFromVar(string var, string type);
+    list<int> getStmtThatUsesAnything(string type);
+    list<int> getStmtThatModifiesAnything(string type);
+    pair<list<int>, list<string>> getUsesPairs(string type);
+    pair<list<int>, list<string>> getModifiesPairs(string type);
+
+    //PKB query evaluator (Pattern)
+    pair<list<int>, list<string>> getLeftVariables();
+    pair<list<int>, list<string>> getLeftVariablesThatMatchWith(string expression);
+    list<int> getPartialMatchStmt(string expression);
+    list<int> getPartialBothMatches(string var, string expression);
+    list<int> getExactMatchStmt(string expression);
+    list<int> getExactBothMatches(string var, string expression);
+    list<int> getAllAssignments();
+    list<int> getAllAssignments(string var);
 
 private:
 	ChildToParentStarTable childToParentStarTable;
@@ -109,4 +142,16 @@ private:
 	FollowsStarBefore followsStarBefore;
 	unordered_map<int, int> followsBeforeMap;
 	unordered_map<int, int> followsAfterMap;
+	
+	ConstantTable constantTable;
+    ModTableProcToVar modTableProcToVar;
+    ModTableStmtToVar modTableStmtToVar;
+    ModTableVar modTableVar;
+    PatternTable patternTable;
+    ProcIdxTable procIdxTable;
+    StmtTypeList stmtTypeList;
+    UsesTableProcToVar usesTableProcToVar;
+    UsesTableStmtToVar usesTableStmtToVar;
+    UsesTableVar usesTableVar;
+    VarIdxTable varIdxTable;
 };

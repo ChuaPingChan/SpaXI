@@ -11,9 +11,10 @@ using namespace std;
 class VarIdxTable {
 public:
     VarIdxTable();
-    bool addToVarIdxTable(string var, int index);
+    bool addToVarIdxTable(string var);
     int getIdxFromVar(string var);
     bool isVarPresent(string var);
 private:
     unordered_map<string, int> varIdxMap;
+    int varIdx = 0;
 };
