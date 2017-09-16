@@ -59,5 +59,8 @@ private:
 
     /*--------------- Find set intersection between two lists---------------*/
     list<string> getIntersection(list<string> list1, list<string> list2);
+
+    /*--------------- Convert list of integers to list of strings ---------------*/
+    list<string> getListStringFromListInt(list<int> listOfInt);
 };
 
