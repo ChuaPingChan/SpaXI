@@ -1,0 +1,7 @@
+procedure ABC {
+while a 
+{ 
+	a = 3; 
+   b = 2  ; 
+} 
+} 
