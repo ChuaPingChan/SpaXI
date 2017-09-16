@@ -31,3 +31,18 @@ bool StmtTypeList::isWhileStmt(int stmt)
 {
     return find(whileStmtList.begin(), whileStmtList.end(), stmt) != whileStmtList.end();
 }
+
+bool StmtTypeList::isPresent(int stmt)
+{
+    return stmt <= assignStmtList.size() + whileStmtList.size();
+}
+
+list<int> StmtTypeList::getAssignStmtList()
+{
+    return assignStmtList;
+}
+
+list<int> StmtTypeList::getWhileStmtList()
+{
+    return whileStmtList;
+}

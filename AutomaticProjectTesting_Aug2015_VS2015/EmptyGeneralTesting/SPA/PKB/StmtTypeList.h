@@ -17,6 +17,9 @@ public:
     bool addToWhileStmtList(int stmt);
     bool isAssignStmt(int stmt);
     bool isWhileStmt(int stmt);
+    bool isPresent(int stmt);
+    list<int> getAssignStmtList();
+    list<int> getWhileStmtList();
 private:
     list<int> assignStmtList;
     list<int> whileStmtList;
