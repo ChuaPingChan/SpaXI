@@ -208,28 +208,30 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 	}
 	else if (type1 == "_" && type2 == "int")
 	{ 
-        /*OK*/
-        //hasResult = isAfter(stoi(arg2));
+        hasResult = PKB.isAfter(stoi(arg2));
 	}
 	else if (type1 == "_" && type2 == "_")
 	{
-        //hasResult = hasFollows();
+        hasResult = PKB.hasFollows();
 	}
 	else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        pair<list<string>, list<string>> result;// = isFollowedBy(arg2)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAllAfter(arg2);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
 	{
-        pair<list<string>, list<string>> result;// = isFollowedBy(arg1, stoi(arg2))
+        /*list<string> result = PKB.getBefore(arg1, stoi(arg2));
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
@@ -237,30 +239,36 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
         else
         {
             resultSuchThat = result;
-        }
+        }*/
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-        pair<list<string>, list<string>> result;// = getAllBefore(arg1)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAllBefore(type1);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
 	}
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        pair<list<string>, list<string>> result;// = getFollows(arg1, arg2)
+        pair<list<int>, list<int>> result = PKB.getAllFollows(arg1, arg2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result.first);
+            list<string> list2 = getListStringFromListInt(result.second);
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
 	}
     else
