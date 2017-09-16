@@ -28,6 +28,17 @@ bool ParentToChildTable::addParentChild(int parentStmt, int childStmt)
 	return false;
 }
 
+bool ParentToChildTable::isParent(int parentStmt) {
+	if (parentToChildMap.find(parentStmt) != parentToChildMap.end()) {
+		return true;
+	}
+	return false;
+}
+
+bool ParentToChildTable::empty() {
+	return parentToChildMap.empty();
+}
+
 list<int> ParentToChildTable::getChildren(int parentStmt) {
 	return parentToChildMap[parentStmt];
 }
@@ -46,4 +57,30 @@ bool ParentToChildTable::isParentChild(int parentStmt, int childStmt) {
 	}
 
 	return false;
+}
+
+list<int> ParentToChildTable::getAllParents() {
+	list<int> stmtList;
+	for (std::unordered_map<int, list<int>>::iterator it = parentToChildMap.begin(); it != parentToChildMap.end(); ++it) {
+		stmtList.push_back((*it).first);
+	}
+	return stmtList;
+}
+
+pair<list<int>, list<int>> ParentToChildTable::getAllParentsRel() {
+	list<int> parent;
+	list<int> child;
+
+	for (std::unordered_map<int, list<int>>::iterator it = parentToChildMap.begin(); it != parentToChildMap.end(); ++it) {
+		int currStmt = (*it).first;
+		list<int> after = (*it).second;
+
+		for (std::list<int>::iterator it2 = after.begin(); it2 != after.end(); ++it2) {
+			parent.push_back(currStmt);
+			child.push_back((*it2));
+		}
+	}
+
+	pair<list<int>, list<int>> listPair = make_pair(parent, child);
+	return listPair;
 }
