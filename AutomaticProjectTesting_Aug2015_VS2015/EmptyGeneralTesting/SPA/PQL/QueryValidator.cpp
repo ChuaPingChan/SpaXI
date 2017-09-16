@@ -53,29 +53,240 @@ const string SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "("
 
 bool QueryValidator::isValidQuery(string query)
 {
+
 	vector<string> inputVector = tokenize(query);
+
     for (vector<string>::iterator iter = inputVector.begin(); iter != inputVector.end(); ++iter) {
         string currentLine = *iter;
-        if (currentLine == inputVector.back()) 
-        {
-            if (!isValidSelect(currentLine)) 
-            {
+        if (currentLine == inputVector.back()) {
+            if (!isValidSelect(currentLine)) {
                 return false;
             }
         }
-
-        else 
-        {
-            if (!isValidDeclaration(currentLine)) 
-            {
+        else {
+            if (!isValidDeclaration(currentLine)) {
                 return false;
             }
         }
     }
-    return true; 
+
+    return true; // && isValidSelect();
 }
 
+/*--------------- For IntegrationTesting ---------------*/
+
+bool QueryValidator::isValidDeclarationTest(string str)
+{
+    return isValidDeclaration(str);
+}
+
+
+/*--------------- For UnitTesting ---------------*/
+
+string QueryValidator::removeAllSpacesTest(string str)
+{
+	return removeAllSpaces(str);
+}
+
+/*--------------- Grammar Regex Test---------------*/
+bool QueryValidator::isValidLetterTest(string str)
+{
+    regex letterRegexCheck(LETTER);
+    return regex_match(str, letterRegexCheck);
+}
+
+bool QueryValidator::isValidIntegerTest(string str)
+{
+    regex integerRegexCheck(INTEGER);
+    return regex_match(str, integerRegexCheck);
+}
+
+bool QueryValidator::isValidSynonymTest(string str)
+{
+    return isValidSynonym(str);
+}
+
+bool QueryValidator::isValidStmtRefTest(string str)
+{
+    regex stmtRefRegexCheck(STMTREF);
+    return regex_match(str, stmtRefRegexCheck);
+}
+
+bool QueryValidator::isValidEntRefTest(string str)
+{
+    regex entRefRegexCheck(ENTREF);
+    return regex_match(str, entRefRegexCheck);
+}
+
+bool QueryValidator::isValidNameTest(string str)
+{
+    regex nameRegexCheck(NAME);
+    return regex_match(str, nameRegexCheck);
+}
+
+/*--------------- Splitting Query Test---------------*/
+
+vector<string> QueryValidator::tokenizeTest(string query)
+{
+    return tokenize(query);
+}
+
+/*--------------- Finding Argument in Clause Test---------------*/
+
+bool QueryValidator::isArgumentInClauseTest(string arg, vector<string> clause)
+{
+    return isArgumentInClause(arg, clause);
+}
+
+/*--------------- Splitting Query Test---------------*/
+
+bool QueryValidator::isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result)
+{
+    return (QueryValidator::getBetweenTwoStrings(str, firstDelim, secondDelim) == result);
+}
+
+/*--------------- Declaration Test---------------*/
+
+bool QueryValidator::isValidEntityTest(string str)
+{
+    return isValidEntity(str);
+}
+
+void QueryValidator::stubMethod()
+{
+}
+
+/*--------------- Pattern Test---------------*/
+bool QueryValidator::isValidFactorTest(string str)
+{
+    regex factorRegexCheck(FACTOR);
+    return regex_match(str, factorRegexCheck);
+}
+
+bool QueryValidator::isValidExpressionSpecTest(string str)
+{
+    regex expressionSpecRegexCheck(EXPRESSION_SPEC);
+    return regex_match(str, expressionSpecRegexCheck);
+}
+
+bool QueryValidator::isValidPatternRegexTest(string str)
+{
+    return isValidPatternRegex(str);
+}
+
+bool QueryValidator::isValidPatternTest(string str)
+{
+    return isValidPattern(str);
+}
+
+
+/*--------------- Relationship Test---------------*/
+bool QueryValidator::isValidModifiesRegexTest(string str)
+{
+    return isValidModifiesRegex(str);
+}
+
+bool QueryValidator::isValidUsesRegexTest(string str)
+{
+    return isValidUsesRegex(str);
+}
+
+bool QueryValidator::isValidFollowsRegexTest(string str)
+{
+    return isValidFollowsRegex(str);
+}
+
+bool QueryValidator::isValidParentRegexTest(string str)
+{
+    return isValidParentRegex(str);
+}
+
+bool QueryValidator::isValidModifiesTest(string str)
+{
+    return isValidModifies(str);
+}
+
+bool QueryValidator::isValidUsesTest(string str)
+{
+    return isValidUses(str);
+}
+
+bool QueryValidator::isValidFollowsTest(string str)
+{
+    return isValidFollows(str);
+}
+
+bool QueryValidator::isValidParentTest(string str)
+{
+    return isValidParent(str);
+}
+
+/*--------------- Select Test---------------*/
+bool QueryValidator::isValidSelectTest(string str)
+{
+    return isValidSelect(str);
+}
+
+bool QueryValidator::isValidSelectOverallRegexTest(string str)
+{
+    return isValidSelectOverallRegex(str);
+}
+
+
+
 /******************** Private methods ********************/
+
+/*--------------- Split initial query ---------------*/
+
+//split query using ';' as delimiter
+vector<string> QueryValidator::tokenize(string query)
+{
+    char delimiter = ';';
+    stringstream ss(query);
+    vector<string> tokens;
+    string arguments;
+
+    while (getline(ss, arguments, delimiter)) {
+        tokens.push_back(arguments);
+    }
+    return tokens;
+}
+
+/*--------------- Remove all spaces ---------------*/
+
+string QueryValidator::removeAllSpaces(string str) 
+{ 
+	str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+	return str;
+}
+
+/*--------------- Get string between two delimiters ---------------*/
+string QueryValidator::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)
+{
+    unsigned firstDelimPos = str.find(firstDelim);
+    unsigned middleDelimPos = firstDelimPos + firstDelim.length();
+    unsigned lastDelimPos = str.find(secondDelim);
+
+    return str.substr(middleDelimPos,
+        lastDelimPos - middleDelimPos);
+}
+
+/*--------------- Check if argument is in a clause ---------------*/
+
+bool QueryValidator::isArgumentInClause(string arg, vector<string> clause)
+{
+    if (find(clause.begin(), clause.end(), arg) != clause.end())
+        return true;
+    else
+        return false;
+}
+
+/*--------------- Check if string is an integer ---------------*/
+bool QueryValidator::isIntegerRegexCheck(string arg)
+{
+    regex checkInt = regex(INTEGER);
+    return regex_match(arg, checkInt);
+}
 
 /*--------------- Validation of Declaration ---------------*/
 //Pre-Cond: Semi-colon has to be removed
@@ -232,7 +443,7 @@ bool QueryValidator::isValidSelect(string str)
 
 	}
 		
-    return true;  
+    return true;  //stub
 }
 
 bool QueryValidator::isValidSelectBeginning(string str)
@@ -251,11 +462,12 @@ bool QueryValidator::isValidSelectBeginning(string str)
         if (!qtInstance->varExists(current))
             return false;
     }
+
+
     return true;
 }
 
-/*--------------- Validation of Clauses --------------*/
-
+//PRE-COND: Modifies(a,b)
 bool QueryValidator::isValidModifies(string str)
 {
     if (!isValidModifiesRegex(str))
@@ -372,7 +584,7 @@ bool QueryValidator::isValidUses(string str)
     if (qtInstance->varExists(arg2) && !isArgumentInClause(arg2, qtInstance->getVars())) //arg2 is a synonym and is NOT a variable
         return false;
 
-    //if arg1 exists in synonym bank or is statement number, check for arg2 and store in appropriate data type
+    //if arg1 exists in synonym bank or is statement number, then check for arg2 and store in appropriate data type
     if (isArgumentInClause(arg1, qtInstance->getAssigns()) || isArgumentInClause(arg1, qtInstance->getStmts()) || isArgumentInClause(arg1, qtInstance->getWhiles()) || isIntegerRegexCheck(arg1))
     {
         if (isArgumentInClause(arg2, qtInstance->getVars())) { //if arg2 is a variable synonym
@@ -462,7 +674,7 @@ bool QueryValidator::isValidUses(string str)
     return false;
 }
 
-//PRE-COND: arg1: stmt, assign, while, prog_line
+//PRE-COND: arg1: stmt, assign, while, if, prog_line
 bool QueryValidator::isValidFollows(string str)
 {
     if (!isValidFollowsRegex(str))
@@ -536,7 +748,7 @@ bool QueryValidator::isValidFollows(string str)
         arg1 = getBetweenTwoStrings(str, "Follows(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
-        if (arg1 == arg2 && arg1!="_") //arg1 cannot be the same as arg2
+        if (arg1 == arg2) //arg1 cannot be the same as arg2
             return false;
 
         if (isIntegerRegexCheck(arg1)) {
@@ -658,7 +870,7 @@ bool QueryValidator::isValidParent(string str)
         arg1 = getBetweenTwoStrings(str, "Parent(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
-        if (arg1 == arg2 && arg1!="_") //arg1 cannot be the same as arg2
+        if (arg1 == arg2) //arg1 cannot be the same as arg2
             return false;
 
         if (isIntegerRegexCheck(arg1)) {
@@ -708,8 +920,7 @@ bool QueryValidator::isValidParent(string str)
 
 }
 
-//PRE-COND: pattern arg1(arg2,arg3)
-//arg1 = assignment synonym, arg2 = variable synonym/"entRef", arg3 = "EXPRESSION"
+//PRE-COND: patternarg1(arg2,arg3) arg1 = assignment synonym, arg2 = variable synonym/"entRef", arg3 = "EXPRESSION"
 bool QueryValidator::isValidPattern(string str)
 {
     if (!isValidPatternRegex(str))
@@ -773,8 +984,6 @@ bool QueryValidator::isValidPattern(string str)
 
 }
 
-/*--------------- Regex Validation of Select --------------*/
-
 bool QueryValidator::isValidSelectOverallRegex(string str)
 {
     regex overallSelectRegexCheck(SELECT_OVERALL_REGEX);
@@ -810,219 +1019,3 @@ bool QueryValidator::isValidPatternRegex(string str)
     regex patternRegexCheck(PATTERN_REGEX);
     return regex_match(str, patternRegexCheck);
 }
-
-/******************** Private helper methods ********************/
-
-/*--------------- Split initial query ---------------*/
-
-//split query using ';' as delimiter
-vector<string> QueryValidator::tokenize(string query)
-{
-    char delimiter = ';';
-    stringstream ss(query);
-    vector<string> tokens;
-    string arguments;
-
-    while (getline(ss, arguments, delimiter)) {
-        tokens.push_back(arguments);
-    }
-    return tokens;
-}
-
-/*--------------- Remove all spaces ---------------*/
-
-string QueryValidator::removeAllSpaces(string str)
-{
-    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-    return str;
-}
-
-/*--------------- Get string between two delimiters ---------------*/
-string QueryValidator::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)
-{
-    unsigned firstDelimPos = str.find(firstDelim);
-    unsigned middleDelimPos = firstDelimPos + firstDelim.length();
-    unsigned lastDelimPos = str.find(secondDelim);
-
-    return str.substr(middleDelimPos,
-        lastDelimPos - middleDelimPos);
-}
-
-/*--------------- Check if argument is in a clause ---------------*/
-
-bool QueryValidator::isArgumentInClause(string arg, vector<string> clause)
-{
-    if (find(clause.begin(), clause.end(), arg) != clause.end())
-        return true;
-    else
-        return false;
-}
-
-/*--------------- Check if string is an integer ---------------*/
-bool QueryValidator::isIntegerRegexCheck(string arg)
-{
-    regex checkInt = regex(INTEGER);
-    return regex_match(arg, checkInt);
-}
-
-/******************** Public methods for testing ********************/
-
-/*--------------- For IntegrationTesting ---------------*/
-
-bool QueryValidator::isValidDeclarationTest(string str)
-{
-    return isValidDeclaration(str);
-}
-
-
-/*--------------- For UnitTesting ---------------*/
-
-string QueryValidator::removeAllSpacesTest(string str)
-{
-    return removeAllSpaces(str);
-}
-
-/*--------------- Grammar Regex Test---------------*/
-bool QueryValidator::isValidLetterTest(string str)
-{
-    regex letterRegexCheck(LETTER);
-    return regex_match(str, letterRegexCheck);
-}
-
-bool QueryValidator::isValidIntegerTest(string str)
-{
-    regex integerRegexCheck(INTEGER);
-    return regex_match(str, integerRegexCheck);
-}
-
-bool QueryValidator::isValidSynonymTest(string str)
-{
-    return isValidSynonym(str);
-}
-
-bool QueryValidator::isValidStmtRefTest(string str)
-{
-    regex stmtRefRegexCheck(STMTREF);
-    return regex_match(str, stmtRefRegexCheck);
-}
-
-bool QueryValidator::isValidEntRefTest(string str)
-{
-    regex entRefRegexCheck(ENTREF);
-    return regex_match(str, entRefRegexCheck);
-}
-
-bool QueryValidator::isValidNameTest(string str)
-{
-    regex nameRegexCheck(NAME);
-    return regex_match(str, nameRegexCheck);
-}
-
-/*--------------- Splitting Query Test---------------*/
-
-vector<string> QueryValidator::tokenizeTest(string query)
-{
-    return tokenize(query);
-}
-
-/*--------------- Finding Argument in Clause Test---------------*/
-
-bool QueryValidator::isArgumentInClauseTest(string arg, vector<string> clause)
-{
-    return isArgumentInClause(arg, clause);
-}
-
-/*--------------- Splitting Query Test---------------*/
-
-bool QueryValidator::isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result)
-{
-    return (QueryValidator::getBetweenTwoStrings(str, firstDelim, secondDelim) == result);
-}
-
-/*--------------- Declaration Test---------------*/
-
-bool QueryValidator::isValidEntityTest(string str)
-{
-    return isValidEntity(str);
-}
-
-void QueryValidator::stubMethod()
-{
-}
-
-/*--------------- Pattern Test---------------*/
-bool QueryValidator::isValidFactorTest(string str)
-{
-    regex factorRegexCheck(FACTOR);
-    return regex_match(str, factorRegexCheck);
-}
-
-bool QueryValidator::isValidExpressionSpecTest(string str)
-{
-    regex expressionSpecRegexCheck(EXPRESSION_SPEC);
-    return regex_match(str, expressionSpecRegexCheck);
-}
-
-bool QueryValidator::isValidPatternRegexTest(string str)
-{
-    return isValidPatternRegex(str);
-}
-
-bool QueryValidator::isValidPatternTest(string str)
-{
-    return isValidPattern(str);
-}
-
-
-/*--------------- Relationship Test---------------*/
-bool QueryValidator::isValidModifiesRegexTest(string str)
-{
-    return isValidModifiesRegex(str);
-}
-
-bool QueryValidator::isValidUsesRegexTest(string str)
-{
-    return isValidUsesRegex(str);
-}
-
-bool QueryValidator::isValidFollowsRegexTest(string str)
-{
-    return isValidFollowsRegex(str);
-}
-
-bool QueryValidator::isValidParentRegexTest(string str)
-{
-    return isValidParentRegex(str);
-}
-
-bool QueryValidator::isValidModifiesTest(string str)
-{
-    return isValidModifies(str);
-}
-
-bool QueryValidator::isValidUsesTest(string str)
-{
-    return isValidUses(str);
-}
-
-bool QueryValidator::isValidFollowsTest(string str)
-{
-    return isValidFollows(str);
-}
-
-bool QueryValidator::isValidParentTest(string str)
-{
-    return isValidParent(str);
-}
-
-/*--------------- Select Test---------------*/
-bool QueryValidator::isValidSelectTest(string str)
-{
-    return isValidSelect(str);
-}
-
-bool QueryValidator::isValidSelectOverallRegexTest(string str)
-{
-    return isValidSelectOverallRegex(str);
-}
-
