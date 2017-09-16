@@ -59,8 +59,7 @@ namespace IntegrationTesting
 
             /*--------------- Select beginning --------------*/
             //Valid query
-            qtInstance->clear();
-			qtInstance = QueryTree::getInstance();
+            qtInstance = qtInstance->clear();
 			qv = QueryValidator();
             str = "Select v";
             qtInstance->insertVariable("variable", "v");

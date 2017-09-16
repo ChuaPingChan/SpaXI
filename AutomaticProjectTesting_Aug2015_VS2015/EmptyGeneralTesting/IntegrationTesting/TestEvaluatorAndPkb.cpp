@@ -12,121 +12,197 @@ namespace UnitTesting
     TEST_CLASS(TestEvaluatorAndPkb)
     {
     public:
+        QueryTree* qtInstance = QueryTree::getInstance();
+        QueryEvaluator qe;
         list<string> expectedList1;
         list<string> expectedList2;
         pair<list<string>, list<string>> expectedPair;
         pair<list<string>, list<string>> actualPair;
 
-       // TEST_METHOD(TestEvaluatorSelect)
-       // {
+        // TEST_METHOD(TestEvaluatorSelect)
+        // {
             
-       // }
+        // }
 
-        TEST_METHOD(TestEvaluatorFollows)
+        //Case 1 - Positive: Follows(int, int)
+        TEST_METHOD(TestEvaluatorFollowCase1Positive)
         {
-            //Case 1 - Positive: Follows(int, int)
-            QueryEvaluator qe1Positive = QueryEvaluator();
-            PKBMain PKB1Positive;
-            PKB1Positive.setFollowsRel(0, 1);
-            PKB1Positive.setFollowsRel(1, 2);
-            qe1Positive.setPkb(PKB1Positive);
-            array<string, 4> arrToEvaluate1Positive = { "int", "1", "int", "2" };
-            qe1Positive.evaluateFollowsTest(arrToEvaluate1Positive);
-            Assert::IsTrue(qe1Positive.getHasResult());
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "int", "1", "int", "2" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            Assert::IsTrue(qe.getHasResult());
+        }
 
-            //Case 1 - Negative: Follows(int, int)
-            QueryEvaluator qe1Negative = QueryEvaluator();
-            PKBMain PKB1Negative;
-            PKB1Negative.setFollowsRel(0, 1);
-            PKB1Negative.setFollowsRel(1, 2);
-            qe1Negative.setPkb(PKB1Negative);
-            array<string, 4> arrToEvaluate1Negative = { "int", "3", "int", "4" };
-            qe1Negative.evaluateFollowsTest(arrToEvaluate1Negative);
-            Assert::IsFalse(qe1Negative.getHasResult());
+        //Case 1 - Negative: Follows(int, int)
+        TEST_METHOD(TestEvaluatorFollowCase1Negative)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "int", "3", "int", "4" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            Assert::IsFalse(qe.getHasResult());
+        }
 
-            //Case 2 - Positive: Follows(int, _)
-            QueryEvaluator qe2Positive = QueryEvaluator();
-            PKBMain PKB2Positive;
-            PKB2Positive.setFollowsRel(0, 1);
-            PKB2Positive.setFollowsRel(1, 2);
-            qe2Positive.setPkb(PKB2Positive);
-            array<string, 4> arrToEvaluate2Positive = { "int", "1", "_", "" };
-            qe2Positive.evaluateFollowsTest(arrToEvaluate2Positive);
-            Assert::IsTrue(qe2Positive.getHasResult());
+        //Case 2 - Positive: Follows(int, _)
+        TEST_METHOD(TestEvaluatorFollowCase2Positive)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "int", "1", "_", "" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            Assert::IsTrue(qe.getHasResult());
+        }
 
-            //Case 2 - Negative: Follows(int, _)
-            QueryEvaluator qe2Negative = QueryEvaluator();
-            PKBMain PKB2Negative;
-            PKB2Negative.setFollowsRel(0, 1);
-            PKB2Negative.setFollowsRel(1, 2);
-            qe2Negative.setPkb(PKB2Negative);
-            array<string, 4> arrToEvaluate2Negative = { "int", "3", "_", "" };
-            qe2Negative.evaluateFollowsTest(arrToEvaluate2Negative);
-            Assert::IsFalse(qe2Negative.getHasResult());
+        //Case 2 - Negative: Follows(int, _)
+        TEST_METHOD(TestEvaluatorFollowCase2Negative)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "int", "3", "_", "" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            Assert::IsFalse(qe.getHasResult());
+        }
 
-            //Case 3 - Positive: Follows(int, synonym)
-            QueryEvaluator qe3Positive = QueryEvaluator();
-            PKBMain PKB3Positive;
+        //Case 3 - Positive: Follows(int, synonym)
+        TEST_METHOD(TestEvaluatorFollowCase3Positive)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
             expectedList1.clear();
             expectedList2.clear();
             expectedPair = getEmptyPairOfListOfString();
             actualPair = getEmptyPairOfListOfString();
-            PKB3Positive.setFollowsRel(0, 1);
-            PKB3Positive.setFollowsRel(1, 2);
-            PKB3Positive.setFollowsRel(2, 3);
-            PKB3Positive.setFollowsRel(3, 4);
-            qe3Positive.setPkb(PKB3Positive);
-            array<string, 4> arrToEvaluate3Positive = { "int", "2", "assign", "a" };
-            qe3Positive.evaluateFollowsTest(arrToEvaluate3Positive);
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            PKB.setFollowsRel(2, 3);
+            PKB.setFollowsRel(3, 4);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "int", "2", "assign", "a" };
+            qe.evaluateFollowsTest(arrToEvaluate);
             expectedList1.push_back("3");
             expectedPair = make_pair(expectedList1, expectedList2);
-            actualPair = qe3Positive.getResultSuchThat();
-            Assert::IsTrue(qe3Positive.getHasResult());
+            actualPair = qe.getResultSuchThat();
+            Assert::IsTrue(qe.getHasResult());
             Assert::IsTrue(expectedPair == actualPair);
+        }
 
-            //Case 3 - Negative: Follows(int, synonym)
-            QueryEvaluator qe3Negative = QueryEvaluator();
-            PKBMain PKB3Negative;
+        //Case 3 - Negative: Follows(int, synonym)
+        TEST_METHOD(TestEvaluatorFollowCase3Negative)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
             expectedList1.clear();
             expectedList2.clear();
             expectedPair = getEmptyPairOfListOfString();
             actualPair = getEmptyPairOfListOfString();
-            PKB3Negative.setFollowsRel(0, 1);
-            PKB3Negative.setFollowsRel(1, 2);
-            qe3Negative.setPkb(PKB3Negative);
-            array<string, 4> arrToEvaluate3Negative = { "int", "2", "assign", "a" };
-            qe3Negative.evaluateFollowsTest(arrToEvaluate3Negative);
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "int", "2", "assign", "a" };
+            qe.evaluateFollowsTest(arrToEvaluate);
             expectedPair = make_pair(expectedList1, expectedList2);
-            actualPair = qe3Negative.getResultSuchThat();
-            Assert::IsFalse(qe3Negative.getHasResult());
+            actualPair = qe.getResultSuchThat();
+            Assert::IsFalse(qe.getHasResult());
             Assert::IsTrue(expectedPair == actualPair);
+        }
 
+        //Case 4 - Positive: Follows(_, int)
+        TEST_METHOD(TestEvaluatorFollowCase4Positive)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "_", "", "int", "2" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            Assert::IsTrue(qe.getHasResult());
+        }
 
-            //Case 4 - Positive: Follows(_, int)
-            QueryEvaluator qe4Positive = QueryEvaluator();
-            PKBMain PKB4Positive;
+        //Case 4 - Negative: Follows(_, int)
+        TEST_METHOD(TestEvaluatorFollowCase4Negative)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "_", "", "int", "4" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            Assert::IsFalse(qe.getHasResult());
+        }
+
+        //Case 5 - Positive: Follows(_, _)
+        TEST_METHOD(TestEvaluatorFollowCase5Positive)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "_", "", "_", "" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            Assert::IsTrue(qe.getHasResult());
+        }
+        
+        //Case 5 - Negative: Follows(_, _)
+        TEST_METHOD(TestEvaluatorFollowCase5Negative)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            qe.setPkb(PKB);
+            array<string, 4> arrToEvaluate = { "_", "", "_", "" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            Assert::IsFalse(qe.getHasResult());
+        }
+        
+        //Case 6 - Positive: Follows(_, synonym)
+        TEST_METHOD(TestEvaluatorFollowCase6Positive)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            PKB.setFollowsRel(2, 3);
+            qe.setPkb(PKB);
             expectedList1.clear();
             expectedList2.clear();
             expectedPair = getEmptyPairOfListOfString();
             actualPair = getEmptyPairOfListOfString();
-            PKB4Positive.setFollowsRel(0, 1);
-            PKB4Positive.setFollowsRel(1, 2);
-            qe4Positive.setPkb(PKB4Positive);
-            array<string, 4> arrToEvaluate4Positive = { "_", "", "int", "2" };
-            qe4Positive.evaluateFollowsTest(arrToEvaluate4Positive);
-            Assert::IsTrue(qe4Positive.getHasResult());
-
-            //Case 4 - Negative: Follows(_, int)
-            //TODO
-
-            //Case 5 - Positive: Follows(_, _)
-            //TODO
-
-            //Case 5 - Negative: Follows(_, _)
-            //TODO
-
-            //Case 6 - Positive: Follows(_, synonym)
-            //TODO
+            array<string, 4> arrToEvaluate = { "_", "", "stmt", "s" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            expectedList1.push_back("2");
+            expectedList1.push_back("3");
+            expectedPair = make_pair(expectedList1, expectedList2);
+            actualPair = qe.getResultSuchThat();
+            Assert::IsTrue(qe.getHasResult());
+            Assert::IsTrue(expectedPair == actualPair);
+        }
 
             //Case 6 - Negative: Follows(_, synonym)
             //TODO
@@ -148,7 +224,7 @@ namespace UnitTesting
 
             //Case 9 - Negative: Follows(synonym, synonym)
             //TODO
-        }
+        
 
         TEST_METHOD(TestEvaluateFollowsT)
         {
