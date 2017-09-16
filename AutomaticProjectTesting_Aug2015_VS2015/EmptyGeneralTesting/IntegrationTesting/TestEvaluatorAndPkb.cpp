@@ -54,6 +54,25 @@ namespace UnitTesting
             array<string, 4> arrToEvaluate2Negative = { "int", "3", "_", "" };
             qe2Negative.evaluateFollowsTest(arrToEvaluate2Negative);
             Assert::IsFalse(qe2Negative.getHasResult());*/
+
+            //Case 3 - Positive: Follows(int, synonym)
+            /*QueryEvaluator qe3Positive = QueryEvaluator();
+            PKBMain PKB3Positive;
+            PKB3Positive.setFollowsRel(1, 2);
+            PKB3Positive.setFollowsRel(2, 3);
+            PKB3Positive.setFollowsRel(3, 4);
+            array<string, 4> arrToEvaluate3Positive = { "int", "2", "assign", "a" };
+            qe3Positive.evaluateFollowsTest(arrToEvaluate3Positive);
+            pair<list<string>, list<string>> expectedPair;
+            list<string> expectedList1;
+            expectedList1.push_back("3");
+            list<string> expectedList2;
+            expectedPair = make_pair(expectedList1, expectedList2);
+            pair<list<string>, list<string>> actualPair = qe3Positive.getResultSuchThat();
+            Assert::IsFalse(qe3Positive.getHasResult());
+            Assert::IsTrue(expectedPair == actualPair);*/
+
+            //Case 4 - Negative: Follows(int, synonym)
         }
 
         TEST_METHOD(TestEvaluateFollowsT)
