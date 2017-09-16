@@ -12,16 +12,6 @@ namespace UnitTesting
     public:
         QueryTree qt;
 
-        TEST_METHOD(TestQueryTreeInitialisation)
-        {
-            qt = QueryTree();
-            qt.init();
-            Assert::IsTrue(qt.isInit());
-            Assert::IsFalse(qt.isSplitted());
-            Assert::IsFalse(qt.isValidated());
-            Assert::IsFalse(qt.isEvaluated());
-        }
-
         TEST_METHOD(TestStoreUnvalidatedStmts)
         {
             qt = QueryTree();
@@ -55,7 +45,7 @@ namespace UnitTesting
                 counter++;
             }
             
-            Assert::IsTrue(qt.isSplitted());
+			Assert::IsTrue(splitted.size() == 4);
         }
 
         //TEST_METHOD(TestInsertSelect)
