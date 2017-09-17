@@ -235,18 +235,21 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
             hasResult = true;
         }
 	}
-    //Case 7: Follows(stmt, int)
+    //Case 7: Follows(synonym, int)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
 	{
-        /*list<string> result = PKB.getBefore(arg1, stoi(arg2));
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getBefore(stoi(arg2), type1);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
-        }*/
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
+        }
 	}
     //Case 8: Follows(synonym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
@@ -348,7 +351,7 @@ void QueryEvaluator::evaluateFollowsT(array<string, 4> arr)
     //Case 7: FollowsStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
     {
-        /*list<int> result = PKB.getBeforeStar(type1, stoi(arg2));
+        list<int> result = PKB.getBefore(stoi(arg2), type1);
         if (result.empty())
         {
             hasResult = false;
@@ -359,7 +362,7 @@ void QueryEvaluator::evaluateFollowsT(array<string, 4> arr)
             list<string> list2;
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
-        }*/
+        }
     }
     //Case 8: FollowsStar(synonym, _)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")

@@ -224,13 +224,46 @@ namespace UnitTesting
         //Case 7 - Positive: Follows(synonym, int)
         TEST_METHOD(TestEvaluatorFollowsCase7Positive)
         {
-            
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            PKB.setFollowsRel(2, 3);
+            qe.setPkb(PKB);
+            list<string> expectedList1;
+            list<string> expectedList2;
+            pair<list<string>, list<string>> expectedPair;
+            pair<list<string>, list<string>> actualPair;
+            array<string, 4> arrToEvaluate = { "stmt", "s", "int", "2" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            expectedList1.push_back("1");
+            expectedPair = make_pair(expectedList1, expectedList2);
+            actualPair = qe.getResultSuchThat();
+            Assert::IsTrue(qe.getHasResult());
+            Assert::IsTrue(expectedPair == actualPair);
         }
 
         //Case 7 - Negative: Follows(synonym, int)
         TEST_METHOD(TestEvaluatorFollowsCase7Negative)
         {
-
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain PKB;
+            PKB.setFollowsRel(0, 1);
+            PKB.setFollowsRel(1, 2);
+            PKB.setFollowsRel(2, 3);
+            qe.setPkb(PKB);
+            list<string> expectedList1;
+            list<string> expectedList2;
+            pair<list<string>, list<string>> expectedPair;
+            pair<list<string>, list<string>> actualPair;
+            array<string, 4> arrToEvaluate = { "stmt", "s", "int", "1" };
+            qe.evaluateFollowsTest(arrToEvaluate);
+            expectedPair = make_pair(expectedList1, expectedList2);
+            actualPair = qe.getResultSuchThat();
+            Assert::IsFalse(qe.getHasResult());
+            Assert::IsTrue(expectedPair == actualPair);
         }
 
         //Case 8 - Positive: Follows(synonym, _)
