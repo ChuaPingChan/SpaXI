@@ -113,7 +113,6 @@ list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
 	if (type == "while") {
 		for (int i = 0; i < listSize; i++) {
 			first = childStmt.front();
-			childStmt.pop_front();
 			if (isWhile(first)) {
 				childStmt.push_back(first);
 			}
@@ -123,7 +122,6 @@ list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
 	if (type == "assign") {
 		for (int i = 0; i < listSize; i++) {
 			first = childStmt.front();
-			childStmt.pop_front();
 			if (isAssignment(first)) {
 				childStmt.push_back(first);
 			}
@@ -131,36 +129,6 @@ list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
 	}
 
 	return childStmt;
-}
-
-list<int> PKBMain::getAllParentStar(int childStmt, string type) {
-	list<int> parentStmt = childToParentStarTable.getParentStar(childStmt);
-	if (type == "stmt") {
-		return parentStmt;
-	}
-	int listSize = parentStmt.size();
-	int first;
-	if (type == "while") {
-		for (int i = 0; i < listSize; i++) {
-			first = parentStmt.front();
-			parentStmt.pop_front();
-			if (isWhile(first)) {
-				parentStmt.push_back(first);
-			}
-		}
-	}
-
-	if (type == "assign") {
-		for (int i = 0; i < listSize; i++) {
-			first = parentStmt.front();
-			parentStmt.pop_front();
-			if (isAssignment(first)) {
-				parentStmt.push_back(first);
-			}
-		}
-	}
-
-	return parentStmt;
 }
 
 
