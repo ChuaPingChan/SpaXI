@@ -702,8 +702,6 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	{
 
 		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(arg2, type1));
-		
-		cout << arg2 << " " << type1;
 
 		if (pkbResult.empty())
 		{

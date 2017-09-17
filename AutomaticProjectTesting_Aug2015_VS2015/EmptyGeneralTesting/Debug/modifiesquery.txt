@@ -16,12 +16,12 @@ c
 4 - case 4 Modifies(synonym, ident)
 assign a;
 Select a such that Modifies(a, "c")
-8
+6, 8
 5000
 5 - case 5 Modifies(synonym, _)
 assign a;
 Select a such that Modifies(a, _)
-1, 2, 3, 4, 5, 6, 7, 8
+1, 2, 4, 5, 6, 7, 8
 5000
 6 - case 6 Modifies(synonym, synonym)
 assign a; variable v;

@@ -29,16 +29,19 @@ list<string> PQLMain::run()
 		list<string> evaluatorResult = qtInstance->getEvaluatorResult();
 		if (evaluatorResult.empty())
 		{
+			qtInstance = qtInstance->clear();
 			return evaluatorResult;
 		}
 		else
 		{
 			ResultFormatter formatter;
+			qtInstance = qtInstance->clear();
             return evaluatorResult;
 		}
 	}
 	else
 	{
+		qtInstance = qtInstance->clear();
 		return list<string>();
 	}
 }
