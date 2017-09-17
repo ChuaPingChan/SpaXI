@@ -25,6 +25,7 @@ void TestWrapper::parse(std::string filename) {
 
     Parser parser (&_pkbMain);
     bool isParsedSuccessfully = parser.parse(filename);
+    // TODO: exit if parsing failed.
 }
 
 // method to evaluating a query
