@@ -148,7 +148,9 @@ unordered_map<int, pair<int, int>> DesignExtractor::computeFollowsTable(unordere
 			followsMap[currStmt] = make_pair(befStmt, aftStmt);
 		}
 		else {
-			followsMap[currStmt] = make_pair(befStmt, 0));
+			followsMap[currStmt] = make_pair(befStmt, 0);
 		}
 	}
+
+	return followsMap;
 }

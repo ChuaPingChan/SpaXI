@@ -164,8 +164,8 @@ list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
 
 pair<list<int>, list<int>> PKBMain::getAllParentStarRel(string type1, string type2) {
 	pair<list<int>, list<int>> allParentStarRel = parentToChildStarTable.getAllParentStarRel();
-	list<int> parent = allParentsRel.first;
-	list<int> children = allParentsRel.second;
+	list<int> parent = allParentStarRel.first;
+	list<int> children = allParentStarRel.second;
 	//	int first;
 	//	int second;
 	/*
@@ -605,7 +605,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 
 bool PKBMain::startProcessComplexRelations() {
 	DesignExtractor de;
-	followsTable.setMap(de.computeFollowsTable(followsBeforeMap, followsAfterMap)));
+	followsTable.setMap(de.computeFollowsTable(followsBeforeMap, followsAfterMap));
 	childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
 	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));

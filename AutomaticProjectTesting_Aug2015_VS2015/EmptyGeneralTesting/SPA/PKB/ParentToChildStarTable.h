@@ -15,6 +15,8 @@ public:
 
 	bool addParentChild(int parentStmt, int childStmt);
 
+	bool isParentStar(int parentStmt);
+
 	list<int> getChildren(int parentStmt);
 
 	void setMap(unordered_map<int, list<int>> target);
