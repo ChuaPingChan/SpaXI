@@ -11,7 +11,7 @@ namespace UnitTesting
 	{
 	public:
 
-		TEST_METHOD(TestPKBFollows)
+		TEST_METHOD(TestPKBFollowsAndParents)
 		{
 			PKBMain PKB;
 
@@ -116,7 +116,21 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isParentChild(3, 6));
 			Assert::IsTrue(PKB.isParentChild(6, 7));
 			Assert::IsTrue(PKB.isParentChild(3, 8));
-			
+
+			Assert::IsTrue(PKB.isParent(3));
+			Assert::IsTrue(PKB.isParent(6));
+
+			list<int> children;
+			children = PKB.getChildren(3, "stmt");
+			children.sort();
+			list<int> expectedChildren = { 4, 5, 6, 8 };
+
+			list<int> allChildren;
+			allChildren = PKB.getAllChildren("stmt");
+			allChildren.sort();
+			list<int> expectedAllChildren = { 4, 5, 6, 7, 8 };
+
+			Assert::IsTrue(allChildren == expectedAllChildren);
 		}
 
 		TEST_METHOD(TestPKBFollows2) 
