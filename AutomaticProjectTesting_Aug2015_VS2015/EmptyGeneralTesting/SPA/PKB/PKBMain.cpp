@@ -2,8 +2,18 @@
 
 using namespace std;
 
+PKBMain* PKBMain::singleton = NULL;
+
 PKBMain::PKBMain()
 {
+}
+
+PKBMain* PKBMain::getInstance()
+{
+    if (singleton == NULL) {
+        singleton = new PKBMain();
+    }
+    return singleton;
 }
 
 //PARENT
