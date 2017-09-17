@@ -16,6 +16,7 @@ volatile bool TestWrapper::GlobalStop = false;
 TestWrapper::TestWrapper() {
   // create any objects here as instance variables of this class
   // as well as any initialization required for your spa program
+    _pkbMain = PKBMain::getInstance();
 }
 
 // method for parsing the SIMPLE source
@@ -23,7 +24,7 @@ void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
     // ...rest of your code...
 
-    Parser parser (&_pkbMain);
+    Parser parser (_pkbMain);
     bool isParsedSuccessfully = parser.parse(filename);
     // TODO: exit if parsing failed.
 }

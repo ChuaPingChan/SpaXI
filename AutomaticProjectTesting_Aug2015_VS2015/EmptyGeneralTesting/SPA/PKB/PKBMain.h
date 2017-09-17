@@ -30,6 +30,8 @@ using namespace std;
 class PKBMain {
 public:
 	PKBMain();
+    static PKBMain* getInstance();
+    static void resetInstance();
 
 	//Parser API
 	bool setParentChildRel(int parentStmt, int childStmt);
@@ -109,6 +111,8 @@ public:
     list<int> getAllAssignments(string var);
 
 private:
+    static PKBMain* singleton;
+
 	ChildToParentStarTable childToParentStarTable;
 	ChildToParentTable childToParentTable;
 	ParentToChildStarTable parentToChildStarTable;
