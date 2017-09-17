@@ -68,7 +68,7 @@ namespace UnitTesting
             Assert::IsFalse(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
             targetString = "should fail";
             Assert::IsFalse(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
-            
+
             targetString = "   ;";
             Assert::IsFalse(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON));
 
@@ -106,12 +106,12 @@ namespace UnitTesting
             Assert::IsTrue(std::regex_match(" \t\n\r\f{\t\n\r\f ", Parser::REGEX_MATCH_OPEN_BRACE));
             Assert::IsFalse(std::regex_match(" {a ", Parser::REGEX_MATCH_OPEN_BRACE));
             Assert::IsFalse(std::regex_match(" a{ ", Parser::REGEX_MATCH_OPEN_BRACE));
-            
+
             Assert::IsTrue(std::regex_match("}", Parser::REGEX_MATCH_CLOSE_BRACE));
             Assert::IsTrue(std::regex_match(" \t\n\r\f}\t\n\r\f ", Parser::REGEX_MATCH_CLOSE_BRACE));
             Assert::IsFalse(std::regex_match(" }a ", Parser::REGEX_MATCH_CLOSE_BRACE));
             Assert::IsFalse(std::regex_match(" a} ", Parser::REGEX_MATCH_CLOSE_BRACE));
-            
+
             Assert::IsTrue(std::regex_match("(", Parser::REGEX_MATCH_OPEN_BRACKET));
             Assert::IsTrue(std::regex_match(" \t\n\r\f(\t\n\r\f ", Parser::REGEX_MATCH_OPEN_BRACKET));
             Assert::IsFalse(std::regex_match(" (a ", Parser::REGEX_MATCH_OPEN_BRACKET));
@@ -135,7 +135,7 @@ namespace UnitTesting
             Assert::IsTrue(std::regex_match(" -", Parser::REGEX_VALID_OPERATOR));
             Assert::IsTrue(std::regex_match("\n\t*\n\t", Parser::REGEX_VALID_OPERATOR));
             Assert::IsTrue(std::regex_match("\r\f/\r\f", Parser::REGEX_VALID_OPERATOR));
-            
+
             Assert::IsFalse(std::regex_match("a=4", Parser::REGEX_VALID_OPERATOR));
             Assert::IsFalse(std::regex_match("+-", Parser::REGEX_VALID_OPERATOR));
             Assert::IsFalse(std::regex_match("9+3", Parser::REGEX_VALID_OPERATOR));
@@ -169,16 +169,16 @@ namespace UnitTesting
             Assert::IsTrue(std::regex_match("\t\n  \ra\r\t\f + \f\t\r b\t", match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS));
             Assert::IsTrue(std::regex_match(match.str(1), Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match(match.str(2), Parser::REGEX_VALID_ENTITY_NAME));
-            
+
         }
 
         TEST_METHOD(getNextTokenTest_matchTokenTest_assertMatchAndIncrTokenTest)
         {
             // Set up
-            ParserChildForTest parser(dummyPkbMainPtr); 
+            ParserChildForTest parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
             Assert::IsTrue(parser.concatenateLines(dummySimpleSourcePath));
-            
+
             // Testing begins
             Assert::IsTrue(parser.incrCurrentTokenPtr());
             Assert::IsTrue(parser.matchToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD));
@@ -210,7 +210,7 @@ namespace UnitTesting
         }
 
         TEST_METHOD(extractStringUpToSemicolonTest)
-        {         
+        {
             // Set up
             ParserChildForTest parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
@@ -459,7 +459,7 @@ namespace UnitTesting
             // Set up
             Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_whileOnly());
-            
+
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Clean up
@@ -473,6 +473,20 @@ namespace UnitTesting
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+
+
+        TEST_METHOD(testParsingSimpleSource_assignmentAnd1LevelNestedWhile_missingBoolVar)
+        {
+            // Set up
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile_missingBoolVar());
+
+            Assert::IsFalse(parser.parse(dummySimpleSourcePath));
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -588,7 +602,7 @@ namespace UnitTesting
         }
 
         /*
-        This is a utility method to create a dummy text 
+        This is a utility method to create a dummy text
         containing assignment statements and a while loop without nesting.
         */
         bool createDummySimpleSourceFile_assignments_nonNestedWhile() {
@@ -607,6 +621,20 @@ namespace UnitTesting
         */
         bool createDummySimpleSourceFile_assignments_1LevelNestedWhile() {
             std::string content = "procedure ABC { \n  i=1; \n b=200 ; \n	c= a   ; \nwhile a \n{ \n   while beta { \n        oSCar  = 1 + beta + tmp; \n		a = b; \n		c = 3; \n		d = 4; \n        while tmp{ \n		d = c + a; \n		e = d + 3 + 4 * 5; \n          oSCar = I + k + j1k + chArlie; } \n	while x { \n	c = 3 + a * e + d; \n        x = x + 1;} \n          a=   2; } \n   w = w+1  ; \n} \n} \n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements and 1-level nested while loops.
+        */
+        bool createDummySimpleSourceFile_assignments_1LevelNestedWhile_missingBoolVar() {
+            std::string content = "procedure ABC { \n  i=1; \n b=200 ; \n	c= a   ; \nwhile  \n{ \n   while beta { \n        oSCar  = 1 + beta + tmp; \n		a = b; \n		c = 3; \n		d = 4; \n        while tmp{ \n		d = c + a; \n		e = d + 3 + 4 * 5; \n          oSCar = I + k + j1k + chArlie; } \n	while x { \n	c = 3 + a * e + d; \n        x = x + 1;} \n          a=   2; } \n   w = w+1  ; \n} \n} \n";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);
