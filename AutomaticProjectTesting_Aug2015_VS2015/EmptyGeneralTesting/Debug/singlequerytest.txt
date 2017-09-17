@@ -1,5 +1,5 @@
-21 - Case 8
-stmt s;
-Select s such that Parent*(s, _)
+22 - Case 8
+while w;
+Select w such that Parent*(w, _)
 4, 5, 7, 9, 10, 12, 13, 17
 5000
