@@ -182,7 +182,7 @@ void QueryEvaluator::evaluateSelect(array<string, 2> arr)
 	}
 	else
 	{
-		cerr << "Wrong evaluation!" << endl;
+		cerr << "Unrecognised type: <" << type << ", " << synonym << ">" << endl;
 	}
 }
 
@@ -301,7 +301,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 	}
     else
     {
-        cerr << "Wrong evaluation!!" << endl;
+		cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
     }
 }
 
@@ -421,7 +421,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
     }
     else
     {
-        cerr << "Wrong evaluation!!" << endl;
+        cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
     }
 }
 
@@ -540,7 +540,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
 	}
     else
     {
-        cerr << "Wrong evaluation!!" << endl;
+        cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
     }
 }
 
@@ -665,7 +665,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     }
     else
     {
-        cerr << "Wrong evaluation!!" << endl;
+        cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
     }
 }
 
@@ -771,7 +771,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	}
 	else
 	{
-		cerr << "Wrong evaluation!!" << endl;
+		cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
 	}
 }
 
@@ -877,7 +877,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	}
 	else
 	{
-		cerr << "Wrong evaluation!!" << endl;
+		cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
 	}
 }
 
@@ -908,7 +908,7 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 			list<string> pkbResultSecond = pkbResult.second;
 			pkbResultSecond.push_front(arg2);
 
-			resultSuchThat = make_pair(pkbResultFirst, pkbResultSecond);
+			resultPattern = make_pair(pkbResultFirst, pkbResultSecond);
 			hasResult = true;
 		}
     }
@@ -932,7 +932,7 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 			list<string> pkbResultSecond = pkbResult.second;
 			pkbResultSecond.push_front(arg2);
 
-			resultSuchThat = make_pair(pkbResultFirst, pkbResultSecond);
+			resultPattern = make_pair(pkbResultFirst, pkbResultSecond);
 			hasResult = true;
 		}
 	}
@@ -947,12 +947,13 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 
 		if (pkbResult.empty())
 		{
+
 			hasResult = false;
 		}
 		else
 		{
 			pkbResult.push_front(arg1);
-			resultSuchThat.first = pkbResult;
+			resultPattern.first = pkbResult;
 			hasResult = true;
 		}
 
@@ -976,13 +977,13 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		else
 		{
 			pkbResult.push_front(arg1);
-			resultSuchThat.first = pkbResult;
+			resultPattern.first = pkbResult;
 			hasResult = true;
 		}
     }
 
 	// Case 5: pattern a(_, _)
-    else if (type1 == "_" && type2 == "_")
+    else if (type2 == "_" && type3 == "_")
     {
 		list<string> pkbResult = getListStringFromListInt(pkbInstance->getAllAssignments());
 
@@ -993,7 +994,7 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		else
 		{
 			pkbResult.push_front(arg1);
-			resultSuchThat.first = pkbResult;
+			resultPattern.first = pkbResult;
 			hasResult = true;
 		}
     }
@@ -1013,13 +1014,13 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		else
 		{
 			pkbResult.push_front(arg1);
-			resultSuchThat.first = pkbResult;
+			resultPattern.first = pkbResult;
 			hasResult = true;
 		}
     }
     else
     {
-        cerr << "Wrong evaluation!!" << endl;
+        cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ", " << type3 << ":" << arg3 << ">" << endl;
     }
 
 }
