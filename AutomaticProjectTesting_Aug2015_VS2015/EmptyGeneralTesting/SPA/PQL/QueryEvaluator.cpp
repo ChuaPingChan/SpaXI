@@ -794,29 +794,35 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
     string type2 = arr[4];
     string arg1 = arr[3];
     string arg2 = arr[5];
-    if (type2 == "var" && arg2 == "_")
+    if (type1 == "var" && type2 == "_")
     {
-        //resultPattern = getLeftVariables(assign,variable);
+        // list<int> assign = PKB.getLeftVariables.first;
+        // list<string> var = PKB.getLeftVariables.second;
+        //resultPattern = pair<intToString(assign),var>;
     }
-    else if (type2 == "var" && arg2 == "ident")
+    else if (type1 == "var" && type2 == "ident")
     {
         //resultPattern = getLeftVariablesThatMatchWith(assign,variable);
     }
-    else if (type2 == "_" && arg2 == "ident")
+    else if (type1 == "_" && type2 == "ident")
     {
         //resultPattern = getPartialMatchStmt(arr[5])
     }
-    else if (type2 == "ident" && arg2 == "ident")
+    else if (type1 == "ident" && type2 == "ident")
     {
         //resultPattern = hasPartialBothMatches(arr[3],arr[5])
     }
-    else if (type2 == "_" && arg2 == "_")
+    else if (type1 == "_" && type2 == "_")
     {
         //resultPattern = getAssignments();
     }
-    else if (type2 == "ident" && arg2 == "_")
+    else if (type1 == "ident" && type2 == "_")
     {
         //resultPattern = getAssignments(arr[3]);
+    }
+    else
+    {
+        cerr << "WTF JUST HAPPENED!" << endl;
     }
 
 }
