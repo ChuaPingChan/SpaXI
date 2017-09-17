@@ -13,6 +13,7 @@ namespace UnitTesting
     {
     public:
         QueryTree* qtInstance = QueryTree::getInstance();
+		PKBMain* pkbInstance = PKBMain::getInstance();
         QueryEvaluator qe;
 
         // TEST_METHOD(TestEvaluatorSelect)
@@ -26,10 +27,11 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
+			PKBMain::resetInstance();
+			pkbInstance = PKBMain::getInstance();
+			pkbInstance->setFollowsRel(0, 1);
+			pkbInstance->setFollowsRel(1, 2);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "1", "int", "2" };
             qe.evaluateFollowsTest(arrToEvaluate);
             Assert::IsTrue(qe.getHasResult());
@@ -40,10 +42,11 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
+			PKBMain::resetInstance();
+			pkbInstance = PKBMain::getInstance();
+			pkbInstance->setFollowsRel(0, 1);
+			pkbInstance->setFollowsRel(1, 2);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "3", "int", "4" };
             qe.evaluateFollowsTest(arrToEvaluate);
             Assert::IsFalse(qe.getHasResult());
@@ -54,10 +57,10 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
+			PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+			pkbInstance->setFollowsRel(0, 1);
+			pkbInstance->setFollowsRel(1, 2);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "1", "_", "" };
             qe.evaluateFollowsTest(arrToEvaluate);
             Assert::IsTrue(qe.getHasResult());
@@ -68,10 +71,10 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "3", "_", "" };
             qe.evaluateFollowsTest(arrToEvaluate);
             Assert::IsFalse(qe.getHasResult());
@@ -82,16 +85,16 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
             pair<list<string>, list<string>> actualPair;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.setFollowsRel(2, 3);
-            PKB.setFollowsRel(3, 4);
-            qe.setPkb(PKB);
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            pkbInstance->setFollowsRel(2, 3);
+            pkbInstance->setFollowsRel(3, 4);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "2", "stmt", "s" };
             qe.evaluateFollowsTest(arrToEvaluate);
             expectedList1.push_back("3");
@@ -106,14 +109,14 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
             pair<list<string>, list<string>> actualPair;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "2", "assign", "a" };
             qe.evaluateFollowsTest(arrToEvaluate);
             expectedPair = make_pair(expectedList1, expectedList2);
@@ -127,10 +130,10 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "_", "", "int", "2" };
             qe.evaluateFollowsTest(arrToEvaluate);
             Assert::IsTrue(qe.getHasResult());
@@ -141,10 +144,10 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "_", "", "int", "4" };
             qe.evaluateFollowsTest(arrToEvaluate);
             Assert::IsFalse(qe.getHasResult());
@@ -155,10 +158,10 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "_", "", "_", "" };
             qe.evaluateFollowsTest(arrToEvaluate);
             Assert::IsTrue(qe.getHasResult());
@@ -169,9 +172,9 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "_", "", "_", "" };
             qe.evaluateFollowsTest(arrToEvaluate);
             Assert::IsFalse(qe.getHasResult());
@@ -182,11 +185,11 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.setFollowsRel(2, 3);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            pkbInstance->setFollowsRel(2, 3);
+            //qe.setPkb(PKB);
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
@@ -206,9 +209,9 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            //qe.setPkb(PKB);
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
@@ -226,11 +229,11 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.setFollowsRel(2, 3);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            pkbInstance->setFollowsRel(2, 3);
+            //qe.setPkb(PKB);
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
@@ -249,11 +252,11 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.setFollowsRel(2, 3);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            pkbInstance->setFollowsRel(2, 3);
+            //qe.setPkb(PKB);
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
@@ -271,11 +274,11 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.setFollowsRel(2, 3);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            pkbInstance->setFollowsRel(2, 3);
+            //qe.setPkb(PKB);
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
@@ -295,9 +298,9 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            //qe.setPkb(PKB);
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
@@ -315,11 +318,11 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.setFollowsRel(2, 3);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            pkbInstance->setFollowsRel(1, 2);
+            pkbInstance->setFollowsRel(2, 3);
+            //qe.setPkb(PKB);
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
@@ -339,9 +342,9 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            qe.setPkb(PKB);
+            PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+            //qe.setPkb(PKB);
             list<string> expectedList1;
             list<string> expectedList2;
             pair<list<string>, list<string>> expectedPair;
@@ -360,11 +363,11 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.startProcessComplexRelations();
-            qe.setPkb(PKB);
+			PKBMain::resetInstance();
+			pkbInstance = PKBMain::getInstance();
+            pkbInstance->setFollowsRel(0, 1);
+			pkbInstance->setFollowsRel(1, 2);
+			pkbInstance->startProcessComplexRelations();
             array<string, 4> arrToEvaluate = { "int", "1", "int", "2" };
             qe.evaluateFollowsStarTest(arrToEvaluate);
             Assert::IsTrue(qe.getHasResult());
@@ -375,39 +378,38 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            qe.setPkb(PKB);
-            PKB.startProcessComplexRelations();
+			PKBMain::resetInstance();
+			pkbInstance = PKBMain::getInstance();
+			pkbInstance->setFollowsRel(0, 1);
+			pkbInstance->setFollowsRel(1, 2);
+			pkbInstance->startProcessComplexRelations();
             array<string, 4> arrToEvaluate = { "int", "1", "_", "" };
             qe.evaluateFollowsStarTest(arrToEvaluate);
             Assert::IsTrue(qe.getHasResult());
         }
-
+		
         //Case 3 - Positive: FollowsStar(int, synonym)
         TEST_METHOD(TestEvaluatorFollowStarCase3Positive)
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
+			PKBMain::resetInstance();
+			pkbInstance = PKBMain::getInstance();
             list<string> expectedList1;
             list<string> expectedList2;
-            pair<list<string>, list<string>> expectedPair;
-            pair<list<string>, list<string>> actualPair;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.setFollowsRel(2, 3);
-            PKB.setFollowsRel(3, 4);
-            PKB.startProcessComplexRelations();
-            qe.setPkb(PKB);
+			pkbInstance->setFollowsRel(0, 1);
+			pkbInstance->setFollowsRel(1, 2);
+			pkbInstance->setFollowsRel(2, 3);
+			pkbInstance->setFollowsRel(3, 4);
+			pkbInstance->startProcessComplexRelations();
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "1", "stmt", "s" };
             qe.evaluateFollowsStarTest(arrToEvaluate);
             expectedList1.push_back("2");
             expectedList1.push_back("3");
             expectedList1.push_back("4");
-            expectedPair = make_pair(expectedList1, expectedList2);
-            actualPair = qe.getResultSuchThat();
+			pair<list<string>, list<string>> expectedPair = make_pair(expectedList1, expectedList2);
+			pair<list<string>, list<string>> actualPair = qe.getResultSuchThat();
             Assert::IsTrue(qe.getHasResult());
             Assert::IsTrue(expectedPair == actualPair);
         }
@@ -417,14 +419,15 @@ namespace UnitTesting
         {
             qe = QueryEvaluator();
             qtInstance = qtInstance->clear();
-            PKBMain PKB;
-            PKB.setFollowsRel(0, 1);
-            PKB.setFollowsRel(1, 2);
-            PKB.setFollowsRel(4, 5);
-            PKB.setFollowsRel(9, 10);
-            PKB.setFollowsRel(10, 11);
-            PKB.startProcessComplexRelations();
-            qe.setPkb(PKB);
+			PKBMain::resetInstance();
+			pkbInstance = PKBMain::getInstance();
+			pkbInstance->setFollowsRel(0, 1);
+			pkbInstance->setFollowsRel(1, 2);
+			pkbInstance->setFollowsRel(4, 5);
+			pkbInstance->setFollowsRel(9, 10);
+			pkbInstance->setFollowsRel(10, 11);
+			pkbInstance->startProcessComplexRelations();
+            //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "_", "", "int", "10" };
             qe.evaluateFollowsStarTest(arrToEvaluate);
             Assert::IsTrue(qe.getHasResult());
