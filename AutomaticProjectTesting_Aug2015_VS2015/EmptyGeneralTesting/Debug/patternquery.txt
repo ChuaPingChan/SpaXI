@@ -12,6 +12,7 @@ c
 assign a;
 Select a pattern a(_, _"c"_)
 8
+5000
 4 - case 4 (ident, ident)
 assign a;
 Select a pattern a("i", _"j"_)
@@ -45,7 +46,7 @@ none
 10 - valid
 assign a; variable v;
 Select v pattern a("c", _)
-c
+a, b, c, d, i, j
 5000
 11 - valid
 assign a;

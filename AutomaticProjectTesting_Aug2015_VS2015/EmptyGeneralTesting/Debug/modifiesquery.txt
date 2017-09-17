@@ -4,7 +4,7 @@ Select s such that Modifies(1, "i")
 1, 2, 3, 4, 5, 6, 7, 8
 5000
 2 - case 2 Modifies(int, _)
-variable v;
+variable v; stmt s;
 Select s such that Modifies(3, _)
 1, 2, 3, 4, 5, 6, 7, 8
 5000

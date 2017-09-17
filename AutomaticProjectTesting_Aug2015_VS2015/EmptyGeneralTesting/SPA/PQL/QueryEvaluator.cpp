@@ -83,8 +83,11 @@ void QueryEvaluator::evaluate()
 		}
 	}
 
-    finalResult = getCommonSynonymResult(resultSelect, resultSuchThat, resultPattern);
-    qtInstance->storeEvaluatorResult(finalResult);
+	if (hasResult) 
+	{
+		finalResult = getCommonSynonymResult(resultSelect, resultSuchThat, resultPattern);
+		qtInstance->storeEvaluatorResult(finalResult);
+	}
 }
 
 /*--------------- Unit Testing ---------------*/
@@ -671,7 +674,8 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	if (type1 == "int" && type2 == "ident")
 	{
 		int num = stoi(arg1);
-		hasResult = pkbInstance->isUses(num, arg2);
+		string ident = regex_replace(arg2, regex("\""), "");
+		hasResult = pkbInstance->isUses(num, ident);
 	}
     //Case 2: Uses(int, _)
 	else if (type1 == "int" && type2 == "_")
@@ -776,7 +780,8 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	if (type1 == "int" && type2 == "ident")
 	{
 		int num = stoi(arg1);
-		hasResult = pkbInstance->isMod(num, arg2);
+		string ident = regex_replace(arg2, regex("\""), "");
+		hasResult = pkbInstance->isMod(num, ident);
 	}
 	//Case 2: Modifies(int, _)
 	else if (type1 == "int" && type2 == "_")
@@ -822,7 +827,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 			hasResult = true;
 		}
 	}
-	//Case 5: Modifies(synonyym, _)
+	//Case 5: Modifies(synonym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
 		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatModifiesAnything(type1));
@@ -872,15 +877,16 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 
 void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 {
-    string type1 = arr[2];
-    string type2 = arr[4];
-    string arg1 = arr[3];
-    string arg2 = arr[5];
-    if (type1 == "var" && type2 == "_")
+    string type1 = arr[0];
+    string type2 = arr[2];
+	string type3 = arr[4];
+    string arg1 = arr[1];
+    string arg2 = arr[3];
+	string arg3 = arr[5];
+
+	// Case 1: pattern a(synonym, _)
+    if (type2 == "var" && type3 == "_")
     {
-        // list<int> assign = PKB.getLeftVariables.first;
-        // list<string> var = PKB.getLeftVariables.second;
-        //resultPattern = pair<intToString(assign),var>;
 
 		pair<list<int>, list<string>> pkbResult = pkbInstance->getLeftVariables();
 
@@ -891,23 +897,22 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		else
 		{
 			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
-			list<string> lst = resultSuchThat.first;
-			lst.push_back(arg1);
-			lst.insert(lst.end(), pkbResultFirst.begin(), pkbResultFirst.end());
+			pkbResultFirst.push_front(arg1);
 
-			list<string> lst2 = resultSuchThat.second;
-			lst2.push_back(arg2);
-			lst2.insert(lst2.end(), pkbResult.second.begin(), pkbResult.second.end());
+			list<string> pkbResultSecond = pkbResult.second;
+			pkbResultSecond.push_front(arg2);
 
-			resultSuchThat = make_pair(lst, lst2);
+			resultSuchThat = make_pair(pkbResultFirst, pkbResultSecond);
 			hasResult = true;
 		}
     }
-    else if (type1 == "var" && type2 == "ident")
-    {
-        //resultPattern = getLeftVariablesThatMatchWith(assign,variable);
 
-		pair<list<int>, list<string>> pkbResult = pkbInstance->getLeftVariablesThatMatchWith(arg2);
+	// Case 2: pattern a(synonym, ident)
+	else if (type2 == "var" && type3 == "ident")
+	{
+		string ident = regex_replace(arg3, regex("\""), "");
+		ident = regex_replace(ident, regex("_"), "");
+		pair<list<int>, list<string>> pkbResult = pkbInstance->getLeftVariablesThatMatchWith(ident);
 
 		if (pkbResult.first.empty() && pkbResult.second.empty())
 		{
@@ -916,23 +921,23 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		else
 		{
 			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
-			list<string> lst = resultSuchThat.first;
-			lst.push_back(arg1);
-			lst.insert(lst.end(), pkbResultFirst.begin(), pkbResultFirst.end());
+			pkbResultFirst.push_front(arg1);
 
-			list<string> lst2 = resultSuchThat.second;
-			lst2.push_back(arg2);
-			lst2.insert(lst2.end(), pkbResult.second.begin(), pkbResult.second.end());
+			list<string> pkbResultSecond = pkbResult.second;
+			pkbResultSecond.push_front(arg2);
 
-			resultSuchThat = make_pair(lst, lst2);
+			resultSuchThat = make_pair(pkbResultFirst, pkbResultSecond);
 			hasResult = true;
 		}
-    }
-    else if (type1 == "_" && type2 == "ident")
-    {
-        //resultPattern = getPartialMatchStmt(arr[5])
+	}
 
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getPartialMatchStmt(arg2));
+	// Case 3: pattern a(_, ident)
+    else if (type2 == "_" && type3 == "ident")
+    {
+		string ident = regex_replace(arg3, regex("\""), "");
+		ident = regex_replace(ident, regex("_"), "");
+
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getPartialMatchStmt(ident));
 
 		if (pkbResult.empty())
 		{
@@ -940,19 +945,23 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		}
 		else
 		{
-			list<string> lst = resultSuchThat.first;
-			lst.push_back(arg1);
-			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
-			resultSuchThat = make_pair(lst, list<string>());
+			pkbResult.push_front(arg1);
+			resultSuchThat.first = pkbResult;
 			hasResult = true;
 		}
 
     }
-    else if (type1 == "ident" && type2 == "ident")
+	// Case 4: pattern a(ident, ident)
+    else if (type2 == "ident" && type3 == "ident")
     {
-        //resultPattern = hasPartialBothMatches(arr[3],arr[5])
 
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getPartialBothMatches(arg1, arg2));
+		string ident1 = regex_replace(arg2, regex("\""), "");
+		ident1 = regex_replace(ident1, regex("_"), "");
+
+		string ident2 = regex_replace(arg3, regex("\""), "");
+		ident2 = regex_replace(ident2, regex("_"), "");
+
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getPartialBothMatches(ident1, ident2));
 
 		if (pkbResult.empty())
 		{
@@ -960,17 +969,15 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		}
 		else
 		{
-			list<string> lst = resultSuchThat.first;
-			lst.push_back(arg1);
-			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
-			resultSuchThat = make_pair(lst, list<string>());
+			pkbResult.push_front(arg1);
+			resultSuchThat.first = pkbResult;
 			hasResult = true;
 		}
     }
+
+	// Case 5: pattern a(_, _)
     else if (type1 == "_" && type2 == "_")
     {
-        //resultPattern = getAssignments();
-
 		list<string> pkbResult = getListStringFromListInt(pkbInstance->getAllAssignments());
 
 		if (pkbResult.empty())
@@ -979,18 +986,19 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		}
 		else
 		{
-			list<string> lst = resultSuchThat.first;
-			lst.push_back(arg1);
-			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
-			resultSuchThat = make_pair(lst, list<string>());
+			pkbResult.push_front(arg1);
+			resultSuchThat.first = pkbResult;
 			hasResult = true;
 		}
     }
-    else if (type1 == "ident" && type2 == "_")
-    {
-        //resultPattern = getAssignments(arr[3]);
 
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getAllAssignments(arg1));
+	// Case 6: pattern a(ident, _)
+    else if (type2 == "ident" && type3 == "_")
+    {
+		string ident = regex_replace(arg2, regex("\""), "");
+		ident = regex_replace(ident, regex("_"), "");
+
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getAllAssignments(ident));
 
 		if (pkbResult.empty())
 		{
@@ -998,10 +1006,8 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 		}
 		else
 		{
-			list<string> lst = resultSuchThat.first;
-			lst.push_back(arg1);
-			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
-			resultSuchThat = make_pair(lst, list<string>());
+			pkbResult.push_front(arg1);
+			resultSuchThat.first = pkbResult;
 			hasResult = true;
 		}
     }
