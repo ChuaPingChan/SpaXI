@@ -13,7 +13,7 @@ public:
     /********
     * REGEX *
     *********/
-    
+
     static const std::regex REGEX_VALID_ENTITY_NAME;
     static const std::regex REGEX_MATCH_CONSTANT;
     static const std::regex REGEX_EXTRACT_NEXT_TOKEN;
@@ -55,7 +55,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     int _firstStmtInProc;
     PKBMain* _pkbMainPtr;
     std::stack<std::stack<int>> _stacksOfFollowsStacks;
-    
+
     /******************
     * Private Methods *
     *******************/
@@ -63,6 +63,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     bool incrCurrentTokenPtr();
     std::vector<std::string> tokenizeString(std::string stringToTokenize);
     bool assertMatchAndIncrementToken(std::regex re);
+    bool assertMatchWithoutIncrementToken(std::regex re);
     bool matchToken(std::regex re);
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
