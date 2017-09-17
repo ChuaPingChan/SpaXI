@@ -366,7 +366,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
     //Case 7: FollowsStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
     {
-        list<int> result = pkbInstance->getBefore(stoi(arg2), type1);
+        list<int> result = pkbInstance->getBeforeStar(stoi(arg2), type1);
         if (result.empty())
         {
             hasResult = false;
