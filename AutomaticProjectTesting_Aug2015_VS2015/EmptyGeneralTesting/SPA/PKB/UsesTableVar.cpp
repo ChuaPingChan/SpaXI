@@ -54,14 +54,14 @@ bool UsesTableVar::addUsesVarToAssignList(int varIdx, int stmtNumber)
 bool UsesTableVar::addUsesVarToWhileStmtList(int varIdx, int stmtNumber)
 {
     // if stmt number does not exist as a key, create new list and insert data to hash map
-    if (usesVarToStmtMap.find(varIdx) == usesVarToStmtMap.end()) {
-        usesVarToStmtMap[varIdx] = list<int>();
-        usesVarToStmtMap[varIdx].push_back(stmtNumber);
+    if (usesVarToWhileStmtMap.find(varIdx) == usesVarToWhileStmtMap.end()) {
+        usesVarToWhileStmtMap[varIdx] = list<int>();
+        usesVarToWhileStmtMap[varIdx].push_back(stmtNumber);
         return true;
     }
     else {
         // else, expand the list of variables
-        usesVarToStmtMap[varIdx].push_back(stmtNumber);
+        usesVarToWhileStmtMap[varIdx].push_back(stmtNumber);
         return true;
     }
     return false;
