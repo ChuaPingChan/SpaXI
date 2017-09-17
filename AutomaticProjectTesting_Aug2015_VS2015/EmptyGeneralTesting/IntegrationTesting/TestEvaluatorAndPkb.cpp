@@ -96,9 +96,9 @@ namespace UnitTesting
             pkbInstance->setFollowsRel(3, 4);
             //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "2", "stmt", "s" };
-            qe.evaluateFollowsTest(arrToEvaluate);
-            expectedList1.push_front(arrToEvaluate[1]);
+            qe.evaluateFollowsTest(arrToEvaluate);           
             expectedList1.push_back("3");
+            expectedList1.push_front("s");
             expectedPair = make_pair(expectedList1, expectedList2);
             actualPair = qe.getResultSuchThat();
             Assert::IsTrue(qe.getHasResult());
@@ -202,7 +202,7 @@ namespace UnitTesting
             pair<list<string>, list<string>> actualPair;
             array<string, 4> arrToEvaluate = { "_", "", "stmt", "s" };
             qe.evaluateFollowsTest(arrToEvaluate);
-            expectedList1.push_front(arrToEvaluate[1]);
+            expectedList1.push_front("s");
             expectedList1.push_back("2");
             expectedList1.push_back("3");
             expectedPair = make_pair(expectedList1, expectedList2);
@@ -415,6 +415,7 @@ namespace UnitTesting
             //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "1", "stmt", "s" };
             qe.evaluateFollowsStarTest(arrToEvaluate);
+            expectedList1.push_front("s");
             expectedList1.push_back("2");
             expectedList1.push_back("3");
             expectedList1.push_back("4");
