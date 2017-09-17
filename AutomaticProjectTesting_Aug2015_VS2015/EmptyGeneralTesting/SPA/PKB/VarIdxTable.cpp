@@ -30,3 +30,13 @@ bool VarIdxTable::isVarPresent(string var)
     }
     return false;
 }
+
+list<string> VarIdxTable::getAllVariables() {
+	list<string> varList;
+
+	for (unordered_map<string, int>::iterator it = varIdxMap.begin(); it != varIdxMap.end(); ++it) {
+		varList.push_back((*it).first);
+	}
+
+	return varList;
+}

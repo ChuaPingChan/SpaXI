@@ -73,6 +73,10 @@ public:
     bool isAssignment(int stmtNum);
     bool isWhile(int stmtNum);
     list<int> getAllWhiles();
+	list<int> getAllConstants();
+	list<int> getAllStatements();
+
+	list<string> getAllVariables();
     
     //PKB-Parser
     bool addVariable(string var);

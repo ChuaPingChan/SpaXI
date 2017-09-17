@@ -711,6 +711,18 @@ list<int> PKBMain::getAllWhiles()
 	return stmtTypeList.getWhileStmtList();
 }
 
+list<int> PKBMain::getAllConstants() {
+	return constantTable.getAllConstants();
+}
+
+list<int> PKBMain::getAllStatements() {
+	return stmtTypeList.getAllStatements();
+}
+
+list<string> PKBMain::getAllVariables() {
+	return varIdxTable.getAllVariables();
+}
+
 bool PKBMain::setModTableStmtToVar(int stmt, string var)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
