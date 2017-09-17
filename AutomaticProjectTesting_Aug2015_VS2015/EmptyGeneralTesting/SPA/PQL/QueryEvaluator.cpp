@@ -330,6 +330,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
 
@@ -357,6 +358,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -373,6 +375,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -389,6 +392,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -405,6 +409,8 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result.first);
             list<string> list2 = getListStringFromListInt(result.second);
+            list1.push_front(arg1);
+            list2.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -444,6 +450,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -470,6 +477,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -486,6 +494,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -502,6 +511,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -509,7 +519,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     //Case 9: Parent(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        /*pair<list<int>, list<int>> result = PKB.getAllParentRel(type1, type2);
+        pair<list<int>, list<int>> result = PKB.getAllParentsRel(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
@@ -518,9 +528,11 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result.first);
             list<string> list2 = getListStringFromListInt(result.second);
+            list1.push_front(arg1);
+            list2.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
-        }*/
+        }
 	}
     else
     {
@@ -557,6 +569,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -583,6 +596,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -590,7 +604,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     //Case 7: ParentStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
     {
-        /*list<int> result = PKB.getParent(type1, stoi(arg2));
+       /* list<int> result = pkbInstance->getParent(type1, stoi(arg2));
         if (result.empty())
         {
             hasResult = false;
@@ -603,10 +617,10 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
             hasResult = true;
         }*/
     }
-    //Case 8: ParentStar(synonym, int)
+    //Case 8: ParentStar(synonym, _)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
     {
-        /*list<int> result = PKB.getAllParent(type1);
+        list<int> result = PKB.getAllParents(type1);
         if (result.empty())
         {
             hasResult = false;
@@ -615,9 +629,10 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
-        }*/
+        }
     }
     //Case 9: ParentStar(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
@@ -631,6 +646,8 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result.first);
             list<string> list2 = getListStringFromListInt(result.second);
+            list1.push_front(arg1);
+            list2.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
