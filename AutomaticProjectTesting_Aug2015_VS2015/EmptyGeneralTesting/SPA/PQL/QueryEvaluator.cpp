@@ -171,7 +171,7 @@ void QueryEvaluator::evaluateSelect(array<string, 2> arr)
 		resultSelect = getListStringFromListInt(pkbInstance->getAllWhiles());
         resultSelect.push_front(synonym);
 	}
-	else if (type == "variable")
+	else if (type == "var")
 	{
 		resultSelect = pkbInstance->getAllVariables();
         resultSelect.push_front(synonym);
@@ -211,7 +211,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
-            list1.push_front(arg1);
+            list1.push_front(arg2);     
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -238,7 +238,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
-            list1.push_front(arg1);
+            list1.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
