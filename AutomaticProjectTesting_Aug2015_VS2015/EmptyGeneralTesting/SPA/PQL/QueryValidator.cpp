@@ -543,7 +543,7 @@ bool QueryValidator::isValidModifies(string str)
                 //store in data type for whiles synonym
             }
 
-            if (isIntegerRegexCheck(arg2))
+            if (isIntegerRegexCheck(arg1))
             {
                 result[0] = "int";
                 result[1] = arg1;
@@ -589,7 +589,7 @@ bool QueryValidator::isValidModifies(string str)
                 //store in data type for whiles synonym
             }
 
-            if (isIntegerRegexCheck(arg2))
+            if (isIntegerRegexCheck(arg1))
             {
                 result[0] = "int";
                 result[1] = arg1;
@@ -646,7 +646,7 @@ bool QueryValidator::isValidUses(string str)
                 //store in data type for whiles synonym
             }
 
-            if (isIntegerRegexCheck(arg2))
+            if (isIntegerRegexCheck(arg1))
             {
                 result[0] = "int";
                 result[1] = arg1;
@@ -692,7 +692,7 @@ bool QueryValidator::isValidUses(string str)
                 //store in data type for whiles synonym
             }
 
-            if (isIntegerRegexCheck(arg2))
+            if (isIntegerRegexCheck(arg1))
             {
                 result[0] = "int";
                 result[1] = arg1;

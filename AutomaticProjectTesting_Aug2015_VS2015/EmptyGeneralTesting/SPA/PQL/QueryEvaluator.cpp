@@ -701,7 +701,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
 
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(arg1, arg2));
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(type1, arg2));
 		
 
 		if (pkbResult.empty())
@@ -720,7 +720,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
     //Case 5: Uses(synonyym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatUsesAnything(arg1));
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatUsesAnything(type1));
 
 		if (pkbResult.empty())
 		{
@@ -738,7 +738,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
     //Case 6: Uses(synonym, var)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
-		pair<list<int>, list<string>> pkbResult = pkbInstance->getUsesPairs(arg1);
+		pair<list<int>, list<string>> pkbResult = pkbInstance->getUsesPairs(type1);
 
 		if (pkbResult.first.empty() && pkbResult.second.empty())
 		{
