@@ -28,7 +28,7 @@ namespace UnitTesting
             expected.push_back(1);
             expected.push_back(2);
             expected.push_back(3);
-            list<int> test = ct.getConstants(1);
+            list<int> test = ct.getStmtConstants(1);
             while (!test.empty() && !expected.empty()) 
             {
                 Assert::AreEqual(test.front(), expected.front());

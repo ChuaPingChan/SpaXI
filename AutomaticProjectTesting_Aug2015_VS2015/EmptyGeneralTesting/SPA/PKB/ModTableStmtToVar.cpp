@@ -11,7 +11,6 @@ bool ModTableStmtToVar::addModStmtToVarList(int stmtNumber, string var) {
     if (modStmtToVarMap.find(stmtNumber) == modStmtToVarMap.end()) {
         modStmtToVarMap[stmtNumber] = list<string>();
         modStmtToVarMap[stmtNumber].push_back(var);
-        modStmtToVarMap[stmtNumber].unique();
         return true;
     }
     else {
