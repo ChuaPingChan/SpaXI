@@ -33,7 +33,7 @@ void QueryEvaluator::evaluate()
 		vector<array<string, 4>> vec = qtInstance->getFollowsT();
 		for (int i = 0; i < vec.size(); i++)
 		{
-			evaluateFollowsT(vec.at(i));
+			evaluateFollowsStar(vec.at(i));
 		}
 	}
 
@@ -51,7 +51,7 @@ void QueryEvaluator::evaluate()
 		vector<array<string, 4>> vec = qtInstance->getParentT();
 		for (int i = 0; i < vec.size(); i++)
 		{
-			evaluateParentT(vec.at(i));
+			evaluateParentStar(vec.at(i));
 		}
 	}
 
@@ -116,9 +116,9 @@ void QueryEvaluator::evaluateFollowsTest(array<string, 4> arr)
     evaluateFollows(arr);
 }
 
-void QueryEvaluator::evaluateFollowsTTest(array<string, 4> arr)
+void QueryEvaluator::evaluateFollowsStarTest(array<string, 4> arr)
 {
-    evaluateFollowsT(arr);
+    evaluateFollowsStar(arr);
 }
 
 void QueryEvaluator::evaluateParentTest(array<string, 4> arr)
@@ -126,9 +126,9 @@ void QueryEvaluator::evaluateParentTest(array<string, 4> arr)
     evaluateParent(arr);
 }
 
-void QueryEvaluator::evaluateParentTTest(array<string, 4> arr)
+void QueryEvaluator::evaluateParentStarTest(array<string, 4> arr)
 {
-    evaluateParentT(arr);
+    evaluateParentStar(arr);
 }
 
 void QueryEvaluator::evaluateUsesTest(array<string, 4> arr)
@@ -289,7 +289,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     }
 }
 
-void QueryEvaluator::evaluateFollowsT(array<string, 4> arr)
+void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
 {
     string type1 = arr[0];
     string type2 = arr[2];
@@ -500,7 +500,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     }
 }
 
-void QueryEvaluator::evaluateParentT(array<string, 4> arr)
+void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
 {
     string type1 = arr[0];
     string type2 = arr[2];
