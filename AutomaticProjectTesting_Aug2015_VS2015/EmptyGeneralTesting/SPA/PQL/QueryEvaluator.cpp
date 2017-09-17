@@ -178,7 +178,7 @@ void QueryEvaluator::evaluateSelect(array<string, 2> arr)
 	}
 	else
 	{
-		cerr << "WTF JUST HAPPENED!" << endl;
+		cerr << "Wrong evaluation!" << endl;
 	}
 }
 
@@ -224,7 +224,6 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     //Case 5: Follows(_, _)
 	else if (type1 == "_" && type2 == "_")
 	{
-        cout << "IT REACHED DOUBLE UNDERSCORE";
         hasResult = pkbInstance->hasFollows();
 	}
     //Case 6: Follows(_, synonym)
@@ -298,7 +297,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 	}
     else
     {
-        cerr << "WTF JUST HAPPENED!" << endl;
+        cerr << "Wrong evaluation!!" << endl;
     }
 }
 
@@ -333,6 +332,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
             list<string> list2;
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
+
         }
     }
     //Case 4: FollowsStar(_, int)
@@ -411,7 +411,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
     }
     else
     {
-        cerr << "WTF JUST HAPPENED!" << endl;
+        cerr << "Wrong evaluation!!" << endl;
     }
 }
 
@@ -524,7 +524,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
 	}
     else
     {
-        cerr << "WTF JUST HAPPENED!" << endl;
+        cerr << "Wrong evaluation!!" << endl;
     }
 }
 
@@ -637,7 +637,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     }
     else
     {
-        cerr << "WTF JUST HAPPENED!" << endl;
+        cerr << "Wrong evaluation!!" << endl;
     }
 }
 
@@ -732,7 +732,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	}
 	else
 	{
-		cerr << "WTF JUST HAPPENED!" << endl;
+		cerr << "Wrong evaluation!!" << endl;
 	}
 }
 
@@ -827,7 +827,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	}
 	else
 	{
-		cerr << "WTF JUST HAPPENED!" << endl;
+		cerr << "Wrong evaluation!!" << endl;
 	}
 }
 
@@ -865,7 +865,7 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
     }
     else
     {
-        cerr << "WTF JUST HAPPENED!" << endl;
+        cerr << "Wrong evaluation!!" << endl;
     }
 
 }

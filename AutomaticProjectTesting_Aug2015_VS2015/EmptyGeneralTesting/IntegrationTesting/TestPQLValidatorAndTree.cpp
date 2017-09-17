@@ -379,7 +379,7 @@ namespace IntegrationTesting
 
 
             qtInstance = qtInstance->clear(); qv = QueryValidator();
-            str = "Select v such that Follows(_,_)";
+            str = "Select v such that Follows(_, _)";
             qtInstance->insertVariable("variable", "v");
             Assert::IsTrue(qv.isValidSelectTest(str));
 
