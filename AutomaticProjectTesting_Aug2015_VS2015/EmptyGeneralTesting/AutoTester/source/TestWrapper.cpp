@@ -23,7 +23,7 @@ void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
     // ...rest of your code...
 
-    Parser parser (&_pkbMain);
+    Parser parser (_pkbMain);
     bool isParsedSuccessfully = parser.parse(filename);
     // TODO: exit if parsing failed.
 }
