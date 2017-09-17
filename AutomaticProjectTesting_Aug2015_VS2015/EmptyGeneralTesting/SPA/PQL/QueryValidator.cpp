@@ -396,10 +396,9 @@ bool QueryValidator::isValidSelect(string str)
 	regex clauseRegex(RELREF + "|" + PATTERN_REGEX);
 	sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
 	sregex_iterator it_end;
-	int counter = 0;
+
 	for (; it != it_end; it++)
 	{
-		counter++;
 		string currentClause = it->str(0);
 
 		if (currentClause.find("Follows") != std::string::npos) 

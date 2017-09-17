@@ -1,0 +1,133 @@
+Parameters : nonNestedWhileOnly.txt usesqueries.txt out.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Debug
+Beginning to evaluate Query File.
+36 - case 1 Uses(int, "ident")
+stmt s;
+Select s such that Uses(1, "j")
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+Evaluating query 36 - case 1 Uses(int, "ident")
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+37 - case 2 Uses(int, _)
+stmt s;
+Select s such that Uses(4, _)
+none
+5000
+Evaluating query 37 - case 2 Uses(int, _)
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+38 - case 3 Uses(int, synonym)
+variable v;
+Select v such that Uses(8, v)
+c, d
+5000
+Evaluating query 38 - case 3 Uses(int, synonym)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: c d 
+Correct answer: c d 
+39 - case 4 Uses(synonym, "ident")
+stmt s;
+Select s such that Uses(s, "d")
+8
+5000
+Evaluating query 39 - case 4 Uses(synonym, "ident")
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 8 
+Correct answer: 8 
+40 - case 5 Uses(synonym, _)
+stmt s;
+Select s such that Uses(s, _)
+1, 3, 8
+5000
+Evaluating query 40 - case 5 Uses(synonym, _)
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 3 8 
+Correct answer: 1 3 8 
+41 - case 6 Uses(synonym, synonym)
+stmt s; variable v;
+Select s such that Uses(s, v)
+1, 3, 8
+5000
+Evaluating query 41 - case 6 Uses(synonym, synonym)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 3 8 
+Correct answer: 1 3 8 
+42 - invalid case Uses(_, int)
+stmt s;
+Select s such that Uses(_, 3)
+none
+5000
+Evaluating query 42 - invalid case Uses(_, int)
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+43 - invalid case Uses(_, _)
+stmt s;
+Select s such that Uses(_ , _)
+none
+5000
+Evaluating query 43 - invalid case Uses(_, _)
+_ is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+44 - invalid case Uses(_, synonym)
+variable v;
+Select s such that Uses(_, v)
+none
+5000
+Evaluating query 44 - invalid case Uses(_, synonym)
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+45 - wrong usage of synonym
+stmt s; variable v;
+Select v such that Uses(v, s)
+none
+5000
+Evaluating query 45 - wrong usage of synonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+46 - same type in uses
+variable v1, v2;
+Select v such that Uses(v1, v2)
+none
+5000
+Evaluating query 46 - same type in uses
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+47 - same type in uses
+variable v;
+Select v such that Uses(3, v)
+a
+5000
+Evaluating query 47 - same type in uses
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: a 
+Correct answer: a 
+End of evaluating Query File.
+AutoTester Completed !

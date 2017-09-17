@@ -886,7 +886,6 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 	// Case 1: pattern a(synonym, _)
     if (type2 == "var" && type3 == "_")
     {
-
 		pair<list<int>, list<string>> pkbResult = pkbInstance->getLeftVariables();
 
 		if (pkbResult.first.empty() && pkbResult.second.empty())
