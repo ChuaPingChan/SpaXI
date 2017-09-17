@@ -6,9 +6,15 @@ while a
 { 
    while beta { 
         oSCar  = 1 + beta + tmp; 
+		a = b;
+		c = 3;
+		d = 4;
         while tmp{ 
+		d = c + a;
+		e = d + 3 + 4 * 5;
           oSCar = I + k + j1k + chArlie; } 
 	while x { 
+	c = 3 + a * e + d;
         x = x + 1;} 
           a=   2; } 
    w = w+1  ; 
