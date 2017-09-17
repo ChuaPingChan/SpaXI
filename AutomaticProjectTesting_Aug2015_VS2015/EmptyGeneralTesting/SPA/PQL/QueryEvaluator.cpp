@@ -86,6 +86,7 @@ void QueryEvaluator::evaluate()
 	if (hasResult) 
 	{
 		finalResult = getCommonSynonymResult(resultSelect, resultSuchThat, resultPattern);
+
 		qtInstance->storeEvaluatorResult(finalResult);
 	}
 }
@@ -564,6 +565,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
         list<int> result = pkbInstance->getChildrenStar(stoi(arg1), type2);
+
         if (result.empty())
         {
             hasResult = false;
@@ -608,6 +610,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
     {
         list<int> result = pkbInstance->getParentStar(stoi(arg2), type1);
+
         if (result.empty())
         {
             hasResult = false;
@@ -615,16 +618,20 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
         else
         {
             list<string> list1 = getListStringFromListInt(result);
+
             list<string> list2;
-            list1.push_front(arg2);
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
+
             hasResult = true;
         }
     }
     //Case 8: ParentStar(synonym, _)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
     {
+
         list<int> result = PKB.getAllParents(type1);
+
         if (result.empty())
         {
             hasResult = false;
@@ -1056,8 +1063,9 @@ list<string> QueryEvaluator::getCommonSynonymResult(list<string> select, pair<li
     {
         if (!suchThat.first.empty()) 
         {
-            if (select.front() == suchThat.first.front())
+            if (select.front() == suchThat.first.front()) {
                 tempResultSuchThat = getIntersection(select, suchThat.first);
+            }
         }
 
         if (!suchThat.second.empty())
