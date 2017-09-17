@@ -478,20 +478,6 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-
-
-        TEST_METHOD(testParsingSimpleSource_assignmentAnd1LevelNestedWhile_missingBoolVar)
-        {
-            // Set up
-            Parser parser(dummyPkbMainPtr);
-            Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile_missingBoolVar());
-
-            Assert::IsFalse(parser.parse(dummySimpleSourcePath));
-
-            // Clean up
-            Assert::IsTrue(deleteDummySimpleSourceFile());
-        }
-
         TEST_METHOD(testParsingSimpleSource_assignmentAnd2LevelNestedWhile_success)
         {
             // Set up
@@ -621,20 +607,6 @@ namespace UnitTesting
         */
         bool createDummySimpleSourceFile_assignments_1LevelNestedWhile() {
             std::string content = "procedure ABC { \n  i=1; \n b=200 ; \n	c= a   ; \nwhile a \n{ \n   while beta { \n        oSCar  = 1 + beta + tmp; \n		a = b; \n		c = 3; \n		d = 4; \n        while tmp{ \n		d = c + a; \n		e = d + 3 + 4 * 5; \n          oSCar = I + k + j1k + chArlie; } \n	while x { \n	c = 3 + a * e + d; \n        x = x + 1;} \n          a=   2; } \n   w = w+1  ; \n} \n} \n";
-            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
-            std::ofstream outfile(newFilePath);
-            std::string inputString(content);
-            outfile << inputString;
-            outfile.close();
-            return true;
-        }
-
-        /*
-        This is a utility method to create a dummy text
-        containing assignment statements and 1-level nested while loops.
-        */
-        bool createDummySimpleSourceFile_assignments_1LevelNestedWhile_missingBoolVar() {
-            std::string content = "procedure ABC { \n  i=1; \n b=200 ; \n	c= a   ; \nwhile  \n{ \n   while beta { \n        oSCar  = 1 + beta + tmp; \n		a = b; \n		c = 3; \n		d = 4; \n        while tmp{ \n		d = c + a; \n		e = d + 3 + 4 * 5; \n          oSCar = I + k + j1k + chArlie; } \n	while x { \n	c = 3 + a * e + d; \n        x = x + 1;} \n          a=   2; } \n   w = w+1  ; \n} \n} \n";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);
