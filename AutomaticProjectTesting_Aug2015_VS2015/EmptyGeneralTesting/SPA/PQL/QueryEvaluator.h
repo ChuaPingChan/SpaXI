@@ -24,9 +24,9 @@ public:
     list<string> getIntersectionTest(list<string> list1, list<string> list2);
     void evaluateSelectTest(array<string, 2> arr);
     void evaluateFollowsTest(array<string, 4> arr);
-    void evaluateFollowsTTest(array<string, 4> arr);
+    void evaluateFollowsStarTest(array<string, 4> arr);
     void evaluateParentTest(array<string, 4> arr);
-    void evaluateParentTTest(array<string, 4> arr);
+    void evaluateParentStarTest(array<string, 4> arr);
     void evaluateUsesTest(array<string, 4> arr);
     void evaluateModifiesTest(array<string, 4> arr);
     void evaluatePatternTest(array<string, 6> arr);
@@ -45,9 +45,9 @@ private:
     /*--------------- Evaluator clauses ---------------*/
     void evaluateSelect(array<string, 2> arr);
 	void evaluateFollows(array<string, 4> arr);
-	void evaluateFollowsT(array<string, 4> arr);
+	void evaluateFollowsStar(array<string, 4> arr);
 	void evaluateParent(array<string, 4> arr);
-	void evaluateParentT(array<string, 4> arr);
+	void evaluateParentStar(array<string, 4> arr);
 	void evaluateUses(array<string, 4> arr);
 	void evaluateModifies(array<string, 4> arr);
 	void evaluatePattern(array<string, 6> arr);
