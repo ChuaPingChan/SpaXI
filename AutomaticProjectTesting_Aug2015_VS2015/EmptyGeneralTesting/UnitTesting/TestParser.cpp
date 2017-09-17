@@ -20,7 +20,6 @@ namespace UnitTesting
     TEST_CLASS(TestParser)
     {
     public:
-
         TEST_METHOD(regexValidEntityNameTest)
         {
             Assert::IsFalse(std::regex_match("", Parser::REGEX_VALID_ENTITY_NAME));
@@ -423,7 +422,31 @@ namespace UnitTesting
         {
             // Set up
             Parser parser(dummyPkbMainPtr);
-            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_error());
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_missingEqual());
+
+            Assert::IsFalse(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_assignmentsOnly_missingSemicolon)
+        {
+            // Set up
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_missingSemicolon());
+
+            Assert::IsFalse(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testParsingSimpleSource_assignmentsOnly_wrongProcName)
+        {
+            // Set up
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_wrongProcName());
 
             Assert::IsFalse(parser.parse(dummySimpleSourcePath));
 
@@ -500,8 +523,36 @@ namespace UnitTesting
         This is a utility method to create a dummy text
         containing assignment statements only, with syntax error.
         */
-        bool createDummySimpleSourceFile_assignmentsOnly_error() {
+        bool createDummySimpleSourceFile_assignmentsOnly_missingEqual() {
             std::string content = "procedure ABC{\n  a  1;\n b = 2;\n	c = a;\n }\n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements only.
+        */
+        bool createDummySimpleSourceFile_assignmentsOnly_missingSemicolon() {
+            std::string content = "procedure ABC{\n  a = 1;\n b = 2;\n	c = a\n }\n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements only, with syntax error.
+        */
+        bool createDummySimpleSourceFile_assignmentsOnly_wrongProcName() {
+            std::string content = "procedure 3abc {\n  a  1;\n b = 2;\n	c = a;\n }\n";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);
@@ -515,7 +566,7 @@ namespace UnitTesting
         containing assignment statements and a while loop without nesting.
         */
         bool createDummySimpleSourceFile_whileOnly() {
-            std::string content = "procedure ABC { \nwhile a \n{ \n	a = 3; \n   b = 2  ; \n} \n} \n";
+            std::string content = "procedure ABC { \ni = j; \nj = 3 + 5; \nwhile a \n{ \n	a = 3; \n   b = 2  ; \nc = 4; \nd = 5; \n} \nc = c + d; \n} \n";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

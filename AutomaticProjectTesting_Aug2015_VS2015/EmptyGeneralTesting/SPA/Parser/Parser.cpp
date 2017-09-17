@@ -469,21 +469,21 @@ void Parser::parseWhile() {
     Update VarToIdxMap
     Update ModTableStmtToVar using currentStmtNumber
     Update ModTableStmtToVar using parentStack
-    Update ModTableProcToVar using callStack
+    Update ModTableProcToVar using callStack        (after iteration 1.0)
     Update ModTableVar using currentStmtNumber
     Update ModTableVar using parentStack
-    Update ModTableVar using callStack
+    Update ModTableVar using callStack              (after iteration 1.0)
     */
     OutputDebugString("PKB: Add variable to PKB.\n");
     OutputDebugString("PKB: Update uses relationship.\n");
-    _pkbMainPtr->addVariable(whileVar);
+    _pkbMainPtr->addVariable(whileVar);     // Must add variable first before setting relationships
     _pkbMainPtr->setModTableStmtToVar(_currentStmtNumber, whileVar);
     // TODO Refactoring: Extract method to achieve SLAP.
     if (!_parentStack.empty()) {
         stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
         while (!parentStackCopy.empty()) {
             int parentStmt = parentStackCopy.top();
-            _pkbMainPtr->setModTableStmtToVar(parentStmt, whileVar);
+            _pkbMainPtr->setUseTableStmtToVar(parentStmt, whileVar);
             parentStackCopy.pop();
         }
     }
