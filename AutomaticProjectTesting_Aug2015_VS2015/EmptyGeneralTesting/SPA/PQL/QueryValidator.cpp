@@ -346,6 +346,8 @@ bool QueryValidator::isValidDeclaration(string str)
 
         if (_synonymBank.find(synonym) == _synonymBank.end()) {
             _synonymBank.insert(synonym);
+			if (entity == synonym)
+				return false;
             qtInstance->insertVariable(entity, synonym);
         }
         else {

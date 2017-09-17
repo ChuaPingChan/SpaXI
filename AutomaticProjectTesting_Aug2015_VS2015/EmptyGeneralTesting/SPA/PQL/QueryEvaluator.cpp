@@ -83,8 +83,11 @@ void QueryEvaluator::evaluate()
 		}
 	}
 
-    finalResult = getCommonSynonymResult(resultSelect, resultSuchThat, resultPattern);
-    qtInstance->storeEvaluatorResult(finalResult);
+	if (hasResult) 
+	{
+		finalResult = getCommonSynonymResult(resultSelect, resultSuchThat, resultPattern);
+		qtInstance->storeEvaluatorResult(finalResult);
+	}
 }
 
 /*--------------- Unit Testing ---------------*/
@@ -670,7 +673,8 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	if (type1 == "int" && type2 == "ident")
 	{
 		int num = stoi(arg1);
-		hasResult = pkbInstance->isUses(num, arg2);
+		string ident = regex_replace(arg2, regex("\""), "");
+		hasResult = pkbInstance->isUses(num, ident);
 	}
     //Case 2: Uses(int, _)
 	else if (type1 == "int" && type2 == "_")
@@ -775,7 +779,8 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	if (type1 == "int" && type2 == "ident")
 	{
 		int num = stoi(arg1);
-		hasResult = pkbInstance->isMod(num, arg2);
+		string ident = regex_replace(arg2, regex("\""), "");
+		hasResult = pkbInstance->isMod(num, ident);
 	}
 	//Case 2: Modifies(int, _)
 	else if (type1 == "int" && type2 == "_")
@@ -821,7 +826,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 			hasResult = true;
 		}
 	}
-	//Case 5: Modifies(synonyym, _)
+	//Case 5: Modifies(synonym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
 		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatModifiesAnything(type1));
