@@ -669,19 +669,19 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	if (type1 == "int" && type2 == "ident")
 	{
 		int num = stoi(arg1);
-		// hasResult = isUses(num, arg2);
+		hasResult = pkbInstance->isUses(num, arg2);
 	}
     //Case 2: Uses(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
 		int num = stoi(arg1);
-		// hasResult = isUsingAnything(num, arg2);
+		hasResult = pkbInstance->isUsingAnything(num);
 	}
     //Case 3: Uses(int, var)
 	else if (type1 == "int" && type2 == "var")
 	{
 		int num = stoi(arg1);
-		list<string> pkbResult;// = getUsesFromStmt(num);
+		list<string> pkbResult = pkbInstance->getUsesFromStmt(num);
 
 		if (pkbResult.empty())
 		{
@@ -698,7 +698,8 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
 
-		list<string> pkbResult;// = getUsesFromVar(arg1, arg2);
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(arg1, arg2));
+		
 
 		if (pkbResult.empty())
 		{
@@ -714,7 +715,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
     //Case 5: Uses(synonyym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-		list<string> pkbResult;// = getStmtThatUsesAnything(arg1);
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatUsesAnything(arg1));
 
 		if (pkbResult.empty())
 		{
@@ -730,7 +731,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
     //Case 6: Uses(synonym, var)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
-		pair<list<string>, list<string>> pkbResult;// = getUsesPairs(arg1);
+		pair<list<int>, list<string>> pkbResult = pkbInstance->getUsesPairs(arg1);
 
 		if (pkbResult.first.empty() && pkbResult.second.empty())
 		{
@@ -738,9 +739,10 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 		}
 		else
 		{
-			list<string> lst1 = resultSuchThat.first;
+			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
+			list<string> lst1 = resultSuchThat.first;			
 			lst1.push_back(arg1);
-			lst1.insert(lst1.end(), pkbResult.first.begin(), pkbResult.first.end());
+			lst1.insert(lst1.end(), pkbResultFirst.begin(), pkbResultFirst.end());
 
 			list<string> lst2 = resultSuchThat.second;
 			lst2.push_back(arg2);
