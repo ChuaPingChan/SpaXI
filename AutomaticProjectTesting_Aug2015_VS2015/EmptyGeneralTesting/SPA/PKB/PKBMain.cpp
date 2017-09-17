@@ -80,66 +80,7 @@ list<int> PKBMain::getAllChildren(string type) {
 
 	return stmtList;
 }
-/*
-pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2) {
-	pair<list<int>, list<int>> allParentsRel = parentToChildTable.getAllParentsRel();
-	list<int> parent = allParentsRel.first;
-	list<int> children = allParentsRel.second;
-	int first;
-	int second;
 
-	int listSize = parent.size();
-	for (int i = 0; i < listSize; i++) {
-		if (type1 == "while") {
-			first = parent.front();
-			parent.pop_front();
-			second = children.front();
-			children.pop_front();
-			if (isWhile(first)) {
-				parent.push_back(first);
-				children.push_back(second);
-			}
-		}
-
-		if (type1 == "assign") {
-			first = parent.front();
-			parent.pop_front();
-			second = children.front();
-			children.pop_front();
-			if (isAssignment(first)) {
-				parent.push_back(first);
-				children.push_back(second);
-			}
-		}
-	}
-
-	listSize = parent.size();
-	for (int i = 0; i < listSize; i++) {
-		if (type2 == "while") {
-			first = parent.front();
-			parent.pop_front();
-			second = children.front();
-			children.pop_front();
-			if (isWhile(second)) {
-				parent.push_back(first);
-				children.push_back(second);
-			}
-		}
-
-		if (type2 == "assign") {
-			first = parent.front();
-			parent.pop_front();
-			second = children.front();
-			children.pop_front();
-			if (isAssignment(second)) {
-				parent.push_back(first);
-				children.push_back(second);
-			}
-		}
-	}
-
-	return make_pair(parent, children);
-}*/
 
 bool PKBMain::isParentStarChild(int parentStmt, int childStmt) {
 	return parentToChildStarTable.isParentStarChild(parentStmt, childStmt);
