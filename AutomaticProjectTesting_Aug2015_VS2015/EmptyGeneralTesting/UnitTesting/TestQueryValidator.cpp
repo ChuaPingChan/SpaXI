@@ -232,6 +232,10 @@ namespace UnitTesting
             str = "Follows*(123,456)";
             Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "123"));
             Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "rwr", "3121"));
+			qv = QueryValidator();
+			str = "Follows*(s1, s2)";
+			Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "s1"));
+			Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "rwr", "3121"));
 
             //Parent and Parent* clause test
             qv = QueryValidator();
@@ -498,6 +502,8 @@ namespace UnitTesting
             Assert::IsTrue(qv.isValidFollowsRegexTest(str));
             str = "Follows*(validStmtRef,validStmtRef)";
             Assert::IsTrue(qv.isValidFollowsRegexTest(str));
+			str = "Follows*(s1, s2)";
+			Assert::IsTrue(qv.isValidFollowsRegexTest(str));
             /*str = "Follows  *  (   validSynonymForBothArgs  ,   withWhiteSpacesBetweenFollowsAndStar   )";
             Assert::IsTrue(qv.isValidFollowsRegexTest(str));*/
 
