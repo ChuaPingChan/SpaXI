@@ -14,8 +14,9 @@ public:
 	PQLMain(string query);
 	~PQLMain();
 
+	list<string> run();
+
 private:
 	string query;
-	list<string> run();
 };
 

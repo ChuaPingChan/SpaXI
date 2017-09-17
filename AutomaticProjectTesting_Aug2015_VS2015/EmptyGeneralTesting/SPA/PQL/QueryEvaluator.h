@@ -18,7 +18,7 @@ public:
 	void evaluate();
 
     /*--------------- Unit Testing ---------------*/
-    void setPkb(PKBMain pkb);
+    void setPkb(PKBMain &pkb);
     bool getHasResult();
     pair<list<string>, list<string>> getResultSuchThat();
     list<string> getIntersectionTest(list<string> list1, list<string> list2);

@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="PKB\ChildToParentStarTable.cpp" />
     <ClCompile Include="PKB\ChildToParentTable.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
@@ -42,7 +41,6 @@
     <ClCompile Include="PQL\ResultFormatter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="PKB\ChildToParentStarTable.h" />
     <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
