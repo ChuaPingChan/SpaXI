@@ -467,5 +467,28 @@ namespace UnitTesting
             }
         }
 
+        //Case 4 - Positive: Uses(synonym, ident)
+        TEST_METHOD(TestEvaluatorUsesCase4Positive)
+        {
+            qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain::resetInstance();
+            pkbInstance = PKBMain::getInstance();
+            pkbInstance->addVariable("j");
+            pkbInstance->addVariable("a");
+            pkbInstance->addVariable("c");
+            pkbInstance->addVariable("d");
+            pkbInstance->setUseTableStmtToVar(1,"j");
+            pkbInstance->setUseTableStmtToVar(3, "a");
+            pkbInstance->setUseTableStmtToVar(8, "c");
+            pkbInstance->setUseTableStmtToVar(8, "d");
+            pkbInstance->startProcessComplexRelations();
+            //qe.setPkb(PKB);
+            list<int> actualList = pkbInstance->getUsesFromVar("d", "stmt");
+            list<int> expectedList;
+            expectedList.push_back(8);
+            Assert::IsTrue(expectedList == actualList);
+        }
+
     };
 }
