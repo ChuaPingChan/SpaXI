@@ -16,6 +16,13 @@ PKBMain* PKBMain::getInstance()
     return singleton;
 }
 
+void PKBMain::resetInstance()
+{
+    delete singleton;
+    singleton = NULL;
+    singleton = new PKBMain();
+}
+
 //PARENT
 bool PKBMain::setParentChildRel(int parentStmt, int childStmt) {
 	return (parentToChildTable.addParentChild(parentStmt, childStmt) && childToParentTable.addChildParent(childStmt, parentStmt));
