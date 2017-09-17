@@ -224,6 +224,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     //Case 5: Follows(_, _)
 	else if (type1 == "_" && type2 == "_")
 	{
+        cout << "IT REACHED DOUBLE UNDERSCORE";
         hasResult = pkbInstance->hasFollows();
 	}
     //Case 6: Follows(_, synonym)

@@ -134,6 +134,11 @@ namespace UnitTesting
             PKBMain::resetInstance(); pkbInstance = PKBMain::getInstance();
             pkbInstance->setFollowsRel(0, 1);
             pkbInstance->setFollowsRel(1, 2);
+            pkbInstance->setFollowsRel(2, 3);
+            pkbInstance->setFollowsRel(3, 8);
+            pkbInstance->setFollowsRel(4, 5);
+            pkbInstance->setFollowsRel(5, 6);
+            pkbInstance->setFollowsRel(6, 7);
             //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "_", "", "int", "2" };
             qe.evaluateFollowsTest(arrToEvaluate);
