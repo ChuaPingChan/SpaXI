@@ -703,6 +703,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 
 		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(arg2, type1));
 		
+		cout << arg2 << " " << type1;
 
 		if (pkbResult.empty())
 		{
@@ -807,7 +808,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
 
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(type1, arg2));
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(arg2, type1));
 
 		if (pkbResult.empty())
 		{
