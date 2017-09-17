@@ -842,14 +842,14 @@ list<int> PKBMain::getUsesFromVar(string var, string type)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	if (type.compare("stmt") == 0) {
-		return modTableVar.getModStmtsFromVar(varIdx);
+		return usesTableVar.getUsesStmtsFromVar(varIdx);
 	}
 	else if (type.compare("assign") == 0) {
-		return modTableVar.getModAssignsFromVar(varIdx);
+		return usesTableVar.getUsesAssignsFromVar(varIdx);
 	}
 	else if (type.compare("while") == 0) {
-		modTableVar.getModWhileStmtFromVar(varIdx).merge(modTableVar.getModWhileContainersFromVar(varIdx));
-		return modTableVar.getModWhileStmtFromVar(varIdx);
+		usesTableVar.getUsesWhileStmtFromVar(varIdx).merge(usesTableVar.getUsesWhileContainersFromVar(varIdx));
+		return usesTableVar.getUsesWhileStmtFromVar(varIdx);
 	}
 	else {
 		return list<int>();
@@ -860,14 +860,14 @@ list<int> PKBMain::getModifiesFromVar(string var, string type)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	if (type.compare("stmt") == 0) {
-		return usesTableVar.getUsesStmtsFromVar(varIdx);
+		return modTableVar.getModStmtsFromVar(varIdx);
 	}
 	else if (type.compare("assign") == 0) {
-		return usesTableVar.getUsesAssignsFromVar(varIdx);
+		return modTableVar.getModAssignsFromVar(varIdx);
 	}
 	else if (type.compare("while") == 0) {
-		usesTableVar.getUsesWhileStmtFromVar(varIdx).merge(usesTableVar.getUsesWhileContainersFromVar(varIdx));
-		return usesTableVar.getUsesWhileStmtFromVar(varIdx);
+		modTableVar.getModWhileStmtFromVar(varIdx).merge(modTableVar.getModWhileContainersFromVar(varIdx));
+		return modTableVar.getModWhileStmtFromVar(varIdx);
 	}
 	else {
 		return list<int>();
