@@ -147,6 +147,21 @@ bool Parser::assertMatchAndIncrementToken(regex re) {
 }
 
 /*
+Asserts that the next token must match the given regex.
+Does not move the current token pointer forward.
+*/
+bool Parser::assertMatchWithoutIncrementToken(regex re) {
+    if (regex_match(_currentTokenPtr, re)) {
+        return true;
+    } else {
+        // TODO: consider throwing exception.
+        _isValidSyntax = false;
+        OutputDebugString("WARNING: Matching of token failed.\n");
+        return false;
+    }
+}
+
+/*
 Matches the given regex with the next token. Does not proceed to the next token.
 */
 bool Parser::matchToken(regex re) {
@@ -271,7 +286,7 @@ void Parser::parseAssignment() {
     _pkbMainPtr->addAssignmentStmt(_currentStmtNumber);
 
     // Process LHS
-    assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
     string lhsVar = _currentTokenPtr;
 
     /*
@@ -463,7 +478,8 @@ void Parser::parseWhile() {
 
     _parentStack.push(_currentStmtNumber);
 
-    assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+
     string whileVar = _currentTokenPtr;
     /* PKB TODO
     Update VarToIdxMap

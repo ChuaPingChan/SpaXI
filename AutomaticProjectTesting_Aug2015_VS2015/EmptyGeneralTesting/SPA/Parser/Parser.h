@@ -63,6 +63,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     bool incrCurrentTokenPtr();
     std::vector<std::string> tokenizeString(std::string stringToTokenize);
     bool assertMatchAndIncrementToken(std::regex re);
+    bool assertMatchWithoutIncrementToken(std::regex re);
     bool matchToken(std::regex re);
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
