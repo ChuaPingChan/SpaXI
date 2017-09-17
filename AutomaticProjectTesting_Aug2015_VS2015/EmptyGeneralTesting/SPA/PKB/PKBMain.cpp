@@ -133,7 +133,7 @@ list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
 	return childStmt;
 }
 
-list<int> PKBMain::getAllParentStar(int childStmt, string type) {
+list<int> PKBMain::getParentStar(int childStmt, string type) {
 	list<int> parentStmt = childToParentStarTable.getParentStar(childStmt);
 	if (type == "stmt") {
 		return parentStmt;
