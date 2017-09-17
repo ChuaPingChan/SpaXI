@@ -63,7 +63,7 @@ bool PKBMain::isChild(int childStmt) {
 }
 
 bool PKBMain::hasParentRel() {
-	return parentToChildTable.empty();
+	return !parentToChildTable.empty();
 }
 
 list<int> PKBMain::getParent(int childStmt, string type) {
