@@ -33,7 +33,7 @@ list<string> PQLMain::run()
 		else
 		{
 			ResultFormatter formatter;
-			return list<string>();
+            return evaluatorResult;
 		}
 	}
 	else

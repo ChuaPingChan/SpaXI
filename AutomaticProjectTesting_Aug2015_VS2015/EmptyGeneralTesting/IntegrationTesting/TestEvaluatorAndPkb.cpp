@@ -97,6 +97,7 @@ namespace UnitTesting
             //qe.setPkb(PKB);
             array<string, 4> arrToEvaluate = { "int", "2", "stmt", "s" };
             qe.evaluateFollowsTest(arrToEvaluate);
+            expectedList1.push_front(arrToEvaluate[1]);
             expectedList1.push_back("3");
             expectedPair = make_pair(expectedList1, expectedList2);
             actualPair = qe.getResultSuchThat();
@@ -196,6 +197,7 @@ namespace UnitTesting
             pair<list<string>, list<string>> actualPair;
             array<string, 4> arrToEvaluate = { "_", "", "stmt", "s" };
             qe.evaluateFollowsTest(arrToEvaluate);
+            expectedList1.push_front(arrToEvaluate[1]);
             expectedList1.push_back("2");
             expectedList1.push_back("3");
             expectedPair = make_pair(expectedList1, expectedList2);
@@ -240,6 +242,7 @@ namespace UnitTesting
             pair<list<string>, list<string>> actualPair;
             array<string, 4> arrToEvaluate = { "stmt", "s", "int", "2" };
             qe.evaluateFollowsTest(arrToEvaluate);
+            expectedList1.push_front(arrToEvaluate[1]);
             expectedList1.push_back("1");
             expectedPair = make_pair(expectedList1, expectedList2);
             actualPair = qe.getResultSuchThat();
@@ -285,6 +288,7 @@ namespace UnitTesting
             pair<list<string>, list<string>> actualPair;
             array<string, 4> arrToEvaluate = { "stmt", "s", "_", "" };
             qe.evaluateFollowsTest(arrToEvaluate);
+            expectedList1.push_front(arrToEvaluate[1]);
             expectedList1.push_back("1");
             expectedList1.push_back("2");
             expectedPair = make_pair(expectedList1, expectedList2);
@@ -329,6 +333,7 @@ namespace UnitTesting
             pair<list<string>, list<string>> actualPair;
             array<string, 4> arrToEvaluate = { "stmt", "s1", "stmt", "s2" };
             qe.evaluateFollowsTest(arrToEvaluate);
+            expectedList1.push_front(arrToEvaluate[1]); expectedList2.push_front(arrToEvaluate[3]);
             expectedList1.push_back("1"); expectedList2.push_back("2");
             expectedList1.push_back("2"); expectedList2.push_back("3");
             expectedPair = make_pair(expectedList1, expectedList2);

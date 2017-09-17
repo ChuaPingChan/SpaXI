@@ -84,6 +84,7 @@ void QueryEvaluator::evaluate()
 	}
 
     finalResult = getCommonSynonymResult(resultSelect, resultSuchThat, resultPattern);
+    qtInstance->storeEvaluatorResult(finalResult);
 }
 
 /*--------------- Unit Testing ---------------*/
@@ -158,18 +159,22 @@ void QueryEvaluator::evaluateSelect(array<string, 2> arr)
 	if (type == "stmt")
 	{
 		resultSelect = getListStringFromListInt(pkbInstance->getAllStatements());
+        resultSelect.push_front(synonym);
 	}
 	else if (type == "assign")
 	{
 		resultSelect = getListStringFromListInt(pkbInstance->getAllAssignments());
+        resultSelect.push_front(synonym);
 	}
 	else if (type == "while")
 	{
 		resultSelect = getListStringFromListInt(pkbInstance->getAllWhiles());
+        resultSelect.push_front(synonym);
 	}
 	else if (type == "variable")
 	{
 		resultSelect = pkbInstance->getAllVariables();
+        resultSelect.push_front(synonym);
 	}
 	else
 	{
@@ -206,6 +211,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -232,6 +238,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -248,6 +255,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -264,6 +272,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg1);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
@@ -280,6 +289,8 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result.first);
             list<string> list2 = getListStringFromListInt(result.second);
+            list1.push_front(arg1);
+            list2.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
         }
