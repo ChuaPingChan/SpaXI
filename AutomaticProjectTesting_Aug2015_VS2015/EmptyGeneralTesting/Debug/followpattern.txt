@@ -26,12 +26,12 @@ Select a such that Follows(_, _) pattern a(_, _)
 6 - Pattern is true, Select all stmt satisfy follow
 assign a; stmt s;
 Select s such that Follows(_, s) pattern a(_, _)
-2, 3, 4, 5, 6, 7
+2, 3, 5, 6, 7, 8
 5000
 7 - Follow is true, Select all assign
 assign a; stmt s;
 Select a such that Follows(_, s) pattern a(_, _)
-1, 2, 3, 4, 5, 6, 7, 8
+1, 2, 4, 5, 6, 7, 8
 5000
 8 - common assign 
 assign a; stmt s;
@@ -79,7 +79,7 @@ Select v such that Follows(_, 2) pattern a(v, _)
 i, j, a, b, c, d
 5000
 17 - Follow is true, Select all variable that are being assigned
-assign a;
+assign a; variable v;
 Select v such that Follows(_, _) pattern a(v, _)
 i, j, a, b, c, d
 5000
