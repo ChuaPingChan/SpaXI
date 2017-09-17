@@ -32,6 +32,8 @@ class FollowsTable {
 		list<int> getAllAfter();
 
 		pair<list<int>, list<int>> getAllFollows();
+
+		void setMap(unordered_map<int, pair<int, int>> map);
 	
 	private:
 		unordered_map<int, pair<int, int>> followsMap;

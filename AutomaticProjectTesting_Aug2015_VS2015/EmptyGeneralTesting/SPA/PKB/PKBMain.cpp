@@ -141,6 +141,87 @@ pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2)
 	return make_pair(parent, children);
 }
 
+bool PKBMain::isParentStarChild(int parentStmt, int childStmt) {
+	return parentToChildStarTable.isParentStarChild(parentStmt, childStmt);
+}
+
+list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
+	list<int> childStmt = parentToChildStarTable.getChildren(parentStmt);
+	if (type == "stmt") {
+		return childStmt;
+	}
+	//TODO
+	if (type == "while") {
+
+	}
+
+	if (type == "assign") {
+
+	}
+
+	return childStmt;
+}
+
+pair<list<int>, list<int>> PKBMain::getAllParentStarRel(string type1, string type2) {
+	pair<list<int>, list<int>> allParentStarRel = parentToChildStarTable.getAllParentStarRel();
+	list<int> parent = allParentStarRel.first;
+	list<int> children = allParentStarRel.second;
+	//	int first;
+	//	int second;
+	/*
+	int listSize = parent.size();
+	for (int i = 0; i < listSize; i++) {
+	if (type1 == "WHILE") {
+	first = parent.front();
+	parent.pop_front();
+	second = children.front();
+	children.pop_front();
+	if (isWhile(first) {
+	parent.push_back(first);
+	children.push_back(second);
+	}
+	}
+
+	if (type1 == "ASSIGN") {
+	first = parent.front();
+	parent.pop_front();
+	second = children.front();
+	children.pop_front();
+	if (isAssign(first)) {
+	parent.push_back(first);
+	children.push_back(second);
+	}
+	}
+	}
+
+	int listSize = parent.size();
+	for (int i = 0; i < listSize; i++) {
+	if (type2 == "WHILE") {
+	first = parent.front();
+	parent.pop_front();
+	second = children.front();
+	children.pop_front();
+	if (isWhile(second)) {
+	parent.push_back(first);
+	children.push_back(second);
+	}
+	}
+
+	if (type2 == "ASSIGN") {
+	first = parent.front();
+	parent.pop_front();
+	second = children.front();
+	children.pop_front();
+	if (isAssign(second)) {
+	parent.push_back(first);
+	children.push_back(second);
+	}
+	}
+	}*/
+
+	return make_pair(parent, children);
+}
+
 //
 //FOLLOWS
 pair<list<int>, list<int>> PKBMain::getAllFollows(string type1, string type2) {
@@ -533,8 +614,9 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 
 bool PKBMain::startProcessComplexRelations() {
 	DesignExtractor de;
-	//childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
-	//parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
+	followsTable.setMap(de.computeFollowsTable(followsBeforeMap, followsAfterMap));
+	childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
+	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
 	followsStarBefore.setMap(de.computeFollowsStarBeforeTable(followsTable));
 	return true;

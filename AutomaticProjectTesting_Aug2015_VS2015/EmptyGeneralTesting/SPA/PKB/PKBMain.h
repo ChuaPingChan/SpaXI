@@ -41,7 +41,10 @@ public:
     list<int> getAllParents(string type);
     list<int> getAllChildren(string type);
     pair<list<int>, list<int>> getAllParentsRel(string type1, string type2);
-    pair<list<int>, list<int>> getAllFollows(string type1, string type2);
+	bool isParentStarChild(int parentStmt, int childStmt);
+	list<int> getChildrenStar(int parentStmt, string type);
+	pair<list<int>, list<int>> getAllParentStarRel(string type1, string type2);
+	pair<list<int>, list<int>> getAllFollows(string type1, string type2);
     bool hasFollows();
     bool setFollowsRel(int stmtBef, int stmtAft);
     bool isAfter(int stmtAft);
