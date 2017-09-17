@@ -14,13 +14,13 @@ namespace UnitTesting
         {
             VarIdxTable vit;
             
-            Assert::IsTrue(vit.addToVarIdxTable("a", 1));
-            Assert::IsTrue(vit.addToVarIdxTable("b", 2));
-            Assert::IsTrue(vit.addToVarIdxTable("hello", 3));
-            Assert::IsTrue(vit.addToVarIdxTable("japan", 4));
-            Assert::IsTrue(vit.addToVarIdxTable("daisuki", 5));
+            Assert::IsTrue(vit.addToVarIdxTable("a"));
+            Assert::IsTrue(vit.addToVarIdxTable("b"));
+            Assert::IsTrue(vit.addToVarIdxTable("hello"));
+            Assert::IsTrue(vit.addToVarIdxTable("japan"));
+            Assert::IsTrue(vit.addToVarIdxTable("daisuki"));
 
-            Assert::IsTrue(vit.getIdxFromVar("japan") == 4);
+            Assert::IsTrue(vit.getIdxFromVar("japan") == 3);
             Assert::IsFalse(vit.getIdxFromVar("lalala") == 1);
 
             Assert::IsTrue(vit.isVarPresent("daisuki"));

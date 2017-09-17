@@ -49,7 +49,7 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _parentStack = stack<int>();
     _firstStmtInProc = Parser::INT_INITIAL_STMT_NUMBER;
     _pkbMainPtr = pkbMainPtr;
-    _headerToStmtsMap = unordered_map<int, list<int>>();
+    _stacksOfFollowsStacks = stack<stack<int>>();
 }
 
 bool Parser::parse(string filename) {
@@ -157,14 +157,13 @@ void Parser::parseProgram() {
     incrCurrentTokenPtr();
 
     // PKB TODO: put this in a while loop after iteration 1,
-    //      when there are multiple procedures.
+    //           when there are multiple procedures.
     parseProcedure();
     OutputDebugString("FINE: End of program reached.\n");
 
-    // PKB TODO: Populate FollowsTable.
-    OutputDebugString("PKB: Add follows relationship.\n");
     // PKB TODO: Tell PKB to start design extractor.
     OutputDebugString("PKB: Tell PKB to start design extractor.\n");
+    _pkbMainPtr->startProcessComplexRelations();
 }
 
 // Expects _nextToken to be "procedure" keyword
@@ -183,19 +182,29 @@ void Parser::parseProcedure() {
     procName = _currentTokenPtr;
     // PKB TODO: Add to ProcToIdxMap
     OutputDebugString("PKB: Add procedure.\n");
+    _pkbMainPtr->addProcedure(procName);
     
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    OutputDebugString("FINE: Entering procedure...\n");
+    // Add new stmtList stack to follows stack
+    OutputDebugString("FINE: Push new stmtList stack to follows stack.\n");
+    stack<int>* newFollowsStack = new stack<int>();
+    _stacksOfFollowsStacks.push(*newFollowsStack);
     _firstStmtInProc++;
+    
     parseStmtList();
+
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    processAndPopTopFollowStack();
+    OutputDebugString("FINE: Processing and then pop top follows stack.\n");
+    OutputDebugString("FINE: Exiting procedure...\n");
 }
 
 /*
 Parses the statment list within a scope. At the end of this method, _nextToken is '}'.
 */
 void Parser::parseStmtList() {
-    //OutputDebugString("FINE: Entering new statement list.\n");
     parseStmt();    // End of statement characters like ';' and '}' are handled in parseStmt().
     if (matchToken(Parser::REGEX_MATCH_CLOSE_BRACE)) {
         return;
@@ -211,6 +220,10 @@ and '}' for while and if-else statements.
 void Parser::parseStmt() {
     _currentStmtNumber++;
     OutputDebugString("FINE: Identifying next statement type...\n");
+
+    // Push current statement to top of the top followsStack
+    _stacksOfFollowsStacks.top().push(_currentStmtNumber);
+    OutputDebugString("FINE: Pushing stmt to top stack of follows stack.\n");
 
     // Set parent child relation. 0 if no parent.
     if (_parentStack.empty()) {
@@ -255,6 +268,7 @@ void Parser::parseAssignment() {
     OutputDebugString("FINE: Assignment statement identified.\n");
     // PKB TODO: Add assignmentStmt to PKB
     OutputDebugString("PKB: Add assignment to PKB.\n");
+    _pkbMainPtr->addAssignmentStmt(_currentStmtNumber);
 
     // Process LHS
     assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
@@ -265,13 +279,24 @@ void Parser::parseAssignment() {
     Add lhsVar to VarToIdxMap
     Update ModTableStmtToVar using currentStmtNumber
     Update ModTableStmtToVar using parentStack
-    Update ModTableProcToVar using callStack
+    Update ModTableProcToVar using callStack        (after iteration 1)
     Update ModTableVar using currentStmtNumber
     Update ModTableVar using parentStack
-    Update ModTableVar using callStack
+    Update ModTableVar using callStack              (after iteration 1)
     */
     OutputDebugString("PKB: Add variable to PKB.\n");
     OutputDebugString("PKB: Update modifies relationship.\n");
+    _pkbMainPtr->addVariable(lhsVar);
+    _pkbMainPtr->setModTableStmtToVar(_currentStmtNumber, lhsVar);
+    // TODO Refactoring: Extract method to achieve SLAP.
+    if (!_parentStack.empty()) {
+        stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+        while (!parentStackCopy.empty()) {
+            int parentStmt = parentStackCopy.top();
+            _pkbMainPtr->setModTableStmtToVar(parentStmt, lhsVar);
+            parentStackCopy.pop();
+        }
+    }
     
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_EQUAL);
@@ -281,36 +306,63 @@ void Parser::parseAssignment() {
     if (assertIsValidExpression(rhsExpression)) {
         while (!matchToken(Parser::REGEX_MATCH_SEMICOLON)) {
             if (matchToken(Parser::REGEX_VALID_ENTITY_NAME)) {
+                string var = _currentTokenPtr;
                 /*
                 PKB TODO:
                 Update VarToIdxMap
                 Update UsesTableStmtToVar using currentStmtNumber
                 Update UsesTableStmtToVar using parentStack
-                Update UsesProcToVar using callStack
+                Update UsesProcToVar using callStack        (after iteration 1)
                 Update UsesTableVar using currentStmtNumber
                 Update UsesTableVar using parentStack
-                Update UsesTableVar using callStack
+                Update UsesTableVar using callStack         (after iteration 1)
                 */
                 OutputDebugString("PKB: Add variable to PKB.\n");
                 OutputDebugString("PKB: Update uses relationship.\n");
+                _pkbMainPtr->addVariable(var);
+                _pkbMainPtr->setModTableStmtToVar(_currentStmtNumber, var);
+                // TODO Refactoring: Extract method to achieve SLAP.
+                if (!_parentStack.empty()) {
+                    stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+                    while (!parentStackCopy.empty()) {
+                        int parentStmt = parentStackCopy.top();
+                        _pkbMainPtr->setModTableStmtToVar(parentStmt, var);
+                        parentStackCopy.pop();
+                    }
+                }
+
             } else if (matchToken(Parser::REGEX_MATCH_CONSTANT)) {
+                int constant = stoi(_currentTokenPtr);
                 /*
                 PKB TODO:
                 Update constants DS
                 Update UsesTableStmtToConst using currentStmtNumber
                 Update UsesTableStmtToConst using parentStack
-                Update UsesProcToConst using callStack
+                Update UsesProcToConst using callStack          (after iteration 1)
                 Update UsesTableConst using currentStmtNumber
                 Update UsesTableConst using parentStack
-                Update UsesTableConst using callStack
+                Update UsesTableConst using callStack           (after iteration 1)
                 */
                 OutputDebugString("PKB: Add constant to PKB.\n");
                 OutputDebugString("PKB: Update uses relationship.\n");
+                _pkbMainPtr->addConstant(_currentStmtNumber, constant);
+                // TODO Refactoring: Extract method to achieve SLAP.
+                if (!_parentStack.empty()) {
+                    stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+                    while (!parentStackCopy.empty()) {
+                        int parentStmt = parentStackCopy.top();
+                        _pkbMainPtr->addConstant(parentStmt, constant);
+                        parentStackCopy.pop();
+                    }
+                }
+                
             }
             incrCurrentTokenPtr();
         }
         // PKB TODO: Add LHS var and RHS expression (without whitespace) to pattern table.
         OutputDebugString("PKB: Update pattern table.\n");
+        string rhsExpressionNoWhitespace = removeAllWhitespaces(rhsExpression);
+        _pkbMainPtr->setPatternRelation(_currentStmtNumber, lhsVar, rhsExpressionNoWhitespace);
     }
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
 }
@@ -404,14 +456,16 @@ _currentTokenPtr will be advanced after '}'.
 void Parser::parseWhile() {
     OutputDebugString("FINE: While statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
+
     // PKB TODO: Add while stmt to PKB
     OutputDebugString("PKB: Add while statement to PKB.\n");
+    _pkbMainPtr->addWhileStmt(_currentStmtNumber);
 
     _parentStack.push(_currentStmtNumber);
 
     assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
     string whileVar = _currentTokenPtr;
-    /* TODO
+    /* PKB TODO
     Update VarToIdxMap
     Update ModTableStmtToVar using currentStmtNumber
     Update ModTableStmtToVar using parentStack
@@ -422,14 +476,53 @@ void Parser::parseWhile() {
     */
     OutputDebugString("PKB: Add variable to PKB.\n");
     OutputDebugString("PKB: Update uses relationship.\n");
+    _pkbMainPtr->addVariable(whileVar);
+    _pkbMainPtr->setModTableStmtToVar(_currentStmtNumber, whileVar);
+    // TODO Refactoring: Extract method to achieve SLAP.
+    if (!_parentStack.empty()) {
+        stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+        while (!parentStackCopy.empty()) {
+            int parentStmt = parentStackCopy.top();
+            _pkbMainPtr->setModTableStmtToVar(parentStmt, whileVar);
+            parentStackCopy.pop();
+        }
+    }
     
     assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
 
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     OutputDebugString("FINE: Entering while block.\n");
+    // Add new stmtList stack to follows stack
+    OutputDebugString("Push new stmtList stack to follows stack.\n");
+    stack<int>* newFollowsStack = new stack<int>();
+    _stacksOfFollowsStacks.push(*newFollowsStack);
+    
     parseStmtList();
-    OutputDebugString("FINE: Exiting while block.\n");
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    OutputDebugString("FINE: Exiting while block.\n");
+    processAndPopTopFollowStack();
+    OutputDebugString("FINE: Processing and then pop top follows stack.\n");
+    
     _parentStack.pop();
+}
+
+void Parser::processAndPopTopFollowStack()
+{
+    assert(!_stacksOfFollowsStacks.empty() && !_stacksOfFollowsStacks.top().empty());
+    stack<int> topFollowsStack = _stacksOfFollowsStacks.top();
+
+    int stmtAfter = topFollowsStack.top();
+    topFollowsStack.pop();
+    int stmtBefore = 0;
+    while (!topFollowsStack.empty()) {
+        stmtBefore = topFollowsStack.top();
+        (*_pkbMainPtr).setFollowsRel(stmtBefore, stmtAfter);
+        stmtAfter = stmtBefore;
+        topFollowsStack.pop();
+    }
+    (*_pkbMainPtr).setFollowsRel(0, stmtAfter);
+
+    // TODO: Free dynamically allocated memory with "delete" keyword.
+    _stacksOfFollowsStacks.pop();
 }

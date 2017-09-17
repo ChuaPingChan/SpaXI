@@ -54,7 +54,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::stack<int> _parentStack;           //Contains only container stmts
     int _firstStmtInProc;
     PKBMain* _pkbMainPtr;
-    unordered_map<int, list<int>> _headerToStmtsMap;
+    std::stack<std::stack<int>> _stacksOfFollowsStacks;
     
     /******************
     * Private Methods *
@@ -69,6 +69,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::string removeAllWhitespaces(std::string targetString);
     std::string removeAllBrackets(std::string targetString);
     bool isBracketedCorrectly(std::string expression);
+    void processAndPopTopFollowStack();
 
     bool assignmentExpected();
     bool whileExpected();

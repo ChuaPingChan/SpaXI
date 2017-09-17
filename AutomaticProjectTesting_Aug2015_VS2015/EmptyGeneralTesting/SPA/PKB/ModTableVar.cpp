@@ -11,12 +11,12 @@ bool ModTableVar::addModVarToStmtList(int varIdx, int stmtNumber) {
     if (modVarToStmtMap.find(varIdx) == modVarToStmtMap.end()) {
         modVarToStmtMap[varIdx] = list<int>();
         modVarToStmtMap[varIdx].push_back(stmtNumber);
-        modVarToStmtMap[varIdx].unique();
         return true;
     }
     else {
         // else, expand the list of variables
         modVarToStmtMap[varIdx].push_back(stmtNumber);
+		modVarToStmtMap[varIdx].sort();
         modVarToStmtMap[varIdx].unique();
         return true;
     }
@@ -50,6 +50,8 @@ bool ModTableVar::addModVarToAssignList(int varIdx, int stmtNumber)
     else {
         // else, expand the list of variables
         modVarToAssignMap[varIdx].push_back(stmtNumber);
+		modVarToAssignMap[varIdx].sort();
+		modVarToAssignMap[varIdx].unique();
         return true;
     }
     return false;
@@ -66,6 +68,8 @@ bool ModTableVar::addModVarToWhileStmtList(int varIdx, int stmtNumber)
     else {
         // else, expand the list of variables
         modVarToStmtMap[varIdx].push_back(stmtNumber);
+		modVarToStmtMap[varIdx].sort();
+		modVarToStmtMap[varIdx].unique();
         return true;
     }
     return false;

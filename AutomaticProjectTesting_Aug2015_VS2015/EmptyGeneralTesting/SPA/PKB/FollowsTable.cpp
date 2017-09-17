@@ -95,3 +95,7 @@ pair<list<int>, list<int>> FollowsTable::getAllFollows() {
 	stmtPair = std::make_pair(bef, aft);
 	return stmtPair;
 }
+
+void FollowsTable::setMap(unordered_map<int, pair<int, int>> map) {
+	followsMap = map;
+}

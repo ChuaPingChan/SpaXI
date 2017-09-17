@@ -4,10 +4,11 @@ VarIdxTable::VarIdxTable() {
 
 }
 
-bool VarIdxTable::addToVarIdxTable(string var, int index) {
+bool VarIdxTable::addToVarIdxTable(string var) {
     // if variable does not exist as a key, create new list and insert data to hash map
     if (varIdxMap.find(var) == varIdxMap.end()) {
-        varIdxMap[var] = index;
+        varIdxMap[var] = varIdx;
+        varIdx++;
         return true;
     }
     return false;

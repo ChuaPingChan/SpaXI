@@ -22,5 +22,6 @@
 */Release*
 */release*
 *.vcxproj.filters
+*out.xml
 # Don't ignore .sln and .vcxproj, .ico, .rc, .rc2
 
