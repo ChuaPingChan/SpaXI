@@ -41,5 +41,6 @@ list<string> PQLMain::run()
 		return list<string>();
 	}
 
+	qtInstance = qtInstance->clear();
 
 }
