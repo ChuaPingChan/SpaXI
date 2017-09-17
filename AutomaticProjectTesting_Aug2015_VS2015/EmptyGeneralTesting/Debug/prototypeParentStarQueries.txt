@@ -138,3 +138,18 @@ while w; assign a;
 Select a such that Parent*(w, a)
 6, 8, 10, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28
 5000
+7 - Case 3 Parent
+stmt s;
+Select s such that Parent(4, s)
+5, 26, 27, 28
+5000
+8 - Case 3
+assign a;
+Select a such that Parent(9, a)
+10
+5000
+9 - Case 3
+while w;
+Select w such that Parent(11, w)
+12, 17
+5000
