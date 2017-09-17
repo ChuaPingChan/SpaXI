@@ -723,6 +723,16 @@ bool QueryValidator::isValidFollows(string str)
         if (arg1 == arg2 && arg1 != "_")  //arg1 cannot be the same as arg2. 
             return false;
         
+		// if both args are int, arg1 must be < than arg2
+		if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
+		{
+			int first = stoi(arg1);
+			int second = stoi(arg2);
+			if (first >= second) 
+			{
+				return false;
+			}
+		}
 
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "int";
