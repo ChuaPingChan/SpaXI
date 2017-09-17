@@ -24,5 +24,6 @@
 *.vcxproj.filters
 *out.xml
 *dummySimpleSource.txt
+*out.xml
 # Don't ignore .sln and .vcxproj, .ico, .rc, .rc2
 
