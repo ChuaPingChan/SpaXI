@@ -53,3 +53,8 @@ variable v1, v2;
 Select v such that Uses(v1, v2)
 none
 5000
+47 - same type in uses
+variable v;
+Select v such that Uses(3, v)
+a
+5000
