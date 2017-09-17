@@ -40,7 +40,7 @@ Select a such that Parent*(9, a)
 5000
 9 - Case 3
 while w;
-Select w such that Parent(11, w)
+Select w such that Parent*(11, w)
 12, 17
 5000
 10 - Case 4
@@ -111,7 +111,7 @@ Select w such that Parent*(w, _)
 23 - Case 9
 stmt s1, s2;
 Select s1 such that Parent*(s1, s2)
-4, 5, 7, 9, 10, 12, 13, 17
+4, 5, 7, 9, 12, 11, 17
 5000
 24 - Case 9
 stmt s1, s2;
@@ -121,7 +121,7 @@ Select s2 such that Parent*(s1, s2)
 25 - Case 9
 stmt s; while w;
 Select s such that Parent*(s, w)
-4, 5, 7, 9, 11
+4, 5, 9, 11
 5000
 26 - Case 9
 stmt s; while w;
