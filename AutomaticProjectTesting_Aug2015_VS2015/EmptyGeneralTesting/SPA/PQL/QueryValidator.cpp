@@ -920,6 +920,10 @@ bool QueryValidator::isValidParent(string str)
             result[2] = "while";
             result[3] = arg2;
         }
+        else if (isArgumentInClause(arg2, qtInstance->getAssigns())) {
+            result[2] = "assign";
+            result[3] = arg2;
+        }
         else if (arg2 == "_") {
             result[2] = arg2;
             result[3] = "";
@@ -981,6 +985,10 @@ bool QueryValidator::isValidParent(string str)
         }
         else if (isArgumentInClause(arg2, qtInstance->getWhiles())) {
             result[2] = "while";
+            result[3] = arg2;
+        }
+        else if (isArgumentInClause(arg2, qtInstance->getAssigns())) {
+            result[2] = "assign";
             result[3] = arg2;
         }
         else if (arg2 == "_") {
