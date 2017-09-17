@@ -3,6 +3,7 @@
 QueryEvaluator::QueryEvaluator()
 {
 	qtInstance = QueryTree::getInstance();
+	pkbInstance = PKBMain::getInstance();
 }
 
 
@@ -186,17 +187,17 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     //Case 1: Follows(int, int)
 	if (type1 == "int" && type2 == "int")
 	{
-        hasResult = PKB.isFollows(stoi(arg1), stoi(arg2));
+        hasResult = pkbInstance->isFollows(stoi(arg1), stoi(arg2));
 	}
     //Case 2: Follows(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
-        hasResult = PKB.isBefore(stoi(arg1));
+        hasResult = pkbInstance->isBefore(stoi(arg1));
 	}
     //Case 3: Follows(int, synonym)
 	else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while")) 
 	{
-        list<int> result = PKB.getAfter(stoi(arg1), type2);
+        list<int> result = pkbInstance->getAfter(stoi(arg1), type2);
         if (result.empty())
         {
             hasResult = false;
@@ -212,17 +213,17 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     //Case 4: Follows(_, int)
 	else if (type1 == "_" && type2 == "int")
 	{ 
-        hasResult = PKB.isAfter(stoi(arg2));
+        hasResult = pkbInstance->isAfter(stoi(arg2));
 	}
     //Case 5: Follows(_, _)
 	else if (type1 == "_" && type2 == "_")
 	{
-        hasResult = PKB.hasFollows();
+        hasResult = pkbInstance->hasFollows();
 	}
     //Case 6: Follows(_, synonym)
 	else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        list<int> result = PKB.getAllAfter(arg2);
+        list<int> result = pkbInstance->getAllAfter(arg2);
         if (result.empty())
         {
             hasResult = false;
@@ -238,7 +239,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     //Case 7: Follows(synonym, int)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
 	{
-        list<int> result = PKB.getBefore(stoi(arg2), type1);
+        list<int> result = pkbInstance->getBefore(stoi(arg2), type1);
         if (result.empty())
         {
             hasResult = false;
@@ -254,7 +255,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     //Case 8: Follows(synonym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-        list<int> result = PKB.getAllBefore(type1);
+        list<int> result = pkbInstance->getAllBefore(type1);
         if (result.empty())
         {
             hasResult = false;
@@ -270,7 +271,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     //Case 9: Follows(synonym, synonym)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        pair<list<int>, list<int>> result = PKB.getAllFollows(type1, type2);
+        pair<list<int>, list<int>> result = pkbInstance->getAllFollows(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
@@ -299,17 +300,17 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
     //Case 1: FollowsStar(int, int)
     if (type1 == "int" && type2 == "int")
     {
-        hasResult = PKB.isFollowsStar(stoi(arg1), stoi(arg2));
+        hasResult = pkbInstance->isFollowsStar(stoi(arg1), stoi(arg2));
     }
     //Case 2: FollowsStar(int, _)
     else if (type1 == "int" && type2 == "_")
     {
-        hasResult = PKB.isBefore(stoi(arg1));
+        hasResult = pkbInstance->isBefore(stoi(arg1));
     }
     //Case 3: FollowsStar(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        list<int> result = PKB.getAfterStar(stoi(arg1), type2);
+        list<int> result = pkbInstance->getAfterStar(stoi(arg1), type2);
         if (result.empty())
         {
             hasResult = false;
@@ -325,17 +326,17 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
     //Case 4: FollowsStar(_, int)
     else if (type1 == "_" && type2 == "int")
     {
-        hasResult = PKB.isAfter(stoi(arg2));
+        hasResult = pkbInstance->isAfter(stoi(arg2));
     }
     //Case 5: FollowsStar(_, _)
     else if (type1 == "_" && type2 == "_")
     {
-        hasResult = PKB.hasFollows();
+        hasResult = pkbInstance->hasFollows();
     }
     //Case 6: FollowsStar(_, synonym)
     else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        list<int> result = PKB.getAllAfterStar(type2);
+        list<int> result = pkbInstance->getAllAfterStar(type2);
         if (result.empty())
         {
             hasResult = false;
@@ -351,7 +352,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
     //Case 7: FollowsStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
     {
-        list<int> result = PKB.getBefore(stoi(arg2), type1);
+        list<int> result = pkbInstance->getBefore(stoi(arg2), type1);
         if (result.empty())
         {
             hasResult = false;
@@ -367,7 +368,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
     //Case 8: FollowsStar(synonym, _)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
     {
-        list<int> result = PKB.getAllBeforeStar(type1);
+        list<int> result = pkbInstance->getAllBeforeStar(type1);
         if (result.empty())
         {
             hasResult = false;
@@ -383,7 +384,7 @@ void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
     //Case 9: FollowsStar(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        pair<list<int>, list<int>> result = PKB.getAllFollowsStar(type1, type2);
+        pair<list<int>, list<int>> result = pkbInstance->getAllFollowsStar(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
@@ -412,17 +413,17 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     //Case 1: Parent(int, int)
     if (type1 == "int" && type2 == "int")
 	{
-        hasResult = PKB.isParentChild(stoi(arg1), stoi(arg2));
+        hasResult = pkbInstance->isParentChild(stoi(arg1), stoi(arg2));
 	}
     //Case 2: Parent(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
-        hasResult = PKB.isParent(stoi(arg1));
+        hasResult = pkbInstance->isParent(stoi(arg1));
 	}
     //Case 3: Parent(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        list<int> result = PKB.getChildren(stoi(arg1), type2);
+        list<int> result = pkbInstance->getChildren(stoi(arg1), type2);
         if (result.empty())
         {
             hasResult = false;
@@ -438,17 +439,17 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     //Case 4: Parent(_, int)
 	else if (type1 == "_" && type2 == "int")
 	{
-        hasResult = PKB.isChild(stoi(arg2));
+        hasResult = pkbInstance->isChild(stoi(arg2));
 	}
     //Case 5: Parent(_, _)
 	else if (type1 == "_" && type2 == "_")
 	{
-        hasResult = PKB.hasParentRel();
+        hasResult = pkbInstance->hasParentRel();
 	}
     //Case 6: Parent(_, synonym)
     else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        list<int> result = PKB.getAllChildren(type2);
+        list<int> result = pkbInstance->getAllChildren(type2);
         if (result.empty())
         {
             hasResult = false;
@@ -464,7 +465,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     //Case 7: Parent(synonym, int)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
 	{
-        list<int> result = PKB.getParent(stoi(arg2), type1);
+        list<int> result = pkbInstance->getParent(stoi(arg2), type1);
         if (result.empty())
         {
             hasResult = false;
@@ -480,7 +481,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     //Case 8: Parent(synonym, _)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
 	{
-        list<int> result = PKB.getAllParents(type1);
+        list<int> result = pkbInstance->getAllParents(type1);
         if (result.empty())
         {
             hasResult = false;
@@ -525,17 +526,17 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     //Case 1: ParentStar(int, int)
     if (type1 == "int" && type2 == "int")
     {
-        hasResult = PKB.isParentStarChild(stoi(arg1), stoi(arg2));
+        hasResult = pkbInstance->isParentStarChild(stoi(arg1), stoi(arg2));
     }
     //Case 2: ParentStar(int, _)
     else if (type1 == "int" && type2 == "_")
     {
-        hasResult = PKB.isParent(stoi(arg1));
+        hasResult = pkbInstance->isParent(stoi(arg1));
     }
     //Case 3: ParentStar(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        list<int> result = PKB.getChildrenStar(stoi(arg1), type2);
+        list<int> result = pkbInstance->getChildrenStar(stoi(arg1), type2);
         if (result.empty())
         {
             hasResult = false;
@@ -551,17 +552,17 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     //Case 4: ParentStar(_, int)
     else if (type1 == "_" && type2 == "int")
     {
-        hasResult = PKB.isChild(stoi(arg2));
+        hasResult = pkbInstance->isChild(stoi(arg2));
     }
     //Case 5: ParentStar(_, _)
     else if (type1 == "_" && type2 == "_")
     {
-        hasResult = PKB.hasParentRel();
+        hasResult = pkbInstance->hasParentRel();
     }
     //Case 6: ParentStar(_, synonym)
     else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        list<int> result = PKB.getAllChildren(type2);
+        list<int> result = pkbInstance->getAllChildren(type2);
         if (result.empty())
         {
             hasResult = false;
@@ -609,7 +610,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     //Case 9: ParentStar(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        pair<list<int>, list<int>> result = PKB.getAllParentStarRel(type1, type2);
+        pair<list<int>, list<int>> result = pkbInstance->getAllParentStarRel(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;

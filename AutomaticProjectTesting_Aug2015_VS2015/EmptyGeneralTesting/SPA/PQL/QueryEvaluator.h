@@ -34,7 +34,8 @@ public:
 private:
 
 	QueryTree* qtInstance;
-    PKBMain PKB;        //TODO: Set this to static
+    PKBMain* pkbInstance; 
+	PKBMain PKB;//TODO: Set this to static
 
     bool hasResult = true;
     list<string> finalResult;
