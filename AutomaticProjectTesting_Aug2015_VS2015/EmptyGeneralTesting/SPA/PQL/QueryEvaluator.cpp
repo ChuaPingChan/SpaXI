@@ -807,7 +807,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
 
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(arg1, arg2));
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(type1, arg2));
 
 		if (pkbResult.empty())
 		{
@@ -825,7 +825,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	//Case 5: Modifies(synonyym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatModifiesAnything(arg1));
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatModifiesAnything(type1));
 
 		if (pkbResult.empty())
 		{
@@ -843,7 +843,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	//Case 6: Modifies(synonym, var)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
-		pair<list<int>, list<string>> pkbResult = pkbInstance->getModifiesPairs(arg1);
+		pair<list<int>, list<string>> pkbResult = pkbInstance->getModifiesPairs(type1);
 
 		if (pkbResult.first.empty() && pkbResult.second.empty())
 		{
