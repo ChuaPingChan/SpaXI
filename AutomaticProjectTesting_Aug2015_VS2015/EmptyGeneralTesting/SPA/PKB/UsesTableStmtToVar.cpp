@@ -10,7 +10,6 @@ bool UsesTableStmtToVar::addUsesStmtToVarList(int stmtNumber, string var)
     if (usesStmtToVarMap.find(stmtNumber) == usesStmtToVarMap.end()) {
         usesStmtToVarMap[stmtNumber] = list<string>();
         usesStmtToVarMap[stmtNumber].push_back(var);
-        usesStmtToVarMap[stmtNumber].unique();
         return true;
     }
     else {
