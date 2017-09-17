@@ -535,7 +535,7 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     //Case 3: ParentStar(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        list<int> result = PKB.getChildrenStar(type2);
+        list<int> result = PKB.getChildrenStar(stoi(arg1), type2);
         if (result.empty())
         {
             hasResult = false;
