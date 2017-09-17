@@ -401,7 +401,7 @@ namespace UnitTesting
             PKB.setFollowsRel(3, 4);
             PKB.startProcessComplexRelations();
             qe.setPkb(PKB);
-            array<string, 4> arrToEvaluate = { "int", "1", "assign", "a" };
+            array<string, 4> arrToEvaluate = { "int", "1", "stmt", "s" };
             qe.evaluateFollowsStarTest(arrToEvaluate);
             expectedList1.push_back("2");
             expectedList1.push_back("3");
