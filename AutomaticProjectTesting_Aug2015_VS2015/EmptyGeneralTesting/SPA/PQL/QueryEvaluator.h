@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <array>
+#include <regex>
 #include <string>
 #include <iostream>
 #include <algorithm>

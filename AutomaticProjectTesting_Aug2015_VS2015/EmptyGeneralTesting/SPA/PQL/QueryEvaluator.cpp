@@ -700,8 +700,8 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
     //Case 4: Uses(synonym, ident)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
-
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(arg2, type1));
+		string ident = regex_replace(arg2, regex("\""), "");
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(ident, type1));
 
 		if (pkbResult.empty())
 		{
@@ -805,8 +805,8 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	//Case 4: Modifies(synonym, ident)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
-
-		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(arg2, type1));
+		string ident = regex_replace(arg2, regex("\""), "");
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(ident, type1));
 
 		if (pkbResult.empty())
 		{
