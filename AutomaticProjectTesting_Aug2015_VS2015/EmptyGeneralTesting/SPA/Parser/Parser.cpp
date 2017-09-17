@@ -320,7 +320,7 @@ void Parser::parseAssignment() {
                 OutputDebugString("PKB: Add variable to PKB.\n");
                 OutputDebugString("PKB: Update uses relationship.\n");
                 _pkbMainPtr->addVariable(var);
-                _pkbMainPtr->setModTableStmtToVar(_currentStmtNumber, var);
+                _pkbMainPtr->setUseTableStmtToVar(_currentStmtNumber, var);
                 // TODO Refactoring: Extract method to achieve SLAP.
                 if (!_parentStack.empty()) {
                     stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
