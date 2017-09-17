@@ -10,7 +10,7 @@ Select s such that Uses(4, _)
 5000
 38 - case 3 Uses(int, synonym)
 variable v;
-Select s such that Uses(8, v)
+Select v such that Uses(8, v)
 c, d
 5000
 39 - case 4 Uses(synonym, "ident")
@@ -35,7 +35,7 @@ none
 5000
 43 - invalid case Uses(_, _)
 stmt s;
-Select s such that Uses(_, _)
+Select s such that Uses(_ , _)
 none
 5000
 44 - invalid case Uses(_, synonym)
