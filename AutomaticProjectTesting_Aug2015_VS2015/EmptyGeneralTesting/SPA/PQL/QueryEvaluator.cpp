@@ -605,10 +605,10 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
             hasResult = true;
         }
     }
-    //Case 7: ParentStar(synonym, int)
+    //Case 7: ParentStar(int, synonym)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
     {
-       /* list<int> result = pkbInstance->getParent(type1, stoi(arg2));
+        list<int> result = pkbInstance->getParentStar(stoi(arg2), type1);
         if (result.empty())
         {
             hasResult = false;
@@ -617,9 +617,10 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
         {
             list<string> list1 = getListStringFromListInt(result);
             list<string> list2;
+            list1.push_front(arg2);
             resultSuchThat = make_pair(list1, list2);
             hasResult = true;
-        }*/
+        }
     }
     //Case 8: ParentStar(synonym, _)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
