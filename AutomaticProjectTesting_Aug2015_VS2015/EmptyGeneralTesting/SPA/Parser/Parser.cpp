@@ -62,14 +62,14 @@ bool Parser::parse(string filename) {
 
 bool Parser::concatenateLines(string filename) {
     ifstream infile(filename.c_str());
-    
+
     string stringAccumulator;
 
     string line;
     while (getline(infile, line)) {
         stringAccumulator += line;
     }
-    
+
     _concatenatedSourceCode = stringAccumulator;
     infile.close();
     return true;
@@ -84,11 +84,11 @@ bool Parser::incrCurrentTokenPtr()
         _currentTokenPtr = match.str(1);
         return true;
     }
-    
+
     // If at the middle of a SIMPLE source file, discard the first token and move to the next.
     if (regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
         _currentTokenPtr = match.str(1);
-        _concatenatedSourceCode.erase(0, match.position(1)+match.length(1));
+        _concatenatedSourceCode.erase(0, match.position(1) + match.length(1));
         if (regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
             _currentTokenPtr = match.str(1);
             return true;
@@ -147,6 +147,21 @@ bool Parser::assertMatchAndIncrementToken(regex re) {
 }
 
 /*
+Asserts that the next token must match the given regex.
+Does not move the current token pointer forward.
+*/
+bool Parser::assertMatchWithoutIncrementToken(regex re) {
+    if (regex_match(_currentTokenPtr, re)) {
+        return true;
+    } else {
+        // TODO: consider throwing exception.
+        _isValidSyntax = false;
+        OutputDebugString("WARNING: Matching of token failed.\n");
+        return false;
+    }
+}
+
+/*
 Matches the given regex with the next token. Does not proceed to the next token.
 */
 bool Parser::matchToken(regex re) {
@@ -183,7 +198,7 @@ void Parser::parseProcedure() {
     // PKB TODO: Add to ProcToIdxMap
     OutputDebugString("PKB: Add procedure.\n");
     _pkbMainPtr->addProcedure(procName);
-    
+
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     OutputDebugString("FINE: Entering procedure...\n");
@@ -192,7 +207,7 @@ void Parser::parseProcedure() {
     stack<int>* newFollowsStack = new stack<int>();
     _stacksOfFollowsStacks.push(*newFollowsStack);
     _firstStmtInProc++;
-    
+
     parseStmtList();
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
@@ -232,7 +247,7 @@ void Parser::parseStmt() {
         (*_pkbMainPtr).setParentChildRel(_parentStack.top(), _currentStmtNumber);
     }
     OutputDebugString("PKB: Update parent-child relation.\n");
-    
+
     // Check statement type and call appropriate function
     // (i.e. call, assignment, if-else, while)
     if (Parser::whileExpected()) {
@@ -271,7 +286,7 @@ void Parser::parseAssignment() {
     _pkbMainPtr->addAssignmentStmt(_currentStmtNumber);
 
     // Process LHS
-    assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
     string lhsVar = _currentTokenPtr;
 
     /*
@@ -297,7 +312,7 @@ void Parser::parseAssignment() {
             parentStackCopy.pop();
         }
     }
-    
+
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_EQUAL);
 
@@ -355,7 +370,7 @@ void Parser::parseAssignment() {
                         parentStackCopy.pop();
                     }
                 }
-                
+
             }
             incrCurrentTokenPtr();
         }
@@ -463,7 +478,8 @@ void Parser::parseWhile() {
 
     _parentStack.push(_currentStmtNumber);
 
-    assert(matchToken(Parser::REGEX_VALID_ENTITY_NAME));
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+
     string whileVar = _currentTokenPtr;
     /* PKB TODO
     Update VarToIdxMap
@@ -487,7 +503,7 @@ void Parser::parseWhile() {
             parentStackCopy.pop();
         }
     }
-    
+
     assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
@@ -496,14 +512,14 @@ void Parser::parseWhile() {
     OutputDebugString("Push new stmtList stack to follows stack.\n");
     stack<int>* newFollowsStack = new stack<int>();
     _stacksOfFollowsStacks.push(*newFollowsStack);
-    
+
     parseStmtList();
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
     OutputDebugString("FINE: Exiting while block.\n");
     processAndPopTopFollowStack();
     OutputDebugString("FINE: Processing and then pop top follows stack.\n");
-    
+
     _parentStack.pop();
 }
 

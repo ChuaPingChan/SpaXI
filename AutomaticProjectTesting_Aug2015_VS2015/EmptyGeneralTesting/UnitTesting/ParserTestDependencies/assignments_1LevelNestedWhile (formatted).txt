@@ -1,0 +1,25 @@
+procedure ABC { 
+1	i=1; 
+2	b=200 ; 
+3	c= a   ; 
+4	while a 
+	{ 
+5		while beta { 
+6			oSCar  = 1 + beta + tmp; 
+7			a = b;
+8			c = 3;
+9			d = 4;
+10			while tmp{ 
+11				d = c + a;
+12				e = d + 3 + 4 * 5;
+13				oSCar = I + k + j1k + chArlie;
+			} 
+14			while x { 
+15				c = 3 + a * e + d;
+16				x = x + 1;
+			} 
+17			a=   2; 
+		} 
+18		w = w+1  ; 
+	} 
+} 

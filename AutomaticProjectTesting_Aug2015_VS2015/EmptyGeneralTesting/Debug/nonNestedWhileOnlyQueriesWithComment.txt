@@ -48,7 +48,7 @@ stmt s;
 Select s such that Follows (_, s)
 1, 2, 3, 4, 5, 6, 7, 8
 5000
-11 - comment
+11 - comment	// Because a not declared
 stmt s;
 Select s such that Follows (_, a)
 none
@@ -68,7 +68,7 @@ stmt s1, s2;
 Select s1 such that Follows(s1, s2)
 1, 2, 3, 4, 5, 6
 5000
-15 - comment
+15 - comment	//Cannot have same argument
 stmt s;
 Select s such that Follows(s, s)
 none
@@ -83,7 +83,7 @@ stmt s; variable v;
 Select s such that Follows(v, s)
 none
 5000
-18 - comment
+18 - comment	//Invalid synonym naming
 variable 1wrongSynonym;
 Select v
 none
