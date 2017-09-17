@@ -722,9 +722,10 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 		}
 		else
 		{
-			list<string> lst1 = resultSuchThat.first;
+			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
+			list<string> lst1 = resultSuchThat.first;			
 			lst1.push_back(arg1);
-			lst1.insert(lst1.end(), pkbResult.first.begin(), pkbResult.first.end());
+			lst1.insert(lst1.end(), pkbResultFirst.begin(), pkbResultFirst.end());
 
 			list<string> lst2 = resultSuchThat.second;
 			lst2.push_back(arg2);
