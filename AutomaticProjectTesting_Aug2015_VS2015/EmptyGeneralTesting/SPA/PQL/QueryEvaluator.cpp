@@ -412,87 +412,102 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     //Case 1: Parent(int, int)
     if (type1 == "int" && type2 == "int")
 	{
-        //hasResult = isParent(stoi(arg1), stoi(arg2));
+        hasResult = PKB.isParentChild(stoi(arg1), stoi(arg2));
 	}
     //Case 2: Parent(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
-        //hasResult = isParent(stoi(arg1));
+        hasResult = PKB.isParent(stoi(arg1));
 	}
     //Case 3: Parent(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        pair<list<string>, list<string>> result;// = getChildren(stoi(arg1), arg2)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getChildren(stoi(arg1), type2);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
 	}
     //Case 4: Parent(_, int)
 	else if (type1 == "_" && type2 == "int")
 	{
-        //hasResult = isChildren(stoi(arg2));
+        hasResult = PKB.isChild(stoi(arg2));
 	}
     //Case 5: Parent(_, _)
 	else if (type1 == "_" && type2 == "_")
 	{
-        //hasResult = hasParent();
+        hasResult = PKB.hasParentRel();
 	}
     //Case 6: Parent(_, synonym)
     else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        pair<list<string>, list<string>> result;// = isParentOf(arg2)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAllChildren(type2);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
 	}
     //Case 7: Parent(synonym, int)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
 	{
-        pair<list<string>, list<string>> result;// = isParentOf(arg1, stoi(arg2))
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getParent(stoi(arg2), type1);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
 	}
     //Case 8: Parent(synonym, _)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
 	{
-        pair<list<string>, list<string>> result;// = getChildren(arg1)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAllParents(type1);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
 	}
     //Case 9: Parent(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        pair<list<string>, list<string>> result;// = (getParent(arg1, arg2)
+        /*pair<list<int>, list<int>> result = PKB.getAllParentRel(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
-        }
+            list<string> list1 = getListStringFromListInt(result.first);
+            list<string> list2 = getListStringFromListInt(result.second);
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
+        }*/
 	}
     else
     {
@@ -510,86 +525,101 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     //Case 1: ParentStar(int, int)
     if (type1 == "int" && type2 == "int")
     {
-        //hasResult = isParentStar(arg1, arg2);
+        hasResult = PKB.isParentStarChild(stoi(arg1), stoi(arg2));
     }
     //Case 2: ParentStar(int, _)
     else if (type1 == "int" && type2 == "_")
     {
-        //hasResult = isParentStar(arg2);
+        hasResult = PKB.isParent(stoi(arg1));
     }
     //Case 3: ParentStar(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        pair<list<string>, list<string>> result;// = getChildrenStar(stoi(arg1), arg2)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getChildrenStar(type2);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
     }
     //Case 4: ParentStar(_, int)
     else if (type1 == "_" && type2 == "int")
     {
-        //hasResult = isChildrenStar(stoi(arg1));
+        hasResult = PKB.isChild(stoi(arg2));
     }
     //Case 5: ParentStar(_, _)
     else if (type1 == "_" && type2 == "_")
     {
-        //hasResult = hasParentStar();
+        hasResult = PKB.hasParentRel();
     }
     //Case 6: ParentStar(_, synonym)
     else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        pair<list<string>, list<string>> result;// = isParentStarOf(arg2);
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAllChildren(type2);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
     }
     //Case 7: ParentStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
     {
-        pair<list<string>, list<string>> result;// = isParentStarOf(arg1, stoi(arg2));
-        if (result.first.empty() && result.second.empty())
+        /*list<int> result = PKB.getParent(type1, stoi(arg2));
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
-        }
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
+        }*/
     }
     //Case 8: ParentStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
     {
-        pair<list<string>, list<string>> result;// = getChildrenStar(arg1)
-        if (result.first.empty() && result.second.empty())
+        /*list<int> result = PKB.getAllParent(type1);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
-        }
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
+        }*/
     }
     //Case 9: ParentStar(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        pair<list<string>, list<string>> result;// = getParentT(arg1, arg2)
+        pair<list<int>, list<int>> result = PKB.getAllParentStarRel(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result.first);
+            list<string> list2 = getListStringFromListInt(result.second);
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
     }
     else
