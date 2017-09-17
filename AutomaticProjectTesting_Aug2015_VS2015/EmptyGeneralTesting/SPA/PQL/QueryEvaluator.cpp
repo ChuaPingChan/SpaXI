@@ -630,7 +630,8 @@ void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
     {
 
-        list<int> result = PKB.getAllParents(type1);
+        list<int> result = pkbInstance->getAllParents(type1);
+
 
         if (result.empty())
         {
