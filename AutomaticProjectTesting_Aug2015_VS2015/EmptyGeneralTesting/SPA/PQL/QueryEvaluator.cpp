@@ -522,8 +522,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     //Case 9: Parent(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        cout << "Reached case 9 in Parent" << endl;
-        pair<list<int>, list<int>> result = PKB.getAllParentsRel(type1, type2);
+        pair<list<int>, list<int>> result = pkbInstance->getAllParentsRel(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
