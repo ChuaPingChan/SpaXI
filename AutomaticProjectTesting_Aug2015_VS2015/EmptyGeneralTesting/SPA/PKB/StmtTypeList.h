@@ -15,6 +15,7 @@ public:
     StmtTypeList();
     bool addToAssignStmtList(int stmt);
     bool addToWhileStmtList(int stmt);
+	list<int> getAllStatements();
     bool isAssignStmt(int stmt);
     bool isWhileStmt(int stmt);
     bool isPresent(int stmt);

@@ -34,7 +34,7 @@ namespace UnitTesting
 
 			Assert::AreEqual(PKB.getAfter(1), 2);
 			Assert::AreEqual(PKB.getAfter(10), 0);
-			list<int> allBefore = PKB.getAllBefore("STMT");
+			list<int> allBefore = PKB.getAllBefore("stmt");
 			allBefore.sort();
 
 			Assert::IsTrue(std::find(allBefore.begin(), allBefore.end(), 1) != allBefore.end());
@@ -49,7 +49,7 @@ namespace UnitTesting
 			Assert::IsFalse(std::find(allBefore.begin(), allBefore.end(), 10) != allBefore.end());
 			Assert::IsFalse(std::find(allBefore.begin(), allBefore.end(), 0) != allBefore.end());
 
-			list<int> allAfter = PKB.getAllAfter("STMT");
+			list<int> allAfter = PKB.getAllAfter("stmt");
 			allAfter.sort();
 			Assert::IsFalse(std::find(allAfter.begin(), allAfter.end(), 1) != allAfter.end());
 			Assert::IsTrue(std::find(allAfter.begin(), allAfter.end(), 2) != allAfter.end());
@@ -111,11 +111,11 @@ namespace UnitTesting
 
 			// TESTPARENT
 
-			/*Assert::IsTrue(PKB.isParent(3, 4));
-			Assert::IsTrue(PKB.isParent(3, 5));
-			Assert::IsTrue(PKB.isParent(3, 6));
-			Assert::IsTrue(PKB.isParent(6, 7));
-			Assert::IsTrue(PKB.isParent(3, 8));*/
+			Assert::IsTrue(PKB.isParentChild(3, 4));
+			Assert::IsTrue(PKB.isParentChild(3, 5));
+			Assert::IsTrue(PKB.isParentChild(3, 6));
+			Assert::IsTrue(PKB.isParentChild(6, 7));
+			Assert::IsTrue(PKB.isParentChild(3, 8));
 			
 		}
 

@@ -22,6 +22,14 @@ bool StmtTypeList::addToWhileStmtList(int stmt) {
     return false;
 }
 
+list<int> StmtTypeList::getAllStatements() {
+	list<int> stmtList;
+	stmtList.insert(stmtList.end(), assignStmtList.begin(), assignStmtList.end());
+	stmtList.insert(stmtList.end(), whileStmtList.begin(), whileStmtList.end());
+
+	return stmtList;
+}
+
 bool StmtTypeList::isAssignStmt(int stmt)
 {
     return find(assignStmtList.begin(), assignStmtList.end(), stmt) != assignStmtList.end();
