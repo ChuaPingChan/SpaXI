@@ -693,6 +693,8 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 			list<string> lst = resultSuchThat.first;
 			lst.push_back(arg2);
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
 		}
 	}
     //Case 4: Uses(synonym, ident)
@@ -711,6 +713,8 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 			list<string> lst = resultSuchThat.first;
 			lst.push_back(arg1);
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
 		}
 	}
     //Case 5: Uses(synonyym, _)
@@ -727,6 +731,8 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 			list<string> lst = resultSuchThat.first;
 			lst.push_back(arg1);
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
 		}
 	}
     //Case 6: Uses(synonym, var)
@@ -741,13 +747,16 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 		else
 		{
 			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
-			list<string> lst1 = resultSuchThat.first;			
-			lst1.push_back(arg1);
-			lst1.insert(lst1.end(), pkbResultFirst.begin(), pkbResultFirst.end());
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResultFirst.begin(), pkbResultFirst.end());
 
 			list<string> lst2 = resultSuchThat.second;
 			lst2.push_back(arg2);
-			lst2.insert(lst2.end(), pkbResult.first.begin(), pkbResult.first.end());
+			lst2.insert(lst2.end(), pkbResult.second.begin(), pkbResult.second.end());
+
+			resultSuchThat = make_pair(lst, lst2);
+			hasResult = true;
 		}
 	}
 	else
@@ -763,23 +772,23 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	string arg1 = arr[1];
 	string arg2 = arr[3];
 
-    //Case 1: Modifies(int, ident)
+	//Case 1: Modifies(int, ident)
 	if (type1 == "int" && type2 == "ident")
 	{
 		int num = stoi(arg1);
-		// hasResult = isMod(num, arg2);
+		hasResult = pkbInstance->isMod(num, arg2);
 	}
-    //Case 2: Modifies(int, _)
+	//Case 2: Modifies(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
 		int num = stoi(arg1);
-		// hasResult = isModifyingAnything(num, arg2);
+		hasResult = pkbInstance->isModifyingAnything(num);
 	}
-    //Case 3: Modifies(int, var)
+	//Case 3: Modifies(int, var)
 	else if (type1 == "int" && type2 == "var")
 	{
 		int num = stoi(arg1);
-		list<string> pkbResult;// = getModifiesFromStmt(num);
+		list<string> pkbResult = pkbInstance->getModifiesFromStmt(num);
 
 		if (pkbResult.empty())
 		{
@@ -790,13 +799,15 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 			list<string> lst = resultSuchThat.first;
 			lst.push_back(arg2);
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
 		}
 	}
-    //Case 4: Modifies(synonym, ident)
+	//Case 4: Modifies(synonym, ident)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
 
-		list<string> pkbResult;// = getModifiesFromVar(arg1, arg2);
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(arg1, arg2));
 
 		if (pkbResult.empty())
 		{
@@ -807,12 +818,14 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 			list<string> lst = resultSuchThat.first;
 			lst.push_back(arg1);
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
 		}
 	}
-    //Case 5: Modifies(synonym, _)
+	//Case 5: Modifies(synonyym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
-		list<string> pkbResult;// = getStmtThatModifiesAnything(arg1);
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatModifiesAnything(arg1));
 
 		if (pkbResult.empty())
 		{
@@ -823,12 +836,14 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 			list<string> lst = resultSuchThat.first;
 			lst.push_back(arg1);
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
 		}
 	}
-    //Case 6: Modifies(synonym, var)
+	//Case 6: Modifies(synonym, var)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
-		pair<list<string>, list<string>> pkbResult;// = getModifiesPairs(arg1);
+		pair<list<int>, list<string>> pkbResult = pkbInstance->getModifiesPairs(arg1);
 
 		if (pkbResult.first.empty() && pkbResult.second.empty())
 		{
@@ -836,13 +851,17 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 		}
 		else
 		{
-			list<string> lst1 = resultSuchThat.first;
-			lst1.push_back(arg1);
-			lst1.insert(lst1.end(), pkbResult.first.begin(), pkbResult.first.end());
+			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResultFirst.begin(), pkbResultFirst.end());
 
 			list<string> lst2 = resultSuchThat.second;
 			lst2.push_back(arg2);
-			lst2.insert(lst2.end(), pkbResult.first.begin(), pkbResult.first.end());
+			lst2.insert(lst2.end(), pkbResult.second.begin(), pkbResult.second.end());
+
+			resultSuchThat = make_pair(lst, lst2);
+			hasResult = true;
 		}
 	}
 	else
@@ -862,26 +881,129 @@ void QueryEvaluator::evaluatePattern(array<string, 6> arr)
         // list<int> assign = PKB.getLeftVariables.first;
         // list<string> var = PKB.getLeftVariables.second;
         //resultPattern = pair<intToString(assign),var>;
+
+		pair<list<int>, list<string>> pkbResult = pkbInstance->getLeftVariables();
+
+		if (pkbResult.first.empty() && pkbResult.second.empty())
+		{
+			hasResult = false;
+		}
+		else
+		{
+			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResultFirst.begin(), pkbResultFirst.end());
+
+			list<string> lst2 = resultSuchThat.second;
+			lst2.push_back(arg2);
+			lst2.insert(lst2.end(), pkbResult.second.begin(), pkbResult.second.end());
+
+			resultSuchThat = make_pair(lst, lst2);
+			hasResult = true;
+		}
     }
     else if (type1 == "var" && type2 == "ident")
     {
         //resultPattern = getLeftVariablesThatMatchWith(assign,variable);
+
+		pair<list<int>, list<string>> pkbResult = pkbInstance->getLeftVariablesThatMatchWith(arg2);
+
+		if (pkbResult.first.empty() && pkbResult.second.empty())
+		{
+			hasResult = false;
+		}
+		else
+		{
+			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResultFirst.begin(), pkbResultFirst.end());
+
+			list<string> lst2 = resultSuchThat.second;
+			lst2.push_back(arg2);
+			lst2.insert(lst2.end(), pkbResult.second.begin(), pkbResult.second.end());
+
+			resultSuchThat = make_pair(lst, lst2);
+			hasResult = true;
+		}
     }
     else if (type1 == "_" && type2 == "ident")
     {
         //resultPattern = getPartialMatchStmt(arr[5])
+
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getPartialMatchStmt(arg2));
+
+		if (pkbResult.empty())
+		{
+			hasResult = false;
+		}
+		else
+		{
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
+		}
+
     }
     else if (type1 == "ident" && type2 == "ident")
     {
         //resultPattern = hasPartialBothMatches(arr[3],arr[5])
+
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getPartialBothMatches(arg1, arg2));
+
+		if (pkbResult.empty())
+		{
+			hasResult = false;
+		}
+		else
+		{
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
+		}
     }
     else if (type1 == "_" && type2 == "_")
     {
         //resultPattern = getAssignments();
+
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getAllAssignments());
+
+		if (pkbResult.empty())
+		{
+			hasResult = false;
+		}
+		else
+		{
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
+		}
     }
     else if (type1 == "ident" && type2 == "_")
     {
         //resultPattern = getAssignments(arr[3]);
+
+		list<string> pkbResult = getListStringFromListInt(pkbInstance->getAllAssignments(arg1));
+
+		if (pkbResult.empty())
+		{
+			hasResult = false;
+		}
+		else
+		{
+			list<string> lst = resultSuchThat.first;
+			lst.push_back(arg1);
+			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
+			resultSuchThat = make_pair(lst, list<string>());
+			hasResult = true;
+		}
     }
     else
     {
