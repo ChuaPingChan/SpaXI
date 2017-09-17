@@ -60,16 +60,16 @@ bool ModTableVar::addModVarToAssignList(int varIdx, int stmtNumber)
 bool ModTableVar::addModVarToWhileStmtList(int varIdx, int stmtNumber)
 {
     // if stmt number does not exist as a key, create new list and insert data to hash map
-    if (modVarToStmtMap.find(varIdx) == modVarToStmtMap.end()) {
-        modVarToStmtMap[varIdx] = list<int>();
-        modVarToStmtMap[varIdx].push_back(stmtNumber);
+    if (modVarToWhileStmtMap.find(varIdx) == modVarToWhileStmtMap.end()) {
+        modVarToWhileStmtMap[varIdx] = list<int>();
+        modVarToWhileStmtMap[varIdx].push_back(stmtNumber);
         return true;
     }
     else {
         // else, expand the list of variables
-        modVarToStmtMap[varIdx].push_back(stmtNumber);
-		modVarToStmtMap[varIdx].sort();
-		modVarToStmtMap[varIdx].unique();
+        modVarToWhileStmtMap[varIdx].push_back(stmtNumber);
+		modVarToWhileStmtMap[varIdx].sort();
+		modVarToWhileStmtMap[varIdx].unique();
         return true;
     }
     return false;
