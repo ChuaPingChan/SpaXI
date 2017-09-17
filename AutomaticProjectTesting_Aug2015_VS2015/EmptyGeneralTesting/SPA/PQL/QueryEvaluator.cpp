@@ -183,14 +183,17 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
     string arg1 = arr[1];
     string arg2 = arr[3];
 
+    //Case 1: Follows(int, int)
 	if (type1 == "int" && type2 == "int")
 	{
         hasResult = PKB.isFollows(stoi(arg1), stoi(arg2));
 	}
+    //Case 2: Follows(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
         hasResult = PKB.isBefore(stoi(arg1));
 	}
+    //Case 3: Follows(int, synonym)
 	else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while")) 
 	{
         list<int> result = PKB.getAfter(stoi(arg1), type2);
@@ -206,14 +209,17 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
             hasResult = true;
         }
 	}
+    //Case 4: Follows(_, int)
 	else if (type1 == "_" && type2 == "int")
 	{ 
         hasResult = PKB.isAfter(stoi(arg2));
 	}
+    //Case 5: Follows(_, _)
 	else if (type1 == "_" && type2 == "_")
 	{
         hasResult = PKB.hasFollows();
 	}
+    //Case 6: Follows(_, synonym)
 	else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
         list<int> result = PKB.getAllAfter(arg2);
@@ -229,6 +235,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
             hasResult = true;
         }
 	}
+    //Case 7: Follows(stmt, int)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
 	{
         /*list<string> result = PKB.getBefore(arg1, stoi(arg2));
@@ -241,6 +248,7 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
             resultSuchThat = result;
         }*/
 	}
+    //Case 8: Follows(synonym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
         list<int> result = PKB.getAllBefore(type1);
@@ -256,9 +264,10 @@ void QueryEvaluator::evaluateFollows(array<string, 4> arr)
             hasResult = true;
         }
 	}
+    //Case 9: Follows(synonym, synonym)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
-        pair<list<int>, list<int>> result = PKB.getAllFollows(arg1, arg2);
+        pair<list<int>, list<int>> result = PKB.getAllFollows(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
@@ -284,14 +293,17 @@ void QueryEvaluator::evaluateFollowsT(array<string, 4> arr)
     string arg1 = arr[1];
     string arg2 = arr[3];
 
+    //Case 1: FollowsStar(int, int)
     if (type1 == "int" && type2 == "int")
     {
         hasResult = PKB.isFollowsStar(stoi(arg1), stoi(arg2));
     }
+    //Case 2: FollowsStar(int, _)
     else if (type1 == "int" && type2 == "_")
     {
         hasResult = PKB.isBefore(stoi(arg1));
     }
+    //Case 3: FollowsStar(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
         list<int> result = PKB.getAfterStar(stoi(arg1), type2);
@@ -307,60 +319,78 @@ void QueryEvaluator::evaluateFollowsT(array<string, 4> arr)
             hasResult = true;
         }
     }
+    //Case 4: FollowsStar(_, int)
     else if (type1 == "_" && type2 == "int")
     {
-        //hasResult = isBeingFollowedByStar(stoi(arg2));
+        hasResult = PKB.isAfter(stoi(arg2));
     }
+    //Case 5: FollowsStar(_, _)
     else if (type1 == "_" && type2 == "_")
     {
-        //hasResult = hasFollowsT();
+        hasResult = PKB.hasFollows();
     }
+    //Case 6: FollowsStar(_, synonym)
     else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        pair<list<string>, list<string>> result;// = isFollowedStarBy(arg2)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAllAfterStar(type2);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
     }
+    //Case 7: FollowsStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
     {
-        pair<list<string>, list<string>> result;// = isFollowedBy(arg1, stoi(arg2)
-        if (result.first.empty() && result.second.empty())
+        /*list<int> result = PKB.getBeforeStar(type1, stoi(arg2));
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
-        }
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
+        }*/
     }
+    //Case 8: FollowsStar(synonym, _)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
     {
-        pair<list<string>, list<string>> result;// = getAfter(arg1, arg2)
-        if (result.first.empty() && result.second.empty())
+        list<int> result = PKB.getAllBeforeStar(type1);
+        if (result.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result);
+            list<string> list2;
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
     }
+    //Case 9: FollowsStar(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
-        pair<list<string>, list<string>> result;// = getFollows(arg1, arg2)
+        pair<list<int>, list<int>> result = PKB.getAllFollowsStar(type1, type2);
         if (result.first.empty() && result.second.empty())
         {
             hasResult = false;
         }
         else
         {
-            resultSuchThat = result;
+            list<string> list1 = getListStringFromListInt(result.first);
+            list<string> list2 = getListStringFromListInt(result.second);
+            resultSuchThat = make_pair(list1, list2);
+            hasResult = true;
         }
     }
     else
@@ -376,14 +406,17 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
     string arg1 = arr[1];
     string arg2 = arr[3];
 
+    //Case 1: Parent(int, int)
     if (type1 == "int" && type2 == "int")
 	{
         //hasResult = isParent(stoi(arg1), stoi(arg2));
 	}
+    //Case 2: Parent(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
         //hasResult = isParent(stoi(arg1));
 	}
+    //Case 3: Parent(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
         pair<list<string>, list<string>> result;// = getChildren(stoi(arg1), arg2)
@@ -396,14 +429,17 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
             resultSuchThat = result;
         }
 	}
+    //Case 4: Parent(_, int)
 	else if (type1 == "_" && type2 == "int")
 	{
         //hasResult = isChildren(stoi(arg2));
 	}
+    //Case 5: Parent(_, _)
 	else if (type1 == "_" && type2 == "_")
 	{
         //hasResult = hasParent();
 	}
+    //Case 6: Parent(_, synonym)
     else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
         pair<list<string>, list<string>> result;// = isParentOf(arg2)
@@ -416,6 +452,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
             resultSuchThat = result;
         }
 	}
+    //Case 7: Parent(synonym, int)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
 	{
         pair<list<string>, list<string>> result;// = isParentOf(arg1, stoi(arg2))
@@ -428,6 +465,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
             resultSuchThat = result;
         }
 	}
+    //Case 8: Parent(synonym, _)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
 	{
         pair<list<string>, list<string>> result;// = getChildren(arg1)
@@ -440,6 +478,7 @@ void QueryEvaluator::evaluateParent(array<string, 4> arr)
             resultSuchThat = result;
         }
 	}
+    //Case 9: Parent(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
 	{
         pair<list<string>, list<string>> result;// = (getParent(arg1, arg2)
@@ -465,14 +504,17 @@ void QueryEvaluator::evaluateParentT(array<string, 4> arr)
     string arg1 = arr[1];
     string arg2 = arr[3];
 
+    //Case 1: ParentStar(int, int)
     if (type1 == "int" && type2 == "int")
     {
         //hasResult = isParentStar(arg1, arg2);
     }
+    //Case 2: ParentStar(int, _)
     else if (type1 == "int" && type2 == "_")
     {
         //hasResult = isParentStar(arg2);
     }
+    //Case 3: ParentStar(int, synonym)
     else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
         pair<list<string>, list<string>> result;// = getChildrenStar(stoi(arg1), arg2)
@@ -485,14 +527,17 @@ void QueryEvaluator::evaluateParentT(array<string, 4> arr)
             resultSuchThat = result;
         }
     }
+    //Case 4: ParentStar(_, int)
     else if (type1 == "_" && type2 == "int")
     {
         //hasResult = isChildrenStar(stoi(arg1));
     }
+    //Case 5: ParentStar(_, _)
     else if (type1 == "_" && type2 == "_")
     {
         //hasResult = hasParentStar();
     }
+    //Case 6: ParentStar(_, synonym)
     else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
         pair<list<string>, list<string>> result;// = isParentStarOf(arg2);
@@ -505,6 +550,7 @@ void QueryEvaluator::evaluateParentT(array<string, 4> arr)
             resultSuchThat = result;
         }
     }
+    //Case 7: ParentStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
     {
         pair<list<string>, list<string>> result;// = isParentStarOf(arg1, stoi(arg2));
@@ -517,6 +563,7 @@ void QueryEvaluator::evaluateParentT(array<string, 4> arr)
             resultSuchThat = result;
         }
     }
+    //Case 8: ParentStar(synonym, int)
     else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
     {
         pair<list<string>, list<string>> result;// = getChildrenStar(arg1)
@@ -529,6 +576,7 @@ void QueryEvaluator::evaluateParentT(array<string, 4> arr)
             resultSuchThat = result;
         }
     }
+    //Case 9: ParentStar(synonym, synonym)
     else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
     {
         pair<list<string>, list<string>> result;// = getParentT(arg1, arg2)
@@ -554,16 +602,19 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 	string arg1 = arr[1];
 	string arg2 = arr[3];
 
+    //Case 1: Uses(int, ident)
 	if (type1 == "int" && type2 == "ident")
 	{
 		int num = stoi(arg1);
 		// hasResult = isUses(num, arg2);
 	}
+    //Case 2: Uses(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
 		int num = stoi(arg1);
 		// hasResult = isUsingAnything(num, arg2);
 	}
+    //Case 3: Uses(int, var)
 	else if (type1 == "int" && type2 == "var")
 	{
 		int num = stoi(arg1);
@@ -580,6 +631,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
+    //Case 4: Uses(synonym, ident)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
 
@@ -596,6 +648,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
+    //Case 5: Uses(synonyym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
 		list<string> pkbResult;// = getStmtThatUsesAnything(arg1);
@@ -611,6 +664,7 @@ void QueryEvaluator::evaluateUses(array<string, 4> arr)
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
+    //Case 6: Uses(synonym, var)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
 		pair<list<string>, list<string>> pkbResult;// = getUsesPairs(arg1);
@@ -643,16 +697,19 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 	string arg1 = arr[1];
 	string arg2 = arr[3];
 
+    //Case 1: Modifies(int, ident)
 	if (type1 == "int" && type2 == "ident")
 	{
 		int num = stoi(arg1);
 		// hasResult = isMod(num, arg2);
 	}
+    //Case 2: Modifies(int, _)
 	else if (type1 == "int" && type2 == "_")
 	{
 		int num = stoi(arg1);
 		// hasResult = isModifyingAnything(num, arg2);
 	}
+    //Case 3: Modifies(int, var)
 	else if (type1 == "int" && type2 == "var")
 	{
 		int num = stoi(arg1);
@@ -669,6 +726,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
+    //Case 4: Modifies(synonym, ident)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
 	{
 
@@ -685,6 +743,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
+    //Case 5: Modifies(synonym, _)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
 	{
 		list<string> pkbResult;// = getStmtThatModifiesAnything(arg1);
@@ -700,6 +759,7 @@ void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 		}
 	}
+    //Case 6: Modifies(synonym, var)
 	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
 	{
 		pair<list<string>, list<string>> pkbResult;// = getModifiesPairs(arg1);
