@@ -157,19 +157,19 @@ void QueryEvaluator::evaluateSelect(array<string, 2> arr)
 
 	if (type == "stmt")
 	{
-		// resultSelect = getAllStmts();
+		resultSelect = getListStringFromListInt(pkbInstance->getAllStatements());
 	}
 	else if (type == "assign")
 	{
-		// resultSelect = getAllAssignments();
+		resultSelect = getListStringFromListInt(pkbInstance->getAllAssignments());
 	}
 	else if (type == "while")
 	{
-		// resultSelect = getAllWhiles();
+		resultSelect = getListStringFromListInt(pkbInstance->getAllWhiles());
 	}
 	else if (type == "variable")
 	{
-		// resultSelect = getAllVars();
+		resultSelect = pkbInstance->getAllVariables();
 	}
 	else
 	{
