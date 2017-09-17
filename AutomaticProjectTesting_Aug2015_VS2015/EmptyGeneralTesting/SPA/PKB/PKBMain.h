@@ -31,6 +31,7 @@ class PKBMain {
 public:
 	PKBMain();
     static PKBMain* getInstance();
+    static void resetInstance();
 
 	//Parser API
 	bool setParentChildRel(int parentStmt, int childStmt);

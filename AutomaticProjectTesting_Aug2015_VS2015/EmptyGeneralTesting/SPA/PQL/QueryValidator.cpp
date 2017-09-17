@@ -455,15 +455,47 @@ bool QueryValidator::isValidSelectBeginning(string str)
     regex synonymRegex(SYNONYM);
     sregex_iterator it(str.begin(), str.end(), synonymRegex);
     sregex_iterator it_end;
-
+    string current;
     for (; it != it_end; it++)
     {
-        string current = it->str(0);
+        current = it->str(0);
         if (!qtInstance->varExists(current))
             return false;
     }
 
+    array<string, 2> result;
+    if (isArgumentInClause(current,qtInstance->getAssigns()))
+    {
+        result[0] = "assign";
+        result[1] = current;
+    }
+    else  if (isArgumentInClause(current, qtInstance->getWhiles()))
+    {
+        result[0] = "while";
+        result[1] = current;
+    }
+    else  if (isArgumentInClause(current, qtInstance->getStmts()))
+    {
+        result[0] = "stmt";
+        result[1] = current;
+    }
+    else  if (isArgumentInClause(current, qtInstance->getVars()))
+    {
+        result[0] = "var";
+        result[1] = current;
+    }
+    else  if (isArgumentInClause(current, qtInstance->getProgLines()))
+    {
+        result[0] = "stmt";
+        result[1] = current;
+    }
+    else  if (isArgumentInClause(current, qtInstance->getConsts()))
+    {
+        result[0] = "const";
+        result[1] = current;
+    }
 
+    qtInstance->insertSelect(result);
     return true;
 }
 
