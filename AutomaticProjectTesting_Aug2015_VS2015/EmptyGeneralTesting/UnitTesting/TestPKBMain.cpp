@@ -73,7 +73,7 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isFollows(3, 9));
 			Assert::IsTrue(PKB.isFollows(9, 10));
 
-			pair<list<int>, list<int>> allFollows = PKB.getAllFollows("WHILE", "WHILE");
+			pair<list<int>, list<int>> allFollows = PKB.getAllFollows("while", "while");
 			list<int> bef = allFollows.first;
 			list<int> aft = allFollows.second;
 
@@ -86,7 +86,7 @@ namespace UnitTesting
 			PKB.startProcessComplexRelations();
 			Assert::IsTrue(PKB.isFollowsStar(1, 10));
 
-			list<int> allAfterStar = PKB.getAllAfterStar("STMT");
+			list<int> allAfterStar = PKB.getAllAfterStar("stmt");
 			allAfterStar.sort();
 			list<int> expectedAfterStar;
 			expectedAfterStar.push_back(2);
@@ -99,14 +99,14 @@ namespace UnitTesting
 
 			Assert::IsTrue(allAfterStar == expectedAfterStar);
 
-			list<int>allBeforeStar = PKB.getAllBeforeStar("STMT");
+			list<int>allBeforeStar = PKB.getAllBeforeStar("stmt");
 			allBeforeStar.sort();
 			list<int> expectedBeforeStar;
 			expectedBeforeStar = { 1, 2, 3, 4, 5, 6, 9 };
 
 			Assert::IsTrue(expectedBeforeStar == allBeforeStar);
 
-			pair<list<int>, list<int>> allFollowsStar = PKB.getAllFollowsStar("STMT", "STMT");
+			pair<list<int>, list<int>> allFollowsStar = PKB.getAllFollowsStar("stmt", "stmt");
 			Assert::IsTrue(allFollowsStar.first.size() == 16);
 
 			// TESTPARENT

@@ -95,7 +95,7 @@ namespace UnitTesting
             PKB.setFollowsRel(2, 3);
             PKB.setFollowsRel(3, 4);
             qe.setPkb(PKB);
-            array<string, 4> arrToEvaluate = { "int", "2", "assign", "a" };
+            array<string, 4> arrToEvaluate = { "int", "2", "stmt", "s" };
             qe.evaluateFollowsTest(arrToEvaluate);
             expectedList1.push_back("3");
             expectedPair = make_pair(expectedList1, expectedList2);
