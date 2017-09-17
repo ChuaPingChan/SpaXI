@@ -1,0 +1,5 @@
+21 - Case 8
+stmt s;
+Select s such that Parent*(s, _)
+4, 5, 7, 9, 10, 12, 13, 17
+5000
