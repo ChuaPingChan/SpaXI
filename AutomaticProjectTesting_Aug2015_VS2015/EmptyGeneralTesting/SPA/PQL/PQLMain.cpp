@@ -16,6 +16,7 @@ PQLMain::~PQLMain()
 list<string> PQLMain::run()
 {
 	QueryTree* qtInstance = QueryTree::getInstance();
+	qtInstance = qtInstance->clear();
 
 	QueryValidator validator;
 	bool isValid = validator.isValidQuery(query);
@@ -40,7 +41,4 @@ list<string> PQLMain::run()
 	{
 		return list<string>();
 	}
-
-	qtInstance = qtInstance->clear();
-
 }
