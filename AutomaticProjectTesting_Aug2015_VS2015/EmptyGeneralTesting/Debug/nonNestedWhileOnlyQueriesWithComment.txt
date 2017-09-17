@@ -48,7 +48,7 @@ stmt s;
 Select s such that Follows (_, s)
 1, 2, 3, 4, 5, 6, 7, 8
 5000
-11 - comment
+11 - comment	// Because a not declared
 stmt s;
 Select s such that Follows (_, a)
 none
@@ -61,7 +61,7 @@ Select s such that Follows(s, 3)
 13 - comment
 stmt s; 
 Select s such that Follows(s, _)
-1, 2, 3, 4, 5, 6
+1, 2, 3, 4, 5, 6, 7
 5000
 14 - comment
 stmt s1, s2;
@@ -70,6 +70,6 @@ Select s1 such that Follows(s1, s2)
 5000
 15 - comment
 stmt s;
-Select s such that Follows(s, s)
+Select s such that Follows(s, s)	//Cannot have same argument
 none
 5000
