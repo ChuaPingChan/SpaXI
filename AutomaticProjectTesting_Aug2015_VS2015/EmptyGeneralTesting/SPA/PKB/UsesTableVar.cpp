@@ -62,6 +62,8 @@ bool UsesTableVar::addUsesVarToWhileStmtList(int varIdx, int stmtNumber)
     else {
         // else, expand the list of variables
         usesVarToWhileStmtMap[varIdx].push_back(stmtNumber);
+		usesVarToWhileStmtMap[varIdx].sort();
+		usesVarToWhileStmtMap[varIdx].unique();
         return true;
     }
     return false;
