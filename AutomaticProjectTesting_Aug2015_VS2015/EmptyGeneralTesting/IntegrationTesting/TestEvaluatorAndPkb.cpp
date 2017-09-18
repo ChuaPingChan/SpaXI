@@ -16,10 +16,18 @@ namespace UnitTesting
 		PKBMain* pkbInstance = PKBMain::getInstance();
         QueryEvaluator qe;
 
-        // TEST_METHOD(TestEvaluatorSelect)
-        // {
-            
-        // }
+        TEST_METHOD(TestEvaluatorSelectConstant)
+        {
+            //Not the correct way to test constant
+            /*qe = QueryEvaluator();
+            qtInstance = qtInstance->clear();
+            PKBMain::resetInstance();
+            pkbInstance = PKBMain::getInstance();
+            pkbInstance->addConstant(1, 5);
+            array<string, 2> arrToEvaluate = { "const", "5" };
+            qe.evaluateSelectTest(arrToEvaluate);
+            Assert::IsTrue(qe.getHasResult());*/
+        }
 
         /*--------------- Evaluate Follow ---------------*/
         //Case 1 - Positive: Follows(int, int)

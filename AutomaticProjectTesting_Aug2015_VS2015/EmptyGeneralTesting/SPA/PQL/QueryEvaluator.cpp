@@ -180,6 +180,11 @@ void QueryEvaluator::evaluateSelect(array<string, 2> arr)
 		resultSelect = pkbInstance->getAllVariables();
         resultSelect.push_front(synonym);
 	}
+    else if (type == "const")
+    {
+        resultSelect = getListStringFromListInt(pkbInstance->getAllConstants());
+        resultSelect.push_front(synonym);
+    }
 	else
 	{
 		cerr << "Unrecognised type: <" << type << ", " << synonym << ">" << endl;
