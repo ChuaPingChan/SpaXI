@@ -1,0 +1,15 @@
+1 - comment
+assign a; variable v;
+Select v pattern a(v, _)
+i, j, a, b, c, d
+5000
+2 - comment
+assign a; variable v;
+Select v pattern a(v, _"c"_)
+c
+5000
+3 - comment
+assign a;
+Select a pattern a(_, _"c"_)
+8
+5000

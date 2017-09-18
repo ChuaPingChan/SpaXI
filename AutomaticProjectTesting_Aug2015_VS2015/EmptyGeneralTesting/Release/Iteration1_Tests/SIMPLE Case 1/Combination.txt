@@ -1,0 +1,35 @@
+1 - comment
+assign a;
+Select a such that Follows(1, a) pattern a(_,_)
+2
+5000
+2 - comment
+stmt s;assign a;
+Select s such that Parent(1, _) pattern a(_,_)
+none
+5000
+3 - comment
+variable v; assign a;
+Select a such that Parent*(1, a) pattern a(v,_)
+none
+5000
+4 - comment
+assign a;
+Select a such that Follows*(1, a) pattern a(_,_)
+2, 8
+5000
+5 - comment
+assign a; variable v;
+Select a such that Follows(1, a) pattern a(v, _)
+2
+5000
+6 - comment
+variable v; stmt s;
+Select v such that Follows(4, _) pattern a(v, _) 
+i, j, a, b, c, d
+5000
+7 - comment
+assign a;
+Select a pattern a(_, _) such that Uses(8, "c")
+1, 2, 4, 5, 6, 7, 8
+5000
