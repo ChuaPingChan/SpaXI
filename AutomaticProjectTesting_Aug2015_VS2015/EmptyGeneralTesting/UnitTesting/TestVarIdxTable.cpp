@@ -25,6 +25,8 @@ namespace UnitTesting
 
             Assert::IsTrue(vit.isVarPresent("daisuki"));
             Assert::IsFalse(vit.isVarPresent("yamete"));
+
+			Assert::IsTrue(vit.getIdxFromVar("A") == -1);
         }
 
     };

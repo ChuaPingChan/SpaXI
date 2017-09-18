@@ -841,6 +841,9 @@ list<string> PKBMain::getModifiesFromStmt(int stmt)
 list<int> PKBMain::getUsesFromVar(string var, string type)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
+	if (varIdx == -1) {
+		return list<int>();
+	}
 	if (type.compare("stmt") == 0) {
 		return usesTableVar.getUsesStmtsFromVar(varIdx);
 	}
@@ -859,6 +862,9 @@ list<int> PKBMain::getUsesFromVar(string var, string type)
 list<int> PKBMain::getModifiesFromVar(string var, string type)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
+	if (varIdx == -1) {
+		return list<int>();
+	}
 	if (type.compare("stmt") == 0) {
 		return modTableVar.getModStmtsFromVar(varIdx);
 	}

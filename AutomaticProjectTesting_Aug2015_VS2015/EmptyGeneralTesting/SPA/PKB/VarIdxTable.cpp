@@ -15,6 +15,10 @@ bool VarIdxTable::addToVarIdxTable(string var) {
 }
 
 int VarIdxTable::getIdxFromVar(string var) {
+	if (varIdxMap.find(var) == varIdxMap.end()) {
+		return -1;
+	}
+
     return varIdxMap[var];
 }
 
