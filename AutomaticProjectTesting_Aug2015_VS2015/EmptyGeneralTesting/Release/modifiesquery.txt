@@ -1,0 +1,55 @@
+1 - case 1 Modifies(int, ident)
+stmt s;
+Select s such that Modifies(1, "i")
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+2 - case 2 Modifies(int, _)
+variable v; stmt s;
+Select s such that Modifies(3, _)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+3 - case 3 Modifies(int, variable)
+variable v;
+Select v such that Modifies(8, v)
+c
+5000
+4 - case 4 Modifies(synonym, ident)
+assign a;
+Select a such that Modifies(a, "c")
+6, 8
+5000
+5 - case 5 Modifies(synonym, _)
+assign a;
+Select a such that Modifies(a, _)
+1, 2, 4, 5, 6, 7, 8
+5000
+6 - case 6 Modifies(synonym, synonym)
+assign a; variable v;
+Select a such that Modifies(a, v)
+1, 2, 4, 5, 6, 7, 8
+5000
+7 - invalid modifies
+variable v;
+Select v such that Modifies(10, v)
+none
+5000
+8 - invalid modifies
+stmt s;
+Select s such that Modifies(1, 2)
+none
+5000
+9 - invalid, synonym/var cannot start w number
+stmt s;
+Select s such that Modifies(4, "3")
+none
+5000
+10 - invalid
+stmt stmt;
+Select stmt such that Modifies(stmt, "j")
+none
+5000
+11 - invalid synonym
+stmt 8;
+Select 8 such that Modifies(5, "d")
+none
+5000

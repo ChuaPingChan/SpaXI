@@ -1,0 +1,55 @@
+1 - case 1 (synonym, _)
+assign a; variable v;
+Select v pattern a(v, _)
+i, j, a, b, c, d
+5000
+2 - case 2 (synonym, ident)
+assign a; variable v;
+Select v pattern a(v, _"c"_)
+c
+5000
+3 - case 3 (_, ident)
+assign a;
+Select a pattern a(_, _"c"_)
+8
+5000
+4 - case 4 (ident, ident)
+assign a;
+Select a pattern a("i", _"j"_)
+1
+5000
+5 - case 5 (_, _)
+assign a;
+Select a pattern a(_, _)
+1, 2, 4, 5, 6, 7, 8
+5000
+6 - case 6 (ident, _)
+assign a;
+Select a pattern a("a", _)
+4
+5000
+7 - invalid synonym for pattern
+assign a; stmt s;
+Select a pattern s(_, _)
+none
+5000
+8 - invalid left arg of pattern
+assign a;
+Select a pattern a(1, _)
+none
+5000
+9 - none existence of variable
+assign a;
+Select a pattern a("missingVar", _)
+none
+5000
+10 - valid
+assign a; variable v;
+Select v pattern a("c", _)
+a, b, c, d, i, j
+5000
+11 - valid
+assign a;
+Select a pattern a("c", _)
+6, 8
+5000

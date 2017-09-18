@@ -1,0 +1,175 @@
+1 - comment
+while w;
+Select w
+3
+5000
+2 - comment
+assign a;
+Select a
+1, 2, 4, 5, 6, 7, 8
+5000
+3 - comment
+stmt s;
+Select s
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+4 - comment
+variable v;
+Select v
+i, j, a, b, c, d
+5000
+5 - comment
+stmt s;
+Select s such that Follows(1, 2)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+6 - comment
+stmt s;
+Select s such that Follows(1, _)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+7 - comment
+stmt s;
+Select s such that Follows(1, s)
+2
+5000
+8 - comment
+stmt s;
+Select s such that Follows(_, 2)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+9 - comment
+stmt s;
+Select s such that Follows (_,_)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+10 - comment
+stmt s;
+Select s such that Follows (_, s)
+2, 3, 5, 6, 7, 8
+5000
+11 - comment
+stmt s;
+Select s such that Follows (_, a)
+none
+5000
+12 - comment
+stmt s;
+Select s such that Follows(s, 3)
+2
+5000
+13 - comment
+stmt s; 
+Select s such that Follows(s, _)
+1, 2, 3, 4, 5, 6
+5000
+14 - comment
+stmt s1, s2;
+Select s1 such that Follows(s1, s2)
+1, 2, 3, 4, 5, 6
+5000
+15 - comment
+stmt s;
+Select s such that Follows(s, s)
+none
+5000
+16 - comment
+stmt s; assign a;
+Select s such that Follows(s, a)
+1, 3, 4, 5, 6
+5000
+17 - comment
+stmt s; variable v;
+Select s such that Follows(v, s)
+none
+5000
+18 - comment
+variable 1wrongSynonym;
+Select v
+none
+5000
+19 - comment
+while "w";
+Select "w" such that Follows("w", 8)
+none
+5000
+20 - comment
+stmt s;
+Select s such that Follows(3,2)
+none
+5000
+21 - comment
+stmt s;
+Select s such that Follows(8, 9)
+none
+5000
+22 - case 1
+stmt s;
+Select s such that Follows*(1, 3)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+23 - case 2
+stmt s;
+Select s such that Follows*(1, _)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+24 - case 3
+stmt s;
+Select s such that Follows*(1, s)
+2, 3, 8
+5000
+25 - case 4
+stmt s; 
+Select s such that Follows*(_, 8)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+26 - case 5
+stmt s;
+Select s such that Follows*(_, _)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+27 - case 6
+stmt s;
+Select s such that Follows*(_, s)
+2, 3, 5, 6, 7, 8
+5000
+28 - case 7
+stmt s;
+Select s such that Follows*(s, 6)
+4, 5
+5000
+29 - case 8
+stmt s;
+Select s such that Follows*(s, _)
+1, 2, 3, 4, 5, 6
+5000
+30 - case 9 (Same synonym in follows)
+stmt s;
+Select s such that Follows*(s, s)
+none
+5000
+31 - case 9
+stmt s1, s2; 
+Select s1 such that Follows*(s1, s2)
+1, 2, 3, 4, 5, 6
+5000
+32 - case 9
+stmt s1, s2;
+Select s2 such that Follows*(s1, s2)
+2, 3, 5, 6, 7, 8
+5000
+33 - invalid declaration entity
+statement s;
+Select s such that Follows(1, 2)
+none
+5000
+34 - invalid select spelling
+stmt s;
+Sellect s such that Follows(1, 2)
+none
+5000
+35 - comment
+assign a;
+Select a such that Follows*(a, 7)
+4, 5, 6
+5000
