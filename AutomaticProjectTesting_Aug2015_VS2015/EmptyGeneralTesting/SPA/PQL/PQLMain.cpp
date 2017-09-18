@@ -5,7 +5,9 @@
 
 PQLMain::PQLMain(string query)
 {
-	this->query = query;
+    //TODO: Un-hack this
+    string processedQuery = regex_replace(query, regex("prog_line"), "stmt");
+	this->query = processedQuery;
 }
 
 
