@@ -629,12 +629,87 @@ namespace IntegrationTesting
             //TODO: Test validity of uses
         }
 
-        TEST_METHOD(TestFollows_Valid)
+        TEST_METHOD(TestValidity_Follows_Int_Int_Valid)
+        {
+            QueryValidatorFriend qvf = QueryValidatorFriend();;
+            string str = "Follows(1,2)";
+            qtInstance = qtInstance->clear();
+            insertTwoVarIntoQueryTree("int", "1", "int", "2");
+            Assert::IsTrue(qvf.isValidFollows(str));
+        }
+
+        TEST_METHOD(TestValidity_Follows_Int_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf = QueryValidatorFriend();;
+            string str = "Follows(1,_)";
+            qtInstance = qtInstance->clear();
+            insertTwoVarIntoQueryTree("int", "1", "_", "");
+            Assert::IsTrue(qvf.isValidFollows(str));
+        }
+
+        TEST_METHOD(TestValidity_Follows_Int_Stmt_Valid)
         {
             QueryValidatorFriend qvf;
-            string str;
+            string str = "Follows(1,s)";
+            qtInstance = qtInstance->clear(); qvf = QueryValidatorFriend();
+            insertTwoVarIntoQueryTree("int", "1", "stmt", "s");
+            Assert::IsTrue(qvf.isValidFollows(str));
+        }
 
-            //TODO: Test validity of follows
+        TEST_METHOD(TestValidity_Follows_Int_Assign_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(1,a)";
+            qtInstance = qtInstance->clear(); qvf = QueryValidatorFriend();
+            insertTwoVarIntoQueryTree("int", "1", "assign", "a");
+            Assert::IsTrue(qvf.isValidFollows(str));
+        }
+
+        TEST_METHOD(TestValidity_Follows_Int_While_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(1,w)";
+            qtInstance = qtInstance->clear(); qvf = QueryValidatorFriend();
+            insertTwoVarIntoQueryTree("int", "1", "while", "w");
+            Assert::IsTrue(qvf.isValidFollows(str));
+        }
+
+        /*TEST_METHOD(TestValidity_Follows_Int_If_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(1,f)";
+            qtInstance = qtInstance->clear(); qvf = QueryValidatorFriend();
+            qtInstance->insertVariable("int", "1");
+            qtInstance->insertVariable("if", "f");
+            Assert::IsTrue(qvf.isValidFollows(str));
+        }*/
+
+        /*TEST_METHOD(TestValidity_Follows_Int_ProgLine_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(1,w)";
+            qtInstance = qtInstance->clear(); qvf = QueryValidatorFriend();
+            qtInstance->insertVariable("int", "1");
+            qtInstance->insertVariable("prog_line", "n");
+            Assert::IsTrue(qvf.isValidFollows(str));
+        }*/
+
+        TEST_METHOD(TestValidity_Follows_Underscore_Int_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(_,3)";
+            qtInstance = qtInstance->clear(); qvf = QueryValidatorFriend();
+            insertTwoVarIntoQueryTree("_", "", "int", "3");
+            Assert::IsTrue(qvf.isValidFollows(str));
+        }
+
+        TEST_METHOD(TestValidity_Follows_Underscore_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(_,_)";
+            qtInstance = qtInstance->clear(); qvf = QueryValidatorFriend();
+            insertTwoVarIntoQueryTree("_", "", "_", "");
+            Assert::IsTrue(qvf.isValidFollows(str));
         }
 
         TEST_METHOD(TestFollowsStar_Valid)
@@ -660,5 +735,12 @@ namespace IntegrationTesting
 
             //TODO: Test validity of parentstar
         }
+
+        void insertTwoVarIntoQueryTree(string type1, string arg1, string type2, string arg2)
+        {
+            qtInstance->insertVariable(type1, arg1);
+            qtInstance->insertVariable(type2, arg2);
+        }
+
     };
 }
