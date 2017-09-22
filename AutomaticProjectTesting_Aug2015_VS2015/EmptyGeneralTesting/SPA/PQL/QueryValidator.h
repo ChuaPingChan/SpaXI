@@ -57,14 +57,6 @@ public:
     /*--------------- For Unit Testing ---------------*/
 	string removeAllSpacesTest(string str);
 
-    /*--------------- Grammar Regex Test---------------*/
-    bool isValidLetterTest(string str);
-    bool isValidIntegerTest(string str);
-    bool isValidSynonymTest(string str);
-    bool isValidStmtRefTest(string str);
-    bool isValidEntRefTest(string str);
-    bool isValidNameTest(string str);
-
     /*--------------- Tokenizer Test---------------*/
     vector<string> tokenizeTest(string query);
  

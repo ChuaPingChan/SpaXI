@@ -88,42 +88,6 @@ string QueryValidator::removeAllSpacesTest(string str)
 	return removeAllSpaces(str);
 }
 
-/*--------------- Grammar Regex Test---------------*/
-bool QueryValidator::isValidLetterTest(string str)
-{
-    regex letterRegexCheck(LETTER);
-    return regex_match(str, letterRegexCheck);
-}
-
-bool QueryValidator::isValidIntegerTest(string str)
-{
-    regex integerRegexCheck(INTEGER);
-    return regex_match(str, integerRegexCheck);
-}
-
-bool QueryValidator::isValidSynonymTest(string str)
-{
-    return isValidSynonym(str);
-}
-
-bool QueryValidator::isValidStmtRefTest(string str)
-{
-    regex stmtRefRegexCheck(STMTREF);
-    return regex_match(str, stmtRefRegexCheck);
-}
-
-bool QueryValidator::isValidEntRefTest(string str)
-{
-    regex entRefRegexCheck(ENTREF);
-    return regex_match(str, entRefRegexCheck);
-}
-
-bool QueryValidator::isValidNameTest(string str)
-{
-    regex nameRegexCheck(NAME);
-    return regex_match(str, nameRegexCheck);
-}
-
 /*--------------- Splitting Query Test---------------*/
 
 vector<string> QueryValidator::tokenizeTest(string query)
