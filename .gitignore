@@ -1,6 +1,8 @@
 *.obj
 *.log
 *.pdb
+*.ipdb
+*.iobj
 *.idb
 *.tlog
 *.ilk
