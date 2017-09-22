@@ -608,5 +608,57 @@ namespace IntegrationTesting
             Assert::IsFalse(qvf.isValidSelect(str));
 
         }
+
+
+        /****************************************
+        * Such That Relationship Validity Tests *
+        ****************************************/
+        TEST_METHOD(TestModifies_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str;
+
+            //TODO: Test validity of modifies
+        }
+
+        TEST_METHOD(TestUses_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str;
+
+            //TODO: Test validity of uses
+        }
+
+        TEST_METHOD(TestFollows_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str;
+
+            //TODO: Test validity of follows
+        }
+
+        TEST_METHOD(TestFollowsStar_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str;
+
+            //TODO: Test validity of followstar
+        }
+
+        TEST_METHOD(TestParent_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str;
+
+            //TODO: Test validity of parent
+        }
+
+        TEST_METHOD(TestParentStar_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str;
+
+            //TODO: Test validity of parentstar
+        }
     };
 }
