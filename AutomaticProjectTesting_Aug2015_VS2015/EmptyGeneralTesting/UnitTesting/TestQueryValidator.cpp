@@ -156,6 +156,7 @@ namespace UnitTesting
             Assert::IsFalse(qvf.isValidName(str));
         }
 
+
         /******************
         * Tokenizer Tests *
         ******************/
@@ -196,6 +197,15 @@ namespace UnitTesting
         }
 
 
+        /********************
+        * Remove all spaces *
+        ********************/
+        TEST_METHOD(TestRemoveAllSpaces)
+        {
+            QueryValidatorFriend qvf;
+            string str = " a  b    c  ";
+            Assert::IsTrue(qvf.removeAllSpaces(str) == "abc");
+        }
 
 
 
@@ -221,21 +231,6 @@ namespace UnitTesting
 
 
 
-
-
-
-
-
-
-
-		TEST_METHOD(TestRemoveAllSpaces)
-		{
-			QueryValidator qv;
-			string str;
-
-			str = " a  b    c  ";
-			Assert::IsTrue(qv.removeAllSpacesTest(str) == "abc");
-		}
 
        
 

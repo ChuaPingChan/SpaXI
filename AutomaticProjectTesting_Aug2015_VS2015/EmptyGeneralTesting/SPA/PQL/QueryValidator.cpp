@@ -83,18 +83,9 @@ bool QueryValidator::isValidDeclarationTest(string str)
 
 /*--------------- For UnitTesting ---------------*/
 
-string QueryValidator::removeAllSpacesTest(string str)
-{
-	return removeAllSpaces(str);
-}
-
 
 /*--------------- Finding Argument in Clause Test---------------*/
 
-bool QueryValidator::isArgumentInClauseTest(string arg, vector<string> clause)
-{
-    return isArgumentInClause(arg, clause);
-}
 
 /*--------------- Splitting Query Test---------------*/
 

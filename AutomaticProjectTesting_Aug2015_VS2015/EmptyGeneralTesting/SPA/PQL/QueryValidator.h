@@ -58,10 +58,7 @@ public:
 
 
     /*--------------- For Unit Testing ---------------*/
-	string removeAllSpacesTest(string str);
- 
-    /*--------------- Finding Argument in Clause Test---------------*/
-    bool isArgumentInClauseTest(string arg, vector<string> clause);
+
 
     /*--------------- Substring Test---------------*/
     bool isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result);
