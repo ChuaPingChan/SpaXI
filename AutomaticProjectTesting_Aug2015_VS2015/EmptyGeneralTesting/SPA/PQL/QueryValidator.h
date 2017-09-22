@@ -12,6 +12,8 @@ using namespace std;
 
 class QueryValidator
 {
+    friend class QueryValidatorFriend;
+
 public:
     QueryValidator();
     ~QueryValidator();
