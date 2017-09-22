@@ -305,115 +305,111 @@ namespace UnitTesting
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
-
-        
-
-        /*--------------- Declaration Test---------------*/
-        TEST_METHOD(TestEntityRegex)
+        /********************
+        * Declaration Tests *
+        ********************/
+        TEST_METHOD(TestEntityRegex_Valid)
         {
-            QueryValidator qv;
-            string str;
-            
-            //Valid Entities Regex
-            str = "procedure";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            QueryValidatorFriend qvf;
+            string str = "procedure";
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "stmtLst";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "stmt";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "assign";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "call";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "while";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "if";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "variable";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "constant";
-            Assert::IsTrue(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
             str = "prog_line";
-            Assert::IsTrue(qv.isValidEntityTest(str));
-
-            //Invalid Entities Regex
-            str = "invalidEntity";
-            Assert::IsFalse(qv.isValidEntityTest(str));
-            str = "invalidEntityEndsWith#";
-            Assert::IsFalse(qv.isValidEntityTest(str));
-            str = "invalidEntityEndsWith1";
-            Assert::IsFalse(qv.isValidEntityTest(str));
-            str = "1invalidEntityStartsWithNumber";
-            Assert::IsFalse(qv.isValidEntityTest(str));
-            str = "#invalidEntityStartsWithSymbol";
-            Assert::IsFalse(qv.isValidEntityTest(str));
+            Assert::IsTrue(qvf.isValidEntity(str));
         }
 
-        TEST_METHOD(TestQueryDeclarationValidity)
+        TEST_METHOD(TestEntityRegex_inValid)
         {
-            QueryValidator qv;
-            string str;
-
-            //Valid Declaration
-            str = "assign validEntityAndSynonym";
-            Assert::IsTrue(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "stmt validEntity, multipleVa1idSynonym";
-            Assert::IsTrue(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "stmt validEntity  , separatedByComma ,      multipleValidSynonym";
-            Assert::IsTrue(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "stmt validEntity, mixedCommaFormat     ,      multipleVa1idSynonym";
-            Assert::IsTrue(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "variable          validEntitySynonymWithWhitespace";
-            Assert::IsTrue(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "while \n validEntitySynonymWithNewline";
-            Assert::IsTrue(qv.isValidDeclarationTest(str));
-
-            //Invalid Declaration
-            qv = QueryValidator();
-            str = "invalidEntity inv@lidSyn0nym";
-            Assert::IsFalse(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "invalidEntity validSynonym";
-            Assert::IsFalse(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "assign validEntity, inv@lidSynonym";
-            Assert::IsFalse(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "assign validEntity validSynonym  but no comma";
-            Assert::IsFalse(qv.isValidDeclarationTest(str));
-            qv = QueryValidator();
-            str = "assign validEntity, validSynonymRepeted, validSynonymRepeted";
-            Assert::IsFalse(qv.isValidDeclarationTest(str));
+            QueryValidatorFriend qvf;
+            string str = "invalidEntity";
+            Assert::IsFalse(qvf.isValidEntity(str));
+            str = "invalidEntityEndsWith#";
+            Assert::IsFalse(qvf.isValidEntity(str));
+            str = "invalidEntityEndsWith1";
+            Assert::IsFalse(qvf.isValidEntity(str));
+            str = "1invalidEntityStartsWithNumber";
+            Assert::IsFalse(qvf.isValidEntity(str));
+            str = "#invalidEntityStartsWithSymbol";
+            Assert::IsFalse(qvf.isValidEntity(str));
         }
+
+        TEST_METHOD(TestQueryDeclaration_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "assign validEntityAndSynonym";
+            Assert::IsTrue(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "stmt validEntity, multipleVa1idSynonym";
+            Assert::IsTrue(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "stmt validEntity  , separatedByComma ,      multipleValidSynonym";
+            Assert::IsTrue(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "stmt validEntity, mixedCommaFormat     ,      multipleVa1idSynonym";
+            Assert::IsTrue(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "variable          validEntitySynonymWithWhitespace";
+            Assert::IsTrue(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "while \n validEntitySynonymWithNewline";
+            Assert::IsTrue(qvf.isValidDeclaration(str));
+        }
+
+        TEST_METHOD(TestQueryDeclaration_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            qvf = QueryValidatorFriend();
+            string str = "invalidEntity inv@lidSyn0nym";
+            Assert::IsFalse(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "invalidEntity validSynonym";
+            Assert::IsFalse(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "assign validEntity, inv@lidSynonym";
+            Assert::IsFalse(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "assign validEntity validSynonym  but no comma";
+            Assert::IsFalse(qvf.isValidDeclaration(str));
+            qvf = QueryValidatorFriend();
+            str = "assign validEntity, validSynonymRepeted, validSynonymRepeted";
+            Assert::IsFalse(qvf.isValidDeclaration(str));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         /*--------------- Pattern Test---------------*/

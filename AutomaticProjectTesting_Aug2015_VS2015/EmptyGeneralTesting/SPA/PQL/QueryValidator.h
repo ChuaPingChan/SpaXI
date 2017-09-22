@@ -61,11 +61,6 @@ public:
 
 
 
-    /*--------------- Declaration Test---------------*/
-    bool isValidEntityTest(string str);
-    bool isValidDeclarationTest(string str);
-    void stubMethod();  //Just a placeholder
-
     /*--------------- Pattern Test---------------*/
     bool isValidFactorTest(string str);
     bool isValidExpressionSpecTest(string str);

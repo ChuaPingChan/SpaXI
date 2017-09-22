@@ -73,28 +73,11 @@ bool QueryValidator::isValidQuery(string query)
     return true; // && isValidSelect();
 }
 
-/*--------------- For IntegrationTesting ---------------*/
-
-bool QueryValidator::isValidDeclarationTest(string str)
-{
-    return isValidDeclaration(str);
-}
 
 
 /*--------------- For UnitTesting ---------------*/
 
 
-
-/*--------------- Declaration Test---------------*/
-
-bool QueryValidator::isValidEntityTest(string str)
-{
-    return isValidEntity(str);
-}
-
-void QueryValidator::stubMethod()
-{
-}
 
 /*--------------- Pattern Test---------------*/
 bool QueryValidator::isValidFactorTest(string str)
