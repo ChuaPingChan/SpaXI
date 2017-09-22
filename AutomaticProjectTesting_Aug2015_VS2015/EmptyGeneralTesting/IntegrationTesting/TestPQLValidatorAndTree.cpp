@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "../SPA/PQL/QueryTree.h"
 #include "../SPA/PQL/QueryValidator.h"
+#include "../SPA/PQL/QueryValidatorFriend.h"
 
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -15,14 +16,15 @@ namespace IntegrationTesting
         TEST_METHOD(TestQueryTreeDeclaration)
         {
 			qtInstance = qtInstance->clear();
-            QueryValidator qv;
+            //QueryValidator qv;
+            QueryValidatorFriend qvf;
             string str;
 
             str = "assign a; variable v; stmt s; while w; constant c; prog_line pl;";
-            vector<string> tokenizer = qv.tokenizeTest(str);
+            vector<string> tokenizer = qvf.tokenize(str);
             for (int i = 0; i < tokenizer.size(); i++)
             {
-                bool testDeclaration = qv.isValidDeclarationTest(tokenizer.at(i));
+                bool testDeclaration = qvf.isValidDeclaration(tokenizer.at(i));
                 Assert::IsTrue(testDeclaration);
             }
 
@@ -33,19 +35,19 @@ namespace IntegrationTesting
             Assert::IsTrue(qtInstance->varExists("c"));
             Assert::IsTrue(qtInstance->varExists("pl"));
 
-            Assert::IsTrue(qv.isArgumentInClauseTest("a", qtInstance->getAssigns()));
-            Assert::IsTrue(qv.isArgumentInClauseTest("v", qtInstance->getVars()));
-            Assert::IsTrue(qv.isArgumentInClauseTest("s", qtInstance->getStmts()));
-            Assert::IsTrue(qv.isArgumentInClauseTest("w", qtInstance->getWhiles()));
-            Assert::IsTrue(qv.isArgumentInClauseTest("c", qtInstance->getConsts()));
-            Assert::IsTrue(qv.isArgumentInClauseTest("pl", qtInstance->getProgLines()));
+            Assert::IsTrue(qvf.isArgumentInClause("a", qtInstance->getAssigns()));
+            Assert::IsTrue(qvf.isArgumentInClause("v", qtInstance->getVars()));
+            Assert::IsTrue(qvf.isArgumentInClause("s", qtInstance->getStmts()));
+            Assert::IsTrue(qvf.isArgumentInClause("w", qtInstance->getWhiles()));
+            Assert::IsTrue(qvf.isArgumentInClause("c", qtInstance->getConsts()));
+            Assert::IsTrue(qvf.isArgumentInClause("pl", qtInstance->getProgLines()));
 
-            Assert::IsFalse(qv.isArgumentInClauseTest("a1", qtInstance->getAssigns()));
-            Assert::IsFalse(qv.isArgumentInClauseTest("v1", qtInstance->getVars()));
-            Assert::IsFalse(qv.isArgumentInClauseTest("s1", qtInstance->getStmts()));
-            Assert::IsFalse(qv.isArgumentInClauseTest("w1", qtInstance->getWhiles()));
-            Assert::IsFalse(qv.isArgumentInClauseTest("c1", qtInstance->getConsts()));
-            Assert::IsFalse(qv.isArgumentInClauseTest("pl1", qtInstance->getProgLines()));
+            Assert::IsFalse(qvf.isArgumentInClause("a1", qtInstance->getAssigns()));
+            Assert::IsFalse(qvf.isArgumentInClause("v1", qtInstance->getVars()));
+            Assert::IsFalse(qvf.isArgumentInClause("s1", qtInstance->getStmts()));
+            Assert::IsFalse(qvf.isArgumentInClause("w1", qtInstance->getWhiles()));
+            Assert::IsFalse(qvf.isArgumentInClause("c1", qtInstance->getConsts()));
+            Assert::IsFalse(qvf.isArgumentInClause("pl1", qtInstance->getProgLines()));
 
 
 

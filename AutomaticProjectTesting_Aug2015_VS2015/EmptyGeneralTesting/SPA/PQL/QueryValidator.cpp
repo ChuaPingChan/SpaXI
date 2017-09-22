@@ -88,12 +88,6 @@ string QueryValidator::removeAllSpacesTest(string str)
 	return removeAllSpaces(str);
 }
 
-/*--------------- Splitting Query Test---------------*/
-
-vector<string> QueryValidator::tokenizeTest(string query)
-{
-    return tokenize(query);
-}
 
 /*--------------- Finding Argument in Clause Test---------------*/
 

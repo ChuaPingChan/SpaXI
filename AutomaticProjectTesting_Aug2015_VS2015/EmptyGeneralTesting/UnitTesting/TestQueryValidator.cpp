@@ -156,7 +156,44 @@ namespace UnitTesting
             Assert::IsFalse(qvf.isValidName(str));
         }
 
+        /******************
+        * Tokenizer Tests *
+        ******************/
+        TEST_METHOD(TestToknenizer_Split_Equality)
+        {
+            QueryValidatorFriend qvf;
+            string str = "assign a;select a;";
+            vector<string> splitted = qvf.tokenize(str);
+            Assert::AreEqual((std::string) "assign a", splitted.at(0));
+            Assert::AreEqual((std::string) "select a", splitted.at(1));
+        }
 
+        TEST_METHOD(TestToknenizer_SplitWithSpaces_Equality)
+        {
+            QueryValidatorFriend qvf;
+            string str = "assign a     ; select a     ;";
+            vector<string> splitted = qvf.tokenize(str);
+            Assert::AreEqual((std::string) "assign a     ", splitted.at(0));
+            Assert::AreEqual((std::string) " select a     ", splitted.at(1));
+        }
+
+        TEST_METHOD(TestToknenizer_SplitWithSpaces_Inequality)
+        {
+            QueryValidatorFriend qvf;
+            string str = "assign a     ; select a     ;";
+            vector<string> splitted = qvf.tokenize(str);
+            Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
+            Assert::AreNotEqual((std::string) " select a", splitted.at(1));
+        }
+
+        TEST_METHOD(TestToknenizer_WithNewDeclarationAtStart_Inequality)
+        {
+            QueryValidatorFriend qvf;
+            string str = "while w;assign a;select a;";
+            vector<string> splitted = qvf.tokenize(str);
+            Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
+            Assert::AreNotEqual((std::string) " select a", splitted.at(1));
+        }
 
 
 
@@ -200,43 +237,7 @@ namespace UnitTesting
 			Assert::IsTrue(qv.removeAllSpacesTest(str) == "abc");
 		}
 
-        /*--------------- Tokenizer Test---------------*/
-
-        TEST_METHOD(TestTokenizer)
-        { 
-            QueryValidator qv;
-            string str;
-            vector<string> splitted;
-
-            //Equality test
-            qv = QueryValidator();
-            str = "assign a;select a;";
-            splitted = qv.tokenizeTest(str);
-            Assert::AreEqual((std::string) "assign a", splitted.at(0));
-            Assert::AreEqual((std::string) "select a", splitted.at(1));
-
-            //Equality test with spaces
-            qv = QueryValidator();
-            str = "assign a     ; select a     ;";
-            splitted = qv.tokenizeTest(str);
-            Assert::AreEqual((std::string) "assign a     ", splitted.at(0));
-            Assert::AreEqual((std::string) " select a     ", splitted.at(1));
-
-            //Inequality test with spaces
-            qv = QueryValidator();
-            str = "assign a     ; select a     ;";
-            splitted = qv.tokenizeTest(str);
-            Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
-            Assert::AreNotEqual((std::string) " select a", splitted.at(1));
-
-            //Inequality test with new declaration at beginning
-            qv = QueryValidator();
-            str = "while w;assign a;select a;";
-            splitted = qv.tokenizeTest(str);
-            Assert::AreNotEqual((std::string) "assign a", splitted.at(0));
-            Assert::AreNotEqual((std::string) " select a", splitted.at(1));
-
-        }
+       
 
         /*--------------- Substring Test---------------*/
 

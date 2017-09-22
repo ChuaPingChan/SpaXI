@@ -53,12 +53,12 @@ public:
     static const string SELECT_OVERALL_REGEX;
 
     bool isValidQuery(string query);
+    
+
+
 
     /*--------------- For Unit Testing ---------------*/
 	string removeAllSpacesTest(string str);
-
-    /*--------------- Tokenizer Test---------------*/
-    vector<string> tokenizeTest(string query);
  
     /*--------------- Finding Argument in Clause Test---------------*/
     bool isArgumentInClauseTest(string arg, vector<string> clause);
