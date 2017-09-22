@@ -92,6 +92,21 @@ bool QueryValidatorFriend::isValidModifies(string str) {
     return qv.isValidModifies(str);
 }
 
+bool QueryValidatorFriend::isValidUses(string str)
+{
+    return qv.isValidUses(str);
+}
+
+bool QueryValidatorFriend::isValidFollows(string str)
+{
+    return qv.isValidFollows(str);
+}
+
+bool QueryValidatorFriend::isValidParent(string str)
+{
+    return qv.isValidParent(str);
+}
+
 /*--------------- Validation of Pattern ---------------*/
 bool QueryValidatorFriend::isValidPatternRegex(string str) {
     return qv.isValidPatternRegex(str);
@@ -105,4 +120,9 @@ bool QueryValidatorFriend::isValidFactor(string str) {
 bool QueryValidatorFriend::isValidExpressionSpec(string str) {
     regex expressionSpecRegexCheck(QueryValidator::EXPRESSION_SPEC);
     return regex_match(str, expressionSpecRegexCheck);
+}
+
+bool QueryValidatorFriend::isValidPattern(string str)
+{
+    return isValidPattern(str);
 }
