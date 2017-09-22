@@ -208,6 +208,102 @@ namespace UnitTesting
         }
 
 
+        /******************
+        * Substring Tests *
+        ******************/
+        TEST_METHOD(TestSubstringBetween_UniqueCharDelims)
+        {
+            QueryValidatorFriend qvf;
+            string str = "abcdefghijklmnop#$%123456789";
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "g", "5") == "hijklmnop#$%1234");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, "c", "7") == "hijklmnop#$%1234");
+        }
+
+        /*TEST_METHOD(TestSubstringBetweenSameCharDelims)
+        {
+        QueryValidatorFriend qvf;
+        string str = "TestBetweenSameCharDelims";
+        Assert::IsTrue(qvf.getBetweenTwoStrings(str, "e", "e") == "stBetweenSameCharD");
+        Assert::IsFalse(qvf.getBetweenTwoStrings(str, "e", "e") == "stBetwe");
+        }*/
+
+        /*TEST_METHOD(TestSubstringBetweenWhiteSpaceDelims)
+        {
+        QueryValidatorFriend qvf;
+        string str = "Test between white space delims";
+        Assert::IsTrue(qvf.getBetweenTwoStrings(str, " ", " ") == "between");
+        Assert::IsFalse(qvf.getBetweenTwoStrings(str, " ", " ") == "white space");
+        }*/
+
+        TEST_METHOD(TestSubstringBetweenDelims_ExtractUsesArgs)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Uses(a,b)";
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "(", ",") == "a");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, ",", ")") == "b");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, "(", ",") == "(a");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, ",", ")") == "b)");
+        }
+
+        TEST_METHOD(TestSubstringBetweenDelims_ExtractModifiesArgs)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifes(abc,def)";
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "(", ",") == "abc");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, ",", ")") == "def");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, "(", ",") == "(awf");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, ",", "31") == "awfwf");
+        }
+
+        TEST_METHOD(TestSubstringBetweenDelims_ExtractFollowsArgs)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(a,b)";
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "(", ",") == "a");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, ",", ")") == "b");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, ",", ",") == "qeeq");
+        }
+
+        TEST_METHOD(TestSubstringBetweenDelims_ExtractFollowsStarArgs)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows*(123,456)";
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "(", ",") == "123");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, ",", ")") == "456");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, ",", "rwr") == "3121");
+        }
+
+        TEST_METHOD(TestSubstringBetweenDelims_ExtractParentArgs)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(abc123,def)";
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "(", ",") == "abc123");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, ",", ")") == "def");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, ",", "\"") == "qeeq");
+        }
+
+        TEST_METHOD(TestSubstringBetweenDelims_ExtractParentStarArgs)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent*(1,2)";
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "Parent", "(") == "*");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "Parent*(", ",") == "1");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, ",", ")") == "2");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, ",", "2") == ",");
+        }
+
+        TEST_METHOD(TestSubstringBetweenDelims_ExtractPatternArgs)
+        {
+            QueryValidatorFriend qvf;
+            string str = "patternarg1(arg2,arg3)";
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "pattern", "(") == "arg1");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "(", ",") == "arg2");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, ",", ")") == "arg3");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "ern", "(") == "arg1");
+            Assert::IsTrue(qvf.getBetweenTwoStrings(str, "arg2", "arg3") == ",");
+            Assert::IsFalse(qvf.getBetweenTwoStrings(str, ",", ")") == "arg2");
+        }
+
 
 
 
@@ -234,66 +330,7 @@ namespace UnitTesting
 
        
 
-        /*--------------- Substring Test---------------*/
-
-        TEST_METHOD(TestSubstringBetweenDelims) 
-        {
-            QueryValidator qv;
-            string str;
-            
-            //Uses clause test
-            qv = QueryValidator();
-            str = "Uses(a,b)";
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str,"(",",","a"));
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, ",", ")", "b"));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, "(", ",", "(a"));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", ",", "a"));
-
-            //Modifies clause test
-            qv = QueryValidator();
-            str = "Modifes(abc,def)";
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "abc"));
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, ",", ")", "def"));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, "(", ",", "(awf"));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "31", "awfwf"));
-
-            //Follows and Follows* clause test
-            qv = QueryValidator();
-            str = "Follows(a,b)";
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "a"));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", ",", "qeeq"));
-            qv = QueryValidator();
-            str = "Follows*(123,456)";
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "123"));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "rwr", "3121"));
-			qv = QueryValidator();
-			str = "Follows*(s1, s2)";
-			Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "s1"));
-			Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "rwr", "3121"));
-
-            //Parent and Parent* clause test
-            qv = QueryValidator();
-            str = "Parent(abc123,def)";
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "abc123"));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "\"", "qeeq"));
-            qv = QueryValidator();
-            str = "Parent*(1,2)";
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "Parent", "(", "*"));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", "2", ","));
-
-            //Pattern clause test
-            qv = QueryValidator();
-            str = "patternarg1(arg2,arg3)";
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "pattern", "(", "arg1"));
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "(", ",", "arg2"));
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, ",", ")", "arg3"));
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "ern", "(", "arg1"));
-            Assert::IsTrue(qv.isGetBetweenTwoStringsTest(str, "arg2", "arg3", ","));
-            Assert::IsFalse(qv.isGetBetweenTwoStringsTest(str, ",", ")", "arg2"));
-
-
-
-        }
+        
 
         /*--------------- Declaration Test---------------*/
         TEST_METHOD(TestEntityRegex)

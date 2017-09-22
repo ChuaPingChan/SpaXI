@@ -60,8 +60,6 @@ public:
     /*--------------- For Unit Testing ---------------*/
 
 
-    /*--------------- Substring Test---------------*/
-    bool isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result);
 
     /*--------------- Declaration Test---------------*/
     bool isValidEntityTest(string str);

@@ -84,15 +84,6 @@ bool QueryValidator::isValidDeclarationTest(string str)
 /*--------------- For UnitTesting ---------------*/
 
 
-/*--------------- Finding Argument in Clause Test---------------*/
-
-
-/*--------------- Splitting Query Test---------------*/
-
-bool QueryValidator::isGetBetweenTwoStringsTest(string str, string firstDelim, string secondDelim, string result)
-{
-    return (QueryValidator::getBetweenTwoStrings(str, firstDelim, secondDelim) == result);
-}
 
 /*--------------- Declaration Test---------------*/
 
