@@ -85,7 +85,7 @@ bool QueryValidatorFriend::isValidFollowsRegex(string str) {
 }
 
 bool QueryValidatorFriend::isValidParentRegex(string str) {
-    return isValidParentRegex(str);
+    return qv.isValidParentRegex(str);
 }
 
 bool QueryValidatorFriend::isValidModifies(string str) {
@@ -94,7 +94,7 @@ bool QueryValidatorFriend::isValidModifies(string str) {
 
 /*--------------- Validation of Pattern ---------------*/
 bool QueryValidatorFriend::isValidPatternRegex(string str) {
-    return isValidPatternRegex(str);
+    return qv.isValidPatternRegex(str);
 }
 
 //bool QueryValidatorFriend::isValidFactor(string str) {

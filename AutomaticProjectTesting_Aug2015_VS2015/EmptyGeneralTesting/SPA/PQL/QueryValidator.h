@@ -68,10 +68,7 @@ public:
     bool isValidPatternTest(string str);
 
     /*--------------- Relationship Test---------------*/
-    bool isValidModifiesRegexTest(string str);
-    bool isValidUsesRegexTest(string str);
-    bool isValidFollowsRegexTest(string str);
-    bool isValidParentRegexTest(string str);
+
 
     bool isValidModifiesTest(string str);
     bool isValidUsesTest(string str);

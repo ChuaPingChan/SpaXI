@@ -447,11 +447,134 @@ namespace UnitTesting
         }
 
 
+        /*************************************
+        * Such That Relationship Regex Tests *
+        *************************************/
+        TEST_METHOD(TestModifiesRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifies(validStmtRef,validEntRef)";
+            Assert::IsTrue(qvf.isValidModifiesRegex(str));
+            str = "Modifies  (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
+            Assert::IsTrue(qvf.isValidModifiesRegex(str));
+            /*str = "Modifies(\"programName\", validEnrRef";
+            Assert::IsTrue(qv.isValidModifiesRegexTest(str));*/
+        }
 
+        TEST_METHOD(TestModifiesRegex_inValid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "modifies(lowercase,relationshipName)";
+            Assert::IsFalse(qvf.isValidModifiesRegex(str));
+            str = "misspelt(relationship,name)";
+            Assert::IsFalse(qvf.isValidModifiesRegex(str));
+            str = "modifies(invalidSecondArg,2)";
+            Assert::IsFalse(qvf.isValidModifiesRegex(str));
+            str = "Modifies[validArgsSyntax, wrongBrackets]";
+            Assert::IsFalse(qvf.isValidModifiesRegex(str));
+            str = "Modifies(validArgsSyntax.butFullStopReplacesComma)";
+            Assert::IsFalse(qvf.isValidModifiesRegex(str));
+            str = "Modifies(validArgsSyntax noCommas)";
+            Assert::IsFalse(qvf.isValidModifiesRegex(str));
+            str = "Modifies(validArgsSyntax, with, multipleArgs)";
+            Assert::IsFalse(qvf.isValidModifiesRegex(str));
+        }
 
+        TEST_METHOD(TestUsesRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Uses(validStmtRef,validEntRef)";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));
+            str = "Uses  (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));
+            /*str = "Uses(\"programName\", validEnrRef";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));*/
+        }
 
+        TEST_METHOD(TestUsesRegex_inValid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "uses(lowercase,relationshipName)";
+            Assert::IsFalse(qvf.isValidUsesRegex(str));
+            str = "misspelt(relationship,name)";
+            Assert::IsFalse(qvf.isValidUsesRegex(str));
+            str = "uses(invalidSecondArg,2)";
+            Assert::IsFalse(qvf.isValidUsesRegex(str));
+            str = "Uses[validArgsSyntax, wrongBrackets]";
+            Assert::IsFalse(qvf.isValidUsesRegex(str));
+            str = "Uses(validArgsSyntax.butFullStopReplacesComma)";
+            Assert::IsFalse(qvf.isValidUsesRegex(str));
+            str = "Uses(validArgsSyntax noCommas)";
+            Assert::IsFalse(qvf.isValidUsesRegex(str));
+            str = "Uses(validArgsSyntax, with, multipleArgs)";
+            Assert::IsFalse(qvf.isValidUsesRegex(str));
+        }
 
+        //Valid Follows||Follows* Regex
+        TEST_METHOD(TestFollowsRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(validStmtRef,validStmtRef)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows  (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(validStmtRef,validStmtRef)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(s1, s2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            /*str = "Follows  *  (   validSynonymForBothArgs  ,   withWhiteSpacesBetweenFollowsAndStar   )";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));*/
+        }
 
+        //Invalid Follows||Follows* Regex
+        TEST_METHOD(TestFollowsRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "follows(lowercase,relationshipName)";
+            Assert::IsFalse(qvf.isValidFollowsRegex(str));
+            str = "misspelt(relationship,name)";
+            Assert::IsFalse(qvf.isValidFollowsRegex(str));
+            str = "Follows[validArgsSyntax, wrongBrackets]";
+            Assert::IsFalse(qvf.isValidFollowsRegex(str));
+            str = "Follows(validArgsSyntax.butFullStopReplacesComma)";
+            Assert::IsFalse(qvf.isValidFollowsRegex(str));
+            str = "Follows(validArgsSyntax noCommas)";
+            Assert::IsFalse(qvf.isValidFollowsRegex(str));
+            str = "Follows(validArgsSyntax, with, multipleArgs)";
+            Assert::IsFalse(qvf.isValidFollowsRegex(str));
+        }
+
+        //Valid Parent||Parent* Regex
+        TEST_METHOD(TestParentRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(validStmtRef,validStmtRef)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(validStmtRef,validStmtRef)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            /*str = "Parent  *  (   validSynonymForBothArgs  ,   withWhiteSpacesBetweenParentAndStar   )";
+            Assert::IsTrue(qvf.isValidParentRegex(str));*/
+        }
+
+        //Invalid Parent||Parent* Regex
+        TEST_METHOD(TestParentRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "parent(lowercase,relationshipName)";
+            Assert::IsFalse(qvf.isValidParentRegex(str));
+            str = "misspelt(relationship,name)";
+            Assert::IsFalse(qvf.isValidParentRegex(str));
+            str = "Parent[validArgsSyntax, wrongBrackets]";
+            Assert::IsFalse(qvf.isValidParentRegex(str));
+            str = "Parent(validArgsSyntax.butFullStopReplacesComma)";
+            Assert::IsFalse(qvf.isValidParentRegex(str));
+            str = "Parent(validArgsSyntax noCommas)";
+            Assert::IsFalse(qvf.isValidParentRegex(str));
+            str = "Parent(validArgsSyntax, with, multipleArgs)";
+            Assert::IsFalse(qvf.isValidParentRegex(str));
+        }
 
 
 
@@ -546,128 +669,7 @@ namespace UnitTesting
         }
 
 
-        /*--------------- Relationship Test---------------*/
-        TEST_METHOD(TestModifiesRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Modifies Regex
-            str = "Modifies(validStmtRef,validEntRef)";
-            Assert::IsTrue(qv.isValidModifiesRegexTest(str));
-            str = "Modifies  (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
-            Assert::IsTrue(qv.isValidModifiesRegexTest(str));
-            /*str = "Modifies(\"programName\", validEnrRef";
-            Assert::IsTrue(qv.isValidModifiesRegexTest(str));*/
-
-            //Invalid Modifies Regex
-            str = "modifies(lowercase,relationshipName)";
-            Assert::IsFalse(qv.isValidModifiesRegexTest(str));
-            str = "misspelt(relationship,name)";
-            Assert::IsFalse(qv.isValidModifiesRegexTest(str));
-            str = "modifies(invalidSecondArg,2)";
-            Assert::IsFalse(qv.isValidModifiesRegexTest(str));
-            str = "Modifies[validArgsSyntax, wrongBrackets]";
-            Assert::IsFalse(qv.isValidModifiesRegexTest(str));
-            str = "Modifies(validArgsSyntax.butFullStopReplacesComma)";
-            Assert::IsFalse(qv.isValidModifiesRegexTest(str));
-            str = "Modifies(validArgsSyntax noCommas)";
-            Assert::IsFalse(qv.isValidModifiesRegexTest(str));
-            str = "Modifies(validArgsSyntax, with, multipleArgs)";
-            Assert::IsFalse(qv.isValidModifiesRegexTest(str));
-        }
-
-        TEST_METHOD(TestUsesRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Uses Regex
-            str = "Uses(validStmtRef,validEntRef)";
-            Assert::IsTrue(qv.isValidUsesRegexTest(str));
-            str = "Uses  (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
-            Assert::IsTrue(qv.isValidUsesRegexTest(str));
-            /*str = "Uses(\"programName\", validEnrRef";
-            Assert::IsTrue(qv.isValidUsesRegexTest(str));*/
-
-            //Invalid Uses Regex
-            str = "uses(lowercase,relationshipName)";
-            Assert::IsFalse(qv.isValidUsesRegexTest(str));
-            str = "misspelt(relationship,name)";
-            Assert::IsFalse(qv.isValidUsesRegexTest(str));
-            str = "uses(invalidSecondArg,2)";
-            Assert::IsFalse(qv.isValidUsesRegexTest(str));
-            str = "Uses[validArgsSyntax, wrongBrackets]";
-            Assert::IsFalse(qv.isValidUsesRegexTest(str));
-            str = "Uses(validArgsSyntax.butFullStopReplacesComma)";
-            Assert::IsFalse(qv.isValidUsesRegexTest(str));
-            str = "Uses(validArgsSyntax noCommas)";
-            Assert::IsFalse(qv.isValidUsesRegexTest(str));
-            str = "Uses(validArgsSyntax, with, multipleArgs)";
-            Assert::IsFalse(qv.isValidUsesRegexTest(str));
-        }
-
-        TEST_METHOD(TestFollowsRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Follows||Follows* Regex
-            str = "Follows(validStmtRef,validStmtRef)";
-            Assert::IsTrue(qv.isValidFollowsRegexTest(str));
-            str = "Follows  (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
-            Assert::IsTrue(qv.isValidFollowsRegexTest(str));
-            str = "Follows*(validStmtRef,validStmtRef)";
-            Assert::IsTrue(qv.isValidFollowsRegexTest(str));
-			str = "Follows*(s1, s2)";
-			Assert::IsTrue(qv.isValidFollowsRegexTest(str));
-            /*str = "Follows  *  (   validSynonymForBothArgs  ,   withWhiteSpacesBetweenFollowsAndStar   )";
-            Assert::IsTrue(qv.isValidFollowsRegexTest(str));*/
-
-            //Invalid Follows||Follows* Regex
-            str = "follows(lowercase,relationshipName)";
-            Assert::IsFalse(qv.isValidFollowsRegexTest(str));
-            str = "misspelt(relationship,name)";
-            Assert::IsFalse(qv.isValidFollowsRegexTest(str));
-            str = "Follows[validArgsSyntax, wrongBrackets]";
-            Assert::IsFalse(qv.isValidFollowsRegexTest(str));
-            str = "Follows(validArgsSyntax.butFullStopReplacesComma)";
-            Assert::IsFalse(qv.isValidFollowsRegexTest(str));
-            str = "Follows(validArgsSyntax noCommas)";
-            Assert::IsFalse(qv.isValidFollowsRegexTest(str));
-            str = "Follows(validArgsSyntax, with, multipleArgs)";
-            Assert::IsFalse(qv.isValidFollowsRegexTest(str));
-        }
-
-        TEST_METHOD(TestParentRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Parent||Parent* Regex
-            str = "Parent(validStmtRef,validStmtRef)";
-            Assert::IsTrue(qv.isValidParentRegexTest(str));
-            str = "Parent (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
-            Assert::IsTrue(qv.isValidParentRegexTest(str));
-            str = "Parent*(validStmtRef,validStmtRef)";
-            Assert::IsTrue(qv.isValidParentRegexTest(str));
-            /*str = "Parent  *  (   validSynonymForBothArgs  ,   withWhiteSpacesBetweenParentAndStar   )";
-            Assert::IsTrue(qv.isValidParentRegexTest(str));*/
-
-            //Invalid Parent||Parent* Regex
-            str = "parent(lowercase,relationshipName)";
-            Assert::IsFalse(qv.isValidParentRegexTest(str));
-            str = "misspelt(relationship,name)";
-            Assert::IsFalse(qv.isValidParentRegexTest(str));
-            str = "Parent[validArgsSyntax, wrongBrackets]";
-            Assert::IsFalse(qv.isValidParentRegexTest(str));
-            str = "Parent(validArgsSyntax.butFullStopReplacesComma)";
-            Assert::IsFalse(qv.isValidParentRegexTest(str));
-            str = "Parent(validArgsSyntax noCommas)";
-            Assert::IsFalse(qv.isValidParentRegexTest(str));
-            str = "Parent(validArgsSyntax, with, multipleArgs)";
-            Assert::IsFalse(qv.isValidParentRegexTest(str));
-        }
+   //     
 
         TEST_METHOD(TestModifiesValidity)
         {

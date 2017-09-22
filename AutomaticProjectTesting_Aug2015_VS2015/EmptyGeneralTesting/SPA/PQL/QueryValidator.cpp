@@ -103,26 +103,6 @@ bool QueryValidator::isValidPatternTest(string str)
 }
 
 
-/*--------------- Relationship Test---------------*/
-bool QueryValidator::isValidModifiesRegexTest(string str)
-{
-    return isValidModifiesRegex(str);
-}
-
-bool QueryValidator::isValidUsesRegexTest(string str)
-{
-    return isValidUsesRegex(str);
-}
-
-bool QueryValidator::isValidFollowsRegexTest(string str)
-{
-    return isValidFollowsRegex(str);
-}
-
-bool QueryValidator::isValidParentRegexTest(string str)
-{
-    return isValidParentRegex(str);
-}
 
 bool QueryValidator::isValidModifiesTest(string str)
 {
