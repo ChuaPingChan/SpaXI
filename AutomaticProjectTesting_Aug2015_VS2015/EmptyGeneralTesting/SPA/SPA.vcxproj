@@ -38,6 +38,7 @@
     <ClCompile Include="PQL\QueryEvaluator.cpp" />
     <ClCompile Include="PQL\QueryTree.cpp" />
     <ClCompile Include="PQL\QueryValidator.cpp" />
+    <ClCompile Include="PQL\QueryValidatorFriend.cpp" />
     <ClCompile Include="PQL\ResultFormatter.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +69,7 @@
     <ClInclude Include="PQL\QueryEvaluator.h" />
     <ClInclude Include="PQL\QueryTree.h" />
     <ClInclude Include="PQL\QueryValidator.h" />
+    <ClInclude Include="PQL\QueryValidatorFriend.h" />
     <ClInclude Include="PQL\ResultFormatter.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
