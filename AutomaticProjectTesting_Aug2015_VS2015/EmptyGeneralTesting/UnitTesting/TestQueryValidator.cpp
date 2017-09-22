@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "string.h"
 #include "..\SPA\PQL\QueryValidator.h"
+#include "..\SPA\PQL\QueryValidatorFriend.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
@@ -12,6 +13,184 @@ namespace UnitTesting
     {
     public:
 
+        /**********************
+        * Grammar Regex Tests *
+        **********************/
+        TEST_METHOD(TestLetterRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "a";
+            Assert::IsTrue(qvf.isValidLetter(str));
+        }
+
+        TEST_METHOD(TestLetterRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "invalid";
+            Assert::IsFalse(qvf.isValidLetter(str));
+            str = "#";
+            Assert::IsFalse(qvf.isValidLetter(str));
+            str = "2";
+            Assert::IsFalse(qvf.isValidLetter(str));
+            str = " ";
+            Assert::IsFalse(qvf.isValidLetter(str));
+            str = "";
+            Assert::IsFalse(qvf.isValidLetter(str));
+        }
+
+        TEST_METHOD(TestIntegerRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "1";
+            Assert::IsTrue(qvf.isValidInteger(str));
+            str = "0123";
+            Assert::IsTrue(qvf.isValidInteger(str));
+        }
+
+        TEST_METHOD(TestIntegerRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "invalid integer";
+            Assert::IsFalse(qvf.isValidInteger(str));
+            str = "_";
+            Assert::IsFalse(qvf.isValidInteger(str));
+            str = " ";
+            Assert::IsFalse(qvf.isValidInteger(str));
+            str = "";
+            Assert::IsFalse(qvf.isValidInteger(str));
+        }
+
+        TEST_METHOD(TestSynonymRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "a";
+            Assert::IsTrue(qvf.isValidSynonym(str));
+            str = "nameWithoutNumAndHexSymbol";
+            Assert::IsTrue(qvf.isValidSynonym(str));
+            str = "nameW1thNumb3rW1th0utH3xSymbol";
+            Assert::IsTrue(qvf.isValidSynonym(str));
+            str = "nameWith#SymbolWithoutNumbers";
+            Assert::IsTrue(qvf.isValidSynonym(str));
+            str = "nameW1thNumb3rAnd#Symbol";
+            Assert::IsTrue(qvf.isValidSynonym(str));
+            str = "assign";
+            Assert::IsTrue(qvf.isValidSynonym(str));
+        }
+
+        TEST_METHOD(TestSynonymRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "0";
+            Assert::IsFalse(qvf.isValidSynonym(str));
+            str = "#";
+            Assert::IsFalse(qvf.isValidSynonym(str));
+            str = "n@meWithSpeci@lSymbols";
+            Assert::IsFalse(qvf.isValidSynonym(str));
+            str = "1invalidEntityStartsWithNumber";
+            Assert::IsFalse(qvf.isValidSynonym(str));
+            str = "#invalidEntityStartsWithSymbol";
+            Assert::IsFalse(qvf.isValidSynonym(str));
+        }
+
+        TEST_METHOD(TestStmtRefRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "validSynonym";
+            Assert::IsTrue(qvf.isValidStmtRef(str));
+            str = "_";
+            Assert::IsTrue(qvf.isValidStmtRef(str));
+            str = "22011209040009142005070518";
+            Assert::IsTrue(qvf.isValidStmtRef(str));
+        }
+
+        TEST_METHOD(TestStmtRefRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "validSynonym_validUnderscore_22011209040009142005070518";
+            Assert::IsFalse(qvf.isValidStmtRef(str));
+            str = "\"validIdentWithQuotationMarks\"";
+            Assert::IsFalse(qvf.isValidStmtRef(str));
+        }
+
+        TEST_METHOD(TestEntRefRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "validSynonym";
+            Assert::IsTrue(qvf.isValidEntRef(str));
+            str = "_";
+            Assert::IsTrue(qvf.isValidEntRef(str));
+            str = "\"validIdentWithQuotationMarks\"";
+            Assert::IsTrue(qvf.isValidEntRef(str));
+        }
+
+        TEST_METHOD(TestEntRefRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "validSynonym_validUnderscore_\"validIdentW1thQu0tationMarks\"";
+            Assert::IsFalse(qvf.isValidEntRef(str));
+        }
+
+        TEST_METHOD(TestNameRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "a";
+            Assert::IsTrue(qvf.isValidName(str));
+            str = "nameWithoutNumAndHexSymbol";
+            Assert::IsTrue(qvf.isValidName(str));
+            str = "nameW1thNumb3rW1th0utH3xSymbol";
+            Assert::IsTrue(qvf.isValidName(str));
+            str = "assign";
+            Assert::IsTrue(qvf.isValidName(str));
+        }
+
+        TEST_METHOD(TestNameRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "0";
+            Assert::IsFalse(qvf.isValidName(str));
+            str = "#";
+            Assert::IsFalse(qvf.isValidName(str));
+            str = "n@meWithSpeci@lSymbols";
+            Assert::IsFalse(qvf.isValidName(str));
+            str = "1invalidEntityStartsWithNumber";
+            Assert::IsFalse(qvf.isValidName(str));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		TEST_METHOD(TestRemoveAllSpaces)
 		{
 			QueryValidator qv;
@@ -20,147 +199,6 @@ namespace UnitTesting
 			str = " a  b    c  ";
 			Assert::IsTrue(qv.removeAllSpacesTest(str) == "abc");
 		}
-
-        /*--------------- Grammar Regex Test---------------*/
-        TEST_METHOD(TestLetterRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Letter Regex
-            str = "a";
-            Assert::IsTrue(qv.isValidLetterTest(str));
-
-            //Invalid Letter Regex
-            str = "invalid";
-            Assert::IsFalse(qv.isValidLetterTest(str));
-            str = "#";
-            Assert::IsFalse(qv.isValidLetterTest(str));
-            str = "2";
-            Assert::IsFalse(qv.isValidLetterTest(str));
-            str = " ";
-            Assert::IsFalse(qv.isValidLetterTest(str));
-            str = "";
-            Assert::IsFalse(qv.isValidLetterTest(str));
-        }
-
-        TEST_METHOD(TestIntegerRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Integer Regex
-            str = "1";
-            Assert::IsTrue(qv.isValidIntegerTest(str));
-            str = "0123";
-            Assert::IsTrue(qv.isValidIntegerTest(str));
-
-            //Invalid Integer Regex
-            str = "invalid integer";
-            Assert::IsFalse(qv.isValidIntegerTest(str));
-            str = "_";
-            Assert::IsFalse(qv.isValidIntegerTest(str));
-            str = " ";
-            Assert::IsFalse(qv.isValidIntegerTest(str));
-            str = "";
-            Assert::IsFalse(qv.isValidLetterTest(str));
-        }
-
-        TEST_METHOD(TestSynonymRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Synonym Regex
-            str = "a";
-            Assert::IsTrue(qv.isValidSynonymTest(str));
-            str = "nameWithoutNumAndHexSymbol";
-            Assert::IsTrue(qv.isValidSynonymTest(str));
-            str = "nameW1thNumb3rW1th0utH3xSymbol";
-            Assert::IsTrue(qv.isValidSynonymTest(str));
-            str = "nameWith#SymbolWithoutNumbers";
-            Assert::IsTrue(qv.isValidSynonymTest(str));
-            str = "nameW1thNumb3rAnd#Symbol";
-            Assert::IsTrue(qv.isValidSynonymTest(str));
-            str = "assign";
-            Assert::IsTrue(qv.isValidSynonymTest(str));
-
-            //Invalid Synonym Regex
-            str = "0";
-            Assert::IsFalse(qv.isValidSynonymTest(str));
-            str = "#";
-            Assert::IsFalse(qv.isValidSynonymTest(str));
-            str = "n@meWithSpeci@lSymbols";
-            Assert::IsFalse(qv.isValidSynonymTest(str));
-            str = "1invalidEntityStartsWithNumber";
-            Assert::IsFalse(qv.isValidSynonymTest(str));
-            str = "#invalidEntityStartsWithSymbol";
-            Assert::IsFalse(qv.isValidSynonymTest(str));
-        }
-
-        TEST_METHOD(TestStmtRefRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Stmt Ref Regex
-            str = "validSynonym";
-            Assert::IsTrue(qv.isValidStmtRefTest(str));
-            str = "_";
-            Assert::IsTrue(qv.isValidStmtRefTest(str));
-            str = "22011209040009142005070518";
-            Assert::IsTrue(qv.isValidStmtRefTest(str));
-
-            //Invalid Stmt Ref Regex
-            str = "validSynonym_validUnderscore_22011209040009142005070518";
-            Assert::IsFalse(qv.isValidStmtRefTest(str));
-            str = "\"validIdentWithQuotationMarks\"";
-            Assert::IsFalse(qv.isValidStmtRefTest(str));
-        }
-
-        TEST_METHOD(TestEntRefRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Ent Ref Regex
-            str = "validSynonym";
-            Assert::IsTrue(qv.isValidEntRefTest(str));
-            str = "_";
-            Assert::IsTrue(qv.isValidEntRefTest(str));
-            str = "\"validIdentWithQuotationMarks\"";
-            Assert::IsTrue(qv.isValidEntRefTest(str));
-
-            //Invalid Ent Ref Regex
-            str = "validSynonym_validUnderscore_\"validIdentW1thQu0tationMarks\"";
-            Assert::IsFalse(qv.isValidStmtRefTest(str));
-        }
-
-        TEST_METHOD(TestNameRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Name Regex
-            str = "a";
-            Assert::IsTrue(qv.isValidNameTest(str));
-            str = "nameWithoutNumAndHexSymbol";
-            Assert::IsTrue(qv.isValidNameTest(str));
-            str = "nameW1thNumb3rW1th0utH3xSymbol";
-            Assert::IsTrue(qv.isValidNameTest(str));
-            str = "assign";
-            Assert::IsTrue(qv.isValidNameTest(str));
-
-            //Invalid Name Regex
-            str = "0";
-            Assert::IsFalse(qv.isValidNameTest(str));
-            str = "#";
-            Assert::IsFalse(qv.isValidNameTest(str));
-            str = "n@meWithSpeci@lSymbols";
-            Assert::IsFalse(qv.isValidNameTest(str));
-            str = "1invalidEntityStartsWithNumber";
-            Assert::IsFalse(qv.isValidNameTest(str));
-        }
 
         /*--------------- Tokenizer Test---------------*/
 

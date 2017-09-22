@@ -4,34 +4,34 @@ QueryValidatorFriend::QueryValidatorFriend() {}
 QueryValidatorFriend::~QueryValidatorFriend() {}
 
 /*--------------- Validation of Grammar Regex ---------------*/
-//bool QueryValidatorFriend::isValidLetter(string str) {
-//    regex letterRegexCheck(QueryValidator::LETTER);
-//    return regex_match(str, letterRegexCheck);
-//}
-//
-//bool QueryValidatorFriend::isValidInteger(string str) {
-//    regex integerRegexCheck(QueryValidator::INTEGER);
-//    return regex_match(str, integerRegexCheck);
-//}
-//
-//bool QueryValidatorFriend::isValidSynonym(string str) {
-//    return qv.isValidSynonym(str);
-//}
-//
-//bool QueryValidatorFriend::isValidStmtRef(string str) {
-//    regex stmtRefRegexCheck(QueryValidator::STMTREF);
-//    return regex_match(str, stmtRefRegexCheck);
-//}
-//
-//bool QueryValidatorFriend::isValidEntRef(string str) {
-//    regex entRefRegexCheck(QueryValidator::ENTREF);
-//    return regex_match(str, entRefRegexCheck);
-//}
-//
-//bool QueryValidatorFriend::isValidName(string str) {
-//    regex nameRegexCheck(QueryValidator::NAME);
-//    return regex_match(str, nameRegexCheck);
-//}
+bool QueryValidatorFriend::isValidLetter(string str) {
+    regex letterRegexCheck(QueryValidator::LETTER);
+    return regex_match(str, letterRegexCheck);
+}
+
+bool QueryValidatorFriend::isValidInteger(string str) {
+    regex integerRegexCheck(QueryValidator::INTEGER);
+    return regex_match(str, integerRegexCheck);
+}
+
+bool QueryValidatorFriend::isValidSynonym(string str) {
+    return qv.isValidSynonym(str);
+}
+
+bool QueryValidatorFriend::isValidStmtRef(string str) {
+    regex stmtRefRegexCheck(QueryValidator::STMTREF);
+    return regex_match(str, stmtRefRegexCheck);
+}
+
+bool QueryValidatorFriend::isValidEntRef(string str) {
+    regex entRefRegexCheck(QueryValidator::ENTREF);
+    return regex_match(str, entRefRegexCheck);
+}
+
+bool QueryValidatorFriend::isValidName(string str) {
+    regex nameRegexCheck(QueryValidator::NAME);
+    return regex_match(str, nameRegexCheck);
+}
 
 /*--------------- Splitting Query ---------------*/
 vector<string> QueryValidatorFriend::tokenize(string query) {

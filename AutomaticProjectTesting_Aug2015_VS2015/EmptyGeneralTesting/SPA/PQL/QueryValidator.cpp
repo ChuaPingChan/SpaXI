@@ -12,38 +12,38 @@ QueryValidator::~QueryValidator()
 }
 
 /******************** Grammar ********************/
-const string LETTER = "([a-zA-Z])";
-const string DIGIT = "([0-9])";
-const string INTEGER = "(" + DIGIT + "+)";
-const string HASH = "(#)";
-const string UNDERSCORE = "(_)";
-const string IDENT = "(" + LETTER + "(" + LETTER + "|" + DIGIT + "|" + HASH + ")*)";
-const string SYNONYM = IDENT;
-const string STMTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + INTEGER + ")";
-const string ENTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + "\"" + IDENT + "\"" ")";
-const string NAME = "(" + LETTER + "(" + LETTER + "|" + DIGIT + ")*)";
-const string SPACE_0 = "(\\s*)";
-const string SPACE_1 = "(\\s+)";
+const string QueryValidator::LETTER = "([a-zA-Z])";
+const string QueryValidator::DIGIT = "([0-9])";
+const string QueryValidator::INTEGER = "(" + DIGIT + "+)";
+const string QueryValidator::HASH = "(#)";
+const string QueryValidator::UNDERSCORE = "(_)";
+const string QueryValidator::IDENT = "(" + LETTER + "(" + LETTER + "|" + DIGIT + "|" + HASH + ")*)";
+const string QueryValidator::SYNONYM = IDENT;
+const string QueryValidator::STMTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + INTEGER + ")";
+const string QueryValidator::ENTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + "\"" + IDENT + "\"" ")";
+const string QueryValidator::NAME = "(" + LETTER + "(" + LETTER + "|" + DIGIT + ")*)";
+const string QueryValidator::SPACE_0 = "(\\s*)";
+const string QueryValidator::SPACE_1 = "(\\s+)";
 
 /*--------------- Declaration Regex ---------------*/
-const string DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
+const string QueryValidator::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 
 /*--------------- Pattern Clause Regex ---------------*/
-const string FACTOR = "(" + NAME + "|" + INTEGER + ")";
-const string EXPRESSION_SPEC = "(" + UNDERSCORE + "|" + UNDERSCORE + "\"" + FACTOR + "\"" + UNDERSCORE + ")";
-const string PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM + SPACE_0 + "[(]" + SPACE_0 + ENTREF + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidator::FACTOR = "(" + NAME + "|" + INTEGER + ")";
+const string QueryValidator::EXPRESSION_SPEC = "(" + UNDERSCORE + "|" + UNDERSCORE + "\"" + FACTOR + "\"" + UNDERSCORE + ")";
+const string QueryValidator::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM + SPACE_0 + "[(]" + SPACE_0 + ENTREF + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Relationship Clause Regex ---------------*/
-const string MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-const string USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-const string FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-const string PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidator::MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidator::USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidator::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidator::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Select Regex ---------------*/
-const string SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM;
-const string RELREF = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
-const string SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF;
-const string SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
+const string QueryValidator::SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM;
+const string QueryValidator::RELREF = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
+const string QueryValidator::SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF;
+const string QueryValidator::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
 
 //string relCond = relRef + "(" + andRegex + relRef + ")*";
 //string patternCond = patternRegex + "(" + andRegex + patternRegex + ")*";

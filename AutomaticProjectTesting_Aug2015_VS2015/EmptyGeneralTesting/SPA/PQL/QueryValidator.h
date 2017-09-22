@@ -18,6 +18,40 @@ public:
     QueryValidator();
     ~QueryValidator();
 
+    /******************** Grammar ********************/
+    static const string LETTER;
+    static const string DIGIT;
+    static const string INTEGER;
+    static const string HASH;
+    static const string UNDERSCORE;
+    static const string IDENT;
+    static const string SYNONYM;
+    static const string STMTREF;
+    static const string ENTREF;
+    static const string NAME;
+    static const string SPACE_0;
+    static const string SPACE_1;
+
+    /*--------------- Declaration Regex ---------------*/
+    static const string DESIGN_ENTITY_REGEX;
+
+    /*--------------- Pattern Clause Regex ---------------*/
+    static const string FACTOR;
+    static const string EXPRESSION_SPEC;
+    static const string PATTERN_REGEX;
+
+    /*--------------- Relationship Clause Regex ---------------*/
+    static const string MODIFIES_REGEX;
+    static const string USES_REGEX;
+    static const string FOLLOWS_REGEX;
+    static const string PARENT_REGEX;
+
+    /*--------------- Select Regex ---------------*/
+    static const string SELECT_REGEX;
+    static const string RELREF;
+    static const string SUCH_THAT_REGEX;
+    static const string SELECT_OVERALL_REGEX;
+
     bool isValidQuery(string query);
 
     /*--------------- For Unit Testing ---------------*/
