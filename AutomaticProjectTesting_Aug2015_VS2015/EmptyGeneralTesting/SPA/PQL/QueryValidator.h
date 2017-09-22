@@ -78,9 +78,7 @@ public:
     bool isValidFollowsTest(string str);
     bool isValidParentTest(string str);
 
-    /*--------------- Select Test---------------*/
-    bool isValidSelectTest(string str);
-    bool isValidSelectOverallRegexTest(string str);
+
    
 
     

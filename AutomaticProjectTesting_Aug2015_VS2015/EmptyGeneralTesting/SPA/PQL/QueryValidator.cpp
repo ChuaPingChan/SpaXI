@@ -144,17 +144,6 @@ bool QueryValidator::isValidParentTest(string str)
     return isValidParent(str);
 }
 
-/*--------------- Select Test---------------*/
-bool QueryValidator::isValidSelectTest(string str)
-{
-    return isValidSelect(str);
-}
-
-bool QueryValidator::isValidSelectOverallRegexTest(string str)
-{
-    return isValidSelectOverallRegex(str);
-}
-
 
 
 /******************** Private methods ********************/
