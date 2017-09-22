@@ -53,41 +53,16 @@ public:
     static const string SELECT_OVERALL_REGEX;
 
     bool isValidQuery(string query);
-    
 
 
+private:
 
-    /*--------------- For Unit Testing ---------------*/
-
-
-
-    /*--------------- Pattern Test---------------*/
-    bool isValidFactorTest(string str);
-    bool isValidExpressionSpecTest(string str);
-    bool isValidPatternRegexTest(string str);
-    bool isValidPatternTest(string str);
-
-    /*--------------- Relationship Test---------------*/
-
-
-    bool isValidModifiesTest(string str);
-    bool isValidUsesTest(string str);
-    bool isValidFollowsTest(string str);
-    bool isValidParentTest(string str);
-
-
-   
-
-    
-
-private: 
-
-	QueryTree* qtInstance;
+    QueryTree* qtInstance;
 
     unordered_set<string> _synonymBank;   //Contains list of used synonyms
     vector<string> _unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
-    
-    /*--------------- Splitting Query ---------------*/
+
+                                             /*--------------- Splitting Query ---------------*/
     vector<string> tokenize(string query);
 
     /*--------------- Remove all spaces ---------------*/
@@ -95,7 +70,7 @@ private:
 
     /*--------------- Get string between two delimiters ---------------*/
     string getBetweenTwoStrings(const string & str, const string & firstDelim, const string & secondDelim);
-   
+
     /*--------------- Check if argument is in a clause ---------------*/
     bool isArgumentInClause(string arg, vector<string> clause);
 
@@ -103,24 +78,29 @@ private:
     bool isIntegerRegexCheck(string arg);
 
     /*--------------- Validation of Declaration ---------------*/
-    bool isValidDeclaration(string str);   
+    bool isValidDeclaration(string str);
     bool isValidEntity(string str);
     bool isValidSynonym(string str);
 
     /*--------------- Validation of Select ---------------*/
     bool isValidSelect(string str);
-	bool isValidSelectBeginning(string str);
-    bool isValidModifies(string str);
-    bool isValidUses(string str);
-    bool isValidFollows(string str);
-    bool isValidParent(string str);
-    bool isValidPattern(string str);
-
+    bool isValidSelectBeginning(string str);
     bool isValidSelectOverallRegex(string str);
+
+    /*--------------- Validation of Such That clauses ---------------*/
     bool isValidModifiesRegex(string str);
     bool isValidUsesRegex(string str);
     bool isValidFollowsRegex(string str);
     bool isValidParentRegex(string str);
+
+    bool isValidModifies(string str);
+    bool isValidUses(string str);
+    bool isValidFollows(string str);
+    bool isValidParent(string str);
+
+    /*--------------- Validation of Pattern ---------------*/
     bool isValidPatternRegex(string str);
+    bool isValidPattern(string str);
+
 };
 

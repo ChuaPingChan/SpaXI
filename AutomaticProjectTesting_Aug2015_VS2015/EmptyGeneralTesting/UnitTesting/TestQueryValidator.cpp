@@ -577,141 +577,147 @@ namespace UnitTesting
         }
 
 
-
-
-
-
-
-
-
-
-        /*--------------- Pattern Test---------------*/
-        TEST_METHOD(TestFactorRegex)
+        /****************************************
+        * Such That Relationship Validity Tests *
+        ****************************************/
+        TEST_METHOD(TestModifies_Valid)
         {
-            QueryValidator qv;
-            string str;
-
-            //Valid Factor Regex
-            str = "validName";
-            Assert::IsTrue(qv.isValidFactorTest(str));
-            str = "22011209040009142005070518";
-            Assert::IsTrue(qv.isValidFactorTest(str));
-            str = "validName22011209040009142005070518";
-            Assert::IsTrue(qv.isValidFactorTest(str));
-
-            //Invalid Factor Regex
-            str = "#invalidNameInvalidInteger";
-            Assert::IsFalse(qv.isValidFactorTest(str));
-        }
-
-        TEST_METHOD(TestExpressionSpecRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Expression Regex
-            str = "_";
-            Assert::IsTrue(qv.isValidExpressionSpecTest(str));
-            str = "_\"validFactorWithBothSideUnderscore\"_";
-            Assert::IsTrue(qv.isValidExpressionSpecTest(str));
-            /*str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
-            Assert::IsTrue(qv.isValidExpressionSpecTest(str));
-            str = "\"validFactorWithRightSideUnderscoreOnly\"_";
-            Assert::IsTrue(qv.isValidExpressionSpecTest(str));*/
-
-            //Invalid Expression Regex
-            str = "";
-            Assert::IsFalse(qv.isValidExpressionSpecTest(str));
-            //TODO: NEED MORE TEST CASES
-        }
-
-        TEST_METHOD(TestPatternRegex)
-        {
-            QueryValidator qv;
-            string str;
-
-            //Valid Pattern Regex
-            str = "pattern a(validBothArgs, _)";
-            Assert::IsTrue(qv.isValidPatternRegexTest(str));
-            str = "pattern a (   validBothArgs  ,   _  )";
-            Assert::IsTrue(qv.isValidPatternRegexTest(str));
-            /*str = "pattern a(_, "a+b");
-            Assert::IsTrue(qv.isValidPatternRegexTest(str));
-            */
-
-            //Invalid Pattern Regex
-            str = "Pattern a(uppercase, _\"relationshipName\"_)";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-            str = "misspelt(relationship, _\"name\"_)";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-            str = "pattern a(v_\"validExpressionSpec\"_, _)";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-            str = "pattern (noSynonymBeforeBracket, _)";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-            str = "pattern a(invalidSecondArg,2)";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-            str = "pattern a[validArgsSyntax, _\"wrongBrackets\"_";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-            str = "pattern a(validArgsSyntax.butFullStopReplacesComma)";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-            str = "pattern a(validArgsSyntax noCommas)";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-            str = "pattern a(validArgsSyntax, with, multipleArgs)";
-            Assert::IsFalse(qv.isValidPatternRegexTest(str));
-        }
-
-        TEST_METHOD(TestPatternValidity)
-        {
-            QueryValidator qv;
-            string str;
-
-            //TODO: Test the validity for pattern
-        }
-
-
-   //     
-
-        TEST_METHOD(TestModifiesValidity)
-        {
-            QueryValidator qv;
+            QueryValidatorFriend qvf;
             string str;
 
             //TODO: Test validity of modifies
         }
 
-        TEST_METHOD(TestUsesValidity)
+        TEST_METHOD(TestUses_Valid)
         {
-            QueryValidator qv;
+            QueryValidatorFriend qvf;
             string str;
 
             //TODO: Test validity of uses
         }
 
-        TEST_METHOD(TestFollowsValidity)
+        TEST_METHOD(TestFollows_Valid)
         {
-            QueryValidator qv;
+            QueryValidatorFriend qvf;
             string str;
 
             //TODO: Test validity of follows
         }
 
-        TEST_METHOD(TestParentValidity)
+        TEST_METHOD(TestFollowsStar_Valid)
         {
-            QueryValidator qv;
+            QueryValidatorFriend qvf;
+            string str;
+
+            //TODO: Test validity of followstar
+        }
+
+        TEST_METHOD(TestParent_Valid)
+        {
+            QueryValidatorFriend qvf;
             string str;
 
             //TODO: Test validity of parent
         }
 
-        //
+        TEST_METHOD(TestParentStar_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str;
 
+            //TODO: Test validity of parentstar
+        }
+
+
+        /****************
+        * Pattern Tests *
+        ****************/
+        TEST_METHOD(TestPatternRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(validBothArgs, _)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+            str = "pattern a (   validBothArgs  ,   _  )";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+            /*str = "pattern a(_, "a+b");
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+            */
+        }
+
+        TEST_METHOD(TestPatternRegex_InValid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Pattern a(uppercase, _\"relationshipName\"_)";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+            str = "misspelt(relationship, _\"name\"_)";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+            str = "pattern a(v_\"validExpressionSpec\"_, _)";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+            str = "pattern (noSynonymBeforeBracket, _)";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+            str = "pattern a(invalidSecondArg,2)";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+            str = "pattern a[validArgsSyntax, _\"wrongBrackets\"_";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+            str = "pattern a(validArgsSyntax.butFullStopReplacesComma)";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+            str = "pattern a(validArgsSyntax noCommas)";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+            str = "pattern a(validArgsSyntax, with, multipleArgs)";
+            Assert::IsFalse(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestFactorRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "validName";
+            Assert::IsTrue(qvf.isValidFactor(str));
+            str = "22011209040009142005070518";
+            Assert::IsTrue(qvf.isValidFactor(str));
+            str = "validName22011209040009142005070518";
+            Assert::IsTrue(qvf.isValidFactor(str));
+        }
+
+        TEST_METHOD(TestFactorRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "#invalidNameInvalidInteger";
+            Assert::IsFalse(qvf.isValidFactor(str));
+        }
+
+        TEST_METHOD(TestExpressionSpecRegex_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "_";
+            Assert::IsTrue(qvf.isValidExpressionSpec(str));
+            str = "_\"validFactorWithBothSideUnderscore\"_";
+            Assert::IsTrue(qvf.isValidExpressionSpec(str));
+            /*str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
+            Assert::IsTrue(qvf.isValidExpressionSpec(str));
+            str = "\"validFactorWithRightSideUnderscoreOnly\"_";
+            Assert::IsTrue(qvf.isValidExpressionSpec(str));*/
+        }
+
+        TEST_METHOD(TestExpressionSpecRegex_Invalid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "";
+            Assert::IsFalse(qvf.isValidExpressionSpec(str));
+            //TODO: NEED MORE TEST CASES
+        }
+
+
+        /******************************
+        * Entire query Validity Tests *
+        ******************************/
         TEST_METHOD(TestQueryValidity)
         {
             QueryValidator qv;
-			string query = "assign a; variable v; Select v";
+            string query = "assign a; variable v; Select v";
 
             Assert::IsTrue(qv.isValidQuery(query));
         }
+
 
     };
 }

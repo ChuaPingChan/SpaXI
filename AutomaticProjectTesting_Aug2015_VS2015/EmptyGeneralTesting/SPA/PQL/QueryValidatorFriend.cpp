@@ -97,12 +97,12 @@ bool QueryValidatorFriend::isValidPatternRegex(string str) {
     return qv.isValidPatternRegex(str);
 }
 
-//bool QueryValidatorFriend::isValidFactor(string str) {
-//    regex expressionSpecRegexCheck(QueryValidator::EXPRESSION_SPEC);
-//    return regex_match(str, expressionSpecRegexCheck);
-//}
-//
-//bool QueryValidatorFriend::isValidExpressionSpec(string str) {
-//    regex expressionSpecRegexCheck(QueryValidator::EXPRESSION_SPEC);
-//    return regex_match(str, expressionSpecRegexCheck);
-//}
+bool QueryValidatorFriend::isValidFactor(string str) {
+    regex factorRegexCheck(QueryValidator::FACTOR);
+    return regex_match(str, factorRegexCheck);
+}
+
+bool QueryValidatorFriend::isValidExpressionSpec(string str) {
+    regex expressionSpecRegexCheck(QueryValidator::EXPRESSION_SPEC);
+    return regex_match(str, expressionSpecRegexCheck);
+}

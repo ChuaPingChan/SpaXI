@@ -4,7 +4,7 @@ using namespace std;
 
 QueryValidator::QueryValidator()
 {
-	qtInstance = QueryTree::getInstance();
+    qtInstance = QueryTree::getInstance();
 }
 
 QueryValidator::~QueryValidator()
@@ -49,12 +49,14 @@ const string QueryValidator::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX
 //string patternCond = patternRegex + "(" + andRegex + patternRegex + ")*";
 
 
-/******************** Public methods ********************/
+/*****************
+* Public methods *
+*****************/
 
 bool QueryValidator::isValidQuery(string query)
 {
 
-	vector<string> inputVector = tokenize(query);
+    vector<string> inputVector = tokenize(query);
 
     for (vector<string>::iterator iter = inputVector.begin(); iter != inputVector.end(); ++iter) {
         string currentLine = *iter;
@@ -74,59 +76,9 @@ bool QueryValidator::isValidQuery(string query)
 }
 
 
-
-/*--------------- For UnitTesting ---------------*/
-
-
-
-/*--------------- Pattern Test---------------*/
-bool QueryValidator::isValidFactorTest(string str)
-{
-    regex factorRegexCheck(FACTOR);
-    return regex_match(str, factorRegexCheck);
-}
-
-bool QueryValidator::isValidExpressionSpecTest(string str)
-{
-    regex expressionSpecRegexCheck(EXPRESSION_SPEC);
-    return regex_match(str, expressionSpecRegexCheck);
-}
-
-bool QueryValidator::isValidPatternRegexTest(string str)
-{
-    return isValidPatternRegex(str);
-}
-
-bool QueryValidator::isValidPatternTest(string str)
-{
-    return isValidPattern(str);
-}
-
-
-
-bool QueryValidator::isValidModifiesTest(string str)
-{
-    return isValidModifies(str);
-}
-
-bool QueryValidator::isValidUsesTest(string str)
-{
-    return isValidUses(str);
-}
-
-bool QueryValidator::isValidFollowsTest(string str)
-{
-    return isValidFollows(str);
-}
-
-bool QueryValidator::isValidParentTest(string str)
-{
-    return isValidParent(str);
-}
-
-
-
-/******************** Private methods ********************/
+/******************
+* Private methods *
+******************/
 
 /*--------------- Split initial query ---------------*/
 
@@ -146,10 +98,10 @@ vector<string> QueryValidator::tokenize(string query)
 
 /*--------------- Remove all spaces ---------------*/
 
-string QueryValidator::removeAllSpaces(string str) 
-{ 
-	str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-	return str;
+string QueryValidator::removeAllSpaces(string str)
+{
+    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+    return str;
 }
 
 /*--------------- Get string between two delimiters ---------------*/
@@ -238,8 +190,8 @@ bool QueryValidator::isValidDeclaration(string str)
 
         if (_synonymBank.find(synonym) == _synonymBank.end()) {
             _synonymBank.insert(synonym);
-			if (entity == synonym)
-				return false;
+            if (entity == synonym)
+                return false;
             qtInstance->insertVariable(entity, synonym);
         }
         else {
@@ -272,69 +224,69 @@ bool QueryValidator::isValidSelect(string str)
     if (isValidSelectOverallRegex(str) == false)
         return false;
 
-	/* Extracting the Select portion */
-	regex selectRegex(SELECT_REGEX);
-	sregex_iterator sel(str.begin(), str.end(), selectRegex);
-	sregex_iterator sel_end;
+    /* Extracting the Select portion */
+    regex selectRegex(SELECT_REGEX);
+    sregex_iterator sel(str.begin(), str.end(), selectRegex);
+    sregex_iterator sel_end;
 
-	for (; sel != sel_end; sel++)
-	{
-		string current = sel->str(0);
+    for (; sel != sel_end; sel++)
+    {
+        string current = sel->str(0);
         if (!isValidSelectBeginning(current))
             return false;
-	}
+    }
 
-	/* Extracting the clauses portion */
-	regex clauseRegex(RELREF + "|" + PATTERN_REGEX);
-	sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
-	sregex_iterator it_end;
+    /* Extracting the clauses portion */
+    regex clauseRegex(RELREF + "|" + PATTERN_REGEX);
+    sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
+    sregex_iterator it_end;
 
-	for (; it != it_end; it++)
-	{
-		string currentClause = it->str(0);
+    for (; it != it_end; it++)
+    {
+        string currentClause = it->str(0);
 
-		if (currentClause.find("Follows") != std::string::npos) 
-		{
-			if (!isValidFollows(currentClause))
-			{
-				return false;
-			}
-		}
-		else if (currentClause.find("Parent") != std::string::npos)
-		{
-			if (!isValidParent(currentClause))
-			{
-				return false;
-			}
-		}
-		else if (currentClause.find("Uses") != std::string::npos)
-		{
-			if (!isValidUses(currentClause))
-			{
-				return false;
-			}
-		}
-		else if (currentClause.find("Modifies") != std::string::npos)
-		{
-			if (!isValidModifies(currentClause))
-			{
-				return false;
-			}
-		}
-		else if (currentClause.find("pattern") != std::string::npos)
-		{
-			if (!isValidPattern(currentClause))
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
+        if (currentClause.find("Follows") != std::string::npos)
+        {
+            if (!isValidFollows(currentClause))
+            {
+                return false;
+            }
+        }
+        else if (currentClause.find("Parent") != std::string::npos)
+        {
+            if (!isValidParent(currentClause))
+            {
+                return false;
+            }
+        }
+        else if (currentClause.find("Uses") != std::string::npos)
+        {
+            if (!isValidUses(currentClause))
+            {
+                return false;
+            }
+        }
+        else if (currentClause.find("Modifies") != std::string::npos)
+        {
+            if (!isValidModifies(currentClause))
+            {
+                return false;
+            }
+        }
+        else if (currentClause.find("pattern") != std::string::npos)
+        {
+            if (!isValidPattern(currentClause))
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
 
-	}
-		
+    }
+
     return true;  //stub
 }
 
@@ -356,7 +308,7 @@ bool QueryValidator::isValidSelectBeginning(string str)
     }
 
     array<string, 2> result;
-    if (isArgumentInClause(current,qtInstance->getAssigns()))
+    if (isArgumentInClause(current, qtInstance->getAssigns()))
     {
         result[0] = "assign";
         result[1] = current;
@@ -391,6 +343,37 @@ bool QueryValidator::isValidSelectBeginning(string str)
     return true;
 }
 
+bool QueryValidator::isValidSelectOverallRegex(string str)
+{
+    regex overallSelectRegexCheck(SELECT_OVERALL_REGEX);
+    return regex_match(str, overallSelectRegexCheck);
+}
+
+/*--------------- Validation of Such That clauses ---------------*/
+bool QueryValidator::isValidModifiesRegex(string str)
+{
+    regex modifiesRegexCheck(MODIFIES_REGEX);
+    return regex_match(str, modifiesRegexCheck);
+}
+
+bool QueryValidator::isValidUsesRegex(string str)
+{
+    regex usesRegexCheck(USES_REGEX);
+    return regex_match(str, usesRegexCheck);
+}
+
+bool QueryValidator::isValidFollowsRegex(string str)
+{
+    regex followsRegexCheck(FOLLOWS_REGEX);
+    return regex_match(str, followsRegexCheck);
+}
+
+bool QueryValidator::isValidParentRegex(string str)
+{
+    regex parentRegexCheck(PARENT_REGEX);
+    return regex_match(str, parentRegexCheck);
+}
+
 //PRE-COND: Modifies(a,b)
 bool QueryValidator::isValidModifies(string str)
 {
@@ -400,7 +383,7 @@ bool QueryValidator::isValidModifies(string str)
     str = removeAllSpaces(str);
     string arg1 = getBetweenTwoStrings(str, "Modifies(", ",");
     string arg2 = getBetweenTwoStrings(str, ",", ")");
-    array<string,4> result;
+    array<string, 4> result;
 
     if (qtInstance->varExists(arg2) && !isArgumentInClause(arg2, qtInstance->getVars())) //arg2 is a synonym and is NOT a variable
         return false;
@@ -493,7 +476,7 @@ bool QueryValidator::isValidModifies(string str)
     }
 
     return false;
-                    
+
 }
 
 bool QueryValidator::isValidUses(string str)
@@ -503,7 +486,7 @@ bool QueryValidator::isValidUses(string str)
     str = removeAllSpaces(str);
     string arg1 = getBetweenTwoStrings(str, "Uses(", ",");
     string arg2 = getBetweenTwoStrings(str, ",", ")");
-    array<string,4> result;
+    array<string, 4> result;
 
     if (qtInstance->varExists(arg2) && !isArgumentInClause(arg2, qtInstance->getVars())) //arg2 is a synonym and is NOT a variable
         return false;
@@ -606,7 +589,7 @@ bool QueryValidator::isValidFollows(string str)
 
     str = removeAllSpaces(str);
     string arg1, arg2;
-    array<string,4> result;
+    array<string, 4> result;
 
     if (regex_search(str, regex("\\*"))) { //contains *, means it is Follows*
         arg1 = getBetweenTwoStrings(str, "Follows*(", ",");
@@ -614,17 +597,17 @@ bool QueryValidator::isValidFollows(string str)
 
         if (arg1 == arg2 && arg1 != "_")  //arg1 cannot be the same as arg2. 
             return false;
-        
-		// if both args are int, arg1 must be < than arg2
-		if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
-		{
-			int first = stoi(arg1);
-			int second = stoi(arg2);
-			if (first >= second) 
-			{
-				return false;
-			}
-		}
+
+        // if both args are int, arg1 must be < than arg2
+        if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
+        {
+            int first = stoi(arg1);
+            int second = stoi(arg2);
+            if (first >= second)
+            {
+                return false;
+            }
+        }
 
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "int";
@@ -676,9 +659,9 @@ bool QueryValidator::isValidFollows(string str)
         }
         qtInstance->insertFollowsStar(result);
         return true;
-       
+
     }
-    else { 
+    else {
 
         arg1 = getBetweenTwoStrings(str, "Follows(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
@@ -686,16 +669,16 @@ bool QueryValidator::isValidFollows(string str)
         if (arg1 == arg2 && arg1 != "_") //arg1 cannot be the same as arg2
             return false;
 
-		// if both args are int, arg1 must be < than arg2
-		if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
-		{
-			int first = stoi(arg1);
-			int second = stoi(arg2);
-			if (first >= second)
-			{
-				return false;
-			}
-		}
+        // if both args are int, arg1 must be < than arg2
+        if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
+        {
+            int first = stoi(arg1);
+            int second = stoi(arg2);
+            if (first >= second)
+            {
+                return false;
+            }
+        }
 
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "int";
@@ -748,7 +731,6 @@ bool QueryValidator::isValidFollows(string str)
         return true;
         //Store string array into query tree in Follows()
     }
-    
 }
 
 bool QueryValidator::isValidParent(string str)
@@ -764,19 +746,19 @@ bool QueryValidator::isValidParent(string str)
         arg1 = getBetweenTwoStrings(str, "Parent*(", ",");
         arg2 = getBetweenTwoStrings(str, ",", ")");
 
-        if (arg1 == arg2 && arg1!="_") //arg1 cannot be the same as arg2
+        if (arg1 == arg2 && arg1 != "_") //arg1 cannot be the same as arg2
             return false;
 
-		// if both args are int, arg1 must be < than arg2
-		if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
-		{
-			int first = stoi(arg1);
-			int second = stoi(arg2);
-			if (first >= second)
-			{
-				return false;
-			}
-		}
+        // if both args are int, arg1 must be < than arg2
+        if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
+        {
+            int first = stoi(arg1);
+            int second = stoi(arg2);
+            if (first >= second)
+            {
+                return false;
+            }
+        }
 
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "int";
@@ -834,16 +816,16 @@ bool QueryValidator::isValidParent(string str)
         if (arg1 == arg2 && arg1 != "_") //arg1 cannot be the same as arg2
             return false;
 
-		// if both args are int, arg1 must be < than arg2
-		if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
-		{
-			int first = stoi(arg1);
-			int second = stoi(arg2);
-			if (first >= second)
-			{
-				return false;
-			}
-		}
+        // if both args are int, arg1 must be < than arg2
+        if (isIntegerRegexCheck(arg1) && isIntegerRegexCheck(arg2))
+        {
+            int first = stoi(arg1);
+            int second = stoi(arg2);
+            if (first >= second)
+            {
+                return false;
+            }
+        }
 
         if (isIntegerRegexCheck(arg1)) {
             result[0] = "int";
@@ -892,8 +874,14 @@ bool QueryValidator::isValidParent(string str)
         return true;
         //Store string array into query tree in Parent()
     }
+}
 
 
+/*--------------- Validation of Pattern ---------------*/
+bool QueryValidator::isValidPatternRegex(string str)
+{
+    regex patternRegexCheck(PATTERN_REGEX);
+    return regex_match(str, patternRegexCheck);
 }
 
 //PRE-COND: patternarg1(arg2,arg3) arg1 = assignment synonym, arg2 = variable synonym/"entRef", arg3 = "EXPRESSION"
@@ -903,15 +891,15 @@ bool QueryValidator::isValidPattern(string str)
         return false;
 
     str = removeAllSpaces(str);
-    string arg1 = getBetweenTwoStrings(str,"pattern","(");
+    string arg1 = getBetweenTwoStrings(str, "pattern", "(");
     string arg2 = getBetweenTwoStrings(str, "(", ",");
     string arg3 = getBetweenTwoStrings(str, ",", ")");
-    array<string,6> result;
+    array<string, 6> result;
 
     if (qtInstance->varExists(arg3)) //check if argument 3 is a synonym; not allowed.
         return false;
 
-    if (qtInstance->varExists(arg2)&&!isArgumentInClause(arg2,qtInstance->getVars())) //check if argument 2 is declared as a synonym other than a variable; not allowed.
+    if (qtInstance->varExists(arg2) && !isArgumentInClause(arg2, qtInstance->getVars())) //check if argument 2 is declared as a synonym other than a variable; not allowed.
         return false;
 
     if (arg3 == "_")
@@ -925,7 +913,7 @@ bool QueryValidator::isValidPattern(string str)
         result[5] = arg3;
     }
 
-    if (isArgumentInClause(arg1, qtInstance->getAssigns())) 
+    if (isArgumentInClause(arg1, qtInstance->getAssigns()))
     {
         result[0] = "assign";
         result[1] = arg1;
@@ -954,44 +942,8 @@ bool QueryValidator::isValidPattern(string str)
         }
     }
 
-    else             
+    else
 
-    return false;
+        return false;
 
-}
-
-bool QueryValidator::isValidSelectOverallRegex(string str)
-{
-    regex overallSelectRegexCheck(SELECT_OVERALL_REGEX);
-    return regex_match(str, overallSelectRegexCheck);
-}
-
-bool QueryValidator::isValidModifiesRegex(string str)
-{
-    regex modifiesRegexCheck(MODIFIES_REGEX);
-    return regex_match(str, modifiesRegexCheck);
-}
-
-bool QueryValidator::isValidUsesRegex(string str)
-{
-    regex usesRegexCheck(USES_REGEX);
-    return regex_match(str, usesRegexCheck);
-}
-
-bool QueryValidator::isValidFollowsRegex(string str)
-{
-    regex followsRegexCheck(FOLLOWS_REGEX);
-    return regex_match(str, followsRegexCheck);
-}
-
-bool QueryValidator::isValidParentRegex(string str)
-{
-    regex parentRegexCheck(PARENT_REGEX);
-    return regex_match(str, parentRegexCheck);
-}
-
-bool QueryValidator::isValidPatternRegex(string str)
-{
-    regex patternRegexCheck(PATTERN_REGEX);
-    return regex_match(str, patternRegexCheck);
 }

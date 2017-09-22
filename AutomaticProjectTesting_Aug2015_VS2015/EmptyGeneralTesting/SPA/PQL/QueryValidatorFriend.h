@@ -48,15 +48,15 @@ public:
     bool isValidParentRegex(string str);
 
     bool isValidModifies(string str);   //TODO: write unit test
-    //bool isValidUses(string str);       //TODO: write unit test
-    //bool isValidFollows(string str);    //TODO: write unit test
-    //bool isValidParent(string str);     //TODO: write unit test
+    bool isValidUses(string str);       //TODO: write unit test
+    bool isValidFollows(string str);    //TODO: write unit test
+    bool isValidParent(string str);     //TODO: write unit test
 
     /*--------------- Validation of Pattern ---------------*/
     bool isValidPatternRegex(string str);
     bool isValidFactor(string str);
     bool isValidExpressionSpec(string str);
 
-    //bool isValidPattern(string str);    //TODO: write unit test
+    bool isValidPattern(string str);    //TODO: write unit test
 };
 
