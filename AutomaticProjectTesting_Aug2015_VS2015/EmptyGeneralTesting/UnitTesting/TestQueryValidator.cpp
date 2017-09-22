@@ -878,7 +878,49 @@ namespace UnitTesting
         /****************
         * Pattern Tests *
         ****************/
-        TEST_METHOD(TestPatternRegex_Valid)
+        TEST_METHOD(TestRegex_Pattern_Synonym_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(v, _)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Synonym_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(v, _\"x\"_)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Underscore_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(_, _\"x\"_)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Ident_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(\"y\", _\"x\"_)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Underscore_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(_, _)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Ident_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(\"y\", _)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(validBothArgs, _)";
@@ -890,7 +932,7 @@ namespace UnitTesting
             */
         }
 
-        TEST_METHOD(TestPatternRegex_InValid)
+        TEST_METHOD(TestRegex_Pattern_InValid)
         {
             QueryValidatorFriend qvf;
             string str = "Pattern a(uppercase, _\"relationshipName\"_)";
@@ -913,43 +955,54 @@ namespace UnitTesting
             Assert::IsFalse(qvf.isValidPatternRegex(str));
         }
 
-        TEST_METHOD(TestFactorRegex_Valid)
+        TEST_METHOD(TestRegex_Factor_VarName_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "validName";
-            Assert::IsTrue(qvf.isValidFactor(str));
-            str = "22011209040009142005070518";
             Assert::IsTrue(qvf.isValidFactor(str));
             str = "validName22011209040009142005070518";
             Assert::IsTrue(qvf.isValidFactor(str));
         }
 
-        TEST_METHOD(TestFactorRegex_Invalid)
+        TEST_METHOD(TestRegex_Factor_ConstValue_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "22011209040009142005070518";
+            Assert::IsTrue(qvf.isValidFactor(str));
+        }
+
+        TEST_METHOD(TestRegex_Factor_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "#invalidNameInvalidInteger";
             Assert::IsFalse(qvf.isValidFactor(str));
         }
 
-        TEST_METHOD(TestExpressionSpecRegex_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "_";
             Assert::IsTrue(qvf.isValidExpressionSpec(str));
             str = "_\"validFactorWithBothSideUnderscore\"_";
             Assert::IsTrue(qvf.isValidExpressionSpec(str));
-            /*str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
-            Assert::IsTrue(qvf.isValidExpressionSpec(str));
-            str = "\"validFactorWithRightSideUnderscoreOnly\"_";
-            Assert::IsTrue(qvf.isValidExpressionSpec(str));*/
         }
 
-        TEST_METHOD(TestExpressionSpecRegex_Invalid)
+        TEST_METHOD(TestRegex_ExpressionSpec_UnderscoreFactorUnderscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "_\"validFactorWithBothSideUnderscore\"_";
+            Assert::IsTrue(qvf.isValidExpressionSpec(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpec_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "";
             Assert::IsFalse(qvf.isValidExpressionSpec(str));
-            //TODO: NEED MORE TEST CASES
+            str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
+            Assert::IsFalse(qvf.isValidExpressionSpec(str));
+            str = "\"validFactorWithRightSideUnderscoreOnly\"_";
+            Assert::IsFalse(qvf.isValidExpressionSpec(str));
         }
 
 
