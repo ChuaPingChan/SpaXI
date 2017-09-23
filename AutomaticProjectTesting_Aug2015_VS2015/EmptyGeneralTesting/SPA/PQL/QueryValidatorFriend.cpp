@@ -128,13 +128,13 @@ bool QueryValidatorFriend::isValidPattern(string str)
 }
 
 /*--------------- Insert into QueryTree ---------------*/
-void QueryValidatorFriend::insertTwoVarIntoQueryTree(string type1, string arg1, string type2, string arg2) {
+void QueryValidatorFriend::insertTwoParamIntoQueryTree(string type1, string arg1, string type2, string arg2) {
     qv.qtInstance = qv.qtInstance->clear();
     qv.qtInstance->insertVariable(type1, arg1);
     qv.qtInstance->insertVariable(type2, arg2);
 }
 
-void QueryValidatorFriend::insertThreeVarIntoQueryTree(string type1, string arg1, string type2, string arg2, string type3, string arg3) {
+void QueryValidatorFriend::insertThreeParamIntoQueryTree(string type1, string arg1, string type2, string arg2, string type3, string arg3) {
     qv.qtInstance = qv.qtInstance->clear();
     qv.qtInstance->insertVariable(type1, arg1);
     qv.qtInstance->insertVariable(type2, arg2);

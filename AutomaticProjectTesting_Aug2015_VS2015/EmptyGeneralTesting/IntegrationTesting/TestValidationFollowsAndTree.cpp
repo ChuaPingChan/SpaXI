@@ -14,7 +14,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(1,2)";
-            qvf.insertTwoVarIntoQueryTree("int", "1", "int", "2");
+            qvf.insertTwoParamIntoQueryTree("int", "1", "int", "2");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -22,7 +22,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf = QueryValidatorFriend();;
             string str = "Follows(1,_)";
-            qvf.insertTwoVarIntoQueryTree("int", "1", "_", "");
+            qvf.insertTwoParamIntoQueryTree("int", "1", "_", "");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -30,7 +30,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(1,s)";
-            qvf.insertTwoVarIntoQueryTree("int", "1", "stmt", "s");
+            qvf.insertTwoParamIntoQueryTree("int", "1", "stmt", "s");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -38,7 +38,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(1,a)";
-            qvf.insertTwoVarIntoQueryTree("int", "1", "assign", "a");
+            qvf.insertTwoParamIntoQueryTree("int", "1", "assign", "a");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -46,7 +46,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(1,w)";
-            qvf.insertTwoVarIntoQueryTree("int", "1", "while", "w");
+            qvf.insertTwoParamIntoQueryTree("int", "1", "while", "w");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -55,7 +55,7 @@ namespace IntegrationTesting
         {
         QueryValidatorFriend qvf;
         string str = "Follows(1,f)";
-        qvf.insertTwoVarIntoQueryTree("int", "1", "if", "f");
+        qvf.insertTwoParamIntoQueryTree("int", "1", "if", "f");
         Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -64,7 +64,7 @@ namespace IntegrationTesting
         {
         QueryValidatorFriend qvf;
         string str = "Follows(1,pl)";
-        qvf.insertTwoVarIntoQueryTree("int", "1", "prog_line", "pl");
+        qvf.insertTwoParamIntoQueryTree("int", "1", "prog_line", "pl");
         Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -73,7 +73,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(1,cl)";
-            qvf.insertTwoVarIntoQueryTree("int", "1", "call", "cl");
+            qvf.insertTwoParamIntoQueryTree("int", "1", "call", "cl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -81,7 +81,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(_,3)";
-            qvf.insertTwoVarIntoQueryTree("_", "", "int", "3");
+            qvf.insertTwoParamIntoQueryTree("_", "", "int", "3");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -89,14 +89,14 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(_,_)";
-            qvf.insertTwoVarIntoQueryTree("_", "", "_", "");
+            qvf.insertTwoParamIntoQueryTree("_", "", "_", "");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
         TEST_METHOD(TestValidity_Follows_Underscore_Stmt_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "Follows(_,s)";
-            qvf.insertTwoVarIntoQueryTree("_", "", "stmt", "s");
+            qvf.insertTwoParamIntoQueryTree("_", "", "stmt", "s");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -104,7 +104,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(_,a)";
-            qvf.insertTwoVarIntoQueryTree("_", "", "assign", "a");
+            qvf.insertTwoParamIntoQueryTree("_", "", "assign", "a");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -112,7 +112,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(_,w)";
-            qvf.insertTwoVarIntoQueryTree("_", "", "while", "w");
+            qvf.insertTwoParamIntoQueryTree("_", "", "while", "w");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -121,7 +121,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(_,f)";
-            qvf.insertTwoVarIntoQueryTree("_", "", "if", "f");
+            qvf.insertTwoParamIntoQueryTree("_", "", "if", "f");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -130,7 +130,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(_,pl)";
-            qvf.insertTwoVarIntoQueryTree("_", "", "prog_line", "pl");
+            qvf.insertTwoParamIntoQueryTree("_", "", "prog_line", "pl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -139,7 +139,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(_,cl)";
-            qvf.insertTwoVarIntoQueryTree("_", "", "call", "cl");
+            qvf.insertTwoParamIntoQueryTree("_", "", "call", "cl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -147,7 +147,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s,1)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s", "int", "1");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s", "int", "1");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -155,7 +155,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(a,1)";
-            qvf.insertTwoVarIntoQueryTree("assign", "a", "int", "1");
+            qvf.insertTwoParamIntoQueryTree("assign", "a", "int", "1");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -163,7 +163,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(w,1)";
-            qvf.insertTwoVarIntoQueryTree("while", "w", "int", "1");
+            qvf.insertTwoParamIntoQueryTree("while", "w", "int", "1");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -172,7 +172,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(f,1)";
-            qvf.insertTwoVarIntoQueryTree("if", "f", "int", "1");
+            qvf.insertTwoParamIntoQueryTree("if", "f", "int", "1");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -181,7 +181,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(pl,1)";
-            qvf.insertTwoVarIntoQueryTree("prog_line", "pl", "int", "1");
+            qvf.insertTwoParamIntoQueryTree("prog_line", "pl", "int", "1");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -190,7 +190,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(cl,1)";
-            qvf.insertTwoVarIntoQueryTree("call", "cl", "int", "1");
+            qvf.insertTwoParamIntoQueryTree("call", "cl", "int", "1");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -198,7 +198,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s,_)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s", "_", "");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s", "_", "");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -206,7 +206,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(a,_)";
-            qvf.insertTwoVarIntoQueryTree("assign", "a", "_", "");
+            qvf.insertTwoParamIntoQueryTree("assign", "a", "_", "");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -214,7 +214,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(w,_)";
-            qvf.insertTwoVarIntoQueryTree("while", "w", "_", "");
+            qvf.insertTwoParamIntoQueryTree("while", "w", "_", "");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -223,7 +223,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(f,_)";
-            qvf.insertTwoVarIntoQueryTree("if", "f", "_", "");
+            qvf.insertTwoParamIntoQueryTree("if", "f", "_", "");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -232,7 +232,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(pl,_)";
-            qvf.insertTwoVarIntoQueryTree("prog_line", "pl", "_", "");
+            qvf.insertTwoParamIntoQueryTree("prog_line", "pl", "_", "");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -241,7 +241,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(cl,_)";
-            qvf.insertTwoVarIntoQueryTree("call", "cl", "_", "");
+            qvf.insertTwoParamIntoQueryTree("call", "cl", "_", "");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -249,7 +249,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s1,s2)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s1", "stmt", "s2");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s1", "stmt", "s2");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -257,7 +257,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s,a)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s", "assign", "a");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s", "assign", "a");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -265,7 +265,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s,w)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s", "while", "w");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s", "while", "w");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -274,7 +274,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s,f)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s", "if", "f");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s", "if", "f");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -283,7 +283,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s,pl)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s", "prog_line", "pl");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s", "prog_line", "pl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -292,7 +292,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s,cl)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s", "call", "cl");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s", "call", "cl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -300,7 +300,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(a,s)";
-            qvf.insertTwoVarIntoQueryTree("assign", "a", "stmt", "s");
+            qvf.insertTwoParamIntoQueryTree("assign", "a", "stmt", "s");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -308,7 +308,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(a1,a2)";
-            qvf.insertTwoVarIntoQueryTree("assign", "a1", "assign", "a2");
+            qvf.insertTwoParamIntoQueryTree("assign", "a1", "assign", "a2");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -316,7 +316,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(a,w)";
-            qvf.insertTwoVarIntoQueryTree("assign", "a", "while", "w");
+            qvf.insertTwoParamIntoQueryTree("assign", "a", "while", "w");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -325,7 +325,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(a,f)";
-            qvf.insertTwoVarIntoQueryTree("assign", "a", "if", "f");
+            qvf.insertTwoParamIntoQueryTree("assign", "a", "if", "f");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -334,7 +334,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(a,pl)";
-            qvf.insertTwoVarIntoQueryTree("assign", "a", "prog_line", "pl");
+            qvf.insertTwoParamIntoQueryTree("assign", "a", "prog_line", "pl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -343,7 +343,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(a,cl)";
-            qvf.insertTwoVarIntoQueryTree("assign", "a", "call", "cl");
+            qvf.insertTwoParamIntoQueryTree("assign", "a", "call", "cl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -351,7 +351,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(w,s)";
-            qvf.insertTwoVarIntoQueryTree("while", "w", "stmt", "s");
+            qvf.insertTwoParamIntoQueryTree("while", "w", "stmt", "s");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -359,7 +359,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(w,a)";
-            qvf.insertTwoVarIntoQueryTree("while", "w", "assign", "a");
+            qvf.insertTwoParamIntoQueryTree("while", "w", "assign", "a");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -367,7 +367,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(w1,w2)";
-            qvf.insertTwoVarIntoQueryTree("while", "w1", "while", "w2");
+            qvf.insertTwoParamIntoQueryTree("while", "w1", "while", "w2");
             Assert::IsTrue(qvf.isValidFollows(str));
         }
 
@@ -376,7 +376,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(w,f)";
-            qvf.insertTwoVarIntoQueryTree("while", "w", "if", "f");
+            qvf.insertTwoParamIntoQueryTree("while", "w", "if", "f");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -385,7 +385,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(w,pl)";
-            qvf.insertTwoVarIntoQueryTree("while", "w", "prog_line", "pl");
+            qvf.insertTwoParamIntoQueryTree("while", "w", "prog_line", "pl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -394,7 +394,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(w,c)";
-            qvf.insertTwoVarIntoQueryTree("while", "w", "call", "cl");
+            qvf.insertTwoParamIntoQueryTree("while", "w", "call", "cl");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
 
@@ -402,7 +402,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Follows(s,s)";
-            qvf.insertTwoVarIntoQueryTree("stmt", "s", "stmt", "s");
+            qvf.insertTwoParamIntoQueryTree("stmt", "s", "stmt", "s");
             Assert::IsFalse(qvf.isValidFollows(str));
         }
     

@@ -14,7 +14,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Modifies(1,\"x\")";
-            qvf.insertTwoVarIntoQueryTree("int", "1", "int", "\"x\"");
+            qvf.insertTwoParamIntoQueryTree("int", "1", "int", "\"x\"");
             Assert::IsTrue(qvf.isValidModifies(str));
         }
     };
