@@ -171,6 +171,7 @@
     <ClCompile Include="TestFrontEnd.cpp" />
     <ClCompile Include="TestPQLValidatorAndTree.cpp" />
     <ClCompile Include="TestValidationFollowsFollowsStarAndTree.cpp" />
+    <ClCompile Include="TestValidationParentParentStarAndTree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
