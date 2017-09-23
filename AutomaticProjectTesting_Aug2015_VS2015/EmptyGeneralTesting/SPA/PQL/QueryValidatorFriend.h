@@ -58,5 +58,9 @@ public:
     bool isValidExpressionSpec(string str);
 
     bool isValidPattern(string str);    //TODO: write unit test
+
+    /*--------------- Insert into QueryTree ---------------*/
+    void insertTwoVarIntoQueryTree(string type1, string arg1, string type2, string arg2);
+    void insertThreeVarIntoQueryTree(string type1, string arg1, string type2, string arg2, string type3, string arg3);
 };
 
