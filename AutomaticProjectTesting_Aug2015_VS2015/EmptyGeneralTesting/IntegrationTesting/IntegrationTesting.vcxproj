@@ -175,6 +175,7 @@
     <ClCompile Include="TestValidationModifiesAndTree.cpp" />
     <ClCompile Include="TestValidationParentAndTree.cpp" />
     <ClCompile Include="TestValidationParentStarAndTree.cpp" />
+    <ClCompile Include="TestValidationPatternAndTree.cpp" />
     <ClCompile Include="TestValidationUsesAndTree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

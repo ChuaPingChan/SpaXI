@@ -124,7 +124,7 @@ bool QueryValidatorFriend::isValidExpressionSpec(string str) {
 
 bool QueryValidatorFriend::isValidPattern(string str)
 {
-    return isValidPattern(str);
+    return qv.isValidPattern(str);
 }
 
 /*--------------- Insert into QueryTree ---------------*/
