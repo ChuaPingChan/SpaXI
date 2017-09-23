@@ -151,7 +151,7 @@ namespace IntegrationTesting
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
-        TEST_METHOD(TestValidity_Parent_Assign_int_Valid)
+        TEST_METHOD(TestValidity_Parent_Assign_int_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a,1)";
@@ -202,7 +202,7 @@ namespace IntegrationTesting
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
-        TEST_METHOD(TestValidity_Parent_Assign_Underscore_Valid)
+        TEST_METHOD(TestValidity_Parent_Assign_Underscore_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a,_)";
@@ -296,7 +296,7 @@ namespace IntegrationTesting
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
-        TEST_METHOD(TestValidity_Parent_Assign_Stmt_Valid)
+        TEST_METHOD(TestValidity_Parent_Assign_Stmt_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a,s)";
@@ -304,7 +304,7 @@ namespace IntegrationTesting
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
-        TEST_METHOD(TestValidity_Parent_Assign_Assign_Valid)
+        TEST_METHOD(TestValidity_Parent_Assign_Assign_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a1,a2)";
@@ -312,7 +312,7 @@ namespace IntegrationTesting
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
-        TEST_METHOD(TestValidity_Parent_Assign_While_Valid)
+        TEST_METHOD(TestValidity_Parent_Assign_While_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a,w)";
@@ -320,7 +320,7 @@ namespace IntegrationTesting
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
-        TEST_METHOD(TestValidity_Parent_Assign_If_Valid)
+        TEST_METHOD(TestValidity_Parent_Assign_If_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a,f)";
@@ -328,7 +328,7 @@ namespace IntegrationTesting
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
-        TEST_METHOD(TestValidity_Parent_Assign_ProgLine_Valid)
+        TEST_METHOD(TestValidity_Parent_Assign_ProgLine_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a,pl)";
@@ -336,7 +336,7 @@ namespace IntegrationTesting
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
-        TEST_METHOD(TestValidity_Parent_Assign_Call_Valid)
+        TEST_METHOD(TestValidity_Parent_Assign_Call_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a,cl)";
