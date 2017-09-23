@@ -47,20 +47,20 @@ public:
     bool isValidFollowsRegex(string str);
     bool isValidParentRegex(string str);
 
-    bool isValidModifies(string str);   //TODO: write unit test
-    bool isValidUses(string str);       //TODO: write unit test
-    bool isValidFollows(string str);    //TODO: write unit test
-    bool isValidParent(string str);     //TODO: write unit test
+    bool isValidModifies(string str);
+    bool isValidUses(string str);
+    bool isValidFollows(string str);
+    bool isValidParent(string str);
 
     /*--------------- Validation of Pattern ---------------*/
     bool isValidPatternRegex(string str);
     bool isValidFactor(string str);
     bool isValidExpressionSpec(string str);
 
-    bool isValidPattern(string str);    //TODO: write unit test
+    bool isValidPattern(string str);
 
     /*--------------- Insert into QueryTree ---------------*/
-    void insertTwoParamIntoQueryTree(string type1, string arg1, string type2, string arg2);
-    void insertThreeParamIntoQueryTree(string type1, string arg1, string type2, string arg2, string type3, string arg3);
+    void insertSynonymIntoQueryTree(string type1, string arg1);
+    void insertSynonymIntoQueryTree(string type1, string arg1, string type2, string arg2);
+    void insertSynonymIntoQueryTree(string type1, string arg1, string type2, string arg2, string type3, string arg3);
 };
-

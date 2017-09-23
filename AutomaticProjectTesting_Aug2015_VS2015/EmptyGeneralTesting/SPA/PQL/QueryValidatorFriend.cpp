@@ -92,18 +92,15 @@ bool QueryValidatorFriend::isValidModifies(string str) {
     return qv.isValidModifies(str);
 }
 
-bool QueryValidatorFriend::isValidUses(string str)
-{
+bool QueryValidatorFriend::isValidUses(string str) {
     return qv.isValidUses(str);
 }
 
-bool QueryValidatorFriend::isValidFollows(string str)
-{
+bool QueryValidatorFriend::isValidFollows(string str) {
     return qv.isValidFollows(str);
 }
 
-bool QueryValidatorFriend::isValidParent(string str)
-{
+bool QueryValidatorFriend::isValidParent(string str) {
     return qv.isValidParent(str);
 }
 
@@ -122,19 +119,23 @@ bool QueryValidatorFriend::isValidExpressionSpec(string str) {
     return regex_match(str, expressionSpecRegexCheck);
 }
 
-bool QueryValidatorFriend::isValidPattern(string str)
-{
+bool QueryValidatorFriend::isValidPattern(string str) {
     return qv.isValidPattern(str);
 }
 
 /*--------------- Insert into QueryTree ---------------*/
-void QueryValidatorFriend::insertTwoParamIntoQueryTree(string type1, string arg1, string type2, string arg2) {
+void QueryValidatorFriend::insertSynonymIntoQueryTree(string type1, string arg1) {
+    qv.qtInstance = qv.qtInstance->clear();
+    qv.qtInstance->insertVariable(type1, arg1);
+}
+
+void QueryValidatorFriend::insertSynonymIntoQueryTree(string type1, string arg1, string type2, string arg2) {
     qv.qtInstance = qv.qtInstance->clear();
     qv.qtInstance->insertVariable(type1, arg1);
     qv.qtInstance->insertVariable(type2, arg2);
 }
 
-void QueryValidatorFriend::insertThreeParamIntoQueryTree(string type1, string arg1, string type2, string arg2, string type3, string arg3) {
+void QueryValidatorFriend::insertSynonymIntoQueryTree(string type1, string arg1, string type2, string arg2, string type3, string arg3) {
     qv.qtInstance = qv.qtInstance->clear();
     qv.qtInstance->insertVariable(type1, arg1);
     qv.qtInstance->insertVariable(type2, arg2);

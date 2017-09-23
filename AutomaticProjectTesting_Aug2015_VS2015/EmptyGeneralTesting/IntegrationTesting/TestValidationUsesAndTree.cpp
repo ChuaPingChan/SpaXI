@@ -14,7 +14,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Uses(1,\"x\")";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "int", "\"x\"");
+            qvf.insertSynonymIntoQueryTree("int", "1");
             Assert::IsTrue(qvf.isValidUses(str));
         }
     };
