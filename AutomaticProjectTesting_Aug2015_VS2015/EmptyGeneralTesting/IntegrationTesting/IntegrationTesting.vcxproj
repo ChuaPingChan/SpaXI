@@ -173,7 +173,8 @@
     <ClCompile Include="TestValidationFollowsAndTree.cpp" />
     <ClCompile Include="TestValidationFollowsStarAndTree.cpp" />
     <ClCompile Include="TestValidationModifiesAndTree.cpp" />
-    <ClCompile Include="TestValidationParentParentStarAndTree.cpp" />
+    <ClCompile Include="TestValidationParentAndTree.cpp" />
+    <ClCompile Include="TestValidationParentStarAndTree.cpp" />
     <ClCompile Include="TestValidationUsesAndTree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
