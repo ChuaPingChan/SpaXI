@@ -609,48 +609,5 @@ namespace IntegrationTesting
 
         }
 
-
-        /****************************************
-        * Such That Relationship Validity Tests *
-        ****************************************/
-        /*************** Test Modifies ***************/
-        TEST_METHOD(TestModifies_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of modifies
-        }
-
-        /*************** Test Uses ***************/
-        TEST_METHOD(TestUses_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of uses
-        }
-
-        /*************** Test Follows ***************/
-        //----------------------------------------
-
-        /*************** Test Parent ***************/
-        TEST_METHOD(TestParent_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of parent
-        }
-
-        /*************** Test ParentStar ***************/
-        TEST_METHOD(TestParentStar_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of parentstar
-        }
-
     };
 }
