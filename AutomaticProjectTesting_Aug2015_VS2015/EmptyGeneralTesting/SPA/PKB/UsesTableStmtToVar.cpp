@@ -22,6 +22,9 @@ bool UsesTableStmtToVar::addUsesStmtToVarList(int stmtNumber, string var)
 
 list<string> UsesTableStmtToVar::getUsesVariablesFromStmt(int stmtNumber) 
 {
+	if (usesStmtToVarMap.find(stmtNumber) == usesStmtToVarMap.end()) {
+		return list<string>();
+	}
     return usesStmtToVarMap[stmtNumber];
 }
 
