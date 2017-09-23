@@ -608,5 +608,6 @@ namespace IntegrationTesting
             Assert::IsFalse(qvf.isValidSelect(str));
 
         }
+
     };
 }

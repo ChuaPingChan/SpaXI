@@ -450,7 +450,49 @@ namespace UnitTesting
         /*************************************
         * Such That Relationship Regex Tests *
         *************************************/
-        TEST_METHOD(TestModifiesRegex_Valid)
+        TEST_METHOD(TestRegex_Modifies_Int_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifies(1,\"x\")";
+            Assert::IsTrue(qvf.isValidModifiesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Modifies_Int_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifies(1,_)";
+            Assert::IsTrue(qvf.isValidModifiesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Modifies_Int_Variable_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifies(1,v)";
+            Assert::IsTrue(qvf.isValidModifiesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Modifies_Synonym_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifies(s,\"x\")";
+            Assert::IsTrue(qvf.isValidModifiesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Modifies_Synonym_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifies(s,_)";
+            Assert::IsTrue(qvf.isValidModifiesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Modifies_Synonym_Synonym_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifies(_,_)";
+            Assert::IsTrue(qvf.isValidModifiesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Modifies_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "Modifies(validStmtRef,validEntRef)";
@@ -461,7 +503,7 @@ namespace UnitTesting
             Assert::IsTrue(qv.isValidModifiesRegexTest(str));*/
         }
 
-        TEST_METHOD(TestModifiesRegex_inValid)
+        TEST_METHOD(TestRegex_Modifies_inValid)
         {
             QueryValidatorFriend qvf;
             string str = "modifies(lowercase,relationshipName)";
@@ -480,7 +522,49 @@ namespace UnitTesting
             Assert::IsFalse(qvf.isValidModifiesRegex(str));
         }
 
-        TEST_METHOD(TestUsesRegex_Valid)
+        TEST_METHOD(TestRegex_Uses_Int_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Uses(1,\"x\")";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Uses_Int_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Uses(1,_)";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Uses_Int_Variable_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Uses(1,v)";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Uses_Synonym_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Uses(s,\"x\")";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Uses_Synonym_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Uses(s,_)";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Uses_Synonym_Synonym_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Uses(_,_)";
+            Assert::IsTrue(qvf.isValidUsesRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Uses_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "Uses(validStmtRef,validEntRef)";
@@ -491,14 +575,14 @@ namespace UnitTesting
             Assert::IsTrue(qvf.isValidUsesRegex(str));*/
         }
 
-        TEST_METHOD(TestUsesRegex_inValid)
+        TEST_METHOD(TestRegex_Uses_inValid)
         {
             QueryValidatorFriend qvf;
             string str = "uses(lowercase,relationshipName)";
             Assert::IsFalse(qvf.isValidUsesRegex(str));
             str = "misspelt(relationship,name)";
             Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "uses(invalidSecondArg,2)";
+            str = "Uses(invalidSecondArg,2)";
             Assert::IsFalse(qvf.isValidUsesRegex(str));
             str = "Uses[validArgsSyntax, wrongBrackets]";
             Assert::IsFalse(qvf.isValidUsesRegex(str));
@@ -510,8 +594,89 @@ namespace UnitTesting
             Assert::IsFalse(qvf.isValidUsesRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Follows_Int_Int_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(1, 2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(1, 2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Int_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(1, _)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(1, _)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Int_synonyyn_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(1, v)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(1, v)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Underscore_Integer_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(_, 2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(_, 2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Underscore_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(_, _)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(_, _)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Underscore_Synonym_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(_, s)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(_, s)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Synonym_Int_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(s, 2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(s, 2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Synonym_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(s, _)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(s, _)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Synonym_Synonym_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows(s1, s2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+            str = "Follows*(s1, s2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
         //Valid Follows||Follows* Regex
-        TEST_METHOD(TestFollowsRegex_Valid)
+        TEST_METHOD(TestRegex_Follows_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "Follows(validStmtRef,validStmtRef)";
@@ -527,7 +692,7 @@ namespace UnitTesting
         }
 
         //Invalid Follows||Follows* Regex
-        TEST_METHOD(TestFollowsRegex_Invalid)
+        TEST_METHOD(TestRegex_Follows_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "follows(lowercase,relationshipName)";
@@ -544,8 +709,89 @@ namespace UnitTesting
             Assert::IsFalse(qvf.isValidFollowsRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Parent_Int_Int_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(1, 2)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(1, 2)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Parent_Int_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(1, _)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(1, _)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Parent_Int_synonyyn_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(1, v)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(1, v)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Parent_Underscore_Integer_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(_, 2)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(_, 2)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Parent_Underscore_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(_, _)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(_, _)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Parent_Underscore_Synonym_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(_, s)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(_, s)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Parent_Synonym_Int_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(s, 2)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(s, 2)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Parent_Synonym_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(s, _)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(s, _)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Parent_Synonym_Synonym_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Parent(s1, s2)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+            str = "Parent*(s1, s2)";
+            Assert::IsTrue(qvf.isValidParentRegex(str));
+        }
+
         //Valid Parent||Parent* Regex
-        TEST_METHOD(TestParentRegex_Valid)
+        TEST_METHOD(TestRegex_Parent_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "Parent(validStmtRef,validStmtRef)";
@@ -559,7 +805,7 @@ namespace UnitTesting
         }
 
         //Invalid Parent||Parent* Regex
-        TEST_METHOD(TestParentRegex_Invalid)
+        TEST_METHOD(TestRegex_Parent_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "parent(lowercase,relationshipName)";
@@ -577,62 +823,52 @@ namespace UnitTesting
         }
 
 
-        /****************************************
-        * Such That Relationship Validity Tests *
-        ****************************************/
-        TEST_METHOD(TestModifies_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of modifies
-        }
-
-        TEST_METHOD(TestUses_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of uses
-        }
-
-        TEST_METHOD(TestFollows_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of follows
-        }
-
-        TEST_METHOD(TestFollowsStar_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of followstar
-        }
-
-        TEST_METHOD(TestParent_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of parent
-        }
-
-        TEST_METHOD(TestParentStar_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str;
-
-            //TODO: Test validity of parentstar
-        }
-
-
         /****************
         * Pattern Tests *
         ****************/
-        TEST_METHOD(TestPatternRegex_Valid)
+        TEST_METHOD(TestRegex_Pattern_Synonym_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(v, _)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Synonym_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(v, _\"x\"_)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Underscore_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(_, _\"x\"_)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Ident_Ident_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(\"y\", _\"x\"_)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Underscore_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(_, _)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Ident_Underscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "pattern a(\"y\", _)";
+            Assert::IsTrue(qvf.isValidPatternRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(validBothArgs, _)";
@@ -644,7 +880,7 @@ namespace UnitTesting
             */
         }
 
-        TEST_METHOD(TestPatternRegex_InValid)
+        TEST_METHOD(TestRegex_Pattern_InValid)
         {
             QueryValidatorFriend qvf;
             string str = "Pattern a(uppercase, _\"relationshipName\"_)";
@@ -667,43 +903,54 @@ namespace UnitTesting
             Assert::IsFalse(qvf.isValidPatternRegex(str));
         }
 
-        TEST_METHOD(TestFactorRegex_Valid)
+        TEST_METHOD(TestRegex_Factor_VarName_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "validName";
-            Assert::IsTrue(qvf.isValidFactor(str));
-            str = "22011209040009142005070518";
             Assert::IsTrue(qvf.isValidFactor(str));
             str = "validName22011209040009142005070518";
             Assert::IsTrue(qvf.isValidFactor(str));
         }
 
-        TEST_METHOD(TestFactorRegex_Invalid)
+        TEST_METHOD(TestRegex_Factor_ConstValue_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "22011209040009142005070518";
+            Assert::IsTrue(qvf.isValidFactor(str));
+        }
+
+        TEST_METHOD(TestRegex_Factor_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "#invalidNameInvalidInteger";
             Assert::IsFalse(qvf.isValidFactor(str));
         }
 
-        TEST_METHOD(TestExpressionSpecRegex_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
         {
             QueryValidatorFriend qvf;
             string str = "_";
             Assert::IsTrue(qvf.isValidExpressionSpec(str));
             str = "_\"validFactorWithBothSideUnderscore\"_";
             Assert::IsTrue(qvf.isValidExpressionSpec(str));
-            /*str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
-            Assert::IsTrue(qvf.isValidExpressionSpec(str));
-            str = "\"validFactorWithRightSideUnderscoreOnly\"_";
-            Assert::IsTrue(qvf.isValidExpressionSpec(str));*/
         }
 
-        TEST_METHOD(TestExpressionSpecRegex_Invalid)
+        TEST_METHOD(TestRegex_ExpressionSpec_UnderscoreFactorUnderscore_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "_\"validFactorWithBothSideUnderscore\"_";
+            Assert::IsTrue(qvf.isValidExpressionSpec(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpec_Invalid)
         {
             QueryValidatorFriend qvf;
             string str = "";
             Assert::IsFalse(qvf.isValidExpressionSpec(str));
-            //TODO: NEED MORE TEST CASES
+            str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
+            Assert::IsFalse(qvf.isValidExpressionSpec(str));
+            str = "\"validFactorWithRightSideUnderscoreOnly\"_";
+            Assert::IsFalse(qvf.isValidExpressionSpec(str));
         }
 
 
