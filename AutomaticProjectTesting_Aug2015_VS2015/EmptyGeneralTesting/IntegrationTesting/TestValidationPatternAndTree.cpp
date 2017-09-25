@@ -17,7 +17,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(v,_)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "var", "v", "_", "");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "var", "v");
             Assert::IsTrue(qvf.isValidPattern(str));
         }
 
@@ -25,7 +25,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(v, _\"x\"_)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "var", "v", "ident", "_\"x\"_");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "var", "v");
             Assert::IsTrue(qvf.isValidPattern(str));
         }
 
@@ -34,7 +34,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(v, \"x\")";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "var", "v", "ident", "\"x\"");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
         
@@ -43,7 +43,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(v, _\"x+3-y*2\"_)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "var", "v", "ident", "_\"x+3-y*2\"_");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -52,7 +52,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(v, \"x+3-y*2\")";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "var", "v", "ident", "\"x+3-y*2\"");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -60,7 +60,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(_, _\"x\"_)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "_", "", "ident", "_\"x\"_");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsTrue(qvf.isValidPattern(str));
         }
 
@@ -69,7 +69,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(_, \"x\")";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "_", "", "ident", "\"x\"");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -78,7 +78,7 @@ namespace IntegrationTesting
         {
         QueryValidatorFriend qvf;
         string str = "pattern a(_, _\"x+3-y*2\"_)";
-        qvf.insertThreeParamIntoQueryTree("assign", "a", "_", "", "ident", "_\"x+3-y*2\"_");
+        qvf.insertSynonymIntoQueryTree("assign", "a");
         Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -87,7 +87,7 @@ namespace IntegrationTesting
         {
         QueryValidatorFriend qvf;
         string str = "pattern a(_, \"x+3-y*2\")";
-        qvf.insertThreeParamIntoQueryTree("assign", "a", "_", "", "ident", "\"x+3-y*2\"");
+        qvf.insertSynonymIntoQueryTree("assign", "a");
         Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -95,7 +95,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(\"x\", _\"x\"_)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "ident", "\"x\"", "ident", "_\"x\"_");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsTrue(qvf.isValidPattern(str));
         }
 
@@ -104,7 +104,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(\"x\", \"x\")";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "ident", "\"x\"", "ident", "\"x\"");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -113,7 +113,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(\"x\", _\"x+3-y*2\"_)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "ident", "\"x\"", "ident", "_\"x+3-y*2\"_");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -122,7 +122,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(\"x\", \"x+3-y*2\")";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "ident", "\"x\"", "ident", "\"x+3-y*2\"");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -130,7 +130,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(_, _)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "_", "", "_", "");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsTrue(qvf.isValidPattern(str));
         }
 
@@ -138,7 +138,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(\"x\", _)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "ident", "\"x\"", "_", "");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsTrue(qvf.isValidPattern(str));
         }
 
@@ -146,7 +146,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(v, _\"-1\"_)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "var", "v", "ident", "_\"-1\"_");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -154,7 +154,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(v, \"-1\")";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "var", "v", "ident", "\"-1\"");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -167,7 +167,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(v,_)";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "var", "v", "_", "");
+            qvf.insertSynonymIntoQueryTree("while", "w", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
         
@@ -176,7 +176,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(_, _)";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "_", "", "_", "");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -185,7 +185,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(\"x\", _)";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "ident", "\"x\"", "_", "");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -193,7 +193,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern while(v, _\"x\"_)";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "var", "v", "ident", "_\"x\"_");
+            qvf.insertSynonymIntoQueryTree("while", "w", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -201,7 +201,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(v, \"x\")";
-            qvf.insertThreeParamIntoQueryTree("while", "v", "var", "v", "ident", "\"x\"");
+            qvf.insertSynonymIntoQueryTree("while", "v", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -209,7 +209,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(_, _\"x\"_)";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "_", "", "ident", "_\"x\"_");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -217,7 +217,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(_, \"x\")";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "_", "", "ident", "\"x\"");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -225,7 +225,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(_, _\"x+3-y*2\"_)";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "_", "", "ident", "_\"x+3-y*2\"_");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -233,7 +233,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(_, \"x+3-y*2\")";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "_", "", "ident", "\"x+3-y*2\"");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -241,7 +241,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(\"x\", _\"x\"_)";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "ident", "\"x\"", "ident", "_\"x\"_");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -249,7 +249,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(\"x\", \"x\")";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "ident", "\"x\"", "ident", "\"x\"");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -257,7 +257,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(\"x\", _\"x+3-y*2\"_)";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "ident", "\"x\"", "ident", "_\"x+3-y*2\"_");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -265,7 +265,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern w(\"x\", \"x+3-y*2\")";
-            qvf.insertThreeParamIntoQueryTree("while", "w", "ident", "\"x\"", "ident", "\"x+3-y*2\"");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -283,7 +283,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern c(v,_)";
-            qvf.insertThreeParamIntoQueryTree("call", "c", "var", "v", "_", "");
+            qvf.insertSynonymIntoQueryTree("call", "c", "var", "v");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -291,7 +291,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(s,_)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "stmt", "s", "_", "");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "stmt", "s");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
 
@@ -299,7 +299,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "pattern a(v,s)";
-            qvf.insertThreeParamIntoQueryTree("assign", "a", "var", "v", "stmt", "s");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "var", "v", "stmt", "s");
             Assert::IsFalse(qvf.isValidPattern(str));
         }
        

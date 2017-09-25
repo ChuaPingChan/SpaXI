@@ -14,7 +14,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf = QueryValidatorFriend();;
             string str = "Parent*(1,2)";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "int", "2");
+            qvf.insertSynonymIntoQueryTree("int", "1", "int", "2");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -22,7 +22,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf = QueryValidatorFriend();;
             string str = "Parent*(1,_)";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "_", "");
+            qvf.insertSynonymIntoQueryTree("int", "1");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -30,7 +30,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(1,s)";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "stmt", "s");
+            qvf.insertSynonymIntoQueryTree("int", "1", "stmt", "s");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -38,7 +38,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(1,a)";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "assign", "a");
+            qvf.insertSynonymIntoQueryTree("int", "1", "assign", "a");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -46,7 +46,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(1,w)";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "while", "w");
+            qvf.insertSynonymIntoQueryTree("int", "1", "while", "w");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -55,7 +55,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(1,f)";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "if", "f");
+            qvf.insertSynonymIntoQueryTree("int", "1", "if", "f");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -64,7 +64,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(1,pl)";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "prog_line", "pl");
+            qvf.insertSynonymIntoQueryTree("int", "1", "prog_line", "pl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -73,7 +73,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(1,cl)";
-            qvf.insertTwoParamIntoQueryTree("int", "1", "call", "cl");
+            qvf.insertSynonymIntoQueryTree("int", "1", "call", "cl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -81,7 +81,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(_,3)";
-            qvf.insertTwoParamIntoQueryTree("_", "", "int", "3");
+            qvf.insertSynonymIntoQueryTree("int", "3");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -89,7 +89,6 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(_,_)";
-            qvf.insertTwoParamIntoQueryTree("_", "", "_", "");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -97,7 +96,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(_,s)";
-            qvf.insertTwoParamIntoQueryTree("_", "", "stmt", "s");
+            qvf.insertSynonymIntoQueryTree("stmt", "s");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -105,7 +104,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(_,a)";
-            qvf.insertTwoParamIntoQueryTree("_", "", "assign", "a");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -113,7 +112,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(_,w)";
-            qvf.insertTwoParamIntoQueryTree("_", "", "while", "w");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -122,7 +121,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(_,f)";
-            qvf.insertTwoParamIntoQueryTree("_", "", "if", "f");
+            qvf.insertSynonymIntoQueryTree("if", "f");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -131,7 +130,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(_,pl)";
-            qvf.insertTwoParamIntoQueryTree("_", "", "prog_line", "pl");
+            qvf.insertSynonymIntoQueryTree("prog_line", "pl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -140,7 +139,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "ParentSar(_,cl)";
-            qvf.insertTwoParamIntoQueryTree("_", "", "call", "cl");
+            qvf.insertSynonymIntoQueryTree("call", "cl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -148,7 +147,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s,1)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s", "int", "1");
+            qvf.insertSynonymIntoQueryTree("stmt", "s", "int", "1");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -156,7 +155,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(a,1)";
-            qvf.insertTwoParamIntoQueryTree("assign", "a", "int", "1");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "int", "1");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -164,7 +163,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(w,1)";
-            qvf.insertTwoParamIntoQueryTree("while", "w", "int", "1");
+            qvf.insertSynonymIntoQueryTree("while", "w", "int", "1");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -173,7 +172,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(f,1)";
-            qvf.insertTwoParamIntoQueryTree("if", "f", "int", "1");
+            qvf.insertSynonymIntoQueryTree("if", "f", "int", "1");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -182,7 +181,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(pl,1)";
-            qvf.insertTwoParamIntoQueryTree("prog_line", "pl", "int", "1");
+            qvf.insertSynonymIntoQueryTree("prog_line", "pl", "int", "1");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -191,7 +190,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(cl,1)";
-            qvf.insertTwoParamIntoQueryTree("call", "cl", "int", "1");
+            qvf.insertSynonymIntoQueryTree("call", "cl", "int", "1");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -199,7 +198,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s,_)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s", "_", "");
+            qvf.insertSynonymIntoQueryTree("stmt", "s");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -207,7 +206,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(a,_)";
-            qvf.insertTwoParamIntoQueryTree("assign", "a", "_", "");
+            qvf.insertSynonymIntoQueryTree("assign", "a");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -215,7 +214,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(w,_)";
-            qvf.insertTwoParamIntoQueryTree("while", "w", "_", "");
+            qvf.insertSynonymIntoQueryTree("while", "w");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -224,7 +223,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(f,_)";
-            qvf.insertTwoParamIntoQueryTree("if", "f", "_", "");
+            qvf.insertSynonymIntoQueryTree("if", "f");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -233,7 +232,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(pl,_)";
-            qvf.insertTwoParamIntoQueryTree("prog_line", "pl", "_", "");
+            qvf.insertSynonymIntoQueryTree("prog_line", "pl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -242,7 +241,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(cl,_)";
-            qvf.insertTwoParamIntoQueryTree("call", "cl", "_", "");
+            qvf.insertSynonymIntoQueryTree("call", "cl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -250,7 +249,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s1,s2)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s1", "stmt", "s2");
+            qvf.insertSynonymIntoQueryTree("stmt", "s1", "stmt", "s2");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -258,7 +257,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s,a)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s", "assign", "a");
+            qvf.insertSynonymIntoQueryTree("stmt", "s", "assign", "a");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -266,7 +265,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s,w)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s", "while", "w");
+            qvf.insertSynonymIntoQueryTree("stmt", "s", "while", "w");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -275,7 +274,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s,f)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s", "if", "f");
+            qvf.insertSynonymIntoQueryTree("stmt", "s", "if", "f");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -284,7 +283,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s,pl)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s", "prog_line", "pl");
+            qvf.insertSynonymIntoQueryTree("stmt", "s", "prog_line", "pl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -293,7 +292,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s,cl)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s", "call", "cl");
+            qvf.insertSynonymIntoQueryTree("stmt", "s", "call", "cl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -301,7 +300,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(a,s)";
-            qvf.insertTwoParamIntoQueryTree("assign", "a", "stmt", "s");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "stmt", "s");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -309,7 +308,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(a1,a2)";
-            qvf.insertTwoParamIntoQueryTree("assign", "a1", "assign", "a2");
+            qvf.insertSynonymIntoQueryTree("assign", "a1", "assign", "a2");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -317,7 +316,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(a,w)";
-            qvf.insertTwoParamIntoQueryTree("assign", "a", "while", "w");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "while", "w");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -325,7 +324,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent(a,f)";
-            qvf.insertTwoParamIntoQueryTree("assign", "a", "if", "f");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "if", "f");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -333,7 +332,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(a,pl)";
-            qvf.insertTwoParamIntoQueryTree("assign", "a", "prog_line", "pl");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "prog_line", "pl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -341,7 +340,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(a,cl)";
-            qvf.insertTwoParamIntoQueryTree("assign", "a", "call", "cl");
+            qvf.insertSynonymIntoQueryTree("assign", "a", "call", "cl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -349,7 +348,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(w,s)";
-            qvf.insertTwoParamIntoQueryTree("while", "w", "stmt", "s");
+            qvf.insertSynonymIntoQueryTree("while", "w", "stmt", "s");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -357,7 +356,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(w,a)";
-            qvf.insertTwoParamIntoQueryTree("while", "w", "assign", "a");
+            qvf.insertSynonymIntoQueryTree("while", "w", "assign", "a");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -365,7 +364,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(w1,w2)";
-            qvf.insertTwoParamIntoQueryTree("while", "w1", "while", "w2");
+            qvf.insertSynonymIntoQueryTree("while", "w1", "while", "w2");
             Assert::IsTrue(qvf.isValidParent(str));
         }
 
@@ -374,7 +373,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(w,f)";
-            qvf.insertTwoParamIntoQueryTree("while", "w", "if", "f");
+            qvf.insertSynonymIntoQueryTree("while", "w", "if", "f");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -383,7 +382,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(w,pl)";
-            qvf.insertTwoParamIntoQueryTree("while", "w", "prog_line", "pl");
+            qvf.insertSynonymIntoQueryTree("while", "w", "prog_line", "pl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -392,7 +391,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(w,c)";
-            qvf.insertTwoParamIntoQueryTree("while", "w", "call", "cl");
+            qvf.insertSynonymIntoQueryTree("while", "w", "call", "cl");
             Assert::IsFalse(qvf.isValidParent(str));
         }
 
@@ -400,7 +399,7 @@ namespace IntegrationTesting
         {
             QueryValidatorFriend qvf;
             string str = "Parent*(s,s)";
-            qvf.insertTwoParamIntoQueryTree("stmt", "s", "stmt", "s");
+            qvf.insertSynonymIntoQueryTree("stmt", "s", "stmt", "s");
             Assert::IsFalse(qvf.isValidParent(str));
         }
     };
