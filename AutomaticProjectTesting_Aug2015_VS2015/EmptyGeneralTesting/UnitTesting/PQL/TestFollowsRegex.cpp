@@ -51,6 +51,13 @@ namespace UnitTesting
             Assert::IsTrue(qvf.isValidFollowsRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Follows_Star_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows*(s1,s2)";
+            Assert::IsTrue(qvf.isValidFollowsRegex(str));
+        }
+
         TEST_METHOD(TestRegex_Follows_LowercaseKeyword_inValid)
         {
             QueryValidatorFriend qvf;
@@ -100,6 +107,13 @@ namespace UnitTesting
             string str = "Follows(validArgsSyntax, with, extraArgs)";
             Assert::IsFalse(qvf.isValidFollowsRegex(str));
             str = "Follows(insufficientArgs)";
+            Assert::IsFalse(qvf.isValidFollowsRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Follows_Star_inValid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Follows  *  (s1, s2)";
             Assert::IsFalse(qvf.isValidFollowsRegex(str));
         }
     };
