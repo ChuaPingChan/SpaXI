@@ -10,6 +10,12 @@ namespace UnitTesting
     TEST_CLASS(TestUsesRegex)
     {
     public:
+        TEST_METHOD(TestRegex_Uses_Integer_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Usess(1,2)";
+        }
+
         TEST_METHOD(TestRegex_Uses_Arg_SingleLetterSynonym_Valid)
         {
             QueryValidatorFriend qvf;
@@ -79,11 +85,11 @@ namespace UnitTesting
         TEST_METHOD(TestRegex_Uses_Synonym_inValid)
         {
             QueryValidatorFriend qvf;
-            string str = "modifies(1,invalidFirstArg)";
+            string str = "Uses(1,\"1invalidFirstArg\")";
             Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "modifies(invalidSecondArg,2)";
+            str = "Uses(\"2invalidSecondArg\",2)";
             Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "modifies(#,#)";
+            str = "Uses(#,#)";
             Assert::IsFalse(qvf.isValidUsesRegex(str));
         }
 
