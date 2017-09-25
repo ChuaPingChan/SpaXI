@@ -165,6 +165,7 @@
     <ClCompile Include="PQL\TestFollowsRegex.cpp" />
     <ClCompile Include="PQL\TestModifiesRegex.cpp" />
     <ClCompile Include="PQL\TestParentRegex.cpp" />
+    <ClCompile Include="PQL\TestPatternRegex.cpp" />
     <ClCompile Include="PQL\TestUsesRegex.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
