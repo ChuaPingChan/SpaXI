@@ -450,77 +450,7 @@ namespace UnitTesting
         /*************************************
         * Such That Relationship Regex Tests *
         *************************************/
-        TEST_METHOD(TestRegex_Modifies_Int_Ident_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Modifies(1,\"x\")";
-            Assert::IsTrue(qvf.isValidModifiesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Modifies_Int_Underscore_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Modifies(1,_)";
-            Assert::IsTrue(qvf.isValidModifiesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Modifies_Int_Variable_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Modifies(1,v)";
-            Assert::IsTrue(qvf.isValidModifiesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Modifies_Synonym_Ident_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Modifies(s,\"x\")";
-            Assert::IsTrue(qvf.isValidModifiesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Modifies_Synonym_Underscore_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Modifies(s,_)";
-            Assert::IsTrue(qvf.isValidModifiesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Modifies_Synonym_Synonym_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Modifies(_,_)";
-            Assert::IsTrue(qvf.isValidModifiesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Modifies_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Modifies(validStmtRef,validEntRef)";
-            Assert::IsTrue(qvf.isValidModifiesRegex(str));
-            str = "Modifies  (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
-            Assert::IsTrue(qvf.isValidModifiesRegex(str));
-            /*str = "Modifies(\"programName\", validEnrRef";
-            Assert::IsTrue(qv.isValidModifiesRegexTest(str));*/
-        }
-
-        TEST_METHOD(TestRegex_Modifies_inValid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "modifies(lowercase,relationshipName)";
-            Assert::IsFalse(qvf.isValidModifiesRegex(str));
-            str = "misspelt(relationship,name)";
-            Assert::IsFalse(qvf.isValidModifiesRegex(str));
-            str = "modifies(invalidSecondArg,2)";
-            Assert::IsFalse(qvf.isValidModifiesRegex(str));
-            str = "Modifies[validArgsSyntax, wrongBrackets]";
-            Assert::IsFalse(qvf.isValidModifiesRegex(str));
-            str = "Modifies(validArgsSyntax.butFullStopReplacesComma)";
-            Assert::IsFalse(qvf.isValidModifiesRegex(str));
-            str = "Modifies(validArgsSyntax noCommas)";
-            Assert::IsFalse(qvf.isValidModifiesRegex(str));
-            str = "Modifies(validArgsSyntax, with, multipleArgs)";
-            Assert::IsFalse(qvf.isValidModifiesRegex(str));
-        }
+        
 
         TEST_METHOD(TestRegex_Uses_Int_Ident_Valid)
         {
