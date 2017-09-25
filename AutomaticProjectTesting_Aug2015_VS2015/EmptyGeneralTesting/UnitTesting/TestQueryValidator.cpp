@@ -452,77 +452,7 @@ namespace UnitTesting
         *************************************/
         
 
-        TEST_METHOD(TestRegex_Uses_Int_Ident_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Uses(1,\"x\")";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Uses_Int_Underscore_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Uses(1,_)";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Uses_Int_Variable_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Uses(1,v)";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Uses_Synonym_Ident_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Uses(s,\"x\")";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Uses_Synonym_Underscore_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Uses(s,_)";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Uses_Synonym_Synonym_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Uses(_,_)";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Uses_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Uses(validStmtRef,validEntRef)";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));
-            str = "Uses  (   validSynonymForBothArgs  ,   withWhiteSpaces   )";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));
-            /*str = "Uses(\"programName\", validEnrRef";
-            Assert::IsTrue(qvf.isValidUsesRegex(str));*/
-        }
-
-        TEST_METHOD(TestRegex_Uses_inValid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "uses(lowercase,relationshipName)";
-            Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "misspelt(relationship,name)";
-            Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "Uses(invalidSecondArg,2)";
-            Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "Uses[validArgsSyntax, wrongBrackets]";
-            Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "Uses(validArgsSyntax.butFullStopReplacesComma)";
-            Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "Uses(validArgsSyntax noCommas)";
-            Assert::IsFalse(qvf.isValidUsesRegex(str));
-            str = "Uses(validArgsSyntax, with, multipleArgs)";
-            Assert::IsFalse(qvf.isValidUsesRegex(str));
-        }
+       
 
         TEST_METHOD(TestRegex_Follows_Int_Int_Valid)
         {
