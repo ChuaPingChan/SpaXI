@@ -10,6 +10,12 @@ namespace UnitTesting
     TEST_CLASS(TestModifiesRegex)
     {
     public:
+        TEST_METHOD(TestRegex_Modifies_Integer_Valid)
+        {
+            QueryValidatorFriend qvf;
+            string str = "Modifiess(1,2)";
+        }
+
         TEST_METHOD(TestRegex_Modifies_Arg_SingleLetterSynonym_Valid)
         {
             QueryValidatorFriend qvf;
@@ -79,11 +85,11 @@ namespace UnitTesting
         TEST_METHOD(TestRegex_Modifies_Synonym_inValid)
         {
             QueryValidatorFriend qvf;
-            string str = "modifies(1,invalidFirstArg)";
+            string str = "Modifies(1,\"1invalidFirstArg\")";
             Assert::IsFalse(qvf.isValidModifiesRegex(str));
-            str = "modifies(invalidSecondArg,2)";
+            str = "Modifies(\"2invalidSecondArg\",2)";
             Assert::IsFalse(qvf.isValidModifiesRegex(str));
-            str = "modifies(#,#)";
+            str = "Modifies(#,#)";
             Assert::IsFalse(qvf.isValidModifiesRegex(str));
         }
 
