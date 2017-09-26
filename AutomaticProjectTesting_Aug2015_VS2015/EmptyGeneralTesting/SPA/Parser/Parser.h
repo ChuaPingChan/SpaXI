@@ -49,11 +49,14 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::string _concatenatedSourceCode;
     std::string _currentTokenPtr;
     bool _isValidSyntax;
-    std::string _errorMessage;
     std::stack<std::string> _callStack;     //Contains only procedures
     std::stack<int> _parentStack;           //Contains only container stmts
     PKBMain* _pkbMainPtr;
     std::stack<std::stack<int>> _stacksOfFollowsStacks;
+    /*
+    TODO: New attributes for iteration 2.0
+        - _currentProcName      //The current procedure being parsed
+    */
 
     /******************
     * Private Methods *

@@ -44,7 +44,6 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _concatenatedSourceCode = Parser::STRING_EMPTY_STRING;
     _currentTokenPtr = Parser::STRING_EMPTY_STRING;
     _isValidSyntax = false;
-    _errorMessage = string();
     _callStack = stack<string>();
     _parentStack = stack<int>();
     _pkbMainPtr = pkbMainPtr;
@@ -52,10 +51,25 @@ Parser::Parser(PKBMain* pkbMainPtr)
 }
 
 bool Parser::parse(string filename) {
-    // TODO: Implement this when all other methods are tested.
     _isValidSyntax = true;
     concatenateLines(filename);
     parseProgram();
+
+    /*
+    PKB TODO: Tell PKB to start design extractor.
+        - Compute Follow* and Parents*
+        - Compute cross-procedural Uses and Modifies
+        - Compute Calls*
+        - Compute Next*
+    */
+    OutputDebugString("PKB: Tell PKB to start design extractor.\n");
+    _pkbMainPtr->startProcessComplexRelations();
+
+    /*
+    TODO: Final checks
+        - All calls are to valid procedures
+    */
+
     return _isValidSyntax;
 }
 
@@ -113,7 +127,7 @@ vector<string> Parser::tokenizeString(string stringToTokenize)
 /*
 Returns a string from the current _nextToken to the character before the first semicolon encountered.
 Indicate SIMPLE syntax error if no semicolon is encountered in the remaining of the string.
-Note that this method does not remove whitespaces and does not move _nextToken forward.
+Note that this method does not remove whitespaces and does not move _currentTokenPtr forward.
 */
 string Parser::extractStringUpToSemicolon() {
     smatch match;
@@ -174,10 +188,6 @@ void Parser::parseProgram() {
     //           when there are multiple procedures.
     parseProcedure();
     OutputDebugString("FINE: End of program reached.\n");
-
-    // PKB TODO: Tell PKB to start design extractor.
-    OutputDebugString("PKB: Tell PKB to start design extractor.\n");
-    _pkbMainPtr->startProcessComplexRelations();
 }
 
 // Expects _nextToken to be "procedure" keyword
