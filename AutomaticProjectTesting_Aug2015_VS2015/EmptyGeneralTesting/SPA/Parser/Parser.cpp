@@ -47,7 +47,6 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _errorMessage = string();
     _callStack = stack<string>();
     _parentStack = stack<int>();
-    _firstStmtInProc = Parser::INT_INITIAL_STMT_NUMBER;
     _pkbMainPtr = pkbMainPtr;
     _stacksOfFollowsStacks = stack<stack<int>>();
 }
@@ -206,7 +205,6 @@ void Parser::parseProcedure() {
     OutputDebugString("FINE: Push new stmtList stack to follows stack.\n");
     stack<int>* newFollowsStack = new stack<int>();
     _stacksOfFollowsStacks.push(*newFollowsStack);
-    _firstStmtInProc++;
 
     parseStmtList();
 
