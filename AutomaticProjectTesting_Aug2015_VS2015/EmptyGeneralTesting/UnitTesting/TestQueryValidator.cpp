@@ -160,56 +160,6 @@ namespace UnitTesting
             Assert::IsFalse(qvf.getBetweenTwoStrings(str, ",", ")") == "arg2");
         }
 
-
-        /********************
-        * Declaration Tests *
-        ********************/
-        
-
-        TEST_METHOD(TestQueryDeclaration_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "assign validEntityAndSynonym";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "stmt validEntity, multipleVa1idSynonym";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "stmt validEntity  , separatedByComma ,      multipleValidSynonym";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "stmt validEntity, mixedCommaFormat     ,      multipleVa1idSynonym";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "variable          validEntitySynonymWithWhitespace";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "while \n validEntitySynonymWithNewline";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
-        }
-
-        TEST_METHOD(TestQueryDeclaration_Invalid)
-        {
-            QueryValidatorFriend qvf;
-            qvf = QueryValidatorFriend();
-            string str = "invalidEntity inv@lidSyn0nym";
-            Assert::IsFalse(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "invalidEntity validSynonym";
-            Assert::IsFalse(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "assign validEntity, inv@lidSynonym";
-            Assert::IsFalse(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "assign validEntity validSynonym  but no comma";
-            Assert::IsFalse(qvf.isValidDeclaration(str));
-            qvf = QueryValidatorFriend();
-            str = "assign validEntity, validSynonymRepeted, validSynonymRepeted";
-            Assert::IsFalse(qvf.isValidDeclaration(str));
-        }
-
-        
-
         /******************************
         * Entire query Validity Tests *
         ******************************/
