@@ -162,12 +162,13 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PQL\TestBasicRegex.cpp" />
-    <ClCompile Include="PQL\TestFollowsRegex.cpp" />
-    <ClCompile Include="PQL\TestModifiesRegex.cpp" />
-    <ClCompile Include="PQL\TestParentRegex.cpp" />
-    <ClCompile Include="PQL\TestPatternRegex.cpp" />
-    <ClCompile Include="PQL\TestUsesRegex.cpp" />
+    <ClCompile Include="PQL\TestRegexBasic.cpp" />
+    <ClCompile Include="PQL\TestRegexFollows.cpp" />
+    <ClCompile Include="PQL\TestRegexModifies.cpp" />
+    <ClCompile Include="PQL\TestRegexParent.cpp" />
+    <ClCompile Include="PQL\TestRegexPattern.cpp" />
+    <ClCompile Include="PQL\TestRegexSelect.cpp" />
+    <ClCompile Include="PQL\TestRegexUses.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

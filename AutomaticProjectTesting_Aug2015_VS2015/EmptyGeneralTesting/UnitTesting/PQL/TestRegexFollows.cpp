@@ -7,7 +7,7 @@ using namespace std;
 
 namespace UnitTesting
 {
-    TEST_CLASS(TestFollowsRegex)
+    TEST_CLASS(TestRegexFollows)
     {
     public:
         TEST_METHOD(TestRegex_Follows_Integer_Valid)

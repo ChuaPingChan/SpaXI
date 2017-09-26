@@ -7,7 +7,7 @@ using namespace std;
 
 namespace UnitTesting
 {
-    TEST_CLASS(TestBasicRegex)
+    TEST_CLASS(TestRegexBasic)
     {
     public:
 
