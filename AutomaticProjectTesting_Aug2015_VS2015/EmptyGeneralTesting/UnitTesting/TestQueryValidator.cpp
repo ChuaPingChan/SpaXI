@@ -208,63 +208,8 @@ namespace UnitTesting
             Assert::IsFalse(qvf.isValidDeclaration(str));
         }
 
-
-        /***************
-        * Select Tests *
-        ***************/
-        TEST_METHOD(TestSelectOverallRegex_OnlySelect_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Select s";
-            Assert::IsTrue(qvf.isValidSelectOverallRegex(str));
-            qvf = QueryValidatorFriend();
-            str = "Select   abcd";
-            Assert::IsTrue(qvf.isValidSelectOverallRegex(str));
-            qvf = QueryValidatorFriend();
-            str = "Select a123 ";
-            Assert::IsTrue(qvf.isValidSelectOverallRegex(str));
-            qvf = QueryValidatorFriend();
-            str = "Select s";
-            Assert::IsTrue(qvf.isValidSelectOverallRegex(str));
-        }
-
-        TEST_METHOD(TestSelectOverallRegex_OnlySelect_Invalid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "select s1@";
-            Assert::IsFalse(qvf.isValidSelectOverallRegex(str));
-            qvf = QueryValidatorFriend();
-            str = "selects10";
-            Assert::IsFalse(qvf.isValidSelectOverallRegex(str));
-            qvf = QueryValidatorFriend();
-            str = "selects10";
-            Assert::IsFalse(qvf.isValidSelectOverallRegex(str));
-            qvf = QueryValidatorFriend();
-            str = "select s10 suchthat";
-            Assert::IsFalse(qvf.isValidSelectOverallRegex(str));
-            qvf = QueryValidatorFriend();
-            str = "Select abcd such that";
-            Assert::IsFalse(qvf.isValidSelectOverallRegex(str));
-        }
-
-        TEST_METHOD(TestSelectOverallRegex_SelectAndUses_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Select s such that Uses(a,b)";
-            Assert::IsTrue(qvf.isValidSelectOverallRegex(str));
-            qvf = QueryValidatorFriend();
-            str = "Select s12 such that Uses ( b , c )";
-            Assert::IsTrue(qvf.isValidSelectOverallRegex(str));
-        }
-
-        TEST_METHOD(TestSelectOverallRegex_SelectAndPattern_Valid)
-        {
-            QueryValidatorFriend qvf;
-            string str = "Select s12 pattern a ( _ , _ ) ";
-            Assert::IsTrue(qvf.isValidSelectOverallRegex(str));
-        }
-
         
+
         /******************************
         * Entire query Validity Tests *
         ******************************/
