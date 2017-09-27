@@ -62,19 +62,28 @@ procedure GHI {
 46		w = laugh;
 	}
 47	funnyVar = 0;
+48	call NotSharingVar;
+49	funnyVar = 10;
 }
 
 procedure DEF {
-48	a = 123;
-49	b = 345;
-50	while a {
-51		c = b;
-52		b = 482;
-53		call GHI;
-54		while b {
-55			laugh = laugh + 1;
+50	a = 123;
+51	b = 345;
+52	while a {
+53		c = b;
+54		b = 482;
+55		call GHI;
+56		while b {
+57			laugh = laugh + 1;
 		}
 	}
-56	c = b + a;
-57	b = 1000;
+58	c = b + a;
+59	b = 1000;
+}
+
+procedure NotSharingVar {
+60	best = 1;
+61	food = best;
+62	supper = best * best;
+63	supper = supper * best;
 }
