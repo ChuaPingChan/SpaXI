@@ -15,11 +15,14 @@ public:
     *********/
 
     static const std::regex REGEX_VALID_ENTITY_NAME;
+    static const std::regex REGEX_VALID_VAR_NAME;
+    static const std::regex REGEX_VALID_PROC_NAME;
     static const std::regex REGEX_MATCH_CONSTANT;
     static const std::regex REGEX_EXTRACT_NEXT_TOKEN;
     static const std::regex REGEX_EXTRACT_UP_TO_SEMICOLON;
     static const std::regex REGEX_MATCH_PROCEDURE_KEYWORD;
     static const std::regex REGEX_MATCH_WHILE_KEYWORD;
+    static const std::regex REGEX_MATCH_CALL_KEYWORD;
     static const std::regex REGEX_MATCH_OPEN_BRACE;
     static const std::regex REGEX_MATCH_CLOSE_BRACE;
     static const std::regex REGEX_MATCH_OPEN_BRACKET;
@@ -75,12 +78,14 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
 
     bool assignmentExpected();
     bool whileExpected();
+    bool callStmtExpected();
 
     void parseProgram();
     void parseProcedure();
     void parseStmtList();
     void parseStmt();
     void parseAssignment();
-    void parseWhile();
+    void parseWhileStmt();
+    void parseCallStmt();
 
 };
