@@ -16,6 +16,7 @@ using namespace std;
 
 const int Parser::INT_INITIAL_STMT_NUMBER = 0;
 const string Parser::STRING_EMPTY_STRING = "";
+const int Parser::INT_INITIAL_PROC_INDEX = 0;
 
 const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
 const regex Parser::REGEX_MATCH_CONSTANT = regex("\\s*\\d+\\s*");
@@ -48,6 +49,7 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _parentStack = stack<int>();
     _pkbMainPtr = pkbMainPtr;
     _stacksOfFollowsStacks = stack<stack<int>>();
+    _currentProcIdx = Parser::INT_INITIAL_PROC_INDEX;
 }
 
 bool Parser::parse(string filename) {
@@ -88,7 +90,11 @@ bool Parser::concatenateLines(string filename) {
     return true;
 }
 
-// Proceed to next token.
+/*
+Proceed to next token.
+Returns true if token is incremented successfully.
+Returns false when the end of _concatenatedSourceCode is reached.
+*/
 bool Parser::incrCurrentTokenPtr()
 {
     smatch match;
@@ -110,6 +116,15 @@ bool Parser::incrCurrentTokenPtr()
         _currentTokenPtr = Parser::STRING_EMPTY_STRING;
         return false;
     }
+}
+
+/*
+Checks if end of the source code has been reached.
+Precondition:
+- Source code has to be concatenated into _concatenatedSourceCode.
+*/
+bool Parser::endOfSourceCodeReached() {
+    return regex_match(_concatenatedSourceCode, regex("\\s*"));
 }
 
 // Tokenize a given string into a vector of strings.
@@ -184,9 +199,9 @@ bool Parser::matchToken(regex re) {
 void Parser::parseProgram() {
     incrCurrentTokenPtr();
 
-    // PKB TODO: put this in a while loop after iteration 1,
-    //           when there are multiple procedures.
-    parseProcedure();
+    while (!endOfSourceCodeReached() && _isValidSyntax) {   //While not at the end of _concatednatedSourceCode
+        parseProcedure();
+    }
     OutputDebugString("FINE: End of program reached.\n");
 }
 
@@ -197,16 +212,19 @@ void Parser::parseProcedure() {
 
     string procName;
     if (!(matchToken(Parser::REGEX_VALID_ENTITY_NAME))) {
-        // TODO: Throw exception?
+        //TODO: Throw exception?
         _isValidSyntax = false;
         //TODO: Remove this line after determining how to signal user on syntax error.
         OutputDebugString("WARNING: Invalid procedure name.\n");
         return;
     }
     procName = _currentTokenPtr;
-    // PKB TODO: Add to ProcToIdxMap
+    // PKB: Add to ProcToIdxMap
     OutputDebugString("PKB: Add procedure.\n");
     _pkbMainPtr->addProcedure(procName);
+    // PKB TODO: Update _currentProcIdx
+    // _currentProcIdx = _pkbMainPtr->getProcIdx(procName);
+    
 
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);

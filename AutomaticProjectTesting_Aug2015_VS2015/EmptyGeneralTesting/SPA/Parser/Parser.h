@@ -41,6 +41,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     *************/
     static const int INT_INITIAL_STMT_NUMBER;
     static const std::string STRING_EMPTY_STRING;
+    static const int INT_INITIAL_PROC_INDEX;
 
     /********************
     * Member Attributes *
@@ -53,16 +54,14 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::stack<int> _parentStack;           //Contains only container stmts
     PKBMain* _pkbMainPtr;
     std::stack<std::stack<int>> _stacksOfFollowsStacks;
-    /*
-    TODO: New attributes for iteration 2.0
-        - _currentProcName      //The current procedure being parsed
-    */
+    int _currentProcIdx;                    //The index of the current procedure being parsed
 
     /******************
     * Private Methods *
     *******************/
     bool concatenateLines(std::string filename);
     bool incrCurrentTokenPtr();
+    bool endOfSourceCodeReached();
     std::vector<std::string> tokenizeString(std::string stringToTokenize);
     bool assertMatchAndIncrementToken(std::regex re);
     bool assertMatchWithoutIncrementToken(std::regex re);
