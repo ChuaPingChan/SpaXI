@@ -2,7 +2,6 @@
 #include <cstdio>
 #include <regex>
 
-#include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../SPA/Parser/Parser.h"
 #include "../SPA/Parser/ParserChildForTest.h"
@@ -538,6 +537,18 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(testParsingSimpleSource_multiProcAssignmentsCalls_success)
+        {
+            // Set up
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_multiProcs_assignmentsAndCalls());
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         /******************************
         * Utility Methods for Testing *
         *******************************/
@@ -715,6 +726,21 @@ namespace UnitTesting
         */
         bool createDummySimpleSourceFile_multiProcs_assignmentsOnly() {
             std::string content = "procedure ABC{ \n  a = 1; \n b = 2; \n	c = a; \n } \n \nprocedure DEF{ \n  a = 1; \n b = 2; \n	c = a; \n } \n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy SIMPLE source with
+        multiple procedures, all containing assignment statements and
+        valid call statements only.
+        */
+        bool createDummySimpleSourceFile_multiProcs_assignmentsAndCalls() {
+            std::string content = "procedure ABC{ \n  a = 1; \n b = 2; \n call DEF; \n	c = a; \n } \n \nprocedure DEF{ \n  a = 1; \n b = 2; \n	c = a; \n } \n ";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

@@ -108,5 +108,5 @@ void ParserChildForTest::parseAssignment()
 
 void ParserChildForTest::parseWhile()
 {
-    Parser::parseWhile();
+    Parser::parseWhileStmt();
 }
