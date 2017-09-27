@@ -10,13 +10,13 @@
 
 using namespace std;
 
-class QueryValidator
+class QueryValidatorOld
 {
     friend class QueryValidatorFriend;
 
 public:
-    QueryValidator();
-    ~QueryValidator();
+    QueryValidatorOld();
+    ~QueryValidatorOld();
 
     /******************** Grammar ********************/
     static const string LETTER;

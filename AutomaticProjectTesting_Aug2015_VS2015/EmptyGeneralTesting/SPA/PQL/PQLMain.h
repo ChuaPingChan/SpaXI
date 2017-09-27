@@ -2,7 +2,7 @@
 #include <string>
 #include <list>
 #include "QueryTree.h"
-#include "QueryValidator.h"
+#include "QueryValidatorOld.h"
 #include "QueryEvaluator.h"
 #include "ResultFormatter.h"
 

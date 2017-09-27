@@ -1,49 +1,50 @@
-#include "QueryValidator.h"
+#include "QueryValidatorOld.h"
 
 using namespace std;
 
-QueryValidator::QueryValidator()
+QueryValidatorOld
+::QueryValidatorOld()
 {
     qtInstance = QueryTree::getInstance();
 }
 
-QueryValidator::~QueryValidator()
+QueryValidatorOld::~QueryValidatorOld()
 {
 }
 
 /******************** Grammar ********************/
-const string QueryValidator::LETTER = "([a-zA-Z])";
-const string QueryValidator::DIGIT = "([0-9])";
-const string QueryValidator::INTEGER = "(" + DIGIT + "+)";
-const string QueryValidator::HASH = "(#)";
-const string QueryValidator::UNDERSCORE = "(_)";
-const string QueryValidator::IDENT = "(" + LETTER + "(" + LETTER + "|" + DIGIT + "|" + HASH + ")*)";
-const string QueryValidator::SYNONYM = IDENT;
-const string QueryValidator::STMTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + INTEGER + ")";
-const string QueryValidator::ENTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + "\"" + IDENT + "\"" ")";
-const string QueryValidator::NAME = "(" + LETTER + "(" + LETTER + "|" + DIGIT + ")*)";
-const string QueryValidator::SPACE_0 = "(\\s*)";
-const string QueryValidator::SPACE_1 = "(\\s+)";
+const string QueryValidatorOld::LETTER = "([a-zA-Z])";
+const string QueryValidatorOld::DIGIT = "([0-9])";
+const string QueryValidatorOld::INTEGER = "(" + DIGIT + "+)";
+const string QueryValidatorOld::HASH = "(#)";
+const string QueryValidatorOld::UNDERSCORE = "(_)";
+const string QueryValidatorOld::IDENT = "(" + LETTER + "(" + LETTER + "|" + DIGIT + "|" + HASH + ")*)";
+const string QueryValidatorOld::SYNONYM = IDENT;
+const string QueryValidatorOld::STMTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + INTEGER + ")";
+const string QueryValidatorOld::ENTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + "\"" + IDENT + "\"" ")";
+const string QueryValidatorOld::NAME = "(" + LETTER + "(" + LETTER + "|" + DIGIT + ")*)";
+const string QueryValidatorOld::SPACE_0 = "(\\s*)";
+const string QueryValidatorOld::SPACE_1 = "(\\s+)";
 
 /*--------------- Declaration Regex ---------------*/
-const string QueryValidator::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
+const string QueryValidatorOld::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 
 /*--------------- Pattern Clause Regex ---------------*/
-const string QueryValidator::FACTOR = "(" + NAME + "|" + INTEGER + ")";
-const string QueryValidator::EXPRESSION_SPEC = "(" + UNDERSCORE + "|" + UNDERSCORE + "\"" + FACTOR + "\"" + UNDERSCORE + ")";
-const string QueryValidator::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM + SPACE_0 + "[(]" + SPACE_0 + ENTREF + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidatorOld::FACTOR = "(" + NAME + "|" + INTEGER + ")";
+const string QueryValidatorOld::EXPRESSION_SPEC = "(" + UNDERSCORE + "|" + UNDERSCORE + "\"" + FACTOR + "\"" + UNDERSCORE + ")";
+const string QueryValidatorOld::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM + SPACE_0 + "[(]" + SPACE_0 + ENTREF + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Relationship Clause Regex ---------------*/
-const string QueryValidator::MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-const string QueryValidator::USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-const string QueryValidator::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-const string QueryValidator::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidatorOld::MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidatorOld::USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidatorOld::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string QueryValidatorOld::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Select Regex ---------------*/
-const string QueryValidator::SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM;
-const string QueryValidator::RELREF = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
-const string QueryValidator::SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF;
-const string QueryValidator::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
+const string QueryValidatorOld::SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM;
+const string QueryValidatorOld::RELREF = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
+const string QueryValidatorOld::SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF;
+const string QueryValidatorOld::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
 
 //string relCond = relRef + "(" + andRegex + relRef + ")*";
 //string patternCond = patternRegex + "(" + andRegex + patternRegex + ")*";
@@ -53,7 +54,7 @@ const string QueryValidator::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX
 * Public methods *
 *****************/
 
-bool QueryValidator::isValidQuery(string query)
+bool QueryValidatorOld::isValidQuery(string query)
 {
 
     vector<string> inputVector = tokenize(query);
@@ -83,7 +84,7 @@ bool QueryValidator::isValidQuery(string query)
 /*--------------- Split initial query ---------------*/
 
 //split query using ';' as delimiter
-vector<string> QueryValidator::tokenize(string query)
+vector<string> QueryValidatorOld::tokenize(string query)
 {
     char delimiter = ';';
     stringstream ss(query);
@@ -98,14 +99,14 @@ vector<string> QueryValidator::tokenize(string query)
 
 /*--------------- Remove all spaces ---------------*/
 
-string QueryValidator::removeAllSpaces(string str)
+string QueryValidatorOld::removeAllSpaces(string str)
 {
     str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
     return str;
 }
 
 /*--------------- Get string between two delimiters ---------------*/
-string QueryValidator::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)
+string QueryValidatorOld::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)
 {
     unsigned firstDelimPos = str.find(firstDelim);
     unsigned middleDelimPos = firstDelimPos + firstDelim.length();
@@ -117,7 +118,7 @@ string QueryValidator::getBetweenTwoStrings(const string &str, const string &fir
 
 /*--------------- Check if argument is in a clause ---------------*/
 
-bool QueryValidator::isArgumentInClause(string arg, vector<string> clause)
+bool QueryValidatorOld::isArgumentInClause(string arg, vector<string> clause)
 {
     if (find(clause.begin(), clause.end(), arg) != clause.end())
         return true;
@@ -126,7 +127,7 @@ bool QueryValidator::isArgumentInClause(string arg, vector<string> clause)
 }
 
 /*--------------- Check if string is an integer ---------------*/
-bool QueryValidator::isIntegerRegexCheck(string arg)
+bool QueryValidatorOld::isIntegerRegexCheck(string arg)
 {
     regex checkInt = regex(INTEGER);
     return regex_match(arg, checkInt);
@@ -134,7 +135,7 @@ bool QueryValidator::isIntegerRegexCheck(string arg)
 
 /*--------------- Validation of Declaration ---------------*/
 //Pre-Cond: Semi-colon has to be removed
-bool QueryValidator::isValidDeclaration(string str)
+bool QueryValidatorOld::isValidDeclaration(string str)
 {
     string entity;
     string synonym;
@@ -206,20 +207,20 @@ bool QueryValidator::isValidDeclaration(string str)
     return numComma == expectedNumComma;
 }
 
-bool QueryValidator::isValidEntity(string str)
+bool QueryValidatorOld::isValidEntity(string str)
 {
     regex entityRegex(DESIGN_ENTITY_REGEX);
     return regex_match(str, entityRegex);
 }
 
-bool QueryValidator::isValidSynonym(string str)
+bool QueryValidatorOld::isValidSynonym(string str)
 {
     regex synonymRegex(SYNONYM);
     return regex_match(str, synonymRegex);
 }
 
 /*--------------- Validation of Select --------------*/
-bool QueryValidator::isValidSelect(string str)
+bool QueryValidatorOld::isValidSelect(string str)
 {
     if (isValidSelectOverallRegex(str) == false)
         return false;
@@ -290,7 +291,7 @@ bool QueryValidator::isValidSelect(string str)
     return true;  //stub
 }
 
-bool QueryValidator::isValidSelectBeginning(string str)
+bool QueryValidatorOld::isValidSelectBeginning(string str)
 {
     size_t f = str.find("Select");
     str.replace(f, std::string("Select").length(), "");
@@ -343,39 +344,39 @@ bool QueryValidator::isValidSelectBeginning(string str)
     return true;
 }
 
-bool QueryValidator::isValidSelectOverallRegex(string str)
+bool QueryValidatorOld::isValidSelectOverallRegex(string str)
 {
     regex overallSelectRegexCheck(SELECT_OVERALL_REGEX);
     return regex_match(str, overallSelectRegexCheck);
 }
 
 /*--------------- Validation of Such That clauses ---------------*/
-bool QueryValidator::isValidModifiesRegex(string str)
+bool QueryValidatorOld::isValidModifiesRegex(string str)
 {
     regex modifiesRegexCheck(MODIFIES_REGEX);
     return regex_match(str, modifiesRegexCheck);
 }
 
-bool QueryValidator::isValidUsesRegex(string str)
+bool QueryValidatorOld::isValidUsesRegex(string str)
 {
     regex usesRegexCheck(USES_REGEX);
     return regex_match(str, usesRegexCheck);
 }
 
-bool QueryValidator::isValidFollowsRegex(string str)
+bool QueryValidatorOld::isValidFollowsRegex(string str)
 {
     regex followsRegexCheck(FOLLOWS_REGEX);
     return regex_match(str, followsRegexCheck);
 }
 
-bool QueryValidator::isValidParentRegex(string str)
+bool QueryValidatorOld::isValidParentRegex(string str)
 {
     regex parentRegexCheck(PARENT_REGEX);
     return regex_match(str, parentRegexCheck);
 }
 
 //PRE-COND: Modifies(a,b)
-bool QueryValidator::isValidModifies(string str)
+bool QueryValidatorOld::isValidModifies(string str)
 {
     if (!isValidModifiesRegex(str))
         return false;
@@ -479,7 +480,7 @@ bool QueryValidator::isValidModifies(string str)
 
 }
 
-bool QueryValidator::isValidUses(string str)
+bool QueryValidatorOld::isValidUses(string str)
 {
     if (!isValidUsesRegex(str))
         return false;
@@ -582,7 +583,7 @@ bool QueryValidator::isValidUses(string str)
 }
 
 //PRE-COND: arg1: stmt, assign, while, if, prog_line
-bool QueryValidator::isValidFollows(string str)
+bool QueryValidatorOld::isValidFollows(string str)
 {
     if (!isValidFollowsRegex(str))
         return false;
@@ -733,7 +734,7 @@ bool QueryValidator::isValidFollows(string str)
     }
 }
 
-bool QueryValidator::isValidParent(string str)
+bool QueryValidatorOld::isValidParent(string str)
 {
     if (!isValidParentRegex(str))
         return false;
@@ -878,14 +879,14 @@ bool QueryValidator::isValidParent(string str)
 
 
 /*--------------- Validation of Pattern ---------------*/
-bool QueryValidator::isValidPatternRegex(string str)
+bool QueryValidatorOld::isValidPatternRegex(string str)
 {
     regex patternRegexCheck(PATTERN_REGEX);
     return regex_match(str, patternRegexCheck);
 }
 
 //PRE-COND: patternarg1(arg2,arg3) arg1 = assignment synonym, arg2 = variable synonym/"entRef", arg3 = "EXPRESSION"
-bool QueryValidator::isValidPattern(string str)
+bool QueryValidatorOld::isValidPattern(string str)
 {
     if (!isValidPatternRegex(str))
         return false;

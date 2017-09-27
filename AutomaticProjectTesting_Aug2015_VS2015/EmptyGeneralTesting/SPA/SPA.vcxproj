@@ -37,7 +37,7 @@
     <ClCompile Include="PQL\PQLMain.cpp" />
     <ClCompile Include="PQL\QueryEvaluator.cpp" />
     <ClCompile Include="PQL\QueryTree.cpp" />
-    <ClCompile Include="PQL\QueryValidator.cpp" />
+    <ClCompile Include="PQL\QueryValidatorOld.cpp" />
     <ClCompile Include="PQL\QueryValidatorFriend.cpp" />
     <ClCompile Include="PQL\ResultFormatter.cpp" />
   </ItemGroup>
@@ -68,7 +68,7 @@
     <ClInclude Include="PQL\PQLMain.h" />
     <ClInclude Include="PQL\QueryEvaluator.h" />
     <ClInclude Include="PQL\QueryTree.h" />
-    <ClInclude Include="PQL\QueryValidator.h" />
+    <ClInclude Include="PQL\QueryValidatorOld.h" />
     <ClInclude Include="PQL\QueryValidatorFriend.h" />
     <ClInclude Include="PQL\ResultFormatter.h" />
   </ItemGroup>

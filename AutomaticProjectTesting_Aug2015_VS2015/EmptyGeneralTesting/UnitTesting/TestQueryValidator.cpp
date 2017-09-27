@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "string.h"
-#include "..\SPA\PQL\QueryValidator.h"
+#include "..\SPA\PQL\QueryValidatorOld.h"
 #include "..\SPA\PQL\QueryValidatorFriend.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -165,7 +165,7 @@ namespace UnitTesting
         ******************************/
         TEST_METHOD(TestQueryValidity)
         {
-            QueryValidator qv;
+            QueryValidatorOld qv;
             string query = "assign a; variable v; Select v";
 
             Assert::IsTrue(qv.isValidQuery(query));

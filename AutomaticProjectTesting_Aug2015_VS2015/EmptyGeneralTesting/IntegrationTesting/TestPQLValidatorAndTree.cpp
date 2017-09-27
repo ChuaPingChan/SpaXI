@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../SPA/PQL/QueryTree.h"
-#include "../SPA/PQL/QueryValidator.h"
+#include "../SPA/PQL/QueryValidatorOld.h"
 #include "../SPA/PQL/QueryValidatorFriend.h"
 
 using namespace std;

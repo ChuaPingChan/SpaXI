@@ -1,10 +1,10 @@
 #pragma once
 #include <regex>
-#include "QueryValidator.h"
+#include "QueryValidatorOld.h"
 
 class QueryValidatorFriend
 {
-    QueryValidator qv;
+    QueryValidatorOld qv;
 public:
     QueryValidatorFriend();
     ~QueryValidatorFriend();

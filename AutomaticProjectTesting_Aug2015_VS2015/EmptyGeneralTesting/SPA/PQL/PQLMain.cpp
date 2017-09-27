@@ -20,7 +20,7 @@ list<string> PQLMain::run()
 	QueryTree* qtInstance = QueryTree::getInstance();
 	//qtInstance = qtInstance->clear();
 
-	QueryValidator validator;
+	QueryValidatorOld validator;
 	bool isValid = validator.isValidQuery(query);
 
 	if (isValid) 

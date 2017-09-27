@@ -5,12 +5,12 @@ QueryValidatorFriend::~QueryValidatorFriend() {}
 
 /*--------------- Validation of Grammar Regex ---------------*/
 bool QueryValidatorFriend::isValidLetter(string str) {
-    regex letterRegexCheck(QueryValidator::LETTER);
+    regex letterRegexCheck(QueryValidatorOld::LETTER);
     return regex_match(str, letterRegexCheck);
 }
 
 bool QueryValidatorFriend::isValidInteger(string str) {
-    regex integerRegexCheck(QueryValidator::INTEGER);
+    regex integerRegexCheck(QueryValidatorOld::INTEGER);
     return regex_match(str, integerRegexCheck);
 }
 
@@ -19,17 +19,17 @@ bool QueryValidatorFriend::isValidSynonym(string str) {
 }
 
 bool QueryValidatorFriend::isValidStmtRef(string str) {
-    regex stmtRefRegexCheck(QueryValidator::STMTREF);
+    regex stmtRefRegexCheck(QueryValidatorOld::STMTREF);
     return regex_match(str, stmtRefRegexCheck);
 }
 
 bool QueryValidatorFriend::isValidEntRef(string str) {
-    regex entRefRegexCheck(QueryValidator::ENTREF);
+    regex entRefRegexCheck(QueryValidatorOld::ENTREF);
     return regex_match(str, entRefRegexCheck);
 }
 
 bool QueryValidatorFriend::isValidName(string str) {
-    regex nameRegexCheck(QueryValidator::NAME);
+    regex nameRegexCheck(QueryValidatorOld::NAME);
     return regex_match(str, nameRegexCheck);
 }
 
@@ -110,12 +110,12 @@ bool QueryValidatorFriend::isValidPatternRegex(string str) {
 }
 
 bool QueryValidatorFriend::isValidFactor(string str) {
-    regex factorRegexCheck(QueryValidator::FACTOR);
+    regex factorRegexCheck(QueryValidatorOld::FACTOR);
     return regex_match(str, factorRegexCheck);
 }
 
 bool QueryValidatorFriend::isValidExpressionSpec(string str) {
-    regex expressionSpecRegexCheck(QueryValidator::EXPRESSION_SPEC);
+    regex expressionSpecRegexCheck(QueryValidatorOld::EXPRESSION_SPEC);
     return regex_match(str, expressionSpecRegexCheck);
 }
 
