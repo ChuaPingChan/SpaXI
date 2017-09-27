@@ -47,6 +47,14 @@ procedure GHI	 {
 	if w then {
 		w = a;
 		laugh = w;
+		if b then {
+			b = b * 3 - tmp + oSCar;
+			oSCar = Romeo;
+		} else {
+			w = 1000;
+			a = 2;
+		}
+		w = a;
 	} else {
 		a = 2;
 		w = laugh;

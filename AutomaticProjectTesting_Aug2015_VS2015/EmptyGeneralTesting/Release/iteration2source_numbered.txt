@@ -49,24 +49,32 @@ procedure GHI {
 36	if w then {
 37		w = a;
 38		laugh = w;
+39		if b then {
+40			b = b * 3 - tmp + oSCar;
+41			oSCar = Romeo;
+		} else {
+42			w = 1000;
+43			a = 2;
+		}
+44		w = a;
 	} else {
-39		a = 2;
-40		w = laugh;
+45		a = 2;
+46		w = laugh;
 	}
-41	funnyVar = 0;
+47	funnyVar = 0;
 }
 
 procedure DEF {
-42	a = 123;
-43	b = 345;
-44	while a {
-45		c = b;
-46		b = 482;
-47		call GHI;
-48		while b {
-49			laugh = laugh + 1;
+48	a = 123;
+49	b = 345;
+50	while a {
+51		c = b;
+52		b = 482;
+53		call GHI;
+54		while b {
+55			laugh = laugh + 1;
 		}
 	}
-50	c = b + a;
-51	b = 1000;
+56	c = b + a;
+57	b = 1000;
 }
