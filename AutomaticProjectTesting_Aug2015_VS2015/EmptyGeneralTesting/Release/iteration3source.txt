@@ -1,0 +1,78 @@
+procedure ABC {
+  i=1;
+ b=200 ;
+ Romeo = c + a * (b - i * a) - 5 * 3 + 1;
+ b = c * (b - a) * ((3 * Romeo) - (2 * (3 - 1)));
+	c= a   ;
+while a
+{
+   while beta {
+        oSCar  = 1 + beta + tmp;
+		if a then {
+			oSCar = oSCar - beta;
+			c = b;
+			b = a;
+		} else {
+			call GHI;
+			Romeo = beta + c* b;
+			d = b - 3;
+		}
+		
+	while x {
+        x = x + 1;
+        while left {
+			c = b - 5;
+			b = c - a;
+            x = x+ 1	; }}
+		e = g - 1;
+          a=   2; }
+   w = w+1  ;
+   call DEF;
+   w = 2		;
+   i = w;
+}
+}
+
+procedure GHI	 {
+	funnyVar = 101;
+	while funnyVar {
+		laugh = 10;
+		funnyVar = funnyVar - 1;
+		while laugh {
+			laugh = laugh - 1;
+		}
+	}
+	w = 3 + a;
+	a = 10;
+	if w then {
+		w = a;
+		laugh = w;
+		if b then {
+			b = b * 3 - tmp + oSCar;
+			oSCar = Romeo;
+		} else {
+			w = 1000;
+			a = 2;
+		}
+		w = a;
+	} else {
+		a = 2;
+		w = laugh;
+	}
+	funnyVar = 0;
+}
+
+procedure DEF {
+	a = 123;
+	b = 345;
+	while a {
+		c = b;
+		b = 482;
+		call GHI;
+		while b {
+			laugh = laugh + 1;
+		}
+	}
+	c = b + a;
+	b = 1000;
+}

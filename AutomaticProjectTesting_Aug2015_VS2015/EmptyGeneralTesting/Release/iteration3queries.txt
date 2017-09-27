@@ -1,0 +1,5 @@
+1 - Case 1
+stmt s;
+Select s such that Parent*(s, 8)
+6, 7
+5000
