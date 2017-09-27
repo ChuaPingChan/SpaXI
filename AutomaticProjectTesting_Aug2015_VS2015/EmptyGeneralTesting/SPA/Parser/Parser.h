@@ -15,11 +15,14 @@ public:
     *********/
 
     static const std::regex REGEX_VALID_ENTITY_NAME;
+    static const std::regex REGEX_VALID_VAR_NAME;
+    static const std::regex REGEX_VALID_PROC_NAME;
     static const std::regex REGEX_MATCH_CONSTANT;
     static const std::regex REGEX_EXTRACT_NEXT_TOKEN;
     static const std::regex REGEX_EXTRACT_UP_TO_SEMICOLON;
     static const std::regex REGEX_MATCH_PROCEDURE_KEYWORD;
     static const std::regex REGEX_MATCH_WHILE_KEYWORD;
+    static const std::regex REGEX_MATCH_CALL_KEYWORD;
     static const std::regex REGEX_MATCH_OPEN_BRACE;
     static const std::regex REGEX_MATCH_CLOSE_BRACE;
     static const std::regex REGEX_MATCH_OPEN_BRACKET;
@@ -41,6 +44,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     *************/
     static const int INT_INITIAL_STMT_NUMBER;
     static const std::string STRING_EMPTY_STRING;
+    static const int INT_INITIAL_PROC_INDEX;
 
     /********************
     * Member Attributes *
@@ -49,18 +53,18 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::string _concatenatedSourceCode;
     std::string _currentTokenPtr;
     bool _isValidSyntax;
-    std::string _errorMessage;
     std::stack<std::string> _callStack;     //Contains only procedures
     std::stack<int> _parentStack;           //Contains only container stmts
-    int _firstStmtInProc;
     PKBMain* _pkbMainPtr;
     std::stack<std::stack<int>> _stacksOfFollowsStacks;
+    int _currentProcIdx;                    //The index of the current procedure being parsed
 
     /******************
     * Private Methods *
     *******************/
     bool concatenateLines(std::string filename);
     bool incrCurrentTokenPtr();
+    bool endOfSourceCodeReached();
     std::vector<std::string> tokenizeString(std::string stringToTokenize);
     bool assertMatchAndIncrementToken(std::regex re);
     bool assertMatchWithoutIncrementToken(std::regex re);
@@ -74,12 +78,14 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
 
     bool assignmentExpected();
     bool whileExpected();
+    bool callStmtExpected();
 
     void parseProgram();
     void parseProcedure();
     void parseStmtList();
     void parseStmt();
     void parseAssignment();
-    void parseWhile();
+    void parseWhileStmt();
+    void parseCallStmt();
 
 };

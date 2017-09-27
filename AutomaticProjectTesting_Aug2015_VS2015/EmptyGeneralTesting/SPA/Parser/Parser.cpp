@@ -16,14 +16,18 @@ using namespace std;
 
 const int Parser::INT_INITIAL_STMT_NUMBER = 0;
 const string Parser::STRING_EMPTY_STRING = "";
+const int Parser::INT_INITIAL_PROC_INDEX = 0;
 
 const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
+const regex Parser::REGEX_VALID_VAR_NAME = Parser::REGEX_VALID_ENTITY_NAME;
+const regex Parser::REGEX_VALID_PROC_NAME = Parser::REGEX_VALID_ENTITY_NAME;
 const regex Parser::REGEX_MATCH_CONSTANT = regex("\\s*\\d+\\s*");
 const regex Parser::REGEX_EXTRACT_NEXT_TOKEN = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|[^a-zA-Z0-9]|\\d+).*");
 //const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([a-zA-Z0-9+\\-*/=][a-zA-Z0-9+\\s\\-*/=]*)\\s*;.*");
 const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([^;\\s][^;]*)\\s*;.*");
 const regex Parser::REGEX_MATCH_PROCEDURE_KEYWORD = regex("\\s*procedure\\s*");
 const regex Parser::REGEX_MATCH_WHILE_KEYWORD = regex("\\s*while\\s*");
+const regex Parser::REGEX_MATCH_CALL_KEYWORD = regex("\\s*call\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACE = regex("\\s*\\u007B\\s*");
 const regex Parser::REGEX_MATCH_CLOSE_BRACE = regex("\\s*\\u007D\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACKET = regex("\\s*\\(\\s*");
@@ -44,19 +48,33 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _concatenatedSourceCode = Parser::STRING_EMPTY_STRING;
     _currentTokenPtr = Parser::STRING_EMPTY_STRING;
     _isValidSyntax = false;
-    _errorMessage = string();
     _callStack = stack<string>();
     _parentStack = stack<int>();
-    _firstStmtInProc = Parser::INT_INITIAL_STMT_NUMBER;
     _pkbMainPtr = pkbMainPtr;
     _stacksOfFollowsStacks = stack<stack<int>>();
+    _currentProcIdx = Parser::INT_INITIAL_PROC_INDEX;
 }
 
 bool Parser::parse(string filename) {
-    // TODO: Implement this when all other methods are tested.
     _isValidSyntax = true;
     concatenateLines(filename);
     parseProgram();
+
+    /*
+    PKB TODO: Tell PKB to start design extractor.
+        - Compute Follow* and Parents*
+        - Compute cross-procedural Uses and Modifies
+        - Compute Calls*
+        - Compute Next*
+    */
+    OutputDebugString("PKB: Tell PKB to start design extractor.\n");
+    _pkbMainPtr->startProcessComplexRelations();
+
+    /*
+    TODO: Final checks
+        - All calls are to valid procedures
+    */
+
     return _isValidSyntax;
 }
 
@@ -75,7 +93,11 @@ bool Parser::concatenateLines(string filename) {
     return true;
 }
 
-// Proceed to next token.
+/*
+Proceed to next token.
+Returns true if token is incremented successfully.
+Returns false when the end of _concatenatedSourceCode is reached.
+*/
 bool Parser::incrCurrentTokenPtr()
 {
     smatch match;
@@ -99,6 +121,15 @@ bool Parser::incrCurrentTokenPtr()
     }
 }
 
+/*
+Checks if end of the source code has been reached.
+Precondition:
+- Source code has to be concatenated into _concatenatedSourceCode.
+*/
+bool Parser::endOfSourceCodeReached() {
+    return regex_match(_concatenatedSourceCode, regex("\\s*"));
+}
+
 // Tokenize a given string into a vector of strings.
 vector<string> Parser::tokenizeString(string stringToTokenize)
 {
@@ -112,9 +143,9 @@ vector<string> Parser::tokenizeString(string stringToTokenize)
 }
 
 /*
-Returns a string from the current _nextToken to the character before the first semicolon encountered.
+Returns a string from the current _currentTokenPtr to the character before the first semicolon encountered.
 Indicate SIMPLE syntax error if no semicolon is encountered in the remaining of the string.
-Note that this method does not remove whitespaces and does not move _nextToken forward.
+Note that this method does not remove whitespaces and does not move _currentTokenPtr forward.
 */
 string Parser::extractStringUpToSemicolon() {
     smatch match;
@@ -131,7 +162,7 @@ string Parser::extractStringUpToSemicolon() {
 
 /*
 Asserts that the next token must match the given regex.
-If the match is successful, move _nextToken forward and return true.
+If the match is successful, move _currentTokenPtr forward and return true.
 If match is unsuccessful, indicate syntax error.
 */
 bool Parser::assertMatchAndIncrementToken(regex re) {
@@ -171,33 +202,32 @@ bool Parser::matchToken(regex re) {
 void Parser::parseProgram() {
     incrCurrentTokenPtr();
 
-    // PKB TODO: put this in a while loop after iteration 1,
-    //           when there are multiple procedures.
-    parseProcedure();
+    while (!endOfSourceCodeReached() && _isValidSyntax) {   //While not at the end of _concatednatedSourceCode
+        parseProcedure();
+    }
     OutputDebugString("FINE: End of program reached.\n");
-
-    // PKB TODO: Tell PKB to start design extractor.
-    OutputDebugString("PKB: Tell PKB to start design extractor.\n");
-    _pkbMainPtr->startProcessComplexRelations();
 }
 
-// Expects _nextToken to be "procedure" keyword
+// Expects _currentTokenPtr to be "procedure" keyword
 void Parser::parseProcedure() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD);
     OutputDebugString("FINE: Parsing procedure.\n");
 
     string procName;
     if (!(matchToken(Parser::REGEX_VALID_ENTITY_NAME))) {
-        // TODO: Throw exception?
+        //TODO: Throw exception?
         _isValidSyntax = false;
         //TODO: Remove this line after determining how to signal user on syntax error.
         OutputDebugString("WARNING: Invalid procedure name.\n");
         return;
     }
     procName = _currentTokenPtr;
-    // PKB TODO: Add to ProcToIdxMap
+    // PKB: Add to ProcToIdxMap
     OutputDebugString("PKB: Add procedure.\n");
     _pkbMainPtr->addProcedure(procName);
+    // PKB TODO: Update _currentProcIdx
+    // _currentProcIdx = _pkbMainPtr->getProcIdx(procName);
+    
 
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
@@ -206,7 +236,6 @@ void Parser::parseProcedure() {
     OutputDebugString("FINE: Push new stmtList stack to follows stack.\n");
     stack<int>* newFollowsStack = new stack<int>();
     _stacksOfFollowsStacks.push(*newFollowsStack);
-    _firstStmtInProc++;
 
     parseStmtList();
 
@@ -217,7 +246,7 @@ void Parser::parseProcedure() {
 }
 
 /*
-Parses the statment list within a scope. At the end of this method, _nextToken is '}'.
+Parses the statment list within a scope. At the end of this method, _currentTokenPtr is '}'.
 */
 void Parser::parseStmtList() {
     parseStmt();    // End of statement characters like ';' and '}' are handled in parseStmt().
@@ -251,7 +280,9 @@ void Parser::parseStmt() {
     // Check statement type and call appropriate function
     // (i.e. call, assignment, if-else, while)
     if (Parser::whileExpected()) {
-        parseWhile();
+        parseWhileStmt();
+    } else if (Parser::callStmtExpected()) {
+        parseCallStmt();
     } else if (Parser::assignmentExpected()) {
         // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords
         parseAssignment();
@@ -261,7 +292,7 @@ void Parser::parseStmt() {
 /*
 Tells whether the current statement is expected to be an assignment statement or not.
 If next token is a varName, assignment statement is expected.
-When the method ends, _nextToken is the varName.
+When the method ends, _currentTokenPtr is the varName.
 */
 bool Parser::assignmentExpected() {
     return matchToken(Parser::REGEX_VALID_ENTITY_NAME);
@@ -269,10 +300,18 @@ bool Parser::assignmentExpected() {
 
 /*
 Tells whether the current statement is expected to be a while statement or not.
-When the method ends, _nextToken is the 'while' keyword.
+When the method ends, _currentTokenPtr is the 'while' keyword.
 */
 bool Parser::whileExpected() {
     return matchToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
+}
+
+/*
+Tells whether the current statement is expected to be a call statement or not.
+When the method ends, _currentTokenPtr is the 'call' keyword.
+*/
+bool Parser::callStmtExpected() {
+    return matchToken(Parser::REGEX_MATCH_CALL_KEYWORD);
 }
 
 /*
@@ -468,7 +507,7 @@ bool Parser::isBracketedCorrectly(std::string expression)
 Parses a while statement. When this method ends,
 _currentTokenPtr will be advanced after '}'.
 */
-void Parser::parseWhile() {
+void Parser::parseWhileStmt() {
     OutputDebugString("FINE: While statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
 
@@ -541,4 +580,28 @@ void Parser::processAndPopTopFollowStack()
 
     // TODO: Free dynamically allocated memory with "delete" keyword.
     _stacksOfFollowsStacks.pop();
+}
+
+void Parser::parseCallStmt()
+{
+    OutputDebugString("FINE: Parsing Calls statement.\n");
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CALL_KEYWORD);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    string calledProcName = _currentTokenPtr;
+
+    /*
+    TODO:
+    The procedure being called will not be added to PKB. After the whole SIMPLE program is parsed,
+    Ask DesignExtractor to check if all the procedures being called are present.
+    Show error message and exit if a call statement calls an undefined procedure.
+    */
+    /*
+    PKB TODO:
+    - Add calledProcName to PKB's procedures DS?
+    - Add calls relation
+    */
+    OutputDebugString("PKB: Add calls relation.\n");
+
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
 }
