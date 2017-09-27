@@ -60,6 +60,8 @@ procedure GHI	 {
 		w = laugh;
 	}
 	funnyVar = 0;
+	call NotSharingVar;
+	funnyVar = 10;
 }
 
 procedure DEF {
@@ -75,4 +77,11 @@ procedure DEF {
 	}
 	c = b + a;
 	b = 1000;
+}
+
+procedure NotSharingVar {
+	best = 1;
+	food = best;
+	supper = best * best;
+	supper = supper * best;
 }
