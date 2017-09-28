@@ -55,7 +55,6 @@
     <ClCompile Include="PQL\Validator\Selection\Pattern\WhilePatternValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\UsesValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.cpp" />
-    <ClCompile Include="PQL\QueryTreeStub.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
@@ -106,7 +105,6 @@
     <ClInclude Include="PQL\Validator\Selection\Pattern\WhilePatternValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\UsesValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.h" />
-    <ClInclude Include="PQL\QueryTreeStub.h" />
     <ClInclude Include="PQL\Utilities\SuchThatClause.h" />
     <ClInclude Include="PQL\Utilities\SelectClause.h" />
   </ItemGroup>
