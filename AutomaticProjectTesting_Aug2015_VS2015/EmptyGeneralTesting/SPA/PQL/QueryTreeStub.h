@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <list>
 
 using namespace std;
 
@@ -12,6 +13,7 @@ public:
     QueryTreeStub();
     ~QueryTreeStub();
 
+    void storeUnvalidatedStmts(vector<string> splitted);
     void insertSelect(array<string, 2> arr);
     void insertVariable(string type, string var);
     void insertFollows(array<string, 4> arr);
@@ -21,7 +23,7 @@ public:
     void insertUses(array<string, 4> arr);
     void insertModifies(array<string, 4> arr);
     void insertPattern(array<string, 6> arr);
-
+    void storeEvaluatorResult(list<string> list);
 
     vector<string> getUnvalidatedStmts();
     vector<string> getStmts();
@@ -31,7 +33,6 @@ public:
     vector<string> getConsts();
     vector<string> getProgLines();
 
-
     array<string, 2> getSelect();
     vector<array<string, 4>> getFollows();
     vector<array<string, 4>> getFollowsT();
@@ -40,8 +41,12 @@ public:
     vector<array<string, 4>> getUses();
     vector<array<string, 4>> getModifies();
     vector<array<string, 6>> getPatterns();
+    list<string> getEvaluatorResult();
+
+    bool varExists(string var);
 
 private:
+
     vector<string> unvalidatedStmts;
     vector<string> stmts;
     vector<string> assigns;
@@ -59,5 +64,7 @@ private:
     vector<array<string, 4>> usesClauses;
     vector<array<string, 4>> modifiesClauses;
     vector<array<string, 6>> patternClauses;
+
+    list<string> evaluatorResult;
 };
 

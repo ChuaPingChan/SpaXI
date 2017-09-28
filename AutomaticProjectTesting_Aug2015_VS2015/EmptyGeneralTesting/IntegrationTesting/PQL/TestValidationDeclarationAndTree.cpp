@@ -13,7 +13,7 @@ namespace UnitTesting
     {
     public:
 
-        TEST_METHOD(TestValidity_Declaration_Entity_SynonymSingle_Valid_Trial)
+        TEST_METHOD(TestValidity_Declaration_Entity_SynonymSingle_Valid)
         {
             QueryTreeStub qtPtr;
             FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
@@ -22,47 +22,56 @@ namespace UnitTesting
             Assert::IsTrue(UtilityQueryTree::isGetAllAssignsSame(qtPtr, fdv.getQueryTreeCopy()));
         }
 
-        /*TEST_METHOD(TestValidity_Declaration_Entity_SynonymMultiple_Valid)
+        TEST_METHOD(TestValidity_Declaration_Entity_SynonymMultiple_Valid)
         {
-            QueryValidatorFriend qvf;
+            QueryTreeStub qtPtr;
+            FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "stmt validEntity, multipleVa1idSynonym";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
+            Assert::IsTrue(fdv.isValidDeclaration(str));
+            Assert::IsTrue(UtilityQueryTree::isGetAllStmtsSame(qtPtr, fdv.getQueryTreeCopy()));
         }
 
         TEST_METHOD(TestValidity_Declaration_Entity_Synonym_Whitespace_Valid)
         {
-            QueryValidatorFriend qvf;
+            QueryTreeStub qtPtr;
+            FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "variable          validEntitySynonymWithWhitespace";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
+            Assert::IsTrue(fdv.isValidDeclaration(str));
+            Assert::IsTrue(UtilityQueryTree::isGetAllVariablesSame(qtPtr, fdv.getQueryTreeCopy()));
         }
 
         TEST_METHOD(TestValidity_Declaration_Entity_Synonym_Newline_Valid)
         {
-            QueryValidatorFriend qvf;
+            QueryTreeStub qtPtr;
+            FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "while \n validEntitySynonymWithNewline";
-            Assert::IsTrue(qvf.isValidDeclaration(str));
+            Assert::IsTrue(fdv.isValidDeclaration(str));
+            Assert::IsTrue(UtilityQueryTree::isGetAllWhilesSame(qtPtr, fdv.getQueryTreeCopy()));
         }
 
         TEST_METHOD(TestValidity_Declaration_Entity_Synonym_Invalid)
         {
-            QueryValidatorFriend qvf;
+            QueryTreeStub qtPtr;
+            FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "invalidEntity inv@lidSyn0nym";
-            Assert::IsFalse(qvf.isValidDeclaration(str));
+            Assert::IsFalse(fdv.isValidDeclaration(str));
         }
 
         TEST_METHOD(TestValidity_Declaration_SeparationBtwnArg_Invalid)
         {
-            QueryValidatorFriend qvf;
+            QueryTreeStub qtPtr;
+            FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "assign validEntity validSynonym  but no comma";
-            Assert::IsFalse(qvf.isValidDeclaration(str));
+            Assert::IsFalse(fdv.isValidDeclaration(str));
         }
 
         TEST_METHOD(TestValidity_Declaration_RepeatedSynonym_Invalid)
         {
-            QueryValidatorFriend qvf;
+            QueryTreeStub qtPtr;
+            FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "assign sameSynonym, sameSynonym, sameSynonym";
-            Assert::IsFalse(qvf.isValidDeclaration(str));
-        }*/
+            Assert::IsFalse(fdv.isValidDeclaration(str));
+        }
 
     };
 }

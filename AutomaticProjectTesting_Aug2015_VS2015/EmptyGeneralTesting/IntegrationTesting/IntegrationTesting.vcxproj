@@ -174,7 +174,6 @@
     </ClCompile>
     <ClCompile Include="TestFrontEnd.cpp" />
     <ClCompile Include="TestPQLValidatorAndTree.cpp" />
-    <ClCompile Include="TestValidationDeclarationAndTree.cpp" />
     <ClCompile Include="TestValidationFollowsAndTree.cpp" />
     <ClCompile Include="TestValidationFollowsStarAndTree.cpp" />
     <ClCompile Include="TestValidationModifiesAndTree.cpp" />

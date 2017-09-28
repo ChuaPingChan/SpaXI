@@ -60,10 +60,10 @@ bool DeclarationValidator::isValidDeclaration(string str) {
         }
 
         if (synonymBank.find(synonym) == synonymBank.end()) {
-            synonymBank.insert(synonym);
+           synonymBank.insert(synonym);
             if (entity == synonym)
                 return false;
-            //qtInstance->insertVariable(entity, synonym);
+            qtPtr->insertVariable(entity, synonym);
         }
         else {
             return false;
@@ -82,10 +82,20 @@ bool DeclarationValidator::setQueryTreeStub(QueryTreeStub *qtPtrNew) {
     return true;
 }
 
+//TODO: Remove the content and call api from relation table
 bool DeclarationValidator::isValidEntity(string str) {
-    return true;
+    const string DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
+    regex entityRegex(DESIGN_ENTITY_REGEX);
+    return regex_match(str, entityRegex);
 }
 
+//TODO: Remove the content and call api from relation table
 bool DeclarationValidator::isValidSynonym(string str) {
-    return true;
+    const string LETTER = "([a-zA-Z])";
+    const string DIGIT = "([0-9])";
+    const string HASH = "(#)";
+    const string IDENT = "(" + LETTER + "(" + LETTER + "|" + DIGIT + "|" + HASH + ")*)";
+    const string SYNONYM = IDENT;
+    regex synonymRegex(SYNONYM);
+    return regex_match(str, synonymRegex);
 }
