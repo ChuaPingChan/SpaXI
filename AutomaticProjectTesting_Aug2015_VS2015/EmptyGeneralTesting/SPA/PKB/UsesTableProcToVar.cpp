@@ -22,5 +22,9 @@ bool UsesTableProcToVar::addUsesProcToVarList(int procIdx, string var) {
 }
 
 list<string> UsesTableProcToVar::getUsesVariablesFromProc(int procIdx) {
+	if (usesProcToVarMap.find(procIdx) == usesProcToVarMap.end()) {
+		return list<string>();
+	}
+
     return usesProcToVarMap[procIdx];
 }

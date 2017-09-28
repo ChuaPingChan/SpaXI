@@ -15,5 +15,9 @@ bool ProcIdxTable::addToProcIdxTable(string proc) {
 }
 
 int ProcIdxTable::getIdxFromProc(string proc) {
+	if (procIdxMap.find(proc) == procIdxMap.end()) {
+		return -1;
+	}
+
     return procIdxMap[proc];
 }
