@@ -25,6 +25,7 @@ list<string> UsesTableStmtToVar::getUsesVariablesFromStmt(int stmtNumber)
 	if (usesStmtToVarMap.find(stmtNumber) == usesStmtToVarMap.end()) {
 		return list<string>();
 	}
+
     return usesStmtToVarMap[stmtNumber];
 }
 
