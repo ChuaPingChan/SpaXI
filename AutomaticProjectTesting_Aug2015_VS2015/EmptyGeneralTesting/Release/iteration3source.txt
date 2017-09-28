@@ -31,6 +31,20 @@ while a
    w = 2		;
    i = w;
 }
+b = c + a;
+	beta = 100;
+	if beta then {
+		beta = beta * 2;
+		while beta {
+			beta = beta - 1;
+			b = b + c + a;
+			c = c + a;
+		}	} else {		beta = 50;
+		while beta {
+			beta = beta - 1;
+			c = c + a;
+		}
+	}
 }
 
 procedure GHI	 {
