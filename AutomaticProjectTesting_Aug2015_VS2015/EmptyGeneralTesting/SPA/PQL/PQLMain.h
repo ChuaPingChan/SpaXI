@@ -18,5 +18,6 @@ public:
 
 private:
 	string query;
+	QueryTree qt;
 };
 
