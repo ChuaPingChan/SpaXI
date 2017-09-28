@@ -25,7 +25,7 @@ bool QueryValidator::isValidQuery(string query) {
         }
     }
 
-    return true; // && isValidSelect();
+    return true;
 }
 
 bool QueryValidator::isValidDeclaration(string str) {

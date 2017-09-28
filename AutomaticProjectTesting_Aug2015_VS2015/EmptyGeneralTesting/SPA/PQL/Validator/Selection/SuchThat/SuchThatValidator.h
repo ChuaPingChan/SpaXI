@@ -9,6 +9,8 @@ public:
     SuchThatValidator();
     ~SuchThatValidator();
 
-    virtual bool isValid(string str) = 0;
+    virtual void setNextValidator(SuchThatValidator nextValidator);
+
+    virtual bool isValid(string str);
 };
 

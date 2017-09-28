@@ -1,17 +1,21 @@
 #include "ModifiesValidator.h"
 
-
-
-ModifiesValidator::ModifiesValidator()
+ModifiesValidator::ModifiesValidator(QueryTreeStub *qtPtrNew)
 {
+    this->qtPtr = qtPtrNew;
 }
-
 
 ModifiesValidator::~ModifiesValidator()
 {
 }
 
-bool ModifiesValidator::isValid()
+
+void ModifiesValidator::setNextValidator(SuchThatValidator nextValidator)
+{
+    this->nextValidatorInLine = nextValidator;
+}
+
+bool ModifiesValidator::isValid(string str)
 {
     return false;
 }
