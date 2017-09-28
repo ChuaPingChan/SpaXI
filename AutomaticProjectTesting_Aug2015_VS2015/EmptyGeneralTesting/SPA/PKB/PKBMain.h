@@ -33,8 +33,7 @@ public:
     static PKBMain* getInstance();
     static void resetInstance();
 
-	//Parser API
-	bool setParentChildRel(int parentStmt, int childStmt);
+	//Parent
     bool isParentChild(int parentStmt, int childStmt);
     bool isParent(int parentStmt);
     list<int> getChildren(int parentStmt, string type);
@@ -48,9 +47,10 @@ public:
 	list<int> getChildrenStar(int parentStmt, string type);
 	list<int> getParentStar(int childStmt, string type);
 	pair<list<int>, list<int>> getAllParentStarRel(string type1, string type2);
+
+	//Follows
 	pair<list<int>, list<int>> getAllFollows(string type1, string type2);
     bool hasFollows();
-    bool setFollowsRel(int stmtBef, int stmtAft);
     bool isAfter(int stmtAft);
     bool isBefore(int stmtBef);
     bool isFollows(int stmtBef, int stmtAft);
@@ -80,10 +80,13 @@ public:
 	list<string> getAllVariables();
     
     //PKB-Parser
+	bool setParentChildRel(int parentStmt, int childStmt);
+    bool setFollowsRel(int stmtBef, int stmtAft);
     bool addVariable(string var);
     bool addProcedure(string proc);
     bool addAssignmentStmt(int stmt);
     bool addWhileStmt(int stmt);
+	bool addCallStmt(int stmt, string proc);
     bool addConstant(int stmt, int constant);
     bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);
