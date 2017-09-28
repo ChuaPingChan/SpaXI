@@ -1,10 +1,14 @@
 #include "QueryValidator.h"
 
-QueryValidator::QueryValidator() {}
+QueryValidator::QueryValidator(QueryTree *qtNew) {
+    this->qtPtr = qtNew;
+    dv.setQueryTree(this->qtPtr);
+    sv.setQueryTree(this->qtPtr);
+}
+
 QueryValidator::~QueryValidator() {}
 
-bool QueryValidator::isValidQuery(string query)
-{
+bool QueryValidator::isValidQuery(string query) {
     vector<string> inputVector = tokenize(query);
 
     for (vector<string>::iterator iter = inputVector.begin(); iter != inputVector.end(); ++iter) {

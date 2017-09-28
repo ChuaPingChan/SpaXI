@@ -14,14 +14,15 @@ using namespace std;
 class QueryValidator
 {
 public:
-    QueryValidator();
+    QueryValidator(QueryTree *qtPtrNew);
     ~QueryValidator();
 
     bool isValidQuery(string query);
 
 private:
-    DeclarationValidator dv;
-    SelectionValidator sv;
+    QueryTree *qtPtr;
+    DeclarationValidator dv = DeclarationValidator(qtPtr);  //Null when initialised
+    SelectionValidator sv = SelectionValidator(qtPtr);      //Null when initialised
 
     bool isValidDeclaration(string str);
     bool isValidSelection(string str);
