@@ -1,6 +1,6 @@
 #include "UsesValidator.h"
 
-UsesValidator::UsesValidator(QueryTreeStub *qtPtrNew)
+UsesValidator::UsesValidator(QueryTree *qtPtrNew)
 {
     this->qtPtr = qtPtrNew;
 }

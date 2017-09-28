@@ -1,6 +1,6 @@
 #include "SuchThatHandler.h"
 
-SuchThatHandler::SuchThatHandler(QueryTreeStub *qtPtrNew)
+SuchThatHandler::SuchThatHandler(QueryTree *qtPtrNew)
 {
     this->qtPtr = qtPtrNew;
 }

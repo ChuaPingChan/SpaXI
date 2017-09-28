@@ -18,10 +18,10 @@ PQLMain::~PQLMain()
 list<string> PQLMain::run()
 {
 
-	QueryValidatorOld validator;
+	QueryValidator validator = QueryValidator(&qt);
 	bool isValid = validator.isValidQuery(query);
 
-	if (isValid) 
+	/*if (isValid) 
 	{
 		QueryEvaluator evaluator;
 		evaluator.evaluate();
@@ -40,5 +40,6 @@ list<string> PQLMain::run()
 	else
 	{
 		return list<string>();
-	}
+	}*/
+    return list<string>();
 }

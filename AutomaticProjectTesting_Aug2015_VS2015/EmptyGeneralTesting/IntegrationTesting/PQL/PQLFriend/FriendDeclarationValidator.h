@@ -6,12 +6,12 @@ class FriendDeclarationValidator
     DeclarationValidator dv = DeclarationValidator(NULL);
 
 public:
-    FriendDeclarationValidator(QueryTreeStub *qtPtrNew);
+    FriendDeclarationValidator(QueryTree *qtPtrNew);
     ~FriendDeclarationValidator();
 
     bool isValidDeclaration(string str);
 
-    QueryTreeStub getQueryTreeCopy();
-    QueryTreeStub** getQueryTreeAddress();
+    QueryTree getQueryTreeCopy();
+    QueryTree** getQueryTreeAddress();
 };
 

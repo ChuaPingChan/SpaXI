@@ -8,19 +8,19 @@
 #include "CallsValidator.h"
 #include "NextValidator.h"
 #include "AffectsValidator.h"
-#include "..\..\..\QueryTreeStub.h"
+#include "..\..\..\QueryTree.h"
 
 class SuchThatHandler
 {
 public:
-    SuchThatHandler(QueryTreeStub *qtPtrNew);
+    SuchThatHandler(QueryTree *qtPtrNew);
     ~SuchThatHandler();
 
     bool isValidSuchThat(string str);
         
 
 private:
-    QueryTreeStub *qtPtr;
+    QueryTree *qtPtr;
 
     string removeAllSpaces(string str);
 };

@@ -1,7 +1,7 @@
 #include "SelectionValidator.h"
 
-SelectionValidator::SelectionValidator(QueryTreeStub *qtPtrNew) {
-    setQueryTreeStub(qtPtrNew);
+SelectionValidator::SelectionValidator(QueryTree *qtPtrNew) {
+    setQueryTree(qtPtrNew);
 }
 
 SelectionValidator::~SelectionValidator() {}
@@ -97,7 +97,7 @@ bool SelectionValidator::isValidSelection(string str)
     return true;  //stub
 }
 
-bool SelectionValidator::setQueryTreeStub(QueryTreeStub *qtPtrNew)
+bool SelectionValidator::setQueryTree(QueryTree *qtPtrNew)
 {
     this->qtPtr = qtPtrNew;
     return true;

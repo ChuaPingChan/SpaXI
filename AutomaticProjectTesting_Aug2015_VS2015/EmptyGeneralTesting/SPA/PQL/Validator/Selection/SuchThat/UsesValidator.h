@@ -1,18 +1,18 @@
 #pragma once
 #include "SuchThatValidator.h"
-#include "..\..\..\QueryTreeStub.h"
+#include "..\..\..\QueryTree.h"
 
 class UsesValidator : public SuchThatValidator
 {
 public:
-    UsesValidator(QueryTreeStub *qtPtrNew);
+    UsesValidator(QueryTree *qtPtrNew);
     ~UsesValidator();
 
     virtual void setNextValidator(SuchThatValidator nextValidator);
     virtual bool isValid(string str);
 
 private:
-    QueryTreeStub *qtPtr;
+    QueryTree *qtPtr;
     SuchThatValidator nextValidatorInLine;
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "..\..\..\SPA\PQL\QueryTreeStub.h"
+#include "..\..\..\SPA\PQL\QueryTree.h"
 
 using namespace std;
 
@@ -11,9 +11,9 @@ public:
     UtilityQueryTree();
     ~UtilityQueryTree();
 
-    static bool isGetAllStmtsSame(QueryTreeStub qt1, QueryTreeStub qt2);
-    static bool isGetAllAssignsSame(QueryTreeStub qt1, QueryTreeStub qt2);
-    static bool isGetAllVariablesSame(QueryTreeStub qt1, QueryTreeStub qt2);
-    static bool isGetAllWhilesSame(QueryTreeStub qt1, QueryTreeStub qt2);
+    static bool isGetAllStmtsSame(QueryTree qt1, QueryTree qt2);
+    static bool isGetAllAssignsSame(QueryTree qt1, QueryTree qt2);
+    static bool isGetAllVariablesSame(QueryTree qt1, QueryTree qt2);
+    static bool isGetAllWhilesSame(QueryTree qt1, QueryTree qt2);
 };
 

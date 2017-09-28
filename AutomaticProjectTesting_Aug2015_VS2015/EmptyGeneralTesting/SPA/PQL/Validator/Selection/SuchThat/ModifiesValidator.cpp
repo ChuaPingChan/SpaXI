@@ -1,6 +1,6 @@
 #include "ModifiesValidator.h"
 
-ModifiesValidator::ModifiesValidator(QueryTreeStub *qtPtrNew)
+ModifiesValidator::ModifiesValidator(QueryTree *qtPtrNew)
 {
     this->qtPtr = qtPtrNew;
 }

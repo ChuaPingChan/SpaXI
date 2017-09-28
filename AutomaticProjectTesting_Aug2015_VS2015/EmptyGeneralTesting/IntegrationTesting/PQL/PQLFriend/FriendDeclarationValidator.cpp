@@ -1,7 +1,7 @@
 #include "FriendDeclarationValidator.h"
 
 
-FriendDeclarationValidator::FriendDeclarationValidator(QueryTreeStub *qtPtrNew)
+FriendDeclarationValidator::FriendDeclarationValidator(QueryTree *qtPtrNew)
 {
     dv = DeclarationValidator(qtPtrNew);
 }
@@ -16,12 +16,12 @@ bool FriendDeclarationValidator::isValidDeclaration(string str)
     return dv.isValidDeclaration(str);
 }
 
-QueryTreeStub FriendDeclarationValidator::getQueryTreeCopy()
+QueryTree FriendDeclarationValidator::getQueryTreeCopy()
 {
     return *(dv.qtPtr);
 }
 
-QueryTreeStub** FriendDeclarationValidator::getQueryTreeAddress()
+QueryTree** FriendDeclarationValidator::getQueryTreeAddress()
 {
     return &(dv.qtPtr);
 }
