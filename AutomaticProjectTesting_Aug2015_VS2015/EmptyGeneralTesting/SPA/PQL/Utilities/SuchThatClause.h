@@ -16,7 +16,7 @@ public:
 	string getArgTwo();
 
 private:
-	int rel;
+	int _rel;
 	int _argOneType;
 	int _argTwoType;
 	string _argOne;
