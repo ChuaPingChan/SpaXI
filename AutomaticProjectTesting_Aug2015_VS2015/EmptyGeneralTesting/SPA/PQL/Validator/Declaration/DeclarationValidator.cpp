@@ -1,7 +1,7 @@
 #include "DeclarationValidator.h"
 
-DeclarationValidator::DeclarationValidator(QueryTree *qtPtrNew) {
-    setQueryTree(qtPtrNew);
+DeclarationValidator::DeclarationValidator(QueryTreeStub *qtPtrNew) {
+    setQueryTreeStub(qtPtrNew);
 }
 
 DeclarationValidator::~DeclarationValidator() {}
@@ -77,7 +77,7 @@ bool DeclarationValidator::isValidDeclaration(string str) {
     return numComma == expectedNumComma;
 }
 
-bool DeclarationValidator::setQueryTree(QueryTree *qtPtrNew) {
+bool DeclarationValidator::setQueryTreeStub(QueryTreeStub *qtPtrNew) {
     this->qtPtr = qtPtrNew;
     return true;
 }

@@ -7,20 +7,20 @@
 #include <algorithm>
 #include "Declaration\DeclarationValidator.h"
 #include "Selection\SelectionValidator.h"
-#include "..\QueryTree.h"
+#include "..\QueryTreeStub.h"
 
 using namespace std;
 
 class QueryValidator
 {
 public:
-    QueryValidator(QueryTree *qtPtrNew);
+    QueryValidator(QueryTreeStub *qtPtrNew);
     ~QueryValidator();
 
     bool isValidQuery(string query);
 
 private:
-    QueryTree *qtPtr;
+    QueryTreeStub *qtPtr;
     DeclarationValidator dv = DeclarationValidator(qtPtr);  //Null when initialised
     SelectionValidator sv = SelectionValidator(qtPtr);      //Null when initialised
 

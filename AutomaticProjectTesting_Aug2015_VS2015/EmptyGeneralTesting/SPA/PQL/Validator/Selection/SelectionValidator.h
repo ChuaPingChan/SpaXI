@@ -1,18 +1,18 @@
 #pragma once
 #include <string>
-#include "..\..\QueryTree.h"
+#include "..\..\QueryTreeStub.h"
 
 using namespace std;
 
 class SelectionValidator
 {
 public:
-    SelectionValidator(QueryTree *qtPtrNew);
+    SelectionValidator(QueryTreeStub *qtPtrNew);
     ~SelectionValidator();
 
     bool isValidSelection(string str);
-    bool setQueryTree(QueryTree *qtPtrNew);
+    bool setQueryTreeStub(QueryTreeStub *qtPtrNew);
 
 private:
-    QueryTree *qtPtr;
+    QueryTreeStub *qtPtr;
 };

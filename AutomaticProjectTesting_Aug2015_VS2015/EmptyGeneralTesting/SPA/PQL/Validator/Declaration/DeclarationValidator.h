@@ -2,21 +2,23 @@
 #include <string>
 #include <unordered_set>
 #include <regex>
-#include "..\..\QueryTree.h"
+#include "..\..\QueryTreeStub.h"
 
 using namespace std;
 
 class DeclarationValidator
 {
+    friend class FriendDeclarationValidator;
+
 public:
-    DeclarationValidator(QueryTree *qtPtrNew);
+    DeclarationValidator(QueryTreeStub *qtPtrNew);
     ~DeclarationValidator();
 
     bool isValidDeclaration(string str);
-    bool setQueryTree(QueryTree *qtPtrNew);
+    bool setQueryTreeStub(QueryTreeStub *qtPtrNew);
 
 private:
-    QueryTree *qtPtr;
+    QueryTreeStub *qtPtr;
 
     unordered_set<string> synonymBank;   //Contains list of used synonyms
     vector<string> unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree

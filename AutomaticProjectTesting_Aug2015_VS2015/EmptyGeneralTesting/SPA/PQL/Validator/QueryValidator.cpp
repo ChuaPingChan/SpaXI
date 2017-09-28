@@ -1,9 +1,9 @@
 #include "QueryValidator.h"
 
-QueryValidator::QueryValidator(QueryTree *qtNew) {
+QueryValidator::QueryValidator(QueryTreeStub *qtNew) {
     this->qtPtr = qtNew;
-    dv.setQueryTree(this->qtPtr);
-    sv.setQueryTree(this->qtPtr);
+    dv.setQueryTreeStub(this->qtPtr);
+    sv.setQueryTreeStub(this->qtPtr);
 }
 
 QueryValidator::~QueryValidator() {}
