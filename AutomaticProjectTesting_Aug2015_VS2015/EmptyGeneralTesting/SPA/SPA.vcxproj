@@ -55,6 +55,7 @@
     <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\Pattern\WhilePatternValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\UsesValidator.cpp" />
+    <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
@@ -101,6 +102,7 @@
     <ClInclude Include="PQL\Validator\Selection\SuchThat\SuchThatValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\Pattern\WhilePatternValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\UsesValidator.h" />
+    <ClInclude Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
