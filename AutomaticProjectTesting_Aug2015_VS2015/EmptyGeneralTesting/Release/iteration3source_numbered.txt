@@ -33,57 +33,73 @@ procedure ABC {
 26		w = 2		;
 27		i = w;
 	}
+28	b = c + a;
+29	beta = 100;
+30	if beta then {
+31		beta = beta * 2;
+32		while beta {
+33			beta = beta - 1;
+34			b = b + c + a;
+35			c = c + a;
+		}
+	} else {
+36		beta = 50;
+37		while beta {
+38			beta = beta - 1;
+39			c = c + a;
+		}
+	}
 }
 
 procedure GHI {
-28	funnyVar = 101;
-29	while funnyVar {
-30		laugh = 10;
-31		funnyVar = funnyVar - 1;
-32		while laugh {
-33			laugh = laugh - 1;
+40	funnyVar = 101;
+41	while funnyVar {
+42		laugh = 10;
+43		funnyVar = funnyVar - 1;
+44		while laugh {
+45			laugh = laugh - 1;
 		}
 	}
-34	w = 3 + a;
-35	a = 10;
-36	if w then {
-37		w = a;
-38		laugh = w;
-39		if b then {
-40			b = b * 3 - tmp + oSCar;
-41			oSCar = Romeo;
+46	w = 3 + a;
+47	a = 10;
+48	if w then {
+49		w = a;
+50		laugh = w;
+51		if b then {
+52			b = b * 3 - tmp + oSCar;
+53			oSCar = Romeo;
 		} else {
-42			w = 1000;
-43			a = 2;
+54			w = 1000;
+55			a = 2;
 		}
-44		w = a;
+56		w = a;
 	} else {
-45		a = 2;
-46		w = laugh;
+57		a = 2;
+58		w = laugh;
 	}
-47	funnyVar = 0;
-48	call NotSharingVar;
-49	funnyVar = 10;
+59	funnyVar = 0;
+60	call NotSharingVar;
+61	funnyVar = 10;
 }
 
 procedure DEF {
-50	a = 123;
-51	b = 345;
-52	while a {
-53		c = b;
-54		b = 482;
-55		call GHI;
-56		while b {
-57			laugh = laugh + 1;
+62	a = 123;
+63	b = 345;
+64	while a {
+65		c = b;
+66		b = 482;
+67		call GHI;
+68		while b {
+69			laugh = laugh + 1;
 		}
 	}
-58	c = b + a;
-59	b = 1000;
+70	c = b + a;
+71	b = 1000;
 }
 
 procedure NotSharingVar {
-60	best = 1;
-61	food = best;
-62	supper = best * best;
-63	supper = supper * best;
+72	best = 1;
+73	food = best;
+74	supper = best * best;
+75	supper = supper * best;
 }
