@@ -6,25 +6,25 @@ using namespace std;
 class PatternClause
 {
 public:
-	PatternClause(int type, int type_one, string arg_one, int type_two, string arg_two, int type_three, string arg_three);
+	PatternClause(int patternType, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree);
 	~PatternClause();
 
 	/* Getters */
-	int getType();
-	int getTypeOne();
-	int getTypeTwo();
-	int getTypeThree();
+	int getPatternType();
+	int getArgOneType();
+	int getArgTwoType();
+	int getArgThreeType();
 	string getArgOne();
 	string getArgTwo();
 	string getArgThree();
 
 private:
-	int type;
-	int type_one;
-	int type_two;
-	int type_three;
-	string arg_one;
-	string arg_two;
-	string arg_three;
+	int _patternType;
+	int _argOneType;
+	int _argTwoType;
+	int _argThreeType;
+	string _argOne;
+	string _argTwo;
+	string _argThree;
 };
 

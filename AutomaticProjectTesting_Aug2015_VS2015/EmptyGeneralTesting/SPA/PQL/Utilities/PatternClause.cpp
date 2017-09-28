@@ -1,52 +1,52 @@
 #include "PatternClause.h"
 
 
-PatternClause::PatternClause(int type, int type_one, string arg_one, int type_two, string arg_two, int type_three, string arg_three)
+PatternClause::PatternClause(int patternType, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree)
 {
-	this->type = type;
-	this->type_one = type_one;
-	this->type_two = type_two;
-	this->type_three = type_three;
-	this->arg_one = arg_one;
-	this->arg_two = arg_two;
-	this->arg_three = arg_three;
+	this->_patternType = patternType;
+	this->_argOneType = argOneType;
+	this->_argTwoType = argTwoType;
+	this->_argThreeType = argThreeType;
+	this->_argOne = argOne;
+	this->_argTwo = argTwo;
+	this->_argThree = argThree;
 }
 
 PatternClause::~PatternClause()
 {
 }
 
-int PatternClause::getType()
+int PatternClause::getPatternType()
 {
-	return type;
+	return _patternType;
 }
 
-int PatternClause::getTypeOne()
+int PatternClause::getArgOneType()
 {
-	return this->type_one;
+	return this->_argOneType;
 }
 
-int PatternClause::getTypeTwo()
+int PatternClause::getArgTwoType()
 {
-	return this->type_two;
+	return this->_argTwoType;
 }
 
-int PatternClause::getTypeThree()
+int PatternClause::getArgThreeType()
 {
-	return this->type_three;
+	return this->_argThreeType;
 }
 
 string PatternClause::getArgOne()
 {
-	return this->arg_one;
+	return this->_argOne;
 }
 
 string PatternClause::getArgTwo()
 {
-	return this->arg_two;
+	return this->_argTwo;
 }
 
 string PatternClause::getArgThree()
 {
-	return this->arg_three;
+	return this->_argThree;
 }

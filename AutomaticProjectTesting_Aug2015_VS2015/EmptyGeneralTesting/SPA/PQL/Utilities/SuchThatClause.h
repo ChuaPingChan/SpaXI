@@ -6,7 +6,7 @@ using namespace std;
 class SuchThatClause
 {
 public:
-	SuchThatClause(int rel, int type_one, string arg_one, int type_two, string arg_two);
+	SuchThatClause(int rel, int argOneType, string argOne, int argTwoType, string argTwo);
 	~SuchThatClause();
 
 	int getRel();
@@ -17,9 +17,9 @@ public:
 
 private:
 	int rel;
-	int type_one;
-	int type_two;
-	string arg_one;
-	string arg_two;
+	int _argOneType;
+	int _argTwoType;
+	string _argOne;
+	string _argTwo;
 };
 
