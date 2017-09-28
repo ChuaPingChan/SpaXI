@@ -3,7 +3,7 @@
 
 SuchThatClause::SuchThatClause(int rel, int argOneType, string argOne, int argTwoType, string argTwo)
 {
-	this->rel = rel;
+	this->_rel = rel;
 	this->_argOneType = argOneType;
 	this->_argTwoType = argTwoType;
 	this->_argOne = argOne;
@@ -16,7 +16,7 @@ SuchThatClause::~SuchThatClause()
 
 int SuchThatClause::getRel()
 {
-	return this->rel;
+	return this->_rel;
 }
 
 int SuchThatClause::getTypeOne()
