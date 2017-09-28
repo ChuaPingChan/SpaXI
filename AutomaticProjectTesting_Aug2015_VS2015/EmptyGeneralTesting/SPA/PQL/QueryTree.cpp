@@ -2,8 +2,6 @@
 
 using namespace std;
 
-QueryTree* QueryTree::instance = 0;
-
 QueryTree::QueryTree()
 {
 }
@@ -12,58 +10,36 @@ QueryTree::~QueryTree()
 {
 }
 
-QueryTree* QueryTree::getInstance()
-{
-	if (instance == 0) 
-	{
-		instance = new QueryTree();
-	}
-
-	return instance;
-}
-
-QueryTree* QueryTree::clear()
-{
-	delete instance;
-	instance = new QueryTree();
-	return instance;
-}
-
-void QueryTree::storeUnvalidatedStmts(vector<string> splittedVec)
-{
-	unvalidatedStmts = splittedVec;
-}
-
 void QueryTree::insertVariable(string type, string var)
 {
 	if (type == "stmt") 
 	{
-		stmts.push_back(var);
+		stmts.insert(var);
 	}
 
 	else if (type == "assign")
 	{
-		assigns.push_back(var);
+		assigns.insert(var);
 	}
 
 	else if (type == "while")
 	{
-		whiles.push_back(var);
+		whiles.insert(var);
 	}
 
 	else if (type == "variable")
 	{
-		vars.push_back(var);
+		vars.insert(var);
 	}
 
 	else if (type == "constant")
 	{
-		consts.push_back(var);
+		consts.insert(var);
 	}
 
 	else if (type == "prog_line")
 	{
-		progLines.push_back(var);
+		progLines.insert(var);
 	}
 
 	else
@@ -72,39 +48,19 @@ void QueryTree::insertVariable(string type, string var)
 	}
 }
 
-void QueryTree::insertFollows(array<string, 4> arr)
+void QueryTree::insertSelect(SelectClause select)
 {
-	followsClauses.push_back(arr);
+	selectStmt = select;
 }
 
-void QueryTree::insertFollowsStar(array<string, 4> arr)
+void QueryTree::insertSuchThat(SuchThatClause relClause)
 {
-	followsStarClauses.push_back(arr);
+	suchThatClauses.push_back(relClause);
 }
 
-void QueryTree::insertParent(array<string, 4> arr)
+void QueryTree::insertPattern(PatternClause patternClause)
 {
-	parentClauses.push_back(arr);
-}
-
-void QueryTree::insertParentStar(array<string, 4> arr)
-{
-	parentStarClauses.push_back(arr);
-}
-
-void QueryTree::insertUses(array<string, 4> arr)
-{
-	usesClauses.push_back(arr);
-}
-
-void QueryTree::insertModifies(array<string, 4> arr)
-{
-	modifiesClauses.push_back(arr);
-}
-
-void QueryTree::insertPattern(array<string, 6> arr)
-{
-	patternClauses.push_back(arr);
+	patternClauses.push_back(patternClause);
 }
 
 void QueryTree::storeEvaluatorResult(list<string> list)
@@ -112,82 +68,47 @@ void QueryTree::storeEvaluatorResult(list<string> list)
 	evaluatorResult = list;
 }
 
-void QueryTree::insertSelect(array<string, 2> arr)
-{
-	selectStmt = arr;
-}
-
-vector<string> QueryTree::getUnvalidatedStmts()
-{
-	return unvalidatedStmts;
-}
-
-vector<string> QueryTree::getStmts()
+unordered_set<string> QueryTree::getStmts()
 {
 	return stmts;
 }
 
-vector<string> QueryTree::getAssigns()
+unordered_set<string> QueryTree::getAssigns()
 {
 	return assigns;
 }
 
-vector<string> QueryTree::getWhiles()
+unordered_set<string> QueryTree::getWhiles()
 {
 	return whiles;
 }
 
-vector<string> QueryTree::getVars()
+unordered_set<string> QueryTree::getVars()
 {
 	return vars;
 }
 
-vector<string> QueryTree::getConsts()
+unordered_set<string> QueryTree::getConsts()
 {
 	return consts;
 }
 
-vector<string> QueryTree::getProgLines()
+unordered_set<string> QueryTree::getProgLines()
 {
 	return progLines;
 }
 
-array<string, 2> QueryTree::getSelect()
+SelectClause QueryTree::getSelect()
 {
 	return selectStmt;
 }
 
-vector<array<string, 4>> QueryTree::getFollows()
+vector<SuchThatClause> QueryTree::getSuchThatClauses()
 {
-	return followsClauses;
+	return suchThatClauses;
 }
 
-vector<array<string, 4>> QueryTree::getFollowsT()
-{
-	return followsStarClauses;
-}
-
-vector<array<string, 4>> QueryTree::getParent()
-{
-	return parentClauses;
-}
-
-vector<array<string, 4>> QueryTree::getParentT()
-{
-	return parentStarClauses;
-}
-
-vector<array<string, 4>> QueryTree::getUses()
-{
-	return usesClauses;
-}
-
-vector<array<string, 4>> QueryTree::getModifies()
-{
-	return modifiesClauses;
-}
-
-vector<array<string, 6>> QueryTree::getPatterns()
+vector<PatternClause> QueryTree::getPatternClauses()
 {
 	return patternClauses;
 }

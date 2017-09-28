@@ -158,10 +158,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="PQL\PQLFriend\FriendDeclarationValidator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="PQL\Utility\UtilityQueryTree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PQL\PQLFriend\FriendDeclarationValidator.cpp" />
+    <ClCompile Include="PQL\TestValidationDeclarationAndTree.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -170,7 +174,6 @@
     </ClCompile>
     <ClCompile Include="TestFrontEnd.cpp" />
     <ClCompile Include="TestPQLValidatorAndTree.cpp" />
-    <ClCompile Include="TestValidationDeclarationAndTree.cpp" />
     <ClCompile Include="TestValidationFollowsAndTree.cpp" />
     <ClCompile Include="TestValidationFollowsStarAndTree.cpp" />
     <ClCompile Include="TestValidationModifiesAndTree.cpp" />
@@ -178,6 +181,7 @@
     <ClCompile Include="TestValidationParentStarAndTree.cpp" />
     <ClCompile Include="TestValidationPatternAndTree.cpp" />
     <ClCompile Include="TestValidationUsesAndTree.cpp" />
+    <ClCompile Include="PQL\Utility\UtilityQueryTree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
