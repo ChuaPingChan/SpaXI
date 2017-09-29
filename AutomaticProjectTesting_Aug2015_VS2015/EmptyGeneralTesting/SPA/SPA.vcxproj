@@ -23,6 +23,7 @@
     <ClCompile Include="PQL\Evaluator\SuchThat\ParentEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\ParentStarEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\Pattern\PatternEvaluator.cpp" />
+    <ClCompile Include="PQL\Utilities\ClauseResult.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\AffectsValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\CallsValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\FollowsValidator.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="PQL\Evaluator\SuchThat\ParentEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\ParentStarEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\Pattern\PatternEvaluator.h" />
+    <ClInclude Include="PQL\Utilities\ClauseResult.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\CallsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\FollowsValidator.h" />
