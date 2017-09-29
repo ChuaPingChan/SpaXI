@@ -27,10 +27,10 @@ public:
     ~RelationshipTable();
     bool isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two);
     bool isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two, ARGTYPE three);
+    Relationship rModify, rUses, rParent, rParentStar, rFollows, rFollowsStar, rCalls, rCallsStar, rNext, rNextStar, rAffects, rAffectsStar, rPattern;
 
 private:
     unordered_map<RELATION, Relationship> relTable;
-    Relationship rModify, rUses, rParent, rParentStar, rFollows, rFollowsStar, rCalls, rCallsStar, rNext, rNextStar, rAffects, rAffectsStar, rPattern;
 
     /****** Helper methods for Validity of Argument Type *******/
     bool isArg1Valid(Relationship rel, ARGTYPE arg1);

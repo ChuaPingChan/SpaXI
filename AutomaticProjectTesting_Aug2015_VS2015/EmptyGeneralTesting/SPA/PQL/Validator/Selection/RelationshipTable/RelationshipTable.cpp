@@ -27,6 +27,8 @@ RelationshipTable::RelationshipTable()
     rUses = Relationship(arg1, arg2);
     relTable[MODIFIES] = rModify;
     relTable[USES] = rUses;
+    arg1.clear();
+    arg2.clear();
 
     //Parent & Parent*
     arg1 = rule3;
@@ -35,6 +37,8 @@ RelationshipTable::RelationshipTable()
     rParentStar = Relationship(arg1, arg2);
     relTable[PARENT] = rParent;
     relTable[PARENTSTAR] = rParentStar;
+    arg1.clear();
+    arg2.clear();
 
     //Follows & Follows*
     arg1 = rule4;
@@ -43,6 +47,8 @@ RelationshipTable::RelationshipTable()
     rFollowsStar = Relationship(arg1, arg2);
     relTable[FOLLOWS] = rParent;
     relTable[FOLLOWSSTAR] = rParentStar;
+    arg1.clear();
+    arg2.clear();
 /*
     //Calls and Calls*
     arg1 = rule5;
@@ -74,6 +80,9 @@ RelationshipTable::RelationshipTable()
     arg3 = rule_arg3_for_pattern;
     rPattern =  Relationship(arg1, arg2, arg3);
     relTable[PATTERN] = rPattern;
+    arg1.clear();
+    arg2.clear();
+    arg3.clear();
     
 }
 
@@ -94,13 +103,14 @@ bool RelationshipTable::hasRelationship(RELATION inputRel)
 
 bool RelationshipTable::isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two)
 {
-    Relationship rel = relTable[inputRel];
+    Relationship rel = relTable.find(inputRel)->second;
     return isArg1Valid(rel, one) && isArg2Valid(rel, two);
 }
 
 bool RelationshipTable::isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two, ARGTYPE three)
 {
-    Relationship rel = relTable[inputRel];
+
+    Relationship rel = relTable[MODIFIES];
     return isArg1Valid(rel, one) && isArg2Valid(rel, two) && isArg3Valid(rel, three);
 }
 
