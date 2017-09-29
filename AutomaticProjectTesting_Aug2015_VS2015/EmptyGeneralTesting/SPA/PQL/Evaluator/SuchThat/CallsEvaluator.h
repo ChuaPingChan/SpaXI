@@ -1,5 +1,7 @@
-#pragma once
-class CallsEvaluator
+#pragma 
+#include "SuchThatRelEvaluator.h"
+
+class CallsEvaluator : public SuchThatRelEvaluator
 {
 public:
 	CallsEvaluator();

@@ -1,5 +1,7 @@
 #pragma once
-class ParentStarEvaluator
+#include "SuchThatRelEvaluator.h"
+
+class ParentStarEvaluator : public SuchThatRelEvaluator
 {
 public:
 	ParentStarEvaluator();

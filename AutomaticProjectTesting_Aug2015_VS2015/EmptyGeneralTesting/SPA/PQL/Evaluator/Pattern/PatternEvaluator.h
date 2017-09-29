@@ -1,5 +1,7 @@
 #pragma once
-class PatternEvaluator
+#include "../ClauseEvaluator.h"
+
+class PatternEvaluator : public ClauseEvaluator
 {
 public:
 	PatternEvaluator();

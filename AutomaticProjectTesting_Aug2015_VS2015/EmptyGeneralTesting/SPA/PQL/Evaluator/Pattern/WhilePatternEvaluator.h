@@ -1,5 +1,7 @@
 #pragma once
-class WhilePatternEvaluator
+#include "PatternEvaluator.h"
+
+class WhilePatternEvaluator : public PatternEvaluator
 {
 public:
 	WhilePatternEvaluator();

@@ -1,5 +1,7 @@
 #pragma once
-class AssignPatternEvaluator
+#include "PatternEvaluator.h"
+
+class AssignPatternEvaluator : public PatternEvaluator
 {
 public:
 	AssignPatternEvaluator();

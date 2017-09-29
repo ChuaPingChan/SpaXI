@@ -3,10 +3,11 @@
 #include <vector>
 #include <utility>
 #include <list>
+#include "ClauseObject.h"
 
 using namespace std;
 
-class SelectClause
+class SelectClause : public ClauseObject
 {
 public:
 	SelectClause();

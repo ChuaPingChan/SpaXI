@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PQL\Evaluator\ClauseEvaluator.cpp" />
+    <ClCompile Include="PQL\Evaluator\ResultFactory.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\AffectsEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\AffectsStarEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\CallsEvaluator.cpp" />
@@ -77,9 +78,11 @@
     <ClCompile Include="PQL\Evaluator\SuchThat\SelectionEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\UsesEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\Pattern\WhilePatternEvaluator.cpp" />
+    <ClCompile Include="PQL\Evaluator\SuchThat\SuchThatRelEvaluator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Evaluator\ClauseEvaluator.h" />
+    <ClInclude Include="PQL\Evaluator\ResultFactory.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\AffectsEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\AffectsStarEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\CallsEvaluator.h" />
@@ -113,6 +116,7 @@
     <ClInclude Include="PQL\Evaluator\SuchThat\SelectionEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\UsesEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\Pattern\WhilePatternEvaluator.h" />
+    <ClInclude Include="PQL\Evaluator\SuchThat\SuchThatRelEvaluator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Utilities\PatternClause.h" />

@@ -3,7 +3,7 @@
 QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
 {
 	this->_qt = qtPtr;
-	this->_rsFactory = ResultFactory(_qt);
+	this->_rsFactory = ResultFactory();
 }
 
 QueryEvaluator::~QueryEvaluator()

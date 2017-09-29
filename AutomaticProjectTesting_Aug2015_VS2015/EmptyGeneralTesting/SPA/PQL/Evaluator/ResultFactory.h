@@ -23,13 +23,12 @@ class ResultFactory
 {
 public:
 	ResultFactory();
-	ResultFactory(QueryTree* qtPtr);
 	~ResultFactory();
 
-	ClauseResult makeClauseResult(ClauseEvaluator evaluator);
+	ClauseResult makeClauseResult();
 
 private:
-	QueryTree* _qt;
-	ClauseEvaluator evaluator;
+
+	void setStrategy(int type);
 };
 
