@@ -12,11 +12,10 @@ class ClauseResult
 {
 public:
     ClauseResult();
-    ~ClauseResult();
 
     vector<string> getAllSynonyms();
-    void getSynonymResults(string synName, vector<string> *results);
-    void getSynonymResults(string synName, vector<int> *results);
+    void getSynonymResults(string synName, vector<string> &results);
+    void getSynonymResults(string synName, vector<int> &results);
     bool synonymPresent(string synName);
     bool addNewSynResults(string newSynName, vector<string> newSynResults);
     bool addNewSynResults(string newSynName, vector<int> newSynResults);
@@ -29,7 +28,9 @@ public:
 private:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
-    vector<vector<int>> _intResult;
-    vector<vector<string>> _stringResult;
+    vector<vector<int>> _intResult;     // Results of stmt, constant, prog_line synonyms
+    vector<vector<string>> _strResult;  // Results of procedure and variable synonyms
+
+    template<class T> void appendToVector(vector<T> &v1, const vector<T> &v2, int n);
 };
 
