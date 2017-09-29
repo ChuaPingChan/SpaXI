@@ -11,6 +11,6 @@ bool SelectionValidator::isValidSelection(string str) {
 }
 
 bool SelectionValidator::setQueryTreeStub(QueryTreeStub *qtPtrNew) {
-    this->qtPtr = qtPtrNew;
+    this->qtPtr = qtPtrNew; 
     return true;
 }

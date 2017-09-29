@@ -57,8 +57,9 @@
     <ClCompile Include="PQL\Validator\Selection\SuchThat\UsesValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.cpp" />
     <ClCompile Include="PQL\QueryTreeStub.cpp" />
-    <ClCompile Include="PQL\Validator\RelationshipTable\Relationship.cpp" />
-    <ClCompile Include="PQL\Validator\RelationshipTable\RelationshipTable.cpp" />
+    <ClCompile Include="PQL\Validator\Selection\RelationshipTable\Relationship.cpp" />
+    <ClCompile Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.cpp" />
+    <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
@@ -107,8 +108,9 @@
     <ClInclude Include="PQL\Validator\Selection\SuchThat\UsesValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.h" />
     <ClInclude Include="PQL\QueryTreeStub.h" />
-    <ClInclude Include="PQL\Validator\RelationshipTable\Relationship.h" />
-    <ClInclude Include="PQL\Validator\RelationshipTable\RelationshipTable.h" />
+    <ClInclude Include="PQL\Validator\Selection\RelationshipTable\Relationship.h" />
+    <ClInclude Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.h" />
+    <ClInclude Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
