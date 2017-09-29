@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PQL\Utilities\Formatter.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\AffectsValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\CallsValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\FollowsValidator.cpp" />
@@ -57,6 +58,7 @@
     <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PQL\Utilities\Formatter.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\CallsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\FollowsValidator.h" />
