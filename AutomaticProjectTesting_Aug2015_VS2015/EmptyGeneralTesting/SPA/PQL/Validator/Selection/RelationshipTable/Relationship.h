@@ -3,34 +3,34 @@
 #include<string>
 
 using namespace std;
-const int MODIFIES = 0;
-const int USES = 1;
-const int PARENT = 2;
-const int PARENTSTAR = 3;
-const int FOLLOWS = 4;
-const int FOLLOWSSTAR = 5;
-const int CALLS = 6;
-const int CALLSSTAR = 7;
-const int NEXT = 8;
-const int NEXTSTAR = 9;
-const int AFFECTS = 10;
-const int AFFECTSSTAR = 11;
-const int PATTERN = 12;
+static const int MODIFIES = 0;
+static const int USES = 1;
+static const int PARENT = 2;
+static const int PARENTSTAR = 3;
+static const int FOLLOWS = 4;
+static const int FOLLOWSSTAR = 5;
+static const int CALLS = 6;
+static const int CALLSSTAR = 7;
+static const int NEXT = 8;
+static const int NEXTSTAR = 9;
+static const int AFFECTS = 10;
+static const int AFFECTSSTAR = 11;
+static const int PATTERN = 12;
 
-typedef vector<int> ARGUMENT;
+typedef vector<int> ARGUMENT_TYPE;
 
 class Relationship
 {
 public:
     Relationship();
-    Relationship(ARGUMENT arg1Type, ARGUMENT arg2Type);
-    Relationship(ARGUMENT arg1Type, ARGUMENT arg2Type, ARGUMENT arg3Type);
-    ARGUMENT getArg1Type();
-    ARGUMENT getArg2Type();
-    ARGUMENT getArg3Type();
+    Relationship(ARGUMENT_TYPE arg1Type, ARGUMENT_TYPE arg2Type);
+    Relationship(ARGUMENT_TYPE arg1Type, ARGUMENT_TYPE arg2Type, ARGUMENT_TYPE arg3Type);
+    ARGUMENT_TYPE getArg1Type();
+    ARGUMENT_TYPE getArg2Type();
+    ARGUMENT_TYPE getArg3Type();
     ~Relationship();
 
 private:
-    ARGUMENT arg1Type,arg2Type,arg3Type;
+    ARGUMENT_TYPE arg1Type,arg2Type,arg3Type;
 };
 

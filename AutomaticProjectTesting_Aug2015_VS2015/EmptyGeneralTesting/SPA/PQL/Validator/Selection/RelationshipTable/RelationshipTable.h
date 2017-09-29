@@ -1,21 +1,22 @@
 #pragma once
 #include"Relationship.h"
 #include<unordered_map>
+#include<assert.h>
 
-const int STMT = 0;
-const int ASSIGN = 1;
-const int WHILE = 2;
-const int IF = 3;
-const int PROG_LINE = 4;
-const int CALL = 5;
-const int PROCEDURE = 6;
-const int VARIABLE = 7;
-const int INTEGER = 8;
-const int UNDERSCORE = 9;
-const int IDENT_WITHCOMMAS = 10;
-const int EXPRESSION_SPEC = 11;
-const int CONSTANT = 12;
-const int STMTLIST = 13;
+static const int STMT = 0;
+static const int ASSIGN = 1;
+static const int WHILE = 2;
+static const int IF = 3;
+static const int PROG_LINE = 4;
+static const int CALL = 5;
+static const int PROCEDURE = 6;
+static const int VARIABLE = 7;
+static const int INTEGER = 8;
+static const int UNDERSCORE = 9;
+static const int IDENT_WITHQUOTES = 10;
+static const int EXPRESSION_SPEC = 11;
+static const int CONSTANT = 12;
+static const int STMTLIST = 13;
 
 typedef int RELATION;
 typedef int ARGTYPE;
