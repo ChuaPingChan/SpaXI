@@ -2,6 +2,12 @@
 class ClauseObject
 {
 protected:
+	TYPE clauseType;
+
+public:
+	ClauseObject();
+	~ClauseObject();
+
 	enum TYPE {
 		SELECT = 0,
 		REL,
@@ -9,10 +15,11 @@ protected:
 		WITH
 	};
 
-	TYPE clauseType;
-
-public:
-	ClauseObject();
-	~ClauseObject();
+	/* Getter */
+	TYPE getClauseType()
+	{
+		return clauseType;
+	}
+	
 };
 

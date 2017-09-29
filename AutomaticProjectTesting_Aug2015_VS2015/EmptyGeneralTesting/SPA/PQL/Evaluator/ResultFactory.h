@@ -6,7 +6,7 @@
 #include "Pattern/AssignPatternEvaluator.h"
 #include "Pattern/WhilePatternEvaluator.h"
 #include "Pattern/IfPatternEvaluator.h"
-#include "SuchThat/SelectionEvaluator.h"
+#include "SelectionEvaluator.h"
 #include "SuchThat/FollowsEvaluator.h"
 #include "SuchThat/FollowsStarEvaluator.h"
 #include "SuchThat/ParentEvaluator.h"
@@ -17,7 +17,6 @@
 #include "SuchThat/NextStarEvaluator.h"
 #include "SuchThat/AffectsEvaluator.h"
 #include "SuchThat/AffectsStarEvaluator.h"
-#include "SuchThat/SelectionEvaluator.h"
 
 class ResultFactory
 {
@@ -25,10 +24,12 @@ public:
 	ResultFactory();
 	~ResultFactory();
 
-	ClauseResult makeClauseResult();
+	ClauseResult makeClauseResult(ClauseObject clause);
 
 private:
-
-	void setStrategy(int type);
+	template<typename Base, typename T>
+	inline bool instanceof(const T *ptr) {
+		return dynamic_cast<const Base*>(ptr) != nullptr;
+	}
 };
 
