@@ -5,8 +5,10 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-#include "QueryTree.h"
-#include "../PKB/PKBMain.h"
+#include "../QueryTree.h"
+#include "../../PKB/PKBMain.h"
+#include "Results/ResultFactory.h"
+#include "Results"
 
 using namespace std;
 
@@ -16,7 +18,7 @@ public:
 	QueryEvaluator();
 	~QueryEvaluator();
 
-	//void evaluate();
+	void evaluate(QueryTree* qtPtr);
 
  //   /*--------------- Unit Testing ---------------*/
  //   void setPkb(PKBMain &pkb);
