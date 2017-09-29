@@ -1,7 +1,9 @@
 #include "QueryEvaluator.h"
 
-QueryEvaluator::QueryEvaluator()
+QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
 {
+	this->_qt = qtPtr;
+	this->_rsFactory = ResultFactory(_qt);
 }
 
 QueryEvaluator::~QueryEvaluator()
