@@ -1,9 +1,6 @@
 #pragma once
 class ClauseObject
 {
-protected:
-	TYPE clauseType;
-
 public:
 	ClauseObject();
 	~ClauseObject();
@@ -20,6 +17,9 @@ public:
 	{
 		return clauseType;
 	}
+
+protected:
+	TYPE clauseType;
 	
 };
 

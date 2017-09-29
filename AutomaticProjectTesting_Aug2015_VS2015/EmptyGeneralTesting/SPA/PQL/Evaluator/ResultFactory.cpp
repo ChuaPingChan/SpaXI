@@ -21,6 +21,8 @@ ClauseResult ResultFactory::makeClauseResult(ClauseObject clause)
 		break;
 
 	case (ClauseObject::REL):
+		FollowsEvaluator evaluator = FollowsEvaluator();
+		ClauseResult result = evaluator.evaluate(clause);
 		break;
 
 	case (ClauseObject::PATTERN):
