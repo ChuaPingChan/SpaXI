@@ -15,12 +15,5 @@ void FollowsValidator::setNextValidator(SuchThatValidator nextValidator)
 
 bool FollowsValidator::isValid(string str)
 {
-    if (str == "") {
-        //validate
-        return true;
-    }
-    else {
-        nextValidatorInLine.isValid(str);
-    }
     return false;
 }

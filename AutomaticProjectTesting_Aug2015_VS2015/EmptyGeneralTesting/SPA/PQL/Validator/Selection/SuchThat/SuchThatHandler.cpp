@@ -10,22 +10,76 @@ SuchThatHandler::~SuchThatHandler()
 {
 }
 
+
+
 bool SuchThatHandler::isValidSuchThat(string str)
 {
-    SuchThatValidator modifiesValidator = ModifiesValidator(qtPtr);
-    SuchThatValidator usesValidator = UsesValidator(qtPtr);
+    string processedStr = Formatter::removeAllSpaces(str);
+    string rel = getSuchThatKeyWord(processedStr);
 
-    modifiesValidator.setNextValidator(usesValidator);
+    SuchThatValidator suchThatValidator(qtPtr);
 
-    string processedStr = removeAllSpaces(str);
+    if (rel == "Modifies") {
+        suchThatValidator = ModifiesValidator(rel, processedStr);
+    }
 
-
-
-    return false;
+    if (suchThatValidator.isValid()) {
+        SuchThatClause suchThatClause = makeSuchThatClause(suchThatValidator);
+        storeInQueryTree(suchThatClause);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-string SuchThatHandler::removeAllSpaces(string str)
+//TODO: Put inside regex table (Only the regex part)
+string SuchThatHandler::getSuchThatKeyWord(string str)
 {
-    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-    return str;
+    string SUCH_THAT_KEYWORD = "(Modifies|Uses|Parent|Parent*|Follows|Follows*|Calls|Calls*|Next|Next*|Affects|Affects)";
+    regex suchThatKeywordRegex(SUCH_THAT_KEYWORD);
+    smatch foundMatch;
+    regex_search(str, foundMatch, suchThatKeywordRegex);
+    string suchThatKeyword = foundMatch[1];
+
+    return suchThatKeyword;
 }
+
+//TODO: Change the index number
+int SuchThatHandler::getRelIndex(string rel)
+{
+    if (rel == "Modifies") {
+        return 0;
+    }
+    return 0;   //stub
+}
+
+//TODO: Change the index reference
+int SuchThatHandler::getArgTypeIndex(string arg)
+{
+    if (arg == "int") {
+        return 0;
+    }
+    return 0;   //stub
+}
+
+SuchThatClause SuchThatHandler::makeSuchThatClause(SuchThatValidator stv)
+{
+    int rel = getRelIndex(stv.getRel());
+    int argOneType = getArgTypeIndex(stv.getArgOneType());
+    int argTwoType = getArgTypeIndex(stv.getArgTwoType());
+    string argOne = stv.getArgOne();
+    string argTwo = stv.getArgTwo();
+
+    return SuchThatClause(rel, argOneType, argOne, argTwoType, argTwo);
+}
+
+bool SuchThatHandler::storeInQueryTree(SuchThatClause stc)
+{
+    qtPtr->insertSuchThat(stc);
+    return true;
+}
+
+
+
