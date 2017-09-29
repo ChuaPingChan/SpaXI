@@ -11,6 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PQL\Evaluator\ClauseEvaluator.cpp" />
+    <ClCompile Include="PQL\Evaluator\SuchThat\AffectsEvaluator.cpp" />
+    <ClCompile Include="PQL\Evaluator\SuchThat\AffectsStarEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\CallsEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\CallsStarEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\Pattern\AssignPatternEvaluator.cpp" />
@@ -76,6 +79,9 @@
     <ClCompile Include="PQL\Evaluator\Pattern\WhilePatternEvaluator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PQL\Evaluator\ClauseEvaluator.h" />
+    <ClInclude Include="PQL\Evaluator\SuchThat\AffectsEvaluator.h" />
+    <ClInclude Include="PQL\Evaluator\SuchThat\AffectsStarEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\CallsEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\CallsStarEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\Pattern\AssignPatternEvaluator.h" />
