@@ -3,6 +3,7 @@
 
 SuchThatClause::SuchThatClause(int rel, int argOneType, string argOne, int argTwoType, string argTwo)
 {
+	this->clauseType = REL;
 	this->_rel = rel;
 	this->_argOneType = argOneType;
 	this->_argTwoType = argTwoType;

@@ -14,6 +14,7 @@ PatternClause::PatternClause(int patternType, int argOneType, string argOne, int
 
 PatternClause::~PatternClause()
 {
+	this->clauseType = PATTERN;
 }
 
 int PatternClause::getPatternType()

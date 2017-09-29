@@ -17,18 +17,18 @@ public:
 
 	/* Getters */
 	bool isTuple();
-	int getType();
-	int getType(int index);
-	vector<int> getTypes();
-	string getArg();
-	string getArg(int index);
-	vector<string> getArgs();
+	int getSelectionType();
+	int getSelectionType(int index);
+	vector<int> getSelectionTypes();
+	string getSelectionArg();
+	string getSelectionArg(int index);
+	vector<string> getSelectionArgs();
 
 private:
 	bool tuple;
-	int type;
-	string arg;
-	vector<int> types;
-	vector<string> args;
+	int selectionType;
+	string selectionArg;
+	vector<int> selectionTypes;
+	vector<string> selectionArgs;
 };
 
