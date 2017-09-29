@@ -94,32 +94,14 @@ bool RelationshipTable::hasRelationship(RELATION inputRel)
 
 bool RelationshipTable::isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two)
 {
-    switch (inputRel) {
-    case MODIFIES: 
-        return isArg1Valid(rModify, one) && isArg2Valid(rModify, two);
-        break;
-    case USES: 
-        return isArg1Valid(rUses, one) && isArg2Valid(rUses, two);
-        break;
-    case PARENT: 
-        return isArg1Valid(rParent, one) && isArg2Valid(rParent, two);
-        break;
-    case PARENTSTAR: 
-        return isArg1Valid(rParentStar, one) && isArg2Valid(rParentStar, two);
-        break;
-    case FOLLOWS: 
-        return isArg1Valid(rFollows, one) && isArg2Valid(rFollows, two);
-        break;
-    case FOLLOWSSTAR: 
-        return isArg1Valid(rFollowsStar, one) && isArg2Valid(rFollowsStar, two);
-        break;
-    }
-    return false;
+    Relationship rel = relTable[inputRel];
+    return isArg1Valid(rel, one) && isArg2Valid(rel, two);
 }
 
-bool RelationshipTable::isArgValid(RELATION, ARGTYPE one, ARGTYPE two, ARGTYPE three)
+bool RelationshipTable::isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two, ARGTYPE three)
 {
-    return isArg1Valid(rPattern, one) && isArg2Valid(rPattern, two) && isArg3Valid(rPattern, three);
+    Relationship rel = relTable[inputRel];
+    return isArg1Valid(rel, one) && isArg2Valid(rel, two) && isArg3Valid(rel, three);
 }
 
 
