@@ -187,5 +187,24 @@ namespace UnitTesting {
                 testAssignList.pop_front();
             }
         }
+
+        TEST_METHOD(TestOtherCases)
+        {
+            PatternTable pt;
+            Assert::IsTrue(pt.addToPatternTable(1, "meiji", "1868"));
+            Assert::IsTrue(pt.addToPatternTable(2, "taisho", "1912-1925"));
+            Assert::IsTrue(pt.addToPatternTable(3, "showa", "1925-1989"));
+            Assert::IsTrue(pt.addToPatternTable(4, "heisei", "1989-present"));
+
+            Assert::IsTrue(pt.hasPartialMatch(1, "1868"));
+            Assert::IsTrue(pt.hasPartialMatch(2, "1925"));
+            Assert::IsTrue(pt.hasPartialMatch(3, "1989"));
+            Assert::IsTrue(pt.hasPartialMatch(4, "present"));
+
+            Assert::IsFalse(pt.hasPartialMatch(1, "18"));
+            Assert::IsFalse(pt.hasPartialMatch(2, "19"));
+            Assert::IsFalse(pt.hasPartialMatch(3, "25"));
+            Assert::IsFalse(pt.hasPartialMatch(4, "p"));
+        }
     };
 }
