@@ -71,7 +71,7 @@ bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults
 }
 
 /*
-Appends the 
+Appends v2 to the end of v1 for n number of times.
 */
 template<class T> void ClauseResult::appendToVector(vector<T>& v1, const vector<T>& v2, int n)
 {
