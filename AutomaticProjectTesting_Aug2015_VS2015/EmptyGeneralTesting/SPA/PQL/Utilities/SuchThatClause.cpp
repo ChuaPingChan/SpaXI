@@ -19,12 +19,12 @@ int SuchThatClause::getRel()
 	return this->_rel;
 }
 
-int SuchThatClause::getTypeOne()
+int SuchThatClause::getArgOneType()
 {
 	return this->_argOneType;
 }
 
-int SuchThatClause::getTypeTwo()
+int SuchThatClause::getArgTwoType()
 {
 	return this->_argTwoType;
 }
