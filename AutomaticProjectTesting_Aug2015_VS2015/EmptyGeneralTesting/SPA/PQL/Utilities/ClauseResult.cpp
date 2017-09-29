@@ -70,10 +70,7 @@ bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults
     return false;
 }
 
-/*
-Appends v2 to the end of v1 for n number of times.
-*/
-template<class T> void ClauseResult::appendToVector(vector<T>& v1, const vector<T>& v2, int n)
+void ClauseResult::appendToVector(vector<int>& v1, const vector<int>& v2, int n)
 {
     for (int i = 0; i < n; i++) {
         v1.insert(v1.end(), v2.begin(), v2.end());

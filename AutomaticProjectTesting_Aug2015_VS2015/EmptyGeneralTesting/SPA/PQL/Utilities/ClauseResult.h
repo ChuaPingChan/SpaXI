@@ -23,14 +23,13 @@ public:
     bool removeCombinations(string synName, string value);
     bool pairWithOldSyn(string oldSyn, string oldSynValue, string newSyn, vector<string> newSynResults);
     bool pairWithOldSyn(string oldSyn, int oldSynValue, string newSyn, vector<int> newSynResults);
-
-
-private:
+    
+protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
     vector<vector<int>> _intResult;     // Results of stmt, constant, prog_line synonyms
     vector<vector<string>> _strResult;  // Results of procedure and variable synonyms
 
-    template<class T> void appendToVector(vector<T> &v1, const vector<T> &v2, int n);
+    static void appendToVector(vector<int> &v1, const vector<int> &v2, int n);
 };
 
