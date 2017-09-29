@@ -56,7 +56,6 @@
     <ClCompile Include="PQL\Validator\Selection\Pattern\WhilePatternValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\UsesValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.cpp" />
-    <ClCompile Include="PQL\QueryTreeStub.cpp" />
     <ClCompile Include="PQL\Validator\Selection\RelationshipTable\Relationship.cpp" />
     <ClCompile Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.cpp" />
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
