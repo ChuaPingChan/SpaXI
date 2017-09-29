@@ -2,7 +2,7 @@
 #include <string>
 #include <list>
 #include "QueryTree.h"
-#include "QueryValidatorOld.h"
+#include "Validator\QueryValidator.h"
 #include "QueryEvaluator.h"
 #include "ResultFormatter.h"
 
@@ -18,5 +18,6 @@ public:
 
 private:
 	string query;
+	QueryTree qt;
 };
 

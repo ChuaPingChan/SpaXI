@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PQL\Utilities\Formatter.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\AffectsValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\CallsValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\FollowsValidator.cpp" />
@@ -21,6 +22,7 @@
     <ClCompile Include="PQL\Validator\Selection\Pattern\AssignPatternValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\ModifiesValidator.cpp" />
     <ClCompile Include="PQL\Validator\Declaration\DeclarationValidator.cpp" />
+    <ClCompile Include="PQL\Utilities\PatternClause.cpp" />
     <ClCompile Include="PKB\ChildToParentStarTable.cpp" />
     <ClCompile Include="PKB\ChildToParentTable.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
@@ -47,8 +49,6 @@
     <ClCompile Include="PQL\PQLMain.cpp" />
     <ClCompile Include="PQL\QueryEvaluator.cpp" />
     <ClCompile Include="PQL\QueryTree.cpp" />
-    <ClCompile Include="PQL\QueryValidatorOld.cpp" />
-    <ClCompile Include="PQL\QueryValidatorFriend.cpp" />
     <ClCompile Include="PQL\ResultFormatter.cpp" />
     <ClCompile Include="PQL\Validator\QueryValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SelectionValidator.cpp" />
@@ -62,6 +62,7 @@
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PQL\Utilities\Formatter.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\CallsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\FollowsValidator.h" />
@@ -72,6 +73,11 @@
     <ClInclude Include="PQL\Validator\Selection\Pattern\AssignPatternValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\ModifiesValidator.h" />
     <ClInclude Include="PQL\Validator\Declaration\DeclarationValidator.h" />
+    <ClCompile Include="PQL\Utilities\SuchThatClause.cpp" />
+    <ClCompile Include="PQL\Utilities\SelectClause.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PQL\Utilities\PatternClause.h" />
     <ClInclude Include="PKB\ChildToParentStarTable.h" />
     <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
@@ -98,8 +104,6 @@
     <ClInclude Include="PQL\PQLMain.h" />
     <ClInclude Include="PQL\QueryEvaluator.h" />
     <ClInclude Include="PQL\QueryTree.h" />
-    <ClInclude Include="PQL\QueryValidatorOld.h" />
-    <ClInclude Include="PQL\QueryValidatorFriend.h" />
     <ClInclude Include="PQL\ResultFormatter.h" />
     <ClInclude Include="PQL\Validator\QueryValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SelectionValidator.h" />
@@ -111,6 +115,8 @@
     <ClInclude Include="PQL\Validator\Selection\RelationshipTable\Relationship.h" />
     <ClInclude Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.h" />
     <ClInclude Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.h" />
+    <ClInclude Include="PQL\Utilities\SuchThatClause.h" />
+    <ClInclude Include="PQL\Utilities\SelectClause.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>

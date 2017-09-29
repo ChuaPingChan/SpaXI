@@ -17,33 +17,29 @@ PQLMain::~PQLMain()
 
 list<string> PQLMain::run()
 {
-	QueryTree* qtInstance = QueryTree::getInstance();
-	//qtInstance = qtInstance->clear();
 
-	QueryValidatorOld validator;
+	QueryValidator validator = QueryValidator(&qt);
 	bool isValid = validator.isValidQuery(query);
 
-	if (isValid) 
+	/*if (isValid) 
 	{
 		QueryEvaluator evaluator;
 		evaluator.evaluate();
 
-		list<string> evaluatorResult = qtInstance->getEvaluatorResult();
+		list<string> evaluatorResult = qt.getEvaluatorResult();
 		if (evaluatorResult.empty())
 		{
-			qtInstance = qtInstance->clear();
 			return evaluatorResult;
 		}
 		else
 		{
 			ResultFormatter formatter;
-			qtInstance = qtInstance->clear();
             return evaluatorResult;
 		}
 	}
 	else
 	{
-		qtInstance = qtInstance->clear();
 		return list<string>();
-	}
+	}*/
+    return list<string>();
 }

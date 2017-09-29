@@ -1,18 +1,27 @@
 #pragma once
 #include <string>
-#include "..\..\QueryTreeStub.h"
+#include <regex>        //TODO:Remove after implementing regex teable
+#include "..\..\QueryTree.h"    //TODO: Change to properQueryTree
+#include "SuchThat\SuchThatHandler.h"
 
 using namespace std;
 
 class SelectionValidator
 {
 public:
-    SelectionValidator(QueryTreeStub *qtPtrNew);
+    SelectionValidator(QueryTree *qtPtrNew);
     ~SelectionValidator();
 
     bool isValidSelection(string str);
-    bool setQueryTreeStub(QueryTreeStub *qtPtrNew);
+    bool setQueryTree(QueryTree *qtPtrNew);
+
+    
 
 private:
-    QueryTreeStub *qtPtr;
+    QueryTree *qtPtr;
+
+    //bool isValidSelectBeginning(string str);    //TODO: Make into a class
+    bool isValidSelectOverallRegex(string str);     //TODO: Change to a method call to the regex cpp
+
+    bool isSuchThat(string str);
 };

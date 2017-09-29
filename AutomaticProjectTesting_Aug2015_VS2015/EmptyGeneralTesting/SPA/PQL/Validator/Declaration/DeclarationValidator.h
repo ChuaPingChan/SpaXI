@@ -2,7 +2,7 @@
 #include <string>
 #include <unordered_set>
 #include <regex>
-#include "..\..\QueryTreeStub.h"
+#include "..\..\QueryTree.h"
 
 using namespace std;
 
@@ -11,14 +11,14 @@ class DeclarationValidator
     friend class FriendDeclarationValidator;
 
 public:
-    DeclarationValidator(QueryTreeStub *qtPtrNew);
+    DeclarationValidator(QueryTree *qtPtrNew);
     ~DeclarationValidator();
 
     bool isValidDeclaration(string str);
-    bool setQueryTreeStub(QueryTreeStub *qtPtrNew);
+    bool setQueryTree(QueryTree *qtPtrNew);
 
 private:
-    QueryTreeStub *qtPtr;
+    QueryTree *qtPtr;
 
     unordered_set<string> synonymBank;   //Contains list of used synonyms
     vector<string> unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree

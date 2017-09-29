@@ -1,7 +1,7 @@
 #include "CppUnitTest.h"
 #include "string.h"
 #include "PQLFriend\FriendDeclarationValidator.h"
-#include "..\..\SPA\PQL\QueryTreeStub.h"
+#include "..\..\SPA\PQL\QueryTree.h"
 #include "Utility\UtilityQueryTree.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -15,7 +15,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_Declaration_Entity_SynonymSingle_Valid)
         {
-            QueryTreeStub qtPtr;
+            QueryTree qtPtr;
             FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "assign validEntityAndSynonym";
             Assert::IsTrue(fdv.isValidDeclaration(str));
@@ -24,7 +24,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_Declaration_Entity_SynonymMultiple_Valid)
         {
-            QueryTreeStub qtPtr;
+            QueryTree qtPtr;
             FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "stmt validEntity, multipleVa1idSynonym";
             Assert::IsTrue(fdv.isValidDeclaration(str));
@@ -33,7 +33,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_Declaration_Entity_Synonym_Whitespace_Valid)
         {
-            QueryTreeStub qtPtr;
+            QueryTree qtPtr;
             FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "variable          validEntitySynonymWithWhitespace";
             Assert::IsTrue(fdv.isValidDeclaration(str));
@@ -42,7 +42,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_Declaration_Entity_Synonym_Newline_Valid)
         {
-            QueryTreeStub qtPtr;
+            QueryTree qtPtr;
             FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "while \n validEntitySynonymWithNewline";
             Assert::IsTrue(fdv.isValidDeclaration(str));
@@ -51,7 +51,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_Declaration_Entity_Synonym_Invalid)
         {
-            QueryTreeStub qtPtr;
+            QueryTree qtPtr;
             FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "invalidEntity inv@lidSyn0nym";
             Assert::IsFalse(fdv.isValidDeclaration(str));
@@ -59,7 +59,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_Declaration_SeparationBtwnArg_Invalid)
         {
-            QueryTreeStub qtPtr;
+            QueryTree qtPtr;
             FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "assign validEntity validSynonym  but no comma";
             Assert::IsFalse(fdv.isValidDeclaration(str));
@@ -67,7 +67,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_Declaration_RepeatedSynonym_Invalid)
         {
-            QueryTreeStub qtPtr;
+            QueryTree qtPtr;
             FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
             string str = "assign sameSynonym, sameSynonym, sameSynonym";
             Assert::IsFalse(fdv.isValidDeclaration(str));
