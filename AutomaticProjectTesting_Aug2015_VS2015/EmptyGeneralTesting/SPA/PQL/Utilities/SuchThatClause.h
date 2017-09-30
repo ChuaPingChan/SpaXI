@@ -1,10 +1,9 @@
 #pragma once
 #include <string>
-#include "ClauseObject.h"
 
 using namespace std;
 
-class SuchThatClause : public ClauseObject
+class SuchThatClause
 {
 public:
 	SuchThatClause(int rel, int argOneType, string argOne, int argTwoType, string argTwo);

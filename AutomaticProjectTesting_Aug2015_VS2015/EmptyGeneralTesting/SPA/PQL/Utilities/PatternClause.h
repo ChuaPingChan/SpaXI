@@ -1,10 +1,9 @@
 #pragma once
 #include <string>
-#include "ClauseObject.h"
 
 using namespace std;
 
-class PatternClause : public ClauseObject
+class PatternClause
 {
 public:
 	PatternClause(int patternType, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree);

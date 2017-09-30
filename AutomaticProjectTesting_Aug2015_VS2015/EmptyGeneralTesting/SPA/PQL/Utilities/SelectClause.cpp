@@ -2,12 +2,10 @@
 
 SelectClause::SelectClause()
 {
-	this->clauseType = SELECT;
 }
 
 SelectClause::SelectClause(int type, string arg)
 {
-	this->clauseType = SELECT;
 	this->tuple = false;
 	this->selectionType = type;
 	this->selectionArg = arg;
@@ -15,7 +13,6 @@ SelectClause::SelectClause(int type, string arg)
 
 SelectClause::SelectClause(vector<int> types, vector<string> args)
 {
-	this->clauseType = SELECT;
 	this->tuple = true;
 	this->selectionTypes = types;
 	this->selectionArgs = args;
