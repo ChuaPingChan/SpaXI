@@ -9,6 +9,7 @@ using namespace std;
 
 class SuchThatValidator
 {
+public:
     static const string MODIFIES;
     static const string USES;
     static const string PARENT;
@@ -35,7 +36,6 @@ class SuchThatValidator
     static const string IDENT_WITH_QUOTES;
     static const string CONSTANT;
 
-public:
     SuchThatValidator(QueryTree *qtPtrNew);
     SuchThatValidator();
     ~SuchThatValidator();
@@ -59,8 +59,8 @@ protected:
     string argTwo;
     bool validity;
 
-    string getArgOne(string keyword, string str);
-    string getArgTwo(string str);
+    string extractArgOne(string keyword, string str);
+    string extractArgTwo(string str);
 
     bool isArgumentInClause(string arg, unordered_set<string> clause);
 
