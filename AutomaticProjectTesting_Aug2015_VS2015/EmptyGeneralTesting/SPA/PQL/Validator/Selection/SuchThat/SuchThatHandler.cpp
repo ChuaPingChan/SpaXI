@@ -15,16 +15,16 @@ bool SuchThatHandler::isValidSuchThat(string str)
     string processedStr = Formatter::removeAllSpaces(str);
     string rel = getSuchThatKeyWord(processedStr);
 
-    SuchThatValidator suchThatValidator(qtPtr);
+    SuchThatValidator *suchThatValidator = new SuchThatValidator(qtPtr);
 
     if (rel == SuchThatValidator::MODIFIES) {
-        suchThatValidator = ModifiesValidator(rel, processedStr);
+        suchThatValidator = new ModifiesValidator(rel, processedStr);
     }
 
-    suchThatValidator.validate();
+    suchThatValidator->validate();
 
-    if (suchThatValidator.isValid()) {
-        SuchThatClause suchThatClause = makeSuchThatClause(suchThatValidator);
+    if (suchThatValidator->isValid()) {
+        SuchThatClause suchThatClause = makeSuchThatClause(*suchThatValidator);
         storeInQueryTree(suchThatClause);
         return true;
     }
