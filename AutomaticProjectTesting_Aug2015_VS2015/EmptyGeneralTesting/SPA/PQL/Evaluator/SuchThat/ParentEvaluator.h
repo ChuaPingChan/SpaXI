@@ -6,5 +6,7 @@ class ParentEvaluator : public SuchThatRelEvaluator
 public:
 	ParentEvaluator();
 	~ParentEvaluator();
+
+	ClauseResult evaluate(SuchThatClause clause);
 };
 

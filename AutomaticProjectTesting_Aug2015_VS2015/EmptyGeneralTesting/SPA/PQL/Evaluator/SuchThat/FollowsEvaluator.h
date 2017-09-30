@@ -9,7 +9,5 @@ public:
 
 	ClauseResult evaluate(SuchThatClause stClause);
 
-private:
-	PKBMain* pkbInstance;
 }; 
 

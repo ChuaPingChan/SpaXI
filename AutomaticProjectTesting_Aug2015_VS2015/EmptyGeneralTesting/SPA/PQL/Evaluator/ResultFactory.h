@@ -15,6 +15,8 @@
 #include "SuchThat/UsesEvaluator.h"
 #include "SuchThat/NextEvaluator.h"
 #include "SuchThat/NextStarEvaluator.h"
+#include "SuchThat/CallsEvaluator.h"
+#include "SuchThat/CallsStarEvaluator.h"
 #include "SuchThat/AffectsEvaluator.h"
 #include "SuchThat/AffectsStarEvaluator.h"
 

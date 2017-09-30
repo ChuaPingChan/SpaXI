@@ -55,17 +55,17 @@ ClauseResult ResultFactory::makeClauseResult(SuchThatClause clause)
 		return evaluator.evaluate(clause);
 	}
 
-	//else if (rel == CALLS)
-	//{
-	//	CallsEvaluator evaluator = CallsEvaluator();
-	//	return evaluator.evaluate(clause);
-	//}
+	else if (rel == CALLS)
+	{
+		CallsEvaluator evaluator = CallsEvaluator();
+		return evaluator.evaluate(clause);
+	}
 
-	//else if (rel == CALLSSTAR)
-	//{
-	//	CallsStarEvaluator evaluator = CallsStarEvaluator();
-	//	return evaluator.evaluate(clause);
-	//}
+	else if (rel == CALLSSTAR)
+	{
+		CallsStarEvaluator evaluator = CallsStarEvaluator();
+		return evaluator.evaluate(clause);
+	}
 
 	else if (rel == NEXT)
 	{
@@ -93,7 +93,7 @@ ClauseResult ResultFactory::makeClauseResult(SuchThatClause clause)
 
 	else
 	{
-
+		cerr << "Type: " << rel << " is not regconised!" << endl;
 	}
 }
 

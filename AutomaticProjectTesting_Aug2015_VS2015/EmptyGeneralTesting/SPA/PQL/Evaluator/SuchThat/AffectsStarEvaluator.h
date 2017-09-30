@@ -6,5 +6,7 @@ class AffectsStarEvaluator : public SuchThatRelEvaluator
 public:
 	AffectsStarEvaluator();
 	~AffectsStarEvaluator();
+
+	ClauseResult evaluate(SuchThatClause clause);
 };
 
