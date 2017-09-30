@@ -120,6 +120,12 @@ int SuchThatHandler::getArgTypeIndex(string arg)
     else if (arg == SuchThatValidator::INTEGER) {
         return 8;
     }
+    else if (arg == SuchThatValidator::UNDERSCORE) {
+        return 9;
+    }
+    else if (arg == SuchThatValidator::IDENT_WITH_QUOTES) {
+        return 10;
+    }
     else {
         return -1;  //TODO: Throw excception to say invalid
     }
