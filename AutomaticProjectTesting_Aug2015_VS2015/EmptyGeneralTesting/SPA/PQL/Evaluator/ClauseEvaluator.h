@@ -33,7 +33,5 @@ public:
 	ClauseEvaluator();
 	~ClauseEvaluator();
 
-	virtual ClauseResult evaluate(ClauseObject clause) = 0;
-
 };
 
