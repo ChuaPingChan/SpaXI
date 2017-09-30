@@ -50,6 +50,13 @@ private:
 		PATTERN
 	};
 
+	enum PATTERN_TYPE
+	{
+		ASSIGN = 0,
+		WHILE,
+		IF
+	};
+
 	template<typename Base, typename T>
 	inline bool instanceof(const T *ptr) {
 		return dynamic_cast<const Base*>(ptr) != nullptr;

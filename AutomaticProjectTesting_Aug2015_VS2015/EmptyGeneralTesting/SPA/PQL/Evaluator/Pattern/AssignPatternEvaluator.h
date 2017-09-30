@@ -6,5 +6,7 @@ class AssignPatternEvaluator : public PatternEvaluator
 public:
 	AssignPatternEvaluator();
 	~AssignPatternEvaluator();
+
+	ClauseResult evaluate(PatternClause clause);
 };
 

@@ -6,5 +6,7 @@ class IfPatternEvaluator : public PatternEvaluator
 public:
 	IfPatternEvaluator();
 	~IfPatternEvaluator();
+
+	ClauseResult evaluate(PatternClause clause);
 };
 

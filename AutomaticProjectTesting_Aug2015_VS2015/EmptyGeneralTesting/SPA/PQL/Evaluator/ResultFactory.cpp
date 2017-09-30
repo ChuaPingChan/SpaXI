@@ -12,7 +12,8 @@ ResultFactory::~ResultFactory()
 
 ClauseResult ResultFactory::makeClauseResult(SelectClause clause)
 {
-	return ClauseResult();
+	SelectionEvaluator evaluator = SelectionEvaluator();
+	return evaluator.evaluate(clause);
 }
 
 ClauseResult ResultFactory::makeClauseResult(SuchThatClause clause)
@@ -93,11 +94,34 @@ ClauseResult ResultFactory::makeClauseResult(SuchThatClause clause)
 
 	else
 	{
-		cerr << "Type: " << rel << " is not regconised!" << endl;
+		cerr << "Relationship: " << rel << " is not regconised!" << endl;
 	}
 }
 
 ClauseResult ResultFactory::makeClauseResult(PatternClause clause)
 {
-	return ClauseResult();
+	int patternType = clause.getPatternType();
+
+	if (patternType == ASSIGN)
+	{
+		AssignPatternEvaluator evaluator = AssignPatternEvaluator();
+		return evaluator.evaluate(clause);
+	}
+
+	else if (patternType == WHILE)
+	{
+		WhilePatternEvaluator evaluator = WhilePatternEvaluator();
+		return evaluator.evaluate(clause);
+	}
+
+	else if (patternType == IF)
+	{
+		IfPatternEvaluator evaluator = IfPatternEvaluator();
+		return evaluator.evaluate(clause);
+	}
+
+	else
+	{
+		cerr << "Pattern Type: " << patternType << " is not regconised!" << endl;
+	}
 }
