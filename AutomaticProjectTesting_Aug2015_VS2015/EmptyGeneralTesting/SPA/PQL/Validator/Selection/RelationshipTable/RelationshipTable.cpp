@@ -1,15 +1,15 @@
 #include "RelationshipTable.h"
 
- ARGUMENT_TYPE rule1 = { STMT, ASSIGN,WHILE,IF,PROG_LINE,CALL,PROCEDURE,IDENT_WITHQUOTES,INTEGER};
- ARGUMENT_TYPE rule2 = { VARIABLE, IDENT_WITHQUOTES, UNDERSCORE};
- ARGUMENT_TYPE rule3 = { STMT, WHILE,IF,PROG_LINE,INTEGER, UNDERSCORE};
- ARGUMENT_TYPE rule4 = { STMT, ASSIGN,WHILE,IF,PROG_LINE,CALL,INTEGER, UNDERSCORE };
- ARGUMENT_TYPE rule5 = { PROCEDURE, IDENT_WITHQUOTES, UNDERSCORE };
- ARGUMENT_TYPE rule6 = { ASSIGN, STMT, PROG_LINE, INTEGER, UNDERSCORE };
- ARGUMENT_TYPE rule7 = { STMT, ASSIGN,WHILE,IF,PROG_LINE,CALL,PROCEDURE,IDENT_WITHQUOTES,INTEGER };
- ARGUMENT_TYPE rule_arg1_for_pattern = { ASSIGN, WHILE };
- ARGUMENT_TYPE rule_arg2_for_pattern = { VARIABLE, IDENT_WITHQUOTES, UNDERSCORE };
- ARGUMENT_TYPE rule_arg3_for_pattern = { EXPRESSION_SPEC,UNDERSCORE };
+ ARGUMENT_TYPE_RULES rule1 = { STMT, ASSIGN,WHILE,IF,PROG_LINE,CALL,PROCEDURE,IDENT_WITHQUOTES,INTEGER};
+ ARGUMENT_TYPE_RULES rule2 = { VARIABLE, IDENT_WITHQUOTES, UNDERSCORE};
+ ARGUMENT_TYPE_RULES rule3 = { STMT, WHILE,IF,PROG_LINE,INTEGER, UNDERSCORE};
+ ARGUMENT_TYPE_RULES rule4 = { STMT, ASSIGN,WHILE,IF,PROG_LINE,CALL,INTEGER, UNDERSCORE };
+ ARGUMENT_TYPE_RULES rule5 = { PROCEDURE, IDENT_WITHQUOTES, UNDERSCORE };
+ ARGUMENT_TYPE_RULES rule6 = { ASSIGN, STMT, PROG_LINE, INTEGER, UNDERSCORE };
+ ARGUMENT_TYPE_RULES rule7 = { STMT, ASSIGN,WHILE,IF,PROG_LINE,CALL,PROCEDURE,IDENT_WITHQUOTES,INTEGER };
+ ARGUMENT_TYPE_RULES rule_arg1_for_pattern = { ASSIGN, WHILE };
+ ARGUMENT_TYPE_RULES rule_arg2_for_pattern = { VARIABLE, IDENT_WITHQUOTES, UNDERSCORE };
+ ARGUMENT_TYPE_RULES rule_arg3_for_pattern = { EXPRESSION_SPEC,UNDERSCORE };
 
  /*****************
  * Public methods *
@@ -17,8 +17,8 @@
 
 RelationshipTable::RelationshipTable()
 {
-    ARGUMENT_TYPE arg1, arg2;
-    ARGUMENT_TYPE arg3; //Extra argument for PATTERN
+    ARGUMENT_TYPE_RULES arg1, arg2;
+    ARGUMENT_TYPE_RULES arg3; //Extra argument for PATTERN
     
     //Modifies & Uses
     arg1 = rule1;
@@ -45,8 +45,8 @@ RelationshipTable::RelationshipTable()
     arg2 = rule4;
     rFollows = Relationship(arg1, arg2);
     rFollowsStar = Relationship(arg1, arg2);
-    relTable[FOLLOWS] = rParent;
-    relTable[FOLLOWSSTAR] = rParentStar;
+    relTable[FOLLOWS] = rFollows;
+    relTable[FOLLOWSSTAR] = rFollowsStar;
     arg1.clear();
     arg2.clear();
 /*
@@ -101,17 +101,16 @@ bool RelationshipTable::hasRelationship(RELATION inputRel)
    return true;
 } */
 
-bool RelationshipTable::isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two)
+bool RelationshipTable::isArgValid(RELATION_TYPE inputRel, ARG_TYPE one, ARG_TYPE two)
 {
     assert(inputRel <= 12);
     Relationship rel = relTable.find(inputRel)->second;
     return isArg1Valid(rel, one) && isArg2Valid(rel, two);
 }
 
-bool RelationshipTable::isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two, ARGTYPE three)
+bool RelationshipTable::isArgValid(RELATION_TYPE inputRel, ARG_TYPE one, ARG_TYPE two, ARG_TYPE three)
 {
-
-    Relationship rel = relTable[MODIFIES];
+    Relationship rel = relTable.find(inputRel)->second;
     return isArg1Valid(rel, one) && isArg2Valid(rel, two) && isArg3Valid(rel, three);
 }
 
@@ -119,10 +118,10 @@ bool RelationshipTable::isArgValid(RELATION inputRel, ARGTYPE one, ARGTYPE two, 
 /*****************
 * Private helper methods *
 *****************/
-bool RelationshipTable::isArg1Valid(Relationship rel, ARGTYPE arg) 
+bool RelationshipTable::isArg1Valid(Relationship rel, ARG_TYPE arg) 
 {
-    ARGUMENT_TYPE arg1 = rel.getArg1Type();
-    for (ARGUMENT_TYPE::iterator it = arg1.begin(); it != arg1.end(); ++it)
+    ARGUMENT_TYPE_RULES arg1 = rel.getArg1Type();
+    for (ARGUMENT_TYPE_RULES::iterator it = arg1.begin(); it != arg1.end(); ++it)
     {
         if (*it == arg)
             return true;
@@ -130,10 +129,10 @@ bool RelationshipTable::isArg1Valid(Relationship rel, ARGTYPE arg)
     return false;
 }
 
-bool RelationshipTable::isArg2Valid(Relationship rel, ARGTYPE arg)
+bool RelationshipTable::isArg2Valid(Relationship rel, ARG_TYPE arg)
 {
-    ARGUMENT_TYPE arg2 = rel.getArg2Type();
-    for (ARGUMENT_TYPE::iterator it = arg2.begin(); it != arg2.end(); ++it)
+    ARGUMENT_TYPE_RULES arg2 = rel.getArg2Type();
+    for (ARGUMENT_TYPE_RULES::iterator it = arg2.begin(); it != arg2.end(); ++it)
     {
         if (*it == arg)
             return true;
@@ -141,10 +140,10 @@ bool RelationshipTable::isArg2Valid(Relationship rel, ARGTYPE arg)
     return false;
 }
 
-bool RelationshipTable::isArg3Valid(Relationship rel, ARGTYPE arg)
+bool RelationshipTable::isArg3Valid(Relationship rel, ARG_TYPE arg)
 {
-    ARGUMENT_TYPE arg3 = rel.getArg2Type();
-    for (ARGUMENT_TYPE::iterator it = arg3.begin(); it != arg3.end(); ++it)
+    ARGUMENT_TYPE_RULES arg3 = rel.getArg3Type();
+    for (ARGUMENT_TYPE_RULES::iterator it = arg3.begin(); it != arg3.end(); ++it)
     {
         if (*it == arg)
             return true;
