@@ -10,32 +10,6 @@ SuchThatHandler::~SuchThatHandler()
 {
 }
 
-const string MODIFIES = "Modifies";
-const string USES = "Uses";
-const string PARENT = "Parent";
- const string PARENTSTAR = "Parent*";
- const string FOLLOWS = "Follows";
- const string FOLLOWSSTAR = "Follows*";
- const string CALLS = "Calls";
- const string CALLSSTAR = "Calls*";
- const string NEXT = "Next";
- const string NEXTSTAR = "Next*";
- const string AFFECTS = "Affects";
- const string AFFECTSSTAR = "Affects*";
-
- const string STMT = "stmt";
- const string ASSIGN = "assign";
- const string WHILE = "while";
- const string IF = "if";
- const string PROG_LINE = "prog_line";
- const string CALL = "call";
- const string PROCEDURE = "procedure";
- const string VARIABLE = "variable";
- const string INTEGER = "int";
- const string UNDERSCORE = "underscore";
- const string IDENT_WITH_QUOTES = "identWithQuotes";
- const string CONSTANT = "constant";
-
 bool SuchThatHandler::isValidSuchThat(string str)
 {
     string processedStr = Formatter::removeAllSpaces(str);
