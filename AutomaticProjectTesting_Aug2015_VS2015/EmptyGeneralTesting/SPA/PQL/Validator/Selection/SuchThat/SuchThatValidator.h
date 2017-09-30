@@ -57,7 +57,7 @@ protected:
     string argTwoType;
     string argOne;
     string argTwo;
-    bool validity;
+    bool validity = false;
 
     string extractArgOne(string keyword, string str);
     string extractArgTwo(string str);
