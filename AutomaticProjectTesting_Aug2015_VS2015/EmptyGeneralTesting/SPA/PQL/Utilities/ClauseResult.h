@@ -14,21 +14,17 @@ public:
     ClauseResult();
 
     vector<string> getAllSynonyms();
-    void getSynonymResults(string synName, vector<string> &results);
-    void getSynonymResults(string synName, vector<int> &results);
+    vector<vector<int>> getSynonymsResults(vector<string> synNames);
+    vector<int> getSynonymResults(string synName);
     bool synonymPresent(string synName);
-    bool addNewSynResults(string newSynName, vector<string> newSynResults);
     bool addNewSynResults(string newSynName, vector<int> newSynResults);
     bool removeCombinations(string synName, int value);
-    bool removeCombinations(string synName, string value);
-    bool pairWithOldSyn(string oldSyn, string oldSynValue, string newSyn, vector<string> newSynResults);
     bool pairWithOldSyn(string oldSyn, int oldSynValue, string newSyn, vector<int> newSynResults);
     
 protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
-    vector<vector<int>> _intResult;     // Results of stmt, constant, prog_line synonyms
-    vector<vector<string>> _strResult;  // Results of procedure and variable synonyms
+    vector<vector<int>> _result;     // Results of stmt, constant, prog_line synonyms
 
     template<typename T> static void appendToVector(vector<T> &v1, const vector<T> &v2, int n)
     {
