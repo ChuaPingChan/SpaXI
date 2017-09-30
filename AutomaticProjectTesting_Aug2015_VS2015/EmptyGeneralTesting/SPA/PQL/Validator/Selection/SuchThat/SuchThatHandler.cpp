@@ -50,19 +50,80 @@ string SuchThatHandler::getSuchThatKeyWord(string str)
 //TODO: Change the index number
 int SuchThatHandler::getRelIndex(string rel)
 {
-    if (rel == "Modifies") {
+    if (rel == SuchThatValidator::MODIFIES) {
         return 0;
     }
-    return 0;   //stub
+    else if (rel == SuchThatValidator::USES) {
+        return 1;
+    }
+    else if (rel == SuchThatValidator::PARENT) {
+        return 2;
+    }
+    else if (rel == SuchThatValidator::PARENTSTAR) {
+        return 3;
+    }
+    else if (rel == SuchThatValidator::FOLLOWS) {
+        return 4;
+    }
+    else if (rel == SuchThatValidator::FOLLOWSSTAR) {
+        return 5;
+    }
+    else if (rel == SuchThatValidator::CALLS) {
+        return 6;
+    }
+    else if (rel == SuchThatValidator::CALLSSTAR) {
+        return 7;
+    }
+    else if (rel == SuchThatValidator::NEXT) {
+        return 8;
+    }
+    else if (rel == SuchThatValidator::NEXTSTAR) {
+        return 9;
+    }
+    else if (rel == SuchThatValidator::AFFECTS) {
+        return 10;
+    }
+    else if (rel == SuchThatValidator::AFFECTSSTAR) {
+        return 11;
+    }
+    else {
+        return -1;  //TODO: Throw exception to say inalid
+    }
 }
 
 //TODO: Change the index reference
 int SuchThatHandler::getArgTypeIndex(string arg)
 {
-    if (arg == "stmt") {
+    if (arg == SuchThatValidator::STMT) {
         return 0;
     }
-    return 0;   //stub
+    else if (arg == SuchThatValidator::ASSIGN) {
+        return 1;
+    }
+    else if (arg == SuchThatValidator::WHILE) {
+        return 2;
+    }
+    else if (arg == SuchThatValidator::IF) {
+        return 3;
+    }
+    else if (arg == SuchThatValidator::PROG_LINE) {
+        return 4;
+    }
+    else if (arg == SuchThatValidator::CALL) {
+        return 5;
+    }
+    else if (arg == SuchThatValidator::PROCEDURE) {
+        return 6;
+    }
+    else if (arg == SuchThatValidator::VARIABLE) {
+        return 7;
+    }
+    else if (arg == SuchThatValidator::INTEGER) {
+        return 8;
+    }
+    else {
+        return -1;  //TODO: Throw excception to say invalid
+    }
 }
 
 SuchThatClause SuchThatHandler::makeSuchThatClause(SuchThatValidator stv)
