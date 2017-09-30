@@ -17,9 +17,12 @@ bool SuchThatHandler::isValidSuchThat(string str)
 
     SuchThatValidator suchThatValidator(qtPtr);
 
-    if (rel == "Modifies") {
+    //TODO: use statiic string
+    if (rel == SuchThatValidator::MODIFIES) {
         suchThatValidator = ModifiesValidator(rel, processedStr);
     }
+
+    suchThatValidator.validate();
 
     if (suchThatValidator.isValid()) {
         SuchThatClause suchThatClause = makeSuchThatClause(suchThatValidator);
