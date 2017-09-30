@@ -162,6 +162,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="PQL\Utility\UtilityQueryTree.h" />
+    <ClInclude Include="PQL\Utility\UtilitySuchThat.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PQL\PQLFriend\FriendDeclarationValidator.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="TestValidationPatternAndTree.cpp" />
     <ClCompile Include="TestValidationUsesAndTree.cpp" />
     <ClCompile Include="PQL\Utility\UtilityQueryTree.cpp" />
+    <ClCompile Include="PQL\Utility\UtilitySuchThat.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
