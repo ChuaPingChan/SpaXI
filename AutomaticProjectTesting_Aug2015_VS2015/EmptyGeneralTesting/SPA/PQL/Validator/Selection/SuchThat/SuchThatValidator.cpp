@@ -45,7 +45,7 @@ void SuchThatValidator::validate()
 
 bool SuchThatValidator::isValid()
 {
-    return false;
+    return this->validity;
 }
 
 string SuchThatValidator::getRel()
