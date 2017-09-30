@@ -24,9 +24,30 @@ public:
 	ResultFactory();
 	~ResultFactory();
 
-	ClauseResult makeClauseResult(ClauseObject clause);
+	ClauseResult makeClauseResult(SelectClause clause);
+	ClauseResult makeClauseResult(SuchThatClause clause);
+	ClauseResult makeClauseResult(PatternClause clause);
+	//ClauseResult makeClauseResult(WithClause clause);
 
 private:
+
+	enum REL 
+	{
+		MODIFIES = 0,
+		USES,
+		PARENT,
+		PARENTSTAR,
+		FOLLOWS,
+		FOLLOWSSTAR,
+		CALLS,
+		CALLSSTAR,
+		NEXT,
+		NEXTSTAR,
+		AFFECTS,
+		AFFECTSSTAR,
+		PATTERN
+	};
+
 	template<typename Base, typename T>
 	inline bool instanceof(const T *ptr) {
 		return dynamic_cast<const Base*>(ptr) != nullptr;
