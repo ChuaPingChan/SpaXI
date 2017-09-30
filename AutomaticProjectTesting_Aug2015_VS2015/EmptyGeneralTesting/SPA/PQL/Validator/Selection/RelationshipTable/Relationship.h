@@ -3,6 +3,7 @@
 #include<string>
 
 using namespace std;
+typedef vector<int> ARGUMENT_TYPE;
 static const int MODIFIES = 0;
 static const int USES = 1;
 static const int PARENT = 2;
@@ -17,7 +18,6 @@ static const int AFFECTS = 10;
 static const int AFFECTSSTAR = 11;
 static const int PATTERN = 12;
 
-typedef vector<int> ARGUMENT_TYPE;
 
 class Relationship
 {
