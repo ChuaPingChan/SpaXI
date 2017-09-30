@@ -21,7 +21,7 @@ Returns the possible results of the all synonyms that satisfy a PQL query.
 If a synonym has no possible values that satisfies the query, an empty vector
 will be returned.
 */
-vector<vector<int>> ClauseResult::getSynonymsResults(vector<string> synNames)
+vector<vector<int>> ClauseResult::getSynonymResults(vector<string> synNames)
 {
     vector<vector<int>> result;
 
@@ -30,27 +30,28 @@ vector<vector<int>> ClauseResult::getSynonymsResults(vector<string> synNames)
         return result;
     }
 
-    for (vector<string>::iterator iter = synNames.begin();
-        iter != synNames.end(); iter++) {       // For each synonym selected
-        vector<int> synResults = getSynonymResults(*iter);
-        result.push_back(synResults);
+    vector<int> synIndices;
+    synIndices.clear();
+    for (vector<string>::iterator synNamePtr = synNames.begin();
+        synNamePtr != synNames.end();
+        synNamePtr++) {
+        synIndices.push_back(_synToIdxMap.at(*synNamePtr));
     }
-    return result;
-}
 
-/*
-Returns the possible results of the given synonym that satisfies a PQL query.
-If the synonym has no possible values that satisfies the query, an empty vector
-will be given.
-*/
-vector<int> ClauseResult::getSynonymResults(string synName)
-{
-    vector<int> result;
-    result.clear();     // Most likely redundant. Just to be sure.
+    // For each combinations, filter the selected synonyms only.
+    for (vector<vector<int>>::iterator combPtr = _result.begin();
+        combPtr != _result.end();
+        combPtr++) {
 
-    if (_synToIdxMap.count(synName) != 0) {
-        int synIdx = _synToIdxMap.at(synName);
-        result = _result[synIdx];
+        vector<int> filteredCombination;
+        filteredCombination.clear();
+        
+        for (vector<int>::iterator synIndexPtr = synIndices.begin();
+            synIndexPtr != synIndices.end();
+            synIndexPtr++) {
+            filteredCombination.push_back((*combPtr).at(*synIndexPtr));
+        }
+        result.push_back(filteredCombination);
     }
     return result;
 }
@@ -84,37 +85,84 @@ bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults
     // Add to _synToIdxMap
     _synToIdxMap.insert({ newSynName, newSynIdx });
 
-    // Add to _intResult
-    int repeatNumber = newSynResults.size() - 1;
-    int numCombinations = _result.at(0).size();
+    // Update _result - Cartesian product
+    int repeatNumber = newSynResults.size();
+    vector<vector<int>> outdatedResult = _result;
+    _result.clear();
 
-    // Catesian product
-    for (vector<vector<int>>::iterator iter = _result.begin();
-         iter != _result.end();
-         iter++) {
-        vector<int> initialState = *iter;
-        ClauseResult::appendToVector(*iter, initialState, repeatNumber);
-    }
-    vector<int> modNewSynResults;
-    modNewSynResults.clear();
-    for (vector<int>::iterator iter = newSynResults.begin();
-         iter != newSynResults.end();
-         iter++) {
-        for (int i = 0; i < numCombinations; i++) {
-            modNewSynResults.push_back(*iter);
+    for (vector<vector<int>>::iterator combPtr = outdatedResult.begin();
+        combPtr != outdatedResult.end();
+        combPtr++)
+    {
+        for (vector<int>::iterator newSynResPtr = newSynResults.begin();
+            newSynResPtr != newSynResults.end();
+            newSynResPtr++)
+        {
+            vector<int> newComb = *combPtr;
+            newComb.push_back(*newSynResPtr);
+            _result.push_back(newComb);
         }
     }
-    _result.push_back(modNewSynResults);
 
     return true;
 }
 
 bool ClauseResult::removeCombinations(string synName, int value)
 {
-    return false;
+    int synIdx = _synToIdxMap.at(synName);
+    vector<vector<int>> updatedResult;
+    updatedResult.clear();
+
+    for (vector<vector<int>>::iterator combPtr = _result.begin();
+        combPtr != _result.end();
+        combPtr++)
+    {
+        if ((*combPtr).at(synIdx) != value) {
+            updatedResult.push_back(*combPtr);
+        }
+    }
+    _result = updatedResult;
+    return true;
 }
 
-bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue, string newSyn, vector<int> newSynResults)
+bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
+                                  string newSyn, vector<int> newSynResults)
 {
-    return false;
+    assert(newSynResults.size() > 0);
+    assert(_synToIdxMap.count(newSyn) == 0);    // Must be new synonym
+
+    int oldSynIdx = _synToIdxMap.at(oldSyn);
+
+    vector<vector<int>> updatedResult;
+    updatedResult.clear();
+
+    // Add to _synList
+    _synList.push_back(newSyn);
+    int newSynIdx = _synList.size() - 1;
+
+    // Add to _synToIdxMap
+    _synToIdxMap.insert({ newSyn, newSynIdx });
+
+    // Update _result - Cartesian product
+    int repeatNumber = newSynResults.size();
+
+    for (vector<vector<int>>::iterator combPtr = _result.begin();
+        combPtr != _result.end();
+        combPtr++)
+    {
+        if ((*combPtr).at(oldSynIdx) == oldSynValue)
+        {
+            for (vector<int>::iterator newSynResPtr = newSynResults.begin();
+                newSynResPtr != newSynResults.end();
+                newSynResPtr++)
+            {
+                vector<int> newComb = *combPtr;
+                newComb.push_back(*newSynResPtr);
+                updatedResult.push_back(newComb);
+            }
+        }
+    }
+    _result = updatedResult;
+
+    return true;
 }

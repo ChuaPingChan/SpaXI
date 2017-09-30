@@ -14,8 +14,7 @@ public:
     ClauseResult();
 
     vector<string> getAllSynonyms();
-    vector<vector<int>> getSynonymsResults(vector<string> synNames);
-    vector<int> getSynonymResults(string synName);
+    vector<vector<int>> getSynonymResults(vector<string> synNames);
     bool synonymPresent(string synName);
     bool addNewSynResults(string newSynName, vector<int> newSynResults);
     bool removeCombinations(string synName, int value);
