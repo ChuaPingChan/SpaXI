@@ -65,16 +65,22 @@ bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults
 {
     assert(_synToIdxMap.count(newSynName) == 0);
 
-    int numOfNewSynResults = newSynResults.size();
+    int repeatNumber = newSynResults.size() - 1;
+
+    // For each synonyms with integer results
+    for (vector<vector<int>>::iterator iter = _intResult.begin();
+        iter != _intResult.end(); iter++) {
+        vector<int> initialState = *iter;
+        ClauseResult::appendToVector(*iter, initialState, repeatNumber);
+    }
+    // For each synonyms with string results (e.g. procedure, variable)
+    for (vector<vector<string>>::iterator iter = _strResult.begin();
+        iter != _strResult.end(); iter++) {
+        vector<string> initialState = *iter;
+        ClauseResult::appendToVector(*iter, initialState, repeatNumber);
+    }
 
     return false;
-}
-
-void ClauseResult::appendToVector(vector<int>& v1, const vector<int>& v2, int n)
-{
-    for (int i = 0; i < n; i++) {
-        v1.insert(v1.end(), v2.begin(), v2.end());
-    }
 }
 
 bool ClauseResult::removeCombinations(string synName, int value)

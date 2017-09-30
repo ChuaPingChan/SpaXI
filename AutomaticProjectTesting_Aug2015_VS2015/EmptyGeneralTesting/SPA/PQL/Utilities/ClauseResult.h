@@ -30,6 +30,10 @@ protected:
     vector<vector<int>> _intResult;     // Results of stmt, constant, prog_line synonyms
     vector<vector<string>> _strResult;  // Results of procedure and variable synonyms
 
-    static void appendToVector(vector<int> &v1, const vector<int> &v2, int n);
+    template<typename T> static void appendToVector(vector<T> &v1, const vector<T> &v2, int n)
+    {
+        for (int i = 0; i < n; i++) {
+            v1.insert(v1.end(), v2.begin(), v2.end());
+        }
+    }
 };
-
