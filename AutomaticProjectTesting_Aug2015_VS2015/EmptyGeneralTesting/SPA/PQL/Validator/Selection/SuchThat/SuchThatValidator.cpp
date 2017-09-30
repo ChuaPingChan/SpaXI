@@ -13,31 +13,31 @@ SuchThatValidator::~SuchThatValidator()
 {
 }
 
-const string MODIFIES = "Modifies";
-const string USES = "Uses";
-const string PARENT = "Parent";
-const string PARENTSTAR = "Parent*";
-const string FOLLOWS = "Follows";
-const string FOLLOWSSTAR = "Follows*";
-const string CALLS = "Calls";
-const string CALLSSTAR = "Calls*";
-const string NEXT = "Next";
-const string NEXTSTAR = "Next*";
-const string AFFECTS = "Affects";
-const string AFFECTSSTAR = "Affects*";
+const string SuchThatValidator:: MODIFIES = "Modifies";
+const string SuchThatValidator:: USES = "Uses";
+const string SuchThatValidator:: PARENT = "Parent";
+const string SuchThatValidator:: PARENTSTAR = "Parent*";
+const string SuchThatValidator:: FOLLOWS = "Follows";
+const string SuchThatValidator:: FOLLOWSSTAR = "Follows*";
+const string SuchThatValidator:: CALLS = "Calls";
+const string SuchThatValidator:: CALLSSTAR = "Calls*";
+const string SuchThatValidator:: NEXT = "Next";
+const string SuchThatValidator:: NEXTSTAR = "Next*";
+const string SuchThatValidator:: AFFECTS = "Affects";
+const string SuchThatValidator:: AFFECTSSTAR = "Affects*";
 
-const string STMT = "stmt";
-const string ASSIGN = "assign";
-const string WHILE = "while";
-const string IF = "if";
-const string PROG_LINE = "prog_line";
-const string CALL = "call";
-const string PROCEDURE = "procedure";
-const string VARIABLE = "variable";
-const string INTEGER = "int";
-const string UNDERSCORE = "underscore";
-const string IDENT_WITH_QUOTES = "identWithQuotes";
-const string CONSTANT = "constant";
+const string SuchThatValidator:: STMT = "stmt";
+const string SuchThatValidator:: ASSIGN = "assign";
+const string SuchThatValidator:: WHILE = "while";
+const string SuchThatValidator:: IF = "if";
+const string SuchThatValidator:: PROG_LINE = "prog_line";
+const string SuchThatValidator:: CALL = "call";
+const string SuchThatValidator:: PROCEDURE = "procedure";
+const string SuchThatValidator:: VARIABLE = "variable";
+const string SuchThatValidator:: INTEGER = "int";
+const string SuchThatValidator:: UNDERSCORE = "underscore";
+const string SuchThatValidator:: IDENT_WITH_QUOTES = "identWithQuotes";
+const string SuchThatValidator:: CONSTANT = "constant";
 
 void SuchThatValidator::validate()
 {
@@ -73,7 +73,7 @@ string SuchThatValidator::getArgTwo()
     return this->argTwo;
 }
 
-string SuchThatValidator::getArgOne(string keyword, string str)
+string SuchThatValidator::extractArgOne(string keyword, string str)
 {
     string delimFirst = keyword + "(";
     string delimSecond = ",";
@@ -81,7 +81,7 @@ string SuchThatValidator::getArgOne(string keyword, string str)
     return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
 }
 
-string SuchThatValidator::getArgTwo(string str)
+string SuchThatValidator::extractArgTwo(string str)
 {
     string delimFirst = ",";
     string delimSecond = ")";
