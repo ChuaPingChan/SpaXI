@@ -40,8 +40,8 @@ public:
     SuchThatValidator();
     ~SuchThatValidator();
 
-    void validate();
-    bool isValid();
+    virtual void validate();
+    virtual bool isValid();
 
     string getRel();
     string getArgOneType();

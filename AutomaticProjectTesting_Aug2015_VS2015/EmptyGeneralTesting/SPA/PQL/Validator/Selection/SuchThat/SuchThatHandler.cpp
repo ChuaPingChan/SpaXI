@@ -17,7 +17,6 @@ bool SuchThatHandler::isValidSuchThat(string str)
 
     SuchThatValidator suchThatValidator(qtPtr);
 
-    //TODO: use statiic string
     if (rel == SuchThatValidator::MODIFIES) {
         suchThatValidator = ModifiesValidator(rel, processedStr);
     }

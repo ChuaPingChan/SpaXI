@@ -7,9 +7,9 @@ public:
     ModifiesValidator(string rel, string str);
     ~ModifiesValidator();
 
-    virtual bool isValid();
-    virtual void validate();
-
+    void validate();
+    bool isValid();
+    
 private:
     string paramStr;
 

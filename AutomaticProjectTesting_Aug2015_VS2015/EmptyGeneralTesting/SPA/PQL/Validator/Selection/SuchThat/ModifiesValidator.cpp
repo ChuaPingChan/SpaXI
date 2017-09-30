@@ -33,31 +33,36 @@ void ModifiesValidator::validate()
     }
 }
 
+bool ModifiesValidator::isValid()
+{
+    return this->validity;
+}
+
 bool ModifiesValidator::isValidArgOne(string argOne)
 {
     QueryTree qt = *(this->qtPtr);
-
-    if (isArgumentInClause(argOne, qt.getAssigns()))
-    {
-        this->argOneType = "assign";
-        return true;
-    } 
     
-    else if (isArgumentInClause(argOne, qt.getStmts()))
+    if (isArgumentInClause(argOne, qt.getStmts()))
     {
-        this->argOneType = "stmt";
+        this->argOneType = SuchThatValidator::STMT;
+        return true;
+    }
+
+    else if (isArgumentInClause(argOne, qt.getAssigns()))
+    {
+        this->argOneType = SuchThatValidator::ASSIGN;
         return true;
     }
 
     else if (isArgumentInClause(argOne, qt.getWhiles()))
     {
-        this->argOneType = "while";
+        this->argOneType = SuchThatValidator::WHILE;
         return true;
     }
 
     else if (isIntegerRegexCheck(argOne))
     {
-        this->argOneType = "int";
+        this->argOneType = SuchThatValidator::INTEGER;
         return true;
     }
 
@@ -72,18 +77,18 @@ bool ModifiesValidator::isValidArgTwo(string argTwo)
     QueryTree qt = *(this->qtPtr);
 
     if (isArgumentInClause(argTwo, qt.getVars())) { //if arg2 is a variable synonym
-        this->argTwoType = "variable";
+        this->argTwoType = SuchThatValidator::VARIABLE;
         return true;
     }
 
     else if (argTwo == "_") {
-        this->argTwoType = "underscore";
+        this->argTwoType = SuchThatValidator::UNDERSCORE;
         return true;
     }
 
     else if (isIdentWithQuotes(argTwo))
     {
-        this->argTwoType = "ident";
+        this->argTwoType = SuchThatValidator::IDENT_WITH_QUOTES;
         return true;
     }
 
@@ -91,9 +96,4 @@ bool ModifiesValidator::isValidArgTwo(string argTwo)
     {
         return false;
     }
-}
-
-bool ModifiesValidator::isValid()
-{
-    return this->validity;
 }
