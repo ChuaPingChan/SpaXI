@@ -38,16 +38,17 @@ namespace UnitTesting
         TEST_METHOD(TestAddNewSynResults_nonZeroIntResults_success) {
             ClauseResult cr = ClauseResult();
             
-            string stmt1 = "s1";
+            string stmt1 = "a";
             int stmt1ResultsArray[] = { 1, 2 };
             vector<int> stmt1Results(stmt1ResultsArray, stmt1ResultsArray + sizeof(stmt1ResultsArray) / sizeof(int));
             
-            string stmt2 = "s2";
+            string stmt2 = "b";
             int stmt2ResultsArray[] = { 3, 4 };
             vector<int> stmt2Results(stmt2ResultsArray, stmt2ResultsArray + sizeof(stmt2ResultsArray) / sizeof(int));
 
-            cr.addNewSynResults("s1", stmt1Results);
-            cr.addNewSynResults("s2", stmt2Results);
+            cr.addNewSynResults("a", stmt1Results);
+            cr.addNewSynResults("b", stmt2Results);
+            vector<vector<int>> result = cr.getAllResults();
         }
     };
 }

@@ -56,6 +56,11 @@ vector<vector<int>> ClauseResult::getSynonymResults(vector<string> synNames)
     return result;
 }
 
+vector<vector<int>> ClauseResult::getAllResults()
+{
+    return _result;
+}
+
 bool ClauseResult::synonymPresent(string synName)
 {
     return _synToIdxMap.count(synName) > 0;
@@ -86,6 +91,18 @@ bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults
     _synToIdxMap.insert({ newSynName, newSynIdx });
 
     // Update _result - Cartesian product
+    if (_result.empty()) {
+        for (vector<int>::iterator newSynResPtr = newSynResults.begin();
+            newSynResPtr != newSynResults.end();
+            newSynResPtr++)
+        {
+            vector<int> newComb;
+            newComb.push_back(*newSynResPtr);
+            _result.push_back(newComb);
+        }
+        return true;
+    }
+
     int repeatNumber = newSynResults.size();
     vector<vector<int>> outdatedResult = _result;
     _result.clear();
