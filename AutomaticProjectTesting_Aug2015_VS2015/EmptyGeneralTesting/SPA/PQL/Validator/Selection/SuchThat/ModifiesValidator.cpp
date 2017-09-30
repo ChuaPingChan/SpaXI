@@ -12,10 +12,10 @@ ModifiesValidator::~ModifiesValidator()
 
 void ModifiesValidator::validate()
 {
-    string firstArg = getArgOne(rel, paramStr);
-    string secondArg = getArgTwo(paramStr);
+    string firstArg = extractArgOne(rel, paramStr);
+    string secondArg = extractArgTwo(paramStr);
 
-    if (firstArg == secondArg) {
+    if (firstArg == secondArg) {    //Because can never be 2 underlines or 2 int or 2 same synonym or 2 same synonymType
         this->validity = false;
     }
 
@@ -72,12 +72,12 @@ bool ModifiesValidator::isValidArgTwo(string argTwo)
     QueryTree qt = *(this->qtPtr);
 
     if (isArgumentInClause(argTwo, qt.getVars())) { //if arg2 is a variable synonym
-        this->argTwoType = "var";
+        this->argTwoType = "variable";
         return true;
     }
 
     else if (argTwo == "_") {
-        this->argTwoType = argTwo;
+        this->argTwoType = "underscore";
         return true;
     }
 
