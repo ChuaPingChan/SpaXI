@@ -81,7 +81,7 @@ bool ModifiesValidator::isValidArgTwo(string argTwo)
         return true;
     }
 
-    else if (isIdentWithInvertedCommas(argTwo))
+    else if (isIdentWithQuotes(argTwo))
     {
         this->argTwoType = "ident";
         return true;

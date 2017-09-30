@@ -66,5 +66,5 @@ protected:
 
     //TODO: remove after implementing regex table
     bool isIntegerRegexCheck(string arg);
-    bool isIdentWithInvertedCommas(string arg);
+    bool isIdentWithQuotes(string arg);
 };

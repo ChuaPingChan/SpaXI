@@ -107,14 +107,14 @@ bool SuchThatValidator::isIntegerRegexCheck(string arg)
     return regex_match(arg, checkInt);
 }
 
-bool SuchThatValidator::isIdentWithInvertedCommas(string arg)
+bool SuchThatValidator::isIdentWithQuotes(string arg)
 {
     string LETTER = "([a-zA-Z])";
     string DIGIT = "([0-9])";
     string HASH = "(#)";
     string IDENT = "(" + LETTER + "(" + LETTER + "|" + DIGIT + "|" + HASH + ")*)";
-    string IDENT_WITH_INVERTED_COMMA = "(\"" + IDENT + "\")";
+    string IDENT_WITH_QUOTES = "(\"" + IDENT + "\")";
 
-    regex checkIdentWithInvertedCommas = regex(IDENT_WITH_INVERTED_COMMA);
+    regex checkIdentWithInvertedCommas = regex(IDENT_WITH_QUOTES);
     return regex_match(arg, checkIdentWithInvertedCommas);
 }

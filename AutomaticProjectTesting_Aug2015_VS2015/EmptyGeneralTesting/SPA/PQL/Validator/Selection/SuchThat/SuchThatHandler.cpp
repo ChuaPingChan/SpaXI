@@ -56,7 +56,7 @@ int SuchThatHandler::getRelIndex(string rel)
 //TODO: Change the index reference
 int SuchThatHandler::getArgTypeIndex(string arg)
 {
-    if (arg == "int") {
+    if (arg == "stmt") {
         return 0;
     }
     return 0;   //stub
