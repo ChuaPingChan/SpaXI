@@ -36,7 +36,6 @@ public:
     static const string IDENT_WITH_QUOTES;
     static const string CONSTANT;
 
-    SuchThatValidator(QueryTree *qtPtrNew);
     SuchThatValidator(string rel, string paramStr, QueryTree *qtPtrNew);
     SuchThatValidator();
     ~SuchThatValidator();

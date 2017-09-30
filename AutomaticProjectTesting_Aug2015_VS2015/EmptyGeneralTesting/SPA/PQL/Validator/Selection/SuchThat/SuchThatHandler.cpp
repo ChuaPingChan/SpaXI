@@ -15,7 +15,7 @@ bool SuchThatHandler::isValidSuchThat(string str)
     string processedStr = Formatter::removeAllSpaces(str);
     string rel = getSuchThatKeyWord(processedStr);
 
-    SuchThatValidator *suchThatValidator = new SuchThatValidator(qtPtr);
+    SuchThatValidator *suchThatValidator;
 
     if (rel == SuchThatValidator::MODIFIES) {
         suchThatValidator = new ModifiesValidator(rel, processedStr, qtPtr);

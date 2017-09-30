@@ -1,10 +1,5 @@
 #include "SuchThatValidator.h"
 
-SuchThatValidator::SuchThatValidator(QueryTree *qtPtrNew)
-{
-    this->qtPtr = qtPtrNew;
-}
-
 SuchThatValidator::SuchThatValidator(string rel, string paramStr, QueryTree * qtPtrNew)
 {
     this->rel = rel;
