@@ -18,7 +18,7 @@ bool SuchThatHandler::isValidSuchThat(string str)
     SuchThatValidator *suchThatValidator = new SuchThatValidator(qtPtr);
 
     if (rel == SuchThatValidator::MODIFIES) {
-        suchThatValidator = new ModifiesValidator(rel, processedStr);
+        suchThatValidator = new ModifiesValidator(rel, processedStr, qtPtr);
     }
 
     suchThatValidator->validate();

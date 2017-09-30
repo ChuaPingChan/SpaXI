@@ -4,15 +4,13 @@
 class ModifiesValidator : public SuchThatValidator
 {
 public:
-    ModifiesValidator(string rel, string str);
+    ModifiesValidator(string rel, string paramStr, QueryTree *qtPtrNew);
     ~ModifiesValidator();
 
     void validate();
     bool isValid();
     
 private:
-    string paramStr;
-
     bool isValidArgOne(string argOne);
     bool isValidArgTwo(string argTwo);
 };

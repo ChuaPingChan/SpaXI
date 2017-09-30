@@ -5,6 +5,13 @@ SuchThatValidator::SuchThatValidator(QueryTree *qtPtrNew)
     this->qtPtr = qtPtrNew;
 }
 
+SuchThatValidator::SuchThatValidator(string rel, string paramStr, QueryTree * qtPtrNew)
+{
+    this->rel = rel;
+    this->paramStr = paramStr;
+    this->qtPtr = qtPtrNew;
+}
+
 SuchThatValidator::SuchThatValidator()
 {
 }

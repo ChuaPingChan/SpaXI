@@ -1,9 +1,8 @@
 #include "ModifiesValidator.h"
 
-ModifiesValidator::ModifiesValidator(string rel, string str)
+ModifiesValidator::ModifiesValidator(string rel, string paramStr, QueryTree *qtPtrNew)
+    :SuchThatValidator(rel, paramStr, qtPtrNew)
 {
-    this->rel = rel;
-    this->paramStr = str;
 }
 
 ModifiesValidator::~ModifiesValidator()

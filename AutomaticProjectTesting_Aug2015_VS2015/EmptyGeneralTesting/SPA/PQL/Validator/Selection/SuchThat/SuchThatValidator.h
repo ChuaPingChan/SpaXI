@@ -37,6 +37,7 @@ public:
     static const string CONSTANT;
 
     SuchThatValidator(QueryTree *qtPtrNew);
+    SuchThatValidator(string rel, string paramStr, QueryTree *qtPtrNew);
     SuchThatValidator();
     ~SuchThatValidator();
 
@@ -51,6 +52,7 @@ public:
 
 protected:
     QueryTree *qtPtr;
+    string paramStr;
 
     string rel;
     string argOneType;
