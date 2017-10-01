@@ -1,8 +1,8 @@
 #include "PatternTable.h"
 
-string infixToPostfix(string infix);
-bool isOperator(char c);
-int getPrecedence(char sign);
+list<string> infixToPostfix(string infix);
+bool isOperator(string c);
+int getPrecedence(string sign);
 
 PatternTable::PatternTable() {
     
@@ -14,7 +14,7 @@ PatternTable::PatternTable() {
 */
 bool PatternTable::addToPatternTable(int stmtNumber, string var, string expression) {
     // to convert infix to postfix expression
-    string postfixExpression = infixToPostfix(expression);
+    list<string> postfixExpression = infixToPostfix(expression);
     // if stmt number does not exist as a key, insert data to hash map
     if (patternTableMap.find(stmtNumber) == patternTableMap.end()) {
         patternTableMap[stmtNumber] = make_pair(var, postfixExpression);
@@ -23,14 +23,14 @@ bool PatternTable::addToPatternTable(int stmtNumber, string var, string expressi
     return false;
 }
 
-pair<string,string> PatternTable::getExpression(int stmtNumber) {
+pair<string,list<string>> PatternTable::getExpression(int stmtNumber) {
     return patternTableMap[stmtNumber];
 }
 
 pair<list<int>,list<string>> PatternTable::getLeftVariables()
 {
     pair<list<int>, list<string>> pairOfList;
-    unordered_map<int, pair<string, string>>::iterator it;
+    unordered_map<int, pair<string, list<string>>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
         //varList.push_back(make_pair(it->first,it->second.first));
@@ -43,7 +43,7 @@ pair<list<int>,list<string>> PatternTable::getLeftVariables()
 pair<list<int>,list<string>> PatternTable::getLeftVariableThatMatchWithString(string expression)
 {
     pair<list<int>, list<string>> pairOfList;
-    unordered_map<int, pair<string, string>>::iterator it;
+    unordered_map<int, pair<string, list<string>>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
         if (hasPartialMatch(it->first, expression))
@@ -58,7 +58,7 @@ pair<list<int>,list<string>> PatternTable::getLeftVariableThatMatchWithString(st
 list<int> PatternTable::getExactMatchStmt(string expression)
 {
     list<int> assignList;
-    unordered_map<int, pair<string, string>>::iterator it;
+    unordered_map<int, pair<string, list<string>>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
         int stmt = it->first;
@@ -72,7 +72,7 @@ list<int> PatternTable::getExactMatchStmt(string expression)
 list<int> PatternTable::getPartialMatchStmt(string expression)
 {
     list<int> assignList;
-    unordered_map<int, pair<string, string>>::iterator it;
+    unordered_map<int, pair<string, list<string>>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
         int stmt = it->first;
@@ -86,7 +86,7 @@ list<int> PatternTable::getPartialMatchStmt(string expression)
 list<int> PatternTable::getExactBothMatches(string var, string expression)
 {
     list<int> assignList;
-    unordered_map<int, pair<string, string>>::iterator it;
+    unordered_map<int, pair<string, list<string>>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
         int stmt = it->first;
@@ -104,7 +104,7 @@ list<int> PatternTable::getExactBothMatches(string var, string expression)
 list<int> PatternTable::getPartialBothMatches(string var, string expression)
 {
     list<int> assignList;
-    unordered_map<int, pair<string, string>>::iterator it;
+    unordered_map<int, pair<string, list<string>>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
         int stmt = it->first;
@@ -122,7 +122,7 @@ list<int> PatternTable::getPartialBothMatches(string var, string expression)
 list<int> PatternTable::getLeftVariableMatchingStmts(string var)
 {
     list<int> stmtList;
-    unordered_map<int, pair<string, string>>::iterator it;
+    unordered_map<int, pair<string, list<string>>>::iterator it;
     for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
     {
         if (var.compare(it->second.first) == 0)
@@ -138,66 +138,84 @@ list<int> PatternTable::getLeftVariableMatchingStmts(string var)
 //////////////////////////////////////////////////////////
 bool PatternTable::hasExactMatch(int stmtNumber, string expression) {
     // returns true if postfix of expression exactly matches with patternTableMap[stmtNumber]
-    return patternTableMap[stmtNumber].second.compare(infixToPostfix(expression)) == 0;
+    return patternTableMap[stmtNumber].second == infixToPostfix(expression);
 }
 
 bool PatternTable::hasPartialMatch(int stmtNumber, string expression) {
-    size_t found = patternTableMap[stmtNumber].second.find(infixToPostfix(expression));
-    // returns true if postfix of expression is the substring of patternTableMap[stmtNumber]
-    return found != string::npos;
+    // returns true if postfix of expression is the sublist of patternTableMap[stmtNumber]
+    list<string> exp = patternTableMap[stmtNumber].second;
+    list<string> subexp = infixToPostfix(expression);
+    list<string>::iterator listitr = std::search(
+        exp.begin(), exp.end(),
+        subexp.begin(), subexp.end()
+    );
+    return listitr != exp.end();
 }
 
 /*
     Pre-cond: infix is a valid expression
 */
-string infixToPostfix(string infix) {
-    stack<char> signStack = stack<char>();
-    string postfix = "";
-    for (size_t i = 0; i < infix.length(); i++) {
+list<string> infixToPostfix(string infix) {
+    stack<string> signStack = stack<string>();
+    list<string> postfix = list<string>();
+    string var = "";
+    for (int i = 0; i < infix.length(); i++) {
+        string current = "";
+        current += infix[i];
         if (isalpha(infix[i]) || isdigit(infix[i])) {
-            postfix += infix[i];
+            var += infix[i];
         }
-        else if (isOperator(infix[i])) {
-            while (!signStack.empty()
-                && signStack.top() != '('
-                && getPrecedence(infix[i]) <= getPrecedence(signStack.top())) {
-                postfix += signStack.top();
+        else {
+            if (!var.empty()) {
+                postfix.push_back(var);
+                var = "";
+            }
+            if (isOperator(current)) {
+                while (!signStack.empty()
+                    && signStack.top().compare("(") != 0
+                    && getPrecedence(current) <= getPrecedence(signStack.top())) {
+                    postfix.push_back(signStack.top());
+                    signStack.pop();
+                }
+                signStack.push(current);
+            }
+            else if (infix[i] == '(') {
+                signStack.push(current);
+            }
+            else if (infix[i] == ')') {
+                while (!signStack.empty() && signStack.top().compare("(") != 0) {
+                    postfix.push_back(signStack.top());
+                    signStack.pop();
+                }
                 signStack.pop();
             }
-            signStack.push(infix[i]);
-        }
-        else if (infix[i] == '(') {
-            signStack.push(infix[i]);
-        }
-        else if (infix[i] == ')') {
-            while (!signStack.empty() && signStack.top() != '(') {
-                postfix += signStack.top();
-                signStack.pop();
-            }
-            signStack.pop();
         }
     }
+    postfix.push_back(var);
     while (!signStack.empty()) {
-        if (signStack.top() != '(' || signStack.top() != ')') {
-            postfix += signStack.top();
+        if (signStack.top().compare("(") != 0 || signStack.top().compare(")") != 0) {
+            postfix.push_back(signStack.top());
         }
         signStack.pop();
     }
     return postfix;
 }
 
-bool isOperator(char c) {
-    return (c == '+' || c == '-' || c == '*' || c == '/');
+bool isOperator(string c) {
+    return (c.compare("+") == 0 ||
+        c.compare("-") == 0 ||
+        c.compare("*") == 0 ||
+        c.compare("/") == 0);
 }
 
 /*
     Pre-cond: sign takes only operators(+, -, *, /)
 */
-int getPrecedence(char sign) {
+int getPrecedence(string sign) {
     int weight;
-    if (sign == '+' || sign == '-')
+    if (sign.compare("+") == 0 || sign.compare("-") == 0)
         weight = 1;
-    else if (sign == '*' || sign == '/')
+    else if (sign.compare("*") == 0 || sign.compare("/") == 0)
         weight = 2;
     return weight;
 }
