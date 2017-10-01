@@ -26,7 +26,7 @@ bool PatternHandler::isValidPattern(string str)
         //patternValidator = new IfPatternValidator(patternType, processedStr, qtPtr);
     }
     else {
-        //TODO: throw exception
+        return false;
     }
 
     patternValidator->validate();
