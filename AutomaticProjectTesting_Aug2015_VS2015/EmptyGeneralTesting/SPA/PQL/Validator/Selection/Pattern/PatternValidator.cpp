@@ -1,15 +1,6 @@
 #include "PatternValidator.h"
 
-const string PatternValidator::ASSIGN = "assign";
-const string PatternValidator::WHILE = "while";
-const string PatternValidator::IF = "if";
-
-const string PatternValidator::VARIABLE = "variable";
-const string PatternValidator::UNDERSCORE = "underscore";
-const string PatternValidator::IDENT_WITH_QUOTES = "ident";
-const string PatternValidator::EXPRESSION_SPEC = "expression_spec";
-
-PatternValidator::PatternValidator(string patternType, string paramStr, QueryTree * qtPtrNew)
+PatternValidator::PatternValidator(int patternType, string paramStr, QueryTree * qtPtrNew)
 {
     this->patternType = patternType;
     this->paramStr = paramStr;
@@ -29,22 +20,22 @@ bool PatternValidator::isValid()
     return this->validity;
 }
 
-string PatternValidator::getPatternType()
+int PatternValidator::getPatternType()
 {
     return this->patternType;
 }
 
-string PatternValidator::getArgOneType()
+int PatternValidator::getArgOneType()
 {
     return this->argOneType;
 }
 
-string PatternValidator::getArgTwoType()
+int PatternValidator::getArgTwoType()
 {
     return this->argTwoType;
 }
 
-string PatternValidator::getArgThreeType()
+int PatternValidator::getArgThreeType()
 {
     return this->argThreeType;
 }

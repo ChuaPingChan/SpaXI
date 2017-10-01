@@ -49,40 +49,40 @@ string SuchThatHandler::getSuchThatKeyWord(string str)
 
 int SuchThatHandler::getRelIndex(string rel)
 {
-    if (rel == RELATIONSHIP_STRING[MODIFIES]) {
+    if (rel == RELATIONSHIP_STRING_ARRAY[MODIFIES]) {
         return MODIFIES;
     }
-    else if (rel == RELATIONSHIP_STRING[USES]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[USES]) {
         return USES;
     }
-    else if (rel == RELATIONSHIP_STRING[PARENT]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[PARENT]) {
         return PARENT;
     }
-    else if (rel == RELATIONSHIP_STRING[PARENTSTAR]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[PARENTSTAR]) {
         return PARENTSTAR;
     }
-    else if (rel == RELATIONSHIP_STRING[FOLLOWS]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[FOLLOWS]) {
         return FOLLOWS;
     }
-    else if (rel == RELATIONSHIP_STRING[FOLLOWSSTAR]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[FOLLOWSSTAR]) {
         return FOLLOWS;
     }
-    else if (rel == RELATIONSHIP_STRING[CALLS]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[CALLS]) {
         return CALLS;
     }
-    else if (rel == RELATIONSHIP_STRING[CALLSSTAR]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[CALLSSTAR]) {
         return CALLSSTAR;
     }
-    else if (rel == RELATIONSHIP_STRING[NEXT]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[NEXT]) {
         return NEXT;
     }
-    else if (rel == RELATIONSHIP_STRING[NEXTSTAR]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[NEXTSTAR]) {
         return NEXTSTAR;
     }
-    else if (rel == RELATIONSHIP_STRING[AFFECTS]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[AFFECTS]) {
         return AFFECTS;
     }
-    else if (rel == RELATIONSHIP_STRING[AFFECTSSTAR]) {
+    else if (rel == RELATIONSHIP_STRING_ARRAY[AFFECTSSTAR]) {
         return AFFECTSSTAR;
     }
     else {

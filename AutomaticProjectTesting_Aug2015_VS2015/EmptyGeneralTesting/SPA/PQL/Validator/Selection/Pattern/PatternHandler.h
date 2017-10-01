@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "..\..\..\QueryTree.h"
+#include "..\..\..\Patternship.h"
 #include "PatternValidator.h"
 #include "AssignPatternValidator.h"
 #include "WhilePatternValidator.h"
@@ -21,12 +22,10 @@ public:
     bool isValidPattern(string str);
 
 private:
+    static const string PATTERN_KEYWORD;
     QueryTree *qtPtr;
 
-    string getPatternKeyword(string str);
-
-    int getPatternTypeIndex(string patternType);
-    int getArgTypeIndex(string arg);
+    int getPatternType(string str);
 
     string extractArgOne(string str);
 
