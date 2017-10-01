@@ -127,6 +127,12 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, int syn2Result, vector<
     return false;
 }
 
+bool ClauseResult::addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results)
+{
+    return false;
+}
+
+/*
 bool ClauseResult::overlapExistingSynResults(string synName, vector<int> synResultsToOverlap)
 {
     int synIdx = _synToIdxMap.at(synName);
@@ -145,6 +151,7 @@ bool ClauseResult::overlapExistingSynResults(string synName, vector<int> synResu
     _results = updatedResults;
     return true;
 }
+*/
 
 bool ClauseResult::removeCombinations(string synName, int value)
 {
