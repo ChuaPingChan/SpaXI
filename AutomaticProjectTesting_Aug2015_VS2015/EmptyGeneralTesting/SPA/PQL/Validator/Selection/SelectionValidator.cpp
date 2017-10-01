@@ -65,6 +65,7 @@ bool SelectionValidator::isValidSelection(string str)
     //}
 
     SuchThatHandler stHandler = SuchThatHandler(qtPtr);
+    PatternHandler pHandler = PatternHandler(qtPtr);
 
     /* Extracting the clauses portion */
     regex clauseRegex(RELREF + "|" + PATTERN_REGEX);
@@ -80,13 +81,12 @@ bool SelectionValidator::isValidSelection(string str)
                 return false;
             }
         }
-        /*else if (currentClause.find("pattern") != std::string::npos)
-        {
-            if (!isValidPattern(currentClause))
-            {
+        else if (isPattern(currentClause)) {
+            if (!pHandler.isValidPattern(currentClause)) {
                 return false;
             }
-        }*/
+        }
+       
         /*else
         {
             return false;
@@ -174,4 +174,9 @@ bool SelectionValidator::isSuchThat(string str)
     else {
         return false;
     }
+}
+
+bool SelectionValidator::isPattern(string str)
+{
+    return (str.find("pattern") != std::string::npos);
 }

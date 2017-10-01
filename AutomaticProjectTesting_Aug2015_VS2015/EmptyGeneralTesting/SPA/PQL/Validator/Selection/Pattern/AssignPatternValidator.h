@@ -1,8 +1,10 @@
 #pragma once
-class AssignPatternValidator
+#include "PatternValidator.h"
+
+class AssignPatternValidator : public PatternValidator
 {
 public:
-    AssignPatternValidator();
+    AssignPatternValidator(string patternType, string paramStr, QueryTree *qtPtrNew);
     ~AssignPatternValidator();
 };
 

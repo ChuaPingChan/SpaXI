@@ -3,6 +3,7 @@
 #include <regex>        //TODO:Remove after implementing regex teable
 #include "..\..\QueryTree.h"    //TODO: Change to properQueryTree
 #include "SuchThat\SuchThatHandler.h"
+#include "Pattern\PatternHandler.h"
 
 using namespace std;
 
@@ -24,4 +25,5 @@ private:
     bool isValidSelectOverallRegex(string str);     //TODO: Change to a method call to the regex cpp
 
     bool isSuchThat(string str);
+    bool isPattern(string str);
 };

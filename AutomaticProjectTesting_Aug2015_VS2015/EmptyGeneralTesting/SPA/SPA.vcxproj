@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PQL\Validator\Selection\Pattern\PatternHandler.cpp" />
     <ClCompile Include="PQL\Utilities\Formatter.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\AffectsValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\CallsValidator.cpp" />
@@ -61,6 +62,7 @@
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PQL\Validator\Selection\Pattern\PatternHandler.h" />
     <ClInclude Include="PQL\Utilities\Formatter.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\CallsValidator.h" />
