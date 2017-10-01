@@ -45,12 +45,12 @@ void QueryTree::insertVariable(int type, string var)
     else if (type == PROCEDURE)
     {
         procedures.insert(var);
-    }
+    }*/
 
     else if (type == VARIABLE)
     {
         vars.insert(var);
-    }*/
+    }
    
 	else if (type == CONSTANT)
 	{
