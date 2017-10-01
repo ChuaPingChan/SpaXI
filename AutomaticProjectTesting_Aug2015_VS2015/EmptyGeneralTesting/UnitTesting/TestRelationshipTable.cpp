@@ -11,7 +11,7 @@ namespace UnitTesting
     {
         RelationshipTable rt;
 
-        TEST_METHOD(TestRelationshipTableModifies)
+        /*TEST_METHOD(TestRelationshipTableModifies)
         {
             Assert::IsTrue(rt.isArgValid(MODIFIES, INTEGER, VARIABLE));
             Assert::IsTrue(rt.isArgValid(MODIFIES, WHILE, VARIABLE));
@@ -121,7 +121,7 @@ namespace UnitTesting
             Assert::IsFalse(rt.isArgValid(PATTERN, WHILE, IDENT_WITHQUOTES, VARIABLE));
 
 
-        }
+        }*/
 
     };
 
