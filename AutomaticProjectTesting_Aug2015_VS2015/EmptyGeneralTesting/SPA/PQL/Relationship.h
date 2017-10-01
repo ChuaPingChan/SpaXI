@@ -19,15 +19,15 @@ enum RELATIONSHIP
     AFFECTSSTAR
 };
 
-static const string RELATIONSHIP_STRING[] = { "Modifies",
-                                            "Uses",
-                                            "Parent",
-                                            "Parent*",
-                                            "Follows",
-                                            "Follows*",
-                                            "Calls",
-                                            "Calls*",
-                                            "Next",
-                                            "Next*",
-                                            "Affects",
-                                            "Affects*" };
+static const string RELATIONSHIP_STRING_ARRAY[] = { "Modifies",
+                                                    "Uses",
+                                                    "Parent",
+                                                    "Parent*",
+                                                    "Follows",
+                                                    "Follows*",
+                                                    "Calls",
+                                                    "Calls*",
+                                                    "Next",
+                                                    "Next*",
+                                                    "Affects",
+                                                    "Affects*" };
