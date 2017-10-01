@@ -13,12 +13,13 @@ SuchThatHandler::~SuchThatHandler()
 bool SuchThatHandler::isValidSuchThat(string str)
 {
     string processedStr = Formatter::removeAllSpaces(str);
-    string rel = getSuchThatKeyWord(processedStr);
+    string relStr = getSuchThatKeyWord(processedStr);
+    int rel = getRelIndex(relStr);
 
     SuchThatValidator *suchThatValidator;
 
-    if (rel == SuchThatValidator::MODIFIES) {
-        suchThatValidator = new ModifiesValidator(rel, processedStr, qtPtr);
+    if (rel == MODIFIES) {
+        suchThatValidator = new ModifiesValidator(MODIFIES, processedStr, qtPtr);
     }
 
     suchThatValidator->validate();
@@ -46,96 +47,54 @@ string SuchThatHandler::getSuchThatKeyWord(string str)
     return suchThatKeyword;
 }
 
-//TODO: Change the index number
 int SuchThatHandler::getRelIndex(string rel)
 {
-    if (rel == SuchThatValidator::MODIFIES) {
-        return 0;
+    if (rel == RELATIONSHIP_STRING[MODIFIES]) {
+        return MODIFIES;
     }
-    else if (rel == SuchThatValidator::USES) {
-        return 1;
+    else if (rel == RELATIONSHIP_STRING[USES]) {
+        return USES;
     }
-    else if (rel == SuchThatValidator::PARENT) {
-        return 2;
+    else if (rel == RELATIONSHIP_STRING[PARENT]) {
+        return PARENT;
     }
-    else if (rel == SuchThatValidator::PARENTSTAR) {
-        return 3;
+    else if (rel == RELATIONSHIP_STRING[PARENTSTAR]) {
+        return PARENTSTAR;
     }
-    else if (rel == SuchThatValidator::FOLLOWS) {
-        return 4;
+    else if (rel == RELATIONSHIP_STRING[FOLLOWS]) {
+        return FOLLOWS;
     }
-    else if (rel == SuchThatValidator::FOLLOWSSTAR) {
-        return 5;
+    else if (rel == RELATIONSHIP_STRING[FOLLOWSSTAR]) {
+        return FOLLOWS;
     }
-    else if (rel == SuchThatValidator::CALLS) {
-        return 6;
+    else if (rel == RELATIONSHIP_STRING[CALLS]) {
+        return CALLS;
     }
-    else if (rel == SuchThatValidator::CALLSSTAR) {
-        return 7;
+    else if (rel == RELATIONSHIP_STRING[CALLSSTAR]) {
+        return CALLSSTAR;
     }
-    else if (rel == SuchThatValidator::NEXT) {
-        return 8;
+    else if (rel == RELATIONSHIP_STRING[NEXT]) {
+        return NEXT;
     }
-    else if (rel == SuchThatValidator::NEXTSTAR) {
-        return 9;
+    else if (rel == RELATIONSHIP_STRING[NEXTSTAR]) {
+        return NEXTSTAR;
     }
-    else if (rel == SuchThatValidator::AFFECTS) {
-        return 10;
+    else if (rel == RELATIONSHIP_STRING[AFFECTS]) {
+        return AFFECTS;
     }
-    else if (rel == SuchThatValidator::AFFECTSSTAR) {
-        return 11;
+    else if (rel == RELATIONSHIP_STRING[AFFECTSSTAR]) {
+        return AFFECTSSTAR;
     }
     else {
         return -1;  //TODO: Throw exception to say inalid
     }
 }
 
-//TODO: Change the index reference
-int SuchThatHandler::getArgTypeIndex(string arg)
-{
-    if (arg == SuchThatValidator::STMT) {
-        return 0;
-    }
-    else if (arg == SuchThatValidator::ASSIGN) {
-        return 1;
-    }
-    else if (arg == SuchThatValidator::WHILE) {
-        return 2;
-    }
-    else if (arg == SuchThatValidator::IF) {
-        return 3;
-    }
-    else if (arg == SuchThatValidator::PROG_LINE) {
-        return 4;
-    }
-    else if (arg == SuchThatValidator::CALL) {
-        return 5;
-    }
-    else if (arg == SuchThatValidator::PROCEDURE) {
-        return 6;
-    }
-    else if (arg == SuchThatValidator::VARIABLE) {
-        return 7;
-    }
-    else if (arg == SuchThatValidator::INTEGER) {
-        return 8;
-    }
-    else if (arg == SuchThatValidator::UNDERSCORE) {
-        return 9;
-    }
-    else if (arg == SuchThatValidator::IDENT_WITH_QUOTES) {
-        return 10;
-    }
-    else {
-        return -1;  //TODO: Throw excception to say invalid
-    }
-}
-
 SuchThatClause SuchThatHandler::makeSuchThatClause(SuchThatValidator stv)
 {
-    int rel = getRelIndex(stv.getRel());
-    int argOneType = getArgTypeIndex(stv.getArgOneType());
-    int argTwoType = getArgTypeIndex(stv.getArgTwoType());
+    int rel = stv.getRel();
+    int argOneType = stv.getArgOneType();
+    int argTwoType = stv.getArgTwoType();
     string argOne = stv.getArgOne();
     string argTwo = stv.getArgTwo();
 

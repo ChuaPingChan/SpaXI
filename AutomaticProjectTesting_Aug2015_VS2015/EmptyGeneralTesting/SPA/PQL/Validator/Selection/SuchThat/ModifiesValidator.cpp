@@ -1,6 +1,6 @@
 #include "ModifiesValidator.h"
 
-ModifiesValidator::ModifiesValidator(string rel, string paramStr, QueryTree *qtPtrNew)
+ModifiesValidator::ModifiesValidator(int rel, string paramStr, QueryTree *qtPtrNew)
     :SuchThatValidator(rel, paramStr, qtPtrNew)
 {
 }
@@ -26,8 +26,8 @@ void ModifiesValidator::validate()
     else {
         this->argOne = "";
         this->argTwo = "";
-        this->argOneType = "";
-        this->argTwoType = "";
+        this->argOneType = UNKNWON;
+        this->argTwoType = UNKNWON;
         this->validity = false;
     }
 }
@@ -43,25 +43,25 @@ bool ModifiesValidator::isValidArgOne(string argOne)
     
     if (isArgumentInClause(argOne, qt.getStmts()))
     {
-        this->argOneType = SuchThatValidator::STMT;
+        this->argOneType = STMT;
         return true;
     }
 
     else if (isArgumentInClause(argOne, qt.getAssigns()))
     {
-        this->argOneType = SuchThatValidator::ASSIGN;
+        this->argOneType = ASSIGN;
         return true;
     }
 
     else if (isArgumentInClause(argOne, qt.getWhiles()))
     {
-        this->argOneType = SuchThatValidator::WHILE;
+        this->argOneType = WHILE;
         return true;
     }
 
     else if (isIntegerRegexCheck(argOne))
     {
-        this->argOneType = SuchThatValidator::INTEGER;
+        this->argOneType = INTEGER;
         return true;
     }
 
@@ -76,18 +76,18 @@ bool ModifiesValidator::isValidArgTwo(string argTwo)
     QueryTree qt = *(this->qtPtr);
 
     if (isArgumentInClause(argTwo, qt.getVars())) { //if arg2 is a variable synonym
-        this->argTwoType = SuchThatValidator::VARIABLE;
+        this->argTwoType = VARIABLE;
         return true;
     }
 
     else if (argTwo == "_") {
-        this->argTwoType = SuchThatValidator::UNDERSCORE;
+        this->argTwoType = UNDERSCORE;
         return true;
     }
 
-    else if (isIdentWithQuotes(argTwo))
+    else if (RegexValidators::isValidIdentWithQuotes(argTwo))
     {
-        this->argTwoType = SuchThatValidator::IDENT_WITH_QUOTES;
+        this->argTwoType = IDENT_WITHQUOTES;
         return true;
     }
 

@@ -10,6 +10,7 @@
 #include "NextValidator.h"
 #include "AffectsValidator.h"
 #include "..\..\..\QueryTree.h"
+#include "..\..\..\Relationship.h"
 #include "..\..\..\Utilities\SuchThatClause.h"
 #include "..\..\..\Utilities\Formatter.h"
 
@@ -28,7 +29,6 @@ private:
     string getSuchThatKeyWord(string str);
 
     int getRelIndex(string rel);
-    int getArgTypeIndex(string arg);
 
     SuchThatClause makeSuchThatClause(SuchThatValidator stv);
     bool storeInQueryTree(SuchThatClause stc);

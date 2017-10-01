@@ -4,7 +4,7 @@
 class ModifiesValidator : public SuchThatValidator
 {
 public:
-    ModifiesValidator(string rel, string paramStr, QueryTree *qtPtrNew);
+    ModifiesValidator(int rel, string paramStr, QueryTree *qtPtrNew);
     ~ModifiesValidator();
 
     void validate();
