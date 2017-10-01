@@ -4,6 +4,8 @@
 #include "..\..\..\SPA\PQL\Utilities\SuchThatClause.h"
 #include "..\..\..\SPA\PQL\Utilities\PatternClause.h"
 
+using namespace std;
+
 class UtilitySelection
 {
 public:
@@ -16,4 +18,3 @@ public:
     static SuchThatClause getFirstClauseFromTree(QueryTree qt);
     static bool isSameSuchThatClauseContent(SuchThatClause expected, SuchThatClause actual);
 };
-

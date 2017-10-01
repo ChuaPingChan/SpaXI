@@ -10,36 +10,51 @@ QueryTree::~QueryTree()
 {
 }
 
-void QueryTree::insertVariable(string type, string var)
+void QueryTree::insertVariable(int type, string var)
 {
-	if (type == "stmt") 
+	if (type == STMT) 
 	{
 		stmts.insert(var);
 	}
 
-	else if (type == "assign")
+	else if (type == ASSIGN)
 	{
 		assigns.insert(var);
 	}
 
-	else if (type == "while")
+	else if (type == WHILE)
 	{
 		whiles.insert(var);
 	}
 
-	else if (type == "variable")
-	{
-		vars.insert(var);
-	}
+    /*else if (type == IF)
+    {
+    ifs.insert(var)
+    }*/
 
-	else if (type == "constant")
+    else if (type == PROG_LINE)
+    {
+        progLines.insert(var);
+    }
+
+    /*else if (type == CALL)
+    {
+        
+    }
+
+    else if (type == PROCEDURE)
+    {
+        procedures.insert(var);
+    }
+
+    else if (type == VARIABLE)
+    {
+        vars.insert(var);
+    }*/
+   
+	else if (type == CONSTANT)
 	{
 		consts.insert(var);
-	}
-
-	else if (type == "prog_line")
-	{
-		progLines.insert(var);
 	}
 
 	else

@@ -1,5 +1,48 @@
 #include "RegexValidators.h"
 
+/********
+* REGEX *
+********/
+/******************** Grammar ********************/
+const string RegexValidators::LETTER_REGEX = "([a-zA-Z])";
+const string RegexValidators::DIGIT_REGEX = "([0-9])";
+const string RegexValidators::INTEGER_REGEX = "(" + DIGIT_REGEX + "+)";
+const string RegexValidators::HASH_REGEX = "(#)";
+const string RegexValidators::UNDERSCORE_REGEX = "(_)";
+const string RegexValidators::IDENT_REGEX = "(" + LETTER_REGEX + "(" + LETTER_REGEX + "|" + DIGIT_REGEX + "|" + HASH_REGEX + ")*)";
+const string RegexValidators::SYNONYM_REGEX = IDENT_REGEX;
+const string RegexValidators::STMTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + INTEGER_REGEX + ")";
+const string RegexValidators::ENTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + "\"" + IDENT_REGEX + "\"" ")";
+const string RegexValidators::NAME_REGEX = "(" + LETTER_REGEX + "(" + LETTER_REGEX + "|" + DIGIT_REGEX + ")*)";
+const string RegexValidators::SPACE_0 = "(\\s*)";
+const string RegexValidators::SPACE_1 = "(\\s+)";
+
+/*--------------- Declaration Regex ---------------*/
+const string RegexValidators::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
+
+/*--------------- Pattern Clause Regex ---------------*/
+const string RegexValidators::FACTOR_REGEX = "(" + NAME_REGEX + "|" + INTEGER_REGEX + ")";
+const string RegexValidators::EXPRESSION_SPEC = "(" + UNDERSCORE_REGEX + "|" + UNDERSCORE_REGEX + "\"" + FACTOR_REGEX + "\"" + UNDERSCORE_REGEX + ")";
+const string RegexValidators::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
+
+/*--------------- Relationship Clause Regex ---------------*/
+const string RegexValidators::MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
+
+/*--------------- Select Regex ---------------*/
+const string RegexValidators::SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM_REGEX;
+const string RegexValidators::RELREF_REGEX = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
+const string RegexValidators::SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF_REGEX;
+const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
+
+
+
+
+/**********
+* METHODS *
+**********/
 /*--------------- Declaration Regex Methods ---------------*/
 bool RegexValidators::isValidEntity(string str)
 {
@@ -9,7 +52,7 @@ bool RegexValidators::isValidEntity(string str)
 
 bool RegexValidators::isValidSynonym(string str)
 {
-    regex synonymRegex(SYNONYM);
+    regex synonymRegex(SYNONYM_REGEX);
     return regex_match(str, synonymRegex);
 }
 
@@ -52,3 +95,15 @@ bool RegexValidators::isValidPatternRegex(string str)
     return regex_match(str, patternRegexCheck);
 }
 
+/*--------------- Select Regex ---------------*/
+bool RegexValidators::isValidSelectRegex(string str)
+{
+    regex selectRegexCheck(SELECT_REGEX);
+    return regex_match(str, selectRegexCheck);
+}
+
+bool RegexValidators::isValidSuchThatRegex(string str)
+{
+    regex suchThatRegexCheck(SUCH_THAT_REGEX);
+    return regex_match(str, suchThatRegexCheck);
+}

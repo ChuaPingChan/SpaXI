@@ -8,6 +8,7 @@
 #include "Utilities\SuchThatClause.h"
 #include "Utilities\PatternClause.h"
 #include "Utilities\SelectClause.h"
+#include "..\Entity.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ public:
 	QueryTree();
 	~QueryTree();
 
-	void insertVariable(string type, string var);
+	void insertVariable(int type, string var);
 	void insertSelect(SelectClause select);
 	void insertSuchThat(SuchThatClause relClause);
 	void insertPattern(PatternClause patternClause);

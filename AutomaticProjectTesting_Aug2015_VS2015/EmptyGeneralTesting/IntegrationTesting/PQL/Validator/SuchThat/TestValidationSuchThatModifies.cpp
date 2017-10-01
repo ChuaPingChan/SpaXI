@@ -1,6 +1,8 @@
 #include "CppUnitTest.h"
 #include "string.h"
 #include "..\SPA\PQL\QueryTree.h"
+#include "..\SPA\Entity.h"
+#include "..\SPA\PQL\Relationship.h"
 #include "..\SPA\PQL\Validator\Selection\SuchThat\SuchThatHandler.h"
 #include "..\SPA\PQL\Utilities\SuchThatClause.h"
 #include "..\..\Utility\UtilitySelection.h"
@@ -19,7 +21,7 @@ namespace UnitTesting
             QueryTree qt;
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(0, 8, "1", 10, "\"x\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", IDENT_WITHQUOTES, "\"x\"");
             SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -30,7 +32,7 @@ namespace UnitTesting
             QueryTree qt;
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(0, 8, "1", 9, "_");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", UNDERSCORE, "_");
             SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -39,10 +41,10 @@ namespace UnitTesting
         {
             string str = "Modifies(1, v)";
             QueryTree qt;
-            qt.insertVariable("variable", "v");
+            qt.insertVariable(VARIABLE, "v");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(0, 8, "1", 7, "v");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", VARIABLE, "v");
             SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -51,10 +53,10 @@ namespace UnitTesting
         {
             string str = "Modifies(a, \"x\")";
             QueryTree qt;
-            qt.insertVariable("assign", "a");
+            qt.insertVariable(ASSIGN, "a");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(0, 1, "a", 10, "\"x\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, ASSIGN, "a", IDENT_WITHQUOTES, "\"x\"");
             SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -63,10 +65,10 @@ namespace UnitTesting
         {
             string str = "Modifies(s, _)";
             QueryTree qt;
-            qt.insertVariable("stmt", "s");
+            qt.insertVariable(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(0, 0, "s", 9, "_");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s", UNDERSCORE, "_");
             SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -75,11 +77,11 @@ namespace UnitTesting
         {
             string str = "Modifies(w, v)";
             QueryTree qt;
-            qt.insertVariable("while", "w");
-            qt.insertVariable("variable", "v");
+            qt.insertVariable(WHILE, "w");
+            qt.insertVariable(VARIABLE, "v");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(0, 2, "w", 7, "v");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, WHILE, "w", VARIABLE, "v");
             SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }

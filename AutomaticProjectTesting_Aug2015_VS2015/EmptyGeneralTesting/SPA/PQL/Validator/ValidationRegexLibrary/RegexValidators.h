@@ -6,61 +6,64 @@ using namespace std;
 class RegexValidators
 {
 public:
-
-    /******************** Declaration Regex ********************/
-    bool isValidEntity(string str);
-
-    bool isValidSynonym(string str);
-
-    /******************** Select Overall ********************/
-    bool isValidSelectOverallRegex(string str);
-
-    /******************** Pattern Regex ********************/
-    bool isValidPatternRegex(string str);
-
-    /******************** Such That Regex ********************/
-    bool isValidModifiesRegex(string str);
-
-    bool isValidUsesRegex(string str);
-
-    bool isValidFollowsRegex(string str);
-
-    bool isValidParentRegex(string str);
-
-private:
-
+    /********
+    * REGEX *
+    ********/
     /******************** Grammar ********************/
-    const string LETTER = "([a-zA-Z])";
-    const string DIGIT = "([0-9])";
-    const string INTEGER = "(" + DIGIT + "+)";
-    const string HASH = "(#)";
-    const string UNDERSCORE = "(_)";
-    const string IDENT = "(" + LETTER + "(" + LETTER + "|" + DIGIT + "|" + HASH + ")*)";
-    const string SYNONYM = IDENT;
-    const string STMTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + INTEGER + ")";
-    const string ENTREF = "(" + SYNONYM + "|" + UNDERSCORE + "|" + "\"" + IDENT + "\"" ")";
-    const string NAME = "(" + LETTER + "(" + LETTER + "|" + DIGIT + ")*)";
-    const string SPACE_0 = "(\\s*)";
-    const string SPACE_1 = "(\\s+)";
+    static const string LETTER_REGEX;
+    static const string DIGIT_REGEX;
+    static const string INTEGER_REGEX;
+    static const string HASH_REGEX;
+    static const string UNDERSCORE_REGEX;
+    static const string IDENT_REGEX;
+    static const string SYNONYM_REGEX;
+    static const string STMTREF_REGEX;
+    static const string ENTREF_REGEX;
+    static const string NAME_REGEX;
+    static const string SPACE_0;
+    static const string SPACE_1;
 
     /*--------------- Declaration Regex ---------------*/
-    const string DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
+    static const string DESIGN_ENTITY_REGEX;
 
     /*--------------- Pattern Clause Regex ---------------*/
-    const string FACTOR = "(" + NAME + "|" + INTEGER + ")";
-    const string EXPRESSION_SPEC = "(" + UNDERSCORE + "|" + UNDERSCORE + "\"" + FACTOR + "\"" + UNDERSCORE + ")";
-    const string PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM + SPACE_0 + "[(]" + SPACE_0 + ENTREF + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
+    static const string FACTOR_REGEX;
+    static const string EXPRESSION_SPEC;
+    static const string PATTERN_REGEX;
 
     /*--------------- Relationship Clause Regex ---------------*/
-    const string MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-    const string USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + ENTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-    const string FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
-    const string PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF + SPACE_0 + "[,]" + SPACE_0 + STMTREF + SPACE_0 + "[)]" + SPACE_0 + ")";
+    static const string MODIFIES_REGEX;
+    static const string USES_REGEX;
+    static const string FOLLOWS_REGEX;
+    static const string PARENT_REGEX;
 
     /*--------------- Select Regex ---------------*/
-    const string SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM;
-    const string RELREF = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
-    const string SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF;
-    const string SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
-};
+    static const string SELECT_REGEX;
+    static const string RELREF_REGEX;
+    static const string SUCH_THAT_REGEX;
+    static const string SELECT_OVERALL_REGEX;
 
+
+    /**********
+    * Methods *
+    **********/
+    /******************** Declaration Regex ********************/
+    static bool isValidEntity(string str);
+    static bool isValidSynonym(string str);
+
+    /******************** Select Overall ********************/
+    static bool isValidSelectOverallRegex(string str);
+
+    /******************** Pattern Regex ********************/
+    static bool isValidPatternRegex(string str);
+
+    /******************** Such That Regex ********************/
+    static bool isValidModifiesRegex(string str);
+    static bool isValidUsesRegex(string str);
+    static bool isValidFollowsRegex(string str);
+    static bool isValidParentRegex(string str);
+
+    /*--------------- Select Regex ---------------*/
+    static bool isValidSelectRegex(string str);
+    static bool isValidSuchThatRegex(string str);
+};

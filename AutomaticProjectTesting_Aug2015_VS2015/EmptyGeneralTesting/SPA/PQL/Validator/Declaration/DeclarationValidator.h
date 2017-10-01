@@ -3,6 +3,8 @@
 #include <unordered_set>
 #include <regex>
 #include "..\..\QueryTree.h"
+#include "..\..\..\Entity.h"
+#include "..\ValidationRegexLibrary\RegexValidators.h"
 
 using namespace std;
 
@@ -18,6 +20,8 @@ public:
     bool setQueryTree(QueryTree *qtPtrNew);
 
 private:
+    static const string ENTITY_STR[];
+
     QueryTree *qtPtr;
 
     unordered_set<string> synonymBank;   //Contains list of used synonyms
@@ -25,4 +29,5 @@ private:
 
     bool isValidEntity(string str);
     bool isValidSynonym(string str);
+    int getEntityIndexReference(string entity);
 };

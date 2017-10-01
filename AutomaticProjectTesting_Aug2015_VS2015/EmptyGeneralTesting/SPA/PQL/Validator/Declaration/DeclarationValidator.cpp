@@ -1,5 +1,9 @@
 #include "DeclarationValidator.h"
 
+using namespace std;
+
+const string DeclarationValidator::ENTITY_STR[] = {"stmt", "assign", "while", "if", "prog_line", "call", "procedure", "variable", "integer", "underscore", "identWithQuotes", "expressionSpecs", "constant"};
+
 DeclarationValidator::DeclarationValidator(QueryTree *qtPtrNew) {
     setQueryTree(qtPtrNew);
 }
@@ -63,7 +67,7 @@ bool DeclarationValidator::isValidDeclaration(string str) {
            synonymBank.insert(synonym);
             if (entity == synonym)
                 return false;
-            qtPtr->insertVariable(entity, synonym);
+            qtPtr->insertVariable(getEntityIndexReference(entity), synonym);
         }
         else {
             return false;
@@ -82,20 +86,41 @@ bool DeclarationValidator::setQueryTree(QueryTree *qtPtrNew) {
     return true;
 }
 
-//TODO: Remove the content and call api from relation table
 bool DeclarationValidator::isValidEntity(string str) {
-    const string DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
-    regex entityRegex(DESIGN_ENTITY_REGEX);
-    return regex_match(str, entityRegex);
+    return RegexValidators::isValidEntity(str);
 }
 
-//TODO: Remove the content and call api from relation table
 bool DeclarationValidator::isValidSynonym(string str) {
-    const string LETTER = "([a-zA-Z])";
-    const string DIGIT = "([0-9])";
-    const string HASH = "(#)";
-    const string IDENT = "(" + LETTER + "(" + LETTER + "|" + DIGIT + "|" + HASH + ")*)";
-    const string SYNONYM = IDENT;
-    regex synonymRegex(SYNONYM);
-    return regex_match(str, synonymRegex);
+    return RegexValidators::isValidSynonym(str);
+}
+
+int DeclarationValidator::getEntityIndexReference(string entity)
+{
+    if (entity == ENTITY_STR[STMT]) {
+        return STMT;
+    }
+    else if (entity == ENTITY_STR[ASSIGN]) {
+        return ASSIGN;
+    }
+    else if (entity == ENTITY_STR[WHILE]) {
+        return WHILE;
+    }
+    else if (entity == ENTITY_STR[IF]) {
+        return IF;
+    }
+    else if (entity == ENTITY_STR[PROG_LINE]) {
+        return PROG_LINE;
+    }
+    else if (entity == ENTITY_STR[CALL]) {
+        return CALL;
+    }
+    else if (entity == ENTITY_STR[PROCEDURE]) {
+        return PROCEDURE;
+    }
+    else if (entity == ENTITY_STR[VARIABLE]) {
+        return VARIABLE;
+    }
+    else if (entity == ENTITY_STR[CONSTANT]) {
+        return CONSTANT;
+    }
 }
