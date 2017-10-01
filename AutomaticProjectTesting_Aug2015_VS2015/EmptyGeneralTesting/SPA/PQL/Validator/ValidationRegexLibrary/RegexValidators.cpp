@@ -10,6 +10,7 @@ const string RegexValidators::INTEGER_REGEX = "(" + DIGIT_REGEX + "+)";
 const string RegexValidators::HASH_REGEX = "(#)";
 const string RegexValidators::UNDERSCORE_REGEX = "(_)";
 const string RegexValidators::IDENT_REGEX = "(" + LETTER_REGEX + "(" + LETTER_REGEX + "|" + DIGIT_REGEX + "|" + HASH_REGEX + ")*)";
+const string RegexValidators::IDENT_WITH_QUOTES_REGEX = "(\"" + IDENT_REGEX + "\")";
 const string RegexValidators::SYNONYM_REGEX = IDENT_REGEX;
 const string RegexValidators::STMTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + INTEGER_REGEX + ")";
 const string RegexValidators::ENTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + "\"" + IDENT_REGEX + "\"" ")";
@@ -39,6 +40,12 @@ const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGE
 
 
 
+
+bool RegexValidators::isValidIdentWithQuotes(string str)
+{
+    regex checkIdentWithInvertedCommas = regex(IDENT_WITH_QUOTES_REGEX);
+    return regex_match(str, checkIdentWithInvertedCommas);
+}
 
 /**********
 * METHODS *

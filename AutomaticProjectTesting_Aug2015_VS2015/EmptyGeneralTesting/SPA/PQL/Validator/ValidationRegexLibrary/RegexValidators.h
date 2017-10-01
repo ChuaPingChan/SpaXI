@@ -16,6 +16,7 @@ public:
     static const string HASH_REGEX;
     static const string UNDERSCORE_REGEX;
     static const string IDENT_REGEX;
+    static const string IDENT_WITH_QUOTES_REGEX;
     static const string SYNONYM_REGEX;
     static const string STMTREF_REGEX;
     static const string ENTREF_REGEX;
@@ -47,6 +48,8 @@ public:
     /**********
     * Methods *
     **********/
+    /******************** Grammar ********************/
+    static bool isValidIdentWithQuotes(string str);
     /******************** Declaration Regex ********************/
     static bool isValidEntity(string str);
     static bool isValidSynonym(string str);
