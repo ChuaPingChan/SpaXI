@@ -57,6 +57,11 @@ vector<vector<int>> ClauseResult::getSynonymResults(vector<string> synNames)
     return result;
 }
 
+vector<int> ClauseResult::getSynonymResults(string synName)
+{
+    return vector<int>();
+}
+
 vector<vector<int>> ClauseResult::getAllResults()
 {
     return _results;
