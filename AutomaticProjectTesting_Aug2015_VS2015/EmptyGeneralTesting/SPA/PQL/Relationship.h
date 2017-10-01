@@ -30,4 +30,4 @@ static const string RELATIONSHIP_STRING[] = { "Modifies",
                                             "Next",
                                             "Next*",
                                             "Affects",
-                                            "Affects*" }
+                                            "Affects*" };
