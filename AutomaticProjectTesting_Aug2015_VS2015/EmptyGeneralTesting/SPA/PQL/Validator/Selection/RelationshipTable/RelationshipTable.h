@@ -2,7 +2,7 @@
 #include"Relationship.h"
 #include<unordered_map>
 #include<assert.h>
-#include "EntityTable.h"
+#include "..\..\..\..\Entity.h"
 
 typedef int RELATION_TYPE;
 typedef int ARG_TYPE;

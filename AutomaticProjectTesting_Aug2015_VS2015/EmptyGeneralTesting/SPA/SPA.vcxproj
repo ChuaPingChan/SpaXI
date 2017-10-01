@@ -62,9 +62,10 @@
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PQL\Relationship.h" />
     <ClInclude Include="PQL\Validator\Selection\Pattern\PatternHandler.h" />
     <ClInclude Include="PQL\Utilities\Formatter.h" />
-    <ClInclude Include="PQL\Validator\Selection\RelationshipTable\EntityTable.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\CallsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\FollowsValidator.h" />
