@@ -1,4 +1,5 @@
 #include <cassert>
+#include <unordered_set>
 
 #include "ClauseResult.h"
 
@@ -8,7 +9,7 @@ ClauseResult::ClauseResult()
 {
     _synToIdxMap = unordered_map<string, int>();
     _synList = vector<string>();
-    _result = vector<vector<int>>();
+    _results = vector<vector<int>>();
 }
 
 vector<string> ClauseResult::getAllSynonyms()
@@ -39,8 +40,8 @@ vector<vector<int>> ClauseResult::getSynonymResults(vector<string> synNames)
     }
 
     // For each combinations, filter the selected synonyms only.
-    for (vector<vector<int>>::iterator combPtr = _result.begin();
-        combPtr != _result.end();
+    for (vector<vector<int>>::iterator combPtr = _results.begin();
+        combPtr != _results.end();
         combPtr++) {
 
         vector<int> filteredCombination;
@@ -58,7 +59,7 @@ vector<vector<int>> ClauseResult::getSynonymResults(vector<string> synNames)
 
 vector<vector<int>> ClauseResult::getAllResults()
 {
-    return _result;
+    return _results;
 }
 
 bool ClauseResult::synonymPresent(string synName)
@@ -77,10 +78,7 @@ Note: This method involves computing Catesian product - computationally expensiv
 */
 bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults)
 {
-    if (newSynResults.size() == 0) {
-        return true;
-    }
-
+    assert(newSynResults.size() > 0);
     assert(_synToIdxMap.count(newSynName) == 0);    // Must be new synonym
     
     // Add to _synList
@@ -91,21 +89,21 @@ bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults
     _synToIdxMap.insert({ newSynName, newSynIdx });
 
     // Update _result - Cartesian product
-    if (_result.empty()) {
+    if (_results.empty()) {
         for (vector<int>::iterator newSynResPtr = newSynResults.begin();
             newSynResPtr != newSynResults.end();
             newSynResPtr++)
         {
             vector<int> newComb;
             newComb.push_back(*newSynResPtr);
-            _result.push_back(newComb);
+            _results.push_back(newComb);
         }
         return true;
     }
 
     int repeatNumber = newSynResults.size();
-    vector<vector<int>> outdatedResult = _result;
-    _result.clear();
+    vector<vector<int>> outdatedResult = _results;
+    _results.clear();
 
     for (vector<vector<int>>::iterator combPtr = outdatedResult.begin();
         combPtr != outdatedResult.end();
@@ -117,10 +115,34 @@ bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults
         {
             vector<int> newComb = *combPtr;
             newComb.push_back(*newSynResPtr);
-            _result.push_back(newComb);
+            _results.push_back(newComb);
         }
     }
 
+    return true;
+}
+
+bool ClauseResult::addNewSynPairResults(string syn1Name, int syn2Result, vector<vector<int>> pairResults)
+{
+    return false;
+}
+
+bool ClauseResult::overlapExistingSynResults(string synName, vector<int> synResultsToOverlap)
+{
+    int synIdx = _synToIdxMap.at(synName);
+    unordered_set<int> resultsSetToOverlap(synResultsToOverlap.begin(), synResultsToOverlap.end());
+    vector<vector<int>> updatedResults = _results;
+
+    for (vector<vector<int>>::iterator combPtr = _results.begin();
+        combPtr != _results.end();
+        combPtr++)
+    {
+        int valueInComb = (*combPtr).at(synIdx);
+        if (resultsSetToOverlap.count(valueInComb) == 1) {
+            updatedResults.push_back(*combPtr);
+        }
+    }
+    _results = updatedResults;
     return true;
 }
 
@@ -130,15 +152,15 @@ bool ClauseResult::removeCombinations(string synName, int value)
     vector<vector<int>> updatedResult;
     updatedResult.clear();
 
-    for (vector<vector<int>>::iterator combPtr = _result.begin();
-        combPtr != _result.end();
+    for (vector<vector<int>>::iterator combPtr = _results.begin();
+        combPtr != _results.end();
         combPtr++)
     {
         if ((*combPtr).at(synIdx) != value) {
             updatedResult.push_back(*combPtr);
         }
     }
-    _result = updatedResult;
+    _results = updatedResult;
     return true;
 }
 
@@ -163,8 +185,8 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
     // Update _result - Cartesian product
     int repeatNumber = newSynResults.size();
 
-    for (vector<vector<int>>::iterator combPtr = _result.begin();
-        combPtr != _result.end();
+    for (vector<vector<int>>::iterator combPtr = _results.begin();
+        combPtr != _results.end();
         combPtr++)
     {
         if ((*combPtr).at(oldSynIdx) == oldSynValue)
@@ -179,7 +201,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
             }
         }
     }
-    _result = updatedResult;
+    _results = updatedResult;
 
     return true;
 }

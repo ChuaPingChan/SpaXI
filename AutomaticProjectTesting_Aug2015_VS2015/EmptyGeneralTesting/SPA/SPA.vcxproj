@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PQL\Utilities\ClauseResultChildForTest.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResult.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\AffectsValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\CallsValidator.cpp" />
@@ -59,7 +58,6 @@
     <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PQL\Utilities\ClauseResultChildForTest.h" />
     <ClInclude Include="PQL\Utilities\ClauseResult.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\CallsValidator.h" />

@@ -18,13 +18,16 @@ public:
     vector<vector<int>> getAllResults();
     bool synonymPresent(string synName);
     bool addNewSynResults(string newSynName, vector<int> newSynResults);
+    bool overlapExistingSynResults(string synName, vector<int> synResultsToOverlap);
+    bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
+    bool addNewSynPairResults(string syn1Name, int syn2Result, vector<vector<int>> pairResults);
     bool removeCombinations(string synName, int value);
     bool pairWithOldSyn(string oldSyn, int oldSynValue, string newSyn, vector<int> newSynResults);
     
 protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
-    vector<vector<int>> _result;     // Results of stmt, constant, prog_line synonyms
+    vector<vector<int>> _results;     // Results of stmt, constant, prog_line synonyms
 
     template<typename T> static void appendToVector(vector<T> &v1, const vector<T> &v2, int n)
     {

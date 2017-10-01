@@ -1,5 +1,5 @@
 #include "ClauseResultChildForTest.h"
-#include "ClauseResult.h"
+#include "../SPA/PQL/Utilities/ClauseResult.h"
 
 using namespace std;
 
