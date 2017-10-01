@@ -206,5 +206,19 @@ namespace UnitTesting {
             Assert::IsFalse(pt.hasPartialMatch(3, "25"));
             Assert::IsFalse(pt.hasPartialMatch(4, "p"));
         }
+
+		TEST_METHOD(TestMoreCases)
+		{
+			PatternTable pt;
+			Assert::IsTrue(pt.addToPatternTable(1, "alpha", "alpha+beta-5*charlie+10"));
+			Assert::IsTrue(pt.addToPatternTable(2, "beta", "alpha+beta-5*charlie*beta+2*3+10"));
+
+			Assert::IsTrue(pt.hasPartialMatch(1, "alpha+beta-5*charlie"));
+			Assert::IsFalse(pt.hasPartialMatch(1, "beta-5"));
+
+			Assert::IsTrue(pt.hasPartialMatch(2, "2*3"));
+			Assert::IsTrue(pt.hasPartialMatch(2, "alpha+beta-5*charlie*beta"));
+			Assert::IsFalse(pt.hasPartialMatch(2, "alphabet"));
+		}
     };
 }
