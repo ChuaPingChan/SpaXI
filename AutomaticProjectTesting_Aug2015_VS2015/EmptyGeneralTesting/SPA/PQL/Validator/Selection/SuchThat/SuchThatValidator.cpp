@@ -51,7 +51,7 @@ string SuchThatValidator::getArgTwo()
 
 string SuchThatValidator::extractArgOne(int rel, string str)
 {
-    string relStr = RELATIONSHIP_STRING[rel];
+    string relStr = RELATIONSHIP_STRING_ARRAY[rel];
     string delimFirst = relStr + "(";
     string delimSecond = ",";
 
