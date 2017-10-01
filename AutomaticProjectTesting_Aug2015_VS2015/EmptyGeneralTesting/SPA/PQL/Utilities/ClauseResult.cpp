@@ -1,5 +1,6 @@
 #include <cassert>
 #include <unordered_set>
+#include <set>
 
 #include "ClauseResult.h"
 
@@ -54,12 +55,9 @@ vector<vector<int>> ClauseResult::getSynonymResults(vector<string> synNames)
         }
         result.push_back(filteredCombination);
     }
-    return result;
-}
 
-vector<int> ClauseResult::getSynonymResults(string synName)
-{
-    return vector<int>();
+    result = ClauseResult::getUniqueElements(result);
+    return result;
 }
 
 vector<vector<int>> ClauseResult::getAllResults()
@@ -127,17 +125,74 @@ bool ClauseResult::addNewSynResults(string newSynName, vector<int> newSynResults
     return true;
 }
 
-bool ClauseResult::addNewSynPairResults(string syn1Name, int syn2Result, vector<vector<int>> pairResults)
+bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, vector<vector<int>> pairResults)
 {
-    return false;
+    assert(pairResults.size() > 0);
+    assert(_synToIdxMap.count(syn1Name) == 0);    // syn1 must be new synonym
+    assert(_synToIdxMap.count(syn2Name) == 0);    // syn2 must be new synonym
+
+    // Add to _synList
+    _synList.push_back(syn1Name);
+    int syn1Idx = _synList.size() - 1;
+    _synList.push_back(syn2Name);
+    int syn2Idx = _synList.size() - 1;
+
+    // Add to _synToIdxMap
+    _synToIdxMap.insert({ syn1Name, syn1Idx });
+    _synToIdxMap.insert({ syn2Name, syn2Idx });
+
+    // Update _result - Cartesian product
+    if (_results.empty()) {
+        for (vector<vector<int>>::iterator pairResultPtr = pairResults.begin();
+            pairResultPtr != pairResults.end();
+            pairResultPtr++)
+        {
+            _results.push_back(*pairResultPtr);
+        }
+        return true;
+    }
+
+    int repeatNumber = pairResults.size();
+    vector<vector<int>> outdatedResult = _results;
+    _results.clear();
+
+    for (vector<vector<int>>::iterator combPtr = outdatedResult.begin();
+        combPtr != outdatedResult.end();
+        combPtr++)
+    {
+        for (vector<vector<int>>::iterator pairResultPtr = pairResults.begin();
+            pairResultPtr != pairResults.end();
+            pairResultPtr++)
+        {
+            vector<int> newComb = *combPtr;
+            newComb.insert(newComb.end(), (*pairResultPtr).begin(), (*pairResultPtr).end());
+            _results.push_back(newComb);
+        }
+    }
+
+    return true;
 }
 
 bool ClauseResult::addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results)
 {
-    return false;
+    vector<vector<int>> pairResults;
+    pairResults.clear();
+
+    for (list<int>::iterator syn1ResultPtr = syn1Results.begin();
+        syn1ResultPtr != syn1Results.end();
+        syn1ResultPtr++) {
+        for (list<int>::iterator syn2ResultPtr = syn2Results.begin();
+            syn2ResultPtr != syn2Results.end();
+            syn2ResultPtr++) {
+            vector<int> pairResult;
+            pairResult.clear();
+            pairResult.push_back(*syn1ResultPtr);
+            pairResult.push_back(*syn2ResultPtr);
+        }
+    }
+    return addNewSynPairResults(syn1Name, syn2Name, pairResults);
 }
 
-/*
 bool ClauseResult::overlapExistingSynResults(string synName, vector<int> synResultsToOverlap)
 {
     int synIdx = _synToIdxMap.at(synName);
@@ -156,7 +211,6 @@ bool ClauseResult::overlapExistingSynResults(string synName, vector<int> synResu
     _results = updatedResults;
     return true;
 }
-*/
 
 bool ClauseResult::removeCombinations(string synName, int value)
 {
@@ -174,6 +228,11 @@ bool ClauseResult::removeCombinations(string synName, int value)
     }
     _results = updatedResult;
     return true;
+}
+
+bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value)
+{
+    return removeCombinations(syn1Name, syn1Value) && removeCombinations(syn2Name, syn2Value);
 }
 
 bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
@@ -216,4 +275,9 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
     _results = updatedResult;
 
     return true;
+}
+
+bool ClauseResult::empty()
+{
+    return _results.empty();
 }

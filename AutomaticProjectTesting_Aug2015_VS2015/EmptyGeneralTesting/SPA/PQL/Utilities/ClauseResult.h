@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <set>
 
 using namespace std;
 
@@ -15,15 +16,16 @@ public:
 
     vector<string> getAllSynonyms();
     vector<vector<int>> getSynonymResults(vector<string> synNames);
-    vector<int> getSynonymResults(string synName);
     vector<vector<int>> getAllResults();
     bool synonymPresent(string synName);
     bool addNewSynResults(string newSynName, vector<int> newSynResults);
-    //bool overlapExistingSynResults(string synName, vector<int> synResultsToOverlap);
+    bool overlapExistingSynResults(string synName, vector<int> synResultsToOverlap);
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
-    bool addNewSynPairResults(string syn1Name, int syn2Result, vector<vector<int>> pairResults);
+    bool addNewSynPairResults(string syn1Name, string syn2Name, vector<vector<int>> pairResults);
     bool removeCombinations(string synName, int value);
+    bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
     bool pairWithOldSyn(string oldSyn, int oldSynValue, string newSyn, vector<int> newSynResults);
+    bool empty();
     
 protected:
     unordered_map<string, int> _synToIdxMap;
@@ -35,5 +37,14 @@ protected:
         for (int i = 0; i < n; i++) {
             v1.insert(v1.end(), v2.begin(), v2.end());
         }
+    }
+
+    template<typename T> static vector<T> getUniqueElements(vector<T> &vec)
+    {
+        set<T> s(vec.begin(), vec.end());
+        vector<T> uniqueVec;
+        uniqueVec.clear();
+        uniqueVec.assign(s.begin(), s.end());
+        return uniqueVec;
     }
 };
