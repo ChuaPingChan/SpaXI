@@ -11,10 +11,8 @@ FollowsEvaluator::~FollowsEvaluator()
 {
 }
 
-ClauseResult FollowsEvaluator::evaluate(SuchThatClause stClause)
+bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult)
 {
-
-
 	int argOneType = stClause.getArgOneType();
 	int argTwoType = stClause.getArgTwoType();
 	string argOne = stClause.getArgOne();
@@ -26,29 +24,28 @@ ClauseResult FollowsEvaluator::evaluate(SuchThatClause stClause)
 	if (argOneType == INTEGER && argTwoType == INTEGER)
 	{
 		hasResult = pkbInstance->isFollows(stoi(argOne), stoi(argTwo));
+		return hasResult;
 	}
 
 	//Case 2: Follows(int, _)
 	else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
 	{
 		hasResult = pkbInstance->isBefore(stoi(argOne));
+		return hasResult;
 	}
 
 	//Case 3: Follows(int, synonym)
 	else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 	{
-		list<int> result = pkbInstance->getAfter(stoi(argOne), argTwoType);
-		if (result.empty())
+		bool exists = clauseResult->synonymPresent(argTwo);
+		if (exists)
 		{
-			hasResult = false;
+
 		}
 		else
 		{
-			list<string> list1 = getListStringFromListInt(result);
-			list<string> list2;
-			list1.push_front(argTwo);
-			resultSuchThat = make_pair(list1, list2);
-			hasResult = true;
+			list<int> result = pkbInstance->getAfter(stoi(argOne), argTwoType);
+			//clauseResult->
 		}
 	}
 
@@ -122,18 +119,20 @@ ClauseResult FollowsEvaluator::evaluate(SuchThatClause stClause)
 	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 	{
 		pair<list<int>, list<int>> result = pkbInstance->getAllFollows(argOneType, argTwoType);
+
 		if (result.first.empty() && result.second.empty())
 		{
 			hasResult = false;
 		}
 		else
 		{
-			list<string> list1 = getListStringFromListInt(result.first);
+			
+			/*list<string> list1 = getListStringFromListInt(result.first);
 			list<string> list2 = getListStringFromListInt(result.second);
 			list1.push_front(argOne);
 			list2.push_front(argTwo);
 			resultSuchThat = make_pair(list1, list2);
-			hasResult = true;
+			hasResult = true;*/
 		}
 	}
 	else

@@ -171,17 +171,17 @@ QueryEvaluator::~QueryEvaluator()
 //	string type = arr[0];
 //	string synonym = arr[1];
 //
-//	if (type == "stmt")
+//	if (type == STMT)
 //	{
 //		resultSelect = getListStringFromListInt(pkbInstance->getAllStatements());
 //        resultSelect.push_front(synonym);
 //	}
-//	else if (type == "assign")
+//	else if (type == ASSIGN)
 //	{
 //		resultSelect = getListStringFromListInt(pkbInstance->getAllAssignments());
 //        resultSelect.push_front(synonym);
 //	}
-//	else if (type == "while")
+//	else if (type == WHILE)
 //	{
 //		resultSelect = getListStringFromListInt(pkbInstance->getAllWhiles());
 //        resultSelect.push_front(synonym);
@@ -204,25 +204,25 @@ QueryEvaluator::~QueryEvaluator()
 //
 //void QueryEvaluator::evaluateFollows(array<string, 4> arr)
 //{
-//    string type1 = arr[0];
-//    string type2 = arr[2];
-//    string arg1 = arr[1];
-//    string arg2 = arr[3];
+//    string argOneType = arr[0];
+//    string argTwoType = arr[2];
+//    string argOne = arr[1];
+//    string argTwo = arr[3];
 //
 //    //Case 1: Follows(int, int)
-//	if (type1 == "int" && type2 == "int")
+//	if (argOneType == INTEGER && argTwoType == INTEGER)
 //	{
-//        hasResult = pkbInstance->isFollows(stoi(arg1), stoi(arg2));
+//        hasResult = pkbInstance->isFollows(stoi(argOne), stoi(argTwo));
 //	}
 //    //Case 2: Follows(int, _)
-//	else if (type1 == "int" && type2 == "_")
+//	else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
 //	{
-//        hasResult = pkbInstance->isBefore(stoi(arg1));
+//        hasResult = pkbInstance->isBefore(stoi(argOne));
 //	}
 //    //Case 3: Follows(int, synonym)
-//	else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while")) 
+//	else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE)) 
 //	{
-//        list<int> result = pkbInstance->getAfter(stoi(arg1), type2);
+//        list<int> result = pkbInstance->getAfter(stoi(argOne), argTwoType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -231,25 +231,25 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg2);     
+//            list1.push_front(argTwo);     
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    //Case 4: Follows(_, int)
-//	else if (type1 == "_" && type2 == "int")
+//	else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
 //	{ 
-//        hasResult = pkbInstance->isAfter(stoi(arg2));
+//        hasResult = pkbInstance->isAfter(stoi(argTwo));
 //	}
 //    //Case 5: Follows(_, _)
-//	else if (type1 == "_" && type2 == "_")
+//	else if (argOneType == UNDERSCORE && argTwoType == UNDERSCORE)
 //	{
 //        hasResult = pkbInstance->hasFollows();
 //	}
 //    //Case 6: Follows(_, synonym)
-//	else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//	else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //	{
-//        list<int> result = pkbInstance->getAllAfter(arg2);
+//        list<int> result = pkbInstance->getAllAfter(argTwo);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -258,15 +258,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg2);
+//            list1.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    //Case 7: Follows(synonym, int)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == INTEGER)
 //	{
-//        list<int> result = pkbInstance->getBefore(stoi(arg2), type1);
+//        list<int> result = pkbInstance->getBefore(stoi(argTwo), argOneType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -275,15 +275,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg1);
+//            list1.push_front(argOne);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    //Case 8: Follows(synonym, _)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == UNDERSCORE)
 //	{
-//        list<int> result = pkbInstance->getAllBefore(type1);
+//        list<int> result = pkbInstance->getAllBefore(argOneType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -292,15 +292,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg1);
+//            list1.push_front(argOne);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    //Case 9: Follows(synonym, synonym)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //	{
-//        pair<list<int>, list<int>> result = pkbInstance->getAllFollows(type1, type2);
+//        pair<list<int>, list<int>> result = pkbInstance->getAllFollows(argOneType, argTwoType);
 //        if (result.first.empty() && result.second.empty())
 //        {
 //            hasResult = false;
@@ -309,39 +309,39 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result.first);
 //            list<string> list2 = getListStringFromListInt(result.second);
-//            list1.push_front(arg1);
-//            list2.push_front(arg2);
+//            list1.push_front(argOne);
+//            list2.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    else
 //    {
-//		cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
+//		cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
 //    }
 //}
 //
 //void QueryEvaluator::evaluateFollowsStar(array<string, 4> arr)
 //{
-//    string type1 = arr[0];
-//    string type2 = arr[2];
-//    string arg1 = arr[1];
-//    string arg2 = arr[3];
+//    string argOneType = arr[0];
+//    string argTwoType = arr[2];
+//    string argOne = arr[1];
+//    string argTwo = arr[3];
 //
 //    //Case 1: FollowsStar(int, int)
-//    if (type1 == "int" && type2 == "int")
+//    if (argOneType == INTEGER && argTwoType == INTEGER)
 //    {
-//        hasResult = pkbInstance->isFollowsStar(stoi(arg1), stoi(arg2));
+//        hasResult = pkbInstance->isFollowsStar(stoi(argOne), stoi(argTwo));
 //    }
 //    //Case 2: FollowsStar(int, _)
-//    else if (type1 == "int" && type2 == "_")
+//    else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
 //    {
-//        hasResult = pkbInstance->isBefore(stoi(arg1));
+//        hasResult = pkbInstance->isBefore(stoi(argOne));
 //    }
 //    //Case 3: FollowsStar(int, synonym)
-//    else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //    {
-//        list<int> result = pkbInstance->getAfterStar(stoi(arg1), type2);
+//        list<int> result = pkbInstance->getAfterStar(stoi(argOne), argTwoType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -350,26 +350,26 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg2);
+//            list1.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //
 //        }
 //    }
 //    //Case 4: FollowsStar(_, int)
-//    else if (type1 == "_" && type2 == "int")
+//    else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
 //    {
-//        hasResult = pkbInstance->isAfter(stoi(arg2));
+//        hasResult = pkbInstance->isAfter(stoi(argTwo));
 //    }
 //    //Case 5: FollowsStar(_, _)
-//    else if (type1 == "_" && type2 == "_")
+//    else if (argOneType == UNDERSCORE && argTwoType == UNDERSCORE)
 //    {
 //        hasResult = pkbInstance->hasFollows();
 //    }
 //    //Case 6: FollowsStar(_, synonym)
-//    else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //    {
-//        list<int> result = pkbInstance->getAllAfterStar(type2);
+//        list<int> result = pkbInstance->getAllAfterStar(argTwoType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -378,15 +378,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg2);
+//            list1.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //    }
 //    //Case 7: FollowsStar(synonym, int)
-//    else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "int")
+//    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == INTEGER)
 //    {
-//        list<int> result = pkbInstance->getBeforeStar(stoi(arg2), type1);
+//        list<int> result = pkbInstance->getBeforeStar(stoi(argTwo), argOneType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -395,15 +395,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg1);
+//            list1.push_front(argOne);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //    }
 //    //Case 8: FollowsStar(synonym, _)
-//    else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
+//    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == UNDERSCORE)
 //    {
-//        list<int> result = pkbInstance->getAllBeforeStar(type1);
+//        list<int> result = pkbInstance->getAllBeforeStar(argOneType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -412,15 +412,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg1);
+//            list1.push_front(argOne);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //    }
 //    //Case 9: FollowsStar(synonym, synonym)
-//    else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //    {
-//        pair<list<int>, list<int>> result = pkbInstance->getAllFollowsStar(type1, type2);
+//        pair<list<int>, list<int>> result = pkbInstance->getAllFollowsStar(argOneType, argTwoType);
 //        if (result.first.empty() && result.second.empty())
 //        {
 //            hasResult = false;
@@ -429,39 +429,39 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result.first);
 //            list<string> list2 = getListStringFromListInt(result.second);
-//            list1.push_front(arg1);
-//            list2.push_front(arg2);
+//            list1.push_front(argOne);
+//            list2.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //    }
 //    else
 //    {
-//        cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
+//        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
 //    }
 //}
 //
 //void QueryEvaluator::evaluateParent(array<string, 4> arr)
 //{
-//    string type1 = arr[0];
-//    string type2 = arr[2];
-//    string arg1 = arr[1];
-//    string arg2 = arr[3];
+//    string argOneType = arr[0];
+//    string argTwoType = arr[2];
+//    string argOne = arr[1];
+//    string argTwo = arr[3];
 //
 //    //Case 1: Parent(int, int)
-//    if (type1 == "int" && type2 == "int")
+//    if (argOneType == INTEGER && argTwoType == INTEGER)
 //	{
-//        hasResult = pkbInstance->isParentChild(stoi(arg1), stoi(arg2));
+//        hasResult = pkbInstance->isParentChild(stoi(argOne), stoi(argTwo));
 //	}
 //    //Case 2: Parent(int, _)
-//	else if (type1 == "int" && type2 == "_")
+//	else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
 //	{
-//        hasResult = pkbInstance->isParent(stoi(arg1));
+//        hasResult = pkbInstance->isParent(stoi(argOne));
 //	}
 //    //Case 3: Parent(int, synonym)
-//    else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //	{
-//        list<int> result = pkbInstance->getChildren(stoi(arg1), type2);
+//        list<int> result = pkbInstance->getChildren(stoi(argOne), argTwoType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -470,25 +470,25 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg2);
+//            list1.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    //Case 4: Parent(_, int)
-//	else if (type1 == "_" && type2 == "int")
+//	else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
 //	{
-//        hasResult = pkbInstance->isChild(stoi(arg2));
+//        hasResult = pkbInstance->isChild(stoi(argTwo));
 //	}
 //    //Case 5: Parent(_, _)
-//	else if (type1 == "_" && type2 == "_")
+//	else if (argOneType == UNDERSCORE && argTwoType == UNDERSCORE)
 //	{
 //        hasResult = pkbInstance->hasParentRel();
 //	}
 //    //Case 6: Parent(_, synonym)
-//    else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //	{
-//        list<int> result = pkbInstance->getAllChildren(type2);
+//        list<int> result = pkbInstance->getAllChildren(argTwoType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -497,15 +497,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg2);
+//            list1.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    //Case 7: Parent(synonym, int)
-//    else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
+//    else if ((argOneType == STMT || argOneType == WHILE) && argTwoType == INTEGER)
 //	{
-//        list<int> result = pkbInstance->getParent(stoi(arg2), type1);
+//        list<int> result = pkbInstance->getParent(stoi(argTwo), argOneType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -514,15 +514,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg1);
+//            list1.push_front(argOne);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    //Case 8: Parent(synonym, _)
-//    else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
+//    else if ((argOneType == STMT || argOneType == WHILE) && argTwoType == UNDERSCORE)
 //	{
-//        list<int> result = pkbInstance->getAllParents(type1);
+//        list<int> result = pkbInstance->getAllParents(argOneType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -531,15 +531,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg1);
+//            list1.push_front(argOne);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    //Case 9: Parent(synonym, synonym)
-//    else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if ((argOneType == STMT || argOneType == WHILE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //    {
-//        pair<list<int>, list<int>> result = pkbInstance->getAllParentsRel(type1, type2);
+//        pair<list<int>, list<int>> result = pkbInstance->getAllParentsRel(argOneType, argTwoType);
 //        if (result.first.empty() && result.second.empty())
 //        {
 //            hasResult = false;
@@ -548,39 +548,39 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result.first);
 //            list<string> list2 = getListStringFromListInt(result.second);
-//            list1.push_front(arg1);
-//            list2.push_front(arg2);
+//            list1.push_front(argOne);
+//            list2.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //	}
 //    else
 //    {
-//        cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
+//        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
 //    }
 //}
 //
 //void QueryEvaluator::evaluateParentStar(array<string, 4> arr)
 //{
-//    string type1 = arr[0];
-//    string type2 = arr[2];
-//    string arg1 = arr[1];
-//    string arg2 = arr[3];
+//    string argOneType = arr[0];
+//    string argTwoType = arr[2];
+//    string argOne = arr[1];
+//    string argTwo = arr[3];
 //
 //    //Case 1: ParentStar(int, int)
-//    if (type1 == "int" && type2 == "int")
+//    if (argOneType == INTEGER && argTwoType == INTEGER)
 //    {
-//        hasResult = pkbInstance->isParentStarChild(stoi(arg1), stoi(arg2));
+//        hasResult = pkbInstance->isParentStarChild(stoi(argOne), stoi(argTwo));
 //    }
 //    //Case 2: ParentStar(int, _)
-//    else if (type1 == "int" && type2 == "_")
+//    else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
 //    {
-//        hasResult = pkbInstance->isParent(stoi(arg1));
+//        hasResult = pkbInstance->isParent(stoi(argOne));
 //    }
 //    //Case 3: ParentStar(int, synonym)
-//    else if (type1 == "int" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //    {
-//        list<int> result = pkbInstance->getChildrenStar(stoi(arg1), type2);
+//        list<int> result = pkbInstance->getChildrenStar(stoi(argOne), argTwoType);
 //
 //        if (result.empty())
 //        {
@@ -590,25 +590,25 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg2);
+//            list1.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //    }
 //    //Case 4: ParentStar(_, int)
-//    else if (type1 == "_" && type2 == "int")
+//    else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
 //    {
-//        hasResult = pkbInstance->isChild(stoi(arg2));
+//        hasResult = pkbInstance->isChild(stoi(argTwo));
 //    }
 //    //Case 5: ParentStar(_, _)
-//    else if (type1 == "_" && type2 == "_")
+//    else if (argOneType == UNDERSCORE && argTwoType == UNDERSCORE)
 //    {
 //        hasResult = pkbInstance->hasParentRel();
 //    }
 //    //Case 6: ParentStar(_, synonym)
-//    else if (type1 == "_" && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //    {
-//        list<int> result = pkbInstance->getAllChildren(type2);
+//        list<int> result = pkbInstance->getAllChildren(argTwoType);
 //        if (result.empty())
 //        {
 //            hasResult = false;
@@ -617,15 +617,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg2);
+//            list1.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //    }
 //    //Case 7: ParentStar(int, synonym)
-//    else if ((type1 == "stmt" || type1 == "while") && type2 == "int")
+//    else if ((argOneType == STMT || argOneType == WHILE) && argTwoType == INTEGER)
 //    {
-//        list<int> result = pkbInstance->getParentStar(stoi(arg2), type1);
+//        list<int> result = pkbInstance->getParentStar(stoi(argTwo), argOneType);
 //
 //        if (result.empty())
 //        {
@@ -636,17 +636,17 @@ QueryEvaluator::~QueryEvaluator()
 //            list<string> list1 = getListStringFromListInt(result);
 //
 //            list<string> list2;
-//            list1.push_front(arg1);
+//            list1.push_front(argOne);
 //            resultSuchThat = make_pair(list1, list2);
 //
 //            hasResult = true;
 //        }
 //    }
 //    //Case 8: ParentStar(synonym, _)
-//    else if ((type1 == "stmt" || type1 == "while") && type2 == "_")
+//    else if ((argOneType == STMT || argOneType == WHILE) && argTwoType == UNDERSCORE)
 //    {
 //
-//        list<int> result = pkbInstance->getAllParents(type1);
+//        list<int> result = pkbInstance->getAllParents(argOneType);
 //
 //
 //        if (result.empty())
@@ -657,15 +657,15 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result);
 //            list<string> list2;
-//            list1.push_front(arg1);
+//            list1.push_front(argOne);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //    }
 //    //Case 9: ParentStar(synonym, synonym)
-//    else if ((type1 == "stmt" || type1 == "while") && (type2 == "stmt" || type2 == "assign" || type2 == "while"))
+//    else if ((argOneType == STMT || argOneType == WHILE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 //    {
-//        pair<list<int>, list<int>> result = pkbInstance->getAllParentStarRel(type1, type2);
+//        pair<list<int>, list<int>> result = pkbInstance->getAllParentStarRel(argOneType, argTwoType);
 //        if (result.first.empty() && result.second.empty())
 //        {
 //            hasResult = false;
@@ -674,42 +674,42 @@ QueryEvaluator::~QueryEvaluator()
 //        {
 //            list<string> list1 = getListStringFromListInt(result.first);
 //            list<string> list2 = getListStringFromListInt(result.second);
-//            list1.push_front(arg1);
-//            list2.push_front(arg2);
+//            list1.push_front(argOne);
+//            list2.push_front(argTwo);
 //            resultSuchThat = make_pair(list1, list2);
 //            hasResult = true;
 //        }
 //    }
 //    else
 //    {
-//        cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
+//        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
 //    }
 //}
 //
 //void QueryEvaluator::evaluateUses(array<string, 4> arr)
 //{
-//	string type1 = arr[0];
-//	string type2 = arr[2];
-//	string arg1 = arr[1];
-//	string arg2 = arr[3];
+//	string argOneType = arr[0];
+//	string argTwoType = arr[2];
+//	string argOne = arr[1];
+//	string argTwo = arr[3];
 //
 //    //Case 1: Uses(int, ident)
-//	if (type1 == "int" && type2 == "ident")
+//	if (argOneType == INTEGER && argTwoType == "ident")
 //	{
-//		int num = stoi(arg1);
-//		string ident = regex_replace(arg2, regex("\""), "");
+//		int num = stoi(argOne);
+//		string ident = regex_replace(argTwo, regex("\""), "");
 //		hasResult = pkbInstance->isUses(num, ident);
 //	}
 //    //Case 2: Uses(int, _)
-//	else if (type1 == "int" && type2 == "_")
+//	else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
 //	{
-//		int num = stoi(arg1);
+//		int num = stoi(argOne);
 //		hasResult = pkbInstance->isUsingAnything(num);
 //	}
 //    //Case 3: Uses(int, var)
-//	else if (type1 == "int" && type2 == "var")
+//	else if (argOneType == INTEGER && argTwoType == "var")
 //	{
-//		int num = stoi(arg1);
+//		int num = stoi(argOne);
 //		list<string> pkbResult = pkbInstance->getUsesFromStmt(num);
 //
 //		if (pkbResult.empty())
@@ -719,17 +719,17 @@ QueryEvaluator::~QueryEvaluator()
 //		else
 //		{
 //			list<string> lst = resultSuchThat.first;
-//			lst.push_back(arg2);
+//			lst.push_back(argTwo);
 //			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 //			resultSuchThat = make_pair(lst, list<string>());
 //			hasResult = true;
 //		}
 //	}
 //    //Case 4: Uses(synonym, ident)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == "ident")
 //	{
-//		string ident = regex_replace(arg2, regex("\""), "");
-//		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(ident, type1));
+//		string ident = regex_replace(argTwo, regex("\""), "");
+//		list<string> pkbResult = getListStringFromListInt(pkbInstance->getUsesFromVar(ident, argOneType));
 //
 //		if (pkbResult.empty())
 //		{
@@ -738,16 +738,16 @@ QueryEvaluator::~QueryEvaluator()
 //		else
 //		{
 //			list<string> lst = resultSuchThat.first;
-//			lst.push_back(arg1);
+//			lst.push_back(argOne);
 //			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 //			resultSuchThat = make_pair(lst, list<string>());
 //			hasResult = true;
 //		}
 //	}
 //    //Case 5: Uses(synonyym, _)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == UNDERSCORE)
 //	{
-//		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatUsesAnything(type1));
+//		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatUsesAnything(argOneType));
 //
 //		if (pkbResult.empty())
 //		{
@@ -756,16 +756,16 @@ QueryEvaluator::~QueryEvaluator()
 //		else
 //		{
 //			list<string> lst = resultSuchThat.first;
-//			lst.push_back(arg1);
+//			lst.push_back(argOne);
 //			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 //			resultSuchThat = make_pair(lst, list<string>());
 //			hasResult = true;
 //		}
 //	}
 //    //Case 6: Uses(synonym, var)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == "var")
 //	{
-//		pair<list<int>, list<string>> pkbResult = pkbInstance->getUsesPairs(type1);
+//		pair<list<int>, list<string>> pkbResult = pkbInstance->getUsesPairs(argOneType);
 //
 //		if (pkbResult.first.empty() && pkbResult.second.empty())
 //		{
@@ -775,11 +775,11 @@ QueryEvaluator::~QueryEvaluator()
 //		{
 //			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
 //			list<string> lst = resultSuchThat.first;
-//			lst.push_back(arg1);
+//			lst.push_back(argOne);
 //			lst.insert(lst.end(), pkbResultFirst.begin(), pkbResultFirst.end());
 //
 //			list<string> lst2 = resultSuchThat.second;
-//			lst2.push_back(arg2);
+//			lst2.push_back(argTwo);
 //			lst2.insert(lst2.end(), pkbResult.second.begin(), pkbResult.second.end());
 //
 //			resultSuchThat = make_pair(lst, lst2);
@@ -788,34 +788,34 @@ QueryEvaluator::~QueryEvaluator()
 //	}
 //	else
 //	{
-//		cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
+//		cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
 //	}
 //}
 //
 //void QueryEvaluator::evaluateModifies(array<string, 4> arr)
 //{
-//	string type1 = arr[0];
-//	string type2 = arr[2];
-//	string arg1 = arr[1];
-//	string arg2 = arr[3];
+//	string argOneType = arr[0];
+//	string argTwoType = arr[2];
+//	string argOne = arr[1];
+//	string argTwo = arr[3];
 //
 //	//Case 1: Modifies(int, ident)
-//	if (type1 == "int" && type2 == "ident")
+//	if (argOneType == INTEGER && argTwoType == "ident")
 //	{
-//		int num = stoi(arg1);
-//		string ident = regex_replace(arg2, regex("\""), "");
+//		int num = stoi(argOne);
+//		string ident = regex_replace(argTwo, regex("\""), "");
 //		hasResult = pkbInstance->isMod(num, ident);
 //	}
 //	//Case 2: Modifies(int, _)
-//	else if (type1 == "int" && type2 == "_")
+//	else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
 //	{
-//		int num = stoi(arg1);
+//		int num = stoi(argOne);
 //		hasResult = pkbInstance->isModifyingAnything(num);
 //	}
 //	//Case 3: Modifies(int, var)
-//	else if (type1 == "int" && type2 == "var")
+//	else if (argOneType == INTEGER && argTwoType == "var")
 //	{
-//		int num = stoi(arg1);
+//		int num = stoi(argOne);
 //		list<string> pkbResult = pkbInstance->getModifiesFromStmt(num);
 //
 //		if (pkbResult.empty())
@@ -825,17 +825,17 @@ QueryEvaluator::~QueryEvaluator()
 //		else
 //		{
 //			list<string> lst = resultSuchThat.first;
-//			lst.push_back(arg2);
+//			lst.push_back(argTwo);
 //			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 //			resultSuchThat = make_pair(lst, list<string>());
 //			hasResult = true;
 //		}
 //	}
 //	//Case 4: Modifies(synonym, ident)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "ident")
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == "ident")
 //	{
-//		string ident = regex_replace(arg2, regex("\""), "");
-//		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(ident, type1));
+//		string ident = regex_replace(argTwo, regex("\""), "");
+//		list<string> pkbResult = getListStringFromListInt(pkbInstance->getModifiesFromVar(ident, argOneType));
 //
 //		if (pkbResult.empty())
 //		{
@@ -844,16 +844,16 @@ QueryEvaluator::~QueryEvaluator()
 //		else
 //		{
 //			list<string> lst = resultSuchThat.first;
-//			lst.push_back(arg1);
+//			lst.push_back(argOne);
 //			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 //			resultSuchThat = make_pair(lst, list<string>());
 //			hasResult = true;
 //		}
 //	}
 //	//Case 5: Modifies(synonym, _)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "_")
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == UNDERSCORE)
 //	{
-//		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatModifiesAnything(type1));
+//		list<string> pkbResult = getListStringFromListInt(pkbInstance->getStmtThatModifiesAnything(argOneType));
 //
 //		if (pkbResult.empty())
 //		{
@@ -862,16 +862,16 @@ QueryEvaluator::~QueryEvaluator()
 //		else
 //		{
 //			list<string> lst = resultSuchThat.first;
-//			lst.push_back(arg1);
+//			lst.push_back(argOne);
 //			lst.insert(lst.end(), pkbResult.begin(), pkbResult.end());
 //			resultSuchThat = make_pair(lst, list<string>());
 //			hasResult = true;
 //		}
 //	}
 //	//Case 6: Modifies(synonym, var)
-//	else if ((type1 == "stmt" || type1 == "assign" || type1 == "while") && type2 == "var")
+//	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == "var")
 //	{
-//		pair<list<int>, list<string>> pkbResult = pkbInstance->getModifiesPairs(type1);
+//		pair<list<int>, list<string>> pkbResult = pkbInstance->getModifiesPairs(argOneType);
 //
 //		if (pkbResult.first.empty() && pkbResult.second.empty())
 //		{
@@ -881,11 +881,11 @@ QueryEvaluator::~QueryEvaluator()
 //		{
 //			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
 //			list<string> lst = resultSuchThat.first;
-//			lst.push_back(arg1);
+//			lst.push_back(argOne);
 //			lst.insert(lst.end(), pkbResultFirst.begin(), pkbResultFirst.end());
 //
 //			list<string> lst2 = resultSuchThat.second;
-//			lst2.push_back(arg2);
+//			lst2.push_back(argTwo);
 //			lst2.insert(lst2.end(), pkbResult.second.begin(), pkbResult.second.end());
 //
 //			resultSuchThat = make_pair(lst, lst2);
@@ -894,21 +894,21 @@ QueryEvaluator::~QueryEvaluator()
 //	}
 //	else
 //	{
-//		cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ">" << endl;
+//		cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
 //	}
 //}
 //
 //void QueryEvaluator::evaluatePattern(array<string, 6> arr)
 //{
-//    string type1 = arr[0];
-//    string type2 = arr[2];
+//    string argOneType = arr[0];
+//    string argTwoType = arr[2];
 //	string type3 = arr[4];
-//    string arg1 = arr[1];
-//    string arg2 = arr[3];
+//    string argOne = arr[1];
+//    string argTwo = arr[3];
 //	string arg3 = arr[5];
 //
 //	// Case 1: pattern a(synonym, _)
-//    if (type2 == "var" && type3 == "_")
+//    if (argTwoType == "var" && type3 == UNDERSCORE)
 //    {
 //		pair<list<int>, list<string>> pkbResult = pkbInstance->getLeftVariables();
 //
@@ -919,10 +919,10 @@ QueryEvaluator::~QueryEvaluator()
 //		else
 //		{
 //			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
-//			pkbResultFirst.push_front(arg1);
+//			pkbResultFirst.push_front(argOne);
 //
 //			list<string> pkbResultSecond = pkbResult.second;
-//			pkbResultSecond.push_front(arg2);
+//			pkbResultSecond.push_front(argTwo);
 //
 //			resultPattern = make_pair(pkbResultFirst, pkbResultSecond);
 //			hasResult = true;
@@ -930,10 +930,10 @@ QueryEvaluator::~QueryEvaluator()
 //    }
 //
 //	// Case 2: pattern a(synonym, ident)
-//	else if (type2 == "var" && type3 == "ident")
+//	else if (argTwoType == "var" && type3 == "ident")
 //	{
 //		string ident = regex_replace(arg3, regex("\""), "");
-//		ident = regex_replace(ident, regex("_"), "");
+//		ident = regex_replace(ident, regex(UNDERSCORE), "");
 //		pair<list<int>, list<string>> pkbResult = pkbInstance->getLeftVariablesThatMatchWith(ident);
 //
 //		if (pkbResult.first.empty() && pkbResult.second.empty())
@@ -943,10 +943,10 @@ QueryEvaluator::~QueryEvaluator()
 //		else
 //		{
 //			list<string> pkbResultFirst = getListStringFromListInt(pkbResult.first);
-//			pkbResultFirst.push_front(arg1);
+//			pkbResultFirst.push_front(argOne);
 //
 //			list<string> pkbResultSecond = pkbResult.second;
-//			pkbResultSecond.push_front(arg2);
+//			pkbResultSecond.push_front(argTwo);
 //
 //			resultPattern = make_pair(pkbResultFirst, pkbResultSecond);
 //			hasResult = true;
@@ -954,10 +954,10 @@ QueryEvaluator::~QueryEvaluator()
 //	}
 //
 //	// Case 3: pattern a(_, ident)
-//    else if (type2 == "_" && type3 == "ident")
+//    else if (argTwoType == UNDERSCORE && type3 == "ident")
 //    {
 //		string ident = regex_replace(arg3, regex("\""), "");
-//		ident = regex_replace(ident, regex("_"), "");
+//		ident = regex_replace(ident, regex(UNDERSCORE), "");
 //
 //		list<string> pkbResult = getListStringFromListInt(pkbInstance->getPartialMatchStmt(ident));
 //
@@ -968,21 +968,21 @@ QueryEvaluator::~QueryEvaluator()
 //		}
 //		else
 //		{
-//			pkbResult.push_front(arg1);
+//			pkbResult.push_front(argOne);
 //			resultPattern.first = pkbResult;
 //			hasResult = true;
 //		}
 //
 //    }
 //	// Case 4: pattern a(ident, ident)
-//    else if (type2 == "ident" && type3 == "ident")
+//    else if (argTwoType == "ident" && type3 == "ident")
 //    {
 //
-//		string ident1 = regex_replace(arg2, regex("\""), "");
-//		ident1 = regex_replace(ident1, regex("_"), "");
+//		string ident1 = regex_replace(argTwo, regex("\""), "");
+//		ident1 = regex_replace(ident1, regex(UNDERSCORE), "");
 //
 //		string ident2 = regex_replace(arg3, regex("\""), "");
-//		ident2 = regex_replace(ident2, regex("_"), "");
+//		ident2 = regex_replace(ident2, regex(UNDERSCORE), "");
 //
 //		list<string> pkbResult = getListStringFromListInt(pkbInstance->getPartialBothMatches(ident1, ident2));
 //
@@ -992,14 +992,14 @@ QueryEvaluator::~QueryEvaluator()
 //		}
 //		else
 //		{
-//			pkbResult.push_front(arg1);
+//			pkbResult.push_front(argOne);
 //			resultPattern.first = pkbResult;
 //			hasResult = true;
 //		}
 //    }
 //
 //	// Case 5: pattern a(_, _)
-//    else if (type2 == "_" && type3 == "_")
+//    else if (argTwoType == UNDERSCORE && type3 == UNDERSCORE)
 //    {
 //		list<string> pkbResult = getListStringFromListInt(pkbInstance->getAllAssignments());
 //
@@ -1009,17 +1009,17 @@ QueryEvaluator::~QueryEvaluator()
 //		}
 //		else
 //		{
-//			pkbResult.push_front(arg1);
+//			pkbResult.push_front(argOne);
 //			resultPattern.first = pkbResult;
 //			hasResult = true;
 //		}
 //    }
 //
 //	// Case 6: pattern a(ident, _)
-//    else if (type2 == "ident" && type3 == "_")
+//    else if (argTwoType == "ident" && type3 == UNDERSCORE)
 //    {
-//		string ident = regex_replace(arg2, regex("\""), "");
-//		ident = regex_replace(ident, regex("_"), "");
+//		string ident = regex_replace(argTwo, regex("\""), "");
+//		ident = regex_replace(ident, regex(UNDERSCORE), "");
 //
 //		list<string> pkbResult = getListStringFromListInt(pkbInstance->getAllAssignments(ident));
 //
@@ -1029,14 +1029,14 @@ QueryEvaluator::~QueryEvaluator()
 //		}
 //		else
 //		{
-//			pkbResult.push_front(arg1);
+//			pkbResult.push_front(argOne);
 //			resultPattern.first = pkbResult;
 //			hasResult = true;
 //		}
 //    }
 //    else
 //    {
-//        cerr << "Unrecognised type: <" << type1 << ":" << arg1 << ", " << type2 << ":" << arg2 << ", " << type3 << ":" << arg3 << ">" << endl;
+//        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ", " << type3 << ":" << arg3 << ">" << endl;
 //    }
 //
 //}

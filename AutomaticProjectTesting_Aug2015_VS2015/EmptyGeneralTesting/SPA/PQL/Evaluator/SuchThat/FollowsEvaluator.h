@@ -7,7 +7,7 @@ public:
 	FollowsEvaluator();
 	~FollowsEvaluator();
 
-	ClauseResult evaluate(SuchThatClause stClause);
+	bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
 
 }; 
 

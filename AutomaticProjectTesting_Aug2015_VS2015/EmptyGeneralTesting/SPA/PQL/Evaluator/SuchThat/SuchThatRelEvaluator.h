@@ -8,6 +8,6 @@ public:
 	SuchThatRelEvaluator();
 	~SuchThatRelEvaluator();
 
-	virtual ClauseResult evaluate(SuchThatClause stClause) = 0;
+	virtual bool evaluate(SuchThatClause stClause, ClauseResult * clauseResult) = 0;
 };
 
