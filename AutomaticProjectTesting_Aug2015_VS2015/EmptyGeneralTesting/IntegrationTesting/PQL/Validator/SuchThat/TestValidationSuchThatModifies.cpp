@@ -22,7 +22,7 @@ namespace UnitTesting
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", IDENT_WITHQUOTES, "\"x\"");
-            SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
@@ -33,7 +33,7 @@ namespace UnitTesting
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", UNDERSCORE, "_");
-            SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
@@ -45,7 +45,7 @@ namespace UnitTesting
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", VARIABLE, "v");
-            SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
@@ -57,7 +57,7 @@ namespace UnitTesting
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, ASSIGN, "a", IDENT_WITHQUOTES, "\"x\"");
-            SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
@@ -69,7 +69,7 @@ namespace UnitTesting
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s", UNDERSCORE, "_");
-            SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
@@ -82,7 +82,7 @@ namespace UnitTesting
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, WHILE, "w", VARIABLE, "v");
-            SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 

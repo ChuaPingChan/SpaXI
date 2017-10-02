@@ -1,9 +1,10 @@
 #include "CppUnitTest.h"
 #include "string.h"
 #include "..\SPA\PQL\QueryTree.h"
+#include "..\SPA\PQL\Patternship.h"
 #include "..\SPA\PQL\Validator\Selection\Pattern\PatternHandler.h"
 #include "..\SPA\PQL\Utilities\PatternClause.h"
-//#include "..\..\Utility\UtilitySelection.h"
+#include "..\..\Utility\UtilitySelection.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
@@ -17,11 +18,13 @@ namespace UnitTesting
         {
             string str = "pattern a(v, _)";
             QueryTree qt;
+            qt.insertVariable(ASSIGN, "a");
+            qt.insertVariable(VARIABLE, "v");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
-            //PatternClause expected = UtilitySelection::makePatternClause(0, 8, "1", 10, "\"x\"");
-            //SuchThatClause actual = UtilitySelection::getFirstClauseFromTree(qt);
-            //Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_");
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSamePatternClauseContent(expected, actual));
         }
     };
 }

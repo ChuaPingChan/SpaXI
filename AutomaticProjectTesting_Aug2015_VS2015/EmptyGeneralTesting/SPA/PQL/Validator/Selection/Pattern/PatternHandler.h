@@ -23,7 +23,7 @@ private:
 
     int getPatternType(string str);
 
-    string extractArgPatternType(string str);
+    string extractPatternSynonym(string str);
 
     PatternClause makePatternClause(PatternValidator pv);
     bool storeInQueryTree(PatternClause pc);

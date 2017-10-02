@@ -13,18 +13,19 @@ PatternHandler::~PatternHandler()
 bool PatternHandler::isValidPattern(string str)
 {
     string processedStr = Formatter::removeAllSpaces(str);
-    int patternType = getPatternType(processedStr);
+    string patternSyn = extractPatternSynonym(processedStr);
+    int patternType = getPatternType(patternSyn);
 
     PatternValidator *patternValidator;
 
     if (patternType == ASSSIGN_PATTERN) {
-        patternValidator = new AssignPatternValidator(patternType, processedStr, qtPtr);
+        patternValidator = new AssignPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else if (patternType == WHILE_PATTERN) {
-        //patternValidator = new WhilePatternValidator(patternType, processedStr, qtPtr);
+        //patternValidator = new WhilePatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else if (patternType == If_PATTERN) {
-        //patternValidator = new IfPatternValidator(patternType, processedStr, qtPtr);
+        //patternValidator = new IfPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else {
         return false;
@@ -42,18 +43,17 @@ bool PatternHandler::isValidPattern(string str)
     }
 }
 
-int PatternHandler::getPatternType(string processedStr)
+int PatternHandler::getPatternType(string patternSyn)
 {
-    string argPatternType = extractArgPatternType(processedStr);
-    if (qtPtr->isEntitySynonymExist(argPatternType, ASSIGN))
+    if (qtPtr->isEntitySynonymExist(patternSyn, ASSIGN))
     {
         return ASSSIGN_PATTERN;
     }
-    else if (qtPtr->isEntitySynonymExist(argPatternType, WHILE))
+    else if (qtPtr->isEntitySynonymExist(patternSyn, WHILE))
     {
         return WHILE_PATTERN;
     }
-    else if (qtPtr->isEntitySynonymExist(argPatternType, IF))
+    else if (qtPtr->isEntitySynonymExist(patternSyn, IF))
     {
         return If_PATTERN;
     }
@@ -62,7 +62,7 @@ int PatternHandler::getPatternType(string processedStr)
     }
 }
 
-string PatternHandler::extractArgPatternType(string str)
+string PatternHandler::extractPatternSynonym(string str)
 {
     string delimFirst = PatternValidator::PATTERN_KEYWORD;
     string delimSecond = "(";
@@ -72,15 +72,16 @@ string PatternHandler::extractArgPatternType(string str)
 
 PatternClause PatternHandler::makePatternClause(PatternValidator pv)
 {
-    int patternTypeIdx = pv.getPatternType();
+    int patternType = pv.getPatternType();
     int argOneType = pv.getArgOneType();
     int argTwoType = pv.getArgTwoType();
     int argThreeType = pv.getArgThreeType();
+    string patternSyn = pv.getPatternSynonym();
     string argOne = pv.getArgOne();
     string argTwo = pv.getArgTwo();
     string argThree = pv.getArgThree();
 
-    return PatternClause(patternTypeIdx, argOneType, argOne, argTwoType, argTwo, argThreeType, argThree);
+    return PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo, argThreeType, argThree);
 }
 
 bool PatternHandler::storeInQueryTree(PatternClause pc)

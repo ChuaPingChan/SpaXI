@@ -3,9 +3,10 @@
 const string PatternValidator::PATTERN_KEYWORD = "pattern";
 
 
-PatternValidator::PatternValidator(int patternType, string paramStr, QueryTree * qtPtrNew)
+PatternValidator::PatternValidator(int patternType, string patternSyn, string paramStr, QueryTree * qtPtrNew)
 {
     this->patternType = patternType;
+    this->patternSyn = patternSyn;
     this->paramStr = paramStr;
     this->qtPtr = qtPtrNew;
 }
@@ -41,6 +42,11 @@ int PatternValidator::getArgTwoType()
 int PatternValidator::getArgThreeType()
 {
     return this->argThreeType;
+}
+
+string PatternValidator::getPatternSynonym()
+{
+    return this->patternSyn;
 }
 
 string PatternValidator::getArgOne()

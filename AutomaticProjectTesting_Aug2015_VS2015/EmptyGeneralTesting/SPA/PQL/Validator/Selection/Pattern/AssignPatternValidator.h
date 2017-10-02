@@ -4,7 +4,7 @@
 class AssignPatternValidator : public PatternValidator
 {
 public:
-    AssignPatternValidator(int patternType, string paramStr, QueryTree *qtPtrNew);
+    AssignPatternValidator(int patternType, string patternSyn, string paramStr, QueryTree *qtPtrNew);
     ~AssignPatternValidator();
 
     void validate();

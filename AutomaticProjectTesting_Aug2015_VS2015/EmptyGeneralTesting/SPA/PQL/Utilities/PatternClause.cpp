@@ -1,15 +1,21 @@
 #include "PatternClause.h"
 
 
-PatternClause::PatternClause(int patternType, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree)
+PatternClause::PatternClause(int patternType, string patternSyn, int argOneType, string argOne, int argTwoType, string argTwo)
 {
-	this->_patternType = patternType;
-	this->_argOneType = argOneType;
-	this->_argTwoType = argTwoType;
-	this->_argThreeType = argThreeType;
-	this->_argOne = argOne;
-	this->_argTwo = argTwo;
-	this->_argThree = argThree;
+    this->_patternType = patternType;
+    this->_argOneType = argOneType;
+    this->_argTwoType = argTwoType;
+    this->_patternSyn = patternSyn;
+    this->_argOne = argOne;
+    this->_argTwo = argTwo;
+}
+
+PatternClause::PatternClause(int patternType, string patternSyn, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree)
+{
+    PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo);
+    this->_argThreeType = argThreeType;
+    this->_argThree = argThree;
 }
 
 PatternClause::~PatternClause()
@@ -34,6 +40,11 @@ int PatternClause::getArgTwoType()
 int PatternClause::getArgThreeType()
 {
 	return this->_argThreeType;
+}
+
+string PatternClause::getPatternSynonym()
+{
+    return this->_patternSyn;
 }
 
 string PatternClause::getArgOne()

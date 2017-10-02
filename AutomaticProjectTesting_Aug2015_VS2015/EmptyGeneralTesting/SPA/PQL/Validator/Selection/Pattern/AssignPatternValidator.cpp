@@ -1,7 +1,7 @@
 #include "AssignPatternValidator.h"
 
-AssignPatternValidator::AssignPatternValidator(int patternType, string paramStr, QueryTree *qtPtrNew)
-    :PatternValidator(patternType, paramStr, qtPtrNew)
+AssignPatternValidator::AssignPatternValidator(int patternType, string patternSyn, string paramStr, QueryTree *qtPtrNew)
+    :PatternValidator(patternType, patternSyn, paramStr, qtPtrNew)
 {
 }
 
@@ -92,7 +92,7 @@ string AssignPatternValidator::extractArgOne(string str)
 
 string AssignPatternValidator::extractArgTwo(string str)
 {
-    string delimFirst = "(";
+    string delimFirst = ",";
     string delimSecond = ")";
 
     return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
