@@ -14,7 +14,7 @@ bool PatternHandler::isValidPattern(string str)
 {
     string processedStr = Formatter::removeAllSpaces(str);
     string patternSyn = extractPatternSynonym(processedStr);
-    int patternType = getPatternType(patternSyn);
+    PatternType patternType = getPatternType(patternSyn);
 
     PatternValidator *patternValidator;
 
@@ -43,7 +43,7 @@ bool PatternHandler::isValidPattern(string str)
     }
 }
 
-int PatternHandler::getPatternType(string patternSyn)
+PatternType PatternHandler::getPatternType(string patternSyn)
 {
     if (qtPtr->isEntitySynonymExist(patternSyn, ASSIGN))
     {
@@ -57,9 +57,10 @@ int PatternHandler::getPatternType(string patternSyn)
     {
         return If_PATTERN;
     }
-    else {
-        return -1;  //TODO: Throw exception
-    }
+    //else 
+    //{
+    //    return -1;  //TODO: Throw exception
+    //}
 }
 
 string PatternHandler::extractPatternSynonym(string str)
@@ -72,10 +73,10 @@ string PatternHandler::extractPatternSynonym(string str)
 
 PatternClause PatternHandler::makePatternClause(PatternValidator pv)
 {
-    int patternType = pv.getPatternType();
-    int argOneType = pv.getArgOneType();
-    int argTwoType = pv.getArgTwoType();
-    int argThreeType = pv.getArgThreeType();
+    PatternType patternType = pv.getPatternType();
+    Entity argOneType = pv.getArgOneType();
+    Entity argTwoType = pv.getArgTwoType();
+    Entity argThreeType = pv.getArgThreeType();
     string patternSyn = pv.getPatternSynonym();
     string argOne = pv.getArgOne();
     string argTwo = pv.getArgTwo();

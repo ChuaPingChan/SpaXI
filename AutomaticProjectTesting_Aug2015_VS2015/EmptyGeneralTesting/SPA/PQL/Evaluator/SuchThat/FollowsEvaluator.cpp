@@ -84,7 +84,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResults(argOne, pkbResult);;
+			clauseResult->addNewSynResults(argOne, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}

@@ -1,6 +1,6 @@
 #include "AssignPatternValidator.h"
 
-AssignPatternValidator::AssignPatternValidator(int patternType, string patternSyn, string paramStr, QueryTree *qtPtrNew)
+AssignPatternValidator::AssignPatternValidator(PatternType patternType, string patternSyn, string paramStr, QueryTree *qtPtrNew)
     :PatternValidator(patternType, patternSyn, paramStr, qtPtrNew)
 {
 }
@@ -21,10 +21,11 @@ void AssignPatternValidator::validate()
         this->validity = true;
     }
     else {
+        //TODO: Might need to add unknown type
         this->argOne = "";
         this->argTwo = "";
-        this->argOneType = UNKNOWN;
-        this->argTwoType = UNKNOWN;
+        this->argOneType;// = UNKNOWN;
+        this->argTwoType;// = UNKNOWN;
         this->validity = false;
     }
 }

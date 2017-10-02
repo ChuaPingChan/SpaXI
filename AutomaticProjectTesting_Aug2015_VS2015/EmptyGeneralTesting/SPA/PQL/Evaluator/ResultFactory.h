@@ -26,9 +26,9 @@ public:
     ResultFactory(ClauseResult clauseResult);
     ~ResultFactory();
 
-    ClauseResult makeClauseResult(SelectClause clause);
-    ClauseResult makeClauseResult(SuchThatClause clause);
-    ClauseResult makeClauseResult(PatternClause clause);
+    //ClauseResult makeClauseResult(SelectClause clause);
+    //ClauseResult makeClauseResult(SuchThatClause clause);
+    //ClauseResult makeClauseResult(PatternClause clause);
     //ClauseResult makeClauseResult(WithClause clause);
 
 private:

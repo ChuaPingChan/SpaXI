@@ -21,7 +21,7 @@ public:
 private:
     QueryTree *qtPtr;
 
-    int getPatternType(string str);
+    PatternType getPatternType(string str);
 
     string extractPatternSynonym(string str);
 

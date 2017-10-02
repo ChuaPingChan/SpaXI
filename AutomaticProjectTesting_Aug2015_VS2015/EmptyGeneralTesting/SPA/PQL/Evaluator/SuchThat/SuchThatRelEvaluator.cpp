@@ -2,8 +2,9 @@
 
 
 
-SuchThatRelEvaluator::SuchThatRelEvaluator() : ClauseEvaluator()
+SuchThatRelEvaluator::SuchThatRelEvaluator()
 {
+    this->pkbInstance = PKBMain::getInstance();
 }
 
 

@@ -29,5 +29,5 @@ private:
 
     bool isValidEntity(string str);
     bool isValidSynonym(string str);
-    int getEntityIndexReference(string entity);
+    Entity getEntityIndexReference(string entity);
 };

@@ -1,13 +1,17 @@
 #pragma once
-#include "../ClauseEvaluator.h"
+#include "../../Utilities/ClauseResult.h"
 #include "../../Utilities/SuchThatClause.h"
+#include "../../../PKB/PKBMain.h"
 
-class SuchThatRelEvaluator : public ClauseEvaluator
+class SuchThatRelEvaluator
 {
 public:
-	SuchThatRelEvaluator();
-	~SuchThatRelEvaluator();
+    SuchThatRelEvaluator();
+    ~SuchThatRelEvaluator();
 
-	virtual bool evaluate(SuchThatClause stClause, ClauseResult * clauseResult) = 0;
+    virtual bool evaluate(SuchThatClause stClause, ClauseResult * clauseResult) = 0;
+
+protected:
+    PKBMain* pkbInstance;
 };
 

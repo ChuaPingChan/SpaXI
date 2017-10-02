@@ -8,16 +8,16 @@ class PatternValidator
 {
 public:
     static const string PATTERN_KEYWORD;
-    PatternValidator(int patternType, string patternSyn, string paramStr, QueryTree *qtPtrNew);
+    PatternValidator(PatternType patternType, string patternSyn, string paramStr, QueryTree *qtPtrNew);
     ~PatternValidator();
 
     virtual void validate();
     virtual bool isValid();
 
-    int getPatternType();
-    int getArgOneType();
-    int getArgTwoType();
-    int getArgThreeType();
+    PatternType getPatternType();
+    Entity getArgOneType();
+    Entity getArgTwoType();
+    Entity getArgThreeType();
     string getPatternSynonym();
     string getArgOne();
     string getArgTwo();
@@ -28,10 +28,11 @@ protected:
     QueryTree *qtPtr;
     string paramStr;
 
-    int patternType = UNKNOWN;
-    int argOneType = UNKNOWN;
-    int argTwoType = UNKNOWN;
-    int argThreeType = UNKNOWN;
+    //TODO: Might need unknown type
+    PatternType patternType;// = UNKNOWN;
+    Entity argOneType;// = UNKNOWN;
+    Entity argTwoType;// = UNKNOWN;
+    Entity argThreeType;// = UNKNOWN;
     string patternSyn = "";
     string argOne = "";
     string argTwo = "";

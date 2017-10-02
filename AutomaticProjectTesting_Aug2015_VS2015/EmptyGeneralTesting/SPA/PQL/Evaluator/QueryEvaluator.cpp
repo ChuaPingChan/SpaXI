@@ -13,7 +13,7 @@ void QueryEvaluator::evaluate()
 {
     bool hasResult = true;
     ClauseResult clauseResult;
-    ResultFactory factory = 
+    ResultFactory factory = ResultFactory(clauseResult);
 
     for (SuchThatClause stClause : _qt->getSuchThatClauses())
     {

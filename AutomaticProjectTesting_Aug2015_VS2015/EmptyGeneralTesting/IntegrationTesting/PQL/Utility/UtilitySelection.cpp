@@ -10,7 +10,7 @@ UtilitySelection::~UtilitySelection()
 {
 }
 
-SuchThatClause UtilitySelection::makeSuchThatClause(int rel, int argOneType, string argOne, int argTwoType, string argTwo)
+SuchThatClause UtilitySelection::makeSuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
 {
     return SuchThatClause(rel, argOneType, argOne, argTwoType, argTwo);
 }
@@ -24,8 +24,8 @@ SuchThatClause UtilitySelection::getFirstSuchThatClauseFromTree(QueryTree qt)
 bool UtilitySelection::isSameSuchThatClauseContent(SuchThatClause expected, SuchThatClause actual)
 {
     bool isSameRel = expected.getRel() == actual.getRel();
-    bool isSameArgOneType = expected.getTypeOne() == actual.getTypeOne();
-    bool isSameArgTwoType = expected.getTypeTwo() == actual.getTypeTwo();
+    bool isSameArgOneType = expected.getArgOneType() == actual.getArgOneType();
+    bool isSameArgTwoType = expected.getArgOneType() == actual.getArgTwoType();
     bool isSameArgOne = expected.getArgOne() == actual.getArgOne();
     bool isSameArgTwo = expected.getArgTwo() == actual.getArgTwo();
 
@@ -33,12 +33,13 @@ bool UtilitySelection::isSameSuchThatClauseContent(SuchThatClause expected, Such
 }
 
 
-PatternClause UtilitySelection::makePatternClause(int patternType, string patternSyn, int argOneType, string argOne, int argTwoType, string argTwo)
+PatternClause UtilitySelection::makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
 {
-    return PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo, -1, "");
+    //TODO: Might need to create type for unknown
+    return PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo, STMT, "");
 }
 
-PatternClause UtilitySelection::makePatternClause(int patternType, string patternSyn, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree)
+PatternClause UtilitySelection::makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree)
 {
     return PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo, argThreeType, argThree);
 }

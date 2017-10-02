@@ -128,7 +128,7 @@ vector<PatternClause> QueryTree::getPatternClauses()
     return _patternClauses;
 }
 
-list<string> QueryTree::getEvaluatorResult()
+ClauseResult QueryTree::getEvaluatorResult()
 {
     return _evaluatorResult;
 }

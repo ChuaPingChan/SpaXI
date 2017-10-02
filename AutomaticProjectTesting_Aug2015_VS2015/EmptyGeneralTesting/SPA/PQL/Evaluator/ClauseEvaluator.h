@@ -1,19 +1,19 @@
 #include <string>
 #include <list>
-#include "../Utilities/ClauseResult.h"
 #include "../../PKB/PKBMain.h"
 
 using namespace std;
 
 class ClauseEvaluator
 {
-protected:
-	PKBMain* pkbInstance;
-	list<string> getListStringFromListInt(list<int> listOfInt);
 
 public:
-	ClauseEvaluator();
-	~ClauseEvaluator();
+    ClauseEvaluator();
+    ~ClauseEvaluator();
+
+protected:
+    PKBMain* pkbInstance;
+    list<string> getListStringFromListInt(list<int> listOfInt);
 
 };
 

@@ -8,6 +8,7 @@
 #include "../QueryTree.h"
 #include "../../PKB/PKBMain.h"
 #include "ResultFactory.h"
+#include "../Utilities/SuchThatClause.h"
 
 using namespace std;
 

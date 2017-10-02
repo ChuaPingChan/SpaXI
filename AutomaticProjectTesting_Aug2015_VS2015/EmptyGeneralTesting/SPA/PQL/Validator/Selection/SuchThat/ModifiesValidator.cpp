@@ -1,6 +1,6 @@
 #include "ModifiesValidator.h"
 
-ModifiesValidator::ModifiesValidator(int rel, string paramStr, QueryTree *qtPtrNew)
+ModifiesValidator::ModifiesValidator(Relationship rel, string paramStr, QueryTree *qtPtrNew)
     :SuchThatValidator(rel, paramStr, qtPtrNew)
 {
 }
@@ -24,10 +24,11 @@ void ModifiesValidator::validate()
         this->validity = true;
     }
     else {
+        //TODO: Might need type for unknown
         this->argOne = "";
         this->argTwo = "";
-        this->argOneType = UNKNWON;
-        this->argTwoType = UNKNWON;
+        this->argOneType;// = UNKNWON;
+        this->argTwoType;// = UNKNWON;
         this->validity = false;
     }
 }

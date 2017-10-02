@@ -1,6 +1,6 @@
 #include "SuchThatValidator.h"
 
-SuchThatValidator::SuchThatValidator(int rel, string paramStr, QueryTree * qtPtrNew)
+SuchThatValidator::SuchThatValidator(Relationship rel, string paramStr, QueryTree * qtPtrNew)
 {
     this->rel = rel;
     this->paramStr = paramStr;
@@ -24,17 +24,16 @@ bool SuchThatValidator::isValid()
     return this->validity;
 }
 
-int SuchThatValidator::getRel()
+Relationship SuchThatValidator::getRel()
 {
     return this->rel;
 }
-
-int SuchThatValidator::getArgOneType()
+Entity SuchThatValidator::getArgOneType()
 {
     return this->argOneType;
 }
 
-int SuchThatValidator::getArgTwoType()
+Entity SuchThatValidator::getArgTwoType()
 {
     return this->argTwoType;
 }
@@ -49,7 +48,7 @@ string SuchThatValidator::getArgTwo()
     return this->argTwo;
 }
 
-string SuchThatValidator::extractArgOne(int rel, string str)
+string SuchThatValidator::extractArgOne(Relationship rel, string str)
 {
     string relStr = RELATIONSHIP_STRING_ARRAY[rel];
     string delimFirst = relStr + "(";

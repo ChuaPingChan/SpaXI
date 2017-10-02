@@ -1,9 +1,8 @@
 #pragma once
-#include "ClauseEvaluator.h"
-#include "../Utilities/ClauseResult.h"
 #include "../Utilities/SelectClause.h"
+#include "../Utilities/ClauseResult.h"
 
-class SelectionEvaluator : public ClauseEvaluator
+class SelectionEvaluator
 {
 public:
 	SelectionEvaluator();

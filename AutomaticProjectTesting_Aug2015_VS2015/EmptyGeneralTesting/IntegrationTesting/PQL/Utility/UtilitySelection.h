@@ -12,12 +12,12 @@ public:
     UtilitySelection();
     ~UtilitySelection();
 
-    static SuchThatClause makeSuchThatClause(int rel, int argOneType, string argOne, int argTwoType, string argTwo);
+    static SuchThatClause makeSuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo);
     static SuchThatClause getFirstSuchThatClauseFromTree(QueryTree qt);
     static bool isSameSuchThatClauseContent(SuchThatClause expected, SuchThatClause actual);
 
-    static PatternClause makePatternClause(int patternType, string patternSyn, int argOneType, string argOne, int argTwoType, string argTwo);
-    static PatternClause makePatternClause(int patternType, string patternSyn, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree);
+    static PatternClause makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo);
+    static PatternClause makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree);
     static PatternClause getFirstPatternClauseFromTree(QueryTree qt);
     static bool isSamePatternClauseContent(PatternClause expected, PatternClause actual);
 };

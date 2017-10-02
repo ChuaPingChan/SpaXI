@@ -127,9 +127,9 @@ int SuchThatHandler::getRelIndex(string rel)
 
 SuchThatClause SuchThatHandler::makeSuchThatClause(SuchThatValidator stv)
 {
-    int rel = stv.getRel();
-    int argOneType = stv.getArgOneType();
-    int argTwoType = stv.getArgTwoType();
+    Relationship rel = stv.getRel();
+    Entity argOneType = stv.getArgOneType();
+    Entity argTwoType = stv.getArgTwoType();
     string argOne = stv.getArgOne();
     string argTwo = stv.getArgTwo();
 

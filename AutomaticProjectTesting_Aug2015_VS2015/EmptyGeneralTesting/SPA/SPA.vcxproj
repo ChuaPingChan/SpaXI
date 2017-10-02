@@ -74,9 +74,6 @@
     <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\Pattern\WhilePatternValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\UsesValidator.cpp" />
-    <ClCompile Include="PQL\Evaluator\Results\ResultBase.cpp" />
-    <ClCompile Include="PQL\Evaluator\Results\ResultFactory.cpp" />
-    <ClCompile Include="PQL\Evaluator\Results\ResultObject.cpp" />
     <ClCompile Include="PQL\Evaluator\SelectionEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\UsesEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\Pattern\WhilePatternEvaluator.cpp" />
@@ -124,9 +121,6 @@
     <ClInclude Include="PQL\Validator\Declaration\DeclarationValidator.h" />
     <ClCompile Include="PQL\Utilities\SuchThatClause.cpp" />
     <ClCompile Include="PQL\Utilities\SelectClause.cpp" />
-    <ClInclude Include="PQL\Evaluator\Results\ResultBase.h" />
-    <ClInclude Include="PQL\Evaluator\Results\ResultFactory.h" />
-    <ClInclude Include="PQL\Evaluator\Results\ResultObject.h" />
     <ClInclude Include="PQL\Evaluator\SelectionEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\UsesEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\Pattern\WhilePatternEvaluator.h" />

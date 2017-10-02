@@ -28,7 +28,7 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 {
     if (RegexValidators::isValidSynonymRegex(selectedStr))
     {
-        int entity = getEntityOfSynonym(selectedStr);
+        Entity entity = getEntityOfSynonym(selectedStr);
         if (entity == UNKNOWN)
             return false;
         SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
@@ -43,17 +43,17 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
     return false;
 }
 
-SelectClause SelectValidator::makeSelectClause(int selectionType)
+SelectClause SelectValidator::makeSelectClause(SelectionType selectionType)
 {
     return SelectClause(selectionType);
 }
 
-SelectClause SelectValidator::makeSelectClause(int selectionType, int singleArgType, string singleArg)
+SelectClause SelectValidator::makeSelectClause(SelectionType selectionType, Entity singleArgType, string singleArg)
 {
     return SelectClause(selectionType, singleArgType, singleArg);
 }
 
-SelectClause SelectValidator::makeSelectClause(int selectionType, vector<int> tupleArgTypes, vector<string> tupleArgs)
+SelectClause SelectValidator::makeSelectClause(SelectionType selectionType, vector<Entity> tupleArgTypes, vector<string> tupleArgs)
 {
     return SelectClause(selectionType, tupleArgTypes, tupleArgs);
 }
@@ -63,7 +63,7 @@ bool SelectValidator::storeInQueryTree(SelectClause sc)
     return false;
 }
 
-int SelectValidator::getEntityOfSynonym(string syn)
+Entity SelectValidator::getEntityOfSynonym(string syn)
 {
     if (qtPtr->isEntitySynonymExist(syn, STMT))
     {
@@ -96,7 +96,8 @@ int SelectValidator::getEntityOfSynonym(string syn)
     else if (qtPtr->isEntitySynonymExist(syn, STMTLIST)) {
         return STMTLIST;
     }
-    return UNKNOWN;
+    //TODO: Might need another type for UNKNOWN
+    //return UNKNOWN;
 }
 
 string SelectValidator::removeSelectKeyword(string str)

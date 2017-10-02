@@ -94,7 +94,7 @@ bool DeclarationValidator::isValidSynonym(string str) {
     return RegexValidators::isValidSynonymRegex(str);
 }
 
-int DeclarationValidator::getEntityIndexReference(string entity)
+Entity DeclarationValidator::getEntityIndexReference(string entity)
 {
     if (entity == ENTITY_STR[STMT]) {
         return STMT;

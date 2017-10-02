@@ -3,7 +3,7 @@
 #include <list>
 #include "QueryTree.h"
 #include "Validator\QueryValidator.h"
-#include "QueryEvaluator.h"
+#include "Evaluator\QueryEvaluator.h"
 #include "ResultFormatter.h"
 
 using namespace std;

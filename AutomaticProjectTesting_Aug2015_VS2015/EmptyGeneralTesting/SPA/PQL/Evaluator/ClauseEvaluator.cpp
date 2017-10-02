@@ -2,7 +2,7 @@
 
 ClauseEvaluator::ClauseEvaluator()
 {
-	pkbInstance = PKBMain::getInstance();
+    pkbInstance = PKBMain::getInstance();
 }
 
 

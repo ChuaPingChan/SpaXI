@@ -24,13 +24,13 @@ private:
     bool isValidSelectSingle(string selectedStr);
     bool isValidSelectTuple(string selectedStr);
 
-    SelectClause makeSelectClause(int selectionType);
-    SelectClause makeSelectClause(int selectionType, int singleArgType, string singleArg);
-    SelectClause makeSelectClause(int selectionType, vector<int> tupleArgTypes, vector<string> tupleArgs);
+    SelectClause makeSelectClause(SelectionType selectionType);
+    SelectClause makeSelectClause(SelectionType selectionType, Entity singleArgType, string singleArg);
+    SelectClause makeSelectClause(SelectionType selectionType, vector<Entity> tupleArgTypes, vector<string> tupleArgs);
    
     bool storeInQueryTree(SelectClause sc);
 
-    int getEntityOfSynonym(string syn);
+    Entity getEntityOfSynonym(string syn);
     string removeSelectKeyword(string str);
 };
 

@@ -13,16 +13,16 @@ using namespace std;
 class SuchThatValidator
 {
 public:
-    SuchThatValidator(int rel, string paramStr, QueryTree *qtPtrNew);
+    SuchThatValidator(Relationship rel, string paramStr, QueryTree *qtPtrNew);
     SuchThatValidator();
     ~SuchThatValidator();
 
     virtual void validate();
     virtual bool isValid();
 
-    int getRel();
-    int getArgOneType();
-    int getArgTwoType();
+    Relationship getRel();
+    Entity getArgOneType();
+    Entity getArgTwoType();
     string getArgOne();
     string getArgTwo();
 
@@ -31,13 +31,14 @@ protected:
     QueryTree *qtPtr;
     string paramStr;
 
-    int rel = UNKNWON;
-    int argOneType = UNKNWON;
-    int argTwoType = UNKNWON;
+    //TODO: Might need to set unknown type
+    Relationship rel;// = UNKNWON;
+    Entity argOneType;// = UNKNWON;
+    Entity argTwoType;// = UNKNWON;
     string argOne = "";
     string argTwo = "";
     bool validity = false;
 
-    string extractArgOne(int rel, string str);
+    string extractArgOne(Relationship rel, string str);
     string extractArgTwo(string str);
 };
