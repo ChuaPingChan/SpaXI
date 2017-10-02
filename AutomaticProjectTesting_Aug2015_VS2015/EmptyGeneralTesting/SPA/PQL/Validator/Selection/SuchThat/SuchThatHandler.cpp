@@ -18,8 +18,43 @@ bool SuchThatHandler::isValidSuchThat(string str)
 
     SuchThatValidator *suchThatValidator;
 
-    if (rel == MODIFIES) {
-        suchThatValidator = new ModifiesValidator(MODIFIES, processedStr, qtPtr);
+    switch(rel) {
+        case MODIFIES:
+            suchThatValidator = new ModifiesValidator(MODIFIES, processedStr, qtPtr);
+            break;
+        /*case USES:
+            suchThatValidator = new UsesValidator(USES, processedStr, qtPtr);
+            break;
+        case PARENT:
+            suchThatValidator = new ParentValidator(PARENT, processedStr, qtPtr);
+            break;
+        case PARENTSTAR:
+            suchThatValidator = new ParentValidator(PARENTSTAR, processedStr, qtPtr);
+            break;
+        case FOLLOWS:
+            suchThatValidator = new FollowsValidator(FOLLOWS, processedStr, qtPtr);
+            break;
+        case FOLLOWSSTAR:
+            suchThatValidator = new FollowsValidator(FOLLOWSSTAR, processedStr, qtPtr);
+            break;
+        case CALLS:
+            suchThatValidator = new CallsValidator(CALLS, processedStr, qtPtr);
+            break;
+        case CALLSSTAR:
+            suchThatValidator = new CallsValidator(CALLSSTAR, processedStr, qtPtr);
+            break;
+        case NEXT:
+            suchThatValidator = new NextValidator(NEXT, processedStr, qtPtr);
+            break;
+        case NEXTSTAR:
+            suchThatValidator = new NextValidator(NEXTSTAR, processedStr, qtPtr);
+            break;
+        case AFFECTS:
+            suchThatValidator = new AffectsValidator(AFFECTS, processedStr, qtPtr);
+            break;
+        case AFFECTSSTAR:
+            suchThatValidator = new AffectsValidator(AFFECTSSTAR, processedStr, qtPtr);
+            break;*/
     }
 
     suchThatValidator->validate();
@@ -106,6 +141,3 @@ bool SuchThatHandler::storeInQueryTree(SuchThatClause stc)
     qtPtr->insertSuchThat(stc);
     return true;
 }
-
-
-
