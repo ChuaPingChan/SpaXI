@@ -27,9 +27,9 @@ public:
     // TODO: Modify unit test to receive list instead of vector
     list<list<int>> getAllResults();
     bool synonymPresent(string synName);
-    bool addNewSynResults(string newSynName, vector<int> newSynResults);
+    bool addNewSynResults(string newSynName, list<int> newSynResults);
     // TODO: Make addNewSynResults do overlapExistingSynResults
-    bool overlapExistingSynResults(string synName, vector<int> synResultsToOverlap);
+    // TODO: Remove bool overlapExistingSynResults(string synName, vector<int> synResultsToOverlap);
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
     bool addNewSynPairResults(string syn1Name, string syn2Name, vector<vector<int>> pairResults);
     bool removeCombinations(string synName, int value);
@@ -56,7 +56,7 @@ protected:
     template<typename T> static list<list<T>> convertVectorOfVectorToListOfLists(vector<vector<T>> &v)
     {
         list<list<T>> newListOfLists;
-        newListOfList.clear();
+        newListOfLists.clear();
         for (vector<vector<T>>::iterator innerVecPtr = v.begin();
             innerVecPtr != v.end();
             innerVecPtr++) {
