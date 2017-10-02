@@ -49,10 +49,11 @@ public:
     * Methods *
     **********/
     /******************** Grammar ********************/
-    static bool isValidIdentWithQuotes(string str);
+    static bool isValidIntegerRegex(string str);
+    static bool isValidIdentWithQuotesRegex(string str);
     /******************** Declaration Regex ********************/
-    static bool isValidEntity(string str);
-    static bool isValidSynonym(string str);
+    static bool isValidEntityRegex(string str);
+    static bool isValidSynonymRegex(string str);
 
     /******************** Select Overall ********************/
     static bool isValidSelectOverallRegex(string str);

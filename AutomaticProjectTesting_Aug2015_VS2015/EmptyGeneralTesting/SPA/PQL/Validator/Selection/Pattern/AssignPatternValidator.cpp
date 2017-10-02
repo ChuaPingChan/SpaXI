@@ -49,7 +49,7 @@ bool AssignPatternValidator::isValidArgOne(string argOne)
         return true;
     }
 
-    else if (RegexValidators::isValidIdentWithQuotes(argOne))
+    else if (RegexValidators::isValidIdentWithQuotesRegex(argOne))
     {
         this->argOneType = IDENT_WITHQUOTES;
         return true;

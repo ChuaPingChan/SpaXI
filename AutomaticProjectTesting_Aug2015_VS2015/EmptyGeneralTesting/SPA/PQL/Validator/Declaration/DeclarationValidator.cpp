@@ -87,11 +87,11 @@ bool DeclarationValidator::setQueryTree(QueryTree *qtPtrNew) {
 }
 
 bool DeclarationValidator::isValidEntity(string str) {
-    return RegexValidators::isValidEntity(str);
+    return RegexValidators::isValidEntityRegex(str);
 }
 
 bool DeclarationValidator::isValidSynonym(string str) {
-    return RegexValidators::isValidSynonym(str);
+    return RegexValidators::isValidSynonymRegex(str);
 }
 
 int DeclarationValidator::getEntityIndexReference(string entity)

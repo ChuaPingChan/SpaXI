@@ -41,23 +41,29 @@ const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGE
 
 
 
-bool RegexValidators::isValidIdentWithQuotes(string str)
+bool RegexValidators::isValidIntegerRegex(string str)
 {
-    regex checkIdentWithInvertedCommas = regex(IDENT_WITH_QUOTES_REGEX);
-    return regex_match(str, checkIdentWithInvertedCommas);
+    regex integerRegexCheck = regex(INTEGER_REGEX);
+    return regex_match(str, integerRegexCheck);
 }
 
 /**********
 * METHODS *
 **********/
+bool RegexValidators::isValidIdentWithQuotesRegex(string str)
+{
+    regex checkIdentWithInvertedCommas = regex(IDENT_WITH_QUOTES_REGEX);
+    return regex_match(str, checkIdentWithInvertedCommas);
+}
+
 /*--------------- Declaration Regex Methods ---------------*/
-bool RegexValidators::isValidEntity(string str)
+bool RegexValidators::isValidEntityRegex(string str)
 {
     regex entityRegex(DESIGN_ENTITY_REGEX);
     return regex_match(str, entityRegex);
 }
 
-bool RegexValidators::isValidSynonym(string str)
+bool RegexValidators::isValidSynonymRegex(string str)
 {
     regex synonymRegex(SYNONYM_REGEX);
     return regex_match(str, synonymRegex);

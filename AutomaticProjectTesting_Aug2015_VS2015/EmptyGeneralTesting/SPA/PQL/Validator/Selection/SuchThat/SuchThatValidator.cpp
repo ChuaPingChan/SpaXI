@@ -65,21 +65,3 @@ string SuchThatValidator::extractArgTwo(string str)
 
     return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
 }
-
-/*--------------- Check if argument is in a clause ---------------*/
-bool SuchThatValidator::isArgumentInClause(string arg, unordered_set<string> clause)
-{
-    if (find(clause.begin(), clause.end(), arg) != clause.end())
-        return true;
-    else
-        return false;
-}
-
-//TODO: Remove after implement regex table
-bool SuchThatValidator::isIntegerRegexCheck(string arg)
-{
-    string DIGIT = "([0-9])";
-    string INTEGER = "(" + DIGIT + "+)";
-    regex checkInt = regex(INTEGER);
-    return regex_match(arg, checkInt);
-}

@@ -40,9 +40,4 @@ protected:
 
     string extractArgOne(int rel, string str);
     string extractArgTwo(string str);
-
-    bool isArgumentInClause(string arg, unordered_set<string> clause);
-
-    //TODO: remove after implementing regex table
-    bool isIntegerRegexCheck(string arg);
 };
