@@ -16,4 +16,3 @@ public:
     static bool isGetAllVariablesSame(QueryTree qt1, QueryTree qt2);
     static bool isGetAllWhilesSame(QueryTree qt1, QueryTree qt2);
 };
-

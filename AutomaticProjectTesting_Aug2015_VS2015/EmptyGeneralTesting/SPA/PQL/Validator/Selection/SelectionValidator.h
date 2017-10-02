@@ -2,7 +2,11 @@
 #include <string>
 #include <regex>        //TODO:Remove after implementing regex teable
 #include "..\..\QueryTree.h"    //TODO: Change to properQueryTree
+#include "Select\SelectValidator.h"
 #include "SuchThat\SuchThatHandler.h"
+#include "Pattern\PatternHandler.h"
+//With
+#include "..\ValidationRegexLibrary\RegexValidators.h"
 
 using namespace std;
 
@@ -20,8 +24,12 @@ public:
 private:
     QueryTree *qtPtr;
 
-    //bool isValidSelectBeginning(string str);    //TODO: Make into a class
-    bool isValidSelectOverallRegex(string str);     //TODO: Change to a method call to the regex cpp
+    bool isValidSelect(string str);
+    bool areValidClauses(string str);
 
     bool isSuchThat(string str);
+    bool isPattern(string str);
+    bool isWith(string str);
+
+    string extractSelectRawStr(string str);
 };

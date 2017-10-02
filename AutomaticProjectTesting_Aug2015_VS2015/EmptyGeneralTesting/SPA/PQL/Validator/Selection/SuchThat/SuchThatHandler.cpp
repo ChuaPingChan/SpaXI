@@ -12,20 +12,132 @@ SuchThatHandler::~SuchThatHandler()
 
 bool SuchThatHandler::isValidSuchThat(string str)
 {
-    SuchThatValidator modifiesValidator = ModifiesValidator(qtPtr);
-    SuchThatValidator usesValidator = UsesValidator(qtPtr);
+    string processedStr = Formatter::removeAllSpaces(str);
+    string relStr = getSuchThatKeyWord(processedStr);
+    int rel = getRelIndex(relStr);
 
-    modifiesValidator.setNextValidator(usesValidator);
+    SuchThatValidator *suchThatValidator;
 
-    string processedStr = removeAllSpaces(str);
+    switch(rel) {
+        case MODIFIES:
+            suchThatValidator = new ModifiesValidator(MODIFIES, processedStr, qtPtr);
+            break;
+        /*case USES:
+            suchThatValidator = new UsesValidator(USES, processedStr, qtPtr);
+            break;
+        case PARENT:
+            suchThatValidator = new ParentValidator(PARENT, processedStr, qtPtr);
+            break;
+        case PARENTSTAR:
+            suchThatValidator = new ParentValidator(PARENTSTAR, processedStr, qtPtr);
+            break;
+        case FOLLOWS:
+            suchThatValidator = new FollowsValidator(FOLLOWS, processedStr, qtPtr);
+            break;
+        case FOLLOWSSTAR:
+            suchThatValidator = new FollowsValidator(FOLLOWSSTAR, processedStr, qtPtr);
+            break;
+        case CALLS:
+            suchThatValidator = new CallsValidator(CALLS, processedStr, qtPtr);
+            break;
+        case CALLSSTAR:
+            suchThatValidator = new CallsValidator(CALLSSTAR, processedStr, qtPtr);
+            break;
+        case NEXT:
+            suchThatValidator = new NextValidator(NEXT, processedStr, qtPtr);
+            break;
+        case NEXTSTAR:
+            suchThatValidator = new NextValidator(NEXTSTAR, processedStr, qtPtr);
+            break;
+        case AFFECTS:
+            suchThatValidator = new AffectsValidator(AFFECTS, processedStr, qtPtr);
+            break;
+        case AFFECTSSTAR:
+            suchThatValidator = new AffectsValidator(AFFECTSSTAR, processedStr, qtPtr);
+            break;*/
+    }
 
+    suchThatValidator->validate();
 
-
-    return false;
+    if (suchThatValidator->isValid()) {
+        SuchThatClause suchThatClause = makeSuchThatClause(*suchThatValidator);
+        storeInQueryTree(suchThatClause);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-string SuchThatHandler::removeAllSpaces(string str)
+//TODO: Put inside regex table (Only the regex part)
+string SuchThatHandler::getSuchThatKeyWord(string str)
 {
-    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-    return str;
+    string SUCH_THAT_KEYWORD = "(Modifies|Uses|Parent|Parent*|Follows|Follows*|Calls|Calls*|Next|Next*|Affects|Affects)";
+    regex suchThatKeywordRegex(SUCH_THAT_KEYWORD);
+    smatch foundMatch;
+    regex_search(str, foundMatch, suchThatKeywordRegex);
+    string suchThatKeyword = foundMatch[1];
+
+    return suchThatKeyword;
+}
+
+int SuchThatHandler::getRelIndex(string rel)
+{
+    if (rel == RELATIONSHIP_STRING_ARRAY[MODIFIES]) {
+        return MODIFIES;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[USES]) {
+        return USES;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[PARENT]) {
+        return PARENT;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[PARENTSTAR]) {
+        return PARENTSTAR;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[FOLLOWS]) {
+        return FOLLOWS;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[FOLLOWSSTAR]) {
+        return FOLLOWS;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[CALLS]) {
+        return CALLS;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[CALLSSTAR]) {
+        return CALLSSTAR;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[NEXT]) {
+        return NEXT;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[NEXTSTAR]) {
+        return NEXTSTAR;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[AFFECTS]) {
+        return AFFECTS;
+    }
+    else if (rel == RELATIONSHIP_STRING_ARRAY[AFFECTSSTAR]) {
+        return AFFECTSSTAR;
+    }
+    else {
+        return -1;  //TODO: Throw exception to say inalid
+    }
+}
+
+SuchThatClause SuchThatHandler::makeSuchThatClause(SuchThatValidator stv)
+{
+    int rel = stv.getRel();
+    int argOneType = stv.getArgOneType();
+    int argTwoType = stv.getArgTwoType();
+    string argOne = stv.getArgOne();
+    string argTwo = stv.getArgTwo();
+
+    return SuchThatClause(rel, argOneType, argOne, argTwoType, argTwo);
+}
+
+bool SuchThatHandler::storeInQueryTree(SuchThatClause stc)
+{
+    qtPtr->insertSuchThat(stc);
+    return true;
 }
