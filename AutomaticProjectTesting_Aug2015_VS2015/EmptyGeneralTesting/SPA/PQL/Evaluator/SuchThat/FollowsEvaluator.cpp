@@ -42,8 +42,8 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResult(argOne, pkbResult);;
-			return clauseResult.hasResults();
+			clauseResult->addNewSynResults(argOne, pkbResult);;
+			return clauseResult->hasResults();
 		}
 	}
 
@@ -69,8 +69,8 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResult(argOne, pkbResult);;
-			return clauseResult.hasResults();
+			clauseResult->addNewSynResults(argOne, pkbResult);;
+			return clauseResult->hasResults();
 		}
 	}
 
@@ -84,8 +84,8 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResult(argOne, pkbResult);;
-			return clauseResult.hasResults();
+			clauseResult->addNewSynResults(argOne, pkbResult);;
+			return clauseResult->hasResults();
 		}
 	}
 
@@ -99,8 +99,8 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResult(argOne, pkbResult);
-			return clauseResult.hasResults();
+			clauseResult->addNewSynResults(argOne, pkbResult);
+			return clauseResult->hasResults();
 		}
 	}
 
