@@ -133,35 +133,31 @@ list<string> QueryTree::getEvaluatorResult()
 	return evaluatorResult;
 }
 
-bool QueryTree::varExists(string var)
+bool QueryTree::isEntitySynonymExist(string synonym, int entityIdx)
 {
-	if (find(stmts.begin(), stmts.end(), var) != stmts.end()) 
-	{
-		return true;
-	}
-	else if (find(assigns.begin(), assigns.end(), var) != assigns.end())
-	{
-		return true;
-	}
-	else if (find(whiles.begin(), whiles.end(), var) != whiles.end())
-	{
-		return true;
-	}
-	else if (find(vars.begin(), vars.end(), var) != vars.end())
-	{
-		return true;
-	}
-	else if (find(consts.begin(), consts.end(), var) != consts.end())
-	{
-		return true;
-	}
-	else if (find(progLines.begin(), progLines.end(), var) != progLines.end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    switch (entityIdx) {
+        case STMT:
+            return (find(stmts.begin(), stmts.end(), synonym) != stmts.end());
+        case ASSIGN:
+            return (find(assigns.begin(), assigns.end(), synonym) != assigns.end());
+        case WHILE:
+            return (find(whiles.begin(), whiles.end(), synonym) != whiles.end());
+        case IF:
+            return false;
+        case PROG_LINE:
+            return (find(progLines.begin(), progLines.end(), synonym) != progLines.end());
+        case CALL:
+            return false;
+        case PROCEDURE:
+            return false;
+        case VARIABLE:
+            return (find(vars.begin(), vars.end(), synonym) != vars.end());
+        case CONSTANT:
+            return false;
+        case STMTLIST:
+            return false;
+        default:
+            return false;
+    }
 }
  

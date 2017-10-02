@@ -36,7 +36,7 @@ public:
 	vector<PatternClause> getPatternClauses();
 	list<string> getEvaluatorResult();
 
-	bool varExists(string var);
+	bool isEntitySynonymExist(string synonym, int entityIdx);
 
 private:
 
