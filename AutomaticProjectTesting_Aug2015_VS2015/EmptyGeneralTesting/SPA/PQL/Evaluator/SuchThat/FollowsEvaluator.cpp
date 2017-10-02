@@ -42,7 +42,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResults(argOne, pkbResult);;
+			clauseResult->addNewSynResults(argOne, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}
@@ -69,7 +69,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResults(argOne, pkbResult);;
+			clauseResult->addNewSynResults(argOne, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}
@@ -77,7 +77,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 	//Case 7: Follows(synonym, int)
 	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == INTEGER)
 	{
-		list<int> pkbRsult = pkbInstance->getBefore(stoi(argTwo), argOneType);
+		list<int> pkbResult = pkbInstance->getBefore(stoi(argTwo), argOneType);
 		if (pkbResult.empty())
 		{
 			return false;

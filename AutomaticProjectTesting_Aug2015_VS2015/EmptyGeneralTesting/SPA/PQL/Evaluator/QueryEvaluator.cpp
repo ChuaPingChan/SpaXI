@@ -2,13 +2,19 @@
 
 QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
 {
-	this->_qt = qtPtr;
-	this->_rsFactory = ResultFactory();
+    this->_qt = qtPtr;
+    this->_rsFactory = ResultFactory();
 }
 
 QueryEvaluator::~QueryEvaluator()
 {
 }
+
+void QueryEvaluator::evaluate()
+{
+    
+}
+
 
 
 //QueryEvaluator::QueryEvaluator()
@@ -222,16 +228,16 @@ QueryEvaluator::~QueryEvaluator()
 //    //Case 3: Follows(int, synonym)
 //	else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE)) 
 //	{
-		//list<int> result = pkbInstance->getAfter(stoi(argOne), argTwoType);
-		//if (result.empty())
-		//{
-		//    hasResult = false;
-		//}
-		//else
-		//{
-		//    ClauseResult->
-		//    hasResult = true;
-		//}
+        //list<int> result = pkbInstance->getAfter(stoi(argOne), argTwoType);
+        //if (result.empty())
+        //{
+        //    hasResult = false;
+        //}
+        //else
+        //{
+        //    ClauseResult->
+        //    hasResult = true;
+        //}
 //	}
 //    //Case 4: Follows(_, int)
 //	else if (argOneType == UNDERSCORE && argTwoType == INTEGER)

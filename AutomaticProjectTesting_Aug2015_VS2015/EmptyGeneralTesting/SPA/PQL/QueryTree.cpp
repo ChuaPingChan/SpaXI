@@ -12,20 +12,20 @@ QueryTree::~QueryTree()
 
 void QueryTree::insertVariable(int type, string var)
 {
-	if (type == STMT) 
-	{
-		stmts.insert(var);
-	}
+    if (type == STMT) 
+    {
+        stmts.insert(var);
+    }
 
-	else if (type == ASSIGN)
-	{
-		assigns.insert(var);
-	}
+    else if (type == ASSIGN)
+    {
+        assigns.insert(var);
+    }
 
-	else if (type == WHILE)
-	{
-		whiles.insert(var);
-	}
+    else if (type == WHILE)
+    {
+        whiles.insert(var);
+    }
 
     /*else if (type == IF)
     {
@@ -52,85 +52,85 @@ void QueryTree::insertVariable(int type, string var)
         vars.insert(var);
     }
    
-	else if (type == CONSTANT)
-	{
-		consts.insert(var);
-	}
+    else if (type == CONSTANT)
+    {
+        consts.insert(var);
+    }
 
-	else
-	{
-		cerr << "Type not recognised!";
-	}
+    else
+    {
+        cerr << "Type not recognised!";
+    }
 }
 
 void QueryTree::insertSelect(SelectClause select)
 {
-	selectStmt = select;
+    selectStmt = select;
 }
 
 void QueryTree::insertSuchThat(SuchThatClause relClause)
 {
-	suchThatClauses.push_back(relClause);
+    suchThatClauses.push_back(relClause);
 }
 
 void QueryTree::insertPattern(PatternClause patternClause)
 {
-	patternClauses.push_back(patternClause);
+    patternClauses.push_back(patternClause);
 }
 
 void QueryTree::storeEvaluatorResult(list<string> list)
 {
-	evaluatorResult = list;
+    evaluatorResult = list;
 }
 
 unordered_set<string> QueryTree::getStmts()
 {
-	return stmts;
+    return stmts;
 }
 
 unordered_set<string> QueryTree::getAssigns()
 {
-	return assigns;
+    return assigns;
 }
 
 unordered_set<string> QueryTree::getWhiles()
 {
-	return whiles;
+    return whiles;
 }
 
 unordered_set<string> QueryTree::getVars()
 {
-	return vars;
+    return vars;
 }
 
 unordered_set<string> QueryTree::getConsts()
 {
-	return consts;
+    return consts;
 }
 
 unordered_set<string> QueryTree::getProgLines()
 {
-	return progLines;
+    return progLines;
 }
 
 SelectClause QueryTree::getSelect()
 {
-	return selectStmt;
+    return selectStmt;
 }
 
 vector<SuchThatClause> QueryTree::getSuchThatClauses()
 {
-	return suchThatClauses;
+    return suchThatClauses;
 }
 
 vector<PatternClause> QueryTree::getPatternClauses()
 {
-	return patternClauses;
+    return patternClauses;
 }
 
 list<string> QueryTree::getEvaluatorResult()
 {
-	return evaluatorResult;
+    return evaluatorResult;
 }
 
 bool QueryTree::isEntitySynonymExist(string synonym, int entityIdx)

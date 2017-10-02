@@ -18,8 +18,8 @@ public:
 	QueryTree();
 	~QueryTree();
 
-	void insertVariable(int type, string var);
-	void insertSelect(SelectClause select);
+    void insertVariable(int type, string var);
+	    void insertSelect(SelectClause select);
 	void insertSuchThat(SuchThatClause relClause);
 	void insertPattern(PatternClause patternClause);
 	void storeEvaluatorResult(list<string> list);
