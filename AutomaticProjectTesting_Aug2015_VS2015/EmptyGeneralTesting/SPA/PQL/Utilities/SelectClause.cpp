@@ -4,50 +4,38 @@ SelectClause::SelectClause()
 {
 }
 
-SelectClause::SelectClause(int type, string arg)
+SelectClause::SelectClause(int selectionType)
 {
-	this->tuple = false;
-	this->type = type;
-	this->arg = arg;
+    this->selectionType = selectionType;
 }
 
-SelectClause::SelectClause(vector<int> types, vector<string> args)
+SelectClause::SelectClause(int selectionType, vector<int> argTypes, vector<string> args)
 {
-	this->tuple = true;
-	this->types = types;
-	this->args = args;
+    this->selectionType = selectionType;
+    this->argTypes = argTypes;
+    this->args = args;
 }
 
 SelectClause::~SelectClause()
 {
 }
 
-bool SelectClause::isTuple()
+int SelectClause::getSelectionType()
 {
-	return tuple;
+    return this->selectionType;
 }
 
-int SelectClause::getType()
+int SelectClause::getArgTypeAt(int index)
 {
-	return type;
+	return argTypes.at(index);
 }
 
-int SelectClause::getType(int index)
+vector<int> SelectClause::getArgTypes()
 {
-	return types.at(index);
+	return argTypes;
 }
 
-vector<int> SelectClause::getTypes()
-{
-	return types;
-}
-
-string SelectClause::getArg()
-{
-	return arg;
-}
-
-string SelectClause::getArg(int index)
+string SelectClause::getArgAt(int index)
 {
 	return args.at(index);
 }

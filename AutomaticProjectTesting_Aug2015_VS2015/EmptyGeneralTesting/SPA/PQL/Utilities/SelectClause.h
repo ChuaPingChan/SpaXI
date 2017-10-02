@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 #include <list>
+#include "..\Selectionship.h"
 
 using namespace std;
 
@@ -10,24 +11,20 @@ class SelectClause
 {
 public:
 	SelectClause();
-	SelectClause(int type, string arg);
-	SelectClause(vector<int> types, vector<string> args);
+	SelectClause(int selectionType);
+	SelectClause(int selectionType, vector<int> argTypes, vector<string> args);
 	~SelectClause();
 
 	/* Getters */
-	bool isTuple();
-	int getType();
-	int getType(int index);
-	vector<int> getTypes();
-	string getArg();
-	string getArg(int index);
+    int getSelectionType();
+    int getArgTypeAt(int index);
+	vector<int> getArgTypes();
+	string getArgAt(int index);
 	vector<string> getArgs();
 
 private:
-	bool tuple;
-	int type;
-	string arg;
-	vector<int> types;
+	int selectionType;
+	vector<int> argTypes;
 	vector<string> args;
 };
 
