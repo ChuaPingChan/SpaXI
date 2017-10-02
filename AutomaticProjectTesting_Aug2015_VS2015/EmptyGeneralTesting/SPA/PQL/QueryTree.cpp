@@ -133,7 +133,7 @@ list<string> QueryTree::getEvaluatorResult()
     return evaluatorResult;
 }
 
-bool QueryTree::isEntitySynonymExist(string synonym, int entityIdx)
+bool QueryTree::isEntitySynonymExist(string synonym, Entity entityIdx)
 {
     switch (entityIdx) {
         case STMT:

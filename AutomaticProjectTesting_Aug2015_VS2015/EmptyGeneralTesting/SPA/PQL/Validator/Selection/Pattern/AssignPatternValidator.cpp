@@ -37,7 +37,7 @@ bool AssignPatternValidator::isValid()
 bool AssignPatternValidator::isValidArgOne(string argOne)
 {
     QueryTree qt = *(this->qtPtr);
-    if (qt.isENTITYSynonymExist(argOne, VARIABLE))
+    if (qt.isEntitySynonymExist(argOne, VARIABLE))
     {
         this->argOneType = VARIABLE;
         return true;

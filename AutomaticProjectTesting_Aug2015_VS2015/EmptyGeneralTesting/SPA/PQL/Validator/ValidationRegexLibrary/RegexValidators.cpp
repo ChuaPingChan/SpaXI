@@ -57,7 +57,7 @@ bool RegexValidators::isValidIdentWithQuotesRegex(string str)
 }
 
 /*--------------- Declaration Regex Methods ---------------*/
-bool RegexValidators::isValidENTITYRegex(string str)
+bool RegexValidators::isValidEntityRegex(string str)
 {
     regex entityRegex(DESIGN_ENTITY_REGEX);
     return regex_match(str, entityRegex);

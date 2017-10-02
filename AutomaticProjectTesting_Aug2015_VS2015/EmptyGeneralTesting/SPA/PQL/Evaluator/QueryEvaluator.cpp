@@ -12,7 +12,7 @@ QueryEvaluator::~QueryEvaluator()
 
 void QueryEvaluator::evaluate()
 {
-    
+    for (SuchThatClause stClause : _qt->getSuchThatClauses())
 }
 
 

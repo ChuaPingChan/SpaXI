@@ -45,15 +45,15 @@ bool PatternHandler::isValidPattern(string str)
 
 int PatternHandler::getPatternType(string patternSyn)
 {
-    if (qtPtr->isENTITYSynonymExist(patternSyn, ASSIGN))
+    if (qtPtr->isEntitySynonymExist(patternSyn, ASSIGN))
     {
         return ASSSIGN_PATTERN;
     }
-    else if (qtPtr->isENTITYSynonymExist(patternSyn, WHILE))
+    else if (qtPtr->isEntitySynonymExist(patternSyn, WHILE))
     {
         return WHILE_PATTERN;
     }
-    else if (qtPtr->isENTITYSynonymExist(patternSyn, IF))
+    else if (qtPtr->isEntitySynonymExist(patternSyn, IF))
     {
         return If_PATTERN;
     }

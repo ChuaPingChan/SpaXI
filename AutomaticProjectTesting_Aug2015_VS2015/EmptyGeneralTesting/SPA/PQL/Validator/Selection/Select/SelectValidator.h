@@ -30,7 +30,7 @@ private:
    
     bool storeInQueryTree(SelectClause sc);
 
-    int getENTITYOfSynonym(string syn);
+    int getEntityOfSynonym(string syn);
     string removeSelectKeyword(string str);
 };
 

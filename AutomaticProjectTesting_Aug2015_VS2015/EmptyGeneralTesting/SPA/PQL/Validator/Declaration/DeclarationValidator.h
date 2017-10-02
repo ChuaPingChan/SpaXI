@@ -27,7 +27,7 @@ private:
     unordered_set<string> synonymBank;   //Contains list of used synonyms
     vector<string> unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
 
-    bool isValidENTITY(string str);
+    bool isValidEntity(string str);
     bool isValidSynonym(string str);
-    int getENTITYIndexReference(string entity);
+    int getEntityIndexReference(string entity);
 };

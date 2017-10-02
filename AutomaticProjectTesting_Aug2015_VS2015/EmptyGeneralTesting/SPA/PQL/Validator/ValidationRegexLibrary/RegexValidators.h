@@ -52,7 +52,7 @@ public:
     static bool isValidIntegerRegex(string str);
     static bool isValidIdentWithQuotesRegex(string str);
     /******************** Declaration Regex ********************/
-    static bool isValidENTITYRegex(string str);
+    static bool isValidEntityRegex(string str);
     static bool isValidSynonymRegex(string str);
 
     /******************** Select Overall ********************/

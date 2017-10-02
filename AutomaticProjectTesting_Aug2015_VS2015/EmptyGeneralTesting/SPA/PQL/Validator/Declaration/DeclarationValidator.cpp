@@ -26,13 +26,13 @@ bool DeclarationValidator::isValidDeclaration(string str) {
     for (; pos != end; pos++) {
         string token = pos->str(0);
 
-        if (counter == 0 && isValidENTITY(token)) {
+        if (counter == 0 && isValidEntity(token)) {
             numWord++;
             entity = token;
             counter++;
             continue;
         }
-        else if (counter == 0 && !isValidENTITY(token)) {
+        else if (counter == 0 && !isValidEntity(token)) {
             return false;
         }
 
@@ -67,7 +67,7 @@ bool DeclarationValidator::isValidDeclaration(string str) {
            synonymBank.insert(synonym);
             if (entity == synonym)
                 return false;
-            qtPtr->insertVariable(getENTITYIndexReference(entity), synonym);
+            qtPtr->insertVariable(getEntityIndexReference(entity), synonym);
         }
         else {
             return false;
@@ -86,15 +86,15 @@ bool DeclarationValidator::setQueryTree(QueryTree *qtPtrNew) {
     return true;
 }
 
-bool DeclarationValidator::isValidENTITY(string str) {
-    return RegexValidators::isValidENTITYRegex(str);
+bool DeclarationValidator::isValidEntity(string str) {
+    return RegexValidators::isValidEntityRegex(str);
 }
 
 bool DeclarationValidator::isValidSynonym(string str) {
     return RegexValidators::isValidSynonymRegex(str);
 }
 
-int DeclarationValidator::getENTITYIndexReference(string entity)
+int DeclarationValidator::getEntityIndexReference(string entity)
 {
     if (entity == ENTITY_STR[STMT]) {
         return STMT;
