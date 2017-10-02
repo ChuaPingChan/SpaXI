@@ -18,9 +18,9 @@ const int Parser::INT_INITIAL_STMT_NUMBER = 0;
 const string Parser::STRING_EMPTY_STRING = "";
 const int Parser::INT_INITIAL_PROC_INDEX = 0;
 
-const regex Parser::REGEX_VALID_Entity_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
-const regex Parser::REGEX_VALID_VAR_NAME = Parser::REGEX_VALID_Entity_NAME;
-const regex Parser::REGEX_VALID_PROC_NAME = Parser::REGEX_VALID_Entity_NAME;
+const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
+const regex Parser::REGEX_VALID_VAR_NAME = Parser::REGEX_VALID_ENTITY_NAME;
+const regex Parser::REGEX_VALID_PROC_NAME = Parser::REGEX_VALID_ENTITY_NAME;
 const regex Parser::REGEX_MATCH_CONSTANT = regex("\\s*\\d+\\s*");
 const regex Parser::REGEX_EXTRACT_NEXT_TOKEN = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|[^a-zA-Z0-9]|\\d+).*");
 //const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([a-zA-Z0-9+\\-*/=][a-zA-Z0-9+\\s\\-*/=]*)\\s*;.*");
@@ -214,7 +214,7 @@ void Parser::parseProcedure() {
     OutputDebugString("FINE: Parsing procedure.\n");
 
     string procName;
-    if (!(matchToken(Parser::REGEX_VALID_Entity_NAME))) {
+    if (!(matchToken(Parser::REGEX_VALID_ENTITY_NAME))) {
         //TODO: Throw exception?
         _isValidSyntax = false;
         //TODO: Remove this line after determining how to signal user on syntax error.
@@ -295,7 +295,7 @@ If next token is a varName, assignment statement is expected.
 When the method ends, _currentTokenPtr is the varName.
 */
 bool Parser::assignmentExpected() {
-    return matchToken(Parser::REGEX_VALID_Entity_NAME);
+    return matchToken(Parser::REGEX_VALID_ENTITY_NAME);
 }
 
 /*
@@ -325,7 +325,7 @@ void Parser::parseAssignment() {
     _pkbMainPtr->addAssignmentStmt(_currentStmtNumber);
 
     // Process LHS
-    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_Entity_NAME);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
     string lhsVar = _currentTokenPtr;
 
     /*
@@ -359,7 +359,7 @@ void Parser::parseAssignment() {
     string rhsExpression = extractStringUpToSemicolon();
     if (assertIsValidExpression(rhsExpression)) {
         while (!matchToken(Parser::REGEX_MATCH_SEMICOLON)) {
-            if (matchToken(Parser::REGEX_VALID_Entity_NAME)) {
+            if (matchToken(Parser::REGEX_VALID_ENTITY_NAME)) {
                 string var = _currentTokenPtr;
                 /*
                 PKB TODO:
@@ -435,7 +435,7 @@ bool Parser::assertIsValidExpression(string expression) {
 
     string bracketsRemoved = removeAllBrackets(expression);
     // Base case
-    if (regex_match(bracketsRemoved, Parser::REGEX_VALID_Entity_NAME) || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)) {
+    if (regex_match(bracketsRemoved, Parser::REGEX_VALID_ENTITY_NAME) || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)) {
         //OutputDebugString("FINE: Expression is valid.\n");
         return true;
     }
@@ -517,7 +517,7 @@ void Parser::parseWhileStmt() {
 
     _parentStack.push(_currentStmtNumber);
 
-    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_Entity_NAME);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
     string whileVar = _currentTokenPtr;
     /* PKB TODO
@@ -543,7 +543,7 @@ void Parser::parseWhileStmt() {
         }
     }
 
-    assertMatchAndIncrementToken(Parser::REGEX_VALID_Entity_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     OutputDebugString("FINE: Entering while block.\n");
@@ -586,7 +586,7 @@ void Parser::parseCallStmt()
 {
     OutputDebugString("FINE: Parsing Calls statement.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CALL_KEYWORD);
-    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_Entity_NAME);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
     string calledProcName = _currentTokenPtr;
 
     /*
@@ -602,6 +602,6 @@ void Parser::parseCallStmt()
     */
     OutputDebugString("PKB: Add calls relation.\n");
 
-    assertMatchAndIncrementToken(Parser::REGEX_VALID_Entity_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
 }

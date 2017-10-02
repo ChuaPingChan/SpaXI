@@ -25,7 +25,7 @@ public:
     static const string SPACE_1;
 
     /*--------------- Declaration Regex ---------------*/
-    static const string DESIGN_Entity_REGEX;
+    static const string DESIGN_ENTITY_REGEX;
 
     /*--------------- Pattern Clause Regex ---------------*/
     static const string FACTOR_REGEX;
@@ -52,7 +52,7 @@ public:
     static bool isValidIntegerRegex(string str);
     static bool isValidIdentWithQuotesRegex(string str);
     /******************** Declaration Regex ********************/
-    static bool isValidEntityRegex(string str);
+    static bool isValidENTITYRegex(string str);
     static bool isValidSynonymRegex(string str);
 
     /******************** Select Overall ********************/

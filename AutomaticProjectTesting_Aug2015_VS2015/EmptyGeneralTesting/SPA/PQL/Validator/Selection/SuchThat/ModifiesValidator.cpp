@@ -39,19 +39,19 @@ bool ModifiesValidator::isValid()
 
 bool ModifiesValidator::isValidArgOne(string argOne)
 {
-    if (qtPtr->isEntitySynonymExist(argOne, STMT))
+    if (qtPtr->isENTITYSynonymExist(argOne, STMT))
     {
         this->argOneType = STMT;
         return true;
     }
 
-    else if (qtPtr->isEntitySynonymExist(argOne, ASSIGN))
+    else if (qtPtr->isENTITYSynonymExist(argOne, ASSIGN))
     {
         this->argOneType = ASSIGN;
         return true;
     }
 
-    else if (qtPtr->isEntitySynonymExist(argOne, WHILE))
+    else if (qtPtr->isENTITYSynonymExist(argOne, WHILE))
     {
         this->argOneType = WHILE;
         return true;
@@ -71,7 +71,7 @@ bool ModifiesValidator::isValidArgOne(string argOne)
 
 bool ModifiesValidator::isValidArgTwo(string argTwo)
 {
-    if (qtPtr->isEntitySynonymExist(argTwo, VARIABLE))
+    if (qtPtr->isENTITYSynonymExist(argTwo, VARIABLE))
     {
         this->argTwoType = VARIABLE;
         return true;

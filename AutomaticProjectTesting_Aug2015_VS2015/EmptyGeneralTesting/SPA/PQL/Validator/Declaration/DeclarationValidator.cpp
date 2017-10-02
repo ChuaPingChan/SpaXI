@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const string DeclarationValidator::Entity_STR[] = {"stmt", "assign", "while", "if", "prog_line", "call", "procedure", "variable", "integer", "underscore", "identWithQuotes", "expressionSpecs", "constant", "stmtLst"};
+const string DeclarationValidator::ENTITY_STR[] = {"stmt", "assign", "while", "if", "prog_line", "call", "procedure", "variable", "integer", "underscore", "identWithQuotes", "expressionSpecs", "constant", "stmtLst"};
 
 DeclarationValidator::DeclarationValidator(QueryTree *qtPtrNew) {
     setQueryTree(qtPtrNew);
@@ -26,13 +26,13 @@ bool DeclarationValidator::isValidDeclaration(string str) {
     for (; pos != end; pos++) {
         string token = pos->str(0);
 
-        if (counter == 0 && isValidEntity(token)) {
+        if (counter == 0 && isValidENTITY(token)) {
             numWord++;
             entity = token;
             counter++;
             continue;
         }
-        else if (counter == 0 && !isValidEntity(token)) {
+        else if (counter == 0 && !isValidENTITY(token)) {
             return false;
         }
 
@@ -67,7 +67,7 @@ bool DeclarationValidator::isValidDeclaration(string str) {
            synonymBank.insert(synonym);
             if (entity == synonym)
                 return false;
-            qtPtr->insertVariable(getEntityIndexReference(entity), synonym);
+            qtPtr->insertVariable(getENTITYIndexReference(entity), synonym);
         }
         else {
             return false;
@@ -86,41 +86,41 @@ bool DeclarationValidator::setQueryTree(QueryTree *qtPtrNew) {
     return true;
 }
 
-bool DeclarationValidator::isValidEntity(string str) {
-    return RegexValidators::isValidEntityRegex(str);
+bool DeclarationValidator::isValidENTITY(string str) {
+    return RegexValidators::isValidENTITYRegex(str);
 }
 
 bool DeclarationValidator::isValidSynonym(string str) {
     return RegexValidators::isValidSynonymRegex(str);
 }
 
-int DeclarationValidator::getEntityIndexReference(string entity)
+int DeclarationValidator::getENTITYIndexReference(string entity)
 {
-    if (entity == Entity_STR[STMT]) {
+    if (entity == ENTITY_STR[STMT]) {
         return STMT;
     }
-    else if (entity == Entity_STR[ASSIGN]) {
+    else if (entity == ENTITY_STR[ASSIGN]) {
         return ASSIGN;
     }
-    else if (entity == Entity_STR[WHILE]) {
+    else if (entity == ENTITY_STR[WHILE]) {
         return WHILE;
     }
-    else if (entity == Entity_STR[IF]) {
+    else if (entity == ENTITY_STR[IF]) {
         return IF;
     }
-    else if (entity == Entity_STR[PROG_LINE]) {
+    else if (entity == ENTITY_STR[PROG_LINE]) {
         return PROG_LINE;
     }
-    else if (entity == Entity_STR[CALL]) {
+    else if (entity == ENTITY_STR[CALL]) {
         return CALL;
     }
-    else if (entity == Entity_STR[PROCEDURE]) {
+    else if (entity == ENTITY_STR[PROCEDURE]) {
         return PROCEDURE;
     }
-    else if (entity == Entity_STR[VARIABLE]) {
+    else if (entity == ENTITY_STR[VARIABLE]) {
         return VARIABLE;
     }
-    else if (entity == Entity_STR[CONSTANT]) {
+    else if (entity == ENTITY_STR[CONSTANT]) {
         return CONSTANT;
     }
 }

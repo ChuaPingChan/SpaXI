@@ -14,7 +14,7 @@ public:
     * REGEX *
     *********/
 
-    static const std::regex REGEX_VALID_Entity_NAME;
+    static const std::regex REGEX_VALID_ENTITY_NAME;
     static const std::regex REGEX_VALID_VAR_NAME;
     static const std::regex REGEX_VALID_PROC_NAME;
     static const std::regex REGEX_MATCH_CONSTANT;

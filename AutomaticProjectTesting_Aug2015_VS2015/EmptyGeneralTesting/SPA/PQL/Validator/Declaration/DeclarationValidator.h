@@ -20,14 +20,14 @@ public:
     bool setQueryTree(QueryTree *qtPtrNew);
 
 private:
-    static const string Entity_STR[];
+    static const string ENTITY_STR[];
 
     QueryTree *qtPtr;
 
     unordered_set<string> synonymBank;   //Contains list of used synonyms
     vector<string> unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
 
-    bool isValidEntity(string str);
+    bool isValidENTITY(string str);
     bool isValidSynonym(string str);
-    int getEntityIndexReference(string entity);
+    int getENTITYIndexReference(string entity);
 };

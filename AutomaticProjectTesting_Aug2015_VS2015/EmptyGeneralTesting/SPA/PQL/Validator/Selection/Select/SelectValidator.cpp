@@ -28,7 +28,7 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 {
     if (RegexValidators::isValidSynonymRegex(selectedStr))
     {
-        int entity = getEntityOfSynonym(selectedStr);
+        int entity = getENTITYOfSynonym(selectedStr);
         if (entity == UNKNOWN)
             return false;
         SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
@@ -63,37 +63,37 @@ bool SelectValidator::storeInQueryTree(SelectClause sc)
     return false;
 }
 
-int SelectValidator::getEntityOfSynonym(string syn)
+int SelectValidator::getENTITYOfSynonym(string syn)
 {
-    if (qtPtr->isEntitySynonymExist(syn, STMT))
+    if (qtPtr->isENTITYSynonymExist(syn, STMT))
     {
         return STMT;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, ASSIGN)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, ASSIGN)) {
         return ASSIGN;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, WHILE)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, WHILE)) {
         return WHILE;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, IF)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, IF)) {
         return IF;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, PROG_LINE)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, PROG_LINE)) {
         return PROG_LINE;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, CALL)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, CALL)) {
         return CALL;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, PROCEDURE)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, PROCEDURE)) {
         return PROCEDURE;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, VARIABLE)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, VARIABLE)) {
         return VARIABLE;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, CONSTANT)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, CONSTANT)) {
         return CONSTANT;
     }
-    else if (qtPtr->isEntitySynonymExist(syn, STMTLIST)) {
+    else if (qtPtr->isENTITYSynonymExist(syn, STMTLIST)) {
         return STMTLIST;
     }
     return UNKNOWN;
