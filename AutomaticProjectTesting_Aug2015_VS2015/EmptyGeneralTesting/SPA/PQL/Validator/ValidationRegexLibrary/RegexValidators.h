@@ -58,6 +58,7 @@ public:
     static bool isValidSelectOverallRegex(string str);
 
     /******************** Pattern Regex ********************/
+    static bool isValidExpressionSpec(string str);
     static bool isValidPatternRegex(string str);
 
     /******************** Such That Regex ********************/

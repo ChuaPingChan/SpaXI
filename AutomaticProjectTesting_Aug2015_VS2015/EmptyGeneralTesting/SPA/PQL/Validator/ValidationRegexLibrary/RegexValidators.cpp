@@ -95,6 +95,12 @@ bool RegexValidators::isValidParentRegex(string str)
     return regex_match(str, parentRegexCheck);
 }
 
+bool RegexValidators::isValidExpressionSpec(string str)
+{
+    regex expressionSpecCheck(EXPRESSION_SPEC);
+    return regex_match(str, expressionSpecCheck);
+}
+
 /*--------------- Pattern Clause Regex Methods ---------------*/
 bool RegexValidators::isValidPatternRegex(string str)
 {
