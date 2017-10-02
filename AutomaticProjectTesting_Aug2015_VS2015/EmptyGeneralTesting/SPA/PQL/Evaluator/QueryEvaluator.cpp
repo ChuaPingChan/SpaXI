@@ -222,19 +222,16 @@ QueryEvaluator::~QueryEvaluator()
 //    //Case 3: Follows(int, synonym)
 //	else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE)) 
 //	{
-//        list<int> result = pkbInstance->getAfter(stoi(argOne), argTwoType);
-//        if (result.empty())
-//        {
-//            hasResult = false;
-//        }
-//        else
-//        {
-//            list<string> list1 = getListStringFromListInt(result);
-//            list<string> list2;
-//            list1.push_front(argTwo);     
-//            resultSuchThat = make_pair(list1, list2);
-//            hasResult = true;
-//        }
+		//list<int> result = pkbInstance->getAfter(stoi(argOne), argTwoType);
+		//if (result.empty())
+		//{
+		//    hasResult = false;
+		//}
+		//else
+		//{
+		//    ClauseResult->
+		//    hasResult = true;
+		//}
 //	}
 //    //Case 4: Follows(_, int)
 //	else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
