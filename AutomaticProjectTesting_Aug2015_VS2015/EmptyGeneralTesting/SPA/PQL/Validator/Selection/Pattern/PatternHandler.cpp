@@ -1,6 +1,5 @@
 #include "PatternHandler.h"
 
-const string PatternHandler::PATTERN_KEYWORD = "pattern";
 
 PatternHandler::PatternHandler(QueryTree *qtPtrNew)
 {
@@ -43,37 +42,32 @@ bool PatternHandler::isValidPattern(string str)
     }
 }
 
-int PatternHandler::getPatternType(string str)
+int PatternHandler::getPatternType(string processedStr)
 {
-    string argOne = extractArgOne(str);
-    if (isArgumentInClause(argOne, qtPtr->getAssigns())) {
+    string argPatternType = extractArgPatternType(processedStr);
+    if (qtPtr->isEntitySynonymExist(argPatternType, ASSIGN))
+    {
         return ASSSIGN_PATTERN;
     }
-    else if (isArgumentInClause(argOne, qtPtr->getWhiles())) {
+    else if (qtPtr->isEntitySynonymExist(argPatternType, WHILE))
+    {
         return WHILE_PATTERN;
     }
-    /*else if (isArgumentInClause(argOne, qtPtr->getIfs())) {
-        return IF_PATTERN;
-    }*/
+    else if (qtPtr->isEntitySynonymExist(argPatternType, IF))
+    {
+        return If_PATTERN;
+    }
     else {
         return -1;  //TODO: Throw exception
     }
 }
 
-string PatternHandler::extractArgOne(string str)
+string PatternHandler::extractArgPatternType(string str)
 {
-    string delimFirst = PATTERN_KEYWORD;
+    string delimFirst = PatternValidator::PATTERN_KEYWORD;
     string delimSecond = "(";
 
     return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
-}
-
-bool PatternHandler::isArgumentInClause(string arg, unordered_set<string> clause)
-{
-    if (find(clause.begin(), clause.end(), arg) != clause.end())
-        return true;
-    else
-        return false;
 }
 
 PatternClause PatternHandler::makePatternClause(PatternValidator pv)

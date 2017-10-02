@@ -6,5 +6,15 @@ class AssignPatternValidator : public PatternValidator
 public:
     AssignPatternValidator(int patternType, string paramStr, QueryTree *qtPtrNew);
     ~AssignPatternValidator();
+
+    void validate();
+    bool isValid();
+
+private:
+    bool isValidArgOne(string argOne);
+    bool isValidArgTwo(string argTwo);
+
+    string extractArgOne(string str);
+    string extractArgTwo(string str);
 };
 

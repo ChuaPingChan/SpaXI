@@ -1,11 +1,13 @@
 #pragma once
 #include <string>
 #include "..\..\..\Utilities\Formatter.h"
+#include "..\..\ValidationRegexLibrary\RegexValidators.h"
 #include "..\..\..\QueryTree.h"
 
 class PatternValidator
 {
 public:
+    static const string PATTERN_KEYWORD;
     PatternValidator(int patternType, string paramStr, QueryTree *qtPtrNew);
     ~PatternValidator();
 
@@ -21,16 +23,17 @@ public:
     string getArgThree();
 
 protected:
+    static const int UNKNOWN = -1;
     QueryTree *qtPtr;
     string paramStr;
 
-    int patternType;
-    int argOneType;
-    int argTwoType;
-    int argThreeType;
-    string argOne;
-    string argTwo;
-    string argThree;
+    int patternType = UNKNOWN;
+    int argOneType = UNKNOWN;
+    int argTwoType = UNKNOWN;
+    int argThreeType = UNKNOWN;
+    string argOne = "";
+    string argTwo = "";
+    string argThree = "";
 
     bool validity = false;
 };

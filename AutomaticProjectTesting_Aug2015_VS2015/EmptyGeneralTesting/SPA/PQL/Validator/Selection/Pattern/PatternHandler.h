@@ -2,6 +2,7 @@
 #include <string>
 #include "..\..\..\QueryTree.h"
 #include "..\..\..\Patternship.h"
+#include "..\..\..\..\Entity.h"
 #include "PatternValidator.h"
 #include "AssignPatternValidator.h"
 #include "WhilePatternValidator.h"
@@ -12,24 +13,17 @@
 class PatternHandler
 {
 public:
-    static const string ASSIGN;
-    static const string WHILE;
-    static const string IF;
-
     PatternHandler(QueryTree *qtPtrNew);
     ~PatternHandler();
 
     bool isValidPattern(string str);
 
 private:
-    static const string PATTERN_KEYWORD;
     QueryTree *qtPtr;
 
     int getPatternType(string str);
 
-    string extractArgOne(string str);
-
-    bool isArgumentInClause(string arg, unordered_set<string> clause);
+    string extractArgPatternType(string str);
 
     PatternClause makePatternClause(PatternValidator pv);
     bool storeInQueryTree(PatternClause pc);

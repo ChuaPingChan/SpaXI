@@ -1,5 +1,8 @@
 #include "PatternValidator.h"
 
+const string PatternValidator::PATTERN_KEYWORD = "pattern";
+
+
 PatternValidator::PatternValidator(int patternType, string paramStr, QueryTree * qtPtrNew)
 {
     this->patternType = patternType;
