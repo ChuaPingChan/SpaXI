@@ -6,7 +6,9 @@
 #include <unordered_map>
 #include <list>
 #include <stack>
+#include <ctype.h>
 #include <utility>
+#include <algorithm>
 
 using namespace std;
 
@@ -14,7 +16,7 @@ class PatternTable {
 public:
     PatternTable();
     bool addToPatternTable(int stmtNumber, string var, string expression);
-    pair<string,string> getExpression(int stmtNumber);
+    pair<string,list<string>> getExpression(int stmtNumber);
     
     pair<list<int>,list<string>> getLeftVariables();
     pair<list<int>,list<string>> getLeftVariableThatMatchWithString(string expression);
@@ -28,6 +30,6 @@ public:
     bool hasExactMatch(int stmtNumber, string expression);
     bool hasPartialMatch(int stmtNumber, string expression);
 private:
-    unordered_map<int, pair<string,string>> patternTableMap;
+    unordered_map<int, pair<string,list<string>>> patternTableMap;
     stack<char> infixToPostfixStack;
 };

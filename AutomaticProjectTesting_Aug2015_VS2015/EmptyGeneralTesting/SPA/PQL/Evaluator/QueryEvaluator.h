@@ -5,21 +5,21 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-#include "QueryTree.h"
-#include "../PKB/PKBMain.h"
+#include "../QueryTree.h"
+#include "../../PKB/PKBMain.h"
+#include "ResultFactory.h"
 
 using namespace std;
 
 class QueryEvaluator
 {
 public:
-	QueryEvaluator();
+	QueryEvaluator(QueryTree* qtPtr);
 	~QueryEvaluator();
 
-	//void evaluate();
+	void evaluate();
 
  //   /*--------------- Unit Testing ---------------*/
- //   void setPkb(PKBMain &pkb);
  //   bool getHasResult();
  //   pair<list<string>, list<string>> getResultSuchThat();
  //   list<string> getIntersectionTest(list<string> list1, list<string> list2);
@@ -34,8 +34,8 @@ public:
 
 private:
 
-	//QueryTree* qtInstance;
- //   PKBMain* pkbInstance; 
+	QueryTree* _qt;
+	ResultFactory _rsFactory;
 	//PKBMain PKB;//TODO: Set this to static
 
  //   bool hasResult = true;

@@ -9,9 +9,10 @@ public:
 	SuchThatClause(int rel, int argOneType, string argOne, int argTwoType, string argTwo);
 	~SuchThatClause();
 
+	/* Getters */
 	int getRel();
-	int getTypeOne();
-	int getTypeTwo();
+	int getArgOneType();
+	int getArgTwoType();
 	string getArgOne();
 	string getArgTwo();
 
