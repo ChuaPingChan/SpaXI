@@ -39,27 +39,25 @@ bool ModifiesValidator::isValid()
 
 bool ModifiesValidator::isValidArgOne(string argOne)
 {
-    QueryTree qt = *(this->qtPtr);
-    
-    if (isArgumentInClause(argOne, qt.getStmts()))
+    if (qtPtr->isEntitySynonymExist(argOne, STMT))
     {
         this->argOneType = STMT;
         return true;
     }
 
-    else if (isArgumentInClause(argOne, qt.getAssigns()))
+    else if (qtPtr->isEntitySynonymExist(argOne, ASSIGN))
     {
         this->argOneType = ASSIGN;
         return true;
     }
 
-    else if (isArgumentInClause(argOne, qt.getWhiles()))
+    else if (qtPtr->isEntitySynonymExist(argOne, WHILE))
     {
         this->argOneType = WHILE;
         return true;
     }
 
-    else if (isIntegerRegexCheck(argOne))
+    else if (RegexValidators::isValidIntegerRegex(argOne))
     {
         this->argOneType = INTEGER;
         return true;
@@ -73,9 +71,8 @@ bool ModifiesValidator::isValidArgOne(string argOne)
 
 bool ModifiesValidator::isValidArgTwo(string argTwo)
 {
-    QueryTree qt = *(this->qtPtr);
-
-    if (isArgumentInClause(argTwo, qt.getVars())) { //if arg2 is a variable synonym
+    if (qtPtr->isEntitySynonymExist(argTwo, VARIABLE))
+    {
         this->argTwoType = VARIABLE;
         return true;
     }
@@ -85,7 +82,7 @@ bool ModifiesValidator::isValidArgTwo(string argTwo)
         return true;
     }
 
-    else if (RegexValidators::isValidIdentWithQuotes(argTwo))
+    else if (RegexValidators::isValidIdentWithQuotesRegex(argTwo))
     {
         this->argTwoType = IDENT_WITHQUOTES;
         return true;
