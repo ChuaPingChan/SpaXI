@@ -60,10 +60,12 @@
     <ClCompile Include="PQL\Validator\Selection\RelationshipTable\Relationship.cpp" />
     <ClCompile Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.cpp" />
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
+    <ClCompile Include="PQL\Validator\Selection\Select\SelectValidator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />
     <ClInclude Include="PQL\Relationship.h" />
+    <ClInclude Include="PQL\Selectionship.h" />
     <ClInclude Include="PQL\Validator\Selection\Pattern\PatternHandler.h" />
     <ClInclude Include="PQL\Utilities\Formatter.h" />
     <ClInclude Include="Entity.h" />
@@ -79,6 +81,7 @@
     <ClInclude Include="PQL\Validator\Declaration\DeclarationValidator.h" />
     <ClCompile Include="PQL\Utilities\SuchThatClause.cpp" />
     <ClCompile Include="PQL\Utilities\SelectClause.cpp" />
+    <ClInclude Include="PQL\Validator\Selection\Select\SelectValidator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Utilities\PatternClause.h" />

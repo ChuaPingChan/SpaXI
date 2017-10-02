@@ -8,21 +8,28 @@ SelectionValidator::~SelectionValidator() {}
 
 bool SelectionValidator::isValidSelection(string str)
 {
-    if (RegexValidators::isValidSelectOverallRegex(str) == false)
+    if (!RegexValidators::isValidSelectOverallRegex(str))
         return false;
 
-    ///* Extracting the Select portion */
-    //regex selectRegex(SELECT_REGEX);
-    //sregex_iterator sel(str.begin(), str.end(), selectRegex);
-    //sregex_iterator sel_end;
+    return isValidSelect(str) && areValidClauses(str);
+}
 
-    //for (; sel != sel_end; sel++)
-    //{
-    //    string current = sel->str(0);
-    //    if (!isValidSelectBeginning(current))
-    //        return false;
-    //}
+bool SelectionValidator::setQueryTree(QueryTree *qtPtrNew)
+{
+    this->qtPtr = qtPtrNew;
+    return true;
+}
 
+bool SelectionValidator::isValidSelect(string str)
+{
+    string selectRawStr = extractSelectRawStr(str);
+
+    SelectValidator sv = SelectValidator(qtPtr);
+    return sv.isValid(selectRawStr);
+}
+
+bool SelectionValidator::areValidClauses(string str)
+{
     SuchThatHandler stHandler = SuchThatHandler(qtPtr);
     PatternHandler pHandler = PatternHandler(qtPtr);
 
@@ -45,75 +52,19 @@ bool SelectionValidator::isValidSelection(string str)
                 return false;
             }
         }
-       
-        /*else
-        {
-            return false;
+        /*else if (isWith(currentClause)) {
+        if (!wHandler.isValidWith(currentClause)) {
+        return false;
+        }
         }*/
 
+        /*else
+        {
+        return false;
+        }*/
     }
-
-    return true;  //stub
-}
-
-bool SelectionValidator::setQueryTree(QueryTree *qtPtrNew)
-{
-    this->qtPtr = qtPtrNew;
     return true;
 }
-
-//bool SelectionValidator::isValidSelectBeginning(string str)
-//{
-//    size_t f = str.find("Select");
-//    str.replace(f, std::string("Select").length(), "");
-//
-//    /* Extracting the synonym */
-//    regex synonymRegex(SYNONYM);
-//    sregex_iterator it(str.begin(), str.end(), synonymRegex);
-//    sregex_iterator it_end;
-//    string current;
-//    for (; it != it_end; it++)
-//    {
-//        current = it->str(0);
-//        if (!qtInstance->varExists(current))
-//            return false;
-//    }
-//
-//    array<string, 2> result;
-//    if (isArgumentInClause(current, qtInstance->getAssigns()))
-//    {
-//        result[0] = "assign";
-//        result[1] = current;
-//    }
-//    else  if (isArgumentInClause(current, qtInstance->getWhiles()))
-//    {
-//        result[0] = "while";
-//        result[1] = current;
-//    }
-//    else  if (isArgumentInClause(current, qtInstance->getStmts()))
-//    {
-//        result[0] = "stmt";
-//        result[1] = current;
-//    }
-//    else  if (isArgumentInClause(current, qtInstance->getVars()))
-//    {
-//        result[0] = "var";
-//        result[1] = current;
-//    }
-//    else  if (isArgumentInClause(current, qtInstance->getProgLines()))
-//    {
-//        result[0] = "stmt";
-//        result[1] = current;
-//    }
-//    else  if (isArgumentInClause(current, qtInstance->getConsts()))
-//    {
-//        result[0] = "const";
-//        result[1] = current;
-//    }
-//
-//    qtInstance->insertSelect(result);
-//    return true;
-//}
 
 bool SelectionValidator::isSuchThat(string str)
 {
@@ -132,4 +83,18 @@ bool SelectionValidator::isSuchThat(string str)
 bool SelectionValidator::isPattern(string str)
 {
     return (str.find("pattern") != std::string::npos);
+}
+
+string SelectionValidator::extractSelectRawStr(string str)
+{
+    /* Extracting the Select portion */
+    regex selectRegex(RegexValidators::SELECT_REGEX);
+    sregex_iterator sel(str.begin(), str.end(), selectRegex);
+    sregex_iterator sel_end;
+    string selectStr;
+    for (; sel != sel_end; sel++)
+    {
+        selectStr = sel->str(0);
+    }
+    return selectStr;
 }
