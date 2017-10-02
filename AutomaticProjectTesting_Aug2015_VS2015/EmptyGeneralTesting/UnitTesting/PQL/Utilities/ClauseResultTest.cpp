@@ -12,6 +12,7 @@ namespace UnitTesting
     TEST_CLASS(TestClauseResult)
     {
     public:
+        /*
         TEST_METHOD(TestAppendToVector_intVector_success)
         {
             std::vector<int> v = std::vector<int>();
@@ -108,5 +109,6 @@ namespace UnitTesting
 
             Assert::IsTrue(result == expectedResults);
         }
+        */
     };
 }

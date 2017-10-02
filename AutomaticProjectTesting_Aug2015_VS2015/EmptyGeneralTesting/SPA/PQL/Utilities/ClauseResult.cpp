@@ -13,9 +13,9 @@ ClauseResult::ClauseResult()
     _results = vector<vector<int>>();
 }
 
-vector<string> ClauseResult::getAllSynonyms()
+list<string> ClauseResult::getAllSynonyms()
 {
-    return _synList;
+    return ClauseResult::convertVectorToList(_synList);
 }
 
 /*
@@ -23,16 +23,16 @@ Returns the possible results of the all synonyms that satisfy a PQL query.
 If a synonym has no possible values that satisfies the query, an empty vector
 will be returned.
 */
-vector<vector<int>> ClauseResult::getSynonymResults(vector<string> synNames)
+list<list<int>> ClauseResult::getSynonymResults(vector<string> synNames)
 {
-    vector<vector<int>> result;
+    list<list<int>> result;
 
     if (synNames.empty()) {
         result.clear();
         return result;
     }
 
-    vector<int> synIndices;
+    list<int> synIndices;
     synIndices.clear();
     for (vector<string>::iterator synNamePtr = synNames.begin();
         synNamePtr != synNames.end();
@@ -45,24 +45,36 @@ vector<vector<int>> ClauseResult::getSynonymResults(vector<string> synNames)
         combPtr != _results.end();
         combPtr++) {
 
-        vector<int> filteredCombination;
-        filteredCombination.clear();
+        list<int> selectedSynCombination;
+        selectedSynCombination.clear();
         
-        for (vector<int>::iterator synIndexPtr = synIndices.begin();
+        for (list<int>::iterator synIndexPtr = synIndices.begin();
             synIndexPtr != synIndices.end();
             synIndexPtr++) {
-            filteredCombination.push_back((*combPtr).at(*synIndexPtr));
+            selectedSynCombination.push_back((*combPtr).at(*synIndexPtr));
         }
-        result.push_back(filteredCombination);
+        result.push_back(selectedSynCombination);
     }
 
     result = ClauseResult::getUniqueElements(result);
     return result;
 }
 
-vector<vector<int>> ClauseResult::getAllResults()
+list<int> ClauseResult::getSynonymResults(string synNames)
 {
-    return _results;
+    // TODO: Needs implementation
+    return list<int>();
+}
+
+list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string syn2Name)
+{
+    // TODO: Needs implementation
+    return list<pair<int, int>>();
+}
+
+list<list<int>> ClauseResult::getAllResults()
+{
+    return ClauseResult::convertVectorOfVectorToListOfLists(_results);
 }
 
 bool ClauseResult::synonymPresent(string synName)
@@ -236,10 +248,11 @@ bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn
 }
 
 bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
-                                  string newSyn, vector<int> newSynResults)
+                                  string newSyn, list<int> newSynResultsList)
 {
-    assert(newSynResults.size() > 0);
+    assert(newSynResultsList.size() > 0);
     assert(_synToIdxMap.count(newSyn) == 0);    // Must be new synonym
+    vector<int> newSynResults = ClauseResult::convertListToVector(newSynResultsList);
 
     int oldSynIdx = _synToIdxMap.at(oldSyn);
 
@@ -277,7 +290,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
     return true;
 }
 
-bool ClauseResult::empty()
+bool ClauseResult::hasResults()
 {
     return _results.empty();
 }
