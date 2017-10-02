@@ -3,7 +3,7 @@
 
 using namespace std;
 
-enum SELECTIONTYPE
+enum SelectionType
 {
     SELECT_BOOLEAN = 0,
     SELECT_SINGLE,

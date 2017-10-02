@@ -3,7 +3,7 @@
 
 using namespace std;
 
-enum RELATIONSHIP
+enum Relationship
 {
     MODIFIES = 0,
     USES,

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const string DeclarationValidator::ENTITY_STR[] = {"stmt", "assign", "while", "if", "prog_line", "call", "procedure", "variable", "integer", "underscore", "identWithQuotes", "expressionSpecs", "constant", "stmtLst"};
+const string DeclarationValidator::Entity_STR[] = {"stmt", "assign", "while", "if", "prog_line", "call", "procedure", "variable", "integer", "underscore", "identWithQuotes", "expressionSpecs", "constant", "stmtLst"};
 
 DeclarationValidator::DeclarationValidator(QueryTree *qtPtrNew) {
     setQueryTree(qtPtrNew);
@@ -96,31 +96,31 @@ bool DeclarationValidator::isValidSynonym(string str) {
 
 int DeclarationValidator::getEntityIndexReference(string entity)
 {
-    if (entity == ENTITY_STR[STMT]) {
+    if (entity == Entity_STR[STMT]) {
         return STMT;
     }
-    else if (entity == ENTITY_STR[ASSIGN]) {
+    else if (entity == Entity_STR[ASSIGN]) {
         return ASSIGN;
     }
-    else if (entity == ENTITY_STR[WHILE]) {
+    else if (entity == Entity_STR[WHILE]) {
         return WHILE;
     }
-    else if (entity == ENTITY_STR[IF]) {
+    else if (entity == Entity_STR[IF]) {
         return IF;
     }
-    else if (entity == ENTITY_STR[PROG_LINE]) {
+    else if (entity == Entity_STR[PROG_LINE]) {
         return PROG_LINE;
     }
-    else if (entity == ENTITY_STR[CALL]) {
+    else if (entity == Entity_STR[CALL]) {
         return CALL;
     }
-    else if (entity == ENTITY_STR[PROCEDURE]) {
+    else if (entity == Entity_STR[PROCEDURE]) {
         return PROCEDURE;
     }
-    else if (entity == ENTITY_STR[VARIABLE]) {
+    else if (entity == Entity_STR[VARIABLE]) {
         return VARIABLE;
     }
-    else if (entity == ENTITY_STR[CONSTANT]) {
+    else if (entity == Entity_STR[CONSTANT]) {
         return CONSTANT;
     }
 }

@@ -13,8 +13,8 @@ FollowsEvaluator::~FollowsEvaluator()
 
 bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult)
 {
-	ENTITY argOneType = stClause.getArgOneType();
-	ENTITY argTwoType = stClause.getArgTwoType();
+	Entity argOneType = stClause.getArgOneType();
+	Entity argTwoType = stClause.getArgTwoType();
 	string argOne = stClause.getArgOne();
 	string argTwo = stClause.getArgTwo();
 

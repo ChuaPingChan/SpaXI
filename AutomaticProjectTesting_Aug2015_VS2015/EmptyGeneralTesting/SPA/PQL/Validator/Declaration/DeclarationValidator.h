@@ -20,7 +20,7 @@ public:
     bool setQueryTree(QueryTree *qtPtrNew);
 
 private:
-    static const string ENTITY_STR[];
+    static const string Entity_STR[];
 
     QueryTree *qtPtr;
 

@@ -25,7 +25,7 @@ public:
     static const string SPACE_1;
 
     /*--------------- Declaration Regex ---------------*/
-    static const string DESIGN_ENTITY_REGEX;
+    static const string DESIGN_Entity_REGEX;
 
     /*--------------- Pattern Clause Regex ---------------*/
     static const string FACTOR_REGEX;

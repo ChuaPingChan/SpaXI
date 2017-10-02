@@ -14,8 +14,8 @@ FollowsStarEvaluator::~FollowsStarEvaluator()
 ClauseResult FollowsStarEvaluator::evaluate(SuchThatClause clause)
 {
 
-	ENTITY argOneType = clause.getArgOneType();
-	ENTITY argTwoType = clause.getArgTwoType();
+	Entity argOneType = clause.getArgOneType();
+	Entity argTwoType = clause.getArgTwoType();
 	string argOne = clause.getArgOne();
 	string argTwo = clause.getArgTwo();
 

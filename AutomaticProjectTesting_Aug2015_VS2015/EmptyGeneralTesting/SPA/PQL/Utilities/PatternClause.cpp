@@ -1,11 +1,8 @@
 #include "PatternClause.h"
 
+using namespace std;
 
-<<<<<<< HEAD
-PatternClause::PatternClause(int patternType, ENTITY argOneType, string argOne, ENTITY argTwoType, string argTwo, ENTITY argThreeType, string argThree)
-=======
-PatternClause::PatternClause(int patternType, string patternSyn, int argOneType, string argOne, int argTwoType, string argTwo)
->>>>>>> 928dd00390e3106ff06de11ce5d174abcf1e0e8b
+PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
 {
     this->_patternType = patternType;
     this->_argOneType = argOneType;
@@ -15,7 +12,7 @@ PatternClause::PatternClause(int patternType, string patternSyn, int argOneType,
     this->_argTwo = argTwo;
 }
 
-PatternClause::PatternClause(int patternType, string patternSyn, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree)
+PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree)
 {
     PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo);
     this->_argThreeType = argThreeType;
@@ -26,24 +23,24 @@ PatternClause::~PatternClause()
 {
 }
 
-int PatternClause::getPatternType()
+PatternType PatternClause::getPatternType()
 {
-	return _patternType;
+    return _patternType;
 }
 
-ENTITY PatternClause::getArgOneType()
+Entity PatternClause::getArgOneType()
 {
-	return this->_argOneType;
+    return this->_argOneType;
 }
 
-ENTITY PatternClause::getArgTwoType()
+Entity PatternClause::getArgTwoType()
 {
-	return this->_argTwoType;
+    return this->_argTwoType;
 }
 
-ENTITY PatternClause::getArgThreeType()
+Entity PatternClause::getArgThreeType()
 {
-	return this->_argThreeType;
+    return this->_argThreeType;
 }
 
 string PatternClause::getPatternSynonym()
@@ -53,15 +50,15 @@ string PatternClause::getPatternSynonym()
 
 string PatternClause::getArgOne()
 {
-	return this->_argOne;
+    return this->_argOne;
 }
 
 string PatternClause::getArgTwo()
 {
-	return this->_argTwo;
+    return this->_argTwo;
 }
 
 string PatternClause::getArgThree()
 {
-	return this->_argThree;
+    return this->_argThree;
 }

@@ -19,7 +19,7 @@ const string RegexValidators::SPACE_0 = "(\\s*)";
 const string RegexValidators::SPACE_1 = "(\\s+)";
 
 /*--------------- Declaration Regex ---------------*/
-const string RegexValidators::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
+const string RegexValidators::DESIGN_Entity_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 
 /*--------------- Pattern Clause Regex ---------------*/
 const string RegexValidators::FACTOR_REGEX = "(" + NAME_REGEX + "|" + INTEGER_REGEX + ")";
@@ -59,7 +59,7 @@ bool RegexValidators::isValidIdentWithQuotesRegex(string str)
 /*--------------- Declaration Regex Methods ---------------*/
 bool RegexValidators::isValidEntityRegex(string str)
 {
-    regex entityRegex(DESIGN_ENTITY_REGEX);
+    regex entityRegex(DESIGN_Entity_REGEX);
     return regex_match(str, entityRegex);
 }
 

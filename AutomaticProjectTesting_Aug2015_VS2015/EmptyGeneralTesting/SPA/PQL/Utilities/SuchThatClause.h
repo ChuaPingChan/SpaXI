@@ -1,27 +1,28 @@
 #pragma once
 #include <string>
 #include "../../Entity.h"
+#include "../Relationship.h"
 
 using namespace std;
 
 class SuchThatClause
 {
 public:
-	SuchThatClause(int rel, ENTITY argOneType, string argOne, ENTITY argTwoType, string argTwo);
-	~SuchThatClause();
+    SuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo);
+    ~SuchThatClause();
 
-	/* Getters */
-	int getRel();
-	ENTITY getArgOneType();
-	ENTITY getArgTwoType();
-	string getArgOne();
-	string getArgTwo();
+    /* Getters */
+    Relationship getRel();
+    Entity getArgOneType();
+    Entity getArgTwoType();
+    string getArgOne();
+    string getArgTwo();
 
 private:
-	int _rel;
-	ENTITY _argOneType;
-	ENTITY _argTwoType;
-	string _argOne;
-	string _argTwo;
+    Relationship _rel;
+    Entity _argOneType;
+    Entity _argTwoType;
+    string _argOne;
+    string _argTwo;
 };
 

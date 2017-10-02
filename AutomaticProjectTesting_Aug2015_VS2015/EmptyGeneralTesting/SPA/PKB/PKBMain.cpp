@@ -36,7 +36,7 @@ bool PKBMain::isParent(int parentStmt) {
 	return parentToChildTable.isParent(parentStmt);
 }
 
-list<int> PKBMain::getChildren(int parentStmt, ENTITY type) {
+list<int> PKBMain::getChildren(int parentStmt, Entity type) {
 	list<int> stmtList = parentToChildTable.getChildren(parentStmt);
 
 	if (type == STMT) {
@@ -66,7 +66,7 @@ bool PKBMain::hasParentRel() {
 	return !parentToChildTable.empty();
 }
 
-list<int> PKBMain::getParent(int childStmt, ENTITY type) {
+list<int> PKBMain::getParent(int childStmt, Entity type) {
 	list<int> stmtList;
 	int parentStmt = childToParentTable.getParent(childStmt);
 	if (type == WHILE) {
@@ -85,12 +85,12 @@ list<int> PKBMain::getParent(int childStmt, ENTITY type) {
 	return stmtList;
 }
 
-list<int> PKBMain::getAllParents(ENTITY type) {
+list<int> PKBMain::getAllParents(Entity type) {
 	//TODO 1 implement entity search
 	return parentToChildTable.getAllParents();
 }
 
-list<int> PKBMain::getAllChildren(ENTITY type) {
+list<int> PKBMain::getAllChildren(Entity type) {
 	list<int> stmtList = childToParentTable.getAllChildren();
 	//TODO 3 change if possible, the way to get all children of certain type
 	if (type == STMT) {
@@ -117,7 +117,7 @@ bool PKBMain::isParentStarChild(int parentStmt, int childStmt) {
 	return parentToChildStarTable.isParentStarChild(parentStmt, childStmt);
 }
 
-list<int> PKBMain::getChildrenStar(int parentStmt, ENTITY type) {
+list<int> PKBMain::getChildrenStar(int parentStmt, Entity type) {
 	list<int> childStmt = parentToChildStarTable.getChildren(parentStmt);
 	if (type == STMT) {
 		return childStmt;
@@ -148,7 +148,7 @@ list<int> PKBMain::getChildrenStar(int parentStmt, ENTITY type) {
 	return childStmt;
 }
 
-list<int> PKBMain::getParentStar(int childStmt, ENTITY type) {
+list<int> PKBMain::getParentStar(int childStmt, Entity type) {
 	list<int> parentStmt = childToParentStarTable.getParentStar(childStmt);
 	if (type == STMT) {
 		return parentStmt;
@@ -181,7 +181,7 @@ list<int> PKBMain::getParentStar(int childStmt, ENTITY type) {
 }
 
 
-pair<list<int>, list<int>> PKBMain::getAllParentsRel(ENTITY type1, ENTITY type2) {
+pair<list<int>, list<int>> PKBMain::getAllParentsRel(Entity type1, Entity type2) {
 	pair<list<int>, list<int>> allParentRel = parentToChildTable.getAllParentsRel();
 	list<int> parent = allParentRel.first;
 	list<int> children = allParentRel.second;
@@ -243,7 +243,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentsRel(ENTITY type1, ENTITY type2)
 	return make_pair(parent, children);
 }
 
-pair<list<int>, list<int>> PKBMain::getAllParentStarRel(ENTITY type1, ENTITY type2) {
+pair<list<int>, list<int>> PKBMain::getAllParentStarRel(Entity type1, Entity type2) {
 	pair<list<int>, list<int>> allParentStarRel = parentToChildStarTable.getAllParentStarRel();
 	list<int> parent = allParentStarRel.first;
 	list<int> children = allParentStarRel.second;
@@ -305,7 +305,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentStarRel(ENTITY type1, ENTITY typ
 
 //
 //FOLLOWS
-pair<list<int>, list<int>> PKBMain::getAllFollows(ENTITY type1, ENTITY type2) {
+pair<list<int>, list<int>> PKBMain::getAllFollows(Entity type1, Entity type2) {
 	pair<list<int>, list<int>> allFollows = followsTable.getAllFollows();
 	list<int> bef = allFollows.first;
 	list<int> aft = allFollows.second;
@@ -427,7 +427,7 @@ int PKBMain::getAfter(int currStmt) {
 	}
 }
 
-list<int> PKBMain::getAfter(int currStmt, ENTITY type) {
+list<int> PKBMain::getAfter(int currStmt, Entity type) {
 	int after = getAfter(currStmt);
 	list<int> stmtList;
 	list<int> emptyList;
@@ -462,7 +462,7 @@ list<int> PKBMain::getAfter(int currStmt, ENTITY type) {
 	return stmtList;
 }
 
-list<int> PKBMain::getBefore(int currStmt, ENTITY type) {
+list<int> PKBMain::getBefore(int currStmt, Entity type) {
 	int before = getBefore(currStmt);
 	list<int> stmtList;
 	list<int> emptyList;
@@ -497,7 +497,7 @@ list<int> PKBMain::getBefore(int currStmt, ENTITY type) {
 	return stmtList;
 }
 
-list<int> PKBMain::getAllBefore(ENTITY type) {
+list<int> PKBMain::getAllBefore(Entity type) {
 	list<int> stmtList;
 	stmtList = followsTable.getAllBefore();
 
@@ -526,7 +526,7 @@ list<int> PKBMain::getAllBefore(ENTITY type) {
 	return stmtList;
 }
 
-list<int> PKBMain::getAllAfter(ENTITY type) {
+list<int> PKBMain::getAllAfter(Entity type) {
 	list<int> stmtList;
 	stmtList = followsTable.getAllAfter();
 
@@ -560,7 +560,7 @@ bool PKBMain::isFollowsStar(int befStmt, int aftStmt) {
 	return followsStarAfter.isAfterStar(befStmt, aftStmt);
 }
 
-list<int> PKBMain::getAfterStar(int befStmt, ENTITY type) {
+list<int> PKBMain::getAfterStar(int befStmt, Entity type) {
 	list<int> aft = followsStarAfter.getAfterStar(befStmt);
 	int first;
 	int listSize = aft.size();
@@ -587,7 +587,7 @@ list<int> PKBMain::getAfterStar(int befStmt, ENTITY type) {
 	return aft;
 }
 
-list<int> PKBMain::getBeforeStar(int aftStmt, ENTITY type) {
+list<int> PKBMain::getBeforeStar(int aftStmt, Entity type) {
 	list<int> bef = followsStarBefore.getBeforeStar(aftStmt);
 	int first;
 	int listSize = bef.size();
@@ -614,7 +614,7 @@ list<int> PKBMain::getBeforeStar(int aftStmt, ENTITY type) {
 	return bef;
 }
 
-list<int> PKBMain::getAllBeforeStar(ENTITY type) {
+list<int> PKBMain::getAllBeforeStar(Entity type) {
 	list<int> bef = followsStarBefore.getAllBeforeStar();
 	int first;
 	int listSize = bef.size();
@@ -641,7 +641,7 @@ list<int> PKBMain::getAllBeforeStar(ENTITY type) {
 	return bef;
 }
 
-list<int> PKBMain::getAllAfterStar(ENTITY type) {
+list<int> PKBMain::getAllAfterStar(Entity type) {
 	list<int> aft = followsStarAfter.getAllAfterStar();
 	int first;
 	int listSize = aft.size();
@@ -669,7 +669,7 @@ list<int> PKBMain::getAllAfterStar(ENTITY type) {
 	return aft;
 }
 
-pair<list<int>, list<int>> PKBMain::getAllFollowsStar(ENTITY type1, ENTITY type2) {
+pair<list<int>, list<int>> PKBMain::getAllFollowsStar(Entity type1, Entity type2) {
 	pair<list<int>, list<int>> allFollows = followsStarAfter.getAllFollows();
 	list<int> bef = allFollows.first;
 	list<int> aft = allFollows.second;
@@ -861,7 +861,7 @@ list<string> PKBMain::getModifiesFromStmt(int stmt)
 	return modTableStmtToVar.getModVariablesFromStmt(stmt);
 }
 
-list<int> PKBMain::getUsesFromVar(string var, ENTITY type)
+list<int> PKBMain::getUsesFromVar(string var, Entity type)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	if (varIdx == -1) {
@@ -883,7 +883,7 @@ list<int> PKBMain::getUsesFromVar(string var, ENTITY type)
 	}
 }
 
-list<int> PKBMain::getModifiesFromVar(string var, ENTITY type)
+list<int> PKBMain::getModifiesFromVar(string var, Entity type)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	if (varIdx == -1) {
@@ -904,25 +904,25 @@ list<int> PKBMain::getModifiesFromVar(string var, ENTITY type)
 	}
 }
 
-list<int> PKBMain::getStmtThatUsesAnything(ENTITY type)
+list<int> PKBMain::getStmtThatUsesAnything(Entity type)
 {
 	list<int> stmtList = usesTableStmtToVar.getStmtThatUses();
 	return stmtTypeList.getStmtType(stmtList, type);
 }
 
-list<int> PKBMain::getStmtThatModifiesAnything(ENTITY type)
+list<int> PKBMain::getStmtThatModifiesAnything(Entity type)
 {
 	list<int> stmtList = modTableStmtToVar.getStmtThatModifies();
 	return stmtTypeList.getStmtType(stmtList, type);
 }
 
-pair<list<int>, list<string>> PKBMain::getUsesPairs(ENTITY type)
+pair<list<int>, list<string>> PKBMain::getUsesPairs(Entity type)
 {
 	pair<list<int>, list<string>> usesPairs = usesTableStmtToVar.getUsesPair();
 	return stmtTypeList.getStmtType(usesPairs, type);
 }
 
-pair<list<int>, list<string>> PKBMain::getModifiesPairs(ENTITY type)
+pair<list<int>, list<string>> PKBMain::getModifiesPairs(Entity type)
 {
 	pair<list<int>, list<string>> modPairs = modTableStmtToVar.getModPair();
 	return stmtTypeList.getStmtType(modPairs, type);

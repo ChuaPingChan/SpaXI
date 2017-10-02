@@ -59,7 +59,7 @@ list<int> StmtTypeList::getWhileStmtList()
     getStmtType: to retrieve the statement numbers according to type
     (e.g. assign, while, ifs)
 */
-list<int> StmtTypeList::getStmtType(list<int> stmtList, ENTITY type)
+list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
 {
     list<int> filteredList;
     list<int>::iterator it;
@@ -87,7 +87,7 @@ list<int> StmtTypeList::getStmtType(list<int> stmtList, ENTITY type)
     return filteredList;
 }
 
-pair<list<int>, list<string>> StmtTypeList::getStmtType(pair<list<int>, list<string>> pairOfList, ENTITY type)
+pair<list<int>, list<string>> StmtTypeList::getStmtType(pair<list<int>, list<string>> pairOfList, Entity type)
 {
     list<int> stmts = pairOfList.first;
     list<string> vars = pairOfList.second;

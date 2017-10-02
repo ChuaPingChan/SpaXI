@@ -37,36 +37,36 @@ public:
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
     bool isParent(int parentStmt);
-    list<int> getChildren(int parentStmt, ENTITY type);
+    list<int> getChildren(int parentStmt, Entity type);
     bool isChild(int childStmt);
     bool hasParentRel();
-    list<int> getParent(int childStmt, ENTITY type);
-    list<int> getAllParents(ENTITY type);
-    list<int> getAllChildren(ENTITY type);
-    pair<list<int>, list<int>> getAllParentsRel(ENTITY type1, ENTITY type2);
+    list<int> getParent(int childStmt, Entity type);
+    list<int> getAllParents(Entity type);
+    list<int> getAllChildren(Entity type);
+    pair<list<int>, list<int>> getAllParentsRel(Entity type1, Entity type2);
 	bool isParentStarChild(int parentStmt, int childStmt);
-	list<int> getChildrenStar(int parentStmt, ENTITY type);
-	list<int> getParentStar(int childStmt, ENTITY type);
-	pair<list<int>, list<int>> getAllParentStarRel(ENTITY type1, ENTITY type2);
+	list<int> getChildrenStar(int parentStmt, Entity type);
+	list<int> getParentStar(int childStmt, Entity type);
+	pair<list<int>, list<int>> getAllParentStarRel(Entity type1, Entity type2);
 
 	//Follows
-	pair<list<int>, list<int>> getAllFollows(ENTITY type1, ENTITY type2);
+	pair<list<int>, list<int>> getAllFollows(Entity type1, Entity type2);
     bool hasFollows();
     bool isAfter(int stmtAft);
     bool isBefore(int stmtBef);
     bool isFollows(int stmtBef, int stmtAft);
     int getBefore(int currStmt);
     int getAfter(int currStmt);
-    list<int> getAfter(int currStmt, ENTITY type);
-    list<int> getBefore(int currStmt, ENTITY type);
-    list<int> getAllBefore(ENTITY type);
-    list<int> getAllAfter(ENTITY type);
+    list<int> getAfter(int currStmt, Entity type);
+    list<int> getBefore(int currStmt, Entity type);
+    list<int> getAllBefore(Entity type);
+    list<int> getAllAfter(Entity type);
     bool isFollowsStar(int befStmt, int aftStmt);
-    list<int> getAfterStar(int befStmt, ENTITY type);
-    list<int> getBeforeStar(int aftStmt, ENTITY type);
-    list<int> getAllBeforeStar(ENTITY type);
-    list<int> getAllAfterStar(ENTITY type);
-    pair<list<int>, list<int>> getAllFollowsStar(ENTITY type1, ENTITY type2);
+    list<int> getAfterStar(int befStmt, Entity type);
+    list<int> getBeforeStar(int aftStmt, Entity type);
+    list<int> getAllBeforeStar(Entity type);
+    list<int> getAllAfterStar(Entity type);
+    pair<list<int>, list<int>> getAllFollowsStar(Entity type1, Entity type2);
     bool startProcessComplexRelations();
 	
 	//General Purpose API for query evaluator
@@ -103,12 +103,12 @@ public:
     bool isModifyingAnything(int stmt);
     list<string> getUsesFromStmt(int stmt);
     list<string> getModifiesFromStmt(int stmt);
-    list<int> getUsesFromVar(string var, ENTITY type);
-    list<int> getModifiesFromVar(string var, ENTITY type);
-    list<int> getStmtThatUsesAnything(ENTITY type);
-    list<int> getStmtThatModifiesAnything(ENTITY type);
-    pair<list<int>, list<string>> getUsesPairs(ENTITY type);
-    pair<list<int>, list<string>> getModifiesPairs(ENTITY type);
+    list<int> getUsesFromVar(string var, Entity type);
+    list<int> getModifiesFromVar(string var, Entity type);
+    list<int> getStmtThatUsesAnything(Entity type);
+    list<int> getStmtThatModifiesAnything(Entity type);
+    pair<list<int>, list<string>> getUsesPairs(Entity type);
+    pair<list<int>, list<string>> getModifiesPairs(Entity type);
 
     //PKB query evaluator (Pattern)
     pair<list<int>, list<string>> getLeftVariables();

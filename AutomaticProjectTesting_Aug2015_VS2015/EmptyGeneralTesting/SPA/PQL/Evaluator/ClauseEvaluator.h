@@ -12,23 +12,6 @@ protected:
 	PKBMain* pkbInstance;
 	list<string> getListStringFromListInt(list<int> listOfInt);
 
-	enum TYPE
-	{
-		STMT = 0,
-		ASSIGN,
-		WHILE,
-		IF,
-		PROG_LINE,
-		CALL,
-		PROCEDURE,
-		VARIABLE,
-		INTEGER,
-		UNDERSCORE,
-		IDENT,
-		EXP,
-		CONSTANT,
-	};
-
 public:
 	ClauseEvaluator();
 	~ClauseEvaluator();

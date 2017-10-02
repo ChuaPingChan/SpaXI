@@ -1,22 +1,6 @@
 #pragma once
-enum ENTITY
+enum Entity
 {
-<<<<<<< HEAD
-	STMT = 0,
-	ASSIGN,
-	WHILE,
-	IF,
-	PROG_LINE,
-	CALL,
-	PROCEDURE,
-	VARIABLE,
-	INTEGER,
-	UNDERSCORE,
-	IDENT_WITHQUOTES,
-	EXPRESSION_SPEC,
-	CONSTANT
-};
-=======
     STMT = 0,
     ASSIGN,
     WHILE,
@@ -32,4 +16,3 @@ enum ENTITY
     CONSTANT,
     STMTLIST
 };
->>>>>>> 928dd00390e3106ff06de11ce5d174abcf1e0e8b

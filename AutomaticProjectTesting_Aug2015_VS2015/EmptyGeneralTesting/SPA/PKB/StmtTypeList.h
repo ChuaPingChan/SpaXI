@@ -22,8 +22,8 @@ public:
     bool isPresent(int stmt);
     list<int> getAssignStmtList();
     list<int> getWhileStmtList();
-    list<int> getStmtType(list<int> stmtList, ENTITY type);
-    pair<list<int>, list<string>> getStmtType(pair<list<int>, list<string>> pairOfList, ENTITY type);
+    list<int> getStmtType(list<int> stmtList, Entity type);
+    pair<list<int>, list<string>> getStmtType(pair<list<int>, list<string>> pairOfList, Entity type);
 private:
     list<int> assignStmtList;
     list<int> whileStmtList;

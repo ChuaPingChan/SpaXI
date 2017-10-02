@@ -8,7 +8,7 @@ enum PATTERNSHIP
     PATTERN = 13    //Continue indexing from Relationship.h
 };
 
-enum PATTERNTYPE
+enum PatternType
 {
     ASSSIGN_PATTERN = 0,
     WHILE_PATTERN,
