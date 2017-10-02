@@ -36,14 +36,14 @@ bool PKBMain::isParent(int parentStmt) {
 	return parentToChildTable.isParent(parentStmt);
 }
 
-list<int> PKBMain::getChildren(int parentStmt, string type) {
+list<int> PKBMain::getChildren(int parentStmt, ENTITY type) {
 	list<int> stmtList = parentToChildTable.getChildren(parentStmt);
 
-	if (type == "stmt") {
+	if (type == STMT) {
 		return stmtList;
 	}
 
-	if (type == "assign") {
+	if (type == ASSIGN) {
 		int listSize = stmtList.size();
 		int first;
 		for (int i = 0; i < listSize; i++) {
@@ -66,24 +66,38 @@ bool PKBMain::hasParentRel() {
 	return !parentToChildTable.empty();
 }
 
-list<int> PKBMain::getParent(int childStmt, string type) {
+list<int> PKBMain::getParent(int childStmt, ENTITY type) {
 	list<int> stmtList;
-	stmtList.push_back(childToParentTable.getParent(childStmt));
+	int parentStmt = childToParentTable.getParent(childStmt);
+	if (type == WHILE) {
+		if (isWhile(parentStmt)) {
+			stmtList.push_back(parentStmt);
+		}
+	}
+//TODO 1 implement once isIf is done
+/*	if (type == IF) {
+		if (isIf(parentStmt)) {
+			stmtList.push_back(parentStmt);
+		}
+	}
+	*/
+
 	return stmtList;
 }
 
-list<int> PKBMain::getAllParents(string type) {
+list<int> PKBMain::getAllParents(ENTITY type) {
+	//TODO 1 implement entity search
 	return parentToChildTable.getAllParents();
 }
 
-list<int> PKBMain::getAllChildren(string type) {
+list<int> PKBMain::getAllChildren(ENTITY type) {
 	list<int> stmtList = childToParentTable.getAllChildren();
-
-	if (type == "stmt") {
+	//TODO 3 change if possible, the way to get all children of certain type
+	if (type == STMT) {
 		return stmtList;
 	}
 
-	if (type == "assign") {
+	if (type == ASSIGN) {
 		int listSize = stmtList.size();
 		int first;
 		for (int i = 0; i < listSize; i++) {
@@ -103,14 +117,14 @@ bool PKBMain::isParentStarChild(int parentStmt, int childStmt) {
 	return parentToChildStarTable.isParentStarChild(parentStmt, childStmt);
 }
 
-list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
+list<int> PKBMain::getChildrenStar(int parentStmt, ENTITY type) {
 	list<int> childStmt = parentToChildStarTable.getChildren(parentStmt);
-	if (type == "stmt") {
+	if (type == STMT) {
 		return childStmt;
 	}
 	int listSize = childStmt.size();
 	int first;
-	if (type == "while") {
+	if (type == WHILE) {
 		for (int i = 0; i < listSize; i++) {
 			first = childStmt.front();
 			childStmt.pop_front();
@@ -120,7 +134,7 @@ list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
 		}
 	}
 
-	if (type == "assign") {
+	if (type == ASSIGN) {
 		for (int i = 0; i < listSize; i++) {
 			first = childStmt.front();
 			childStmt.pop_front();
@@ -129,18 +143,19 @@ list<int> PKBMain::getChildrenStar(int parentStmt, string type) {
 			}
 		}
 	}
+	//TODO 1 add if or calls
 
 	return childStmt;
 }
 
-list<int> PKBMain::getParentStar(int childStmt, string type) {
+list<int> PKBMain::getParentStar(int childStmt, ENTITY type) {
 	list<int> parentStmt = childToParentStarTable.getParentStar(childStmt);
-	if (type == "stmt") {
+	if (type == STMT) {
 		return parentStmt;
 	}
 	int listSize = parentStmt.size();
 	int first;
-	if (type == "while") {
+	if (type == WHILE) {
 		for (int i = 0; i < listSize; i++) {
 			first = parentStmt.front();
 			parentStmt.pop_front();
@@ -150,7 +165,7 @@ list<int> PKBMain::getParentStar(int childStmt, string type) {
 		}
 	}
 
-	if (type == "assign") {
+	if (type == ASSIGN) {
 		for (int i = 0; i < listSize; i++) {
 			first = parentStmt.front();
 			parentStmt.pop_front();
@@ -159,12 +174,14 @@ list<int> PKBMain::getParentStar(int childStmt, string type) {
 			}
 		}
 	}
+
+	//TODO 1 Add if
 
 	return parentStmt;
 }
 
 
-pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2) {
+pair<list<int>, list<int>> PKBMain::getAllParentsRel(ENTITY type1, ENTITY type2) {
 	pair<list<int>, list<int>> allParentRel = parentToChildTable.getAllParentsRel();
 	list<int> parent = allParentRel.first;
 	list<int> children = allParentRel.second;
@@ -173,7 +190,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2)
 
 	int listSize = parent.size();
 	for (int i = 0; i < listSize; i++) {
-		if (type1 == "while") {
+		if (type1 == WHILE) {
 			first = parent.front();
 			parent.pop_front();
 			second = children.front();
@@ -185,7 +202,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2)
 		}
 
 
-		if (type1 == "assign") {
+		if (type1 == ASSIGN) {
 			first = parent.front();
 			parent.pop_front();
 			second = children.front();
@@ -200,7 +217,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2)
 
 	listSize = parent.size();
 	for (int i = 0; i < listSize; i++) {
-		if (type2 == "while") {
+		if (type2 == WHILE) {
 			first = parent.front();
 			parent.pop_front();
 			second = children.front();
@@ -211,7 +228,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2)
 			}
 		}
 
-		if (type2 == "assign") {
+		if (type2 == ASSIGN) {
 			first = parent.front();
 			parent.pop_front();
 			second = children.front();
@@ -222,11 +239,11 @@ pair<list<int>, list<int>> PKBMain::getAllParentsRel(string type1, string type2)
 			}
 		}
 	}
-
+	//TODO 1 add if
 	return make_pair(parent, children);
 }
 
-pair<list<int>, list<int>> PKBMain::getAllParentStarRel(string type1, string type2) {
+pair<list<int>, list<int>> PKBMain::getAllParentStarRel(ENTITY type1, ENTITY type2) {
 	pair<list<int>, list<int>> allParentStarRel = parentToChildStarTable.getAllParentStarRel();
 	list<int> parent = allParentStarRel.first;
 	list<int> children = allParentStarRel.second;
@@ -235,7 +252,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentStarRel(string type1, string typ
 
 	int listSize = parent.size();
 	for (int i = 0; i < listSize; i++) {
-		if (type1 == "while") {
+		if (type1 == WHILE) {
 			first = parent.front();
 			parent.pop_front();
 			second = children.front();
@@ -246,7 +263,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentStarRel(string type1, string typ
 			}
 		}
 
-		if (type1 == "assign") {
+		if (type1 == ASSIGN) {
 			first = parent.front();
 			parent.pop_front();
 			second = children.front();
@@ -260,7 +277,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentStarRel(string type1, string typ
 
 	listSize = parent.size();
 	for (int i = 0; i < listSize; i++) {
-		if (type2 == "while") {
+		if (type2 == WHILE) {
 			first = parent.front();
 			parent.pop_front();
 			second = children.front();
@@ -271,7 +288,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentStarRel(string type1, string typ
 			}
 		}
 
-		if (type2 == "assign") {
+		if (type2 == ASSIGN) {
 			first = parent.front();
 			parent.pop_front();
 			second = children.front();
@@ -288,7 +305,7 @@ pair<list<int>, list<int>> PKBMain::getAllParentStarRel(string type1, string typ
 
 //
 //FOLLOWS
-pair<list<int>, list<int>> PKBMain::getAllFollows(string type1, string type2) {
+pair<list<int>, list<int>> PKBMain::getAllFollows(ENTITY type1, ENTITY type2) {
 	pair<list<int>, list<int>> allFollows = followsTable.getAllFollows();
 	list<int> bef = allFollows.first;
 	list<int> aft = allFollows.second;
@@ -297,7 +314,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollows(string type1, string type2) {
 
 	int listSize = bef.size();
 	for (int i = 0; i < listSize; i++) {
-		if (type1 == "while") {
+		if (type1 == WHILE) {
 			first = bef.front();
 			bef.pop_front();
 			second = aft.front();
@@ -308,7 +325,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollows(string type1, string type2) {
 			}
 		}
 
-		if (type1 == "assign") {
+		if (type1 == ASSIGN) {
 			first = bef.front();
 			bef.pop_front();
 			second = aft.front();
@@ -322,7 +339,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollows(string type1, string type2) {
 
 	listSize = bef.size();
 	for (int i = 0; i < listSize; i++) {
-		if (type2 == "while") {
+		if (type2 == WHILE) {
 			first = bef.front();
 			bef.pop_front();
 			second = aft.front();
@@ -333,7 +350,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollows(string type1, string type2) {
 			}
 		}
 
-		if (type2 == "assign") {
+		if (type2 == ASSIGN) {
 			first = bef.front();
 			bef.pop_front();
 			second = aft.front();
@@ -410,7 +427,7 @@ int PKBMain::getAfter(int currStmt) {
 	}
 }
 
-list<int> PKBMain::getAfter(int currStmt, string type) {
+list<int> PKBMain::getAfter(int currStmt, ENTITY type) {
 	int after = getAfter(currStmt);
 	list<int> stmtList;
 	list<int> emptyList;
@@ -420,7 +437,7 @@ list<int> PKBMain::getAfter(int currStmt, string type) {
 
 	stmtList.push_back(after);
 
-	if (type == "assign") {
+	if (type == ASSIGN) {
 
 		if (isAssignment(after)) {
 			return stmtList;
@@ -431,7 +448,7 @@ list<int> PKBMain::getAfter(int currStmt, string type) {
 
 	}
 
-	if (type == "while") {
+	if (type == WHILE) {
 
 		if (isWhile(after)) {
 			return stmtList;
@@ -441,11 +458,11 @@ list<int> PKBMain::getAfter(int currStmt, string type) {
 		}
 
 	}
-
+	//TODO 1 add if
 	return stmtList;
 }
 
-list<int> PKBMain::getBefore(int currStmt, string type) {
+list<int> PKBMain::getBefore(int currStmt, ENTITY type) {
 	int before = getBefore(currStmt);
 	list<int> stmtList;
 	list<int> emptyList;
@@ -455,7 +472,7 @@ list<int> PKBMain::getBefore(int currStmt, string type) {
 
 	stmtList.push_back(before);
 
-	if (type == "assign") {
+	if (type == ASSIGN) {
 
 		if (isAssignment(before)) {
 			return stmtList;
@@ -466,7 +483,7 @@ list<int> PKBMain::getBefore(int currStmt, string type) {
 
 	}
 
-	if (type == "while") {
+	if (type == WHILE) {
 
 		if (isWhile(before)) {
 			return stmtList;
@@ -476,17 +493,17 @@ list<int> PKBMain::getBefore(int currStmt, string type) {
 		}
 
 	}
-
+	//TODO 1 add if
 	return stmtList;
 }
 
-list<int> PKBMain::getAllBefore(string type) {
+list<int> PKBMain::getAllBefore(ENTITY type) {
 	list<int> stmtList;
 	stmtList = followsTable.getAllBefore();
 
 	int listSize = stmtList.size();
 	int first;
-	if (type == "assign") {
+	if (type == ASSIGN) {
 		for (int i = 0; i < listSize; i++) {
 			first = stmtList.front();
 			stmtList.pop_front();
@@ -496,7 +513,7 @@ list<int> PKBMain::getAllBefore(string type) {
 		}
 	}
 
-	if (type == "while") {
+	if (type == WHILE) {
 		for (int i = 0; i < listSize; i++) {
 			first = stmtList.front();
 			stmtList.pop_front();
@@ -505,18 +522,18 @@ list<int> PKBMain::getAllBefore(string type) {
 			}
 		}
 	}
-
+	//add if
 	return stmtList;
 }
 
-list<int> PKBMain::getAllAfter(string type) {
+list<int> PKBMain::getAllAfter(ENTITY type) {
 	list<int> stmtList;
 	stmtList = followsTable.getAllAfter();
 
 	int listSize = stmtList.size();
 	int first;
 
-	if (type == "assign") {
+	if (type == ASSIGN) {
 		for (int i = 0; i < listSize; i++) {
 			first = stmtList.front();
 			stmtList.pop_front();
@@ -526,7 +543,7 @@ list<int> PKBMain::getAllAfter(string type) {
 		}
 	}
 
-	if (type == "while") {
+	if (type == WHILE) {
 		for (int i = 0; i < listSize; i++) {
 			first = stmtList.front();
 			stmtList.pop_front();
@@ -543,89 +560,92 @@ bool PKBMain::isFollowsStar(int befStmt, int aftStmt) {
 	return followsStarAfter.isAfterStar(befStmt, aftStmt);
 }
 
-list<int> PKBMain::getAfterStar(int befStmt, string type) {
+list<int> PKBMain::getAfterStar(int befStmt, ENTITY type) {
 	list<int> aft = followsStarAfter.getAfterStar(befStmt);
 	int first;
 	int listSize = aft.size();
-	if (type == "stmt") {
+	if (type == STMT) {
 		return aft;
 	}
 
 	for (int i = 0; i < listSize; i++) {
 		first = aft.front();
 		aft.pop_front();
-		if (type == "while") {
+		if (type == WHILE) {
 			if (isWhile(first)) {
 				aft.push_back(first);
 			}
 		}
-		if (type == "assign") {
+		if (type == ASSIGN) {
 			if (isAssignment(first)) {
 				aft.push_back(first);
 			}
 
 		}
+		//TODO 1 add if
 	}
 	return aft;
 }
 
-list<int> PKBMain::getBeforeStar(int aftStmt, string type) {
+list<int> PKBMain::getBeforeStar(int aftStmt, ENTITY type) {
 	list<int> bef = followsStarBefore.getBeforeStar(aftStmt);
 	int first;
 	int listSize = bef.size();
-	if (type == "stmt") {
+	if (type == STMT) {
 		return bef;
 	}
 
 	for (int i = 0; i < listSize; i++) {
 		first = bef.front();
 		bef.pop_front();
-		if (type == "while") {
+		if (type == WHILE) {
 			if (isWhile(first)) {
 				bef.push_back(first);
 			}
 		}
-		if (type == "assign") {
+		if (type == ASSIGN) {
 			if (isAssignment(first)) {
 				bef.push_back(first);
 			}
 		}
+		//TODO 1 add if
 	}
 
 	return bef;
 }
 
-list<int> PKBMain::getAllBeforeStar(string type) {
+list<int> PKBMain::getAllBeforeStar(ENTITY type) {
 	list<int> bef = followsStarBefore.getAllBeforeStar();
 	int first;
 	int listSize = bef.size();
-	if (type == "stmt") {
+	if (type == STMT) {
 		return bef;
 	}
 
 	for (int i = 0; i < listSize; i++) {
 		first = bef.front();
 		bef.pop_front();
-		if (type == "while") {
+		if (type == WHILE) {
 			if (isWhile(first)) {
 				bef.push_back(first);
 			}
 		}
-		if (type == "assign") {
+		if (type == ASSIGN) {
 			if (isAssignment(first)) {
 				bef.push_back(first);
 			}
 		}
+		//TODO 1 add if
 	}
 
 	return bef;
 }
 
-list<int> PKBMain::getAllAfterStar(string type) {
+list<int> PKBMain::getAllAfterStar(ENTITY type) {
 	list<int> aft = followsStarAfter.getAllAfterStar();
 	int first;
 	int listSize = aft.size();
-	if (type == "stmt") {
+	if (type == STMT) {
 		return aft;
 	}
 
@@ -633,22 +653,23 @@ list<int> PKBMain::getAllAfterStar(string type) {
 	for (int i = 0; i < listSize; i++) {
 		first = aft.front();
 		aft.pop_front();
-		if (type == "while") {
+		if (type == WHILE) {
 			if (isWhile(first)) {
 				aft.push_back(first);
 			}
 		}
-		if (type == "assign") {
+		if (type == ASSIGN) {
 			if (isAssignment(first)) {
 				aft.push_back(first);
 			}
 		}
+		//TODO 1 add if
 	}
 
 	return aft;
 }
 
-pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2) {
+pair<list<int>, list<int>> PKBMain::getAllFollowsStar(ENTITY type1, ENTITY type2) {
 	pair<list<int>, list<int>> allFollows = followsStarAfter.getAllFollows();
 	list<int> bef = allFollows.first;
 	list<int> aft = allFollows.second;
@@ -657,7 +678,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 
 	int listSize = bef.size();
 	for (int i = 0; i < listSize; i++) {
-		if (type1 == "while") {
+		if (type1 == WHILE) {
 			first = bef.front();
 			bef.pop_front();
 			second = aft.front();
@@ -668,7 +689,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 			}
 		}
 
-		if (type1 == "assign") {
+		if (type1 == ASSIGN) {
 			first = bef.front();
 			bef.pop_front();
 			second = aft.front();
@@ -682,7 +703,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 
 	listSize = bef.size();
 	for (int i = 0; i < listSize; i++) {
-		if (type2 == "while") {
+		if (type2 == WHILE) {
 			first = bef.front();
 			bef.pop_front();
 			second = aft.front();
@@ -693,7 +714,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 			}
 		}
 
-		if (type2 == "assign") {
+		if (type2 == ASSIGN) {
 			first = bef.front();
 			bef.pop_front();
 			second = aft.front();
@@ -705,6 +726,7 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(string type1, string type2
 		}
 	}
 
+	//TODO 1 add if
 	return make_pair(bef, aft);
 }
 
@@ -715,6 +737,7 @@ bool PKBMain::startProcessComplexRelations() {
 	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
 	followsStarBefore.setMap(de.computeFollowsStarBeforeTable(followsTable));
+	//TODO 2 add calls, perhaps optimise
 	return true;
 }
 
@@ -838,40 +861,41 @@ list<string> PKBMain::getModifiesFromStmt(int stmt)
 	return modTableStmtToVar.getModVariablesFromStmt(stmt);
 }
 
-list<int> PKBMain::getUsesFromVar(string var, string type)
+list<int> PKBMain::getUsesFromVar(string var, ENTITY type)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	if (varIdx == -1) {
 		return list<int>();
 	}
-	if (type.compare("stmt") == 0) {
+	if (type == STMT) {
 		return usesTableVar.getUsesStmtsFromVar(varIdx);
 	}
-	else if (type.compare("assign") == 0) {
+	else if (type == ASSIGN) {
 		return usesTableVar.getUsesAssignsFromVar(varIdx);
 	}
-	else if (type.compare("while") == 0) {
+	else if (type == WHILE) {
 		usesTableVar.getUsesWhileStmtFromVar(varIdx).merge(usesTableVar.getUsesWhileContainersFromVar(varIdx));
 		return usesTableVar.getUsesWhileStmtFromVar(varIdx);
 	}
+	//TODO 1 add if
 	else {
 		return list<int>();
 	}
 }
 
-list<int> PKBMain::getModifiesFromVar(string var, string type)
+list<int> PKBMain::getModifiesFromVar(string var, ENTITY type)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	if (varIdx == -1) {
 		return list<int>();
 	}
-	if (type.compare("stmt") == 0) {
+	if (type == STMT) {
 		return modTableVar.getModStmtsFromVar(varIdx);
 	}
-	else if (type.compare("assign") == 0) {
+	else if (type == ASSIGN) {
 		return modTableVar.getModAssignsFromVar(varIdx);
 	}
-	else if (type.compare("while") == 0) {
+	else if (type == WHILE) {
 		modTableVar.getModWhileStmtFromVar(varIdx).merge(modTableVar.getModWhileContainersFromVar(varIdx));
 		return modTableVar.getModWhileStmtFromVar(varIdx);
 	}
@@ -880,25 +904,25 @@ list<int> PKBMain::getModifiesFromVar(string var, string type)
 	}
 }
 
-list<int> PKBMain::getStmtThatUsesAnything(string type)
+list<int> PKBMain::getStmtThatUsesAnything(ENTITY type)
 {
 	list<int> stmtList = usesTableStmtToVar.getStmtThatUses();
 	return stmtTypeList.getStmtType(stmtList, type);
 }
 
-list<int> PKBMain::getStmtThatModifiesAnything(string type)
+list<int> PKBMain::getStmtThatModifiesAnything(ENTITY type)
 {
 	list<int> stmtList = modTableStmtToVar.getStmtThatModifies();
 	return stmtTypeList.getStmtType(stmtList, type);
 }
 
-pair<list<int>, list<string>> PKBMain::getUsesPairs(string type)
+pair<list<int>, list<string>> PKBMain::getUsesPairs(ENTITY type)
 {
 	pair<list<int>, list<string>> usesPairs = usesTableStmtToVar.getUsesPair();
 	return stmtTypeList.getStmtType(usesPairs, type);
 }
 
-pair<list<int>, list<string>> PKBMain::getModifiesPairs(string type)
+pair<list<int>, list<string>> PKBMain::getModifiesPairs(ENTITY type)
 {
 	pair<list<int>, list<string>> modPairs = modTableStmtToVar.getModPair();
 	return stmtTypeList.getStmtType(modPairs, type);
@@ -942,7 +966,7 @@ list<int> PKBMain::getAllAssignments()
 list<int> PKBMain::getAllAssignments(string var)
 {
 	list<int> stmtList = patternTable.getLeftVariableMatchingStmts(var);
-	return stmtTypeList.getStmtType(stmtList, "assign");
+	return stmtTypeList.getStmtType(stmtList, ASSIGN);
 }
 
 bool PKBMain::addVariable(string var)

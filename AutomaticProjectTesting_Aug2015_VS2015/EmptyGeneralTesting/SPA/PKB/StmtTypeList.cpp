@@ -59,27 +59,27 @@ list<int> StmtTypeList::getWhileStmtList()
     getStmtType: to retrieve the statement numbers according to type
     (e.g. assign, while, ifs)
 */
-list<int> StmtTypeList::getStmtType(list<int> stmtList, string type)
+list<int> StmtTypeList::getStmtType(list<int> stmtList, ENTITY type)
 {
     list<int> filteredList;
     list<int>::iterator it;
     for (it = stmtList.begin(); it != stmtList.end(); ++it)
     {
-        if (type.compare("assign") == 0)
+        if (type == ASSIGN)
         {
             if (isAssignStmt(*it))
             {
                 filteredList.push_back(*it);
             }
         }
-        else if (type.compare("while") == 0)
+        else if (type == WHILE)
         {
             if (isWhileStmt(*it))
             {
                 filteredList.push_back(*it);
             }
         }
-        else if (type.compare("stmt") == 0)
+        else if (type == STMT)
         {
             filteredList.push_back(*it);
         }
@@ -87,7 +87,7 @@ list<int> StmtTypeList::getStmtType(list<int> stmtList, string type)
     return filteredList;
 }
 
-pair<list<int>, list<string>> StmtTypeList::getStmtType(pair<list<int>, list<string>> pairOfList, string type)
+pair<list<int>, list<string>> StmtTypeList::getStmtType(pair<list<int>, list<string>> pairOfList, ENTITY type)
 {
     list<int> stmts = pairOfList.first;
     list<string> vars = pairOfList.second;
@@ -104,24 +104,25 @@ pair<list<int>, list<string>> StmtTypeList::getStmtType(pair<list<int>, list<str
     list<pair<int, string>>::iterator it;
     for (it = listOfPairs.begin(); it != listOfPairs.end(); ++it)
     {
-        if (type.compare("assign") == 0)
+        if (type == ASSIGN)
         {
             if (isAssignStmt(it->first))
             {
                 filteredListOfPairs.push_back(*it);
             }
         }
-        else if (type.compare("while") == 0)
+        else if (type == WHILE)
         {
             if (isWhileStmt(it->first))
             {
                 filteredListOfPairs.push_back(*it);
             }
         }
-        else if (type.compare("stmt") == 0)
+        else if (type == STMT)
         {
             filteredListOfPairs.push_back(*it);
         }
+		//TODO 1 add if
     }
     // convert back to pair of lists
     list<int> resultStmts;
