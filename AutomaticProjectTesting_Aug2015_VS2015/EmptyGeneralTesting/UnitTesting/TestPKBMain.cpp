@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include <string>
 #include "../SPA/PKB/PKBMain.h"
+#include "../SPA/Entity.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -34,7 +35,7 @@ namespace UnitTesting
 
 			Assert::AreEqual(PKB.getAfter(1), 2);
 			Assert::AreEqual(PKB.getAfter(10), 0);
-			list<int> allBefore = PKB.getAllBefore("stmt");
+			list<int> allBefore = PKB.getAllBefore(STMT);
 			allBefore.sort();
 
 			Assert::IsTrue(std::find(allBefore.begin(), allBefore.end(), 1) != allBefore.end());
@@ -49,7 +50,7 @@ namespace UnitTesting
 			Assert::IsFalse(std::find(allBefore.begin(), allBefore.end(), 10) != allBefore.end());
 			Assert::IsFalse(std::find(allBefore.begin(), allBefore.end(), 0) != allBefore.end());
 
-			list<int> allAfter = PKB.getAllAfter("stmt");
+			list<int> allAfter = PKB.getAllAfter(STMT);
 			allAfter.sort();
 			Assert::IsFalse(std::find(allAfter.begin(), allAfter.end(), 1) != allAfter.end());
 			Assert::IsTrue(std::find(allAfter.begin(), allAfter.end(), 2) != allAfter.end());
@@ -73,7 +74,7 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isFollows(3, 9));
 			Assert::IsTrue(PKB.isFollows(9, 10));
 
-			pair<list<int>, list<int>> allFollows = PKB.getAllFollows("while", "while");
+			pair<list<int>, list<int>> allFollows = PKB.getAllFollows(WHILE, WHILE);
 			list<int> bef = allFollows.first;
 			list<int> aft = allFollows.second;
 
@@ -86,7 +87,7 @@ namespace UnitTesting
 			PKB.startProcessComplexRelations();
 			Assert::IsTrue(PKB.isFollowsStar(1, 10));
 
-			list<int> allAfterStar = PKB.getAllAfterStar("stmt");
+			list<int> allAfterStar = PKB.getAllAfterStar(STMT);
 			allAfterStar.sort();
 			list<int> expectedAfterStar;
 			expectedAfterStar.push_back(2);
@@ -99,14 +100,14 @@ namespace UnitTesting
 
 			Assert::IsTrue(allAfterStar == expectedAfterStar);
 
-			list<int>allBeforeStar = PKB.getAllBeforeStar("stmt");
+			list<int>allBeforeStar = PKB.getAllBeforeStar(STMT);
 			allBeforeStar.sort();
 			list<int> expectedBeforeStar;
 			expectedBeforeStar = { 1, 2, 3, 4, 5, 6, 9 };
 
 			Assert::IsTrue(expectedBeforeStar == allBeforeStar);
 
-			pair<list<int>, list<int>> allFollowsStar = PKB.getAllFollowsStar("stmt", "stmt");
+			pair<list<int>, list<int>> allFollowsStar = PKB.getAllFollowsStar(STMT, STMT);
 			Assert::IsTrue(allFollowsStar.first.size() == 16);
 
 			// TESTPARENT
@@ -121,12 +122,12 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isParent(6));
 
 			list<int> children;
-			children = PKB.getChildren(3, "stmt");
+			children = PKB.getChildren(3, STMT);
 			children.sort();
 			list<int> expectedChildren = { 4, 5, 6, 8 };
 
 			list<int> allChildren;
-			allChildren = PKB.getAllChildren("stmt");
+			allChildren = PKB.getAllChildren(STMT);
 			allChildren.sort();
 			list<int> expectedAllChildren = { 4, 5, 6, 7, 8 };
 
@@ -228,7 +229,7 @@ namespace UnitTesting
             stmtList.push_back(1);
             stmtList.push_back(2);
             list<int> testStmtList;
-            testStmtList = PKB.getModifiesFromVar("a","stmt");
+            testStmtList = PKB.getModifiesFromVar("a", STMT);
             while (!stmtList.empty() && !testStmtList.empty())
             {
                 Assert::AreEqual(stmtList.front(), testStmtList.front());

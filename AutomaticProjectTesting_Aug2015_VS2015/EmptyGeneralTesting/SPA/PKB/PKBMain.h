@@ -24,6 +24,7 @@
 #include "UsesTableVar.h"
 #include "VarIdxTable.h"
 #include <string>
+#include "../Entity.h"
 
 using namespace std;
 
@@ -36,36 +37,36 @@ public:
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
     bool isParent(int parentStmt);
-    list<int> getChildren(int parentStmt, string type);
+    list<int> getChildren(int parentStmt, ENTITY type);
     bool isChild(int childStmt);
     bool hasParentRel();
-    list<int> getParent(int childStmt, string type);
-    list<int> getAllParents(string type);
-    list<int> getAllChildren(string type);
-    pair<list<int>, list<int>> getAllParentsRel(string type1, string type2);
+    list<int> getParent(int childStmt, ENTITY type);
+    list<int> getAllParents(ENTITY type);
+    list<int> getAllChildren(ENTITY type);
+    pair<list<int>, list<int>> getAllParentsRel(ENTITY type1, ENTITY type2);
 	bool isParentStarChild(int parentStmt, int childStmt);
-	list<int> getChildrenStar(int parentStmt, string type);
-	list<int> getParentStar(int childStmt, string type);
-	pair<list<int>, list<int>> getAllParentStarRel(string type1, string type2);
+	list<int> getChildrenStar(int parentStmt, ENTITY type);
+	list<int> getParentStar(int childStmt, ENTITY type);
+	pair<list<int>, list<int>> getAllParentStarRel(ENTITY type1, ENTITY type2);
 
 	//Follows
-	pair<list<int>, list<int>> getAllFollows(string type1, string type2);
+	pair<list<int>, list<int>> getAllFollows(ENTITY type1, ENTITY type2);
     bool hasFollows();
     bool isAfter(int stmtAft);
     bool isBefore(int stmtBef);
     bool isFollows(int stmtBef, int stmtAft);
     int getBefore(int currStmt);
     int getAfter(int currStmt);
-    list<int> getAfter(int currStmt, string type);
-    list<int> getBefore(int currStmt, string type);
-    list<int> getAllBefore(string type);
-    list<int> getAllAfter(string type);
+    list<int> getAfter(int currStmt, ENTITY type);
+    list<int> getBefore(int currStmt, ENTITY type);
+    list<int> getAllBefore(ENTITY type);
+    list<int> getAllAfter(ENTITY type);
     bool isFollowsStar(int befStmt, int aftStmt);
-    list<int> getAfterStar(int befStmt, string type);
-    list<int> getBeforeStar(int aftStmt, string type);
-    list<int> getAllBeforeStar(string type);
-    list<int> getAllAfterStar(string type);
-    pair<list<int>, list<int>> getAllFollowsStar(string type1, string type2);
+    list<int> getAfterStar(int befStmt, ENTITY type);
+    list<int> getBeforeStar(int aftStmt, ENTITY type);
+    list<int> getAllBeforeStar(ENTITY type);
+    list<int> getAllAfterStar(ENTITY type);
+    pair<list<int>, list<int>> getAllFollowsStar(ENTITY type1, ENTITY type2);
     bool startProcessComplexRelations();
 	
 	//General Purpose API for query evaluator
@@ -87,6 +88,7 @@ public:
     bool addAssignmentStmt(int stmt);
     bool addWhileStmt(int stmt);
 	bool addCallStmt(int stmt, string proc);
+	//TODO 1 add call
     bool addConstant(int stmt, int constant);
     bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);
@@ -101,12 +103,12 @@ public:
     bool isModifyingAnything(int stmt);
     list<string> getUsesFromStmt(int stmt);
     list<string> getModifiesFromStmt(int stmt);
-    list<int> getUsesFromVar(string var, string type);
-    list<int> getModifiesFromVar(string var, string type);
-    list<int> getStmtThatUsesAnything(string type);
-    list<int> getStmtThatModifiesAnything(string type);
-    pair<list<int>, list<string>> getUsesPairs(string type);
-    pair<list<int>, list<string>> getModifiesPairs(string type);
+    list<int> getUsesFromVar(string var, ENTITY type);
+    list<int> getModifiesFromVar(string var, ENTITY type);
+    list<int> getStmtThatUsesAnything(ENTITY type);
+    list<int> getStmtThatModifiesAnything(ENTITY type);
+    pair<list<int>, list<string>> getUsesPairs(ENTITY type);
+    pair<list<int>, list<string>> getModifiesPairs(ENTITY type);
 
     //PKB query evaluator (Pattern)
     pair<list<int>, list<string>> getLeftVariables();

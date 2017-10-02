@@ -42,6 +42,7 @@
     <ClCompile Include="PQL\ResultFormatter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="PKB\ChildToParentStarTable.h" />
     <ClInclude Include="PKB\ChildToParentTable.h" />
     <ClInclude Include="Parser\Parser.h" />
