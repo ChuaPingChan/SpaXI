@@ -3,7 +3,6 @@
 QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
 {
     this->_qt = qtPtr;
-    this->_rsFactory = ResultFactory();
 }
 
 QueryEvaluator::~QueryEvaluator()
@@ -12,7 +11,14 @@ QueryEvaluator::~QueryEvaluator()
 
 void QueryEvaluator::evaluate()
 {
+    bool hasResult = true;
+    ClauseResult clauseResult;
+    ResultFactory factory = 
+
     for (SuchThatClause stClause : _qt->getSuchThatClauses())
+    {
+
+    }
 }
 
 

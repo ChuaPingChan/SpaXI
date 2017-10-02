@@ -9,6 +9,7 @@
 #include "Utilities\PatternClause.h"
 #include "Utilities\SelectClause.h"
 #include "..\Entity.h"
+#include "Utilities\ClauseResult.h"
 
 using namespace std;
 
@@ -19,10 +20,10 @@ public:
     ~QueryTree();
 
     void insertVariable(int type, string var);
-        void insertSelect(SelectClause select);
+    void insertSelect(SelectClause select);
     void insertSuchThat(SuchThatClause relClause);
     void insertPattern(PatternClause patternClause);
-    void storeEvaluatorResult(list<string> list);
+    void storeEvaluatorResult(ClauseResult result);
     
     unordered_set<string> getStmts();
     unordered_set<string> getAssigns();
@@ -34,23 +35,23 @@ public:
     SelectClause getSelect();
     vector<SuchThatClause> getSuchThatClauses();
     vector<PatternClause> getPatternClauses();
-    list<string> getEvaluatorResult();
+    ClauseResult getEvaluatorResult();
 
     bool isEntitySynonymExist(string synonym, Entity entityIdx);
 
 private:
 
-    unordered_set<string> stmts;
-    unordered_set<string> assigns;
-    unordered_set<string> whiles;
-    unordered_set<string> vars;
-    unordered_set<string> consts;
-    unordered_set<string> progLines;
+    unordered_set<string> _stmts;
+    unordered_set<string> _assigns;
+    unordered_set<string> _whiles;
+    unordered_set<string> _vars;
+    unordered_set<string> _consts;
+    unordered_set<string> _progLines;
 
-    SelectClause selectStmt;
-    vector<SuchThatClause> suchThatClauses;
-    vector<PatternClause> patternClauses;
+    SelectClause _selectStmt;
+    vector<SuchThatClause> _suchThatClauses;
+    vector<PatternClause> _patternClauses;
 
-    list<string> evaluatorResult;
+    ClauseResult _evaluatorResult;
 };
 

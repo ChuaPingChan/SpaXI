@@ -14,17 +14,17 @@ void QueryTree::insertVariable(int type, string var)
 {
     if (type == STMT) 
     {
-        stmts.insert(var);
+        _stmts.insert(var);
     }
 
     else if (type == ASSIGN)
     {
-        assigns.insert(var);
+        _assigns.insert(var);
     }
 
     else if (type == WHILE)
     {
-        whiles.insert(var);
+        _whiles.insert(var);
     }
 
     /*else if (type == IF)
@@ -34,7 +34,7 @@ void QueryTree::insertVariable(int type, string var)
 
     else if (type == PROG_LINE)
     {
-        progLines.insert(var);
+        _progLines.insert(var);
     }
 
     /*else if (type == CALL)
@@ -49,12 +49,12 @@ void QueryTree::insertVariable(int type, string var)
 
     else if (type == VARIABLE)
     {
-        vars.insert(var);
+        _vars.insert(var);
     }
    
     else if (type == CONSTANT)
     {
-        consts.insert(var);
+        _consts.insert(var);
     }
 
     else
@@ -65,93 +65,93 @@ void QueryTree::insertVariable(int type, string var)
 
 void QueryTree::insertSelect(SelectClause select)
 {
-    selectStmt = select;
+    _selectStmt = select;
 }
 
 void QueryTree::insertSuchThat(SuchThatClause relClause)
 {
-    suchThatClauses.push_back(relClause);
+    _suchThatClauses.push_back(relClause);
 }
 
 void QueryTree::insertPattern(PatternClause patternClause)
 {
-    patternClauses.push_back(patternClause);
+    _patternClauses.push_back(patternClause);
 }
 
-void QueryTree::storeEvaluatorResult(list<string> list)
+void QueryTree::storeEvaluatorResult(ClauseResult result)
 {
-    evaluatorResult = list;
+    _evaluatorResult = result;
 }
 
 unordered_set<string> QueryTree::getStmts()
 {
-    return stmts;
+    return _stmts;
 }
 
 unordered_set<string> QueryTree::getAssigns()
 {
-    return assigns;
+    return _assigns;
 }
 
 unordered_set<string> QueryTree::getWhiles()
 {
-    return whiles;
+    return _whiles;
 }
 
 unordered_set<string> QueryTree::getVars()
 {
-    return vars;
+    return _vars;
 }
 
 unordered_set<string> QueryTree::getConsts()
 {
-    return consts;
+    return _consts;
 }
 
 unordered_set<string> QueryTree::getProgLines()
 {
-    return progLines;
+    return _progLines;
 }
 
 SelectClause QueryTree::getSelect()
 {
-    return selectStmt;
+    return _selectStmt;
 }
 
 vector<SuchThatClause> QueryTree::getSuchThatClauses()
 {
-    return suchThatClauses;
+    return _suchThatClauses;
 }
 
 vector<PatternClause> QueryTree::getPatternClauses()
 {
-    return patternClauses;
+    return _patternClauses;
 }
 
 list<string> QueryTree::getEvaluatorResult()
 {
-    return evaluatorResult;
+    return _evaluatorResult;
 }
 
 bool QueryTree::isEntitySynonymExist(string synonym, Entity entityIdx)
 {
     switch (entityIdx) {
         case STMT:
-            return (find(stmts.begin(), stmts.end(), synonym) != stmts.end());
+            return (find(_stmts.begin(), _stmts.end(), synonym) != _stmts.end());
         case ASSIGN:
-            return (find(assigns.begin(), assigns.end(), synonym) != assigns.end());
+            return (find(_assigns.begin(), _assigns.end(), synonym) != _assigns.end());
         case WHILE:
-            return (find(whiles.begin(), whiles.end(), synonym) != whiles.end());
+            return (find(_whiles.begin(), _whiles.end(), synonym) != _whiles.end());
         case IF:
             return false;
         case PROG_LINE:
-            return (find(progLines.begin(), progLines.end(), synonym) != progLines.end());
+            return (find(_progLines.begin(), _progLines.end(), synonym) != _progLines.end());
         case CALL:
             return false;
         case PROCEDURE:
             return false;
         case VARIABLE:
-            return (find(vars.begin(), vars.end(), synonym) != vars.end());
+            return (find(_vars.begin(), _vars.end(), synonym) != _vars.end());
         case CONSTANT:
             return false;
         case STMTLIST:

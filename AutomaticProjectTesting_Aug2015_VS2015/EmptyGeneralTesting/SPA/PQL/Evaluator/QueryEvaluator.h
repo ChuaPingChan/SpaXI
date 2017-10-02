@@ -35,7 +35,6 @@ public:
 private:
 
 	QueryTree* _qt;
-	ResultFactory _rsFactory;
 	//PKBMain PKB;//TODO: Set this to static
 
  //   bool hasResult = true;

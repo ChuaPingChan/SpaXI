@@ -23,43 +23,21 @@
 class ResultFactory
 {
 public:
-	ResultFactory();
-	~ResultFactory();
+    ResultFactory(ClauseResult clauseResult);
+    ~ResultFactory();
 
-	ClauseResult makeClauseResult(SelectClause clause);
-	ClauseResult makeClauseResult(SuchThatClause clause);
-	ClauseResult makeClauseResult(PatternClause clause);
-	//ClauseResult makeClauseResult(WithClause clause);
+    ClauseResult makeClauseResult(SelectClause clause);
+    ClauseResult makeClauseResult(SuchThatClause clause);
+    ClauseResult makeClauseResult(PatternClause clause);
+    //ClauseResult makeClauseResult(WithClause clause);
 
 private:
 
-	enum REL 
-	{
-		MODIFIES = 0,
-		USES,
-		PARENT,
-		PARENTSTAR,
-		FOLLOWS,
-		FOLLOWSSTAR,
-		CALLS,
-		CALLSSTAR,
-		NEXT,
-		NEXTSTAR,
-		AFFECTS,
-		AFFECTSSTAR,
-		PATTERN
-	};
+    ClauseResult _clauseResult;
 
-	enum PATTERN_TYPE
-	{
-		ASSIGN = 0,
-		WHILE,
-		IF
-	};
-
-	template<typename Base, typename T>
-	inline bool instanceof(const T *ptr) {
-		return dynamic_cast<const Base*>(ptr) != nullptr;
-	}
+    template<typename Base, typename T>
+    inline bool instanceof(const T *ptr) {
+        return dynamic_cast<const Base*>(ptr) != nullptr;
+    }
 };
 

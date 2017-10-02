@@ -1,8 +1,9 @@
 #include "ResultFactory.h"
 
 
-ResultFactory::ResultFactory()
+ResultFactory::ResultFactory(ClauseResult clauseResult)
 {
+    this->_clauseResult = clauseResult;
 }
 
 
