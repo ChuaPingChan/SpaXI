@@ -9,11 +9,18 @@ SelectClause::SelectClause(int selectionType)
     this->selectionType = selectionType;
 }
 
-SelectClause::SelectClause(int selectionType, vector<int> argTypes, vector<string> args)
+SelectClause::SelectClause(int selectionType, int singleArgType, string singleArg)
 {
     this->selectionType = selectionType;
-    this->argTypes = argTypes;
-    this->args = args;
+    this->singleArgType = singleArgType;
+    this->singleArg = singleArg;
+}
+
+SelectClause::SelectClause(int selectionType, vector<int> tupleArgTypes, vector<string> tupleArgs)
+{
+    this->selectionType = selectionType;
+    this->tupleArgTypes = tupleArgTypes;
+    this->tupleArgs = tupleArgs;
 }
 
 SelectClause::~SelectClause()
@@ -25,22 +32,32 @@ int SelectClause::getSelectionType()
     return this->selectionType;
 }
 
-int SelectClause::getArgTypeAt(int index)
+int SelectClause::getSingleArgType()
 {
-	return argTypes.at(index);
+    return this->singleArgType;
 }
 
-vector<int> SelectClause::getArgTypes()
+string SelectClause::getSingleArg()
 {
-	return argTypes;
+    return this->singleArg;
 }
 
-string SelectClause::getArgAt(int index)
+vector<int> SelectClause::getTupleArgTypes()
 {
-	return args.at(index);
+    return this->tupleArgTypes;
 }
 
-vector<string> SelectClause::getArgs()
+int SelectClause::getTupleArgTypeAt(int index)
 {
-	return args;
+	return tupleArgTypes.at(index);
+}
+
+vector<string> SelectClause::getTupleArgs()
+{
+    return this->tupleArgs;
+}
+
+string SelectClause::getTupleArgAt(int index)
+{
+	return tupleArgs.at(index);
 }

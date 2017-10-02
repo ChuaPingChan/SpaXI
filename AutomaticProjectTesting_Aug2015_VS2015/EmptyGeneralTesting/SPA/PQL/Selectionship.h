@@ -5,7 +5,7 @@ using namespace std;
 
 enum SELECTIONTYPE
 {
-    SELECT_SINGLE = 0,
-    SELECT_BOOLEAN,
+    SELECT_BOOLEAN = 0,
+    SELECT_SINGLE,
     SELECT_TUPLE
 };

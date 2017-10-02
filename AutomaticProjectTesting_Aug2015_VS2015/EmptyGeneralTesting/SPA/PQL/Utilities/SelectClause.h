@@ -12,19 +12,28 @@ class SelectClause
 public:
 	SelectClause();
 	SelectClause(int selectionType);
-	SelectClause(int selectionType, vector<int> argTypes, vector<string> args);
+    SelectClause(int selectionType, int singleArgType, string singleArg);
+	SelectClause(int selectionType, vector<int> tupleArgTypes, vector<string> tupleArgs);
 	~SelectClause();
 
 	/* Getters */
     int getSelectionType();
-    int getArgTypeAt(int index);
-	vector<int> getArgTypes();
-	string getArgAt(int index);
-	vector<string> getArgs();
+
+    int getSingleArgType();
+    string getSingleArg();
+
+    vector<int> getTupleArgTypes();
+    int getTupleArgTypeAt(int index);
+	
+    vector<string> getTupleArgs();
+    string getTupleArgAt(int index);
+	
 
 private:
 	int selectionType;
-	vector<int> argTypes;
-	vector<string> args;
+    int singleArgType;
+    string singleArg;
+	vector<int> tupleArgTypes;
+	vector<string> tupleArgs;
 };
 

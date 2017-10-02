@@ -16,7 +16,12 @@ bool SelectValidator::isValid(string str)
 {
     string selectWithoutKeyword = removeSelectKeyword(str);
     string processedStr = Formatter::removeAllSpaces(processedStr);
-    return isValidSelectSingle(processedStr) || isValidSelectBoolean(processedStr) || isValidSelectTuple(processedStr);
+    return isValidSelectBoolean(processedStr) || isValidSelectSingle(processedStr) || isValidSelectTuple(processedStr);
+}
+
+bool SelectValidator::isValidSelectBoolean(string selectedStr)
+{
+    return false;
 }
 
 bool SelectValidator::isValidSelectSingle(string selectedStr)
@@ -26,19 +31,10 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
         int entity = getEntityOfSynonym(selectedStr);
         if (entity == UNKNOWN)
             return false;
- 
-        vector<int> argType(entity);
-        vector<string> arg;
-        arg.push_back(selectedStr);
-        SelectClause sc = makeSelectClause(SELECT_SINGLE, argType, arg);
+        SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
         storeInQueryTree(sc);
         return true;
     }
-    return false;
-}
-
-bool SelectValidator::isValidSelectBoolean(string selectedStr)
-{
     return false;
 }
 
@@ -47,14 +43,19 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
     return false;
 }
 
-SelectClause SelectValidator::makeSelectClause(int selectionType, vector<int> argTypes, vector<string> args)
-{
-    return SelectClause(selectionType, argTypes, args);
-}
-
 SelectClause SelectValidator::makeSelectClause(int selectionType)
 {
     return SelectClause(selectionType);
+}
+
+SelectClause SelectValidator::makeSelectClause(int selectionType, int singleArgType, string singleArg)
+{
+    return SelectClause(selectionType, singleArgType, singleArg);
+}
+
+SelectClause SelectValidator::makeSelectClause(int selectionType, vector<int> tupleArgTypes, vector<string> tupleArgs)
+{
+    return SelectClause(selectionType, tupleArgTypes, tupleArgs);
 }
 
 bool SelectValidator::storeInQueryTree(SelectClause sc)
