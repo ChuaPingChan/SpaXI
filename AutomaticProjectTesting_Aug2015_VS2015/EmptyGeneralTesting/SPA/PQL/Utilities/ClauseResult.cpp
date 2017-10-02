@@ -277,7 +277,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
     return true;
 }
 
-bool ClauseResult::empty()
+bool ClauseResult::hasResults()
 {
     return _results.empty();
 }

@@ -16,16 +16,18 @@ public:
 
     vector<string> getAllSynonyms();
     vector<vector<int>> getSynonymResults(vector<string> synNames);
+    // TODO: Complete list<pair<int>> getSynonymPairResults(string syn1Name, string syn2Name);
     vector<vector<int>> getAllResults();
     bool synonymPresent(string synName);
     bool addNewSynResults(string newSynName, vector<int> newSynResults);
+    // TODO: Make addNewSynResults do overlapExistingSynResults
     bool overlapExistingSynResults(string synName, vector<int> synResultsToOverlap);
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
     bool addNewSynPairResults(string syn1Name, string syn2Name, vector<vector<int>> pairResults);
     bool removeCombinations(string synName, int value);
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
     bool pairWithOldSyn(string oldSyn, int oldSynValue, string newSyn, vector<int> newSynResults);
-    bool empty();
+    bool hasResults();
     
 protected:
     unordered_map<string, int> _synToIdxMap;
