@@ -1,7 +1,7 @@
 #include "PatternClause.h"
 
 
-PatternClause::PatternClause(int patternType, int argOneType, string argOne, int argTwoType, string argTwo, int argThreeType, string argThree)
+PatternClause::PatternClause(int patternType, ENTITY argOneType, string argOne, ENTITY argTwoType, string argTwo, ENTITY argThreeType, string argThree)
 {
 	this->_patternType = patternType;
 	this->_argOneType = argOneType;
@@ -21,17 +21,17 @@ int PatternClause::getPatternType()
 	return _patternType;
 }
 
-int PatternClause::getArgOneType()
+ENTITY PatternClause::getArgOneType()
 {
 	return this->_argOneType;
 }
 
-int PatternClause::getArgTwoType()
+ENTITY PatternClause::getArgTwoType()
 {
 	return this->_argTwoType;
 }
 
-int PatternClause::getArgThreeType()
+ENTITY PatternClause::getArgThreeType()
 {
 	return this->_argThreeType;
 }

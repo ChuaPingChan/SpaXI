@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 #include <list>
+#include "../../Entity.h"
 
 using namespace std;
 

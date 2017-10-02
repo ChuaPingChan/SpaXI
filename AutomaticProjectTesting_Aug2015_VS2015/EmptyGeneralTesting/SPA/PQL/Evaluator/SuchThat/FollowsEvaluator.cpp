@@ -13,8 +13,8 @@ FollowsEvaluator::~FollowsEvaluator()
 
 bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult)
 {
-	int argOneType = stClause.getArgOneType();
-	int argTwoType = stClause.getArgTwoType();
+	ENTITY argOneType = stClause.getArgOneType();
+	ENTITY argTwoType = stClause.getArgTwoType();
 	string argOne = stClause.getArgOne();
 	string argTwo = stClause.getArgTwo();
 
@@ -62,7 +62,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 	//Case 6: Follows(_, synonym)
 	else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
 	{
-		list<int> pkbResult = pkbInstance->getAllAfter(argTwo);
+		list<int> pkbResult = pkbInstance->getAllAfter(argTwoType);
 		if (pkbResult.empty())
 		{
 			return false;
@@ -156,7 +156,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 				for (int i : existingVals)
 				{
 					// Removes if it is no longer valid, else adding new synonym to existing result
-					list<int> argTwoVals = pkbInstance->getAfter(i, argTwoType);
+					list<int> argTwoVals = pkbInstance->getAfter(i, argOneType);
 					if (argTwoVals.empty())
 					{
 						clauseResult->removeCombinations(argOne, i);
@@ -177,14 +177,14 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 				for (int i : existingVals)
 				{
 					// Removes if it is no longer valid, else adding new synonym to existing result
-					list<int> argOneVals = pkbInstance->getAfter(argOneType, i);
+					list<int> argOneVals = pkbInstance->getBefore(i, argTwoType);
 					if (argOneVals.empty())
 					{
 						clauseResult->removeCombinations(argTwo, i);
 					}
 					else
 					{
-						clauseResult->pairWithOldSyn(argTwo, i, argTwo, argOneVals);
+						clauseResult->pairWithOldSyn(argTwo, i, argOne, argOneVals);
 					}
 				}
 

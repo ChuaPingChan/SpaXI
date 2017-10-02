@@ -1,7 +1,7 @@
 #include "SuchThatClause.h"
 
 
-SuchThatClause::SuchThatClause(int rel, int argOneType, string argOne, int argTwoType, string argTwo)
+SuchThatClause::SuchThatClause(int rel, ENTITY argOneType, string argOne, ENTITY argTwoType, string argTwo)
 {
 	this->_rel = rel;
 	this->_argOneType = argOneType;
@@ -19,12 +19,12 @@ int SuchThatClause::getRel()
 	return this->_rel;
 }
 
-int SuchThatClause::getArgOneType()
+ENTITY SuchThatClause::getArgOneType()
 {
 	return this->_argOneType;
 }
 
-int SuchThatClause::getArgTwoType()
+ENTITY SuchThatClause::getArgTwoType()
 {
 	return this->_argTwoType;
 }
