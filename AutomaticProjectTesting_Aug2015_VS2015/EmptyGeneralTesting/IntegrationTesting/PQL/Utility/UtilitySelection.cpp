@@ -25,7 +25,7 @@ bool UtilitySelection::isSameSuchThatClauseContent(SuchThatClause expected, Such
 {
     bool isSameRel = expected.getRel() == actual.getRel();
     bool isSameArgOneType = expected.getArgOneType() == actual.getArgOneType();
-    bool isSameArgTwoType = expected.getArgOneType() == actual.getArgTwoType();
+    bool isSameArgTwoType = expected.getArgTwoType() == actual.getArgTwoType();
     bool isSameArgOne = expected.getArgOne() == actual.getArgOne();
     bool isSameArgTwo = expected.getArgTwo() == actual.getArgTwo();
 
