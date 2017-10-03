@@ -16,32 +16,28 @@ class ClauseResult
 public:
     ClauseResult();
 
-    // TODO: Modify unit test to receive list instead of vector
     list<string> getAllSynonyms();
-    // TODO: Modify unit test to receive list instead of vector
     list<list<int>> getSynonymResults(vector<string> synNames);
     // TODO: Implement this
     list<int> getSynonymResults(string synNames);
     // TODO: Complete list<pair<int>> getSynonymPairResults(string syn1Name, string syn2Name);
     list<pair<int,int>> getSynonymPairResults(string syn1Name, string syn2Name);
-    // TODO: Modify unit test to receive list instead of vector
     list<list<int>> getAllResults();
     bool synonymPresent(string synName);
     bool addNewSynResults(string newSynName, list<int> newSynResults);
     // TODO: Make addNewSynResults do overlapExistingSynResults
-    // TODO: Remove bool overlapExistingSynResults(string synName, vector<int> synResultsToOverlap);
+    bool overlapExistingSynResults(string synName, list<int> synResultsToOverlap);
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
     bool addNewSynPairResults(string syn1Name, string syn2Name, vector<vector<int>> pairResults);
     bool removeCombinations(string synName, int value);
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
-    // TODO: Modify unit test to receive list instead of vector
     bool pairWithOldSyn(string oldSyn, int oldSynValue, string newSyn, list<int> newSynResults);
     bool hasResults();
     
 protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
-    vector<vector<int>> _results;     // Results of stmt, constant, prog_line synonyms
+    vector<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
 
     // TODO: Unit test needed.
     template<typename T> static list<T> convertVectorToList(vector<T> &v)

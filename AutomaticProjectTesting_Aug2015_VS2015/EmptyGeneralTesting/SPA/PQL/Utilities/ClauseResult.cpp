@@ -93,7 +93,7 @@ Note: This method involves computing Catesian product - computationally expensiv
 */
 bool ClauseResult::addNewSynResults(string newSynName, list<int> newSynResultsList)
 {
-    assert(newSynResultsList.size() > 0);
+    assert(newSynResultsList.size() > 0);       // TODO: Can consider clearing everything if this happens
     assert(_synToIdxMap.count(newSynName) == 0);    // Must be new synonym
     vector<int> newSynResults = convertListToVector(newSynResultsList);
     
@@ -206,9 +206,11 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, list<int> syn1Results, 
     return addNewSynPairResults(syn1Name, syn2Name, pairResults);
 }
 
-/*
-bool ClauseResult::overlapExistingSynResults(string synName, vector<int> synResultsToOverlap)
+bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResultsListToOverlap)
 {
+    assert(synonymPresent(synName));
+    vector<int> synResultsToOverlap = convertListToVector(synResultsListToOverlap);
+
     int synIdx = _synToIdxMap.at(synName);
     unordered_set<int> resultsSetToOverlap(synResultsToOverlap.begin(), synResultsToOverlap.end());
     vector<vector<int>> updatedResults = _results;
@@ -225,7 +227,6 @@ bool ClauseResult::overlapExistingSynResults(string synName, vector<int> synResu
     _results = updatedResults;
     return true;
 }
-*/
 
 bool ClauseResult::removeCombinations(string synName, int value)
 {
