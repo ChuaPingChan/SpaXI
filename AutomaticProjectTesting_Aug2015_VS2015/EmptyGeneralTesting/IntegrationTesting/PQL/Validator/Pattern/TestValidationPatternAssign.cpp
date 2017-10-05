@@ -24,7 +24,7 @@ namespace UnitTesting
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
-            Assert::IsTrue(UtilitySelection::isSamePatternClauseContent(expected, actual));
+            Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
     };
 }

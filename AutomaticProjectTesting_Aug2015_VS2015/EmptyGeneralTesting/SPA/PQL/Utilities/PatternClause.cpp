@@ -14,8 +14,13 @@ PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity 
 
 PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree)
 {
-    PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo);
+    this->_patternType = patternType;
+    this->_argOneType = argOneType;
+    this->_argTwoType = argTwoType;
     this->_argThreeType = argThreeType;
+    this->_patternSyn = patternSyn;
+    this->_argOne = argOne;
+    this->_argTwo = argTwo;
     this->_argThree = argThree;
 }
 

@@ -19,5 +19,6 @@ public:
     static PatternClause makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo);
     static PatternClause makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree);
     static PatternClause getFirstPatternClauseFromTree(QueryTree qt);
-    static bool isSamePatternClauseContent(PatternClause expected, PatternClause actual);
+    static bool isSamePatternClauseAssignWhileContent(PatternClause expected, PatternClause actual);
+    static bool isSamePatternClauseIfContent(PatternClause expected, PatternClause actual);
 };

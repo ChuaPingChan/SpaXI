@@ -36,7 +36,7 @@ bool UtilitySelection::isSameSuchThatClauseContent(SuchThatClause expected, Such
 PatternClause UtilitySelection::makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
 {
     //TODO: Might need to create type for unknown
-    return PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo, STMT, "");
+    return PatternClause(patternType, patternSyn, argOneType, argOne, argTwoType, argTwo);
 }
 
 PatternClause UtilitySelection::makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree)
@@ -50,7 +50,19 @@ PatternClause UtilitySelection::getFirstPatternClauseFromTree(QueryTree qt)
     return pcVector.front();
 }
 
-bool UtilitySelection::isSamePatternClauseContent(PatternClause expected, PatternClause actual)
+bool UtilitySelection::isSamePatternClauseAssignWhileContent(PatternClause expected, PatternClause actual)
+{
+    bool isSamePatternType = expected.getPatternType() == actual.getPatternType();
+    bool isSamePatternSyn = expected.getPatternSynonym() == actual.getPatternSynonym();
+    bool isSameArgOneType = expected.getArgOneType() == actual.getArgOneType();
+    bool isSameArgTwoType = expected.getArgTwoType() == actual.getArgTwoType();
+    bool isSameArgOne = expected.getArgOne() == actual.getArgOne();
+    bool isSameArgTwo = expected.getArgTwo() == actual.getArgTwo();
+
+    return isSamePatternType && isSamePatternSyn && isSameArgOneType && isSameArgTwoType && isSameArgOne && isSameArgTwo;
+}
+
+bool UtilitySelection::isSamePatternClauseIfContent(PatternClause expected, PatternClause actual)
 {
     bool isSamePatternType = expected.getPatternType() == actual.getPatternType();
     bool isSamePatternSyn = expected.getPatternSynonym() == actual.getPatternSynonym();
