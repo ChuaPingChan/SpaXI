@@ -24,14 +24,13 @@ bool SuchThatHandler::isValidSuchThat(string str)
             break;
         /*case USES:
             suchThatValidator = new UsesValidator(USES, processedStr, qtPtr);
-            break;
+            break;*/
         case PARENT:
             suchThatValidator = new ParentValidator(PARENT, processedStr, qtPtr);
             break;
         case PARENTSTAR:
             suchThatValidator = new ParentValidator(PARENTSTAR, processedStr, qtPtr);
             break;
-            */
         case FOLLOWS:
             suchThatValidator = new FollowsValidator(FOLLOWS, processedStr, qtPtr);
             break;
