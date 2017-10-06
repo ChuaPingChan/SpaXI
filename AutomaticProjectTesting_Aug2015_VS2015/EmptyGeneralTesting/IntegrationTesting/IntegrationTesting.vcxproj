@@ -168,6 +168,7 @@
     <ClCompile Include="PQL\PQLFriend\FriendDeclarationValidator.cpp" />
     <ClCompile Include="PQL\TestValidationDeclarationAndTree.cpp" />
     <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternAssign.cpp" />
+    <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatFollows.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatModifies.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
