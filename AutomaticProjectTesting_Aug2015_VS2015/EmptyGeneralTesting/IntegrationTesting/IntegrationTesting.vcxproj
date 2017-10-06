@@ -172,6 +172,7 @@
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatFollowsStar.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatModifies.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatParent.cpp" />
+    <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatParentStar.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
