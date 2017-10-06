@@ -1,17 +1,17 @@
 #pragma once
 #include "SuchThatValidator.h"
-#include "..\..\..\QueryTree.h"
 
 class UsesValidator : public SuchThatValidator
 {
 public:
-    UsesValidator(QueryTree *qtPtrNew);
+    UsesValidator(Relationship rel, string paramStr, QueryTree *qtPtrNew);
     ~UsesValidator();
 
-    bool isValid(string str);
+    void validate();
+    bool isValid();
 
 private:
-    QueryTree *qtPtr;
-    SuchThatValidator nextValidatorInLine;
+    bool isValidArgOne(string argOne);
+    bool isValidArgTwo(string argTwo);
 };
 

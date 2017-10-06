@@ -22,9 +22,9 @@ bool SuchThatHandler::isValidSuchThat(string str)
         case MODIFIES:
             suchThatValidator = new ModifiesValidator(MODIFIES, processedStr, qtPtr);
             break;
-        /*case USES:
+        case USES:
             suchThatValidator = new UsesValidator(USES, processedStr, qtPtr);
-            break;*/
+            break;
         case PARENT:
             suchThatValidator = new ParentValidator(PARENT, processedStr, qtPtr);
             break;
