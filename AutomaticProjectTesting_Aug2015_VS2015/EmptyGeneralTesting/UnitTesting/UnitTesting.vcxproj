@@ -165,7 +165,7 @@
   <ItemGroup>
     <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexFollows.cpp" />
-    <ClCompile Include="PQL\TestRegexModifies.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexModifies.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexParent.cpp" />
     <ClCompile Include="PQL\TestRegexPattern.cpp" />
     <ClCompile Include="PQL\TestRegexSelect.cpp" />
