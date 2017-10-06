@@ -50,8 +50,12 @@ public:
     * Methods *
     **********/
     /******************** Grammar ********************/
+    static bool isValidLetterRegex(string str);
     static bool isValidIntegerRegex(string str);
     static bool isValidIdentWithQuotesRegex(string str);
+    static bool isValidStmtRefRegex(string str);
+    static bool isValidEntRefRegex(string str);
+    static bool isValidNameRegex(string str);
     /******************** Declaration Regex ********************/
     static bool isValidEntityRegex(string str);
     static bool isValidSynonymRegex(string str);

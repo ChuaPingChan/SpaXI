@@ -163,7 +163,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PQL\TestRegexBasic.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
     <ClCompile Include="PQL\TestRegexFollows.cpp" />
     <ClCompile Include="PQL\TestRegexModifies.cpp" />
     <ClCompile Include="PQL\TestRegexParent.cpp" />

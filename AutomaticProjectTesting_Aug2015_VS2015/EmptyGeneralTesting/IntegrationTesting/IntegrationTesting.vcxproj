@@ -181,7 +181,6 @@
     <ClCompile Include="TestPQLValidatorAndTree.cpp" />
     <ClCompile Include="TestValidationFollowsAndTree.cpp" />
     <ClCompile Include="TestValidationFollowsStarAndTree.cpp" />
-    <ClCompile Include="TestValidationModifiesAndTree.cpp" />
     <ClCompile Include="TestValidationParentAndTree.cpp" />
     <ClCompile Include="TestValidationParentStarAndTree.cpp" />
     <ClCompile Include="TestValidationPatternAndTree.cpp" />

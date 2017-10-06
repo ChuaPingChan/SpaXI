@@ -42,6 +42,12 @@ const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGE
 
 
 
+bool RegexValidators::isValidLetterRegex(string str)
+{
+    regex letterRegexCheck = regex(LETTER_REGEX);
+    return regex_match(str, letterRegexCheck);
+}
+
 bool RegexValidators::isValidIntegerRegex(string str)
 {
     regex integerRegexCheck = regex(INTEGER_REGEX);
@@ -55,6 +61,24 @@ bool RegexValidators::isValidIdentWithQuotesRegex(string str)
 {
     regex checkIdentWithInvertedCommas = regex(IDENT_WITH_QUOTES_REGEX);
     return regex_match(str, checkIdentWithInvertedCommas);
+}
+
+bool RegexValidators::isValidStmtRefRegex(string str)
+{
+    regex stmtrefRegexCheck = regex(STMTREF_REGEX);
+    return regex_match(str, stmtrefRegexCheck);
+}
+
+bool RegexValidators::isValidEntRefRegex(string str)
+{
+    regex entrefRegexCheck = regex(ENTREF_REGEX);
+    return regex_match(str, entrefRegexCheck);
+}
+
+bool RegexValidators::isValidNameRegex(string str)
+{
+    regex nameRegexCheck = regex(NAME_REGEX);
+    return regex_match(str, nameRegexCheck);
 }
 
 /*--------------- Declaration Regex Methods ---------------*/
