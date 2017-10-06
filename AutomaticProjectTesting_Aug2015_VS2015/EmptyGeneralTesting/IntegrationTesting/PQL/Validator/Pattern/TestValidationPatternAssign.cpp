@@ -63,5 +63,29 @@ namespace UnitTesting
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
+
+        TEST_METHOD(TestValidity_PatternAssign_Underscore_Underscore_Valid)
+        {
+            string str = "pattern a(_, _)";
+            QueryTree qt;
+            qt.insertVariable(ASSIGN, "a");
+            PatternHandler pHandler = PatternHandler(&qt);
+            Assert::IsTrue(pHandler.isValidPattern(str));
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", UNDERSCORE, "_", UNDERSCORE, "_");
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_PatternAssign_IdentWithQuotes_Underscore_Valid)
+        {
+            string str = "pattern a(\"x\", _)";
+            QueryTree qt;
+            qt.insertVariable(ASSIGN, "a");
+            PatternHandler pHandler = PatternHandler(&qt);
+            Assert::IsTrue(pHandler.isValidPattern(str));
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHQUOTES, "\"x\"", UNDERSCORE, "_");
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
+        }
     };
 }
