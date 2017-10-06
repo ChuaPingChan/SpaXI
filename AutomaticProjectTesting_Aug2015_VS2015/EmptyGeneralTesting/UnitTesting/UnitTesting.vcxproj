@@ -163,13 +163,13 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PQL\TestRegexBasic.cpp" />
-    <ClCompile Include="PQL\TestRegexFollows.cpp" />
-    <ClCompile Include="PQL\TestRegexModifies.cpp" />
-    <ClCompile Include="PQL\TestRegexParent.cpp" />
-    <ClCompile Include="PQL\TestRegexPattern.cpp" />
-    <ClCompile Include="PQL\TestRegexSelect.cpp" />
-    <ClCompile Include="PQL\TestRegexUses.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexFollows.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexModifies.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexParent.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexPattern.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexSelect.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexUses.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultChildForTest.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultTest.cpp" />
     <ClCompile Include="stdafx.cpp">

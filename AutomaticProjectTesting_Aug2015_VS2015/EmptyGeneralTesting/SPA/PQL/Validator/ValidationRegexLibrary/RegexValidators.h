@@ -37,6 +37,7 @@ public:
     static const string USES_REGEX;
     static const string FOLLOWS_REGEX;
     static const string PARENT_REGEX;
+    static const string RELATIONSHIP_KEYWORD_REGEX;
 
     /*--------------- Select Regex ---------------*/
     static const string SELECT_REGEX;
@@ -49,26 +50,30 @@ public:
     * Methods *
     **********/
     /******************** Grammar ********************/
+    static bool isValidLetterRegex(string str);
     static bool isValidIntegerRegex(string str);
     static bool isValidIdentWithQuotesRegex(string str);
-    /******************** Declaration Regex ********************/
-    static bool isValidEntityRegex(string str);
     static bool isValidSynonymRegex(string str);
-
-    /******************** Select Overall ********************/
-    static bool isValidSelectOverallRegex(string str);
-
-    /******************** Pattern Regex ********************/
-    static bool isValidExpressionSpec(string str);
-    static bool isValidPatternRegex(string str);
-
-    /******************** Such That Regex ********************/
+    static bool isValidStmtRefRegex(string str);
+    static bool isValidEntRefRegex(string str);
+    static bool isValidNameRegex(string str);
+    static bool isValidEntityRegex(string str);
+    
+    /******************** Relationship Clause Regex ********************/
     static bool isValidModifiesRegex(string str);
     static bool isValidUsesRegex(string str);
     static bool isValidFollowsRegex(string str);
     static bool isValidParentRegex(string str);
 
+    /******************** Pattern Regex ********************/
+    static bool isValidFactorRegex(string str);
+    static bool isValidExpressionSpecRegex(string str);
+    static bool isValidPatternRegex(string str);
+
     /*--------------- Select Regex ---------------*/
     static bool isValidSelectRegex(string str);
     static bool isValidSuchThatRegex(string str);
+
+    /******************** Select Overall ********************/
+    static bool isValidSelectOverallRegex(string str);
 };

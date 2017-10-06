@@ -22,7 +22,7 @@ bool SuchThatHandler::isValidSuchThat(string str)
         case MODIFIES:
             suchThatValidator = new ModifiesValidator(MODIFIES, processedStr, qtPtr);
             break;
-        /*case USES:
+        case USES:
             suchThatValidator = new UsesValidator(USES, processedStr, qtPtr);
             break;
         case PARENT:
@@ -37,7 +37,7 @@ bool SuchThatHandler::isValidSuchThat(string str)
         case FOLLOWSSTAR:
             suchThatValidator = new FollowsValidator(FOLLOWSSTAR, processedStr, qtPtr);
             break;
-        case CALLS:
+        /*case CALLS:
             suchThatValidator = new CallsValidator(CALLS, processedStr, qtPtr);
             break;
         case CALLSSTAR:
@@ -70,16 +70,14 @@ bool SuchThatHandler::isValidSuchThat(string str)
     }
 }
 
-//TODO: Put inside regex table (Only the regex part)
+//TODO: Throw exception if cant find
 string SuchThatHandler::getSuchThatKeyWord(string str)
 {
-    string SUCH_THAT_KEYWORD = "(Modifies|Uses|Parent|Parent*|Follows|Follows*|Calls|Calls*|Next|Next*|Affects|Affects)";
-    regex suchThatKeywordRegex(SUCH_THAT_KEYWORD);
+    regex suchThatKeywordRegex(RegexValidators::RELATIONSHIP_KEYWORD_REGEX);
     smatch foundMatch;
-    regex_search(str, foundMatch, suchThatKeywordRegex);
-    string suchThatKeyword = foundMatch[1];
 
-    return suchThatKeyword;
+    regex_search(str, foundMatch, suchThatKeywordRegex);
+    return foundMatch[1];
 }
 
 int SuchThatHandler::getRelIndex(string rel)
@@ -100,7 +98,7 @@ int SuchThatHandler::getRelIndex(string rel)
         return FOLLOWS;
     }
     else if (rel == RELATIONSHIP_STRING_ARRAY[FOLLOWSSTAR]) {
-        return FOLLOWS;
+        return FOLLOWSSTAR;
     }
     else if (rel == RELATIONSHIP_STRING_ARRAY[CALLS]) {
         return CALLS;

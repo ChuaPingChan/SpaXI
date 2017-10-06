@@ -16,6 +16,7 @@ void ModifiesValidator::validate()
 
     if (firstArg == secondArg) {    //Because can never be 2 underlines or 2 int or 2 same synonym or 2 same synonymType
         this->validity = false;
+        return;
     }
 
     if (isValidArgOne(firstArg) && isValidArgTwo(secondArg)) {
@@ -24,11 +25,6 @@ void ModifiesValidator::validate()
         this->validity = true;
     }
     else {
-        //TODO: Might need type for unknown
-        this->argOne = "";
-        this->argTwo = "";
-        this->argOneType;// = UNKNWON;
-        this->argTwoType;// = UNKNWON;
         this->validity = false;
     }
 }
@@ -78,7 +74,7 @@ bool ModifiesValidator::isValidArgTwo(string argTwo)
         return true;
     }
 
-    else if (argTwo == "_") {
+    else if (argTwo == UNDERSCORE_STRING) {
         this->argTwoType = UNDERSCORE;
         return true;
     }

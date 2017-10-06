@@ -17,7 +17,6 @@ public:
     bool isValid(string str);
 
 private:
-    static const int UNKNOWN = -1;
     QueryTree *qtPtr;
     
     bool isValidSelectBoolean(string selectedStr);
@@ -31,6 +30,7 @@ private:
     bool storeInQueryTree(SelectClause sc);
 
     Entity getEntityOfSynonym(string syn);
+    bool isKnownEntity(Entity entity);  //TODO: Remove after throwing exception
     string removeSelectKeyword(string str);
 };
 

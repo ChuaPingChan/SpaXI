@@ -1,5 +1,7 @@
 #include "SuchThatValidator.h"
 
+const string SuchThatValidator::UNDERSCORE_STRING = "_";
+
 SuchThatValidator::SuchThatValidator(Relationship rel, string paramStr, QueryTree * qtPtrNew)
 {
     this->rel = rel;

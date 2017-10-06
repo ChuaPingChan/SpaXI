@@ -27,7 +27,7 @@ public:
     string getArgTwo();
 
 protected:
-    static const int UNKNWON = -1;
+    static const string UNDERSCORE_STRING;
     QueryTree *qtPtr;
     string paramStr;
 

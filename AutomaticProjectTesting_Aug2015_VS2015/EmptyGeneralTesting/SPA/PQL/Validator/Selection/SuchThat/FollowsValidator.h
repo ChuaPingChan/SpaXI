@@ -4,9 +4,13 @@
 class FollowsValidator : public SuchThatValidator
 {
 public:
-    FollowsValidator();
+    FollowsValidator(Relationship rel, string paramStr, QueryTree *qtPtrNew);
     ~FollowsValidator();
 
-    bool isValid(string str);
+    void validate();
+    bool isValid();
 
+private:
+    bool isValidArgOne(string argOne);
+    bool isValidArgTwo(string argTwo);
 };
