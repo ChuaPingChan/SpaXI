@@ -66,7 +66,8 @@ public:
     static bool isValidParentRegex(string str);
 
     /******************** Pattern Regex ********************/
-    static bool isValidExpressionSpec(string str);
+    static bool isValidFactorRegex(string str);
+    static bool isValidExpressionSpecRegex(string str);
     static bool isValidPatternRegex(string str);
 
     /*--------------- Select Regex ---------------*/
