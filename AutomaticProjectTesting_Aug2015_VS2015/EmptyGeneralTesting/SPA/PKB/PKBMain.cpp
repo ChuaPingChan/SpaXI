@@ -22,6 +22,61 @@ void PKBMain::resetInstance()
     singleton = NULL;
     singleton = new PKBMain();
 }
+//CALLS
+bool PKBMain::setCallsRel(int stmt, string callerProcName, string calleeProcName) {
+	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
+	stmtTypeList.addToCallsStmtList(stmt);
+	if (procIdxTable.getIdxFromProc(calleeProcName) == -1) {
+		procIdxTable.addToProcIdxTable(calleeProcName);
+	}
+	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
+	return callsTable.addCallsRel(callerProcIdx, calleeProcIdx) && callsTable.addCallsStmt(stmt, calleeProcIdx);
+}
+
+bool PKBMain::isCalls(string callerProcName, string calleeProcName) {
+	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
+	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
+
+	if (callerProcIdx == -1 || calleeProcIdx == -1) {
+		return false;
+	}
+
+	return callsTable.isCalls(callerProcIdx, calleeProcIdx);
+}
+
+bool PKBMain::isCaller(string callerProcName) {
+	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
+	return callsTable.isCaller(callerProcIdx);
+}
+
+list<int> PKBMain::getCallee(string callerProcName) {
+	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
+	return callsTable.getCallee(callerProcIdx);
+}
+
+bool PKBMain::isCallee(string calleeProcName) {
+	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
+	return callsTable.isCaller(calleeProcIdx);
+}
+
+bool PKBMain::hasCalls() {
+	return callsTable.hasCalls();
+}
+
+list<int> PKBMain::getAllCallees() {
+	return callsTable.getAllCallees();
+}
+
+list<int> PKBMain::getCaller(string calleeProcName) {
+	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
+	return callsTable.getCaller(calleeProcIdx);
+}
+
+list<int> PKBMain::getAllCallers() {
+	return callsTable.getAllCallers();
+}
+
+
 
 //PARENT
 bool PKBMain::setParentChildRel(int parentStmt, int childStmt) {

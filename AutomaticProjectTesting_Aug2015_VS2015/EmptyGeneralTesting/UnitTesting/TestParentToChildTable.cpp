@@ -27,6 +27,8 @@ namespace UnitTesting
 			ChildToParentTable ctpt;
 			Assert::IsTrue(ctpt.addChildParent(1, 2));
 
+			Assert::IsTrue(ctpt.getParent(1) == 0);
+			//TODO 4 check if invalid returns 0 and how PKBMain deals with it
 		}
 
 		TEST_METHOD(TestMultipleChildren)

@@ -261,5 +261,11 @@ namespace UnitTesting
         TEST_METHOD(TestUsesTable) {
             PKBMain PKB;
         }
+
+		TEST_METHOD(TestCallsTable) {
+			PKBMain PKB;
+			PKB.setCallsRel(3, "A", "B");
+			PKB.setCallsRel(5, "A", "C");
+		}
 	};
 }
