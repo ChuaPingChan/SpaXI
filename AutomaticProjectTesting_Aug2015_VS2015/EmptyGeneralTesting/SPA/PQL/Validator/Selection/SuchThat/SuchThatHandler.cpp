@@ -71,16 +71,15 @@ bool SuchThatHandler::isValidSuchThat(string str)
     }
 }
 
-//TODO: Put inside regex table (Only the regex part)
+//TODO: put regex inside regex table
 string SuchThatHandler::getSuchThatKeyWord(string str)
 {
-    string SUCH_THAT_KEYWORD = "(Modifies|Uses|Parent|Parent*|Follows|Follows*|Calls|Calls*|Next|Next*|Affects|Affects)";
-    regex suchThatKeywordRegex(SUCH_THAT_KEYWORD);
+    string suchThatKeyword = "(Modifies|Uses|Parent[\\*]|Parent|Follows[\\*]|Follows|Calls[\\*]|Calls|Next[\\*]|Next|Affects[\\*]|Affects)";
+    regex suchThatKeywordRegex(suchThatKeyword);
     smatch foundMatch;
-    regex_search(str, foundMatch, suchThatKeywordRegex);
-    string suchThatKeyword = foundMatch[1];
 
-    return suchThatKeyword;
+    regex_search(str, foundMatch, suchThatKeywordRegex);
+    return foundMatch[1];
 }
 
 int SuchThatHandler::getRelIndex(string rel)
@@ -101,7 +100,7 @@ int SuchThatHandler::getRelIndex(string rel)
         return FOLLOWS;
     }
     else if (rel == RELATIONSHIP_STRING_ARRAY[FOLLOWSSTAR]) {
-        return FOLLOWS;
+        return FOLLOWSSTAR;
     }
     else if (rel == RELATIONSHIP_STRING_ARRAY[CALLS]) {
         return CALLS;
