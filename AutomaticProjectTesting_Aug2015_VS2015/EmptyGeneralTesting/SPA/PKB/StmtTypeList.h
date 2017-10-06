@@ -16,15 +16,20 @@ public:
     StmtTypeList();
     bool addToAssignStmtList(int stmt);
     bool addToWhileStmtList(int stmt);
+	bool addToCallsStmtList(int stmt);
 	list<int> getAllStatements();
     bool isAssignStmt(int stmt);
     bool isWhileStmt(int stmt);
+	bool isCallsStmt(int stmt);
     bool isPresent(int stmt);
     list<int> getAssignStmtList();
     list<int> getWhileStmtList();
+	list<int> addToCallsStmtList();
     list<int> getStmtType(list<int> stmtList, Entity type);
     pair<list<int>, list<string>> getStmtType(pair<list<int>, list<string>> pairOfList, Entity type);
 private:
+	list<int> allStmtList;
     list<int> assignStmtList;
     list<int> whileStmtList;
+	list<int> callsStmtList;
 };

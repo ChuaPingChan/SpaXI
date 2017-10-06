@@ -8,6 +8,7 @@ bool StmtTypeList::addToAssignStmtList(int stmt) {
     // if stmt number does not exists in assignment list, add to list
     if (find(assignStmtList.begin(), assignStmtList.end(), stmt) == assignStmtList.end()) {
         assignStmtList.push_back(stmt);
+		allStmtList.push_back(stmt);
         return true;
     }
     return false;
@@ -17,17 +18,23 @@ bool StmtTypeList::addToWhileStmtList(int stmt) {
     // if stmt number does not exists in assignment list, add to list
     if (find(whileStmtList.begin(), whileStmtList.end(), stmt) == whileStmtList.end()) {
         whileStmtList.push_back(stmt);
+		allStmtList.push_back(stmt);
         return true;
     }
     return false;
 }
 
-list<int> StmtTypeList::getAllStatements() {
-	list<int> stmtList;
-	stmtList.insert(stmtList.end(), assignStmtList.begin(), assignStmtList.end());
-	stmtList.insert(stmtList.end(), whileStmtList.begin(), whileStmtList.end());
+bool StmtTypeList::addToCallsStmtList(int stmt) {
+	if (find(callsStmtList.begin(), callsStmtList.end(), stmt) == callsStmtList.end()) {
+		callsStmtList.push_back(stmt);
+		allStmtList.push_back(stmt);
+		return true;
+	}
+	return false;
+}
 
-	return stmtList;
+list<int> StmtTypeList::getAllStatements() {
+	return allStmtList;
 }
 
 bool StmtTypeList::isAssignStmt(int stmt)
@@ -38,6 +45,11 @@ bool StmtTypeList::isAssignStmt(int stmt)
 bool StmtTypeList::isWhileStmt(int stmt)
 {
     return find(whileStmtList.begin(), whileStmtList.end(), stmt) != whileStmtList.end();
+}
+
+bool StmtTypeList::isCallsStmt(int stmt)
+{
+	return find(callsStmtList.begin(), callsStmtList.end(), stmt) != callsStmtList.end();
 }
 
 bool StmtTypeList::isPresent(int stmt)
@@ -55,10 +67,16 @@ list<int> StmtTypeList::getWhileStmtList()
     return whileStmtList;
 }
 
+list<int> StmtTypeList::addToCallsStmtList()
+{
+	return callsStmtList;
+}
+
 /*
     getStmtType: to retrieve the statement numbers according to type
     (e.g. assign, while, ifs)
 */
+//TODO 1 change PKB entity types to use this method
 list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
 {
     list<int> filteredList;
