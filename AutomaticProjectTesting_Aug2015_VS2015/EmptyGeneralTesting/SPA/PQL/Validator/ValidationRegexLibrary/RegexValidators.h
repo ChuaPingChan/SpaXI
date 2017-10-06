@@ -20,7 +20,12 @@ public:
     static const string SYNONYM_REGEX;
     static const string STMTREF_REGEX;
     static const string ENTREF_REGEX;
+    static const string LINEREF_REGEX;
     static const string NAME_REGEX;
+    static const string ATTRNAME_REGEX;
+    static const string ATTRREF_REGEX;
+    static const string ELEM_REGEX;
+    static const string TUPLE_REGEX;
     static const string SPACE_0;
     static const string SPACE_1;
 
@@ -37,13 +42,17 @@ public:
     static const string USES_REGEX;
     static const string FOLLOWS_REGEX;
     static const string PARENT_REGEX;
+    static const string RELREF_REGEX;
+    static const string SUCH_THAT_REGEX;
     static const string RELATIONSHIP_KEYWORD_REGEX;
 
     /*--------------- Select Regex ---------------*/
     static const string SELECT_REGEX;
-    static const string RELREF_REGEX;
-    static const string SUCH_THAT_REGEX;
+
+    /*--------------- Select Overall ---------------*/
     static const string SELECT_OVERALL_REGEX;
+
+
 
 
     /**********
@@ -57,6 +66,10 @@ public:
     static bool isValidStmtRefRegex(string str);
     static bool isValidEntRefRegex(string str);
     static bool isValidNameRegex(string str);
+    static bool isValidAttrNameRegex(string str);
+    static bool isValidAttrRefRegex(string str);
+    static bool isValidElemRegex(string str);
+    static bool isValidTupleRegex(string str);
     static bool isValidEntityRegex(string str);
     
     /******************** Relationship Clause Regex ********************/

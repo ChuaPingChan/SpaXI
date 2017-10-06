@@ -14,7 +14,12 @@ const string RegexValidators::IDENT_WITH_QUOTES_REGEX = "(\"" + IDENT_REGEX + "\
 const string RegexValidators::SYNONYM_REGEX = IDENT_REGEX;
 const string RegexValidators::STMTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + INTEGER_REGEX + ")";
 const string RegexValidators::ENTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + "\"" + IDENT_REGEX + "\"" ")";
+const string RegexValidators::LINEREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + INTEGER_REGEX + ")";
 const string RegexValidators::NAME_REGEX = "(" + LETTER_REGEX + "(" + LETTER_REGEX + "|" + DIGIT_REGEX + ")*)";
+const string RegexValidators::ATTRNAME_REGEX = "(procName|varName|value|stmt#)";
+const string RegexValidators::ATTRREF_REGEX = "(" + SYNONYM_REGEX + "[.]" + ATTRNAME_REGEX + ")";
+const string RegexValidators::ELEM_REGEX = "(" + SYNONYM_REGEX + "|" + ATTRREF_REGEX + ")";
+const string RegexValidators::TUPLE_REGEX = "(" + ELEM_REGEX + "|" + "[<]" + ELEM_REGEX + "[(]" + "[,]" + ELEM_REGEX + "[)]" + "[\*]" + "[>]" + ")";
 const string RegexValidators::SPACE_0 = "(\\s*)";
 const string RegexValidators::SPACE_1 = "(\\s+)";
 const string RegexValidators::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
@@ -24,6 +29,8 @@ const string RegexValidators::MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SP
 const string RegexValidators::USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::RELREF_REGEX = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
+const string RegexValidators::SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF_REGEX;
 const string RegexValidators::RELATIONSHIP_KEYWORD_REGEX = "(Modifies|Uses|Parent[\\*]|Parent|Follows[\\*]|Follows|Calls[\\*]|Calls|Next[\\*]|Next|Affects[\\*]|Affects)";
 
 /*--------------- Pattern Clause Regex ---------------*/
@@ -33,8 +40,8 @@ const string RegexValidators::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPAC
 
 /*--------------- Select Regex ---------------*/
 const string RegexValidators::SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM_REGEX;
-const string RegexValidators::RELREF_REGEX = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
-const string RegexValidators::SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF_REGEX;
+
+/******************** Select Overall ********************/
 const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
 
 
@@ -83,6 +90,30 @@ bool RegexValidators::isValidNameRegex(string str)
 {
     regex nameRegexCheck = regex(NAME_REGEX);
     return regex_match(str, nameRegexCheck);
+}
+
+bool RegexValidators::isValidAttrNameRegex(string str)
+{
+    regex attrNameRegexCheck = regex(ATTRNAME_REGEX);
+    return regex_match(str, attrNameRegexCheck);
+}
+
+bool RegexValidators::isValidAttrRefRegex(string str)
+{
+    regex attrRefRegexCheck = regex(ATTRREF_REGEX);
+    return regex_match(str, attrRefRegexCheck);
+}
+
+bool RegexValidators::isValidElemRegex(string str)
+{
+    regex elemRegexCheck(ELEM_REGEX);
+    return regex_match(str, elemRegexCheck);
+}
+
+bool RegexValidators::isValidTupleRegex(string str)
+{
+    regex tupleRegexCheck(TUPLE_REGEX);
+    return regex_match(str, tupleRegexCheck);
 }
 
 bool RegexValidators::isValidEntityRegex(string str)

@@ -14,7 +14,6 @@ namespace UnitTesting
         /*********
         * Letter *
         *********/
-
         TEST_METHOD(TestRegex_Letter_Valid)
         {
             string str = "a";
@@ -44,7 +43,6 @@ namespace UnitTesting
         /**********
         * Integer *
         **********/
-
         TEST_METHOD(TestRegex_Integer_Valid)
         {
             string str = "1";
@@ -70,7 +68,6 @@ namespace UnitTesting
         /**********
         * Synonym *
         **********/
-
         TEST_METHOD(TestRegex_Synonym_SingleLetter_Valid)
         {
             string str = "a";
@@ -114,7 +111,6 @@ namespace UnitTesting
         /**********
         * StmtRef *
         **********/
-
         TEST_METHOD(TestRegex_StmtRef_Synonym_Valid)
         {
             string str = "validSynonym";
@@ -150,7 +146,6 @@ namespace UnitTesting
         /**********
         * EntRef *
         **********/
-
         TEST_METHOD(TestRegex_EntRef_Synonym_Valid)
         {
             string str = "validSynonym";
@@ -180,7 +175,6 @@ namespace UnitTesting
         /*******
         * Name *
         *******/
-
         TEST_METHOD(TestRegex_Name_SingleChar_Valid)
         {
             string str = "a";
@@ -201,7 +195,6 @@ namespace UnitTesting
 
         TEST_METHOD(TestRegex_Name_WithSpecialChar_Invalid)
         {
-            
             string str = "n@meWithSpeci@lSymbols";
             Assert::IsFalse(RegexValidators::isValidNameRegex(str));
             str = "1invalidEntityStartsWithNumber";
@@ -210,82 +203,174 @@ namespace UnitTesting
 
 
 
+        /************
+        * Attr Name *
+        ************/
+        TEST_METHOD(TestRegex_AttrName_ProcName_Valid)
+        {
+            string str = "procName";
+            Assert::IsTrue(RegexValidators::isValidAttrNameRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_AttrName_VarName_Valid)
+        {
+            string str = "varName";
+            Assert::IsTrue(RegexValidators::isValidAttrNameRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_AttrName_Value_Valid)
+        {
+            string str = "value";
+            Assert::IsTrue(RegexValidators::isValidAttrNameRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_AttrName_StmtNum_Valid)
+        {
+            string str = "stmt#";
+            Assert::IsTrue(RegexValidators::isValidAttrNameRegex(str));
+        }
+
+
+
+        /***********
+        * Attr Ref *
+        ***********/
+        TEST_METHOD(TestRegex_AttrRef_Synonym_ProcName_Valid)
+        {
+            string str = "p.procName";
+            Assert::IsTrue(RegexValidators::isValidAttrRefRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_AttrRef_Synonym_VarName_Valid)
+        {
+            string str = "v.varName";
+            Assert::IsTrue(RegexValidators::isValidAttrRefRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_AttrRef_Synonym_Vale_Valid)
+        {
+            string str = "v.value";
+            Assert::IsTrue(RegexValidators::isValidAttrRefRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_AttrRef_Synonym_StmtNum_Valid)
+        {
+            string str = "s1.stmt#";
+            Assert::IsTrue(RegexValidators::isValidAttrRefRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_AttrRef_Whitespaces_Invalid)
+        {
+            string str = "  p   .    procName   ";
+            Assert::IsFalse(RegexValidators::isValidAttrRefRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_AttrRef_IllegalCharacters_Invalid)
+        {
+            string str = "s.stmt@";
+            Assert::IsFalse(RegexValidators::isValidAttrRefRegex(str));
+        }
+
+
+
+        /*******
+        * Elem *
+        *******/
+        TEST_METHOD(TestRegex_Elem_Synonym_Valid)
+        {
+            string str = "validSynonym";
+            Assert::IsTrue(RegexValidators::isValidElemRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Elem_AttrRef_Valid)
+        {
+            string str = "p.procName";
+            Assert::IsTrue(RegexValidators::isValidElemRegex(str));
+        }
+
+
+
+        /********
+        * Tuple *
+        ********/
+        TEST_METHOD(TestRegex_Tuple_Elem_AttrRef_Valid)
+        {
+            string str = "p.procName";
+            Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_MultipleElem_Valid)
+        {
+            string str = "<s, s1>";
+            Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
+        }
+
+
         /****************
         * Design Entity *
         ****************/
         TEST_METHOD(TestRegex_DesignEntity_Procedure_Valid)
         {
-            
             string str = "procedure";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_StmtLst_Valid)
         {
-            
             string str = "stmtLst";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_Stmt_Valid)
         {
-            
             string str = "stmt";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_Assign_Valid)
         {
-            
             string str = "assign";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_Call_Valid)
         {
-            
             string str = "call";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_While_Valid)
         {
-            
             string str = "while";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_If_Valid)
         {
-            
             string str = "if";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_Variable_Valid)
         {
-            
             string str = "variable";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_Constant_Valid)
         {
-            
             string str = "constant";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_ProgLine_Valid)
         {
-            
             string str = "prog_line";
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
         TEST_METHOD(TestRegex_DesignEntity_Invalid)
         {
-            
             string str = "invalidEntity";
             Assert::IsFalse(RegexValidators::isValidEntityRegex(str));
             str = "invalidEntityEndsWith#";
