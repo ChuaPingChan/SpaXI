@@ -1,8 +1,8 @@
 #include "CppUnitTest.h"
 #include "string.h"
-#include "PQLFriend\FriendDeclarationValidator.h"
-#include "..\..\SPA\PQL\QueryTree.h"
-#include "Utility\UtilityQueryTree.h"
+#include "..\PQLFriend\FriendDeclarationValidator.h"
+#include "..\SPA\PQL\QueryTree.h"
+#include "..\Utility\UtilityQueryTree.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;

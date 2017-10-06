@@ -15,7 +15,7 @@ SelectValidator::~SelectValidator()
 bool SelectValidator::isValid(string str)
 {
     string selectWithoutKeyword = removeSelectKeyword(str);
-    string processedStr = Formatter::removeAllSpaces(processedStr);
+    string processedStr = Formatter::removeAllSpaces(selectWithoutKeyword);
     return isValidSelectBoolean(processedStr) || isValidSelectSingle(processedStr) || isValidSelectTuple(processedStr);
 }
 
@@ -29,7 +29,7 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
     if (RegexValidators::isValidSynonymRegex(selectedStr))
     {
         Entity entity = getEntityOfSynonym(selectedStr);
-        if (entity == UNKNOWN)
+        if (!isKnownEntity(entity))
             return false;
         SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
         storeInQueryTree(sc);
@@ -98,6 +98,29 @@ Entity SelectValidator::getEntityOfSynonym(string syn)
     }
     //TODO: Might need another type for UNKNOWN
     //return UNKNOWN;
+}
+
+bool SelectValidator::isKnownEntity(Entity entity)
+{
+    switch (entity) {
+        case STMT:
+        case ASSIGN:
+        case WHILE:
+        case IF:
+        case PROG_LINE:
+        case CALL:
+        case PROCEDURE:
+        case VARIABLE:
+        case INTEGER:
+        case UNDERSCORE:
+        case IDENT_WITHQUOTES:
+        case EXPRESSION_SPEC:
+        case CONSTANT:
+        case STMTLIST:
+            return true;
+        default:
+            return false;
+    }
 }
 
 string SelectValidator::removeSelectKeyword(string str)
