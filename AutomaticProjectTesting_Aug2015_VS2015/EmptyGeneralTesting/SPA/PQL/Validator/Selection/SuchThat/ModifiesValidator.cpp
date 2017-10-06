@@ -25,11 +25,6 @@ void ModifiesValidator::validate()
         this->validity = true;
     }
     else {
-        //TODO: Might need type for unknown
-        this->argOne = "";
-        this->argTwo = "";
-        this->argOneType;// = UNKNWON;
-        this->argTwoType;// = UNKNWON;
         this->validity = false;
     }
 }
