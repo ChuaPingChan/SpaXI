@@ -71,11 +71,10 @@ bool SuchThatHandler::isValidSuchThat(string str)
     }
 }
 
-//TODO: put regex inside regex table
+//TODO: Throw exception if cant find
 string SuchThatHandler::getSuchThatKeyWord(string str)
 {
-    string suchThatKeyword = "(Modifies|Uses|Parent[\\*]|Parent|Follows[\\*]|Follows|Calls[\\*]|Calls|Next[\\*]|Next|Affects[\\*]|Affects)";
-    regex suchThatKeywordRegex(suchThatKeyword);
+    regex suchThatKeywordRegex(RegexValidators::RELATIONSHIP_KEYWORD_REGEX);
     smatch foundMatch;
 
     regex_search(str, foundMatch, suchThatKeywordRegex);

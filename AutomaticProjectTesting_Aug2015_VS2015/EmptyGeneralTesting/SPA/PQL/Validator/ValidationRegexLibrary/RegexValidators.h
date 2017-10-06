@@ -37,6 +37,7 @@ public:
     static const string USES_REGEX;
     static const string FOLLOWS_REGEX;
     static const string PARENT_REGEX;
+    static const string RELATIONSHIP_KEYWORD_REGEX;
 
     /*--------------- Select Regex ---------------*/
     static const string SELECT_REGEX;
