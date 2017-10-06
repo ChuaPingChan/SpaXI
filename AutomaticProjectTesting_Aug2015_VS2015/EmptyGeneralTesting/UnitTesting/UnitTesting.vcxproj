@@ -167,7 +167,7 @@
     <ClCompile Include="PQL\Regex\TestRegexFollows.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexModifies.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexParent.cpp" />
-    <ClCompile Include="PQL\TestRegexPattern.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexPattern.cpp" />
     <ClCompile Include="PQL\TestRegexSelect.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexUses.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultChildForTest.cpp" />
