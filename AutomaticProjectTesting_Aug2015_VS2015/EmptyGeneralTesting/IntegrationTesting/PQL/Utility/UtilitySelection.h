@@ -18,6 +18,7 @@ public:
     static SuchThatClause makeSuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo);
     static SuchThatClause getFirstSuchThatClauseFromTree(QueryTree qt);
     static bool isSameSuchThatClauseContent(SuchThatClause expected, SuchThatClause actual);
+    static bool AreSameSuchThatClausesContentAsInTree(vector<SuchThatClause> expectedList, QueryTree qt);
 
 
     /**********

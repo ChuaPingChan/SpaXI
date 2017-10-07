@@ -44,7 +44,6 @@ public:
     static const string PARENT_REGEX;
     static const string RELREF_REGEX;
     static const string RELCOND_REGEX;
-    static const string SUCH_THAT_REGEX;    //TODO: Remove after such that cl is confirmed
     static const string SUCH_THAT_CL_REGEX;
     static const string RELATIONSHIP_KEYWORD_REGEX;
 
@@ -82,7 +81,6 @@ public:
     static bool isValidParentRegex(string str);
     static bool isValidRelCondRegex(string str);
     static bool isValidSuchThatClRegex(string str);
-    static bool isValidSuchThatRegex(string str);
 
     /******************** Pattern Regex ********************/
     static bool isValidFactorRegex(string str);
