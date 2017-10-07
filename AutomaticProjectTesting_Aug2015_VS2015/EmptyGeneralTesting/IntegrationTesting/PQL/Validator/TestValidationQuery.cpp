@@ -243,6 +243,23 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_Pattern_Assign_Valid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("variable v;");
+            query.append("Select a pattern a(v, _)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            PatternClause expectedPc = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_");
+            PatternClause actualPc = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expectedPc, actualPc));
+        }
+
+
 
         /******************
         * Invalid Queries *

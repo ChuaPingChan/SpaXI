@@ -39,7 +39,10 @@ public:
     static const string PATTERN_ASSIGN_REGEX;
     static const string PATTERN_WHILE_REGEX;
     static const string PATTERN_IF_REGEX;
-    static const string PATTERN_REGEX;
+    static const string PATTERNREF_REGEX;
+    static const string PATTERNCOND_REGEX;
+    //static const string PATTERN_REGEX;
+    static const string PATTERN_Cl_REGEX;
 
     /*--------------- Relationship Clause Regex ---------------*/
     static const string MODIFIES_FIRSTARG_REGEX;
@@ -50,7 +53,7 @@ public:
     static const string PARENT_REGEX;
     static const string RELREF_REGEX;
     static const string RELCOND_REGEX;
-    static const string SUCH_THAT_CL_REGEX;
+    static const string SUCH_THAT_Cl_REGEX;
     static const string RELATIONSHIP_KEYWORD_REGEX;
 
     /*--------------- Select Regex ---------------*/
@@ -95,7 +98,9 @@ public:
     static bool isValidPatternAssignRegex(string str);
     static bool isValidPatternWhileRegex(string str);
     static bool isValidPatternIfRegex(string str);
+    static bool isValidPatternCondRegex(string str);
     static bool isValidPatternRegex(string str);
+    static bool isValidPatternClRegex(string str);
 
     /*--------------- Select Regex ---------------*/
     static bool isValidResultClRegex(string str);

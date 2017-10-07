@@ -34,7 +34,7 @@ bool SelectionValidator::areValidClauses(string str)
     PatternHandler pHandler = PatternHandler(qtPtr);
 
     /* Extracting the clauses portion */
-    regex clauseRegex(RegexValidators::RELREF_REGEX + "|" + RegexValidators::PATTERN_REGEX);
+    regex clauseRegex(RegexValidators::RELREF_REGEX + "|" + RegexValidators::PATTERN_Cl_REGEX);
     sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
     sregex_iterator it_end;
 

@@ -313,18 +313,16 @@ namespace UnitTesting
         /****************************
         * Select, Pattern, Multiple *
         ****************************/
-        //TODO: Change to IsTrue when implement multiple pattern
         TEST_METHOD(TestRegex_Select_Pattern_Twice_Valid)
         {
             string str = "Select s pattern a ( _ , _ ) and w (v, _)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple pattern
         TEST_METHOD(TestRegex_Select_Pattern_Thrice_Valid)
         {
-            string str = "Select s pattern a ( _ , _ ) and w (v, _) and f(_, _)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            string str = "Select s pattern a ( _ , _ ) and w (v, _) and f(_, _, _)";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
         
 
@@ -361,17 +359,16 @@ namespace UnitTesting
         /***********************************
         * Select, Such That, Pattern, With *
         ***********************************/
-        //TODO: Change to IsTrue when implement multiple clauses
         TEST_METHOD(TestRegex_Select_SuchThat_Pattern_Valid)
         {
             string str = "Select s such that Uses(1, v) pattern a ( _ , _ ) and w (v, _) and f(_, _)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         TEST_METHOD(TestRegex_Select_Pattern_SuchThat_Valid)
         {
             string str = "Select s pattern a ( _ , _ ) and w (v, _) and f(_, _) such that Uses(1, v) and Modifies(2,v)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         //TODO: Change to IsTrue when implement multiple clauses
