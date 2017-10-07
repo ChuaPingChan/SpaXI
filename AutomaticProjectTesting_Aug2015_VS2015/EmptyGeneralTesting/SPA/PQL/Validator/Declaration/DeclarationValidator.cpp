@@ -65,8 +65,6 @@ bool DeclarationValidator::isValidDeclaration(string str) {
 
         if (synonymBank.find(synonym) == synonymBank.end()) {
            synonymBank.insert(synonym);
-            if (entity == synonym)
-                return false;
             qtPtr->insertVariable(getEntityIndexReference(entity), synonym);
         }
         else {
