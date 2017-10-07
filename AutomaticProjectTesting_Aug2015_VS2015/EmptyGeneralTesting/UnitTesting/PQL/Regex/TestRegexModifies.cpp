@@ -48,11 +48,10 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidModifiesRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement procedure
         TEST_METHOD(TestRegex_Modifies_Ident_Valid)
         {
             string str = "Modifies(\"procedure\",\"x\")";
-            Assert::IsFalse(RegexValidators::isValidModifiesRegex(str));
+            Assert::IsTrue(RegexValidators::isValidModifiesRegex(str));
         }
 
         TEST_METHOD(TestRegex_Modifies_Underscore_Valid)

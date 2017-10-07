@@ -68,10 +68,10 @@ bool SelectionValidator::areValidClauses(string str)
 
 bool SelectionValidator::isSuchThat(string str)
 {
-    if ((str.find("Follows") != std::string::npos) || 
-        (str.find("Parent") != std::string::npos) ||
-        (str.find("Modifies") != std::string::npos) ||
-        (str.find("Uses") != std::string::npos))
+    if ((str.find(RELATIONSHIP_STRING_ARRAY[FOLLOWS]) != std::string::npos) || 
+        (str.find(RELATIONSHIP_STRING_ARRAY[PARENT]) != std::string::npos) ||
+        (str.find(RELATIONSHIP_STRING_ARRAY[MODIFIES]) != std::string::npos) ||
+        (str.find(RELATIONSHIP_STRING_ARRAY[USES]) != std::string::npos))
     {
         return true;
     }

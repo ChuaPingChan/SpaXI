@@ -27,25 +27,25 @@ void QueryTree::insertSynonym(int type, string synonym)
         _whiles.insert(synonym);
     }
 
-    /*else if (type == IF)
+    else if (type == IF)
     {
-    ifs.insert(var)
-    }*/
+        _ifs.insert(synonym);
+    }
 
     else if (type == PROG_LINE)
     {
         _progLines.insert(synonym);
     }
 
-    /*else if (type == CALL)
+    else if (type == CALL)
     {
-        
+        _calls.insert(synonym);
     }
 
     else if (type == PROCEDURE)
     {
-        procedures.insert(var);
-    }*/
+        _procedures.insert(synonym);
+    }
 
     else if (type == VARIABLE)
     {
@@ -65,7 +65,7 @@ void QueryTree::insertSynonym(int type, string synonym)
 
 void QueryTree::insertSelect(SelectClause select)
 {
-    _selectStmt = select;
+    _selectClause = select;
 }
 
 void QueryTree::insertSuchThat(SuchThatClause relClause)
@@ -98,6 +98,21 @@ unordered_set<string> QueryTree::getWhiles()
     return _whiles;
 }
 
+unordered_set<string> QueryTree::getIfs()
+{
+    return _ifs;
+}
+
+unordered_set<string> QueryTree::getCalls()
+{
+    return _calls;
+}
+
+unordered_set<string> QueryTree::getProcedures()
+{
+    return _procedures;
+}
+
 unordered_set<string> QueryTree::getVars()
 {
     return _vars;
@@ -113,9 +128,9 @@ unordered_set<string> QueryTree::getProgLines()
     return _progLines;
 }
 
-SelectClause QueryTree::getSelect()
+SelectClause QueryTree::getSelectClause()
 {
-    return _selectStmt;
+    return _selectClause;
 }
 
 vector<SuchThatClause> QueryTree::getSuchThatClauses()
@@ -143,17 +158,17 @@ bool QueryTree::isEntitySynonymExist(string synonym, Entity entityIdx)
         case WHILE:
             return (find(_whiles.begin(), _whiles.end(), synonym) != _whiles.end());
         case IF:
-            return false;
+            return (find(_ifs.begin(), _ifs.end(), synonym) != _ifs.end());
         case PROG_LINE:
             return (find(_progLines.begin(), _progLines.end(), synonym) != _progLines.end());
         case CALL:
-            return false;
+            return (find(_calls.begin(), _calls.end(), synonym) != _calls.end());
         case PROCEDURE:
-            return false;
+            return (find(_procedures.begin(), _procedures.end(), synonym) != _procedures.end());
         case VARIABLE:
             return (find(_vars.begin(), _vars.end(), synonym) != _vars.end());
         case CONSTANT:
-            return false;
+            return (find(_consts.begin(), _consts.end(), synonym) != _consts.end());
         case STMTLIST:
             return false;
         default:
