@@ -41,7 +41,7 @@ namespace UnitTesting
         {
             string str = "Parent*(1, s)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(PARENTSTAR, INTEGER, "1", STMT, "s");
@@ -53,7 +53,7 @@ namespace UnitTesting
         {
             string str = "Parent*(1, a)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(PARENTSTAR, INTEGER, "1", ASSIGN, "a");
@@ -65,7 +65,7 @@ namespace UnitTesting
         {
             string str = "Parent*(1, w)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(PARENTSTAR, INTEGER, "1", WHILE, "w");
@@ -135,7 +135,7 @@ namespace UnitTesting
         {
             string str = "Parent*(_, s)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(PARENTSTAR, UNDERSCORE, "_", STMT, "s");
@@ -147,7 +147,7 @@ namespace UnitTesting
         {
             string str = "Parent*(s, 2)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(PARENTSTAR, STMT, "s", INTEGER, "2");
@@ -159,7 +159,7 @@ namespace UnitTesting
         {
             string str = "Parent*(w, 2)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(PARENTSTAR, WHILE, "w", INTEGER, "2");
@@ -211,7 +211,7 @@ namespace UnitTesting
         {
             string str = "Parent*(w, _)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(PARENTSTAR, WHILE, "w", UNDERSCORE, "_");
@@ -223,8 +223,8 @@ namespace UnitTesting
         {
             string str = "Parent*(w1, w2)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w1");
-            qt.insertVariable(WHILE, "w2");
+            qt.insertSynonym(WHILE, "w1");
+            qt.insertSynonym(WHILE, "w2");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(PARENTSTAR, WHILE, "w1", WHILE, "w2");

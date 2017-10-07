@@ -32,6 +32,32 @@ bool UtilitySelection::isSameSuchThatClauseContent(SuchThatClause expected, Such
     return isSameRel && isSameArgOneType && isSameArgTwoType && isSameArgOne && isSameArgTwo;
 }
 
+bool UtilitySelection::AreSameSuchThatClausesContentAsInTree(vector<SuchThatClause> expectedList, QueryTree qt)
+{
+    vector<SuchThatClause> actualList = qt.getSuchThatClauses();
+
+    if (actualList.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::vector<SuchThatClause>::iterator iterExpected = expectedList.begin(); iterExpected != expectedList.end(); ++iterExpected) {
+        SuchThatClause expectedStc = *iterExpected;
+
+        std::vector<SuchThatClause>::iterator iterActual = actualList.begin();
+        for (; iterActual != actualList.end(); ++iterActual) {
+            SuchThatClause actualStc = *iterActual;
+            if (isSameSuchThatClauseContent(expectedStc, actualStc)) {
+                break;
+            }
+        }
+
+        if (iterActual == actualList.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 PatternClause UtilitySelection::makePatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
 {

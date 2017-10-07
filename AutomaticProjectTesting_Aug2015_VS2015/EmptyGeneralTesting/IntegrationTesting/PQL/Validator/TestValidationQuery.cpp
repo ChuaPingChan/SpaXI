@@ -23,7 +23,7 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select s");
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
         }
@@ -34,7 +34,6 @@ namespace UnitTesting
             query.append("stmt Select;");
             query.append("Select Select");
             QueryTree qt;
-            //qt.insertVariable(STMT, "Select");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
         }
@@ -45,7 +44,6 @@ namespace UnitTesting
             query.append("assign Modifies;");
             query.append("Select Modifies");
             QueryTree qt;
-            //qt.insertVariable(ASSIGN, "Modifies");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
         }
@@ -56,7 +54,6 @@ namespace UnitTesting
             query.append("assign assign;");
             query.append("Select assign");
             QueryTree qt;
-            //qt.insertVariable(ASSIGN, "assign");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
         }
@@ -68,8 +65,6 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select s such that Modifies(s, v)");
             QueryTree qt;
-            //qt.insertVariable(STMT, "s");
-            //qt.insertVariable(VARIABLE, "v");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s", VARIABLE, "v");
@@ -77,15 +72,13 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Stmt_SingleSuchThat_FollowsStar_Valid)
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_SingleSuchThat_FollowsStar_Valid)
         {
             string query;
             query.append("assign a;");
             query.append("while w;");
             query.append("Select a such that Follows*(a, w)");
             QueryTree qt;
-            //qt.insertVariable(ASSIGN, "a");
-            //qt.insertVariable(WHILE, "w");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, ASSIGN, "a", WHILE, "w");
@@ -93,7 +86,68 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_SingleSuchThat_FollowsStar_Whitespace_Valid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("while w;");
+            query.append("   Select    a    such    that    Follows*      (   a   ,   w   )  ");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, ASSIGN, "a", WHILE, "w");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Stmt_MultipleSuchThat_Follows_And_Parent_Valid)
+        {
+            string query;
+            query.append("stmt s1, s2;");
+            query.append("while w;");
+            query.append("Select s2 such that Follows(s1, s2) and Parent(w, s2)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<SuchThatClause> expectedList;
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s1", STMT, "s2"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(PARENT, WHILE, "w", STMT, "s2"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Stmt_MultipleSuchThat_FollowsStar_SuchThat_ParentStar_Valid)
+        {
+            string query;
+            query.append("stmt s1, s2;");
+            query.append("while w;");
+            query.append("Select s2 such that Follows*(s1, s2) such that Parent*(w, s2)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<SuchThatClause> expectedList;
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s1", STMT, "s2"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(PARENTSTAR, WHILE, "w", STMT, "s2"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_While_MultipleSuchThat_FollowsStar_SuchThat_ParentStar_And_Modifies_SuchThat_Uses_And_Follows_Valid)
+        {
+            string query;
+            query.append("stmt s1, s2, s3;");
+            query.append("while w;");
+            query.append("variable v, v2;");
+            query.append("Select w such that Follows*(s1, s2) such that Parent*(w, s2) and Modifies(s1, v) such that Uses(w, v2) and Follows(s1, s3)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<SuchThatClause> expectedList;
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s1", STMT, "s2"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(PARENTSTAR, WHILE, "w", STMT, "s2"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", VARIABLE, "v"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(USES, WHILE, "w", VARIABLE, "v2"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s1", STMT, "s3"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
+        }
 
 
         /******************
@@ -105,7 +159,6 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select a");
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsFalse(validator.isValidQuery(query));
         }
@@ -126,7 +179,28 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select s such that Modifies(s, 12)");
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_FollowsStar_Whitespace_StarNotConnectedToKeyword_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("while w;");
+            query.append("   Select    a    such    that    Follows    *      (   a   ,   w   )  ");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SuchThat_Keyword_And_Missing_Invalid)
+        {
+            string query;
+            query.append("stmt s1, s2;");
+            query.append("while w;");
+            query.append("Select s2 such that Follows(s1, s2) Parent(w, s2)");
+            QueryTree qt;
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsFalse(validator.isValidQuery(query));
         }

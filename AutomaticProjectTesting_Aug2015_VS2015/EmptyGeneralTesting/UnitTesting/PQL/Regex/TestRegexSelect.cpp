@@ -262,18 +262,22 @@ namespace UnitTesting
         /********************************************
         * Select, Such that, Multiple Relationships *
         ********************************************/
-        //TODO: Change to IsTrue when implement multiple pattern
-        TEST_METHOD(TestRegex_Select_SuchThat_Twice_Valid)
+        TEST_METHOD(TestRegex_Select_SuchThat_And_Valid)
         {
             string str = "Select s such that Uses(s, v) and Modifies(2, v)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple pattern
-        TEST_METHOD(TestRegex_Select_SuchThat_Thrice_Valid)
+        TEST_METHOD(TestRegex_Select_SuchThat_And_And_Valid)
         {
             string str = "Select s such that Uses(s, v) and Modifies(2, v) and Follows(1,2)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_SuchThat_SuchThat_And_Valid)
+        {
+            string str = "Select s such that Uses(s, v) such that Modifies(2, v) and Follows(1,2)";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         TEST_METHOD(TestRegex_Select_SuchThat_IncorrectAndConcatenation_Invalid)

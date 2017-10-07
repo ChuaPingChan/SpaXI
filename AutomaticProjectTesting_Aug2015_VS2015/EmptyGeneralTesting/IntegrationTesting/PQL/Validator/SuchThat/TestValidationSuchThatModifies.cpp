@@ -41,7 +41,7 @@ namespace UnitTesting
         {
             string str = "Modifies(1, v)";
             QueryTree qt;
-            qt.insertVariable(VARIABLE, "v");
+            qt.insertSynonym(VARIABLE, "v");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", VARIABLE, "v");
@@ -53,7 +53,7 @@ namespace UnitTesting
         {
             string str = "Modifies(a, \"x\")";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, ASSIGN, "a", IDENT_WITHQUOTES, "\"x\"");
@@ -65,7 +65,7 @@ namespace UnitTesting
         {
             string str = "Modifies(s, _)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s", UNDERSCORE, "_");
@@ -77,8 +77,8 @@ namespace UnitTesting
         {
             string str = "Modifies(w, v)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
-            qt.insertVariable(VARIABLE, "v");
+            qt.insertSynonym(WHILE, "w");
+            qt.insertSynonym(VARIABLE, "v");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, WHILE, "w", VARIABLE, "v");

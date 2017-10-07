@@ -31,7 +31,7 @@ const string RegexValidators::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" 
 const string RegexValidators::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::RELREF_REGEX = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
 const string RegexValidators::RELCOND_REGEX = "(" + SPACE_0 + RELREF_REGEX + SPACE_0 + "("+ SPACE_1 + "and" + SPACE_1 + RELREF_REGEX + SPACE_0 + ")*" + SPACE_0 + ")";
-const string RegexValidators::SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF_REGEX;
+const string RegexValidators::SUCH_THAT_CL_REGEX = "(" + SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELCOND_REGEX + SPACE_0 + ")";
 const string RegexValidators::RELATIONSHIP_KEYWORD_REGEX = "(Modifies|Uses|Parent[\\*]|Parent|Follows[\\*]|Follows|Calls[\\*]|Calls|Next[\\*]|Next|Affects[\\*]|Affects)";
 
 /*--------------- Pattern Clause Regex ---------------*/
@@ -44,7 +44,7 @@ const string RegexValidators::RESULTCL_REGEX = "(" + SPACE_0 + TUPLE_REGEX + SPA
 const string RegexValidators::SELECT_REGEX = "(Select)" + SPACE_1 + RESULTCL_REGEX;
 
 /******************** Select Overall ********************/
-const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
+const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_CL_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
 
 
 
@@ -155,10 +155,10 @@ bool RegexValidators::isValidRelCondRegex(string str)
     return regex_match(str, relCondRegexCheck);
 }
 
-bool RegexValidators::isValidSuchThatRegex(string str)
+bool RegexValidators::isValidSuchThatClRegex(string str)
 {
-    regex suchThatRegexCheck(SUCH_THAT_REGEX);
-    return regex_match(str, suchThatRegexCheck);
+    regex suchThatClRegexCheck(SUCH_THAT_CL_REGEX);
+    return regex_match(str, suchThatClRegexCheck);
 }
 
 bool RegexValidators::isValidFactorRegex(string str)
