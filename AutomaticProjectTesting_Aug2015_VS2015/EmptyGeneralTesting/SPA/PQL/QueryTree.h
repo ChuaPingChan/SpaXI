@@ -28,6 +28,9 @@ public:
     unordered_set<string> getStmts();
     unordered_set<string> getAssigns();
     unordered_set<string> getWhiles();
+    unordered_set<string> getIfs();
+    unordered_set<string> getCalls();
+    unordered_set<string> getProcedures();
     unordered_set<string> getVars();
     unordered_set<string> getConsts();
     unordered_set<string> getProgLines();
@@ -44,6 +47,9 @@ private:
     unordered_set<string> _stmts;
     unordered_set<string> _assigns;
     unordered_set<string> _whiles;
+    unordered_set<string> _ifs;
+    unordered_set<string> _calls;
+    unordered_set<string> _procedures;
     unordered_set<string> _vars;
     unordered_set<string> _consts;
     unordered_set<string> _progLines;

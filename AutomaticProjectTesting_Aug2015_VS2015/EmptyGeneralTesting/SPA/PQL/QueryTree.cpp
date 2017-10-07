@@ -27,25 +27,25 @@ void QueryTree::insertSynonym(int type, string synonym)
         _whiles.insert(synonym);
     }
 
-    /*else if (type == IF)
+    else if (type == IF)
     {
-    ifs.insert(var)
-    }*/
+        _ifs.insert(synonym);
+    }
 
     else if (type == PROG_LINE)
     {
         _progLines.insert(synonym);
     }
 
-    /*else if (type == CALL)
+    else if (type == CALL)
     {
-        
+        _calls.insert(synonym);
     }
 
     else if (type == PROCEDURE)
     {
-        procedures.insert(var);
-    }*/
+        _procedures.insert(synonym);
+    }
 
     else if (type == VARIABLE)
     {
@@ -96,6 +96,21 @@ unordered_set<string> QueryTree::getAssigns()
 unordered_set<string> QueryTree::getWhiles()
 {
     return _whiles;
+}
+
+unordered_set<string> QueryTree::getIfs()
+{
+    return _ifs;
+}
+
+unordered_set<string> QueryTree::getCalls()
+{
+    return _calls;
+}
+
+unordered_set<string> QueryTree::getProcedures()
+{
+    return _procedures;
 }
 
 unordered_set<string> QueryTree::getVars()

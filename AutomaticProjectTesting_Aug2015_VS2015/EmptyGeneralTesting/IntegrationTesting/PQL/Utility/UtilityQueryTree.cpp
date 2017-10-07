@@ -10,72 +10,136 @@ UtilityQueryTree::~UtilityQueryTree()
 {
 }
 
-bool UtilityQueryTree::isGetAllStmtsSame(QueryTree qt1, QueryTree qt2)
+bool UtilityQueryTree::isSameContentAllStmts(unordered_set<string> expectedList, QueryTree qt)
 {
-    unordered_set<string> stmtVectorFromQt1 = qt1.getStmts();
-    unordered_set<string> stmtVectorFromQt2 = qt2.getStmts();
+    unordered_set<string> stmtVectorFromQt = qt.getStmts();
 
-    if (stmtVectorFromQt1.size() != stmtVectorFromQt2.size()) {
+    if (stmtVectorFromQt.size() != expectedList.size()) {
         return false;
     }
 
-    for (std::unordered_set<string>::iterator itOne = stmtVectorFromQt1.begin(); itOne != stmtVectorFromQt1.end(); ++itOne) {
-        string stmtFromQt1 = *itOne;
-        if (find(stmtVectorFromQt2.begin(), stmtVectorFromQt2.end(), stmtFromQt1) == stmtVectorFromQt2.end()) {
+    for (std::unordered_set<string>::iterator itOne = expectedList.begin(); itOne != expectedList.end(); ++itOne) {
+        string expectedstmt = *itOne;
+        if (find(stmtVectorFromQt.begin(), stmtVectorFromQt.end(), expectedstmt) == stmtVectorFromQt.end()) {
             return false;
         }
     }
     return true;
 }
 
-bool UtilityQueryTree::isGetAllAssignsSame(QueryTree qt1, QueryTree qt2)
+bool UtilityQueryTree::isSameContentAllAssigns(unordered_set<string> expectedList, QueryTree qt)
 {
-    unordered_set<string> assignVectorFromQt1 = qt1.getAssigns();
-    unordered_set<string> assignVectorFromQt2 = qt2.getAssigns();
+    unordered_set<string> assignVectorFromQt = qt.getAssigns();
 
-    if (assignVectorFromQt1.size() != assignVectorFromQt2.size()) {
+    if (assignVectorFromQt.size() != expectedList.size()) {
         return false;
     }
 
-    for (std::unordered_set<string>::iterator itOne = assignVectorFromQt1.begin(); itOne != assignVectorFromQt1.end(); ++itOne) {
-        string assignFromQt1 = *itOne;
-        if (find(assignVectorFromQt2.begin(), assignVectorFromQt2.end(), assignFromQt1) == assignVectorFromQt2.end()) {
+    for (std::unordered_set<string>::iterator itOne = expectedList.begin(); itOne != expectedList.end(); ++itOne) {
+        string expectedassign = *itOne;
+        if (find(assignVectorFromQt.begin(), assignVectorFromQt.end(), expectedassign) == assignVectorFromQt.end()) {
             return false;
         }
     }
     return true;
 }
 
-bool UtilityQueryTree::isGetAllVariablesSame(QueryTree qt1, QueryTree qt2)
+bool UtilityQueryTree::isSameContentAllWhiles(unordered_set<string> expectedList, QueryTree qt)
 {
-    unordered_set<string> variableVectorFromQt1 = qt1.getVars();
-    unordered_set<string> variableVectorFromQt2 = qt2.getVars();
+    unordered_set<string> whileVectorFromQt = qt.getWhiles();
 
-    if (variableVectorFromQt1.size() != variableVectorFromQt2.size()) {
+    if (whileVectorFromQt.size() != expectedList.size()) {
         return false;
     }
 
-    for (std::unordered_set<string>::iterator itOne = variableVectorFromQt1.begin(); itOne != variableVectorFromQt1.end(); ++itOne) {
-        string variableFromQt1 = *itOne;
-        if (find(variableVectorFromQt2.begin(), variableVectorFromQt2.end(), variableFromQt1) == variableVectorFromQt2.end()) {
+    for (std::unordered_set<string>::iterator itOne = expectedList.begin(); itOne != expectedList.end(); ++itOne) {
+        string expectedwhile = *itOne;
+        if (find(whileVectorFromQt.begin(), whileVectorFromQt.end(), expectedwhile) == whileVectorFromQt.end()) {
             return false;
         }
     }
     return true;
 }
 
-bool UtilityQueryTree::isGetAllWhilesSame(QueryTree qt1, QueryTree qt2)
+bool UtilityQueryTree::isSameContentAllIfs(unordered_set<string> expectedList, QueryTree qt)
 {
-    unordered_set<string> whileVectorFromQt1 = qt1.getWhiles();
-    unordered_set<string> whileVectorFromQt2 = qt2.getWhiles();
+    unordered_set<string> ifVectorFromQt = qt.getIfs();
 
-    if (whileVectorFromQt1.size() != whileVectorFromQt2.size()) {
+    if (ifVectorFromQt.size() != expectedList.size()) {
         return false;
     }
 
-    for (std::unordered_set<string>::iterator itOne = whileVectorFromQt1.begin(); itOne != whileVectorFromQt1.end(); ++itOne) {
-        string whileFromQt1 = *itOne;
-        if (find(whileVectorFromQt2.begin(), whileVectorFromQt2.end(), whileFromQt1) == whileVectorFromQt2.end()) {
+    for (std::unordered_set<string>::iterator itOne = expectedList.begin(); itOne != expectedList.end(); ++itOne) {
+        string expectedif = *itOne;
+        if (find(ifVectorFromQt.begin(), ifVectorFromQt.end(), expectedif) == ifVectorFromQt.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool UtilityQueryTree::isSameContentAllProgLines(unordered_set<string> expectedList, QueryTree qt)
+{
+    unordered_set<string> progLineVectorFromQt = qt.getProgLines();
+
+    if (progLineVectorFromQt.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::unordered_set<string>::iterator itOne = expectedList.begin(); itOne != expectedList.end(); ++itOne) {
+        string expectedprogLine = *itOne;
+        if (find(progLineVectorFromQt.begin(), progLineVectorFromQt.end(), expectedprogLine) == progLineVectorFromQt.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool UtilityQueryTree::isSameContentAllCalls(unordered_set<string> expectedList, QueryTree qt)
+{
+    unordered_set<string> callVectorFromQt = qt.getCalls();
+
+    if (callVectorFromQt.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::unordered_set<string>::iterator itOne = expectedList.begin(); itOne != expectedList.end(); ++itOne) {
+        string expectedcall = *itOne;
+        if (find(callVectorFromQt.begin(), callVectorFromQt.end(), expectedcall) == callVectorFromQt.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool UtilityQueryTree::isSameContentAllProcedures(unordered_set<string> expectedList, QueryTree qt)
+{
+    unordered_set<string> procedureVectorFromQt = qt.getProcedures();
+
+    if (procedureVectorFromQt.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::unordered_set<string>::iterator itOne = expectedList.begin(); itOne != expectedList.end(); ++itOne) {
+        string expectedprocedure = *itOne;
+        if (find(procedureVectorFromQt.begin(), procedureVectorFromQt.end(), expectedprocedure) == procedureVectorFromQt.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool UtilityQueryTree::isSameContentAllVariables(unordered_set<string> expectedList, QueryTree qt)
+{
+    unordered_set<string> variableVectorFromQt = qt.getVars();
+
+    if (variableVectorFromQt.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::unordered_set<string>::iterator itOne = expectedList.begin(); itOne != expectedList.end(); ++itOne) {
+        string expectedvariable = *itOne;
+        if (find(variableVectorFromQt.begin(), variableVectorFromQt.end(), expectedvariable) == variableVectorFromQt.end()) {
             return false;
         }
     }
