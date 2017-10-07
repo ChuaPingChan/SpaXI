@@ -10,6 +10,8 @@ public:
     * REGEX *
     ********/
     /******************** Grammar ********************/
+    static const string SPACE_0;
+    static const string SPACE_1;
     static const string LETTER_REGEX;
     static const string DIGIT_REGEX;
     static const string INTEGER_REGEX;
@@ -26,8 +28,6 @@ public:
     static const string ATTRREF_REGEX;
     static const string ELEM_REGEX;
     static const string TUPLE_REGEX;
-    static const string SPACE_0;
-    static const string SPACE_1;
 
     /*--------------- Declaration Regex ---------------*/
     static const string DESIGN_ENTITY_REGEX;
