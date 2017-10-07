@@ -31,7 +31,9 @@ const string RegexValidators::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" 
 const string RegexValidators::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::RELREF_REGEX = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
 const string RegexValidators::RELCOND_REGEX = "(" + SPACE_0 + RELREF_REGEX + SPACE_0 + "("+ SPACE_1 + "and" + SPACE_1 + RELREF_REGEX + SPACE_0 + ")*" + SPACE_0 + ")";
+//TODO: Remove SUCH_THAT_REGEX after such that cl regex i confirmed
 const string RegexValidators::SUCH_THAT_REGEX = SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELREF_REGEX;
+const string RegexValidators::SUCH_THAT_CL_REGEX = "(" + SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELCOND_REGEX + SPACE_0 + ")";
 const string RegexValidators::RELATIONSHIP_KEYWORD_REGEX = "(Modifies|Uses|Parent[\\*]|Parent|Follows[\\*]|Follows|Calls[\\*]|Calls|Next[\\*]|Next|Affects[\\*]|Affects)";
 
 /*--------------- Pattern Clause Regex ---------------*/
@@ -153,6 +155,12 @@ bool RegexValidators::isValidRelCondRegex(string str)
 {
     regex relCondRegexCheck(RELCOND_REGEX);
     return regex_match(str, relCondRegexCheck);
+}
+
+bool RegexValidators::isValidSuchThatClRegex(string str)
+{
+    regex suchThatClRegexCheck(SUCH_THAT_CL_REGEX);
+    return regex_match(str, suchThatClRegexCheck);
 }
 
 bool RegexValidators::isValidSuchThatRegex(string str)
