@@ -177,44 +177,89 @@ namespace UnitTesting
         /***************************
         * Pattern While Regex Test *
         ***************************/
-        TEST_METHOD(TestRegex_Pattern_While_Variable_Valid)
+        TEST_METHOD(TestRegex_Pattern_While_Synonym_Underscore_Valid)
         {
             string str = "w(v,_)";
             Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Pattern_While_Variable_Whitespaces_Valid)
+        TEST_METHOD(TestRegex_Pattern_While_Synonym_Underscore_Whitespaces_Valid)
         {
             string str = "  w   (   v   ,   _   )   ";
             Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Pattern_While_Underscore_Valid)
+        TEST_METHOD(TestRegex_Pattern_While_Underscore_Underscore_Valid)
         {
             string str = "w(_,_)";
             Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Pattern_While_Underscore_whitespaces_Valid)
+        TEST_METHOD(TestRegex_Pattern_While_Underscore_Underscore_whitespaces_Valid)
         {
             string str = "   w  (      _     ,    _  )  ";
             Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Valid)
+        TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Underscore_Valid)
         {
             string str = "w(\"ident\",_)";
             Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
         }
 
         //TODO: Change to IsTrue when ident accept spaces
-        TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Whitespaces_Valid)
+        TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Underscore_Whitespaces_Valid)
         {
             string str = " w  (   \"   ident   \"   ,   _   )";
             Assert::IsFalse(RegexValidators::isValidPatternWhileRegex(str));
         }
 
-        
+        TEST_METHOD(TestRegex_Pattern_While_SecondArg_Synonym_Invalid)
+        {
+            string str = "w(v,v1)";
+            Assert::IsFalse(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+
+        /************************
+        * Pattern If Regex Test *
+        ************************/
+        TEST_METHOD(TestRegex_Pattern_If_Synonym_Underscore_Underscore_Valid)
+        {
+            string str = "f(v,_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_If_Synonym_Underscore_Underscore_Whitespaces_Valid)
+        {
+            string str = "  f   (   v    ,      _   ,      _     )    ";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_If_Underscore_Underscore_Underscore_Valid)
+        {
+            string str = "f(_,_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_If_Underscore_Underscore_Underscore_Whitespace_Valid)
+        {
+            string str = "  f   (     _      ,      _      ,     _     )    ";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_If_IdentWithQuotes_Underscore_Underscore_Valid)
+        {
+            string str = "f(\"procedure\",_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        //TODO: Change to IsTrue when done w w spaces regarding ident
+        TEST_METHOD(TestRegex_Pattern_If_IdentWithQuotes_Underscore_Underscore_Whitespace_Valid)
+        {
+            string str = "  f  (  \"     procedure    \"  ,  _   ,   _  )";
+            Assert::IsFalse(RegexValidators::isValidPatternIfRegex(str));
+        }
 
 
 

@@ -38,6 +38,7 @@ public:
     static const string EXPRESSION_SPEC;
     static const string PATTERN_ASSIGN_REGEX;
     static const string PATTERN_WHILE_REGEX;
+    static const string PATTERN_IF_REGEX;
     static const string PATTERN_REGEX;
 
     /*--------------- Relationship Clause Regex ---------------*/
@@ -93,6 +94,7 @@ public:
     static bool isValidExpressionSpecRegex(string str);
     static bool isValidPatternAssignRegex(string str);
     static bool isValidPatternWhileRegex(string str);
+    static bool isValidPatternIfRegex(string str);
     static bool isValidPatternRegex(string str);
 
     /*--------------- Select Regex ---------------*/
