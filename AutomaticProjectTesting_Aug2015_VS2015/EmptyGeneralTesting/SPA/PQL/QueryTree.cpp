@@ -158,17 +158,17 @@ bool QueryTree::isEntitySynonymExist(string synonym, Entity entityIdx)
         case WHILE:
             return (find(_whiles.begin(), _whiles.end(), synonym) != _whiles.end());
         case IF:
-            return false;
+            return (find(_ifs.begin(), _ifs.end(), synonym) != _ifs.end());
         case PROG_LINE:
             return (find(_progLines.begin(), _progLines.end(), synonym) != _progLines.end());
         case CALL:
-            return false;
+            return (find(_calls.begin(), _calls.end(), synonym) != _calls.end());
         case PROCEDURE:
-            return false;
+            return (find(_procedures.begin(), _procedures.end(), synonym) != _procedures.end());
         case VARIABLE:
             return (find(_vars.begin(), _vars.end(), synonym) != _vars.end());
         case CONSTANT:
-            return false;
+            return (find(_consts.begin(), _consts.end(), synonym) != _consts.end());
         case STMTLIST:
             return false;
         default:

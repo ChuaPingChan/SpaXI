@@ -86,10 +86,82 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        /******************************************************************************************/
-        //TODO: Add test when procedure is inplemented [-- HERE --- ]
-        /******************************************************************************************/
+        TEST_METHOD(TestValidity_SuchThatModifies_IdentWithQuotes_IdentWithQuotes_Valid)
+        {
+            string str = "Modifies(\"Pikachu\", \"pokeball\")";
+            QueryTree qt;
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Pikachu\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"pokeball\"");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "\"Pikachu\"", IDENT_WITHQUOTES, "\"pokeball\"");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
 
+        TEST_METHOD(TestValidity_SuchThatModifies_IdentWithQuotes_Underscore_Valid)
+        {
+            string str = "Modifies(\"Pikachu\", _)";
+            QueryTree qt;
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Pikachu\"");
+            qt.insertSynonym(UNDERSCORE, "_");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "\"Pikachu\"", UNDERSCORE, "_");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
 
+        TEST_METHOD(TestValidity_SuchThatModifies_IdentWithQuotes_Variable_Valid)
+        {
+            string str = "Modifies(\"Pikachu\", thunderstone)";
+            QueryTree qt;
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Pikachu\"");
+            qt.insertSynonym(VARIABLE, "thunderstone");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "\"Pikachu\"", VARIABLE, "thunderstone");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_SuchThatModifies_Procedure_IdentWithQuotes_Valid)
+        {
+            string str = "Modifies(Blastoise, \"pokeball\")";
+            QueryTree qt;
+            qt.insertSynonym(PROCEDURE, "Blastoise");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"pokeball\"");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "Blastoise", IDENT_WITHQUOTES, "\"pokeball\"");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_SuchThatModifies_Procedure_Underscore_Valid)
+        {
+            string str = "Modifies(Blastoise, _ )";
+            QueryTree qt;
+            qt.insertSynonym(PROCEDURE, "Blastoise");
+            qt.insertSynonym(UNDERSCORE, "_");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "Blastoise", UNDERSCORE, "_");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_SuchThatModifies_Procedure_Variable_Valid)
+        {
+            string str = "Modifies(Blastoise, hydroCannon)";
+            QueryTree qt;
+            qt.insertSynonym(PROCEDURE, "Blastoise");
+            qt.insertSynonym(VARIABLE, "hydroCannon");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "Blastoise", VARIABLE, "hydroCannon");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
     };
 }
