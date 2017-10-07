@@ -33,6 +33,18 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Select_KeywordAsSynonym_Select_Valid)
+        {
+            string str = "Select Select";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_KeywordAsSynonym_Uses_Valid)
+        {
+            string str = "Select Uses";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
         TEST_METHOD(TestRegex_Select_MissingWhitespaces_Invalid)
         {
             string str = "Selects";
@@ -85,11 +97,16 @@ namespace UnitTesting
         /***************
         * Select Tuple *
         ***************/
-        //TODO: After implementing tuple
         TEST_METHOD(TestRegex_Select_Tuple_Valid)
         {
             string str = "Select <s, a>";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_Tuple_Multiple_Valid)
+        {
+            string str = "Select <s, a, w, f>";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         TEST_METHOD(TestRegex_Select_Tuple_MissingWhitespaces_Invalid)

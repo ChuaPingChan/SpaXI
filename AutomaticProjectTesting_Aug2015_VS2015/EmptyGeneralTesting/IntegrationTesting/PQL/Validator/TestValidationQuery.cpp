@@ -28,6 +28,39 @@ namespace UnitTesting
             Assert::IsTrue(validator.isValidQuery(query));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_KeywordAsSynonym_Select_Valid)
+        {
+            string query;
+            query.append("stmt Select;");
+            query.append("Select Select");
+            QueryTree qt;
+            //qt.insertVariable(STMT, "Select");
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_KeywordAsSynonym_Modifies_Valid)
+        {
+            string query;
+            query.append("assign Modifies;");
+            query.append("Select Modifies");
+            QueryTree qt;
+            //qt.insertVariable(ASSIGN, "Modifies");
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_KeywordAsSynonym_assign_Valid)
+        {
+            string query;
+            query.append("assign assign;");
+            query.append("Select assign");
+            QueryTree qt;
+            //qt.insertVariable(ASSIGN, "assign");
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+        }
+
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Stmt_SingleSuchThat_Modifies_Valid)
         {
             string query;
@@ -35,8 +68,8 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select s such that Modifies(s, v)");
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
-            qt.insertVariable(VARIABLE, "v");
+            //qt.insertVariable(STMT, "s");
+            //qt.insertVariable(VARIABLE, "v");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s", VARIABLE, "v");
@@ -51,8 +84,8 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select a such that Follows*(a, w)");
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
-            qt.insertVariable(WHILE, "w");
+            //qt.insertVariable(ASSIGN, "a");
+            //qt.insertVariable(WHILE, "w");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, ASSIGN, "a", WHILE, "w");

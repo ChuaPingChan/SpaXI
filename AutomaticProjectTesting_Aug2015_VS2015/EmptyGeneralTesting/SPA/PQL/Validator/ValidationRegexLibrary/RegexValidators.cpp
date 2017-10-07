@@ -40,7 +40,7 @@ const string RegexValidators::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPAC
 
 /*--------------- Select Regex ---------------*/
 const string RegexValidators::RESULTCL_REGEX = "(" + SPACE_0 + TUPLE_REGEX + SPACE_0 + "|" + SPACE_0 + "BOOLEAN" + SPACE_0 + ")";
-const string RegexValidators::SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM_REGEX;
+const string RegexValidators::SELECT_REGEX = "(Select)" + SPACE_1 + RESULTCL_REGEX;
 
 /******************** Select Overall ********************/
 const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
