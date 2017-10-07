@@ -21,7 +21,13 @@ bool SelectValidator::isValid(string str)
 
 bool SelectValidator::isValidSelectBoolean(string selectedStr)
 {
-    return RegexValidators::isValidBooleanRegex(selectedStr);
+    if (RegexValidators::isValidBooleanRegex(selectedStr))
+    {
+        SelectClause sc = makeSelectClause(SELECT_BOOLEAN);
+        storeInQueryTree(sc);
+        return true;
+    }
+    return false;
 }
 
 bool SelectValidator::isValidSelectSingle(string selectedStr)
