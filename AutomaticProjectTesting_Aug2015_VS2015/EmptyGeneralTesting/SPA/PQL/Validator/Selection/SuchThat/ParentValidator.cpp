@@ -48,6 +48,18 @@ bool ParentValidator::isValidArgOne(string argOne)
         return true;
     }
 
+    else if (qtPtr->isEntitySynonymExist(argOne, IF))
+    {
+        this->argOneType = IF;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argOne, PROG_LINE))
+    {
+        this->argOneType = PROG_LINE;
+        return true;
+    }
+
     else if (RegexValidators::isValidIntegerRegex(argOne))
     {
         this->argOneType = INTEGER;
@@ -83,6 +95,24 @@ bool ParentValidator::isValidArgTwo(string argTwo)
     else if (qtPtr->isEntitySynonymExist(argTwo, WHILE))
     {
         this->argTwoType = WHILE;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argTwo, IF))
+    {
+        this->argTwoType = IF;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argTwo, PROG_LINE))
+    {
+        this->argTwoType = PROG_LINE;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argTwo, CALL))
+    {
+        this->argTwoType = CALL;
         return true;
     }
 

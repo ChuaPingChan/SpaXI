@@ -156,6 +156,22 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Boolean_SingleSuchThat_ParentStar_If_Call_Valid)
+        {
+            string query;
+            query.append("if RayYan;");
+            query.append("call AllGods;");
+            query.append("Select BOOLEAN such that Parent*(RayYan, AllGods)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(PARENTSTAR, IF, "RayYan", CALL, "AllGods");
+            SuchThatClause actualStc = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
+        }
+
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_SingleSuchThat_FollowsStar_Whitespace_Valid)
         {
             string query;
