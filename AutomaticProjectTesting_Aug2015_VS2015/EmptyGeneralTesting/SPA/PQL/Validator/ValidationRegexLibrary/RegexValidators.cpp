@@ -40,6 +40,7 @@ const string RegexValidators::RELATIONSHIP_KEYWORD_REGEX = "(Modifies|Uses|Paren
 /*--------------- Pattern Clause Regex ---------------*/
 const string RegexValidators::FACTOR_REGEX = "(" + SPACE_0 + NAME_REGEX + SPACE_0 + "|" + SPACE_0 + INTEGER_REGEX + SPACE_0 + ")";
 const string RegexValidators::EXPRESSION_SPEC = "(" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "|" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "\"" + SPACE_0 + FACTOR_REGEX + SPACE_0 + "\"" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + ")";
+const string RegexValidators::PATTERN_ASSIGN_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + "(" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "|" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + ")" + "[)]" + SPACE_0 + ")";
 const string RegexValidators::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Select Regex ---------------*/
@@ -180,6 +181,12 @@ bool RegexValidators::isValidExpressionSpecRegex(string str)
 {
     regex expressionSpecCheck(EXPRESSION_SPEC);
     return regex_match(str, expressionSpecCheck);
+}
+
+bool RegexValidators::isValidPatternAssignRegex(string str)
+{
+    regex patternAssignRegexCheck(PATTERN_ASSIGN_REGEX);
+    return regex_match(str, patternAssignRegexCheck);
 }
 
 /*--------------- Pattern Clause Regex Methods ---------------*/

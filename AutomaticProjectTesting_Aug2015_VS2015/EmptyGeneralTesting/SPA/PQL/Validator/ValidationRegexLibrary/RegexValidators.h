@@ -36,6 +36,7 @@ public:
     /*--------------- Pattern Clause Regex ---------------*/
     static const string FACTOR_REGEX;
     static const string EXPRESSION_SPEC;
+    static const string PATTERN_ASSIGN_REGEX;
     static const string PATTERN_REGEX;
 
     /*--------------- Relationship Clause Regex ---------------*/
@@ -89,6 +90,7 @@ public:
     /******************** Pattern Regex ********************/
     static bool isValidFactorRegex(string str);
     static bool isValidExpressionSpecRegex(string str);
+    static bool isValidPatternAssignRegex(string str);
     static bool isValidPatternRegex(string str);
 
     /*--------------- Select Regex ---------------*/

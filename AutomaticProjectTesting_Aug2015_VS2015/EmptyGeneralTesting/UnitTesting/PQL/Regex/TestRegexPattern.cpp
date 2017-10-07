@@ -15,7 +15,6 @@ namespace UnitTesting
         /********************
         * Factor Regex Test *
         ********************/
-
         TEST_METHOD(TestRegex_Factor_VarName_Alphabetic_Valid)
         {
             string str = "validName";
@@ -71,7 +70,6 @@ namespace UnitTesting
         /*****************************
         * Expression Spec Regex Test *
         *****************************/
-
         TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
         {
             string str = "_";
@@ -153,11 +151,32 @@ namespace UnitTesting
         }
 
 
+        /****************************
+        * Pattern Assign Regex Test *
+        ****************************/
+        TEST_METHOD(TestRegex_Pattern_Assign_Underscore_Valid)
+        {
+            string str = "a(v,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_ExpressionSpec_PartialMatch_Valid)
+        {
+            string str = "a(v,_\"x\"_)";
+            Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        //TODO: Add whitespace in between express spec after add space in regex
+        TEST_METHOD(TestRegex_Pattern_Assign_Whitespace_Valid)
+        {
+            string str = "   a   (   v    ,   _\"x\"_    )   ";
+            Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
 
         /*********************
         * Pattern Regex Test *
         *********************/
-
         TEST_METHOD(TestRegex_Pattern_Whitespace_Valid)
         {
             string str = "pattern a (   validBothArgs  ,   _  )";
