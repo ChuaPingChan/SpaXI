@@ -299,10 +299,40 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Tuple_MultipleElem_Valid)
+        TEST_METHOD(TestRegex_Tuple_SingleElem_Valid)
         {
-            string str = "<s, s1>";
+            string str = "<s>";
             Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_MultipleElem_Two_Valid)
+        {
+            string str = "<s,s1>";
+            Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_MultipleElem_Three_Valid)
+        {
+            string str = "<s,s1,s2>";
+            Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_SingleElem_WhitespacesValid)
+        {
+            string str = "   <  s   >     ";
+            Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_MultipleElem_Whitespaces_Valid)
+        {
+            string str = "   <   s   ,  s1   >   ";
+            Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_EmptyElem_Invalid)
+        {
+            string str = " < > ";
+            Assert::IsFalse(RegexValidators::isValidTupleRegex(str));
         }
 
 

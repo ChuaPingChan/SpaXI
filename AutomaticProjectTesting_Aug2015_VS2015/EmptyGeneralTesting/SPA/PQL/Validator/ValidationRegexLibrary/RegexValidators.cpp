@@ -4,6 +4,8 @@
 * REGEX *
 ********/
 /******************** Grammar ********************/
+const string RegexValidators::SPACE_0 = "(\\s*)";
+const string RegexValidators::SPACE_1 = "(\\s+)";
 const string RegexValidators::LETTER_REGEX = "([a-zA-Z])";
 const string RegexValidators::DIGIT_REGEX = "([0-9])";
 const string RegexValidators::INTEGER_REGEX = "(" + DIGIT_REGEX + "+)";
@@ -19,9 +21,7 @@ const string RegexValidators::NAME_REGEX = "(" + LETTER_REGEX + "(" + LETTER_REG
 const string RegexValidators::ATTRNAME_REGEX = "(procName|varName|value|stmt#)";
 const string RegexValidators::ATTRREF_REGEX = "(" + SYNONYM_REGEX + "[.]" + ATTRNAME_REGEX + ")";
 const string RegexValidators::ELEM_REGEX = "(" + SYNONYM_REGEX + "|" + ATTRREF_REGEX + ")";
-const string RegexValidators::TUPLE_REGEX = "(" + ELEM_REGEX + "|" + "[<]" + ELEM_REGEX + "[(]" + "[,]" + ELEM_REGEX + "[)]" + "[\*]" + "[>]" + ")";
-const string RegexValidators::SPACE_0 = "(\\s*)";
-const string RegexValidators::SPACE_1 = "(\\s+)";
+const string RegexValidators::TUPLE_REGEX = "(" + SPACE_0 + ELEM_REGEX + SPACE_0 + "|" + SPACE_0 + "<" + SPACE_0 + ELEM_REGEX + SPACE_0 + "(," + SPACE_0 + ELEM_REGEX + SPACE_0 + ")*" + ">" + SPACE_0 + ")";
 const string RegexValidators::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 
 /*--------------- Relationship Clause Regex ---------------*/
