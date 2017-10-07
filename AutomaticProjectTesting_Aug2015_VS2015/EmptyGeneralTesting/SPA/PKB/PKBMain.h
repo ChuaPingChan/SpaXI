@@ -23,6 +23,7 @@
 #include "UsesTableStmtToVar.h"
 #include "UsesTableVar.h"
 #include "VarIdxTable.h"
+#include "CallsTable.h"
 #include <string>
 #include "../Entity.h"
 
@@ -82,19 +83,31 @@ public:
     
     //PKB-Parser
 	bool setParentChildRel(int parentStmt, int childStmt);
-    bool setFollowsRel(int stmtBef, int stmtAft);
+	bool setFollowsRel(int stmtBef, int stmtAft);
+	bool setCallsRel(int stmt, string callerProcName, string calleeProcName);
     bool addVariable(string var);
     bool addProcedure(string proc);
     bool addAssignmentStmt(int stmt);
     bool addWhileStmt(int stmt);
-	bool addCallStmt(int stmt, string proc);
-	//TODO 1 add call
     bool addConstant(int stmt, int constant);
     bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);
     bool setUseTableStmtToVar(int stmt, string var);
     bool setUseTableProcToVar(string proc, string var);
     bool setPatternRelation(int stmt, string var, string expression);
+
+	//PKB query (Calls)
+	bool isCalls(string callerProcName, string calleeProcName);
+	bool isCaller(string callerProcName);
+	list<int> getCallee(string callerProcName);
+	bool isCallee(string calleeProcName);
+	bool hasCalls();
+
+	list<int> getAllCallees();
+
+	list<int> getCaller(string calleeProcName);
+
+	list<int> getAllCallers();
 
     //PKB query evaluator (Uses, Modifies)
     bool isUses(int stmt, string var);
@@ -132,6 +145,7 @@ private:
 	FollowsStarBefore followsStarBefore;
 	unordered_map<int, int> followsBeforeMap;
 	unordered_map<int, int> followsAfterMap;
+	CallsTable callsTable;
 	
 	ConstantTable constantTable;
     ModTableProcToVar modTableProcToVar;
