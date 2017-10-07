@@ -23,7 +23,7 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select s");
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
         }

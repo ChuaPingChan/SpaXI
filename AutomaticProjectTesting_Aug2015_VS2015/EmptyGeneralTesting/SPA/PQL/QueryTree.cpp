@@ -10,21 +10,21 @@ QueryTree::~QueryTree()
 {
 }
 
-void QueryTree::insertVariable(int type, string var)
+void QueryTree::insertSynonym(int type, string synonym)
 {
     if (type == STMT) 
     {
-        _stmts.insert(var);
+        _stmts.insert(synonym);
     }
 
     else if (type == ASSIGN)
     {
-        _assigns.insert(var);
+        _assigns.insert(synonym);
     }
 
     else if (type == WHILE)
     {
-        _whiles.insert(var);
+        _whiles.insert(synonym);
     }
 
     /*else if (type == IF)
@@ -34,7 +34,7 @@ void QueryTree::insertVariable(int type, string var)
 
     else if (type == PROG_LINE)
     {
-        _progLines.insert(var);
+        _progLines.insert(synonym);
     }
 
     /*else if (type == CALL)
@@ -49,12 +49,12 @@ void QueryTree::insertVariable(int type, string var)
 
     else if (type == VARIABLE)
     {
-        _vars.insert(var);
+        _vars.insert(synonym);
     }
    
     else if (type == CONSTANT)
     {
-        _consts.insert(var);
+        _consts.insert(synonym);
     }
 
     else

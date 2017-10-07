@@ -18,8 +18,8 @@ namespace UnitTesting
         {
             string str = "pattern a(v, _)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
-            qt.insertVariable(VARIABLE, "v");
+            qt.insertSynonym(ASSIGN, "a");
+            qt.insertSynonym(VARIABLE, "v");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_");
@@ -31,8 +31,8 @@ namespace UnitTesting
         {
             string str = "pattern a(v, _\"x\"_)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
-            qt.insertVariable(VARIABLE, "v");
+            qt.insertSynonym(ASSIGN, "a");
+            qt.insertSynonym(VARIABLE, "v");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", EXPRESSION_SPEC, "_\"x\"_");
@@ -44,7 +44,7 @@ namespace UnitTesting
         {
             string str = "pattern a(_, _\"x\"_)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", UNDERSCORE, "_", EXPRESSION_SPEC, "_\"x\"_");
@@ -56,7 +56,7 @@ namespace UnitTesting
         {
             string str = "pattern a(\"x\", _\"x\"_)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHQUOTES, "\"x\"", EXPRESSION_SPEC, "_\"x\"_");
@@ -68,7 +68,7 @@ namespace UnitTesting
         {
             string str = "pattern a(_, _)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", UNDERSCORE, "_", UNDERSCORE, "_");
@@ -80,7 +80,7 @@ namespace UnitTesting
         {
             string str = "pattern a(\"x\", _)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHQUOTES, "\"x\"", UNDERSCORE, "_");

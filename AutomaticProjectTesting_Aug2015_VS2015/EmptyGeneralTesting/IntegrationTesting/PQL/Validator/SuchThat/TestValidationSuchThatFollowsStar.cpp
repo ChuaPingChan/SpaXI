@@ -41,7 +41,7 @@ namespace UnitTesting
         {
             string str = "Follows*(1, s)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", STMT, "s");
@@ -53,7 +53,7 @@ namespace UnitTesting
         {
             string str = "Follows*(1, a)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", ASSIGN, "a");
@@ -65,7 +65,7 @@ namespace UnitTesting
         {
             string str = "Follows*(1, w)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", WHILE, "w");
@@ -135,7 +135,7 @@ namespace UnitTesting
         {
             string str = "Follows*(_, s)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, UNDERSCORE, "_", STMT, "s");
@@ -147,7 +147,7 @@ namespace UnitTesting
         {
             string str = "Follows*(s, 2)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s", INTEGER, "2");
@@ -159,7 +159,7 @@ namespace UnitTesting
         {
             string str = "Follows*(a, 2)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, ASSIGN, "a", INTEGER, "2");
@@ -171,7 +171,7 @@ namespace UnitTesting
         {
             string str = "Follows*(w, 2)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, WHILE, "w", INTEGER, "2");
@@ -219,7 +219,7 @@ namespace UnitTesting
         {
             string str = "Follows*(w, _)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, WHILE, "w", UNDERSCORE, "_");
@@ -231,8 +231,8 @@ namespace UnitTesting
         {
             string str = "Follows*(w1, w2)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w1");
-            qt.insertVariable(WHILE, "w2");
+            qt.insertSynonym(WHILE, "w1");
+            qt.insertSynonym(WHILE, "w2");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, WHILE, "w1", WHILE, "w2");

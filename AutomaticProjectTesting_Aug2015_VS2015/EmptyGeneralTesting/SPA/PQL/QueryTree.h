@@ -19,7 +19,7 @@ public:
     QueryTree();
     ~QueryTree();
 
-    void insertVariable(int type, string var);
+    void insertSynonym(int type, string synonym);
     void insertSelect(SelectClause select);
     void insertSuchThat(SuchThatClause relClause);
     void insertPattern(PatternClause patternClause);
