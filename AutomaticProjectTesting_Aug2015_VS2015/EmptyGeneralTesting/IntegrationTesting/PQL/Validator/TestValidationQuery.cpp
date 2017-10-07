@@ -16,6 +16,18 @@ namespace UnitTesting
         /****************
         * Valid Queries *
         ****************/
+        TEST_METHOD(TestValidity_Query_SelectBoolean_Stmt_Valid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select BOOLEAN");
+            QueryTree qt;
+            qt.insertSynonym(STMT, "s");
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
 
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Stmt_Valid)
         {
@@ -113,6 +125,21 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Procedure_SingleSuchThat_Uses_IdentWQ_Variable_Valid)
+        {
+            string query;
+            query.append("procedure Pokemon;");
+            query.append("Select Pokemon such that Uses(\"Azelf\", \"Psychic\")");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "Pokemon");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(USES, IDENT_WITHQUOTES, "\"Azelf\"", IDENT_WITHQUOTES, "\"Psychic\"");
+            SuchThatClause actualStc = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
+        }
+
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_SingleSuchThat_FollowsStar_Assign_While_Valid)
         {
             string query;
@@ -125,6 +152,22 @@ namespace UnitTesting
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, ASSIGN, "a", WHILE, "w");
+            SuchThatClause actualStc = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Boolean_SingleSuchThat_ParentStar_If_Call_Valid)
+        {
+            string query;
+            query.append("if RayYan;");
+            query.append("call AllGods;");
+            query.append("Select BOOLEAN such that Parent*(RayYan, AllGods)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(PARENTSTAR, IF, "RayYan", CALL, "AllGods");
             SuchThatClause actualStc = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
         }

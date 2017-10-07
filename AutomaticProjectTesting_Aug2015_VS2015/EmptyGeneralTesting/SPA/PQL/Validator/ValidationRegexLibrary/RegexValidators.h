@@ -41,6 +41,7 @@ public:
     /*--------------- Relationship Clause Regex ---------------*/
     static const string MODIFIES_FIRSTARG_REGEX;
     static const string MODIFIES_REGEX;
+    static const string USES_FIRSTARG_REGEX;
     static const string USES_REGEX;
     static const string FOLLOWS_REGEX;
     static const string PARENT_REGEX;

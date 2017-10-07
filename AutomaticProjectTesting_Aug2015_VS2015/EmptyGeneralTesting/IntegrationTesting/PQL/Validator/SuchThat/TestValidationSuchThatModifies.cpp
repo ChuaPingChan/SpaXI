@@ -12,10 +12,10 @@ using namespace std;
 
 namespace UnitTesting
 {
-    TEST_CLASS(TestValidationSuchThatModifies)
+    TEST_CLASS(TestValidationSuchThat_Modifies)
     {
     public:
-        TEST_METHOD(TestValidity_SuchThatModifies_Int_IdentWithQuotes_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Int_IdentWithQuotes_Valid)
         {
             string str = "Modifies(1, \"x\")";
             QueryTree qt;
@@ -26,7 +26,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_Int_Underscore_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Int_Underscore_Valid)
         {
             string str = "Modifies(1, _)";
             QueryTree qt;
@@ -37,7 +37,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_Int_Variable_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Int_Variable_Valid)
         {
             string str = "Modifies(1, v)";
             QueryTree qt;
@@ -49,7 +49,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_Synonym_IdentWithQuotes_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Synonym_IdentWithQuotes_Valid)
         {
             string str = "Modifies(a, \"x\")";
             QueryTree qt;
@@ -61,7 +61,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_Synonym_Underscore_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Synonym_Underscore_Valid)
         {
             string str = "Modifies(s, _)";
             QueryTree qt;
@@ -73,7 +73,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_Synonym_Variable_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Synonym_Variable_Valid)
         {
             string str = "Modifies(w, v)";
             QueryTree qt;
@@ -86,7 +86,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_IdentWithQuotes_IdentWithQuotes_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_IdentWithQuotes_IdentWithQuotes_Valid)
         {
             string str = "Modifies(\"Pikachu\", \"pokeball\")";
             QueryTree qt;
@@ -99,7 +99,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_IdentWithQuotes_Underscore_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_IdentWithQuotes_Underscore_Valid)
         {
             string str = "Modifies(\"Pikachu\", _)";
             QueryTree qt;
@@ -112,7 +112,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_IdentWithQuotes_Variable_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_IdentWithQuotes_Variable_Valid)
         {
             string str = "Modifies(\"Pikachu\", thunderstone)";
             QueryTree qt;
@@ -125,7 +125,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_Procedure_IdentWithQuotes_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Procedure_IdentWithQuotes_Valid)
         {
             string str = "Modifies(Blastoise, \"pokeball\")";
             QueryTree qt;
@@ -138,7 +138,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_Procedure_Underscore_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Procedure_Underscore_Valid)
         {
             string str = "Modifies(Blastoise, _ )";
             QueryTree qt;
@@ -151,7 +151,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatModifies_Procedure_Variable_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Modifies_Procedure_Variable_Valid)
         {
             string str = "Modifies(Blastoise, hydroCannon)";
             QueryTree qt;
