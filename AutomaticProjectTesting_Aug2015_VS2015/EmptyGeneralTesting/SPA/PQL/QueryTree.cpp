@@ -65,7 +65,7 @@ void QueryTree::insertSynonym(int type, string synonym)
 
 void QueryTree::insertSelect(SelectClause select)
 {
-    _selectStmt = select;
+    _selectClause = select;
 }
 
 void QueryTree::insertSuchThat(SuchThatClause relClause)
@@ -128,9 +128,9 @@ unordered_set<string> QueryTree::getProgLines()
     return _progLines;
 }
 
-SelectClause QueryTree::getSelect()
+SelectClause QueryTree::getSelectClause()
 {
-    return _selectStmt;
+    return _selectClause;
 }
 
 vector<SuchThatClause> QueryTree::getSuchThatClauses()

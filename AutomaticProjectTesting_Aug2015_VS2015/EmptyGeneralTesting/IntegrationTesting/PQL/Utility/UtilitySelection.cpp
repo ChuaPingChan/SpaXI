@@ -10,6 +10,38 @@ UtilitySelection::~UtilitySelection()
 {
 }
 
+SelectClause UtilitySelection::makeSelectClause(SelectionType selectionType)
+{
+    return SelectClause(selectionType);
+}
+
+SelectClause UtilitySelection::makeSelectClause(SelectionType selectionType, Entity singleArgType, string singleArg)
+{
+    return SelectClause(selectionType, singleArgType, singleArg);
+}
+
+SelectClause UtilitySelection::makeSelectClause(SelectionType selectionType, vector<Entity> tupleArgTypes, vector<string> tupleArgs)
+{
+    return SelectClause(selectionType, tupleArgTypes, tupleArgs);
+}
+
+bool UtilitySelection::isSameSelectClauseContent(SelectClause expected, SelectClause actual)
+{
+    switch (expected.getSelectionType())
+    {
+        case SELECT_BOOLEAN:
+            return isSameSelectBooleanContent(expected, actual);
+        case SELECT_SINGLE:
+            return isSameSelectSingleArgContent(expected, actual);
+        case SELECT_TUPLE:
+            return isSameSelectTupleArgContent(expected, actual);
+        default:
+            return false;
+    }
+}
+
+
+
 SuchThatClause UtilitySelection::makeSuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
 {
     return SuchThatClause(rel, argOneType, argOne, argTwoType, argTwo);
@@ -100,4 +132,29 @@ bool UtilitySelection::isSamePatternClauseIfContent(PatternClause expected, Patt
     bool isSameArgThree = expected.getArgThree() == actual.getArgThree();
 
     return isSamePatternType && isSamePatternSyn && isSameArgOneType && isSameArgTwoType && isSameArgThreeType && isSameArgOne && isSameArgTwo && isSameArgThree;
+}
+
+
+
+
+/**********
+* Private *
+**********/
+bool UtilitySelection::isSameSelectBooleanContent(SelectClause expected, SelectClause actual)
+{
+    return expected.getSelectionType() == actual.getSelectionType();
+}
+
+bool UtilitySelection::isSameSelectSingleArgContent(SelectClause expected, SelectClause actual)
+{
+    return expected.getSelectionType() == actual.getSelectionType()
+        && expected.getSingleArgType() == actual.getSingleArgType()
+        && expected.getSingleArg() == actual.getSingleArg();
+}
+
+bool UtilitySelection::isSameSelectTupleArgContent(SelectClause expected, SelectClause actual)
+{
+    return expected.getSelectionType() == actual.getSelectionType()
+        && expected.getTupleArgTypes() == actual.getTupleArgTypes()
+        && expected.getTupleArgs() == actual.getTupleArgs();
 }

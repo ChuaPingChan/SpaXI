@@ -15,6 +15,7 @@ public:
     static const string LETTER_REGEX;
     static const string DIGIT_REGEX;
     static const string INTEGER_REGEX;
+    static const string BOOLEAN_REGEX;
     static const string HASH_REGEX;
     static const string UNDERSCORE_REGEX;
     static const string IDENT_REGEX;
@@ -64,6 +65,7 @@ public:
     /******************** Grammar ********************/
     static bool isValidLetterRegex(string str);
     static bool isValidIntegerRegex(string str);
+    static bool isValidBooleanRegex(string str);
     static bool isValidIdentWithQuotesRegex(string str);
     static bool isValidSynonymRegex(string str);
     static bool isValidStmtRefRegex(string str);

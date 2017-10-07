@@ -21,7 +21,7 @@ bool SelectValidator::isValid(string str)
 
 bool SelectValidator::isValidSelectBoolean(string selectedStr)
 {
-    return false;
+    return RegexValidators::isValidBooleanRegex(selectedStr);
 }
 
 bool SelectValidator::isValidSelectSingle(string selectedStr)
@@ -60,7 +60,8 @@ SelectClause SelectValidator::makeSelectClause(SelectionType selectionType, vect
 
 bool SelectValidator::storeInQueryTree(SelectClause sc)
 {
-    return false;
+    qtPtr->insertSelect(sc);
+    return true;
 }
 
 Entity SelectValidator::getEntityOfSynonym(string syn)
