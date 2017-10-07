@@ -33,6 +33,12 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Select_MissingWhitespaces_Invalid)
+        {
+            string str = "Selects";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
         TEST_METHOD(TestRegex_Select_LowercaseKeyword_Invalid)
         {
             string str = "select s";
@@ -42,6 +48,12 @@ namespace UnitTesting
         TEST_METHOD(TestRegex_Select_MisspeltKeyword_Invalid)
         {
             string str = "selelct s";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_DuplicateSelect_Valid)
+        {
+            string str = "Select s Select v";
             Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
         }
 
@@ -62,8 +74,6 @@ namespace UnitTesting
         /*****************
         * Select Boolean *
         *****************/
-
-        //TODO: Change to IsTrue when implement Boolean
         TEST_METHOD(TestRegex_Select_Boolean_Valid)
         {
             string str = "Select BOOLEAN";
@@ -75,11 +85,16 @@ namespace UnitTesting
         /***************
         * Select Tuple *
         ***************/
-
-        //TODO: Change to IsTrue when implement tuple
+        //TODO: After implementing tuple
         TEST_METHOD(TestRegex_Select_Tuple_Valid)
         {
             string str = "Select <s, a>";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_Tuple_MissingWhitespaces_Invalid)
+        {
+            string str = "Select<s,a>";
             Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
         }
 
@@ -89,18 +104,29 @@ namespace UnitTesting
             Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Select_Tuple_Brackets_InValid)
+        TEST_METHOD(TestRegex_Select_Tuple_Brackets_LeftOnly_InValid)
         {
             string str = "Select <left, bracketOnly";
             Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
-            str = "Select right, bracketOnly>";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
-            str = "Select no brackets";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
-            str = "Select (incorrect, bracketType)";
+        }
+
+        TEST_METHOD(TestRegex_Select_Tuple_Brackets_RightOnly_InValid)
+        {
+            string str = "Select right, bracketOnly>";
             Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Select_Tuple_Brackets_MissingBoth_InValid)
+        {
+            string str = "Select no brackets";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_Tuple_Brackets_Incorrect_InValid)
+        {
+            string str = "Select (incorrect, bracketType)";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
 
 
         /*****************************************
@@ -197,9 +223,21 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Select_SuchThat_SplitUp_Invalid)
+        TEST_METHOD(TestRegex_SingleRelation_SuchThat_SplitUp_Invalid)
         {
             string str = "Select s such Follows(1,2) that";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_SingleRelation_MissingWhitespaces_Whole_Invalid)
+        {
+            string str = "SelectssuchthatUses(a,b)";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_SingleRelation_MissingWhitespaces_InSelect_Invalid)
+        {
+            string str = "Selectssuch that Uses(a,b)";
             Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
         }
 

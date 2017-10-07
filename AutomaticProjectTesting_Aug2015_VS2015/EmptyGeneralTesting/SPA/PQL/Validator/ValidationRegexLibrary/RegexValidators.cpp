@@ -39,6 +39,7 @@ const string RegexValidators::EXPRESSION_SPEC = "(" + SPACE_0 + UNDERSCORE_REGEX
 const string RegexValidators::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
 
 /*--------------- Select Regex ---------------*/
+const string RegexValidators::RESULTCL_REGEX = "(" + SPACE_0 + TUPLE_REGEX + SPACE_0 + "|" + SPACE_0 + "BOOLEAN" + SPACE_0 + ")";
 const string RegexValidators::SELECT_REGEX = "(Select)" + SPACE_1 + SYNONYM_REGEX;
 
 /******************** Select Overall ********************/
@@ -147,6 +148,12 @@ bool RegexValidators::isValidParentRegex(string str)
     return regex_match(str, parentRegexCheck);
 }
 
+bool RegexValidators::isValidSuchThatRegex(string str)
+{
+    regex suchThatRegexCheck(SUCH_THAT_REGEX);
+    return regex_match(str, suchThatRegexCheck);
+}
+
 bool RegexValidators::isValidFactorRegex(string str)
 {
     regex factorRegexCheck(FACTOR_REGEX);
@@ -167,16 +174,16 @@ bool RegexValidators::isValidPatternRegex(string str)
 }
 
 /*--------------- Select Regex ---------------*/
+bool RegexValidators::isValidResultClRegex(string str)
+{
+    regex resultClRegexCheck(RESULTCL_REGEX);
+    return regex_match(str, resultClRegexCheck);
+}
+
 bool RegexValidators::isValidSelectRegex(string str)
 {
     regex selectRegexCheck(SELECT_REGEX);
     return regex_match(str, selectRegexCheck);
-}
-
-bool RegexValidators::isValidSuchThatRegex(string str)
-{
-    regex suchThatRegexCheck(SUCH_THAT_REGEX);
-    return regex_match(str, suchThatRegexCheck);
 }
 
 /*--------------- Select Clause Regex Methods ---------------*/

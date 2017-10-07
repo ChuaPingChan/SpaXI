@@ -47,6 +47,7 @@ public:
     static const string RELATIONSHIP_KEYWORD_REGEX;
 
     /*--------------- Select Regex ---------------*/
+    static const string RESULTCL_REGEX;
     static const string SELECT_REGEX;
 
     /*--------------- Select Overall ---------------*/
@@ -77,6 +78,7 @@ public:
     static bool isValidUsesRegex(string str);
     static bool isValidFollowsRegex(string str);
     static bool isValidParentRegex(string str);
+    static bool isValidSuchThatRegex(string str);
 
     /******************** Pattern Regex ********************/
     static bool isValidFactorRegex(string str);
@@ -84,9 +86,9 @@ public:
     static bool isValidPatternRegex(string str);
 
     /*--------------- Select Regex ---------------*/
+    static bool isValidResultClRegex(string str);
     static bool isValidSelectRegex(string str);
-    static bool isValidSuchThatRegex(string str);
-
+    
     /******************** Select Overall ********************/
     static bool isValidSelectOverallRegex(string str);
 };

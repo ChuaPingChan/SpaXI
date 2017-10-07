@@ -399,18 +399,43 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidEntityRegex(str));
         }
 
-        TEST_METHOD(TestRegex_DesignEntity_Invalid)
+        TEST_METHOD(TestRegex_DesignEntity_IncorrectName_Invalid)
         {
             string str = "invalidEntity";
             Assert::IsFalse(RegexValidators::isValidEntityRegex(str));
-            str = "invalidEntityEndsWith#";
+        }
+
+        TEST_METHOD(TestRegex_DesignEntity_IllegalChar_Ending_Invalid)
+        {
+            string str = "invalidEntityEndsWith#";
             Assert::IsFalse(RegexValidators::isValidEntityRegex(str));
             str = "invalidEntityEndsWith1";
             Assert::IsFalse(RegexValidators::isValidEntityRegex(str));
-            str = "1invalidEntityStartsWithNumber";
+        }
+
+        TEST_METHOD(TestRegex_DesignEntity_IllegalChar_Beginning_Invalid)
+        {
+            string str = "1invalidEntityStartsWithNumber";
             Assert::IsFalse(RegexValidators::isValidEntityRegex(str));
             str = "#invalidEntityStartsWithSymbol";
             Assert::IsFalse(RegexValidators::isValidEntityRegex(str));
+        }
+
+
+
+        /************
+        * Result Cl *
+        ************/
+        TEST_METHOD(TestRegex_ResultCl_Tuple_Valid)
+        {
+            string str = "<s1, a , w>";
+            Assert::IsTrue(RegexValidators::isValidResultClRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ResultCl_Boolean_Valid)
+        {
+            string str = "BOOLEAN";
+            Assert::IsTrue(RegexValidators::isValidResultClRegex(str));
         }
 
     };
