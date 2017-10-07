@@ -172,6 +172,50 @@ namespace UnitTesting
             string str = "   a   (   v    ,   _\"x\"_    )   ";
             Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
         }
+        
+
+        /***************************
+        * Pattern While Regex Test *
+        ***************************/
+        TEST_METHOD(TestRegex_Pattern_While_Variable_Valid)
+        {
+            string str = "w(v,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_Variable_Whitespaces_Valid)
+        {
+            string str = "  w   (   v   ,   _   )   ";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_Underscore_Valid)
+        {
+            string str = "w(_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_Underscore_whitespaces_Valid)
+        {
+            string str = "   w  (      _     ,    _  )  ";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Valid)
+        {
+            string str = "w(\"ident\",_)";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        //TODO: Change to IsTrue when ident accept spaces
+        TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Whitespaces_Valid)
+        {
+            string str = " w  (   \"   ident   \"   ,   _   )";
+            Assert::IsFalse(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        
+
 
 
         /*********************
