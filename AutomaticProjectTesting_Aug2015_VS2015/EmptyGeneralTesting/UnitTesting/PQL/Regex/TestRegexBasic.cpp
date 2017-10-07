@@ -438,5 +438,41 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidResultClRegex(str));
         }
 
+
+
+
+        /************
+        * Rel Cond *
+        ************/
+        TEST_METHOD(TestRegex_RelCond_ClauseCount_One_Valid)
+        {
+            string str = "Follows(1,2)";
+            Assert::IsTrue(RegexValidators::isValidRelCondRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_RelCond_ClauseCount_Two_Valid)
+        {
+            string str = " Follows(1,2) and Parent(1,2) ";
+            Assert::IsTrue(RegexValidators::isValidRelCondRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_RelCond_ClauseCount_Multiple_Valid)
+        {
+            string str = " Follows(1, 2) and Parent(1, 2) and Modifies(1, v) and Uses(1, v) and Follows*(2, 3) and Parent*(2, 3) ";
+            Assert::IsTrue(RegexValidators::isValidRelCondRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_RelCond_Whitespaces_Valid)
+        {
+            string str = "  Follows  (   1     ,           2         )     and       Parent     (     1      ,     2     )  ";
+            Assert::IsTrue(RegexValidators::isValidRelCondRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_RelCond_MissingWhitespace_Invalid)
+        {
+            string str = "Follows(1,2)andParent(1,2)";
+            Assert::IsFalse(RegexValidators::isValidRelCondRegex(str));
+        }
+
     };
 }
