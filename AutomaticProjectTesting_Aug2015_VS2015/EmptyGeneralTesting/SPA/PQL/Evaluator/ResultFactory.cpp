@@ -26,6 +26,21 @@ bool ResultFactory::processClause(SuchThatClause clause)
         FollowsEvaluator evaluator = FollowsEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
     }
+    else if (rel == FOLLOWSSTAR)
+    {
+        FollowsStarEvaluator evaluator = FollowsStarEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+    if (rel == PARENT)
+    {
+        ParentEvaluator evaluator = ParentEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+    else if (rel == PARENTSTAR)
+    {
+        ParentStarEvaluator evaluator = ParentStarEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
     else
     {
         return false;
