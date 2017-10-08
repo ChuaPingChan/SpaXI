@@ -65,7 +65,7 @@ PatternType PatternHandler::getPatternType(string patternSyn)
 
 string PatternHandler::extractPatternSynonym(string str)
 {
-    string delimFirst = PatternValidator::PATTERN_KEYWORD;
+    string delimFirst = "";
     string delimSecond = "(";
 
     return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);

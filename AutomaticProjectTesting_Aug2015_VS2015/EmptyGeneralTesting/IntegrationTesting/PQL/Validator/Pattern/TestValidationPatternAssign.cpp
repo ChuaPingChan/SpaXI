@@ -9,6 +9,11 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
+/*
+* This class assumes that the overall pattern regex passed, hence only check for the assign component
+* The keyword, 'pattern', has been removed 
+*/
+
 namespace UnitTesting
 {
     TEST_CLASS(TestValidationPatternAssign)
@@ -16,7 +21,7 @@ namespace UnitTesting
     public:
         TEST_METHOD(TestValidity_PatternAssign_Synonym_Underscore_Valid)
         {
-            string str = "pattern a(v, _)";
+            string str = "a(v, _)";
             QueryTree qt;
             qt.insertSynonym(ASSIGN, "a");
             qt.insertSynonym(VARIABLE, "v");
@@ -29,7 +34,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_PatternAssign_Synonym_ExpressionSpec_PartialMatch_SingleVariable_Valid)
         {
-            string str = "pattern a(v, _\"x\"_)";
+            string str = "a(v, _\"x\"_)";
             QueryTree qt;
             qt.insertSynonym(ASSIGN, "a");
             qt.insertSynonym(VARIABLE, "v");
@@ -42,7 +47,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_PatternAssign_Underscore_ExpressionSpec_PartialMatch_SingleVariable_Valid)
         {
-            string str = "pattern a(_, _\"x\"_)";
+            string str = "a(_, _\"x\"_)";
             QueryTree qt;
             qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
@@ -54,7 +59,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_PatternAssign_IdentWithQuotes_ExpressionSpec_PartialMatch_SingleVariable_Valid)
         {
-            string str = "pattern a(\"x\", _\"x\"_)";
+            string str = "a(\"x\", _\"x\"_)";
             QueryTree qt;
             qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
@@ -66,7 +71,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_PatternAssign_Underscore_Underscore_Valid)
         {
-            string str = "pattern a(_, _)";
+            string str = "a(_, _)";
             QueryTree qt;
             qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
@@ -78,7 +83,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_PatternAssign_IdentWithQuotes_Underscore_Valid)
         {
-            string str = "pattern a(\"x\", _)";
+            string str = "a(\"x\", _)";
             QueryTree qt;
             qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);

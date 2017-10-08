@@ -207,6 +207,12 @@ bool RegexValidators::isValidPatternIfRegex(string str)
     return regex_match(str, patternIfRegexCheck);
 }
 
+bool RegexValidators::isValidPatternRefRegex(string str)
+{
+    regex patternRefRegexCheck(PATTERNREF_REGEX);
+    return regex_match(str, patternRefRegexCheck);
+}
+
 bool RegexValidators::isValidPatternCondRegex(string str)
 {
     regex patternCondRegexCheck(PATTERNCOND_REGEX);

@@ -98,8 +98,9 @@ public:
     static bool isValidPatternAssignRegex(string str);
     static bool isValidPatternWhileRegex(string str);
     static bool isValidPatternIfRegex(string str);
+    static bool isValidPatternRefRegex(string str);
     static bool isValidPatternCondRegex(string str);
-    static bool isValidPatternRegex(string str);
+    //static bool isValidPatternRegex(string str);
     static bool isValidPatternClRegex(string str);
 
     /*--------------- Select Regex ---------------*/

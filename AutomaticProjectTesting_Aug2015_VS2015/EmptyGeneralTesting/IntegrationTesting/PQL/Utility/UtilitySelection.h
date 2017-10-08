@@ -36,6 +36,7 @@ public:
     static PatternClause getFirstPatternClauseFromTree(QueryTree qt);
     static bool isSamePatternClauseAssignWhileContent(PatternClause expected, PatternClause actual);
     static bool isSamePatternClauseIfContent(PatternClause expected, PatternClause actual);
+    static bool areSamePatternClausesContentAsInTree(vector<PatternClause> expectedList, QueryTree qt);
 
 
 
