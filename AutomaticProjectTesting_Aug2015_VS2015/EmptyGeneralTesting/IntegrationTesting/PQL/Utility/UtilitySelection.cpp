@@ -134,6 +134,43 @@ bool UtilitySelection::isSamePatternClauseIfContent(PatternClause expected, Patt
     return isSamePatternType && isSamePatternSyn && isSameArgOneType && isSameArgTwoType && isSameArgThreeType && isSameArgOne && isSameArgTwo && isSameArgThree;
 }
 
+bool UtilitySelection::areSamePatternClausesContentAsInTree(vector<PatternClause> expectedList, QueryTree qt)
+{
+    vector<PatternClause> actualList = qt.getPatternClauses();
+
+    if (actualList.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::vector<PatternClause>::iterator iterExpected = expectedList.begin(); iterExpected != expectedList.end(); ++iterExpected) {
+        PatternClause expectedPc = *iterExpected;
+
+        std::vector<PatternClause>::iterator iterActual = actualList.begin();
+        for (; iterActual != actualList.end(); ++iterActual) {
+            PatternClause actualPc = *iterActual;
+            PatternType actualPatternType = actualPc.getPatternType();
+
+            if (actualPatternType == ASSSIGN_PATTERN && isSamePatternClauseAssignWhileContent(expectedPc, actualPc))
+            {
+                break;
+            }
+            else if (actualPatternType == WHILE_PATTERN && isSamePatternClauseAssignWhileContent(expectedPc, actualPc))
+            {
+                break;
+            }
+            else if (actualPatternType == If_PATTERN && isSamePatternClauseIfContent(expectedPc, actualPc))
+            {
+                break;
+            }
+        }
+
+        if (iterActual == actualList.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 
 

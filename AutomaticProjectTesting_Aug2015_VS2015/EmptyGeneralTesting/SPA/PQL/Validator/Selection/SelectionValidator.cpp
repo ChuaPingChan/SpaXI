@@ -34,7 +34,7 @@ bool SelectionValidator::areValidClauses(string str)
     PatternHandler pHandler = PatternHandler(qtPtr);
 
     /* Extracting the clauses portion */
-    regex clauseRegex(RegexValidators::RELREF_REGEX + "|" + RegexValidators::PATTERN_REGEX);
+    regex clauseRegex(RegexValidators::RELREF_REGEX + "|" + RegexValidators::PATTERNREF_REGEX);
     sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
     sregex_iterator it_end;
 
@@ -82,7 +82,8 @@ bool SelectionValidator::isSuchThat(string str)
 
 bool SelectionValidator::isPattern(string str)
 {
-    return (str.find("pattern") != std::string::npos);
+    //return (str.find("pattern") != std::string::npos);
+    return RegexValidators::isValidPatternRefRegex(str);
 }
 
 string SelectionValidator::extractSelectRawStr(string str)

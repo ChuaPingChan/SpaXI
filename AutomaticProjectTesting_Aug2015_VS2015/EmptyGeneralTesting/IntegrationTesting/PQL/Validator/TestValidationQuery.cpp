@@ -243,6 +243,149 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_Pattern_Assign_Valid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("variable v;");
+            query.append("Select a pattern a(v, _)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            PatternClause expectedPc = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_");
+            PatternClause actualPc = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expectedPc, actualPc));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_Pattern_Assign_And_Assign_Valid)
+        {
+            string query;
+            query.append("assign a1, a2;");
+            query.append("variable v;");
+            query.append("Select a2 pattern a1(v, _) and a2(_,_)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a2");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<PatternClause> expectedList;
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedList, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_Pattern_Assign_And_While_Valid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("variable v;");
+            query.append("while w;");
+            query.append("Select a pattern a(v, _) and w(_,_)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<PatternClause> expectedList;
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w", UNDERSCORE, "_", UNDERSCORE, "_"));
+            Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedList, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Assign_Pattern_Assign_And_Assign_Pattern_Assign_Valid)
+        {
+            string query;
+            query.append("assign a1, a2;");
+            query.append("variable v;");
+            query.append("Select a2 pattern a1(v, _) and a2(_,_) pattern a1 (v, _)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a2");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<PatternClause> expectedList;
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedList, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Stmt_SuchThat_Parent_Pattern_Assign_And_Assign_SuchThat_Follows_And_Modifies_Pattern_Assign_Valid)
+        {
+            string query;
+            query.append("stmt s1, s2;");
+            query.append("assign a1, a2;");
+            query.append("variable v;");
+            query.append("Select s2 such that Parent(s1, s2) pattern a1(v, _) and a2(_,_) such that Follows(s2, s1) and Modifies(s1, \"x\") pattern a1 (v, _)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s2");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<SuchThatClause> expectedListStc;
+            vector<PatternClause> expectedListPc;
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENT, STMT, "s1", STMT, "s2"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s2", STMT, "s1"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "\"x\""));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
+            Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Stmt_Parent_Pattern_Assign_And_While_SuchThat_Follows_And_Modifies_Pattern_Valid)
+        {
+            string query;
+            query.append("stmt s1, s2;");
+            query.append("assign a1, a2;");
+            query.append("while w1, w2;");
+            query.append("variable v1, v2;");
+            query.append("Select s2 such that Parent(s1, s2) pattern a1(v2, _) and w1(\"y\",_) such that Follows(s2, s1) and Modifies(s1, \"x\") pattern w2 (v1, _)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s2");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<SuchThatClause> expectedListStc;
+            vector<PatternClause> expectedListPc;
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENT, STMT, "s1", STMT, "s2"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v2", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w1", IDENT_WITHQUOTES, "\"y\"", UNDERSCORE, "_"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s2", STMT, "s1"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "\"x\""));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w2", VARIABLE, "v1", UNDERSCORE, "_"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
+            Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Call_Pattern_Assign_SuchThat_FollowsStar_And_ParentStar_SuchThat_Modifies_Pattern_Assign_Pattern_Assign_Valid)
+        {
+            string query;
+            query.append("call cl;");
+            query.append("stmt s1, s2, s3;");
+            query.append("variable v;");
+            query.append("assign a1, a2;");
+            query.append("Select cl pattern a1(v, _) such that Follows*(s1, s2) and Parent*(s2, s3) such that Modifies(1, v) pattern a2(_, _) pattern a2(v, _)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "cl");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<SuchThatClause> expectedListStc;
+            vector<PatternClause> expectedListPc;
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s1", STMT, "s2"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENTSTAR, STMT, "s2", STMT, "s3"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", VARIABLE, "v"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", VARIABLE, "v", UNDERSCORE, "_"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
+            Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
+        }
+
 
         /******************
         * Invalid Queries *
@@ -294,6 +437,75 @@ namespace UnitTesting
             query.append("stmt s1, s2;");
             query.append("while w;");
             query.append("Select s2 such that Follows(s1, s2) Parent(w, s2)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SuchThat_Follows_Int_Int_SecondArg_GreaterThan_FirstArg_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select s such that Follows(15, 2)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SuchThat_Parent_Int_Int_SecondArg_GreaterThan_FirstArg_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select s such that Parent(15, 2)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SuchThat_Modifies_And_Pattern_Assign_And_SuchThat_Parent_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("variable v;");
+            query.append("while w;");
+            query.append("assign a1, a2;");
+            query.append("Select s such that Modifies(1, v) and pattern a1(_, _) and such that Parent(w, a2)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SuchThat_Modifies_And_Assign_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("variable v;");
+            query.append("assign a;");
+            query.append("Select s such that Modifies(1, v) and a(_, _)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_Pattern_Assign_And_Modifies_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("variable v;");
+            query.append("assign a;");
+            query.append("Select s pattern a(_, _) and Modifies(1, v)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SuchThat_Assign_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("variable v;");
+            query.append("assign a;");
+            query.append("Select s such that a(v, _)");
             QueryTree qt;
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsFalse(validator.isValidQuery(query));

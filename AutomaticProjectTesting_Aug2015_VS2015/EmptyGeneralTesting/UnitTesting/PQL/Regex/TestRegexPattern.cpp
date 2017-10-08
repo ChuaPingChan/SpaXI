@@ -15,7 +15,6 @@ namespace UnitTesting
         /********************
         * Factor Regex Test *
         ********************/
-
         TEST_METHOD(TestRegex_Factor_VarName_Alphabetic_Valid)
         {
             string str = "validName";
@@ -71,7 +70,6 @@ namespace UnitTesting
         /*****************************
         * Expression Spec Regex Test *
         *****************************/
-
         TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
         {
             string str = "_";
@@ -153,107 +151,251 @@ namespace UnitTesting
         }
 
 
+        /****************************
+        * Pattern Assign Regex Test *
+        ****************************/
+        TEST_METHOD(TestRegex_Pattern_Assign_Underscore_Valid)
+        {
+            string str = "a(v,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_ExpressionSpec_PartialMatch_Valid)
+        {
+            string str = "a(v,_\"x\"_)";
+            Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        //TODO: Add whitespace in between express spec after add space in regex
+        TEST_METHOD(TestRegex_Pattern_Assign_Whitespace_Valid)
+        {
+            string str = "   a   (   v    ,   _\"x\"_    )   ";
+            Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
+        }
+        
+
+        /***************************
+        * Pattern While Regex Test *
+        ***************************/
+        TEST_METHOD(TestRegex_Pattern_While_Synonym_Underscore_Valid)
+        {
+            string str = "w(v,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_Synonym_Underscore_Whitespaces_Valid)
+        {
+            string str = "  w   (   v   ,   _   )   ";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_Underscore_Underscore_Valid)
+        {
+            string str = "w(_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_Underscore_Underscore_whitespaces_Valid)
+        {
+            string str = "   w  (      _     ,    _  )  ";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Underscore_Valid)
+        {
+            string str = "w(\"ident\",_)";
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        //TODO: Change to IsTrue when ident accept spaces
+        TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Underscore_Whitespaces_Valid)
+        {
+            string str = " w  (   \"   ident   \"   ,   _   )";
+            Assert::IsFalse(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_While_SecondArg_Synonym_Invalid)
+        {
+            string str = "w(v,v1)";
+            Assert::IsFalse(RegexValidators::isValidPatternWhileRegex(str));
+        }
+
+
+        /************************
+        * Pattern If Regex Test *
+        ************************/
+        TEST_METHOD(TestRegex_Pattern_If_Synonym_Underscore_Underscore_Valid)
+        {
+            string str = "f(v,_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_If_Synonym_Underscore_Underscore_Whitespaces_Valid)
+        {
+            string str = "  f   (   v    ,      _   ,      _     )    ";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_If_Underscore_Underscore_Underscore_Valid)
+        {
+            string str = "f(_,_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_If_Underscore_Underscore_Underscore_Whitespace_Valid)
+        {
+            string str = "  f   (     _      ,      _      ,     _     )    ";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_If_IdentWithQuotes_Underscore_Underscore_Valid)
+        {
+            string str = "f(\"procedure\",_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+        //TODO: Change to IsTrue when done w w spaces regarding ident
+        TEST_METHOD(TestRegex_Pattern_If_IdentWithQuotes_Underscore_Underscore_Whitespace_Valid)
+        {
+            string str = "  f  (  \"     procedure    \"  ,  _   ,   _  )";
+            Assert::IsFalse(RegexValidators::isValidPatternIfRegex(str));
+        }
+
+
+
+        /**************************
+        * Pattern Cond Regex Test *
+        **************************/
+        TEST_METHOD(TestRegex_Pattern_SingleClause_Assign_Valid)
+        {
+            string str = "a(v,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternCondRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_SingleClause_While_Whitespace_Valid)
+        {
+            string str = "  w   (   v   ,   _   )   ";
+            Assert::IsTrue(RegexValidators::isValidPatternCondRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_MultipleClauses_And_Valid)
+        {
+            string str = "a(v,_) and w(v,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternCondRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_MultipleClauses_And_Whitespace_Valid)
+        {
+            string str = "  a    (   v   ,    _   )      and     w    (   v   ,   _    )      ";
+            Assert::IsTrue(RegexValidators::isValidPatternCondRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_MultipleClauses_And_And_And_Valid)
+        {
+            string str = "a(v,_) and w(v,_) and f(_,_,_) and f(\"procedure\",_,_)";
+            Assert::IsTrue(RegexValidators::isValidPatternCondRegex(str));
+        }
+
 
         /*********************
         * Pattern Regex Test *
         *********************/
-
         TEST_METHOD(TestRegex_Pattern_Whitespace_Valid)
         {
             string str = "pattern a (   validBothArgs  ,   _  )";
-            Assert::IsTrue(RegexValidators::isValidPatternRegex(str));
+            Assert::IsTrue(RegexValidators::isValidPatternClRegex(str));
         }
 
         //TODO: Change to is true when include +
         TEST_METHOD(TestRegex_Pattern_Whitespace_InExpressionSpec_Valid)
         {
             string str = "pattern a (   validBothArgs  ,   \"   x+y   \"  )";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         //TODO: Change to is true when include +
         TEST_METHOD(TestRegex_Pattern_Tabs_InExpressionSpec_Valid)
         {
             string str = "pattern a (validBothArgs,\"	x+y		\")";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_Whitespace_InExpressionSpec_PartialMatch_Valid)
         {
             string str = "pattern a (   validBothArgs  ,   _   \"  var   \"   _  )";
-            Assert::IsTrue(RegexValidators::isValidPatternRegex(str));
+            Assert::IsTrue(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_Underscore_Underscore_Valid)
         {
             string str = "pattern a(_, _)";
-            Assert::IsTrue(RegexValidators::isValidPatternRegex(str));
+            Assert::IsTrue(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_SecondArg_Ident_PartialMatch_Valid)
         {
             string str = "pattern a(v, _\"y\"_)";
-            Assert::IsTrue(RegexValidators::isValidPatternRegex(str));
+            Assert::IsTrue(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_UppercaseKeywordInvalid)
         {
             string str = "Pattern a(uppercase, _\"ident\"_)";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_MisspeltKeywordInvalid)
         {
             string str = "misspelt(relationship, _\"name\"_)";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_IntegerArgInvalid)
         {
             string str = "pattern 1(2, 3)";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
         
         TEST_METHOD(TestRegex_Pattern_ArgCount_MissingPatternTypeSynonymInvalid)
         {
             string str = "pattern (noSynonymBeforeBracket, _)";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_ArgCount_OneArgInvalid)
         {
             string str = "pattern a(onlyTwoArg)";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_ArgCount_ExtraInvalid)
         {
             string str = "pattern a(too, many, arguments, already)";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_ArgCount_EmptyInvalid)
         {
             string str = "pattern a()";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_BracketInvalid)
         {
             string str = "pattern a[validArgsSyntax, _\"wrongBrackets\"_]";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
             str = "pattern a((validArgsSyntax, _\"extraBrackets\"_))";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
             str = "pattern a validArgsSyntax, _\"noBrackets\"_";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_SeparationBtwnArgInvalid)
         {
             string str = "pattern a(validArgsSyntax.butFullStopReplacesComma)";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
             str = "pattern a(validArgsSyntax noCommas)";
-            Assert::IsFalse(RegexValidators::isValidPatternRegex(str));
+            Assert::IsFalse(RegexValidators::isValidPatternClRegex(str));
         }
         
     };

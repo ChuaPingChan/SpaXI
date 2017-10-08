@@ -32,22 +32,29 @@ const string RegexValidators::USES_FIRSTARG_REGEX = "(" + SYNONYM_REGEX + "|" + 
 const string RegexValidators::USES_REGEX = "(" + SPACE_0 + "(Uses)" + SPACE_0 + "[(]" + SPACE_0 + USES_FIRSTARG_REGEX + SPACE_0 + "[,]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::CALLS_REGEX = "(" + SPACE_0 + "(Calls)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::RELREF_REGEX = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + ")";
 const string RegexValidators::RELCOND_REGEX = "(" + SPACE_0 + RELREF_REGEX + SPACE_0 + "("+ SPACE_1 + "and" + SPACE_1 + RELREF_REGEX + SPACE_0 + ")*" + SPACE_0 + ")";
-const string RegexValidators::SUCH_THAT_CL_REGEX = "(" + SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELCOND_REGEX + SPACE_0 + ")";
+const string RegexValidators::SUCH_THAT_Cl_REGEX = "(" + SPACE_0 + "(such)" + SPACE_1 + "(that)" + SPACE_1 + RELCOND_REGEX + SPACE_0 + ")";
 const string RegexValidators::RELATIONSHIP_KEYWORD_REGEX = "(Modifies|Uses|Parent[\\*]|Parent|Follows[\\*]|Follows|Calls[\\*]|Calls|Next[\\*]|Next|Affects[\\*]|Affects)";
 
 /*--------------- Pattern Clause Regex ---------------*/
 const string RegexValidators::FACTOR_REGEX = "(" + SPACE_0 + NAME_REGEX + SPACE_0 + "|" + SPACE_0 + INTEGER_REGEX + SPACE_0 + ")";
 const string RegexValidators::EXPRESSION_SPEC = "(" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "|" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "\"" + SPACE_0 + FACTOR_REGEX + SPACE_0 + "\"" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + ")";
-const string RegexValidators::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::PATTERN_ASSIGN_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + "(" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "|" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + ")" + "[)]" + SPACE_0 + ")";
+const string RegexValidators::PATTERN_WHILE_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0+ "[)]" + SPACE_0 + ")";
+const string RegexValidators::PATTERN_IF_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::PATTERNREF_REGEX = "(" + PATTERN_ASSIGN_REGEX + "|" + PATTERN_WHILE_REGEX + "|" + PATTERN_IF_REGEX + ")";
+const string RegexValidators::PATTERNCOND_REGEX = "(" + SPACE_0 + PATTERNREF_REGEX + SPACE_0 + "(" + SPACE_1 + "and" + SPACE_1 + PATTERNREF_REGEX + SPACE_0 + ")*" + SPACE_0 + ")";
+//const string RegexValidators::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::PATTERN_Cl_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + PATTERNCOND_REGEX + SPACE_0 + ")";
 
 /*--------------- Select Regex ---------------*/
 const string RegexValidators::RESULTCL_REGEX = "(" + SPACE_0 + TUPLE_REGEX + SPACE_0 + "|" + SPACE_0 + BOOLEAN_REGEX + SPACE_0 + ")";
 const string RegexValidators::SELECT_REGEX = "(Select)" + SPACE_1 + RESULTCL_REGEX;
 
 /******************** Select Overall ********************/
-const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_CL_REGEX + "|" + PATTERN_REGEX + ")*" + SPACE_0 + "$";
+const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGEX + SPACE_0 + "(" + SUCH_THAT_Cl_REGEX + "|" + PATTERN_Cl_REGEX + ")*" + SPACE_0 + "$";
 
 
 
@@ -158,6 +165,12 @@ bool RegexValidators::isValidParentRegex(string str)
     return regex_match(str, parentRegexCheck);
 }
 
+bool RegexValidators::isValidCallsRegex(string str)
+{
+    regex callsRegexCheck(CALLS_REGEX);
+    return regex_match(str, callsRegexCheck);
+}
+
 bool RegexValidators::isValidRelCondRegex(string str)
 {
     regex relCondRegexCheck(RELCOND_REGEX);
@@ -166,10 +179,11 @@ bool RegexValidators::isValidRelCondRegex(string str)
 
 bool RegexValidators::isValidSuchThatClRegex(string str)
 {
-    regex suchThatClRegexCheck(SUCH_THAT_CL_REGEX);
+    regex suchThatClRegexCheck(SUCH_THAT_Cl_REGEX);
     return regex_match(str, suchThatClRegexCheck);
 }
 
+/*--------------- Pattern Clause Regex Methods ---------------*/
 bool RegexValidators::isValidFactorRegex(string str)
 {
     regex factorRegexCheck(FACTOR_REGEX);
@@ -182,11 +196,46 @@ bool RegexValidators::isValidExpressionSpecRegex(string str)
     return regex_match(str, expressionSpecCheck);
 }
 
-/*--------------- Pattern Clause Regex Methods ---------------*/
-bool RegexValidators::isValidPatternRegex(string str)
+bool RegexValidators::isValidPatternAssignRegex(string str)
 {
-    regex patternRegexCheck(PATTERN_REGEX);
-    return regex_match(str, patternRegexCheck);
+    regex patternAssignRegexCheck(PATTERN_ASSIGN_REGEX);
+    return regex_match(str, patternAssignRegexCheck);
+}
+
+bool RegexValidators::isValidPatternWhileRegex(string str)
+{
+    regex patternWhileRegexCheck(PATTERN_WHILE_REGEX);
+    return regex_match(str, patternWhileRegexCheck);
+}
+
+bool RegexValidators::isValidPatternIfRegex(string str)
+{
+    regex patternIfRegexCheck(PATTERN_IF_REGEX);
+    return regex_match(str, patternIfRegexCheck);
+}
+
+bool RegexValidators::isValidPatternRefRegex(string str)
+{
+    regex patternRefRegexCheck(PATTERNREF_REGEX);
+    return regex_match(str, patternRefRegexCheck);
+}
+
+bool RegexValidators::isValidPatternCondRegex(string str)
+{
+    regex patternCondRegexCheck(PATTERNCOND_REGEX);
+    return regex_match(str, patternCondRegexCheck);
+}
+
+//bool RegexValidators::isValidPatternRegex(string str)
+//{
+//    regex patternRegexCheck(PATTERN_REGEX);
+//    return regex_match(str, patternRegexCheck);
+//}
+
+bool RegexValidators::isValidPatternClRegex(string str)
+{
+    regex patternClRegexCheck(PATTERN_Cl_REGEX);
+    return regex_match(str, patternClRegexCheck);
 }
 
 /*--------------- Select Regex ---------------*/
