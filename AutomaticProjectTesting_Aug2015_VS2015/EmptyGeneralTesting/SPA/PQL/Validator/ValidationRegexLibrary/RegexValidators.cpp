@@ -165,6 +165,12 @@ bool RegexValidators::isValidParentRegex(string str)
     return regex_match(str, parentRegexCheck);
 }
 
+bool RegexValidators::isValidCallsRegex(string str)
+{
+    regex callsRegexCheck(CALLS_REGEX);
+    return regex_match(str, callsRegexCheck);
+}
+
 bool RegexValidators::isValidRelCondRegex(string str)
 {
     regex relCondRegexCheck(RELCOND_REGEX);

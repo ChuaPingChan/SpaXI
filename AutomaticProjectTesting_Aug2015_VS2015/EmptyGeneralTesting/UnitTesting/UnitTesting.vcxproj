@@ -191,6 +191,7 @@
     <ClCompile Include="TestParserPKB.cpp" />
     <ClCompile Include="TestPatternTable.cpp" />
     <ClCompile Include="TestPKBMain.cpp" />
+    <ClCompile Include="TestRegexCalls.cpp" />
     <ClCompile Include="TestRelationshipTable.cpp" />
     <ClCompile Include="TestStmtTypeList.cpp" />
     <ClCompile Include="TestUsesTableStmtToVar.cpp" />

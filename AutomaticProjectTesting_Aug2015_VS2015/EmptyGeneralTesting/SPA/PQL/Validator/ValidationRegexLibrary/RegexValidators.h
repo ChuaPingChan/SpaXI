@@ -90,6 +90,7 @@ public:
     static bool isValidUsesRegex(string str);
     static bool isValidFollowsRegex(string str);
     static bool isValidParentRegex(string str);
+    static bool isValidCallsRegex(string str);
     static bool isValidRelCondRegex(string str);
     static bool isValidSuchThatClRegex(string str);
 
