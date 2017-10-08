@@ -12,13 +12,30 @@ QueryEvaluator::~QueryEvaluator()
 void QueryEvaluator::evaluate()
 {
     bool hasResult = true;
-    ClauseResult clauseResult;
-    ResultFactory factory = ResultFactory(clauseResult);
+    ResultFactory factory = ResultFactory();
 
     for (SuchThatClause stClause : _qt->getSuchThatClauses())
     {
-
+        hasResult = factory.processClause(stClause);
+        if (!hasResult) break;
     }
+
+    if (hasResult) 
+    {
+        for (PatternClause ptClause : _qt->getPatternClauses())
+        {
+            hasResult = factory.processClause(ptClause);
+            if (!hasResult) break;
+        }
+    }
+
+    if (hasResult)
+    {
+        SelectClause slClause = _qt->getSelectClause();
+        hasResult = factory.processClause(slClause);
+    }
+
+    _qt->storeEvaluatorResult(factory.makeClauseResult());
 }
 
 

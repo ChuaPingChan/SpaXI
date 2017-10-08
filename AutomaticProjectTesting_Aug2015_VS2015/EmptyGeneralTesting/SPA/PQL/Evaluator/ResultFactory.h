@@ -23,13 +23,15 @@
 class ResultFactory
 {
 public:
-    ResultFactory(ClauseResult clauseResult);
+    ResultFactory();
     ~ResultFactory();
 
-    //ClauseResult makeClauseResult(SelectClause clause);
-    //ClauseResult makeClauseResult(SuchThatClause clause);
-    //ClauseResult makeClauseResult(PatternClause clause);
-    //ClauseResult makeClauseResult(WithClause clause);
+    bool processClause(SelectClause clause);
+    bool processClause(SuchThatClause clause);
+    bool processClause(PatternClause clause);
+
+    ClauseResult makeClauseResult();
+
 
 private:
 
