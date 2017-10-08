@@ -222,6 +222,24 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Procedure_Calls_Procedure_Variable_And_Modifies_Procedure_Variable_Valid)
+        {
+            string query;
+            query.append("procedure p;");
+            query.append("procedure q;");
+            query.append("variable v;");
+            query.append("Select p such that Calls(p, q) and Modifies(p, v)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<SuchThatClause> expectedList;
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(CALLS, PROCEDURE, "p", PROCEDURE, "q"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "p", VARIABLE, "v"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
+        }
+
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_While_MultipleSuchThat_FollowsStar_SuchThat_ParentStar_And_Modifies_SuchThat_Uses_And_Follows_Valid)
         {
             string query;

@@ -68,7 +68,8 @@ bool SelectionValidator::areValidClauses(string str)
 
 bool SelectionValidator::isSuchThat(string str)
 {
-    if ((str.find(RELATIONSHIP_STRING_ARRAY[FOLLOWS]) != std::string::npos) || 
+    if ((str.find(RELATIONSHIP_STRING_ARRAY[CALLS]) != std::string::npos)||
+        (str.find(RELATIONSHIP_STRING_ARRAY[FOLLOWS]) != std::string::npos) ||
         (str.find(RELATIONSHIP_STRING_ARRAY[PARENT]) != std::string::npos) ||
         (str.find(RELATIONSHIP_STRING_ARRAY[MODIFIES]) != std::string::npos) ||
         (str.find(RELATIONSHIP_STRING_ARRAY[USES]) != std::string::npos))
