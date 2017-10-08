@@ -242,6 +242,7 @@ bool ClauseResult::removeCombinations(string synName, int value)
             updatedResult.push_back(*combPtr);
         }
     }
+    // TODO: Remove synonym from lists as well. Also from other removal methods.
     _results = updatedResult;
     return true;
 }
