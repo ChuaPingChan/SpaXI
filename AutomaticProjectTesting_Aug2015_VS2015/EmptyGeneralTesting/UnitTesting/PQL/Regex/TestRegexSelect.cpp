@@ -186,18 +186,16 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change this to IsTrue when implement Call
         TEST_METHOD(TestRegex_SingleRelation_Calls_Valid)
         {
             string str = "Select s such that Calls(p1,p2)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change this to IsTrue when implement Call*
         TEST_METHOD(TestRegex_SingleRelation_CallsStar_Valid)
         {
             string str = "Select s such that Calls*(p1,p2)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         //TODO: Change this to IsTrue when implement Next
