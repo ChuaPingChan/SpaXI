@@ -51,6 +51,7 @@ public:
     static const string USES_REGEX;
     static const string FOLLOWS_REGEX;
     static const string PARENT_REGEX;
+    static const string CALLS_REGEX;
     static const string RELREF_REGEX;
     static const string RELCOND_REGEX;
     static const string SUCH_THAT_Cl_REGEX;
@@ -89,6 +90,7 @@ public:
     static bool isValidUsesRegex(string str);
     static bool isValidFollowsRegex(string str);
     static bool isValidParentRegex(string str);
+    static bool isValidCallsRegex(string str);
     static bool isValidRelCondRegex(string str);
     static bool isValidSuchThatClRegex(string str);
 
