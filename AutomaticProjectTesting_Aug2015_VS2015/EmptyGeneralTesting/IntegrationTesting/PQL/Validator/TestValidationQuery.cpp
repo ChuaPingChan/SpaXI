@@ -409,6 +409,16 @@ namespace UnitTesting
             Assert::IsFalse(validator.isValidQuery(query));
         }
 
+        TEST_METHOD(TestValidity_Query_SuchThat_Parent_Int_Int_SecondArg_GreaterThan_FirstArg_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select s such that Parent(15, 2)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
         TEST_METHOD(TestValidity_Query_SuchThat_Modifies_And_Pattern_Assign_And_SuchThat_Parent_Invalid)
         {
             string query;
