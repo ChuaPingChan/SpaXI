@@ -1,9 +1,8 @@
 #include "ResultFactory.h"
 
 
-ResultFactory::ResultFactory(ClauseResult clauseResult)
+ResultFactory::ResultFactory()
 {
-    this->_clauseResult = clauseResult;
 }
 
 
@@ -11,24 +10,37 @@ ResultFactory::~ResultFactory()
 {
 }
 
-//ClauseResult ResultFactory::makeClauseResult(SelectClause clause)
-//{
-//    SelectionEvaluator evaluator = SelectionEvaluator();
-//    return evaluator.evaluate(clause);
-//}
+bool ResultFactory::processClause(SelectClause clause)
+{
+    SelectionEvaluator evaluator = SelectionEvaluator();
+    //return evaluator.evaluate(clause); 
+    return false;
+}
 
-//ClauseResult ResultFactory::makeClauseResult(SuchThatClause clause)
-//{
-//    int rel = clause.getRel();
-//    ClauseResult clauseResult;
-//
-//    if (rel == FOLLOWS)
-//    {
-//        FollowsEvaluator evaluator = FollowsEvaluator();
-//        evaluator.evaluate(clause, &clauseResult);
-//        return clauseResult;
-//    }
-//}
+bool ResultFactory::processClause(SuchThatClause clause)
+{
+    int rel = clause.getRel();
+
+    if (rel == FOLLOWS)
+    {
+        FollowsEvaluator evaluator = FollowsEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool ResultFactory::processClause(PatternClause clause)
+{
+    return false;
+}
+
+ClauseResult ResultFactory::makeClauseResult()
+{
+    return _clauseResult;
+}
 
 //    if (rel == MODIFIES)
 //    {
