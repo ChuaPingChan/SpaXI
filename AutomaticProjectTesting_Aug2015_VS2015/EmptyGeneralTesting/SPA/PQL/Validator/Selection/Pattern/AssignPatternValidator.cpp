@@ -21,11 +21,6 @@ void AssignPatternValidator::validate()
         this->validity = true;
     }
     else {
-        //TODO: Might need to add unknown type
-        this->argOne = "";
-        this->argTwo = "";
-        this->argOneType;// = UNKNOWN;
-        this->argTwoType;// = UNKNOWN;
         this->validity = false;
     }
 }
