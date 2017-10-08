@@ -13,10 +13,10 @@ const string RegexValidators::BOOLEAN_REGEX = "(BOOLEAN)";
 const string RegexValidators::HASH_REGEX = "(#)";
 const string RegexValidators::UNDERSCORE_REGEX = "(_)";
 const string RegexValidators::IDENT_REGEX = "(" + LETTER_REGEX + "(" + LETTER_REGEX + "|" + DIGIT_REGEX + "|" + HASH_REGEX + ")*)";
-const string RegexValidators::IDENT_WITH_QUOTES_REGEX = "(\"" + IDENT_REGEX + "\")";
+const string RegexValidators::IDENT_WITH_QUOTES_REGEX = "(\"" + SPACE_0 + IDENT_REGEX + SPACE_0 + "\")";
 const string RegexValidators::SYNONYM_REGEX = IDENT_REGEX;
 const string RegexValidators::STMTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + INTEGER_REGEX + ")";
-const string RegexValidators::ENTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + "\"" + IDENT_REGEX + "\"" ")";
+const string RegexValidators::ENTREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + IDENT_WITH_QUOTES_REGEX + ")";
 const string RegexValidators::LINEREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + INTEGER_REGEX + ")";
 const string RegexValidators::NAME_REGEX = "(" + LETTER_REGEX + "(" + LETTER_REGEX + "|" + DIGIT_REGEX + ")*)";
 const string RegexValidators::ATTRNAME_REGEX = "(procName|varName|value|stmt#)";
@@ -46,7 +46,6 @@ const string RegexValidators::PATTERN_WHILE_REGEX = "(" + SPACE_0 + SYNONYM_REGE
 const string RegexValidators::PATTERN_IF_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::PATTERNREF_REGEX = "(" + PATTERN_ASSIGN_REGEX + "|" + PATTERN_WHILE_REGEX + "|" + PATTERN_IF_REGEX + ")";
 const string RegexValidators::PATTERNCOND_REGEX = "(" + SPACE_0 + PATTERNREF_REGEX + SPACE_0 + "(" + SPACE_1 + "and" + SPACE_1 + PATTERNREF_REGEX + SPACE_0 + ")*" + SPACE_0 + ")";
-//const string RegexValidators::PATTERN_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::PATTERN_Cl_REGEX = "(" + SPACE_0 + "(pattern)" + SPACE_1 + PATTERNCOND_REGEX + SPACE_0 + ")";
 
 /*--------------- With Regex ---------------*/

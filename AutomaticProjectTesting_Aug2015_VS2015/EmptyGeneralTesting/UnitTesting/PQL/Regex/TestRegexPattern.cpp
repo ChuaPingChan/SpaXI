@@ -207,11 +207,10 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
         }
 
-        //TODO: Change to IsTrue when ident accept spaces
         TEST_METHOD(TestRegex_Pattern_While_IdentWithQuotes_Underscore_Whitespaces_Valid)
         {
             string str = " w  (   \"   ident   \"   ,   _   )";
-            Assert::IsFalse(RegexValidators::isValidPatternWhileRegex(str));
+            Assert::IsTrue(RegexValidators::isValidPatternWhileRegex(str));
         }
 
         TEST_METHOD(TestRegex_Pattern_While_SecondArg_Synonym_Invalid)
@@ -254,11 +253,10 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
         }
 
-        //TODO: Change to IsTrue when done w w spaces regarding ident
         TEST_METHOD(TestRegex_Pattern_If_IdentWithQuotes_Underscore_Underscore_Whitespace_Valid)
         {
             string str = "  f  (  \"     procedure    \"  ,  _   ,   _  )";
-            Assert::IsFalse(RegexValidators::isValidPatternIfRegex(str));
+            Assert::IsTrue(RegexValidators::isValidPatternIfRegex(str));
         }
 
 
