@@ -33,17 +33,6 @@ public:
     /*--------------- Declaration Regex ---------------*/
     static const string DESIGN_ENTITY_REGEX;
 
-    /*--------------- Pattern Clause Regex ---------------*/
-    static const string FACTOR_REGEX;
-    static const string EXPRESSION_SPEC;
-    static const string PATTERN_ASSIGN_REGEX;
-    static const string PATTERN_WHILE_REGEX;
-    static const string PATTERN_IF_REGEX;
-    static const string PATTERNREF_REGEX;
-    static const string PATTERNCOND_REGEX;
-    //static const string PATTERN_REGEX;
-    static const string PATTERN_Cl_REGEX;
-
     /*--------------- Relationship Clause Regex ---------------*/
     static const string MODIFIES_FIRSTARG_REGEX;
     static const string MODIFIES_REGEX;
@@ -56,6 +45,23 @@ public:
     static const string RELCOND_REGEX;
     static const string SUCH_THAT_Cl_REGEX;
     static const string RELATIONSHIP_KEYWORD_REGEX;
+
+    /*--------------- Pattern Clause Regex ---------------*/
+    static const string FACTOR_REGEX;
+    static const string EXPRESSION_SPEC;
+    static const string PATTERN_ASSIGN_REGEX;
+    static const string PATTERN_WHILE_REGEX;
+    static const string PATTERN_IF_REGEX;
+    static const string PATTERNREF_REGEX;
+    static const string PATTERNCOND_REGEX;
+    //static const string PATTERN_REGEX;
+    static const string PATTERN_Cl_REGEX;
+
+    /*--------------- With Regex ---------------*/
+    static const string REF_REGEX;
+    static const string ATTRCOMPARE_REGEX;
+    static const string ATTRCOND_REGEX;
+    static const string WITH_Cl_REGEX;
 
     /*--------------- Select Regex ---------------*/
     static const string RESULTCL_REGEX;
@@ -74,6 +80,7 @@ public:
     static bool isValidLetterRegex(string str);
     static bool isValidIntegerRegex(string str);
     static bool isValidBooleanRegex(string str);
+    static bool isValidUnderscoreRegex(string str);
     static bool isValidIdentWithQuotesRegex(string str);
     static bool isValidSynonymRegex(string str);
     static bool isValidStmtRefRegex(string str);
@@ -104,6 +111,12 @@ public:
     static bool isValidPatternCondRegex(string str);
     //static bool isValidPatternRegex(string str);
     static bool isValidPatternClRegex(string str);
+
+    /*--------------- With Regex ---------------*/
+    static bool isValidRefRegex(string str);
+    static bool isValidAttrCompareRegex(string str);
+    static bool isValidAttrCondRegex(string str);
+    static bool isValidWithClRegex(string str);
 
     /*--------------- Select Regex ---------------*/
     static bool isValidResultClRegex(string str);

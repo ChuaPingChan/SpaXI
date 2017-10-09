@@ -170,8 +170,10 @@
     <ClCompile Include="PQL\Regex\TestRegexPattern.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexSelect.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexUses.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexWith.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultChildForTest.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultTest.cpp" />
+    <ClCompile Include="PQL\Utilities\TestFormatter.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

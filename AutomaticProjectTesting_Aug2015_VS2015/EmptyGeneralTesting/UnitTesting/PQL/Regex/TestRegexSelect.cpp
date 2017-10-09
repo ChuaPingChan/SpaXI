@@ -328,29 +328,26 @@ namespace UnitTesting
         /***********************
         * Select, With, Single *
         ***********************/
-        //TODO: Change to IsTrue when implement with
         TEST_METHOD(TestRegex_Select_With_Single_Valid)
         {
             string str = "Select s with c.value=1";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
 
         /*************************
         * Select, With, Multiple *
         *************************/
-        //TODO: Change to IsTrue when implement multiple pattern
         TEST_METHOD(TestRegex_Select_With_Twice_Valid)
         {
             string str = "Select s with c.value=1 and v.varName=\"x\"";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple pattern
         TEST_METHOD(TestRegex_Select_With_Thrice_Valid)
         {
             string str = "Select s with c.value=1 and v.varName=\"x\" and c.value=v.value";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
 

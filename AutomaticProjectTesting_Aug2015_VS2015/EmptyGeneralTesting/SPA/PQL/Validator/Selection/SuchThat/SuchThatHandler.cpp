@@ -55,7 +55,8 @@ bool SuchThatHandler::isValidSuchThat(string str)
         case AFFECTSSTAR:
             suchThatValidator = new AffectsValidator(AFFECTSSTAR, processedStr, qtPtr);
             break;*/
-        default: return false;
+        default: 
+            return false;
     }
 
     suchThatValidator->validate();

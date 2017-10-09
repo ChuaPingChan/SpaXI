@@ -13,5 +13,6 @@ public:
 
     static string removeAllSpaces(string str);
     static string getBetweenTwoStrings(const string & str, const string & firstDelim, const string & secondDelim);
+    static string getBetweenTwoStrings(const string & str, const string & firstDelim, int firstDelimNumthOccurrence, const string & secondDelim, int secondDelimNumthOccurrenceAfterFirstDelim);
 };
 

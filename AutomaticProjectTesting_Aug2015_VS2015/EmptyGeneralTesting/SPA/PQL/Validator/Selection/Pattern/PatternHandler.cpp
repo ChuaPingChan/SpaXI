@@ -25,7 +25,7 @@ bool PatternHandler::isValidPattern(string str)
         patternValidator = new WhilePatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else if (patternType == If_PATTERN) {
-        //patternValidator = new IfPatternValidator(patternType, patternSyn, processedStr, qtPtr);
+        patternValidator = new IfPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else {
         return false;
