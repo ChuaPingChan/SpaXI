@@ -295,7 +295,7 @@ namespace UnitTesting
         ********/
         TEST_METHOD(TestRegex_Tuple_Elem_AttrRef_Valid)
         {
-            string str = "p.procName";
+            string str = " p.procName";
             Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
         }
 

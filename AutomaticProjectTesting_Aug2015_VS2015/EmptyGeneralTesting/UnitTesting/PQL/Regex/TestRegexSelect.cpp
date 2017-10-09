@@ -268,6 +268,12 @@ namespace UnitTesting
             Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
         }
 
+        TEST_METHOD(TestRegex_SingleRelation_RelationStickToSuchThatKeyword_Invalid)
+        {
+            string str = "Select s such thatUses(a,b)";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
 
         /********************************************
         * Select, Such that, Multiple Relationships *
@@ -288,6 +294,18 @@ namespace UnitTesting
         {
             string str = "Select s such that Uses(s, v) such that Modifies(2, v) and Follows(1,2)";
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_SuchThat_AndStickToBracketInFront_Valid)
+        {
+            string str = "Select s such that Uses(s, v)and Follows(1,2)";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_SuchThat_AndStickToBracketBehind_Invalid)
+        {
+            string str = "Select s such that Uses(s, v) andFollows(1,2)";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         TEST_METHOD(TestRegex_Select_SuchThat_IncorrectAndConcatenation_Invalid)
@@ -334,8 +352,24 @@ namespace UnitTesting
             string str = "Select s pattern a ( _ , _ ) and w (v, _) and f(_, _, _)";
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
-        
 
+        TEST_METHOD(TestRegex_Select_Pattern_AndStickToPreviousType_Valid)
+        {
+            string str = "Select s pattern a ( _ , _ )and w (v, _)";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+        
+        TEST_METHOD(TestRegex_Select_Pattern_Whitespace_Valid)
+        {
+            string str = "    Select s pattern         a         (    _   ,     _      )       and      w     (   v  ,     _    )    and    f(   _    ,      _    ,     _)    ";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_Pattern_AndStickBehindType_Invalid)
+        {
+            string str = "Select s pattern a(_,_) andw(v,_)";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
 
         /***********************
         * Select, With, Single *
@@ -378,46 +412,40 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple clauses
         TEST_METHOD(TestRegex_Select_SuchThat_With_Valid)
         {
             string str = "Select s such that Uses(1, v) with c.value=stmt#";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple clauses
         TEST_METHOD(TestRegex_Select_With_SuchThat_Valid)
         {
             string str = "Select s with c.value=stmt# such that Uses(1, v)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple clauses
         TEST_METHOD(TestRegex_Select_Pattern_With_Valid)
         {
             string str = "Select s pattern a( _ , _ ) with c.value=stmt#";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple clauses
         TEST_METHOD(TestRegex_Select_With_Pattern_Valid)
         {
             string str = "Select s with c.value=stmt# pattern a( _ , _ )";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple clauses
         TEST_METHOD(TestRegex_Select_SuchThat_Pattern_With_Valid)
         {
             string str = "Select s such that Uses(1, v) pattern a(_,_) with c.value=stmt#";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement multiple clauses
         TEST_METHOD(TestRegex_Select_SuchThat_Pattern_With_Multiple_Valid)
         {
             string str = "Select s such that Uses(1, v) pattern a(_,_) with c.value=stmt# such that Modifies(3, v) and Follows(1, 2) with c.value=1 and v.varName=\"x\" pattern a(v, _) and a1(v1, _)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
     };
 }

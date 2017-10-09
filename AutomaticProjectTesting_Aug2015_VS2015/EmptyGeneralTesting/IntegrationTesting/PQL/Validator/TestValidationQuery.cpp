@@ -16,7 +16,7 @@ namespace UnitTesting
         /**************************
         * Select Clause - BOOLEAN *
         **************************/
-        TEST_METHOD(TestValidity_Query_SelectBoolean_ValidDeclaration_Valid)
+        TEST_METHOD(TestValidity_Query_SelectBoolean_ValidDeclaration_ExpectTrue_Valid)
         {
             string query;
             query.append("stmt s;");
@@ -29,7 +29,17 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
-        TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_Valid)
+        TEST_METHOD(TestValidity_Query_SelectBoolean_InvalidDeclaration_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("statement s;");
+            query.append("Select BOOLEAN");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_Expect_True_Valid)
         {
             string query;
             query.append("Select BOOLEAN");
@@ -56,6 +66,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
         }
 
+        
         /*********************************
         * Select Clause - Single Synonym *
         *********************************/

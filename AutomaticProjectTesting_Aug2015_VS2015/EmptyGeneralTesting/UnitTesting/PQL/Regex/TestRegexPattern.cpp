@@ -98,7 +98,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestRegex_ExpressionSpec_Whitespaces_Valid)
         {
-            string str = "  _   \" whitespaces \"   _  ";
+            string str = "  _   \"    whitespaces     \"   _  ";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
         }
 
@@ -166,8 +166,13 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
         }
 
-        //TODO: Add whitespace in between express spec after add space in regex
-        TEST_METHOD(TestRegex_Pattern_Assign_Whitespace_Valid)
+        TEST_METHOD(TestRegex_Pattern_Assign_FirstArg_IdentWQ_Whitespace_Valid)
+        {
+            string str = " a   (  \"    x   \"   ,   _   )";
+            Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_SecondArg_Whitespace_Valid)
         {
             string str = "   a   (   v    ,   _\"x\"_    )   ";
             Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
