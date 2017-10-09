@@ -83,8 +83,12 @@ bool SelectionValidator::isSuchThat(string str)
 
 bool SelectionValidator::isPattern(string str)
 {
-    //return (str.find("pattern") != std::string::npos);
     return RegexValidators::isValidPatternRefRegex(str);
+}
+
+bool SelectionValidator::isWith(string str)
+{
+    return RegexValidators::isValidAttrCompareRegex(str);
 }
 
 string SelectionValidator::extractSelectRawStr(string str)

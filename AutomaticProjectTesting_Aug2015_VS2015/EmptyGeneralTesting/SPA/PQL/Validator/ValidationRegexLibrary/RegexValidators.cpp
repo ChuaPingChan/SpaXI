@@ -85,16 +85,22 @@ bool RegexValidators::isValidBooleanRegex(string str)
     return regex_match(str, booleanRegexCheck);
 }
 
+bool RegexValidators::isValidUnderscoreRegex(string str)
+{
+    regex underscoreRegexCheck = regex(UNDERSCORE_REGEX);
+    return regex_match(str, underscoreRegexCheck);
+}
+
 bool RegexValidators::isValidIdentWithQuotesRegex(string str)
 {
-    regex checkIdentWithInvertedCommas = regex(IDENT_WITH_QUOTES_REGEX);
-    return regex_match(str, checkIdentWithInvertedCommas);
+    regex IdentWithQuotesRegexCheck = regex(IDENT_WITH_QUOTES_REGEX);
+    return regex_match(str, IdentWithQuotesRegexCheck);
 }
 
 bool RegexValidators::isValidSynonymRegex(string str)
 {
-    regex synonymRegex(SYNONYM_REGEX);
-    return regex_match(str, synonymRegex);
+    regex synonymRegexCheck(SYNONYM_REGEX);
+    return regex_match(str, synonymRegexCheck);
 }
 
 bool RegexValidators::isValidStmtRefRegex(string str)
