@@ -29,16 +29,15 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
-        //TODO: Change to is true even if no declaration
         TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_Valid)
         {
             string query;
             query.append("Select BOOLEAN");
             QueryTree qt;
             QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsTrue(validator.isValidQuery(query));
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
-            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
         TEST_METHOD(TestValidity_Query_SelectBoolean_SuchThat_Valid)
@@ -383,6 +382,7 @@ namespace UnitTesting
             string query;
             query.append("call cl;");
             query.append("variable v;");
+            query.append("if f;");
             query.append("Select cl pattern f (v, _, _)");
             QueryTree qt;
             QueryValidator validator = QueryValidator(&qt);
