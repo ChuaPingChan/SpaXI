@@ -10,6 +10,13 @@ namespace UnitTesting
     TEST_CLASS(TestFormatter)
     {
     public:
+        TEST_METHOD(TestFormatter_RemovesAllQuotes_Valid)
+        {
+            string orgStr = "\"Good Morning!\"";
+            string res = Formatter::removeAllQuotes(orgStr);
+            Assert::IsTrue(res == "Good Morning!");
+        }
+
         TEST_METHOD(TestFormatter_GetBetweenTwoString_SingleCharDelim_UniqueDelims_OneOcurrence_Valid)
         {
             string orgStr = "Modifies(1,v)";

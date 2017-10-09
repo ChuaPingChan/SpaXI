@@ -18,6 +18,16 @@ string Formatter::removeAllSpaces(string str)
     return str;
 }
 
+string Formatter::removeAllQuotes(string str)
+{
+    return removeAllOccurrencesOf(str, "\"", "");
+}
+
+string Formatter::removeAllOccurrencesOf(string str, string from, string to)
+{
+    return regex_replace(str, regex(from), to);
+}
+
 
 /*--------------- Get string between two delimiters ---------------*/
 string Formatter::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)

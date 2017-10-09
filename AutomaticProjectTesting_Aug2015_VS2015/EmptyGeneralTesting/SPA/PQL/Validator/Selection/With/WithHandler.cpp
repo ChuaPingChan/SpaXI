@@ -11,14 +11,27 @@ WithHandler::~WithHandler()
 bool WithHandler::isValidWith(string str)
 {
     string processedStr = Formatter::removeAllSpaces(str);
-    string lhs;
-    string rhs;
-    return false;
+    WithValidator withValidator = WithValidator(qtPtr);
+    withValidator.validate(processedStr);
+
+    if (withValidator.isValid()) {
+        WithClause withClause = makeWithClause(withValidator);
+        storeInQueryTree(withClause);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-string WithHandler::extractLhs(string str)
+WithClause WithHandler::makeWithClause(WithValidator withValidator)
 {
-    return string();
+    Attribute lhsAttribute = withValidator.getLhsAttribute();
+    Attribute rhsAttribute = withValidator.getRhsAttribute();
+    string lhsValue = withValidator.getLhsValue();
+    string rhsValue = withValidator.getRhsValue();
+    return WithClause(lhsAttribute, lhsValue, rhsAttribute, rhsValue);
 }
 
 bool WithHandler::storeInQueryTree(WithClause wc)
