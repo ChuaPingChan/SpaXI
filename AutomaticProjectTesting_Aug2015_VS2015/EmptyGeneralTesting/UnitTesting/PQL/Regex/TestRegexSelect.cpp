@@ -97,6 +97,12 @@ namespace UnitTesting
         /***************
         * Select Tuple *
         ***************/
+        TEST_METHOD(TestRegex_Select_Tuplw_SingleSynonym_Valid)
+        {
+            string str = "Select <s>";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
         TEST_METHOD(TestRegex_Select_Tuple_Valid)
         {
             string str = "Select <s, a>";
@@ -109,10 +115,16 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Select_Tuple_MissingWhitespaces_Invalid)
+        TEST_METHOD(TestRegex_Select_Tuple_NoWhitespaces_InfrontOfBrackets_Valid)
         {
             string str = "Select<s,a>";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Select_Tuple_NoWhitespaces_AfterBrackets_Valid)
+        {
+            string str = "Select <s,a>such that Follows(1,2)";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         TEST_METHOD(TestRegex_Select_Tuple_SeparationBtwnArg_InValid)
@@ -228,13 +240,13 @@ namespace UnitTesting
 
         TEST_METHOD(TestRegex_SingleRelation_Whitespace_Valid)
         {
-            string str = "  Select   s12      such    that  Uses   (   b  ,  c   )   ";
+            string str = "  Select   s12      such that  Uses   (   b  ,  c   )   ";
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         TEST_METHOD(TestRegex_SingleRelation_Tab_Valid)
         {
-            string str = "	Select	s12		such	that	Uses	(	b	,	c	)	";
+            string str = "	Select	s12		such that	Uses	(	b	,	c	)	";
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 

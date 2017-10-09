@@ -500,7 +500,7 @@ namespace UnitTesting
 
         TEST_METHOD(TestRegex_SuchThatCl_Whitespace_Valid)
         {
-            string str = "   such        that     Follows   (  1   ,   2   )   and    Parent    (   1   ,    2   )   ";
+            string str = "   such that     Follows   (  1   ,   2   )   and    Parent    (   1   ,    2   )   ";
             Assert::IsTrue(RegexValidators::isValidSuchThatClRegex(str));
         }
 
