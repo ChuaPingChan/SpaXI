@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="PKB\CallsMap.cpp" />
     <ClCompile Include="PKB\CallsTable.cpp" />
+    <ClCompile Include="PQL\Attributeship.cpp" />
     <ClCompile Include="PQL\Evaluator\ClauseEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\ResultFactory.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\AffectsEvaluator.cpp" />
