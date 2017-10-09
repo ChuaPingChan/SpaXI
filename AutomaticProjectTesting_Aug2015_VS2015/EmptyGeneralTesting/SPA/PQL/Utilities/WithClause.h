@@ -5,7 +5,7 @@
 class WithClause
 {
 public:
-    WithClause();
+    WithClause(Attribute lhsAttribute, string lhsValue, Attribute rhsAttribute, string rhsValue);
     ~WithClause();
 
     Attribute getLhsAttribute();

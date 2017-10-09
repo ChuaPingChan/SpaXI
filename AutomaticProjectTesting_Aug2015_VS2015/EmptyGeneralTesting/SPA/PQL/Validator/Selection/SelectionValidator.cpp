@@ -32,6 +32,7 @@ bool SelectionValidator::areValidClauses(string str)
 {
     SuchThatHandler stHandler = SuchThatHandler(qtPtr);
     PatternHandler pHandler = PatternHandler(qtPtr);
+    WithHandler wHandler = WithHandler(qtPtr);
 
     /* Extracting the clauses portion */
     regex clauseRegex(RegexValidators::RELREF_REGEX + "|" + RegexValidators::PATTERNREF_REGEX);
@@ -52,11 +53,11 @@ bool SelectionValidator::areValidClauses(string str)
                 return false;
             }
         }
-        /*else if (isWith(currentClause)) {
-        if (!wHandler.isValidWith(currentClause)) {
-        return false;
+        else if (isWith(currentClause)) {
+            if (!wHandler.isValidWith(currentClause)) {
+            return false;
+            }
         }
-        }*/
 
         /*else
         {

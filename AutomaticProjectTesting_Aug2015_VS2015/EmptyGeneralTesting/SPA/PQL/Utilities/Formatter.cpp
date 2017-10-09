@@ -63,3 +63,20 @@ string Formatter::getBetweenTwoStrings(const string &str, const string &firstDel
 
     return str.substr(firstDelimPos, lenOfTargetStr);
 }
+
+/*
+* Get substring before first occurrence of delimiter
+*/
+string Formatter::getStringBeforeDelim(const string &str, const string &delim)
+{
+    unsigned delimPos = str.find(delim);
+    return str.substr(0, delimPos);
+}
+
+string Formatter::getStringAfterDelim(const string & str, const string & delim)
+{
+    unsigned delimPos = str.find(delim);
+    int endOfDelimPos = delimPos + delim.length();
+    int subStrLength = str.length() - delimPos;
+    return str.substr(endOfDelimPos, subStrLength);
+}

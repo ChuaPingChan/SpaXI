@@ -82,6 +82,7 @@
     <ClCompile Include="PQL\Evaluator\Pattern\WhilePatternEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\SuchThatRelEvaluator.cpp" />
     <ClCompile Include="PQL\Utilities\WithClause.cpp" />
+    <ClCompile Include="PQL\Validator\Selection\With\WithHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PKB\CallsMap.h" />
@@ -108,6 +109,7 @@
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
     <ClCompile Include="PQL\Validator\Selection\Select\SelectValidator.cpp" />
     <ClInclude Include="PQL\Utilities\WithClause.h" />
+    <ClInclude Include="PQL\Validator\Selection\With\WithHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />
