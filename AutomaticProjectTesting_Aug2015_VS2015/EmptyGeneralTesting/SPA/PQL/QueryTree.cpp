@@ -78,6 +78,11 @@ void QueryTree::insertPattern(PatternClause patternClause)
     _patternClauses.push_back(patternClause);
 }
 
+void QueryTree::insertWith(WithClause withClause)
+{
+    _withClauses.push_back(withClause);
+}
+
 void QueryTree::storeEvaluatorResult(ClauseResult result)
 {
     _evaluatorResult = result;
@@ -141,6 +146,11 @@ vector<SuchThatClause> QueryTree::getSuchThatClauses()
 vector<PatternClause> QueryTree::getPatternClauses()
 {
     return _patternClauses;
+}
+
+vector<WithClause> QueryTree::getWithClauses()
+{
+    return _withClauses;
 }
 
 ClauseResult QueryTree::getEvaluatorResult()

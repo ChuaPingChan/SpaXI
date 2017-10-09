@@ -13,7 +13,7 @@
   <ItemGroup>
     <ClCompile Include="PKB\CallsMap.cpp" />
     <ClCompile Include="PKB\CallsTable.cpp" />
-    <ClCompile Include="PQL\Attributeship.cpp" />
+    <ClCompile Include="PQL\Attributeship.h" />
     <ClCompile Include="PQL\Evaluator\ClauseEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\ResultFactory.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\AffectsEvaluator.cpp" />
@@ -81,6 +81,7 @@
     <ClCompile Include="PQL\Evaluator\SuchThat\UsesEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\Pattern\WhilePatternEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\SuchThatRelEvaluator.cpp" />
+    <ClCompile Include="PQL\Utilities\WithClause.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PKB\CallsMap.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.cpp" />
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
     <ClCompile Include="PQL\Validator\Selection\Select\SelectValidator.cpp" />
+    <ClInclude Include="PQL\Utilities\WithClause.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />
