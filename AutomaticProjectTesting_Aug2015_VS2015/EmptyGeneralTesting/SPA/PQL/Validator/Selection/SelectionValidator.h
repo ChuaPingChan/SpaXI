@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
 #include <regex>        //TODO:Remove after implementing regex teable
-#include "..\..\QueryTree.h"    //TODO: Change to properQueryTree
+#include "..\..\QueryTree.h"
 #include "Select\SelectValidator.h"
 #include "SuchThat\SuchThatHandler.h"
 #include "Pattern\PatternHandler.h"
-//With
+#include "With\WithHandler.h"
 #include "..\ValidationRegexLibrary\RegexValidators.h"
 
 using namespace std;

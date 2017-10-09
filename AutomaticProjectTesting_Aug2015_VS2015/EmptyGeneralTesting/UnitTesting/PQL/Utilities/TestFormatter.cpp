@@ -10,6 +10,13 @@ namespace UnitTesting
     TEST_CLASS(TestFormatter)
     {
     public:
+        TEST_METHOD(TestFormatter_RemovesAllQuotes_Valid)
+        {
+            string orgStr = "\"Good Morning!\"";
+            string res = Formatter::removeAllQuotes(orgStr);
+            Assert::IsTrue(res == "Good Morning!");
+        }
+
         TEST_METHOD(TestFormatter_GetBetweenTwoString_SingleCharDelim_UniqueDelims_OneOcurrence_Valid)
         {
             string orgStr = "Modifies(1,v)";
@@ -36,6 +43,13 @@ namespace UnitTesting
             string orgStr = "if(a,b,c,d,e,f,g)";
             string res = Formatter::getBetweenTwoStrings(orgStr, ",", ",");
             Assert::IsTrue(res == "b");
+        }
+
+        TEST_METHOD(TestFormatter_GetBetweenTwoString_From_Start_To_Delim_Valid)
+        {
+            string orgStr = "c.value=a.stmt#";
+            string res = Formatter::getBetweenTwoStrings(orgStr, "", "=");
+            Assert::IsTrue(res == "c.value");
         }
 
         TEST_METHOD(TestFormatter_GetBetweenTwoString_SingleCharDelim_UniqueDelims_MultipleOccurrence_ExpectResultFromSecondOccurrence_Valid)
@@ -72,5 +86,34 @@ namespace UnitTesting
             string res = Formatter::getBetweenTwoStrings(orgStr, ",", 1, ",", 3);
             Assert::IsTrue(res == "b,c,d");
         }
+
+        TEST_METHOD(TestFormatter_GetStringBeforeDelim_SingleCharDelim_Valid)
+        {
+            string orgStr = "c.value=s.stmt#";
+            string res = Formatter::getStringBeforeDelim(orgStr, "=");
+            Assert::IsTrue(res == "c.value");
+        }
+
+        TEST_METHOD(TestFormatter_GetStringBeforeDelim_MultiCharDelim_Valid)
+        {
+            string orgStr = "Thank you very much";
+            string res = Formatter::getStringBeforeDelim(orgStr, " you");
+            Assert::IsTrue(res == "Thank");
+        }
+
+        TEST_METHOD(TestFormatter_GetStringAfterDelim_SingleCharDelim_Valid)
+        {
+            string orgStr = "c.value=s.stmt#";
+            string res = Formatter::getStringAfterDelim(orgStr, "=");
+            Assert::IsTrue(res == "s.stmt#");
+        }
+
+        TEST_METHOD(TestFormatter_GetStringAfterDelim_MultiCharDelim_Valid)
+        {
+            string orgStr = "Thank you very much";
+            string res = Formatter::getStringAfterDelim(orgStr, "you ");
+            Assert::IsTrue(res == "very much");
+        }
+
     };
 }

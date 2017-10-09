@@ -5,10 +5,11 @@
 #include <array>
 #include <list>
 #include <unordered_set>
+#include "..\Entity.h"
 #include "Utilities\SuchThatClause.h"
 #include "Utilities\PatternClause.h"
+#include "Utilities\WithClause.h"
 #include "Utilities\SelectClause.h"
-#include "..\Entity.h"
 #include "Utilities\ClauseResult.h"
 
 using namespace std;
@@ -23,6 +24,7 @@ public:
     void insertSelect(SelectClause select);
     void insertSuchThat(SuchThatClause relClause);
     void insertPattern(PatternClause patternClause);
+    void insertWith(WithClause withClause);
     void storeEvaluatorResult(ClauseResult result);
     
     unordered_set<string> getStmts();
@@ -38,6 +40,7 @@ public:
     SelectClause getSelectClause();
     vector<SuchThatClause> getSuchThatClauses();
     vector<PatternClause> getPatternClauses();
+    vector<WithClause> getWithClauses();
     ClauseResult getEvaluatorResult();
 
     bool isEntitySynonymExist(string synonym, Entity entityIdx);
@@ -57,6 +60,7 @@ private:
     SelectClause _selectClause;
     vector<SuchThatClause> _suchThatClauses;
     vector<PatternClause> _patternClauses;
+    vector<WithClause> _withClauses;
 
     ClauseResult _evaluatorResult;
 };

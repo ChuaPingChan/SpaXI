@@ -18,6 +18,16 @@ string Formatter::removeAllSpaces(string str)
     return str;
 }
 
+string Formatter::removeAllQuotes(string str)
+{
+    return removeAllOccurrencesOf(str, "\"", "");
+}
+
+string Formatter::removeAllOccurrencesOf(string str, string from, string to)
+{
+    return regex_replace(str, regex(from), to);
+}
+
 
 /*--------------- Get string between two delimiters ---------------*/
 string Formatter::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)
@@ -62,4 +72,21 @@ string Formatter::getBetweenTwoStrings(const string &str, const string &firstDel
     int lenOfTargetStr = secondDelimPos - firstDelimPos - 1;
 
     return str.substr(firstDelimPos, lenOfTargetStr);
+}
+
+/*
+* Get substring before first occurrence of delimiter
+*/
+string Formatter::getStringBeforeDelim(const string &str, const string &delim)
+{
+    unsigned delimPos = str.find(delim);
+    return str.substr(0, delimPos);
+}
+
+string Formatter::getStringAfterDelim(const string & str, const string & delim)
+{
+    unsigned delimPos = str.find(delim);
+    int endOfDelimPos = delimPos + delim.length();
+    int subStrLength = str.length() - delimPos;
+    return str.substr(endOfDelimPos, subStrLength);
 }

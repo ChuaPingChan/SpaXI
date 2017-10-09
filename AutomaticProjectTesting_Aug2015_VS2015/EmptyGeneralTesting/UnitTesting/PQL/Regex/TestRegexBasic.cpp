@@ -299,6 +299,12 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Tuple_Elem_AttrRef_InsideArrowBrackets_Valid)
+        {
+            string str = "<p.procName>";
+            Assert::IsTrue(RegexValidators::isValidTupleRegex(str));
+        }
+
         TEST_METHOD(TestRegex_Tuple_SingleElem_Valid)
         {
             string str = "<s>";
