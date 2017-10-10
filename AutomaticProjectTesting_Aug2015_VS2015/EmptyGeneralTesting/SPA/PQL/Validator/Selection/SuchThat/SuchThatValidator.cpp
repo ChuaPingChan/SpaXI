@@ -56,7 +56,7 @@ string SuchThatValidator::extractArgOne(Relationship rel, string str)
     string delimFirst = relStr + "(";
     string delimSecond = ",";
 
-    return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
+    return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
 }
 
 string SuchThatValidator::extractArgTwo(string str)
@@ -64,5 +64,5 @@ string SuchThatValidator::extractArgTwo(string str)
     string delimFirst = ",";
     string delimSecond = ")";
 
-    return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
+    return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
 }

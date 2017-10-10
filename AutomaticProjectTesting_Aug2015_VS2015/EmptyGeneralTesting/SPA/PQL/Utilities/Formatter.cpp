@@ -12,9 +12,10 @@ Formatter::~Formatter()
 }
 
 /*--------------- Remove all spaces ---------------*/
-string Formatter::removeAllSpaces(string str)
+string Formatter::removeAllSpacesAndTabs(string str)
 {
     str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+    str.erase(std::remove(str.begin(), str.end(), '\t'), str.end());
     return str;
 }
 
@@ -30,7 +31,7 @@ string Formatter::removeAllOccurrencesOf(string str, string from, string to)
 
 
 /*--------------- Get string between two delimiters ---------------*/
-string Formatter::getBetweenTwoStrings(const string &str, const string &firstDelim, const string &secondDelim)
+string Formatter::getBetweenTwoDelims(const string &str, const string &firstDelim, const string &secondDelim)
 {
     unsigned firstDelimPos = str.find(firstDelim);
     unsigned endFirstDelimPos = firstDelimPos + firstDelim.length();
@@ -45,7 +46,7 @@ string Formatter::getBetweenTwoStrings(const string &str, const string &firstDel
 /*
 * NumthOccurrence must be 1 or more
 */
-string Formatter::getBetweenTwoStrings(const string &str, const string &firstDelim, int firstDelimNumthOccurrence, const string &secondDelim, int secondDelimNumthOccurrenceAfterFirstDelim)
+string Formatter::getBetweenTwoDelims(const string &str, const string &firstDelim, int firstDelimNumthOccurrence, const string &secondDelim, int secondDelimNumthOccurrenceAfterFirstDelim)
 {
     string substrFromEndFirstDelimPos = str;
     unsigned firstDelimTempPos;
