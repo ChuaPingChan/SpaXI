@@ -92,7 +92,7 @@ bool RegexValidators::isValidUnderscoreRegex(string str)
     return regex_match(str, underscoreRegexCheck);
 }
 
-bool RegexValidators::isValidIdentWithQuotesRegex(string str)
+bool RegexValidators::isValidIdentWithQuotesRegex(string &str)
 {
     regex IdentWithQuotesRegexCheck = regex(IDENT_WITH_QUOTES_REGEX);
     return regex_match(str, IdentWithQuotesRegexCheck);

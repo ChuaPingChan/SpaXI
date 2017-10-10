@@ -43,7 +43,8 @@ bool CallsValidator::isValidArgOne(string argOne)
 
     else if (RegexValidators::isValidIdentWithQuotesRegex(argOne))
     {
-        this->argOneType = IDENT_WITHQUOTES;
+        argOne = Formatter::removeAllQuotes(argOne);
+        this->argOneType = IDENT_WITHOUTQUOTES;
         return true;
     }
 
@@ -69,7 +70,8 @@ bool CallsValidator::isValidArgTwo(string argTwo)
 
     else if (RegexValidators::isValidIdentWithQuotesRegex(argTwo))
     {
-        this->argTwoType = IDENT_WITHQUOTES;
+        argTwo = Formatter::removeAllQuotes(argTwo);
+        this->argTwoType = IDENT_WITHOUTQUOTES;
         return true;
     }
 

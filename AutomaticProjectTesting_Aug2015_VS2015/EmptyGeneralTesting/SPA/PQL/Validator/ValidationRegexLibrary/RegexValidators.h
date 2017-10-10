@@ -82,7 +82,7 @@ public:
     static bool isValidIntegerRegex(string str);
     static bool isValidBooleanRegex(string str);
     static bool isValidUnderscoreRegex(string str);
-    static bool isValidIdentWithQuotesRegex(string str);
+    static bool isValidIdentWithQuotesRegex(string &str);
     static bool isValidSynonymRegex(string str);
     static bool isValidStmtRefRegex(string str);
     static bool isValidEntRefRegex(string str);
