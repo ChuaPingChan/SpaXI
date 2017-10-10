@@ -10,7 +10,7 @@ ClauseResult::ClauseResult()
 {
     _synToIdxMap = unordered_map<string, int>();
     _synList = vector<string>();
-    _results = vector<vector<int>>();
+    _results = list<vector<int>>();
 }
 
 list<string> ClauseResult::getAllSynonyms()
@@ -41,7 +41,7 @@ list<list<int>> ClauseResult::getSynonymResults(vector<string> synNames)
     }
 
     // For each combinations, filter the selected synonyms only.
-    for (vector<vector<int>>::iterator combPtr = _results.begin();
+    for (list<vector<int>>::iterator combPtr = _results.begin();
         combPtr != _results.end();
         combPtr++) {
 
@@ -50,7 +50,8 @@ list<list<int>> ClauseResult::getSynonymResults(vector<string> synNames)
         
         for (list<int>::iterator synIndexPtr = synIndices.begin();
             synIndexPtr != synIndices.end();
-            synIndexPtr++) {
+            synIndexPtr++)
+        {
             selectedSynCombination.push_back((*combPtr).at(*synIndexPtr));
         }
         result.push_back(selectedSynCombination);
@@ -118,10 +119,10 @@ bool ClauseResult::addNewSynResults(string newSynName, list<int> newSynResultsLi
     }
 
     int repeatNumber = newSynResults.size();
-    vector<vector<int>> outdatedResult = _results;
+    list<vector<int>> outdatedResult = _results;
     _results.clear();
 
-    for (vector<vector<int>>::iterator combPtr = outdatedResult.begin();
+    for (list<vector<int>>::iterator combPtr = outdatedResult.begin();
         combPtr != outdatedResult.end();
         combPtr++)
     {
@@ -166,10 +167,10 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, vector
     }
 
     int repeatNumber = pairResults.size();
-    vector<vector<int>> outdatedResult = _results;
+    list<vector<int>> outdatedResult = _results;
     _results.clear();
 
-    for (vector<vector<int>>::iterator combPtr = outdatedResult.begin();
+    for (list<vector<int>>::iterator combPtr = outdatedResult.begin();
         combPtr != outdatedResult.end();
         combPtr++)
     {
@@ -213,9 +214,9 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
 
     int synIdx = _synToIdxMap.at(synName);
     unordered_set<int> resultsSetToOverlap(synResultsToOverlap.begin(), synResultsToOverlap.end());
-    vector<vector<int>> updatedResults = _results;
+    list<vector<int>> updatedResults;
 
-    for (vector<vector<int>>::iterator combPtr = _results.begin();
+    for (list<vector<int>>::iterator combPtr = _results.begin();
         combPtr != _results.end();
         combPtr++)
     {
@@ -231,10 +232,10 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
 bool ClauseResult::removeCombinations(string synName, int value)
 {
     int synIdx = _synToIdxMap.at(synName);
-    vector<vector<int>> updatedResult;
+    list<vector<int>> updatedResult;
     updatedResult.clear();
 
-    for (vector<vector<int>>::iterator combPtr = _results.begin();
+    for (list<vector<int>>::iterator combPtr = _results.begin();
         combPtr != _results.end();
         combPtr++)
     {
@@ -261,7 +262,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
 
     int oldSynIdx = _synToIdxMap.at(oldSyn);
 
-    vector<vector<int>> updatedResult;
+    list<vector<int>> updatedResult;
     updatedResult.clear();
 
     // Add to _synList
@@ -274,7 +275,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, int oldSynValue,
     // Update _result - Cartesian product
     int repeatNumber = newSynResults.size();
 
-    for (vector<vector<int>>::iterator combPtr = _results.begin();
+    for (list<vector<int>>::iterator combPtr = _results.begin();
         combPtr != _results.end();
         combPtr++)
     {

@@ -37,7 +37,7 @@ public:
 protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
-    vector<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
+    list<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
 
     // TODO: Unit test needed.
     template<typename T> static list<T> convertVectorToList(vector<T> &v)
@@ -49,11 +49,11 @@ protected:
     }
 
     // TODO: Unit test needed.
-    template<typename T> static list<list<T>> convertVectorOfVectorToListOfLists(vector<vector<T>> &v)
+    template<typename T> static list<list<T>> convertVectorOfVectorToListOfLists(list<vector<T>> &v)
     {
         list<list<T>> newListOfLists;
         newListOfLists.clear();
-        for (vector<vector<T>>::iterator innerVecPtr = v.begin();
+        for (list<vector<T>>::iterator innerVecPtr = v.begin();
             innerVecPtr != v.end();
             innerVecPtr++) {
             list<T> innerList = convertVectorToList(*innerVecPtr);
