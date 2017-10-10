@@ -19,9 +19,9 @@ list<string> ClauseResult::getAllSynonyms()
 }
 
 /*
-Returns the possible results of the all synonyms that satisfy a PQL query.
-If a synonym has no possible values that satisfies the query, an empty vector
-will be returned.
+Returns the possible results of the all synonyms that satisfy a PQL query
+in the same order. If a synonym has no possible values that satisfies the
+query, an empty list will be returned.
 */
 list<list<int>> ClauseResult::getSynonymResults(vector<string> synNames)
 {
@@ -61,16 +61,51 @@ list<list<int>> ClauseResult::getSynonymResults(vector<string> synNames)
     return result;
 }
 
-list<int> ClauseResult::getSynonymResults(string synNames)
+/*
+Returns the possible results of the synonyms that satisfy a PQL query.
+If a synonym has no possible values that satisfies the query, 
+an empty list will be returned.
+*/
+list<int> ClauseResult::getSynonymResults(string synName)
 {
-    // TODO: Needs implementation
-    return list<int>();
+    vector<string> synNameVec;
+    synNameVec.clear();
+    synNameVec.push_back(synName);
+
+    list<list<int>> result = getSynonymResults(synNameVec);
+    assert(result.size() == 1);
+
+    return *(result.begin());
 }
 
 list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string syn2Name)
 {
-    // TODO: Needs implementation
-    return list<pair<int, int>>();
+    vector<string> synNameList;
+    synNameList.clear();
+    synNameList.push_back(syn1Name);
+    synNameList.push_back(syn2Name);
+
+    list<list<int>> synPairResultList = getSynonymResults(synNameList);
+    list<pair<int, int>> synPairResult;
+    synPairResult.clear();
+
+    // Convert inner lists to pairs
+    // TODO: Can consider refactoring, but not for now, not reused by others.
+    for (list<list<int>>::iterator synPairResultInnerListPtr = synPairResultList.begin();
+        synPairResultInnerListPtr != synPairResultList.end();
+        synPairResultInnerListPtr++)
+    {
+        assert((*synPairResultInnerListPtr).size() == 2);
+
+        int first = (*synPairResultInnerListPtr).front();
+        (*synPairResultInnerListPtr).pop_front();
+        int second = (*synPairResultInnerListPtr).front();
+
+        pair<int, int> pairResult(first, second);
+        synPairResult.push_back(pairResult);
+    }
+
+    return synPairResult;
 }
 
 list<list<int>> ClauseResult::getAllResults()
