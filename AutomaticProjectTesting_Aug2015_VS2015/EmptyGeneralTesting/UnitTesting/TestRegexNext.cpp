@@ -58,12 +58,6 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidNextRegex(str));
         }
 
-        TEST_METHOD(TestRegex_Next_LowercaseKeyword_inValid)
-        {
-            string str = "Next(lowercase,relationshipName)";
-            Assert::IsFalse(RegexValidators::isValidNextRegex(str));
-        }
-
         TEST_METHOD(TestRegex_Next_MissingLetterS_inValid)
         {
             string str = "Nex(no,s)";
