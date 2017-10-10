@@ -943,6 +943,9 @@ list<int> PKBMain::getUsesFromVar(string var, Entity type)
 		return usesTableVar.getUsesWhileStmtFromVar(varIdx);
 	}
 	//TODO 1 add if
+    else if (type == IF) {
+        return usesTableVar.getUsesIfFromVar(varIdx);
+    }
 	else {
 		return list<int>();
 	}
@@ -964,6 +967,9 @@ list<int> PKBMain::getModifiesFromVar(string var, Entity type)
 		modTableVar.getModWhileStmtFromVar(varIdx).merge(modTableVar.getModWhileContainersFromVar(varIdx));
 		return modTableVar.getModWhileStmtFromVar(varIdx);
 	}
+    else if (type == IF) {
+        modTableVar.getModIfFromVar(varIdx);
+    }
 	else {
 		return list<int>();
 	}
