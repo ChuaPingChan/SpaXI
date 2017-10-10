@@ -12,7 +12,7 @@ public:
     Formatter();
     ~Formatter();
 
-    static string removeAllSpaces(string str);
+    static string removeAllSpacesAndTabs(string str);
     static string removeAllQuotes(string str);
     static string removeAllOccurrencesOf(string str, string from, string to);
 
