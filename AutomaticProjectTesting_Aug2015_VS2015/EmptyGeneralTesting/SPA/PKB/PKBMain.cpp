@@ -816,6 +816,11 @@ bool PKBMain::isWhile(int stmtNum)
 	return stmtTypeList.isWhileStmt(stmtNum);
 }
 
+bool PKBMain::isIf(int stmtNum)
+{
+    return stmtTypeList.isIfStmt(stmtNum);
+}
+
 list<int> PKBMain::getAllWhiles()
 {
 	return stmtTypeList.getWhileStmtList();
@@ -1046,6 +1051,12 @@ bool PKBMain::addWhileStmt(int stmt)
 {
 	bool added = stmtTypeList.addToWhileStmtList(stmt);
 	return added;
+}
+
+bool PKBMain::addIfStmt(int stmt)
+{
+    bool added = stmtTypeList.addToIfStmtList(stmt);
+    return added;
 }
 
 bool PKBMain::addConstant(int stmt, int constant)

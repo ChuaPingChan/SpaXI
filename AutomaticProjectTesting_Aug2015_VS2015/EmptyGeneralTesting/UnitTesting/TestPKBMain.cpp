@@ -153,17 +153,23 @@ namespace UnitTesting
             Assert::IsTrue(PKB.addWhileStmt(2));
             Assert::IsTrue(PKB.addWhileStmt(5));
             Assert::IsTrue(PKB.addWhileStmt(7));
+            Assert::IsTrue(PKB.addIfStmt(9));
+            Assert::IsTrue(PKB.addIfStmt(10));
+            Assert::IsTrue(PKB.addAssignmentStmt(11));
             // test isAssignment
             Assert::IsTrue(PKB.isAssignment(6));
             Assert::IsFalse(PKB.isAssignment(7));
             // test isWhile
             Assert::IsTrue(PKB.isWhile(2));
             Assert::IsFalse(PKB.isWhile(3));
+            // test isIf
+            Assert::IsTrue(PKB.isIf(10));
+            Assert::IsFalse(PKB.isIf(8));
             // test isPresent
             Assert::IsTrue(PKB.addVariable("hello"));
             Assert::IsTrue(PKB.addVariable("kimochi"));
             Assert::IsTrue(PKB.isPresent(5));
-            Assert::IsFalse(PKB.isPresent(9));
+            Assert::IsFalse(PKB.isPresent(12));
             Assert::IsTrue(PKB.isPresent("hello"));
             Assert::IsFalse(PKB.isPresent("world"));
             // test getWhiles
