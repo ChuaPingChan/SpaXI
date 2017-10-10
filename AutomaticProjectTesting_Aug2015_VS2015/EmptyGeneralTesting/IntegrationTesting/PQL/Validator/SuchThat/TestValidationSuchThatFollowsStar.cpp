@@ -12,10 +12,10 @@ using namespace std;
 
 namespace UnitTesting
 {
-    TEST_CLASS(TestValidationSuchThatFollowsStar)
+    TEST_CLASS(TestValidationSuchThat_FollowsStar)
     {
     public:
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_Int_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_Int_Valid)
         {
             string str = "Follows*(1, 2)";
             QueryTree qt;
@@ -26,7 +26,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_Underscore_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_Underscore_Valid)
         {
             string str = "Follows*(1, _)";
             QueryTree qt;
@@ -37,11 +37,11 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_Stmt_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_Stmt_Valid)
         {
             string str = "Follows*(1, s)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", STMT, "s");
@@ -49,11 +49,11 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_Assign_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_Assign_Valid)
         {
             string str = "Follows*(1, a)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", ASSIGN, "a");
@@ -61,11 +61,11 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_While_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_While_Valid)
         {
             string str = "Follows*(1, w)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", WHILE, "w");
@@ -73,43 +73,43 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        /*TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_If_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_If_Valid)
         {
-        string str = "Follows*(1, f)";
-        QueryTree qt;
-        qt.insertVariable(IF, "f");
-        SuchThatHandler stHandler = SuchThatHandler(&qt);
-        Assert::IsTrue(stHandler.isValidSuchThat(str));
-        SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", IF, "f");
-        SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
-        Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+            string str = "Follows*(1, f)";
+            QueryTree qt;
+            qt.insertSynonym(IF, "f");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", IF, "f");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_ProgLine_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_ProgLine_Valid)
         {
-        string str = "Follows*(1, pl)";
-        QueryTree qt;
-        qt.insertVariable(PROG_LINE, "pl");
-        SuchThatHandler stHandler = SuchThatHandler(&qt);
-        Assert::IsTrue(stHandler.isValidSuchThat(str));
-        SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", PROG_LINE, "pl");
-        SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
-        Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+            string str = "Follows*(1, pl)";
+            QueryTree qt;
+            qt.insertSynonym(PROG_LINE, "pl");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", PROG_LINE, "pl");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_Call_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_Call_Valid)
         {
-        string str = "Follows*(1, cl)";
-        QueryTree qt;
-        qt.insertVariable(CALL, "cl");
-        SuchThatHandler stHandler = SuchThatHandler(&qt);
-        Assert::IsTrue(stHandler.isValidSuchThat(str));
-        SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", CALL, "cl");
-        SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
-        Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
-        }*/
+            string str = "Follows*(1, cl)";
+            QueryTree qt;
+            qt.insertSynonym(CALL, "cl");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, INTEGER, "1", CALL, "cl");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Underscore_Int_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Underscore_Int_Valid)
         {
             string str = "Follows*(_, 2)";
             QueryTree qt;
@@ -120,7 +120,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Underscore_Underscore_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Underscore_Underscore_Valid)
         {
             string str = "Follows*(_, _)";
             QueryTree qt;
@@ -131,11 +131,11 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Underscore_Synonym_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Underscore_Synonym_Valid)
         {
             string str = "Follows*(_, s)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, UNDERSCORE, "_", STMT, "s");
@@ -143,11 +143,11 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Stmt_Int_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Stmt_Int_Valid)
         {
             string str = "Follows*(s, 2)";
             QueryTree qt;
-            qt.insertVariable(STMT, "s");
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s", INTEGER, "2");
@@ -155,11 +155,11 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Assign_Int_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Assign_Int_Valid)
         {
             string str = "Follows*(a, 2)";
             QueryTree qt;
-            qt.insertVariable(ASSIGN, "a");
+            qt.insertSynonym(ASSIGN, "a");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, ASSIGN, "a", INTEGER, "2");
@@ -167,11 +167,11 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_While_Int_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_While_Int_Valid)
         {
             string str = "Follows*(w, 2)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, WHILE, "w", INTEGER, "2");
@@ -179,47 +179,47 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        /*TEST_METHOD(TestValidity_SuchThatFollowsStar_If_Int_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_If_Int_Valid)
         {
-        string str = "Follows*(f, 2)";
-        QueryTree qt;
-        qt.insertVariable(IF, "f");
-        SuchThatHandler stHandler = SuchThatHandler(&qt);
-        Assert::IsTrue(stHandler.isValidSuchThat(str));
-        SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, IF, "f", INTEGER, "2");
-        SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
-        Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+            string str = "Follows*(f, 2)";
+            QueryTree qt;
+            qt.insertSynonym(IF, "f");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, IF, "f", INTEGER, "2");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_ProgLine_Int_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_ProgLine_Int_Valid)
         {
-        string str = "Follows*(pl, 2)";
-        QueryTree qt;
-        qt.insertVariable(PROG_LINE, "pl");
-        SuchThatHandler stHandler = SuchThatHandler(&qt);
-        Assert::IsTrue(stHandler.isValidSuchThat(str));
-        SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, PROG_LINE, "pl", INTEGER, "2");
-        SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
-        Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+            string str = "Follows*(pl, 2)";
+            QueryTree qt;
+            qt.insertSynonym(PROG_LINE, "pl");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, PROG_LINE, "pl", INTEGER, "2");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Call_Int_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Call_Int_Valid)
         {
-        string str = "Follows*(cl, 2)";
-        QueryTree qt;
-        qt.insertVariable(CALL, "cl");
-        SuchThatHandler stHandler = SuchThatHandler(&qt);
-        Assert::IsTrue(stHandler.isValidSuchThat(str));
-        SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, CALL, "cl", INTEGER, "2");
-        SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
-        Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
-        }*/
+            string str = "Follows*(cl, 2)";
+            QueryTree qt;
+            qt.insertSynonym(CALL, "cl");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, CALL, "cl", INTEGER, "2");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Synonym_Underscore_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Synonym_Underscore_Valid)
         {
             string str = "Follows*(w, _)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w");
+            qt.insertSynonym(WHILE, "w");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, WHILE, "w", UNDERSCORE, "_");
@@ -227,12 +227,12 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Synonym_Synonym_Valid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Synonym_Synonym_Valid)
         {
             string str = "Follows*(w1, w2)";
             QueryTree qt;
-            qt.insertVariable(WHILE, "w1");
-            qt.insertVariable(WHILE, "w2");
+            qt.insertSynonym(WHILE, "w1");
+            qt.insertSynonym(WHILE, "w2");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, WHILE, "w1", WHILE, "w2");
@@ -244,7 +244,7 @@ namespace UnitTesting
         /**********
         * Invalid *
         **********/
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_Int_SameStmtNum_Invalid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_Int_SameStmtNum_Invalid)
         {
             string str = "Follows*(1, 1)";
             QueryTree qt;
@@ -252,7 +252,7 @@ namespace UnitTesting
             Assert::IsFalse(stHandler.isValidSuchThat(str));
         }
 
-        TEST_METHOD(TestValidity_SuchThatFollowsStar_Int_Int_SameSynonymName_Invalid)
+        TEST_METHOD(TestValidity_SuchThat_FollowsStar_Int_Int_SameSynonymName_Invalid)
         {
             string str = "Follows*(s, s)";
             QueryTree qt;

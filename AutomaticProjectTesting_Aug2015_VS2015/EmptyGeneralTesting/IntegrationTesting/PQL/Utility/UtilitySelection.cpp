@@ -10,6 +10,38 @@ UtilitySelection::~UtilitySelection()
 {
 }
 
+SelectClause UtilitySelection::makeSelectClause(SelectionType selectionType)
+{
+    return SelectClause(selectionType);
+}
+
+SelectClause UtilitySelection::makeSelectClause(SelectionType selectionType, Entity singleArgType, string singleArg)
+{
+    return SelectClause(selectionType, singleArgType, singleArg);
+}
+
+SelectClause UtilitySelection::makeSelectClause(SelectionType selectionType, vector<Entity> tupleArgTypes, vector<string> tupleArgs)
+{
+    return SelectClause(selectionType, tupleArgTypes, tupleArgs);
+}
+
+bool UtilitySelection::isSameSelectClauseContent(SelectClause expected, SelectClause actual)
+{
+    switch (expected.getSelectionType())
+    {
+        case SELECT_BOOLEAN:
+            return isSameSelectBooleanContent(expected, actual);
+        case SELECT_SINGLE:
+            return isSameSelectSingleArgContent(expected, actual);
+        case SELECT_TUPLE:
+            return isSameSelectTupleArgContent(expected, actual);
+        default:
+            return false;
+    }
+}
+
+
+
 SuchThatClause UtilitySelection::makeSuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
 {
     return SuchThatClause(rel, argOneType, argOne, argTwoType, argTwo);
@@ -30,6 +62,32 @@ bool UtilitySelection::isSameSuchThatClauseContent(SuchThatClause expected, Such
     bool isSameArgTwo = expected.getArgTwo() == actual.getArgTwo();
 
     return isSameRel && isSameArgOneType && isSameArgTwoType && isSameArgOne && isSameArgTwo;
+}
+
+bool UtilitySelection::AreSameSuchThatClausesContentAsInTree(vector<SuchThatClause> expectedList, QueryTree qt)
+{
+    vector<SuchThatClause> actualList = qt.getSuchThatClauses();
+
+    if (actualList.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::vector<SuchThatClause>::iterator iterExpected = expectedList.begin(); iterExpected != expectedList.end(); ++iterExpected) {
+        SuchThatClause expectedStc = *iterExpected;
+
+        std::vector<SuchThatClause>::iterator iterActual = actualList.begin();
+        for (; iterActual != actualList.end(); ++iterActual) {
+            SuchThatClause actualStc = *iterActual;
+            if (isSameSuchThatClauseContent(expectedStc, actualStc)) {
+                break;
+            }
+        }
+
+        if (iterActual == actualList.end()) {
+            return false;
+        }
+    }
+    return true;
 }
 
 
@@ -74,4 +132,66 @@ bool UtilitySelection::isSamePatternClauseIfContent(PatternClause expected, Patt
     bool isSameArgThree = expected.getArgThree() == actual.getArgThree();
 
     return isSamePatternType && isSamePatternSyn && isSameArgOneType && isSameArgTwoType && isSameArgThreeType && isSameArgOne && isSameArgTwo && isSameArgThree;
+}
+
+bool UtilitySelection::areSamePatternClausesContentAsInTree(vector<PatternClause> expectedList, QueryTree qt)
+{
+    vector<PatternClause> actualList = qt.getPatternClauses();
+
+    if (actualList.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::vector<PatternClause>::iterator iterExpected = expectedList.begin(); iterExpected != expectedList.end(); ++iterExpected) {
+        PatternClause expectedPc = *iterExpected;
+
+        std::vector<PatternClause>::iterator iterActual = actualList.begin();
+        for (; iterActual != actualList.end(); ++iterActual) {
+            PatternClause actualPc = *iterActual;
+            PatternType actualPatternType = actualPc.getPatternType();
+
+            if (actualPatternType == ASSSIGN_PATTERN && isSamePatternClauseAssignWhileContent(expectedPc, actualPc))
+            {
+                break;
+            }
+            else if (actualPatternType == WHILE_PATTERN && isSamePatternClauseAssignWhileContent(expectedPc, actualPc))
+            {
+                break;
+            }
+            else if (actualPatternType == If_PATTERN && isSamePatternClauseIfContent(expectedPc, actualPc))
+            {
+                break;
+            }
+        }
+
+        if (iterActual == actualList.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
+
+/**********
+* Private *
+**********/
+bool UtilitySelection::isSameSelectBooleanContent(SelectClause expected, SelectClause actual)
+{
+    return expected.getSelectionType() == actual.getSelectionType();
+}
+
+bool UtilitySelection::isSameSelectSingleArgContent(SelectClause expected, SelectClause actual)
+{
+    return expected.getSelectionType() == actual.getSelectionType()
+        && expected.getSingleArgType() == actual.getSingleArgType()
+        && expected.getSingleArg() == actual.getSingleArg();
+}
+
+bool UtilitySelection::isSameSelectTupleArgContent(SelectClause expected, SelectClause actual)
+{
+    return expected.getSelectionType() == actual.getSelectionType()
+        && expected.getTupleArgTypes() == actual.getTupleArgTypes()
+        && expected.getTupleArgs() == actual.getTupleArgs();
 }

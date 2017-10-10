@@ -37,13 +37,13 @@ bool SuchThatHandler::isValidSuchThat(string str)
         case FOLLOWSSTAR:
             suchThatValidator = new FollowsValidator(FOLLOWSSTAR, processedStr, qtPtr);
             break;
-        /*case CALLS:
+        case CALLS:
             suchThatValidator = new CallsValidator(CALLS, processedStr, qtPtr);
             break;
         case CALLSSTAR:
             suchThatValidator = new CallsValidator(CALLSSTAR, processedStr, qtPtr);
             break;
-        case NEXT:
+     /* case NEXT:
             suchThatValidator = new NextValidator(NEXT, processedStr, qtPtr);
             break;
         case NEXTSTAR:
@@ -55,6 +55,8 @@ bool SuchThatHandler::isValidSuchThat(string str)
         case AFFECTSSTAR:
             suchThatValidator = new AffectsValidator(AFFECTSSTAR, processedStr, qtPtr);
             break;*/
+        default: 
+            return false;
     }
 
     suchThatValidator->validate();

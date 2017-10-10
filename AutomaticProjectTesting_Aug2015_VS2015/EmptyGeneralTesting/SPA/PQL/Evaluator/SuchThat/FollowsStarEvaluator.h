@@ -8,6 +8,6 @@ public:
 	FollowsStarEvaluator();
 	~FollowsStarEvaluator();
 
-	ClauseResult evaluate(SuchThatClause clause);
+	bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
 };
 

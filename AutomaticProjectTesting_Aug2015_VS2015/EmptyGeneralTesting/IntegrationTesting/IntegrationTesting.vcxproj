@@ -166,6 +166,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PQL\PQLFriend\FriendDeclarationValidator.cpp" />
+    <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternIf.cpp" />
+    <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatCalls.cpp" />
+    <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternWhile.cpp" />
+    <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatCallsStar.cpp" />
     <ClCompile Include="PQL\Validator\TestValidationDeclarationAndTree.cpp" />
     <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternAssign.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatFollows.cpp" />

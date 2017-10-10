@@ -11,8 +11,13 @@ public:
     UtilityQueryTree();
     ~UtilityQueryTree();
 
-    static bool isGetAllStmtsSame(QueryTree qt1, QueryTree qt2);
-    static bool isGetAllAssignsSame(QueryTree qt1, QueryTree qt2);
-    static bool isGetAllVariablesSame(QueryTree qt1, QueryTree qt2);
-    static bool isGetAllWhilesSame(QueryTree qt1, QueryTree qt2);
+    static bool isSameContentAllStmts(unordered_set<string> expectedList, QueryTree qt);
+    static bool isSameContentAllAssigns(unordered_set<string> expectedList, QueryTree qt);
+    static bool isSameContentAllWhiles(unordered_set<string> expectedList, QueryTree qt);
+    static bool isSameContentAllIfs(unordered_set<string> expectedList, QueryTree qt);
+    static bool isSameContentAllProgLines(unordered_set<string> expectedList, QueryTree qt);
+    static bool isSameContentAllCalls(unordered_set<string> expectedList, QueryTree qt);
+    static bool isSameContentAllProcedures(unordered_set<string> expectedList, QueryTree qt);
+    static bool isSameContentAllVariables(unordered_set<string> expectedList, QueryTree qt);
+    
 };

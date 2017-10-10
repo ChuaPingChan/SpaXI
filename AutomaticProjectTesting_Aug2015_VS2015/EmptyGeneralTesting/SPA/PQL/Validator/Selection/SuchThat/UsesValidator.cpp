@@ -54,9 +54,33 @@ bool UsesValidator::isValidArgOne(string argOne)
         return true;
     }
 
+    else if (qtPtr->isEntitySynonymExist(argOne, PROG_LINE))
+    {
+        this->argOneType = PROG_LINE;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argOne, CALL))
+    {
+        this->argOneType = CALL;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argOne, PROCEDURE))
+    {
+        this->argOneType = PROCEDURE;
+        return true;
+    }
+
     else if (RegexValidators::isValidIntegerRegex(argOne))
     {
         this->argOneType = INTEGER;
+        return true;
+    }
+
+    else if (RegexValidators::isValidIdentWithQuotesRegex(argOne))
+    {
+        this->argOneType = IDENT_WITHQUOTES;
         return true;
     }
 

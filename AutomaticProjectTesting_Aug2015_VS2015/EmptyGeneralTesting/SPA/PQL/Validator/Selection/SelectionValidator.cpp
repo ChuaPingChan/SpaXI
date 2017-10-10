@@ -32,9 +32,10 @@ bool SelectionValidator::areValidClauses(string str)
 {
     SuchThatHandler stHandler = SuchThatHandler(qtPtr);
     PatternHandler pHandler = PatternHandler(qtPtr);
+    WithHandler wHandler = WithHandler(qtPtr);
 
     /* Extracting the clauses portion */
-    regex clauseRegex(RegexValidators::RELREF_REGEX + "|" + RegexValidators::PATTERN_REGEX);
+    regex clauseRegex(RegexValidators::RELREF_REGEX + "|" + RegexValidators::PATTERNREF_REGEX);
     sregex_iterator it(str.cbegin(), str.cend(), clauseRegex);
     sregex_iterator it_end;
 
@@ -52,11 +53,11 @@ bool SelectionValidator::areValidClauses(string str)
                 return false;
             }
         }
-        /*else if (isWith(currentClause)) {
-        if (!wHandler.isValidWith(currentClause)) {
-        return false;
+        else if (isWith(currentClause)) {
+            if (!wHandler.isValidWith(currentClause)) {
+            return false;
+            }
         }
-        }*/
 
         /*else
         {
@@ -68,10 +69,11 @@ bool SelectionValidator::areValidClauses(string str)
 
 bool SelectionValidator::isSuchThat(string str)
 {
-    if ((str.find("Follows") != std::string::npos) || 
-        (str.find("Parent") != std::string::npos) ||
-        (str.find("Modifies") != std::string::npos) ||
-        (str.find("Uses") != std::string::npos))
+    if ((str.find(RELATIONSHIP_STRING_ARRAY[CALLS]) != std::string::npos)||
+        (str.find(RELATIONSHIP_STRING_ARRAY[FOLLOWS]) != std::string::npos) ||
+        (str.find(RELATIONSHIP_STRING_ARRAY[PARENT]) != std::string::npos) ||
+        (str.find(RELATIONSHIP_STRING_ARRAY[MODIFIES]) != std::string::npos) ||
+        (str.find(RELATIONSHIP_STRING_ARRAY[USES]) != std::string::npos))
     {
         return true;
     }
@@ -82,7 +84,12 @@ bool SelectionValidator::isSuchThat(string str)
 
 bool SelectionValidator::isPattern(string str)
 {
-    return (str.find("pattern") != std::string::npos);
+    return RegexValidators::isValidPatternRefRegex(str);
+}
+
+bool SelectionValidator::isWith(string str)
+{
+    return RegexValidators::isValidAttrCompareRegex(str);
 }
 
 string SelectionValidator::extractSelectRawStr(string str)

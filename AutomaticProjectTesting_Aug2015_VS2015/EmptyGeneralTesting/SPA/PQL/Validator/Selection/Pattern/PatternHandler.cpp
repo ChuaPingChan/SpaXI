@@ -22,10 +22,10 @@ bool PatternHandler::isValidPattern(string str)
         patternValidator = new AssignPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else if (patternType == WHILE_PATTERN) {
-        //patternValidator = new WhilePatternValidator(patternType, patternSyn, processedStr, qtPtr);
+        patternValidator = new WhilePatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else if (patternType == If_PATTERN) {
-        //patternValidator = new IfPatternValidator(patternType, patternSyn, processedStr, qtPtr);
+        patternValidator = new IfPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else {
         return false;
@@ -65,7 +65,7 @@ PatternType PatternHandler::getPatternType(string patternSyn)
 
 string PatternHandler::extractPatternSynonym(string str)
 {
-    string delimFirst = PatternValidator::PATTERN_KEYWORD;
+    string delimFirst = "";
     string delimSecond = "(";
 
     return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);

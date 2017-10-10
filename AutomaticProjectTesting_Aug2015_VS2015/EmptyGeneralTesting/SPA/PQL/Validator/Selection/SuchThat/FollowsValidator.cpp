@@ -14,7 +14,7 @@ void FollowsValidator::validate()
     string firstArg = extractArgOne(rel, paramStr);
     string secondArg = extractArgTwo(paramStr);
 
-    if (firstArg == secondArg && firstArg!=UNDERSCORE_STRING) {    //Because can never be 2 underlines or 2 int or 2 same synonym or 2 same synonymType
+    if (firstArg == secondArg && firstArg!=UNDERSCORE_STRING || !isFirstArgValueLessThanSecondArgValue(firstArg, secondArg)) {    //Because can never be 2 underlines or 2 int or 2 same synonym or 2 same synonymType
         this->validity = false;
         return;
     }
@@ -51,6 +51,24 @@ bool FollowsValidator::isValidArgOne(string argOne)
     else if (qtPtr->isEntitySynonymExist(argOne, WHILE))
     {
         this->argOneType = WHILE;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argOne, IF))
+    {
+        this->argOneType = IF;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argOne, PROG_LINE))
+    {
+        this->argOneType = PROG_LINE;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argOne, CALL))
+    {
+        this->argOneType = CALL;
         return true;
     }
 
@@ -92,6 +110,24 @@ bool FollowsValidator::isValidArgTwo(string argTwo)
         return true;
     }
 
+    else if (qtPtr->isEntitySynonymExist(argTwo, IF))
+    {
+        this->argTwoType = IF;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argTwo, PROG_LINE))
+    {
+        this->argTwoType = PROG_LINE;
+        return true;
+    }
+
+    else if (qtPtr->isEntitySynonymExist(argTwo, CALL))
+    {
+        this->argTwoType = CALL;
+        return true;
+    }
+
     else if (RegexValidators::isValidIntegerRegex(argTwo))
     {
         this->argTwoType = INTEGER;
@@ -107,5 +143,19 @@ bool FollowsValidator::isValidArgTwo(string argTwo)
     else
     {
         return false;
+    }
+}
+
+bool FollowsValidator::isFirstArgValueLessThanSecondArgValue(string argOne, string argTwo)
+{
+    if (RegexValidators::isValidIntegerRegex(argOne) && RegexValidators::isValidIntegerRegex(argTwo))
+    {
+        int argOneValue = stoi(argOne);
+        int argTwoValue = stoi(argTwo);
+        return (argOneValue < argTwoValue);
+    }
+    else
+    {
+        return true;
     }
 }
