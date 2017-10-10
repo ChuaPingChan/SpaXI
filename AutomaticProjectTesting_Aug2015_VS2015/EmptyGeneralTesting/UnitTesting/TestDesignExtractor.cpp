@@ -6,6 +6,7 @@
 #include "../SPA/PKB/ChildToParentStarTable.h"
 #include "../SPA/PKB/FollowsStarAfter.h"
 #include "../SPA/PKB/FollowsStarBefore.h"
+#include "../SPA/PKB/CallsStarTable.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -14,6 +15,32 @@ namespace UnitTesting
 	TEST_CLASS(TestParentStar)
 	{
 	public:
+		TEST_METHOD(TestGenerateCallsStar) {
+			DesignExtractor de;
+			CallsTable ct;
+			CallsStarTable cst;
+
+			ct.addCallsRel(1, 2);
+			ct.addCallsRel(1, 3);
+			ct.addCallsRel(3, 4);
+			ct.addCallsRel(3, 5);
+			ct.addCallsRel(3, 6);
+			ct.addCallsRel(5, 6);
+			ct.addCallsRel(5, 7);
+			ct.addCallsRel(6, 7);
+			ct.addCallsRel(7, 9);
+			ct.addCallsRel(2, 8);
+			ct.addCallsRel(8, 9);
+
+			pair<unordered_map<int, list<int>>, unordered_map<int, list<int>>> callsStarPair = de.computeCallsStarTable(ct);
+			unordered_map<int, list<int>> callsStarMap = callsStarPair.first;
+			unordered_map<int, list<int>> callsStarMapReverse = callsStarPair.second;
+			cst.setCallsStarMap(callsStarPair);
+
+			list<int> testList = callsStarMap[1];
+			
+			Assert::IsTrue(cst.isCallsStar(1, 9));
+		}
 
 		TEST_METHOD(TestGenerateParentStar)
 		{

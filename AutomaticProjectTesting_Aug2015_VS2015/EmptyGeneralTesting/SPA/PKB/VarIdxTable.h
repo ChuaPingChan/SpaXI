@@ -13,9 +13,11 @@ public:
     VarIdxTable();
     bool addToVarIdxTable(string var);
     int getIdxFromVar(string var);
+	string getVarFromIdx(int idx);
     bool isVarPresent(string var);
 	list<string> getAllVariables();
 private:
     unordered_map<string, int> varIdxMap;
+	unordered_map<int, string> varIdxToStringMap;
     int varIdx = 0;
 };

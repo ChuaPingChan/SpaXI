@@ -109,9 +109,12 @@ public:
 
 	list<int> getAllCallers();
 
+	pair<list<int>, list<int>> getAllCalls();
+
     //PKB query evaluator (Uses, Modifies)
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
+	bool isMod(int stmt, int varIdx);
     bool isUsingAnything(int stmt);
     bool isModifyingAnything(int stmt);
     list<string> getUsesFromStmt(int stmt);
@@ -146,6 +149,7 @@ private:
 	unordered_map<int, int> followsBeforeMap;
 	unordered_map<int, int> followsAfterMap;
 	CallsTable callsTable;
+//	CallsStarTable callsStarTable;
 	
 	ConstantTable constantTable;
     ModTableProcToVar modTableProcToVar;

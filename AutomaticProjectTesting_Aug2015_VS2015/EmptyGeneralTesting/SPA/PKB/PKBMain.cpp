@@ -76,7 +76,9 @@ list<int> PKBMain::getAllCallers() {
 	return callsTable.getAllCallers();
 }
 
-
+pair<list<int>, list<int>> PKBMain::getAllCalls() {
+	return callsTable.getAllCalls();
+}
 
 //PARENT
 bool PKBMain::setParentChildRel(int parentStmt, int childStmt) {
@@ -792,6 +794,7 @@ bool PKBMain::startProcessComplexRelations() {
 	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
 	followsStarBefore.setMap(de.computeFollowsStarBeforeTable(followsTable));
+//	callsStarTable.setMap(de.computeCallsStarTable(callsTable));
 	//TODO 2 add calls, perhaps optimise
 	return true;
 }
@@ -893,6 +896,15 @@ bool PKBMain::isUses(int stmt, string var)
 
 bool PKBMain::isMod(int stmt, string var)
 {
+	return modTableStmtToVar.isMod(stmt, var);
+}
+
+bool PKBMain::isMod(int stmt, int varIdx)
+{
+	string var = varIdxTable.getVarFromIdx(varIdx);
+	if (var == "") {
+		return false;
+	}
 	return modTableStmtToVar.isMod(stmt, var);
 }
 

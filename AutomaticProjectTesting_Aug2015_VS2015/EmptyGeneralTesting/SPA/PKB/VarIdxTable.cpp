@@ -9,6 +9,7 @@ bool VarIdxTable::addToVarIdxTable(string var) {
     if (varIdxMap.find(var) == varIdxMap.end()) {
         varIdxMap[var] = varIdx;
         varIdx++;
+		varIdxToStringMap[varIdx] = var;
         return true;
     }
     return false;
@@ -20,6 +21,14 @@ int VarIdxTable::getIdxFromVar(string var) {
 	}
 
     return varIdxMap[var];
+}
+
+string VarIdxTable::getVarFromIdx(int idx) {
+	if (varIdxToStringMap.find(idx) == varIdxToStringMap.end()) {
+		return "";
+	}
+
+	return varIdxToStringMap[idx];
 }
 
 bool VarIdxTable::isVarPresent(string var)

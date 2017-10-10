@@ -138,6 +138,90 @@ unordered_map<int, list<int>> DesignExtractor::computeFollowsStarBeforeTable(Fol
 	return followsStarBeforeMap;
 }
 
+pair<unordered_map<int, list<int>>, unordered_map<int, list<int>>> DesignExtractor::computeCallsStarTable(CallsTable callsTable) {
+	unordered_map<int, list<int>> callsStarMap;
+	unordered_map<int, list<int>> callsMap = callsTable.getTable();
+	unordered_map<int, list<int>> callsStarMapReverse;
+	unordered_map<int, list<int>> callsMapReverse = callsTable.getTableReverse();
+
+	int currCaller;
+	list<int> calleeList; //all children&grandchildrens
+	queue<int> toVisit; //all children to visit if they are parents
+	vector<bool> hasVisited; //all nodes that have been visited
+
+	for (unordered_map<int, list<int>>::iterator i = callsMap.begin(); i != callsMap.end(); ++i) {
+		currCaller = (*i).first;
+		list<int> currCallees = (*i).second;
+		hasVisited.clear();
+		hasVisited.resize(10000, false);
+		for (std::list<int>::iterator it = currCallees.begin(); it != currCallees.end(); ++it) {
+			toVisit.push(*it);
+			hasVisited[*it] = true;
+		}
+
+		while (!toVisit.empty()) {
+			int currCallee = toVisit.front();
+			toVisit.pop();
+			calleeList.push_back(currCallee);
+
+			//if the currChild is a parent
+			if (callsMap.find(currCallee) != callsMap.end()) {
+				for (std::list<int>::iterator it2 = callsMap[currCallee].begin();
+					it2 != callsMap[currCallee].end(); ++it2) {
+					if (!hasVisited[*it2]) {
+						toVisit.push(*it2);
+						hasVisited[*it2] = true;
+					}
+				}
+			}
+		}
+
+		callsStarMap[currCaller] = calleeList;
+		currCallees.clear();
+		calleeList.clear();
+		hasVisited.clear();
+	}
+
+	int currCallee;
+	list<int> callerList;
+
+	for (unordered_map<int, list<int>>::iterator i = callsMapReverse.begin(); i != callsMapReverse.end(); ++i) {
+		currCallee = (*i).first;
+		list<int> currCallers = (*i).second;
+		hasVisited.clear();
+		hasVisited.resize(10000, false);
+		for (std::list<int>::iterator it = currCallers.begin(); it != currCallers.end(); ++it) {
+			toVisit.push(*it);
+			hasVisited[*it] = true;
+		}
+
+		while (!toVisit.empty()) {
+			int currCaller = toVisit.front();
+			toVisit.pop();
+			callerList.push_back(currCaller);
+
+			//if the currChild is a parent
+			if (callsMapReverse.find(currCaller) != callsMapReverse.end()) {
+				for (std::list<int>::iterator it2 = callsMapReverse[currCaller].begin();
+					it2 != callsMapReverse[currCaller].end(); ++it2) {
+					if (!hasVisited[*it2]) {
+						toVisit.push(*it2);
+						hasVisited[*it2] = true;
+					}
+				}
+			}
+		}
+
+		callsStarMapReverse[currCallee] = callerList;
+		currCallers.clear();
+		callerList.clear();
+		hasVisited.clear();
+	}
+
+
+	return make_pair(callsStarMap, callsStarMapReverse);
+}
+
 unordered_map<int, pair<int, int>> DesignExtractor::computeFollowsTable(unordered_map<int, int> followsBefore, unordered_map<int, int> followsAfter) {
 	unordered_map<int, pair<int, int>> followsMap;
 	for (std::unordered_map<int, int>::iterator it = followsBefore.begin(); it != followsBefore.end(); ++it) {
