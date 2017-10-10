@@ -163,6 +163,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Exception\TestSynonymNotFoundExxception.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexFollows.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexModifies.cpp" />
