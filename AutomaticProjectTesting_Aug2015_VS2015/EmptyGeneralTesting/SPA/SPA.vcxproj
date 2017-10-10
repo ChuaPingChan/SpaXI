@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Exceptions\AttributeNotFoundException.cpp" />
     <ClCompile Include="Exceptions\SynonymNotFoundException.cpp" />
     <ClCompile Include="PKB\CallsMap.cpp" />
     <ClCompile Include="PKB\CallsTable.cpp" />
@@ -87,6 +88,7 @@
     <ClCompile Include="PQL\Validator\Selection\With\WithValidator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exceptions\AttributeNotFoundException.h" />
     <ClInclude Include="PKB\CallsMap.h" />
     <ClInclude Include="PKB\CallsTable.h" />
     <ClInclude Include="PQL\Evaluator\ClauseEvaluator.h" />

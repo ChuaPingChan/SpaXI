@@ -16,7 +16,8 @@ public:
 private:
     QueryTree *qtPtr;
 
-    WithClause makeWithClause(WithValidator withValidator);
+    bool isMirrorImageLhsAndRhs(WithValidator wv);
 
+    WithClause makeWithClause(WithValidator withValidator);
     bool storeInQueryTree(WithClause wc);
 };

@@ -12,17 +12,26 @@ bool WithHandler::isValidWith(string str)
 {
     string processedStr = Formatter::removeAllSpaces(str);
     WithValidator withValidator = WithValidator(qtPtr);
+
     withValidator.validate(processedStr);
 
-    if (withValidator.isValid()) {
+    if (withValidator.isValid() && isMirrorImageLhsAndRhs(withValidator)) {
         WithClause withClause = makeWithClause(withValidator);
         storeInQueryTree(withClause);
         return true;
+    }
+    else if (withValidator.isValid() && isMirrorImageLhsAndRhs(withValidator)) {
+        return true;    //Drop the making of clause as optimisation
     }
     else
     {
         return false;
     }
+}
+
+bool WithHandler::isMirrorImageLhsAndRhs(WithValidator wv)
+{
+    return (wv.getLhsAttribute() == wv.getRhsAttribute() && wv.getLhsValue() == wv.getRhsValue());
 }
 
 WithClause WithHandler::makeWithClause(WithValidator withValidator)

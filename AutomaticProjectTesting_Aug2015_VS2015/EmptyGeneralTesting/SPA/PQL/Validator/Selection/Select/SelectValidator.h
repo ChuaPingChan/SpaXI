@@ -5,6 +5,7 @@
 #include "..\..\..\Selectionship.h"
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
+#include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
 
 using namespace std;
 
@@ -30,7 +31,6 @@ private:
     bool storeInQueryTree(SelectClause sc);
 
     Entity getEntityOfSynonym(string syn);
-    bool isKnownEntity(Entity entity);  //TODO: Remove after throwing exception
     string removeSelectKeyword(string str);
 };
 

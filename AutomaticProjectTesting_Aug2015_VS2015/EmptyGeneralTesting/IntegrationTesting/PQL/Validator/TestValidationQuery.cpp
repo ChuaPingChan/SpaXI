@@ -552,6 +552,36 @@ namespace UnitTesting
             Assert::IsFalse(validator.isValidQuery(query));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SuchThatKeyword_ImmediatelyAfter_Select_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select such that Follows(1, 2)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_patternKeyword_ImmediatelyAfter_Select_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select pattern  a(_, _)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
+        /*TEST_METHOD(TestValidity_Query_SelectSingleSynonym_withKeyword_ImmediatelyAfter_Select_Invalid)
+        {
+            string query;
+            query.append("constant c;");
+            query.append("Select with c.value=1");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }*/
+
         TEST_METHOD(TestValidity_Query_Selection_Before_Declaration_Invalid)
         {
             string query;
