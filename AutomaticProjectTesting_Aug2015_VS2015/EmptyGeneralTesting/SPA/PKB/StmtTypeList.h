@@ -17,14 +17,17 @@ public:
     bool addToAssignStmtList(int stmt);
     bool addToWhileStmtList(int stmt);
 	bool addToCallsStmtList(int stmt);
+    bool addToIfStmtList(int stmt);
 	list<int> getAllStatements();
     bool isAssignStmt(int stmt);
     bool isWhileStmt(int stmt);
 	bool isCallsStmt(int stmt);
     bool isPresent(int stmt);
+    bool isIfStmt(int stmt);
     list<int> getAssignStmtList();
     list<int> getWhileStmtList();
-	list<int> addToCallsStmtList();
+    list<int> getIfStmtList();
+	list<int> getCallsStmtList();
     list<int> getStmtType(list<int> stmtList, Entity type);
     pair<list<int>, list<string>> getStmtType(pair<list<int>, list<string>> pairOfList, Entity type);
 private:
@@ -32,4 +35,5 @@ private:
     list<int> assignStmtList;
     list<int> whileStmtList;
 	list<int> callsStmtList;
+    list<int> ifStmtList;
 };
