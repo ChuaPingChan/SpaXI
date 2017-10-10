@@ -110,30 +110,7 @@ Entity SelectValidator::getEntityOfSynonym(string syn)
         return STMTLIST;
     }
     else {
-        throw SynonymNotFoundException("Inside SelectValidator.\nWhen calling getEntityOfSynonym()");
-    }
-}
-
-bool SelectValidator::isKnownEntity(Entity entity)
-{
-    switch (entity) {
-        case STMT:
-        case ASSIGN:
-        case WHILE:
-        case IF:
-        case PROG_LINE:
-        case CALL:
-        case PROCEDURE:
-        case VARIABLE:
-        case INTEGER:
-        case UNDERSCORE:
-        case IDENT_WITHQUOTES:
-        case EXPRESSION_SPEC:
-        case CONSTANT:
-        case STMTLIST:
-            return true;
-        default:
-            return false;
+        throw SynonymNotFoundException("Inside SelectValidator, when calling getEntityOfSynonym()");
     }
 }
 

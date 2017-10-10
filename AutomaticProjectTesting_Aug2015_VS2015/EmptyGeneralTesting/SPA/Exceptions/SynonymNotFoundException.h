@@ -4,6 +4,9 @@
 
 using namespace std;
 
+/*
+* Thrown when Synonym cannot be found
+*/
 class SynonymNotFoundException : public exception
 {
 public:

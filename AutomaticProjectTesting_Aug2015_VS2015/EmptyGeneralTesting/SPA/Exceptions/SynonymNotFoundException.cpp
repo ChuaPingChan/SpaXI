@@ -9,7 +9,7 @@ SynonymNotFoundException::SynonymNotFoundException()
 
 SynonymNotFoundException::SynonymNotFoundException(const string & message)
 {
-    string errorMsg = SYNONYM_NOT_FOUND + "\n" + message;
+    string errorMsg = SYNONYM_NOT_FOUND + " " + message;
     this->msg = errorMsg;
 }
 

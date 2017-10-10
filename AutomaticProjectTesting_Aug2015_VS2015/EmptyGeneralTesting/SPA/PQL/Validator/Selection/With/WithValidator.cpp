@@ -79,7 +79,8 @@ bool WithValidator::isValidLhs(string lhs)
             this->lhsAttribute = attribute;
             this->lhsValue = attrRefSynonymStr;
         }
-        catch (exception& e) {
+        catch (SynonymNotFoundException& snfe) {
+            //TODO: Logging
             return false;
         }
     }
@@ -152,7 +153,7 @@ Entity WithValidator::getEntityOfSynonym(string syn)
     }
     else
     {
-        throw exception("Synonym Does Not exist in tree");  //TODO: Create own exception
+        throw SynonymNotFoundException("In WithValidator.cpp, when calling getEntityOfSynonym(). Synonym cannot be found in the QueryTree and no Entity can be assigned.");
     }
 }
 

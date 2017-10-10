@@ -31,7 +31,6 @@ private:
     bool storeInQueryTree(SelectClause sc);
 
     Entity getEntityOfSynonym(string syn);
-    bool isKnownEntity(Entity entity);  //TODO: Remove after throwing exception
     string removeSelectKeyword(string str);
 };
 

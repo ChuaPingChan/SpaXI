@@ -8,7 +8,7 @@ using namespace std;
 
 namespace UnitTesting
 {
-    TEST_CLASS(TestSynonymNotFoundException)
+    TEST_CLASS(TestExceptionSynonymNotFound)
     {
     public:
         TEST_METHOD(TestSynonymNotFoundException_DefaultMsg_Valid)
@@ -40,7 +40,7 @@ namespace UnitTesting
                 exceptionMsg = snfe.what();
             }
             Assert::IsTrue(isExceptionThrown);
-            Assert::IsTrue("Synonym not found.\nError!" == exceptionMsg);
+            Assert::IsTrue("Synonym not found. Error!" == exceptionMsg);
         }
 
         int ThrowSynonymNotFoundException()
