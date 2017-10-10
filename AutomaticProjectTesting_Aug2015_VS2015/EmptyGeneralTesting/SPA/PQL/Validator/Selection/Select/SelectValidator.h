@@ -5,6 +5,7 @@
 #include "..\..\..\Selectionship.h"
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
+#include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
 
 using namespace std;
 

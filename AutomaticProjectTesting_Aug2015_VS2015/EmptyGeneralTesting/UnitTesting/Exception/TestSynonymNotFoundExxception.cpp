@@ -11,33 +11,46 @@ namespace UnitTesting
     TEST_CLASS(TestSynonymNotFoundException)
     {
     public:
-
-        TEST_METHOD(TestSynonymNotFoundException_Valid)
+        TEST_METHOD(TestSynonymNotFoundException_DefaultMsg_Valid)
         {
             string str = "!@#$%&*InvalidSynonym";
             bool isExceptionThrown = false;
             string exceptionMsg = "";
             try {
-                getIntBoolSynonym(str);
+                ThrowSynonymNotFoundException();
             }
             catch (SynonymNotFoundException& snfe) {
                 isExceptionThrown = true;
                 exceptionMsg = snfe.what();
             }
             Assert::IsTrue(isExceptionThrown);
-            Assert::IsTrue("Synonym not found.\nHello" == exceptionMsg);
+            Assert::IsTrue("Synonym not found." == exceptionMsg);
         }
 
-        int getIntBoolSynonym(string str)
+        TEST_METHOD(TestSynonymNotFoundException_CustomizedMsg_Valid)
         {
-            if (RegexValidators::isValidSynonymRegex(str))
-            {
-                return 1;
+            string str = "!@#$%&*InvalidSynonym";
+            bool isExceptionThrown = false;
+            string exceptionMsg = "";
+            try {
+                ThrowSynonymNotFoundException(str);
             }
-            else
-            {
-                throw SynonymNotFoundException("Hello");
+            catch (SynonymNotFoundException& snfe) {
+                isExceptionThrown = true;
+                exceptionMsg = snfe.what();
             }
+            Assert::IsTrue(isExceptionThrown);
+            Assert::IsTrue("Synonym not found.\nError!" == exceptionMsg);
+        }
+
+        int ThrowSynonymNotFoundException()
+        {
+            throw SynonymNotFoundException();
+        }
+
+        int ThrowSynonymNotFoundException(string str)
+        {
+            throw SynonymNotFoundException("Error!");
         }
     };
 }

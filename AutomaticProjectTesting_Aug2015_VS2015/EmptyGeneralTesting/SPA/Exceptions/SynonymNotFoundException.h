@@ -1,6 +1,6 @@
 #pragma once
-#include <exception>
 #include <string>
+#include <exception>
 
 using namespace std;
 
@@ -8,16 +8,12 @@ class SynonymNotFoundException : public exception
 {
 public:
     SynonymNotFoundException();
-    SynonymNotFoundException(string msg);
+    SynonymNotFoundException(const string& message);
     ~SynonymNotFoundException();
 
-    virtual const char* what() const throw()
-    {
-        string errorMsg = "Synonym not found.\n" + msg;
-        return errorMsg.c_str();
-    }
+    virtual const char* what() const throw();
 
 private:
+    static const string SYNONYM_NOT_FOUND;
     string msg;
 };
-

@@ -34,13 +34,19 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 {
     if (RegexValidators::isValidSynonymRegex(selectedStr))
     {
-        Entity entity = getEntityOfSynonym(selectedStr);
-        if (!isKnownEntity(entity))
+        try {
+            Entity entity = getEntityOfSynonym(selectedStr);
+            SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
+            storeInQueryTree(sc);
+            return true;
+        }
+        catch (SynonymNotFoundException& snfe) {
+            //TODO: Add to logging
             return false;
-        SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
-        storeInQueryTree(sc);
-        return true;
+        }
+        
     }
+    //TODO: Add support for AttrRef
     return false;
 }
 
@@ -103,8 +109,9 @@ Entity SelectValidator::getEntityOfSynonym(string syn)
     else if (qtPtr->isEntitySynonymExist(syn, STMTLIST)) {
         return STMTLIST;
     }
-    //TODO: Might need another type for UNKNOWN
-    //return UNKNOWN;
+    else {
+        throw SynonymNotFoundException("Inside SelectValidator.\nWhen calling getEntityOfSynonym()");
+    }
 }
 
 bool SelectValidator::isKnownEntity(Entity entity)
