@@ -5,6 +5,7 @@
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
 #include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
+#include "..\..\..\..\Exceptions\AttributeNotFoundException.h"
 
 using namespace std;
 
@@ -34,8 +35,12 @@ private:
 
     string extractLhs(string str);
     string extractRhs(string str);
-    bool isValidLhs(string str);
-    bool isValidRhs(string str);
+    bool isValidLhs(string lhs);
+    bool isValidRhs(string rhs);
+
+    bool isIntegerType(Attribute attr);
+    bool isStringType(Attribute attr);
+    bool isLhsSameTypeAsRhs();
 
     Entity getEntityOfSynonym(string syn);
     Attribute getAttributeOfAttrRefAttribute(Entity entity, string attr);
