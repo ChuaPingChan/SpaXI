@@ -22,6 +22,7 @@ public:
     string getRhsValue();
 
 private:
+    static const string ATTRIBUTE_STRING[];
     QueryTree *qtPtr;
 
     Attribute lhsAttribute;
@@ -32,7 +33,12 @@ private:
 
     string extractLhs(string str);
     string extractRhs(string str);
-    void determineLhsAttributeAndValue(string str);
-    void determineRhsAttributeAndValue(string str);
-};
+    bool isValidLhs(string str);
+    bool isValidRhs(string str);
 
+    Entity getEntityOfSynonym(string syn);
+    Attribute getAttributeOfAttrRefAttribute(Entity entity, string attr);
+
+    string getAttrRefSynonymStr(string str);
+    string getAttrRefAttributeStr(string str);
+};

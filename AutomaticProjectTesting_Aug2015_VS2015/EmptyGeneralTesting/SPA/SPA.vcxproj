@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Exceptions\SynonymNotFoundException.cpp" />
     <ClCompile Include="PKB\CallsMap.cpp" />
     <ClCompile Include="PKB\CallsTable.cpp" />
     <ClCompile Include="PQL\Attributeship.h" />
@@ -112,6 +113,7 @@
     <ClInclude Include="PQL\Utilities\WithClause.h" />
     <ClInclude Include="PQL\Validator\Selection\With\WithHandler.h" />
     <ClInclude Include="PQL\Validator\Selection\With\WithValidator.h" />
+    <ClInclude Include="Exceptions\SynonymNotFoundException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />
