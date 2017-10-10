@@ -185,6 +185,25 @@ namespace UnitTesting
                 expected.pop_front();
                 test.pop_front();
             }
+            // test getAssigns
+            expected.push_back(1);
+            expected.push_back(3);
+            expected.push_back(4);
+            expected.push_back(6);
+            expected.push_back(8);
+            expected.push_back(11);
+            list<int> testAssign = PKB.getAllAssignments();
+            while (!expected.empty() && !testAssign.empty())
+            {
+                Assert::AreEqual(expected.front(), testAssign.front());
+                expected.pop_front();
+                testAssign.pop_front();
+            }
+            // test getIfs
+            expected.push_back(9);
+            expected.push_back(10);
+            list<int> testIf = PKB.getAllIfs();
+            Assert::IsTrue(expected == testIf);
         }
 
         TEST_METHOD(TestModifiesTable) {

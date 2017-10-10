@@ -79,6 +79,7 @@ public:
     list<int> getAllWhiles();
 	list<int> getAllConstants();
 	list<int> getAllStatements();
+    list<int> getAllIfs();
 
 	list<string> getAllVariables();
     

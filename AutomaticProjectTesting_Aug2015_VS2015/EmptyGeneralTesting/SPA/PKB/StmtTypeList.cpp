@@ -117,7 +117,14 @@ list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
                 filteredList.push_back(*it);
             }
         }
-        else if (type == STMT)
+        else if (type == IF)
+        {
+            if (isIfStmt(*it))
+            {
+                filteredList.push_back(*it);
+            }
+        }
+        else
         {
             filteredList.push_back(*it);
         }
@@ -156,11 +163,16 @@ pair<list<int>, list<string>> StmtTypeList::getStmtType(pair<list<int>, list<str
                 filteredListOfPairs.push_back(*it);
             }
         }
+        else if (type == IF)
+        {
+            if (isIfStmt(it->first)) {
+                filteredListOfPairs.push_back(*it);
+            }
+        }
         else if (type == STMT)
         {
             filteredListOfPairs.push_back(*it);
         }
-		//TODO 1 add if
     }
     // convert back to pair of lists
     list<int> resultStmts;

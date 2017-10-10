@@ -834,6 +834,11 @@ list<int> PKBMain::getAllStatements() {
 	return stmtTypeList.getAllStatements();
 }
 
+list<int> PKBMain::getAllIfs()
+{
+    return stmtTypeList.getIfStmtList();
+}
+
 list<string> PKBMain::getAllVariables() {
 	return varIdxTable.getAllVariables();
 }
