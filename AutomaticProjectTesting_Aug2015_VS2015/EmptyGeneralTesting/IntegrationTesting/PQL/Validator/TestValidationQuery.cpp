@@ -237,7 +237,7 @@ namespace UnitTesting
             Assert::IsTrue(validator.isValidQuery(query));
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, VARIABLE, "Masterball");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
-            SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "\"MewTwo\"", VARIABLE, "Masterball");
+            SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "MewTwo", VARIABLE, "Masterball");
             SuchThatClause actualStc = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
         }
@@ -252,7 +252,7 @@ namespace UnitTesting
             Assert::IsTrue(validator.isValidQuery(query));
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "Pokemon");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
-            SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(USES, IDENT_WITHQUOTES, "\"Azelf\"", IDENT_WITHQUOTES, "\"Psychic\"");
+            SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(USES, IDENT_WITHQUOTES, "Azelf", IDENT_WITHQUOTES, "Psychic");
             SuchThatClause actualStc = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
         }
@@ -465,7 +465,7 @@ namespace UnitTesting
             expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
             expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s2", STMT, "s1"));
-            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "\"x\""));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "x"));
             expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
@@ -490,7 +490,7 @@ namespace UnitTesting
             expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v2", UNDERSCORE, "_"));
             expectedListPc.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w1", IDENT_WITHQUOTES, "\"y\"", UNDERSCORE, "_"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s2", STMT, "s1"));
-            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "\"x\""));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "x"));
             expectedListPc.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w2", VARIABLE, "v1", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
