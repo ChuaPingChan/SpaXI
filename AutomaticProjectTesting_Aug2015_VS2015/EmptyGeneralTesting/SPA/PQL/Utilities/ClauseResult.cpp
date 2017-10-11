@@ -20,10 +20,12 @@ list<string> ClauseResult::getAllSynonyms()
 
 /*
 Returns the possible results of the all synonyms that satisfy a PQL query
-in the same order. If a synonym has no possible values that satisfies the
-query, an empty list will be returned.
+in the same order.
+The inner list returned represents a combination of the synonyms given. For example,
+if the synonyms 'a', 'b' and 'c' are given as parameters, an inner list of {2, 3, 4}
+means {a=2, b=3, c=4}.
 */
-list<list<int>> ClauseResult::getSynonymResults(vector<string> synNames)
+list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
 {
     list<list<int>> result;
 
@@ -34,7 +36,7 @@ list<list<int>> ClauseResult::getSynonymResults(vector<string> synNames)
 
     list<int> synIndices;
     synIndices.clear();
-    for (vector<string>::iterator synNamePtr = synNames.begin();
+    for (list<string>::iterator synNamePtr = synNames.begin();
         synNamePtr != synNames.end();
         synNamePtr++) {
         synIndices.push_back(_synToIdxMap.at(*synNamePtr));
@@ -68,7 +70,7 @@ an empty list will be returned.
 */
 list<int> ClauseResult::getSynonymResults(string synName)
 {
-    vector<string> synNameVec;
+    list<string> synNameVec;
     synNameVec.clear();
     synNameVec.push_back(synName);
 
@@ -84,7 +86,7 @@ list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string
     This method is a wrapper over the more more general getSynonymResults which
     takes in a list of synonym names.
     */
-    vector<string> synNameList;
+    list<string> synNameList;
     synNameList.clear();
     synNameList.push_back(syn1Name);
     synNameList.push_back(syn2Name);

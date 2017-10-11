@@ -17,7 +17,7 @@ public:
     ClauseResult();
 
     list<string> getAllSynonyms();
-    list<list<int>> getSynonymResults(vector<string> synNames); // TODO: Unit testing
+    list<list<int>> getSynonymResults(list<string> synNames); // TODO: Unit testing
     list<int> getSynonymResults(string synNames);   // TODO: Unit testing
     list<pair<int, int>> getSynonymPairResults(string syn1Name, string syn2Name);    // TODO: Unit testing
     list<list<int>> getAllResults();
