@@ -1,5 +1,0 @@
-1 - None
-stmt s;
-Select s
-None
-5000
