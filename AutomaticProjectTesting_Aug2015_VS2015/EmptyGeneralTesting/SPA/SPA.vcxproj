@@ -113,6 +113,7 @@
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
     <ClCompile Include="PQL\Validator\Selection\Select\SelectValidator.cpp" />
     <ClInclude Include="PQL\Utilities\WithClause.h" />
+    <ClInclude Include="PQL\Validator\Selection\SuchThat\NextValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\With\WithHandler.h" />
     <ClInclude Include="PQL\Validator\Selection\With\WithValidator.h" />
     <ClInclude Include="Exceptions\SynonymNotFoundException.h" />
@@ -127,7 +128,6 @@
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\CallsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\FollowsValidator.h" />
-    <ClInclude Include="PQL\Validator\Selection\SuchThat\NextValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\ParentValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\Pattern\IfPatternValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\Pattern\PatternValidator.h" />

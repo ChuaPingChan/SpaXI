@@ -21,7 +21,7 @@ namespace UnitTesting
             QueryTree qt;
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", IDENT_WITHQUOTES, "\"x\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", IDENT_WITHQUOTES, "x");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -56,7 +56,7 @@ namespace UnitTesting
             qt.insertSynonym(ASSIGN, "a");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, ASSIGN, "a", IDENT_WITHQUOTES, "\"x\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, ASSIGN, "a", IDENT_WITHQUOTES, "x");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -94,7 +94,7 @@ namespace UnitTesting
             qt.insertSynonym(IDENT_WITHQUOTES, "\"pokeball\"");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "\"Pikachu\"", IDENT_WITHQUOTES, "\"pokeball\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "Pikachu", IDENT_WITHQUOTES, "pokeball");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -107,7 +107,7 @@ namespace UnitTesting
             qt.insertSynonym(UNDERSCORE, "_");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "\"Pikachu\"", UNDERSCORE, "_");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "Pikachu", UNDERSCORE, "_");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -120,7 +120,7 @@ namespace UnitTesting
             qt.insertSynonym(VARIABLE, "thunderstone");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "\"Pikachu\"", VARIABLE, "thunderstone");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "Pikachu", VARIABLE, "thunderstone");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -133,7 +133,7 @@ namespace UnitTesting
             qt.insertSynonym(IDENT_WITHQUOTES, "\"pokeball\"");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "Blastoise", IDENT_WITHQUOTES, "\"pokeball\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "Blastoise", IDENT_WITHQUOTES, "pokeball");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }

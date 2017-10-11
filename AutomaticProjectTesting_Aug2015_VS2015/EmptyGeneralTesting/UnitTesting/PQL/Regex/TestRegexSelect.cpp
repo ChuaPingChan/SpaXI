@@ -210,18 +210,16 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change this to IsTrue when implement Next
         TEST_METHOD(TestRegex_SingleRelation_Next_Valid)
         {
             string str = "Select s such that Next(n1,n2)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change this to IsTrue when implement Next*
         TEST_METHOD(TestRegex_SingleRelation_NextStar_Valid)
         {
             string str = "Select s such that Next*(n1,n2)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         //TODO: Change this to IsTrue when implement Affects

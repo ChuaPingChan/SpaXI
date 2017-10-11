@@ -256,6 +256,7 @@ namespace UnitTesting
         {
             string str = "Follows(s, s)";
             QueryTree qt;
+            qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsFalse(stHandler.isValidSuchThat(str));
         }

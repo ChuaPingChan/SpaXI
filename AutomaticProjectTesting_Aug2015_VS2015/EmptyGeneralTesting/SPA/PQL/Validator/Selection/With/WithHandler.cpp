@@ -10,7 +10,7 @@ WithHandler::~WithHandler()
 
 bool WithHandler::isValidWith(string str)
 {
-    string processedStr = Formatter::removeAllSpaces(str);
+    string processedStr = Formatter::removeAllSpacesAndTabs(str);
     WithValidator withValidator = WithValidator(qtPtr);
 
     withValidator.validate(processedStr);

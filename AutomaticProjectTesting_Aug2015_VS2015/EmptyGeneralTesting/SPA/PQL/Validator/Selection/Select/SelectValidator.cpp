@@ -15,7 +15,7 @@ SelectValidator::~SelectValidator()
 bool SelectValidator::isValid(string str)
 {
     string selectWithoutKeyword = removeSelectKeyword(str);
-    string processedStr = Formatter::removeAllSpaces(selectWithoutKeyword);
+    string processedStr = Formatter::removeAllSpacesAndTabs(selectWithoutKeyword);
     return isValidSelectBoolean(processedStr) || isValidSelectSingle(processedStr) || isValidSelectTuple(processedStr);
 }
 
