@@ -25,8 +25,8 @@ public:
     bool updateSynResults(string synName, list<int> newSynResults);
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
     bool removeCombinations(string synName, int value); // TODO: Unit testing
-    bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
-    bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);    // TODO: Unit testing
+    bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);    // TODO: Unit testing
+    bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);
     bool hasResults();
 
 protected:
