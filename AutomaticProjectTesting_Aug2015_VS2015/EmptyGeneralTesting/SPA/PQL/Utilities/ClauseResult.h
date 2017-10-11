@@ -17,7 +17,7 @@ public:
     ClauseResult();
 
     list<string> getAllSynonyms();
-    list<list<int>> getSynonymResults(vector<string> synNames);
+    list<list<int>> getSynonymResults(vector<string> synNames); // TODO: Unit testing
     list<int> getSynonymResults(string synNames);   // TODO: Unit testing
     list<pair<int, int>> getSynonymPairResults(string syn1Name, string syn2Name);    // TODO: Unit testing
     list<list<int>> getAllResults();
@@ -29,7 +29,7 @@ public:
     bool addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults);
     bool removeCombinations(string synName, int value);
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
-    bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);
+    bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);    // TODO: Unit testing
     bool hasResults();
 
 protected:
@@ -41,7 +41,7 @@ protected:
     /******************
      * Helper methods *
      ******************/
-    list<vector<int>> convertToPairResultVectors(list<int> &syn1Results, list<int> &syn2Results);
+    list<vector<int>> convertTwoListsToListOfPairResultVector(list<int> &syn1Results, list<int> &syn2Results);
 
     // TODO: Unit testing
     template<typename T> static list<T> convertVectorToList(vector<T> &v)
@@ -76,18 +76,22 @@ protected:
     }
 
     /*
-    Joins v2 to the end of v1 for n number of times.
+    Returns a new vector which elements are the result of concatenating v2 to v1.
     If n is not given, the default value is 1.
     */
-    template<typename T> static void joinTwoVectors(vector<T> &v1, const vector<T> &v2, int n = 1)
+    template<typename T> static vector<T> joinTwoVectors(const vector<T> &v1, const vector<T> &v2, int n = 1)
     {
+        if (v2.empty())
+            return v1;
+
+        vector<T> v3 = v1;
         for (int i = 0; i < n; i++) {
-            v1.insert(v1.end(), v2.begin(), v2.end());
+            v3.insert(v3.end(), v2.begin(), v2.end());
         }
+        return v3;
     }
 
-    // TODO: Unit testing
-    template<typename T> static vector<T> getUniqueVectorElements(vector<T> &vec)
+    template<typename T> static vector<T> getUniqueVectorElements(const vector<T> &vec)
     {
         set<T> s(vec.begin(), vec.end());
         vector<T> uniqueVec;
@@ -96,12 +100,20 @@ protected:
         return uniqueVec;
     }
 
-    // TODO: Unit testing
-    template<typename T> static list<T> getUniqueListElements(list<T> &l)
+    template<typename T> static list<T> getUniqueListElements(const list<T> &l)
     {
         list<T> uniqueList(l);
         uniqueList.sort();
         uniqueList.unique();
         return uniqueList;
+    }
+
+    template<typename T> static vector<T> convertPairToVector(const pair<T, T> &p)
+    {
+        vector<T> v;
+        v.clear();
+        v.push_back(p.first);
+        v.push_back(p.second);
+        return v;
     }
 };

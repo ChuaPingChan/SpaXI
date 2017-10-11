@@ -218,7 +218,7 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
             pairResultPtr++)
         {
             vector<int> newComb = *combPtr;
-            ClauseResult::joinTwoVectors(*combPtr, *pairResultPtr);
+            *combPtr = ClauseResult::joinTwoVectors(*combPtr, *pairResultPtr);
             _results.push_back(newComb);
         }
     }
@@ -228,7 +228,7 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
 
 bool ClauseResult::addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results)
 {
-    list<vector<int>> pairResults = ClauseResult::convertToPairResultVectors(syn1Results, syn2Results);
+    list<vector<int>> pairResults = ClauseResult::convertTwoListsToListOfPairResultVector(syn1Results, syn2Results);
     return addNewSynPairResults(syn1Name, syn2Name, pairResults);
 }
 
@@ -240,7 +240,7 @@ is stored as a vector with 2 elements.
 Pre-condition: The two lists given should be of the same length and each element of a list
 should form a pair of valid result with the element with the same order in the other list.
 */
-list<vector<int>> ClauseResult::convertToPairResultVectors(list<int>& syn1Results, list<int>& syn2Results)
+list<vector<int>> ClauseResult::convertTwoListsToListOfPairResultVector(list<int>& syn1Results, list<int>& syn2Results)
 {
     list<vector<int>> pairResults;
     pairResults.clear();
@@ -312,13 +312,50 @@ bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn
     return removeCombinations(syn1Name, syn1Value) && removeCombinations(syn2Name, syn2Value);
 }
 
+/*
+Merges the results of a new synonym to that of an existing synonym.
+*/
 bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs)
 {
-    /*
-    TODO:
-    Optimise this using the "HashMap" method that ZhaoJin suggested at lecture.
-    More description can be found on GitHub issue.
-    */
+    assert(ClauseResult::synonymPresent(oldSyn));
+    assert(!(ClauseResult::synonymPresent(newSyn)));
+
+    // Add to _synList and _synToIdxMap
+    _synList.push_back(newSyn);
+    int newSynIdx = _synList.size() - 1;
+    assert(_synToIdxMap.count(newSyn) == 0);
+    _synToIdxMap.insert({ newSyn, newSynIdx });
+
+    // Create hash map to hasten merging with existing results
+    unordered_map<int, vector<int>> oldSynValToNewSynResultMap;
+    oldSynValToNewSynResultMap.clear();
+
+    // Populate oldSynValToNewSynResultMap
+    for (pair<int, int> resultPair : resultPairs)
+    {   // Convert pair to vector so that it can be appended to existing vector easily
+        oldSynValToNewSynResultMap[resultPair.first].push_back(resultPair.second);
+    }
+
+    // Merging with existing combinations
+    int oldSynIdx = _synToIdxMap.at(oldSyn);
+    list<vector<int>> updatedResults;
+    updatedResults.clear();
+    for (vector<int> existingCombination : _results)
+    {
+        const int oldSynVal = existingCombination[oldSynIdx];
+        // TODO: Consider refactoring to avoid arrowhead code.
+        if (oldSynValToNewSynResultMap.count(oldSynVal) == 1)
+        {
+            vector<int> newSynResults = oldSynValToNewSynResultMap.at(oldSynVal);
+            for (int newSynResult : newSynResults)
+            {
+                vector<int> newComb = existingCombination;
+                newComb.push_back(newSynResult);
+                updatedResults.push_back(newComb);
+            }
+        }
+    }
+    _results = updatedResults;
 
     return true;
 }
