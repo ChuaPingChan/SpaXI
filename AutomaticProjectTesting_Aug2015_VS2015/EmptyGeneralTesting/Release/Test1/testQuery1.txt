@@ -1,0 +1,340 @@
+1 - All statements
+stmt s;
+Select s
+1,2,3,4,5,6,7,8
+5000
+2 - All assignments
+assign a;
+Select a
+1,2,4,5,6,7,8
+5000
+3 - All whiles
+while w;
+Select w
+3
+5000
+4 - All varables
+variable v;
+Select v
+a,b,c,d,i,j
+5000
+1 - Select SingleSynonym Stmt Follows IntInt HaveResult
+stmt s;
+Select s such that Follows(1, 2)
+1,2,3,4,5,6,7,8
+5000
+2 - Select SingleSynonym Stmt Follows IntInt NoResult
+stmts;
+Select s such that Follows(3, 4)
+none
+5000
+3 - Select SingleSynonym Stmt Follows IntUnderscore HaveResult
+stmt s;
+Select s such that Follows(1, _)
+1,2,3,4,5,6,7,8
+5000
+4 - Select SingleSynonym Stmt Follows IntSynonym HaveResult
+stmt s;
+Select s such that Follows(1, s)
+2
+5000
+5 - Select SingleSynonym Stmt Follows IntSynonym BehindWhile HaveResult
+stmt s;
+Select s such that Follows(3, s)
+8
+5000
+6 - Select SingleSynonym Stmt Follows UnderscoreInt HaveResult
+stmt s;
+Select s such that Follows(_, 3)
+1,2,3,4,5,6,7,8
+5000
+7 - Select SingleSynonym Stmt Follows UnderscoreInt NoResult
+stmt s;
+Select s such that Follows(_, 1)
+none
+5000
+8 - Select SingleSynonym Stmt Follows UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Follows(_, _)
+1,2,3,4,5,6,7,8
+5000
+9 - Select SingleSynonym Stmt Follows UnderscoreSynonym HaveResult
+stmt s;
+Select s such that Follows(_, s)
+2,3,5,6,7,8
+5000
+10 - Select SingleSynonym Stmt Follows SynonymInt HaveResult
+stmt s;
+Select s such that Follows(s, 2)
+1
+5000
+11 - Select SingleSynonym Stmt Follows SynonymInt NoResult
+stmt s;
+Select s such that Follows(s, 1)
+none
+5000
+12 - Select SingleSynonym Stmt Follows SynonymInt BeforeWhile HaveResult
+stmt s;
+Select s such that Follows(s, 8)
+3
+5000
+13 - Select SingleSynonym Stmt Follows SynonymUnderscore HaveResult
+stmt s;
+Select s such that Follows(s, _)
+1,2,3,4,5,6
+5000
+14 - Select SingleSynonym Stmt Follows SynonymSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows(s1, s2)
+1,2,3,4,5,6
+5000
+15 - Select SingleSynonym Stmt Follows SynonymSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows(s1, s2)
+2,3,5,6,7,8
+5000
+16 - Select SingleSynonym Stmt Follows SynonymUnderscore NoResult
+stmt s;
+Select s such that Follows(s, s)
+none
+5000
+17 - Select SingleSynonym Variable Follows IntInt HaveResult
+variable v;
+Select v such that Follows(1, 2)
+a,b,c,d,i,j
+5000
+18 - Select SingleSynonym Variable Follows IntInt NoResult
+variable v;
+Select v such that Follows(3, 4)
+none
+5000
+19 - Select SingleSynonym Variable Follows IntUnderscore HaveResult
+variable v;
+Select v such that Follows(1, _)
+a,b,c,d,i,j
+5000
+20 - Select SingleSynonym Variable Follows IntSynonym HaveResult
+variable v; stmt s;
+Select v such that Follows(1, s)
+a,b,c,d,i,j
+5000
+21 - Select SingleSynonym Variable Follows IntSynonym BehindWhile HaveResult
+variable v; stmt s;
+Select v such that Follows(3, s)
+a,b,c,d,i,j
+5000
+22 - Select SingleSynonym Variable Follows UnderscoreInt HaveResult
+variable v;
+Select v such that Follows(_, 3)
+a,b,c,d,i,j
+5000
+23 - Select SingleSynonym Variable Follows UnderscoreInt NoResult
+variable v;
+Select v such that Follows(_, 1)
+none
+5000
+24 - Select SingleSynonym Variable Follows UnderscoreUnderscore HaveResult
+variable v;
+Select v such that Follows(_, _)
+a,b,c,d,i,j
+5000
+25 - Select SingleSynonym Variable Follows UnderscoreSynonym HaveResult
+variable v; stmt s;
+Select v such that Follows(_, s)
+a,b,c,d,i,j
+5000
+26 - Select SingleSynonym Variable Follows SynonymInt HaveResult
+variable v; stmt s;
+Select v such that Follows(s, 2)
+a,b,c,d,i,j
+5000
+27 - Select SingleSynonym Variable Follows SynonymInt NoResult
+variable v; stmt s;
+Select v such that Follows(s, 1)
+none
+5000
+28 - Select SingleSynonym Variable Follows SynonymInt BeforeWhile HaveResult
+variable v; stmt s;
+Select v such that Follows(s, 8)
+a,b,c,d,i,j
+5000
+29 - Select SingleSynonym Variable Follows SynonymUnderscore HaveResult
+variable v; stmt s;
+Select v such that Follows(s, _)
+a,b,c,d,i,j
+5000
+30 - Select SingleSynonym Variable Follows Illegal Argument NoResult
+variable v; stmt s;
+Select v such that Follows(v, s)
+none
+5000
+31 - Select SingleSynonym Assign Follows IntInt HaveResult
+assign a;
+Select a such that Follows(1, 2)
+1,2,4,5,6,7,8
+5000
+32 - Select SingleSynonym Assign Follows IntInt NoResult
+assign a;
+Select a such that Follows(3, 4)
+none
+5000
+33 - Select SingleSynonym Assign Follows IntUnderscore HaveResult
+assign a;
+Select a such that Follows(1, _)
+1,2,4,5,6,7,8
+5000
+34 - Select SingleSynonym Assign Follows IntSynonym HaveResult
+assign a;
+Select a such that Follows(1, a)
+2
+5000
+35 - Select SingleSynonym Assign Follows IntSynonym BehindWhile HaveResult
+assign a;
+Select a such that Follows(3, a)
+8
+5000
+36 - Select SingleSynonym Assign Follows UnderscoreInt HaveResult
+assign a;
+Select a such that Follows(_, 3)
+1,2,4,5,6,7,8
+5000
+37 - Select SingleSynonym Assign Follows UnderscoreInt NoResult
+assign a;
+Select a such that Follows(_, 1)
+none
+5000
+38 - Select SingleSynonym Assign Follows UnderscoreUnderscore HaveResult
+assign a;
+Select a such that Follows(_, _)
+1,2,4,5,6,7,8
+5000
+39 - Select SingleSynonym Assign Follows UnderscoreSynonym HaveResult
+assign a;
+Select a such that Follows(_, a)
+2,5,6,7,8
+5000
+40 - Select SingleSynonym Assign Follows SynonymInt HaveResult
+assign a;
+Select a such that Follows(a, 2)
+1
+5000
+41 - Select SingleSynonym Assign Follows SynonymInt NoResult
+assign a;
+Select a such that Follows(a, 1)
+none
+5000
+42 - Select SingleSynonym Assign Follows SynonymInt BeforeIntNotAssign NoResult
+assign a;
+Select a such that Follows(a, 8)
+none
+5000
+43 - Select SingleSynonym Assign Follows SynonymUnderscore HaveResult
+assign a;
+Select a such that Follows(a, _)
+1,2,4,5,6
+5000
+44 - Select SingleSynonym Assign Follows SynonymSynonym GetFront HaveResult
+assign a1, a2;
+Select a1 such that Follows(a1, a2)
+1,4,5,6
+5000
+45 - Select SingleSynonym Assign Follows SynonymSynonym GetBack HaveResult
+assign a1, a2;
+Select a2 such that Follows(a1, a2)
+2,5,6,7
+5000
+46 - Select SingleSynonym Assign Follows SynonymUnderscore NoResult
+assign a;
+Select a such that Follows(a, a)
+none
+5000
+47 - Select SingleSynonym While Follows IntInt HaveResult
+while w;
+Select w such that Follows(1, 2)
+3
+5000
+48 - Select SingleSynonym While Follows IntInt NoResult
+while w;
+Select w such that Follows(3, 4)
+none
+5000
+49 - Select SingleSynonym While Follows IntUnderscore HaveResult
+while w;
+Select w such that Follows(1, _)
+3
+5000
+50 - Select SingleSynonym While Follows IntSynonym HaveResult
+while w;
+Select w such that Follows(2, w)
+3
+5000
+51 - Select SingleSynonym While Follows IntSynonym WhileFollowItself NoResult
+while w;
+Select w such that Follows(3, w)
+none
+5000
+52 - Select SingleSynonym While Follows UnderscoreInt HaveResult
+while w;
+Select w such that Follows(_, 3)
+3
+5000
+53 - Select SingleSynonym While Follows UnderscoreInt NoResult
+while w;
+Select w such that Follows(_, 1)
+none
+5000
+54 - Select SingleSynonym While Follows UnderscoreUnderscore HaveResult
+while w;
+Select w such that Follows(_, _)
+3
+5000
+55 - Select SingleSynonym While Follows UnderscoreSynonym HaveResult
+while w;
+Select w such that Follows(_, w)
+3
+5000
+56 - Select SingleSynonym While Follows SynonymInt HaveResult
+while w;
+Select w such that Follows(w, 8)
+3
+5000
+57 - Select SingleSynonym While Follows SynonymInt NoResult
+while w;
+Select w such that Follows(w, 1)
+none
+5000
+59 - Select SingleSynonym While Follows SynonymUnderscore HaveResult
+while w;
+Select w such that Follows(w, _)
+3
+5000
+60 - Select SingleSynonym While Follows SynonymSynonym GetFront HaveResult
+while w1, w2;
+Select w1 such that Follows(w1, w2)
+None
+5000
+61 - Select SingleSynonym While Follows SynonymSynonym GetBack HaveResult
+while w1, w2;
+Select w2 such that Follows(w1, w2)
+None
+5000
+62 - Select SingleSynonym While Follows SynonymUnderscore NoResult
+while w;
+Select w such that Follows(w, w)
+none
+5000
+1 - None
+None
+None
+None
+5000
+1 - None
+None
+None
+None
+5000
+1 - None
+None
+None
+None
+5000
