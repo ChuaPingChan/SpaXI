@@ -816,6 +816,11 @@ bool PKBMain::isWhile(int stmtNum)
 	return stmtTypeList.isWhileStmt(stmtNum);
 }
 
+bool PKBMain::isIf(int stmtNum)
+{
+    return stmtTypeList.isIfStmt(stmtNum);
+}
+
 list<int> PKBMain::getAllWhiles()
 {
 	return stmtTypeList.getWhileStmtList();
@@ -827,6 +832,11 @@ list<int> PKBMain::getAllConstants() {
 
 list<int> PKBMain::getAllStatements() {
 	return stmtTypeList.getAllStatements();
+}
+
+list<int> PKBMain::getAllIfs()
+{
+    return stmtTypeList.getIfStmtList();
 }
 
 list<string> PKBMain::getAllVariables() {
@@ -933,6 +943,9 @@ list<int> PKBMain::getUsesFromVar(string var, Entity type)
 		return usesTableVar.getUsesWhileStmtFromVar(varIdx);
 	}
 	//TODO 1 add if
+    else if (type == IF) {
+        return usesTableVar.getUsesIfFromVar(varIdx);
+    }
 	else {
 		return list<int>();
 	}
@@ -954,6 +967,9 @@ list<int> PKBMain::getModifiesFromVar(string var, Entity type)
 		modTableVar.getModWhileStmtFromVar(varIdx).merge(modTableVar.getModWhileContainersFromVar(varIdx));
 		return modTableVar.getModWhileStmtFromVar(varIdx);
 	}
+    else if (type == IF) {
+        modTableVar.getModIfFromVar(varIdx);
+    }
 	else {
 		return list<int>();
 	}
@@ -1046,6 +1062,12 @@ bool PKBMain::addWhileStmt(int stmt)
 {
 	bool added = stmtTypeList.addToWhileStmtList(stmt);
 	return added;
+}
+
+bool PKBMain::addIfStmt(int stmt)
+{
+    bool added = stmtTypeList.addToIfStmtList(stmt);
+    return added;
 }
 
 bool PKBMain::addConstant(int stmt, int constant)
