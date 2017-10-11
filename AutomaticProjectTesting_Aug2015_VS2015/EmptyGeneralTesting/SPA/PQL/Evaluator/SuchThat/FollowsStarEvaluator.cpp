@@ -161,7 +161,7 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
                 resultPairs.clear();
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getAfter(existingSynVal, existingSynType);
+                    list<int> newSynVals = pkbInstance->getAfterStar(existingSynVal, existingSynType);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
