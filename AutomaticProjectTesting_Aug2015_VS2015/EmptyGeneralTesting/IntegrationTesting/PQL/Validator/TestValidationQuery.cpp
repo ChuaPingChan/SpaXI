@@ -443,6 +443,57 @@ namespace UnitTesting
         /****************************************
         * Select Clause - Single Synonym - With *
         ****************************************/
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SingleWith_StrStr_Valid)
+        {
+            string query;
+            query.append("procedure p;");
+            query.append("Select p with p.procName = \"Pikachu\"");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
+            WithClause expectedWith = UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu");
+            WithClause actualWith = UtilitySelection::getFirstWithClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expectedWith, actualWith));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_MultipleWith_With_And_Valid)
+        {
+            string query;
+            query.append("procedure p;");
+            query.append("stmt s;");
+            query.append("constant c;");
+            query.append("Select p with p.procName = \"Pikachu\" and c.value = s.stmt#");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
+            vector<WithClause> expectedListWc;
+            expectedListWc.push_back(UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(CONSTANT_ATTRIBUTE, "c", STMT_ATTRIBUTE, "s"));
+            Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_MultipleWith_With_After_With_Valid)
+        {
+            string query;
+            query.append("procedure p;");
+            query.append("if f;");
+            query.append("while w;");
+            query.append("Select p with p.procName = \"Pikachu\" with w.stmt# = f.stmt#");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
+            vector<WithClause> expectedListWc;
+            expectedListWc.push_back(UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(WHILE_ATTRIBUTE, "w", IF_ATTRIBUTE, "f"));
+            Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
+        }
+
 
         /********************************************************
         * Select Clause - Single Synonym - SuchThat and Pattern *
@@ -525,6 +576,46 @@ namespace UnitTesting
         /*****************************************************
         * Select Clause - Single Synonym - SuchThat and With *
         *****************************************************/
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_With_SurroundedBy_SuchThat_Valid)
+        {
+            string query;
+            query.append("call cl;");
+            query.append("stmt s1, s2, s3;");
+            query.append("Select cl such that Follows*(s1, s2) with cl.stmt# = s3.stmt# such that Parent(s1, s3)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "cl");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
+            vector<SuchThatClause> expectedListStc;
+            vector<PatternClause> expectedListPc;
+            vector<WithClause> expectedListWc;
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s1", STMT, "s2"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(CALL_STMT_ATTRIBUTE, "cl", STMT_ATTRIBUTE, "s3"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENT, STMT, "s1", STMT, "s3"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
+            Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SuchThat_SurroundedBy_With_Valid)
+        {
+            string query;
+            query.append("variable v;");
+            query.append("procedure p;");
+            query.append("Select p with p.procName = v.varName such that Modifies(p, v) with v.varName = \"Pokeball\"");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
+            vector<SuchThatClause> expectedListStc;
+            vector<WithClause> expectedListWc;
+            expectedListWc.push_back(UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", VARIABLE_ATTRIBUTE, "v"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "p", VARIABLE, "v"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(VARIABLE_ATTRIBUTE, "v", IDENT_WITH_QUOTES_ATTRIBUTE, "Pokeball"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
+            Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
+        }
 
         /****************************************************
         * Select Clause - Single Synonym - Pattern and With *
@@ -572,7 +663,7 @@ namespace UnitTesting
             Assert::IsFalse(validator.isValidQuery(query));
         }
 
-        /*TEST_METHOD(TestValidity_Query_SelectSingleSynonym_withKeyword_ImmediatelyAfter_Select_Invalid)
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_withKeyword_ImmediatelyAfter_Select_Invalid)
         {
             string query;
             query.append("constant c;");
@@ -580,7 +671,7 @@ namespace UnitTesting
             QueryTree qt;
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsFalse(validator.isValidQuery(query));
-        }*/
+        }
 
         TEST_METHOD(TestValidity_Query_Selection_Before_Declaration_Invalid)
         {

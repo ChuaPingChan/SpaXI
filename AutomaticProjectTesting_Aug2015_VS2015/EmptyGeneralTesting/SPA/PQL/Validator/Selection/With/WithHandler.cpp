@@ -2,6 +2,7 @@
 
 WithHandler::WithHandler(QueryTree * qtPtrNew)
 {
+    this->qtPtr = qtPtrNew;
 }
 
 WithHandler::~WithHandler()
@@ -15,12 +16,12 @@ bool WithHandler::isValidWith(string str)
 
     withValidator.validate(processedStr);
 
-    if (withValidator.isValid() && isMirrorImageLhsAndRhs(withValidator)) {
+    if (withValidator.isValid() && !isExactlySameLhsAndRhs(withValidator)) {
         WithClause withClause = makeWithClause(withValidator);
         storeInQueryTree(withClause);
         return true;
     }
-    else if (withValidator.isValid() && isMirrorImageLhsAndRhs(withValidator)) {
+    else if (withValidator.isValid() && isExactlySameLhsAndRhs(withValidator)) {
         return true;    //Drop the making of clause as optimisation
     }
     else
@@ -29,7 +30,7 @@ bool WithHandler::isValidWith(string str)
     }
 }
 
-bool WithHandler::isMirrorImageLhsAndRhs(WithValidator wv)
+bool WithHandler::isExactlySameLhsAndRhs(WithValidator wv)
 {
     return (wv.getLhsAttribute() == wv.getRhsAttribute() && wv.getLhsValue() == wv.getRhsValue());
 }

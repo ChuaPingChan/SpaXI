@@ -3,6 +3,7 @@
 #include "..\..\..\SPA\PQL\Utilities\SelectClause.h"
 #include "..\..\..\SPA\PQL\Utilities\SuchThatClause.h"
 #include "..\..\..\SPA\PQL\Utilities\PatternClause.h"
+#include "..\SPA\PQL\Utilities\WithClause.h"
 
 using namespace std;
 
@@ -38,8 +39,13 @@ public:
     static bool isSamePatternClauseIfContent(PatternClause expected, PatternClause actual);
     static bool areSamePatternClausesContentAsInTree(vector<PatternClause> expectedList, QueryTree qt);
 
-
-
+    /*******
+    * With *
+    *******/
+    static WithClause makeWithClause(Attribute lhsAttribute, string lhsValue, Attribute rhsAttribute, string rhsValue);
+    static WithClause getFirstWithClauseFromTree(QueryTree qt);
+    static bool isSameWithClauseContent(WithClause expected, WithClause actual);
+    static bool areSameWithClausesContentAsInTree(vector<WithClause> expectedList, QueryTree qt);
 
 private:
     static bool isSameSelectBooleanContent(SelectClause expected, SelectClause actual);
