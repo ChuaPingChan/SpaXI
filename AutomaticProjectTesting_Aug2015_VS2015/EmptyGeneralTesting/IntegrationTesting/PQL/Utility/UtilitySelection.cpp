@@ -194,6 +194,32 @@ bool UtilitySelection::isSameWithClauseContent(WithClause expected, WithClause a
     return isSameLhsAttribute && isSameRhsAttribute && isSameLhsValue && isSameRhsValue;
 }
 
+bool UtilitySelection::areSameWithClausesContentAsInTree(vector<WithClause> expectedList, QueryTree qt)
+{
+    vector<WithClause> actualList = qt.getWithClauses();
+
+    if (actualList.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::vector<WithClause>::iterator iterExpected = expectedList.begin(); iterExpected != expectedList.end(); ++iterExpected) {
+        WithClause expectedWc = *iterExpected;
+
+        std::vector<WithClause>::iterator iterActual = actualList.begin();
+        for (; iterActual != actualList.end(); ++iterActual) {
+            WithClause actualWc = *iterActual;
+            if (isSameWithClauseContent(expectedWc, actualWc)) {
+                break;
+            }
+        }
+
+        if (iterActual == actualList.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 
 /**********

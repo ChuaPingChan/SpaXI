@@ -45,7 +45,7 @@ public:
     static WithClause makeWithClause(Attribute lhsAttribute, string lhsValue, Attribute rhsAttribute, string rhsValue);
     static WithClause getFirstWithClauseFromTree(QueryTree qt);
     static bool isSameWithClauseContent(WithClause expected, WithClause actual);
-
+    static bool areSameWithClausesContentAsInTree(vector<WithClause> expectedList, QueryTree qt);
 
 private:
     static bool isSameSelectBooleanContent(SelectClause expected, SelectClause actual);
