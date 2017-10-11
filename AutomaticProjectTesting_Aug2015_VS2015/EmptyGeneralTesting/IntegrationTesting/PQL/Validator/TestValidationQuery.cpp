@@ -576,13 +576,12 @@ namespace UnitTesting
         /*****************************************************
         * Select Clause - Single Synonym - SuchThat and With *
         *****************************************************/
-        /*TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Call_With_CallStmtNumConstValue_SuchThat_Follows_And_Parent_SuchThat_Modifies_With_IntInt_And_IdentWqVariableVarName_Valid)
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_With_SurroundedBy_SuchThat_Valid)
         {
             string query;
             query.append("call cl;");
             query.append("stmt s1, s2, s3;");
-            query.append("variable v;");
-            query.append("Select cl with cl.stmt# = c.value such that Follows*(s1, s2) and Parent*(s2, s3) such that Modifies(1, v) with 1=1 and pl=cl.stmt# with \"x\" = v.varName");
+            query.append("Select cl such that Follows*(s1, s2) with cl.stmt# = s3.stmt# such that Parent(s1, s3)");
             QueryTree qt;
             QueryValidator validator = QueryValidator(&qt);
             Assert::IsTrue(validator.isValidQuery(query));
@@ -592,14 +591,31 @@ namespace UnitTesting
             vector<PatternClause> expectedListPc;
             vector<WithClause> expectedListWc;
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s1", STMT, "s2"));
-            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENTSTAR, STMT, "s2", STMT, "s3"));
-            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", VARIABLE, "v"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(CALL_STMT_ATTRIBUTE, "cl", STMT_ATTRIBUTE, "s3"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENT, STMT, "s1", STMT, "s3"));
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
-            Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
-        }*/
+            Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
+        }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SuchThat_SurroundedBy_With_Valid)
+        {
+            string query;
+            query.append("variable v;");
+            query.append("procedure p;");
+            query.append("Select p with p.procName = v.varName such that Modifies(p, v) with v.varName = \"Pokeball\"");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
+            vector<SuchThatClause> expectedListStc;
+            vector<WithClause> expectedListWc;
+            expectedListWc.push_back(UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", VARIABLE_ATTRIBUTE, "v"));
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "p", VARIABLE, "v"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(VARIABLE_ATTRIBUTE, "v", IDENT_WITH_QUOTES_ATTRIBUTE, "Pokeball"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
+            Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
+        }
 
         /****************************************************
         * Select Clause - Single Synonym - Pattern and With *
