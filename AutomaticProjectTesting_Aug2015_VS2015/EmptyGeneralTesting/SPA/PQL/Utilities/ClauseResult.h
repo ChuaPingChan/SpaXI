@@ -19,23 +19,29 @@ public:
     list<string> getAllSynonyms();
     list<list<int>> getSynonymResults(vector<string> synNames);
     list<int> getSynonymResults(string synNames);   // TODO: Unit testing
-    list<pair<int,int>> getSynonymPairResults(string syn1Name, string syn2Name);    // TODO: Unit testing
+    list<pair<int, int>> getSynonymPairResults(string syn1Name, string syn2Name);    // TODO: Unit testing
     list<list<int>> getAllResults();
     bool synonymPresent(string synName);
     bool addNewSynResults(string newSynName, list<int> newSynResults);
     // TODO: Make addNewSynResults do overlapExistingSynResults
     bool overlapExistingSynResults(string synName, list<int> synResultsToOverlap);
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
-    bool addNewSynPairResults(string syn1Name, string syn2Name, vector<vector<int>> pairResults);
+    bool addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults);
     bool removeCombinations(string synName, int value);
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
-    bool pairWithOldSyn(string oldSyn, int oldSynValue, string newSyn, list<int> newSynResults);
+    bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);
     bool hasResults();
-    
+
 protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
     list<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
+
+
+    /******************
+     * Helper methods *
+     ******************/
+    list<vector<int>> convertToPairResultVectors(list<int> &syn1Results, list<int> &syn2Results);
 
     // TODO: Unit testing
     template<typename T> static list<T> convertVectorToList(vector<T> &v)
