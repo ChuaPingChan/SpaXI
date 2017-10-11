@@ -64,7 +64,7 @@ namespace UnitTesting
             qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
-            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHOUTQUOTES, "\"x\"", EXPRESSION_SPEC, "_\"x\"_");
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHQUOTES, "\"x\"", EXPRESSION_SPEC, "_\"x\"_");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
@@ -88,7 +88,7 @@ namespace UnitTesting
             qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
-            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHOUTQUOTES, "\"x\"", UNDERSCORE, "_");
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHQUOTES, "\"x\"", UNDERSCORE, "_");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }

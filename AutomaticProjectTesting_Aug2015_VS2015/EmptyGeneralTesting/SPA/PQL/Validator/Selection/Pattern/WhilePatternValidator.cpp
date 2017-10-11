@@ -46,7 +46,7 @@ bool WhilePatternValidator::isValidArgOne(string argOne)
 
     else if (RegexValidators::isValidIdentWithQuotesRegex(argOne))
     {
-        this->argOneType = IDENT_WITHOUTQUOTES;
+        this->argOneType = IDENT_WITHQUOTES;
         return true;
     }
 

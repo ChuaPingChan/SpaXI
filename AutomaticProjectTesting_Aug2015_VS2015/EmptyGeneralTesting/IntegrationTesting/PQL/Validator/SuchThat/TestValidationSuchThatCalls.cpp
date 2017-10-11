@@ -56,11 +56,11 @@ namespace UnitTesting
         {
             string str = "Calls(\"First\", q)";
             QueryTree qt;
-            qt.insertSynonym(IDENT_WITHOUTQUOTES, "\"First\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"First\"");
             qt.insertSynonym(PROCEDURE, "q");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, IDENT_WITHOUTQUOTES, "\"First\"", PROCEDURE, "q");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, IDENT_WITHQUOTES, "\"First\"", PROCEDURE, "q");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -69,11 +69,11 @@ namespace UnitTesting
         {
             string str = "Calls(p, \"Second\")";
             QueryTree qt;
-            qt.insertSynonym(IDENT_WITHOUTQUOTES, "\"Second\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Second\"");
             qt.insertSynonym(PROCEDURE, "p");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, PROCEDURE, "p", IDENT_WITHOUTQUOTES, "\"Second\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, PROCEDURE, "p", IDENT_WITHQUOTES, "\"Second\"");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -82,11 +82,11 @@ namespace UnitTesting
         {
             string str = "Calls(\"First\", \"Second\")";
             QueryTree qt;
-            qt.insertSynonym(IDENT_WITHOUTQUOTES, "\"First\"");
-            qt.insertSynonym(IDENT_WITHOUTQUOTES, "\"Second\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"First\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Second\"");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, IDENT_WITHOUTQUOTES, "\"First\"", IDENT_WITHOUTQUOTES, "\"Second\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, IDENT_WITHQUOTES, "\"First\"", IDENT_WITHQUOTES, "\"Second\"");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -106,10 +106,10 @@ namespace UnitTesting
         {
             string str = "Calls(\"First\",_)";
             QueryTree qt;
-            qt.insertSynonym(IDENT_WITHOUTQUOTES, "\"First\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"First\"");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, IDENT_WITHOUTQUOTES, "\"First\"", UNDERSCORE, "_");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, IDENT_WITHQUOTES, "\"First\"", UNDERSCORE, "_");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -118,10 +118,10 @@ namespace UnitTesting
         {
             string str = "Calls(_,\"Second\")";
             QueryTree qt;
-            qt.insertSynonym(IDENT_WITHOUTQUOTES, "\"Second\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Second\"");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
-            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, UNDERSCORE, "_", IDENT_WITHOUTQUOTES, "\"Second\"");
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(CALLS, UNDERSCORE, "_", IDENT_WITHQUOTES, "\"Second\"");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -142,7 +142,7 @@ namespace UnitTesting
         {
             string str = "Calls(\"First\",\"First\" )";
             QueryTree qt;
-            qt.insertSynonym(IDENT_WITHOUTQUOTES, "\First\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\First\"");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsFalse(stHandler.isValidSuchThat(str));
         }

@@ -51,7 +51,7 @@ namespace UnitTesting
             qt.insertSynonym(WHILE, "w");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
-            PatternClause expected = UtilitySelection::makePatternClause(WHILE_PATTERN, "w", IDENT_WITHOUTQUOTES, "\"x\"", UNDERSCORE, "_");
+            PatternClause expected = UtilitySelection::makePatternClause(WHILE_PATTERN, "w", IDENT_WITHQUOTES, "\"x\"", UNDERSCORE, "_");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
