@@ -13,8 +13,15 @@ namespace UnitTesting
     {
     public:
 
-        TEST_METHOD(TestGetAllSynonyms_success) {
+        TEST_METHOD(TestMultiMethods_success) {
+            /*
+            Methods tested:
+            1. getAllSynonyms()
+            2. synonymPresent()
+            3. hasResults()
+            */
             ClauseResult cr = ClauseResult();
+            Assert::IsFalse(cr.hasResults());
 
             string syn1 = "a";
             list<int> syn1Results{ 1, 2, 3 };
@@ -27,33 +34,39 @@ namespace UnitTesting
             cr.updateSynResults(syn2, syn2Results);
             cr.updateSynResults(syn3, syn3Results);
 
+            Assert::IsTrue(cr.synonymPresent(syn1));
+            Assert::IsTrue(cr.synonymPresent(syn2));
+            Assert::IsTrue(cr.synonymPresent(syn3));
+            Assert::IsFalse(cr.synonymPresent("z"));
+            Assert::IsFalse(cr.synonymPresent(""));
+
             list<string> allSynonyms = cr.getAllSynonyms();
             list<string> expectedSynonyms{ syn1, syn2, syn3 };
             allSynonyms.sort();
             expectedSynonyms.sort();
 
             Assert::IsTrue(allSynonyms == expectedSynonyms);
+            Assert::IsTrue(cr.hasResults());
         }
 
-        TEST_METHOD(TestAddNewSynResults_sampleResult1_success) {
+        TEST_METHOD(TestUpdateSynResults_success)
+        {
             ClauseResult cr = ClauseResult();
 
             string stmt1 = "a";
             list<int> stmt1Results{ 1, 2, 3 };
-
             string stmt2 = "b";
             list<int> stmt2Results{ 4, 5 };
 
             cr.updateSynResults("a", stmt1Results);
             cr.updateSynResults("b", stmt2Results);
-            list<list<int>> result = cr.getAllResults();
-
+            list<list<int>> actualResult = cr.getAllResults();
             list<list<int>> expectedResults{ {1,4}, {1,5}, {2,4}, {2,5}, {3,4}, {3,5} };
 
-            Assert::IsTrue(result == expectedResults);
+            Assert::IsTrue(actualResult == expectedResults);
         }
 
-        TEST_METHOD(TestAddNewSynResults_sampleResult2_success) {
+        TEST_METHOD(TestUpdateSynResults_longResultThenShortResult_success) {
             ClauseResult cr = ClauseResult();
 
             string stmt1 = "a";
@@ -64,33 +77,127 @@ namespace UnitTesting
 
             cr.updateSynResults("a", stmt1Results);
             cr.updateSynResults("b", stmt2Results);
-            list<list<int>> result = cr.getAllResults();
-
+            list<list<int>> actualResult = cr.getAllResults();
             list<list<int>> expectedResults{ {1,6}, {2,6}, {3,6} };
 
-            Assert::IsTrue(result == expectedResults);
+            Assert::IsTrue(actualResult == expectedResults);
         }
 
-        TEST_METHOD(TestAddNewSynResults_sampleResult3_success) {
+        TEST_METHOD(TestUpdateSynResults_shortResultThenLongResult_success) {
             ClauseResult cr = ClauseResult();
 
             string stmt1 = "a";
             list<int> stmt1Results{ 6 };
-
             string stmt2 = "b";
             list<int> stmt2Results{ 1, 2, 3 };
 
             cr.updateSynResults("a", stmt1Results);
             cr.updateSynResults("b", stmt2Results);
-            list<list<int>> result = cr.getAllResults();
-
+            list<list<int>> actualResult = cr.getAllResults();
             list<list<int>> expectedResults{ { 6,1 },{ 6,2 },{ 6,3 } };
 
-            Assert::IsTrue(result == expectedResults);
+            Assert::IsTrue(actualResult == expectedResults);
+        }
+
+        TEST_METHOD(TestUpdateSynResults_existingSyn_success)
+        {
+            ClauseResult cr;
+
+            string syn1 = "a";
+            list<int> syn1Results{ 1, 2, 3 };
+            list<int> syn1ResultsToOverlap{ 1 };
+            string syn2 = "b";
+            list<int> syn2Results{ 4, 5 };
+            cr.updateSynResults(syn1, syn1Results);
+            cr.updateSynResults(syn2, syn2Results);
+            cr.updateSynResults(syn1, syn1ResultsToOverlap);
+            // {2,4}, {2, 5}, {3, 4} and {3, 5} should be removed
+
+            list<list<int>> actualResults = cr.getAllResults();
+            list<list<int>> expectedResults{ {1, 4}, {1, 5} };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+        }
+
+        TEST_METHOD(TestUpdateSynResults_nonOverlappingResult_success)
+        {
+            ClauseResult cr;
+
+            string syn1 = "a";
+            list<int> syn1Results{ 1, 2, 3 };
+            list<int> syn1ResultsToOverlap{ 9, 10 };
+            string syn2 = "b";
+            list<int> syn2Results{ 4, 5 };
+            cr.updateSynResults(syn1, syn1Results);
+            cr.updateSynResults(syn2, syn2Results);
+            cr.updateSynResults(syn1, syn1ResultsToOverlap);    // Result should be empty
+
+            list<list<int>> actualResults = cr.getAllResults();
+            list<list<int>> expectedResults{};
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+            Assert::IsFalse(cr.hasResults());
+        }
+
+        TEST_METHOD(TestAddNewSynPairResults_nonEmptyExistingResults_success)
+        {
+            ClauseResult cr;
+
+            string syn1 = "a";
+            list<int> syn1Results{ 1, 2 };
+            string syn2 = "b";
+            list<int> syn2Results{ 4, 5, 6 };
+            string syn3 = "c";
+            list<int> syn3Results{ 7, 8, 9 };
+            cr.updateSynResults(syn1, syn1Results);
+            
+            cr.addNewSynPairResults(syn2, syn2Results, syn3, syn3Results);
+            list<list<int>> actualResults = cr.getAllResults();
+            list<list<int>> expectedResults{ { 1, 4, 7 }, { 1, 5, 8 }, { 1, 6, 9 },
+                                             { 2, 4, 7 }, { 2, 5, 8 }, { 2, 6, 9 } };
+            /*********
+            a   b   c
+            ---------
+            1   4   7
+            1   5   8
+            1   6   9
+            2   4   7
+            2   5   8
+            2   6   9
+            **********/
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+        }
+
+        TEST_METHOD(TestAddNewSynPairResults_emptyExistingResults_success)
+        {
+            ClauseResult cr;
+
+            string syn2 = "b";
+            list<int> syn2Results{ 4, 5, 6 };
+            string syn3 = "c";
+            list<int> syn3Results{ 7, 8, 9 };
+
+            cr.addNewSynPairResults(syn2, syn2Results, syn3, syn3Results);
+            list<list<int>> actualResults = cr.getAllResults();
+            list<list<int>> expectedResults{ {4, 7}, {5, 8}, {6, 9} };
+            /*****
+             b   c
+             -----
+             4   7
+             5   8
+             6   9
+             *****/
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
         }
 
         /**************************
-         * Private Helper Methods *
+         * Helper Methods *
          **************************/
         TEST_METHOD(TestJoinTwoVectors_intVector_success)
         {
@@ -201,6 +308,17 @@ namespace UnitTesting
             std::vector<int> expectedVector{ 10, 20 };
             std::vector<int> actualVector = ClauseResultChildForTest::convertPairToVector(oriPair);
             Assert::IsTrue(actualVector == expectedVector);
+        }
+
+        TEST_METHOD(TestPairUpListsResults_success)
+        {
+            list<int> syn1Results{ 1, 2, 3 };
+            list<int> syn2Results{ 2, 3, 4 };
+            list<vector<int>> actualPairedUpResults = ClauseResultChildForTest::pairUpListsResults(syn1Results, syn2Results);
+            list<vector<int>> expectedPairedUpResults{ {1, 2}, {2, 3}, {3, 4} };
+            actualPairedUpResults.sort();
+            expectedPairedUpResults.sort();
+            Assert::IsTrue(actualPairedUpResults == expectedPairedUpResults);
         }
     };
 }

@@ -15,6 +15,8 @@ class ClauseResultChildForTest : public ClauseResult
 public:
     ClauseResultChildForTest();
 
+    static list<vector<int>> pairUpListsResults(list<int> &syn1Results, list<int> &syn2Results);
+
     template<typename T> static vector<T> joinTwoVectors(vector<T> &v1, const vector<T> &v2, int n = 1)
     {
         return ClauseResult::joinTwoVectors(v1, v2, n);
