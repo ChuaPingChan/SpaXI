@@ -45,10 +45,21 @@ namespace UnitTesting
             Assert::IsTrue(list.addToWhileStmtList(4));
             Assert::IsTrue(list.addToWhileStmtList(6));
             Assert::IsTrue(list.addToWhileStmtList(8));
+            Assert::IsTrue(list.addToIfStmtList(9));
 
-            Assert::IsTrue(list.isPresent(8));
-            Assert::IsFalse(list.isPresent(9));
+            Assert::IsTrue(list.isPresent(9));
+            Assert::IsFalse(list.isPresent(10));
         }
+        TEST_METHOD(TestIfElse)
+        {
+            StmtTypeList list;
+            Assert::IsTrue(list.addToIfStmtList(1));
+            Assert::IsTrue(list.addToIfStmtList(4));
+            Assert::IsTrue(list.addToIfStmtList(7));
+            Assert::IsTrue(list.addToIfStmtList(10));
 
+            Assert::IsTrue(list.isIfStmt(7));
+            Assert::IsFalse(list.isIfStmt(8));
+        }
     };
 }

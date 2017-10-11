@@ -75,9 +75,11 @@ public:
     bool isPresent(int stmtNum);
     bool isAssignment(int stmtNum);
     bool isWhile(int stmtNum);
+    bool isIf(int stmtNum);
     list<int> getAllWhiles();
 	list<int> getAllConstants();
 	list<int> getAllStatements();
+    list<int> getAllIfs();
 
 	list<string> getAllVariables();
     
@@ -89,6 +91,7 @@ public:
     bool addProcedure(string proc);
     bool addAssignmentStmt(int stmt);
     bool addWhileStmt(int stmt);
+    bool addIfStmt(int stmt);
     bool addConstant(int stmt, int constant);
     bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);

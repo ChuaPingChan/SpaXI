@@ -91,6 +91,22 @@ bool ModTableVar::addModVarToWhileContainerMap(int varIdx, int stmtNumber)
     return false;
 }
 
+bool ModTableVar::addModVarToIfMap(int varIdx, int stmtNumber)
+{
+    // if stmt number does not exist as a key, create new list and insert data to hash map
+    if (modVarToIfMap.find(varIdx) == modVarToIfMap.end()) {
+        modVarToIfMap[varIdx] = list<int>();
+        modVarToIfMap[varIdx].push_back(stmtNumber);
+        return true;
+    }
+    else {
+        // else, expand the list of variables
+        modVarToIfMap[varIdx].push_back(stmtNumber);
+        return true;
+    }
+    return false;
+}
+
 list<int> ModTableVar::getModStmtsFromVar(int varIdx) {
     return modVarToStmtMap[varIdx];
 }
@@ -113,4 +129,9 @@ list<int> ModTableVar::getModWhileStmtFromVar(int varIdx)
 list<int> ModTableVar::getModWhileContainersFromVar(int varIdx)
 {
     return modVarToWhileContainerMap[varIdx];
+}
+
+list<int> ModTableVar::getModIfFromVar(int varIdx)
+{
+    return modVarToIfMap[varIdx];
 }

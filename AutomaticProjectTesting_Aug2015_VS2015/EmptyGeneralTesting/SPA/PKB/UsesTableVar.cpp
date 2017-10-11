@@ -85,6 +85,22 @@ bool UsesTableVar::addUsesVarToWhileContainerMap(int varIdx, int stmtNumber)
     return false;
 }
 
+bool UsesTableVar::addUsesVarToIfMap(int varIdx, int stmtNumber)
+{
+    // if stmt number does not exist as a key, create new list and insert data to hash map
+    if (usesVarToIfMap.find(varIdx) == usesVarToIfMap.end()) {
+        usesVarToIfMap[varIdx] = list<int>();
+        usesVarToIfMap[varIdx].push_back(stmtNumber);
+        return true;
+    }
+    else {
+        // else, expand the list of variables
+        usesVarToIfMap[varIdx].push_back(stmtNumber);
+        return true;
+    }
+    return false;
+}
+
 list<int> UsesTableVar::getUsesStmtsFromVar(int varIdx) {
     return usesVarToStmtMap[varIdx];
 }
@@ -107,4 +123,9 @@ list<int> UsesTableVar::getUsesWhileStmtFromVar(int varIdx)
 list<int> UsesTableVar::getUsesWhileContainersFromVar(int varIdx)
 {
     return usesVarToWhileContainerMap[varIdx];
+}
+
+list<int> UsesTableVar::getUsesIfFromVar(int varIdx)
+{
+    return usesVarToIfMap[varIdx];
 }
