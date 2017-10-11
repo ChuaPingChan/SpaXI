@@ -4,6 +4,7 @@ const string WithValidator::ATTRIBUTE_STRING[] = {"procName", "stmt#", "stmt#", 
 
 WithValidator::WithValidator(QueryTree *qtPtrNew)
 {
+    this->qtPtr = qtPtrNew;
 }
 
 WithValidator::~WithValidator()
@@ -182,7 +183,7 @@ bool WithValidator::isStringType(Attribute attr)
 bool WithValidator::isLhsSameTypeAsRhs()
 {
     return (isIntegerType(this->lhsAttribute) && isIntegerType(this->rhsAttribute))
-        || (isStringType(this->lhsAttribute) && isStringType(this->lhsAttribute));
+        || (isStringType(this->lhsAttribute) && isStringType(this->rhsAttribute));
 }
 
 Entity WithValidator::getEntityOfSynonym(string syn)
@@ -251,7 +252,7 @@ Attribute WithValidator::getAttributeOfAttrRefAttribute(Entity entity, string at
     else if (entity == VARIABLE && attr == ATTRIBUTE_STRING[VARIABLE_ATTRIBUTE]) {
         return VARIABLE_ATTRIBUTE;
     }
-    else if (entity == CONSTANT && attr == ATTRIBUTE_STRING[CONSTANT]) {
+    else if (entity == CONSTANT && attr == ATTRIBUTE_STRING[CONSTANT_ATTRIBUTE]) {
         return CONSTANT_ATTRIBUTE;
     }
     else {

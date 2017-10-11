@@ -145,3 +145,8 @@ bool UtilityQueryTree::isSameContentAllVariables(unordered_set<string> expectedL
     }
     return true;
 }
+
+bool UtilityQueryTree::isEmptyWithClauseVectorInTree(QueryTree qt)
+{
+    return qt.getWithClauses().empty();
+}

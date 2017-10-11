@@ -173,6 +173,28 @@ bool UtilitySelection::areSamePatternClausesContentAsInTree(vector<PatternClause
 
 
 
+WithClause UtilitySelection::makeWithClause(Attribute lhsAttribute, string lhsValue, Attribute rhsAttribute, string rhsValue)
+{
+    return WithClause(lhsAttribute, lhsValue, rhsAttribute, rhsValue);
+}
+
+WithClause UtilitySelection::getFirstWithClauseFromTree(QueryTree qt)
+{
+    vector<WithClause> wcVector = qt.getWithClauses();
+    return wcVector.front();
+}
+
+bool UtilitySelection::isSameWithClauseContent(WithClause expected, WithClause actual)
+{
+    bool isSameLhsAttribute = expected.getLhsAttribute() == actual.getLhsAttribute();
+    bool isSameRhsAttribute = expected.getRhsAttribute() == actual.getRhsAttribute();
+    bool isSameLhsValue = expected.getLhsValue() == actual.getLhsValue();
+    bool isSameRhsValue = expected.getRhsValue() == actual.getRhsValue();
+
+    return isSameLhsAttribute && isSameRhsAttribute && isSameLhsValue && isSameRhsValue;
+}
+
+
 
 /**********
 * Private *

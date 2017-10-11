@@ -2,6 +2,7 @@
 
 WithHandler::WithHandler(QueryTree * qtPtrNew)
 {
+    this->qtPtr = qtPtrNew;
 }
 
 WithHandler::~WithHandler()
@@ -15,7 +16,7 @@ bool WithHandler::isValidWith(string str)
 
     withValidator.validate(processedStr);
 
-    if (withValidator.isValid() && isMirrorImageLhsAndRhs(withValidator)) {
+    if (withValidator.isValid() && !isMirrorImageLhsAndRhs(withValidator)) {
         WithClause withClause = makeWithClause(withValidator);
         storeInQueryTree(withClause);
         return true;
