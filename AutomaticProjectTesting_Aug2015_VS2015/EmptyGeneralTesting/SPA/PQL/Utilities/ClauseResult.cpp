@@ -49,7 +49,7 @@ list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
 
         list<int> selectedSynCombination;
         selectedSynCombination.clear();
-        
+
         for (list<int>::iterator synIndexPtr = synIndices.begin();
             synIndexPtr != synIndices.end();
             synIndexPtr++)
@@ -65,7 +65,7 @@ list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
 
 /*
 Returns the possible results of the synonyms that satisfy a PQL query.
-If a synonym has no possible values that satisfies the query, 
+If a synonym has no possible values that satisfies the query,
 an empty list will be returned.
 */
 list<int> ClauseResult::getSynonymResults(string synName)
@@ -138,7 +138,7 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     }
 
     vector<int> newSynResults = convertListToVector(newSynResultsList);
-    
+
     // Add to _synList
     _synList.push_back(newSynName);
     int newSynIdx = _synList.size() - 1;
@@ -186,13 +186,11 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
     assert(_synToIdxMap.count(syn1Name) == 0);    // syn1 must be new synonym
     assert(_synToIdxMap.count(syn2Name) == 0);    // syn2 must be new synonym
 
-    // Add to _synList
+    // Add to _synList and _synToIdxMap
     _synList.push_back(syn1Name);
     int syn1Idx = _synList.size() - 1;
     _synList.push_back(syn2Name);
     int syn2Idx = _synList.size() - 1;
-
-    // Add to _synToIdxMap
     _synToIdxMap.insert({ syn1Name, syn1Idx });
     _synToIdxMap.insert({ syn2Name, syn2Idx });
 
@@ -207,30 +205,26 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
         return true;
     }
 
-    int repeatNumber = pairResults.size();
-    list<vector<int>> outdatedResult = _results;
-    _results.clear();
+    list<vector<int>> updatedResults;
+    updatedResults.clear();
 
-    for (list<vector<int>>::iterator combPtr = outdatedResult.begin();
-        combPtr != outdatedResult.end();
-        combPtr++)
+    for (vector<int> existingComb : _results)
     {
-        for (list<vector<int>>::iterator pairResultPtr = pairResults.begin();
-            pairResultPtr != pairResults.end();
-            pairResultPtr++)
+        for (vector<int> pairResult : pairResults)
         {
-            vector<int> newComb = *combPtr;
-            *combPtr = ClauseResult::joinTwoVectors(*combPtr, *pairResultPtr);
-            _results.push_back(newComb);
+            vector<int> newComb = existingComb;
+            newComb = ClauseResult::joinTwoVectors(newComb, pairResult);
+            updatedResults.push_back(newComb);
         }
     }
+    _results = updatedResults;
 
     return true;
 }
 
 bool ClauseResult::addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results)
 {
-    list<vector<int>> pairResults = ClauseResult::convertTwoListsToListOfPairResultVector(syn1Results, syn2Results);
+    list<vector<int>> pairResults = ClauseResult::pairUpListsResults(syn1Results, syn2Results);
     return addNewSynPairResults(syn1Name, syn2Name, pairResults);
 }
 
@@ -242,22 +236,22 @@ is stored as a vector with 2 elements.
 Pre-condition: The two lists given should be of the same length and each element of a list
 should form a pair of valid result with the element with the same order in the other list.
 */
-list<vector<int>> ClauseResult::convertTwoListsToListOfPairResultVector(list<int>& syn1Results, list<int>& syn2Results)
+list<vector<int>> ClauseResult::pairUpListsResults(list<int>& syn1Results, list<int>& syn2Results)
 {
+    assert(syn1Results.size() == syn2Results.size());
+
     list<vector<int>> pairResults;
     pairResults.clear();
 
-    for (list<int>::iterator syn1ResultPtr = syn1Results.begin();
-        syn1ResultPtr != syn1Results.end();
-        syn1ResultPtr++) {
-        for (list<int>::iterator syn2ResultPtr = syn2Results.begin();
-            syn2ResultPtr != syn2Results.end();
-            syn2ResultPtr++) {
-            vector<int> pairResult;
-            pairResult.clear();
-            pairResult.push_back(*syn1ResultPtr);
-            pairResult.push_back(*syn2ResultPtr);
-        }
+    // Simulate zip iterator
+    list<int>::iterator iter1 = syn1Results.begin();
+    list<int>::iterator iter2 = syn2Results.begin();
+    for (; iter1 != syn1Results.end() && iter2 != syn2Results.end(); iter1++, iter2++) {
+        vector<int> pairResult;
+        pairResult.clear();
+        pairResult.push_back(*iter1);
+        pairResult.push_back(*iter2);
+        pairResults.push_back(pairResult);
     }
     return pairResults;
 }
@@ -268,7 +262,7 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
 
     int synIdx = _synToIdxMap.at(synName);
     unordered_set<int> resultsSetToOverlap(synResultsToOverlap.begin(), synResultsToOverlap.end());
-    
+
     list<vector<int>> updatedResults;   // to overwrite _results at the end of this method
 
     for (list<vector<int>>::iterator combPtr = _results.begin();
@@ -294,7 +288,7 @@ bool ClauseResult::removeCombinations(string synName, int value)
     */
 
     int synIdx = _synToIdxMap.at(synName);
-    
+
     list<vector<int>> updatedResult;    // To be assigned to _results at the end of this method
     updatedResult.clear();
     for (list<vector<int>>::iterator combPtr = _results.begin();
@@ -364,5 +358,5 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
 
 bool ClauseResult::hasResults()
 {
-    return _results.empty();
+    return !(_results.empty());
 }
