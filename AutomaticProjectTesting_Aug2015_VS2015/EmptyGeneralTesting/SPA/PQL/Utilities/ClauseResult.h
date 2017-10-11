@@ -21,16 +21,16 @@ public:
     list<int> getSynonymResults(string synNames);   // TODO: Unit testing
     list<pair<int, int>> getSynonymPairResults(string syn1Name, string syn2Name);    // TODO: Unit testing
     list<list<int>> getAllResults();
-    bool synonymPresent(string synName);
-    bool addNewSynResults(string newSynName, list<int> newSynResults);
-    // TODO: Make addNewSynResults do overlapExistingSynResults
-    bool overlapExistingSynResults(string synName, list<int> synResultsToOverlap);
-    bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
-    bool addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults);
-    bool removeCombinations(string synName, int value);
+    bool synonymPresent(string synName);    // TODO: Unit testing
+    bool updateSynResults(string synName, list<int> newSynResults);  // TODO: Unit testing
+    // TODO: Make updateSynResults do overlapExistingSynResults
+    bool overlapExistingSynResults(string synName, list<int> synResultsToOverlap);  // TODO: Unit testing
+    bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);  // TODO: Unit testing
+    bool addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults); // TODO: Unit testing
+    bool removeCombinations(string synName, int value); // TODO: Unit testing
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
     bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);    // TODO: Unit testing
-    bool hasResults();
+    bool hasResults();  // TODO: Unit testing
 
 protected:
     unordered_map<string, int> _synToIdxMap;

@@ -123,18 +123,18 @@ bool ClauseResult::synonymPresent(string synName)
 }
 
 /*
-Adds the results of a new synonym (not present in previous clauses) to all the combinations of existing synonyms.
-
-Pre-conditions:
-- Ensure synonym is not an existing synonym. This can be checked using the synonymPresent() method.
-- Ensure new synonym has non-empty results.
-
-Note: This method involves computing Catesian product - computationally expensive.
+Updates the result of a new or an existing synonym.
+Pre-condition: Ensure new synonym has non-empty results.
+Note: This may method involve computing Catesian product - computationally expensive.
 */
-bool ClauseResult::addNewSynResults(string newSynName, list<int> newSynResultsList)
+bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsList)
 {
     assert(newSynResultsList.size() > 0);       // TODO: Can consider clearing everything if this happens
-    assert(_synToIdxMap.count(newSynName) == 0);    // Must be new synonym
+    if (_synToIdxMap.count(newSynName) == 1)
+    {
+        return overlapExistingSynResults(newSynName, newSynResultsList);
+    }
+
     vector<int> newSynResults = convertListToVector(newSynResultsList);
     
     // Add to _synList

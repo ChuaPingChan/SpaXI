@@ -23,9 +23,9 @@ namespace UnitTesting
             string syn3 = "c";
             list<int> syn3Results{ 7 };
 
-            cr.addNewSynResults(syn1, syn1Results);
-            cr.addNewSynResults(syn2, syn2Results);
-            cr.addNewSynResults(syn3, syn3Results);
+            cr.updateSynResults(syn1, syn1Results);
+            cr.updateSynResults(syn2, syn2Results);
+            cr.updateSynResults(syn3, syn3Results);
 
             list<string> allSynonyms = cr.getAllSynonyms();
             list<string> expectedSynonyms{ syn1, syn2, syn3 };
@@ -44,8 +44,8 @@ namespace UnitTesting
             string stmt2 = "b";
             list<int> stmt2Results{ 4, 5 };
 
-            cr.addNewSynResults("a", stmt1Results);
-            cr.addNewSynResults("b", stmt2Results);
+            cr.updateSynResults("a", stmt1Results);
+            cr.updateSynResults("b", stmt2Results);
             list<list<int>> result = cr.getAllResults();
 
             list<list<int>> expectedResults{ {1,4}, {1,5}, {2,4}, {2,5}, {3,4}, {3,5} };
@@ -62,8 +62,8 @@ namespace UnitTesting
             string stmt2 = "b";
             list<int> stmt2Results{ 6 };
 
-            cr.addNewSynResults("a", stmt1Results);
-            cr.addNewSynResults("b", stmt2Results);
+            cr.updateSynResults("a", stmt1Results);
+            cr.updateSynResults("b", stmt2Results);
             list<list<int>> result = cr.getAllResults();
 
             list<list<int>> expectedResults{ {1,6}, {2,6}, {3,6} };
@@ -80,8 +80,8 @@ namespace UnitTesting
             string stmt2 = "b";
             list<int> stmt2Results{ 1, 2, 3 };
 
-            cr.addNewSynResults("a", stmt1Results);
-            cr.addNewSynResults("b", stmt2Results);
+            cr.updateSynResults("a", stmt1Results);
+            cr.updateSynResults("b", stmt2Results);
             list<list<int>> result = cr.getAllResults();
 
             list<list<int>> expectedResults{ { 6,1 },{ 6,2 },{ 6,3 } };

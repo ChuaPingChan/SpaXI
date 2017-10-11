@@ -42,7 +42,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
         }
         else
         {
-            clauseResult->addNewSynResults(argOne, pkbResult);
+            clauseResult->updateSynResults(argOne, pkbResult);
             return clauseResult->hasResults();
         }
     }
@@ -69,7 +69,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
         }
         else
         {
-            clauseResult->addNewSynResults(argOne, pkbResult);
+            clauseResult->updateSynResults(argOne, pkbResult);
             return clauseResult->hasResults();
         }
     }
@@ -84,7 +84,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
         }
         else
         {
-            clauseResult->addNewSynResults(argOne, pkbResult);
+            clauseResult->updateSynResults(argOne, pkbResult);
             return clauseResult->hasResults();
         }
     }
@@ -99,7 +99,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
         }
         else
         {
-            clauseResult->addNewSynResults(argOne, pkbResult);
+            clauseResult->updateSynResults(argOne, pkbResult);
             return clauseResult->hasResults();
         }
     }
