@@ -57,7 +57,7 @@ list<list<int>> ClauseResult::getSynonymResults(vector<string> synNames)
         result.push_back(selectedSynCombination);
     }
 
-    result = ClauseResult::getUniqueElements(result);
+    result = ClauseResult::getUniqueListElements(result);
     return result;
 }
 
@@ -110,7 +110,7 @@ list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string
 
 list<list<int>> ClauseResult::getAllResults()
 {
-    return ClauseResult::convertVectorOfVectorToListOfLists(_results);
+    return ClauseResult::convertListOfVectorsToListOfLists(_results);
 }
 
 bool ClauseResult::synonymPresent(string synName)
@@ -214,7 +214,7 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, vector
             pairResultPtr++)
         {
             vector<int> newComb = *combPtr;
-            newComb.insert(newComb.end(), (*pairResultPtr).begin(), (*pairResultPtr).end());
+            ClauseResult::joinTwoVectors(*combPtr, *pairResultPtr);
             _results.push_back(newComb);
         }
     }

@@ -18,10 +18,8 @@ public:
 
     list<string> getAllSynonyms();
     list<list<int>> getSynonymResults(vector<string> synNames);
-    // TODO: Implement this
-    list<int> getSynonymResults(string synNames);
-    // TODO: Complete list<pair<int>> getSynonymPairResults(string syn1Name, string syn2Name);
-    list<pair<int,int>> getSynonymPairResults(string syn1Name, string syn2Name);
+    list<int> getSynonymResults(string synNames);   // TODO: Unit testing
+    list<pair<int,int>> getSynonymPairResults(string syn1Name, string syn2Name);    // TODO: Unit testing
     list<list<int>> getAllResults();
     bool synonymPresent(string synName);
     bool addNewSynResults(string newSynName, list<int> newSynResults);
@@ -39,7 +37,7 @@ protected:
     vector<string> _synList;
     list<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
 
-    // TODO: Unit test needed.
+    // TODO: Unit testing
     template<typename T> static list<T> convertVectorToList(vector<T> &v)
     {
         list<T> newList;
@@ -48,8 +46,8 @@ protected:
         return newList;
     }
 
-    // TODO: Unit test needed.
-    template<typename T> static list<list<T>> convertVectorOfVectorToListOfLists(list<vector<T>> &v)
+    // TODO: Unit testing
+    template<typename T> static list<list<T>> convertListOfVectorsToListOfLists(list<vector<T>> &v)
     {
         list<list<T>> newListOfLists;
         newListOfLists.clear();
@@ -62,7 +60,7 @@ protected:
         return newListOfLists;
     }
 
-    // TODO: Unit test needed.
+    // TODO: Unit testing
     template<typename T> static vector<T> convertListToVector(list<T> &listToConvert)
     {
         vector<T> newVector;
@@ -71,15 +69,19 @@ protected:
         return newVector;
     }
 
-    template<typename T> static void appendToVector(vector<T> &v1, const vector<T> &v2, int n)
+    /*
+    Joins v2 to the end of v1 for n number of times.
+    If n is not given, the default value is 1.
+    */
+    template<typename T> static void joinTwoVectors(vector<T> &v1, const vector<T> &v2, int n = 1)
     {
         for (int i = 0; i < n; i++) {
             v1.insert(v1.end(), v2.begin(), v2.end());
         }
     }
 
-    // TODO: Unit test this method
-    template<typename T> static vector<T> getUniqueElements(vector<T> &vec)
+    // TODO: Unit testing
+    template<typename T> static vector<T> getUniqueVectorElements(vector<T> &vec)
     {
         set<T> s(vec.begin(), vec.end());
         vector<T> uniqueVec;
@@ -88,13 +90,12 @@ protected:
         return uniqueVec;
     }
 
-    // TODO: Unit test this method
-    template<typename T> static list<T> getUniqueElements(list<T> &vec)
+    // TODO: Unit testing
+    template<typename T> static list<T> getUniqueListElements(list<T> &l)
     {
-        set<T> s(vec.begin(), vec.end());
-        list<T> uniqueVec;
-        uniqueVec.clear();
-        uniqueVec.assign(s.begin(), s.end());
-        return uniqueVec;
+        list<T> uniqueList(l);
+        uniqueList.sort();
+        uniqueList.unique();
+        return uniqueList;
     }
 };

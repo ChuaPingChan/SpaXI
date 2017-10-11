@@ -22,7 +22,7 @@ namespace UnitTesting
 
             std::vector<int> v2 = v;
             int repeatNum = 10;
-            ClauseResultChildForTest::appendToVector(v, v2, repeatNum);
+            ClauseResultChildForTest::joinTwoVectors(v, v2, repeatNum);
             Assert::IsTrue(v.size() == (repeatNum + 1) * v2.size());
             for (int i = 0; i < v.size(); i++) {
                 if (i % 3 == 0) {
