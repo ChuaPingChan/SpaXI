@@ -312,6 +312,7 @@ namespace UnitTesting
             Assert::IsFalse(parser.assertIsValidExpression("$"));
             Assert::IsFalse(parser.assertIsValidExpression("\n\t\r"));
             Assert::IsTrue(parser.assertIsValidExpression("a+b"));
+            Assert::IsFalse(parser.assertIsValidExpression("a++x"));
             Assert::IsTrue(parser.assertIsValidExpression("a + b  "));
             Assert::IsFalse(parser.assertIsValidExpression("a + 3b  "));
             Assert::IsFalse(parser.assertIsValidExpression("a + a%b  "));
@@ -326,11 +327,16 @@ namespace UnitTesting
             Assert::IsTrue(parser.assertIsValidExpression("a134124 + b/3 * 2  "));
             Assert::IsFalse(parser.assertIsValidExpression(" a = 3 + 4 "));
             Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
+
+            // Brackets
             Assert::IsFalse(parser.assertIsValidExpression("()"));
             Assert::IsTrue(parser.assertIsValidExpression("(a)"));
+            Assert::IsFalse(parser.assertIsValidExpression("x + ("));
+            Assert::IsFalse(parser.assertIsValidExpression("x+a)(b-a"));
+            Assert::IsFalse(parser.assertIsValidExpression("a+(+b)"));
+            Assert::IsFalse(parser.assertIsValidExpression("x+(b-)"));
             Assert::IsTrue(parser.assertIsValidExpression(" (3+4) "));
             Assert::IsFalse(parser.assertIsValidExpression("4(1+2)"));
-            Assert::IsTrue(parser.assertIsValidExpression(" 3 +  4 "));
             Assert::IsTrue(parser.assertIsValidExpression(" ( 3 +  4 ) "));
             Assert::IsFalse(parser.assertIsValidExpression("( 3 +  4 - () )"));
             Assert::IsTrue(parser.assertIsValidExpression(" 4 - 3 * \n\t6\t "));
@@ -338,7 +344,7 @@ namespace UnitTesting
             Assert::IsTrue(parser.assertIsValidExpression("((2) + (4 - 3) * \n\t(6)\t )\t\n"));
             Assert::IsFalse(parser.assertIsValidExpression("((2) + (4 - 3)) * \n\t((6)\t \t\n"));
             Assert::IsFalse(parser.assertIsValidExpression("b + (x+(3+b)) + a (("));
-
+            Assert::IsFalse(parser.assertIsValidExpression("(x+a)(b+c)"));
         }
 
         TEST_METHOD(removeAllWhiteSpacesTest)
