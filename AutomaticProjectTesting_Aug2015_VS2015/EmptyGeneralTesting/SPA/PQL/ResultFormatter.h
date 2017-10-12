@@ -9,11 +9,13 @@ using namespace std;
 
 class ResultFormatter
 {
+
 public:
 	ResultFormatter();
-	list<string> finalResult();
+	list<string> finalResultFromSelection(ClauseResult cr, QueryTree qt);
+
 protected:
-	list<string> resultsFromSelection(ClauseResult cr, QueryTree qt);
-		
+	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
+	list<string> convertListOfListOfIntsToListOfStrings(list<list<int>> listOfInts);
 };
 
