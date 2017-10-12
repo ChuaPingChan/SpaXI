@@ -4,7 +4,7 @@
 
 /*
 This class's sole purpose in life is to allow unit testing
-for the private methods of the Parser class :O
+for the protected methods of the Parser class :O
 
 DO NOT use this class in the real SPA.
 */
