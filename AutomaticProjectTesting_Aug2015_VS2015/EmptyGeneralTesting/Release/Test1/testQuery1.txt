@@ -18,6 +18,16 @@ variable v;
 Select v
 a,b,c,d,i,j
 5000
+None - None
+None
+None
+None
+5000
+aaaa - None
+hello test test
+None
+None
+5000
 1 - Select SingleSynonym Stmt Follows IntInt HaveResult
 stmt s;
 Select s such that Follows(1, 2)
@@ -308,15 +318,15 @@ while w;
 Select w such that Follows(w, _)
 3
 5000
-60 - Select SingleSynonym While Follows SynonymSynonym GetFront HaveResult
+60 - Select SingleSynonym While Follows SynonymSynonym GetFront NoResult
 while w1, w2;
 Select w1 such that Follows(w1, w2)
-None
+none
 5000
-61 - Select SingleSynonym While Follows SynonymSynonym GetBack HaveResult
+61 - Select SingleSynonym While Follows SynonymSynonym GetBack NoResult
 while w1, w2;
 Select w2 such that Follows(w1, w2)
-None
+none
 5000
 62 - Select SingleSynonym While Follows SynonymUnderscore NoResult
 while w;
