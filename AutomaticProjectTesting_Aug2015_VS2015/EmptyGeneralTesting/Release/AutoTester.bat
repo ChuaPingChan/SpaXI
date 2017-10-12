@@ -3,7 +3,7 @@
 echo Welcome to Team 11 AutoTester
 echo ==========================================================
 echo [0] Generate all queries from xls to txt
-::echo [1] Run AutoTester for test 1
+echo [1] Run AutoTester for test 1
 ::echo [2] Run AutoTester for test 2
 ::echo [3] Run AutoTester for test 3
 echo [x] Exit
@@ -37,7 +37,8 @@ goto :main
 :runTest1
 @echo on
 python Test1/QueryGenerator.py
-AutotTester Test1/test1.txt Test1/testQuery1.txt outTest1.xml
+echo Running AutoTester ...
+AutoTester Test1/test1.txt Test1/testQuery1.txt Test1/outTest1.xml
 @echo off
 pause
 cls
@@ -46,7 +47,8 @@ goto :main
 :runTest2
 @echo on
 python Test2/QueryGenerator.py
-AutotTester Test2/test2.txt Test2/testQuery2.txt outTest2.xml
+echo Running AutoTester ...
+AutoTester Test2/test2.txt Test2/testQuery2.txt outTest2.xml
 @echo off
 pause
 cls

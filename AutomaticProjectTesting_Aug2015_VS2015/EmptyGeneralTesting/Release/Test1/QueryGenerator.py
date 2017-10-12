@@ -20,6 +20,8 @@ def main():
 	querySheet4 = workbook['Parent']
 	querySheet5 = workbook['ParentStar']
 	
+	print('Generating Queries ... ')
+	
 	text = ''
 	text += format(querySheet1)
 	text += format(querySheet2)
