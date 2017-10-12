@@ -3,7 +3,8 @@
 #include <string>
 #include <set>
 #include <list>
-#include "QueryTree.h"
+#include "..\QueryTree.h"
+#include "..\Utilities\ClauseResult.h"
 
 using namespace std;
 

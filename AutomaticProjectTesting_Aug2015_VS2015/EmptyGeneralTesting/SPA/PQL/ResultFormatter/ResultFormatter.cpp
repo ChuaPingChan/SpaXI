@@ -1,6 +1,5 @@
 #include "ResultFormatter.h"
-#include "QueryTree.h"
-#include "Utilities\ClauseResult.h"
+
 
 using namespace std;
 
@@ -17,7 +16,7 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 	//Case 1: Select BOOLEAN
 	if (selectionByQuery.getSelectionType()==SELECT_BOOLEAN)
 	{
-		if (!cr.getAllResults().empty()) //If ClauseResult is not empty, BOOLEAN is true
+		if (cr.hasResults()) //If ClauseResult has results, BOOLEAN is true
 		{
 			result.push_back("TRUE");
 		}

@@ -32,6 +32,7 @@
     <ClCompile Include="PQL\Evaluator\SuchThat\ParentEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\ParentStarEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\Pattern\PatternEvaluator.cpp" />
+    <ClCompile Include="PQL\ResultFormatter\ResultFormatter.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResult.cpp" />
     <ClCompile Include="PQL\Validator\Selection\Pattern\PatternHandler.cpp" />
     <ClCompile Include="PQL\Utilities\Formatter.cpp" />
@@ -72,7 +73,6 @@
     <ClCompile Include="PQL\PQLMain.cpp" />
     <ClCompile Include="PQL\Evaluator\QueryEvaluator.cpp" />
     <ClCompile Include="PQL\QueryTree.cpp" />
-    <ClCompile Include="PQL\ResultFormatter.cpp" />
     <ClCompile Include="PQL\Validator\QueryValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SelectionValidator.cpp" />
     <ClCompile Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.cpp" />
@@ -107,6 +107,7 @@
     <ClInclude Include="PQL\Evaluator\SuchThat\ParentEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\SuchThat\ParentStarEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\Pattern\PatternEvaluator.h" />
+    <ClInclude Include="PQL\ResultFormatter\ResultFormatter.h" />
     <ClInclude Include="PQL\Utilities\ClauseResult.h" />
     <ClCompile Include="PQL\Validator\Selection\RelationshipTable\Relationship.cpp" />
     <ClCompile Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.cpp" />
@@ -170,7 +171,6 @@
     <ClInclude Include="PQL\PQLMain.h" />
     <ClInclude Include="PQL\Evaluator\QueryEvaluator.h" />
     <ClInclude Include="PQL\QueryTree.h" />
-    <ClInclude Include="PQL\ResultFormatter.h" />
     <ClInclude Include="PQL\Validator\QueryValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SelectionValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\SuchThatValidator.h" />
