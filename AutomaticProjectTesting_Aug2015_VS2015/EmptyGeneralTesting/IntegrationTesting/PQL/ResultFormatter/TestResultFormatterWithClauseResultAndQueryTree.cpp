@@ -15,7 +15,7 @@ namespace UnitTesting
 	{
 	public:
 
-		TEST_METHOD(TestResultFormatter_SelectionBoolean_ClauseResultNonEmpty_True)
+		TEST_METHOD(TestResultFormatter_SelectBOOLEAN_ClauseResultNonEmpty_True)
 		{
 			QueryTree qt;
 			SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
@@ -29,7 +29,7 @@ namespace UnitTesting
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front()=="TRUE");
 		}
 
-		TEST_METHOD(TestResultFormatter_SelectionBoolean_ClauseResultEmpty_False)
+		TEST_METHOD(TestResultFormatter_SelectBOOLEAN_ClauseResultEmpty_False)
 		{
 			QueryTree qt;
 			SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
@@ -38,6 +38,34 @@ namespace UnitTesting
 			ClauseResult cr;
 			ResultFormatter rf;
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front() == "FALSE");
+		}
+
+		TEST_METHOD(TestResultFormatter_SelectSynonym_ClauseResultEmpty_NoResult_EmptyString)
+		{
+			QueryTree qt;
+			string synonym = "s";
+			SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
+			qt.insertSelect(UtilitySelection::makeSelectClause(SELECT_SINGLE,STMT,synonym));
+			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+			ClauseResult cr;
+			ResultFormatter rf;
+			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).empty());
+		}
+
+		TEST_METHOD(TestResultFormatter_SelectSynonym_ClauseResultNonEmpty_ResultExpected)
+		{
+			QueryTree qt;
+			string synonym = "s";
+			SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
+			qt.insertSelect(UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, synonym));
+			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+			list<int> synonymResult = { 1,2,3 };
+			ClauseResult cr;
+			cr.updateSynResults(synonym, synonymResult);
+			Assert::IsTrue(cr.hasResults());			
+			ResultFormatter rf;
+			list<string> actualResult = rf.finalResultFromSelection(cr, qt);
+		    Assert::IsTrue(actualResult.front() == "1");
 		}
 
 	};

@@ -29,7 +29,12 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 	//Case 2: Select synonym
 	else if (selectionByQuery.getSelectionType() == SELECT_SINGLE)
 	{
-		result = convertListOfIntsToListOfStrings(cr.getSynonymResults(selectionByQuery.getSingleArg()));
+		if (cr.hasResults())
+		{
+			string synonymToGetResultFor = selectionByQuery.getSingleArg();
+			result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
+		}
+	
 	}
 
 	//Case 3: Select tuple

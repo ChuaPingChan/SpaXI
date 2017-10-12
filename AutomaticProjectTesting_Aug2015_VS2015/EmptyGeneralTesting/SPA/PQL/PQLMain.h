@@ -4,7 +4,7 @@
 #include "QueryTree.h"
 #include "Validator\QueryValidator.h"
 #include "Evaluator\QueryEvaluator.h"
-#include "ResultFormatter.h"
+#include "..\PQL\ResultFormatter\ResultFormatter.h"
 
 using namespace std;
 
