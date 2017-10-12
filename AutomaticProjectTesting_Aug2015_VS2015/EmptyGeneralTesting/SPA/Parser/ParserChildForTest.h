@@ -24,6 +24,7 @@ public:
     std::string removeAllWhitespaces(std::string targetString);
     std::string removeAllBrackets(std::string targetString);
     bool isBracketedCorrectly(std::string expression);
+    static std::pair<string, string> splitExpressionLhsRhs(std::string expression);
 
     void parseProgram();
     void parseProcedure();
