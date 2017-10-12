@@ -17,15 +17,15 @@ public:
     ClauseResult();
 
     list<string> getAllSynonyms();
-    list<list<int>> getSynonymResults(list<string> synNames); // TODO: Unit testing
-    list<int> getSynonymResults(string synNames);   // TODO: Unit testing
-    list<pair<int, int>> getSynonymPairResults(string syn1Name, string syn2Name);    // TODO: Unit testing
+    list<list<int>> getSynonymResults(list<string> synNames);
+    list<int> getSynonymResults(string synNames);
+    list<pair<int, int>> getSynonymPairResults(string syn1Name, string syn2Name);
     list<list<int>> getAllResults();
     bool synonymPresent(string synName);
     bool updateSynResults(string synName, list<int> newSynResults);
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
     bool removeCombinations(string synName, int value);
-    bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);    // TODO: Unit testing
+    bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
     bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);
     bool hasResults();
 
@@ -33,7 +33,6 @@ protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
     list<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
-
 
     /******************
      * Helper methods *

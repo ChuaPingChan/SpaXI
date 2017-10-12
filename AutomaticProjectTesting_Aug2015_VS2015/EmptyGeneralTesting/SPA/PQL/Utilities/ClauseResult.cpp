@@ -24,39 +24,30 @@ in the same order.
 The inner list returned represents a combination of the synonyms given. For example,
 if the synonyms 'a', 'b' and 'c' are given as parameters, an inner list of {2, 3, 4}
 means {a=2, b=3, c=4}.
+
+Pre-condition: The list of synonym names given cannot be empty.
 */
 list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
 {
+    assert(!(synNames.empty()));
     list<list<int>> result;
-
-    if (synNames.empty()) {
-        result.clear();
-        return result;
-    }
 
     list<int> synIndices;
     synIndices.clear();
-    for (list<string>::iterator synNamePtr = synNames.begin();
-        synNamePtr != synNames.end();
-        synNamePtr++) {
-        synIndices.push_back(_synToIdxMap.at(*synNamePtr));
+    for (string synName : synNames) {
+        synIndices.push_back(_synToIdxMap.at(synName));
     }
 
     // For each combinations, filter the selected synonyms only.
-    for (list<vector<int>>::iterator combPtr = _results.begin();
-        combPtr != _results.end();
-        combPtr++) {
+    for (vector<int> existingComb : _results) {
+        list<int> selectedSynCombinations;
+        selectedSynCombinations.clear();
 
-        list<int> selectedSynCombination;
-        selectedSynCombination.clear();
-
-        for (list<int>::iterator synIndexPtr = synIndices.begin();
-            synIndexPtr != synIndices.end();
-            synIndexPtr++)
+        for (int synIndex : synIndices)
         {
-            selectedSynCombination.push_back((*combPtr).at(*synIndexPtr));
+            selectedSynCombinations.push_back(existingComb.at(synIndex));
         }
-        result.push_back(selectedSynCombination);
+        result.push_back(selectedSynCombinations);
     }
 
     result = ClauseResult::getUniqueListElements(result);
@@ -70,14 +61,23 @@ an empty list will be returned.
 */
 list<int> ClauseResult::getSynonymResults(string synName)
 {
+    // Construct a list with only one synonym name
     list<string> synNameVec;
     synNameVec.clear();
     synNameVec.push_back(synName);
 
-    list<list<int>> result = getSynonymResults(synNameVec);
-    assert(result.size() == 1);
+    list<list<int>> resultVerticalList = getSynonymResults(synNameVec);
 
-    return *(result.begin());
+    // Put resutls into a single list for the convenience of evaluators
+    list<int> resultHorizontalList;
+    resultHorizontalList.clear();
+    for (list<int> oneResult : resultVerticalList)
+    {
+        assert(oneResult.size() == 1);
+        resultHorizontalList.push_back(oneResult.front());
+    }
+
+    return resultHorizontalList;
 }
 
 list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string syn2Name)
@@ -302,7 +302,7 @@ bool ClauseResult::removeCombinations(string synName, int value)
     /*
     list<vector<int>> updatedResult;    // To be assigned to _results at the end of this method
     updatedResult.clear();
-    
+
     for (vector<int> existingComb : _results)
     {
         if (existingComb.at(synIdx) != value)
