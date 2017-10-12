@@ -31,8 +31,14 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 	{
 		if (cr.hasResults())
 		{
-			string synonymToGetResultFor = selectionByQuery.getSingleArg();
-			result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
+			Entity argType = selectionByQuery.getSingleArgType();
+			if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
+			{
+				string synonymToGetResultFor = selectionByQuery.getSingleArg();
+				result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
+			}
+
+			//To-Do: Mapping of List to String from PKB
 		}
 	
 	}
