@@ -423,16 +423,17 @@ void Parser::parseAssignment() {
 Asserts that an expression is syntactically valid.
 */
 bool Parser::assertIsValidExpression(string expression) {
-    regex REGEX_BRACKETED_ENTITY = regex("\\s*\\(\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*\\)\\s*");
-    regex REGEX_BRACKETED_CONSTANT = regex("\\s*\\(\\s*\\d+\\s*\\)\\s*");
 
+    // Remove outermost bracket (if applicable)
     smatch contentInBracket;
     while (regex_match(expression, contentInBracket, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT)
            && contentInBracket.size() > 1) {
         expression = contentInBracket.str(1);
     }
 
-    // Check for bracket correctness
+    // Check for bracket correctness. Just for redundancy.
+    // Does not guarantee bracketing is correct, just counting.
+    // e.g. "4 ( + 3)" will be evaluated as correct even though it's wrong.
     if (!isBracketedCorrectly(expression)) {
         return false;
     }
@@ -440,8 +441,6 @@ bool Parser::assertIsValidExpression(string expression) {
     // Base case
     if (regex_match(expression, Parser::REGEX_VALID_ENTITY_NAME)
         || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)
-        || regex_match(expression, REGEX_BRACKETED_ENTITY)
-        || regex_match(expression, REGEX_BRACKETED_CONSTANT)
         )
     {
         //OutputDebugString("FINE: Expression is valid.\n");

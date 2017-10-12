@@ -302,6 +302,7 @@ namespace UnitTesting
         TEST_METHOD(assertIsValidExpressionTest)
         {
             ParserChildForTest parser(dummyPkbMainPtr);
+            // TODO: Tidy up, form categories
             Assert::IsTrue(parser.assertIsValidExpression("a"));
             Assert::IsTrue(parser.assertIsValidExpression("1"));
             Assert::IsFalse(parser.assertIsValidExpression(""));
@@ -312,6 +313,7 @@ namespace UnitTesting
             Assert::IsFalse(parser.assertIsValidExpression("$"));
             Assert::IsFalse(parser.assertIsValidExpression("\n\t\r"));
             Assert::IsTrue(parser.assertIsValidExpression("a+b"));
+            Assert::IsFalse(parser.assertIsValidExpression("90a+b"));
             Assert::IsFalse(parser.assertIsValidExpression("a++x"));
             Assert::IsTrue(parser.assertIsValidExpression("a + b  "));
             Assert::IsFalse(parser.assertIsValidExpression("a + 3b  "));
@@ -331,6 +333,7 @@ namespace UnitTesting
             // Brackets
             Assert::IsFalse(parser.assertIsValidExpression("()"));
             Assert::IsTrue(parser.assertIsValidExpression("(a)"));
+            Assert::IsFalse(parser.assertIsValidExpression("a()"));
             Assert::IsFalse(parser.assertIsValidExpression("x + ("));
             Assert::IsFalse(parser.assertIsValidExpression("x+a)(b-a"));
             Assert::IsFalse(parser.assertIsValidExpression("a+(+b)"));
