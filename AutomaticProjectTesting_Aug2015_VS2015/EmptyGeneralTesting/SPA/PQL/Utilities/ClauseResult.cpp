@@ -287,25 +287,48 @@ bool ClauseResult::removeCombinations(string synName, int value)
     it MUST always have at least 1 possible result.
     */
 
-    int synIdx = _synToIdxMap.at(synName);
+    assert(ClauseResult::synonymPresent(synName));
 
+    int synIdx = _synToIdxMap.at(synName);
+    list<vector<int>>::iterator existingResultsIter = _results.begin();
+    while (existingResultsIter != _results.end())
+    {
+        if ((*existingResultsIter).at(synIdx) == value)
+            existingResultsIter = _results.erase(existingResultsIter);
+        else
+            existingResultsIter++;
+    }
+
+    /*
     list<vector<int>> updatedResult;    // To be assigned to _results at the end of this method
     updatedResult.clear();
-    for (list<vector<int>>::iterator combPtr = _results.begin();
-        combPtr != _results.end();
-        combPtr++)
+    
+    for (vector<int> existingComb : _results)
     {
-        if ((*combPtr).at(synIdx) != value) {
-            updatedResult.push_back(*combPtr);
-        }
+        if (existingComb.at(synIdx) != value)
+            updatedResult.push_back(existingComb);
     }
     _results = updatedResult;
+    */
     return true;
 }
 
 bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value)
 {
-    return removeCombinations(syn1Name, syn1Value) && removeCombinations(syn2Name, syn2Value);
+    assert(ClauseResult::synonymPresent(syn1Name));
+    assert(ClauseResult::synonymPresent(syn2Name));
+
+    int syn1Idx = _synToIdxMap.at(syn1Name);
+    int syn2Idx = _synToIdxMap.at(syn2Name);
+    list<vector<int>>::iterator existingResultsIter = _results.begin();
+    while (existingResultsIter != _results.end())
+    {
+        if (((*existingResultsIter).at(syn1Idx) == syn1Value) && ((*existingResultsIter).at(syn2Idx) == syn2Value))
+            existingResultsIter = _results.erase(existingResultsIter);
+        else
+            existingResultsIter++;
+    }
+    return true;
 }
 
 /*
