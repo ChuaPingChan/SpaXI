@@ -2,8 +2,8 @@
 
 from openpyxl import load_workbook
 
-EXCEL_WORKBOOK_PATH = 'QuerySet1.xlsx'
-OUTPUT_FILE_PATH = 'testQuery1.txt'
+EXCEL_WORKBOOK_PATH = 'Test1/QuerySet1.xlsx'
+OUTPUT_FILE_PATH = 'Test1/testQuery1.txt'
 
 INDEX_COLUMN = 'A'
 COMMENT_COLUMN = 'E'
