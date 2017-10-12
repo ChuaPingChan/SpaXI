@@ -173,6 +173,54 @@ bool UtilitySelection::areSamePatternClausesContentAsInTree(vector<PatternClause
 
 
 
+WithClause UtilitySelection::makeWithClause(Attribute lhsAttribute, string lhsValue, Attribute rhsAttribute, string rhsValue)
+{
+    return WithClause(lhsAttribute, lhsValue, rhsAttribute, rhsValue);
+}
+
+WithClause UtilitySelection::getFirstWithClauseFromTree(QueryTree qt)
+{
+    vector<WithClause> wcVector = qt.getWithClauses();
+    return wcVector.front();
+}
+
+bool UtilitySelection::isSameWithClauseContent(WithClause expected, WithClause actual)
+{
+    bool isSameLhsAttribute = expected.getLhsAttribute() == actual.getLhsAttribute();
+    bool isSameRhsAttribute = expected.getRhsAttribute() == actual.getRhsAttribute();
+    bool isSameLhsValue = expected.getLhsValue() == actual.getLhsValue();
+    bool isSameRhsValue = expected.getRhsValue() == actual.getRhsValue();
+
+    return isSameLhsAttribute && isSameRhsAttribute && isSameLhsValue && isSameRhsValue;
+}
+
+bool UtilitySelection::areSameWithClausesContentAsInTree(vector<WithClause> expectedList, QueryTree qt)
+{
+    vector<WithClause> actualList = qt.getWithClauses();
+
+    if (actualList.size() != expectedList.size()) {
+        return false;
+    }
+
+    for (std::vector<WithClause>::iterator iterExpected = expectedList.begin(); iterExpected != expectedList.end(); ++iterExpected) {
+        WithClause expectedWc = *iterExpected;
+
+        std::vector<WithClause>::iterator iterActual = actualList.begin();
+        for (; iterActual != actualList.end(); ++iterActual) {
+            WithClause actualWc = *iterActual;
+            if (isSameWithClauseContent(expectedWc, actualWc)) {
+                break;
+            }
+        }
+
+        if (iterActual == actualList.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 
 /**********
 * Private *

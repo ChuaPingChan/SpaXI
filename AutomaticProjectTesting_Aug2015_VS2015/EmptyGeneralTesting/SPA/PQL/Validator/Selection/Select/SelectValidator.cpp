@@ -15,7 +15,7 @@ SelectValidator::~SelectValidator()
 bool SelectValidator::isValid(string str)
 {
     string selectWithoutKeyword = removeSelectKeyword(str);
-    string processedStr = Formatter::removeAllSpaces(selectWithoutKeyword);
+    string processedStr = Formatter::removeAllSpacesAndTabs(selectWithoutKeyword);
     return isValidSelectBoolean(processedStr) || isValidSelectSingle(processedStr) || isValidSelectTuple(processedStr);
 }
 
@@ -34,13 +34,19 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 {
     if (RegexValidators::isValidSynonymRegex(selectedStr))
     {
-        Entity entity = getEntityOfSynonym(selectedStr);
-        if (!isKnownEntity(entity))
+        try {
+            Entity entity = getEntityOfSynonym(selectedStr);
+            SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
+            storeInQueryTree(sc);
+            return true;
+        }
+        catch (SynonymNotFoundException& snfe) {
+            //TODO: Add to logging
             return false;
-        SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
-        storeInQueryTree(sc);
-        return true;
+        }
+        
     }
+    //TODO: Add support for AttrRef
     return false;
 }
 
@@ -103,30 +109,8 @@ Entity SelectValidator::getEntityOfSynonym(string syn)
     else if (qtPtr->isEntitySynonymExist(syn, STMTLIST)) {
         return STMTLIST;
     }
-    //TODO: Might need another type for UNKNOWN
-    //return UNKNOWN;
-}
-
-bool SelectValidator::isKnownEntity(Entity entity)
-{
-    switch (entity) {
-        case STMT:
-        case ASSIGN:
-        case WHILE:
-        case IF:
-        case PROG_LINE:
-        case CALL:
-        case PROCEDURE:
-        case VARIABLE:
-        case INTEGER:
-        case UNDERSCORE:
-        case IDENT_WITHQUOTES:
-        case EXPRESSION_SPEC:
-        case CONSTANT:
-        case STMTLIST:
-            return true;
-        default:
-            return false;
+    else {
+        throw SynonymNotFoundException("Inside SelectValidator, when calling getEntityOfSynonym()");
     }
 }
 

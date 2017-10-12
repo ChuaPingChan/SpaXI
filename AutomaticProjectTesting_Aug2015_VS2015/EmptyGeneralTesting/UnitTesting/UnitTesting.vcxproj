@@ -163,7 +163,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exception\TestSynonymNotFoundExxception.cpp" />
+    <ClCompile Include="Exception\TestExceptionAttributeNotFound.cpp" />
+    <ClCompile Include="Exception\TestExceptionSynonymNotFound.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexFollows.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexModifies.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="TestPatternTable.cpp" />
     <ClCompile Include="TestPKBMain.cpp" />
     <ClCompile Include="TestRegexCalls.cpp" />
+    <ClCompile Include="TestRegexNext.cpp" />
     <ClCompile Include="TestRelationshipTable.cpp" />
     <ClCompile Include="TestStmtTypeList.cpp" />
     <ClCompile Include="TestUsesTableStmtToVar.cpp" />

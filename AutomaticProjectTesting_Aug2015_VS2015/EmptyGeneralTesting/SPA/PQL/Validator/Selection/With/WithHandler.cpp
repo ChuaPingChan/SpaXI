@@ -2,6 +2,7 @@
 
 WithHandler::WithHandler(QueryTree * qtPtrNew)
 {
+    this->qtPtr = qtPtrNew;
 }
 
 WithHandler::~WithHandler()
@@ -10,19 +11,28 @@ WithHandler::~WithHandler()
 
 bool WithHandler::isValidWith(string str)
 {
-    string processedStr = Formatter::removeAllSpaces(str);
+    string processedStr = Formatter::removeAllSpacesAndTabs(str);
     WithValidator withValidator = WithValidator(qtPtr);
+
     withValidator.validate(processedStr);
 
-    if (withValidator.isValid()) {
+    if (withValidator.isValid() && !isExactlySameLhsAndRhs(withValidator)) {
         WithClause withClause = makeWithClause(withValidator);
         storeInQueryTree(withClause);
         return true;
+    }
+    else if (withValidator.isValid() && isExactlySameLhsAndRhs(withValidator)) {
+        return true;    //Drop the making of clause as optimisation
     }
     else
     {
         return false;
     }
+}
+
+bool WithHandler::isExactlySameLhsAndRhs(WithValidator wv)
+{
+    return (wv.getLhsAttribute() == wv.getRhsAttribute() && wv.getLhsValue() == wv.getRhsValue());
 }
 
 WithClause WithHandler::makeWithClause(WithValidator withValidator)

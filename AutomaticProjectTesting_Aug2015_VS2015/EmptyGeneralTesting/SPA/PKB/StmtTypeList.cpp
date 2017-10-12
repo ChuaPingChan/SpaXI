@@ -33,6 +33,16 @@ bool StmtTypeList::addToCallsStmtList(int stmt) {
 	return false;
 }
 
+bool StmtTypeList::addToIfStmtList(int stmt)
+{
+    if (find(ifStmtList.begin(), ifStmtList.end(), stmt) == ifStmtList.end()) {
+        ifStmtList.push_back(stmt);
+        allStmtList.push_back(stmt);
+        return true;
+    }
+    return false;
+}
+
 list<int> StmtTypeList::getAllStatements() {
 	return allStmtList;
 }
@@ -54,7 +64,12 @@ bool StmtTypeList::isCallsStmt(int stmt)
 
 bool StmtTypeList::isPresent(int stmt)
 {
-    return stmt <= assignStmtList.size() + whileStmtList.size();
+    return stmt <= assignStmtList.size() + whileStmtList.size() + callsStmtList.size() + ifStmtList.size();
+}
+
+bool StmtTypeList::isIfStmt(int stmt)
+{
+    return find(ifStmtList.begin(), ifStmtList.end(), stmt) != ifStmtList.end();;
 }
 
 list<int> StmtTypeList::getAssignStmtList()
@@ -67,7 +82,12 @@ list<int> StmtTypeList::getWhileStmtList()
     return whileStmtList;
 }
 
-list<int> StmtTypeList::addToCallsStmtList()
+list<int> StmtTypeList::getIfStmtList()
+{
+    return ifStmtList;
+}
+
+list<int> StmtTypeList::getCallsStmtList()
 {
 	return callsStmtList;
 }
@@ -97,7 +117,14 @@ list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
                 filteredList.push_back(*it);
             }
         }
-        else if (type == STMT)
+        else if (type == IF)
+        {
+            if (isIfStmt(*it))
+            {
+                filteredList.push_back(*it);
+            }
+        }
+        else
         {
             filteredList.push_back(*it);
         }
@@ -136,11 +163,16 @@ pair<list<int>, list<string>> StmtTypeList::getStmtType(pair<list<int>, list<str
                 filteredListOfPairs.push_back(*it);
             }
         }
+        else if (type == IF)
+        {
+            if (isIfStmt(it->first)) {
+                filteredListOfPairs.push_back(*it);
+            }
+        }
         else if (type == STMT)
         {
             filteredListOfPairs.push_back(*it);
         }
-		//TODO 1 add if
     }
     // convert back to pair of lists
     list<int> resultStmts;

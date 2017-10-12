@@ -19,5 +19,6 @@ public:
     static bool isSameContentAllCalls(unordered_set<string> expectedList, QueryTree qt);
     static bool isSameContentAllProcedures(unordered_set<string> expectedList, QueryTree qt);
     static bool isSameContentAllVariables(unordered_set<string> expectedList, QueryTree qt);
-    
+
+    static bool isEmptyWithClauseVectorInTree(QueryTree qt);
 };

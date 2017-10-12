@@ -12,7 +12,7 @@ SuchThatHandler::~SuchThatHandler()
 
 bool SuchThatHandler::isValidSuchThat(string str)
 {
-    string processedStr = Formatter::removeAllSpaces(str);
+    string processedStr = Formatter::removeAllSpacesAndTabs(str);
     string relStr = getSuchThatKeyWord(processedStr);
     int rel = getRelIndex(relStr);
 
@@ -43,13 +43,13 @@ bool SuchThatHandler::isValidSuchThat(string str)
         case CALLSSTAR:
             suchThatValidator = new CallsValidator(CALLSSTAR, processedStr, qtPtr);
             break;
-     /* case NEXT:
+        case NEXT:
             suchThatValidator = new NextValidator(NEXT, processedStr, qtPtr);
             break;
         case NEXTSTAR:
             suchThatValidator = new NextValidator(NEXTSTAR, processedStr, qtPtr);
             break;
-        case AFFECTS:
+     /* case AFFECTS:
             suchThatValidator = new AffectsValidator(AFFECTS, processedStr, qtPtr);
             break;
         case AFFECTSSTAR:

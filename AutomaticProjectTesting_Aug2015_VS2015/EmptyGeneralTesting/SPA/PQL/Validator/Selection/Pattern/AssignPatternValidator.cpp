@@ -83,7 +83,7 @@ string AssignPatternValidator::extractArgOne(string str)
     string delimFirst = "(";
     string delimSecond = ",";
 
-    return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
+    return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
 }
 
 string AssignPatternValidator::extractArgTwo(string str)
@@ -91,5 +91,5 @@ string AssignPatternValidator::extractArgTwo(string str)
     string delimFirst = ",";
     string delimSecond = ")";
 
-    return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
+    return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
 }

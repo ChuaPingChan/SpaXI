@@ -12,7 +12,7 @@ PatternHandler::~PatternHandler()
 
 bool PatternHandler::isValidPattern(string str)
 {
-    string processedStr = Formatter::removeAllSpaces(str);
+    string processedStr = Formatter::removeAllSpacesAndTabs(str);
     string patternSyn = extractPatternSynonym(processedStr);
     PatternType patternType = getPatternType(patternSyn);
 
@@ -68,7 +68,7 @@ string PatternHandler::extractPatternSynonym(string str)
     string delimFirst = "";
     string delimSecond = "(";
 
-    return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
+    return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
 }
 
 PatternClause PatternHandler::makePatternClause(PatternValidator pv)

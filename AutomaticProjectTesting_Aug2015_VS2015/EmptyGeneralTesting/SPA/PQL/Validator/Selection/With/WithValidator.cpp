@@ -4,6 +4,7 @@ const string WithValidator::ATTRIBUTE_STRING[] = {"procName", "stmt#", "stmt#", 
 
 WithValidator::WithValidator(QueryTree *qtPtrNew)
 {
+    this->qtPtr = qtPtrNew;
 }
 
 WithValidator::~WithValidator()
@@ -15,17 +16,21 @@ void WithValidator::validate(string str)
     string lhs = extractLhs(str);
     string rhs = extractRhs(str);
 
-    if (isValidLhs(lhs) && isValidRhs(rhs))
+    if (isValidLhs(lhs) && isValidRhs(rhs) && isLhsSameTypeAsRhs())
     {
-
+        if (lhsAttribute == INTEGER_ATTRIBUTE && rhsAttribute == INTEGER_ATTRIBUTE && lhsValue!=rhsValue)
+        {
+            this->validity = false;
+        }
+        else
+        {
+            this->validity = true;
+        }
     }
-
-    if (lhs == rhs) //TODO: Think where to put this code, i cannt return true immediately cos synonym may nt be in tree
+    else
     {
-        this->validity = true;
+        this->validity = false;
     }
-
-    
 }
 
 bool WithValidator::isValid()
@@ -67,19 +72,21 @@ bool WithValidator::isValidLhs(string lhs)
 {
     if (RegexValidators::isValidAttrRefRegex(lhs))
     {
-        //TODO: Need check with tree wad entity is this
-        //See can the entity have attribute or nt
         string attrRefSynonymStr = getAttrRefSynonymStr(lhs);
         string attrRefAttributeStr = getAttrRefAttributeStr(lhs);
-        Entity entity;
-        Attribute attribute;
         try {
-            entity = getEntityOfSynonym(attrRefSynonymStr);
-            attribute = getAttributeOfAttrRefAttribute(entity, attrRefAttributeStr);
+            Entity entity = getEntityOfSynonym(attrRefSynonymStr);
+            Attribute attribute = getAttributeOfAttrRefAttribute(entity, attrRefAttributeStr);
             this->lhsAttribute = attribute;
             this->lhsValue = attrRefSynonymStr;
+            return true;
         }
-        catch (exception& e) {
+        catch (SynonymNotFoundException& snfe) {
+            //TODO: Log msg from snfe.what()
+            return false;
+        }
+        catch (AttributeNotFoundException& anfe) {
+            //TODO: Log msg from anfe.what()
             return false;
         }
     }
@@ -111,9 +118,72 @@ bool WithValidator::isValidLhs(string lhs)
     }
 }
 
-bool WithValidator::isValidRhs(string str)
+bool WithValidator::isValidRhs(string rhs)
 {
-    return false;
+    if (RegexValidators::isValidAttrRefRegex(rhs))
+    {
+        string attrRefSynonymStr = getAttrRefSynonymStr(rhs);
+        string attrRefAttributeStr = getAttrRefAttributeStr(rhs);
+        try {
+            Entity entity = getEntityOfSynonym(attrRefSynonymStr);
+            Attribute attribute = getAttributeOfAttrRefAttribute(entity, attrRefAttributeStr);
+            this->rhsAttribute = attribute;
+            this->rhsValue = attrRefSynonymStr;
+            return true;
+        }
+        catch (SynonymNotFoundException& snfe) {
+            //TODO: Log msg from snfe.what()
+            return false;
+        }
+        catch (AttributeNotFoundException& anfe) {
+            //TODO: Log msg from anfe.what()
+            return false;
+        }
+    }
+    else if (RegexValidators::isValidIntegerRegex(rhs))
+    {
+        this->rhsAttribute = INTEGER_ATTRIBUTE;
+        this->rhsValue = rhs;
+        return true;
+    }
+    else if (RegexValidators::isValidIdentWithQuotesRegex(rhs))
+    {
+        this->rhsAttribute = IDENT_WITH_QUOTES_ATTRIBUTE;
+        string processedrhs = Formatter::removeAllQuotes(rhs);
+        this->rhsValue = processedrhs;
+        return true;
+    }
+    else if (RegexValidators::isValidSynonymRegex(rhs))
+    {
+        if (qtPtr->isEntitySynonymExist(rhs, PROG_LINE))
+        {
+            this->rhsAttribute = PROG_LINE_ATTRIBUTE;
+            this->rhsValue = rhs;
+            return true;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool WithValidator::isIntegerType(Attribute attr)
+{
+    return (attr == STMT_ATTRIBUTE || attr == ASSIGN_ATTRIBUTE || attr == CALL_STMT_ATTRIBUTE
+            || attr == WHILE_ATTRIBUTE || attr == IF_ATTRIBUTE || attr == CONSTANT_ATTRIBUTE
+            || attr == PROG_LINE_ATTRIBUTE || attr == INTEGER_ATTRIBUTE);
+}
+
+bool WithValidator::isStringType(Attribute attr)
+{
+    return (attr == PROCEDURE_ATTRIBUTE || attr == CALL_PROC_ATTRIBUTE || attr == VARIABLE_ATTRIBUTE || attr == IDENT_WITH_QUOTES_ATTRIBUTE);
+}
+
+bool WithValidator::isLhsSameTypeAsRhs()
+{
+    return (isIntegerType(this->lhsAttribute) && isIntegerType(this->rhsAttribute))
+        || (isStringType(this->lhsAttribute) && isStringType(this->rhsAttribute));
 }
 
 Entity WithValidator::getEntityOfSynonym(string syn)
@@ -152,7 +222,7 @@ Entity WithValidator::getEntityOfSynonym(string syn)
     }
     else
     {
-        throw exception("Synonym Does Not exist in tree");  //TODO: Create own exception
+        throw SynonymNotFoundException("In WithValidator.cpp, when calling getEntityOfSynonym(). Synonym cannot be found in the QueryTree and no Entity can be assigned.");
     }
 }
 
@@ -182,11 +252,11 @@ Attribute WithValidator::getAttributeOfAttrRefAttribute(Entity entity, string at
     else if (entity == VARIABLE && attr == ATTRIBUTE_STRING[VARIABLE_ATTRIBUTE]) {
         return VARIABLE_ATTRIBUTE;
     }
-    else if (entity == CONSTANT && attr == ATTRIBUTE_STRING[CONSTANT]) {
+    else if (entity == CONSTANT && attr == ATTRIBUTE_STRING[CONSTANT_ATTRIBUTE]) {
         return CONSTANT_ATTRIBUTE;
     }
     else {
-        throw exception("Attribute does not exist");
+        throw AttributeNotFoundException("In WithValidator.cpp, when calling getAttributeOfAttrRefAttribute(). Attribute does not match defined attribute or Entity does not have that attribute");
     }
 }
 

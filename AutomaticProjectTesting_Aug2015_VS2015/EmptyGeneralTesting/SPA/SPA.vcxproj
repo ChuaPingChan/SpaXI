@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Exceptions\AttributeNotFoundException.cpp" />
     <ClCompile Include="Exceptions\SynonymNotFoundException.cpp" />
     <ClCompile Include="PKB\CallsMap.cpp" />
     <ClCompile Include="PKB\CallsTable.cpp" />
@@ -87,6 +88,7 @@
     <ClCompile Include="PQL\Validator\Selection\With\WithValidator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exceptions\AttributeNotFoundException.h" />
     <ClInclude Include="PKB\CallsMap.h" />
     <ClInclude Include="PKB\CallsTable.h" />
     <ClInclude Include="PQL\Evaluator\ClauseEvaluator.h" />
@@ -111,6 +113,7 @@
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
     <ClCompile Include="PQL\Validator\Selection\Select\SelectValidator.cpp" />
     <ClInclude Include="PQL\Utilities\WithClause.h" />
+    <ClInclude Include="PQL\Validator\Selection\SuchThat\NextValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\With\WithHandler.h" />
     <ClInclude Include="PQL\Validator\Selection\With\WithValidator.h" />
     <ClInclude Include="Exceptions\SynonymNotFoundException.h" />
@@ -125,7 +128,6 @@
     <ClInclude Include="PQL\Validator\Selection\SuchThat\AffectsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\CallsValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\FollowsValidator.h" />
-    <ClInclude Include="PQL\Validator\Selection\SuchThat\NextValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\ParentValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\Pattern\IfPatternValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\Pattern\PatternValidator.h" />

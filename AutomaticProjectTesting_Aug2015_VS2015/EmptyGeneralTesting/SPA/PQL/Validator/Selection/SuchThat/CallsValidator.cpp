@@ -33,7 +33,7 @@ bool CallsValidator::isValid()
     return this->validity;
 }
 
-bool CallsValidator::isValidArgOne(string argOne)
+bool CallsValidator::isValidArgOne(string &argOne)
 {
     if (qtPtr->isEntitySynonymExist(argOne, PROCEDURE))
     {
@@ -43,6 +43,7 @@ bool CallsValidator::isValidArgOne(string argOne)
 
     else if (RegexValidators::isValidIdentWithQuotesRegex(argOne))
     {
+        argOne = Formatter::removeAllQuotes(argOne);
         this->argOneType = IDENT_WITHQUOTES;
         return true;
     }
@@ -59,7 +60,7 @@ bool CallsValidator::isValidArgOne(string argOne)
     }
 }
 
-bool CallsValidator::isValidArgTwo(string argTwo)
+bool CallsValidator::isValidArgTwo(string &argTwo)
 {
     if (qtPtr->isEntitySynonymExist(argTwo, PROCEDURE))
     {
@@ -69,6 +70,7 @@ bool CallsValidator::isValidArgTwo(string argTwo)
 
     else if (RegexValidators::isValidIdentWithQuotesRegex(argTwo))
     {
+        argTwo = Formatter::removeAllQuotes(argTwo);
         this->argTwoType = IDENT_WITHQUOTES;
         return true;
     }

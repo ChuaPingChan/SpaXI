@@ -170,6 +170,8 @@
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatCalls.cpp" />
     <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternWhile.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatCallsStar.cpp" />
+    <ClCompile Include="PQL\Validator\SuchThat\TestValidationSUchThatNext.cpp" />
+    <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatNextStar.cpp" />
     <ClCompile Include="PQL\Validator\TestValidationDeclarationAndTree.cpp" />
     <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternAssign.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatFollows.cpp" />
@@ -179,6 +181,7 @@
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatParentStar.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatUses.cpp" />
     <ClCompile Include="PQL\Validator\TestValidationQuery.cpp" />
+    <ClCompile Include="PQL\Validator\With\TestValidationWith.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

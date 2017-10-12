@@ -91,7 +91,7 @@ string IfPatternValidator::extractArgOne(string str)
     string delimFirst = "(";
     string delimSecond = ",";
 
-    return Formatter::getBetweenTwoStrings(str, delimFirst, delimSecond);
+    return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
 }
 
 string IfPatternValidator::extractArgTwo(string str)
@@ -99,7 +99,7 @@ string IfPatternValidator::extractArgTwo(string str)
     string delimFirst = ",";
     string delimSecond = ",";
 
-    return Formatter::getBetweenTwoStrings(str, delimFirst, 1, delimSecond, 1);
+    return Formatter::getBetweenTwoDelims(str, delimFirst, 1, delimSecond, 1);
 }
 
 string IfPatternValidator::extractArgThree(string str)
@@ -107,5 +107,5 @@ string IfPatternValidator::extractArgThree(string str)
     string delimFirst = ",";
     string delimSecond = ")";
 
-    return Formatter::getBetweenTwoStrings(str, delimFirst, 2, delimSecond, 1);
+    return Formatter::getBetweenTwoDelims(str, delimFirst, 2, delimSecond, 1);
 }
