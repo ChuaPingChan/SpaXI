@@ -171,6 +171,54 @@ namespace UnitTesting
 
         }
 
+        TEST_METHOD(regexExtractBracketWrappedContent)
+        {
+            std::string targetString, expectedString, actualString;
+            std::smatch match;
+
+            targetString = "(abcd)";
+            expectedString = "abcd";
+            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT));
+            actualString = match.str(1);
+            Assert::IsTrue(actualString == expectedString);
+
+            targetString = "(a + 2 * 3)";
+            expectedString = "a + 2 * 3";
+            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT));
+            actualString = match.str(1);
+            Assert::IsTrue( actualString == expectedString);
+
+            targetString = "((a + 2 * 3))";
+            expectedString = "(a + 2 * 3)";
+            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT));
+            actualString = match.str(1);
+            Assert::IsTrue(actualString == expectedString);
+
+            targetString = "\t ((a + 2 * 3)) \t\r";
+            expectedString = "(a + 2 * 3)";
+            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT));
+            actualString = match.str(1);
+            Assert::IsTrue(actualString == expectedString);
+
+            targetString = "((a + 2) * 3)";
+            expectedString = "(a + 2) * 3";
+            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT));
+            actualString = match.str(1);
+            Assert::IsTrue(actualString == expectedString);
+
+            targetString = "(a + (2 * 3))";
+            expectedString = "a + (2 * 3)";
+            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT));
+            actualString = match.str(1);
+            Assert::IsTrue(actualString == expectedString);
+
+            targetString = "((a + b) + (2 * 3))";
+            expectedString = "(a + b) + (2 * 3)";
+            Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT));
+            actualString = match.str(1);
+            Assert::IsTrue(actualString == expectedString);
+        }
+
         TEST_METHOD(getNextTokenTest_matchTokenTest_assertMatchAndIncrTokenTest)
         {
             // Set up
@@ -311,13 +359,16 @@ namespace UnitTesting
             Assert::IsFalse(parser.assertIsValidExpression("()"));
             Assert::IsTrue(parser.assertIsValidExpression("(a)"));
             Assert::IsTrue(parser.assertIsValidExpression(" (3+4) "));
+            Assert::IsFalse(parser.assertIsValidExpression("4(1+2)"));
             Assert::IsTrue(parser.assertIsValidExpression(" 3 +  4 "));
             Assert::IsTrue(parser.assertIsValidExpression(" ( 3 +  4 ) "));
             Assert::IsFalse(parser.assertIsValidExpression("( 3 +  4 - () )"));
             Assert::IsTrue(parser.assertIsValidExpression(" 4 - 3 * \n\t6\t "));
             Assert::IsTrue(parser.assertIsValidExpression("3 * \n\t6\t "));
-            Assert::IsTrue(parser.assertIsValidExpression("((2) + (4 - 3) * \n\t(6)\t )\t\n"));
+            /*Assert::IsTrue(parser.assertIsValidExpression("((2) + (4 - 3) * \n\t(6)\t )\t\n"));
             Assert::IsFalse(parser.assertIsValidExpression("((2) + (4 - 3)) * \n\t((6)\t \t\n"));
+            Assert::IsFalse(parser.assertIsValidExpression("b + (x+(3+b)) + a (("));*/
+
         }
 
         TEST_METHOD(removeAllWhiteSpacesTest)

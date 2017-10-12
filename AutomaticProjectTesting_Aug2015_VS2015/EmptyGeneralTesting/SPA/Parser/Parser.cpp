@@ -35,9 +35,12 @@ const regex Parser::REGEX_MATCH_CLOSE_BRACKET = regex("\\s*\\)\\s*");
 const regex Parser::REGEX_MATCH_SEMICOLON = regex("\\s*;\\s*");
 
 // Char sequence to match should be a statement up to but not including semicolon.
-const regex Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|\\d+)\\s*[+\\-*/]\\s*([a-zA-Z0-9][a-zA-Z0-9+\\-*/\\s]*[a-zA-z0-9]|[a-zA-Z0-9]+)\\s*");
+// expr = [synonym | digits]   [+-*/]  [expr | synonym | digits]
+const regex Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS = regex("\\s*([a-zA-Z(][a-zA-Z0-9()]*|[\\d(][\\d()]*)\\s*[+\\-*/]\\s*([a-zA-Z0-9(][a-zA-Z0-9()+\\-*/\\s]*[a-zA-z0-9)]|[a-zA-Z0-9])\\s*");
 // Does not confirm the whole expression is valid. Only checks for: [item1][add/minus/times/divide][item2] OR [item1]
-const regex Parser::REGEX_VALID_EXPRESSION = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|\\d+)\\s*[+\\-*/]\\s*([a-zA-z][ a-zA-Z0-9+\\-*/]*)\\s*");
+//const regex Parser::REGEX_VALID_EXPRESSION = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|\\d+)\\s*[+\\-*/]\\s*([a-zA-z][ a-zA-Z0-9+\\-*/]*)\\s*");
+// To extract contents within a wrapping outside bracket. Having outside bracket is assumed.
+const regex Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT = regex("\\s*\\(([^()]+|[^()]*\\(.+\\)[^()]*)\\)\\s*");
 
 const regex Parser::REGEX_MATCH_EQUAL = regex("\\s*=\\s*");
 const regex Parser::REGEX_VALID_OPERATOR = regex("\\s*[+\\-*/]\\s*");
@@ -425,17 +428,26 @@ void Parser::parseAssignment() {
 Asserts that an expression is syntactically valid.
 */
 bool Parser::assertIsValidExpression(string expression) {
-    //OutputDebugString("FINE: Validating expression...\n");
+    regex REGEX_BRACKETED_ENTITY = regex("\\s*\\(\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*\\)\\s*");
+    regex REGEX_BRACKETED_CONSTANT = regex("\\s*\\(\\s*\\d+\\s*\\)\\s*");
+
+    smatch contentInBracket;
+    while (regex_match(expression, contentInBracket, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT)
+           && contentInBracket.size() > 1) {
+        expression = contentInBracket.str(1);
+    }
 
     // Check for bracket correctness
-    string whitespacesRemoved = removeAllWhitespaces(expression);
-    if (!isBracketedCorrectly(whitespacesRemoved)) {
+    if (!isBracketedCorrectly(expression)) {
         return false;
     }
 
-    string bracketsRemoved = removeAllBrackets(expression);
     // Base case
-    if (regex_match(bracketsRemoved, Parser::REGEX_VALID_ENTITY_NAME) || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)) {
+    if (regex_match(expression, Parser::REGEX_VALID_ENTITY_NAME)
+        || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)
+        || regex_match(expression, REGEX_BRACKETED_ENTITY)
+        || regex_match(expression, REGEX_BRACKETED_CONSTANT)
+        ) {
         //OutputDebugString("FINE: Expression is valid.\n");
         return true;
     }
@@ -443,7 +455,7 @@ bool Parser::assertIsValidExpression(string expression) {
     smatch match;
     string leftExpression;
     string rightExpression;
-    if (regex_match(bracketsRemoved, match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS) && match.size() > 2) {
+    if (regex_match(expression, match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS) && match.size() > 2) {
         leftExpression = match.str(1);
         rightExpression = match.str(2);
     } else {
@@ -454,6 +466,37 @@ bool Parser::assertIsValidExpression(string expression) {
     }
     return assertIsValidExpression(leftExpression) && assertIsValidExpression(rightExpression);
 }
+
+/*
+Splits an expression into two parts, namely the left expression and right expression.
+For example,
+"3 + 3 - 2"         ==> "3" and "3 - 2"
+"(2 + 3) + 6 - 7"   ==> "(2 + 3)" and "6 - 7"
+"2 + (6 - 7)"       ==> "2" and "(6 - 7)"
+"(2 + 3) + (6 - 7)" ==> "(2 + 3)" and "(6 - 7)"
+*/
+//std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
+//{
+//    /*
+//    CASE 1:
+//    When the left expression has no brackets. E.g "2 + (10 * 3)", "2 + 10"
+//
+//    CASE 2:
+//    When the left expression is bracketed. E.g. "(2 + 3) + 4", "(2 + 3) + (4 + 10)"
+//    */
+//    smatch match;
+//    string leftExpression;
+//    string rightExpression;
+//    if (regex_match(expression, match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS) && match.size() > 2) {
+//        leftExpression = match.str(1);
+//        rightExpression = match.str(2);
+//    } else {
+//        _isValidSyntax = false;
+//        OutputDebugString("WARNING: Invalid Expression.\n");
+//        // TODO: Throw exception?
+//        return false;
+//    }
+//}
 
 /*
 Removes all the whitespace in a given string
