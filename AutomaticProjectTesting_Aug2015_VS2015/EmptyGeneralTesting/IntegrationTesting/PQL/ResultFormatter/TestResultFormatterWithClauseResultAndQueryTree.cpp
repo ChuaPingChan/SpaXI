@@ -63,9 +63,10 @@ namespace UnitTesting
 			ClauseResult cr;
 			cr.updateSynResults(synonym, synonymResult);
 			Assert::IsTrue(cr.hasResults());			
+			list<string> expectedResult = { "1","2","3" };
 			ResultFormatter rf;
 			list<string> actualResult = rf.finalResultFromSelection(cr, qt);
-		    Assert::IsTrue(actualResult.front() == "1");
+		    Assert::IsTrue(actualResult == expectedResult);
 		}
 
 	};
