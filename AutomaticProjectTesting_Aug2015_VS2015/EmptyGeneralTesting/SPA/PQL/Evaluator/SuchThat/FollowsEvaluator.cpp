@@ -42,7 +42,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResults(argOne, pkbResult);
+			clauseResult->updateSynResults(argOne, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}
@@ -69,7 +69,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResults(argOne, pkbResult);
+			clauseResult->updateSynResults(argOne, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}
@@ -84,7 +84,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResults(argOne, pkbResult);
+			clauseResult->updateSynResults(argOne, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}
@@ -99,7 +99,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->addNewSynResults(argOne, pkbResult);
+			clauseResult->updateSynResults(argOne, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}
@@ -151,42 +151,48 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		{
 			if (argOneExists && !argTwoExists)
 			{
-				list<int> existingVals = clauseResult->getSynonymResults(argOne);
+                string existingSyn = argOne;
+                Entity existingSynType = argOneType;
+                string newSyn = argTwo;
 
-				for (int i : existingVals)
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+                resultPairs.clear();
+				for (int existingSynVal : existingSynVals)
 				{
-					// Removes if it is no longer valid, else adding new synonym to existing result
-					list<int> argTwoVals = pkbInstance->getAfter(i, argOneType);
-					if (argTwoVals.empty())
-					{
-						clauseResult->removeCombinations(argOne, i);
-					}
-					else
-					{
-						clauseResult->pairWithOldSyn(argOne, i, argTwo, argTwoVals);
-					}
+					list<int> newSynVals = pkbInstance->getAfter(existingSynVal, existingSynType);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
 				}
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
 
 				return clauseResult->hasResults();
 			}
 
 			else if (!argOneExists && argTwoExists)
 			{
-				list<int> existingVals = clauseResult->getSynonymResults(argTwo);
+                string existingSyn = argTwo;
+                Entity existingSynType = argTwoType;
+                string newSyn = argOne;
 
-				for (int i : existingVals)
-				{
-					// Removes if it is no longer valid, else adding new synonym to existing result
-					list<int> argOneVals = pkbInstance->getBefore(i, argTwoType);
-					if (argOneVals.empty())
-					{
-						clauseResult->removeCombinations(argTwo, i);
-					}
-					else
-					{
-						clauseResult->pairWithOldSyn(argTwo, i, argOne, argOneVals);
-					}
-				}
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+                resultPairs.clear();
+                for (int existingSynVal : existingSynVals)
+                {
+                    list<int> newSynVals = pkbInstance->getBefore(existingSynVal, existingSynType);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
 
 				return clauseResult->hasResults();
 			}
