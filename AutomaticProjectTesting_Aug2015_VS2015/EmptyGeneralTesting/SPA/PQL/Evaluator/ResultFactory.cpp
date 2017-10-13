@@ -13,8 +13,8 @@ ResultFactory::~ResultFactory()
 bool ResultFactory::processClause(SelectClause clause)
 {
     SelectionEvaluator evaluator = SelectionEvaluator();
-    //return evaluator.evaluate(clause); 
-    return false;
+    return evaluator.evaluate(clause,&_clauseResult); 
+   
 }
 
 bool ResultFactory::processClause(SuchThatClause clause)
