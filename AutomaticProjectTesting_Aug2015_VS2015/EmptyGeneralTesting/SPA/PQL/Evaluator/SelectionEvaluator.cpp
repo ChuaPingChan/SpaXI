@@ -21,7 +21,12 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
 	//Case 1: Select BOOLEAN
 	if (clause.getSelectionType() == SELECT_BOOLEAN)
 	{
-		if (clauseResult->hasResults())
+		if (clauseResult->hasResults() && clauseResult->isPopulated())
+		{
+			hasResultForSelection = true;
+		}
+
+		else if (!clauseResult->hasResults()&&!clauseResult->isPopulated())
 		{
 			hasResultForSelection = true;
 		}
