@@ -8,6 +8,12 @@ public:
 	SelectionEvaluator();
 	~SelectionEvaluator();
 
-	ClauseResult evaluate(SelectClause clause);
+	bool evaluate(SelectClause clause, ClauseResult* clauseResult);
+
+private:
+	list<int> singleSynonymSelectionResult;
+	list<list<int>> tupleSelectionResults;
+	bool hasValidSelection;
+
 };
 
