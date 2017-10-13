@@ -5,9 +5,7 @@
 
 PQLMain::PQLMain(string query)
 {
-    //TODO: Un-hack this
-    string processedQuery = regex_replace(query, regex("prog_line"), "stmt");
-    this->query = processedQuery;
+    this->query = query;
 }
 
 
@@ -21,25 +19,18 @@ list<string> PQLMain::run()
     QueryValidator validator = QueryValidator(&qt);
     bool isValid = validator.isValidQuery(query);
 
-    /*if (isValid) 
+    if (isValid)
     {
-        QueryEvaluator evaluator;
+        QueryEvaluator evaluator(&qt);
         evaluator.evaluate();
-
-        list<string> evaluatorResult = qt.getEvaluatorResult();
-        if (evaluatorResult.empty())
-        {
-            return evaluatorResult;
-        }
-        else
-        {
+        ClauseResult evaluatorResult = qt.getEvaluatorResult();
+        if (evaluatorResult.hasResults()) {
             ResultFormatter formatter;
-            return evaluatorResult;
+            return formatter.finalResultFromSelection(evaluatorResult, qt);
         }
     }
     else
     {
         return list<string>();
-    }*/
-    return list<string>();
+    }
 }

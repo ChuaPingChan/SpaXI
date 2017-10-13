@@ -17,7 +17,8 @@ void QueryEvaluator::evaluate()
     for (SuchThatClause stClause : _qt->getSuchThatClauses())
     {
         hasResult = factory.processClause(stClause);
-        if (!hasResult) break;
+        if (!hasResult)
+            break;
     }
 
     if (hasResult) 
@@ -25,7 +26,8 @@ void QueryEvaluator::evaluate()
         for (PatternClause ptClause : _qt->getPatternClauses())
         {
             hasResult = factory.processClause(ptClause);
-            if (!hasResult) break;
+            if (!hasResult)
+                break;
         }
     }
 
