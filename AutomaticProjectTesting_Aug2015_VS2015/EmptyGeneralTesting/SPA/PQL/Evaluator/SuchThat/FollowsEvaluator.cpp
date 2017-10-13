@@ -33,7 +33,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 	}
 
 	//Case 3: Follows(int, synonym)
-	else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+	else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
 	{
 		list<int> pkbResult = pkbInstance->getAfter(stoi(argOne), argTwoType);
 		if (pkbResult.empty())
@@ -42,7 +42,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->updateSynResults(argOne, pkbResult);
+			clauseResult->updateSynResults(argTwo, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}
@@ -60,7 +60,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 	}
 
 	//Case 6: Follows(_, synonym)
-	else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+	else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
 	{
 		list<int> pkbResult = pkbInstance->getAllAfter(argTwoType);
 		if (pkbResult.empty())
@@ -69,13 +69,13 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 		}
 		else
 		{
-			clauseResult->updateSynResults(argOne, pkbResult);
+			clauseResult->updateSynResults(argTwo, pkbResult);
 			return clauseResult->hasResults();
 		}
 	}
 
 	//Case 7: Follows(synonym, int)
-	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == INTEGER)
+	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == INTEGER)
 	{
 		list<int> pkbResult = pkbInstance->getBefore(stoi(argTwo), argOneType);
 		if (pkbResult.empty())
@@ -90,7 +90,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 	}
 
 	//Case 8: Follows(synonym, _)
-	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == UNDERSCORE)
+	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == UNDERSCORE)
 	{
 		list<int> pkbResult = pkbInstance->getAllBefore(argOneType);
 		if (pkbResult.empty())
@@ -105,7 +105,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 	}
 
 	//Case 9: Follows(synonym, synonym)
-	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+	else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
 	{
 		// Checks if the two synonyms are already present in clauseResult
 		bool argOneExists = clauseResult->synonymPresent(argOne);
