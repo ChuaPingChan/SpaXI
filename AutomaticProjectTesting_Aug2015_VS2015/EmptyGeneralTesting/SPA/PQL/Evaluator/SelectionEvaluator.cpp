@@ -21,15 +21,9 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
 	//Case 1: Select BOOLEAN
 	if (clause.getSelectionType() == SELECT_BOOLEAN)
 	{
-		if (clauseResult->hasResults() && clauseResult->isPopulated())
-		{
-			hasResultForSelection = true;
-		}
-
-		else if (!clauseResult->hasResults()&&!clauseResult->isPopulated())
-		{
-			hasResultForSelection = true;
-		}
+        hasResultForSelection = true;
+        if(!clauseResult->hasResults() && clauseResult->isPopulated())
+        hasResultForSelection = false;
 	}
 
 	//Case 2: Select synonym

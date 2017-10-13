@@ -33,7 +33,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
     }
 
     //Case 3: ParentStar(int, synonym)
-    else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+    else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         list<int> pkbResult = pkbInstance->getChildrenStar(stoi(argOne), argTwoType);
         if (pkbResult.empty())
@@ -42,7 +42,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
         }
         else
         {
-            clauseResult->updateSynResults(argOne, pkbResult);
+            clauseResult->updateSynResults(argTwo, pkbResult);
             return clauseResult->hasResults();
         }
     }
@@ -60,7 +60,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
     }
 
     //Case 6: ParentStar(_, synonym)
-    else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+    else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         list<int> pkbResult = pkbInstance->getAllChildren(argTwoType);
         if (pkbResult.empty())
@@ -69,13 +69,13 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
         }
         else
         {
-            clauseResult->updateSynResults(argOne, pkbResult);
+            clauseResult->updateSynResults(argTwo, pkbResult);
             return clauseResult->hasResults();
         }
     }
 
     //Case 7: ParentStar(synonym, int)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == INTEGER)
+    else if ((argOneType == STMT || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE) && argTwoType == INTEGER)
     {
         list<int> pkbResult = pkbInstance->getParentStar(stoi(argTwo), argOneType);
         if (pkbResult.empty())
@@ -90,7 +90,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
     }
 
     //Case 8: ParentStar(synonym, _)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == UNDERSCORE)
+    else if ((argOneType == STMT || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE) && argTwoType == UNDERSCORE)
     {
         list<int> pkbResult = pkbInstance->getAllParents(argOneType);
         if (pkbResult.empty())
@@ -105,7 +105,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
     }
 
     //Case 9: ParentStar(synonym, synonym)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+    else if ((argOneType == STMT || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         // Checks if the two synonyms are already present in clauseResult
         bool argOneExists = clauseResult->synonymPresent(argOne);

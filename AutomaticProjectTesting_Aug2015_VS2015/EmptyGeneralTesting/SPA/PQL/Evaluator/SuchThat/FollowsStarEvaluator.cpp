@@ -20,20 +20,20 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
 
     bool hasResult;
 
-    //Case 1: Follows(int, int)
+    //Case 1: Follows*(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
         return pkbInstance->isFollowsStar(stoi(argOne), stoi(argTwo));
     }
 
-    //Case 2: Follows(int, _)
+    //Case 2: Follows*(int, _)
     else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
     {
         return pkbInstance->isBefore(stoi(argOne));
     }
 
-    //Case 3: Follows(int, synonym)
-    else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+    //Case 3: Follows*(int, synonym)
+    else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         list<int> pkbResult = pkbInstance->getAfterStar(stoi(argOne), argTwoType);
         if (pkbResult.empty())
@@ -42,25 +42,25 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
         }
         else
         {
-            clauseResult->updateSynResults(argOne, pkbResult);
+            clauseResult->updateSynResults(argTwo, pkbResult);
             return clauseResult->hasResults();
         }
     }
 
-    //Case 4: Follows(_, int)
+    //Case 4: Follows*(_, int)
     else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
     {
         return pkbInstance->isAfter(stoi(argTwo));
     }
 
-    //Case 5: Follows(_, _)
+    //Case 5: Follows*(_, _)
     else if (argOneType == UNDERSCORE && argTwoType == UNDERSCORE)
     {
         return pkbInstance->hasFollows();
     }
 
-    //Case 6: Follows(_, synonym)
-    else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+    //Case 6: Follows*(_, synonym)
+    else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         list<int> pkbResult = pkbInstance->getAllAfter(argTwoType);
         if (pkbResult.empty())
@@ -69,13 +69,13 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
         }
         else
         {
-            clauseResult->updateSynResults(argOne, pkbResult);
+            clauseResult->updateSynResults(argTwo, pkbResult);
             return clauseResult->hasResults();
         }
     }
 
-    //Case 7: Follows(synonym, int)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == INTEGER)
+    //Case 7: Follows*(synonym, int)
+    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == INTEGER)
     {
         list<int> pkbResult = pkbInstance->getBeforeStar(stoi(argTwo), argOneType);
         if (pkbResult.empty())
@@ -89,8 +89,8 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
         }
     }
 
-    //Case 8: Follows(synonym, _)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && argTwoType == UNDERSCORE)
+    //Case 8: Follows*(synonym, _)
+    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == UNDERSCORE)
     {
         list<int> pkbResult = pkbInstance->getAllBeforeStar(argOneType);
         if (pkbResult.empty())
@@ -104,8 +104,8 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
         }
     }
 
-    //Case 9: Follows(synonym, synonym)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE))
+    //Case 9: Follows*(synonym, synonym)
+    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         // Checks if the two synonyms are already present in clauseResult
         bool argOneExists = clauseResult->synonymPresent(argOne);
