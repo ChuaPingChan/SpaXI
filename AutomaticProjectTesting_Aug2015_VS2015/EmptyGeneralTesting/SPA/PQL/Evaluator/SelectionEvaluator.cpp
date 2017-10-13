@@ -13,22 +13,22 @@ SelectionEvaluator::~SelectionEvaluator()
 /*This class checks whether the select clause has a result or not. 
 If it returns an empty Result for Select synonym or Select tuple, 
 evaluation is stopped here*/
-bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResult)
+bool SelectionEvaluator::evaluate(SelectClause clause)
 { 
 	hasResultForSelection = false;
 	list<int> resultsForSingleSynonym;
 	//Case 1: Select BOOLEAN
 	if (clause.getSelectionType() == SELECT_BOOLEAN)
 	{
-		hasResultForSelection = true;
+			hasResultForSelection = true;
+		
 	}
 
 	//Case 2: Select synonym
 	else if (clause.getSelectionType() == SELECT_SINGLE)
 	{
 		resultsForSingleSynonym = evaluateSingleSynonymSelection(clause.getSingleArgType(), clause.getSingleArg());
-		clauseResult->updateSynResults(clause.getSingleArg(), resultsForSingleSynonym);
-		if (clauseResult->hasResults())
+		if (!resultsForSingleSynonym.empty())
 		{
 			hasResultForSelection = true;
 		}
@@ -47,6 +47,10 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
 {
 	if (argType == STMT)
 	{
+		for (int i : pkbInstance->getAllStatements())
+		{
+			cout << i << " ";
+		}
 		return pkbInstance->getAllStatements();
 	}
 	else if (argType == ASSIGN)
