@@ -71,6 +71,11 @@ bool ParserChildForTest::isBracketedCorrectly(std::string expression)
     return Parser::isBracketedCorrectly(expression);
 }
 
+std::pair<string, string> ParserChildForTest::splitExpressionLhsRhs(std::string expression)
+{
+    return Parser::splitExpressionLhsRhs(expression);
+}
+
 void ParserChildForTest::parseProgram()
 {
     Parser::parseProgram();

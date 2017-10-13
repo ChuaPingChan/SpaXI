@@ -34,8 +34,7 @@ public:
     static const std::regex REGEX_MATCH_OPEN_BRACKET;
     static const std::regex REGEX_MATCH_CLOSE_BRACKET;
     static const std::regex REGEX_MATCH_SEMICOLON;
-    static const std::regex REGEX_EXTRACT_EXPRESSION_LHS_RHS;
-    static const std::regex REGEX_VALID_EXPRESSION;
+    static const std::regex REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT;
     static const std::regex REGEX_MATCH_EQUAL;
     static const std::regex REGEX_VALID_OPERATOR;
 
@@ -43,7 +42,7 @@ public:
 
     bool parse(std::string filename);
 
-protected:  // TODO: Temporarily use "protected" to ease unit testing.
+protected:
 
     /************
     * Constants *
@@ -65,9 +64,9 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::stack<std::stack<int>> _stacksOfFollowsStacks;
     int _currentProcIdx;                    //The index of the current procedure being parsed
 
-    /******************
-    * Private Methods *
-    *******************/
+    /*********************
+     * Protected Methods *
+     *********************/
     bool concatenateLines(std::string filename);
     bool incrCurrentTokenPtr();
     bool endOfSourceCodeReached();
@@ -81,6 +80,7 @@ protected:  // TODO: Temporarily use "protected" to ease unit testing.
     std::string removeAllBrackets(std::string targetString);
     bool isBracketedCorrectly(std::string expression);
     void processAndPopTopFollowStack();
+    static std::pair<string, string> splitExpressionLhsRhs(std::string expression);
 
     bool assignmentExpected();
     bool whileExpected();

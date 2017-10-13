@@ -18,11 +18,11 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 	{
 		if (cr.hasResults()) //If ClauseResult has results, BOOLEAN is true
 		{
-			result.push_back("TRUE");
+			result.push_back("true");
 		}
 		else 
 		{
-			result.push_back("FALSE"); //If ClauseResult is empty, BOOLEAN is false
+			result.push_back("false"); //If ClauseResult is empty, BOOLEAN is false
 		}
 	}
 	
