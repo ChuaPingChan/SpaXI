@@ -80,6 +80,26 @@ pair<list<int>, list<int>> PKBMain::getAllCalls() {
 	return callsTable.getAllCalls();
 }
 
+bool PKBMain::isCallsStar(string callerProcName, string calleeProcName) {
+	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
+	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
+
+	return callsStarTable.isCallsStar(callerProcIdx, calleeProcIdx);
+}
+
+list<int> PKBMain::getCalleeStar(string callerProcName) {
+	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
+	return callsStarTable.getCalleeStar(callerProcIdx);
+}
+
+list<int> PKBMain::getCallerStar(string calleeProcName) {
+	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
+	return callsStarTable.getCallerStar(calleeProcIdx);
+}
+
+pair<list<int>, list<int>> PKBMain::getAllCallsStar() {
+	return callsStarTable.getAllCallsStar();
+}
 //PARENT
 bool PKBMain::setParentChildRel(int parentStmt, int childStmt) {
 	return (parentToChildTable.addParentChild(parentStmt, childStmt) && childToParentTable.addChildParent(childStmt, parentStmt));
@@ -794,7 +814,7 @@ bool PKBMain::startProcessComplexRelations() {
 	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
 	followsStarBefore.setMap(de.computeFollowsStarBeforeTable(followsTable));
-//	callsStarTable.setMap(de.computeCallsStarTable(callsTable));
+	callsStarTable.setCallsStarMap(de.computeCallsStarTable(callsTable));
 	//TODO 2 add calls, perhaps optimise
 	return true;
 }

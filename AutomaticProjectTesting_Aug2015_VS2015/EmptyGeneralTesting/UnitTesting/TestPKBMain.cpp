@@ -264,8 +264,30 @@ namespace UnitTesting
 
 		TEST_METHOD(TestCallsTable) {
 			PKBMain PKB;
-			PKB.setCallsRel(3, "A", "B");
-			PKB.setCallsRel(5, "A", "C");
+			PKB.addProcedure("One");
+			PKB.setCallsRel(2, "One", "Two");
+			PKB.setCallsRel(3, "One", "Three");
+			PKB.addProcedure("Three");
+			PKB.setCallsRel(6, "Three", "Four");
+			PKB.setCallsRel(7, "Three", "Five");
+			PKB.setCallsRel(8, "Three", "Six");
+			PKB.addProcedure("Four");
+			PKB.addProcedure("Five");
+			PKB.setCallsRel(14, "Five", "Six");
+			PKB.setCallsRel(15, "Five", "Seven");
+			PKB.addProcedure("Six");
+			PKB.setCallsRel(19, "Six", "Seven");
+			PKB.addProcedure("Two");
+			PKB.setCallsRel(24, "Two", "Eight");
+			PKB.addProcedure("Seven");
+			PKB.setCallsRel(28, "Seven", "Nine");
+			PKB.addProcedure("Eight");
+			PKB.setCallsRel(33, "Eight", "Nine");
+			PKB.addProcedure("Nine");
+
+			PKB.startProcessComplexRelations();
+
+			Assert::IsTrue(PKB.isCallsStar("One", "Nine"));
 		}
 	};
 }

@@ -24,6 +24,7 @@
 #include "UsesTableVar.h"
 #include "VarIdxTable.h"
 #include "CallsTable.h"
+#include "CallsStarTable.h"
 #include <string>
 #include "../Entity.h"
 
@@ -111,6 +112,14 @@ public:
 
 	pair<list<int>, list<int>> getAllCalls();
 
+	bool isCallsStar(string callerProcName, string calleeProcName);
+
+	list<int> getCalleeStar(string callerProcName);
+
+	list<int> getCallerStar(string celleeProcName);
+
+	pair<list<int>, list<int>> getAllCallsStar();
+
     //PKB query evaluator (Uses, Modifies)
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
@@ -162,4 +171,5 @@ private:
     UsesTableStmtToVar usesTableStmtToVar;
     UsesTableVar usesTableVar;
     VarIdxTable varIdxTable;
+	CallsStarTable callsStarTable;
 };

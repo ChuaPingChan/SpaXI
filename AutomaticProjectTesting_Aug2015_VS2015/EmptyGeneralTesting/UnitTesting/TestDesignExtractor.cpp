@@ -40,6 +40,7 @@ namespace UnitTesting
 			list<int> testList = callsStarMap[1];
 			
 			Assert::IsTrue(cst.isCallsStar(1, 9));
+			Assert::IsFalse(cst.isCallsStar(4, 5));
 		}
 
 		TEST_METHOD(TestGenerateParentStar)
