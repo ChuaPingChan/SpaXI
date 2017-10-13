@@ -26,7 +26,8 @@ namespace UnitTesting
 			ClauseResult cr;
 			cr.updateSynResults(synonym, synonymResult);
 			ResultFormatter rf;
-			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front()=="TRUE");
+			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).size()==1);
+			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front()=="true");
 		}
 
 		TEST_METHOD(TestResultFormatter_SelectBOOLEAN_ClauseResultEmpty_False)
@@ -37,7 +38,8 @@ namespace UnitTesting
 			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
 			ClauseResult cr;
 			ResultFormatter rf;
-			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front() == "FALSE");
+			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).size() == 1);
+			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front() == "false");
 		}
 
 		TEST_METHOD(TestResultFormatter_SelectSynonym_ClauseResultEmpty_NoResult_EmptyString)
@@ -66,6 +68,7 @@ namespace UnitTesting
 			list<string> expectedResult = { "1","2","3" };
 			ResultFormatter rf;
 			list<string> actualResult = rf.finalResultFromSelection(cr, qt);
+			Assert::IsTrue(actualResult.size() == 3);
 		    Assert::IsTrue(actualResult == expectedResult);
 		}
 
