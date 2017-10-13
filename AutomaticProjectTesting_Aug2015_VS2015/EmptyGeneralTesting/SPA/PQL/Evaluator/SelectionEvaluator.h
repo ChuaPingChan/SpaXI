@@ -10,7 +10,7 @@ public:
 	SelectionEvaluator();
 	~SelectionEvaluator();
 
-	bool evaluate(SelectClause clause); //To-Do: Integration Testing with ClauseResult
+	bool evaluate(SelectClause clause, ClauseResult* clauseResult); //To-Do: Integration Testing with ClauseResult
 
 protected:
 	list<int> evaluateSingleSynonymSelection(Entity argType, string synonym); //To-Do: Integration Testing with PKB

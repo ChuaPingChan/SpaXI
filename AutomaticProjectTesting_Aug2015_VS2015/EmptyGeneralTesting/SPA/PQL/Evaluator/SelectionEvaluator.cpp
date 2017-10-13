@@ -4,6 +4,7 @@
 
 SelectionEvaluator::SelectionEvaluator()
 {
+	this->pkbInstance = PKBMain::getInstance();
 }
 
 
@@ -13,23 +14,26 @@ SelectionEvaluator::~SelectionEvaluator()
 /*This class checks whether the select clause has a result or not. 
 If it returns an empty Result for Select synonym or Select tuple, 
 evaluation is stopped here*/
-bool SelectionEvaluator::evaluate(SelectClause clause)
+bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResult)
 { 
 	hasResultForSelection = false;
 	list<int> resultsForSingleSynonym;
 	//Case 1: Select BOOLEAN
 	if (clause.getSelectionType() == SELECT_BOOLEAN)
 	{
+		if (clauseResult->hasResults())
+		{
 			hasResultForSelection = true;
-		
+		}
 	}
 
 	//Case 2: Select synonym
 	else if (clause.getSelectionType() == SELECT_SINGLE)
 	{
 		resultsForSingleSynonym = evaluateSingleSynonymSelection(clause.getSingleArgType(), clause.getSingleArg());
-		if (!resultsForSingleSynonym.empty())
+		if (!resultsForSingleSynonym.empty()) //If Select synonym has results, so proceed with evaluation
 		{
+			clauseResult->updateSynResults(clause.getSingleArg(), resultsForSingleSynonym);
 			hasResultForSelection = true;
 		}
 	}
@@ -39,6 +43,7 @@ bool SelectionEvaluator::evaluate(SelectClause clause)
 	{
 		//To-Do
 	}
+	//cout << "Result for select evaluation is"<<hasResultForSelection;
 	return hasResultForSelection;
 }
 
@@ -47,10 +52,6 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
 {
 	if (argType == STMT)
 	{
-		for (int i : pkbInstance->getAllStatements())
-		{
-			cout << i << " ";
-		}
 		return pkbInstance->getAllStatements();
 	}
 	else if (argType == ASSIGN)
@@ -70,21 +71,25 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
 	}
 	else if (argType == PROG_LINE)
 	{
+		return list<int>();
 		//return pkbInstance->getAllProgLines();
 
 	}
 	else if (argType == CALL)
 	{
+		return list<int>();
 		//return pkbInstance->getAllCalls();
 
 	}
 	else if (argType == PROCEDURE)
 	{
+		return list<int>();
 		//return pkbInstance->getALlProcedures();
 
 	}
 	else if (argType == VARIABLE)
 	{
+		return list<int>();
 		//return pkbInstance->getAllVariables();
 
 	}
