@@ -1,12 +1,11 @@
 #pragma once
 #include "SuchThatRelEvaluator.h"
 
-class UsesEvaluator
+class UsesEvaluator : public SuchThatRelEvaluator
 {
 public:
-	UsesEvaluator();
-	~UsesEvaluator();
+    UsesEvaluator();
+    ~UsesEvaluator();
 
-	ClauseResult evaluate(SuchThatClause clause);
+    bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
 };
-

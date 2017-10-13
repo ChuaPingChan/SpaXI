@@ -4,9 +4,10 @@
 class ModifiesEvaluator : public SuchThatRelEvaluator
 {
 public:
-	ModifiesEvaluator();
-	~ModifiesEvaluator();
+    ModifiesEvaluator();
+    ~ModifiesEvaluator();
 
-	ClauseResult evaluate(SuchThatClause clause);
+    bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
+
 };
 
