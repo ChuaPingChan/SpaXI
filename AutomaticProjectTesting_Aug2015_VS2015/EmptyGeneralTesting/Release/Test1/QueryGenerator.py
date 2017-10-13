@@ -14,20 +14,11 @@ TIME_LIMIT = 5000
 
 def main():
 	workbook = load_workbook(filename = EXCEL_WORKBOOK_PATH)
-	querySheet1 = workbook['Complex']
-	querySheet2 = workbook['Follows']
-	querySheet3 = workbook['FollowsStar']
-	querySheet4 = workbook['Parent']
-	querySheet5 = workbook['ParentStar']
-	
+	querySheet = workbook['Sheet']
+		
 	print('Generating Queries ... ')
 	
-	text = ''
-	text += format(querySheet1)
-	text += format(querySheet2)
-	text += format(querySheet3)
-	text += format(querySheet4)
-	text += format(querySheet5)
+	text = format(querySheet)
 	
 	createNewTextFile(text, OUTPUT_FILE_PATH)
 	
