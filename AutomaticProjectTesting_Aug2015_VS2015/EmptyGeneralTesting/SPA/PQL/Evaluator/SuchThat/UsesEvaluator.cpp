@@ -32,7 +32,7 @@ bool UsesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult
         return pkbInstance->isUsingAnything(stoi(argOne));
     }
 
-    //Case 3: Uses(int, var)
+    //Case 3: Uses(int, synonym)
     else if (argOneType == INTEGER && (argTwoType == VARIABLE))
     {
         //To-Do: Uncomment this code when string to int mapping finished
@@ -48,7 +48,7 @@ bool UsesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult
         }
     }
 
-    //Case 4: Uses(synonym, ident)
+    //Case 4: Uses(synonym, IDENT)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL || argOneType == PROCEDURE) && argTwoType == IDENT_WITHQUOTES)
     {
         list<int> pkbResult = pkbInstance->getUsesFromVar(argTwo, argOneType);
@@ -78,7 +78,7 @@ bool UsesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult
         }
     }
 
-    //Case 6: Uses(synonym, var)
+    //Case 6: Uses(synonym, synonym)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL || argOneType == PROCEDURE) && argTwoType == VARIABLE)
     {
         // Checks if the two synonyms are already present in clauseResult

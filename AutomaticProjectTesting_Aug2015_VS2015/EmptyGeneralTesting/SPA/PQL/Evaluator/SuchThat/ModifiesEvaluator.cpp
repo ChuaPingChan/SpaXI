@@ -52,7 +52,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 4: Modifies(synonym, IDENT)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL || argOneType == PROCEDURE)  && argTwoType == IDENT_WITHQUOTES)
     {
-        list<int> pkbResult = pkbInstance->getModifiesFromVar(argOne, argOneType);
+        list<int> pkbResult = pkbInstance->getModifiesFromVar(argTwo, argOneType);
         if (pkbResult.empty())
         {
             return false;
