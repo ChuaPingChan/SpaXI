@@ -18,24 +18,28 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
 	hasResultForSelection = false;
 	list<int> resultsForSingleSynonym;
 	//Case 1: Select BOOLEAN
-	if (clause.getSelectionType == SELECT_BOOLEAN)
+	if (clause.getSelectionType() == SELECT_BOOLEAN)
 	{
 		hasResultForSelection = true;
 	}
 
 	//Case 2: Select synonym
-	else if (clause.getSelectionType == SELECT_SINGLE)
+	else if (clause.getSelectionType() == SELECT_SINGLE)
 	{
 		resultsForSingleSynonym = evaluateSingleSynonymSelection(clause.getSingleArgType(), clause.getSingleArg());
 		clauseResult->updateSynResults(clause.getSingleArg(), resultsForSingleSynonym);
-	
+		if (clauseResult->hasResults())
+		{
+			hasResultForSelection = true;
+		}
 	}
 
 	//Case 3: Select <arg1,arg2>
-	else if (clause.getSelectionType == SELECT_TUPLE)
+	else if (clause.getSelectionType() == SELECT_TUPLE)
 	{
 		//To-Do
 	}
+	return hasResultForSelection;
 }
 
 //To-Do: Fill in missing API after PKB is finished.
