@@ -28,6 +28,7 @@ list<string> PQLMain::run()
             ResultFormatter formatter;
             return formatter.finalResultFromSelection(evaluatorResult, qt);
         }
+		 return list<string>();
     }
     else
     {
