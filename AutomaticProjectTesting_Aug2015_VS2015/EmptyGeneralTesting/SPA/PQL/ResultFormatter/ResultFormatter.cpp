@@ -16,13 +16,13 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 	//Case 1: Select BOOLEAN
 	if (selectionByQuery.getSelectionType()==SELECT_BOOLEAN)
 	{
-		if (cr.hasResults()) //If ClauseResult has results, BOOLEAN is true
+		if (!cr.hasResults() && cr.isPopulated()) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
 		{
-			result.push_back("true");
+			result.push_back("false");
 		}
 		else 
 		{
-			result.push_back("false"); //If ClauseResult is empty, BOOLEAN is false
+			result.push_back("true"); //If ClauseResult is empty, BOOLEAN is false
 		}
 	}
 	

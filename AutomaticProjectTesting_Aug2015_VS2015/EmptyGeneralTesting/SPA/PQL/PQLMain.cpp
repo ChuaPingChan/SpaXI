@@ -18,20 +18,17 @@ list<string> PQLMain::run()
 
     QueryValidator validator = QueryValidator(&qt);
     bool isValid = validator.isValidQuery(query);
-
+    list<string> finalResult;
     if (isValid)
     {
         QueryEvaluator evaluator(&qt);
         evaluator.evaluate();
         ClauseResult evaluatorResult = qt.getEvaluatorResult();
-		 if (evaluatorResult.hasResults()) {
+		 if (evaluatorResult.hasResults()||!evaluatorResult.isPopulated()) 
+         {
             ResultFormatter formatter;
-            return formatter.finalResultFromSelection(evaluatorResult, qt);
-        }
-		 return list<string>();
+            finalResult = formatter.finalResultFromSelection(evaluatorResult, qt);
+         }
     }
-    else
-    {
-        return list<string>();
-    }
+    return finalResult;
 }
