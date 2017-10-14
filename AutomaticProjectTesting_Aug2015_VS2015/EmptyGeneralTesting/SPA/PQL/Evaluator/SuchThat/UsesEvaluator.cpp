@@ -35,8 +35,7 @@ bool UsesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult
     //Case 3: Uses(int, synonym)
     else if (argOneType == INTEGER && (argTwoType == VARIABLE))
     {
-        //To-Do: Uncomment this code when string to int mapping finished
-        list<int> pkbResult;// = pkbInstance->getUsesFromStmt(stoi(argOne));
+        list<int> pkbResult = pkbInstance->getUsesFromStmt(stoi(argOne));
         if (pkbResult.empty())
         {
             return false;
@@ -95,7 +94,7 @@ bool UsesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult
                 int argTwoVal = pair.second;
 
                 // Removes from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isUses(argOneVal, argTwo)) //To-Do:Change argTwo to argTwoVal
+                if (!pkbInstance->isUses(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
                 }
@@ -107,8 +106,8 @@ bool UsesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult
 
         else if (!argOneExists && !argTwoExists)
         {
-            //To-Do: Uncomment when PKB modifies mapping of string to int
-            pair<list<int>, list<int>> pkbResult;// = pkbInstance->getUsesPairs(argOneType);
+           //To-Do: Change API CALL
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getUsesPairs(argOneType);
 
             if (pkbResult.first.empty() && pkbResult.second.empty())
             {

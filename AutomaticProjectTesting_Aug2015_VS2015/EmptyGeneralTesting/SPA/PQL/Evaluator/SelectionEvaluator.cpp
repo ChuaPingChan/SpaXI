@@ -32,7 +32,7 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
 	else if (clause.getSelectionType() == SELECT_SINGLE)
 	{
 		resultsForSingleSynonym = evaluateSingleSynonymSelection(clause.getSingleArgType(), clause.getSingleArg());
-		if (!resultsForSingleSynonym.empty()) //If Select synonym has results, so proceed with evaluation
+		if (!resultsForSingleSynonym.empty()) //If Select synonym has results, proceed with evaluation
 		{
 			clauseResult->updateSynResults(clause.getSingleArg(), resultsForSingleSynonym);
 			hasResultForSelection = true;
@@ -48,7 +48,7 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
 	return hasResultForSelection;
 }
 
-//To-Do: Fill in missing API after PKB is finished.
+//To-Do: Fill in missing API for PROG_LINES after PKB is finished.
 list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, string synonym)
 {
 	if (argType == STMT)
@@ -72,26 +72,23 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
 	}
 	else if (argType == PROG_LINE)
 	{
-		return list<int>();
-		//return pkbInstance->getAllProgLines();
+        //return pkbInstance->getAllProgLines();
+        return list<int>();
 
 	}
 	else if (argType == CALL)
 	{
-		return list<int>();
-		//return pkbInstance->getAllCalls();
+        return pkbInstance->getAllCallees();
 
 	}
 	else if (argType == PROCEDURE)
 	{
-		return list<int>();
-		//return pkbInstance->getALlProcedures();
+		return pkbInstance->getAllProcedures();
 
 	}
 	else if (argType == VARIABLE)
 	{
-		return list<int>();
-		//return pkbInstance->getAllVariables();
+		return pkbInstance->getAllVariables();
 
 	}
 	else if (argType == CONSTANT)

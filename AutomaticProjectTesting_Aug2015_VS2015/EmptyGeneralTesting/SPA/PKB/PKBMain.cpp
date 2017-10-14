@@ -958,6 +958,11 @@ bool PKBMain::setPatternRelation(int stmt, string var, string expression)
 	return added;
 }
 
+bool PKBMain::isUses(int stmt, int varIdx)
+{
+    return usesTableStmtToVar.isUses(stmt, varIdx);
+}
+
 bool PKBMain::isUses(int stmt, string var)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
