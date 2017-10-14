@@ -365,3 +365,95 @@ unordered_map<int, list<int>> DesignExtractor::computeModifiesTable(ModTableStmt
 
 	return modStmtToVarMap;
 }
+
+unordered_map<int, list<int>> DesignExtractor::computeUsesTableStmt(UsesTableStmtToVar usesTableStmtToVar) {
+	unordered_map<int, list<int>> usesStmtToVarMap = usesTableStmtToVar.getMap();
+	unordered_map<int, list<int>> usesVarToStmtMap;
+
+	for (unordered_map<int, list<int>>::iterator it = usesStmtToVarMap.begin(); it != usesStmtToVarMap.end(); ++it) {
+		int stmt = (*it).first;
+		list<int> varList = (*it).second;
+		for (int var : varList) {
+			if (usesVarToStmtMap.find(var) == usesVarToStmtMap.end()) {
+				usesVarToStmtMap[var] = list<int>();
+				usesVarToStmtMap[var].push_back(stmt);
+			}
+			else {
+				usesVarToStmtMap[var].push_back(stmt);
+				usesVarToStmtMap[var].sort();
+				usesVarToStmtMap[var].unique();
+			}
+		}
+	}
+
+	return usesVarToStmtMap;
+}
+
+unordered_map<int, list<int>> DesignExtractor::computeUsesTableProc(UsesTableProcToVar usesTableProcToVar) {
+	unordered_map<int, list<int>> usesProcToVarMap = usesTableProcToVar.getMap();
+	unordered_map<int, list<int>> usesVarToProcMap;
+
+	for (unordered_map<int, list<int>>::iterator it = usesProcToVarMap.begin(); it != usesProcToVarMap.end(); ++it) {
+		int proc = (*it).first;
+		list<int> varList = (*it).second;
+		for (int var : varList) {
+			if (usesVarToProcMap.find(var) == usesVarToProcMap.end()) {
+				usesVarToProcMap[var] = list<int>();
+				usesVarToProcMap[var].push_back(proc);
+			}
+			else {
+				usesVarToProcMap[var].push_back(proc);
+				usesVarToProcMap[var].sort();
+				usesVarToProcMap[var].unique();
+			}
+		}
+	}
+	
+	return usesVarToProcMap;
+}
+
+unordered_map<int, list<int>> DesignExtractor::computeModTableStmt(ModTableStmtToVar modTableStmtToVar) {
+	unordered_map<int, list<int>> modStmtToVarMap = modTableStmtToVar.getMap();
+	unordered_map<int, list<int>> modVarToStmtMap;
+
+	for (unordered_map<int, list<int>>::iterator it = modStmtToVarMap.begin(); it != modStmtToVarMap.end(); ++it) {
+		int stmt = (*it).first;
+		list<int> varList = (*it).second;
+		for (int var : varList) {
+			if (modVarToStmtMap.find(var) == modVarToStmtMap.end()) {
+				modVarToStmtMap[var] = list<int>();
+				modVarToStmtMap[var].push_back(stmt);
+			}
+			else {
+				modVarToStmtMap[var].push_back(stmt);
+				modVarToStmtMap[var].sort();
+				modVarToStmtMap[var].unique();
+			}
+		}
+	}
+
+	return modVarToStmtMap;
+}
+
+unordered_map<int, list<int>> DesignExtractor::computeModTableProc(ModTableProcToVar modTableProcToVar) {
+	unordered_map<int, list<int>> modProcToVarMap = modTableProcToVar.getMap();
+	unordered_map<int, list<int>> modVarToProcMap;
+
+	for (unordered_map<int, list<int>>::iterator it = modProcToVarMap.begin(); it != modProcToVarMap.end(); ++it) {
+		int proc = (*it).first;
+		list<int> varList = (*it).second;
+		for (int var : varList) {
+			if (modVarToProcMap.find(var) == modVarToProcMap.end()) {
+				modVarToProcMap[var] = list<int>();
+				modVarToProcMap[var].push_back(proc);
+			}
+			else {
+				modVarToProcMap[var].push_back(proc);
+				modVarToProcMap[var].sort();
+				modVarToProcMap[var].unique();
+			}
+		}
+	}
+
+	return modVarToProcMap;
+}

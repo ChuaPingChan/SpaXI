@@ -16,6 +16,9 @@ public:
 	bool setMap(unordered_map<int, list<int>> targetMap);
 	unordered_map<int, list<int>> getMap();
 	bool isUses(int procIdx, int varIdx);
+	bool isUsingAnything(int procIdx);
+	list<int> getProcThatUses();
+	pair<list<int>, list<int>> getProcPair();
 private:
     unordered_map<int, list<int>> usesProcToVarMap;
 };

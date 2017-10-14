@@ -33,4 +33,8 @@ class DesignExtractor {
 			StmtTypeList stmtTypeList, UsesTableProcToVar usesTableProcToVar, ChildToParentStarTable childToParentStarTable);
 		unordered_map<int, list<int>> computeModifiesTable(ModTableStmtToVar modTableStmtToVar, 
 			StmtTypeList stmtTypeList, ModTableProcToVar modTableProcToVar, ChildToParentStarTable childToParentStarTable);
+		unordered_map<int, list<int>> computeUsesTableStmt(UsesTableStmtToVar usesTableStmtToVar);
+		unordered_map<int, list<int>> computeUsesTableProc(UsesTableProcToVar usesTableProcToVar);
+		unordered_map<int, list<int>> computeModTableStmt(ModTableStmtToVar modTableStmtToVar);
+		unordered_map<int, list<int>> computeModTableProc(ModTableProcToVar modTableProcToVar);
 };

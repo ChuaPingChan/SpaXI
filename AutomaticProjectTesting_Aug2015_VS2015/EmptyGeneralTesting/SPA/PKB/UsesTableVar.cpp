@@ -19,11 +19,11 @@ bool UsesTableVar::addUsesVarToStmtList(int varIdx, int stmtNumber) {
     return false;
 }
 
-bool UsesTableVar::addUsesVarToProcList(int varIdx, string proc)
+bool UsesTableVar::addUsesVarToProcList(int varIdx, int proc)
 {
     // if stmt number does not exist as a key, create new list and insert data to hash map
     if (usesVarToProcMap.find(varIdx) == usesVarToProcMap.end()) {
-        usesVarToProcMap[varIdx] = list<string>();
+        usesVarToProcMap[varIdx] = list<int>();
         usesVarToProcMap[varIdx].push_back(proc);
         return true;
     }
@@ -105,7 +105,7 @@ list<int> UsesTableVar::getUsesStmtsFromVar(int varIdx) {
     return usesVarToStmtMap[varIdx];
 }
 
-list<string> UsesTableVar::getUsesProcsFromVar(int varIdx)
+list<int> UsesTableVar::getUsesProcsFromVar(int varIdx)
 {
     return usesVarToProcMap[varIdx];
 }
@@ -128,4 +128,14 @@ list<int> UsesTableVar::getUsesWhileContainersFromVar(int varIdx)
 list<int> UsesTableVar::getUsesIfFromVar(int varIdx)
 {
     return usesVarToIfMap[varIdx];
+}
+
+bool UsesTableVar::setStmtMap(unordered_map<int, list<int>> map) {
+	usesVarToStmtMap = map;
+	return true;
+}
+
+bool UsesTableVar::setProcMap(unordered_map<int, list<int>> map) {
+	usesVarToProcMap = map;
+	return true;
 }
