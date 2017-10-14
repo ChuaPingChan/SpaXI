@@ -22,10 +22,7 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
 	if (clause.getSelectionType() == SELECT_BOOLEAN)
 	{
         hasResultForSelection = true;
-        if (!clauseResult->hasResults() && clauseResult->isPopulated())
-        {
-            hasResultForSelection = false;
-        }
+
 	}
 
 	//Case 2: Select synonym
@@ -78,7 +75,7 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
 	}
 	else if (argType == CALL)
 	{
-        return pkbInstance->getAllCallees();
+        return pkbInstance->getAllCallsStmt();
 
 	}
 	else if (argType == PROCEDURE)

@@ -28,7 +28,6 @@ public:
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
     bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);
     bool hasResults();
-    bool isPopulated();     // TODO: Implement and unit test.
 
 protected:
     unordered_map<string, int> _synToIdxMap;

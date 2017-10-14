@@ -384,7 +384,3 @@ bool ClauseResult::hasResults()
     return !(_results.empty());
 }
 
-bool ClauseResult::isPopulated()
-{
-    return false;
-}

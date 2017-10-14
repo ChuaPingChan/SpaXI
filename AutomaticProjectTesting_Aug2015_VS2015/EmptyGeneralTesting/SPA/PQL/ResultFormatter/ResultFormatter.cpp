@@ -5,6 +5,7 @@ using namespace std;
 
 ResultFormatter::ResultFormatter()
 {
+    this->pkbInstance = PKBMain::getInstance();
 }
 
 list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTree qt)
@@ -16,7 +17,8 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 	//Case 1: Select BOOLEAN
 	if (selectionByQuery.getSelectionType()==SELECT_BOOLEAN)
 	{
-		if (!cr.hasResults() && cr.isPopulated()) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
+        bool isTreeEmpty = checkIfQueryTreeHasClauses(&qt);
+		if (!cr.hasResults() && !isTreeEmpty) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
 		{
 			result.push_back("false");
 		}
@@ -32,14 +34,19 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 		if (cr.hasResults())
 		{
 			Entity argType = selectionByQuery.getSingleArgType();
+            string synonymToGetResultFor = selectionByQuery.getSingleArg();
+
 			if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
 			{
-				string synonymToGetResultFor = selectionByQuery.getSingleArg();
 				result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
 			}
 
-			//To-Do: Mapping of List to String from PKB
-		}
+            else if (argType == PROCEDURE || argType == VARIABLE)
+            {
+                result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
+            }
+
+        }
 	
 	}
 
@@ -69,6 +76,15 @@ list<string> ResultFormatter::convertListOfListOfIntsToListOfStrings(list<list<i
 {
 	list<string> convertedFromInt;
 	return convertedFromInt;
+}
+bool ResultFormatter::checkIfQueryTreeHasClauses(QueryTree* qt)
+{
+    if (qt->getSuchThatClauses().empty() && qt->getPatternClauses().empty() && qt->getWithClauses().empty())
+    {
+        return false;
+    }
+
+    return true;
 }
 
 
