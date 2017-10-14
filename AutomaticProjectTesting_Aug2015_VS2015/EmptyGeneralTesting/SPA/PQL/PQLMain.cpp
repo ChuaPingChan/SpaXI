@@ -24,11 +24,9 @@ list<string> PQLMain::run()
         QueryEvaluator evaluator(&qt);
         evaluator.evaluate();
         ClauseResult evaluatorResult = qt.getEvaluatorResult();
-		 if (evaluatorResult.hasResults()) 
-         {
-            ResultFormatter formatter;
-            finalResult = formatter.finalResultFromSelection(evaluatorResult, qt);
-         }
+        ResultFormatter formatter;
+        finalResult = formatter.finalResultFromSelection(evaluatorResult, qt);
+        
     }
     return finalResult;
 }
