@@ -630,8 +630,8 @@ void Parser::parseWhileStmt() {
     OutputDebugString("FINE: Entering while block.\n");
     // Add new stmtList stack to follows stack
     OutputDebugString("Push new stmtList stack to follows stack.\n");
-    stack<int>* newFollowsStack = new stack<int>();
-    _stackOfFollowsStacks.push(*newFollowsStack);
+    stack<int> newFollowsStack = stack<int>();
+    _stackOfFollowsStacks.push(newFollowsStack);
 
     parseStmtList();
 
@@ -688,8 +688,8 @@ void Parser::parseIfStmt()
     OutputDebugString("FINE: Entering if-block.\n");
     // Add new stmtList stack to follows stack
     OutputDebugString("Push new stmtList stack to follows stack.\n");
-    stack<int>* newFollowsStack = new stack<int>();
-    _stackOfFollowsStacks.push(*newFollowsStack);
+    stack<int> newFollowsStack = stack<int>();
+    _stackOfFollowsStacks.push(newFollowsStack);
 
     parseStmtList();
 
@@ -704,8 +704,8 @@ void Parser::parseIfStmt()
     OutputDebugString("FINE: Entering else-block.\n");
     // Add new stmtList stack to follows stack
     OutputDebugString("Push new stmtList stack to follows stack.\n");
-    stack<int>* newFollowsStack = new stack<int>();
-    _stackOfFollowsStacks.push(*newFollowsStack);
+    newFollowsStack = stack<int>();
+    _stackOfFollowsStacks.push(newFollowsStack);
 
     parseStmtList();
 
@@ -727,13 +727,12 @@ void Parser::processAndPopTopFollowStack()
     int stmtBefore = 0;
     while (!topFollowsStack.empty()) {
         stmtBefore = topFollowsStack.top();
-        (*_pkbMainPtr).setFollowsRel(stmtBefore, stmtAfter);
+        _pkbMainPtr->setFollowsRel(stmtBefore, stmtAfter);
         stmtAfter = stmtBefore;
         topFollowsStack.pop();
     }
-    (*_pkbMainPtr).setFollowsRel(0, stmtAfter);
+    _pkbMainPtr->setFollowsRel(0, stmtAfter);
 
-    // TODO: Free dynamically allocated memory with "delete" keyword.
     _stackOfFollowsStacks.pop();
 }
 
@@ -745,17 +744,16 @@ void Parser::parseCallStmt()
     string calledProcName = _currentTokenPtr;
 
     /*
-    TODO:
+    TODO iteration 3.0:
     The procedure being called will not be added to PKB. After the whole SIMPLE program is parsed,
     Ask DesignExtractor to check if all the procedures being called are present.
     Show error message and exit if a call statement calls an undefined procedure.
     */
     /*
-    PKB TODO:
-    - Add calledProcName to PKB's procedures DS?
-    - Add calls relation
+    PKB: Add calls relation
     */
     OutputDebugString("PKB: Add calls relation.\n");
+    _pkbMainPtr->setCallsRel(_currentStmtNumber, _currentProcName, calledProcName);
 
     assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
