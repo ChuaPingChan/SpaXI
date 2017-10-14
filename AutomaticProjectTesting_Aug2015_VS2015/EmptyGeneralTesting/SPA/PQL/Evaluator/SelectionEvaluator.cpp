@@ -78,7 +78,7 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
 	}
 	else if (argType == CALL)
 	{
-        return pkbInstance->getAllCallees();
+        return pkbInstance->getAllCallsStmt();
 
 	}
 	else if (argType == PROCEDURE)

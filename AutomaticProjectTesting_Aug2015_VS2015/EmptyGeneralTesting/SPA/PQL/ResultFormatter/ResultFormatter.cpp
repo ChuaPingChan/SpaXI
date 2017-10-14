@@ -5,6 +5,7 @@ using namespace std;
 
 ResultFormatter::ResultFormatter()
 {
+    this->pkbInstance = PKBMain::getInstance();
 }
 
 list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTree qt)
@@ -32,14 +33,19 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 		if (cr.hasResults())
 		{
 			Entity argType = selectionByQuery.getSingleArgType();
+            string synonymToGetResultFor = selectionByQuery.getSingleArg();
+
 			if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
 			{
-				string synonymToGetResultFor = selectionByQuery.getSingleArg();
 				result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
 			}
 
-			//To-Do: Mapping of List to String from PKB
-		}
+            else if (argType == PROCEDURE || argType == VARIABLE)
+            {
+                result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
+            }
+
+        }
 	
 	}
 

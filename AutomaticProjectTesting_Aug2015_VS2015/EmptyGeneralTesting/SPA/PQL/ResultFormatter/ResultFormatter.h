@@ -5,6 +5,7 @@
 #include <list>
 #include "..\QueryTree.h"
 #include "..\Utilities\ClauseResult.h"
+#include "..\..\PKB\PKBMain.h"
 
 using namespace std;
 
@@ -18,5 +19,7 @@ public:
 protected:
 	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
 	list<string> convertListOfListOfIntsToListOfStrings(list<list<int>> listOfInts);
+private:
+    PKBMain* pkbInstance;
 };
 
