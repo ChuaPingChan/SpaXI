@@ -852,14 +852,14 @@ list<int> PKBMain::getAllStatements() {
 	return stmtTypeList.getAllStatements();
 }
 
-list<string> PKBMain::getAllVariables() {
-	return varIdxTable.getAllVariables();
+list<int> PKBMain::getAllVariables() {
+	return varIdxTable.getAllVariablesIndex();
 }
 
 bool PKBMain::setModTableStmtToVar(int stmt, string var)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
-	bool added = modTableStmtToVar.addModStmtToVarList(stmt, var);
+	bool added = modTableStmtToVar.addModStmtToVarList(stmt, varIdx);
 	added = modTableVar.addModVarToStmtList(varIdx, stmt);
 	if (stmtTypeList.isAssignStmt(stmt))
 	{
@@ -875,7 +875,8 @@ bool PKBMain::setModTableStmtToVar(int stmt, string var)
 bool PKBMain::setModTableProcToVar(string proc, string var)
 {
 	int procIdx = procIdxTable.getIdxFromProc(proc);
-	bool added = modTableProcToVar.addModProcToVarList(procIdx, var);
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	bool added = modTableProcToVar.addModProcToVarList(procIdx, varIdx);
 	return added;
 
 }
@@ -883,7 +884,7 @@ bool PKBMain::setModTableProcToVar(string proc, string var)
 bool PKBMain::setUseTableStmtToVar(int stmt, string var)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
-	bool added = usesTableStmtToVar.addUsesStmtToVarList(stmt, var);
+	bool added = usesTableStmtToVar.addUsesStmtToVarList(stmt, varIdx);
 	added = usesTableVar.addUsesVarToStmtList(varIdx, stmt);
 	if (stmtTypeList.isAssignStmt(stmt))
 	{
@@ -899,7 +900,8 @@ bool PKBMain::setUseTableStmtToVar(int stmt, string var)
 bool PKBMain::setUseTableProcToVar(string proc, string var)
 {
 	int procIdx = procIdxTable.getIdxFromProc(proc);
-	bool added = usesTableProcToVar.addUsesProcToVarList(procIdx, var);
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	bool added = usesTableProcToVar.addUsesProcToVarList(procIdx, varIdx);
 	return added;
 }
 
@@ -911,21 +913,19 @@ bool PKBMain::setPatternRelation(int stmt, string var, string expression)
 
 bool PKBMain::isUses(int stmt, string var)
 {
-	return usesTableStmtToVar.isUses(stmt, var);
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	return usesTableStmtToVar.isUses(stmt, varIdx);
 }
 
 bool PKBMain::isMod(int stmt, string var)
 {
-	return modTableStmtToVar.isMod(stmt, var);
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	return modTableStmtToVar.isMod(stmt, varIdx);
 }
 
 bool PKBMain::isMod(int stmt, int varIdx)
 {
-	string var = varIdxTable.getVarFromIdx(varIdx);
-	if (var == "") {
-		return false;
-	}
-	return modTableStmtToVar.isMod(stmt, var);
+	return modTableStmtToVar.isMod(stmt, varIdx);
 }
 
 bool PKBMain::isUsingAnything(int stmt)
@@ -938,12 +938,12 @@ bool PKBMain::isModifyingAnything(int stmt)
 	return modTableStmtToVar.isModifyingAnything(stmt);
 }
 
-list<string> PKBMain::getUsesFromStmt(int stmt)
+list<int> PKBMain::getUsesFromStmt(int stmt)
 {
 	return usesTableStmtToVar.getUsesVariablesFromStmt(stmt);
 }
 
-list<string> PKBMain::getModifiesFromStmt(int stmt)
+list<int> PKBMain::getModifiesFromStmt(int stmt)
 {
 	return modTableStmtToVar.getModVariablesFromStmt(stmt);
 }
@@ -1003,15 +1003,15 @@ list<int> PKBMain::getStmtThatModifiesAnything(Entity type)
 	return stmtTypeList.getStmtType(stmtList, type);
 }
 
-pair<list<int>, list<string>> PKBMain::getUsesPairs(Entity type)
+pair<list<int>, list<int>> PKBMain::getUsesPairs(Entity type)
 {
-	pair<list<int>, list<string>> usesPairs = usesTableStmtToVar.getUsesPair();
+	pair<list<int>, list<int>> usesPairs = usesTableStmtToVar.getUsesPair();
 	return stmtTypeList.getStmtType(usesPairs, type);
 }
 
-pair<list<int>, list<string>> PKBMain::getModifiesPairs(Entity type)
+pair<list<int>, list<int>> PKBMain::getModifiesPairs(Entity type)
 {
-	pair<list<int>, list<string>> modPairs = modTableStmtToVar.getModPair();
+	pair<list<int>, list<int>> modPairs = modTableStmtToVar.getModPair();
 	return stmtTypeList.getStmtType(modPairs, type);
 }
 

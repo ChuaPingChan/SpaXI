@@ -238,3 +238,7 @@ unordered_map<int, pair<int, int>> DesignExtractor::computeFollowsTable(unordere
 
 	return followsMap;
 }
+
+// TODO 1 implement postorder
+
+// TODO 1 void DesignExtractor::dfsWalk()

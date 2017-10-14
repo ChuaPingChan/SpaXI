@@ -18,4 +18,5 @@ class DesignExtractor {
 		unordered_map<int, list<int>> computeFollowsStarBeforeTable(FollowsTable followsTable);
 		pair<unordered_map<int, list<int>>, unordered_map<int, list<int>>> computeCallsStarTable(CallsTable callsTable);
 		unordered_map<int, pair<int, int>> computeFollowsTable(unordered_map<int, int> followsBefore, unordered_map<int, int> followsAfter);
+		list<int> getPostfix(int root, unordered_map<int, list<int>> graph);
 };

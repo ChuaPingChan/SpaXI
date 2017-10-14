@@ -80,7 +80,7 @@ public:
 	list<int> getAllConstants();
 	list<int> getAllStatements();
 
-	list<string> getAllVariables();
+	list<int> getAllVariables();
     
     //PKB-Parser
 	bool setParentChildRel(int parentStmt, int childStmt);
@@ -126,14 +126,14 @@ public:
 	bool isMod(int stmt, int varIdx);
     bool isUsingAnything(int stmt);
     bool isModifyingAnything(int stmt);
-    list<string> getUsesFromStmt(int stmt);
-    list<string> getModifiesFromStmt(int stmt);
+    list<int> getUsesFromStmt(int stmt);
+    list<int> getModifiesFromStmt(int stmt);
     list<int> getUsesFromVar(string var, Entity type);
     list<int> getModifiesFromVar(string var, Entity type);
     list<int> getStmtThatUsesAnything(Entity type);
     list<int> getStmtThatModifiesAnything(Entity type);
-    pair<list<int>, list<string>> getUsesPairs(Entity type);
-    pair<list<int>, list<string>> getModifiesPairs(Entity type);
+    pair<list<int>, list<int>> getUsesPairs(Entity type);
+    pair<list<int>, list<int>> getModifiesPairs(Entity type);
 
     //PKB query evaluator (Pattern)
     pair<list<int>, list<string>> getLeftVariables();

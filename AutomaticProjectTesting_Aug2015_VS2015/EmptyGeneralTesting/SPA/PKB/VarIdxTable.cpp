@@ -8,6 +8,8 @@ bool VarIdxTable::addToVarIdxTable(string var) {
     // if variable does not exist as a key, create new list and insert data to hash map
     if (varIdxMap.find(var) == varIdxMap.end()) {
         varIdxMap[var] = varIdx;
+		allVarIdx.push_back(varIdx);
+		allVarString.push_back(var);
         varIdx++;
 		varIdxToStringMap[varIdx] = var;
         return true;
@@ -52,4 +54,8 @@ list<string> VarIdxTable::getAllVariables() {
 	}
 
 	return varList;
+}
+
+list<int> VarIdxTable::getAllVariablesIndex() {
+	return allVarIdx;
 }
