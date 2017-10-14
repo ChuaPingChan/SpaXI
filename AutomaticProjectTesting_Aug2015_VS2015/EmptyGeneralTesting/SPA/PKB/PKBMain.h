@@ -153,15 +153,26 @@ public:
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
     bool isUsingAnything(int stmt);
+	bool isUsingAnythingProc(string procName);
     bool isModifyingAnything(int stmt);
+	bool isModifyingAnythingProc(string procName);
     list<int> getUsesFromStmt(int stmt);
+	list<int> getUsesFromProc(string procName);
     list<int> getModifiesFromStmt(int stmt);
+	list<int> getModifiesFromProc(string procIdx);
     list<int> getUsesFromVar(string var, Entity type);
+	list<int> getProcUsesFromVar(string var, Entity type);
     list<int> getModifiesFromVar(string var, Entity type);
-    list<int> getStmtThatUsesAnything(Entity type);
+	list<int> getProcModifiesFromVar(string var, Entity type);
+	list<int> getStmtThatUsesAnything(Entity type);
+	list<int> getProcThatUsesAnything();
     list<int> getStmtThatModifiesAnything(Entity type);
+	list<int> getStmtThatModifiesAnything();
     pair<list<int>, list<int>> getUsesPairs(Entity type);
+	pair<list<int>, list<int>> getProcUsesPair();
     pair<list<int>, list<int>> getModifiesPairs(Entity type);
+
+	pair<list<int>, list<int>> getProcModifiesPair();
 
     //PKB query evaluator (Pattern)
     pair<list<int>, list<string>> getLeftVariables();

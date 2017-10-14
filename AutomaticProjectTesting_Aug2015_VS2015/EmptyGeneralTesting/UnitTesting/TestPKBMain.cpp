@@ -343,6 +343,7 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isModProc("One", "a"));
 			Assert::IsTrue(PKB.isModProc("One", "b"));
 			Assert::IsTrue(PKB.isModProc("One", "c"));
+			Assert::IsTrue(PKB.isModProc("Two", "h"));
 			Assert::IsFalse(PKB.isModProc("Four", "h"));
 
 			/*

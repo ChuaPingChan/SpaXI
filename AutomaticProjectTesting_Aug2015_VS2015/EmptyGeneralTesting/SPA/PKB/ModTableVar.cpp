@@ -23,11 +23,11 @@ bool ModTableVar::addModVarToStmtList(int varIdx, int stmtNumber) {
     return false;
 }
 
-bool ModTableVar::addModVarToProcList(int varIdx, string proc)
+bool ModTableVar::addModVarToProcList(int varIdx, int proc)
 {
     // if stmt number does not exist as a key, create new list and insert data to hash map
     if (modVarToProcMap.find(varIdx) == modVarToProcMap.end()) {
-        modVarToProcMap[varIdx] = list<string>();
+        modVarToProcMap[varIdx] = list<int>();
         modVarToProcMap[varIdx].push_back(proc);
         return true;
     }
@@ -111,7 +111,7 @@ list<int> ModTableVar::getModStmtsFromVar(int varIdx) {
     return modVarToStmtMap[varIdx];
 }
 
-list<string> ModTableVar::getModProcsFromVar(int varIdx)
+list<int> ModTableVar::getModProcsFromVar(int varIdx)
 {
     return modVarToProcMap[varIdx];
 }
@@ -134,4 +134,14 @@ list<int> ModTableVar::getModWhileContainersFromVar(int varIdx)
 list<int> ModTableVar::getModIfFromVar(int varIdx)
 {
     return modVarToIfMap[varIdx];
+}
+
+bool ModTableVar::setStmtMap(unordered_map<int, list<int>> map) {
+	modVarToStmtMap = map;
+	return true;
+}
+
+bool ModTableVar::setProcMap(unordered_map<int, list<int>> map) {
+	modVarToProcMap = map;
+	return true;
 }
