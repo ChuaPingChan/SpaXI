@@ -55,13 +55,19 @@ list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 }
 
 //CALLS
+list<string> PKBMain::getAllCalleeNames() {
+	return stmtTypeList.getAllCalleeNames();
+}
+
 bool PKBMain::setCallsRel(int stmt, string callerProcName, string calleeProcName) {
 	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
-	stmtTypeList.addToCallsStmtList(stmt);
+
 	if (procIdxTable.getIdxFromProc(calleeProcName) == -1) {
 		procIdxTable.addToProcIdxTable(calleeProcName);
 	}
+
 	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
+	stmtTypeList.addToCallsStmtList(stmt, calleeProcIdx, calleeProcName);
 	return callsTable.addCallsRel(callerProcIdx, calleeProcIdx) && callsTable.addCallsStmt(stmt, calleeProcIdx);
 }
 
@@ -365,6 +371,9 @@ bool PKBMain::startProcessComplexRelations() {
 	followsStarBefore.setMap(de.computeFollowsStarBeforeTable(followsTable));
 	callsStarTable.setCallsStarMap(de.computeCallsStarTable(callsTable));
 	usesTableProcToVar.setMap(de.computeUsesTable(usesTableProcToVar, callsStarTable));
+	modTableProcToVar.setMap(de.computeModifiesTable(modTableProcToVar, callsStarTable));
+	usesTableStmtToVar.setMap(de.computeUsesTable(usesTableStmtToVar, stmtTypeList, usesTableProcToVar, childToParentStarTable));
+	modTableStmtToVar.setMap(de.computeModifiesTable(modTableStmtToVar, stmtTypeList, modTableProcToVar, childToParentStarTable));
 	return true;
 }
 
@@ -419,8 +428,15 @@ list<int> PKBMain::getAllVariables() {
 	return varIdxTable.getAllVariablesIndex();
 }
 
+list<string> PKBMain::getAllVarNames() {
+	return varIdxTable.getAllVariables();
+}
 list<int> PKBMain::getAllProcedures() {
 	return procIdxTable.getAllProceduresIndex();
+}
+
+list<string> PKBMain::getAllProcNames() {
+	return procIdxTable.getAllProceduresName();
 }
 bool PKBMain::setModTableStmtToVar(int stmt, string var)
 {
@@ -482,6 +498,21 @@ bool PKBMain::isUses(int stmt, int varIdx)
     return usesTableStmtToVar.isUses(stmt, varIdx);
 }
 
+bool PKBMain::isUsesProc(int procIdx, int varIdx) {
+	return usesTableProcToVar.isUses(procIdx, varIdx);
+}
+
+bool PKBMain::isUsesProc(string procName, string varName) {
+	int procIdx = procIdxTable.getIdxFromProc(procName);
+	int varIdx = varIdxTable.getIdxFromVar(varName);
+
+	if (procIdx == -1 || varIdx == -1) {
+		return false;
+	}
+
+	return usesTableProcToVar.isUses(procIdx, varIdx);
+}
+
 bool PKBMain::isUses(int stmt, string var)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
@@ -494,6 +525,16 @@ bool PKBMain::isMod(int stmt, string var)
 	return modTableStmtToVar.isMod(stmt, varIdx);
 }
 
+bool PKBMain::isModProc(string procName, string varName) {
+	int procIdx = procIdxTable.getIdxFromProc(procName);
+	int varIdx = varIdxTable.getIdxFromVar(varName);
+
+	if (procIdx == -1 || varIdx == -1) {
+		return false;
+	}
+
+	return modTableProcToVar.isMod(procIdx, varIdx);
+}
 bool PKBMain::isMod(int stmt, int varIdx)
 {
 	return modTableStmtToVar.isMod(stmt, varIdx);

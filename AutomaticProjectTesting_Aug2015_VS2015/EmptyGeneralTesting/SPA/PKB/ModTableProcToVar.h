@@ -13,6 +13,9 @@ public:
     ModTableProcToVar();
     bool addModProcToVarList(int procIdx, int varIdx);
     list<int> getModVariablesFromProc(int procIdx);
+	unordered_map<int, list<int>> getMap();
+	bool isMod(int procIdx, int varIdx);
+	bool setMap(unordered_map<int, list<int>> map);
 private:
     unordered_map<int, list<int>> modProcToVarMap;
 };

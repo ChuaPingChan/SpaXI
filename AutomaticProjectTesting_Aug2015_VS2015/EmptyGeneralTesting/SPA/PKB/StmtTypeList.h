@@ -16,8 +16,11 @@ public:
     StmtTypeList();
     bool addToAssignStmtList(int stmt);
     bool addToWhileStmtList(int stmt);
-	bool addToCallsStmtList(int stmt);
-    bool addToIfStmtList(int stmt);
+	bool addToCallsStmtList(int stmt, int calleeProcIdx, string calleeProcName);
+	int getProcIdxFromCall(int stmt);
+	list<string> getAllCalleeNames();
+	unordered_map<int, int> getCallToProcIdxMap();
+	bool addToIfStmtList(int stmt);
 	list<int> getAllStatements();
     bool isAssignStmt(int stmt);
     bool isWhileStmt(int stmt);
@@ -38,4 +41,8 @@ private:
     list<int> whileStmtList;
 	list<int> callsStmtList;
     list<int> ifStmtList;
+	list<string> allCalleeName;
+	unordered_map<int, string> callToProcNameMap;
+	unordered_map<string, list<int>> procNameToCallMap;
+	unordered_map<int, int> callToProcIdxMap;
 };

@@ -37,3 +37,7 @@ bool UsesTableProcToVar::setMap(unordered_map<int, list<int>> targetMap) {
 unordered_map<int, list<int>> UsesTableProcToVar::getMap() {
 	return usesProcToVarMap;
 }
+
+bool UsesTableProcToVar::isUses(int procIdx, int varIdx) {
+	return find(usesProcToVarMap[procIdx].begin(), usesProcToVarMap[procIdx].end(), varIdx) != usesProcToVarMap[procIdx].end();
+}

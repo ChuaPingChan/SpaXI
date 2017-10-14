@@ -91,6 +91,7 @@ public:
     //PKB-Parser
 	bool setParentChildRel(int parentStmt, int childStmt);
 	bool setFollowsRel(int stmtBef, int stmtAft);
+	list<string> getAllCalleeNames();
 	bool setCallsRel(int stmt, string callerProcName, string calleeProcName);
     bool addVariable(string var);
     bool addProcedure(string proc);
@@ -100,7 +101,9 @@ public:
 	bool addIfStmt(int stmt, string controlVar);
     bool addIfStmt(int stmt);
     bool addConstant(int stmt, int constant);
+	list<string> getAllVarNames();
 	list<int> getAllProcedures();
+	list<string> getAllProcNames();
 	bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);
     bool setUseTableStmtToVar(int stmt, string var);
@@ -143,7 +146,10 @@ public:
 
     //PKB query evaluator (Uses, Modifies)
     bool isUses(int stmt, int varIdx);
-    bool isMod(int stmt, int varIdx);
+	bool isUsesProc(int procIdx, int varIdx);
+	bool isUsesProc(string procName, string varName);
+	bool isModProc(string procName, string var);
+	bool isMod(int stmt, int varIdx);
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
     bool isUsingAnything(int stmt);
