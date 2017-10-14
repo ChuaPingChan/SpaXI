@@ -96,7 +96,6 @@ list<int> StmtTypeList::getCallsStmtList()
     getStmtType: to retrieve the statement numbers according to type
     (e.g. assign, while, ifs)
 */
-//TODO 1 change PKB entity types to use this method
 list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
 {
     list<int> filteredList;
@@ -124,6 +123,15 @@ list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
                 filteredList.push_back(*it);
             }
         }
+		else if (type == CALL) {
+			if (isCallsStmt(*it))
+			{
+				filteredList.push_back(*it);
+			}
+		}
+		else if (type == STMT) {
+			return stmtList;
+		}
         else
         {
             filteredList.push_back(*it);
@@ -136,7 +144,6 @@ pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> 
 {
     list<int> stmts = pairOfList.first;
     list<int> vars = pairOfList.second;
-    // converting from pair of two lists into list of pairs
 	pair<list<int>, list<int>> resultPair;
 	resultPair = make_pair(list<int>(), list<int>());
 	int currStmt;
@@ -163,14 +170,14 @@ pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> 
 			}
 
 		}
-		/* TODO 1 uncomment if
+
 		else if (type == IF) {
 			if (isIfStmt(currStmt)) {
 				resultPair.first.push_back(currStmt);
 				resultPair.second.push_back(currVar);
 			}
 
-		}*/
+		}
 
 		else if (type == CALL) {
 			if (isCallsStmt(currStmt)) {
@@ -187,4 +194,56 @@ pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> 
     }
 
 	return resultPair;
+}
+
+pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> pairOfList, Entity type1, Entity type2) {
+	//process first entity
+	pair<list<int>, list<int>> firstResultPair = getStmtType(pairOfList, type1);
+	firstResultPair = make_pair(firstResultPair.second, firstResultPair.first);
+	pair<list<int>, list<int>> secondResultPair = getStmtType(firstResultPair, type2);
+	secondResultPair = make_pair(secondResultPair.second, secondResultPair.first);
+
+	return secondResultPair;
+}
+
+list<int> StmtTypeList::getStmtType(int stmt, Entity type) {
+	list<int> resultList;
+	if (type == ASSIGN)
+	{
+		if (isAssignStmt(stmt))
+		{
+			resultList.push_back(stmt);
+		}
+	}
+	
+	else if (type == WHILE)
+	{
+		if (isWhileStmt(stmt))
+		{
+			resultList.push_back(stmt);
+		}
+	}
+
+	else if (type == IF)
+	{
+		if (isIfStmt(stmt))
+		{
+			resultList.push_back(stmt);
+		}
+	}
+
+	else if (type == CALL)
+	{
+		if (isCallsStmt(stmt))
+		{
+			resultList.push_back(stmt);
+		}
+	}
+
+	else
+	{
+		resultList.push_back(stmt);
+	}
+
+	return resultList;
 }

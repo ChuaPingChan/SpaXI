@@ -240,5 +240,20 @@ unordered_map<int, pair<int, int>> DesignExtractor::computeFollowsTable(unordere
 }
 
 // TODO 1 implement postorder
+unordered_map<int, list<int>> DesignExtractor::computeUsesTable(UsesTableProcToVar usesTable, CallsStarTable callsStarTable) {
+	unordered_map<int, list<int>> usesMap = usesTable.getMap();
+	unordered_map<int, list<int>> callsStarMap = callsStarTable.setCallsStarMap();
+	//iterate all calls
+	unordered_set<int> visited;
+	for (std::unordered_map<int, list<int>>::iterator it = callsStarMap.begin(); it != callsStarMap.end(); ++it) {
+		int currCaller = (*it).first;
+		list<int> calleeStar = (*it).second;
+		for (int it2 : calleeStar) {
+			if (visited.find(it2) != visited.end()) {
 
+			}
+		}
+	}
+	return usesMap;
+}
 // TODO 1 void DesignExtractor::dfsWalk()

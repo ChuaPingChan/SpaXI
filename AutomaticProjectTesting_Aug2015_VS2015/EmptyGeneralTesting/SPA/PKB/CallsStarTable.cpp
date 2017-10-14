@@ -43,3 +43,6 @@ pair<list<int>, list<int>> CallsStarTable::getAllCallsStar() {
 	return allCallsStar;
 }
 
+unordered_map<int, list<int>> CallsStarTable::setCallsStarMap() {
+	return callsStarProcMap;
+}
