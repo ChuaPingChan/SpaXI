@@ -16,9 +16,9 @@ DO NOT use this class in the real SPA.
 class Parser
 {
 public:
-    /********
-    * REGEX *
-    *********/
+    /*********
+     * REGEX *
+     *********/
 
     static const std::regex REGEX_VALID_ENTITY_NAME;
     static const std::regex REGEX_VALID_VAR_NAME;
@@ -29,6 +29,7 @@ public:
     static const std::regex REGEX_MATCH_PROCEDURE_KEYWORD;
     static const std::regex REGEX_MATCH_WHILE_KEYWORD;
     static const std::regex REGEX_MATCH_CALL_KEYWORD;
+    static const std::regex REGEX_MATCH_IF_KEYWORD;
     static const std::regex REGEX_MATCH_OPEN_BRACE;
     static const std::regex REGEX_MATCH_CLOSE_BRACE;
     static const std::regex REGEX_MATCH_OPEN_BRACKET;
@@ -52,8 +53,8 @@ protected:
     static const int INT_INITIAL_PROC_INDEX;
 
     /********************
-    * Member Attributes *
-    *********************/
+     * Member Attributes *
+     *********************/
     int _currentStmtNumber;
     std::string _concatenatedSourceCode;
     std::string _currentTokenPtr;
@@ -61,8 +62,8 @@ protected:
     std::stack<std::string> _callStack;     //Contains only procedures
     std::stack<int> _parentStack;           //Contains only container stmts
     PKBMain* _pkbMainPtr;
-    std::stack<std::stack<int>> _stacksOfFollowsStacks;
-    int _currentProcIdx;                    //The index of the current procedure being parsed
+    std::stack<std::stack<int>> _stackOfFollowsStacks;     // To set Follows relation in PKB
+    int _currentProcIdx;    //The index of the current procedure being parsed. Needed by set Calls relation.
 
     /*********************
      * Protected Methods *
@@ -85,6 +86,7 @@ protected:
     bool assignmentExpected();
     bool whileExpected();
     bool callStmtExpected();
+    bool ifStmtExpected();
 
     void parseProgram();
     void parseProcedure();
@@ -93,5 +95,6 @@ protected:
     void parseAssignment();
     void parseWhileStmt();
     void parseCallStmt();
+    void parseIfStmt();
 
 };
