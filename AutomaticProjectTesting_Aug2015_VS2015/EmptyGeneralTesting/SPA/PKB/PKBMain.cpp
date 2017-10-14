@@ -22,6 +22,24 @@ void PKBMain::resetInstance()
     singleton = NULL;
     singleton = new PKBMain();
 }
+
+//Utility functions
+list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
+	list<string> resultString;
+	list<int>::iterator it;
+	if (type == PROCEDURE) {
+		for (it = indexList.begin(); it != indexList.end(); ++it) {
+			resultString.push_back(prodIdxTable.)
+		}
+	}
+
+	if (type == VARIABLE) {
+		for (it = indexList.begin; it != indexList.end(); ++it) {
+
+		}
+	}
+}
+
 //CALLS
 bool PKBMain::setCallsRel(int stmt, string callerProcName, string calleeProcName) {
 	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
@@ -856,6 +874,9 @@ list<int> PKBMain::getAllVariables() {
 	return varIdxTable.getAllVariablesIndex();
 }
 
+list<int> PKBMain::getAllProcedures() {
+	return procIdxTable.getAllProceduresIndex();
+}
 bool PKBMain::setModTableStmtToVar(int stmt, string var)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);

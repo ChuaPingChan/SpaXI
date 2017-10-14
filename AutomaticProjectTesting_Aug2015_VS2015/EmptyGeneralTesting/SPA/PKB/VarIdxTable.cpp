@@ -9,9 +9,10 @@ bool VarIdxTable::addToVarIdxTable(string var) {
     if (varIdxMap.find(var) == varIdxMap.end()) {
         varIdxMap[var] = varIdx;
 		allVarIdx.push_back(varIdx);
+		varIdxToStringMap[varIdx] = var;
 		allVarString.push_back(var);
         varIdx++;
-		varIdxToStringMap[varIdx] = var;
+
         return true;
     }
     return false;

@@ -36,6 +36,8 @@ public:
     static PKBMain* getInstance();
     static void resetInstance();
 
+	list<string> convertIdxToString(list<int> indexList, Entity type);
+
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
     bool isParent(int parentStmt);
@@ -91,7 +93,8 @@ public:
     bool addAssignmentStmt(int stmt);
     bool addWhileStmt(int stmt);
     bool addConstant(int stmt, int constant);
-    bool setModTableStmtToVar(int stmt, string var);
+	list<int> getAllProcedures();
+	bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);
     bool setUseTableStmtToVar(int stmt, string var);
     bool setUseTableProcToVar(string proc, string var);
