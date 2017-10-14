@@ -31,6 +31,7 @@ public:
     list<int> getStmtType(list<int> stmtList, Entity type);
     pair<list<int>, list<int>> getStmtType(pair<list<int>, list<int>> pairOfList, Entity type);
 	pair<list<int>, list<int>> getStmtType(pair<list<int>, list<int>> pairOfList, Entity type1, Entity type2);
+	list<int> getStmtType(int stmt, Entity type);
 private:
 	list<int> allStmtList;
     list<int> assignStmtList;
