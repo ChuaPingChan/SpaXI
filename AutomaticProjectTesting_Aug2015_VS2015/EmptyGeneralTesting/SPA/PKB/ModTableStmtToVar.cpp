@@ -70,3 +70,11 @@ bool ModTableStmtToVar::isModifyingAnything(int stmtNumber)
     return modStmtToVarMap.find(stmtNumber) != modStmtToVarMap.end();
 }
 
+bool ModTableStmtToVar::setMap(unordered_map<int, list<int>> map) {
+	modStmtToVarMap = map;
+	return true;
+}
+
+unordered_map<int, list<int>> ModTableStmtToVar::getMap() {
+	return modStmtToVarMap;
+}

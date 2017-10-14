@@ -72,3 +72,12 @@ bool UsesTableStmtToVar::isUsingAnything(int stmtNumber)
 {
     return usesStmtToVarMap.find(stmtNumber) != usesStmtToVarMap.end();
 }
+
+bool UsesTableStmtToVar::setMap(unordered_map<int, list<int>> map) {
+	usesStmtToVarMap = map;
+	return true;
+}
+
+unordered_map<int, list<int>> UsesTableStmtToVar::getMap() {
+	return usesStmtToVarMap;
+}

@@ -22,3 +22,16 @@ bool ModTableProcToVar::addModProcToVarList(int procIdx, int varIdx) {
 list<int> ModTableProcToVar::getModVariablesFromProc(int procIdx) {
     return modProcToVarMap[procIdx];
 }
+
+unordered_map<int, list<int>> ModTableProcToVar::getMap() {
+	return modProcToVarMap;
+}
+
+bool ModTableProcToVar::isMod(int procIdx, int varIdx) {
+	return find(modProcToVarMap[procIdx].begin(), modProcToVarMap[procIdx].end(), varIdx) != modProcToVarMap[procIdx].end();
+}
+
+bool ModTableProcToVar::setMap(unordered_map<int, list<int>> map) {
+	modProcToVarMap = map;
+	return true;
+}

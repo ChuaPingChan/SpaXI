@@ -8,6 +8,48 @@ PatternTable::PatternTable() {
     
 }
 
+bool PatternTable::addWhile(int stmt, int varIdx) {
+	if (varToWhileMap.find(varIdx) == varToWhileMap.end()) {
+		varToWhileMap[varIdx].push_back(stmt);
+	}
+	else {
+		varToWhileMap[varIdx].push_back(stmt);
+		varToWhileMap[varIdx].sort();
+		varToWhileMap[varIdx].unique();
+	}
+	return true;
+}
+
+bool PatternTable::addIf(int stmt, int varIdx) {
+	if (varToIfMap.find(varIdx) == varToIfMap.end()) {
+		varToIfMap[varIdx].push_back(stmt);
+	}
+	else {
+		varToIfMap[varIdx].push_back(stmt);
+		varToIfMap[varIdx].sort();
+		varToIfMap[varIdx].unique();
+	}
+	return true;
+}
+
+list<int> PatternTable::getWhileWithControlVariable(int varIdx) {
+	list<int> stmtList;
+	if (varToWhileMap.find(varIdx) == varToWhileMap.end()) {
+		return stmtList;
+	}
+
+	return varToWhileMap[varIdx];
+}
+
+list<int> PatternTable::getIfWithControlVariable(int varIdx) {
+	list<int> stmtList;
+	if (varToIfMap.find(varIdx) == varToIfMap.end()) {
+		return stmtList;
+	}
+
+	return varToIfMap[varIdx];
+}
+
 /*
     Pre-condition: expression must be a valid expression taking operands
     (0-9, a-z, A-Z) and operators(+,-,*,/) between operands
