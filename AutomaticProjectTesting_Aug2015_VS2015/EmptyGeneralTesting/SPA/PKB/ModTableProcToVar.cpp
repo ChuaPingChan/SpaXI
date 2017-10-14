@@ -20,6 +20,10 @@ bool ModTableProcToVar::addModProcToVarList(int procIdx, int varIdx) {
 }
 
 list<int> ModTableProcToVar::getModVariablesFromProc(int procIdx) {
+	if (modProcToVarMap.find(procIdx) == modProcToVarMap.end()) {
+		return list<int>();
+	}
+
     return modProcToVarMap[procIdx];
 }
 
@@ -34,4 +38,35 @@ bool ModTableProcToVar::isMod(int procIdx, int varIdx) {
 bool ModTableProcToVar::setMap(unordered_map<int, list<int>> map) {
 	modProcToVarMap = map;
 	return true;
+}
+
+bool ModTableProcToVar::isModifyingAnything(int procIdx) {
+	return modProcToVarMap.find(procIdx) != modProcToVarMap.end();
+}
+
+list<int> ModTableProcToVar::getProcThatModifies() {
+	list<int> procList;
+	for (unordered_map<int, list<int>>::iterator it = modProcToVarMap.begin(); it != modProcToVarMap.end(); ++it) {
+		int procIdx = (*it).first;
+		procList.push_back(procIdx);
+	}
+
+	return procList;
+}
+
+pair<list<int>, list<int>> ModTableProcToVar::getProcPair() {
+	list<int> procList;
+	list<int> varList;
+
+	for (unordered_map<int, list<int>>::iterator it = modProcToVarMap.begin(); it != modProcToVarMap.end(); ++it) {
+		int procIdx = (*it).first;
+		list<int> varList = (*it).second;
+
+		for (int var : varList) {
+			procList.push_back(procIdx);
+			varList.push_back(var);
+		}
+	}
+
+	return make_pair(procList, varList);
 }

@@ -40,6 +40,9 @@ bool ParentToChildTable::empty() {
 }
 
 list<int> ParentToChildTable::getChildren(int parentStmt) {
+	if (parentToChildMap.find(parentStmt) == parentToChildMap.end()) {
+		return list<int>();
+	}
 	return parentToChildMap[parentStmt];
 }
 

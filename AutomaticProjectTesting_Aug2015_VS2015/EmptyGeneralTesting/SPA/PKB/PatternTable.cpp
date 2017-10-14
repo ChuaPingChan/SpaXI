@@ -42,9 +42,8 @@ list<int> PatternTable::getWhileWithControlVariable(int varIdx) {
 }
 
 list<int> PatternTable::getIfWithControlVariable(int varIdx) {
-	list<int> stmtList;
 	if (varToIfMap.find(varIdx) == varToIfMap.end()) {
-		return stmtList;
+		return list<int>();
 	}
 
 	return varToIfMap[varIdx];
@@ -66,6 +65,7 @@ bool PatternTable::addToPatternTable(int stmtNumber, string var, string expressi
 }
 
 pair<string,list<string>> PatternTable::getExpression(int stmtNumber) {
+	//TODO 1 Check if this adds bug
     return patternTableMap[stmtNumber];
 }
 
@@ -180,6 +180,9 @@ list<int> PatternTable::getLeftVariableMatchingStmts(string var)
 //////////////////////////////////////////////////////////
 bool PatternTable::hasExactMatch(int stmtNumber, string expression) {
     // returns true if postfix of expression exactly matches with patternTableMap[stmtNumber]
+	if (patternTableMap.find(stmtNumber) == patternTableMap.end()) {
+		return false;
+	}
     return patternTableMap[stmtNumber].second == infixToPostfix(expression);
 }
 

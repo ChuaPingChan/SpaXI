@@ -25,6 +25,9 @@ bool ParentToChildStarTable::addParentChild(int parentStmt, int childStmt)
 }
 
 list<int> ParentToChildStarTable::getChildren(int parentStmt) {
+	if (parentToChildStarMap.find(parentStmt) == parentToChildStarMap.end()) {
+		return list<int>();
+	}
 	return parentToChildStarMap[parentStmt];
 }
 
