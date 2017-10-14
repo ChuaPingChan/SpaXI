@@ -708,12 +708,6 @@ bool PKBMain::addWhileStmt(int stmt, string controlVar) {
 	return true;
 }
 
-bool PKBMain::addWhileStmt(int stmt)
-{
-	bool added = stmtTypeList.addToWhileStmtList(stmt);
-	return added;
-}
-
 bool PKBMain::addIfStmt(int stmt, string controlVar)
 {
 	addVariable(controlVar);
@@ -721,11 +715,6 @@ bool PKBMain::addIfStmt(int stmt, string controlVar)
 	int varIdx = varIdxTable.getIdxFromVar(controlVar);
 	patternTable.addIf(stmt, varIdx);
     return added;
-}
-
-bool PKBMain::addIfStmt(int stmt) {
-	bool added = stmtTypeList.addToIfStmtList(stmt);
-	return added;
 }
 
 bool PKBMain::addConstant(int stmt, int constant)

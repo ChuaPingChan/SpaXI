@@ -589,23 +589,23 @@ void Parser::parseWhileStmt() {
     OutputDebugString("FINE: While statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
 
-    // PKB TODO: Add while stmt to PKB
-    OutputDebugString("PKB: Add while statement to PKB.\n");
-    _pkbMainPtr->addWhileStmt(_currentStmtNumber);
-
     _parentStack.push(_currentStmtNumber);
 
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
     string whileVar = _currentTokenPtr;
-    /* PKB TODO
+
+    // PKB TODO: Add while stmt to PKB. Must also pass 'control variable'.
+    OutputDebugString("PKB: Add while statement to PKB.\n");
+    _pkbMainPtr->addWhileStmt(_currentStmtNumber, whileVar);
+
+    /* PKB
     Update VarToIdxMap
     Update UsesTableStmtToVar using currentStmtNumber
     Update UsesTableStmtToVar using parentStack
-    Update UsesTableProcToVar using callStack        (after iteration 1.0)
+    Update UsesTableProcToVar using _currentProcName
     Update UsesTableVar using currentStmtNumber
     Update UsesTableVar using parentStack
-    Update UsesTableVar using callStack              (after iteration 1.0)
     */
     OutputDebugString("PKB: Add variable to PKB.\n");
     OutputDebugString("PKB: Update uses relationship.\n");
@@ -613,13 +613,14 @@ void Parser::parseWhileStmt() {
     _pkbMainPtr->setUseTableStmtToVar(_currentStmtNumber, whileVar);
     // TODO Refactoring: Extract method to achieve SLAP.
     if (!_parentStack.empty()) {
-        stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+        stack<int> parentStackCopy = _parentStack;
         while (!parentStackCopy.empty()) {
             int parentStmt = parentStackCopy.top();
             _pkbMainPtr->setUseTableStmtToVar(parentStmt, whileVar);
             parentStackCopy.pop();
         }
     }
+    _pkbMainPtr->setUseTableProcToVar(_currentProcName, whileVar);
 
     assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
