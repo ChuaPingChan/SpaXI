@@ -18,8 +18,6 @@ bool CallsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResul
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    bool hasResult;
-
     //Case 1: Calls(ident, ident)
     if (argOneType == IDENT_WITHQUOTES && argTwoType == IDENT_WITHQUOTES)
     {
@@ -121,11 +119,10 @@ bool CallsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResul
                 int argTwoVal = pair.second;
 
                 // Removes from clauseResult as it is no longer valid due to new relation
-                // TODO: PKB update method to take in int
-                /*if (!pkbInstance->isCalls(argOneVal, argTwoVal))
+                if (!pkbInstance->isCalls(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
-                }*/
+                }
             }
 
             return clauseResult->hasResults();
@@ -163,7 +160,7 @@ bool CallsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResul
                 for (int existingSynVal : existingSynVals)
                 {
                     // TODO: PKB update method to take in int
-                    list<int> newSynVals;// = pkbInstance->getCallee(existingSynVal);
+                    list<int> newSynVals = pkbInstance->getCallee(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
@@ -188,7 +185,7 @@ bool CallsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResul
                 for (int existingSynVal : existingSynVals)
                 {
                     // TODO: PKB update method to take in int
-                    list<int> newSynVals;// = pkbInstance->getCaller(existingSynVal);
+                    list<int> newSynVals = pkbInstance->getCaller(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);

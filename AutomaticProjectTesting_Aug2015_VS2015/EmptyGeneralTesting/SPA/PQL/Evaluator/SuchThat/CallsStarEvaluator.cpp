@@ -18,8 +18,6 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    bool hasResult;
-
     //Case 1: Calls*(ident, ident)
     if (argOneType == IDENT_WITHQUOTES && argTwoType == IDENT_WITHQUOTES)
     {
@@ -121,11 +119,10 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
                 int argTwoVal = pair.second;
 
                 // Removes from clauseResult as it is no longer valid due to new relation
-                // TODO: PKB update method to take in int
-                /*if (!pkbInstance->isCallsStar(argOneVal, argTwoVal))
+                if (!pkbInstance->isCallsStar(argOneVal, argTwoVal))
                 {
-                clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
-                }*/
+                    clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
+                }
             }
 
             return clauseResult->hasResults();
@@ -163,7 +160,7 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
                 for (int existingSynVal : existingSynVals)
                 {
                     // TODO: PKB update method to take in int
-                    list<int> newSynVals;// = pkbInstance->getCalleeStar(existingSynVal);
+                    list<int> newSynVals = pkbInstance->getCalleeStar(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
@@ -188,7 +185,7 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
                 for (int existingSynVal : existingSynVals)
                 {
                     // TODO: PKB update method to take in int
-                    list<int> newSynVals;// = pkbInstance->getCallerStar(existingSynVal);
+                    list<int> newSynVals = pkbInstance->getCallerStar(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
