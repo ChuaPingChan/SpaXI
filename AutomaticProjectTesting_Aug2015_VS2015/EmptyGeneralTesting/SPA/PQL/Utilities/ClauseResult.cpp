@@ -315,6 +315,7 @@ bool ClauseResult::removeCombinations(string synName, int value)
 
 bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value)
 {
+    assert(!(syn1Name != syn2Name));
     assert(ClauseResult::synonymPresent(syn1Name));
     assert(ClauseResult::synonymPresent(syn2Name));
 
