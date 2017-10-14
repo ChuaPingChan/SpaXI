@@ -45,15 +45,22 @@ def getComment(sheet, rowId):
 	
 def getDeclaration(sheet, rowId):
 	blockId = DECLARATION_COLUMN + str(rowId)
-	return str(sheet[blockId].value)
+	declaration = str(sheet[blockId].value)
+	if (declaration == "NONE"):
+		declaration = ""
+	return declaration
 	
 def getSelect(sheet, rowId):
 	blockId = SELECT_COLUMN + str(rowId)
-	return str(sheet[blockId].value)
+	select = str(sheet[blockId].value)
+	if (select == "NONE"):
+		select = ""
+	return select
 
 def getExpectedAnswer(sheet, rowId):
 	blockId = EXPECTED_ANSWER_COLUMN + str(rowId)
-	return str(sheet[blockId].value)
+	expectedAns = str(sheet[blockId].value)
+	return expectedAns
 	
 def writeIntoTextFile(text, queryFilePath):
 	file = open(queryFilePath, 'w')

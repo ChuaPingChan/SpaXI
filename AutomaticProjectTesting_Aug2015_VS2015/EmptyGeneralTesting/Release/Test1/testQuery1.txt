@@ -84,7 +84,7 @@ Select s such that Follows(1, 2) such that Follows*(1, 3) and Follows(4, 5)
 1,2,3,4,5,6,7,8
 5000
 18 - Select Boolean NoDeclaration HaveResult (Not possible)
-
+None
 Select BOOLEAN
 true
 5000
@@ -592,4 +592,459 @@ Select s2 such that Follows(s1, s2) and Follows(s2, s3)
 stmt s1, s2, s3;
 Select s3 such that Follows(s1, s2) and Follows(s2, s3)
 3,6,7,8
+5000
+120 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain s3ShldNotFollowTwice NoResult
+stmt s1, s2, s3;
+Select s1 such that Follows(s1, s3) and Follows(s2, s3)
+1,2,3,4,5,6
+5000
+121 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain s1ShldNotHaveTwoFollowers NoResult
+stmt s1, s2, s3;
+Select s1 such that Follows(s1, s2) and Follows(s1, s3)
+1,2,3,4,5,6
+5000
+122 - Select SingleSynonym Stmt FollowsStar IntInt HaveResult
+stmt s;
+Select s such that Follows*(1, 8)
+1,2,3,4,5,6,7,8
+5000
+123 - Select SingleSynonym Stmt FollowsStarIntInt NotSameStmtLst NoResult
+stmt s;
+Select s such that Follows*(1, 4)
+none
+5000
+124 - Select SingleSynonym Stmt FollowsStar IntUnderscore HaveResult
+stmt s;
+Select s such that Follows*(1, _)
+1,2,3,4,5,6,7,8
+5000
+125 - Select SingleSynonym Stmt FollowsStar IntSynonym HaveResult
+stmt s;
+Select s such that Follows*(1, s)
+2,3,8
+5000
+126 - Select SingleSynonym Stmt FollowsStar IntSynonym BehindWhile HaveResult
+stmt s;
+Select s such that Follows*(3, s)
+8
+5000
+127 - Select SingleSynonym Stmt FollowsStar UnderscoreInt HaveResult
+stmt s;
+Select s such that Follows*(_, 3)
+1,2,3,4,5,6,7,8
+5000
+128 - Select SingleSynonym Stmt FollowsStar UnderscoreInt NoResult
+stmt s;
+Select s such that Follows*(_, 1)
+none
+5000
+129 - Select SingleSynonym Stmt FollowsStar UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Follows*(_, _)
+1,2,3,4,5,6,7,8
+5000
+130 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym HaveResult
+stmt s;
+Select s such that Follows*(_, s)
+2,3,5,6,7,8
+5000
+131 - Select SingleSynonym Stmt FollowsStar SynonymInt HaveResult
+stmt s;
+Select s such that Follows*(s, 2)
+1
+5000
+132 - Select SingleSynonym Stmt FollowsStar SynonymInt NoResult
+stmt s;
+Select s such that Follows*(s, 1)
+none
+5000
+133 - Select SingleSynonym Stmt FollowsStar SynonymInt BeforeWhile HaveResult
+stmt s;
+Select s such that Follows*(s, 8)
+1,2,3
+5000
+134 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore HaveResult
+stmt s;
+Select s such that Follows*(s, _)
+1,2,3,4,5,6
+5000
+135 - Select SingleSynonym Stmt FollowsStar SynonymSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(s1, s2)
+1,2,3,4,5,6
+5000
+136 - Select SingleSynonym Stmt FollowsStar SynonymSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(s1, s2)
+2,3,5,6,7,8
+5000
+137 - Select SingleSynonym Stmt FollowsStar SynonymSynonym Same NoResult
+stmt s;
+Select s such that Follows*(s, s)
+none
+5000
+138 - Select SingleSynonym Variable FollowsStar IntInt HaveResult
+variable v;
+Select v such that Follows*(1, 2)
+a,b,c,d,i,j
+5000
+139 - Select SingleSynonym Variable FollowsStar IntInt NotSameStmtLst NoResult
+variable v;
+Select v such that Follows*(3, 4)
+none
+5000
+140 - Select SingleSynonym Variable FollowsStar IntUnderscore HaveResult
+variable v;
+Select v such that Follows*(1, _)
+a,b,c,d,i,j
+5000
+141 - Select SingleSynonym Variable FollowsStar IntSynonym HaveResult
+variable v; stmt s;
+Select v such that Follows*(1, s)
+a,b,c,d,i,j
+5000
+142 - Select SingleSynonym Variable FollowsStar IntSynonym BehindWhile HaveResult
+variable v; stmt s;
+Select v such that Follows*(3, s)
+a,b,c,d,i,j
+5000
+143 - Select SingleSynonym Variable FollowsStar UnderscoreInt HaveResult
+variable v;
+Select v such that Follows*(_, 3)
+a,b,c,d,i,j
+5000
+144 - Select SingleSynonym Variable FollowsStar UnderscoreInt NoResult
+variable v;
+Select v such that Follows*(_, 1)
+none
+5000
+145 - Select SingleSynonym Variable FollowsStar UnderscoreUnderscore HaveResult
+variable v;
+Select v such that Follows*(_, _)
+a,b,c,d,i,j
+5000
+146 - Select SingleSynonym Variable FollowsStar UnderscoreSynonym HaveResult
+variable v; stmt s;
+Select v such that Follows*(_, s)
+a,b,c,d,i,j
+5000
+147 - Select SingleSynonym Variable FollowsStar SynonymInt HaveResult
+variable v; stmt s;
+Select v such that Follows*(s, 2)
+a,b,c,d,i,j
+5000
+148 - Select SingleSynonym Variable FollowsStar SynonymInt NoResult
+variable v; stmt s;
+Select v such that Follows*(s, 1)
+none
+5000
+149 - Select SingleSynonym Variable FollowsStar SynonymInt BeforeWhile HaveResult
+variable v; stmt s;
+Select v such that Follows*(s, 8)
+a,b,c,d,i,j
+5000
+150 - Select SingleSynonym Variable FollowsStar SynonymUnderscore HaveResult
+variable v; stmt s;
+Select v such that Follows*(s, _)
+a,b,c,d,i,j
+5000
+151 - Select SingleSynonym Variable FollowsStar Illegal Argument NoResult
+variable v; stmt s;
+Select v such that Follows*(v, s)
+none
+5000
+152 - Select SingleSynonym Assign FollowsStar IntInt HaveResult
+assign a;
+Select a such that Follows*(1, 2)
+1,2,4,5,6,7,8
+5000
+153 - Select SingleSynonym Assign FollowsStar IntInt NotSameStmtList NoResult
+assign a;
+Select a such that Follows*(3, 4)
+none
+5000
+154 - Select SingleSynonym Assign FollowsStar IntUnderscore HaveResult
+assign a;
+Select a such that Follows*(1, _)
+1,2,4,5,6,7,8
+5000
+155 - Select SingleSynonym Assign FollowsStar IntSynonym HaveResult
+assign a;
+Select a such that Follows*(1, a)
+2,8
+5000
+156 - Select SingleSynonym Assign FollowsStar IntSynonym BehindWhile HaveResult
+assign a;
+Select a such that Follows*(3, a)
+8
+5000
+157 - Select SingleSynonym Assign FollowsStar UnderscoreInt HaveResult
+assign a;
+Select a such that Follows*(_, 3)
+1,2,4,5,6,7,8
+5000
+158 - Select SingleSynonym Assign FollowsStar UnderscoreInt NoResult
+assign a;
+Select a such that Follows*(_, 1)
+none
+5000
+159 - Select SingleSynonym Assign FollowsStar UnderscoreUnderscore HaveResult
+assign a;
+Select a such that Follows*(_, _)
+1,2,4,5,6,7,8
+5000
+160 - Select SingleSynonym Assign FollowsStar UnderscoreSynonym HaveResult
+assign a;
+Select a such that Follows*(_, a)
+2,5,6,7,8
+5000
+161 - Select SingleSynonym Assign FollowsStar SynonymInt HaveResult
+assign a;
+Select a such that Follows*(a, 2)
+1
+5000
+162 - Select SingleSynonym Assign FollowsStar SynonymInt NoResult
+assign a;
+Select a such that Follows*(a, 1)
+none
+5000
+163 - Select SingleSynonym Assign FollowsStar SynonymInt BeforeIntNotAssign NoResult
+assign a;
+Select a such that Follows*(a, 8)
+1,2
+5000
+164 - Select SingleSynonym Assign FollowsStar SynonymUnderscore HaveResult
+assign a;
+Select a such that Follows*(a, _)
+1,2,4,5,6
+5000
+165 - Select SingleSynonym Assign FollowsStar SynonymSynonym GetFront HaveResult
+assign a1, a2;
+Select a1 such that Follows*(a1, a2)
+1,2,4,5,6
+5000
+166 - Select SingleSynonym Assign FollowsStar SynonymSynonym GetBack HaveResult
+assign a1, a2;
+Select a2 such that Follows*(a1, a2)
+2,5,6,7,8
+5000
+167 - Select SingleSynonym Assign FollowsStar SynonymSynonym Same NoResult
+assign a;
+Select a such that Follows*(a, a)
+none
+5000
+168 - Select SingleSynonym While FollowsStar IntInt HaveResult
+while w;
+Select w such that Follows*(1, 2)
+3
+5000
+169 - Select SingleSynonym While FollowsStar IntInt NotSameStmtList NoResult
+while w;
+Select w such that Follows*(3, 4)
+none
+5000
+170 - Select SingleSynonym While FollowsStar IntUnderscore HaveResult
+while w;
+Select w such that Follows*(1, _)
+3
+5000
+171 - Select SingleSynonym While FollowsStar IntSynonym HaveResult
+while w;
+Select w such that Follows*(2, w)
+3
+5000
+172 - Select SingleSynonym While FollowsStar IntSynonym WhileFollowItself NoResult
+while w;
+Select w such that Follows*(3, w)
+none
+5000
+173 - Select SingleSynonym While FollowsStar UnderscoreInt HaveResult
+while w;
+Select w such that Follows*(_, 3)
+3
+5000
+174 - Select SingleSynonym While FollowsStar UnderscoreInt NoResult
+while w;
+Select w such that Follows*(_, 1)
+none
+5000
+175 - Select SingleSynonym While FollowsStar UnderscoreUnderscore HaveResult
+while w;
+Select w such that Follows*(_, _)
+3
+5000
+176 - Select SingleSynonym While FollowsStar UnderscoreSynonym HaveResult
+while w;
+Select w such that Follows*(_, w)
+3
+5000
+177 - Select SingleSynonym While FollowsStar SynonymInt HaveResult
+while w;
+Select w such that Follows*(w, 8)
+3
+5000
+178 - Select SingleSynonym While FollowsStar SynonymInt NoResult
+while w;
+Select w such that Follows*(w, 1)
+none
+5000
+179 - Select SingleSynonym While FollowsStar SynonymUnderscore HaveResult
+while w;
+Select w such that Follows*(w, _)
+3
+5000
+180 - Select SingleSynonym While FollowsStar SynonymSynonym GetFront NoResult
+while w1, w2;
+Select w1 such that Follows*(w1, w2)
+none
+5000
+181 - Select SingleSynonym While FollowsStar SynonymSynonym GetBack NoResult
+while w1, w2;
+Select w2 such that Follows*(w1, w2)
+none
+5000
+182 - Select SingleSynonym While FollowsStar SynonymSynonym Same NoResult
+while w;
+Select w such that Follows*(w, w)
+none
+5000
+183 - Select SingleSynonym Stmt SuchThat FollowsStar IntInt and FollowsStar IntInt HaveResult
+stmt s;
+Select s such that Follows*(1, 2) and Follows*(2, 3)
+1,2,3,4,5,6,7,8
+5000
+184 - AndKeyword StuckToBackOf PreviousRelation HaveResult
+stmt s;
+Select s such that Follows*(1, 2)and Follows*(2, 3)
+1,2,3,4,5,6,7,8
+5000
+185 - AndKeyword StuckToFrontOf PreviousRelation NoResult
+stmt s;
+Select s such that Follows*(1, 2) andFollows*(2, 3)
+none
+5000
+186 - Select SingleSynonym Stmt SuchThat FollowsStar IntInt SuchThat FollowsStar IntInt HaveResult
+stmt s;
+Select s such that Follows*(1, 2) such that Follows*(2, 3)
+1,2,3,4,5,6,7,8
+5000
+187 - SuchThatKeyword StuckToBackOf PreviousRelation HaveResult
+stmt s;
+Select s such that Follows*(1, 2)such that Follows*(2, 3)
+1,2,3,4,5,6,7,8
+5000
+188 - SuchThatKeyword StuckToFrontOf PreviousRelation NoResult
+stmt s;
+Select s such that Follows*(1, 2) such thatFollows*(2, 3)
+none
+5000
+189 - Select SingleSynonym Stmt FollowsStar IntUnderscore And FollowsStar IntUnderscore HaveResult
+stmt s;
+Select s such that Follows*(1, _) and Follows*(2, _)
+1,2,3,4,5,6,7,8
+5000
+190 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym BothRelationSameSynonym NoResult
+stmt s;
+Select s such that Follows*(1, s) and Follows*(2, s)
+3,8
+5000
+191 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym BothRelationDiffSynonym HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(1, s2) and Follows*(2, s3)
+1,2,3,4,5,6,7,8
+5000
+192 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(1, s1) and Follows*(2, s2)
+2,3,8
+5000
+193 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(1, s1) and Follows*(2, s2)
+3,8
+5000
+194 - Select SingleSynonym Stmt FollowsStar UnderscoreInt And FollowsStar UnderscoreInt HaveResult
+stmt s;
+Select s such that Follows*(_, 2) and Follows*(_, 5)
+1,2,3,4,5,6,7,8
+5000
+195 - Select SingleSynonym Stmt FollowsStar UnderscoreInt And FollowsStar UnderscoreInt NoResult
+stmt s;
+Select s such that Follows*(_, 2) and Follows*(_, 4)
+none
+5000
+196 - Select SingleSynonym Stmt FollowsStar UnderscoreUnderscore And FollowsStar UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Follows*(_, _) and Follows*(_, _)
+1,2,3,4,5,6,7,8
+5000
+197 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym CommonSynonym HaveResult
+stmt s;
+Select s such that Follows*(_, s) and Follows*(_, s)
+2,3,5,6,7,8
+5000
+198 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym UniqueSynonym HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(_, s2) and Follows*(_, s3)
+1,2,3,4,5,6,7,8
+5000
+199 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(_, s1) and Follows*(_, s2)
+2,3,5,6,7,8
+5000
+200 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(_, s1) and Follows*(_, s2)
+2,3,5,6,7,8
+5000
+201 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt BothRelation SameSynonym NoResult
+stmt s;
+Select s such that Follows*(s, 2) and Follows*(s, 3)
+1
+5000
+202 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(s1, 2) and Follows*(s2, 3)
+1
+5000
+203 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(s1, 2) and Follows*(s2, 3)
+1,2
+5000
+204 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore And FollowsStar SynonymUnderscore GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(s1, _) and Follows*(s2, _)
+1,2,3,4,5,6
+5000
+205 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore And FollowsStar SynonymUnderscore GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(s1, _) and Follows*(s2, _)
+1,2,3,4,5,6
+5000
+206 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetFirst HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(s1, s2) and Follows*(s2, s3)
+1,2,4,5
+5000
+207 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetMiddle HaveResult
+stmt s1, s2, s3;
+Select s2 such that Follows*(s1, s2) and Follows*(s2, s3)
+2,3,5,6
+5000
+208 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetLast HaveResult
+stmt s1, s2, s3;
+Select s3 such that Follows*(s1, s2) and Follows*(s2, s3)
+3,6,7,8
+5000
+209 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain s3ShldNotFollowTwice NoResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(s1, s3) and Follows*(s2, s3)
+1,2,3,4,5,6
+5000
+210 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain s1ShldNotHaveTwoFollowers NoResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(s1, s2) and Follows*(s1, s3)
+1,2,3,4,5,6
 5000
