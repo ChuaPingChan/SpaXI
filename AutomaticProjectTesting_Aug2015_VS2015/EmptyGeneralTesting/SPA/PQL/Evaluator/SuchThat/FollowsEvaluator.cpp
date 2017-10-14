@@ -18,8 +18,6 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    bool hasResult;
-
     //Case 1: Follows(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {

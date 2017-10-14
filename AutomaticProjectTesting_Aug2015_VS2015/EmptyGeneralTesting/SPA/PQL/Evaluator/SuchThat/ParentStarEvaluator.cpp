@@ -18,8 +18,6 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    bool hasResult;
-
     //Case 1: ParentStar(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {

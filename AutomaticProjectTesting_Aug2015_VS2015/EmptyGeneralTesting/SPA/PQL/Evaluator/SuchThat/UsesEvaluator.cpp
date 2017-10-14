@@ -18,8 +18,6 @@ bool UsesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResult
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    bool hasResult;
-
     //Case 1: Uses(int, ident)
     if (argOneType == INTEGER && argTwoType == IDENT_WITHQUOTES)
     {

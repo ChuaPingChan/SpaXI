@@ -18,8 +18,6 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    bool hasResult;
-
     //Case 1: Modifies(int, IDENT)
     if (argOneType == INTEGER && argTwoType == IDENT_WITHQUOTES)
     {
