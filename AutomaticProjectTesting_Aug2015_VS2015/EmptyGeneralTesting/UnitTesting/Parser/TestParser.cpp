@@ -156,7 +156,7 @@ namespace UnitTesting
             expectedString = "a + 2 * 3";
             Assert::IsTrue(std::regex_match(targetString, match, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT));
             actualString = match.str(1);
-            Assert::IsTrue( actualString == expectedString);
+            Assert::IsTrue(actualString == expectedString);
 
             targetString = "((a + 2 * 3))";
             expectedString = "(a + 2 * 3)";
@@ -638,7 +638,7 @@ namespace UnitTesting
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile2());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
-            
+
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
@@ -703,9 +703,9 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-        /******************************
-        * Utility Methods for Testing *
-        *******************************/
+        /*******************************
+         * Utility Methods for Testing *
+         *******************************/
         TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
         {
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());

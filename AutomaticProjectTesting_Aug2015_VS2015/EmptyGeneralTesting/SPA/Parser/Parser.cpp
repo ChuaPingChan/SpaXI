@@ -27,6 +27,7 @@ const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([^;\\s][^;]*)\\s
 const regex Parser::REGEX_MATCH_PROCEDURE_KEYWORD = regex("\\s*procedure\\s*");
 const regex Parser::REGEX_MATCH_WHILE_KEYWORD = regex("\\s*while\\s*");
 const regex Parser::REGEX_MATCH_CALL_KEYWORD = regex("\\s*call\\s*");
+const regex Parser::REGEX_MATCH_IF_KEYWORD = regex("\\s*if\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACE = regex("\\s*\\u007B\\s*");
 const regex Parser::REGEX_MATCH_CLOSE_BRACE = regex("\\s*\\u007D\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACKET = regex("\\s*\\(\\s*");
@@ -49,10 +50,11 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _callStack = stack<string>();
     _parentStack = stack<int>();
     _pkbMainPtr = pkbMainPtr;
-    _stacksOfFollowsStacks = stack<stack<int>>();
+    _stackOfFollowsStacks = stack<stack<int>>();
     _currentProcIdx = Parser::INT_INITIAL_PROC_INDEX;
 }
 
+// TODO: Add comprehensive method description
 bool Parser::parse(string filename) {
     _isValidSyntax = true;
     concatenateLines(filename);
@@ -60,22 +62,26 @@ bool Parser::parse(string filename) {
 
     /*
     PKB TODO: Tell PKB to start design extractor.
-        - Compute Follow* and Parents*
-        - Compute cross-procedural Uses and Modifies
-        - Compute Calls*
-        - Compute Next*
+    - Compute Follow* and Parents*
+    - Compute cross-procedural Uses and Modifies
+    - Compute Calls*
+    - Compute Next*
     */
     OutputDebugString("PKB: Tell PKB to start design extractor.\n");
     _pkbMainPtr->startProcessComplexRelations();
 
     /*
     TODO: Final checks
-        - All calls are to valid procedures
+    - All calls are to valid procedures
     */
 
     return _isValidSyntax;
 }
 
+/*
+Concatenates the lines of a given filepath and store the concatenated string
+in the _concatenatedSourceCode variable.
+*/
 bool Parser::concatenateLines(string filename) {
     ifstream infile(filename.c_str());
 
@@ -100,7 +106,10 @@ bool Parser::incrCurrentTokenPtr()
 {
     smatch match;
     // At the very beginning of a SIMPLE source file, just increment token pointer.
-    if (_currentTokenPtr == "" && regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
+    if (_currentTokenPtr == ""
+        && regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN)
+        && match.size() > 1)
+    {
         _currentTokenPtr = match.str(1);
         return true;
     }
@@ -143,6 +152,7 @@ vector<string> Parser::tokenizeString(string stringToTokenize)
 /*
 Returns a string from the current _currentTokenPtr to the character before the first semicolon encountered.
 Indicate SIMPLE syntax error if no semicolon is encountered in the remaining of the string.
+This method assumes there's a semicolon ahead in the _concatenatedSourceCode.
 Note that this method does not remove whitespaces and does not move _currentTokenPtr forward.
 */
 string Parser::extractStringUpToSemicolon() {
@@ -153,14 +163,14 @@ string Parser::extractStringUpToSemicolon() {
     } else {
         _isValidSyntax = false;
         OutputDebugString("WARNING: Invalid line, no semicolon found.\n");
-        // TODO: Throw exception?
+        // TODO: Throw exception.
     }
     return targetSubstring;
 }
 
 /*
 Asserts that the next token must match the given regex.
-If the match is successful, move _currentTokenPtr forward and return true.
+If the match is successful, move current token pointer forward and return true.
 If match is unsuccessful, indicate syntax error.
 */
 bool Parser::assertMatchAndIncrementToken(regex re) {
@@ -168,7 +178,7 @@ bool Parser::assertMatchAndIncrementToken(regex re) {
         incrCurrentTokenPtr();
         return true;
     } else {
-        // TODO: consider throwing exception.
+        // TODO: Throw exception.
         _isValidSyntax = false;
         OutputDebugString("WARNING: Matching of token failed.\n");
         return false;
@@ -183,7 +193,7 @@ bool Parser::assertMatchWithoutIncrementToken(regex re) {
     if (regex_match(_currentTokenPtr, re)) {
         return true;
     } else {
-        // TODO: consider throwing exception.
+        // TODO: Throw exception.
         _isValidSyntax = false;
         OutputDebugString("WARNING: Matching of token failed.\n");
         return false;
@@ -191,7 +201,8 @@ bool Parser::assertMatchWithoutIncrementToken(regex re) {
 }
 
 /*
-Matches the given regex with the next token. Does not proceed to the next token.
+Matches the given regex with the next token.
+Does not move the current token pointer forward.
 */
 bool Parser::matchToken(regex re) {
     return regex_match(_currentTokenPtr, re);
@@ -206,16 +217,20 @@ void Parser::parseProgram() {
     OutputDebugString("FINE: End of program reached.\n");
 }
 
-// Expects _currentTokenPtr to be "procedure" keyword
+/*
+Parses a procedure.
+Expects _currentTokenPtr to be "procedure" keyword.
+When this method ends, _currentTokenPtr will be one token past the close
+brace of the procedure.
+*/
 void Parser::parseProcedure() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD);
     OutputDebugString("FINE: Parsing procedure.\n");
 
     string procName;
     if (!(matchToken(Parser::REGEX_VALID_ENTITY_NAME))) {
-        //TODO: Throw exception?
+        //TODO: Throw exception
         _isValidSyntax = false;
-        //TODO: Remove this line after determining how to signal user on syntax error.
         OutputDebugString("WARNING: Invalid procedure name.\n");
         return;
     }
@@ -225,7 +240,6 @@ void Parser::parseProcedure() {
     _pkbMainPtr->addProcedure(procName);
     // PKB TODO: Update _currentProcIdx
     // _currentProcIdx = _pkbMainPtr->getProcIdx(procName);
-    
 
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
@@ -233,7 +247,7 @@ void Parser::parseProcedure() {
     // Add new stmtList stack to follows stack
     OutputDebugString("FINE: Push new stmtList stack to follows stack.\n");
     stack<int>* newFollowsStack = new stack<int>();
-    _stacksOfFollowsStacks.push(*newFollowsStack);
+    _stackOfFollowsStacks.push(*newFollowsStack);
 
     parseStmtList();
 
@@ -264,7 +278,7 @@ void Parser::parseStmt() {
     OutputDebugString("FINE: Identifying next statement type...\n");
 
     // Push current statement to top of the top followsStack
-    _stacksOfFollowsStacks.top().push(_currentStmtNumber);
+    _stackOfFollowsStacks.top().push(_currentStmtNumber);
     OutputDebugString("FINE: Pushing stmt to top stack of follows stack.\n");
 
     // Set parent child relation. 0 if no parent.
@@ -281,8 +295,10 @@ void Parser::parseStmt() {
         parseWhileStmt();
     } else if (Parser::callStmtExpected()) {
         parseCallStmt();
+    } else if (Parser::ifStmtExpected()) {
+        parseIfStmt();
     } else if (Parser::assignmentExpected()) {
-        // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords
+        // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords as variable names
         parseAssignment();
     }
 }
@@ -310,6 +326,15 @@ When the method ends, _currentTokenPtr is the 'call' keyword.
 */
 bool Parser::callStmtExpected() {
     return matchToken(Parser::REGEX_MATCH_CALL_KEYWORD);
+}
+
+/*
+Tells whether the current statement is expected to be an if-statement or not.
+When the method ends, _currentTokenPtr is the 'if' keyword.
+*/
+bool Parser::ifStmtExpected()
+{
+    return matchToken(Parser::REGEX_MATCH_IF_KEYWORD);
 }
 
 /*
@@ -427,7 +452,7 @@ bool Parser::assertIsValidExpression(string expression) {
     // Remove outermost bracket (if applicable)
     smatch contentInBracket;
     while (regex_match(expression, contentInBracket, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT)
-           && contentInBracket.size() > 1) {
+        && contentInBracket.size() > 1) {
         expression = contentInBracket.str(1);
     }
 
@@ -488,22 +513,22 @@ std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
     When the left expression has no brackets. E.g "2 + (10 * 3)", "2 + 10"
     */
     regex REGEX_CASE1_EXTRACTOR = regex(possibleWhitespaceRegex
-                                        + extractEntityRegex
-                                        + possibleWhitespaceRegex
-                                        + operatorRegex
-                                        + possibleWhitespaceRegex
-                                        + extractRemainingRegex);
+        + extractEntityRegex
+        + possibleWhitespaceRegex
+        + operatorRegex
+        + possibleWhitespaceRegex
+        + extractRemainingRegex);
 
     /*
     CASE 2:
     When the left expression is bracketed. E.g. "(2 + 3) + 4", "(2 + 3) + (4 + 10)"
     */
     regex REGEX_CASE2_EXTRACTOR = regex(possibleWhitespaceRegex
-                                        + extractBracketWrappedContentRegex
-                                        + possibleWhitespaceRegex
-                                        + operatorRegex
-                                        + possibleWhitespaceRegex
-                                        + extractRemainingRegex);
+        + extractBracketWrappedContentRegex
+        + possibleWhitespaceRegex
+        + operatorRegex
+        + possibleWhitespaceRegex
+        + extractRemainingRegex);
 
     smatch match;
     string leftExpression;
@@ -616,7 +641,7 @@ void Parser::parseWhileStmt() {
     // Add new stmtList stack to follows stack
     OutputDebugString("Push new stmtList stack to follows stack.\n");
     stack<int>* newFollowsStack = new stack<int>();
-    _stacksOfFollowsStacks.push(*newFollowsStack);
+    _stackOfFollowsStacks.push(*newFollowsStack);
 
     parseStmtList();
 
@@ -628,10 +653,15 @@ void Parser::parseWhileStmt() {
     _parentStack.pop();
 }
 
+void Parser::parseIfStmt()
+{
+    // TODO: Implement
+}
+
 void Parser::processAndPopTopFollowStack()
 {
-    assert(!_stacksOfFollowsStacks.empty() && !_stacksOfFollowsStacks.top().empty());
-    stack<int> topFollowsStack = _stacksOfFollowsStacks.top();
+    assert(!_stackOfFollowsStacks.empty() && !_stackOfFollowsStacks.top().empty());
+    stack<int> topFollowsStack = _stackOfFollowsStacks.top();
 
     int stmtAfter = topFollowsStack.top();
     topFollowsStack.pop();
@@ -645,7 +675,7 @@ void Parser::processAndPopTopFollowStack()
     (*_pkbMainPtr).setFollowsRel(0, stmtAfter);
 
     // TODO: Free dynamically allocated memory with "delete" keyword.
-    _stacksOfFollowsStacks.pop();
+    _stackOfFollowsStacks.pop();
 }
 
 void Parser::parseCallStmt()
