@@ -25,19 +25,35 @@ void PKBMain::resetInstance()
 
 //Utility functions
 list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
-	list<string> resultString;
-	list<int>::iterator it;
+	list<string> resultList;
+	string result;
+	int index;
 	if (type == PROCEDURE) {
-		for (it = indexList.begin(); it != indexList.end(); ++it) {
-			resultString.push_back(prodIdxTable.)
+		for (int i = 0; i < indexList.size(); i++) {
+			index = indexList.front();
+			indexList.pop_front();
+			result = procIdxTable.getProcFromIdx(index);
+			if (result == "") {
+				continue;
+			}
+
+			resultList.push_back(result);
 		}
 	}
 
 	if (type == VARIABLE) {
-		for (it = indexList.begin; it != indexList.end(); ++it) {
+		for (int i = 0; i < indexList.size(); i++) {
+			index = indexList.front();
+			indexList.pop_front();
+			result = varIdxTable.getVarFromIdx(index);
+			if (result == "") {
+				continue;
+			}
 
+			resultList.push_back(result);
 		}
 	}
+		return resultList;
 }
 
 //CALLS

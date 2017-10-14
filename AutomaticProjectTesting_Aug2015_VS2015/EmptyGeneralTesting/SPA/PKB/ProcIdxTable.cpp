@@ -25,6 +25,13 @@ int ProcIdxTable::getIdxFromProc(string proc) {
     return procIdxMap[proc];
 }
 
+string ProcIdxTable::getProcFromIdx(int procIdx) {
+	if (procIdxToStringMap.find(procIdx) == procIdxToStringMap.end()) {
+		return "";
+	}
+	
+	return procIdxToStringMap[procIdx];
+}
 list<int> ProcIdxTable::getAllProceduresIndex() {
 	return allProcIdx;
 }
