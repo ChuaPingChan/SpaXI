@@ -38,6 +38,7 @@ namespace UnitTesting
 			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
 			ClauseResult cr;
 			ResultFormatter rf;
+            cr.updateSynResults("s", list<int>());
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).size() == 1);
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front() == "false");
 		}
