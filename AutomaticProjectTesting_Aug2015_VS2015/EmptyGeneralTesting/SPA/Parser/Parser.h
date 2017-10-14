@@ -77,7 +77,6 @@ protected:
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
     std::string removeAllWhitespaces(std::string targetString);
-    std::string removeAllBrackets(std::string targetString);
     bool isBracketedCorrectly(std::string expression);
     void processAndPopTopFollowStack();
     static std::pair<string, string> splitExpressionLhsRhs(std::string expression);

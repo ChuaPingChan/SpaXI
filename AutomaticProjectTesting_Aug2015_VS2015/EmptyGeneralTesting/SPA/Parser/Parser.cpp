@@ -424,11 +424,10 @@ void Parser::parseAssignment() {
                     stack<int> parentStackCopy = _parentStack;
                     while (!parentStackCopy.empty()) {
                         int parentStmt = parentStackCopy.top();
-                        _pkbMainPtr->addConstant(parentStmt, constant);
+                        _pkbMainPtr->addConstant(parentStmt, constant);     // TODO: Check why parentStmt is needed as argument.
                         parentStackCopy.pop();
                     }
                 }
-
             }
             incrCurrentTokenPtr();
         }
@@ -548,14 +547,6 @@ Removes all the whitespace in a given string
 string Parser::removeAllWhitespaces(string targetString)
 {
     return regex_replace(targetString, regex("\\s"), "");
-}
-
-/*
-Removes all brackets in a given string
-*/
-std::string Parser::removeAllBrackets(std::string targetString)
-{
-    return regex_replace(targetString, regex("[()]"), "");
 }
 
 /*
