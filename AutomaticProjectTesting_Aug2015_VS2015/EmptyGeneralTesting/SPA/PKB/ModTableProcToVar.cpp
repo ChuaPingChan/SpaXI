@@ -20,6 +20,10 @@ bool ModTableProcToVar::addModProcToVarList(int procIdx, int varIdx) {
 }
 
 list<int> ModTableProcToVar::getModVariablesFromProc(int procIdx) {
+	if (modProcToVarMap.find(procIdx) == modProcToVarMap.end()) {
+		return list<int>();
+	}
+
     return modProcToVarMap[procIdx];
 }
 

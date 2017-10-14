@@ -47,10 +47,18 @@ bool CallsTable::isCallee(int callee) {
 }
 
 list<int> CallsTable::getCallee(int caller) {
+	if (callsProcMap.find(caller) == callsProcMap.end()) {
+		return list<int>();
+	}
+
 	return callsProcMap[caller];
 }
 
 list<int> CallsTable::getCaller(int callee) {
+	if (callsProcMapReverse.find(callee) == callsProcMapReverse.end()) {
+		return list<int>();
+	}
+
 	return callsProcMapReverse[callee];
 }
 

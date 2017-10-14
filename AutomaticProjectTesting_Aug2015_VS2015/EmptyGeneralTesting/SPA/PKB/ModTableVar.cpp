@@ -108,31 +108,50 @@ bool ModTableVar::addModVarToIfMap(int varIdx, int stmtNumber)
 }
 
 list<int> ModTableVar::getModStmtsFromVar(int varIdx) {
+	if (modVarToStmtMap.find(varIdx) == modVarToStmtMap.end()) {
+		return list<int>();
+	}
+
     return modVarToStmtMap[varIdx];
 }
 
 list<int> ModTableVar::getModProcsFromVar(int varIdx)
 {
+	if (modVarToProcMap.find(varIdx) == modVarToStmtMap.end()) {
+		return list<int>();
+	}
     return modVarToProcMap[varIdx];
 }
 
 list<int> ModTableVar::getModAssignsFromVar(int varIdx)
 {
+	if (modVarToAssignMap.find(varIdx) == modVarToAssignMap.end()) {
+		return list<int>();
+	}
     return modVarToAssignMap[varIdx];
 }
 
 list<int> ModTableVar::getModWhileStmtFromVar(int varIdx)
 {
+	if (modVarToWhileStmtMap.find(varIdx) == modVarToWhileStmtMap.end()) {
+		return list<int>();
+	}
     return modVarToWhileStmtMap[varIdx];
 }
 
 list<int> ModTableVar::getModWhileContainersFromVar(int varIdx)
 {
+	if (modVarToWhileContainerMap.find(varIdx) == modVarToWhileContainerMap.end()) {
+		return list<int>();
+	}
     return modVarToWhileContainerMap[varIdx];
 }
 
 list<int> ModTableVar::getModIfFromVar(int varIdx)
 {
+	if (modVarToIfMap.find(varIdx) == modVarToIfMap.end()) {
+		return list<int>();
+	}
     return modVarToIfMap[varIdx];
 }
 

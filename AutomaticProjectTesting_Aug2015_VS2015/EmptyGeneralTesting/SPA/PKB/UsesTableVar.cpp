@@ -102,31 +102,49 @@ bool UsesTableVar::addUsesVarToIfMap(int varIdx, int stmtNumber)
 }
 
 list<int> UsesTableVar::getUsesStmtsFromVar(int varIdx) {
+	if (usesVarToStmtMap.find(varIdx) == usesVarToStmtMap.end()) {
+		return list<int>();
+	}
     return usesVarToStmtMap[varIdx];
 }
 
 list<int> UsesTableVar::getUsesProcsFromVar(int varIdx)
 {
+	if (usesVarToProcMap.find(varIdx) == usesVarToProcMap.end()) {
+		return list<int>();
+	}
     return usesVarToProcMap[varIdx];
 }
 
 list<int> UsesTableVar::getUsesAssignsFromVar(int varIdx)
 {
+	if (usesVarToAssignMap.find(varIdx) == usesVarToAssignMap.end()) {
+		return list<int>();
+	}
     return usesVarToAssignMap[varIdx];
 }
 
 list<int> UsesTableVar::getUsesWhileStmtFromVar(int varIdx)
 {
+	if (usesVarToWhileStmtMap.find(varIdx) == usesVarToWhileStmtMap.end()) {
+		return list<int>();
+	}
     return usesVarToWhileStmtMap[varIdx];
 }
 
 list<int> UsesTableVar::getUsesWhileContainersFromVar(int varIdx)
 {
+	if (usesVarToWhileContainerMap.find(varIdx) == usesVarToWhileContainerMap.end()) {
+		return list<int>();
+	}
     return usesVarToWhileContainerMap[varIdx];
 }
 
 list<int> UsesTableVar::getUsesIfFromVar(int varIdx)
 {
+	if (usesVarToIfMap.find(varIdx) == usesVarToIfMap.end()) {
+		return list<int>();
+	}
     return usesVarToIfMap[varIdx];
 }
 

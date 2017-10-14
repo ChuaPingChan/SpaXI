@@ -191,7 +191,7 @@ bool PKBMain::hasParentRel() {
 list<int> PKBMain::getParent(int childStmt, Entity type) {
 	list<int> resultList;
 	int parentStmt = childToParentTable.getParent(childStmt);
-	if (parentStmt = 0) {
+	if (parentStmt == 0) {
 		return resultList;
 	}
 	resultList = stmtTypeList.getStmtType(parentStmt, type);
