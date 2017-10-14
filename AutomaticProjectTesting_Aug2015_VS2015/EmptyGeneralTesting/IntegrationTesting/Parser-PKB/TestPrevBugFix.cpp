@@ -25,10 +25,19 @@ namespace UnitTesting
             // Set up
             Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_bug1());
+            list<int> expectedResults;
+            list<int> actualResults;
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
-            list<int> expectedResults = list<int>{ 3, 5, 6, 7 };
-            list<int> actualResults = dummyPkbMain.getAllChildren(Entity::STMT);
+            
+            actualResults = dummyPkbMain.getAllChildren(Entity::STMT);
+            expectedResults = list<int>{ 3, 5, 6, 7 };
+            expectedResults.sort();
+            actualResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            actualResults = dummyPkbMain.getAllParents(Entity::STMT);
+            expectedResults = list<int>{ 2, 4, 5 };
             expectedResults.sort();
             actualResults.sort();
             Assert::IsTrue(actualResults == expectedResults);
