@@ -81,10 +81,10 @@ bool ResultFormatter::checkIfQueryTreeHasClauses(QueryTree* qt)
 {
     if (qt->getSuchThatClauses().empty() && qt->getPatternClauses().empty() && qt->getWithClauses().empty())
     {
-        return false;
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 
