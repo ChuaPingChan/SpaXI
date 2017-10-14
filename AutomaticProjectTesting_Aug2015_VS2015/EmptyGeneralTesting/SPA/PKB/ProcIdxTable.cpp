@@ -35,3 +35,7 @@ string ProcIdxTable::getProcFromIdx(int procIdx) {
 list<int> ProcIdxTable::getAllProceduresIndex() {
 	return allProcIdx;
 }
+
+list<string> ProcIdxTable::getAllProceduresName() {
+	return allProcString;
+}

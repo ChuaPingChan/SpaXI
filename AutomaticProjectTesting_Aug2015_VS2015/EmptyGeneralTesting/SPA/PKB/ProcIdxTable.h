@@ -10,6 +10,7 @@ public:
     int getIdxFromProc(string proc);
 	string getProcFromIdx(int procIdx);
 	list<int> getAllProceduresIndex();
+	list<string> getAllProceduresName();
 private:
     unordered_map<string, int> procIdxMap;
     int procIdx = 0;

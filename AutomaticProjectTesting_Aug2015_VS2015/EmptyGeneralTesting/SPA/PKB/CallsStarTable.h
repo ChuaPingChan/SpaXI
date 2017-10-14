@@ -17,6 +17,7 @@ public:
 	list<int> getCallerStar(int callee);
 	bool isCallsStar(int caller, int callee);
 	pair<list<int>, list<int>> getAllCallsStar();
+	unordered_map<int, list<int>> getMap();
 private:
 	unordered_map<int, list<int>> callsStarProcMap;
 	unordered_map<int, list<int>> callsStarProcMapReverse;

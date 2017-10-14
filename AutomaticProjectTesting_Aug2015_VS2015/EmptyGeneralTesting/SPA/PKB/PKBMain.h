@@ -91,14 +91,19 @@ public:
     //PKB-Parser
 	bool setParentChildRel(int parentStmt, int childStmt);
 	bool setFollowsRel(int stmtBef, int stmtAft);
+	list<string> getAllCalleeNames();
 	bool setCallsRel(int stmt, string callerProcName, string calleeProcName);
     bool addVariable(string var);
     bool addProcedure(string proc);
     bool addAssignmentStmt(int stmt);
+	bool addWhileStmt(int stmt, string controlVar);
     bool addWhileStmt(int stmt);
+	bool addIfStmt(int stmt, string controlVar);
     bool addIfStmt(int stmt);
     bool addConstant(int stmt, int constant);
+	list<string> getAllVarNames();
 	list<int> getAllProcedures();
+	list<string> getAllProcNames();
 	bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);
     bool setUseTableStmtToVar(int stmt, string var);
@@ -108,8 +113,10 @@ public:
 
 	//PKB query (Calls)
 	bool isCalls(string callerProcName, string calleeProcName);
+	bool isCalls(int callerProcIdx, int calleeProcIdx);
 	bool isCaller(string callerProcName);
 	list<int> getCallee(string callerProcName);
+	list<int> getCallee(int callerProxIdx);
 	bool isCallee(string calleeProcName);
 	bool hasCalls();
 
@@ -117,21 +124,32 @@ public:
 
 	list<int> getCaller(string calleeProcName);
 
+	list<int> getCaller(int calleeProcIdx);
+
 	list<int> getAllCallers();
 
 	pair<list<int>, list<int>> getAllCalls();
 
 	bool isCallsStar(string callerProcName, string calleeProcName);
 
+	bool isCallsStar(int callerProcIdx, int calleeProcIdx);
+
 	list<int> getCalleeStar(string callerProcName);
 
+	list<int> getCalleeStar(int callerProcIdx);
+
 	list<int> getCallerStar(string celleeProcName);
+
+	list<int> getCallerStar(int calleeProcIdx);
 
 	pair<list<int>, list<int>> getAllCallsStar();
 
     //PKB query evaluator (Uses, Modifies)
     bool isUses(int stmt, int varIdx);
-    bool isMod(int stmt, int varIdx);
+	bool isUsesProc(int procIdx, int varIdx);
+	bool isUsesProc(string procName, string varName);
+	bool isModProc(string procName, string var);
+	bool isMod(int stmt, int varIdx);
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
     bool isUsingAnything(int stmt);
@@ -147,7 +165,9 @@ public:
 
     //PKB query evaluator (Pattern)
     pair<list<int>, list<string>> getLeftVariables();
-    pair<list<int>, list<string>> getLeftVariablesThatMatchWith(string expression);
+	list<int> getWhilesWithControlVariable(string var);
+	list<int> getIfsWithControlVariable(string var);
+	pair<list<int>, list<string>> getLeftVariablesThatMatchWith(string expression);
     list<int> getPartialMatchStmt(string expression);
     list<int> getPartialBothMatches(string var, string expression);
     list<int> getExactMatchStmt(string expression);
