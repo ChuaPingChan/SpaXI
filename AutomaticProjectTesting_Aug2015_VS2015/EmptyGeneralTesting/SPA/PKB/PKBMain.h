@@ -105,6 +105,7 @@ public:
     bool setUseTableProcToVar(string proc, string var);
     bool setPatternRelation(int stmt, string var, string expression);
 
+
 	//PKB query (Calls)
 	bool isCalls(string callerProcName, string calleeProcName);
 	bool isCaller(string callerProcName);
@@ -129,9 +130,10 @@ public:
 	pair<list<int>, list<int>> getAllCallsStar();
 
     //PKB query evaluator (Uses, Modifies)
+    bool isUses(int stmt, int varIdx);
+    bool isMod(int stmt, int varIdx);
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
-	bool isMod(int stmt, int varIdx);
     bool isUsingAnything(int stmt);
     bool isModifyingAnything(int stmt);
     list<int> getUsesFromStmt(int stmt);

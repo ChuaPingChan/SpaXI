@@ -35,9 +35,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 3: Modifies(int, synonym)
     else if (argOneType == INTEGER && (argTwoType == VARIABLE))
     {
-        //To-Do: change list<int> when mapping received from PKB
-        list<int> pkbResult;// = pkbInstance->getModifiesFromStmt(stoi(argOne));
-        list<string> pkbResultString = pkbInstance->getModifiesFromStmt(stoi(argOne)); 
+        list<int> pkbResult = pkbInstance->getModifiesFromStmt(stoi(argOne));
         if (pkbResult.empty())
         {
             return false;
@@ -97,7 +95,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 int argTwoVal = pair.second;
 
                 // Removes from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isMod(argOneVal, argTwo)) //To-Do: Change argTwo to argTwoVal after integer mapping
+                if (!pkbInstance->isMod(argOneVal, argTwoVal)) 
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
                 }
@@ -110,7 +108,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
         else if (!argOneExists && !argTwoExists)
         {
             //To-Do: Change API CALL
-            pair<list<int>, list<int>> pkbResult;// = pkbInstance->getAllModifies(argOneType, argTwoType);
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getModifiesPairs(argOneType);
 
             if (pkbResult.first.empty() && pkbResult.second.empty())
             {
