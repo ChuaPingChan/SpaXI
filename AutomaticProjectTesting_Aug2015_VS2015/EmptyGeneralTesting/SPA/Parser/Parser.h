@@ -30,6 +30,8 @@ public:
     static const std::regex REGEX_MATCH_WHILE_KEYWORD;
     static const std::regex REGEX_MATCH_CALL_KEYWORD;
     static const std::regex REGEX_MATCH_IF_KEYWORD;
+    static const std::regex REGEX_MATCH_THEN_KEYWORD;
+    static const std::regex REGEX_MATCH_ELSE_KEYWORD;
     static const std::regex REGEX_MATCH_OPEN_BRACE;
     static const std::regex REGEX_MATCH_CLOSE_BRACE;
     static const std::regex REGEX_MATCH_OPEN_BRACKET;

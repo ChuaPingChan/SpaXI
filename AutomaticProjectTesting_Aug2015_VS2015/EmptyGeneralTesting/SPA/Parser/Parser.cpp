@@ -28,6 +28,8 @@ const regex Parser::REGEX_MATCH_PROCEDURE_KEYWORD = regex("\\s*procedure\\s*");
 const regex Parser::REGEX_MATCH_WHILE_KEYWORD = regex("\\s*while\\s*");
 const regex Parser::REGEX_MATCH_CALL_KEYWORD = regex("\\s*call\\s*");
 const regex Parser::REGEX_MATCH_IF_KEYWORD = regex("\\s*if\\s*");
+const regex Parser::REGEX_MATCH_THEN_KEYWORD = regex("\\s*then\\s*");
+const regex Parser::REGEX_MATCH_ELSE_KEYWORD = regex("\\s*else\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACE = regex("\\s*\\u007B\\s*");
 const regex Parser::REGEX_MATCH_CLOSE_BRACE = regex("\\s*\\u007D\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACKET = regex("\\s*\\(\\s*");
@@ -595,7 +597,7 @@ void Parser::parseWhileStmt() {
 
     string whileVar = _currentTokenPtr;
 
-    // PKB TODO: Add while stmt to PKB. Must also pass 'control variable'.
+    // PKB: Add while stmt to PKB. Must also pass 'control variable'.
     OutputDebugString("PKB: Add while statement to PKB.\n");
     _pkbMainPtr->addWhileStmt(_currentStmtNumber, whileVar);
 
@@ -643,7 +645,76 @@ void Parser::parseWhileStmt() {
 
 void Parser::parseIfStmt()
 {
-    // TODO: Implement
+    OutputDebugString("FINE: If-else statement identified.\n");
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD);
+
+    _parentStack.push(_currentStmtNumber);
+
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+
+    string ifVar = _currentTokenPtr;
+
+    // PKB: Add if-else stmt to PKB. Must also pass 'control variable'.
+    OutputDebugString("PKB: Add if-else statement to PKB.\n");
+    _pkbMainPtr->addWhileStmt(_currentStmtNumber, ifVar);
+
+    /* PKB
+    Update VarToIdxMap
+    Update UsesTableStmtToVar using currentStmtNumber
+    Update UsesTableStmtToVar using parentStack
+    Update UsesTableProcToVar using _currentProcName
+    Update UsesTableVar using currentStmtNumber
+    Update UsesTableVar using parentStack
+    */
+    OutputDebugString("PKB: Add variable to PKB.\n");
+    OutputDebugString("PKB: Update uses relationship.\n");
+    _pkbMainPtr->addVariable(ifVar);     // Must add variable first before setting relationships
+    _pkbMainPtr->setUseTableStmtToVar(_currentStmtNumber, ifVar);
+    // TODO Refactoring: Extract method to achieve SLA.
+    if (!_parentStack.empty()) {
+        stack<int> parentStackCopy = _parentStack;
+        while (!parentStackCopy.empty()) {
+            int parentStmt = parentStackCopy.top();
+            _pkbMainPtr->setUseTableStmtToVar(parentStmt, ifVar);
+            parentStackCopy.pop();
+        }
+    }
+    _pkbMainPtr->setUseTableProcToVar(_currentProcName, ifVar);
+
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_THEN_KEYWORD);
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    OutputDebugString("FINE: Entering if-block.\n");
+    // Add new stmtList stack to follows stack
+    OutputDebugString("Push new stmtList stack to follows stack.\n");
+    stack<int>* newFollowsStack = new stack<int>();
+    _stackOfFollowsStacks.push(*newFollowsStack);
+
+    parseStmtList();
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    OutputDebugString("FINE: Exiting if-block.\n");
+    processAndPopTopFollowStack();
+    OutputDebugString("FINE: Processing and then pop top follows stack.\n");
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_THEN_KEYWORD);
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    OutputDebugString("FINE: Entering else-block.\n");
+    // Add new stmtList stack to follows stack
+    OutputDebugString("Push new stmtList stack to follows stack.\n");
+    stack<int>* newFollowsStack = new stack<int>();
+    _stackOfFollowsStacks.push(*newFollowsStack);
+
+    parseStmtList();
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    OutputDebugString("FINE: Exiting else-block.\n");
+    processAndPopTopFollowStack();
+    OutputDebugString("FINE: Processing and then pop top follows stack.\n");
+
+    _parentStack.pop();
 }
 
 void Parser::processAndPopTopFollowStack()
