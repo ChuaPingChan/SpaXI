@@ -110,8 +110,10 @@ public:
 
 	//PKB query (Calls)
 	bool isCalls(string callerProcName, string calleeProcName);
+	bool isCalls(int callerProcIdx, int calleeProcIdx);
 	bool isCaller(string callerProcName);
 	list<int> getCallee(string callerProcName);
+	list<int> getCallee(int callerProxIdx);
 	bool isCallee(string calleeProcName);
 	bool hasCalls();
 
@@ -119,15 +121,23 @@ public:
 
 	list<int> getCaller(string calleeProcName);
 
+	list<int> getCaller(int calleeProcIdx);
+
 	list<int> getAllCallers();
 
 	pair<list<int>, list<int>> getAllCalls();
 
 	bool isCallsStar(string callerProcName, string calleeProcName);
 
+	bool isCallsStar(int callerProcIdx, int calleeProcIdx);
+
 	list<int> getCalleeStar(string callerProcName);
 
+	list<int> getCalleeStar(int callerProcIdx);
+
 	list<int> getCallerStar(string celleeProcName);
+
+	list<int> getCallerStar(int calleeProcIdx);
 
 	pair<list<int>, list<int>> getAllCallsStar();
 

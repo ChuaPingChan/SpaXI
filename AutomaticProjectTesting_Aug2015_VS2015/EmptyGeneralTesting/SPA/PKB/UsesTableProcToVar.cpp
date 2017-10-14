@@ -28,3 +28,12 @@ list<int> UsesTableProcToVar::getUsesVariablesFromProc(int procIdx) {
 
     return usesProcToVarMap[procIdx];
 }
+
+bool UsesTableProcToVar::setMap(unordered_map<int, list<int>> targetMap) {
+	usesProcToVarMap = targetMap;
+	return true;
+}
+
+unordered_map<int, list<int>> UsesTableProcToVar::getMap() {
+	return usesProcToVarMap;
+}

@@ -96,7 +96,6 @@ list<int> StmtTypeList::getCallsStmtList()
     getStmtType: to retrieve the statement numbers according to type
     (e.g. assign, while, ifs)
 */
-//TODO 1 change PKB entity types to use this method
 list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
 {
     list<int> filteredList;

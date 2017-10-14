@@ -76,6 +76,10 @@ bool PKBMain::isCalls(string callerProcName, string calleeProcName) {
 	return callsTable.isCalls(callerProcIdx, calleeProcIdx);
 }
 
+bool PKBMain::isCalls(int callerProcIdx, int calleeProcIdx) {
+	return callsTable.isCalls(callerProcIdx, calleeProcIdx);
+}
+
 bool PKBMain::isCaller(string callerProcName) {
 	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
 	return callsTable.isCaller(callerProcIdx);
@@ -83,6 +87,10 @@ bool PKBMain::isCaller(string callerProcName) {
 
 list<int> PKBMain::getCallee(string callerProcName) {
 	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
+	return callsTable.getCallee(callerProcIdx);
+}
+
+list<int> PKBMain::getCallee(int callerProcIdx) {
 	return callsTable.getCallee(callerProcIdx);
 }
 
@@ -104,6 +112,10 @@ list<int> PKBMain::getCaller(string calleeProcName) {
 	return callsTable.getCaller(calleeProcIdx);
 }
 
+list<int> PKBMain::getCaller(int calleeProcIdx) {
+	return callsTable.getCaller(calleeProcIdx);
+}
+
 list<int> PKBMain::getAllCallers() {
 	return callsTable.getAllCallers();
 }
@@ -119,13 +131,25 @@ bool PKBMain::isCallsStar(string callerProcName, string calleeProcName) {
 	return callsStarTable.isCallsStar(callerProcIdx, calleeProcIdx);
 }
 
+bool PKBMain::isCallsStar(int callerProcIdx, int calleeProcIdx) {
+	return callsStarTable.isCallsStar(callerProcIdx, calleeProcIdx);
+}
+
 list<int> PKBMain::getCalleeStar(string callerProcName) {
 	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
 	return callsStarTable.getCalleeStar(callerProcIdx);
 }
 
+list<int> PKBMain::getCalleeStar(int callerProcIdx) {
+	return callsStarTable.getCalleeStar(callerProcIdx);
+}
+
 list<int> PKBMain::getCallerStar(string calleeProcName) {
 	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
+	return callsStarTable.getCallerStar(calleeProcIdx);
+}
+
+list<int> PKBMain::getCallerStar(int calleeProcIdx) {
 	return callsStarTable.getCallerStar(calleeProcIdx);
 }
 
@@ -340,7 +364,7 @@ bool PKBMain::startProcessComplexRelations() {
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
 	followsStarBefore.setMap(de.computeFollowsStarBeforeTable(followsTable));
 	callsStarTable.setCallsStarMap(de.computeCallsStarTable(callsTable));
-	//TODO 2 add calls, perhaps optimise
+	usesTableProcToVar.setMap(de.computeUsesTable(usesTableProcToVar, callsStarTable));
 	return true;
 }
 
