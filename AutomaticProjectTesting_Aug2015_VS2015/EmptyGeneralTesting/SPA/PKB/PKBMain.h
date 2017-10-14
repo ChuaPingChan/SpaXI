@@ -84,6 +84,8 @@ public:
 	list<int> getAllStatements();
     list<int> getAllIfs();
 
+	list<int> getAllCallsStmt();
+
 	list<int> getAllVariables();
     
     //PKB-Parser

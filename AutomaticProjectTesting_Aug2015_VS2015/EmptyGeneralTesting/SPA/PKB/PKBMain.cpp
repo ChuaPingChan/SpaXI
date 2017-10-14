@@ -896,6 +896,10 @@ list<int> PKBMain::getAllIfs()
     return stmtTypeList.getIfStmtList();
 }
 
+list<int> PKBMain::getAllCallsStmt() {
+	return stmtTypeList.getCallsStmtList;
+}
+
 list<int> PKBMain::getAllVariables() {
 	return varIdxTable.getAllVariablesIndex();
 }
