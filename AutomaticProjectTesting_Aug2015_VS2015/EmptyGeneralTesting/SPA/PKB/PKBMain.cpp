@@ -572,6 +572,15 @@ pair<list<int>, list<string>> PKBMain::getLeftVariables()
 	return patternTable.getLeftVariables();
 }
 
+list<int> PKBMain::getWhilesWithControlVariable(string var) {
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	return patternTable.getWhileWithControlVariable(varIdx);
+}
+
+list<int> PKBMain::getIfsWithControlVariable(string var) {
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	return patternTable.getIfWithControlVariable(varIdx);
+}
 pair<list<int>, list<string>> PKBMain::getLeftVariablesThatMatchWith(string expression)
 {
 	return patternTable.getLeftVariableThatMatchWithString(expression);
@@ -626,16 +635,32 @@ bool PKBMain::addAssignmentStmt(int stmt)
 	return added;
 }
 
+bool PKBMain::addWhileStmt(int stmt, string controlVar) {
+	addVariable(controlVar);
+	int varIdx = varIdxTable.getIdxFromVar(controlVar);
+	bool added = stmtTypeList.addToWhileStmtList(stmt);
+	patternTable.addWhile(stmt, varIdx);
+	return true;
+}
+
 bool PKBMain::addWhileStmt(int stmt)
 {
 	bool added = stmtTypeList.addToWhileStmtList(stmt);
 	return added;
 }
 
-bool PKBMain::addIfStmt(int stmt)
+bool PKBMain::addIfStmt(int stmt, string controlVar)
 {
+	addVariable(controlVar);
     bool added = stmtTypeList.addToIfStmtList(stmt);
+	int varIdx = varIdxTable.getIdxFromVar(controlVar);
+	patternTable.addIf(stmt, varIdx);
     return added;
+}
+
+bool PKBMain::addIfStmt(int stmt) {
+	bool added = stmtTypeList.addToIfStmtList(stmt);
+	return added;
 }
 
 bool PKBMain::addConstant(int stmt, int constant)

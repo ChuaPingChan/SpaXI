@@ -95,7 +95,9 @@ public:
     bool addVariable(string var);
     bool addProcedure(string proc);
     bool addAssignmentStmt(int stmt);
+	bool addWhileStmt(int stmt, string controlVar);
     bool addWhileStmt(int stmt);
+	bool addIfStmt(int stmt, string controlVar);
     bool addIfStmt(int stmt);
     bool addConstant(int stmt, int constant);
 	list<int> getAllProcedures();
@@ -147,7 +149,9 @@ public:
 
     //PKB query evaluator (Pattern)
     pair<list<int>, list<string>> getLeftVariables();
-    pair<list<int>, list<string>> getLeftVariablesThatMatchWith(string expression);
+	list<int> getWhilesWithControlVariable(string var);
+	list<int> getIfsWithControlVariable(string var);
+	pair<list<int>, list<string>> getLeftVariablesThatMatchWith(string expression);
     list<int> getPartialMatchStmt(string expression);
     list<int> getPartialBothMatches(string var, string expression);
     list<int> getExactMatchStmt(string expression);
