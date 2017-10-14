@@ -17,7 +17,8 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 	//Case 1: Select BOOLEAN
 	if (selectionByQuery.getSelectionType()==SELECT_BOOLEAN)
 	{
-		if (!cr.hasResults() && cr.isPopulated()) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
+        bool isTreeEmpty = checkIfQueryTreeHasClauses(&qt);
+		if (!cr.hasResults() && !isTreeEmpty) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
 		{
 			result.push_back("false");
 		}
@@ -75,6 +76,15 @@ list<string> ResultFormatter::convertListOfListOfIntsToListOfStrings(list<list<i
 {
 	list<string> convertedFromInt;
 	return convertedFromInt;
+}
+bool ResultFormatter::checkIfQueryTreeHasClauses(QueryTree* qt)
+{
+    if (qt->getSuchThatClauses().empty() && qt->getPatternClauses().empty() && qt->getWithClauses().empty())
+    {
+        return false;
+    }
+
+    return true;
 }
 
 

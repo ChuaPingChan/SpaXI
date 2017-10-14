@@ -29,7 +29,7 @@ namespace UnitTesting
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).size()==1);
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front()=="true");
 		}
-
+        
 		TEST_METHOD(TestResultFormatter_SelectBOOLEAN_ClauseResultEmpty_False)
 		{
 			QueryTree qt;
@@ -38,7 +38,7 @@ namespace UnitTesting
 			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
 			ClauseResult cr;
 			ResultFormatter rf;
-            cr.updateSynResults("s", list<int>());
+           // cr.updateSynResults("s", list<int>());
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).size() == 1);
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front() == "false");
 		}

@@ -19,6 +19,8 @@ public:
 protected:
 	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
 	list<string> convertListOfListOfIntsToListOfStrings(list<list<int>> listOfInts);
+    bool checkIfQueryTreeHasClauses(QueryTree * qt);
+
 private:
     PKBMain* pkbInstance;
 };
