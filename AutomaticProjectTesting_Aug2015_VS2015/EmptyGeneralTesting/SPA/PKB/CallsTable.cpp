@@ -14,6 +14,8 @@ bool CallsTable::addCallsRel(int caller, int callee) {
 		callees.push_back(callee);
 	}
 
+	allCalls.first.push_back(caller);
+	allCalls.second.push_back(callee);
 	callsProcMap[caller].push_back(callee);
 	callsProcMapReverse[callee].push_back(caller);
 	string callsRel = to_string(caller) + "," + to_string(callee);
@@ -67,4 +69,16 @@ list<int> CallsTable::getAllCallees() {
 
 list<int> CallsTable::getAllCallers() {
 	return callers;
+}
+
+pair<list<int>, list<int>> CallsTable::getAllCalls() {
+	return allCalls;
+}
+
+unordered_map<int, list<int>> CallsTable::getTable() {
+	return callsProcMap;
+}
+
+unordered_map<int, list<int>> CallsTable::getTableReverse() {
+	return callsProcMapReverse;
 }

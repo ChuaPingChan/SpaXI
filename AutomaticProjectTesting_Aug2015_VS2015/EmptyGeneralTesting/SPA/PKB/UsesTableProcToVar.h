@@ -11,8 +11,8 @@ using namespace std;
 class UsesTableProcToVar {
 public:
     UsesTableProcToVar();
-    bool addUsesProcToVarList(int procIdx, string var);
-    list<string> getUsesVariablesFromProc(int procIdx);
+    bool addUsesProcToVarList(int procIdx, int var);
+    list<int> getUsesVariablesFromProc(int procIdx);
 private:
-    unordered_map<int, list<string>> usesProcToVarMap;
+    unordered_map<int, list<int>> usesProcToVarMap;
 };

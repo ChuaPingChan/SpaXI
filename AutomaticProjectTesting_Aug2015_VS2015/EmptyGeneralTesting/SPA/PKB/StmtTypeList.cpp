@@ -132,58 +132,59 @@ list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
     return filteredList;
 }
 
-pair<list<int>, list<string>> StmtTypeList::getStmtType(pair<list<int>, list<string>> pairOfList, Entity type)
+pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> pairOfList, Entity type)
 {
     list<int> stmts = pairOfList.first;
-    list<string> vars = pairOfList.second;
-    list<pair<int, string>> listOfPairs;
+    list<int> vars = pairOfList.second;
     // converting from pair of two lists into list of pairs
+	pair<list<int>, list<int>> resultPair;
+	resultPair = make_pair(list<int>(), list<int>());
+	int currStmt;
+	int currVar;
+
     while (!stmts.empty() && !vars.empty())
     {
-        listOfPairs.push_back(make_pair(stmts.front(), vars.front()));
-        stmts.pop_front();
-        vars.pop_back();
+		currStmt = stmts.front();
+		stmts.pop_front();
+		currVar = vars.front();
+		vars.pop_front();
+
+		if (type == ASSIGN) {
+			if (isAssignStmt(currStmt)) {
+				resultPair.first.push_back(currStmt);
+				resultPair.second.push_back(currVar);
+			}
+		}
+
+		else if (type == WHILE) {
+			if (isWhileStmt(currStmt)) {
+				resultPair.first.push_back(currStmt);
+				resultPair.second.push_back(currVar);
+			}
+
+		}
+		/* TODO 1 uncomment if
+		else if (type == IF) {
+			if (isIfStmt(currStmt)) {
+				resultPair.first.push_back(currStmt);
+				resultPair.second.push_back(currVar);
+			}
+
+		}*/
+
+		else if (type == CALL) {
+			if (isCallsStmt(currStmt)) {
+				resultPair.first.push_back(currStmt);
+				resultPair.second.push_back(currVar);
+			}
+
+		}
+
+		else {
+			resultPair = pairOfList;
+			break;
+		}
     }
-    // filtering away unwanted pairs
-    list<pair<int, string>> filteredListOfPairs;
-    list<pair<int, string>>::iterator it;
-    for (it = listOfPairs.begin(); it != listOfPairs.end(); ++it)
-    {
-        if (type == ASSIGN)
-        {
-            if (isAssignStmt(it->first))
-            {
-                filteredListOfPairs.push_back(*it);
-            }
-        }
-        else if (type == WHILE)
-        {
-            if (isWhileStmt(it->first))
-            {
-                filteredListOfPairs.push_back(*it);
-            }
-        }
-        else if (type == IF)
-        {
-            if (isIfStmt(it->first)) {
-                filteredListOfPairs.push_back(*it);
-            }
-        }
-        else if (type == STMT)
-        {
-            filteredListOfPairs.push_back(*it);
-        }
-    }
-    // convert back to pair of lists
-    list<int> resultStmts;
-    list<string> resultVars;
-    list<pair<int, string>>::iterator resultItr;
-    for (resultItr = filteredListOfPairs.begin();
-        resultItr != filteredListOfPairs.end(); ++resultItr)
-    {
-        resultStmts.push_back(resultItr->first);
-        resultVars.push_back(resultItr->second);
-    }
-    
-    return make_pair(resultStmts, resultVars);
+
+	return resultPair;
 }

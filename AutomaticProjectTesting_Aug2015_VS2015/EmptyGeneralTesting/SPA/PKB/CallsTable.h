@@ -22,6 +22,9 @@ public:
 	bool hasCalls();
 	list<int> getAllCallees();
 	list<int> getAllCallers();
+	pair<list<int>, list<int>> getAllCalls();
+	unordered_map<int, list<int>> getTable();
+	unordered_map<int, list<int>> getTableReverse();
 private:
 	unordered_map<int, list<int>> callsProcMap;
 	unordered_map<int, list<int>> callsProcMapReverse;
@@ -30,4 +33,5 @@ private:
 	unordered_map <string, bool> callsRelPairs;
 	list<int> callees;
 	list<int> callers;
+	pair<list<int>, list<int>> allCalls;
 };

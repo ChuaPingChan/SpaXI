@@ -29,7 +29,8 @@ public:
     list<int> getIfStmtList();
 	list<int> getCallsStmtList();
     list<int> getStmtType(list<int> stmtList, Entity type);
-    pair<list<int>, list<string>> getStmtType(pair<list<int>, list<string>> pairOfList, Entity type);
+    pair<list<int>, list<int>> getStmtType(pair<list<int>, list<int>> pairOfList, Entity type);
+	pair<list<int>, list<int>> getStmtType(pair<list<int>, list<int>> pairOfList, Entity type1, Entity type2);
 private:
 	list<int> allStmtList;
     list<int> assignStmtList;

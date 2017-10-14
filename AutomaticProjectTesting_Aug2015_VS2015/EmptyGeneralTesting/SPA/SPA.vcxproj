@@ -14,6 +14,7 @@
     <ClCompile Include="Exceptions\AttributeNotFoundException.cpp" />
     <ClCompile Include="Exceptions\SynonymNotFoundException.cpp" />
     <ClCompile Include="PKB\CallsMap.cpp" />
+    <ClCompile Include="PKB\CallsStarTable.cpp" />
     <ClCompile Include="PKB\CallsTable.cpp" />
     <ClCompile Include="PQL\Attributeship.h" />
     <ClCompile Include="PQL\Evaluator\ClauseEvaluator.cpp" />
@@ -90,6 +91,7 @@
   <ItemGroup>
     <ClInclude Include="Exceptions\AttributeNotFoundException.h" />
     <ClInclude Include="PKB\CallsMap.h" />
+    <ClInclude Include="PKB\CallsStarTable.h" />
     <ClInclude Include="PKB\CallsTable.h" />
     <ClInclude Include="PQL\Evaluator\ClauseEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\ResultFactory.h" />

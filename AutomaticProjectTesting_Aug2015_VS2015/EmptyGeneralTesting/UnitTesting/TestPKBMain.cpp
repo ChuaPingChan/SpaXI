@@ -206,82 +206,82 @@ namespace UnitTesting
             Assert::IsTrue(expected == testIf);
         }
 
-        TEST_METHOD(TestModifiesTable) {
-            PKBMain PKB;
-            Assert::IsTrue(PKB.setModTableStmtToVar(1, "a"));
-            Assert::IsTrue(PKB.setModTableStmtToVar(1, "b"));
-            Assert::IsTrue(PKB.setModTableStmtToVar(2, "a"));
-            Assert::IsTrue(PKB.setModTableStmtToVar(4, "c"));
-            Assert::IsTrue(PKB.setModTableStmtToVar(7, "d"));
-            Assert::IsTrue(PKB.setModTableStmtToVar(888, "e"));
+        //TEST_METHOD(TestModifiesTable) {
+        //    PKBMain PKB;
+        //    Assert::IsTrue(PKB.setModTableStmtToVar(1, "a"));
+        //    Assert::IsTrue(PKB.setModTableStmtToVar(1, "b"));
+        //    Assert::IsTrue(PKB.setModTableStmtToVar(2, "a"));
+        //    Assert::IsTrue(PKB.setModTableStmtToVar(4, "c"));
+        //    Assert::IsTrue(PKB.setModTableStmtToVar(7, "d"));
+        //    Assert::IsTrue(PKB.setModTableStmtToVar(888, "e"));
 
-            // test getModifiesFromStmt
-            list<string> templist;
-            templist.push_back("a");
-            templist.push_back("b");
-            list<string> testlist = PKB.getModifiesFromStmt(1);
-            while (!templist.empty() && !testlist.empty())
-            {
-                Assert::AreEqual(templist.front(), testlist.front());
-                testlist.pop_front();
-                templist.pop_front();
-            }
+        //    // test getModifiesFromStmt
+        //    list<string> templist;
+        //    templist.push_back("a");
+        //    templist.push_back("b");
+        //    list<string> testlist = PKB.getModifiesFromStmt(1);
+        //    while (!templist.empty() && !testlist.empty())
+        //    {
+        //        Assert::AreEqual(templist.front(), testlist.front());
+        //        testlist.pop_front();
+        //        templist.pop_front();
+        //    }
 
-            // check for zero duplicates
-            templist.push_back("a");
-            templist.push_back("b");
-            Assert::IsTrue(PKB.setModTableStmtToVar(1, "a"));
-            testlist = PKB.getModifiesFromStmt(2);
-            while (!templist.empty() && !testlist.empty())
-            {
-                Assert::AreEqual(templist.front(), testlist.front());
-                testlist.pop_front();
-                templist.pop_front();
-            }
+        //    // check for zero duplicates
+        //    templist.push_back("a");
+        //    templist.push_back("b");
+        //    Assert::IsTrue(PKB.setModTableStmtToVar(1, "a"));
+        //    testlist = PKB.getModifiesFromStmt(2);
+        //    while (!templist.empty() && !testlist.empty())
+        //    {
+        //        Assert::AreEqual(templist.front(), testlist.front());
+        //        testlist.pop_front();
+        //        templist.pop_front();
+        //    }
 
-            // test isMod
-            Assert::IsTrue(PKB.isMod(1, "a"));
-            Assert::IsTrue(PKB.isMod(1, "b"));
-            Assert::IsTrue(PKB.isMod(2, "a"));
-            Assert::IsFalse(PKB.isMod(2, "abc"));
+        //    // test isMod
+        //    Assert::IsTrue(PKB.isMod(1, "a"));
+        //    Assert::IsTrue(PKB.isMod(1, "b"));
+        //    Assert::IsTrue(PKB.isMod(2, "a"));
+        //    Assert::IsFalse(PKB.isMod(2, "abc"));
 
-            // test isModifyingAnything
-            Assert::IsTrue(PKB.isModifyingAnything(1));
-            Assert::IsFalse(PKB.isModifyingAnything(3));
+        //    // test isModifyingAnything
+        //    Assert::IsTrue(PKB.isModifyingAnything(1));
+        //    Assert::IsFalse(PKB.isModifyingAnything(3));
 
-            // test getStmtFromVar
-            list<int> stmtList;
-            stmtList.push_back(1);
-            stmtList.push_back(2);
-            list<int> testStmtList;
-            testStmtList = PKB.getModifiesFromVar("a", STMT);
-            while (!stmtList.empty() && !testStmtList.empty())
-            {
-                Assert::AreEqual(stmtList.front(), testStmtList.front());
-                testStmtList.pop_front();
-                stmtList.pop_front();
-            }
-            // test getStmtThatModifiesAnything
-            
-            // test getModPairs
+        //    // test getStmtFromVar
+        //    list<int> stmtList;
+        //    stmtList.push_back(1);
+        //    stmtList.push_back(2);
+        //    list<int> testStmtList;
+        //    testStmtList = PKB.getModifiesFromVar("a", STMT);
+        //    while (!stmtList.empty() && !testStmtList.empty())
+        //    {
+        //        Assert::AreEqual(stmtList.front(), testStmtList.front());
+        //        testStmtList.pop_front();
+        //        stmtList.pop_front();
+        //    }
+        //    // test getStmtThatModifiesAnything
+        //    
+        //    // test getModPairs
 
-            stmtList.push_back(1);
-            stmtList.push_back(1);
-            stmtList.push_back(2);
-            stmtList.push_back(4);
-            stmtList.push_back(7);
-            stmtList.push_back(888);
+        //    stmtList.push_back(1);
+        //    stmtList.push_back(1);
+        //    stmtList.push_back(2);
+        //    stmtList.push_back(4);
+        //    stmtList.push_back(7);
+        //    stmtList.push_back(888);
 
-            list<string> modList;
-            modList.push_back("a");
-            modList.push_back("b");
-            modList.push_back("a");
-            modList.push_back("c");
-            modList.push_back("d");
-            modList.push_back("e");
+        //    list<string> modList;
+        //    modList.push_back("a");
+        //    modList.push_back("b");
+        //    modList.push_back("a");
+        //    modList.push_back("c");
+        //    modList.push_back("d");
+        //    modList.push_back("e");
 
 
-        }
+        //}
 
         TEST_METHOD(TestUsesTable) {
             PKBMain PKB;
@@ -289,8 +289,51 @@ namespace UnitTesting
 
 		TEST_METHOD(TestCallsTable) {
 			PKBMain PKB;
-			PKB.setCallsRel(3, "A", "B");
-			PKB.setCallsRel(5, "A", "C");
+			PKB.addProcedure("One");
+			PKB.setCallsRel(2, "One", "Two");
+			PKB.setCallsRel(3, "One", "Three");
+			PKB.addProcedure("Three");
+			PKB.setCallsRel(6, "Three", "Four");
+			PKB.setCallsRel(7, "Three", "Five");
+			PKB.setCallsRel(8, "Three", "Six");
+			PKB.addProcedure("Four");
+			PKB.addProcedure("Five");
+			PKB.setCallsRel(14, "Five", "Six");
+			PKB.setCallsRel(15, "Five", "Seven");
+			PKB.addProcedure("Six");
+			PKB.setCallsRel(19, "Six", "Seven");
+			PKB.addProcedure("Two");
+			PKB.setCallsRel(24, "Two", "Eight");
+			PKB.addProcedure("Seven");
+			PKB.setCallsRel(28, "Seven", "Nine");
+			PKB.addProcedure("Eight");
+			PKB.setCallsRel(33, "Eight", "Nine");
+			PKB.addProcedure("Nine");
+
+			PKB.startProcessComplexRelations();
+
+			Assert::IsTrue(PKB.isCallsStar("One", "Nine"));
+
+			/*
+			Index of proc are as follows
+			"One" 0
+			"Two" 1
+			"Three" 2
+			"Four" 3
+			"Five" 4
+			"Six" 5
+			"Seven" 6
+			"Eight" 7
+			"Nine" 8
+			*/
+
+			list<int> expectedList = { 5, 4, 2, 0 };
+			expectedList.sort();
+			list<int> resultList = PKB.getCallerStar("Seven");
+			resultList.sort();
+			Assert::IsTrue(resultList == expectedList);
+			pair<list<int>, list<int>> allCallsStar = PKB.getAllCallsStar();
+
 		}
 	};
 }

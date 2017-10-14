@@ -24,6 +24,7 @@
 #include "UsesTableVar.h"
 #include "VarIdxTable.h"
 #include "CallsTable.h"
+#include "CallsStarTable.h"
 #include <string>
 #include "../Entity.h"
 
@@ -34,6 +35,8 @@ public:
 	PKBMain();
     static PKBMain* getInstance();
     static void resetInstance();
+
+	list<string> convertIdxToString(list<int> indexList, Entity type);
 
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
@@ -81,7 +84,7 @@ public:
 	list<int> getAllStatements();
     list<int> getAllIfs();
 
-	list<string> getAllVariables();
+	list<int> getAllVariables();
     
     //PKB-Parser
 	bool setParentChildRel(int parentStmt, int childStmt);
@@ -93,7 +96,8 @@ public:
     bool addWhileStmt(int stmt);
     bool addIfStmt(int stmt);
     bool addConstant(int stmt, int constant);
-    bool setModTableStmtToVar(int stmt, string var);
+	list<int> getAllProcedures();
+	bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);
     bool setUseTableStmtToVar(int stmt, string var);
     bool setUseTableProcToVar(string proc, string var);
@@ -112,19 +116,30 @@ public:
 
 	list<int> getAllCallers();
 
+	pair<list<int>, list<int>> getAllCalls();
+
+	bool isCallsStar(string callerProcName, string calleeProcName);
+
+	list<int> getCalleeStar(string callerProcName);
+
+	list<int> getCallerStar(string celleeProcName);
+
+	pair<list<int>, list<int>> getAllCallsStar();
+
     //PKB query evaluator (Uses, Modifies)
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
+	bool isMod(int stmt, int varIdx);
     bool isUsingAnything(int stmt);
     bool isModifyingAnything(int stmt);
-    list<string> getUsesFromStmt(int stmt);
-    list<string> getModifiesFromStmt(int stmt);
+    list<int> getUsesFromStmt(int stmt);
+    list<int> getModifiesFromStmt(int stmt);
     list<int> getUsesFromVar(string var, Entity type);
     list<int> getModifiesFromVar(string var, Entity type);
     list<int> getStmtThatUsesAnything(Entity type);
     list<int> getStmtThatModifiesAnything(Entity type);
-    pair<list<int>, list<string>> getUsesPairs(Entity type);
-    pair<list<int>, list<string>> getModifiesPairs(Entity type);
+    pair<list<int>, list<int>> getUsesPairs(Entity type);
+    pair<list<int>, list<int>> getModifiesPairs(Entity type);
 
     //PKB query evaluator (Pattern)
     pair<list<int>, list<string>> getLeftVariables();
@@ -149,6 +164,7 @@ private:
 	unordered_map<int, int> followsBeforeMap;
 	unordered_map<int, int> followsAfterMap;
 	CallsTable callsTable;
+//	CallsStarTable callsStarTable;
 	
 	ConstantTable constantTable;
     ModTableProcToVar modTableProcToVar;
@@ -161,4 +177,5 @@ private:
     UsesTableStmtToVar usesTableStmtToVar;
     UsesTableVar usesTableVar;
     VarIdxTable varIdxTable;
+	CallsStarTable callsStarTable;
 };
