@@ -394,6 +394,8 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
                 return clauseResult->hasResults();
             }
+        }
+    }
 
     else
     {
