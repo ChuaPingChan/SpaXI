@@ -16,7 +16,15 @@ class PatternTable {
 public:
     PatternTable();
 	bool addWhile(int stmt, int varIdx);
+	bool isWhileControlVar(int stmt, int varIdx);
 	bool addIf(int stmt, int varIdx);
+	bool isIfControlVar(int stmt, int varIdx);
+	pair<list<int>, list<int>> getControlVariablesInWhile();
+	list<int> getControlVariablesInWhile(int stmt);
+	list<int> getWhileFromControlVar(int stmt);
+	list<int> getIfFromControlVar(int stmt);
+	list<int> getControlVariablesInIf(int stmt);
+	pair<list<int>, list<int>> getControlVariablesInIf();
     bool addToPatternTable(int stmtNumber, int varIdx, string expression);
     pair<int,list<string>> getExpression(int stmtNumber);
     pair<list<int>,list<int>> getLeftVariables();
@@ -42,4 +50,10 @@ private:
     stack<char> infixToPostfixStack;
 	unordered_map<int, list<int>> varToWhileMap;
 	unordered_map<int, list<int>> varToIfMap;
+	list<int> whileVarList;
+	list<int> whileList;
+	list<int> ifVarList;
+	list<int> ifList;
+	unordered_map<int, int> whileToVarMap;
+	unordered_map<int, int> ifToVarMap;
 };

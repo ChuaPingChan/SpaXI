@@ -25,6 +25,7 @@
 #include "VarIdxTable.h"
 #include "CallsTable.h"
 #include "CallsStarTable.h"
+#include "NextTable.h"
 #include <string>
 #include "../Entity.h"
 
@@ -158,12 +159,18 @@ public:
 	bool isModifyingAnythingProc(string procName);
     list<int> getUsesFromStmt(int stmt);
 	list<int> getUsesFromProc(string procName);
+	list<int> getUsesFromProc(int procIdx);
     list<int> getModifiesFromStmt(int stmt);
 	list<int> getModifiesFromProc(string procIdx);
+	list<int> getModifiesFromProc(int procIdx);
     list<int> getUsesFromVar(string var, Entity type);
-	list<int> getProcUsesFromVar(string var, Entity type);
-    list<int> getModifiesFromVar(string var, Entity type);
-	list<int> getProcModifiesFromVar(string var, Entity type);
+	list<int> getUsesFromVar(int varIdx, Entity type);
+	list<int> getProcUsesFromVar(string var);
+	list<int> getProcUsesFromVar(int varIdx);
+	list<int> getModifiesFromVar(string var, Entity type);
+	list<int> getModifiesFromVar(int varIdx, Entity type);
+	list<int> getProcModifiesFromVar(string var);
+	list<int> getProcModifiesFromVar(int varIdx);
 	list<int> getStmtThatUsesAnything(Entity type);
 	list<int> getProcThatUsesAnything();
     list<int> getStmtThatModifiesAnything(Entity type);
@@ -180,6 +187,14 @@ public:
 	list<int> getIfsWithControlVariable(string var);
 	pair<list<int>, list<int>> getLeftVariablesThatPartialMatchWith(string expression);
 	pair<list<int>, list<int>> getLeftVariablesThatExactMatchWith(string expression);
+	bool isWhileControlVar(int stmt, int varIdx);
+	bool isIfControlVar(int stmt, int varIdx);
+	pair<list<int>, list<int>> getControlVariablesInWhile();
+	list<int> getControlVariablesInIf(int stmt);
+	list<int> getControlVariablesInWhile(int stmt);
+	pair<list<int>, list<int>> getControlVariablesInIf();
+	list<int> getWhileFromControlVar(int varIdx);
+	list<int> getIfFromControlVar(int varIdx);
     list<int> getPartialMatchStmt(string expression);
 	list<int> getPartialMatchVar(int stmt, string expression);
 	list<int> getExactMatchVar(int stmt, string expression);
@@ -223,4 +238,5 @@ private:
     VarIdxTable varIdxTable;
 	CallsStarTable callsStarTable;
 	DesignExtractor de;
+	NextTable nextTable;
 };

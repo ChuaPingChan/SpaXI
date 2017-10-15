@@ -17,7 +17,18 @@ bool PatternTable::addWhile(int stmt, int varIdx) {
 		varToWhileMap[varIdx].sort();
 		varToWhileMap[varIdx].unique();
 	}
+	whileToVarMap[stmt] = varIdx;
+	whileVarList.push_back(varIdx);
+	whileList.push_back(stmt);
 	return true;
+}
+
+bool PatternTable::isWhileControlVar(int stmt, int varIdx) {
+	if (varToWhileMap.find(varIdx) == varToWhileMap.end()) {
+		return false;
+	}
+
+	return find(varToWhileMap[varIdx].begin(), varToWhileMap[varIdx].end(), stmt) != varToWhileMap[varIdx].end();
 }
 
 bool PatternTable::addIf(int stmt, int varIdx) {
@@ -29,7 +40,62 @@ bool PatternTable::addIf(int stmt, int varIdx) {
 		varToIfMap[varIdx].sort();
 		varToIfMap[varIdx].unique();
 	}
+	ifToVarMap[stmt] = varIdx;
+	ifVarList.push_back(varIdx);
+	ifList.push_back(stmt);
 	return true;
+}
+
+bool PatternTable::isIfControlVar(int stmt, int varIdx) {
+	if (varToIfMap.find(varIdx) == varToIfMap.end()) {
+		return false;
+	}
+
+	return find(varToIfMap[varIdx].begin(), varToWhileMap[varIdx].end(), stmt) != varToWhileMap[varIdx].end();
+}
+
+pair<list<int>, list<int>> PatternTable::getControlVariablesInWhile() {
+	return make_pair(whileList, whileVarList);
+}
+
+list<int> PatternTable::getControlVariablesInWhile(int stmt) {
+	list<int> resultList;
+	if (whileToVarMap.find(stmt) == whileToVarMap.end()) {
+		return resultList;
+	}
+
+	resultList.push_back(whileToVarMap[stmt]);
+	return resultList;
+}
+
+list<int> PatternTable::getWhileFromControlVar(int var) {
+	if (varToWhileMap.find(var) == varToWhileMap.end()) {
+		return list<int>();
+	}
+
+	return varToWhileMap[var];
+}
+
+list<int> PatternTable::getIfFromControlVar(int var) {
+	if (varToIfMap.find(var) == varToIfMap.end()) {
+		return list<int>();
+	}
+
+	return varToIfMap[var];
+}
+
+list<int> PatternTable::getControlVariablesInIf(int stmt) {
+	list<int> resultList;
+	if (ifToVarMap.find(stmt) == ifToVarMap.end()) {
+		return resultList;
+	}
+
+	resultList.push_back(ifToVarMap[stmt]);
+	return resultList;
+}
+
+pair<list<int>, list<int>> PatternTable::getControlVariablesInIf() {
+	return make_pair(ifList, ifVarList);
 }
 
 list<int> PatternTable::getWhileWithControlVariable(int varIdx) {

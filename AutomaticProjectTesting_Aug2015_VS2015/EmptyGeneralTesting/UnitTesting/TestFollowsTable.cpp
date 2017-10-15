@@ -25,7 +25,6 @@ namespace UnitTesting
 		
 		TEST_METHOD(TestGetStmt)
 		{
-			// TODO: Your test code here
 			FollowsTable table;
 
 			Assert::IsTrue(table.addFollows(2, 1, 3));
