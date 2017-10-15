@@ -690,6 +690,11 @@ list<int> PKBMain::getProcThatUsesAnything()
 	return procList;
 }
 
+list<int> PKBMain::getProcThatModifiesAnything() {
+	list<int> procList = modTableProcToVar.getProcThatModifies();
+	return procList;
+}
+
 list<int> PKBMain::getStmtThatModifiesAnything(Entity type)
 {
 	list<int> stmtList = modTableStmtToVar.getStmtThatModifies();
