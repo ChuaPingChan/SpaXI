@@ -86,8 +86,6 @@ namespace UnitTesting
         {
             string str = "Follows(\"procedure\",2)";
             Assert::IsFalse(RegexValidators::isValidFollowsRegex(str));
-            str = "Follows(1,\"x\")";
-            Assert::IsFalse(RegexValidators::isValidFollowsRegex(str));
         }
 
         TEST_METHOD(TestRegex_Follows_Ident_SecondArg_Invalid)
