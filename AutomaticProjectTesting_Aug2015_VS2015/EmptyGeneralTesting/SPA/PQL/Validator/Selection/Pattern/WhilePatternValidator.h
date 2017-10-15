@@ -11,7 +11,7 @@ public:
     bool isValid();
 
 private:
-    bool isValidArgOne(string argOne);
+    bool isValidArgOne(string &argOne);
     bool isValidArgTwo(string argTwo);
 
     string extractArgOne(string str);

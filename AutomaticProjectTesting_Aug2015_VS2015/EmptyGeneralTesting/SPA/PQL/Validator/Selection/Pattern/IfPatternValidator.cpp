@@ -32,7 +32,7 @@ bool IfPatternValidator::isValid()
     return this->validity;
 }
 
-bool IfPatternValidator::isValidArgOne(string argOne)
+bool IfPatternValidator::isValidArgOne(string &argOne)
 {
     if (qtPtr->isEntitySynonymExist(argOne, VARIABLE))
     {
@@ -48,6 +48,7 @@ bool IfPatternValidator::isValidArgOne(string argOne)
 
     else if (RegexValidators::isValidIdentWithQuotesRegex(argOne))
     {
+        argOne = Formatter::removeAllQuotes(argOne);
         this->argOneType = IDENT_WITHQUOTES;
         return true;
     }

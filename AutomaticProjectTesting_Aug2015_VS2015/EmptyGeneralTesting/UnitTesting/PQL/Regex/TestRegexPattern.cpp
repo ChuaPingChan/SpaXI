@@ -66,89 +66,227 @@ namespace UnitTesting
         }
 
 
-
-        /*****************************
-        * Expression Spec Regex Test *
-        *****************************/
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
+        /*************************************
+        * Expression Spec Partial Regex Test *
+        *************************************/
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Letter_Valid)
         {
-            string str = "_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\"Hello\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Ident_PartialMatch_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Integer_Valid)
         {
-            string str = "_\"validFactorWithBothSideUnderscore\"_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\"12345\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement exact match
-        TEST_METHOD(TestRegex_ExpressionSpec_ExactMatch_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Plus_Valid)
         {
-            string str = "\"exactMatch\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\"+\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        //TODO: Change to IsTrue when implement + and * and -
-        TEST_METHOD(TestRegex_ExpressionSpec_Operator_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Minus_Valid)
         {
-            string str = "\"x+y-3*z\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\"-\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Whitespaces_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Times_Valid)
         {
-            string str = "  _   \"    whitespaces     \"   _  ";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\"*\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Tabs_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_OpenBrackets_Valid)
         {
-            string str = "	_	\"	tabs	\"	_	";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\"(\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_DivisionInvalid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_CloseBrackets_Valid)
         {
-            string str = "\"x/y\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\")\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_EmptyStringInvalid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Expression_Valid)
         {
-            string str = "";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\"x-2*(a+b)\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_IntegerInvalid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Expression_Random_Valid)
         {
-            string str = "123";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_\"2x-(2*(a-)+b)\"_";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_LettersInvalid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Whitespace_Valid)
         {
-            string str = "abc";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "_ \" x - 2 * ( a + b ) \" _";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_LeftOnlyInvalid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Letter_NoUnderscoreQuotes_Invalid)
         {
-            string str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "Hello";
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_RightOnlyInvalid)
+        /***********************************
+        * Expression Spec Exact Regex Test *
+        ***********************************/
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Letter_Valid)
         {
-            string str = "\"validFactorWithRightSideUnderscoreOnly\"_";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "Hello";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_InMiddleInvalid)
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Integer_Valid)
         {
-            string str = "\"test_test\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+            string str = "12345";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Plus_Valid)
+        {
+            string str = "+";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Minus_Valid)
+        {
+            string str = "-";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Times_Valid)
+        {
+            string str = "*";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_OpenBrackets_Valid)
+        {
+            string str = "(";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_CloseBrackets_Valid)
+        {
+            string str = ")";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Expression_Valid)
+        {
+            string str = "x-2*(a+b)";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Expression_Random_Valid)
+        {
+            string str = "2x-(2*(a-)+b)";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Whitespace_Valid)
+        {
+            string str = " x - 2 * ( a + b ) ";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Letter_UnderscoreQuotes_Inalid)
+        {
+            string str = "_\"Hello\"_";
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
+
+        ///*****************************
+        //* Expression Spec Regex Test *
+        //*****************************/
+        //TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
+        //{
+        //    string str = "_";
+        //    Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_Ident_PartialMatch_Valid)
+        //{
+        //    string str = "_\"validFactorWithBothSideUnderscore\"_";
+        //    Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        ////TODO: Change to IsTrue when implement exact match
+        //TEST_METHOD(TestRegex_ExpressionSpec_ExactMatch_Valid)
+        //{
+        //    string str = "\"exactMatch\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        ////TODO: Change to IsTrue when implement + and * and -
+        //TEST_METHOD(TestRegex_ExpressionSpec_Operator_Valid)
+        //{
+        //    string str = "\"x+y-3*z\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_Whitespaces_Valid)
+        //{
+        //    string str = "  _   \"    whitespaces     \"   _  ";
+        //    Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_Tabs_Valid)
+        //{
+        //    string str = "	_	\"	tabs	\"	_	";
+        //    Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_DivisionInvalid)
+        //{
+        //    string str = "\"x/y\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_EmptyStringInvalid)
+        //{
+        //    string str = "";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_IntegerInvalid)
+        //{
+        //    string str = "123";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_LettersInvalid)
+        //{
+        //    string str = "abc";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_Underscore_LeftOnlyInvalid)
+        //{
+        //    string str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_Underscore_RightOnlyInvalid)
+        //{
+        //    string str = "\"validFactorWithRightSideUnderscoreOnly\"_";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
+
+        //TEST_METHOD(TestRegex_ExpressionSpec_Underscore_InMiddleInvalid)
+        //{
+        //    string str = "\"test_test\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
 
         /****************************

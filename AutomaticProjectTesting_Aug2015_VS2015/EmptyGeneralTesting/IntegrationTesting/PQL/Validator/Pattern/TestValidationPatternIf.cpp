@@ -51,7 +51,7 @@ namespace UnitTesting
             qt.insertSynonym(IF, "f");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
-            PatternClause expected = UtilitySelection::makePatternClause(If_PATTERN, "f", IDENT_WITHQUOTES, "\"x\"", UNDERSCORE, "_", UNDERSCORE, "_");
+            PatternClause expected = UtilitySelection::makePatternClause(If_PATTERN, "f", IDENT_WITHQUOTES, "x", UNDERSCORE, "_", UNDERSCORE, "_");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseIfContent(expected, actual));
         }
