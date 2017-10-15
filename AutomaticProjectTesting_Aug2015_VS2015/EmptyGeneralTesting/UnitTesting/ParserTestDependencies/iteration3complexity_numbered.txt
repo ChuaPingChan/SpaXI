@@ -1,0 +1,105 @@
+procedure ABC {
+1	i = 1;
+2	b = 200;
+3	Romeo = c + a * (b - i * a) - 5 * 3 + 1;
+4	b = c * (b - a) * ((3 * Romeo) - (2 * (3 - 1)));
+5	c = a;
+6	while a {
+7		while beta {
+8			oSCar  = 1 + beta + tmp;
+9			if a then {
+10				oSCar = oSCar - beta;
+11				c = b;
+12				b = a;
+			} else {
+13				call GHI;
+14				Romeo = beta + c* b;
+15				d = b - 3;
+			}
+
+16			while x {
+17				x = x + 1;
+18				while left {
+19					c = b - 5;
+20					b = c - a;
+21					x = x+ 1;
+				}
+			}
+22			e = g - 1;
+23			a=   2;
+		}
+24		w = w+1  ;
+25		call DEF;
+26		w = 2		;
+27		i = w;
+	}
+28	b = c + a;
+29	beta = 100;
+30	if beta then {
+31		beta = beta * 2;
+32		while beta {
+33			beta = beta - 1;
+34			b = b + c + a;
+35			c = c + a;
+		}
+	} else {
+36		beta = 50;
+37		while beta {
+38			beta = beta - 1;
+39			c = c + a;
+		}
+	}
+}
+
+procedure GHI {
+40	funnyVar = 101;
+41	while funnyVar {
+42		laugh = 10;
+43		funnyVar = funnyVar - 1;
+44		while laugh {
+45			laugh = laugh - 1;
+		}
+	}
+46	w = 3 + a;
+47	a = 10;
+48	if w then {
+49		w = a;
+50		laugh = w;
+51		if b then {
+52			b = b * 3 - tmp + oSCar;
+53			oSCar = Romeo;
+		} else {
+54			w = 1000;
+55			a = 2;
+		}
+56		w = a;
+	} else {
+57		a = 2;
+58		w = laugh;
+	}
+59	funnyVar = 0;
+60	call NotSharingVar;
+61	funnyVar = 10;
+}
+
+procedure DEF {
+62	a = 123;
+63	b = 345;
+64	while a {
+65		c = b;
+66		b = 482;
+67		call GHI;
+68		while b {
+69			laugh = laugh + 1;
+		}
+	}
+70	c = b + a;
+71	b = 1000;
+}
+
+procedure NotSharingVar {
+72	best = 1;
+73	food = best;
+74	supper = best * best;
+75	supper = supper * best;
+}

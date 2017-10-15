@@ -204,6 +204,49 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(testParsingSimpleSource_iteration3complexity)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_iteration3complexity());
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Check if all assignment statements are added correctly
+            actualResults = dummyPkbMain.getAllAssignments();
+            expectedResults = list<int>{ 
+                1, 2, 3, 4, 5, 8, 10, 11, 12, 14, 15, 17, 19, 20, 21, 22, 23,
+                24, 26, 27, 28, 29, 31, 33, 34, 35, 36, 38, 39, 40, 42, 43, 45,
+                46, 47, 49, 50, 52, 53, 54, 55, 56, 57, 58, 59, 61, 62, 63, 65,
+                66, 69, 70, 71, 72, 73, 74, 75
+            };
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Check if all if-else statements are added correctly
+            actualResults = dummyPkbMain.getAllIfs();
+            expectedResults = list<int>{ 9, 30, 48, 51 };
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Check if all while statements are added correctly
+            actualResults = dummyPkbMain.getAllWhiles();
+            expectedResults = list<int>{ 6, 7, 16, 18, 32, 37, 41, 44, 64, 68 };
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Check if all call statements are added correctly
+            actualResults = dummyPkbMain.getAllCallsStmt();
+            expectedResults = list<int>{ 13, 25, 60, 67 };
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Check if all parents are deduced correctly
+            actualResults = dummyPkbMain.getAllParents(Entity::STMT);   // Any statements
+            expectedResults = list<int>{ 6, 7, 9, 16, 18, 30, 32, 37, 41, 44, 48, 51, 64, 68 };
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         /*******************************
         * Utility Methods for Testing *
         *******************************/
@@ -436,6 +479,122 @@ namespace UnitTesting
                 "	 \n"
                 "	d = d + 1; \n"
                 "}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy SIMPLE source
+        containing assignment statements and non-nested if-else
+        statements.
+        */
+        bool createDummySimpleSourceFile_iteration3complexity() {
+            std::string content =
+                "procedure ABC { \n"
+                "  i=1; \n"
+                " b=200 ; \n"
+                " Romeo = c + a * (b - i * a) - 5 * 3 + 1; \n"
+                " b = c * (b - a) * ((3 * Romeo) - (2 * (3 - 1))); \n"
+                "	c= a   ; \n"
+                "while a \n"
+                "{ \n"
+                "   while beta { \n"
+                "        oSCar  = 1 + beta + tmp; \n"
+                "		if a then { \n"
+                "			oSCar = oSCar - beta; \n"
+                "			c = b; \n"
+                "			b = a; \n"
+                "		} else { \n"
+                "			call GHI; \n"
+                "			Romeo = beta + c* b; \n"
+                "			d = b - 3; \n"
+                "		} \n"
+                "		 \n"
+                "	while x { \n"
+                "        x = x + 1; \n"
+                "        while left { \n"
+                "			c = b - 5; \n"
+                "			b = c - a; \n"
+                "            x = x+ 1	; }} \n"
+                "		e = g - 1; \n"
+                "          a=   2; } \n"
+                "   w = w+1  ; \n"
+                "   call DEF; \n"
+                "   w = 2		; \n"
+                "   i = w; \n"
+                "} \n"
+                "b = c + a; \n"
+                "	beta = 100; \n"
+                "	if beta then { \n"
+                "		beta = beta * 2; \n"
+                "		while beta { \n"
+                "			beta = beta - 1; \n"
+                "			b = b + c + a; \n"
+                "			c = c + a; \n"
+                "		}	} else {		beta = 50; \n"
+                "		while beta { \n"
+                "			beta = beta - 1; \n"
+                "			c = c + a; \n"
+                "		} \n"
+                "	} \n"
+                "} \n"
+                " \n"
+                "procedure GHI	 { \n"
+                "	funnyVar = 101; \n"
+                "	while funnyVar { \n"
+                "		laugh = 10; \n"
+                "		funnyVar = funnyVar - 1; \n"
+                "		while laugh { \n"
+                "			laugh = laugh - 1; \n"
+                "		} \n"
+                "	} \n"
+                "	w = 3 + a; \n"
+                "	a = 10; \n"
+                "	if w then { \n"
+                "		w = a; \n"
+                "		laugh = w; \n"
+                "		if b then { \n"
+                "			b = b * 3 - tmp + oSCar; \n"
+                "			oSCar = Romeo; \n"
+                "		} else { \n"
+                "			w = 1000; \n"
+                "			a = 2; \n"
+                "		} \n"
+                "		w = a; \n"
+                "	} else { \n"
+                "		a = 2; \n"
+                "		w = laugh; \n"
+                "	} \n"
+                "	funnyVar = 0; \n"
+                "	call NotSharingVar; \n"
+                "	funnyVar = 10; \n"
+                "} \n"
+                " \n"
+                "procedure DEF { \n"
+                "	a = 123; \n"
+                "	b = 345; \n"
+                "	while a { \n"
+                "		c = b; \n"
+                "		b = 482; \n"
+                "		call GHI; \n"
+                "		while b { \n"
+                "			laugh = laugh + 1; \n"
+                "		} \n"
+                "	} \n"
+                "	c = b + a; \n"
+                "	b = 1000; \n"
+                "} \n"
+                " \n"
+                "procedure NotSharingVar { \n"
+                "	best = 1; \n"
+                "	food = best; \n"
+                "	supper = best * best; \n"
+                "	supper = supper * best; \n"
+                "} \n";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);
