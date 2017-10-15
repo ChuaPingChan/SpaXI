@@ -191,7 +191,7 @@
     <ClCompile Include="TestFollowsTable.cpp" />
     <ClCompile Include="TestModTableStmtToVar.cpp" />
     <ClCompile Include="TestParentToChildTable.cpp" />
-    <ClCompile Include="Parser\TestParser.cpp" />
+    <ClCompile Include="Parser\TestParserBasic.cpp" />
     <ClCompile Include="TestParserPKB.cpp" />
     <ClCompile Include="TestPatternTable.cpp" />
     <ClCompile Include="TestPKBMain.cpp" />
