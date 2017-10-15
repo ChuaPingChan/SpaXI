@@ -9,7 +9,7 @@ public:
     PatternEvaluator();
     ~PatternEvaluator();
 
-    virtual ClauseResult evaluate(PatternClause clause) = 0;
+    virtual bool evaluate(PatternClause ptClause, ClauseResult* clauseResult) = 0;
 
 protected:
     PKBMain* pkbInstance;
