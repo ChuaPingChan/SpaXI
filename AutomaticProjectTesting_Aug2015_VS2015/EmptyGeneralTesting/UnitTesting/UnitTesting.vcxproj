@@ -167,6 +167,7 @@
     <ClCompile Include="Exception\TestExceptionSynonymNotFound.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexFollows.cpp" />
+    <ClCompile Include="PQL\Regex\TestRegexKeywordString.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexModifies.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexParent.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexPattern.cpp" />

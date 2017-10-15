@@ -135,7 +135,7 @@ public:
     static bool isValidModifiesString(string str);
     static bool isValidUsesString(string str);
     static bool isValidParentString(string str);
-    static bool isValidParentString(string str);
+    static bool isValidParentStarString(string str);
     static bool isValidFollowsString(string str);
     static bool isValidFollowsStarString(string str);
     static bool isValidCallsString(string str);
