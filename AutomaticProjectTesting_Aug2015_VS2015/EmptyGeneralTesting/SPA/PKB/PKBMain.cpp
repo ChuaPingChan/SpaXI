@@ -54,6 +54,19 @@ list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 		return resultList;
 }
 
+int PKBMain::convertStringToIdx(string arg, Entity type) {
+	int result;
+	if (type == PROCEDURE || type == CALL) {
+		result = procIdxTable.getIdxFromProc(arg);
+	}
+
+	if (type == VARIABLE) {
+		result = varIdxTable.getIdxFromVar(arg);
+	}
+
+	return result;
+}
+
 list<int> PKBMain::convertStringToIdx(list<string> stringList, Entity type) {
 	list<int> resultList;
 	int result;

@@ -39,6 +39,8 @@ public:
 
 	list<string> convertIdxToString(list<int> indexList, Entity type);
 
+	int convertStringToIdx(string arg, Entity type);
+
 	list<int> convertStringToIdx(list<string> stringList, Entity type);
 
 	list<int> getAllIntOf(Entity type);
