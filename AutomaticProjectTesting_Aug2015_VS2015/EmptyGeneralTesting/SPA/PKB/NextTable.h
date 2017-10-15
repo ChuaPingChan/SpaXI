@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 
 using namespace std;
@@ -16,4 +17,7 @@ public:
 private:
 	unordered_map<int, list<int>> nextMap;
 	unordered_map<int, list<int>> nextMapReverse;
+	list<int> prevList;
+	list<int> nextList;
+	unordered_set<string> allNextRel;
 };
