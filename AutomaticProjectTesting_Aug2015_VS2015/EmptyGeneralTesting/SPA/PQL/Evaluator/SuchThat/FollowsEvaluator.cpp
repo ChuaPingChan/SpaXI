@@ -156,7 +156,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
-                resultPairs.clear();
+
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getAfter(existingSynVal, existingSynType);
@@ -180,7 +180,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
-                resultPairs.clear();
+
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getBefore(existingSynVal, existingSynType);
