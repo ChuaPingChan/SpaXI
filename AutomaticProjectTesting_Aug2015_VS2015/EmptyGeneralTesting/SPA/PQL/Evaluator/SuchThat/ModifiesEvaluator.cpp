@@ -18,8 +18,6 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    bool hasResult;
-
     //Case 1: Modifies(int, IDENT)
     if (argOneType == INTEGER && argTwoType == IDENT_WITHQUOTES)
     {
@@ -48,7 +46,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     }
 
     //Case 4: Modifies(synonym, IDENT)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL || argOneType == PROCEDURE)  && argTwoType == IDENT_WITHQUOTES)
+    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL)  && argTwoType == IDENT_WITHQUOTES)
     {
         list<int> pkbResult = pkbInstance->getModifiesFromVar(argTwo, argOneType);
         if (pkbResult.empty())
@@ -63,7 +61,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     }
 
     //Case 5: Modifies(synonym, _)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL || argOneType == PROCEDURE) && argTwoType == UNDERSCORE)
+    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == UNDERSCORE)
     {
         list<int> pkbResult = pkbInstance->getStmtThatModifiesAnything(argOneType);
         if (pkbResult.empty())
@@ -79,7 +77,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
  
     //Case 6: Modifies(synonym, synonym)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL || argOneType == PROCEDURE) && argTwoType == VARIABLE)
+    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == VARIABLE)
     {
         // Checks if the two synonyms are already present in clauseResult
         bool argOneExists = clauseResult->synonymPresent(argOne);
@@ -107,7 +105,6 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
         else if (!argOneExists && !argTwoExists)
         {
-            //To-Do: Change API CALL
             pair<list<int>, list<int>> pkbResult = pkbInstance->getModifiesPairs(argOneType);
 
             if (pkbResult.first.empty() && pkbResult.second.empty())
@@ -136,7 +133,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 resultPairs.clear();
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getAfter(existingSynVal, existingSynType);
+                    list<int> newSynVals = pkbInstance->getModifiesFromStmt(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
@@ -157,10 +154,10 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
-                resultPairs.clear();
+
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getBefore(existingSynVal, existingSynType);
+                    list<int> newSynVals = pkbInstance->getModifiesFromVar(existingSynVal, existingSynType);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
@@ -173,6 +170,164 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
             }
         }
     } 
+
+    //Case 7: Modifies(ident, ident)
+    if (argOneType == IDENT_WITHQUOTES && argTwoType == IDENT_WITHQUOTES)
+    {
+        return pkbInstance->isModProc(argOne, argTwo);
+    }
+
+    //Case 8: Modifies(ident, _)
+    else if (argOneType == IDENT_WITHQUOTES && argTwoType == UNDERSCORE)
+    {
+        return pkbInstance->isModifyingAnythingProc(argOne);
+    }
+
+    //Case 9: Modifies(ident, synonym)
+    else if (argOneType == IDENT_WITHQUOTES && argTwoType == VARIABLE)
+    {
+        list<int> pkbResult = pkbInstance->getModifiesFromProc(argOne);
+        if (pkbResult.empty())
+        {
+            return false;
+        }
+        else
+        {
+            clauseResult->updateSynResults(argTwo, pkbResult);
+            return clauseResult->hasResults();
+        }
+    }
+
+    //Case 10: Modifies(synonym, IDENT)
+    else if (argOneType == PROCEDURE && argTwoType == IDENT_WITHQUOTES)
+    {
+        list<int> pkbResult = pkbInstance->getProcModifiesFromVar(argTwo);
+        if (pkbResult.empty())
+        {
+            return false;
+        }
+        else
+        {
+            clauseResult->updateSynResults(argOne, pkbResult);
+            return clauseResult->hasResults();
+        }
+    }
+
+    //Case 11: Modifies(synonym, _)
+    else if (argOneType == PROCEDURE && argTwoType == UNDERSCORE)
+    {
+        list<int> pkbResult = pkbInstance->getProcThatModifiesAnything();
+        if (pkbResult.empty())
+        {
+            return false;
+        }
+        else
+        {
+            clauseResult->updateSynResults(argOne, pkbResult);
+            return clauseResult->hasResults();
+        }
+    }
+
+
+    //Case 12: Modifies(synonym, synonym)
+    else if (argOneType == PROCEDURE && argTwoType == VARIABLE)
+    {
+        // Checks if the two synonyms are already present in clauseResult
+        bool argOneExists = clauseResult->synonymPresent(argOne);
+        bool argTwoExists = clauseResult->synonymPresent(argTwo);
+
+        //Case 12a
+        if (argOneExists && argTwoExists)
+        {
+            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(argOne, argTwo);
+
+            for (pair<int, int> pair : resultPairs)
+            {
+                int argOneVal = pair.first;
+                int argTwoVal = pair.second;
+
+                // Removes from clauseResult as it is no longer valid due to new relation
+                if (!pkbInstance->isModProc(argOneVal, argTwoVal))
+                {
+                    clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
+                }
+            }
+
+            return clauseResult->hasResults();
+
+        }
+
+        //Case 12b
+        else if (!argOneExists && !argTwoExists)
+        {
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getProcModifiesPair();
+
+            if (pkbResult.first.empty() && pkbResult.second.empty())
+            {
+                return false;
+            }
+            else
+            {
+                // Both synonyms are new thus merging with existing results
+                clauseResult->addNewSynPairResults(argOne, pkbResult.first, argTwo, pkbResult.second);
+                return clauseResult->hasResults();
+            }
+        }
+
+        else
+        {
+            //Case 12c
+            if (argOneExists && !argTwoExists)
+            {
+                string existingSyn = argOne;
+                Entity existingSynType = argOneType;
+                string newSyn = argTwo;
+
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+                resultPairs.clear();
+                for (int existingSynVal : existingSynVals)
+                {
+                    list<int> newSynVals = pkbInstance->getModifiesFromProc(existingSynVal);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                return clauseResult->hasResults();
+            }
+
+            //Case 12d
+            else if (!argOneExists && argTwoExists)
+            {
+                string existingSyn = argTwo;
+                Entity existingSynType = argTwoType;
+                string newSyn = argOne;
+
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+
+                for (int existingSynVal : existingSynVals)
+                {
+                    list<int> newSynVals = pkbInstance->getProcModifiesFromVar(existingSynVal);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                return clauseResult->hasResults();
+            }
+        }
+    }
+
     else
     {
         cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;

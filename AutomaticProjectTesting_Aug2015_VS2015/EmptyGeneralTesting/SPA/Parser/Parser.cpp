@@ -53,6 +53,12 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _pkbMainPtr = pkbMainPtr;
     _stackOfFollowsStacks = stack<stack<int>>();
     _currentProcName = Parser::STRING_EMPTY_STRING;
+    _ifElseStmtExitPoints = unordered_map<int, pair<int,int>>();
+    _whileStmtStack = stack<int>();
+    _ifElseStmtStack = stack<int>();
+
+    _justExitIfElseStmt = false;
+    _justExitWhileStmt = false;
 }
 
 // TODO: Add comprehensive method description
@@ -648,6 +654,8 @@ void Parser::parseIfStmt()
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD);
 
     _parentStack.push(_currentStmtNumber);
+    _ifElseStmtStack.push(_currentStmtNumber);
+    int ifElseStmtNum = _currentStmtNumber;
 
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
