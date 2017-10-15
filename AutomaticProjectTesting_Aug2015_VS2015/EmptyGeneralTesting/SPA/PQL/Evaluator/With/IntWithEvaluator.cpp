@@ -77,8 +77,8 @@ bool IntWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResult)
 
         else if (!leftHandSideExists && !rightHandSideExists)
         {
-            list<int> leftHandSideVals = getAllIntOfIntEntity(leftHandSide);
-            list<int> rightHandSideVals = getAllIntOfIntEntity(rightHandSide));
+            list<int> leftHandSideVals = pkbInstance->getAllIntOfIntEntity(leftHandSideType);
+            list<int> rightHandSideVals = pkbInstance->getAllIntOfIntEntity(rightHandSideType);
             list<int> commonResult;
 
             for (int leftHandSideVal : leftHandSideVals)

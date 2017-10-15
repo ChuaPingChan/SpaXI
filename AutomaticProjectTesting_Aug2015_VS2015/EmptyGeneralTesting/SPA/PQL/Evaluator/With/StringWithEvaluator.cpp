@@ -23,7 +23,7 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
     {
         if (pkbInstance->isInstanceOf(rightHandSideType, leftHandSide))
         {
-            int rightHandSideIdx = convertStringToIdx(rightHandSideType, rightHandSide);
+            int rightHandSideIdx = pkbInstance->convertStringToIdx(rightHandSide, rightHandSideType);
             clauseResult->updateSynResults(rightHandSide, list<int>{rightHandSideIdx});
             return clauseResult->hasResults();
         }
@@ -38,7 +38,7 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
     {
         if (pkbInstance->isInstanceOf(leftHandSideType, rightHandSide))
         {
-            int leftHandSideIdx = convertStringToIdx(leftHandSideType, leftHandSide);
+            int leftHandSideIdx = pkbInstance->convertStringToIdx(leftHandSide, leftHandSideType);
             clauseResult->updateSynResults(leftHandSide, list<int>{leftHandSideIdx});
             return clauseResult->hasResults();
         }
@@ -65,7 +65,7 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
                 int rightHandSideVal = pair.second;
 
                 // Removes from clauseResult as it is no longer valid due to new relation
-                if (!isSameName(leftHandSideType, leftHandSideVal, rightHandSideType, rightHandSideVal))
+                if (!pkbInstance->isSameName(leftHandSideType, leftHandSideVal, rightHandSideType, rightHandSideVal))
                 {
                     clauseResult->removeCombinations(leftHandSide, leftHandSideVal, rightHandSide, rightHandSideVal);
                 }
@@ -76,8 +76,8 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
 
         else if (!leftHandSideExists && !rightHandSideExists)
         {
-            list<int> leftHandSideVals = getAllIdxOfStringEntity(leftHandSideType);
-            list<int> rightHandSideVals = getAllIdxOfStringEntity(rightHandSideType);
+            list<int> leftHandSideVals = pkbInstance->getAllIdxOfStringEntity(leftHandSideType);
+            list<int> rightHandSideVals = pkbInstance->getAllIdxOfStringEntity(rightHandSideType);
             list<int> leftNewResults;
             list<int> rightNewResults;
             
@@ -85,10 +85,10 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
             {
                 for (int rightHandSideVal : rightHandSideVals)
                 {
-                    if (isSameName(leftHandSideType, leftHandSideVal, rightHandSideType, rightHandSideVal))
+                    if (pkbInstance->isSameName(leftHandSideType, leftHandSideVal, rightHandSideType, rightHandSideVal))
                     {
                         leftNewResults.push_back(leftHandSideVal);
-                        rightNewResults.push_back(rightHandSideVals);
+                        rightNewResults.push_back(rightHandSideVal);
                     }
                 }
             }
@@ -137,7 +137,7 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
             {
                 for (int newSynVal : newSynVals)
                 {
-                    if (isSameName(existingSynType, existingSynVal, newSynType, newSynVal))
+                    if (pkbInstance->isSameName(existingSynType, existingSynVal, newSynType, newSynVal))
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
                         resultPairs.push_back(resultPair);
