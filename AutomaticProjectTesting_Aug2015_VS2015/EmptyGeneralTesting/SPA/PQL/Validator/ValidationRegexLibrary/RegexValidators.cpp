@@ -3,6 +3,38 @@
 /********
 * REGEX *
 ********/
+/******************** Entity Strings ********************/
+const string RegexValidators::STMT_STRING = "stmt";
+const string RegexValidators::ASSIGN_STRING = "assign";
+const string RegexValidators::WHILE_STRING = "while";
+const string RegexValidators::IF_STRING = "if";
+const string RegexValidators::PROG_LINE_STRING = "prog_line";
+const string RegexValidators::CALL_STRING = "call";
+const string RegexValidators::PROCEDURE_STRING ="procedure";
+const string RegexValidators::VARIABLE_STRING = "variable";
+const string RegexValidators::CONSTANT_STRING = "constant";
+const string RegexValidators::STMTLST_STRING = "stmtlst";
+
+/******************** Relationships Strings ********************/
+const string RegexValidators::MODIFIES_STRING = "Modifies";
+const string RegexValidators::USES_STRING = "Uses";
+const string RegexValidators::PARENT_STRING = "Parent";
+const string RegexValidators::PARENTSTAR_STRING = "Parent*";
+const string RegexValidators::FOLLOWS_STRING = "Follows";
+const string RegexValidators::FOLLOWSSTAR_STRING = "Follows*";
+const string RegexValidators::CALLS_STRING = "Calls";
+const string RegexValidators::CALLSSTAR_STRING = "Calls*";
+const string RegexValidators::NEXT_STRING = "Next";
+const string RegexValidators::NEXTSTAR_STRING = "Next*";
+const string RegexValidators::AFFECTS_STRING = "Affects";
+const string RegexValidators::AFFECTSSTAR_STRING = "Affects*";
+
+/******************** Attribute Strings ********************/
+const string RegexValidators::PROCNAME_STRING = "procName";
+const string RegexValidators::STMTNUM_STRING = "stmt#";
+const string RegexValidators::VARNAME_STRING = "varName";
+const string RegexValidators::VALUE_STRING = "value";
+
 /******************** Grammar ********************/
 const string RegexValidators::SPACE_0 = "(\\s*)";
 const string RegexValidators::SPACE_1 = "(\\s+)";
@@ -76,6 +108,26 @@ const string RegexValidators::SELECT_OVERALL_REGEX = "^" + SPACE_0 + SELECT_REGE
 /**********
 * METHODS *
 **********/
+/******************** Entity Strings ********************/
+bool RegexValidators::isValidStmtString(string str)
+{
+    regex stmtStringCheck = regex(STMT_STRING);
+    return regex_match(str, stmtStringCheck);
+}
+
+/******************** Relationshipss ********************/
+bool RegexValidators::isValidModifiesString(string str)
+{
+    regex modifiesStringCheck = regex(MODIFIES_STRING);
+    return regex_match(str, modifiesStringCheck);
+}
+
+/******************** Attributes ********************/
+bool RegexValidators::isValidProcNameString(string str)
+{
+    regex procNameStringCheck = regex(PROCNAME_STRING);
+    return regex_match(str, procNameStringCheck);
+}
 
 bool RegexValidators::isValidLetterRegex(string str)
 {
