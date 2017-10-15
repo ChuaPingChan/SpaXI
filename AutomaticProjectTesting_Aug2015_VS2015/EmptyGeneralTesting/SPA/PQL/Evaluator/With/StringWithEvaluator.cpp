@@ -13,10 +13,10 @@ StringWithEvaluator::~StringWithEvaluator()
 
 bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResult)
 {
-    Entity leftHandSideType = wClause.getLhsType;
-    Entity rightHandSideType = wClause.getRhsType;
-    string leftHandSide = wClause.getLhsValue;
-    string rightHandSide = wClause.getLhsValue;
+    Entity leftHandSideType = wClause.getLhsEntity();
+    Entity rightHandSideType = wClause.getRhsEntity();
+    string leftHandSide = wClause.getLhsValue();
+    string rightHandSide = wClause.getLhsValue();
 
     if (leftHandSideType == IDENT_WITHQUOTES 
         && (rightHandSideType == PROCEDURE || rightHandSideType == CALL || rightHandSideType == VARIABLE))

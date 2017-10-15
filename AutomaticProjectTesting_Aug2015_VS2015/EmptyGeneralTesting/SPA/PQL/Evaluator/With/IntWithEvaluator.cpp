@@ -13,10 +13,10 @@ IntWithEvaluator::~IntWithEvaluator()
 
 bool IntWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResult)
 {
-    Entity leftHandSideType = wClause.getLhsType;
-    Entity rightHandSideType = wClause.getRhsType;
-    string leftHandSide = wClause.getLhsValue;
-    string rightHandSide = wClause.getLhsValue;
+    Entity leftHandSideType = wClause.getLhsEntity();
+    Entity rightHandSideType = wClause.getRhsEntity();
+    string leftHandSide = wClause.getLhsValue();
+    string rightHandSide = wClause.getLhsValue();
 
     if (leftHandSideType == INTEGER && (rightHandSideType == STMT || rightHandSideType == ASSIGN || rightHandSideType == WHILE ||
         rightHandSideType == IF || rightHandSideType == CALL || rightHandSideType == CONSTANT || rightHandSideType == PROG_LINE))
