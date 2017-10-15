@@ -201,7 +201,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 10: Modifies(synonym, IDENT)
     else if (argOneType == PROCEDURE && argTwoType == IDENT_WITHQUOTES)
     {
-        list<int> pkbResult = pkbInstance->getProcModsFromVar(argTwo);
+        list<int> pkbResult = pkbInstance->getProcModifiesFromVar(argTwo);
         if (pkbResult.empty())
         {
             return false;
@@ -257,6 +257,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
         }
 
+        //Case 12b
         else if (!argOneExists && !argTwoExists)
         {
             pair<list<int>, list<int>> pkbResult = pkbInstance->getProcModifiesPair();
@@ -275,6 +276,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
         else
         {
+            //Case 12c
             if (argOneExists && !argTwoExists)
             {
                 string existingSyn = argOne;
@@ -299,6 +301,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 return clauseResult->hasResults();
             }
 
+            //Case 12d
             else if (!argOneExists && argTwoExists)
             {
                 string existingSyn = argTwo;
@@ -311,7 +314,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getProcModsFromVar(existingSynVal);
+                    list<int> newSynVals = pkbInstance->getProcModifiesFromVar(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
@@ -324,7 +327,6 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
             }
         }
     }
-
 
     else
     {
