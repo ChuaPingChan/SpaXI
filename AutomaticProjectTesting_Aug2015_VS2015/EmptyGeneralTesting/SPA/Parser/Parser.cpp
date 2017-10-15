@@ -332,8 +332,7 @@ bool Parser::callStmtExpected() {
 Tells whether the current statement is expected to be an if-statement or not.
 When the method ends, _currentTokenPtr is the 'if' keyword.
 */
-bool Parser::ifStmtExpected()
-{
+bool Parser::ifStmtExpected() {
     return matchToken(Parser::REGEX_MATCH_IF_KEYWORD);
 }
 
@@ -698,7 +697,7 @@ void Parser::parseIfStmt()
     processAndPopTopFollowStack();
     OutputDebugString("FINE: Processing and then pop top follows stack.\n");
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_THEN_KEYWORD);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_ELSE_KEYWORD);
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     OutputDebugString("FINE: Entering else-block.\n");

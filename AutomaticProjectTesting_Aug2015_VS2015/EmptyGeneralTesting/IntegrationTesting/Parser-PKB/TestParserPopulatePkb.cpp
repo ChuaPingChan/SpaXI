@@ -12,7 +12,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace UnitTesting
 {
 
-    TEST_CLASS(TestParsingSource)
+    TEST_CLASS(TestParserPopulatePkb)
     {
     public:
 
@@ -175,10 +175,10 @@ namespace UnitTesting
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
-
+        
         /*******************************
-         * Utility Methods for Testing *
-         *******************************/
+        * Utility Methods for Testing *
+        *******************************/
         TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
         {
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
@@ -377,7 +377,7 @@ namespace UnitTesting
         }
 
         /*
-        This is a utility method to create a dummy SIMPLE source 
+        This is a utility method to create a dummy SIMPLE source
         containing assignment statements and non-nested if-else
         statements.
         */
