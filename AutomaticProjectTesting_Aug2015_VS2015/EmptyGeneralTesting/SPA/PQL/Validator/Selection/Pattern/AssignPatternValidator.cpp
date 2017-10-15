@@ -30,7 +30,7 @@ bool AssignPatternValidator::isValid()
     return this->validity;
 }
 
-bool AssignPatternValidator::isValidArgOne(string argOne)
+bool AssignPatternValidator::isValidArgOne(string &argOne)
 {
     QueryTree qt = *(this->qtPtr);
     if (qt.isEntitySynonymExist(argOne, VARIABLE))
@@ -47,6 +47,7 @@ bool AssignPatternValidator::isValidArgOne(string argOne)
 
     else if (RegexValidators::isValidIdentWithQuotesRegex(argOne))
     {
+        argOne = Formatter::removeAllQuotes(argOne);
         this->argOneType = IDENT_WITHQUOTES;
         return true;
     }
