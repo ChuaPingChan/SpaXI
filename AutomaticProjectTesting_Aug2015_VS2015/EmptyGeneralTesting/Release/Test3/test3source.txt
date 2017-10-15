@@ -1,0 +1,14 @@
+procedure One {
+	a = a + b + c + c + b + a;
+
+	while c {
+		c = a + b;
+	}
+
+	while c {
+		while b {
+			a = a + b + c + c + b + a;
+			b = b + b;
+		}
+	}
+}
