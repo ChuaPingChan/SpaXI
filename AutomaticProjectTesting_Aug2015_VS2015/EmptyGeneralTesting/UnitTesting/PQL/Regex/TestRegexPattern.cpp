@@ -205,88 +205,88 @@ namespace UnitTesting
         }
 
 
-        /*****************************
-        * Expression Spec Regex Test *
-        *****************************/
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
-        {
-            string str = "_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        ///*****************************
+        //* Expression Spec Regex Test *
+        //*****************************/
+        //TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
+        //{
+        //    string str = "_";
+        //    Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Ident_PartialMatch_Valid)
-        {
-            string str = "_\"validFactorWithBothSideUnderscore\"_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_Ident_PartialMatch_Valid)
+        //{
+        //    string str = "_\"validFactorWithBothSideUnderscore\"_";
+        //    Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        //TODO: Change to IsTrue when implement exact match
-        TEST_METHOD(TestRegex_ExpressionSpec_ExactMatch_Valid)
-        {
-            string str = "\"exactMatch\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        ////TODO: Change to IsTrue when implement exact match
+        //TEST_METHOD(TestRegex_ExpressionSpec_ExactMatch_Valid)
+        //{
+        //    string str = "\"exactMatch\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        //TODO: Change to IsTrue when implement + and * and -
-        TEST_METHOD(TestRegex_ExpressionSpec_Operator_Valid)
-        {
-            string str = "\"x+y-3*z\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        ////TODO: Change to IsTrue when implement + and * and -
+        //TEST_METHOD(TestRegex_ExpressionSpec_Operator_Valid)
+        //{
+        //    string str = "\"x+y-3*z\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Whitespaces_Valid)
-        {
-            string str = "  _   \"    whitespaces     \"   _  ";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_Whitespaces_Valid)
+        //{
+        //    string str = "  _   \"    whitespaces     \"   _  ";
+        //    Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Tabs_Valid)
-        {
-            string str = "	_	\"	tabs	\"	_	";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_Tabs_Valid)
+        //{
+        //    string str = "	_	\"	tabs	\"	_	";
+        //    Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_DivisionInvalid)
-        {
-            string str = "\"x/y\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_DivisionInvalid)
+        //{
+        //    string str = "\"x/y\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_EmptyStringInvalid)
-        {
-            string str = "";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_EmptyStringInvalid)
+        //{
+        //    string str = "";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_IntegerInvalid)
-        {
-            string str = "123";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_IntegerInvalid)
+        //{
+        //    string str = "123";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_LettersInvalid)
-        {
-            string str = "abc";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_LettersInvalid)
+        //{
+        //    string str = "abc";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_LeftOnlyInvalid)
-        {
-            string str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_Underscore_LeftOnlyInvalid)
+        //{
+        //    string str = "_\"validFactorWithLeftSideUnderscoreOnly\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_RightOnlyInvalid)
-        {
-            string str = "\"validFactorWithRightSideUnderscoreOnly\"_";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_Underscore_RightOnlyInvalid)
+        //{
+        //    string str = "\"validFactorWithRightSideUnderscoreOnly\"_";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_InMiddleInvalid)
-        {
-            string str = "\"test_test\"";
-            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
-        }
+        //TEST_METHOD(TestRegex_ExpressionSpec_Underscore_InMiddleInvalid)
+        //{
+        //    string str = "\"test_test\"";
+        //    Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
+        //}
 
 
         /****************************

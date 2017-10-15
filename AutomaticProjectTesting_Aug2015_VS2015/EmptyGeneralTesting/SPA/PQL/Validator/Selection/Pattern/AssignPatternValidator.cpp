@@ -67,9 +67,17 @@ bool AssignPatternValidator::isValidArgTwo(string argTwo)
         return true;
     }
     
-    else if (RegexValidators::isValidExpressionSpecRegex(argTwo))
+    //TODO: remove quotes, check for well form expression
+    else if (RegexValidators::isValidExpressionSpecPartialRegex(argTwo))
     {
         this->argTwoType = EXPRESSION_SPEC_PARTIAL;
+        return true;
+    }
+
+    //TODO: remove quotes, check for well form expression
+    else if (RegexValidators::isValidExpressionSpecExactRegex(argTwo))
+    {
+        this->argTwoType = EXPRESSION_SPEC_EXACT;
         return true;
     }
 
