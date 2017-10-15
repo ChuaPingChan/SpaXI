@@ -26,15 +26,15 @@ namespace UnitTesting
             Throws unknown exception when running system test on AutoTester.
             */
             // Set up
-            PKBMain pkb;
-            Parser parser(&pkb);
+            PKBMain* pkbPtr = PKBMain::getInstance();
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_SimpleTest3());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
             list<string> actualResults;
             list<string> expectedResults;
 
             string query =
-                "variable v; while w; assign a; prog_line n; Select n such that Modifies(w,_) such that Uses (a,_)";
+                "variable v; while w; assign a; prog_line n;\nSelect n such that Modifies(w, _) such that Uses(a, _)";
             PQLMain pql = PQLMain(query);
 
             actualResults = pql.run();
@@ -46,8 +46,8 @@ namespace UnitTesting
         }
 
         /*******************************
-        * Utility Methods for Testing *
-        *******************************/
+         * Utility Methods for Testing *
+         *******************************/
         TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
         {
             Assert::IsTrue(createDummySimpleSourceFile_SimpleTest3());

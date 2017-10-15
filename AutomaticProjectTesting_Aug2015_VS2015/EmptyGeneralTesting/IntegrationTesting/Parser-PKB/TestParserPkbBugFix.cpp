@@ -50,6 +50,12 @@ namespace UnitTesting
             actualResults.sort();
             Assert::IsTrue(actualResults == expectedResults);
 
+            actualResults = dummyPkbMain.getStmtThatModifiesAnything(Entity::WHILE);
+            expectedResults = list<int>{ 2, 4, 5 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
