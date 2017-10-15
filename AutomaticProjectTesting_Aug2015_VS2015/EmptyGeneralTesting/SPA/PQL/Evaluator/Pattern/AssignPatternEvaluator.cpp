@@ -35,8 +35,8 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
     }
 
     //Case 2: pattern a(_, _"expression"_)
-    //TODO: Change EXPRESSION_SPEC to EXPRESSION_SPEC_PARTIAL
-    else if (argOneType == UNDERSCORE && argTwoType == EXPRESSION_SPEC)
+    //TODO: Change EXPRESSION_SPEC_PARTIAL to EXPRESSION_SPEC_PARTIAL_PARTIAL
+    else if (argOneType == UNDERSCORE && argTwoType == EXPRESSION_SPEC_PARTIAL)
     {
         list<int> pkbResult = pkbInstance->getPartialMatchStmt(argTwo);
         if (pkbResult.empty())
@@ -51,8 +51,8 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
     }
 
     //Case 3: pattern a(_, "expression")
-    //TODO: Change EXPRESSION_SPEC to EXPRESSION_SPEC_EXACT
-    else if (argOneType == UNDERSCORE && argTwoType == EXPRESSION_SPEC)
+    //TODO: Change EXPRESSION_SPEC_PARTIAL to EXPRESSION_SPEC_PARTIAL_EXACT
+    else if (argOneType == UNDERSCORE && argTwoType == EXPRESSION_SPEC_PARTIAL)
     {
         list<int> pkbResult = pkbInstance->getExactMatchStmt(argTwo);
         if (pkbResult.empty())
@@ -82,8 +82,8 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
     }
 
     //Case 5: pattern a("x", _"expression"_)
-    //TODO: Change EXPRESSION_SPEC to EXPRESSION_SPEC_PARTIAL
-    if (argOneType == IDENT_WITHQUOTES && argTwoType == EXPRESSION_SPEC)
+    //TODO: Change EXPRESSION_SPEC_PARTIAL to EXPRESSION_SPEC_PARTIAL_PARTIAL
+    if (argOneType == IDENT_WITHQUOTES && argTwoType == EXPRESSION_SPEC_PARTIAL)
     {
         list<int> pkbResult = pkbInstance->getPartialBothMatches(argOne, argTwo);
         if (pkbResult.empty())
@@ -98,8 +98,8 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
     }
 
     //Case 6: pattern a("x", "expression")
-    //TODO: Change EXPRESSION_SPEC to EXPRESSION_SPEC_EXACT
-    if (argOneType == IDENT_WITHQUOTES && argTwoType == EXPRESSION_SPEC)
+    //TODO: Change EXPRESSION_SPEC_PARTIAL to EXPRESSION_SPEC_PARTIAL_EXACT
+    if (argOneType == IDENT_WITHQUOTES && argTwoType == EXPRESSION_SPEC_PARTIAL)
     {
         list<int> pkbResult = pkbInstance->getExactBothMatches(argOne, argTwo);
         if (pkbResult.empty())
@@ -212,8 +212,8 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
     }
 
     //Case 8: pattern a(synonym, _"expression"_)
-    //TODO: Change EXPRESSION_SPEC to EXPRESSION_SPEC_PARTIAL
-    else if (argOneType == VARIABLE && argTwoType == EXPRESSION_SPEC)
+    //TODO: Change EXPRESSION_SPEC_PARTIAL to EXPRESSION_SPEC_PARTIAL_PARTIAL
+    else if (argOneType == VARIABLE && argTwoType == EXPRESSION_SPEC_PARTIAL)
     {
         // Checks if the two synonyms are already present in clauseResult
         bool patternSynExists = clauseResult->synonymPresent(patternSyn);
@@ -310,8 +310,8 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
     }
 
     //Case 9: pattern a(synonym, "expression")
-    //TODO: Change EXPRESSION_SPEC to EXPRESSION_SPEC_EXACT
-    else if (argOneType == VARIABLE && argTwoType == EXPRESSION_SPEC)
+    //TODO: Change EXPRESSION_SPEC_PARTIAL to EXPRESSION_SPEC_PARTIAL_EXACT
+    else if (argOneType == VARIABLE && argTwoType == EXPRESSION_SPEC_PARTIAL)
     {
         // Checks if the two synonyms are already present in clauseResult
         bool patternSynExists = clauseResult->synonymPresent(patternSyn);

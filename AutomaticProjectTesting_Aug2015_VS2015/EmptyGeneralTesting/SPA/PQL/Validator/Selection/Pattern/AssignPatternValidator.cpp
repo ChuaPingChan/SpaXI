@@ -68,7 +68,7 @@ bool AssignPatternValidator::isValidArgTwo(string argTwo)
     
     else if (RegexValidators::isValidExpressionSpecRegex(argTwo))
     {
-        this->argTwoType = EXPRESSION_SPEC;
+        this->argTwoType = EXPRESSION_SPEC_PARTIAL;
         return true;
     }
 
