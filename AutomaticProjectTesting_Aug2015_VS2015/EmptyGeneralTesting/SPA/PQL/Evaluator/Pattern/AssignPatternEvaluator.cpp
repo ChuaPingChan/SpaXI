@@ -120,6 +120,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
         bool patternSynExists = clauseResult->synonymPresent(patternSyn);
         bool variableExists = clauseResult->synonymPresent(argOne);
 
+        //Case 7a
         if (patternSynExists && variableExists)
         {
             list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
@@ -139,7 +140,8 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
             return clauseResult->hasResults();
 
         }
-
+        
+        //Case 7b
         else if (!patternSynExists && !variableExists)
         {
             pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariables();
@@ -158,6 +160,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
         else
         {
+            //Case 7c
             if (patternSynExists && !variableExists)
             {
                 string existingSyn = patternSyn;
@@ -182,6 +185,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 return clauseResult->hasResults();
             }
 
+            //Case 7d
             else if (!patternSynExists && variableExists)
             {
                 string existingSyn = argOne;
@@ -208,12 +212,14 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
     }
 
     //Case 8: pattern a(synonym, _"expression"_)
+    //TODO: Change EXPRESSION_SPEC to EXPRESSION_SPEC_PARTIAL
     else if (argOneType == VARIABLE && argTwoType == EXPRESSION_SPEC)
     {
         // Checks if the two synonyms are already present in clauseResult
         bool patternSynExists = clauseResult->synonymPresent(patternSyn);
         bool variableExists = clauseResult->synonymPresent(argOne);
 
+        //Case 8a
         if (patternSynExists && variableExists)
         {
             list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
@@ -234,6 +240,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
         }
 
+        //Case 8b
         else if (!patternSynExists && !variableExists)
         {
             pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariablesThatPartialMatchWith(argTwo);
@@ -252,6 +259,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
         else
         {
+            //Case 8c
             if (patternSynExists && !variableExists)
             {
                 string existingSyn = patternSyn;
@@ -287,7 +295,6 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
                 for (int existingSynVal : existingSynVals)
                 {
-                    //TODO: Waiting for PKB to overload Case 5
                     list<int> newSynVals = pkbInstance->getPartialBothMatches(existingSynVal, argTwo);
                     for (int newSynVal : newSynVals)
                     {
@@ -303,12 +310,14 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
     }
 
     //Case 9: pattern a(synonym, "expression")
+    //TODO: Change EXPRESSION_SPEC to EXPRESSION_SPEC_EXACT
     else if (argOneType == VARIABLE && argTwoType == EXPRESSION_SPEC)
     {
         // Checks if the two synonyms are already present in clauseResult
         bool patternSynExists = clauseResult->synonymPresent(patternSyn);
         bool variableExists = clauseResult->synonymPresent(argOne);
 
+        //Case 9a
         if (patternSynExists && variableExists)
         {
             list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
@@ -329,6 +338,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
         }
 
+        //Case 9b
         else if (!patternSynExists && !variableExists)
         {
             pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariablesThatExactMatchWith(argTwo);
@@ -347,6 +357,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
         else
         {
+            //Case 9c
             if (patternSynExists && !variableExists)
             {
                 string existingSyn = patternSyn;
@@ -371,6 +382,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 return clauseResult->hasResults();
             }
 
+            //Case 9d
             else if (!patternSynExists && variableExists)
             {
                 string existingSyn = argOne;
@@ -382,7 +394,6 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
                 for (int existingSynVal : existingSynVals)
                 {
-                    //TODO: Waiting for PKB to overload Case 6
                     list<int> newSynVals = pkbInstance->getExactBothMatches(existingSynVal, argTwo);
                     for (int newSynVal : newSynVals)
                     {

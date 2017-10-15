@@ -7,6 +7,6 @@ public:
 	WhilePatternEvaluator();
 	~WhilePatternEvaluator();
 
-	ClauseResult evaluate(PatternClause clause);
+	bool evaluate(PatternClause ptClause, ClauseResult* clauseResult);
 };
 
