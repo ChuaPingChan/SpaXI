@@ -69,6 +69,9 @@ list<int> StmtTypeList::getAllStatements() {
 	return allStmtList;
 }
 
+bool StmtTypeList::isStatement(int stmt) {
+	return find(allStmtList.begin(), allStmtList.end(), stmt) != allStmtList.end();
+}
 bool StmtTypeList::isAssignStmt(int stmt)
 {
     return find(assignStmtList.begin(), assignStmtList.end(), stmt) != assignStmtList.end();

@@ -22,7 +22,8 @@ public:
 	unordered_map<int, int> getCallToProcIdxMap();
 	bool addToIfStmtList(int stmt);
 	list<int> getAllStatements();
-    bool isAssignStmt(int stmt);
+	bool isStatement(int stmt);
+	bool isAssignStmt(int stmt);
     bool isWhileStmt(int stmt);
 	bool isCallsStmt(int stmt);
     bool isPresent(int stmt);

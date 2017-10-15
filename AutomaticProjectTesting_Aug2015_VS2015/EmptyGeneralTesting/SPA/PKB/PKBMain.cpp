@@ -24,10 +24,30 @@ void PKBMain::resetInstance()
 }
 
 //Utility functions
+bool PKBMain::isSameName(Entity type1, int idx1, Entity type2, int idx2) {
+	string arg1 = convertIdxToString(idx1, type1);
+	string arg2 = convertIdxToString(idx2, type2);
+
+	return arg1 == arg2;
+}
+
+string PKBMain::convertIdxToString(int index, Entity type) {
+	string result;
+	if (type == PROCEDURE || type == CALL) {
+		result = procIdxTable.getProcFromIdx(index);
+	}
+
+	if (type == VARIABLE) {
+		result = varIdxTable.getVarFromIdx(index);
+	}
+
+	return result;
+}
+
 list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 	list<string> resultList;
 	string result;
-	if (type == PROCEDURE) 
+	if (type == PROCEDURE || type == CALL)
     {
 		for (int i : indexList) 
         {
@@ -54,7 +74,48 @@ list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 		return resultList;
 }
 
-list<int> PKBMain::getAllIntOf(Entity type) {
+int PKBMain::convertStringToIdx(string arg, Entity type) {
+	int result = -1;
+	if (type == PROCEDURE || type == CALL) {
+		result = procIdxTable.getIdxFromProc(arg);
+	}
+
+	if (type == VARIABLE) {
+		result = varIdxTable.getIdxFromVar(arg);
+	}
+
+	return result;
+}
+
+list<int> PKBMain::convertStringToIdx(list<string> stringList, Entity type) {
+	list<int> resultList;
+	int result;
+	if (type == PROCEDURE || type == CALL) {
+		for (string s : stringList) {
+			result = procIdxTable.getIdxFromProc(s);
+			if (result == -1) {
+				continue;
+			}
+
+			resultList.push_back(result);
+		}
+	}
+
+	if (type == VARIABLE) {
+		for (string s : stringList) {
+			result = varIdxTable.getIdxFromVar(s);
+			if (result == -1) {
+				continue;
+			}
+
+			resultList.push_back(result);
+		}
+	}
+
+	return resultList;
+}
+
+list<int> PKBMain::getAllIntOfIntEntity(Entity type) {
 	if (type == STMT) {
 		return getAllStatements();
 	}
@@ -84,21 +145,73 @@ list<int> PKBMain::getAllIntOf(Entity type) {
 	}
 }
 
-list<string> PKBMain::getAllStringOf(Entity type) {
+list<int> PKBMain::getAllIdxOfStringEntity(Entity type) {
 	if (type == PROCEDURE) {
-		return getAllProcNames();
+		return getAllProcedures();
 	}
 
 	else if (type == CALL) {
-		return getAllCalleeNames();
+		return getAllCallees();
 	}
 
 	else if (type == VARIABLE) {
-		return getAllVariableNames();
+		return getAllVariables();
 	}
 
 	else {
-		return list<string>();
+		return list<int>();
+	}
+}
+
+bool PKBMain::isInstanceOf(Entity type, int arg) {
+	if (type == STMT) {
+		return isStatement(arg);
+	}
+
+	else if (type == ASSIGN) {
+		return isAssignment(arg);
+	}
+
+	else if (type == WHILE) {
+		return isWhile(arg);
+	}
+
+	else if (type == CALL) {
+		return isCall(arg);
+	}
+
+	else if (type == IF) {
+		return isIf(arg);
+	}
+
+	else if (type == CONSTANT) {
+		return isConstant(arg);
+	}
+
+	else if (type == PROG_LINE) {
+		return isProgLine(arg);
+	}
+
+	else {
+		return false;
+	}
+}
+
+bool PKBMain::isInstanceOf(Entity type, string arg) {
+	if (type == PROCEDURE) {
+		return isProcedure(arg);
+	}
+
+	else if (type == CALL) {
+		return isCallee(arg);
+	}
+
+	else if (type == VARIABLE) {
+		return isVariable(arg);
+	}
+
+	else {
+		return false;
 	}
 }
 
@@ -150,7 +263,7 @@ list<int> PKBMain::getCallee(int callerProcIdx) {
 
 bool PKBMain::isCallee(string calleeProcName) {
 	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
-	return callsTable.isCaller(calleeProcIdx);
+	return callsTable.isCallee(calleeProcIdx);
 }
 
 bool PKBMain::hasCalls() {
@@ -505,10 +618,38 @@ bool PKBMain::isPresent(int stmtNum)
 	return stmtTypeList.isPresent(stmtNum);
 }
 
+bool PKBMain::isStatement(int stmtNum) {
+	return stmtTypeList.isStatement(stmtNum);
+}
+
 bool PKBMain::isAssignment(int stmtNum)
 {
 	return stmtTypeList.isAssignStmt(stmtNum);
 }
+
+bool PKBMain::isCall(int stmtNum) {
+	return stmtTypeList.isCallsStmt(stmtNum);
+}
+
+bool PKBMain::isConstant(int constant) {
+	return constantTable.isConstant(constant);
+}
+
+bool PKBMain::isProgLine(int progLine) {
+	return isStatement(progLine);
+}
+
+bool PKBMain::isProcedure(string procName) {
+	return procIdxTable.isProcedure(procName);
+}
+
+bool PKBMain::isVariable(string varName) {
+	if (varIdxTable.getIdxFromVar(varName) == -1) {
+		return false;
+	}
+	return true;
+}
+
 
 bool PKBMain::isWhile(int stmtNum)
 {
