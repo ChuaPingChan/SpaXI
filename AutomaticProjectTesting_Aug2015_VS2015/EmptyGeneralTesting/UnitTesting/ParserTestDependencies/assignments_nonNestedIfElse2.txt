@@ -1,0 +1,12 @@
+procedure ABC {
+	a = 1;
+	b = 2;
+	while x {
+		if x then {
+			i = 5;
+		} else {
+			j = 6;
+		}
+	}
+	k = 7;
+}
