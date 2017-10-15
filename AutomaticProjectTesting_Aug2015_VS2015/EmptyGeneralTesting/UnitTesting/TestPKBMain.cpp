@@ -145,16 +145,18 @@ namespace UnitTesting
 		TEST_METHOD(TestGeneralPurposeAPI)
         {
             PKBMain PKB;
+            string dummyVarName = "dummyVar";
+
             Assert::IsTrue(PKB.addAssignmentStmt(1));
             Assert::IsTrue(PKB.addAssignmentStmt(3));
             Assert::IsTrue(PKB.addAssignmentStmt(4));
             Assert::IsTrue(PKB.addAssignmentStmt(6));
             Assert::IsTrue(PKB.addAssignmentStmt(8));
-            Assert::IsTrue(PKB.addWhileStmt(2));
-            Assert::IsTrue(PKB.addWhileStmt(5));
-            Assert::IsTrue(PKB.addWhileStmt(7));
-            Assert::IsTrue(PKB.addIfStmt(9));
-            Assert::IsTrue(PKB.addIfStmt(10));
+            Assert::IsTrue(PKB.addWhileStmt(2, dummyVarName));
+            Assert::IsTrue(PKB.addWhileStmt(5, dummyVarName));
+            Assert::IsTrue(PKB.addWhileStmt(7, dummyVarName));
+            Assert::IsTrue(PKB.addIfStmt(9, dummyVarName));
+            Assert::IsTrue(PKB.addIfStmt(10, dummyVarName));
             Assert::IsTrue(PKB.addAssignmentStmt(11));
             // test isAssignment
             Assert::IsTrue(PKB.isAssignment(6));
@@ -173,7 +175,7 @@ namespace UnitTesting
             Assert::IsTrue(PKB.isPresent("hello"));
             Assert::IsFalse(PKB.isPresent("world"));
             // test getWhiles
-            Assert::IsFalse(PKB.addWhileStmt(5));
+            Assert::IsTrue(PKB.addWhileStmt(5, dummyVarName));  // Don't mind duplicates
             list<int> expected;
             expected.push_back(2);
             expected.push_back(5);

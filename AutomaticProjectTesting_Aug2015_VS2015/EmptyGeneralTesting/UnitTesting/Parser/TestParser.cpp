@@ -375,35 +375,6 @@ namespace UnitTesting
             Assert::IsTrue(noWhiteSpace == parser.removeAllWhitespaces(withWhiteSpace));
         }
 
-        TEST_METHOD(removeAllBracketsTest)
-        {
-            ParserChildForTest parser(dummyPkbMainPtr);
-            std::string withBrackets;
-            std::string noBrackets;
-
-            withBrackets = "  \n(3\r\f + 4) \n\t ";
-            noBrackets = "  \n3\r\f + 4 \n\t ";
-            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
-
-            withBrackets = "()";
-            noBrackets = "";
-            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
-
-            withBrackets = "3+4*8/5";
-            noBrackets = "3+4*8/5";
-            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
-
-            withBrackets = " (3 +  4) ";
-            noBrackets = " 3 +  4 ";
-            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
-
-            withBrackets = "(a+(((c)-(d))*e))";
-            noBrackets = "a+c-d*e";
-            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
-            withBrackets = noBrackets;
-            Assert::IsTrue(noBrackets == parser.removeAllBrackets(withBrackets));
-        }
-
         TEST_METHOD(isBracketedCorrectlyTest)
         {
             ParserChildForTest parser(dummyPkbMainPtr);
