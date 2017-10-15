@@ -39,9 +39,15 @@ public:
 
 	list<string> convertIdxToString(list<int> indexList, Entity type);
 
+	list<int> convertStringToIdx(list<string> stringList, Entity type);
+
 	list<int> getAllIntOf(Entity type);
 
 	list<string> getAllStringOf(Entity type);
+
+	bool isInstanceOf(Entity type, int arg);
+
+	bool isInstanceOf(Entity type, string arg);
 
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
@@ -101,7 +107,13 @@ public:
 	//General Purpose API for query evaluator
     bool isPresent(string var);
     bool isPresent(int stmtNum);
+	bool isStatement(int stmtNum);
     bool isAssignment(int stmtNum);
+	bool isCall(int stmtNum);
+	bool isConstant(int constant);
+	bool isProgLine(int progLine);
+	bool isProcedure(string procName);
+	bool isVariable(string varName);
     bool isWhile(int stmtNum);
     bool isIf(int stmtNum);
     list<int> getAllWhiles();
