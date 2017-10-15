@@ -193,7 +193,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getAllAssignments(existingSynVal);
+                    list<int> newSynVals = pkbInstance->getAllAssignments(existingSyn);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
@@ -206,6 +206,194 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
             }
         }
     }
+
+    //Case 8: pattern a(synonym, _"expression"_)
+    else if (argOneType == VARIABLE && argTwoType == EXPRESSION_SPEC)
+    {
+        // Checks if the two synonyms are already present in clauseResult
+        bool patternSynExists = clauseResult->synonymPresent(patternSyn);
+        bool variableExists = clauseResult->synonymPresent(argOne);
+
+        if (patternSynExists && variableExists)
+        {
+            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
+
+            for (pair<int, int> pair : resultPairs)
+            {
+                int patternSynVal = pair.first;
+                int variableVal = pair.second;
+
+                // Removes from clauseResult as it is no longer valid due to new relation
+                if (!pkbInstance->isPartialMatch(patternSynVal, variableVal, argTwo))
+                {
+                    clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
+                }
+            }
+
+            return clauseResult->hasResults();
+
+        }
+
+        else if (!patternSynExists && !variableExists)
+        {
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariablesThatPartialMatchWith(argTwo);
+
+            if (pkbResult.first.empty() && pkbResult.second.empty())
+            {
+                return false;
+            }
+            else
+            {
+                // Both synonyms are new thus merging with existing results
+                clauseResult->addNewSynPairResults(patternSyn, pkbResult.first, argOne, pkbResult.second);
+                return clauseResult->hasResults();
+            }
+        }
+
+        else
+        {
+            if (patternSynExists && !variableExists)
+            {
+                string existingSyn = patternSyn;
+                string newSyn = argOne;
+
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+
+                for (int existingSynVal : existingSynVals)
+                {
+                    //Get list of variables that are modified by the current assignment stmt (existingSynVal)
+                    list<int> newSynVals = pkbInstance->getPartialMatchVar(existingSynVal, argTwo);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                return clauseResult->hasResults();
+            }
+
+            else if (!patternSynExists && variableExists)
+            {
+                string existingSyn = argOne;
+                string newSyn = patternSyn;
+
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+
+                for (int existingSynVal : existingSynVals)
+                {
+                    //TODO: Waiting for PKB to overload Case 5
+                    list<int> newSynVals = pkbInstance->getPartialBothMatches(existingSynVal, argTwo);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                return clauseResult->hasResults();
+            }
+        }
+    }
+
+    //Case 9: pattern a(synonym, "expression")
+    else if (argOneType == VARIABLE && argTwoType == EXPRESSION_SPEC)
+    {
+        // Checks if the two synonyms are already present in clauseResult
+        bool patternSynExists = clauseResult->synonymPresent(patternSyn);
+        bool variableExists = clauseResult->synonymPresent(argOne);
+
+        if (patternSynExists && variableExists)
+        {
+            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
+
+            for (pair<int, int> pair : resultPairs)
+            {
+                int patternSynVal = pair.first;
+                int variableVal = pair.second;
+
+                // Removes from clauseResult as it is no longer valid due to new relation
+                if (!pkbInstance->isExactMatch(patternSynVal, variableVal, argTwo))
+                {
+                    clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
+                }
+            }
+
+            return clauseResult->hasResults();
+
+        }
+
+        else if (!patternSynExists && !variableExists)
+        {
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariablesThatExactMatchWith(argTwo);
+
+            if (pkbResult.first.empty() && pkbResult.second.empty())
+            {
+                return false;
+            }
+            else
+            {
+                // Both synonyms are new thus merging with existing results
+                clauseResult->addNewSynPairResults(patternSyn, pkbResult.first, argOne, pkbResult.second);
+                return clauseResult->hasResults();
+            }
+        }
+
+        else
+        {
+            if (patternSynExists && !variableExists)
+            {
+                string existingSyn = patternSyn;
+                string newSyn = argOne;
+
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+
+                for (int existingSynVal : existingSynVals)
+                {
+                    //Get list of variables that are modified by the current assignment stmt (existingSynVal)
+                    list<int> newSynVals = pkbInstance->getExactMatchVar(existingSynVal, argTwo);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                return clauseResult->hasResults();
+            }
+
+            else if (!patternSynExists && variableExists)
+            {
+                string existingSyn = argOne;
+                string newSyn = patternSyn;
+
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+
+                for (int existingSynVal : existingSynVals)
+                {
+                    //TODO: Waiting for PKB to overload Case 6
+                    list<int> newSynVals = pkbInstance->getExactBothMatches(existingSynVal, argTwo);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                return clauseResult->hasResults();
+            }
 
     else
     {
