@@ -12,6 +12,12 @@ public:
     /******************** Grammar ********************/
     static const string SPACE_0;
     static const string SPACE_1;
+    static const string OPEN_BRACKET_REGEX;
+    static const string CLOSE_BRACKET_REGEX;
+    static const string PLUS_REGEX;
+    static const string MINUS_REGEX;
+    static const string TIMES_REGEX;
+    static const string OPERATOR_REGEX;
     static const string LETTER_REGEX;
     static const string DIGIT_REGEX;
     static const string INTEGER_REGEX;
@@ -50,6 +56,9 @@ public:
     /*--------------- Pattern Clause Regex ---------------*/
     static const string FACTOR_REGEX;
     static const string EXPRESSION_SPEC;
+    static const string EXPR_REGEX;
+    static const string EXPRESSION_SPEC_PARTIAL_REGEX;
+    static const string EXPRESSION_SPEC_EXACT_REGEX;
     static const string PATTERN_ASSIGN_REGEX;
     static const string PATTERN_WHILE_REGEX;
     static const string PATTERN_IF_REGEX;
@@ -106,6 +115,8 @@ public:
     /******************** Pattern Regex ********************/
     static bool isValidFactorRegex(string str);
     static bool isValidExpressionSpecRegex(string str);
+    static bool isValidExpressionSpecPartialRegex(string str);
+    static bool isValidExpressionSpecExactRegex(string str);
     static bool isValidPatternAssignRegex(string str);
     static bool isValidPatternWhileRegex(string str);
     static bool isValidPatternIfRegex(string str);
