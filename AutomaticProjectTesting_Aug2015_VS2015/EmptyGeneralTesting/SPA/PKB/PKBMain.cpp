@@ -389,6 +389,64 @@ bool PKBMain::setNext(int stmt, int stmtNext) {
 	return true;
 }
 
+bool PKBMain::isNext(int stmtBef, int stmtAft) {
+	return nextTable.isNext(stmtBef, stmtAft);
+}
+
+bool PKBMain::isExecutedBefore(int stmtBef) {
+	return nextTable.isExecutedBefore(stmtBef);
+}
+
+list<int> PKBMain::getExecutedAfter(int stmtBef, Entity type) {
+	list<int> stmtList;
+
+	stmtList = nextTable.getExecutedAfter(stmtBef);
+	stmtList = stmtTypeList.getStmtType(stmtList, type);
+
+	return stmtList;
+}
+
+bool PKBMain::isExecutedAfter(int stmtAft) {
+	return nextTable.isExecutedAfter(stmtAft);
+}
+
+bool PKBMain::hasNext() {
+	return nextTable.hasNext();
+}
+
+list<int> PKBMain::getAllExecutedAfter(Entity type) {
+	list<int> stmtList;
+
+	stmtList = nextTable.getAllExecutedAfter();
+	stmtList = stmtTypeList.getStmtType(stmtList, type);
+
+	return stmtList;
+}
+
+list<int> PKBMain::getExecutedBefore(int stmtAft, Entity type) {
+	list<int> stmtList;
+
+	stmtList = nextTable.getExecutedBefore(stmtAft);
+	stmtList = stmtTypeList.getStmtType(stmtList, type);
+	
+	return stmtList;
+}
+
+list<int> PKBMain::getAllExecutedBefore(Entity type) {
+	list<int> stmtList;
+
+	stmtList = nextTable.getAllExecutedBefore();
+	stmtList = stmtTypeList.getStmtType(stmtList, type);
+	
+	return stmtList;
+}
+
+pair<list<int>, list<int>> PKBMain::getAllNext(Entity type1, Entity type2) {
+	pair<list<int>, list<int>>  resultPair = nextTable.getAllNext();
+
+	return stmtTypeList.getStmtType(resultPair, type1, type2);
+}
+
 bool PKBMain::isPresent(string var)
 {
 	return varIdxTable.isVarPresent(var);

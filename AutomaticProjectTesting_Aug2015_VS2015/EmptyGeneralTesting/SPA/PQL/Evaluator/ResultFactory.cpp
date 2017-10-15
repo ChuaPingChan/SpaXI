@@ -19,28 +19,44 @@ bool ResultFactory::processClause(SelectClause clause)
 
 bool ResultFactory::processClause(SuchThatClause clause)
 {
-    int rel = clause.getRel();
+    Relationship rel = clause.getRel();
 
     if (rel == FOLLOWS)
     {
         FollowsEvaluator evaluator = FollowsEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
     }
+
     else if (rel == FOLLOWSSTAR)
     {
         FollowsStarEvaluator evaluator = FollowsStarEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
     }
+
     if (rel == PARENT)
     {
         ParentEvaluator evaluator = ParentEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
     }
+
     else if (rel == PARENTSTAR)
     {
         ParentStarEvaluator evaluator = ParentStarEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
     }
+
+    else if (rel == MODIFIES)
+    {
+        ModifiesEvaluator evaluator = ModifiesEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
+    else if (rel == USES)
+    {
+        UsesEvaluator evaluator = UsesEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
     else
     {
         return false;
@@ -49,7 +65,19 @@ bool ResultFactory::processClause(SuchThatClause clause)
 
 bool ResultFactory::processClause(PatternClause clause)
 {
-    return false;
+    PatternType patternType = clause.getPatternType();
+
+    if (patternType == WHILE)
+    {
+        WhilePatternEvaluator evaluator = WhilePatternEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
+    else if (patternType == IF)
+    {
+        IfPatternEvaluator evaluator = IfPatternEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
 }
 
 ClauseResult ResultFactory::makeClauseResult()
