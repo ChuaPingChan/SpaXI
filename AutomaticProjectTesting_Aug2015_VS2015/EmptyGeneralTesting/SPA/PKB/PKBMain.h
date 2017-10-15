@@ -150,6 +150,7 @@ public:
 	bool isUsesProc(int procIdx, int varIdx);
 	bool isUsesProc(string procName, string varName);
 	bool isModProc(string procName, string var);
+	bool isModProc(int procIdx, int varIdx);
 	bool isMod(int stmt, int varIdx);
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
@@ -173,6 +174,7 @@ public:
 	list<int> getProcModifiesFromVar(int varIdx);
 	list<int> getStmtThatUsesAnything(Entity type);
 	list<int> getProcThatUsesAnything();
+	list<int> getProcThatModifiesAnything();
     list<int> getStmtThatModifiesAnything(Entity type);
 	list<int> getStmtThatModifiesAnything();
     pair<list<int>, list<int>> getUsesPairs(Entity type);

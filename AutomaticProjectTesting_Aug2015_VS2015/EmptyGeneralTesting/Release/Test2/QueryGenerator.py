@@ -2,8 +2,8 @@
 
 from openpyxl import load_workbook
 
-EXCEL_WORKBOOK_PATH = 'QuerySet2.xlsx'
-OUTPUT_FILE_PATH = 'testQuery2.txt'
+EXCEL_WORKBOOK_PATH = 'Test2/QuerySet2.xlsx'
+OUTPUT_FILE_PATH = 'Test2/testQuery2.txt'
 
 INDEX_COLUMN = 'A'
 COMMENT_COLUMN = 'E'
@@ -14,18 +14,11 @@ TIME_LIMIT = 5000
 
 def main():
 	workbook = load_workbook(filename = EXCEL_WORKBOOK_PATH)
-	querySheet1 = workbook['Complex']
-	querySheet2 = workbook['Follows']
-	querySheet3 = workbook['FollowsStar']
-	querySheet4 = workbook['Parent']
-	querySheet5 = workbook['ParentStar']
+	querySheet = workbook['Sheet']
+		
+	print('Generating Queries ... ')
 	
-	text = ''
-	text += format(querySheet1)
-	text += format(querySheet2)
-	text += format(querySheet3)
-	text += format(querySheet4)
-	text += format(querySheet5)
+	text = format(querySheet)
 	
 	createNewTextFile(text, OUTPUT_FILE_PATH)
 	
@@ -52,15 +45,22 @@ def getComment(sheet, rowId):
 	
 def getDeclaration(sheet, rowId):
 	blockId = DECLARATION_COLUMN + str(rowId)
-	return str(sheet[blockId].value)
+	declaration = str(sheet[blockId].value)
+	if (declaration == "NONE"):
+		declaration = ""
+	return declaration
 	
 def getSelect(sheet, rowId):
 	blockId = SELECT_COLUMN + str(rowId)
-	return str(sheet[blockId].value)
+	select = str(sheet[blockId].value)
+	if (select == "NONE"):
+		select = ""
+	return select
 
 def getExpectedAnswer(sheet, rowId):
 	blockId = EXPECTED_ANSWER_COLUMN + str(rowId)
-	return str(sheet[blockId].value)
+	expectedAns = str(sheet[blockId].value)
+	return expectedAns
 	
 def writeIntoTextFile(text, queryFilePath):
 	file = open(queryFilePath, 'w')

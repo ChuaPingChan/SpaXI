@@ -1,13 +1,17 @@
 #pragma once
 #include "../../Utilities/PatternClause.h"
 #include "../../Utilities/ClauseResult.h"
+#include "../../../PKB/PKBMain.h"
 
 class PatternEvaluator
 {
 public:
-	PatternEvaluator();
-	~PatternEvaluator();
+    PatternEvaluator();
+    ~PatternEvaluator();
 
-	virtual ClauseResult evaluate(PatternClause clause) = 0;
+    virtual bool evaluate(PatternClause ptClause, ClauseResult* clauseResult) = 0;
+
+protected:
+    PKBMain* pkbInstance;
 };
 

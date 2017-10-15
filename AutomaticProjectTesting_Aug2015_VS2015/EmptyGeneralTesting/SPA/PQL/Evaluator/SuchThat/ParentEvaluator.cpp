@@ -18,8 +18,6 @@ bool ParentEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResu
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    bool hasResult;
-
     //Case 1: Parent(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
