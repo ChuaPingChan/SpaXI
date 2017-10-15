@@ -174,6 +174,7 @@ public:
 	list<int> getProcModifiesFromVar(int varIdx);
 	list<int> getStmtThatUsesAnything(Entity type);
 	list<int> getProcThatUsesAnything();
+	list<int> getProcThatModifiesAnything();
     list<int> getStmtThatModifiesAnything(Entity type);
 	list<int> getStmtThatModifiesAnything();
     pair<list<int>, list<int>> getUsesPairs(Entity type);
