@@ -4,10 +4,10 @@
 class FollowsEvaluator : public SuchThatRelEvaluator
 {
 public:
-	FollowsEvaluator();
-	~FollowsEvaluator();
+    FollowsEvaluator();
+    ~FollowsEvaluator();
 
-	bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
+    bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
 
-}; 
+};
 

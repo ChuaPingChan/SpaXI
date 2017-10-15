@@ -7,6 +7,6 @@ public:
 	IfPatternEvaluator();
 	~IfPatternEvaluator();
 
-	ClauseResult evaluate(PatternClause clause);
+	bool evaluate(PatternClause ptClause, ClauseResult *clauseResult);
 };
 
