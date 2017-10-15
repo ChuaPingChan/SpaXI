@@ -39,6 +39,10 @@ public:
 
 	list<string> convertIdxToString(list<int> indexList, Entity type);
 
+	list<int> getAllIntOf(Entity type);
+
+	list<string> getAllStringOf(Entity type);
+
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
     bool isParent(int parentStmt);
@@ -120,7 +124,7 @@ public:
 	bool addWhileStmt(int stmt, string controlVar);
 	bool addIfStmt(int stmt, string controlVar);
     bool addConstant(int stmt, int constant);
-	list<string> getAllVarNames();
+	list<string> getAllVariableNames();
 	list<int> getAllProcedures();
 	list<string> getAllProcNames();
 	bool setModTableStmtToVar(int stmt, string var);

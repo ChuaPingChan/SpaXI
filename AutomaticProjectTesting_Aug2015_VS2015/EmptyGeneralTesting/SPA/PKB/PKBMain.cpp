@@ -54,6 +54,54 @@ list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 		return resultList;
 }
 
+list<int> PKBMain::getAllIntOf(Entity type) {
+	if (type == STMT) {
+		return getAllStatements();
+	}
+
+	else if (type == ASSIGN) {
+		return getAllAssignments();
+	}
+
+	else if (type == WHILE) {
+		return getAllWhiles();
+	}
+
+	else if (type == CALL) {
+		return getAllCallsStmt();
+	}
+
+	else if (type == IF) {
+		return getAllConstants();
+	}
+
+	else if (type == PROG_LINE) {
+		return getAllStatements();
+	}
+
+	else {
+		return list<int>();
+	}
+}
+
+list<string> PKBMain::getAllStringOf(Entity type) {
+	if (type == PROCEDURE) {
+		return getAllProcNames();
+	}
+
+	else if (type == CALL) {
+		return getAllCalleeNames();
+	}
+
+	else if (type == VARIABLE) {
+		return getAllVariableNames();
+	}
+
+	else {
+		return list<string>();
+	}
+}
+
 //CALLS
 list<string> PKBMain::getAllCalleeNames() {
 	return stmtTypeList.getAllCalleeNames();
@@ -498,7 +546,7 @@ list<int> PKBMain::getAllVariables() {
 	return varIdxTable.getAllVariablesIndex();
 }
 
-list<string> PKBMain::getAllVarNames() {
+list<string> PKBMain::getAllVariableNames() {
 	return varIdxTable.getAllVariables();
 }
 list<int> PKBMain::getAllProcedures() {
