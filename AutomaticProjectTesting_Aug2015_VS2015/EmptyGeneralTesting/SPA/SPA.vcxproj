@@ -16,6 +16,7 @@
     <ClCompile Include="PQL\Evaluator\With\IntWithEvaluator.cpp" />
     <ClCompile Include="PKB\CallsStarTable.cpp" />
     <ClCompile Include="PKB\CallsTable.cpp" />
+    <ClCompile Include="PKB\NextStarCache.cpp" />
     <ClCompile Include="PKB\NextTable.cpp" />
     <ClCompile Include="PQL\Attributeship.h" />
     <ClCompile Include="PQL\Evaluator\ClauseEvaluator.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="PQL\Evaluator\With\IntWithEvaluator.h" />
     <ClInclude Include="PKB\CallsStarTable.h" />
     <ClInclude Include="PKB\CallsTable.h" />
+    <ClInclude Include="PKB\NextStarCache.h" />
     <ClInclude Include="PKB\NextTable.h" />
     <ClInclude Include="PQL\Evaluator\ClauseEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\ResultFactory.h" />

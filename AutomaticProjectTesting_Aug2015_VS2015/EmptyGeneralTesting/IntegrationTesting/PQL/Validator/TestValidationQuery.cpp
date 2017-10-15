@@ -553,7 +553,7 @@ namespace UnitTesting
             vector<PatternClause> expectedListPc;
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENT, STMT, "s1", STMT, "s2"));
             expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v2", UNDERSCORE, "_"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w1", IDENT_WITHQUOTES, "\"y\"", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w1", IDENT_WITHQUOTES, "y", UNDERSCORE, "_"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s2", STMT, "s1"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "x"));
             expectedListPc.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w2", VARIABLE, "v1", UNDERSCORE, "_"));

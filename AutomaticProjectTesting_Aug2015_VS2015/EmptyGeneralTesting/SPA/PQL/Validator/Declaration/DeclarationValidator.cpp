@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const string DeclarationValidator::ENTITY_STR[] = {"stmt", "assign", "while", "if", "prog_line", "call", "procedure", "variable", "integer", "underscore", "identWithQuotes", "expressionSpecs", "constant", "stmtLst"};
+const string DeclarationValidator::ENTITY_STR[] = {"stmt", "assign", "while", "if", "prog_line", "call", "procedure", "variable", "integer", "underscore", "identWithQuotes", "expressionSpecsPartial", "expressionSpecsExact", "constant", "stmtLst"};
 
 DeclarationValidator::DeclarationValidator(QueryTree *qtPtrNew) {
     setQueryTree(qtPtrNew);

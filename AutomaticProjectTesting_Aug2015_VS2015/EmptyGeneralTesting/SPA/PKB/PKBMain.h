@@ -37,7 +37,23 @@ public:
     static PKBMain* getInstance();
     static void resetInstance();
 
+	bool isSameName(Entity type1, int idx1, Entity type2, int idx2);
+
+	string convertIdxToString(int index, Entity type);
+
 	list<string> convertIdxToString(list<int> indexList, Entity type);
+
+	int convertStringToIdx(string arg, Entity type);
+
+	list<int> convertStringToIdx(list<string> stringList, Entity type);
+
+	list<int> getAllIntOfIntEntity(Entity type);
+
+	list<int> getAllIdxOfStringEntity(Entity type);
+
+	bool isInstanceOf(Entity type, int arg);
+
+	bool isInstanceOf(Entity type, string arg);
 
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
@@ -75,11 +91,35 @@ public:
     bool startProcessComplexRelations();
 
 	bool setNext(int stmt, int stmtNext);
+
+	bool isNext(int stmtBef, int stmtAft);
+
+	bool isExecutedBefore(int stmtBef);
+
+	list<int> getExecutedAfter(int stmtBef, Entity type);
 	
+	bool isExecutedAfter(int stmtAft);
+
+	bool hasNext();
+
+	list<int> getAllExecutedAfter(Entity type);
+
+	list<int> getExecutedBefore(int stmtAft, Entity type);
+
+	list<int> getAllExecutedBefore(Entity type);
+
+	pair<list<int>, list<int>> getAllNext(Entity type1, Entity type2);
+
 	//General Purpose API for query evaluator
     bool isPresent(string var);
     bool isPresent(int stmtNum);
+	bool isStatement(int stmtNum);
     bool isAssignment(int stmtNum);
+	bool isCall(int stmtNum);
+	bool isConstant(int constant);
+	bool isProgLine(int progLine);
+	bool isProcedure(string procName);
+	bool isVariable(string varName);
     bool isWhile(int stmtNum);
     bool isIf(int stmtNum);
     list<int> getAllWhiles();
@@ -102,7 +142,7 @@ public:
 	bool addWhileStmt(int stmt, string controlVar);
 	bool addIfStmt(int stmt, string controlVar);
     bool addConstant(int stmt, int constant);
-	list<string> getAllVarNames();
+	list<string> getAllVariableNames();
 	list<int> getAllProcedures();
 	list<string> getAllProcNames();
 	bool setModTableStmtToVar(int stmt, string var);

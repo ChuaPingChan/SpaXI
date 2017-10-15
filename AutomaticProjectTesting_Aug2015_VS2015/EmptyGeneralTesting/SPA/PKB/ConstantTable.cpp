@@ -6,6 +6,7 @@ ConstantTable::ConstantTable()
 
 bool ConstantTable::addConstantList(int stmtNumber, int constant)
 {
+	constantSet.insert(constant);
     // if stmt number does not exist as a key, create new list and insert data to hash map
     if (constantTableMap.find(stmtNumber) == constantTableMap.end()) {
         constantTableMap[stmtNumber] = list<int>();
@@ -43,4 +44,8 @@ list<int> ConstantTable::getAllConstants() {
 bool ConstantTable::hasConstants(int stmtNumber, int constant)
 {
     return find(constantTableMap[stmtNumber].begin(),constantTableMap[stmtNumber].end(),constant) != constantTableMap[stmtNumber].end();
+}
+
+bool ConstantTable::isConstant(int constant) {
+	return constantSet.find(constant) != constantSet.end();
 }
