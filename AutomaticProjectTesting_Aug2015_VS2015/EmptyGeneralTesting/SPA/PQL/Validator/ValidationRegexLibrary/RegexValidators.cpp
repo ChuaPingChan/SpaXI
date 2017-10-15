@@ -129,6 +129,24 @@ bool RegexValidators::isValidProcNameString(string str)
     return regex_match(str, procNameStringCheck);
 }
 
+bool RegexValidators::isValidStmtNumString(string str)
+{
+    regex stmtNumStringCheck = regex(STMTNUM_STRING);
+    return regex_match(str, stmtNumStringCheck);
+}
+
+bool RegexValidators::isValidVarNameString(string str)
+{
+    regex varNameStringCheck = regex(VARNAME_STRING);
+    return regex_match(str, varNameStringCheck);
+}
+
+bool RegexValidators::isValidValueString(string str)
+{
+    regex valueStringCheck = regex(VALUE_STRING);
+    return regex_match(str, valueStringCheck);
+}
+
 bool RegexValidators::isValidLetterRegex(string str)
 {
     regex letterRegexCheck = regex(LETTER_REGEX);
