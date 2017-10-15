@@ -705,9 +705,13 @@ list<int> PKBMain::getIfsWithControlVariable(string var) {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	return patternTable.getIfWithControlVariable(varIdx);
 }
-pair<list<int>, list<int>> PKBMain::getLeftVariablesThatMatchWith(string expression)
+pair<list<int>, list<int>> PKBMain::getLeftVariablesThatPartialMatchWith(string expression)
 {
-	return patternTable.getLeftVariableThatMatchWithString(expression);
+	return patternTable.getLeftVariableThatPartialMatchWithString(expression);
+}
+
+pair<list<int>, list<int>> PKBMain::getLeftVariablesThatExactMatchWith(string expression) {
+	return patternTable.getLeftVariableThatExactMatchWithString(expression);
 }
 
 list<int> PKBMain::getPartialMatchStmt(string expression)

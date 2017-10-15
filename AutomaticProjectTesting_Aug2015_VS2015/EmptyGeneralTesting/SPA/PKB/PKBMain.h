@@ -178,7 +178,8 @@ public:
     pair<list<int>, list<int>> getLeftVariables();
 	list<int> getWhilesWithControlVariable(string var);
 	list<int> getIfsWithControlVariable(string var);
-	pair<list<int>, list<int>> getLeftVariablesThatMatchWith(string expression);
+	pair<list<int>, list<int>> getLeftVariablesThatPartialMatchWith(string expression);
+	pair<list<int>, list<int>> getLeftVariablesThatExactMatchWith(string expression);
     list<int> getPartialMatchStmt(string expression);
 	list<int> getPartialMatchVar(int stmt, string expression);
 	list<int> getExactMatchVar(int stmt, string expression);

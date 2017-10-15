@@ -20,7 +20,8 @@ public:
     bool addToPatternTable(int stmtNumber, int varIdx, string expression);
     pair<int,list<string>> getExpression(int stmtNumber);
     pair<list<int>,list<int>> getLeftVariables();
-    pair<list<int>,list<int>> getLeftVariableThatMatchWithString(string expression);
+    pair<list<int>,list<int>> getLeftVariableThatPartialMatchWithString(string expression);
+	pair<list<int>, list<int>> getLeftVariableThatExactMatchWithString(string expression);
     list<int> getExactMatchStmt(string expression);
     list<int> getPartialMatchStmt(string expression);
 	list<int> getPartialMatchVar(int stmt, string expression);

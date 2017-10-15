@@ -86,7 +86,7 @@ pair<list<int>,list<int>> PatternTable::getLeftVariables()
     return pairOfList;
 }
 
-pair<list<int>,list<int>> PatternTable::getLeftVariableThatMatchWithString(string expression)
+pair<list<int>,list<int>> PatternTable::getLeftVariableThatPartialMatchWithString(string expression)
 {
     pair<list<int>, list<int>> pairOfList;
     unordered_map<int, pair<int, list<string>>>::iterator it;
@@ -99,6 +99,21 @@ pair<list<int>,list<int>> PatternTable::getLeftVariableThatMatchWithString(strin
         }
     }
     return pairOfList;
+}
+
+pair<list<int>, list<int>> PatternTable::getLeftVariableThatExactMatchWithString(string expression)
+{
+	pair<list<int>, list<int>> pairOfList;
+	unordered_map<int, pair<int, list<string>>>::iterator it;
+	for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it)
+	{
+		if (hasExactMatch(it->first, expression))
+		{
+			pairOfList.first.push_back(it->first);
+			pairOfList.second.push_back(it->second.first);
+		}
+	}
+	return pairOfList;
 }
 
 list<int> PatternTable::getExactMatchStmt(string expression)
