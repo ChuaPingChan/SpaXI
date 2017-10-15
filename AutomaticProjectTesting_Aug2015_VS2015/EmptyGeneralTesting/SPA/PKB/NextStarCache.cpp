@@ -12,9 +12,11 @@ bool NextStarCache::isComputedBefore(int stmtBef) {
 bool NextStarCache::computeStmtBef(int stmtBef, unordered_map<int, list<int>> nextMap) {
 	queue<int> toVisit;
 	unordered_set<int> visited;
+	return true;
 }
 
 bool NextStarCache::computeStmtAft(int stmtAft, unordered_map<int, list<int>> nextMapReverse) {
 	queue<int> toVisit;
 	unordered_set<int> visited;
+	return true;
 }
