@@ -628,7 +628,7 @@ void Parser::parseWhileStmt() {
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     OutputDebugString("FINE: Entering while block.\n");
-    // Add new stmtList stack to follows stack
+    // Entering new statement list -> Add new stmtList stack to follows stack
     OutputDebugString("Push new stmtList stack to follows stack.\n");
     stack<int> newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
@@ -702,7 +702,7 @@ void Parser::parseIfStmt()
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     OutputDebugString("FINE: Entering else-block.\n");
-    // Add new stmtList stack to follows stack
+    // Entering new statement list -> Add new stmtList stack to follows stack
     OutputDebugString("Push new stmtList stack to follows stack.\n");
     newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
@@ -749,9 +749,7 @@ void Parser::parseCallStmt()
     Ask DesignExtractor to check if all the procedures being called are present.
     Show error message and exit if a call statement calls an undefined procedure.
     */
-    /*
-    PKB: Add calls relation
-    */
+    //PKB: Add calls relation
     OutputDebugString("PKB: Add calls relation.\n");
     _pkbMainPtr->setCallsRel(_currentStmtNumber, _currentProcName, calledProcName);
 

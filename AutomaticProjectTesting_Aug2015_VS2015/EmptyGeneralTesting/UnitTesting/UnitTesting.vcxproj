@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClCompile Include="Exception\TestExceptionAttributeNotFound.cpp" />
     <ClCompile Include="Exception\TestExceptionSynonymNotFound.cpp" />
+    <ClCompile Include="Parser\TestParsingSource.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexFollows.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexModifies.cpp" />
@@ -191,7 +192,7 @@
     <ClCompile Include="TestFollowsTable.cpp" />
     <ClCompile Include="TestModTableStmtToVar.cpp" />
     <ClCompile Include="TestParentToChildTable.cpp" />
-    <ClCompile Include="Parser\TestParser.cpp" />
+    <ClCompile Include="Parser\TestParserBasic.cpp" />
     <ClCompile Include="TestParserPKB.cpp" />
     <ClCompile Include="TestPatternTable.cpp" />
     <ClCompile Include="TestPKBMain.cpp" />
