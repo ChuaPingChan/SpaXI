@@ -24,6 +24,26 @@ void PKBMain::resetInstance()
 }
 
 //Utility functions
+bool PKBMain::isSameName(Entity type1, int idx1, Entity type2, int idx2) {
+	string arg1 = convertIdxToString(idx1, type1);
+	string arg2 = convertIdxToString(idx2, type2);
+
+	return arg1 == arg2;
+}
+
+string PKBMain::convertIdxToString(int index, Entity type) {
+	string result;
+	if (type == PROCEDURE || type == CALL) {
+		result = procIdxTable.getProcFromIdx(index);
+	}
+
+	if (type == VARIABLE) {
+		result = varIdxTable.getVarFromIdx(index);
+	}
+
+	return result;
+}
+
 list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 	list<string> resultList;
 	string result;

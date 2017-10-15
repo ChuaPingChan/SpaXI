@@ -16,11 +16,8 @@ bool NextTable::setNextRel(int stmt, int stmtNext) {
 }
 
 bool NextTable::isNext(int stmtBef, int stmtAft) {
-	if (nextMap.find(stmtBef) == nextMap.end()) {
-		return false;
-	}
-
-	return find(nextMap[stmtBef].begin(), nextMap[stmtBef].end(), stmtAft) != nextMap[stmtBef].end();
+	string nextRel = to_string(stmtBef) + "," + to_string(stmtAft);
+	return allNextRel.find(nextRel) != allNextRel.end();
 }
 
 bool NextTable::isExecutedBefore(int stmtBef) {
