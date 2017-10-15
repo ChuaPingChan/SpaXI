@@ -11,4 +11,15 @@ procedure ABC {
 		w = a;
 	}
 	d = c + 200 * 400 - i;
+	
+	if b then {
+		a = c * 30 * 400;
+		w = a - a;
+	}
+	else
+	{
+		d = 100;
+	}
+	
+	d = d + 1;
 }

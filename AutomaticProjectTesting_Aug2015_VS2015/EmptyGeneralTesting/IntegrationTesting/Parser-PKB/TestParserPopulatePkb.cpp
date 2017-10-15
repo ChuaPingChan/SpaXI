@@ -83,10 +83,38 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_nonNextedIfElse_success)
         {
             // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
             Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_nonNestedIfElse());
-
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Test adding of if-else statements
+            actualResults = dummyPkbMain.getAllIfs();
+            expectedResults = list<int>{ 4, 10 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Test if parents are updated correctly
+            actualResults = dummyPkbMain.getAllParents(Entity::STMT);
+            expectedResults = list<int>{ 4, 10 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            actualResults = dummyPkbMain.getAllParents(Entity::IF);
+            expectedResults = list<int>{ 4, 10 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Test if children are updated correctly
+            actualResults = dummyPkbMain.getAllChildren(Entity::STMT);
+            expectedResults = list<int>{ 5, 6, 7, 8, 11, 12, 13 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -175,7 +203,7 @@ namespace UnitTesting
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
-        
+
         /*******************************
         * Utility Methods for Testing *
         *******************************/
@@ -382,7 +410,32 @@ namespace UnitTesting
         statements.
         */
         bool createDummySimpleSourceFile_assignments_nonNestedIfElse() {
-            std::string content = "procedure ABC { \n	i=1; \n	b=200 ; \n	c= a   ; \n	if a then \n	{ \n		a = 3; \n		w = w+1  ; \n	} else { \n		a = c + b; \n		w = a; \n	} \n	d = c + 200 * 400 - i; \n}";
+            std::string content =
+                "procedure ABC { \n"
+                "	i=1; \n"
+                "	b=200 ; \n"
+                "	c= a   ; \n"
+                "	if a then \n"
+                "	{ \n"
+                "		a = 3; \n"
+                "		w = w+1  ; \n"
+                "	} else { \n"
+                "		a = c + b; \n"
+                "		w = a; \n"
+                "	} \n"
+                "	d = c + 200 * 400 - i; \n"
+                "	 \n"
+                "	if b then { \n"
+                "		a = c * 30 * 400; \n"
+                "		w = a - a; \n"
+                "	} \n"
+                "	else \n"
+                "	{ \n"
+                "		d = 100; \n"
+                "	} \n"
+                "	 \n"
+                "	d = d + 1; \n"
+                "}";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

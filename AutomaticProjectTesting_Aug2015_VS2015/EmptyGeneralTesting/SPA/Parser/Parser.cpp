@@ -655,7 +655,7 @@ void Parser::parseIfStmt()
 
     // PKB: Add if-else stmt to PKB. Must also pass 'control variable'.
     OutputDebugString("PKB: Add if-else statement to PKB.\n");
-    _pkbMainPtr->addWhileStmt(_currentStmtNumber, ifVar);
+    _pkbMainPtr->addIfStmt(_currentStmtNumber, ifVar);
 
     /* PKB
     Update VarToIdxMap
