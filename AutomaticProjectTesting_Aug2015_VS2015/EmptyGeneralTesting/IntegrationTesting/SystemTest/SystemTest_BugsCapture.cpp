@@ -30,9 +30,16 @@ namespace UnitTesting
             Parser parser(&pkb);
             Assert::IsTrue(createDummySimpleSourceFile_SimpleTest3());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+            list<string> actualResults;
+            list<string> expectedResults;
 
             string query =
-                "";
+                "variable v; while w; assign a; prog_line n; Select n such that Modifies(w,_) such that Uses (a,_)";
+            PQLMain pql = PQLMain(query);
+
+            actualResults = pql.run();
+            expectedResults = list<string>{ "1", "2", "3", "4", "5", "6", "7" };
+            Assert::IsTrue(actualResults == expectedResults);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
