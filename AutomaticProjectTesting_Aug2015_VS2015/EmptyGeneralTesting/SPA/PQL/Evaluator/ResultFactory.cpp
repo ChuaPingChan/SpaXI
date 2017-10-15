@@ -80,6 +80,23 @@ bool ResultFactory::processClause(PatternClause clause)
     }
 }
 
+bool ResultFactory::processClause(WithClause clause)
+{
+    WithType withType = clause.getWithType();
+
+    if (withType == INTEGER_WITH)
+    {
+        IntWithEvaluator evaluator = IntWithEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
+    else if (withType == STRING_WITH)
+    {
+        StringWithEvaluator evaluator = StringWithEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+}
+
 ClauseResult ResultFactory::makeClauseResult()
 {
     return _clauseResult;
