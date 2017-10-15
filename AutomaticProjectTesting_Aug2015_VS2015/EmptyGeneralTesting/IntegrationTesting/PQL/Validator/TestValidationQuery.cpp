@@ -467,7 +467,7 @@ namespace UnitTesting
             Assert::IsTrue(validator.isValidQuery(query));
             SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
-            WithClause expectedWith = UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu");
+            WithClause expectedWith = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", IDENT_WITHQUOTES, "Pikachu");
             WithClause actualWith = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expectedWith, actualWith));
         }
@@ -485,8 +485,8 @@ namespace UnitTesting
             SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
             vector<WithClause> expectedListWc;
-            expectedListWc.push_back(UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu"));
-            expectedListWc.push_back(UtilitySelection::makeWithClause(CONSTANT_ATTRIBUTE, "c", STMT_ATTRIBUTE, "s"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", IDENT_WITHQUOTES, "Pikachu"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(INTEGER_WITH, CONSTANT, "c", STMT, "s"));
             Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
         }
 
@@ -503,8 +503,8 @@ namespace UnitTesting
             SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
             vector<WithClause> expectedListWc;
-            expectedListWc.push_back(UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu"));
-            expectedListWc.push_back(UtilitySelection::makeWithClause(WHILE_ATTRIBUTE, "w", IF_ATTRIBUTE, "f"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", IDENT_WITHQUOTES, "Pikachu"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(INTEGER_WITH, WHILE, "w", IF, "f"));
             Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
         }
 
@@ -605,7 +605,7 @@ namespace UnitTesting
             vector<PatternClause> expectedListPc;
             vector<WithClause> expectedListWc;
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s1", STMT, "s2"));
-            expectedListWc.push_back(UtilitySelection::makeWithClause(CALL_STMT_ATTRIBUTE, "cl", STMT_ATTRIBUTE, "s3"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(INTEGER_WITH, CALL, "cl", STMT, "s3"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENT, STMT, "s1", STMT, "s3"));
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
             Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
@@ -624,9 +624,9 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
             vector<WithClause> expectedListWc;
-            expectedListWc.push_back(UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", VARIABLE_ATTRIBUTE, "v"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", VARIABLE, "v"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "p", VARIABLE, "v"));
-            expectedListWc.push_back(UtilitySelection::makeWithClause(VARIABLE_ATTRIBUTE, "v", IDENT_WITH_QUOTES_ATTRIBUTE, "Pokeball"));
+            expectedListWc.push_back(UtilitySelection::makeWithClause(STRING_WITH, VARIABLE, "v", IDENT_WITHQUOTES, "Pokeball"));
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
             Assert::IsTrue(UtilitySelection::areSameWithClausesContentAsInTree(expectedListWc, qt));
         }

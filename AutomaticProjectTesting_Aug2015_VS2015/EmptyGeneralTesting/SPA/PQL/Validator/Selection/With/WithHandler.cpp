@@ -32,16 +32,19 @@ bool WithHandler::isValidWith(string str)
 
 bool WithHandler::isExactlySameLhsAndRhs(WithValidator wv)
 {
-    return (wv.getLhsAttribute() == wv.getRhsAttribute() && wv.getLhsValue() == wv.getRhsValue());
+    return (wv.getLhsWithType() == wv.getRhsWithType()
+        && wv.getLhsEntity() == wv.getRhsEntity()
+        && wv.getLhsValue() == wv.getRhsValue());
 }
 
 WithClause WithHandler::makeWithClause(WithValidator withValidator)
 {
-    Attribute lhsAttribute = withValidator.getLhsAttribute();
-    Attribute rhsAttribute = withValidator.getRhsAttribute();
+    WithType withType = withValidator.getLhsWithType();
+    Entity lhsEntity = withValidator.getLhsEntity();
+    Entity rhsEntity = withValidator.getRhsEntity();
     string lhsValue = withValidator.getLhsValue();
     string rhsValue = withValidator.getRhsValue();
-    return WithClause(lhsAttribute, lhsValue, rhsAttribute, rhsValue);
+    return WithClause(withType, lhsEntity, lhsValue, rhsEntity, rhsValue);
 }
 
 bool WithHandler::storeInQueryTree(WithClause wc)

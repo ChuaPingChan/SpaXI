@@ -9,6 +9,39 @@ public:
     /********
     * REGEX *
     ********/
+    /******************** Entity Strings ********************/
+    static const string STMT_STRING;
+    static const string ASSIGN_STRING;
+    static const string WHILE_STRING;
+    static const string IF_STRING;
+    static const string PROG_LINE_STRING;
+    static const string CALL_STRING;
+    static const string PROCEDURE_STRING;
+    static const string VARIABLE_STRING;
+    static const string CONSTANT_STRING;
+    static const string STMTLST_STRING;
+    
+    /******************** Relationships Strings ********************/
+    static const string MODIFIES_STRING;
+    static const string USES_STRING;
+    static const string PARENT_STRING;
+    static const string PARENTSTAR_STRING;
+    static const string FOLLOWS_STRING;
+    static const string FOLLOWSSTAR_STRING;
+    static const string CALLS_STRING;
+    static const string CALLSSTAR_STRING;
+    static const string NEXT_STRING;
+    static const string NEXTSTAR_STRING;
+    static const string AFFECTS_STRING;
+    static const string AFFECTSSTAR_STRING;
+
+    /******************** Attribute Strings ********************/
+    static const string PROCNAME_STRING;
+    static const string STMTNUM_STRING;
+    static const string VARNAME_STRING;
+    static const string VALUE_STRING;
+
+
     /******************** Grammar ********************/
     static const string SPACE_0;
     static const string SPACE_1;
@@ -64,7 +97,6 @@ public:
     static const string PATTERN_IF_REGEX;
     static const string PATTERNREF_REGEX;
     static const string PATTERNCOND_REGEX;
-    //static const string PATTERN_REGEX;
     static const string PATTERN_Cl_REGEX;
 
     /*--------------- With Regex ---------------*/
@@ -86,6 +118,38 @@ public:
     /**********
     * Methods *
     **********/
+    /******************** Entity Strings ********************/
+    static bool isValidStmtString(string str);
+    static bool isValidAssignString(string str);
+    static bool isValidWhileString(string str);
+    static bool isValidIfString(string str);
+    static bool isValidProgLineString(string str);
+    static bool isValidCallString(string str);
+    static bool isValidProcedureString(string str);
+    static bool isValdVariableString(string str);
+    static bool isValidConstantString(string str);
+    static bool isValidStmtLstString(string str);
+
+    /******************** Relationshipss ********************/
+    static bool isValidModifiesString(string str);
+    static bool isValidUsesString(string str);
+    static bool isValidParentString(string str);
+    static bool isValidParentStarString(string str);
+    static bool isValidFollowsString(string str);
+    static bool isValidFollowsStarString(string str);
+    static bool isValidCallsString(string str);
+    static bool isValidCallsStarString(string str);
+    static bool isValidNextString(string str);
+    static bool isValidNextStarString(string str);
+    static bool isValidAffectsString(string str);
+    static bool isValidAffectsStarString(string str);
+
+    /******************** Attributes ********************/
+    static bool isValidProcNameString(string str);
+    static bool isValidStmtNumString(string str);
+    static bool isValidVarNameString(string str);
+    static bool isValidValueString(string str);
+
     /******************** Grammar ********************/
     static bool isValidLetterRegex(string str);
     static bool isValidIntegerRegex(string str);
