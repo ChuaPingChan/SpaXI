@@ -67,7 +67,7 @@ bool WhilePatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clau
                 int variableVal = pair.second;
 
                 // Removes from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isExactMatch(patternSynVal, variableVal))
+                if (!pkbInstance->isWhileControlVar(patternSynVal, variableVal))
                 {
                     clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
                 }
@@ -96,15 +96,53 @@ bool WhilePatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clau
         else
         {
             //Case 3c
-            if (!patternSynExists && !controlVarExists)
+            if (patternSynExists && !controlVarExists)
             {
+                string existingSyn = patternSyn;
+                string newSyn = argOne;
 
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+
+                for (int existingSynVal : existingSynVals)
+                {
+                    //Get list of variables that are modified by the current assignment stmt (existingSynVal)
+                    list<int> newSynVals = pkbInstance->getControlVariablesInWhile(existingSynVal);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                return clauseResult->hasResults();
             }
 
             //Case 3d
-            else if (!patternSynExists && !controlVarExists)
+            else if (!patternSynExists && controlVarExists)
             {
+                string existingSyn = argOne;
+                string newSyn = patternSyn;
 
+                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                list<pair<int, int>> resultPairs;
+
+                for (int existingSynVal : existingSynVals)
+                {
+                    //Get list of variables that are modified by the current assignment stmt (existingSynVal)
+                    list<int> newSynVals = pkbInstance->getWhileFromControlVar(existingSynVal);
+                    for (int newSynVal : newSynVals)
+                    {
+                        pair<int, int> resultPair(existingSynVal, newSynVal);
+                        resultPairs.push_back(resultPair);
+                    }
+                }
+                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                return clauseResult->hasResults();
             }
         }
     }
