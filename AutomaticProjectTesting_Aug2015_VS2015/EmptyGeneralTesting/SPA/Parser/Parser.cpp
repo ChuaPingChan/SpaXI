@@ -53,12 +53,9 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _pkbMainPtr = pkbMainPtr;
     _stackOfFollowsStacks = stack<stack<int>>();
     _currentProcName = Parser::STRING_EMPTY_STRING;
-    _ifElseStmtExitPoints = unordered_map<int, pair<int,int>>();
+    _ifElseStmtExitPointsStack = stack<pair<int, int>>();
     _whileStmtStack = stack<int>();
     _ifElseStmtStack = stack<int>();
-
-    _justExitIfElseStmt = false;
-    _justExitWhileStmt = false;
 }
 
 // TODO: Add comprehensive method description
@@ -280,6 +277,7 @@ Parses a statement up to the point after ';' for call and assignment statements,
 and '}' for while and if-else statements.
 */
 void Parser::parseStmt() {
+
     _currentStmtNumber++;
     OutputDebugString("FINE: Identifying next statement type...\n");
 
@@ -299,10 +297,27 @@ void Parser::parseStmt() {
     // (i.e. call, assignment, if-else, while)
     if (Parser::whileExpected()) {
         parseWhileStmt();
+
+        // If there are statements just outside the while statement, add Next relation
+        if (!(Parser::matchToken(Parser::REGEX_MATCH_CLOSE_BRACE))) {
+            int nextStmtNumber = _currentStmtNumber + 1;
+            _pkbMainPtr->setNext(_whileStmtStack.top(), nextStmtNumber);
+        }
+        _whileStmtStack.pop();
     } else if (Parser::callStmtExpected()) {
         parseCallStmt();
     } else if (Parser::ifStmtExpected()) {
         parseIfStmt();
+
+        // If there are statements just outside the if-else statement, add Next relation
+        if (!(Parser::matchToken(Parser::REGEX_MATCH_CLOSE_BRACE))) {
+            pair<int, int> ifElseExitPoints = _ifElseStmtExitPointsStack.top();
+            int nextStmtNumber = _currentStmtNumber + 1;
+            _pkbMainPtr->setNext(ifElseExitPoints.first, nextStmtNumber);
+            _pkbMainPtr->setNext(ifElseExitPoints.second, nextStmtNumber);
+        }
+        _ifElseStmtStack.pop();
+        _ifElseStmtExitPointsStack.pop();
     } else if (Parser::assignmentExpected()) {
         // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords as variable names
         parseAssignment();
@@ -597,6 +612,8 @@ void Parser::parseWhileStmt() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
 
     _parentStack.push(_currentStmtNumber);
+    _whileStmtStack.push(_currentStmtNumber);
+    int whileStmtNumber = _currentStmtNumber;
 
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
@@ -638,7 +655,10 @@ void Parser::parseWhileStmt() {
     stack<int> newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
 
+    int nextStmtNumber = _currentStmtNumber + 1;
+    _pkbMainPtr->setNext(whileStmtNumber, nextStmtNumber);
     parseStmtList();
+    _pkbMainPtr->setNext(_currentStmtNumber, whileStmtNumber);
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
     OutputDebugString("FINE: Exiting while block.\n");
@@ -648,6 +668,10 @@ void Parser::parseWhileStmt() {
     _parentStack.pop();
 }
 
+/*
+Parses an if-else statement. When this method ends,
+_currentTokenPtr will be advanced after '}'.
+*/
 void Parser::parseIfStmt()
 {
     OutputDebugString("FINE: If-else statement identified.\n");
@@ -698,7 +722,10 @@ void Parser::parseIfStmt()
     stack<int> newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
 
+    int nextStmtNumber = _currentStmtNumber + 1;
+    _pkbMainPtr->setNext(ifElseStmtNum, nextStmtNumber);
     parseStmtList();
+    int lastStmtInIfBlock = _currentStmtNumber;
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
     OutputDebugString("FINE: Exiting if-block.\n");
@@ -714,7 +741,12 @@ void Parser::parseIfStmt()
     newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
 
+    nextStmtNumber = _currentStmtNumber + 1;
+    _pkbMainPtr->setNext(ifElseStmtNum, nextStmtNumber);
     parseStmtList();
+    int lastStmtInElseBlock = _currentStmtNumber;
+
+    _ifElseStmtExitPointsStack.push(pair<int, int>(lastStmtInIfBlock, lastStmtInElseBlock));
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
     OutputDebugString("FINE: Exiting else-block.\n");
@@ -735,10 +767,11 @@ void Parser::processAndPopTopFollowStack()
     while (!topFollowsStack.empty()) {
         stmtBefore = topFollowsStack.top();
         _pkbMainPtr->setFollowsRel(stmtBefore, stmtAfter);
+        _pkbMainPtr->setNext(stmtBefore, stmtAfter);
         stmtAfter = stmtBefore;
         topFollowsStack.pop();
     }
-    _pkbMainPtr->setFollowsRel(0, stmtAfter);
+    _pkbMainPtr->setFollowsRel(0, stmtAfter);   // No need to add 0 for Next
 
     _stackOfFollowsStacks.pop();
 }

@@ -65,13 +65,9 @@ protected:
     PKBMain* _pkbMainPtr;
     std::stack<std::stack<int>> _stackOfFollowsStacks;     // To set Follows relation in PKB
     std::string _currentProcName;    //The index of the current procedure being parsed. Needed by set Calls relation
-    std::unordered_map<int, pair<int,int>> _ifElseStmtExitPoints;   // To set next after exiting if-else statement
+    std::stack<pair<int,int>> _ifElseStmtExitPointsStack;   // To set next after exiting if-else statement
     std::stack<int> _whileStmtStack;
     std::stack<int> _ifElseStmtStack;
-
-    // Flags
-    bool _justExitIfElseStmt;
-    bool _justExitWhileStmt;
 
     /*********************
      * Protected Methods *
