@@ -14,3 +14,16 @@ bool NextTable::setNextRel(int stmt, int stmtNext) {
 	allNextRel.insert(nextRel);
 	return true;
 }
+
+bool NextTable::isNext(int stmtBef, int stmtAft) {
+	if (nextMap.find(stmtBef) == nextMap.end()) {
+		return false;
+	}
+
+	return find(nextMap[stmtBef].begin(), nextMap[stmtBef].end(), stmtAft) != nextMap[stmtBef].end();
+}
+
+bool NextTable::isExecutedBefore(int stmtBef) {
+	return nextMap.find(stmtBef) != nextMap.end();
+}
+
