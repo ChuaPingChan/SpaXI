@@ -1,21 +1,24 @@
 #pragma once
 #include <string>
-#include "../Attributeship.h"
+#include "..\..\Entity.h"
+#include "..\Attributeship.h"
 
 class WithClause
 {
 public:
-    WithClause(Attribute lhsAttribute, string lhsValue, Attribute rhsAttribute, string rhsValue);
+    WithClause(WithType withType, Entity lhsEntity, string lhsValue, Entity rhsEntity, string rhsValue);
     ~WithClause();
 
-    Attribute getLhsAttribute();
-    Attribute getRhsAttribute();
+    WithType getWithType();
+    Entity getLhsEntity();
+    Entity getRhsEntity();
     string getLhsValue();
     string getRhsValue();
 
 private:
-    Attribute lhsAttribute;
-    Attribute rhsAttribute;
+    WithType withType;
+    Entity lhsEntity;
+    Entity rhsEntity;
     string lhsValue;
     string rhsValue;
 };

@@ -18,3 +18,9 @@ enum Attribute
     IDENT_WITH_QUOTES_ATTRIBUTE,
     PROG_LINE_ATTRIBUTE
 };
+
+enum WithType
+{
+    INTEGER_WITH = 0,
+    STRING_WITH
+};

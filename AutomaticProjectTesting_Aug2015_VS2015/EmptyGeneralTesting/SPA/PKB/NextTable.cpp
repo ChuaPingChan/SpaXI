@@ -71,4 +71,5 @@ bool NextTable::isNextStar(int stmtBef, int stmtAft, NextStarCache &nextStarCach
 	if (!nextStarCache.isComputedBefore(stmtBef)) {
 		nextStarCache.computeStmtBef(stmtBef, nextMap);
 	}
+    return true;
 }
