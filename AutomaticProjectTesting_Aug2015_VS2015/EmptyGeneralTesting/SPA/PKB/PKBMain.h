@@ -72,6 +72,8 @@ public:
     list<int> getAllAfterStar(Entity type);
     pair<list<int>, list<int>> getAllFollowsStar(Entity type1, Entity type2);
     bool startProcessComplexRelations();
+
+	bool setNext(int stmt, int stmtNext);
 	
 	//General Purpose API for query evaluator
     bool isPresent(string var);
@@ -175,16 +177,18 @@ public:
 	pair<list<int>, list<int>> getProcModifiesPair();
 
     //PKB query evaluator (Pattern)
-    pair<list<int>, list<string>> getLeftVariables();
+    pair<list<int>, list<int>> getLeftVariables();
 	list<int> getWhilesWithControlVariable(string var);
 	list<int> getIfsWithControlVariable(string var);
-	pair<list<int>, list<string>> getLeftVariablesThatMatchWith(string expression);
+	pair<list<int>, list<int>> getLeftVariablesThatMatchWith(string expression);
     list<int> getPartialMatchStmt(string expression);
     list<int> getPartialBothMatches(string var, string expression);
     list<int> getExactMatchStmt(string expression);
     list<int> getExactBothMatches(string var, string expression);
     list<int> getAllAssignments();
     list<int> getAllAssignments(string var);
+
+	list<int> getAllAssignments(int varIdx);
 
 private:
     static PKBMain* singleton;
@@ -213,4 +217,5 @@ private:
     UsesTableVar usesTableVar;
     VarIdxTable varIdxTable;
 	CallsStarTable callsStarTable;
+	DesignExtractor de;
 };

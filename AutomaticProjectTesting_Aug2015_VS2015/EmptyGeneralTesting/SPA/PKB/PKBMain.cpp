@@ -366,7 +366,6 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(Entity type1, Entity type2
 }
 
 bool PKBMain::startProcessComplexRelations() {
-	DesignExtractor de;
 	followsTable.setMap(de.computeFollowsTable(followsBeforeMap, followsAfterMap));
 	childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
 	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
@@ -382,6 +381,10 @@ bool PKBMain::startProcessComplexRelations() {
 	usesTableVar.setProcMap(de.computeUsesTableProc(usesTableProcToVar));
 	modTableVar.setStmtMap(de.computeModTableStmt(modTableStmtToVar));
 	modTableVar.setProcMap(de.computeModTableProc(modTableProcToVar));
+	return true;
+}
+
+bool PKBMain::setNext(int stmt, int stmtNext) {
 	return true;
 }
 
@@ -497,7 +500,8 @@ bool PKBMain::setUseTableProcToVar(string proc, string var)
 
 bool PKBMain::setPatternRelation(int stmt, string var, string expression)
 {
-	bool added = patternTable.addToPatternTable(stmt, var, expression);
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	bool added = patternTable.addToPatternTable(stmt, varIdx, expression);
 	return added;
 }
 
@@ -687,7 +691,7 @@ pair<list<int>, list<int>> PKBMain::getProcModifiesPair() {
 	return procModPair;
 }
 
-pair<list<int>, list<string>> PKBMain::getLeftVariables()
+pair<list<int>, list<int>> PKBMain::getLeftVariables()
 {
 	return patternTable.getLeftVariables();
 }
@@ -701,7 +705,7 @@ list<int> PKBMain::getIfsWithControlVariable(string var) {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	return patternTable.getIfWithControlVariable(varIdx);
 }
-pair<list<int>, list<string>> PKBMain::getLeftVariablesThatMatchWith(string expression)
+pair<list<int>, list<int>> PKBMain::getLeftVariablesThatMatchWith(string expression)
 {
 	return patternTable.getLeftVariableThatMatchWithString(expression);
 }
@@ -713,7 +717,8 @@ list<int> PKBMain::getPartialMatchStmt(string expression)
 
 list<int> PKBMain::getPartialBothMatches(string var, string expression)
 {
-	return patternTable.getPartialBothMatches(var, expression);
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	return patternTable.getPartialBothMatches(varIdx, expression);
 }
 
 list<int> PKBMain::getExactMatchStmt(string expression)
@@ -723,7 +728,8 @@ list<int> PKBMain::getExactMatchStmt(string expression)
 
 list<int> PKBMain::getExactBothMatches(string var, string expression)
 {
-	return patternTable.getExactBothMatches(var, expression);
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	return patternTable.getExactBothMatches(varIdx, expression);
 }
 
 list<int> PKBMain::getAllAssignments()
@@ -733,7 +739,14 @@ list<int> PKBMain::getAllAssignments()
 
 list<int> PKBMain::getAllAssignments(string var)
 {
-	list<int> stmtList = patternTable.getLeftVariableMatchingStmts(var);
+	int varIdx = varIdxTable.getIdxFromVar(var);
+	list<int> stmtList = patternTable.getLeftVariableMatchingStmts(varIdx);
+	return stmtTypeList.getStmtType(stmtList, ASSIGN);
+}
+
+list<int> PKBMain::getAllAssignments(int varIdx) {
+
+	list<int> stmtList = patternTable.getLeftVariableMatchingStmts(varIdx);
 	return stmtTypeList.getStmtType(stmtList, ASSIGN);
 }
 

@@ -17,16 +17,16 @@ public:
     PatternTable();
 	bool addWhile(int stmt, int varIdx);
 	bool addIf(int stmt, int varIdx);
-    bool addToPatternTable(int stmtNumber, string var, string expression);
-    pair<string,list<string>> getExpression(int stmtNumber);
+    bool addToPatternTable(int stmtNumber, int varIdx, string expression);
+    pair<int,list<string>> getExpression(int stmtNumber);
     
-    pair<list<int>,list<string>> getLeftVariables();
-    pair<list<int>,list<string>> getLeftVariableThatMatchWithString(string expression);
+    pair<list<int>,list<int>> getLeftVariables();
+    pair<list<int>,list<int>> getLeftVariableThatMatchWithString(string expression);
     list<int> getExactMatchStmt(string expression);
     list<int> getPartialMatchStmt(string expression);
-    list<int> getExactBothMatches(string var, string expression);
-    list<int> getPartialBothMatches(string var, string expression);
-    list<int> getLeftVariableMatchingStmts(string var);
+    list<int> getExactBothMatches(int var, string expression);
+    list<int> getPartialBothMatches(int var, string expression);
+    list<int> getLeftVariableMatchingStmts(int var);
 	list<int> getIfWithControlVariable(int varIdx);
 	list<int> getWhileWithControlVariable(int varIdx);
 
@@ -34,7 +34,7 @@ public:
     bool hasExactMatch(int stmtNumber, string expression);
     bool hasPartialMatch(int stmtNumber, string expression);
 private:
-    unordered_map<int, pair<string,list<string>>> patternTableMap;
+    unordered_map<int, pair<int,list<string>>> patternTableMap;
     stack<char> infixToPostfixStack;
 	unordered_map<int, list<int>> varToWhileMap;
 	unordered_map<int, list<int>> varToIfMap;
