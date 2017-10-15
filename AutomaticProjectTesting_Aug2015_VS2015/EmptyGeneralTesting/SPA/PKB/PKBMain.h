@@ -37,6 +37,10 @@ public:
     static PKBMain* getInstance();
     static void resetInstance();
 
+	bool isSameName(Entity type1, int idx1, Entity type2, int idx2);
+
+	string convertIdxToString(int index, Entity type);
+
 	list<string> convertIdxToString(list<int> indexList, Entity type);
 
 	int convertStringToIdx(string arg, Entity type);
