@@ -44,7 +44,7 @@ namespace UnitTesting
 
             dummyPkbMain.getParent(1, Entity::STMT);
 
-            actualResults = dummyPkbMain.getAllParents(Entity::STMT);
+            actualResults = dummyPkbMain.getAllChildren(Entity::STMT);
             expectedResults = list<int>{ 3, 5, 6, 7 };
             expectedResults.sort();
             actualResults.sort();
