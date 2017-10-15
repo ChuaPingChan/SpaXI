@@ -7,6 +7,6 @@ public:
 	NextEvaluator();
 	~NextEvaluator();
 
-	ClauseResult evaluate(SuchThatClause clause);
+	bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
 };
 

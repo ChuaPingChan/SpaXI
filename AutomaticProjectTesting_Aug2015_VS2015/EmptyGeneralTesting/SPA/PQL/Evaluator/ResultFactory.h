@@ -19,6 +19,8 @@
 #include "SuchThat/CallsStarEvaluator.h"
 #include "SuchThat/AffectsEvaluator.h"
 #include "SuchThat/AffectsStarEvaluator.h"
+#include "With/IntWithEvaluator.h"
+#include "With/StringWithEvaluator.h"
 
 class ResultFactory
 {
@@ -29,6 +31,7 @@ public:
     bool processClause(SelectClause clause);
     bool processClause(SuchThatClause clause);
     bool processClause(PatternClause clause);
+    bool processClause(WithClause clause);
 
     ClauseResult makeClauseResult();
 
