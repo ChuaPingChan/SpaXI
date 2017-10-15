@@ -19,13 +19,16 @@ public:
 	bool addIf(int stmt, int varIdx);
     bool addToPatternTable(int stmtNumber, int varIdx, string expression);
     pair<int,list<string>> getExpression(int stmtNumber);
-    
     pair<list<int>,list<int>> getLeftVariables();
     pair<list<int>,list<int>> getLeftVariableThatMatchWithString(string expression);
     list<int> getExactMatchStmt(string expression);
     list<int> getPartialMatchStmt(string expression);
+	list<int> getPartialMatchVar(int stmt, string expression);
+	list<int> getExactMatchVar(int stmt, string expression);
     list<int> getExactBothMatches(int var, string expression);
-    list<int> getPartialBothMatches(int var, string expression);
+	bool isExactMatch(int stmt, int var, string expression);
+	bool isPartialMatch(int stmt, int var, string expression);
+	list<int> getPartialBothMatches(int var, string expression);
     list<int> getLeftVariableMatchingStmts(int var);
 	list<int> getIfWithControlVariable(int varIdx);
 	list<int> getWhileWithControlVariable(int varIdx);

@@ -715,9 +715,21 @@ list<int> PKBMain::getPartialMatchStmt(string expression)
 	return patternTable.getPartialMatchStmt(expression);
 }
 
+list<int> PKBMain::getPartialMatchVar(int stmt, string expression) {
+	return patternTable.getPartialMatchVar(stmt, expression);
+}
+
+list<int> PKBMain::getExactMatchVar(int stmt, string expression) {
+	return patternTable.getExactMatchVar(stmt, expression);
+}
+
 list<int> PKBMain::getPartialBothMatches(string var, string expression)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
+	return patternTable.getPartialBothMatches(varIdx, expression);
+}
+
+list<int> PKBMain::getPartialBothMatches(int varIdx, string expression) {
 	return patternTable.getPartialBothMatches(varIdx, expression);
 }
 
@@ -730,6 +742,18 @@ list<int> PKBMain::getExactBothMatches(string var, string expression)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	return patternTable.getExactBothMatches(varIdx, expression);
+}
+
+list<int> PKBMain::getExactBothMatches(int varIdx, string expression) {
+	return patternTable.getExactBothMatches(varIdx, expression);
+}
+
+bool PKBMain::isExactMatch(int stmt, int varIdx, string expression) {
+	return patternTable.isExactMatch(stmt, varIdx, expression);
+}
+
+bool PKBMain::isPartialMatch(int stmt, int varIdx, string expression) {
+	return patternTable.isPartialMatch(stmt, varIdx, expression);
 }
 
 list<int> PKBMain::getAllAssignments()

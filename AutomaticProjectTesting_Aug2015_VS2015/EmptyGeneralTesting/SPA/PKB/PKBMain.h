@@ -180,9 +180,15 @@ public:
 	list<int> getIfsWithControlVariable(string var);
 	pair<list<int>, list<int>> getLeftVariablesThatMatchWith(string expression);
     list<int> getPartialMatchStmt(string expression);
+	list<int> getPartialMatchVar(int stmt, string expression);
+	list<int> getExactMatchVar(int stmt, string expression);
     list<int> getPartialBothMatches(string var, string expression);
+	list<int> getPartialBothMatches(int varIdx, string expression);
     list<int> getExactMatchStmt(string expression);
     list<int> getExactBothMatches(string var, string expression);
+	list<int> getExactBothMatches(int varIdx, string expression);
+	bool isExactMatch(int stmt, int varIdx, string expression);
+	bool isPartialMatch(int stmt, int varIdx, string expression);
     list<int> getAllAssignments();
     list<int> getAllAssignments(string var);
 

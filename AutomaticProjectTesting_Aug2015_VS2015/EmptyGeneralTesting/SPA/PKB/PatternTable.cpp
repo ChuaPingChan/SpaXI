@@ -129,6 +129,28 @@ list<int> PatternTable::getPartialMatchStmt(string expression)
     return assignList;
 }
 
+list<int> PatternTable::getPartialMatchVar(int stmt, string expression) {
+	list<int> varList;
+	unordered_map<int, pair<int, list<string>>>::iterator it;
+	for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it) {
+		if (it->first == stmt && hasPartialMatch(stmt, expression)) {
+			varList.push_back(it->second.first);
+		}
+	}
+	return varList;
+}
+
+list<int> PatternTable::getExactMatchVar(int stmt, string expression) {
+	list<int> varList;
+	unordered_map<int, pair<int, list<string>>>::iterator it;
+	for (it = patternTableMap.begin(); it != patternTableMap.end(); ++it) {
+		if (it->first == stmt && hasExactMatch(stmt, expression)) {
+			varList.push_back(it->second.first);
+		}
+	}
+	return varList;
+}
+
 list<int> PatternTable::getExactBothMatches(int var, string expression)
 {
     list<int> assignList;
@@ -145,6 +167,22 @@ list<int> PatternTable::getExactBothMatches(int var, string expression)
     }
 
     return assignList;
+}
+
+bool PatternTable::isExactMatch(int stmt, int var, string expression) {
+	if (patternTableMap.find(stmt) == patternTableMap.end()) {
+		return false;
+	}
+
+	return (patternTableMap[stmt].first == var && hasExactMatch(stmt, expression));
+}
+
+bool PatternTable::isPartialMatch(int stmt, int var, string expression) {
+	if (patternTableMap.find(stmt) == patternTableMap.end()) {
+		return false;
+	}
+
+	return (patternTableMap[stmt].first == var && hasPartialMatch(stmt, expression));
 }
 
 list<int> PatternTable::getPartialBothMatches(int var, string expression)
