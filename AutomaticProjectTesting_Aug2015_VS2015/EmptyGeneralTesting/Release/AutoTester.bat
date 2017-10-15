@@ -4,7 +4,7 @@ echo Welcome to Team 11 AutoTester
 echo ==========================================================
 echo [0] Generate all queries from xls to txt
 echo [1] Run AutoTester for test 1
-::echo [2] Run AutoTester for test 2
+echo [2] Run AutoTester for test 2
 ::echo [3] Run AutoTester for test 3
 echo [x] Exit
 set option=
@@ -48,7 +48,7 @@ goto :main
 @echo on
 python Test2/QueryGenerator.py
 echo Running AutoTester ...
-AutoTester Test2/test2.txt Test2/testQuery2.txt outTest2.xml
+AutoTester Test2/ZYTest.txt Test2/testQuery2.txt Test2/outTest2.xml
 @echo off
 pause
 cls
