@@ -39,3 +39,7 @@ list<int> ProcIdxTable::getAllProceduresIndex() {
 list<string> ProcIdxTable::getAllProceduresName() {
 	return allProcString;
 }
+
+bool ProcIdxTable::isProcedure(string procName) {
+	return procIdxMap.find(procName) != procIdxMap.end();
+}

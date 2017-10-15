@@ -30,7 +30,7 @@ bool AssignPatternValidator::isValid()
     return this->validity;
 }
 
-bool AssignPatternValidator::isValidArgOne(string argOne)
+bool AssignPatternValidator::isValidArgOne(string &argOne)
 {
     QueryTree qt = *(this->qtPtr);
     if (qt.isEntitySynonymExist(argOne, VARIABLE))
@@ -47,6 +47,7 @@ bool AssignPatternValidator::isValidArgOne(string argOne)
 
     else if (RegexValidators::isValidIdentWithQuotesRegex(argOne))
     {
+        argOne = Formatter::removeAllQuotes(argOne);
         this->argOneType = IDENT_WITHQUOTES;
         return true;
     }
@@ -66,9 +67,17 @@ bool AssignPatternValidator::isValidArgTwo(string argTwo)
         return true;
     }
     
-    else if (RegexValidators::isValidExpressionSpecRegex(argTwo))
+    //TODO: remove quotes, check for well form expression
+    else if (RegexValidators::isValidExpressionSpecPartialRegex(argTwo))
     {
-        this->argTwoType = EXPRESSION_SPEC;
+        this->argTwoType = EXPRESSION_SPEC_PARTIAL;
+        return true;
+    }
+
+    //TODO: remove quotes, check for well form expression
+    else if (RegexValidators::isValidExpressionSpecExactRegex(argTwo))
+    {
+        this->argTwoType = EXPRESSION_SPEC_EXACT;
         return true;
     }
 

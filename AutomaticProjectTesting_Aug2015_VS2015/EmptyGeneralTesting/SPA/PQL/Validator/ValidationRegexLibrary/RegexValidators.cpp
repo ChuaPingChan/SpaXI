@@ -6,6 +6,12 @@
 /******************** Grammar ********************/
 const string RegexValidators::SPACE_0 = "(\\s*)";
 const string RegexValidators::SPACE_1 = "(\\s+)";
+const string RegexValidators::OPEN_BRACKET_REGEX = "([(])";
+const string RegexValidators::CLOSE_BRACKET_REGEX = "([)])";
+const string RegexValidators::PLUS_REGEX = "([+])";
+const string RegexValidators::MINUS_REGEX = "([-])";
+const string RegexValidators::TIMES_REGEX = "([*])";
+const string RegexValidators::OPERATOR_REGEX = "(" + PLUS_REGEX + "|" + MINUS_REGEX + "|" + TIMES_REGEX + ")";
 const string RegexValidators::LETTER_REGEX = "([a-zA-Z])";
 const string RegexValidators::DIGIT_REGEX = "([0-9])";
 const string RegexValidators::INTEGER_REGEX = "(" + DIGIT_REGEX + "+)";
@@ -42,6 +48,9 @@ const string RegexValidators::RELATIONSHIP_KEYWORD_REGEX = "(Modifies|Uses|Paren
 /*--------------- Pattern Clause Regex ---------------*/
 const string RegexValidators::FACTOR_REGEX = "(" + SPACE_0 + NAME_REGEX + SPACE_0 + "|" + SPACE_0 + INTEGER_REGEX + SPACE_0 + ")";
 const string RegexValidators::EXPRESSION_SPEC = "(" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "|" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "\"" + SPACE_0 + FACTOR_REGEX + SPACE_0 + "\"" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + ")";
+const string RegexValidators::EXPR_REGEX = "(" + NAME_REGEX + "|" + INTEGER_REGEX + "|" + OPERATOR_REGEX + "|" + OPEN_BRACKET_REGEX + "|" + CLOSE_BRACKET_REGEX + "|" + SPACE_0 + ")";
+const string RegexValidators::EXPRESSION_SPEC_PARTIAL_REGEX = "(" + SPACE_0 + "_" + SPACE_0 + "\"(" + SPACE_0 + EXPR_REGEX + SPACE_0 + ")+" + "\"" + SPACE_0 + "_" + SPACE_0 + ")";
+const string RegexValidators::EXPRESSION_SPEC_EXACT_REGEX = "(" + SPACE_0 + "(" + SPACE_0 + EXPR_REGEX + SPACE_0 + ")+" + SPACE_0 + ")";
 const string RegexValidators::PATTERN_ASSIGN_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + "(" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "|" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + ")" + "[)]" + SPACE_0 + ")";
 const string RegexValidators::PATTERN_WHILE_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0+ "[)]" + SPACE_0 + ")";
 const string RegexValidators::PATTERN_IF_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
@@ -212,6 +221,18 @@ bool RegexValidators::isValidExpressionSpecRegex(string str)
 {
     regex expressionSpecCheck(EXPRESSION_SPEC);
     return regex_match(str, expressionSpecCheck);
+}
+
+bool RegexValidators::isValidExpressionSpecPartialRegex(string str)
+{
+    regex expressionSpecPartialRegexCheck(EXPRESSION_SPEC_PARTIAL_REGEX);
+    return regex_match(str, expressionSpecPartialRegexCheck);
+}
+
+bool RegexValidators::isValidExpressionSpecExactRegex(string str)
+{
+    regex expressionSpecExactRegexCheck(EXPRESSION_SPEC_EXACT_REGEX);
+    return regex_match(str, expressionSpecExactRegexCheck);
 }
 
 bool RegexValidators::isValidPatternAssignRegex(string str)
