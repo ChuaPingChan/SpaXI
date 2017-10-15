@@ -4,9 +4,9 @@
 class CallsStarEvaluator : public SuchThatRelEvaluator
 {
 public:
-	CallsStarEvaluator();
-	~CallsStarEvaluator();
+    CallsStarEvaluator();
+    ~CallsStarEvaluator();
 
-	ClauseResult evaluate(SuchThatClause clause);
+    bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
 };
 

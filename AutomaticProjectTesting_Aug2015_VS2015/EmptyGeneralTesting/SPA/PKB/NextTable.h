@@ -14,6 +14,8 @@ class NextTable
 public:
 	NextTable();
 	bool setNextRel(int stmt, int stmtNext);
+	bool isNext(int stmtBef, int stmtAft);
+	bool isExecutedBefore(int stmtBef);
 private:
 	unordered_map<int, list<int>> nextMap;
 	unordered_map<int, list<int>> nextMapReverse;
