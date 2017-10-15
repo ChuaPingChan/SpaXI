@@ -21,7 +21,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
     //Case 1: ParentStar(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
-        return pkbInstance->isParentChild(stoi(argOne), stoi(argTwo));
+        return pkbInstance->isParentStarChild(stoi(argOne), stoi(argTwo));
     }
 
     //Case 2: ParentStar(int, _)
@@ -119,7 +119,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
                 int argTwoVal = pair.second;
 
                 // Removes from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isParentChild(argOneVal, argTwoVal))
+                if (!pkbInstance->isParentStarChild(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
                 }
@@ -131,7 +131,7 @@ bool ParentStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clause
 
         else if (!argOneExists && !argTwoExists)
         {
-            pair<list<int>, list<int>> pkbResult = pkbInstance->getAllParentsRel(argOneType, argTwoType);
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getAllParentStarRel(argOneType, argTwoType);
 
             if (pkbResult.first.empty() && pkbResult.second.empty())
             {

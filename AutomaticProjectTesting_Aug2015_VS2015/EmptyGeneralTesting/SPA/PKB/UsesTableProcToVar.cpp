@@ -37,3 +37,37 @@ bool UsesTableProcToVar::setMap(unordered_map<int, list<int>> targetMap) {
 unordered_map<int, list<int>> UsesTableProcToVar::getMap() {
 	return usesProcToVarMap;
 }
+
+bool UsesTableProcToVar::isUses(int procIdx, int varIdx) {
+	return find(usesProcToVarMap[procIdx].begin(), usesProcToVarMap[procIdx].end(), varIdx) != usesProcToVarMap[procIdx].end();
+}
+
+bool UsesTableProcToVar::isUsingAnything(int procIdx) {
+	return usesProcToVarMap.find(procIdx) != usesProcToVarMap.end();
+}
+
+list<int> UsesTableProcToVar::getProcThatUses() {
+	list<int> procList;
+	for (unordered_map<int, list<int>>::iterator it = usesProcToVarMap.begin(); it != usesProcToVarMap.end(); ++it) {
+		int procIdx = (*it).first;
+		procList.push_back(procIdx);
+	}
+	return procList;
+}
+
+pair<list<int>, list<int>> UsesTableProcToVar::getProcPair() {
+	list<int> procList;
+	list<int> varList;
+
+	for (unordered_map<int, list<int>>::iterator it = usesProcToVarMap.begin(); it != usesProcToVarMap.end(); ++it) {
+		int procIdx = (*it).first;
+		list<int> varList = (*it).second;
+
+		for (int var : varList) {
+			procList.push_back(procIdx);
+			varList.push_back(var);
+		}
+	}
+
+	return make_pair(procList, varList);
+}

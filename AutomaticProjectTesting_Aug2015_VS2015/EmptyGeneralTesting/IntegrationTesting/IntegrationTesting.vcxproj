@@ -165,6 +165,8 @@
     <ClInclude Include="PQL\Utility\UtilitySelection.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Parser-PKB\TestParserPopulatePkb.cpp" />
+    <ClCompile Include="Parser-PKB\TestParserPkbBugFix.cpp" />
     <ClCompile Include="PQL\PQLFriend\FriendDeclarationValidator.cpp" />
     <ClCompile Include="PQL\ResultFormatter\TestResultFormatterWithClauseResultAndQueryTree.cpp" />
     <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternIf.cpp" />

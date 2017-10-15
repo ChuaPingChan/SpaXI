@@ -72,6 +72,8 @@ public:
     list<int> getAllAfterStar(Entity type);
     pair<list<int>, list<int>> getAllFollowsStar(Entity type1, Entity type2);
     bool startProcessComplexRelations();
+
+	bool setNext(int stmt, int stmtNext);
 	
 	//General Purpose API for query evaluator
     bool isPresent(string var);
@@ -91,16 +93,17 @@ public:
     //PKB-Parser
 	bool setParentChildRel(int parentStmt, int childStmt);
 	bool setFollowsRel(int stmtBef, int stmtAft);
+	list<string> getAllCalleeNames();
 	bool setCallsRel(int stmt, string callerProcName, string calleeProcName);
     bool addVariable(string var);
     bool addProcedure(string proc);
     bool addAssignmentStmt(int stmt);
 	bool addWhileStmt(int stmt, string controlVar);
-    bool addWhileStmt(int stmt);
 	bool addIfStmt(int stmt, string controlVar);
-    bool addIfStmt(int stmt);
     bool addConstant(int stmt, int constant);
+	list<string> getAllVarNames();
 	list<int> getAllProcedures();
+	list<string> getAllProcNames();
 	bool setModTableStmtToVar(int stmt, string var);
     bool setModTableProcToVar(string proc, string var);
     bool setUseTableStmtToVar(int stmt, string var);
@@ -143,31 +146,54 @@ public:
 
     //PKB query evaluator (Uses, Modifies)
     bool isUses(int stmt, int varIdx);
-    bool isMod(int stmt, int varIdx);
+	bool isUsesProc(int procIdx, int varIdx);
+	bool isUsesProc(string procName, string varName);
+	bool isModProc(string procName, string var);
+	bool isMod(int stmt, int varIdx);
     bool isUses(int stmt, string var);
     bool isMod(int stmt, string var);
     bool isUsingAnything(int stmt);
+	bool isUsingAnythingProc(string procName);
     bool isModifyingAnything(int stmt);
+	bool isModifyingAnythingProc(string procName);
     list<int> getUsesFromStmt(int stmt);
+	list<int> getUsesFromProc(string procName);
     list<int> getModifiesFromStmt(int stmt);
+	list<int> getModifiesFromProc(string procIdx);
     list<int> getUsesFromVar(string var, Entity type);
+	list<int> getProcUsesFromVar(string var, Entity type);
     list<int> getModifiesFromVar(string var, Entity type);
-    list<int> getStmtThatUsesAnything(Entity type);
+	list<int> getProcModifiesFromVar(string var, Entity type);
+	list<int> getStmtThatUsesAnything(Entity type);
+	list<int> getProcThatUsesAnything();
     list<int> getStmtThatModifiesAnything(Entity type);
+	list<int> getStmtThatModifiesAnything();
     pair<list<int>, list<int>> getUsesPairs(Entity type);
+	pair<list<int>, list<int>> getProcUsesPair();
     pair<list<int>, list<int>> getModifiesPairs(Entity type);
 
+	pair<list<int>, list<int>> getProcModifiesPair();
+
     //PKB query evaluator (Pattern)
-    pair<list<int>, list<string>> getLeftVariables();
+    pair<list<int>, list<int>> getLeftVariables();
 	list<int> getWhilesWithControlVariable(string var);
 	list<int> getIfsWithControlVariable(string var);
-	pair<list<int>, list<string>> getLeftVariablesThatMatchWith(string expression);
+	pair<list<int>, list<int>> getLeftVariablesThatPartialMatchWith(string expression);
+	pair<list<int>, list<int>> getLeftVariablesThatExactMatchWith(string expression);
     list<int> getPartialMatchStmt(string expression);
+	list<int> getPartialMatchVar(int stmt, string expression);
+	list<int> getExactMatchVar(int stmt, string expression);
     list<int> getPartialBothMatches(string var, string expression);
+	list<int> getPartialBothMatches(int varIdx, string expression);
     list<int> getExactMatchStmt(string expression);
     list<int> getExactBothMatches(string var, string expression);
+	list<int> getExactBothMatches(int varIdx, string expression);
+	bool isExactMatch(int stmt, int varIdx, string expression);
+	bool isPartialMatch(int stmt, int varIdx, string expression);
     list<int> getAllAssignments();
     list<int> getAllAssignments(string var);
+
+	list<int> getAllAssignments(int varIdx);
 
 private:
     static PKBMain* singleton;
@@ -196,4 +222,5 @@ private:
     UsesTableVar usesTableVar;
     VarIdxTable varIdxTable;
 	CallsStarTable callsStarTable;
+	DesignExtractor de;
 };

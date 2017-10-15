@@ -24,13 +24,35 @@ bool StmtTypeList::addToWhileStmtList(int stmt) {
     return false;
 }
 
-bool StmtTypeList::addToCallsStmtList(int stmt) {
+bool StmtTypeList::addToCallsStmtList(int stmt, int calleeProcIdx, string calleeProcName) {
 	if (find(callsStmtList.begin(), callsStmtList.end(), stmt) == callsStmtList.end()) {
 		callsStmtList.push_back(stmt);
 		allStmtList.push_back(stmt);
+		allCalleeName.push_back(calleeProcName);
+		callToProcNameMap[stmt] = calleeProcName;
+		procNameToCallMap[calleeProcName].push_back(stmt);
+		procNameToCallMap[calleeProcName].sort();
+		procNameToCallMap[calleeProcName].unique();
+		callToProcIdxMap[stmt] = calleeProcIdx;
 		return true;
 	}
 	return false;
+}
+
+int StmtTypeList::getProcIdxFromCall(int stmt) {
+	if (callToProcIdxMap.find(stmt) == callToProcIdxMap.end()) {
+		return -1;
+	}
+
+	return callToProcIdxMap[stmt];
+}
+
+list<string> StmtTypeList::getAllCalleeNames() {
+	return allCalleeName;
+}
+
+unordered_map<int, int> StmtTypeList::getCallToProcIdxMap() {
+	return callToProcIdxMap;
 }
 
 bool StmtTypeList::addToIfStmtList(int stmt)

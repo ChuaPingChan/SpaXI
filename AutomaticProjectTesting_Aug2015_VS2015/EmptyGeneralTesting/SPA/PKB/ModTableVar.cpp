@@ -23,11 +23,11 @@ bool ModTableVar::addModVarToStmtList(int varIdx, int stmtNumber) {
     return false;
 }
 
-bool ModTableVar::addModVarToProcList(int varIdx, string proc)
+bool ModTableVar::addModVarToProcList(int varIdx, int proc)
 {
     // if stmt number does not exist as a key, create new list and insert data to hash map
     if (modVarToProcMap.find(varIdx) == modVarToProcMap.end()) {
-        modVarToProcMap[varIdx] = list<string>();
+        modVarToProcMap[varIdx] = list<int>();
         modVarToProcMap[varIdx].push_back(proc);
         return true;
     }
@@ -108,30 +108,59 @@ bool ModTableVar::addModVarToIfMap(int varIdx, int stmtNumber)
 }
 
 list<int> ModTableVar::getModStmtsFromVar(int varIdx) {
+	if (modVarToStmtMap.find(varIdx) == modVarToStmtMap.end()) {
+		return list<int>();
+	}
+
     return modVarToStmtMap[varIdx];
 }
 
-list<string> ModTableVar::getModProcsFromVar(int varIdx)
+list<int> ModTableVar::getModProcsFromVar(int varIdx)
 {
+	if (modVarToProcMap.find(varIdx) == modVarToStmtMap.end()) {
+		return list<int>();
+	}
     return modVarToProcMap[varIdx];
 }
 
 list<int> ModTableVar::getModAssignsFromVar(int varIdx)
 {
+	if (modVarToAssignMap.find(varIdx) == modVarToAssignMap.end()) {
+		return list<int>();
+	}
     return modVarToAssignMap[varIdx];
 }
 
 list<int> ModTableVar::getModWhileStmtFromVar(int varIdx)
 {
+	if (modVarToWhileStmtMap.find(varIdx) == modVarToWhileStmtMap.end()) {
+		return list<int>();
+	}
     return modVarToWhileStmtMap[varIdx];
 }
 
 list<int> ModTableVar::getModWhileContainersFromVar(int varIdx)
 {
+	if (modVarToWhileContainerMap.find(varIdx) == modVarToWhileContainerMap.end()) {
+		return list<int>();
+	}
     return modVarToWhileContainerMap[varIdx];
 }
 
 list<int> ModTableVar::getModIfFromVar(int varIdx)
 {
+	if (modVarToIfMap.find(varIdx) == modVarToIfMap.end()) {
+		return list<int>();
+	}
     return modVarToIfMap[varIdx];
+}
+
+bool ModTableVar::setStmtMap(unordered_map<int, list<int>> map) {
+	modVarToStmtMap = map;
+	return true;
+}
+
+bool ModTableVar::setProcMap(unordered_map<int, list<int>> map) {
+	modVarToProcMap = map;
+	return true;
 }

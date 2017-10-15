@@ -7,6 +7,9 @@ ChildToParentStarTable::ChildToParentStarTable()
 }
 
 list<int> ChildToParentStarTable::getParentStar(int childStmt) {
+	if (childToParentStarMap.find(childStmt) == childToParentStarMap.end()) {
+		return list<int>();
+	}
 	return childToParentStarMap[childStmt];
 }
 

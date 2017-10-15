@@ -3,10 +3,14 @@
 #include <list>
 #include "ParentToChildTable.h"
 #include "ChildToParentTable.h"
+#include "ChildToParentStarTable.h"
 #include "FollowsTable.h"
 #include "CallsTable.h"
 #include "UsesTableProcToVar.h"
+#include "UsesTableStmtToVar.h"
+#include "StmtTypeList.h"
 #include "ModTableProcToVar.h"
+#include "ModTableStmtToVar.h"
 #include "CallsStarTable.h"
 #include <queue>
 #include <unordered_set>
@@ -23,5 +27,14 @@ class DesignExtractor {
 		pair<unordered_map<int, list<int>>, unordered_map<int, list<int>>> computeCallsStarTable(CallsTable callsTable);
 		unordered_map<int, pair<int, int>> computeFollowsTable(unordered_map<int, int> followsBefore, unordered_map<int, int> followsAfter);
 		unordered_map<int, list<int>> computeUsesTable(UsesTableProcToVar usesTable, CallsStarTable callsStarTable);
-		list<int> getPostfix(int root, unordered_map<int, list<int>> graph);
+		void DFS(int curr, unordered_map<int, list<int>> &map, unordered_set<int> &visited, unordered_map<int, list<int>> &callsStarMap);
+		unordered_map<int, list<int>> computeModifiesTable(ModTableProcToVar modTable, CallsStarTable callsStarTable);
+		unordered_map<int, list<int>> computeUsesTable(UsesTableStmtToVar usesTableStmtToVar, 
+			StmtTypeList stmtTypeList, UsesTableProcToVar usesTableProcToVar, ChildToParentStarTable childToParentStarTable);
+		unordered_map<int, list<int>> computeModifiesTable(ModTableStmtToVar modTableStmtToVar, 
+			StmtTypeList stmtTypeList, ModTableProcToVar modTableProcToVar, ChildToParentStarTable childToParentStarTable);
+		unordered_map<int, list<int>> computeUsesTableStmt(UsesTableStmtToVar usesTableStmtToVar);
+		unordered_map<int, list<int>> computeUsesTableProc(UsesTableProcToVar usesTableProcToVar);
+		unordered_map<int, list<int>> computeModTableStmt(ModTableStmtToVar modTableStmtToVar);
+		unordered_map<int, list<int>> computeModTableProc(ModTableProcToVar modTableProcToVar);
 };

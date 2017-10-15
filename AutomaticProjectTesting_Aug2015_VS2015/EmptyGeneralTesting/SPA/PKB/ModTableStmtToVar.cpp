@@ -25,6 +25,10 @@ bool ModTableStmtToVar::addModStmtToVarList(int stmtNumber, int varIdx) {
 
 list<int> ModTableStmtToVar::getModVariablesFromStmt(int stmtNumber) 
 {
+	if (modStmtToVarMap.find(stmtNumber) == modStmtToVarMap.end()) {
+		return list<int>();
+	}
+
     return modStmtToVarMap[stmtNumber];
 }
 
@@ -70,3 +74,11 @@ bool ModTableStmtToVar::isModifyingAnything(int stmtNumber)
     return modStmtToVarMap.find(stmtNumber) != modStmtToVarMap.end();
 }
 
+bool ModTableStmtToVar::setMap(unordered_map<int, list<int>> map) {
+	modStmtToVarMap = map;
+	return true;
+}
+
+unordered_map<int, list<int>> ModTableStmtToVar::getMap() {
+	return modStmtToVarMap;
+}

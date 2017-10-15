@@ -145,16 +145,18 @@ namespace UnitTesting
 		TEST_METHOD(TestGeneralPurposeAPI)
         {
             PKBMain PKB;
+            string dummyVarName = "dummyVar";
+
             Assert::IsTrue(PKB.addAssignmentStmt(1));
             Assert::IsTrue(PKB.addAssignmentStmt(3));
             Assert::IsTrue(PKB.addAssignmentStmt(4));
             Assert::IsTrue(PKB.addAssignmentStmt(6));
             Assert::IsTrue(PKB.addAssignmentStmt(8));
-            Assert::IsTrue(PKB.addWhileStmt(2));
-            Assert::IsTrue(PKB.addWhileStmt(5));
-            Assert::IsTrue(PKB.addWhileStmt(7));
-            Assert::IsTrue(PKB.addIfStmt(9));
-            Assert::IsTrue(PKB.addIfStmt(10));
+            Assert::IsTrue(PKB.addWhileStmt(2, dummyVarName));
+            Assert::IsTrue(PKB.addWhileStmt(5, dummyVarName));
+            Assert::IsTrue(PKB.addWhileStmt(7, dummyVarName));
+            Assert::IsTrue(PKB.addIfStmt(9, dummyVarName));
+            Assert::IsTrue(PKB.addIfStmt(10, dummyVarName));
             Assert::IsTrue(PKB.addAssignmentStmt(11));
             // test isAssignment
             Assert::IsTrue(PKB.isAssignment(6));
@@ -173,7 +175,7 @@ namespace UnitTesting
             Assert::IsTrue(PKB.isPresent("hello"));
             Assert::IsFalse(PKB.isPresent("world"));
             // test getWhiles
-            Assert::IsFalse(PKB.addWhileStmt(5));
+            Assert::IsTrue(PKB.addWhileStmt(5, dummyVarName));  // Don't mind duplicates
             list<int> expected;
             expected.push_back(2);
             expected.push_back(5);
@@ -289,9 +291,19 @@ namespace UnitTesting
 
 		TEST_METHOD(TestCallsTable) {
 			PKBMain PKB;
+			PKB.addVariable("a");
+			PKB.addVariable("b");
+			PKB.addVariable("c");
+			PKB.addVariable("d");
+			PKB.addVariable("e");
+			PKB.addVariable("f");
+			PKB.addVariable("g");
+			PKB.addVariable("h");
+			PKB.addVariable("i");
 			PKB.addProcedure("One");
 			PKB.setCallsRel(2, "One", "Two");
 			PKB.setCallsRel(3, "One", "Three");
+			PKB.setUseTableProcToVar("One", "a");
 			PKB.addProcedure("Three");
 			PKB.setCallsRel(6, "Three", "Four");
 			PKB.setCallsRel(7, "Three", "Five");
@@ -300,6 +312,7 @@ namespace UnitTesting
 			PKB.addProcedure("Five");
 			PKB.setCallsRel(14, "Five", "Six");
 			PKB.setCallsRel(15, "Five", "Seven");
+			PKB.setUseTableProcToVar("Five", "b");
 			PKB.addProcedure("Six");
 			PKB.setCallsRel(19, "Six", "Seven");
 			PKB.addProcedure("Two");
@@ -309,10 +322,31 @@ namespace UnitTesting
 			PKB.addProcedure("Eight");
 			PKB.setCallsRel(33, "Eight", "Nine");
 			PKB.addProcedure("Nine");
+			PKB.setUseTableProcToVar("Nine", "c");
+			PKB.setModTableProcToVar("One", "a");
+			PKB.setModTableProcToVar("Two", "b");
+			PKB.setModTableProcToVar("Three", "c");
+			PKB.setModTableProcToVar("Four", "d");
+			PKB.setModTableProcToVar("Five", "e");
+			PKB.setModTableProcToVar("Six", "f");
+			PKB.setModTableProcToVar("Seven", "g");
+			PKB.setModTableProcToVar("Eight", "h");
+			PKB.setModTableProcToVar("Nine", "i");
 
 			PKB.startProcessComplexRelations();
 
 			Assert::IsTrue(PKB.isCallsStar("One", "Nine"));
+			Assert::IsTrue(PKB.isUsesProc("One", "a"));
+			Assert::IsTrue(PKB.isUsesProc("One", "b"));
+			Assert::IsTrue(PKB.isUsesProc("One", "c"));
+			Assert::IsTrue(PKB.isUsesProc("Two", "c"));
+			Assert::IsTrue(PKB.isUsesProc("Five", "c"));
+			Assert::IsTrue(PKB.isUsesProc("Nine", "c"));
+			Assert::IsTrue(PKB.isModProc("One", "a"));
+			Assert::IsTrue(PKB.isModProc("One", "b"));
+			Assert::IsTrue(PKB.isModProc("One", "c"));
+			Assert::IsTrue(PKB.isModProc("Two", "h"));
+			Assert::IsFalse(PKB.isModProc("Four", "h"));
 
 			/*
 			Index of proc are as follows
@@ -332,7 +366,25 @@ namespace UnitTesting
 			list<int> resultList = PKB.getCallerStar("Seven");
 			resultList.sort();
 			Assert::IsTrue(resultList == expectedList);
+			expectedList = { 3, 4, 5, 6, 8 };
+			expectedList.sort();
+			resultList = PKB.getCalleeStar("Three");
+			resultList.sort();
+			Assert::IsTrue(resultList == expectedList);
 			pair<list<int>, list<int>> allCallsStar = PKB.getAllCallsStar();
+			Assert::IsTrue(PKB.isCallsStar(0, 2));
+			Assert::IsTrue(PKB.isCallsStar(0, 3));
+			Assert::IsTrue(PKB.isCallsStar(0, 4));
+			Assert::IsTrue(PKB.isCallsStar(0, 5));
+			Assert::IsTrue(PKB.isCallsStar(0, 6));
+			Assert::IsTrue(PKB.isCallsStar(0, 7));
+			Assert::IsTrue(PKB.isCallsStar(0, 8));
+			Assert::IsTrue(PKB.isCallsStar(1, 7));
+			Assert::IsFalse(PKB.isCallsStar(1, 6));
+			Assert::IsFalse(PKB.isCallsStar(1, 4));
+			Assert::IsTrue(PKB.isCallsStar(1, 8));
+
+
 
 		}
 	};
