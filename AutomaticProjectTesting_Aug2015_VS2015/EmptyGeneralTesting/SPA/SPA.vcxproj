@@ -89,7 +89,7 @@
     <ClCompile Include="PQL\Validator\Selection\With\WithHandler.cpp" />
     <ClCompile Include="PQL\Validator\Selection\With\WithValidator.cpp" />
     <ClCompile Include="PQL\Evaluator\With\WithEvaluator.cpp" />
-    <ClCompile Include="StringWithEvaluator.cpp" />
+    <ClCompile Include="PQL\Evaluator\With\StringWithEvaluator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exceptions\AttributeNotFoundException.h" />
@@ -125,7 +125,7 @@
     <ClInclude Include="PQL\Validator\Selection\With\WithValidator.h" />
     <ClInclude Include="Exceptions\SynonymNotFoundException.h" />
     <ClInclude Include="PQL\Evaluator\With\WithEvaluator.h" />
-    <ClInclude Include="StringWithEvaluator.h" />
+    <ClInclude Include="PQL\Evaluator\With\StringWithEvaluator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />
