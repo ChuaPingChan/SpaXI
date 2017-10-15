@@ -548,6 +548,11 @@ bool PKBMain::isModProc(string procName, string varName) {
 
 	return modTableProcToVar.isMod(procIdx, varIdx);
 }
+
+bool PKBMain::isModProc(int procIdx, int varIdx) {
+	return modTableProcToVar.isMod(procIdx, varIdx);
+}
+
 bool PKBMain::isMod(int stmt, int varIdx)
 {
 	return modTableStmtToVar.isMod(stmt, varIdx);
@@ -682,6 +687,11 @@ list<int> PKBMain::getStmtThatUsesAnything(Entity type)
 list<int> PKBMain::getProcThatUsesAnything()
 {
 	list<int> procList = usesTableProcToVar.getProcThatUses();
+	return procList;
+}
+
+list<int> PKBMain::getProcThatModifiesAnything() {
+	list<int> procList = modTableProcToVar.getProcThatModifies();
 	return procList;
 }
 
