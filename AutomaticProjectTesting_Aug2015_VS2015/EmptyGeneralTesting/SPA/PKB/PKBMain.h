@@ -97,9 +97,7 @@ public:
     bool addProcedure(string proc);
     bool addAssignmentStmt(int stmt);
 	bool addWhileStmt(int stmt, string controlVar);
-    bool addWhileStmt(int stmt);
 	bool addIfStmt(int stmt, string controlVar);
-    bool addIfStmt(int stmt);
     bool addConstant(int stmt, int constant);
 	list<string> getAllVarNames();
 	list<int> getAllProcedures();
