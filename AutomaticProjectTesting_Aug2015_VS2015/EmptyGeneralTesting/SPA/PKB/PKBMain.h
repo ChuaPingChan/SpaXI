@@ -75,7 +75,25 @@ public:
     bool startProcessComplexRelations();
 
 	bool setNext(int stmt, int stmtNext);
+
+	bool isNext(int stmtBef, int stmtAft);
+
+	bool isExecutedBefore(int stmtBef);
+
+	list<int> getExecutedAfter(int stmtBef, Entity type);
 	
+	bool isExecutedAfter(int stmtAft);
+
+	bool hasNext();
+
+	list<int> getAllExecutedAfter(Entity type);
+
+	list<int> getExecutedBefore(int stmtAft, Entity type);
+
+	list<int> getAllExecutedBefore(Entity type);
+
+	pair<list<int>, list<int>> getAllNext(Entity type1, Entity type2);
+
 	//General Purpose API for query evaluator
     bool isPresent(string var);
     bool isPresent(int stmtNum);
