@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "..\..\..\QueryTree.h"
-#include "..\..\..\Attributeship.h"
+#include "..\..\..\Withship.h"
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
 #include "..\..\..\..\Exceptions\SynonymNotFoundException.h"

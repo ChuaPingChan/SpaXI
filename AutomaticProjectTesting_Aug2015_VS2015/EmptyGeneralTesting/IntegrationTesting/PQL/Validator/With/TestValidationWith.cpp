@@ -1,7 +1,7 @@
 #include "CppUnitTest.h"
 #include "string.h"
 #include "..\SPA\PQL\QueryTree.h"
-#include "..\SPA\PQL\Attributeship.h"
+#include "..\SPA\PQL\Withship.h"
 #include "..\SPA\PQL\Validator\Selection\With\WithHandler.h"
 #include "..\SPA\PQL\Utilities\WithClause.h"
 #include "..\..\Utility\UtilitySelection.h"

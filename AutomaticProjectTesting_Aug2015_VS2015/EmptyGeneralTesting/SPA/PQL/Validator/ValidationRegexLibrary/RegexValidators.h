@@ -97,7 +97,6 @@ public:
     static const string PATTERN_IF_REGEX;
     static const string PATTERNREF_REGEX;
     static const string PATTERNCOND_REGEX;
-    //static const string PATTERN_REGEX;
     static const string PATTERN_Cl_REGEX;
 
     /*--------------- With Regex ---------------*/

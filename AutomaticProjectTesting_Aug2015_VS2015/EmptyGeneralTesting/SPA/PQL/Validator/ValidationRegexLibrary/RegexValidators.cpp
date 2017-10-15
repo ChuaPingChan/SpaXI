@@ -335,12 +335,6 @@ bool RegexValidators::isValidPatternCondRegex(string str)
     return regex_match(str, patternCondRegexCheck);
 }
 
-//bool RegexValidators::isValidPatternRegex(string str)
-//{
-//    regex patternRegexCheck(PATTERN_REGEX);
-//    return regex_match(str, patternRegexCheck);
-//}
-
 bool RegexValidators::isValidPatternClRegex(string str)
 {
     regex patternClRegexCheck(PATTERN_Cl_REGEX);

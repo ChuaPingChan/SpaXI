@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "..\..\Entity.h"
-#include "..\Attributeship.h"
+#include "..\Withship.h"
 
 class WithClause
 {

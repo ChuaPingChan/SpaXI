@@ -17,7 +17,7 @@
     <ClCompile Include="PKB\CallsTable.cpp" />
     <ClCompile Include="PKB\NextStarCache.cpp" />
     <ClCompile Include="PKB\NextTable.cpp" />
-    <ClCompile Include="PQL\Attributeship.h" />
+    <ClCompile Include="PQL\Withship.h" />
     <ClCompile Include="PQL\Evaluator\ClauseEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\ResultFactory.cpp" />
     <ClCompile Include="PQL\Evaluator\SuchThat\AffectsEvaluator.cpp" />
