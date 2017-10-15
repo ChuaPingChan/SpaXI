@@ -1,7 +1,7 @@
 #include "CppUnitTest.h"
 #include "string.h"
 #include "..\SPA\PQL\QueryTree.h"
-#include "..\SPA\PQL\Attributeship.h"
+#include "..\SPA\PQL\Withship.h"
 #include "..\SPA\PQL\Validator\Selection\With\WithHandler.h"
 #include "..\SPA\PQL\Utilities\WithClause.h"
 #include "..\..\Utility\UtilitySelection.h"
@@ -28,7 +28,7 @@ namespace UnitTesting
             qt.insertSynonym(PROCEDURE, "p2");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p1", PROCEDURE_ATTRIBUTE, "p2");
+            WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p1", PROCEDURE, "p2");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -81,7 +81,7 @@ namespace UnitTesting
             qt.insertSynonym(CALL, "cl");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", CALL_PROC_ATTRIBUTE, "cl");
+            WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", CALL, "cl");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -114,7 +114,7 @@ namespace UnitTesting
             qt.insertSynonym(VARIABLE, "v");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", VARIABLE_ATTRIBUTE, "v");
+            WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", VARIABLE, "v");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -136,7 +136,7 @@ namespace UnitTesting
             qt.insertSynonym(PROCEDURE, "p");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(PROCEDURE_ATTRIBUTE, "p", IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu");
+            WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", IDENT_WITHQUOTES, "Pikachu");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -178,7 +178,7 @@ namespace UnitTesting
             qt.insertSynonym(STMT, "s2");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(STMT_ATTRIBUTE, "s1", STMT_ATTRIBUTE, "s2");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, STMT, "s1", STMT, "s2");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -211,7 +211,7 @@ namespace UnitTesting
             qt.insertSynonym(CONSTANT, "c");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(STMT_ATTRIBUTE, "s", CONSTANT_ATTRIBUTE, "c");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, STMT, "s", CONSTANT, "c");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -232,7 +232,7 @@ namespace UnitTesting
             qt.insertSynonym(STMT, "s");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(STMT_ATTRIBUTE, "s", INTEGER_ATTRIBUTE, "12345");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, STMT, "s", INTEGER, "12345");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -245,7 +245,7 @@ namespace UnitTesting
             qt.insertSynonym(PROG_LINE, "pl");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(STMT_ATTRIBUTE, "s", PROG_LINE_ATTRIBUTE, "pl");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, STMT, "s", PROG_LINE, "pl");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -257,7 +257,7 @@ namespace UnitTesting
             qt.insertSynonym(PROCEDURE, "pokemon");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu", PROCEDURE_ATTRIBUTE, "pokemon");
+            WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, IDENT_WITHQUOTES, "Pikachu", PROCEDURE, "pokemon");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -279,7 +279,7 @@ namespace UnitTesting
             qt.insertSynonym(VARIABLE, "v");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(IDENT_WITH_QUOTES_ATTRIBUTE, "Pikachu", VARIABLE_ATTRIBUTE, "v");
+            WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, IDENT_WITHQUOTES, "Pikachu", VARIABLE, "v");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -300,7 +300,7 @@ namespace UnitTesting
             QueryTree qt;
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(IDENT_WITH_QUOTES_ATTRIBUTE, "RayYan", IDENT_WITH_QUOTES_ATTRIBUTE, "God");
+            WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, IDENT_WITHQUOTES, "RayYan", IDENT_WITHQUOTES, "God");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -349,7 +349,7 @@ namespace UnitTesting
             qt.insertSynonym(STMT, "s");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(INTEGER_ATTRIBUTE, "12345", STMT_ATTRIBUTE, "s");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, INTEGER, "12345", STMT, "s");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -370,7 +370,7 @@ namespace UnitTesting
             qt.insertSynonym(CONSTANT, "c");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(INTEGER_ATTRIBUTE, "12345", CONSTANT_ATTRIBUTE, "c");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, INTEGER, "12345", CONSTANT, "c");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -407,7 +407,7 @@ namespace UnitTesting
             qt.insertSynonym(PROG_LINE, "pl");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(INTEGER_ATTRIBUTE, "12345", PROG_LINE_ATTRIBUTE, "pl");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, INTEGER, "12345", PROG_LINE, "pl");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -430,7 +430,7 @@ namespace UnitTesting
             qt.insertSynonym(CALL, "cl");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(PROG_LINE_ATTRIBUTE, "pl", CALL_STMT_ATTRIBUTE, "cl");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, PROG_LINE, "pl", CALL, "cl");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -453,7 +453,7 @@ namespace UnitTesting
             qt.insertSynonym(CONSTANT, "c");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(PROG_LINE_ATTRIBUTE, "pl", CONSTANT_ATTRIBUTE, "c");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, PROG_LINE, "pl", CONSTANT, "c");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -474,7 +474,7 @@ namespace UnitTesting
             qt.insertSynonym(PROG_LINE, "pl");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(PROG_LINE_ATTRIBUTE, "pl", INTEGER_ATTRIBUTE, "12");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, PROG_LINE, "pl", INTEGER, "12");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
@@ -487,7 +487,7 @@ namespace UnitTesting
             qt.insertSynonym(PROG_LINE, "pl2");
             WithHandler wHandler = WithHandler(&qt);
             Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(PROG_LINE_ATTRIBUTE, "pl1", PROG_LINE_ATTRIBUTE, "pl2");
+            WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, PROG_LINE, "pl1", PROG_LINE, "pl2");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
         }
