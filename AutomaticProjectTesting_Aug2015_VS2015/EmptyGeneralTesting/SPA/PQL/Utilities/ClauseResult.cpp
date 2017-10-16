@@ -386,6 +386,11 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
     return true;
 }
 
+/*
+Returns true if there are results in the ClauseResult Object.
+Also returns true if ClauseResult is new and have not been
+populated before.
+*/
 bool ClauseResult::hasResults()
 {
     if (_isNew) {
