@@ -65,7 +65,6 @@ protected:
     PKBMain* _pkbMainPtr;
     std::stack<std::stack<int>> _stackOfFollowsStacks;     // To set Follows relation in PKB
     std::string _currentProcName;    //The index of the current procedure being parsed. Needed by set Calls relation
-    std::stack<int> _whileHeaderStmtStack;   // To set Next before exiting while statements
     std::unordered_set<int> _prevReachableStmts;    // To store all statements that can arrive at the current statement in one step
 
     /*********************

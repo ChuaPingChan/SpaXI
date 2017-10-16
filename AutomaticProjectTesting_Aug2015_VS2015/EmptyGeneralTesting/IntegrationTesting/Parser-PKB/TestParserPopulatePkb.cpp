@@ -205,18 +205,18 @@ namespace UnitTesting
             Assert::IsTrue(dummyPkbMain.isNext(7, 8));
             Assert::IsTrue(dummyPkbMain.isNext(8, 3));
             Assert::IsTrue(dummyPkbMain.isNext(3, 9));
-            
+
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-        TEST_METHOD(simpleNextRelation2)
+        TEST_METHOD(TestNextRelation)
         {
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
             Parser parser(dummyPkbMainPtr);
-            Assert::IsTrue(createDummySimpleSourceFile_simpleNextRelation2());
+            Assert::IsTrue(createDummySimpleSourceFile_comprehensiveNextRelations());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Simple Next relations
@@ -266,7 +266,7 @@ namespace UnitTesting
             Assert::IsTrue(dummyPkbMain.isNext(50, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
             Assert::IsTrue(dummyPkbMain.isNext(51, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
             Assert::IsTrue(dummyPkbMain.isNext(53, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
-                        
+            
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
@@ -345,7 +345,7 @@ namespace UnitTesting
 
             // Check if all assignment statements are added correctly
             actualIntResults = dummyPkbMain.getAllAssignments();
-            expectedIntResults = list<int>{ 
+            expectedIntResults = list<int>{
                 1, 2, 3, 4, 5, 8, 10, 11, 12, 14, 15, 17, 19, 20, 21, 22, 23,
                 24, 26, 27, 28, 29, 31, 33, 34, 35, 36, 38, 39, 40, 42, 43, 45,
                 46, 47, 49, 50, 52, 53, 54, 55, 56, 57, 58, 59, 61, 62, 63, 65,
@@ -583,7 +583,7 @@ namespace UnitTesting
         This is a utility method to create a dummy text
         containing assignment statements and if-else statements without nesting.
         */
-        bool createDummySimpleSourceFile_simpleNextRelation2() {
+        bool createDummySimpleSourceFile_comprehensiveNextRelations() {
             std::string content =
                 "procedure ABC { \n"
                 "	a = 1; \n"
