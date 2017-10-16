@@ -22,13 +22,13 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
         //TODO: Uncomment
-       // return pkbInstance->isNextStar(stoi(argOne), stoi(argTwo));
+       //return pkbInstance->isNextStar(stoi(argOne), stoi(argTwo));
     }
 
     //Case 2: Next*(int, _)
     else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
     {
-       // return pkbInstance->isExecutedBefore(stoi(argOne));
+        return pkbInstance->isExecutedBefore(stoi(argOne));
     }
 
     //Case 3: Next*(int, synonym)
@@ -50,22 +50,19 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 4: Next*(_, int)
     else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
     {
-        //TODO: Uncomment
-        //return pkbInstance->isExecutedAfterStar(stoi(argTwo));
+        return pkbInstance->isExecutedAfter(stoi(argTwo));
     }
 
     //Case 5: Next*(_, _)
     else if (argOneType == UNDERSCORE && argTwoType == UNDERSCORE)
     {
-        //TODO: Uncomment
-        //return pkbInstance->hasNextStar();
+        return pkbInstance->hasNext();
     }
 
     //Case 6: Next*(_, synonym)
     else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
-        //TODO:Uncomment
-        list<int> pkbResult;// = pkbInstance->getAllExecutedAfter(argTwoType);
+        list<int> pkbResult = pkbInstance->getAllExecutedAfter(argTwoType);
         if (pkbResult.empty())
         {
             return false;
@@ -97,7 +94,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == UNDERSCORE)
     {
         //TODO:Uncomment
-        list<int> pkbResult;// = pkbInstance->getAllExecutedBeforeStar(argOneType);
+        list<int> pkbResult = pkbInstance->getAllExecutedBefore(argOneType);
         if (pkbResult.empty())
         {
             return false;
@@ -166,7 +163,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 resultPairs.clear();
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals;// = pkbInstance->getAfterStar(existingSynVal, existingSynType); //TODO: Uncomment and change method
+                    list<int> newSynVals = pkbInstance->getExecutedAfter(existingSynVal, existingSynType); //TODO: Uncomment and change method
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
