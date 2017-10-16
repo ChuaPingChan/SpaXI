@@ -339,6 +339,8 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isUsesProc("One", "a"));
 			Assert::IsTrue(PKB.isUsesProc("One", "b"));
 			Assert::IsTrue(PKB.isUsesProc("One", "c"));
+			Assert::IsTrue(PKB.isModProc("Three", "d"));
+			Assert::IsTrue(PKB.isModProc("One", "d"));
 			Assert::IsTrue(PKB.isUsesProc("Two", "c"));
 			Assert::IsTrue(PKB.isUsesProc("Five", "c"));
 			Assert::IsTrue(PKB.isUsesProc("Nine", "c"));
@@ -384,6 +386,101 @@ namespace UnitTesting
 			Assert::IsFalse(PKB.isCallsStar(1, 4));
 			Assert::IsTrue(PKB.isCallsStar(1, 8));
 
+
+
+		}
+
+		TEST_METHOD(TestInterproc) {
+			PKBMain PKB;
+			PKB.addVariable("a");
+			PKB.addVariable("b");
+			PKB.addVariable("c");
+			PKB.addVariable("d");
+			PKB.addVariable("e");
+			PKB.addVariable("f");
+			PKB.addVariable("g");
+			PKB.addVariable("h");
+			PKB.addVariable("i");
+			PKB.addVariable("j");
+			PKB.addVariable("k");
+			PKB.addVariable("l");
+			PKB.addVariable("m");
+			PKB.addVariable("n");
+			PKB.addVariable("o");
+			PKB.addVariable("p");
+			PKB.addVariable("q");
+			PKB.addVariable("r");
+			PKB.addVariable("s");
+			PKB.addVariable("t");
+			PKB.addVariable("u");
+			PKB.addVariable("v");
+			PKB.addVariable("w");
+			PKB.addVariable("x");
+			PKB.addVariable("y");
+			PKB.addVariable("z");
+			PKB.addProcedure("One");
+			PKB.addProcedure("Two");
+			PKB.addProcedure("Three");
+			PKB.addProcedure("Four");
+			PKB.addProcedure("Five");
+			PKB.addProcedure("Six");
+			PKB.addProcedure("Seven");
+			PKB.addProcedure("Eight");
+			PKB.addProcedure("Nine");
+			PKB.addWhileStmt(1, "a");
+			PKB.setUseTableStmtToVar(1, "a");
+			PKB.setUseTableProcToVar("One", "a");
+			PKB.setCallsRel(2, "One", "Two");
+			PKB.setCallsRel(3, "One", "Three");
+			PKB.setUseTableProcToVar("Three", "c");
+			PKB.setUseTableProcToVar("Three", "d");
+			PKB.setModTableProcToVar("Three", "b");
+			PKB.setUseTableStmtToVar(4, "c");
+			PKB.setUseTableStmtToVar(4, "d");
+			PKB.setModTableStmtToVar(4, "b");
+			PKB.addIfStmt(5, "e");
+			PKB.setCallsRel(6, "Three", "Four");
+			PKB.setCallsRel(7, "Three", "Five");
+			PKB.setCallsRel(8, "Three", "Six");
+			PKB.addWhileStmt(9, "f");
+			PKB.setUseTableProcToVar("Four", "f");
+			PKB.setUseTableStmtToVar(9, "f");
+			PKB.setUseTableProcToVar("Four", "h");
+			PKB.setUseTableProcToVar("Four", "a");
+			PKB.setUseTableStmtToVar(10, "h");
+			PKB.setUseTableStmtToVar(10, "a");
+			PKB.setModTableProcToVar("Four", "g");
+			PKB.setModTableStmtToVar(10, "g");
+			PKB.setUseTableProcToVar("Five", "i");
+			PKB.setUseTableStmtToVar(11, "i");
+			PKB.addWhileStmt(11, "i");
+			PKB.setUseTableProcToVar("Five", "a");
+			PKB.setUseTableProcToVar("Five", "h");
+			PKB.setUseTableStmtToVar(12, "a");
+			PKB.setUseTableStmtToVar(12, "h");
+			PKB.setModTableProcToVar("Five", "j");
+			PKB.setModTableStmtToVar(12, "j");
+			PKB.setUseTableProcToVar("Five", "j");
+			PKB.addIfStmt(13, "j");
+			PKB.setCallsRel(14, "Five", "Six");
+			PKB.setCallsRel(15, "Five", "Seven");
+			PKB.setUseTableProcToVar("Five", "j");
+			PKB.setUseTableProcToVar("Five", "g");
+			PKB.setUseTableProcToVar("Five", "a");
+			PKB.setUseTableStmtToVar(16, "j");
+			PKB.setUseTableStmtToVar(16, "g");
+			PKB.setUseTableStmtToVar(16, "a");
+			PKB.setModTableProcToVar("Five", "k");
+			PKB.setModTableStmtToVar(16, "k");
+			PKB.setUseTableProcToVar("Six", "m");
+			PKB.setUseTableProcToVar("Six", "a");
+			PKB.setUseTableStmtToVar(17, "m");
+			PKB.setUseTableStmtToVar(17, "a");
+			PKB.setModTableProcToVar("Six", "l");
+			PKB.setModTableStmtToVar(17, "l");
+			PKB.setUseTableProcToVar("Six", "m");
+			PKB.setUseTableStmtToVar(18, "m");
+			PKB.addIfStmt(18, "m");
 
 
 		}
