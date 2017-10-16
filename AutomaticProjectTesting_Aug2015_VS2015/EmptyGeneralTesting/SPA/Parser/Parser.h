@@ -48,8 +48,8 @@ public:
 protected:
 
     /************
-    * Constants *
-    *************/
+     * Constants *
+     *************/
     static const int INT_INITIAL_STMT_NUMBER;
     static const std::string STRING_EMPTY_STRING;
     static const int INT_INITIAL_PROC_INDEX;

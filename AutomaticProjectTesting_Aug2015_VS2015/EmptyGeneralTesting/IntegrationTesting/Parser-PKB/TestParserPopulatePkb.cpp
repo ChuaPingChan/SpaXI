@@ -241,6 +241,10 @@ namespace UnitTesting
             Assert::IsTrue(dummyPkbMain.isNext(27, 28));
             Assert::IsTrue(dummyPkbMain.isNext(45, 46));
 
+            // Next relations across while-block
+            Assert::IsTrue(dummyPkbMain.isNext(8, 14));
+            Assert::IsTrue(dummyPkbMain.isNext(38, 41));
+
             // Next relations when exiting else-block or while-block
             Assert::IsTrue(dummyPkbMain.isNext(5, 3));
             Assert::IsTrue(dummyPkbMain.isNext(6, 3));
@@ -267,6 +271,11 @@ namespace UnitTesting
             Assert::IsTrue(dummyPkbMain.isNext(51, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
             Assert::IsTrue(dummyPkbMain.isNext(53, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
             
+            // Test for false cases
+            Assert::IsFalse(dummyPkbMain.isNext(1, 3));
+            Assert::IsFalse(dummyPkbMain.isNext(10, 13));
+            Assert::IsFalse(dummyPkbMain.isNext(55, 64));
+
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
@@ -396,8 +405,8 @@ namespace UnitTesting
         }
 
         /*******************************
-        * Utility Methods for Testing *
-        *******************************/
+         * Utility Methods for Testing *
+         *******************************/
         TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
         {
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
