@@ -75,4 +75,41 @@ procedure ABC {
 53.			c = c + 1;
 		}
 	}
+54. f = 54;
+55. if x then {
+56		if b then {
+57.			a = 3;
+58.			d = 4;
+		} else {
+59.			a = 5;
+		}
+	} else {
+60.		if b then {
+61.			a = 3;
+62.			d = 4;
+		} else {
+63.			f = 5;
+		}
+	}
+64. f = 54;
+65. if x then {
+66.		a = 64;
+67.		if b then {
+68.			a = 3;
+69.			d = 4;
+		} else {
+70.			f = a + d;
+		}
+71.		d = 68;
+	} else {
+72.		f = 69;
+73.		if b then {
+74.			a = 3;
+75.			d = 4;
+		} else {
+76.			f = 19;
+		}
+77.		f = 73;
+	}
+78.	f = 68;
 }
