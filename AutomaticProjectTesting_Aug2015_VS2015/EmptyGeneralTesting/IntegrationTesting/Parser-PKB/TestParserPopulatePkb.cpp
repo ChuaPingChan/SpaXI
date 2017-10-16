@@ -282,13 +282,13 @@ namespace UnitTesting
             expectedStringResults.sort();
             Assert::IsTrue(actualStringResults == expectedStringResults);
 
-            //targetProcIdx = (dummyPkbMain.convertStringToIdx(list<string>{"GHI"}, Entity::PROCEDURE)).front();
-            //actualIntResults = dummyPkbMain.getModifiesFromProc(targetProcIdx);
-            //expectedStringResults = list<string>{ "funnyVar", "laugh", "a", "w", "b", "oSCar", "food", "best", "supper" };
-            //expectedIntResults = dummyPkbMain.convertStringToIdx(expectedStringResults, Entity::VARIABLE);
-            //actualStringResults.sort();
-            //expectedStringResults.sort();
-            //Assert::IsTrue(actualIntResults == expectedIntResults);
+            targetProcIdx = (dummyPkbMain.convertStringToIdx(list<string>{"GHI"}, Entity::PROCEDURE)).front();
+            actualIntResults = dummyPkbMain.getModifiesFromProc(targetProcIdx);
+            actualStringResults = dummyPkbMain.convertIdxToString(actualIntResults, Entity::VARIABLE);
+            expectedStringResults = list<string>{ "funnyVar", "laugh", "a", "w", "b", "oSCar", "food", "best", "supper" };
+            actualStringResults.sort();
+            expectedStringResults.sort();
+            Assert::IsTrue(actualStringResults == expectedStringResults);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
