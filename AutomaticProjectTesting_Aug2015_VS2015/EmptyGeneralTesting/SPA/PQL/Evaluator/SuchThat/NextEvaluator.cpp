@@ -11,7 +11,7 @@ NextEvaluator::~NextEvaluator()
 {
 }
 
-ClauseResult NextEvaluator::evaluate(SuchThatClause clause)
+bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResult)
 {
-	return ClauseResult();
+    return false;
 }
