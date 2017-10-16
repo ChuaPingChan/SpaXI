@@ -3,129 +3,144 @@ stmt s;
 Select s
 1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,4,5,6,7,8,9
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtStmt NoCommonSynonym HaveResult
+stmt s, s1, s2;
+Select s with s1.stmt#=s2.stmt#
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtStmt CommonSynonym HaveResult
+stmt s1, s2;
+Select s1 with s1.stmt#=s2.stmt#
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtInt CommonSynonym HaveResult
+stmt s;
+Select s with s.stmt#=3
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtInt NoCommonSynonym HaveResult
+stmt s1, s2;
+Select s1 with s2.stmt#=5
 None
 5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtStr NonCompatible WithType NoResult
+stmt s;
+Select s with s.stmt#="hello"
+none
+5000
+None - Select SingleSynonym With StmtAssign HaveResult
+stmt s; assign a;
+Select s with s.stmt# = a.stmt#
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtWhile HaveResult
+stmt s; while w;
+Select s with s.stmt# = w.stmt#
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtIf HaveResult
+stmt s; if f;
+Select s with s.stmt# = f.stmt#
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtProgLine HaveResult
+stmt s; prog_line pl;
+Select s with s.stmt# = pl
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtCall HaveResult
+stmt s; call cl;
+Select s with s.stmt# = cl.stmt#
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With StmtConstant HaveResult
+stmt s; constant c;
+Select s with s.stmt# = c.value
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With AssignInt HaveResult
+assign a; 
+Select a with a.stmt# = 4
 None
 5000
-None - None
-None
-None
-None
-5000
-None - None
-None
-None
+None - Select SingleSynonym With AssignAssign LhsRhsSame HaveResult
+assign a; 
+Select a with a.stmt# = a.stmt#
 None
 5000
-None - None
-None
-None
+None - Select SingleSynonym With AssignAssign CommonSynonym HaveResult
+assign a1, a2;
+Select a1 with a1.stmt# = a2.stmt#
 None
 5000
-None - None
+None - Select SingleSynonym With AssignAssign NoCommonSynonym HaveResult
+assign a, a1, a2;
+Select a with a1.stmt# = a2.stmt#
 None
+5000
+None - Select SingleSynonym With AssignWhile HaveResult
+assign a; while w;
+Select a with a.stmt#=w.stmt#
 None
+5000
+None - Select SingleSynonym With AssignIf HaveResult
+assign a; if f;
+Select a with a.stmt#=f.stmt#
+None
+5000
+None - Select SingleSynonym With AssignProgLine HaveResult
+assign a; prog_line pl;
+Select a with a.stmt#=pl
+None
+5000
+None - Select SingleSynonym With AssignCall HaveResult
+assign a; call cl;
+Select a with a.stmt# = cl.stmt#
+None
+5000
+None - Select SingleSynonym With WhileStmt HaveResult
+while w; stmt#
+Select w with w.stmt#=s.stmt#
+None
+5000
+None - Select SingleSynonym With WhileInt NoResult
+while w;
+Select w with w.stmt# = 16
+None
+5000
+None - Select SingleSynonym Wiith WhileInt HaveResult
+while w;
+Select w with w.stmt#= 9
+None
+5000
+None - Select SingleSynonym With WhileAssign HaveResult
+while w; assign a;
+Select w with w.stmt#=a.stmt#
+None
+5000
+None - Select SingleSynonym With WhileIf HaveResult
+while w; if f;
+Select w with w.stmt#=f.stmt#
+None
+5000
+None - Select SingleSynonym With WhileProgLine HaveResult
+while w; prog_line;
+Select w with w.stmt# = pl
+None
+5000
+None - Select SingleSynonym With WhileCall HaveResult
+while w; call cl;
+Select w with w.stmt# = cl.stmt#
+None
+5000
+None - Select SingleSynonym With WhileConstant HaveResult
+while w; constant c;
+Select w with w.stmt# = c.value
+None
+5000
+None - Select SingleSynonym With StmtAssign And AssignWhile
+stmt s; assign a; while w;
+Select s with s.stmt# = a.stmt# and a.stmt# = w.stmt#
 None
 5000
 None - None
