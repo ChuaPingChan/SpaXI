@@ -140,61 +140,61 @@ namespace UnitTesting
         ***********************************/
         TEST_METHOD(TestRegex_ExpressionSpecExact_Letter_Valid)
         {
-            string str = "Hello";
+            string str = "\"Hello\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Integer_Valid)
         {
-            string str = "12345";
+            string str = "\"12345\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Plus_Valid)
         {
-            string str = "+";
+            string str = "\"+\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Minus_Valid)
         {
-            string str = "-";
+            string str = "\"-\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Times_Valid)
         {
-            string str = "*";
+            string str = "\"*\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_OpenBrackets_Valid)
         {
-            string str = "(";
+            string str = "\"(\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_CloseBrackets_Valid)
         {
-            string str = ")";
+            string str = "\")\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Expression_Valid)
         {
-            string str = "x-2*(a+b)";
+            string str = "\"x-2*(a+b)\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Expression_Random_Valid)
         {
-            string str = "2x-(2*(a-)+b)";
+            string str = "\"2x-(2*(a-)+b)\"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Whitespace_Valid)
         {
-            string str = " x - 2 * ( a + b ) ";
+            string str = " \" x - 2 * ( a + b ) \"";
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 

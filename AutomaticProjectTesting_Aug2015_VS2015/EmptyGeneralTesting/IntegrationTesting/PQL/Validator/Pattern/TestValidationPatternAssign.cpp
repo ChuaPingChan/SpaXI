@@ -40,7 +40,20 @@ namespace UnitTesting
             qt.insertSynonym(VARIABLE, "v");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
-            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", EXPRESSION_SPEC_PARTIAL, "_\"x\"_");
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", EXPRESSION_SPEC_PARTIAL, "x");
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_Pattern_Assign_Synonym_ExpressionSpec_ExactMatch_SingleVariable_Valid)
+        {
+            string str = "a(v, \"x\")";
+            QueryTree qt;
+            qt.insertSynonym(ASSIGN, "a");
+            qt.insertSynonym(VARIABLE, "v");
+            PatternHandler pHandler = PatternHandler(&qt);
+            Assert::IsTrue(pHandler.isValidPattern(str));
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", EXPRESSION_SPEC_EXACT, "x");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
@@ -52,7 +65,7 @@ namespace UnitTesting
             qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
-            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", UNDERSCORE, "_", EXPRESSION_SPEC_PARTIAL, "_\"x\"_");
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", UNDERSCORE, "_", EXPRESSION_SPEC_PARTIAL, "x");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
@@ -64,7 +77,7 @@ namespace UnitTesting
             qt.insertSynonym(ASSIGN, "a");
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
-            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHQUOTES, "x", EXPRESSION_SPEC_PARTIAL, "_\"x\"_");
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHQUOTES, "x", EXPRESSION_SPEC_PARTIAL, "x");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
@@ -89,6 +102,19 @@ namespace UnitTesting
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", IDENT_WITHQUOTES, "x", UNDERSCORE, "_");
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_Pattern_Assign_Synonym_ExpressionSpec_PartialMatch_MultiVariable_Valid)
+        {
+            string str = "a(v, _\"x+y\"_)";
+            QueryTree qt;
+            qt.insertSynonym(ASSIGN, "a");
+            qt.insertSynonym(VARIABLE, "v");
+            PatternHandler pHandler = PatternHandler(&qt);
+            Assert::IsTrue(pHandler.isValidPattern(str));
+            PatternClause expected = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", EXPRESSION_SPEC_PARTIAL, "x+y");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }

@@ -151,6 +151,9 @@ public:
     static bool isValidValueString(string str);
 
     /******************** Grammar ********************/
+    static bool isValidOpenBracketRegex(string str);
+    static bool isValidCloseBracketRegex(string str);
+    static bool isValidOperatorRegex(string str);
     static bool isValidLetterRegex(string str);
     static bool isValidIntegerRegex(string str);
     static bool isValidBooleanRegex(string str);

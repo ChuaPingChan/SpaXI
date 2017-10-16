@@ -12,9 +12,11 @@ public:
 
 private:
     bool isValidArgOne(string &argOne);
-    bool isValidArgTwo(string argTwo);
+    bool isValidArgTwo(string &argTwo);
 
     string extractArgOne(string str);
     string extractArgTwo(string str);
+
+    bool isWellFormExpr(string str);
 };
 
