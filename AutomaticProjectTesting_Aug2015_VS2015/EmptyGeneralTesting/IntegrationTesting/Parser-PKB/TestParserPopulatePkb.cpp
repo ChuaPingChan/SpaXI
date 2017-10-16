@@ -200,10 +200,49 @@ namespace UnitTesting
 
             Assert::IsTrue(dummyPkbMain.isNext(5, 7));
             Assert::IsTrue(dummyPkbMain.isNext(6, 8));
-            //Assert::IsTrue(dummyPkbMain.isNext(7, 8));
-            //Assert::IsTrue(dummyPkbMain.isNext(8, 3));
-            //Assert::IsTrue(dummyPkbMain.isNext(3, 9));
+            Assert::IsTrue(dummyPkbMain.isNext(7, 8));
+            Assert::IsTrue(dummyPkbMain.isNext(8, 3));
+            Assert::IsTrue(dummyPkbMain.isNext(3, 9));
             
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(simpleNextRelation2)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_simpleNextRelation2());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Test if all if-else statements are added correctly
+            actualResults = dummyPkbMain.getAllIfs();
+            expectedResults = list<int>{ 4 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Test if all while statements are added correctly
+            actualResults = dummyPkbMain.getAllWhiles();
+            expectedResults = list<int>{ 3 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            Assert::IsTrue(dummyPkbMain.isNext(1, 2));
+            Assert::IsTrue(dummyPkbMain.isNext(2, 3));
+            Assert::IsTrue(dummyPkbMain.isNext(3, 4));
+            Assert::IsTrue(dummyPkbMain.isNext(4, 5));
+
+            Assert::IsTrue(dummyPkbMain.isNext(4, 6));
+            Assert::IsTrue(dummyPkbMain.isNext(6, 4));  // Important corner case
+            Assert::IsTrue(dummyPkbMain.isNext(6, 3));  // Important corner case
+            Assert::IsTrue(dummyPkbMain.isNext(5, 3));  // Important corner case
+            Assert::IsTrue(dummyPkbMain.isNext(5, 7));
+            Assert::IsTrue(dummyPkbMain.isNext(6, 7));
+
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
@@ -484,6 +523,32 @@ namespace UnitTesting
                 "		k = 8; \n"
                 "	} \n"
                 "	l = 9; \n"
+                "}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements and if-else statements without nesting.
+        */
+        bool createDummySimpleSourceFile_simpleNextRelation2() {
+            std::string content =
+                "procedure ABC { \n"
+                "	a = 1; \n"
+                "	b = 2; \n"
+                "	while x { \n"
+                "		if x then { \n"
+                "			i = 5; \n"
+                "		} else { \n"
+                "			j = 6; \n"
+                "		} \n"
+                "	} \n"
+                "	k = 7; \n"
                 "}";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);

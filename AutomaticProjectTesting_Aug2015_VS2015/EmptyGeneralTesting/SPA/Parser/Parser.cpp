@@ -54,7 +54,9 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _stackOfFollowsStacks = stack<stack<int>>();
     _currentProcName = Parser::STRING_EMPTY_STRING;
     _ifElseStmtExitPointsStack = stack<pair<int, int>>();
+    _whileStmtExitPointStack = stack<int>();
     _ifElseStmtStack = stack<int>();
+    //_containerStack = stack<int>();
 }
 
 // TODO: Add comprehensive method description
@@ -296,21 +298,46 @@ void Parser::parseStmt() {
     // (i.e. call, assignment, if-else, while)
     if (Parser::whileExpected()) {
         parseWhileStmt();
+
+        // If there are statements just outside the while statement, add Next relation
+        // TODO: Refactor repeated code
+        if (!(Parser::matchToken(Parser::REGEX_MATCH_CLOSE_BRACE))) {
+            int nextStmtNumber = _currentStmtNumber + 1;
+            while (!_whileStmtExitPointStack.empty()) {
+                int prevStmtNumber = _whileStmtExitPointStack.top();
+                _pkbMainPtr->setNext(prevStmtNumber, nextStmtNumber);
+                _whileStmtExitPointStack.pop();
+            }
+            while (!_ifElseStmtExitPointsStack.empty()) {
+                pair<int, int> ifElseExitPoints = _ifElseStmtExitPointsStack.top();
+                _pkbMainPtr->setNext(ifElseExitPoints.first, nextStmtNumber);
+                _pkbMainPtr->setNext(ifElseExitPoints.second, nextStmtNumber);
+                _ifElseStmtStack.pop();
+                _ifElseStmtExitPointsStack.pop();
+            }
+        }
     } else if (Parser::callStmtExpected()) {
         parseCallStmt();
     } else if (Parser::ifStmtExpected()) {
         parseIfStmt();
 
         // If there are statements just outside the if-else statement, add Next relation
+        // TODO: Refactor repeated code
         if (!(Parser::matchToken(Parser::REGEX_MATCH_CLOSE_BRACE))) {
-            OutputDebugString("PKB: Statement after if-else statement detected. Set Next relation.\n");
-            pair<int, int> ifElseExitPoints = _ifElseStmtExitPointsStack.top();
             int nextStmtNumber = _currentStmtNumber + 1;
-            _pkbMainPtr->setNext(ifElseExitPoints.first, nextStmtNumber);
-            _pkbMainPtr->setNext(ifElseExitPoints.second, nextStmtNumber);
+            while (!_whileStmtExitPointStack.empty()) {
+                int prevStmtNumber = _whileStmtExitPointStack.top();
+                _pkbMainPtr->setNext(prevStmtNumber, nextStmtNumber);
+                _whileStmtExitPointStack.pop();
+            }
+            while (!_ifElseStmtExitPointsStack.empty()) {
+                pair<int, int> ifElseExitPoints = _ifElseStmtExitPointsStack.top();
+                _pkbMainPtr->setNext(ifElseExitPoints.first, nextStmtNumber);
+                _pkbMainPtr->setNext(ifElseExitPoints.second, nextStmtNumber);
+                _ifElseStmtStack.pop();
+                _ifElseStmtExitPointsStack.pop();
+            }
         }
-        _ifElseStmtStack.pop();
-        _ifElseStmtExitPointsStack.pop();
     } else if (Parser::assignmentExpected()) {
         // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords as variable names
         parseAssignment();
@@ -605,6 +632,7 @@ void Parser::parseWhileStmt() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
 
     _parentStack.push(_currentStmtNumber);
+    //_containerStack.push(_currentStmtNumber);
     int whileStmtNumber = _currentStmtNumber;
 
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
@@ -651,6 +679,7 @@ void Parser::parseWhileStmt() {
     _pkbMainPtr->setNext(whileStmtNumber, nextStmtNumber);
     parseStmtList();
     _pkbMainPtr->setNext(_currentStmtNumber, whileStmtNumber);
+    _whileStmtExitPointStack.push(_currentStmtNumber);
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
     OutputDebugString("FINE: Exiting while block.\n");
@@ -671,6 +700,7 @@ void Parser::parseIfStmt()
 
     _parentStack.push(_currentStmtNumber);
     _ifElseStmtStack.push(_currentStmtNumber);
+    //_containerStack.push(_currentStmtNumber);
     int ifElseStmtNum = _currentStmtNumber;
 
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
