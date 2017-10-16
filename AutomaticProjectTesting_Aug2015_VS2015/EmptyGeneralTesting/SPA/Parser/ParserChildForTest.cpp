@@ -15,7 +15,7 @@ using namespace std;
 
 /*
 This class's sole purpose in life is to allow unit testing
-for the private methods of the Parser class :O
+for the protected methods of the Parser class :O
 
 DO NOT use this class in the real SPA.
 */
@@ -61,14 +61,14 @@ std::string ParserChildForTest::removeAllWhitespaces(std::string targetString)
     return Parser::removeAllWhitespaces(targetString);
 }
 
-std::string ParserChildForTest::removeAllBrackets(std::string targetString)
-{
-    return Parser::removeAllBrackets(targetString);
-}
-
 bool ParserChildForTest::isBracketedCorrectly(std::string expression)
 {
     return Parser::isBracketedCorrectly(expression);
+}
+
+std::pair<string, string> ParserChildForTest::splitExpressionLhsRhs(std::string expression)
+{
+    return Parser::splitExpressionLhsRhs(expression);
 }
 
 void ParserChildForTest::parseProgram()
@@ -108,5 +108,5 @@ void ParserChildForTest::parseAssignment()
 
 void ParserChildForTest::parseWhile()
 {
-    Parser::parseWhile();
+    Parser::parseWhileStmt();
 }

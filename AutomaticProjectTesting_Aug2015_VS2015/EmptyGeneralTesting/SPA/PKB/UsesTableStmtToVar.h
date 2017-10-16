@@ -12,14 +12,16 @@ using namespace std;
 class UsesTableStmtToVar {
 public:
     UsesTableStmtToVar();
-    bool addUsesStmtToVarList(int stmtNumber, string var);
+    bool addUsesStmtToVarList(int stmtNumber, int varIdx);
     //
-    bool isUses(int stmtNumber, string var);
+    bool isUses(int stmtNumber, int varIdx);
     bool isUsingAnything(int stmtNumber);
-    list<string> getUsesVariablesFromStmt(int stmtNumber);
+	bool setMap(unordered_map<int, list<int>> map);
+	unordered_map<int, list<int>> getMap();
+    list<int> getUsesVariablesFromStmt(int stmtNumber);
     //
     list<int> getStmtThatUses();
-    pair<list<int>,list<string>> getUsesPair();
+    pair<list<int>,list<int>> getUsesPair();
 private:
-    unordered_map<int, list<string>>usesStmtToVarMap;
+    unordered_map<int, list<int>>usesStmtToVarMap;
 };

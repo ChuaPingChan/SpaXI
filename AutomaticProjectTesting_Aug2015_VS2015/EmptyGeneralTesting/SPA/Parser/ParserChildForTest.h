@@ -4,7 +4,7 @@
 
 /*
 This class's sole purpose in life is to allow unit testing
-for the private methods of the Parser class :O
+for the protected methods of the Parser class :O
 
 DO NOT use this class in the real SPA.
 */
@@ -22,8 +22,8 @@ public:
     std::string extractStringUpToSemicolon();
     bool assertIsValidExpression(std::string expression);
     std::string removeAllWhitespaces(std::string targetString);
-    std::string removeAllBrackets(std::string targetString);
     bool isBracketedCorrectly(std::string expression);
+    static std::pair<string, string> splitExpressionLhsRhs(std::string expression);
 
     void parseProgram();
     void parseProcedure();
@@ -36,4 +36,3 @@ public:
     void parseWhile();
 
 };
-

@@ -1,0 +1,12 @@
+procedure ABC{
+  a = 1;
+ b = 2;
+	c = a;
+ }
+ 
+procedure DEF{
+  a = 1;
+ b = 2;
+	c = a;
+ }
+ 

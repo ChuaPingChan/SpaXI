@@ -2,8 +2,6 @@
 
 using namespace std;
 
-QueryTree* QueryTree::instance = 0;
-
 QueryTree::QueryTree()
 {
 }
@@ -12,220 +10,179 @@ QueryTree::~QueryTree()
 {
 }
 
-QueryTree* QueryTree::getInstance()
+void QueryTree::insertSynonym(int type, string synonym)
 {
-	if (instance == 0) 
-	{
-		instance = new QueryTree();
-	}
+    if (type == STMT) 
+    {
+        _stmts.insert(synonym);
+    }
 
-	return instance;
+    else if (type == ASSIGN)
+    {
+        _assigns.insert(synonym);
+    }
+
+    else if (type == WHILE)
+    {
+        _whiles.insert(synonym);
+    }
+
+    else if (type == IF)
+    {
+        _ifs.insert(synonym);
+    }
+
+    else if (type == PROG_LINE)
+    {
+        _progLines.insert(synonym);
+    }
+
+    else if (type == CALL)
+    {
+        _calls.insert(synonym);
+    }
+
+    else if (type == PROCEDURE)
+    {
+        _procedures.insert(synonym);
+    }
+
+    else if (type == VARIABLE)
+    {
+        _vars.insert(synonym);
+    }
+   
+    else if (type == CONSTANT)
+    {
+        _consts.insert(synonym);
+    }
+
+    else
+    {
+        cerr << "Type not recognised!";
+    }
 }
 
-QueryTree* QueryTree::clear()
+void QueryTree::insertSelect(SelectClause select)
 {
-	delete instance;
-	instance = new QueryTree();
-	return instance;
+    _selectClause = select;
 }
 
-void QueryTree::storeUnvalidatedStmts(vector<string> splittedVec)
+void QueryTree::insertSuchThat(SuchThatClause relClause)
 {
-	unvalidatedStmts = splittedVec;
+    _suchThatClauses.push_back(relClause);
 }
 
-void QueryTree::insertVariable(string type, string var)
+void QueryTree::insertPattern(PatternClause patternClause)
 {
-	if (type == "stmt") 
-	{
-		stmts.push_back(var);
-	}
-
-	else if (type == "assign")
-	{
-		assigns.push_back(var);
-	}
-
-	else if (type == "while")
-	{
-		whiles.push_back(var);
-	}
-
-	else if (type == "variable")
-	{
-		vars.push_back(var);
-	}
-
-	else if (type == "constant")
-	{
-		consts.push_back(var);
-	}
-
-	else if (type == "prog_line")
-	{
-		progLines.push_back(var);
-	}
-
-	else
-	{
-		cerr << "Type not recognised!";
-	}
+    _patternClauses.push_back(patternClause);
 }
 
-void QueryTree::insertFollows(array<string, 4> arr)
+void QueryTree::insertWith(WithClause withClause)
 {
-	followsClauses.push_back(arr);
+    _withClauses.push_back(withClause);
 }
 
-void QueryTree::insertFollowsStar(array<string, 4> arr)
+void QueryTree::storeEvaluatorResult(ClauseResult result)
 {
-	followsStarClauses.push_back(arr);
+    _evaluatorResult = result;
 }
 
-void QueryTree::insertParent(array<string, 4> arr)
+unordered_set<string> QueryTree::getStmts()
 {
-	parentClauses.push_back(arr);
+    return _stmts;
 }
 
-void QueryTree::insertParentStar(array<string, 4> arr)
+unordered_set<string> QueryTree::getAssigns()
 {
-	parentStarClauses.push_back(arr);
+    return _assigns;
 }
 
-void QueryTree::insertUses(array<string, 4> arr)
+unordered_set<string> QueryTree::getWhiles()
 {
-	usesClauses.push_back(arr);
+    return _whiles;
 }
 
-void QueryTree::insertModifies(array<string, 4> arr)
+unordered_set<string> QueryTree::getIfs()
 {
-	modifiesClauses.push_back(arr);
+    return _ifs;
 }
 
-void QueryTree::insertPattern(array<string, 6> arr)
+unordered_set<string> QueryTree::getCalls()
 {
-	patternClauses.push_back(arr);
+    return _calls;
 }
 
-void QueryTree::storeEvaluatorResult(list<string> list)
+unordered_set<string> QueryTree::getProcedures()
 {
-	evaluatorResult = list;
+    return _procedures;
 }
 
-void QueryTree::insertSelect(array<string, 2> arr)
+unordered_set<string> QueryTree::getVars()
 {
-	selectStmt = arr;
+    return _vars;
 }
 
-vector<string> QueryTree::getUnvalidatedStmts()
+unordered_set<string> QueryTree::getConsts()
 {
-	return unvalidatedStmts;
+    return _consts;
 }
 
-vector<string> QueryTree::getStmts()
+unordered_set<string> QueryTree::getProgLines()
 {
-	return stmts;
+    return _progLines;
 }
 
-vector<string> QueryTree::getAssigns()
+SelectClause QueryTree::getSelectClause()
 {
-	return assigns;
+    return _selectClause;
 }
 
-vector<string> QueryTree::getWhiles()
+vector<SuchThatClause> QueryTree::getSuchThatClauses()
 {
-	return whiles;
+    return _suchThatClauses;
 }
 
-vector<string> QueryTree::getVars()
+vector<PatternClause> QueryTree::getPatternClauses()
 {
-	return vars;
+    return _patternClauses;
 }
 
-vector<string> QueryTree::getConsts()
+vector<WithClause> QueryTree::getWithClauses()
 {
-	return consts;
+    return _withClauses;
 }
 
-vector<string> QueryTree::getProgLines()
+ClauseResult QueryTree::getEvaluatorResult()
 {
-	return progLines;
+    return _evaluatorResult;
 }
 
-array<string, 2> QueryTree::getSelect()
+bool QueryTree::isEntitySynonymExist(string synonym, Entity entityIdx)
 {
-	return selectStmt;
-}
-
-vector<array<string, 4>> QueryTree::getFollows()
-{
-	return followsClauses;
-}
-
-vector<array<string, 4>> QueryTree::getFollowsT()
-{
-	return followsStarClauses;
-}
-
-vector<array<string, 4>> QueryTree::getParent()
-{
-	return parentClauses;
-}
-
-vector<array<string, 4>> QueryTree::getParentT()
-{
-	return parentStarClauses;
-}
-
-vector<array<string, 4>> QueryTree::getUses()
-{
-	return usesClauses;
-}
-
-vector<array<string, 4>> QueryTree::getModifies()
-{
-	return modifiesClauses;
-}
-
-vector<array<string, 6>> QueryTree::getPatterns()
-{
-	return patternClauses;
-}
-
-list<string> QueryTree::getEvaluatorResult()
-{
-	return evaluatorResult;
-}
-
-bool QueryTree::varExists(string var)
-{
-	if (find(stmts.begin(), stmts.end(), var) != stmts.end()) 
-	{
-		return true;
-	}
-	else if (find(assigns.begin(), assigns.end(), var) != assigns.end())
-	{
-		return true;
-	}
-	else if (find(whiles.begin(), whiles.end(), var) != whiles.end())
-	{
-		return true;
-	}
-	else if (find(vars.begin(), vars.end(), var) != vars.end())
-	{
-		return true;
-	}
-	else if (find(consts.begin(), consts.end(), var) != consts.end())
-	{
-		return true;
-	}
-	else if (find(progLines.begin(), progLines.end(), var) != progLines.end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    switch (entityIdx) {
+        case STMT:
+            return (find(_stmts.begin(), _stmts.end(), synonym) != _stmts.end());
+        case ASSIGN:
+            return (find(_assigns.begin(), _assigns.end(), synonym) != _assigns.end());
+        case WHILE:
+            return (find(_whiles.begin(), _whiles.end(), synonym) != _whiles.end());
+        case IF:
+            return (find(_ifs.begin(), _ifs.end(), synonym) != _ifs.end());
+        case PROG_LINE:
+            return (find(_progLines.begin(), _progLines.end(), synonym) != _progLines.end());
+        case CALL:
+            return (find(_calls.begin(), _calls.end(), synonym) != _calls.end());
+        case PROCEDURE:
+            return (find(_procedures.begin(), _procedures.end(), synonym) != _procedures.end());
+        case VARIABLE:
+            return (find(_vars.begin(), _vars.end(), synonym) != _vars.end());
+        case CONSTANT:
+            return (find(_consts.begin(), _consts.end(), synonym) != _consts.end());
+        case STMTLIST:
+            return false;
+        default:
+            return false;
+    }
 }
  

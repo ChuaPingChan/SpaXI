@@ -8,7 +8,11 @@ bool VarIdxTable::addToVarIdxTable(string var) {
     // if variable does not exist as a key, create new list and insert data to hash map
     if (varIdxMap.find(var) == varIdxMap.end()) {
         varIdxMap[var] = varIdx;
+		allVarIdx.push_back(varIdx);
+		varIdxToStringMap[varIdx] = var;
+		allVarString.push_back(var);
         varIdx++;
+
         return true;
     }
     return false;
@@ -20,6 +24,14 @@ int VarIdxTable::getIdxFromVar(string var) {
 	}
 
     return varIdxMap[var];
+}
+
+string VarIdxTable::getVarFromIdx(int idx) {
+	if (varIdxToStringMap.find(idx) == varIdxToStringMap.end()) {
+		return "";
+	}
+
+	return varIdxToStringMap[idx];
 }
 
 bool VarIdxTable::isVarPresent(string var)
@@ -43,4 +55,8 @@ list<string> VarIdxTable::getAllVariables() {
 	}
 
 	return varList;
+}
+
+list<int> VarIdxTable::getAllVariablesIndex() {
+	return allVarIdx;
 }

@@ -1,75 +1,67 @@
 #pragma once
-#include <vector>
+#include <unordered_set>
 #include <string>
 #include <iostream>
 #include <array>
 #include <list>
+#include <unordered_set>
+#include "..\Entity.h"
+#include "Utilities\SuchThatClause.h"
+#include "Utilities\PatternClause.h"
+#include "Utilities\WithClause.h"
+#include "Utilities\SelectClause.h"
+#include "Utilities\ClauseResult.h"
 
 using namespace std;
 
 class QueryTree
 {
 public:
-	QueryTree();
-	~QueryTree();
+    QueryTree();
+    ~QueryTree();
 
-	static QueryTree* getInstance();
-	QueryTree* clear();
+    void insertSynonym(int type, string synonym);
+    void insertSelect(SelectClause select);
+    void insertSuchThat(SuchThatClause relClause);
+    void insertPattern(PatternClause patternClause);
+    void insertWith(WithClause withClause);
+    void storeEvaluatorResult(ClauseResult result);
+    
+    unordered_set<string> getStmts();
+    unordered_set<string> getAssigns();
+    unordered_set<string> getWhiles();
+    unordered_set<string> getIfs();
+    unordered_set<string> getCalls();
+    unordered_set<string> getProcedures();
+    unordered_set<string> getVars();
+    unordered_set<string> getConsts();
+    unordered_set<string> getProgLines();
 
-	void storeUnvalidatedStmts(vector<string> splitted);
-	void insertSelect(array<string, 2> arr);
-	void insertVariable(string type, string var);
-	void insertFollows(array<string, 4> arr);
-	void insertFollowsStar(array<string, 4> arr);
-	void insertParent(array<string, 4> arr);
-	void insertParentStar(array<string, 4> arr);
-	void insertUses(array<string, 4> arr);
-	void insertModifies(array<string, 4> arr);
-	void insertPattern(array<string, 6> arr);
-	void storeEvaluatorResult(list<string> list);
-	
-	vector<string> getUnvalidatedStmts();
-	vector<string> getStmts();
-	vector<string> getAssigns();
-	vector<string> getWhiles();
-	vector<string> getVars();
-	vector<string> getConsts();
-	vector<string> getProgLines();
+    SelectClause getSelectClause();
+    vector<SuchThatClause> getSuchThatClauses();
+    vector<PatternClause> getPatternClauses();
+    vector<WithClause> getWithClauses();
+    ClauseResult getEvaluatorResult();
 
-	array<string, 2> getSelect();
-	vector<array<string, 4>> getFollows();
-	vector<array<string, 4>> getFollowsT();
-	vector<array<string, 4>> getParent();
-	vector<array<string, 4>> getParentT();
-	vector<array<string, 4>> getUses();
-	vector<array<string, 4>> getModifies();
-	vector<array<string, 6>> getPatterns();
-	list<string> getEvaluatorResult();
-
-	bool varExists(string var);
+    bool isEntitySynonymExist(string synonym, Entity entityIdx);
 
 private:
 
-	static QueryTree* instance;
+    unordered_set<string> _stmts;
+    unordered_set<string> _assigns;
+    unordered_set<string> _whiles;
+    unordered_set<string> _ifs;
+    unordered_set<string> _calls;
+    unordered_set<string> _procedures;
+    unordered_set<string> _vars;
+    unordered_set<string> _consts;
+    unordered_set<string> _progLines;
 
-	vector<string> unvalidatedStmts;
-	vector<string> stmts;
-	vector<string> assigns;
-	vector<string> whiles;
-	vector<string> vars;
-	vector<string> consts;
-	vector<string> progLines; 
+    SelectClause _selectClause;
+    vector<SuchThatClause> _suchThatClauses;
+    vector<PatternClause> _patternClauses;
+    vector<WithClause> _withClauses;
 
-	array<string, 2> selectStmt;
-	vector<string> suchThatClauses;
-	vector<array<string, 4>> followsClauses;
-	vector<array<string, 4>> followsStarClauses;
-	vector<array<string, 4>> parentClauses;
-	vector<array<string, 4>> parentStarClauses;
-	vector<array<string, 4>> usesClauses;
-	vector<array<string, 4>> modifiesClauses;
-	vector<array<string, 6>> patternClauses;
-
-	list<string> evaluatorResult;
+    ClauseResult _evaluatorResult;
 };
 

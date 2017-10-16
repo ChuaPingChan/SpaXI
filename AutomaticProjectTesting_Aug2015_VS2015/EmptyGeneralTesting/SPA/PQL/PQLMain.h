@@ -2,9 +2,9 @@
 #include <string>
 #include <list>
 #include "QueryTree.h"
-#include "QueryValidator.h"
-#include "QueryEvaluator.h"
-#include "ResultFormatter.h"
+#include "Validator\QueryValidator.h"
+#include "Evaluator\QueryEvaluator.h"
+#include "..\PQL\ResultFormatter\ResultFormatter.h"
 
 using namespace std;
 
@@ -18,5 +18,6 @@ public:
 
 private:
 	string query;
+	QueryTree qt;
 };
 

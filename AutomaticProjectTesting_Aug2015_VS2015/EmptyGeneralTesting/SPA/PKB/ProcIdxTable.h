@@ -8,7 +8,15 @@ public:
     ProcIdxTable();
     bool addToProcIdxTable(string proc);
     int getIdxFromProc(string proc);
+	string getProcFromIdx(int procIdx);
+	list<int> getAllProceduresIndex();
+	list<string> getAllProceduresName();
+	bool isProcedure(string procName);
+	bool getAllProceduresName(string procName);
 private:
     unordered_map<string, int> procIdxMap;
     int procIdx = 0;
+	list<int> allProcIdx;
+	list<string> allProcString;
+	unordered_map<int, string> procIdxToStringMap;
 };

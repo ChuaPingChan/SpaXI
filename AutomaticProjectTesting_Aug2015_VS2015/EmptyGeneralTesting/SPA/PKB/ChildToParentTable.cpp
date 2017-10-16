@@ -35,6 +35,10 @@ bool ChildToParentTable::isChild(int childStmt) {
 }
 
 int ChildToParentTable::getParent(int childStmt) {
+	if (childToParentMap.find(childStmt) == childToParentMap.end()) {
+		return 0;
+	}
+
 	return childToParentMap[childStmt];
 }
 

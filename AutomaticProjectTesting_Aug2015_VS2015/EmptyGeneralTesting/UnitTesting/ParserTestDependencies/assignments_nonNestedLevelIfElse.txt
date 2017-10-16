@@ -1,0 +1,25 @@
+procedure ABC { 
+	i=1; 
+	b=200 ; 
+	c= a   ; 
+	if a then
+	{ 
+		a = 3; 
+		w = w+1  ; 
+	} else {
+		a = c + b;
+		w = a;
+	}
+	d = c + 200 * 400 - i;
+	
+	if b then {
+		a = c * 30 * 400;
+		w = a - a;
+	}
+	else
+	{
+		d = 100;
+	}
+	
+	d = d + 1;
+}

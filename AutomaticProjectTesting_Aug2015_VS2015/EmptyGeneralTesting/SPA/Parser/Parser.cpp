@@ -16,14 +16,20 @@ using namespace std;
 
 const int Parser::INT_INITIAL_STMT_NUMBER = 0;
 const string Parser::STRING_EMPTY_STRING = "";
+const int Parser::INT_INITIAL_PROC_INDEX = 0;
 
 const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
+const regex Parser::REGEX_VALID_VAR_NAME = Parser::REGEX_VALID_ENTITY_NAME;
+const regex Parser::REGEX_VALID_PROC_NAME = Parser::REGEX_VALID_ENTITY_NAME;
 const regex Parser::REGEX_MATCH_CONSTANT = regex("\\s*\\d+\\s*");
-const regex Parser::REGEX_EXTRACT_NEXT_TOKEN = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|[^a-zA-Z0-9]|\\d+).*");
-//const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([a-zA-Z0-9+\\-*/=][a-zA-Z0-9+\\s\\-*/=]*)\\s*;.*");
-const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([^;\\s][^;]*)\\s*;.*");
+const regex Parser::REGEX_EXTRACT_NEXT_TOKEN = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|[^a-zA-Z0-9]|\\d+)[^]*");
+const regex Parser::REGEX_EXTRACT_UP_TO_SEMICOLON = regex("\\s*([^;\\s][^;]*)\\s*;[^]*");
 const regex Parser::REGEX_MATCH_PROCEDURE_KEYWORD = regex("\\s*procedure\\s*");
 const regex Parser::REGEX_MATCH_WHILE_KEYWORD = regex("\\s*while\\s*");
+const regex Parser::REGEX_MATCH_CALL_KEYWORD = regex("\\s*call\\s*");
+const regex Parser::REGEX_MATCH_IF_KEYWORD = regex("\\s*if\\s*");
+const regex Parser::REGEX_MATCH_THEN_KEYWORD = regex("\\s*then\\s*");
+const regex Parser::REGEX_MATCH_ELSE_KEYWORD = regex("\\s*else\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACE = regex("\\s*\\u007B\\s*");
 const regex Parser::REGEX_MATCH_CLOSE_BRACE = regex("\\s*\\u007D\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACKET = regex("\\s*\\(\\s*");
@@ -31,9 +37,8 @@ const regex Parser::REGEX_MATCH_CLOSE_BRACKET = regex("\\s*\\)\\s*");
 const regex Parser::REGEX_MATCH_SEMICOLON = regex("\\s*;\\s*");
 
 // Char sequence to match should be a statement up to but not including semicolon.
-const regex Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|\\d+)\\s*[+\\-*/]\\s*([a-zA-Z0-9][a-zA-Z0-9+\\-*/\\s]*[a-zA-z0-9]|[a-zA-Z0-9]+)\\s*");
-// Does not confirm the whole expression is valid. Only checks for: [item1][add/minus/times/divide][item2] OR [item1]
-const regex Parser::REGEX_VALID_EXPRESSION = regex("\\s*([a-zA-Z][a-zA-Z0-9]*|\\d+)\\s*[+\\-*/]\\s*([a-zA-z][ a-zA-Z0-9+\\-*/]*)\\s*");
+// To extract contents within a wrapping outside bracket. Having outside bracket is assumed.
+const regex Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT = regex("\\s*\\(([^()]+|[^()]*\\([^]+\\)[^()]*)\\)\\s*");
 
 const regex Parser::REGEX_MATCH_EQUAL = regex("\\s*=\\s*");
 const regex Parser::REGEX_VALID_OPERATOR = regex("\\s*[+\\-*/]\\s*");
@@ -44,22 +49,46 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _concatenatedSourceCode = Parser::STRING_EMPTY_STRING;
     _currentTokenPtr = Parser::STRING_EMPTY_STRING;
     _isValidSyntax = false;
-    _errorMessage = string();
-    _callStack = stack<string>();
     _parentStack = stack<int>();
-    _firstStmtInProc = Parser::INT_INITIAL_STMT_NUMBER;
     _pkbMainPtr = pkbMainPtr;
-    _stacksOfFollowsStacks = stack<stack<int>>();
+    _stackOfFollowsStacks = stack<stack<int>>();
+    _currentProcName = Parser::STRING_EMPTY_STRING;
+    _ifElseStmtExitPoints = unordered_map<int, pair<int,int>>();
+    _whileStmtStack = stack<int>();
+    _ifElseStmtStack = stack<int>();
+
+    _justExitIfElseStmt = false;
+    _justExitWhileStmt = false;
 }
 
+// TODO: Add comprehensive method description
 bool Parser::parse(string filename) {
-    // TODO: Implement this when all other methods are tested.
     _isValidSyntax = true;
     concatenateLines(filename);
     parseProgram();
+
+    /*
+    PKB TODO: Tell PKB to start design extractor.
+    - Compute Follow* and Parents*
+    - Compute cross-procedural Uses and Modifies
+    - Compute Calls*
+    - Compute Next*
+    */
+    OutputDebugString("PKB: Tell PKB to start design extractor.\n");
+    _pkbMainPtr->startProcessComplexRelations();
+
+    /*
+    TODO iteration3.0: Final checks
+    - All calls are to valid procedures
+    */
+
     return _isValidSyntax;
 }
 
+/*
+Concatenates the lines of a given filepath and store the concatenated string
+in the _concatenatedSourceCode variable.
+*/
 bool Parser::concatenateLines(string filename) {
     ifstream infile(filename.c_str());
 
@@ -75,12 +104,19 @@ bool Parser::concatenateLines(string filename) {
     return true;
 }
 
-// Proceed to next token.
+/*
+Proceed to next token.
+Returns true if token is incremented successfully.
+Returns false when the end of _concatenatedSourceCode is reached.
+*/
 bool Parser::incrCurrentTokenPtr()
 {
     smatch match;
     // At the very beginning of a SIMPLE source file, just increment token pointer.
-    if (_currentTokenPtr == "" && regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1) {
+    if (_currentTokenPtr == ""
+        && regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_NEXT_TOKEN)
+        && match.size() > 1)
+    {
         _currentTokenPtr = match.str(1);
         return true;
     }
@@ -99,6 +135,15 @@ bool Parser::incrCurrentTokenPtr()
     }
 }
 
+/*
+Checks if end of the source code has been reached.
+Precondition:
+- Source code has to be concatenated into _concatenatedSourceCode.
+*/
+bool Parser::endOfSourceCodeReached() {
+    return regex_match(_concatenatedSourceCode, regex("\\s*"));
+}
+
 // Tokenize a given string into a vector of strings.
 vector<string> Parser::tokenizeString(string stringToTokenize)
 {
@@ -112,9 +157,10 @@ vector<string> Parser::tokenizeString(string stringToTokenize)
 }
 
 /*
-Returns a string from the current _nextToken to the character before the first semicolon encountered.
+Returns a string from the current _currentTokenPtr to the character before the first semicolon encountered.
 Indicate SIMPLE syntax error if no semicolon is encountered in the remaining of the string.
-Note that this method does not remove whitespaces and does not move _nextToken forward.
+This method assumes there's a semicolon ahead in the _concatenatedSourceCode.
+Note that this method does not remove whitespaces and does not move _currentTokenPtr forward.
 */
 string Parser::extractStringUpToSemicolon() {
     smatch match;
@@ -124,14 +170,14 @@ string Parser::extractStringUpToSemicolon() {
     } else {
         _isValidSyntax = false;
         OutputDebugString("WARNING: Invalid line, no semicolon found.\n");
-        // TODO: Throw exception?
+        // TODO: Throw exception.
     }
     return targetSubstring;
 }
 
 /*
 Asserts that the next token must match the given regex.
-If the match is successful, move _nextToken forward and return true.
+If the match is successful, move current token pointer forward and return true.
 If match is unsuccessful, indicate syntax error.
 */
 bool Parser::assertMatchAndIncrementToken(regex re) {
@@ -139,7 +185,7 @@ bool Parser::assertMatchAndIncrementToken(regex re) {
         incrCurrentTokenPtr();
         return true;
     } else {
-        // TODO: consider throwing exception.
+        // TODO: Throw exception.
         _isValidSyntax = false;
         OutputDebugString("WARNING: Matching of token failed.\n");
         return false;
@@ -154,7 +200,7 @@ bool Parser::assertMatchWithoutIncrementToken(regex re) {
     if (regex_match(_currentTokenPtr, re)) {
         return true;
     } else {
-        // TODO: consider throwing exception.
+        // TODO: Throw exception.
         _isValidSyntax = false;
         OutputDebugString("WARNING: Matching of token failed.\n");
         return false;
@@ -162,7 +208,8 @@ bool Parser::assertMatchWithoutIncrementToken(regex re) {
 }
 
 /*
-Matches the given regex with the next token. Does not proceed to the next token.
+Matches the given regex with the next token.
+Does not move the current token pointer forward.
 */
 bool Parser::matchToken(regex re) {
     return regex_match(_currentTokenPtr, re);
@@ -171,33 +218,34 @@ bool Parser::matchToken(regex re) {
 void Parser::parseProgram() {
     incrCurrentTokenPtr();
 
-    // PKB TODO: put this in a while loop after iteration 1,
-    //           when there are multiple procedures.
-    parseProcedure();
+    while (!endOfSourceCodeReached() && _isValidSyntax) {   //While not at the end of _concatednatedSourceCode
+        parseProcedure();
+    }
     OutputDebugString("FINE: End of program reached.\n");
-
-    // PKB TODO: Tell PKB to start design extractor.
-    OutputDebugString("PKB: Tell PKB to start design extractor.\n");
-    _pkbMainPtr->startProcessComplexRelations();
 }
 
-// Expects _nextToken to be "procedure" keyword
+/*
+Parses a procedure.
+Expects _currentTokenPtr to be "procedure" keyword.
+When this method ends, _currentTokenPtr will be one token past the close
+brace of the procedure.
+*/
 void Parser::parseProcedure() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD);
     OutputDebugString("FINE: Parsing procedure.\n");
 
     string procName;
     if (!(matchToken(Parser::REGEX_VALID_ENTITY_NAME))) {
-        // TODO: Throw exception?
+        //TODO: Throw exception
         _isValidSyntax = false;
-        //TODO: Remove this line after determining how to signal user on syntax error.
         OutputDebugString("WARNING: Invalid procedure name.\n");
         return;
     }
     procName = _currentTokenPtr;
-    // PKB TODO: Add to ProcToIdxMap
+    // PKB: Add to ProcToIdxMap
     OutputDebugString("PKB: Add procedure.\n");
     _pkbMainPtr->addProcedure(procName);
+    _currentProcName = procName;
 
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
@@ -205,8 +253,7 @@ void Parser::parseProcedure() {
     // Add new stmtList stack to follows stack
     OutputDebugString("FINE: Push new stmtList stack to follows stack.\n");
     stack<int>* newFollowsStack = new stack<int>();
-    _stacksOfFollowsStacks.push(*newFollowsStack);
-    _firstStmtInProc++;
+    _stackOfFollowsStacks.push(*newFollowsStack);
 
     parseStmtList();
 
@@ -217,7 +264,7 @@ void Parser::parseProcedure() {
 }
 
 /*
-Parses the statment list within a scope. At the end of this method, _nextToken is '}'.
+Parses the statment list within a scope. At the end of this method, _currentTokenPtr is '}'.
 */
 void Parser::parseStmtList() {
     parseStmt();    // End of statement characters like ';' and '}' are handled in parseStmt().
@@ -237,7 +284,7 @@ void Parser::parseStmt() {
     OutputDebugString("FINE: Identifying next statement type...\n");
 
     // Push current statement to top of the top followsStack
-    _stacksOfFollowsStacks.top().push(_currentStmtNumber);
+    _stackOfFollowsStacks.top().push(_currentStmtNumber);
     OutputDebugString("FINE: Pushing stmt to top stack of follows stack.\n");
 
     // Set parent child relation. 0 if no parent.
@@ -251,9 +298,13 @@ void Parser::parseStmt() {
     // Check statement type and call appropriate function
     // (i.e. call, assignment, if-else, while)
     if (Parser::whileExpected()) {
-        parseWhile();
+        parseWhileStmt();
+    } else if (Parser::callStmtExpected()) {
+        parseCallStmt();
+    } else if (Parser::ifStmtExpected()) {
+        parseIfStmt();
     } else if (Parser::assignmentExpected()) {
-        // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords
+        // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords as variable names
         parseAssignment();
     }
 }
@@ -261,7 +312,7 @@ void Parser::parseStmt() {
 /*
 Tells whether the current statement is expected to be an assignment statement or not.
 If next token is a varName, assignment statement is expected.
-When the method ends, _nextToken is the varName.
+When the method ends, _currentTokenPtr is the varName.
 */
 bool Parser::assignmentExpected() {
     return matchToken(Parser::REGEX_VALID_ENTITY_NAME);
@@ -269,10 +320,26 @@ bool Parser::assignmentExpected() {
 
 /*
 Tells whether the current statement is expected to be a while statement or not.
-When the method ends, _nextToken is the 'while' keyword.
+When the method ends, _currentTokenPtr is the 'while' keyword.
 */
 bool Parser::whileExpected() {
     return matchToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
+}
+
+/*
+Tells whether the current statement is expected to be a call statement or not.
+When the method ends, _currentTokenPtr is the 'call' keyword.
+*/
+bool Parser::callStmtExpected() {
+    return matchToken(Parser::REGEX_MATCH_CALL_KEYWORD);
+}
+
+/*
+Tells whether the current statement is expected to be an if-statement or not.
+When the method ends, _currentTokenPtr is the 'if' keyword.
+*/
+bool Parser::ifStmtExpected() {
+    return matchToken(Parser::REGEX_MATCH_IF_KEYWORD);
 }
 
 /*
@@ -281,7 +348,6 @@ _currentTokenPtr will be advanced after ';'.
 */
 void Parser::parseAssignment() {
     OutputDebugString("FINE: Assignment statement identified.\n");
-    // PKB TODO: Add assignmentStmt to PKB
     OutputDebugString("PKB: Add assignment to PKB.\n");
     _pkbMainPtr->addAssignmentStmt(_currentStmtNumber);
 
@@ -290,28 +356,28 @@ void Parser::parseAssignment() {
     string lhsVar = _currentTokenPtr;
 
     /*
-    PKB TODO:
+    PKB:
     Add lhsVar to VarToIdxMap
     Update ModTableStmtToVar using currentStmtNumber
     Update ModTableStmtToVar using parentStack
-    Update ModTableProcToVar using callStack        (after iteration 1)
+    Update ModTableProcToVar using _currentProcName
     Update ModTableVar using currentStmtNumber
     Update ModTableVar using parentStack
-    Update ModTableVar using callStack              (after iteration 1)
     */
     OutputDebugString("PKB: Add variable to PKB.\n");
     OutputDebugString("PKB: Update modifies relationship.\n");
     _pkbMainPtr->addVariable(lhsVar);
     _pkbMainPtr->setModTableStmtToVar(_currentStmtNumber, lhsVar);
-    // TODO Refactoring: Extract method to achieve SLAP.
+    // TODO Refactoring: Extract method.
     if (!_parentStack.empty()) {
-        stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+        stack<int> parentStackCopy = _parentStack;
         while (!parentStackCopy.empty()) {
             int parentStmt = parentStackCopy.top();
             _pkbMainPtr->setModTableStmtToVar(parentStmt, lhsVar);
             parentStackCopy.pop();
         }
     }
+    _pkbMainPtr->setModTableProcToVar(_currentProcName, lhsVar);
 
     incrCurrentTokenPtr();
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_EQUAL);
@@ -327,10 +393,9 @@ void Parser::parseAssignment() {
                 Update VarToIdxMap
                 Update UsesTableStmtToVar using currentStmtNumber
                 Update UsesTableStmtToVar using parentStack
-                Update UsesProcToVar using callStack        (after iteration 1)
+                Update UsesProcToVar using _currentProcName
                 Update UsesTableVar using currentStmtNumber
                 Update UsesTableVar using parentStack
-                Update UsesTableVar using callStack         (after iteration 1)
                 */
                 OutputDebugString("PKB: Add variable to PKB.\n");
                 OutputDebugString("PKB: Update uses relationship.\n");
@@ -338,13 +403,14 @@ void Parser::parseAssignment() {
                 _pkbMainPtr->setUseTableStmtToVar(_currentStmtNumber, var);
                 // TODO Refactoring: Extract method to achieve SLAP.
                 if (!_parentStack.empty()) {
-                    stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+                    stack<int> parentStackCopy = _parentStack;
                     while (!parentStackCopy.empty()) {
                         int parentStmt = parentStackCopy.top();
                         _pkbMainPtr->setUseTableStmtToVar(parentStmt, var);
                         parentStackCopy.pop();
                     }
                 }
+                _pkbMainPtr->setModTableProcToVar(_currentProcName, var);
 
             } else if (matchToken(Parser::REGEX_MATCH_CONSTANT)) {
                 int constant = stoi(_currentTokenPtr);
@@ -353,28 +419,26 @@ void Parser::parseAssignment() {
                 Update constants DS
                 Update UsesTableStmtToConst using currentStmtNumber
                 Update UsesTableStmtToConst using parentStack
-                Update UsesProcToConst using callStack          (after iteration 1)
+                Update UsesProcToConst using _currentProcName
                 Update UsesTableConst using currentStmtNumber
                 Update UsesTableConst using parentStack
-                Update UsesTableConst using callStack           (after iteration 1)
                 */
                 OutputDebugString("PKB: Add constant to PKB.\n");
                 OutputDebugString("PKB: Update uses relationship.\n");
                 _pkbMainPtr->addConstant(_currentStmtNumber, constant);
                 // TODO Refactoring: Extract method to achieve SLAP.
                 if (!_parentStack.empty()) {
-                    stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+                    stack<int> parentStackCopy = _parentStack;
                     while (!parentStackCopy.empty()) {
                         int parentStmt = parentStackCopy.top();
-                        _pkbMainPtr->addConstant(parentStmt, constant);
+                        _pkbMainPtr->addConstant(parentStmt, constant);     // TODO: Check why parentStmt is needed as argument.
                         parentStackCopy.pop();
                     }
                 }
-
             }
             incrCurrentTokenPtr();
         }
-        // PKB TODO: Add LHS var and RHS expression (without whitespace) to pattern table.
+        // PKB: Add LHS var and RHS expression (without whitespace) to pattern table.
         OutputDebugString("PKB: Update pattern table.\n");
         string rhsExpressionNoWhitespace = removeAllWhitespaces(rhsExpression);
         _pkbMainPtr->setPatternRelation(_currentStmtNumber, lhsVar, rhsExpressionNoWhitespace);
@@ -386,27 +450,36 @@ void Parser::parseAssignment() {
 Asserts that an expression is syntactically valid.
 */
 bool Parser::assertIsValidExpression(string expression) {
-    //OutputDebugString("FINE: Validating expression...\n");
 
-    // Check for bracket correctness
-    string whitespacesRemoved = removeAllWhitespaces(expression);
-    if (!isBracketedCorrectly(whitespacesRemoved)) {
+    // Remove outermost bracket (if applicable)
+    smatch contentInBracket;
+    while (regex_match(expression, contentInBracket, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT)
+        && contentInBracket.size() > 1) {
+        expression = contentInBracket.str(1);
+    }
+
+    // Check for bracket correctness. Just for redundancy.
+    // Does not guarantee bracketing is correct, just counting.
+    // e.g. "4 ( + 3)" will be evaluated as correct even though it's wrong.
+    if (!isBracketedCorrectly(expression)) {
         return false;
     }
 
-    string bracketsRemoved = removeAllBrackets(expression);
     // Base case
-    if (regex_match(bracketsRemoved, Parser::REGEX_VALID_ENTITY_NAME) || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)) {
+    if (regex_match(expression, Parser::REGEX_VALID_ENTITY_NAME)
+        || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)
+        )
+    {
         //OutputDebugString("FINE: Expression is valid.\n");
         return true;
     }
 
-    smatch match;
     string leftExpression;
     string rightExpression;
-    if (regex_match(bracketsRemoved, match, Parser::REGEX_EXTRACT_EXPRESSION_LHS_RHS) && match.size() > 2) {
-        leftExpression = match.str(1);
-        rightExpression = match.str(2);
+    pair<string, string> lhsRhsExpr = Parser::splitExpressionLhsRhs(expression);
+    if (lhsRhsExpr != pair<string, string>()) {
+        leftExpression = lhsRhsExpr.first;
+        rightExpression = lhsRhsExpr.second;
     } else {
         _isValidSyntax = false;
         OutputDebugString("WARNING: Invalid Expression.\n");
@@ -417,19 +490,70 @@ bool Parser::assertIsValidExpression(string expression) {
 }
 
 /*
+Splits an expression into two parts, namely the left expression and right expression.
+For example,
+"3 + 3 - 2"         ==> "3" and "3 - 2"
+"(2 + 3) + 6 - 7"   ==> "(2 + 3)" and "6 - 7"
+"2 + (6 - 7)"       ==> "2" and "(6 - 7)"
+"(2 + 3) + (6 - 7)" ==> "(2 + 3)" and "(6 - 7)"
+
+If the format of the expression given is not splittable as above, an empty pair
+of strings will be returned.
+*/
+std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
+{
+    string operatorRegex = "[+\\-*/]";
+    string possibleWhitespaceRegex = "\\s*";
+    string extractEntityRegex = "([A-Za-z][A-Za-z0-9]*|\\d+)";
+    //string anyCharRegex = "[\\sa-zA-Z0-9+\\-*/()]";
+    string anyCharRegex = "[^]";
+    string extractRemainingRegex = "(" + anyCharRegex + "+)";
+    string extractBracketWrappedContentRegex = "\\(([^()]+|[^()]*\\(" + anyCharRegex + "+\\)[^()]*)\\)";
+
+    /*
+    CASE 1:
+    When the left expression has no brackets. E.g "2 + (10 * 3)", "2 + 10"
+    */
+    regex REGEX_CASE1_EXTRACTOR = regex(possibleWhitespaceRegex
+        + extractEntityRegex
+        + possibleWhitespaceRegex
+        + operatorRegex
+        + possibleWhitespaceRegex
+        + extractRemainingRegex);
+
+    /*
+    CASE 2:
+    When the left expression is bracketed. E.g. "(2 + 3) + 4", "(2 + 3) + (4 + 10)"
+    */
+    regex REGEX_CASE2_EXTRACTOR = regex(possibleWhitespaceRegex
+        + extractBracketWrappedContentRegex
+        + possibleWhitespaceRegex
+        + operatorRegex
+        + possibleWhitespaceRegex
+        + extractRemainingRegex);
+
+    smatch match;
+    string leftExpression;
+    string rightExpression;
+    if (regex_match(expression, match, REGEX_CASE1_EXTRACTOR) && match.size() > 2) {
+        leftExpression = match.str(1);
+        rightExpression = match.str(2);
+        return pair<string, string>(leftExpression, rightExpression);
+    } else if (regex_match(expression, match, REGEX_CASE2_EXTRACTOR) && match.size() > 2) {
+        leftExpression = match.str(1);
+        rightExpression = match.str(2);
+        return pair<string, string>(leftExpression, rightExpression);
+    } else {
+        return pair<string, string>();
+    }
+}
+
+/*
 Removes all the whitespace in a given string
 */
 string Parser::removeAllWhitespaces(string targetString)
 {
     return regex_replace(targetString, regex("\\s"), "");
-}
-
-/*
-Removes all brackets in a given string
-*/
-std::string Parser::removeAllBrackets(std::string targetString)
-{
-    return regex_replace(targetString, regex("[()]"), "");
 }
 
 /*
@@ -468,27 +592,27 @@ bool Parser::isBracketedCorrectly(std::string expression)
 Parses a while statement. When this method ends,
 _currentTokenPtr will be advanced after '}'.
 */
-void Parser::parseWhile() {
+void Parser::parseWhileStmt() {
     OutputDebugString("FINE: While statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
-
-    // PKB TODO: Add while stmt to PKB
-    OutputDebugString("PKB: Add while statement to PKB.\n");
-    _pkbMainPtr->addWhileStmt(_currentStmtNumber);
 
     _parentStack.push(_currentStmtNumber);
 
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
     string whileVar = _currentTokenPtr;
-    /* PKB TODO
+
+    // PKB: Add while stmt to PKB. Must also pass 'control variable'.
+    OutputDebugString("PKB: Add while statement to PKB.\n");
+    _pkbMainPtr->addWhileStmt(_currentStmtNumber, whileVar);
+
+    /* PKB
     Update VarToIdxMap
     Update UsesTableStmtToVar using currentStmtNumber
     Update UsesTableStmtToVar using parentStack
-    Update UsesTableProcToVar using callStack        (after iteration 1.0)
+    Update UsesTableProcToVar using _currentProcName
     Update UsesTableVar using currentStmtNumber
     Update UsesTableVar using parentStack
-    Update UsesTableVar using callStack              (after iteration 1.0)
     */
     OutputDebugString("PKB: Add variable to PKB.\n");
     OutputDebugString("PKB: Update uses relationship.\n");
@@ -496,22 +620,23 @@ void Parser::parseWhile() {
     _pkbMainPtr->setUseTableStmtToVar(_currentStmtNumber, whileVar);
     // TODO Refactoring: Extract method to achieve SLAP.
     if (!_parentStack.empty()) {
-        stack<int> parentStackCopy = _parentStack;      // TODO: Verify if this is making a copy or not.
+        stack<int> parentStackCopy = _parentStack;
         while (!parentStackCopy.empty()) {
             int parentStmt = parentStackCopy.top();
             _pkbMainPtr->setUseTableStmtToVar(parentStmt, whileVar);
             parentStackCopy.pop();
         }
     }
+    _pkbMainPtr->setUseTableProcToVar(_currentProcName, whileVar);
 
     assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
     OutputDebugString("FINE: Entering while block.\n");
-    // Add new stmtList stack to follows stack
+    // Entering new statement list -> Add new stmtList stack to follows stack
     OutputDebugString("Push new stmtList stack to follows stack.\n");
-    stack<int>* newFollowsStack = new stack<int>();
-    _stacksOfFollowsStacks.push(*newFollowsStack);
+    stack<int> newFollowsStack = stack<int>();
+    _stackOfFollowsStacks.push(newFollowsStack);
 
     parseStmtList();
 
@@ -523,22 +648,118 @@ void Parser::parseWhile() {
     _parentStack.pop();
 }
 
+void Parser::parseIfStmt()
+{
+    OutputDebugString("FINE: If-else statement identified.\n");
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD);
+
+    _parentStack.push(_currentStmtNumber);
+    _ifElseStmtStack.push(_currentStmtNumber);
+    int ifElseStmtNum = _currentStmtNumber;
+
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+
+    string ifVar = _currentTokenPtr;
+
+    // PKB: Add if-else stmt to PKB. Must also pass 'control variable'.
+    OutputDebugString("PKB: Add if-else statement to PKB.\n");
+    _pkbMainPtr->addIfStmt(_currentStmtNumber, ifVar);
+
+    /* PKB
+    Update VarToIdxMap
+    Update UsesTableStmtToVar using currentStmtNumber
+    Update UsesTableStmtToVar using parentStack
+    Update UsesTableProcToVar using _currentProcName
+    Update UsesTableVar using currentStmtNumber
+    Update UsesTableVar using parentStack
+    */
+    OutputDebugString("PKB: Add variable to PKB.\n");
+    OutputDebugString("PKB: Update uses relationship.\n");
+    _pkbMainPtr->addVariable(ifVar);     // Must add variable first before setting relationships
+    _pkbMainPtr->setUseTableStmtToVar(_currentStmtNumber, ifVar);
+    // TODO Refactoring: Extract method to achieve SLA.
+    if (!_parentStack.empty()) {
+        stack<int> parentStackCopy = _parentStack;
+        while (!parentStackCopy.empty()) {
+            int parentStmt = parentStackCopy.top();
+            _pkbMainPtr->setUseTableStmtToVar(parentStmt, ifVar);
+            parentStackCopy.pop();
+        }
+    }
+    _pkbMainPtr->setUseTableProcToVar(_currentProcName, ifVar);
+
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_THEN_KEYWORD);
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    OutputDebugString("FINE: Entering if-block.\n");
+    // Add new stmtList stack to follows stack
+    OutputDebugString("Push new stmtList stack to follows stack.\n");
+    stack<int> newFollowsStack = stack<int>();
+    _stackOfFollowsStacks.push(newFollowsStack);
+
+    parseStmtList();
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    OutputDebugString("FINE: Exiting if-block.\n");
+    processAndPopTopFollowStack();
+    OutputDebugString("FINE: Processing and then pop top follows stack.\n");
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_ELSE_KEYWORD);
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    OutputDebugString("FINE: Entering else-block.\n");
+    // Entering new statement list -> Add new stmtList stack to follows stack
+    OutputDebugString("Push new stmtList stack to follows stack.\n");
+    newFollowsStack = stack<int>();
+    _stackOfFollowsStacks.push(newFollowsStack);
+
+    parseStmtList();
+
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    OutputDebugString("FINE: Exiting else-block.\n");
+    processAndPopTopFollowStack();
+    OutputDebugString("FINE: Processing and then pop top follows stack.\n");
+
+    _parentStack.pop();
+}
+
 void Parser::processAndPopTopFollowStack()
 {
-    assert(!_stacksOfFollowsStacks.empty() && !_stacksOfFollowsStacks.top().empty());
-    stack<int> topFollowsStack = _stacksOfFollowsStacks.top();
+    assert(!_stackOfFollowsStacks.empty() && !_stackOfFollowsStacks.top().empty());
+    stack<int> topFollowsStack = _stackOfFollowsStacks.top();
 
     int stmtAfter = topFollowsStack.top();
     topFollowsStack.pop();
     int stmtBefore = 0;
     while (!topFollowsStack.empty()) {
         stmtBefore = topFollowsStack.top();
-        (*_pkbMainPtr).setFollowsRel(stmtBefore, stmtAfter);
+        _pkbMainPtr->setFollowsRel(stmtBefore, stmtAfter);
         stmtAfter = stmtBefore;
         topFollowsStack.pop();
     }
-    (*_pkbMainPtr).setFollowsRel(0, stmtAfter);
+    _pkbMainPtr->setFollowsRel(0, stmtAfter);
 
-    // TODO: Free dynamically allocated memory with "delete" keyword.
-    _stacksOfFollowsStacks.pop();
+    _stackOfFollowsStacks.pop();
+}
+
+void Parser::parseCallStmt()
+{
+    OutputDebugString("FINE: Parsing Calls statement.\n");
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CALL_KEYWORD);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    string calledProcName = _currentTokenPtr;
+
+    /*
+    TODO iteration 3.0:
+    The procedure being called will not be added to PKB. After the whole SIMPLE program is parsed,
+    Ask DesignExtractor to check if all the procedures being called are present.
+    Show error message and exit if a call statement calls an undefined procedure.
+    */
+    //PKB: Add calls relation
+    OutputDebugString("PKB: Add calls relation.\n");
+    _pkbMainPtr->setCallsRel(_currentStmtNumber, _currentProcName, calledProcName);
+
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
 }
