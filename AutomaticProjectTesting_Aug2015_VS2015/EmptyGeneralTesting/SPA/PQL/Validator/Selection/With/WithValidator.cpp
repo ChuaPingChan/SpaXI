@@ -1,7 +1,5 @@
 #include "WithValidator.h"
 
-const string WithValidator::ATTRIBUTE_STRING[] = {"procName", "stmt#", "stmt#", "stmt#", "procName", "stmt#", "stmt#", "varName", "value"};
-
 WithValidator::WithValidator(QueryTree *qtPtrNew)
 {
     this->qtPtr = qtPtrNew;
@@ -18,7 +16,7 @@ void WithValidator::validate(string str)
 
     if (isValidLhs(lhs) && isValidRhs(rhs) && isLhsSameTypeAsRhs())
     {
-        if (lhsAttribute == INTEGER_ATTRIBUTE && rhsAttribute == INTEGER_ATTRIBUTE && lhsValue!=rhsValue)
+        if (lhsEntity == INTEGER && rhsEntity == INTEGER && lhsValue!=rhsValue)
         {
             this->validity = false;
         }
@@ -38,19 +36,29 @@ bool WithValidator::isValid()
     return this->validity;
 }
 
-Attribute WithValidator::getLhsAttribute()
+WithType WithValidator::getLhsWithType()
 {
-    return this->lhsAttribute;
+    return this->lhsWithType;
 }
 
-Attribute WithValidator::getRhsAttribute()
+Entity WithValidator::getLhsEntity()
 {
-    return this->rhsAttribute;
+    return this->lhsEntity;
 }
 
 string WithValidator::getLhsValue()
 {
     return this->lhsValue;
+}
+
+WithType WithValidator::getRhsWithType()
+{
+    return this->rhsWithType;
+}
+
+Entity WithValidator::getRhsEntity()
+{
+    return this->rhsEntity;
 }
 
 string WithValidator::getRhsValue()
@@ -76,8 +84,9 @@ bool WithValidator::isValidLhs(string lhs)
         string attrRefAttributeStr = getAttrRefAttributeStr(lhs);
         try {
             Entity entity = getEntityOfSynonym(attrRefSynonymStr);
-            Attribute attribute = getAttributeOfAttrRefAttribute(entity, attrRefAttributeStr);
-            this->lhsAttribute = attribute;
+            WithType withType = getWithType(entity, attrRefAttributeStr);
+            this->lhsWithType = withType;
+            this->lhsEntity = entity;
             this->lhsValue = attrRefSynonymStr;
             return true;
         }
@@ -92,14 +101,16 @@ bool WithValidator::isValidLhs(string lhs)
     }
     else if (RegexValidators::isValidIntegerRegex(lhs))
     {
-        this->lhsAttribute = INTEGER_ATTRIBUTE;
+        this->lhsWithType = INTEGER_WITH;
+        this->lhsEntity = INTEGER;
         this->lhsValue = lhs;
         return true;
     }
     else if (RegexValidators::isValidIdentWithQuotesRegex(lhs))
     {
-        this->lhsAttribute = IDENT_WITH_QUOTES_ATTRIBUTE;
         string processedLhs = Formatter::removeAllQuotes(lhs);
+        this->lhsWithType = STRING_WITH;
+        this->lhsEntity = IDENT_WITHQUOTES;
         this->lhsValue = processedLhs;
         return true;
     }
@@ -107,7 +118,8 @@ bool WithValidator::isValidLhs(string lhs)
     {
         if (qtPtr->isEntitySynonymExist(lhs, PROG_LINE))
         {
-            this->lhsAttribute = PROG_LINE_ATTRIBUTE;
+            this->lhsWithType = INTEGER_WITH;
+            this->lhsEntity = PROG_LINE;
             this->lhsValue = lhs;
             return true;
         }
@@ -126,8 +138,9 @@ bool WithValidator::isValidRhs(string rhs)
         string attrRefAttributeStr = getAttrRefAttributeStr(rhs);
         try {
             Entity entity = getEntityOfSynonym(attrRefSynonymStr);
-            Attribute attribute = getAttributeOfAttrRefAttribute(entity, attrRefAttributeStr);
-            this->rhsAttribute = attribute;
+            WithType withType = getWithType(entity, attrRefAttributeStr);
+            this->rhsWithType = withType;
+            this->rhsEntity = entity;
             this->rhsValue = attrRefSynonymStr;
             return true;
         }
@@ -142,14 +155,16 @@ bool WithValidator::isValidRhs(string rhs)
     }
     else if (RegexValidators::isValidIntegerRegex(rhs))
     {
-        this->rhsAttribute = INTEGER_ATTRIBUTE;
+        this->rhsWithType = INTEGER_WITH;
+        this->rhsEntity = INTEGER;
         this->rhsValue = rhs;
         return true;
     }
     else if (RegexValidators::isValidIdentWithQuotesRegex(rhs))
     {
-        this->rhsAttribute = IDENT_WITH_QUOTES_ATTRIBUTE;
         string processedrhs = Formatter::removeAllQuotes(rhs);
+        this->rhsWithType = STRING_WITH;
+        this->rhsEntity = IDENT_WITHQUOTES;
         this->rhsValue = processedrhs;
         return true;
     }
@@ -157,7 +172,8 @@ bool WithValidator::isValidRhs(string rhs)
     {
         if (qtPtr->isEntitySynonymExist(rhs, PROG_LINE))
         {
-            this->rhsAttribute = PROG_LINE_ATTRIBUTE;
+            this->rhsWithType = INTEGER_WITH;
+            this->rhsEntity = PROG_LINE;
             this->rhsValue = rhs;
             return true;
         }
@@ -168,22 +184,9 @@ bool WithValidator::isValidRhs(string rhs)
     }
 }
 
-bool WithValidator::isIntegerType(Attribute attr)
-{
-    return (attr == STMT_ATTRIBUTE || attr == ASSIGN_ATTRIBUTE || attr == CALL_STMT_ATTRIBUTE
-            || attr == WHILE_ATTRIBUTE || attr == IF_ATTRIBUTE || attr == CONSTANT_ATTRIBUTE
-            || attr == PROG_LINE_ATTRIBUTE || attr == INTEGER_ATTRIBUTE);
-}
-
-bool WithValidator::isStringType(Attribute attr)
-{
-    return (attr == PROCEDURE_ATTRIBUTE || attr == CALL_PROC_ATTRIBUTE || attr == VARIABLE_ATTRIBUTE || attr == IDENT_WITH_QUOTES_ATTRIBUTE);
-}
-
 bool WithValidator::isLhsSameTypeAsRhs()
 {
-    return (isIntegerType(this->lhsAttribute) && isIntegerType(this->rhsAttribute))
-        || (isStringType(this->lhsAttribute) && isStringType(this->rhsAttribute));
+    return this->lhsWithType == this->rhsWithType;
 }
 
 Entity WithValidator::getEntityOfSynonym(string syn)
@@ -226,34 +229,34 @@ Entity WithValidator::getEntityOfSynonym(string syn)
     }
 }
 
-Attribute WithValidator::getAttributeOfAttrRefAttribute(Entity entity, string attr)
+WithType WithValidator::getWithType(Entity entity, string attr)
 {
-    if (entity == PROCEDURE && attr == ATTRIBUTE_STRING[PROCEDURE_ATTRIBUTE]) {
-        return PROCEDURE_ATTRIBUTE;
+    if (entity == PROCEDURE && RegexValidators::isValidProcNameString(attr)) {
+        return STRING_WITH;
     }
-    else if (entity == STMT && attr == ATTRIBUTE_STRING[STMT_ATTRIBUTE]) {
-        return STMT_ATTRIBUTE;
+    else if (entity == STMT && RegexValidators::isValidStmtNumString(attr)) {
+        return INTEGER_WITH;
     }
-    else if (entity == ASSIGN && attr == ATTRIBUTE_STRING[ASSIGN_ATTRIBUTE]) {
-        return ASSIGN_ATTRIBUTE;
+    else if (entity == ASSIGN && RegexValidators::isValidStmtNumString(attr)) {
+        return INTEGER_WITH;
     }
-    else if (entity == CALL && attr == ATTRIBUTE_STRING[CALL_STMT_ATTRIBUTE]) {
-        return CALL_STMT_ATTRIBUTE;
+    else if (entity == CALL && RegexValidators::isValidStmtNumString(attr)) {
+        return INTEGER_WITH;
     }
-    else if (entity == CALL && attr == ATTRIBUTE_STRING[CALL_PROC_ATTRIBUTE]) {
-        return CALL_PROC_ATTRIBUTE;
+    else if (entity == CALL && RegexValidators::isValidProcNameString(attr)) {
+        return STRING_WITH;
     }
-    else if (entity == WHILE && attr == ATTRIBUTE_STRING[WHILE_ATTRIBUTE]) {
-        return WHILE_ATTRIBUTE;
+    else if (entity == WHILE && RegexValidators::isValidStmtNumString(attr)) {
+        return INTEGER_WITH;
     }
-    else if (entity == IF && attr == ATTRIBUTE_STRING[IF_ATTRIBUTE]) {
-        return IF_ATTRIBUTE;
+    else if (entity == IF && RegexValidators::isValidStmtNumString(attr)) {
+        return INTEGER_WITH;
     }
-    else if (entity == VARIABLE && attr == ATTRIBUTE_STRING[VARIABLE_ATTRIBUTE]) {
-        return VARIABLE_ATTRIBUTE;
+    else if (entity == VARIABLE && RegexValidators::isValidVarNameString(attr)) {
+        return STRING_WITH;
     }
-    else if (entity == CONSTANT && attr == ATTRIBUTE_STRING[CONSTANT_ATTRIBUTE]) {
-        return CONSTANT_ATTRIBUTE;
+    else if (entity == CONSTANT && RegexValidators::isValidValueString(attr)) {
+        return INTEGER_WITH;
     }
     else {
         throw AttributeNotFoundException("In WithValidator.cpp, when calling getAttributeOfAttrRefAttribute(). Attribute does not match defined attribute or Entity does not have that attribute");

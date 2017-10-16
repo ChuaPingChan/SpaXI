@@ -1,10 +1,11 @@
 #include "WithClause.h"
 
-WithClause::WithClause(Attribute lhsAttribute, string lhsValue, Attribute rhsAttribute, string rhsValue)
+WithClause::WithClause(WithType withType, Entity lhsEntity, string lhsValue, Entity rhsEntity, string rhsValue)
 {
-    this->lhsAttribute = lhsAttribute;
+    this->withType = withType;
+    this->lhsEntity = lhsEntity;
     this->lhsValue = lhsValue;
-    this->rhsAttribute = rhsAttribute;
+    this->rhsEntity = rhsEntity;
     this->rhsValue = rhsValue;
 }
 
@@ -12,14 +13,19 @@ WithClause::~WithClause()
 {
 }
 
-Attribute WithClause::getLhsAttribute()
+WithType WithClause::getWithType()
 {
-    return this->lhsAttribute;
+    return this->withType;
 }
 
-Attribute WithClause::getRhsAttribute()
+Entity WithClause::getLhsEntity()
 {
-    return this->rhsAttribute;
+    return this->lhsEntity;
+}
+
+Entity WithClause::getRhsEntity()
+{
+    return this->rhsEntity;
 }
 
 string WithClause::getLhsValue()

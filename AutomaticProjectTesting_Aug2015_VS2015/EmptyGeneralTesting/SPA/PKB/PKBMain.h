@@ -47,9 +47,9 @@ public:
 
 	list<int> convertStringToIdx(list<string> stringList, Entity type);
 
-	list<int> getAllIntOf(Entity type);
+	list<int> getAllIntOfIntEntity(Entity type);
 
-	list<string> getAllStringOf(Entity type);
+	list<int> getAllIdxOfStringEntity(Entity type);
 
 	bool isInstanceOf(Entity type, int arg);
 

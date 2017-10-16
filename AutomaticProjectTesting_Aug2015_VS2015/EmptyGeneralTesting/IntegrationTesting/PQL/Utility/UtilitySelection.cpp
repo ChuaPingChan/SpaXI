@@ -171,11 +171,9 @@ bool UtilitySelection::areSamePatternClausesContentAsInTree(vector<PatternClause
     return true;
 }
 
-
-
-WithClause UtilitySelection::makeWithClause(Attribute lhsAttribute, string lhsValue, Attribute rhsAttribute, string rhsValue)
+WithClause UtilitySelection::makeWithClause(WithType withType, Entity lhsEntity, string lhsValue, Entity rhsEntity, string rhsValue)
 {
-    return WithClause(lhsAttribute, lhsValue, rhsAttribute, rhsValue);
+    return WithClause(withType, lhsEntity, lhsValue, rhsEntity, rhsValue);
 }
 
 WithClause UtilitySelection::getFirstWithClauseFromTree(QueryTree qt)
@@ -186,12 +184,13 @@ WithClause UtilitySelection::getFirstWithClauseFromTree(QueryTree qt)
 
 bool UtilitySelection::isSameWithClauseContent(WithClause expected, WithClause actual)
 {
-    bool isSameLhsAttribute = expected.getLhsAttribute() == actual.getLhsAttribute();
-    bool isSameRhsAttribute = expected.getRhsAttribute() == actual.getRhsAttribute();
+    bool isSameWithType = expected.getWithType() == actual.getWithType();
+    bool isSameLhsEntity = expected.getLhsEntity() == actual.getLhsEntity();
+    bool isSameRhsEntity = expected.getRhsEntity() == actual.getRhsEntity();
     bool isSameLhsValue = expected.getLhsValue() == actual.getLhsValue();
     bool isSameRhsValue = expected.getRhsValue() == actual.getRhsValue();
 
-    return isSameLhsAttribute && isSameRhsAttribute && isSameLhsValue && isSameRhsValue;
+    return isSameWithType && isSameLhsEntity && isSameRhsEntity && isSameLhsValue && isSameRhsValue;
 }
 
 bool UtilitySelection::areSameWithClausesContentAsInTree(vector<WithClause> expectedList, QueryTree qt)

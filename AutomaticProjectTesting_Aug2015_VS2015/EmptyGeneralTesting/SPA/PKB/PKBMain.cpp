@@ -115,7 +115,7 @@ list<int> PKBMain::convertStringToIdx(list<string> stringList, Entity type) {
 	return resultList;
 }
 
-list<int> PKBMain::getAllIntOf(Entity type) {
+list<int> PKBMain::getAllIntOfIntEntity(Entity type) {
 	if (type == STMT) {
 		return getAllStatements();
 	}
@@ -145,21 +145,21 @@ list<int> PKBMain::getAllIntOf(Entity type) {
 	}
 }
 
-list<string> PKBMain::getAllStringOf(Entity type) {
+list<int> PKBMain::getAllIdxOfStringEntity(Entity type) {
 	if (type == PROCEDURE) {
-		return getAllProcNames();
+		return getAllProcedures();
 	}
 
 	else if (type == CALL) {
-		return getAllCalleeNames();
+		return getAllCallees();
 	}
 
 	else if (type == VARIABLE) {
-		return getAllVariableNames();
+		return getAllVariables();
 	}
 
 	else {
-		return list<string>();
+		return list<int>();
 	}
 }
 

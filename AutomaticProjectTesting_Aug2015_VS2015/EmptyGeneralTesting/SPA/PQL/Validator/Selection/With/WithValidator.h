@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "..\..\..\QueryTree.h"
-#include "..\..\..\Attributeship.h"
+#include "..\..\..\Withship.h"
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
 #include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
@@ -18,19 +18,26 @@ public:
     void validate(string str);
     bool isValid();
 
-    Attribute getLhsAttribute();
-    Attribute getRhsAttribute();
+    WithType getLhsWithType();
+    Entity getLhsEntity();
     string getLhsValue();
+
+    WithType getRhsWithType();
+    Entity getRhsEntity();
     string getRhsValue();
 
 private:
     static const string ATTRIBUTE_STRING[];
     QueryTree *qtPtr;
 
-    Attribute lhsAttribute;
-    Attribute rhsAttribute;
+    WithType lhsWithType;
+    Entity lhsEntity;
     string lhsValue;
+
+    WithType rhsWithType;
+    Entity rhsEntity;
     string rhsValue;
+
     bool validity = false;
 
     string extractLhs(string str);
@@ -38,12 +45,10 @@ private:
     bool isValidLhs(string lhs);
     bool isValidRhs(string rhs);
 
-    bool isIntegerType(Attribute attr);
-    bool isStringType(Attribute attr);
     bool isLhsSameTypeAsRhs();
 
     Entity getEntityOfSynonym(string syn);
-    Attribute getAttributeOfAttrRefAttribute(Entity entity, string attr);
+    WithType getWithType(Entity entity, string attr);
 
     string getAttrRefSynonymStr(string str);
     string getAttrRefAttributeStr(string str);
