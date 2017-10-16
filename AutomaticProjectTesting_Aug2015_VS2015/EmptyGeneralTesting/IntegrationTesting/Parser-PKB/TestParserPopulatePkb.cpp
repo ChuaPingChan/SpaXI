@@ -83,38 +83,40 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_nonNextedIfElse_success)
         {
             // Set up
-            list<int> actualResults;
-            list<int> expectedResults;
+            list<string> actualStringResults;
+            list<string> expectedStringResults;
+            list<int> actualIntResults;
+            list<int> expectedIntResults;
             Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_nonNestedIfElse());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Test adding of if-else statements
-            actualResults = dummyPkbMain.getAllIfs();
-            expectedResults = list<int>{ 4, 10 };
-            actualResults.sort();
-            expectedResults.sort();
-            Assert::IsTrue(actualResults == expectedResults);
+            actualIntResults = dummyPkbMain.getAllIfs();
+            expectedIntResults = list<int>{ 4, 10 };
+            actualIntResults.sort();
+            expectedIntResults.sort();
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Test if parents are updated correctly
-            actualResults = dummyPkbMain.getAllParents(Entity::STMT);
-            expectedResults = list<int>{ 4, 10 };
-            actualResults.sort();
-            expectedResults.sort();
-            Assert::IsTrue(actualResults == expectedResults);
+            actualIntResults = dummyPkbMain.getAllParents(Entity::STMT);
+            expectedIntResults = list<int>{ 4, 10 };
+            actualIntResults.sort();
+            expectedIntResults.sort();
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
-            actualResults = dummyPkbMain.getAllParents(Entity::IF);
-            expectedResults = list<int>{ 4, 10 };
-            actualResults.sort();
-            expectedResults.sort();
-            Assert::IsTrue(actualResults == expectedResults);
+            actualIntResults = dummyPkbMain.getAllParents(Entity::IF);
+            expectedIntResults = list<int>{ 4, 10 };
+            actualIntResults.sort();
+            expectedIntResults.sort();
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Test if children are updated correctly
-            actualResults = dummyPkbMain.getAllChildren(Entity::STMT);
-            expectedResults = list<int>{ 5, 6, 7, 8, 11, 12, 13 };
-            actualResults.sort();
-            expectedResults.sort();
-            Assert::IsTrue(actualResults == expectedResults);
+            actualIntResults = dummyPkbMain.getAllChildren(Entity::STMT);
+            expectedIntResults = list<int>{ 5, 6, 7, 8, 11, 12, 13 };
+            actualIntResults.sort();
+            expectedIntResults.sort();
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -286,20 +288,22 @@ namespace UnitTesting
         TEST_METHOD(manyCalls_success)
         {
             // Set up
-            list<int> actualResults;
-            list<int> expectedResults;
+            list<string> actualStringResults;
+            list<string> expectedStringResults;
+            list<int> actualIntResults;
+            list<int> expectedIntResults;
             Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_manyCalls());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Check if all procedures added correctly
-            actualResults = dummyPkbMain.getAllProcedures();
-            expectedResults = list<int>{ 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-            Assert::IsTrue(actualResults.size() == expectedResults.size());
-            actualResults.sort();
-            expectedResults.sort();
-            Assert::IsTrue(actualResults == expectedResults);
+            actualIntResults = dummyPkbMain.getAllProcedures();
+            expectedIntResults = list<int>{ 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+            Assert::IsTrue(actualIntResults.size() == expectedIntResults.size());
+            actualIntResults.sort();
+            expectedIntResults.sort();
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -308,41 +312,62 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_iteration3complexity)
         {
             // Set up
-            list<int> actualResults;
-            list<int> expectedResults;
+            list<string> actualStringResults;
+            list<string> expectedStringResults;
+            list<int> actualIntResults;
+            list<int> expectedIntResults;
             Parser parser(dummyPkbMainPtr);
             Assert::IsTrue(createDummySimpleSourceFile_iteration3complexity());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Check if all assignment statements are added correctly
-            actualResults = dummyPkbMain.getAllAssignments();
-            expectedResults = list<int>{ 
+            actualIntResults = dummyPkbMain.getAllAssignments();
+            expectedIntResults = list<int>{ 
                 1, 2, 3, 4, 5, 8, 10, 11, 12, 14, 15, 17, 19, 20, 21, 22, 23,
                 24, 26, 27, 28, 29, 31, 33, 34, 35, 36, 38, 39, 40, 42, 43, 45,
                 46, 47, 49, 50, 52, 53, 54, 55, 56, 57, 58, 59, 61, 62, 63, 65,
                 66, 69, 70, 71, 72, 73, 74, 75
             };
-            Assert::IsTrue(actualResults == expectedResults);
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Check if all if-else statements are added correctly
-            actualResults = dummyPkbMain.getAllIfs();
-            expectedResults = list<int>{ 9, 30, 48, 51 };
-            Assert::IsTrue(actualResults == expectedResults);
+            actualIntResults = dummyPkbMain.getAllIfs();
+            expectedIntResults = list<int>{ 9, 30, 48, 51 };
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Check if all while statements are added correctly
-            actualResults = dummyPkbMain.getAllWhiles();
-            expectedResults = list<int>{ 6, 7, 16, 18, 32, 37, 41, 44, 64, 68 };
-            Assert::IsTrue(actualResults == expectedResults);
+            actualIntResults = dummyPkbMain.getAllWhiles();
+            expectedIntResults = list<int>{ 6, 7, 16, 18, 32, 37, 41, 44, 64, 68 };
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Check if all call statements are added correctly
-            actualResults = dummyPkbMain.getAllCallsStmt();
-            expectedResults = list<int>{ 13, 25, 60, 67 };
-            Assert::IsTrue(actualResults == expectedResults);
+            actualIntResults = dummyPkbMain.getAllCallsStmt();
+            expectedIntResults = list<int>{ 13, 25, 60, 67 };
+            Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Check if all parents are deduced correctly
-            actualResults = dummyPkbMain.getAllParents(Entity::STMT);   // Any statements
-            expectedResults = list<int>{ 6, 7, 9, 16, 18, 30, 32, 37, 41, 44, 48, 51, 64, 68 };
+            actualIntResults = dummyPkbMain.getAllParents(Entity::STMT);   // Any statements
+            expectedIntResults = list<int>{ 6, 7, 9, 16, 18, 30, 32, 37, 41, 44, 48, 51, 64, 68 };
+
+            // Jump. Add more incremental test here.
+
+            // Check if inter-procedural Uses and Modifies are set correctly.
+            int targetProcIdx = (dummyPkbMain.convertStringToIdx(list<string>{"GHI"}, Entity::PROCEDURE)).front();
+            actualIntResults = dummyPkbMain.getUsesFromProc(targetProcIdx);
+            actualStringResults = dummyPkbMain.convertIdxToString(actualIntResults, Entity::VARIABLE);
+            expectedStringResults = list<string>{ "funnyVar", "laugh", "w", "a", "b", "tmp", "oSCar", "Romeo", "best", "supper" };
+            actualStringResults.sort();
+            expectedStringResults.sort();
+            Assert::IsTrue(actualStringResults == expectedStringResults);
+
+            targetProcIdx = (dummyPkbMain.convertStringToIdx(list<string>{"GHI"}, Entity::PROCEDURE)).front();
+            actualIntResults = dummyPkbMain.getModifiesFromProc(targetProcIdx);
+            actualStringResults = dummyPkbMain.convertIdxToString(actualIntResults, Entity::VARIABLE);
+            expectedStringResults = list<string>{ "funnyVar", "laugh", "a", "w", "b", "oSCar", "food", "best", "supper" };
+            actualStringResults.sort();
+            expectedStringResults.sort();
+            Assert::IsTrue(actualStringResults == expectedStringResults);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());

@@ -445,7 +445,7 @@ void Parser::parseAssignment() {
                         parentStackCopy.pop();
                     }
                 }
-                _pkbMainPtr->setModTableProcToVar(_currentProcName, var);
+                _pkbMainPtr->setUseTableProcToVar(_currentProcName, var);
 
             } else if (matchToken(Parser::REGEX_MATCH_CONSTANT)) {
                 int constant = stoi(_currentTokenPtr);
