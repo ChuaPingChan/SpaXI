@@ -12,60 +12,6 @@ namespace UnitTesting
     {
     public:
 
-        /********************
-        * Factor Regex Test *
-        ********************/
-        TEST_METHOD(TestRegex_Factor_VarName_Alphabetic_Valid)
-        {
-            string str = "validName";
-            Assert::IsTrue(RegexValidators::isValidFactorRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Factor_VarName_Alphanumeric_Valid)
-        {
-            string str = "validName22011209040009142005070518";
-            Assert::IsTrue(RegexValidators::isValidFactorRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Factor_ConstValue_SingleDigit_Valid)
-        {
-            string str = "2";
-            Assert::IsTrue(RegexValidators::isValidFactorRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Factor_ConstValue_MultiDigits_Valid)
-        {
-            string str = "22011209040009142005070518";
-            Assert::IsTrue(RegexValidators::isValidFactorRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Factor_VarName_BeginWithIllegalCharInvalid)
-        {
-            string str = "#invalidNameInvalidInteger";
-            Assert::IsFalse(RegexValidators::isValidFactorRegex(str));
-            str = "123invalidNameInvalidInteger";
-            Assert::IsFalse(RegexValidators::isValidFactorRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Factor_IdentInvalid)
-        {
-            string str = "\"invalid\"";
-            Assert::IsFalse(RegexValidators::isValidFactorRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Factor_SymbolsInvalid)
-        {
-            string str = "(varname)";
-            Assert::IsFalse(RegexValidators::isValidFactorRegex(str));
-        }
-
-        TEST_METHOD(TestRegex_Factor_WhitespacesInvalid)
-        {
-            string str = " valid   varname  ";
-            Assert::IsFalse(RegexValidators::isValidFactorRegex(str));
-        }
-
-
         /*************************************
         * Expression Spec Partial Regex Test *
         *************************************/
@@ -81,34 +27,34 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecPartial_Plus_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Plus_Invalid)
         {
             string str = "_\"+\"_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecPartial_Minus_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Minus_Invalid)
         {
             string str = "_\"-\"_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecPartial_Times_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Times_Invalid)
         {
             string str = "_\"*\"_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecPartial_OpenBrackets_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_OpenBrackets_invalid)
         {
             string str = "_\"(\"_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecPartial_CloseBrackets_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_CloseBrackets_Invalid)
         {
             string str = "_\")\"_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecPartial_Expression_Valid)
@@ -117,10 +63,10 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecPartial_Expression_Random_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecPartial_Expression_IllegalSynonym_Invalid)
         {
             string str = "_\"2x-(2*(a-)+b)\"_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecPartialRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecPartialRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecPartial_Whitespace_Valid)
@@ -150,34 +96,34 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecExact_Plus_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Plus_Invalid)
         {
             string str = "\"+\"";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecExact_Minus_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Minus_Invalid)
         {
             string str = "\"-\"";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecExact_Times_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecExact_Times_Invalid)
         {
             string str = "\"*\"";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecExact_OpenBrackets_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecExact_OpenBrackets_Invalid)
         {
             string str = "\"(\"";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
-        TEST_METHOD(TestRegex_ExpressionSpecExact_CloseBrackets_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpecExact_CloseBrackets_Invalid)
         {
             string str = "\")\"";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Expression_Valid)
@@ -189,7 +135,7 @@ namespace UnitTesting
         TEST_METHOD(TestRegex_ExpressionSpecExact_Expression_Random_Valid)
         {
             string str = "\"2x-(2*(a-)+b)\"";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpecExact_Whitespace_Valid)
@@ -208,10 +154,10 @@ namespace UnitTesting
         /*****************************
         * Expression Spec Regex Test *
         *****************************/
-        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_Valid)
+        TEST_METHOD(TestRegex_ExpressionSpec_Underscore_NotSupposedToBeHere_Invalid)
         {
             string str = "_";
-            Assert::IsTrue(RegexValidators::isValidExpressionSpecRegex(str));
+            Assert::IsFalse(RegexValidators::isValidExpressionSpecRegex(str));
         }
 
         TEST_METHOD(TestRegex_ExpressionSpec_Ident_PartialMatch_Valid)

@@ -78,11 +78,8 @@ const string RegexValidators::SUCH_THAT_Cl_REGEX = "(" + SPACE_0 + "(such that)"
 const string RegexValidators::RELATIONSHIP_KEYWORD_REGEX = "(Modifies|Uses|Parent[\\*]|Parent|Follows[\\*]|Follows|Calls[\\*]|Calls|Next[\\*]|Next|Affects[\\*]|Affects)";
 
 /*--------------- Pattern Clause Regex ---------------*/
-const string RegexValidators::FACTOR_REGEX = "(" + SPACE_0 + NAME_REGEX + SPACE_0 + "|" + SPACE_0 + INTEGER_REGEX + SPACE_0 + ")";
-//const string RegexValidators::EXPRESSION_SPEC = "(" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "|" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + "\"" + SPACE_0 + FACTOR_REGEX + SPACE_0 + "\"" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + ")";
-const string RegexValidators::EXPR_REGEX = "(" + NAME_REGEX + "|" + INTEGER_REGEX + "|" + OPERATOR_REGEX + "|" + OPEN_BRACKET_REGEX + "|" + CLOSE_BRACKET_REGEX + "|" + SPACE_0 + ")";
-const string RegexValidators::EXPRESSION_SPEC_PARTIAL_REGEX = "";
-const string RegexValidators::EXPRESSION_SPEC_EXACT_REGEX = "";
+const string RegexValidators::EXPRESSION_SPEC_EXACT_REGEX = "(" + SPACE_0 + "\"\\s*\\(*\\s*(\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*|\\s*\\(*\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*(\\s*[+\\-*]\\s*\\(*\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*\\)*\\s*\\)*\\s*)*\\s*)\\s*\\)*\\s*\"" + SPACE_0 + ")";
+const string RegexValidators::EXPRESSION_SPEC_PARTIAL_REGEX = "(" + SPACE_0 + "_" + SPACE_0 + EXPRESSION_SPEC_EXACT_REGEX + SPACE_0 + "_" + SPACE_0 + ")";
 const string RegexValidators::EXPRESSION_SPEC = "(" + EXPRESSION_SPEC_PARTIAL_REGEX + "|" + EXPRESSION_SPEC_EXACT_REGEX + ")";
 const string RegexValidators::PATTERN_ASSIGN_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + "(" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + "(" + SPACE_0 + EXPRESSION_SPEC + SPACE_0 + "|" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0 + ")" + ")" + "[)]" + SPACE_0 + ")";
 const string RegexValidators::PATTERN_WHILE_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + UNDERSCORE_REGEX + SPACE_0+ "[)]" + SPACE_0 + ")";
@@ -297,13 +294,6 @@ bool RegexValidators::isValidSuchThatClRegex(string str)
 {
     regex suchThatClRegexCheck(SUCH_THAT_Cl_REGEX);
     return regex_match(str, suchThatClRegexCheck);
-}
-
-/*--------------- Pattern Clause Regex Methods ---------------*/
-bool RegexValidators::isValidFactorRegex(string str)
-{
-    regex factorRegexCheck(FACTOR_REGEX);
-    return regex_match(str, factorRegexCheck);
 }
 
 bool RegexValidators::isValidExpressionSpecRegex(string str)
