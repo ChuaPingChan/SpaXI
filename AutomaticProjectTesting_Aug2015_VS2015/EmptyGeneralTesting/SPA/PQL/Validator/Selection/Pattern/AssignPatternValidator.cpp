@@ -107,81 +107,10 @@ string AssignPatternValidator::extractArgTwo(string str)
 
 bool AssignPatternValidator::isWellFormExpr(string str)
 {
-    regex exprTokenizerRegex("[0-9a-zA-Z]+|[0-9]+|[a-zA-Z]+|[+]|[-]|[*]|[(]|[)]");
-    if (!regex_match(str, exprTokenizerRegex))
-    {
-        return false;
-    }
-
-    sregex_iterator it(str.cbegin(), str.cend(), exprTokenizerRegex);
-    sregex_iterator it_end;
-
     int countOpenBracket = 0;
     int countCloseBracket = 0;
 
-    string firstToken = it->str(0);
-    if (!RegexValidators::isValidSynonymRegex(firstToken) && !RegexValidators::isValidOpenBracketRegex(firstToken) && !RegexValidators::isValidIntegerRegex(firstToken))
-    {
-        return false;
-    }
-    if (RegexValidators::isValidOpenBracketRegex(firstToken))
-    {
-        countOpenBracket++;
-    }
-    string prevToken = firstToken;
-    it++;
+    
 
-    while(it != it_end)
-    {
-        string currentToken = it->str(0);
-        prevToken = currentToken;
-        if ((RegexValidators::isValidSynonymRegex(currentToken) || RegexValidators::isValidIntegerRegex)
-            && !RegexValidators::isValidOperatorRegex(prevToken) && !RegexValidators::isValidOpenBracketRegex(prevToken))
-        {
-            return false;
-        }
-        else if (RegexValidators::isValidOperatorRegex(currentToken)
-            && !RegexValidators::isValidSynonymRegex(prevToken) && !RegexValidators::isValidIntegerRegex(prevToken) && !RegexValidators::isValidCloseBracketRegex(prevToken))
-        {
-            return false;
-        }
-        else if (RegexValidators::isValidOpenBracketRegex(currentToken))
-        {
-            if (!RegexValidators::isValidOperatorRegex(prevToken) && !RegexValidators::isValidOpenBracketRegex(prevToken))
-            {
-                return false;
-            }
-            else
-            {
-                countOpenBracket++;
-            }
-        }
-        else if (RegexValidators::isValidCloseBracketRegex(currentToken))
-        {
-            if (!RegexValidators::isValidSynonymRegex(prevToken) && !RegexValidators::isValidIntegerRegex(prevToken) && !RegexValidators::isValidCloseBracketRegex(prevToken))
-            {
-                return false;
-            }
-            else
-            {
-                countCloseBracket++;
-            }
-        }
-
-        it++;
-
-        if (it == it_end)   //last token
-        {
-            if (!RegexValidators::isValidSynonymRegex(currentToken) && !RegexValidators::isValidIntegerRegex(currentToken) && !RegexValidators::isValidCloseBracketRegex(currentToken))
-            {
-                return false;
-            }
-            else if (RegexValidators::isValidCloseBracketRegex(currentToken))
-            {
-                countCloseBracket++;
-            }
-        }
-    }
-
-    return countOpenBracket == countOpenBracket;
+    return countOpenBracket == countCloseBracket;
 }
