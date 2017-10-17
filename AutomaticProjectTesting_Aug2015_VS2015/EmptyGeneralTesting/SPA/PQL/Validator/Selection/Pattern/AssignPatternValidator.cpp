@@ -80,7 +80,6 @@ bool AssignPatternValidator::isValidArgTwo(string &argTwo)
         argTwo = Formatter::removeAllQuotes(argTwo);
         this->argTwoType = EXPRESSION_SPEC_EXACT;
         return isWellFormExpr(argTwo);
-        return true;
     }
 
     else
@@ -110,7 +109,24 @@ bool AssignPatternValidator::isWellFormExpr(string str)
     int countOpenBracket = 0;
     int countCloseBracket = 0;
 
-    
+
+    regex bracketRegex(RegexValidators::OPEN_BRACKET_REGEX+ "|" + RegexValidators::CLOSE_BRACKET_REGEX);
+    sregex_iterator it(str.cbegin(), str.cend(), bracketRegex);
+    sregex_iterator it_end;
+
+    for (; it != it_end; it++)
+    {
+        string currentBracketType = it->str(0);
+        if (RegexValidators::isValidOpenBracketRegex(currentBracketType))
+        {
+            countOpenBracket++;
+        }
+        else if (RegexValidators::isValidCloseBracketRegex(currentBracketType))
+        {
+            countCloseBracket++;
+        }
+
+    }
 
     return countOpenBracket == countCloseBracket;
 }

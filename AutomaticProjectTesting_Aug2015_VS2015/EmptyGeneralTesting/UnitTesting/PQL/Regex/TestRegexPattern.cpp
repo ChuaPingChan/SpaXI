@@ -259,6 +259,60 @@ namespace UnitTesting
             string str = "   a   (   v    ,   _\"x\"_    )   ";
             Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
         }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_IncorrectSumOfBrackets_OkInRegex_Valid)
+        {
+            string str = "   a(v, \"(((1+2)\")   ";
+            Assert::IsTrue(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_NoOperatorBtwn_NumberAndOpenBracket_Invalid)
+        {
+            string str = "   a(v, \"4(1+2)\")   ";
+            Assert::IsFalse(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_EmptyBracket_Invalid)
+        {
+            string str = "   a(v, \"()\")   ";
+            Assert::IsFalse(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_OperatorFront_NoSynonymFront_Invalid)
+        {
+            string str = "   a(v, \"+x\")   ";
+            Assert::IsFalse(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_OperatorBack_NoSynonymBack_Invalid)
+        {
+            string str = "   a(v, \"x+\")   ";
+            Assert::IsFalse(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_OperatorFront_NoSynonymFront_WithinBracket_Invalid)
+        {
+            string str = "   a(v, \"x+(+x)\")   ";
+            Assert::IsFalse(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_AdjacentOperator_Invalid)
+        {
+            string str = "   a(v, \"x++x\")   ";
+            Assert::IsFalse(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_OperatorFace_Invalid)
+        {
+            string str = "   a(v, \"x+a)(b-a\")   ";
+            Assert::IsFalse(RegexValidators::isValidPatternAssignRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Pattern_Assign_NoOperatorJoiningBracket_Invalid)
+        {
+            string str = "   a(v, \"(x+a)(b-s)\")";
+            Assert::IsFalse(RegexValidators::isValidPatternAssignRegex(str));
+        }
         
 
         /***************************
