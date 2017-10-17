@@ -25,8 +25,15 @@ list<string> PQLMain::run()
         evaluator.evaluate();
         ClauseResult evaluatorResult = qt.getEvaluatorResult();
         ResultFormatter formatter;
-        finalResult = formatter.finalResultFromSelection(evaluatorResult, qt);
+        if (evaluator.hasResult())
+        {          
+            finalResult = formatter.finalResultFromSelection(evaluatorResult, qt);
+        }
         
+        else
+        {
+            finalResult = formatter.handleNoResult(evaluatorResult, qt);
+        }
     }
     return finalResult;
 }

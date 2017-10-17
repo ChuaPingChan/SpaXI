@@ -19,6 +19,8 @@ public:
 	~QueryEvaluator();
 
 	void evaluate();
+    bool hasResult();
+
 
  //   /*--------------- Unit Testing ---------------*/
  //   bool getHasResult();
@@ -36,6 +38,7 @@ public:
 private:
 
 	QueryTree* _qt;
+    bool hasResultEvaluator;
 	//PKBMain PKB;//TODO: Set this to static
 
  //   bool hasResult = true;
