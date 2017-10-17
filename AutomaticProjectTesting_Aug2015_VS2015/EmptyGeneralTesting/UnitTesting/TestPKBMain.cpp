@@ -484,5 +484,21 @@ namespace UnitTesting
 
 
 		}
+
+		TEST_METHOD(TestNextStar) {
+			PKBMain PKB;
+			PKB.setNext(49, 50);
+			PKB.setNext(50, 51);
+			PKB.setNext(50, 54);
+			PKB.setNext(51, 52);
+			PKB.setNext(51, 54);
+			PKB.setNext(51, 50);
+			PKB.setNext(52, 53);
+			PKB.setNext(53, 51);
+			PKB.setNext(53, 50);
+			PKB.setNext(53, 54);
+
+			Assert::IsTrue(PKB.isNextStar(53, 50));
+		}
 	};
 }
