@@ -608,6 +608,27 @@ pair<list<int>, list<int>> PKBMain::getAllNext(Entity type1, Entity type2) {
 	return stmtTypeList.getStmtType(resultPair, type1, type2);
 }
 
+bool PKBMain::isNextStar(int befStmt, int aftStmt) {
+	return nextTable.isNextStar(befStmt, aftStmt);
+}
+
+list<int> PKBMain::getExecutedAfterStar(int befStmt, Entity type) {
+	list<int> stmtList = nextTable.getExecutedAfterStar(befStmt);
+	stmtList = stmtTypeList.getStmtType(stmtList, type);
+	return stmtList;
+}
+
+list<int> PKBMain::getExecutedBeforeStar(int aftStmt, Entity type) {
+	list<int> stmtList = nextTable.getExecutedBeforeStar(aftStmt);
+	stmtList = stmtTypeList.getStmtType(stmtList, type);
+	return stmtList;
+}
+
+pair<list<int>, list<int>> PKBMain::getAllNextStar(Entity type1, Entity type2) {
+	pair<list<int>, list<int>> resultPair = nextTable.getAllNextStar();
+	return stmtTypeList.getStmtType(resultPair, type1, type2);
+}
+
 bool PKBMain::isPresent(string var)
 {
 	return varIdxTable.isVarPresent(var);
