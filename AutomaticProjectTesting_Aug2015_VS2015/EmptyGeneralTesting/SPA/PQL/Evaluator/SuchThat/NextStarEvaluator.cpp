@@ -21,8 +21,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 1: Next*(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
-        //TODO: Uncomment
-       //return pkbInstance->isNextStar(stoi(argOne), stoi(argTwo));
+       return pkbInstance->isNextStar(stoi(argOne), stoi(argTwo));
     }
 
     //Case 2: Next*(int, _)
@@ -34,8 +33,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 3: Next*(int, synonym)
     else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
-        //TODO: Uncomment
-        list<int> pkbResult;// = pkbInstance->getExecutedAfterStar(stoi(argOne), argTwoType);
+        list<int> pkbResult = pkbInstance->getExecutedAfterStar(stoi(argOne), argTwoType);
         if (pkbResult.empty())
         {
             return false;
@@ -77,8 +75,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 7: Next*(synonym, int)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == INTEGER)
     {
-        //TODO:Uncomment
-        list<int> pkbResult;// = pkbInstance->getExecutedBeforeStar(stoi(argTwo), argOneType);
+        list<int> pkbResult = pkbInstance->getExecutedBeforeStar(stoi(argTwo), argOneType);
         if (pkbResult.empty())
         {
             return false;
@@ -93,7 +90,6 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 8: Next*(synonym, _)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == UNDERSCORE)
     {
-        //TODO:Uncomment
         list<int> pkbResult = pkbInstance->getAllExecutedBefore(argOneType);
         if (pkbResult.empty())
         {
@@ -123,7 +119,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 int argTwoVal = pair.second;
 
                 // Removes from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isNext(argOneVal, argTwoVal))//TODO: Change isNext to isNextStar
+                if (!pkbInstance->isNextStar(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
                 }
@@ -135,7 +131,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
         else if (!argOneExists && !argTwoExists)
         {
-            pair<list<int>, list<int>> pkbResult;// = pkbInstance->getAllNextStar(argOneType, argTwoType); //TODO: Uncomment
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getAllNextStar(argOneType, argTwoType);
 
             if (pkbResult.first.empty() && pkbResult.second.empty())
             {
@@ -163,7 +159,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 resultPairs.clear();
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getExecutedAfter(existingSynVal, existingSynType); //TODO: Uncomment and change method
+                    list<int> newSynVals = pkbInstance->getExecutedAfterStar(existingSynVal, existingSynType);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
@@ -187,7 +183,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 resultPairs.clear();
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals;// = pkbInstance->getBeforeStar(existingSynVal, existingSynType); //TODO: Change method
+                    list<int> newSynVals = pkbInstance->getExecutedBeforeStar(existingSynVal, existingSynType);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
