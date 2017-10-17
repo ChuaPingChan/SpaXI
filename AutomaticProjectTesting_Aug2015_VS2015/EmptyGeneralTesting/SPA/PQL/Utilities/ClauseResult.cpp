@@ -11,6 +11,7 @@ ClauseResult::ClauseResult()
     _synToIdxMap = unordered_map<string, int>();
     _synList = vector<string>();
     _results = list<vector<int>>();
+    _isNew = true;
 }
 
 list<string> ClauseResult::getAllSynonyms()
@@ -132,6 +133,8 @@ Note: This may method involve computing Catesian product - computationally expen
 bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsList)
 {
     assert(newSynResultsList.size() > 0);       // TODO: Can consider clearing everything if this happens
+
+    _isNew = false;
     if (_synToIdxMap.count(newSynName) == 1)
     {
         return overlapExistingSynResults(newSynName, newSynResultsList);
@@ -185,6 +188,8 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
     assert(pairResults.size() > 0);
     assert(_synToIdxMap.count(syn1Name) == 0);    // syn1 must be new synonym
     assert(_synToIdxMap.count(syn2Name) == 0);    // syn2 must be new synonym
+
+    _isNew = false;
 
     // Add to _synList and _synToIdxMap
     _synList.push_back(syn1Name);
@@ -339,6 +344,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
 {
     assert(ClauseResult::synonymPresent(oldSyn));
     assert(!(ClauseResult::synonymPresent(newSyn)));
+    assert(!_isNew);
 
     // Add to _synList and _synToIdxMap
     _synList.push_back(newSyn);
@@ -380,8 +386,17 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
     return true;
 }
 
+/*
+Returns true if there are results in the ClauseResult Object.
+Also returns true if ClauseResult is new and have not been
+populated before.
+*/
 bool ClauseResult::hasResults()
 {
-    return !(_results.empty());
+    if (_isNew) {
+        return true;
+    } else {
+        return !(_results.empty());
+    }
 }
 
