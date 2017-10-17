@@ -15,11 +15,11 @@ class ResultFormatter
 public:
 	ResultFormatter();
 	list<string> finalResultFromSelection(ClauseResult cr, QueryTree qt);
+    list<string> handleNoResult(ClauseResult cr, QueryTree qt);
 
 protected:
 	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
 	list<string> convertListOfListOfIntsToListOfStrings(list<list<int>> listOfInts);
-    bool checkIfQueryTreeHasClauses(QueryTree * qt);
 
 private:
     PKBMain* pkbInstance;

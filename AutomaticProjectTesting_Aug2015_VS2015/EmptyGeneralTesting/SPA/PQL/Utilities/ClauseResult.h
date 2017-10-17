@@ -33,6 +33,7 @@ protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
     list<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
+    bool _isNew;    // Flag to indicate whether ClauseResult has been populated before
 
     /******************
      * Helper methods *
