@@ -18,11 +18,15 @@ public:
 	bool isNext(int stmtBef, int stmtAft);
 	bool isExecutedBefore(int stmtBef);
 	pair<list<int>, list<int>> getAllNext();
+	bool isNextStar(int stmtBef, int stmtAft);
 	bool isNextStar(int stmtBef, int stmtAft, NextStarCache & nextStarCache);
+	list<int> getExecutedAfterStar(int stmt);
+	list<int> getExecutedBeforeStar(int stmtAft);
 	list<int> getExecutedAfter(int stmtBef);
 	bool hasNext();
 	list<int> getAllExecutedAfter();
 	list<int> getExecutedBefore(int stmtAft);
+	pair<list<int>, list<int>> getAllNextStar();
 	list<int> getExecutedBefore();
 	bool isExecutedAfter(int stmtAft);
 	list<int> getAllExecutedBefore();

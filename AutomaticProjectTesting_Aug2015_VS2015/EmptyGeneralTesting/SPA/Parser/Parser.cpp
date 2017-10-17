@@ -53,12 +53,8 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _pkbMainPtr = pkbMainPtr;
     _stackOfFollowsStacks = stack<stack<int>>();
     _currentProcName = Parser::STRING_EMPTY_STRING;
-    _ifElseStmtExitPoints = unordered_map<int, pair<int,int>>();
-    _whileStmtStack = stack<int>();
-    _ifElseStmtStack = stack<int>();
-
-    _justExitIfElseStmt = false;
-    _justExitWhileStmt = false;
+    _whileHeaderStmtStack = stack<int>();
+    _prevReachableStmts = unordered_set<int>();
 }
 
 // TODO: Add comprehensive method description
@@ -280,6 +276,7 @@ Parses a statement up to the point after ';' for call and assignment statements,
 and '}' for while and if-else statements.
 */
 void Parser::parseStmt() {
+
     _currentStmtNumber++;
     OutputDebugString("FINE: Identifying next statement type...\n");
 
@@ -299,13 +296,35 @@ void Parser::parseStmt() {
     // (i.e. call, assignment, if-else, while)
     if (Parser::whileExpected()) {
         parseWhileStmt();
+
+        if (moreStmtsExistInStmtList()) {
+            for (int prevReachableStmt : _prevReachableStmts) {
+                _pkbMainPtr->setNext(prevReachableStmt, _currentStmtNumber + 1);
+            }
+            _prevReachableStmts.clear();
+        }
     } else if (Parser::callStmtExpected()) {
         parseCallStmt();
+
+        if (moreStmtsExistInStmtList()) {
+            _pkbMainPtr->setNext(_currentStmtNumber, _currentStmtNumber + 1);
+        }
     } else if (Parser::ifStmtExpected()) {
         parseIfStmt();
+
+        if (moreStmtsExistInStmtList()) {
+            for (int prevReachableStmt : _prevReachableStmts) {
+                _pkbMainPtr->setNext(prevReachableStmt, _currentStmtNumber + 1);
+            }
+            _prevReachableStmts.clear();
+        }
     } else if (Parser::assignmentExpected()) {
         // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords as variable names
         parseAssignment();
+
+        if (moreStmtsExistInStmtList()) {
+            _pkbMainPtr->setNext(_currentStmtNumber, _currentStmtNumber + 1);
+        }
     }
 }
 
@@ -340,6 +359,19 @@ When the method ends, _currentTokenPtr is the 'if' keyword.
 */
 bool Parser::ifStmtExpected() {
     return matchToken(Parser::REGEX_MATCH_IF_KEYWORD);
+}
+
+/*
+Tells whether there is an upcoming statement starting from the next token.
+Does not move _currentTokenPtr forward.
+*/
+bool Parser::moreStmtsExistInStmtList()
+{
+    /*
+    If the upcoming token is '}', it means there are no more statement
+    in a given container.
+    */
+    return !(matchToken(Parser::REGEX_MATCH_CLOSE_BRACE));
 }
 
 /*
@@ -410,7 +442,7 @@ void Parser::parseAssignment() {
                         parentStackCopy.pop();
                     }
                 }
-                _pkbMainPtr->setModTableProcToVar(_currentProcName, var);
+                _pkbMainPtr->setUseTableProcToVar(_currentProcName, var);
 
             } else if (matchToken(Parser::REGEX_MATCH_CONSTANT)) {
                 int constant = stoi(_currentTokenPtr);
@@ -597,6 +629,8 @@ void Parser::parseWhileStmt() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
 
     _parentStack.push(_currentStmtNumber);
+    //_containerStack.push(_currentStmtNumber);
+    int whileStmtNumber = _currentStmtNumber;   // For setting Next relation
 
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
@@ -638,7 +672,19 @@ void Parser::parseWhileStmt() {
     stack<int> newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
 
+    assert(whileStmtNumber == _currentStmtNumber);
+    _pkbMainPtr->setNext(whileStmtNumber, _currentStmtNumber + 1);
     parseStmtList();
+
+    // Before exiting while-block, update next relation (loop back)
+    for (int prevReachableStmt : _prevReachableStmts) {
+        _pkbMainPtr->setNext(prevReachableStmt, whileStmtNumber);
+        // Don't clear _prevReachableStmts. Entries are still needed outside while-block.
+    }
+    _pkbMainPtr->setNext(_currentStmtNumber, whileStmtNumber);
+    // Store possible exit points of while statement
+    _prevReachableStmts.insert(_currentStmtNumber);
+    _prevReachableStmts.insert(whileStmtNumber);    
 
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
     OutputDebugString("FINE: Exiting while block.\n");
@@ -648,14 +694,17 @@ void Parser::parseWhileStmt() {
     _parentStack.pop();
 }
 
+/*
+Parses an if-else statement. When this method ends,
+_currentTokenPtr will be advanced after '}'.
+*/
 void Parser::parseIfStmt()
 {
     OutputDebugString("FINE: If-else statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD);
 
     _parentStack.push(_currentStmtNumber);
-    _ifElseStmtStack.push(_currentStmtNumber);
-    int ifElseStmtNum = _currentStmtNumber;
+    int ifElseStmtNum = _currentStmtNumber;     // Store for setting Next relation
 
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
 
@@ -698,8 +747,11 @@ void Parser::parseIfStmt()
     stack<int> newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
 
+    assert(ifElseStmtNum == _currentStmtNumber);
+    _pkbMainPtr->setNext(ifElseStmtNum, _currentStmtNumber + 1);
     parseStmtList();
-
+    
+    int lastStmtInIfBlock = _currentStmtNumber;     // Store for setting Next relation
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
     OutputDebugString("FINE: Exiting if-block.\n");
     processAndPopTopFollowStack();
@@ -714,8 +766,14 @@ void Parser::parseIfStmt()
     newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
 
+    _pkbMainPtr->setNext(ifElseStmtNum, _currentStmtNumber + 1);
     parseStmtList();
-
+    
+    // Store the exit points of the if-else statement for setting Next relation
+    int lastStmtInElseBlock = _currentStmtNumber;
+    _prevReachableStmts.insert(lastStmtInIfBlock);
+    _prevReachableStmts.insert(lastStmtInElseBlock);
+    
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
     OutputDebugString("FINE: Exiting else-block.\n");
     processAndPopTopFollowStack();
