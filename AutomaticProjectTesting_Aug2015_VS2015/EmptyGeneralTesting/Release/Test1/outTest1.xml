@@ -1,133 +1,133 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>Release</name><parsing_time_taken>5.000000</parsing_time_taken>
+<name>Release</name><parsing_time_taken>12.000000</parsing_time_taken>
 </info>
 <queries>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="All statements HaveResult">1</id><querystr><![CDATA[stmt s; Select s]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>12.000000</time_taken>
+<time_taken>25.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="All assignments HaveResult">2</id><querystr><![CDATA[assign a; Select a]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>11.000000</time_taken>
+<time_taken>27.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="All whiles HaveResult">3</id><querystr><![CDATA[while w; Select w]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>11.000000</time_taken>
+<time_taken>28.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="All variables HaveResult">4</id><querystr><![CDATA[variable v; Select v]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>11.000000</time_taken>
+<time_taken>31.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="Missing SemiColon In Declaration NoResult">5</id><querystr><![CDATA[stmt s Select s]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>8.000000</time_taken>
+<time_taken>22.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="Missing Whitespace In Declaration Keyword NoResult">6</id><querystr><![CDATA[stmts; Select s]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>7.000000</time_taken>
+<time_taken>17.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="No Whitespace After Select NoResult">7</id><querystr><![CDATA[stmt s; Selects]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>8.000000</time_taken>
+<time_taken>20.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="Nonexistent Entity NoResult">8</id><querystr><![CDATA[recursion r; Select r]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>7.000000</time_taken>
+<time_taken>16.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="SelectKeyword as Entity HaveResult">9</id><querystr><![CDATA[stmt Select; Select Select]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>42.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="NonCapitalised SelectKeyword NoResult">10</id><querystr><![CDATA[stmt s; select s]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>8.000000</time_taken>
+<time_taken>28.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="Invalid Select Arg NoResult">11</id><querystr><![CDATA[stmt Select; Select Select Select]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>8.000000</time_taken>
+<time_taken>30.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" CondNum="1" RelNum="0" comment="Invalid Select Arg NoResult">12</id><querystr><![CDATA[stmts; variable v; Select s v]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>7.000000</time_taken>
+<time_taken>28.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" SuchThat="1" CondNum="2" RelNum="0" comment="Nonexistent Relation NoResult">13</id><querystr><![CDATA[stmt s; Select s such that Mother(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>12.000000</time_taken>
+<time_taken>31.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" SuchThat="1" CondNum="2" RelNum="0" comment="Incomplete Query NoResult">14</id><querystr><![CDATA[stmt s; Select s such that]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>9.000000</time_taken>
+<time_taken>33.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" Followsstar="1" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym SuchThat Follows And FollowsStar HaveResult">15</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2) and Follows*(1, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>57.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" Followsstar="1" SuchThat="2" CondNum="5" RelNum="2" comment="Select SingleSynonym SuchThat Follows SuchThat FollowsStar HaveResult">16</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2) such that Follows*(1, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>20.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" Followsstar="1" SuchThat="2" CondNum="6" RelNum="3" comment="Select SingleSynonym SuchThat Follows SuchThat FollowsStar And Follows HaveResult">17</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2) such that Follows*(1, 3) and Follows(4, 5)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>21.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnBoolean="1" CondNum="1" RelNum="0" comment="Select Boolean NoDeclaration HaveResult (Not possible)">18</id><querystr><![CDATA[None Select BOOLEAN]]></querystr>
 <stuans></stuans>
 <correct>true</correct>
-<time_taken>7.000000</time_taken>
+<time_taken>16.000000</time_taken>
 <failed>
 <missing>true</missing>
 <additional></additional>
@@ -143,1400 +143,1400 @@
 <id ReturnBoolean="1" CondNum="1" RelNum="0" comment="Select Boolean ValidDeclaration HaveResult">19</id><querystr><![CDATA[stmt s; Select BOOLEAN]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>12.000000</time_taken>
+<time_taken>30.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnBoolean="1" CondNum="1" RelNum="0" comment="Select Boolean InvalidDeclaration NoResult">20</id><querystr><![CDATA[stmts; Select BOOLEAN]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>6.000000</time_taken>
+<time_taken>14.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows IntInt HaveResult">21</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>34.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows IntInt NoResult">22</id><querystr><![CDATA[stmt s; Select s such that Follows(3, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>36.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Follows IntInt 2nd Arg > 1st Arg NoResult">23</id><querystr><![CDATA[stmt s; Select s such that Follows(2, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>34.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows IntInt SameInt NoResult">24</id><querystr><![CDATA[stmt s; Select s such that Follows(2, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>32.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Follows LackOf Arguments NoResult">25</id><querystr><![CDATA[stmt s; Select s such that Follows(1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>11.000000</time_taken>
+<time_taken>26.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Follows Excessive Arguments NoResult">26</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2, 3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>9.000000</time_taken>
+<time_taken>28.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Such and That Keywords Separated NoResult">27</id><querystr><![CDATA[stmt s; Select s such Follows(1, 2) that]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>8.000000</time_taken>
+<time_taken>38.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Tab within Follows Keyword">28</id><querystr><![CDATA[stmt s;  Select s such that Follows ( 1 , 2 )]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" CondNum="2" RelNum="1" comment="No Whitespace Within SuchThat Keyword NoResult">29</id><querystr><![CDATA[stmt s; Select s suchthat Follows(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>7.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Excessive Whitespace Within SuchThat Keyword NoResult">30</id><querystr><![CDATA[stmt s; Select s such         that Follows(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>8.000000</time_taken>
+<time_taken>32.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows IntInt FollowsKeywordAsSynonym HaveResult">31</id><querystr><![CDATA[stmt Follows; Select Follows such that Follows(1, 2)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" CondNum="2" RelNum="1" comment="Missing SuchThat Keyword NoResult">32</id><querystr><![CDATA[stmt s; Select s Follows(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>7.000000</time_taken>
+<time_taken>30.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" CondNum="2" RelNum="1" comment="Missing SelectKeyword NoResult">33</id><querystr><![CDATA[stmt s; Follows (1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>9.000000</time_taken>
+<time_taken>29.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Follows IntUnderscore HaveResult">34</id><querystr><![CDATA[stmt s; Select s such that Follows(1, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>54.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows IntSynonym HaveResult">35</id><querystr><![CDATA[stmt s; Select s such that Follows(1, s)]]></querystr>
 <stuans>2</stuans>
 <correct>2</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>50.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows IntSynonym BehindWhile HaveResult">36</id><querystr><![CDATA[stmt s; Select s such that Follows(3, s)]]></querystr>
 <stuans>8</stuans>
 <correct>8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Follows UnderscoreInt HaveResult">37</id><querystr><![CDATA[stmt s; Select s such that Follows(_, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Follows UnderscoreInt NoResult">38</id><querystr><![CDATA[stmt s; Select s such that Follows(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>17.000000</time_taken>
+<time_taken>103.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym Stmt Follows UnderscoreUnderscore HaveResult">39</id><querystr><![CDATA[stmt s; Select s such that Follows(_, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>57.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Follows UnderscoreSynonym HaveResult">40</id><querystr><![CDATA[stmt s; Select s such that Follows(_, s)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>122.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows SynonymInt FollowsKeywordAsSynontm As RelationArg HaveResult">41</id><querystr><![CDATA[stmt s, Follows; Select s such that Follows(Follows, 2)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows SynonymInt HaveResult">42</id><querystr><![CDATA[stmt s; Select s such that Follows(s, 2)]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows SynonymInt NoResult">43</id><querystr><![CDATA[stmt s; Select s such that Follows(s, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows SynonymInt BeforeWhile HaveResult">44</id><querystr><![CDATA[stmt s; Select s such that Follows(s, 8)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>52.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Follows SynonymUnderscore HaveResult">45</id><querystr><![CDATA[stmt s; Select s such that Follows(s, _)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>49.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows SynonymSynonym GetFront HaveResult">46</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows(s1, s2)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>37.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows SynonymSynonym GetBack HaveResult">47</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows(s1, s2)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>41.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Follows SynonymSynonym Same NoResult">48</id><querystr><![CDATA[stmt s; Select s such that Follows(s, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>39.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Follows IntInt HaveResult">49</id><querystr><![CDATA[variable v; Select v such that Follows(1, 2)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>45.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Follows IntInt NoResult">50</id><querystr><![CDATA[variable v; Select v such that Follows(3, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>38.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Follows IntUnderscore HaveResult">51</id><querystr><![CDATA[variable v; Select v such that Follows(1, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Follows IntSynonym HaveResult">52</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows(1, s)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Follows IntSynonym BehindWhile HaveResult">53</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows(3, s)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>19.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Follows UnderscoreInt HaveResult">54</id><querystr><![CDATA[variable v; Select v such that Follows(_, 3)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>79.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Follows UnderscoreInt NoResult">55</id><querystr><![CDATA[variable v; Select v such that Follows(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym Variable Follows UnderscoreUnderscore HaveResult">56</id><querystr><![CDATA[variable v; Select v such that Follows(_, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>44.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Follows UnderscoreSynonym HaveResult">57</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows(_, s)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>39.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Follows SynonymInt HaveResult">58</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows(s, 2)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>37.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Follows SynonymInt NoResult">59</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows(s, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>34.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Follows SynonymInt BeforeWhile HaveResult">60</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows(s, 8)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>109.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Follows SynonymUnderscore HaveResult">61</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows(s, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>49.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Follows Illegal Argument NoResult">62</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows(v, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>46.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows IntInt HaveResult">63</id><querystr><![CDATA[assign a; Select a such that Follows(1, 2)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows IntInt NoResult">64</id><querystr><![CDATA[assign a; Select a such that Follows(3, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign Follows IntUnderscore HaveResult">65</id><querystr><![CDATA[assign a; Select a such that Follows(1, _)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows IntSynonym HaveResult">66</id><querystr><![CDATA[assign a; Select a such that Follows(1, a)]]></querystr>
 <stuans>2</stuans>
 <correct>2</correct>
-<time_taken>13.000000</time_taken>
+<time_taken>44.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows IntSynonym BehindWhile HaveResult">67</id><querystr><![CDATA[assign a; Select a such that Follows(3, a)]]></querystr>
 <stuans>8</stuans>
 <correct>8</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>46.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign Follows UnderscoreInt HaveResult">68</id><querystr><![CDATA[assign a; Select a such that Follows(_, 3)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>77.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign Follows UnderscoreInt NoResult">69</id><querystr><![CDATA[assign a; Select a such that Follows(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym Assign Follows UnderscoreUnderscore HaveResult">70</id><querystr><![CDATA[assign a; Select a such that Follows(_, _)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>120.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign Follows UnderscoreSynonym HaveResult">71</id><querystr><![CDATA[assign a; Select a such that Follows(_, a)]]></querystr>
 <stuans>2,5,6,7,8</stuans>
 <correct>2,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>64.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows SynonymInt HaveResult">72</id><querystr><![CDATA[assign a; Select a such that Follows(a, 2)]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows SynonymInt NoResult">73</id><querystr><![CDATA[assign a; Select a such that Follows(a, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows SynonymInt BeforeIntNotAssign NoResult">74</id><querystr><![CDATA[assign a; Select a such that Follows(a, 8)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign Follows SynonymUnderscore HaveResult">75</id><querystr><![CDATA[assign a; Select a such that Follows(a, _)]]></querystr>
 <stuans>1,2,4,5,6</stuans>
 <correct>1,2,4,5,6</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>54.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows SynonymSynonym GetFront HaveResult">76</id><querystr><![CDATA[assign a1, a2; Select a1 such that Follows(a1, a2)]]></querystr>
 <stuans>1,4,5,6</stuans>
 <correct>1,4,5,6</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows SynonymSynonym GetBack HaveResult">77</id><querystr><![CDATA[assign a1, a2; Select a2 such that Follows(a1, a2)]]></querystr>
 <stuans>2,5,6,7</stuans>
 <correct>2,5,6,7</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>51.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Follows SynonymSynonym Same NoResult">78</id><querystr><![CDATA[assign a; Select a such that Follows(a, a)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>13.000000</time_taken>
+<time_taken>59.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows IntInt HaveResult">79</id><querystr><![CDATA[while w; Select w such that Follows(1, 2)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>13.000000</time_taken>
+<time_taken>203.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows IntInt NoResult">80</id><querystr><![CDATA[while w; Select w such that Follows(3, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While Follows IntUnderscore HaveResult">81</id><querystr><![CDATA[while w; Select w such that Follows(1, _)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>111.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows IntSynonym HaveResult">82</id><querystr><![CDATA[while w; Select w such that Follows(2, w)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>77.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows IntSynonym WhileFollowItself NoResult">83</id><querystr><![CDATA[while w; Select w such that Follows(3, w)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>51.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While Follows UnderscoreInt HaveResult">84</id><querystr><![CDATA[while w; Select w such that Follows(_, 3)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>79.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While Follows UnderscoreInt NoResult">85</id><querystr><![CDATA[while w; Select w such that Follows(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>17.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym While Follows UnderscoreUnderscore HaveResult">86</id><querystr><![CDATA[while w; Select w such that Follows(_, _)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>49.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While Follows UnderscoreSynonym HaveResult">87</id><querystr><![CDATA[while w; Select w such that Follows(_, w)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows SynonymInt HaveResult">88</id><querystr><![CDATA[while w; Select w such that Follows(w, 8)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>13.000000</time_taken>
+<time_taken>54.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows SynonymInt NoResult">89</id><querystr><![CDATA[while w; Select w such that Follows(w, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>13.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While Follows SynonymUnderscore HaveResult">90</id><querystr><![CDATA[while w; Select w such that Follows(w, _)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>52.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows SynonymSynonym GetFront NoResult">91</id><querystr><![CDATA[while w1, w2; Select w1 such that Follows(w1, w2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>51.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows SynonymSynonym GetBack NoResult">92</id><querystr><![CDATA[while w1, w2; Select w2 such that Follows(w1, w2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Follows SynonymSynonym Same NoResult">93</id><querystr><![CDATA[while w; Select w such that Follows(w, w)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>13.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt SuchThat Follows IntInt and Follows IntInt HaveResult">94</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2) and Follows(2, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>143.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="AndKeyword StuckToBackOf PreviousRelation HaveResult">95</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2)and Follows(2, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>246.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" comment="AndKeyword StuckToFrontOf PreviousRelation NoResult">96</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2) andFollows(2, 3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>10.000000</time_taken>
+<time_taken>318.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="2" CondNum="5" RelNum="2" comment="Select SingleSynonym Stmt SuchThat Follows IntInt SuchThat Follows IntInt HaveResult">97</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2) such that Follows(2, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>60.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="2" CondNum="5" RelNum="2" comment="SuchThatKeyword StuckToBackOf PreviousRelation HaveResult">98</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2)such that Follows(2, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>19.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="1" SuchThat="2" CondNum="4" RelNum="1" comment="SuchThatKeyword StuckToFrontOf PreviousRelation NoResult">99</id><querystr><![CDATA[stmt s; Select s such that Follows(1, 2) such thatFollows(2, 3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>12.000000</time_taken>
+<time_taken>42.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows IntUnderscore And Follows IntUnderscore HaveResult">100</id><querystr><![CDATA[stmt s; Select s such that Follows(1, _) and Follows(2, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>22.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym BothRelationSameSynonym NoResult">101</id><querystr><![CDATA[stmt s; Select s such that Follows(1, s) and Follows(2, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>46.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym BothRelationDiffSynonym HaveResult">102</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows(1, s2) and Follows(2, s3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym GetFront HaveResult">103</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows(1, s1) and Follows(2, s2)]]></querystr>
 <stuans>2</stuans>
 <correct>2</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>43.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym GetBack HaveResult">104</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows(1, s1) and Follows(2, s2)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>36.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows UnderscoreInt And Follows UnderscoreInt HaveResult">105</id><querystr><![CDATA[stmt s; Select s such that Follows(_, 2) and Follows(_, 5)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>50.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows UnderscoreInt And Follows UnderscoreInt NoResult">106</id><querystr><![CDATA[stmt s; Select s such that Follows(_, 2) and Follows(_, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>17.000000</time_taken>
+<time_taken>46.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="4" SuchThat="1" CondNum="8" RelNum="2" comment="Select SingleSynonym Stmt Follows UnderscoreUnderscore And Follows UnderscoreUnderscore HaveResult">107</id><querystr><![CDATA[stmt s; Select s such that Follows(_, _) and Follows(_, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym CommonSynonym HaveResult">108</id><querystr><![CDATA[stmt s; Select s such that Follows(_, s) and Follows(_, s)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym UniqueSynonym HaveResult">109</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows(_, s2) and Follows(_, s3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>19.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym GetFront HaveResult">110</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows(_, s1) and Follows(_, s2)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>19.000000</time_taken>
+<time_taken>121.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym GetBack HaveResult">111</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows(_, s1) and Follows(_, s2)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>100.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt BothRelation SameSynonym NoResult">112</id><querystr><![CDATA[stmt s; Select s such that Follows(s, 2) and Follows(s, 3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>60.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt GetFront HaveResult">113</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows(s1, 2) and Follows(s2, 3)]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt GetBack HaveResult">114</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows(s1, 2) and Follows(s2, 3)]]></querystr>
 <stuans>2</stuans>
 <correct>2</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymUnderscore And Follows SynonymUnderscore GetFront HaveResult">115</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows(s1, _) and Follows(s2, _)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymUnderscore And Follows SynonymUnderscore GetBack HaveResult">116</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows(s1, _) and Follows(s2, _)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>77.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetFirst HaveResult">117</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows(s1, s2) and Follows(s2, s3)]]></querystr>
 <stuans>1,2,4,5</stuans>
 <correct>1,2,4,5</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetMiddle HaveResult">118</id><querystr><![CDATA[stmt s1, s2, s3; Select s2 such that Follows(s1, s2) and Follows(s2, s3)]]></querystr>
 <stuans>2,3,5,6</stuans>
 <correct>2,3,5,6</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>119.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetLast HaveResult">119</id><querystr><![CDATA[stmt s1, s2, s3; Select s3 such that Follows(s1, s2) and Follows(s2, s3)]]></querystr>
 <stuans>3,6,7,8</stuans>
 <correct>3,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain s3ShldNotFollowTwice NoResult">120</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows(s1, s3) and Follows(s2, s3)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>54.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain s1ShldNotHaveTwoFollowers NoResult">121</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows(s1, s2) and Follows(s1, s3)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar IntInt HaveResult">122</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, 8)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStarIntInt NotSameStmtLst NoResult">123</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>17.000000</time_taken>
+<time_taken>51.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar IntUnderscore HaveResult">124</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar IntSynonym HaveResult">125</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, s)]]></querystr>
 <stuans>2,3,8</stuans>
 <correct>2,3,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>49.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar IntSynonym BehindWhile HaveResult">126</id><querystr><![CDATA[stmt s; Select s such that Follows*(3, s)]]></querystr>
 <stuans>8</stuans>
 <correct>8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar UnderscoreInt HaveResult">127</id><querystr><![CDATA[stmt s; Select s such that Follows*(_, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>92.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar UnderscoreInt NoResult">128</id><querystr><![CDATA[stmt s; Select s such that Follows*(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar UnderscoreUnderscore HaveResult">129</id><querystr><![CDATA[stmt s; Select s such that Follows*(_, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>60.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar UnderscoreSynonym HaveResult">130</id><querystr><![CDATA[stmt s; Select s such that Follows*(_, s)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar SynonymInt HaveResult">131</id><querystr><![CDATA[stmt s; Select s such that Follows*(s, 2)]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>46.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar SynonymInt NoResult">132</id><querystr><![CDATA[stmt s; Select s such that Follows*(s, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>13.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar SynonymInt BeforeWhile HaveResult">133</id><querystr><![CDATA[stmt s; Select s such that Follows*(s, 8)]]></querystr>
 <stuans>1,2,3</stuans>
 <correct>1,2,3</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar SynonymUnderscore HaveResult">134</id><querystr><![CDATA[stmt s; Select s such that Follows*(s, _)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>21.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar SynonymSynonym GetFront HaveResult">135</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows*(s1, s2)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar SynonymSynonym GetBack HaveResult">136</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows*(s1, s2)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>250.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt FollowsStar SynonymSynonym Same NoResult">137</id><querystr><![CDATA[stmt s; Select s such that Follows*(s, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>113.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable FollowsStar IntInt HaveResult">138</id><querystr><![CDATA[variable v; Select v such that Follows*(1, 2)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable FollowsStar IntInt NotSameStmtLst NoResult">139</id><querystr><![CDATA[variable v; Select v such that Follows*(3, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable FollowsStar IntUnderscore HaveResult">140</id><querystr><![CDATA[variable v; Select v such that Follows*(1, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>52.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable FollowsStar IntSynonym HaveResult">141</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows*(1, s)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable FollowsStar IntSynonym BehindWhile HaveResult">142</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows*(3, s)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable FollowsStar UnderscoreInt HaveResult">143</id><querystr><![CDATA[variable v; Select v such that Follows*(_, 3)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>52.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable FollowsStar UnderscoreInt NoResult">144</id><querystr><![CDATA[variable v; Select v such that Follows*(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym Variable FollowsStar UnderscoreUnderscore HaveResult">145</id><querystr><![CDATA[variable v; Select v such that Follows*(_, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>59.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable FollowsStar UnderscoreSynonym HaveResult">146</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows*(_, s)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable FollowsStar SynonymInt HaveResult">147</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows*(s, 2)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>44.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable FollowsStar SynonymInt NoResult">148</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows*(s, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>42.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable FollowsStar SynonymInt BeforeWhile HaveResult">149</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows*(s, 8)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>43.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable FollowsStar SynonymUnderscore HaveResult">150</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows*(s, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>49.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable FollowsStar Illegal Argument NoResult">151</id><querystr><![CDATA[variable v; stmt s; Select v such that Follows*(v, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>40.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar IntInt HaveResult">152</id><querystr><![CDATA[assign a; Select a such that Follows*(1, 2)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar IntInt NotSameStmtList NoResult">153</id><querystr><![CDATA[assign a; Select a such that Follows*(3, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>13.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign FollowsStar IntUnderscore HaveResult">154</id><querystr><![CDATA[assign a; Select a such that Follows*(1, _)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>41.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar IntSynonym HaveResult">155</id><querystr><![CDATA[assign a; Select a such that Follows*(1, a)]]></querystr>
 <stuans>2,8</stuans>
 <correct>2,8</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>38.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar IntSynonym BehindWhile HaveResult">156</id><querystr><![CDATA[assign a; Select a such that Follows*(3, a)]]></querystr>
 <stuans>8</stuans>
 <correct>8</correct>
-<time_taken>13.000000</time_taken>
+<time_taken>34.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign FollowsStar UnderscoreInt HaveResult">157</id><querystr><![CDATA[assign a; Select a such that Follows*(_, 3)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>45.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign FollowsStar UnderscoreInt NoResult">158</id><querystr><![CDATA[assign a; Select a such that Follows*(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>44.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym Assign FollowsStar UnderscoreUnderscore HaveResult">159</id><querystr><![CDATA[assign a; Select a such that Follows*(_, _)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>136.000000</time_taken>
+<time_taken>46.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign FollowsStar UnderscoreSynonym HaveResult">160</id><querystr><![CDATA[assign a; Select a such that Follows*(_, a)]]></querystr>
 <stuans>2,5,6,7,8</stuans>
 <correct>2,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>39.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar SynonymInt HaveResult">161</id><querystr><![CDATA[assign a; Select a such that Follows*(a, 2)]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar SynonymInt NoResult">162</id><querystr><![CDATA[assign a; Select a such that Follows*(a, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>17.000000</time_taken>
+<time_taken>44.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar SynonymInt BeforeIntNotAssign NoResult">163</id><querystr><![CDATA[assign a; Select a such that Follows*(a, 8)]]></querystr>
 <stuans>1,2</stuans>
 <correct>1,2</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>54.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign FollowsStar SynonymUnderscore HaveResult">164</id><querystr><![CDATA[assign a; Select a such that Follows*(a, _)]]></querystr>
 <stuans>1,2,4,5,6</stuans>
 <correct>1,2,4,5,6</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>108.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar SynonymSynonym GetFront HaveResult">165</id><querystr><![CDATA[assign a1, a2; Select a1 such that Follows*(a1, a2)]]></querystr>
 <stuans>1,2,4,5,6</stuans>
 <correct>1,2,4,5,6</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>38.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar SynonymSynonym GetBack HaveResult">166</id><querystr><![CDATA[assign a1, a2; Select a2 such that Follows*(a1, a2)]]></querystr>
 <stuans>2,5,6,7,8</stuans>
 <correct>2,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>45.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign FollowsStar SynonymSynonym Same NoResult">167</id><querystr><![CDATA[assign a; Select a such that Follows*(a, a)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>37.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar IntInt HaveResult">168</id><querystr><![CDATA[while w; Select w such that Follows*(1, 2)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>48.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar IntInt NotSameStmtList NoResult">169</id><querystr><![CDATA[while w; Select w such that Follows*(3, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>45.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While FollowsStar IntUnderscore HaveResult">170</id><querystr><![CDATA[while w; Select w such that Follows*(1, _)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>13.000000</time_taken>
+<time_taken>50.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar IntSynonym HaveResult">171</id><querystr><![CDATA[while w; Select w such that Follows*(2, w)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>40.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar IntSynonym WhileFollowItself NoResult">172</id><querystr><![CDATA[while w; Select w such that Follows*(3, w)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>31.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While FollowsStar UnderscoreInt HaveResult">173</id><querystr><![CDATA[while w; Select w such that Follows*(_, 3)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>37.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While FollowsStar UnderscoreInt NoResult">174</id><querystr><![CDATA[while w; Select w such that Follows*(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>37.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym While FollowsStar UnderscoreUnderscore HaveResult">175</id><querystr><![CDATA[while w; Select w such that Follows*(_, _)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While FollowsStar UnderscoreSynonym HaveResult">176</id><querystr><![CDATA[while w; Select w such that Follows*(_, w)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>48.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar SynonymInt HaveResult">177</id><querystr><![CDATA[while w; Select w such that Follows*(w, 8)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar SynonymInt NoResult">178</id><querystr><![CDATA[while w; Select w such that Follows*(w, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While FollowsStar SynonymUnderscore HaveResult">179</id><querystr><![CDATA[while w; Select w such that Follows*(w, _)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar SynonymSynonym GetFront NoResult">180</id><querystr><![CDATA[while w1, w2; Select w1 such that Follows*(w1, w2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>48.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar SynonymSynonym GetBack NoResult">181</id><querystr><![CDATA[while w1, w2; Select w2 such that Follows*(w1, w2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While FollowsStar SynonymSynonym Same NoResult">182</id><querystr><![CDATA[while w; Select w such that Follows*(w, w)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>45.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt SuchThat FollowsStar IntInt and FollowsStar IntInt HaveResult">183</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, 2) and Follows*(2, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="AndKeyword StuckToBackOf PreviousRelation HaveResult">184</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, 2)and Follows*(2, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" comment="AndKeyword StuckToFrontOf PreviousRelation NoResult">185</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, 2) andFollows*(2, 3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>11.000000</time_taken>
+<time_taken>50.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="2" CondNum="5" RelNum="2" comment="Select SingleSynonym Stmt SuchThat FollowsStar IntInt SuchThat FollowsStar IntInt HaveResult">186</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, 2) such that Follows*(2, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>19.000000</time_taken>
+<time_taken>142.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="2" CondNum="5" RelNum="2" comment="SuchThatKeyword StuckToBackOf PreviousRelation HaveResult">187</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, 2)such that Follows*(2, 3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>54.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="1" SuchThat="2" CondNum="4" RelNum="1" comment="SuchThatKeyword StuckToFrontOf PreviousRelation NoResult">188</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, 2) such thatFollows*(2, 3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>12.000000</time_taken>
+<time_taken>31.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar IntUnderscore And FollowsStar IntUnderscore HaveResult">189</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, _) and Follows*(2, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>19.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym BothRelationSameSynonym NoResult">190</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, s) and Follows*(2, s)]]></querystr>
 <stuans>3,8</stuans>
 <correct>3,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>46.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym BothRelationDiffSynonym HaveResult">191</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows*(1, s2) and Follows*(2, s3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>39.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym GetFront HaveResult">192</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows*(1, s1) and Follows*(2, s2)]]></querystr>
 <stuans>2,3,8</stuans>
 <correct>2,3,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>42.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym GetBack HaveResult">193</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows*(1, s1) and Follows*(2, s2)]]></querystr>
 <stuans>3,8</stuans>
 <correct>3,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar UnderscoreInt And FollowsStar UnderscoreInt HaveResult">194</id><querystr><![CDATA[stmt s; Select s such that Follows*(_, 2) and Follows*(_, 5)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar UnderscoreInt And FollowsStar UnderscoreInt NoResult">195</id><querystr><![CDATA[stmt s; Select s such that Follows*(_, 2) and Follows*(_, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>17.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="4" SuchThat="1" CondNum="8" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar UnderscoreUnderscore And FollowsStar UnderscoreUnderscore HaveResult">196</id><querystr><![CDATA[stmt s; Select s such that Follows*(_, _) and Follows*(_, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>19.000000</time_taken>
+<time_taken>109.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym CommonSynonym HaveResult">197</id><querystr><![CDATA[stmt s; Select s such that Follows*(_, s) and Follows*(_, s)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>22.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym UniqueSynonym HaveResult">198</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows*(_, s2) and Follows*(_, s3)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym GetFront HaveResult">199</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows*(_, s1) and Follows*(_, s2)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym GetBack HaveResult">200</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows*(_, s1) and Follows*(_, s2)]]></querystr>
 <stuans>2,3,5,6,7,8</stuans>
 <correct>2,3,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt BothRelation SameSynonym NoResult">201</id><querystr><![CDATA[stmt s; Select s such that Follows*(s, 2) and Follows*(s, 3)]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt GetFront HaveResult">202</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows*(s1, 2) and Follows*(s2, 3)]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>57.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt GetBack HaveResult">203</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows*(s1, 2) and Follows*(s2, 3)]]></querystr>
 <stuans>1,2</stuans>
 <correct>1,2</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>60.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymUnderscore And FollowsStar SynonymUnderscore GetFront HaveResult">204</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows*(s1, _) and Follows*(s2, _)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>19.000000</time_taken>
+<time_taken>106.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymUnderscore And FollowsStar SynonymUnderscore GetBack HaveResult">205</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Follows*(s1, _) and Follows*(s2, _)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>21.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetFirst HaveResult">206</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows*(s1, s2) and Follows*(s2, s3)]]></querystr>
 <stuans>1,2,4,5</stuans>
 <correct>1,2,4,5</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetMiddle HaveResult">207</id><querystr><![CDATA[stmt s1, s2, s3; Select s2 such that Follows*(s1, s2) and Follows*(s2, s3)]]></querystr>
 <stuans>2,3,5,6</stuans>
 <correct>2,3,5,6</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>59.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetLast HaveResult">208</id><querystr><![CDATA[stmt s1, s2, s3; Select s3 such that Follows*(s1, s2) and Follows*(s2, s3)]]></querystr>
 <stuans>3,6,7,8</stuans>
 <correct>3,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>52.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain s3ShldNotFollowTwice NoResult">209</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows*(s1, s3) and Follows*(s2, s3)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain s1ShldNotHaveTwoFollowers NoResult">210</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Follows*(s1, s2) and Follows*(s1, s3)]]></querystr>
 <stuans>1,2,3,4,5,6</stuans>
 <correct>1,2,3,4,5,6</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent IntInt NoWhile NoResult">211</id><querystr><![CDATA[stmt s; Select s such that Parent(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>50.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent IntInt OneOutsideWhile OneInsideWhileNoResult">212</id><querystr><![CDATA[stmt s; Select s such that Parent(2, 5)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent IntInt HaveResult">213</id><querystr><![CDATA[stmt s; Select s such that Parent(3, 4)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>13.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Parent IntInt 2nd Arg > 1st Arg NoResult">214</id><querystr><![CDATA[stmt s; Select s such that Parent(2, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>52.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent IntInt SameInt NoResult">215</id><querystr><![CDATA[stmt s; Select s such that Parent(2, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>29.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Parent LackOf Arguments NoResult">216</id><querystr><![CDATA[stmt s; Select s such that Parent(1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>10.000000</time_taken>
+<time_taken>24.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Parent Excessive Arguments NoResult">217</id><querystr><![CDATA[stmt s; Select s such that Parent(1, 2, 3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>9.000000</time_taken>
+<time_taken>24.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Tab within Parent Keyword HaveResult">218</id><querystr><![CDATA[stmt s;  Select s such that Parent ( 1 , 2 )]]></querystr>
 <stuans></stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>34.000000</time_taken>
 <failed>
 <missing>1,2,3,4,5,6,7,8</missing>
 <additional></additional>
@@ -1552,21 +1552,21 @@
 <id ReturnTuple="1" Parent="1" CondNum="2" RelNum="1" comment="No Whitespace Within SuchThat Keyword NoResult">219</id><querystr><![CDATA[stmt s; Select s suchthat Parent(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>9.000000</time_taken>
+<time_taken>22.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Excessive Whitespace Within SuchThat Keyword NoResult">220</id><querystr><![CDATA[stmt s; Select s such         that Parent(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>10.000000</time_taken>
+<time_taken>22.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent IntInt ParentKeywordAsSynonym HaveResult">221</id><querystr><![CDATA[stmt Parent; Select Parent such that Parent(1, 2)]]></querystr>
 <stuans></stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>41.000000</time_taken>
 <failed>
 <missing>1,2,3,4,5,6,7,8</missing>
 <additional></additional>
@@ -1582,77 +1582,77 @@
 <id ReturnTuple="1" Parent="1" CondNum="2" RelNum="1" comment="Missing SuchThat Keyword NoResult">222</id><querystr><![CDATA[stmt s; Select s Parent(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>8.000000</time_taken>
+<time_taken>23.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" CondNum="2" RelNum="1" comment="Missing SelectKeyword NoResult">223</id><querystr><![CDATA[stmt s; Parent (1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>7.000000</time_taken>
+<time_taken>21.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym stmt Parent IntUnderscore NoResult">224</id><querystr><![CDATA[stmt s; Select s such that Parent(1, _)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Parent IntUnderscore HaveResult">225</id><querystr><![CDATA[stmt s; Select s such that Parent(3, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent IntSynonym NoResult">226</id><querystr><![CDATA[stmt s; Select s such that Parent(4, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>43.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent IntSynonym HaveResult">227</id><querystr><![CDATA[stmt s; Select s such that Parent(3, s)]]></querystr>
 <stuans>4,5,6,7</stuans>
 <correct>4,5,6,7</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Parent UnderscoreInt HaveResult">228</id><querystr><![CDATA[stmt s; Select s such that Parent(_, 5)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>89.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Parent UnderscoreInt NoResult">229</id><querystr><![CDATA[stmt s; Select s such that Parent(_, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>13.000000</time_taken>
+<time_taken>54.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym Stmt Parent UnderscoreUnderscore HaveResult">230</id><querystr><![CDATA[stmt s; Select s such that Parent(_, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Parent UnderscoreSynonym HaveResult">231</id><querystr><![CDATA[stmt s; Select s such that Parent(_, s)]]></querystr>
 <stuans>4,5,6,7</stuans>
 <correct>4,5,6,7</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>42.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent SynonymInt ParentKeywordAsSynontm As RelationArg HaveResult">232</id><querystr><![CDATA[stmt s, Parent; Select s such that Parent(Parent, 5)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>36.000000</time_taken>
 <failed>
 <missing></missing>
 <additional>1,2,3,4,5,6,7,8</additional>
@@ -1668,400 +1668,330 @@
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent SynonymInt HaveResult">233</id><querystr><![CDATA[stmt s; Select s such that Parent(s, 4)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>41.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent SynonymInt NoResult">234</id><querystr><![CDATA[stmt s; Select s such that Parent(s, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>35.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Stmt Parent SynonymUnderscore HaveResult">235</id><querystr><![CDATA[stmt s; Select s such that Parent(s, _)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>44.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent SynonymSynonym GetFront HaveResult">236</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Parent(s1, s2)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent SynonymSynonym GetBack HaveResult">237</id><querystr><![CDATA[stmt s1, s2; Select s2 such that Parent(s1, s2)]]></querystr>
 <stuans>4,5,6,7</stuans>
 <correct>4,5,6,7</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Stmt Parent SynonymSynonym Same NoResult">238</id><querystr><![CDATA[stmt s; Select s such that Parent(s, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Parent IntInt HaveResult">239</id><querystr><![CDATA[variable v; Select v such that Parent(3, 4)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Parent IntInt NoResult">240</id><querystr><![CDATA[variable v; Select v such that Parent(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Parent IntUnderscore HaveResult">241</id><querystr><![CDATA[variable v; Select v such that Parent(3, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Parent IntSynonym HaveResult">242</id><querystr><![CDATA[variable v; stmt s; Select v such that Parent(3, s)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Parent UnderscoreInt HaveResult">243</id><querystr><![CDATA[variable v; Select v such that Parent(_, 5)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Parent UnderscoreInt NoResult">244</id><querystr><![CDATA[variable v; Select v such that Parent(_, 3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" comment="Select SingleSynonym Variable Parent UnderscoreUnderscore HaveResult">245</id><querystr><![CDATA[variable v; Select v such that Parent(_, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>64.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Parent UnderscoreSynonym HaveResult">246</id><querystr><![CDATA[variable v; stmt s; Select v such that Parent(_, s)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>60.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Parent SynonymInt HaveResult">247</id><querystr><![CDATA[variable v; stmt s; Select v such that Parent(s, 7)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Parent SynonymInt NoResult">248</id><querystr><![CDATA[variable v; stmt s; Select v such that Parent(s, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>64.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Variable Parent SynonymUnderscore HaveResult">249</id><querystr><![CDATA[variable v; stmt s; Select v such that Parent(s, _)]]></querystr>
 <stuans>i,j,a,b,c,d</stuans>
 <correct>a,b,c,d,i,j</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Variable Parent Illegal Argument NoResult">250</id><querystr><![CDATA[variable v; stmt s; Select v such that Parent(v, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Parent IntInt HaveResult">251</id><querystr><![CDATA[assign a; Select a such that Parent(3, 5)]]></querystr>
 <stuans>1,2,4,5,6,7,8</stuans>
 <correct>1,2,4,5,6,7,8</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign Parent UnderscoreSynonym HaveResult">252</id><querystr><![CDATA[assign a; Select a such that Parent(_, a)]]></querystr>
 <stuans>4,5,6,7</stuans>
 <correct>4,5,6,7</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>55.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Parent SynonymInt NoResult">253</id><querystr><![CDATA[assign a; Select a such that Parent(a, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>34.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym Assign Parent SynonymUnderscore NoResult">254</id><querystr><![CDATA[assign a; Select a such that Parent(a, _)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>49.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Parent SynonymSynonym FirstArgCannotBeAssign NoResult">255</id><querystr><![CDATA[assign a1, a2; Select a1 such that Parent(a1, a2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>77.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym Assign Parent SynonymSynonym Same NoResult">256</id><querystr><![CDATA[assign a; Select a such that Parent(a, a)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>19.000000</time_taken>
+<time_taken>35.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Parent IntInt NoResult">257</id><querystr><![CDATA[while w; Select w such that Parent(1, 2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Parent IntInt NoResult">258</id><querystr><![CDATA[while w; Select w such that Parent(3, 4)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>13.000000</time_taken>
+<time_taken>106.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While Parent IntUnderscore HaveResult">259</id><querystr><![CDATA[while w; Select w such that Parent(1, _)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>51.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While Parent UnderscoreSynonym NoParentOfWhile NoResult">260</id><querystr><![CDATA[while w; Select w such that Parent(_, w)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Parent SynonymInt HaveResult">261</id><querystr><![CDATA[while w; Select w such that Parent(w, 6)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>14.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Parent SynonymInt NoResult">262</id><querystr><![CDATA[while w; Select w such that Parent(w, 1)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>13.000000</time_taken>
+<time_taken>39.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" comment="Select SingleSynonym While Parent SynonymUnderscore HaveResult">263</id><querystr><![CDATA[while w; Select w such that Parent(w, _)]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>13.000000</time_taken>
+<time_taken>114.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Parent SynonymSynonym NoParentOfWhile NoResult">264</id><querystr><![CDATA[while w1, w2; Select w1 such that Parent(w1, w2)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>15.000000</time_taken>
+<time_taken>57.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="Select SingleSynonym While Parent SynonymSynonym Same NoResult">265</id><querystr><![CDATA[while w; Select w such that Parent(w, w)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>100.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt SuchThat Parent IntInt and Parent IntInt HaveResult">266</id><querystr><![CDATA[stmt s; Select s such that Parent(3, 4) and Parent(3, 6)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="AndKeyword StuckToBackOf PreviousRelation HaveResult">267</id><querystr><![CDATA[stmt s; Select s such that Parent(3, 4)and Parent(3, 6)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>53.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" comment="AndKeyword StuckToFrontOf PreviousRelation NoResult">268</id><querystr><![CDATA[stmt s; Select s such that Parent(3, 4) andParent(3, 6)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>10.000000</time_taken>
+<time_taken>27.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" SuchThat="2" CondNum="5" RelNum="2" comment="Select SingleSynonym Stmt SuchThat Parent IntInt SuchThat Parent IntInt HaveResult">269</id><querystr><![CDATA[stmt s; Select s such that Parent(3, 4) such that Parent(3, 6)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>16.000000</time_taken>
+<time_taken>193.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" SuchThat="2" CondNum="5" RelNum="2" comment="SuchThatKeyword StuckToBackOf PreviousRelation HaveResult">270</id><querystr><![CDATA[stmt s; Select s such that Parent(3, 4)such that Parent(3, 6)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>49.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="1" SuchThat="2" CondNum="4" RelNum="1" comment="SuchThatKeyword StuckToFrontOf PreviousRelation NoResult">271</id><querystr><![CDATA[stmt s; Select s such that Parent(3, 4) such thatParent(3, 6)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>10.000000</time_taken>
+<time_taken>31.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Parent IntUnderscore And Parent IntUnderscore HaveResult">272</id><querystr><![CDATA[stmt s; Select s such that Parent(3, _) and Parent(3, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>17.000000</time_taken>
+<time_taken>77.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationSameSynonym NoResult">273</id><querystr><![CDATA[stmt s; Select s such that Parent(1, s) and Parent(2, s)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>14.000000</time_taken>
+<time_taken>44.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationDiffSynonym HaveResult">274</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Parent(1, s2) and Parent(2, s3)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>21.000000</time_taken>
+<time_taken>45.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym GetFront HaveResult">275</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Parent(3, s1) and Parent(3, s2)]]></querystr>
 <stuans>4,5,6,7</stuans>
 <correct>4,5,6,7</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>51.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Parent UnderscoreInt And Parent UnderscoreInt HaveResult">276</id><querystr><![CDATA[stmt s; Select s such that Parent(_, 4) and Parent(_, 5)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>60.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Parent UnderscoreInt And Parent UnderscoreInt 1stResult 2ndNoResult NoResult">277</id><querystr><![CDATA[stmt s; Select s such that Parent(_, 2) and Parent(_, 4)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>16.000000</time_taken>
+<time_taken>52.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" UnnamedVar="4" SuchThat="1" CondNum="8" RelNum="2" comment="Select SingleSynonym Stmt Parent UnderscoreUnderscore And Parent UnderscoreUnderscore HaveResult">278</id><querystr><![CDATA[stmt s; Select s such that Parent(_, _) and Parent(_, _)]]></querystr>
 <stuans>1,2,3,4,5,6,7,8</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym CommonSynonym HaveResult">279</id><querystr><![CDATA[stmt s; Select s such that Parent(_, s) and Parent(_, s)]]></querystr>
 <stuans>4,5,6,7</stuans>
 <correct>4,5,6,7</correct>
-<time_taken>15.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym UniqueSynonym HaveResult">280</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Parent(_, s2) and Parent(_, s3)]]></querystr>
-<stuans>1,2,3,4,5,6,7,8</stuans>
-<correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>18.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym GetFront HaveResult">281</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Parent(_, s1) and Parent(_, s2)]]></querystr>
-<stuans>4,5,6,7</stuans>
-<correct>4,5,6,7</correct>
-<time_taken>19.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent SynonymInt And Parent SynonymInt BothRelation SameSynonym HaveResult">282</id><querystr><![CDATA[stmt s; Select s such that Parent(s, 4) and Parent(s, 5)]]></querystr>
-<stuans>3</stuans>
-<correct>3</correct>
-<time_taken>16.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent SynonymInt And Parent SynonymInt GetFront HaveResult">283</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Parent(s1, 4) and Parent(s2, 6)]]></querystr>
-<stuans>3</stuans>
-<correct>3</correct>
-<time_taken>14.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" comment="Select SingleSynonym Stmt Parent SynonymUnderscore And Parent SynonymUnderscore GetFront HaveResult">284</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Parent(s1, _) and Parent(s2, _)]]></querystr>
-<stuans>3</stuans>
-<correct>3</correct>
-<time_taken>19.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst HaveResult">285</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Parent(s1, s2) and Parent(s2, s3)]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>16.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle HaveResult">286</id><querystr><![CDATA[stmt s1, s2, s3; Select s2 such that Parent(s1, s2) and Parent(s2, s3)]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>15.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast HaveResult">287</id><querystr><![CDATA[stmt s1, s2, s3; Select s3 such that Parent(s1, s2) and Parent(s2, s3)]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>16.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain Same2ndArg HaveResult">288</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Parent(s1, s3) and Parent(s2, s3)]]></querystr>
-<stuans>3</stuans>
-<correct>3</correct>
-<time_taken>16.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" comment="Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain Same1stArg HaveResult">289</id><querystr><![CDATA[stmt s1, s2, s3; Select s1 such that Parent(s1, s2) and Parent(s1, s3)]]></querystr>
-<stuans>3</stuans>
-<correct>3</correct>
-<time_taken>16.000000</time_taken>
-<passed/>
-</query>
-</queries>
-</test_results>
