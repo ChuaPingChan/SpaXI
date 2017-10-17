@@ -57,6 +57,30 @@ bool ResultFactory::processClause(SuchThatClause clause)
         return evaluator.evaluate(clause, &_clauseResult);
     }
 
+    else if (rel == NEXT)
+    {
+        NextEvaluator evaluator = NextEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
+    else if (rel == NEXTSTAR)
+    {
+        NextStarEvaluator evaluator = NextStarEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
+    else if (rel == CALL)
+    {
+        CallsEvaluator evaluator = CallsEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
+    else if (rel == CALLSSTAR)
+    {
+        CallsStarEvaluator evaluator = CallsStarEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
     else
     {
         return false;
@@ -66,6 +90,13 @@ bool ResultFactory::processClause(SuchThatClause clause)
 bool ResultFactory::processClause(PatternClause clause)
 {
     PatternType patternType = clause.getPatternType();
+    
+    if (patternType == ASSIGN)
+    {
+        AssignPatternEvaluator evaluator = AssignPatternEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
 
     if (patternType == WHILE)
     {
