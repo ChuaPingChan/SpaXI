@@ -329,10 +329,10 @@ unordered_map<int, list<int>> DesignExtractor::computeUsesTable(UsesTableStmtToV
 	for (unordered_map<int, int>::iterator it = callToProcIdxMap.begin(); it != callToProcIdxMap.end(); ++it) {
 		int callStmt = (*it).first;
 		int procIdx = (*it).second;
-
+		
 		list<int> procUses = usesProcToVarMap[procIdx];
 		list<int> parentStar = childToParentStarTable.getParentStar(callStmt);
-
+		usesStmtToVarMap[callStmt] = procUses;
 		for (int i : parentStar) {
 			usesStmtToVarMap[i].insert(usesStmtToVarMap[i].end(), procUses.begin(), procUses.end());
 			usesStmtToVarMap[i].sort();
@@ -355,7 +355,7 @@ unordered_map<int, list<int>> DesignExtractor::computeModifiesTable(ModTableStmt
 
 		list<int> procUses = modProcToVarMap[procIdx];
 		list<int> parentStar = childToParentStarTable.getParentStar(callStmt);
-
+		modStmtToVarMap[callStmt] = procUses;
 		for (int i : parentStar) {
 			modStmtToVarMap[i].insert(modStmtToVarMap[i].end(), procUses.begin(), procUses.end());
 			modStmtToVarMap[i].sort();

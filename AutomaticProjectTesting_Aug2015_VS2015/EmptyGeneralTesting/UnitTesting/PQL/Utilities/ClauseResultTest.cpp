@@ -21,7 +21,7 @@ namespace UnitTesting
             3. hasResults()
             */
             ClauseResult cr;
-            Assert::IsFalse(cr.hasResults());
+            Assert::IsTrue(cr.hasResults());
 
             string syn1 = "a";
             list<int> syn1Results{ 1, 2, 3 };
@@ -290,7 +290,7 @@ namespace UnitTesting
         TEST_METHOD(TestRemoveCombinations_oneSynonymPartialRemoval_success)
         {
             ClauseResult cr;
-            Assert::IsFalse(cr.hasResults());
+            Assert::IsTrue(cr.hasResults());
             string syn1 = "a";
             list<int> syn1Results{ 1, 2, 3 };
             string syn2 = "b";
@@ -324,7 +324,7 @@ namespace UnitTesting
         TEST_METHOD(TestRemoveCombinations_oneSynonymRemoveUntilEmpty_success)
         {
             ClauseResult cr;
-            Assert::IsFalse(cr.hasResults());
+            Assert::IsTrue(cr.hasResults());
             string syn1 = "a";
             list<int> syn1Results{ 1, 2, 3 };
             string syn2 = "b";
@@ -356,7 +356,7 @@ namespace UnitTesting
         TEST_METHOD(TestRemoveCombinations_twoSynonymsExistingValues_success)
         {
             ClauseResult cr;
-            Assert::IsFalse(cr.hasResults());
+            Assert::IsTrue(cr.hasResults());
             string syn1 = "a";
             list<int> syn1Results{ 1, 2, 3 };
             string syn2 = "b";
@@ -391,7 +391,7 @@ namespace UnitTesting
         TEST_METHOD(TestRemoveCombinations_twoSynonymsRemoveUntilEmpty_success)
         {
             ClauseResult cr;
-            Assert::IsFalse(cr.hasResults());
+            Assert::IsTrue(cr.hasResults());
             string syn1 = "a";
             list<int> syn1Results{ 1, 2, 3 };
             string syn2 = "b";
@@ -425,7 +425,7 @@ namespace UnitTesting
         TEST_METHOD(TestGetSynonymResults_success)
         {
             ClauseResult cr;
-            Assert::IsFalse(cr.hasResults());
+            Assert::IsTrue(cr.hasResults());
             string syn1 = "a";
             list<int> syn1Results{ 1, 2, 3 };
             string syn2 = "b";
@@ -515,7 +515,7 @@ namespace UnitTesting
         TEST_METHOD(TestGetSynonymPairResults)
         {
             ClauseResult cr;
-            Assert::IsFalse(cr.hasResults());
+            Assert::IsTrue(cr.hasResults());
             string syn1 = "a";
             list<int> syn1Results{ 1, 2, 3 };
             string syn2 = "b";

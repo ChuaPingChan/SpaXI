@@ -17,7 +17,7 @@ namespace UnitTesting
     public:
 
         const std::string dummySimpleSourcePath = "../UnitTesting/ParserTestDependencies/dummySimpleSource.txt";
-        PKBMain dummyPkbMain;
+        PKBMain dummyPkbMain;   // Purposely construct new PKB (non-singleton)
         PKBMain* dummyPkbMainPtr = &dummyPkbMain;
 
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_success)
@@ -166,6 +166,107 @@ namespace UnitTesting
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(simpleNextRelation)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_simpleNextRelation1());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Test if all if-else statements are added correctly
+            actualResults = dummyPkbMain.getAllIfs();
+            expectedResults = list<int>{ 5 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Test if all while statements are added correctly
+            actualResults = dummyPkbMain.getAllWhiles();
+            expectedResults = list<int>{ 3 };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            Assert::IsTrue(dummyPkbMain.isNext(1, 2));
+            Assert::IsTrue(dummyPkbMain.isNext(2, 3));
+            Assert::IsTrue(dummyPkbMain.isNext(3, 4));
+            Assert::IsTrue(dummyPkbMain.isNext(4, 5));
+            Assert::IsTrue(dummyPkbMain.isNext(5, 6));
+            Assert::IsTrue(dummyPkbMain.isNext(8, 9));
+
+            Assert::IsTrue(dummyPkbMain.isNext(5, 7));
+            Assert::IsTrue(dummyPkbMain.isNext(6, 8));
+            Assert::IsTrue(dummyPkbMain.isNext(7, 8));
+            Assert::IsTrue(dummyPkbMain.isNext(8, 3));
+            Assert::IsTrue(dummyPkbMain.isNext(3, 9));
+            
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(simpleNextRelation2)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_simpleNextRelation2());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Simple Next relations
+            Assert::IsTrue(dummyPkbMain.isNext(1, 2));
+            Assert::IsTrue(dummyPkbMain.isNext(2, 3));
+            Assert::IsTrue(dummyPkbMain.isNext(7, 8));
+            Assert::IsTrue(dummyPkbMain.isNext(74, 75));
+
+            // Next relations when entering if-block
+            Assert::IsTrue(dummyPkbMain.isNext(4, 5));
+            Assert::IsTrue(dummyPkbMain.isNext(16, 17));
+            Assert::IsTrue(dummyPkbMain.isNext(19, 20));
+            Assert::IsTrue(dummyPkbMain.isNext(67, 68));
+
+            // Next relations when entering else-block
+            Assert::IsTrue(dummyPkbMain.isNext(4, 6));
+            Assert::IsTrue(dummyPkbMain.isNext(16, 18));
+            Assert::IsTrue(dummyPkbMain.isNext(19, 21));
+
+            // Next relations when entering while-block
+            Assert::IsTrue(dummyPkbMain.isNext(3, 4));
+            Assert::IsTrue(dummyPkbMain.isNext(27, 28));
+            Assert::IsTrue(dummyPkbMain.isNext(45, 46));
+
+            // Next relations when exiting else-block or while-block
+            Assert::IsTrue(dummyPkbMain.isNext(5, 3));
+            Assert::IsTrue(dummyPkbMain.isNext(6, 3));
+            Assert::IsTrue(dummyPkbMain.isNext(11, 13));
+            Assert::IsTrue(dummyPkbMain.isNext(12, 13));
+            Assert::IsTrue(dummyPkbMain.isNext(5, 3));
+            Assert::IsTrue(dummyPkbMain.isNext(17, 15));  // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(20, 15));  // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(21, 15));  // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(24, 30));  // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(26, 30));  // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(27, 30));  // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(29, 30));  // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(58, 64));  // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(59, 64));  // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(62, 64));  // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(63, 64));  // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(13, 8));     // Loop back (while)
+            Assert::IsTrue(dummyPkbMain.isNext(13, 14));
+            Assert::IsTrue(dummyPkbMain.isNext(53, 51));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(dummyPkbMain.isNext(53, 50));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(dummyPkbMain.isNext(51, 50));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(dummyPkbMain.isNext(50, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(dummyPkbMain.isNext(51, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(dummyPkbMain.isNext(53, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
+                        
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
@@ -442,6 +543,163 @@ namespace UnitTesting
         */
         bool createDummySimpleSourceFile_assignments_2LevelNestedWhile() {
             std::string content = "procedure ABC { \n  i=1; \n b=200 ; \n	c= a   ; \nwhile a \n{ \n   while beta { \n        oSCar  = 1 + beta + tmp; \n        while tmp{ \n          oSCar = I + k + j1k + chArlie; } \n	while x { \n        x = x + 1; \n        while left { \n            x = x+ 1	; }} \n          a=   2; } \n   w = w+1  ; \n} \n} \n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements and if-else statements without nesting.
+        */
+        bool createDummySimpleSourceFile_simpleNextRelation1() {
+            std::string content =
+                "procedure ABC { \n"
+                "	a = 1; \n"
+                "	b = 2; \n"
+                "	while x { \n"
+                "		c = 4; \n"
+                "		if x then { \n"
+                "			i = 6; \n"
+                "		} else { \n"
+                "			j = 7; \n"
+                "		} \n"
+                "		k = 8; \n"
+                "	} \n"
+                "	l = 9; \n"
+                "}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy text
+        containing assignment statements and if-else statements without nesting.
+        */
+        bool createDummySimpleSourceFile_simpleNextRelation2() {
+            std::string content =
+                "procedure ABC { \n"
+                "	a = 1; \n"
+                "	b = 2; \n"
+                "	while x { \n"
+                "		if x then { \n"
+                "			i = 5; \n"
+                "		} else { \n"
+                "			j = 6; \n"
+                "		} \n"
+                "	} \n"
+                "	k = 7; \n"
+                "	while a { \n"
+                "		a = 9; \n"
+                "		if x then { \n"
+                "			b = 11; \n"
+                "		} else { \n"
+                "			c = 12; \n"
+                "		} \n"
+                "		d = 13; \n"
+                "	} \n"
+                "	f = 14; \n"
+                "	while b { \n"
+                "		if x then { \n"
+                "			b = 17; \n"
+                "		} else { \n"
+                "			c = 18; \n"
+                "			if a then { \n"
+                "				c = 20; \n"
+                "			} else { \n"
+                "				d = 21; \n"
+                "			} \n"
+                "		} \n"
+                "	} \n"
+                "	f = 22; \n"
+                "	if a then { \n"
+                "		while x { \n"
+                "			a = 25; \n"
+                "			b = 26; \n"
+                "		} \n"
+                "	} else { \n"
+                "		while x { \n"
+                "			a = 28; \n"
+                "			b = 29; \n"
+                "		} \n"
+                "	} \n"
+                "	f = 30; \n"
+                "	if a then { \n"
+                "		d = 32; \n"
+                "		while x { \n"
+                "			a = 34; \n"
+                "			b = 35; \n"
+                "		} \n"
+                "		d = 36; \n"
+                "	} else { \n"
+                "		c = 37; \n"
+                "		while x { \n"
+                "			a = 39; \n"
+                "			b = 40; \n"
+                "		} \n"
+                "		c = 41; \n"
+                "	} \n"
+                "	f = 42; \n"
+                " while a { \n"
+                "		b = 44; \n"
+                "		while b { \n"
+                "			c = 46; \n"
+                "			c = c + 1; \n"
+                "		} \n"
+                "		a = 48; \n"
+                "	} \n"
+                "	f = 49; \n"
+                " while a { \n"
+                "		while b { \n"
+                "			c = 46; \n"
+                "			c = c + 1; \n"
+                "		} \n"
+                "	} \n"
+                " f = 54; \n"
+                " if x then { \n"
+                "		if b then { \n"
+                "			a = 3; \n"
+                "			d = 4; \n"
+                "		} else { \n"
+                "			a = 5; \n"
+                "		} \n"
+                "	} else { \n"
+                "		if b then { \n"
+                "			a = 3; \n"
+                "			d = 4; \n"
+                "		} else { \n"
+                "			f = 5; \n"
+                "		} \n"
+                "	} \n"
+                " f = 54; \n"
+                " if x then { \n"
+                "		a = 64; \n"
+                "		if b then { \n"
+                "			a = 3; \n"
+                "			d = 4; \n"
+                "		} else { \n"
+                "			f = a + d; \n"
+                "		} \n"
+                "		d = 68; \n"
+                "	} else { \n"
+                "		f = 69; \n"
+                "		if b then { \n"
+                "			a = 3; \n"
+                "			d = 4; \n"
+                "		} else { \n"
+                "			f = 19; \n"
+                "		} \n"
+                "		f = 73; \n"
+                "	} \n"
+                "	f = 68; \n"
+                "} ";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

@@ -110,6 +110,14 @@ public:
 
 	pair<list<int>, list<int>> getAllNext(Entity type1, Entity type2);
 
+	bool isNextStar(int befStmt, int aftStmt);
+
+	list<int> getExecutedAfterStar(int sbefStmt, Entity type);
+
+	list<int> getExecutedBeforeStar(int aftStmt, Entity type);
+
+	pair<list<int>, list<int>> getAllNextStar(Entity type1, Entity type2);
+
 	//General Purpose API for query evaluator
     bool isPresent(string var);
     bool isPresent(int stmtNum);
