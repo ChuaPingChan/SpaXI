@@ -59,7 +59,7 @@ bool AssignPatternValidator::isValidArgOne(string &argOne)
     
 }
 
-bool AssignPatternValidator::isValidArgTwo(string argTwo)
+bool AssignPatternValidator::isValidArgTwo(string &argTwo)
 {
     if (argTwo == "_")
     {
@@ -67,18 +67,19 @@ bool AssignPatternValidator::isValidArgTwo(string argTwo)
         return true;
     }
     
-    //TODO: remove quotes, check for well form expression
     else if (RegexValidators::isValidExpressionSpecPartialRegex(argTwo))
     {
+        argTwo = Formatter::removeAllQuotes(argTwo);
+        argTwo = Formatter::removeAllUnderscores(argTwo);
         this->argTwoType = EXPRESSION_SPEC_PARTIAL;
-        return true;
+        return isWellFormExpr(argTwo);
     }
 
-    //TODO: remove quotes, check for well form expression
     else if (RegexValidators::isValidExpressionSpecExactRegex(argTwo))
     {
+        argTwo = Formatter::removeAllQuotes(argTwo);
         this->argTwoType = EXPRESSION_SPEC_EXACT;
-        return true;
+        return isWellFormExpr(argTwo);
     }
 
     else
@@ -101,4 +102,31 @@ string AssignPatternValidator::extractArgTwo(string str)
     string delimSecond = ")";
 
     return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
+}
+
+bool AssignPatternValidator::isWellFormExpr(string str)
+{
+    int countOpenBracket = 0;
+    int countCloseBracket = 0;
+
+
+    regex bracketRegex(RegexValidators::OPEN_BRACKET_REGEX+ "|" + RegexValidators::CLOSE_BRACKET_REGEX);
+    sregex_iterator it(str.cbegin(), str.cend(), bracketRegex);
+    sregex_iterator it_end;
+
+    for (; it != it_end; it++)
+    {
+        string currentBracketType = it->str(0);
+        if (RegexValidators::isValidOpenBracketRegex(currentBracketType))
+        {
+            countOpenBracket++;
+        }
+        else if (RegexValidators::isValidCloseBracketRegex(currentBracketType))
+        {
+            countCloseBracket++;
+        }
+
+    }
+
+    return countOpenBracket == countCloseBracket;
 }

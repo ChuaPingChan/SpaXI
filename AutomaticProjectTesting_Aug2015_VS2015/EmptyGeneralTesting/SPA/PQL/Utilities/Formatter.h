@@ -14,6 +14,7 @@ public:
 
     static string removeAllSpacesAndTabs(string str);
     static string removeAllQuotes(string str);
+    static string removeAllUnderscores(string str);
     static string removeAllOccurrencesOf(string str, string from, string to);
 
     static string getBetweenTwoDelims(const string & str, const string & firstDelim, const string & secondDelim);

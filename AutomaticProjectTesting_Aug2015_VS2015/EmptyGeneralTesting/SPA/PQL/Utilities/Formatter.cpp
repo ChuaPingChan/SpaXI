@@ -24,6 +24,11 @@ string Formatter::removeAllQuotes(string str)
     return removeAllOccurrencesOf(str, "\"", "");
 }
 
+string Formatter::removeAllUnderscores(string str)
+{
+    return removeAllOccurrencesOf(str, "_", "");
+}
+
 string Formatter::removeAllOccurrencesOf(string str, string from, string to)
 {
     return regex_replace(str, regex(from), to);

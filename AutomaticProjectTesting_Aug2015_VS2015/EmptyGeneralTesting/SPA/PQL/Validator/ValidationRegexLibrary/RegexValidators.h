@@ -87,11 +87,9 @@ public:
     static const string RELATIONSHIP_KEYWORD_REGEX;
 
     /*--------------- Pattern Clause Regex ---------------*/
-    static const string FACTOR_REGEX;
-    static const string EXPRESSION_SPEC;
-    static const string EXPR_REGEX;
-    static const string EXPRESSION_SPEC_PARTIAL_REGEX;
     static const string EXPRESSION_SPEC_EXACT_REGEX;
+    static const string EXPRESSION_SPEC_PARTIAL_REGEX;
+    static const string EXPRESSION_SPEC;
     static const string PATTERN_ASSIGN_REGEX;
     static const string PATTERN_WHILE_REGEX;
     static const string PATTERN_IF_REGEX;
@@ -151,6 +149,9 @@ public:
     static bool isValidValueString(string str);
 
     /******************** Grammar ********************/
+    static bool isValidOpenBracketRegex(string str);
+    static bool isValidCloseBracketRegex(string str);
+    static bool isValidOperatorRegex(string str);
     static bool isValidLetterRegex(string str);
     static bool isValidIntegerRegex(string str);
     static bool isValidBooleanRegex(string str);
@@ -177,7 +178,6 @@ public:
     static bool isValidSuchThatClRegex(string str);
 
     /******************** Pattern Regex ********************/
-    static bool isValidFactorRegex(string str);
     static bool isValidExpressionSpecRegex(string str);
     static bool isValidExpressionSpecPartialRegex(string str);
     static bool isValidExpressionSpecExactRegex(string str);
@@ -186,7 +186,6 @@ public:
     static bool isValidPatternIfRegex(string str);
     static bool isValidPatternRefRegex(string str);
     static bool isValidPatternCondRegex(string str);
-    //static bool isValidPatternRegex(string str);
     static bool isValidPatternClRegex(string str);
 
     /*--------------- With Regex ---------------*/
