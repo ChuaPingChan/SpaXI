@@ -3,6 +3,7 @@
 QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
 {
     this->_qt = qtPtr;
+    hasResultEvaluator = true;
 }
 
 QueryEvaluator::~QueryEvaluator()
@@ -11,34 +12,42 @@ QueryEvaluator::~QueryEvaluator()
 
 void QueryEvaluator::evaluate()
 {
-    bool hasResult = true;
     ResultFactory factory = ResultFactory();
 
     for (SuchThatClause stClause : _qt->getSuchThatClauses())
     {
-        hasResult = factory.processClause(stClause);
-        if (!hasResult)
+        hasResultEvaluator = factory.processClause(stClause);
+        if (!hasResultEvaluator)
             break;
     }
 
-    if (hasResult) 
+    if (hasResultEvaluator)
     {
         for (PatternClause ptClause : _qt->getPatternClauses())
         {
-            hasResult = factory.processClause(ptClause);
-            if (!hasResult)
+            hasResultEvaluator = factory.processClause(ptClause);
+            if (!hasResultEvaluator)
                 break;
         }
     }
 
-    if (hasResult)
+    if (hasResultEvaluator)
     {
         SelectClause slClause = _qt->getSelectClause();
-        hasResult = factory.processClause(slClause);
+        hasResultEvaluator = factory.processClause(slClause);
     }
 
-    _qt->storeEvaluatorResult(factory.makeClauseResult());
+    if (hasResultEvaluator)
+    {
+        _qt->storeEvaluatorResult(factory.makeClauseResult());
+    }
 }
+
+bool QueryEvaluator::hasResult()
+{
+    return hasResultEvaluator;
+}
+
 
 
 

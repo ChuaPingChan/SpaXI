@@ -17,8 +17,7 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 	//Case 1: Select BOOLEAN
 	if (selectionByQuery.getSelectionType()==SELECT_BOOLEAN)
 	{
-        bool isTreeEmpty = checkIfQueryTreeHasClauses(&qt);
-		if (!cr.hasResults() && !isTreeEmpty) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
+		if (!cr.hasResults()) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
 		{
 			result.push_back("false");
 		}

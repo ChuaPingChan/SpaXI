@@ -41,7 +41,7 @@ namespace UnitTesting
            // cr.updateSynResults("s", list<int>());
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).size() == 1);
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front() == "false");
-		}*/
+		}
 
 		TEST_METHOD(TestResultFormatter_SelectSynonym_ClauseResultEmpty_NoResult_EmptyString)
 		{
@@ -53,7 +53,7 @@ namespace UnitTesting
 			ClauseResult cr;
 			ResultFormatter rf;
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).empty());
-		}
+		}*/
 
 		TEST_METHOD(TestResultFormatter_SelectSynonym_ClauseResultNonEmpty_OneResult_ResultExpected)
 		{
