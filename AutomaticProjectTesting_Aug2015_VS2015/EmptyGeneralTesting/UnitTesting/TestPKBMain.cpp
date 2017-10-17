@@ -499,6 +499,7 @@ namespace UnitTesting
 			PKB.setNext(53, 54);
 
 			Assert::IsTrue(PKB.isNextStar(53, 50));
+			Assert::IsFalse(PKB.isNextStar(54, 49));
 		}
 	};
 }
