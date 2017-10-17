@@ -60,9 +60,9 @@ pair<list<int>, list<int>> ModTableProcToVar::getProcPair() {
 
 	for (unordered_map<int, list<int>>::iterator it = modProcToVarMap.begin(); it != modProcToVarMap.end(); ++it) {
 		int procIdx = (*it).first;
-		list<int> varList = (*it).second;
+		list<int> currList = (*it).second;
 
-		for (int var : varList) {
+		for (int var : currList) {
 			procList.push_back(procIdx);
 			varList.push_back(var);
 		}
