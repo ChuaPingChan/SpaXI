@@ -53,7 +53,6 @@ Parser::Parser(PKBMain* pkbMainPtr)
     _pkbMainPtr = pkbMainPtr;
     _stackOfFollowsStacks = stack<stack<int>>();
     _currentProcName = Parser::STRING_EMPTY_STRING;
-    _whileHeaderStmtStack = stack<int>();
     _prevReachableStmts = unordered_set<int>();
 }
 
