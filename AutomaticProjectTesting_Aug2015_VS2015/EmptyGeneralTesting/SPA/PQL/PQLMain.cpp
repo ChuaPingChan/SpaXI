@@ -23,13 +23,17 @@ list<string> PQLMain::run()
     {
         QueryEvaluator evaluator(&qt);
         evaluator.evaluate();
+        ClauseResult evaluatorResult = qt.getEvaluatorResult();
+        ResultFormatter formatter;
         if (evaluator.hasResult())
-        {
-            ClauseResult evaluatorResult = qt.getEvaluatorResult();
-            ResultFormatter formatter;
+        {          
             finalResult = formatter.finalResultFromSelection(evaluatorResult, qt);
         }
         
+        else
+        {
+            finalResult = formatter.handleNoResult(evaluatorResult, qt);
+        }
     }
     return finalResult;
 }
