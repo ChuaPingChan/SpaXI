@@ -1,0 +1,918 @@
+Parameters : Test4_Frozen\test4source0.txt Test4_Frozen\test4query0.txt Test4_Frozen\out4_0.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - Queries without conditions
+procedure p;
+Select p
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 1 - Queries without conditions
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+2 - 
+assign a;
+Select a
+1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 14, 15, 17
+5000
+Evaluating query 2 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 1 2 3 4 5 6 8 10 11 12 14 15 17 
+Correct answer: 1 2 3 4 5 6 8 10 11 12 14 15 17 
+3 - 
+stmt s;
+Select s
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 3 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+4 - 
+variable v;
+Select v
+alpha, bravo, charlie, delta, echo, foxtrot, golf, india, juliet, romeo
+5000
+Evaluating query 4 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: alpha bravo charlie delta echo foxtrot golf india juliet romeo 
+Correct answer: alpha bravo charlie delta echo foxtrot golf india juliet romeo 
+5 - 
+variable v;
+Select v
+alpha, bravo, charlie, delta, echo, foxtrot, golf, india, juliet, romeo
+5000
+Evaluating query 5 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: alpha bravo charlie delta echo foxtrot golf india juliet romeo 
+Correct answer: alpha bravo charlie delta echo foxtrot golf india juliet romeo 
+6 - 
+call c;
+Select c
+7, 9
+5000
+Evaluating query 6 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 7 9 
+Correct answer: 7 9 
+7 - 
+while w;
+Select w
+16
+5000
+Evaluating query 7 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 16 
+Correct answer: 16 
+8 - 
+if if;
+Select if
+13
+5000
+Evaluating query 8 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 13 
+Correct answer: 13 
+9 - BOOLEAN procName
+procedure p;
+Select BOOLEAN with p.procName = " ASSIGNANDCALL"
+true
+5000
+Evaluating query 9 - BOOLEAN procName
+The final tag string is ReturnBoolean="1" With="1" CondNum="2" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+10 - 
+procedure p;
+Select BOOLEAN with p.procName = "ANOTHERPROCEDURE "
+true
+5000
+Evaluating query 10 - 
+The final tag string is ReturnBoolean="1" With="1" CondNum="2" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+11 - 
+procedure p;
+Select BOOLEAN with p.procName = "TEST"
+false
+5000
+Evaluating query 11 - 
+The final tag string is ReturnBoolean="1" With="1" CondNum="2" RelNum="0" 
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+12 - Single Call()
+procedure p, q;
+Select p such that Calls(p,q)
+ASSIGNANDCALL, ANOTHERPROCEDURE
+5000
+Evaluating query 12 - Single Call()
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL 
+Additional: 
+13 - 
+procedure p, q;
+Select q such that Calls(p,q)
+ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 13 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE THIRDPROCEDURE 
+Additional: 
+14 - 
+procedure p, q;
+Select p such that Calls(p,_)
+ASSIGNANDCALL, ANOTHERPROCEDURE
+5000
+Evaluating query 14 - 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL 
+Additional: 
+15 - 
+procedure p, q;
+Select q such that Calls(p,_)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 15 - 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+16 - 
+procedure p, q;
+Select p such that Calls(q,_)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 16 - 
+q,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+17 - 
+procedure p, q;
+Select p such that Calls(_,p)
+ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 17 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE THIRDPROCEDURE 
+Additional: 
+18 - 
+procedure p, q;
+Select q such that Calls(_,p)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 18 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+19 - 
+procedure p, q;
+Select p such that Calls(_,q)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 19 - 
+_,q is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+20 - 
+procedure p, q;
+Select p such that Calls(_,_)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 20 - 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+21 - Single Call*()
+procedure p, q;
+Select p such that Calls*(p,q)
+ASSIGNANDCALL, ANOTHERPROCEDURE
+5000
+Evaluating query 21 - Single Call*()
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+Missing: 
+Additional: THIRDPROCEDURE 
+22 - 
+procedure p, q;
+Select q such that Calls*(p,q)
+ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 22 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: 
+Additional: ASSIGNANDCALL 
+23 - 
+procedure p, q;
+Select p such that Calls*(p,_)
+ASSIGNANDCALL, ANOTHERPROCEDURE
+5000
+Evaluating query 23 - 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+24 - 
+procedure p, q;
+Select q such that Calls*(p,_)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 24 - 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+25 - 
+procedure p, q;
+Select p such that Calls*(q,_)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 25 - 
+q,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+26 - 
+procedure p, q;
+Select p such that Calls*(_,p)
+ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 26 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+27 - 
+procedure p, q;
+Select q such that Calls*(_,p)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 27 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+28 - 
+procedure p, q;
+Select p such that Calls*(_,q)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 28 - 
+_,q is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+29 - 
+procedure p, q;
+Select p such that Calls*(_,_)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 29 - 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+30 - Call() with p.procName()
+procedure p, q;
+Select p such that Calls(p,q) with q.procName = "THIRDPROCEDURE"
+ANOTHERPROCEDURE
+5000
+Evaluating query 30 - Call() with p.procName()
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" With="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ANOTHERPROCEDURE 
+Missing: ANOTHERPROCEDURE 
+Additional: 
+31 - 
+procedure p, q;
+Select q such that Calls(p,q) with p.procName = "ANOTHERPROCEDURE"
+THIRDPROCEDURE
+5000
+Evaluating query 31 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" With="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: THIRDPROCEDURE 
+Missing: THIRDPROCEDURE 
+Additional: 
+32 - 
+procedure p, q;
+Select p such that Calls(p,_) with q.procName = "ANOTHERPROCEDURE"
+ASSIGNANDCALL, ANOTHERPROCEDURE
+5000
+Evaluating query 32 - 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL 
+Additional: 
+33 - 
+procedure p, q;
+Select q such that Calls(p,_) with p.procName = "ANOTHERPROCEDURE"
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 33 - 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+34 - 
+procedure p, q;
+Select p such that Calls(q,_) with q.procName = "ASSIGNANDCALL"
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 34 - 
+q,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+35 - 
+procedure p, q;
+Select p such that Calls(_,p) with q.procName = "ASSIGNANDCALL"
+ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 35 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE THIRDPROCEDURE 
+Additional: 
+36 - 
+procedure p, q;
+Select q such that Calls(_,p) with p.procName = "ANOTHERPROCEDURE"
+ASSIGNANDCALL, ANOTHERPROCEDURE,THIRDPROCEDURE
+5000
+Evaluating query 36 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+37 - 
+procedure p, q;
+Select p such that Calls(_,q) with q.procName = "THIRDPROCEDURE"
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 37 - 
+_,q is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+38 - 
+procedure p, q;
+Select p such that Calls(_,_) with q.procName = "ASSIGNANDCALL"
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 38 - 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+39 - Single Call*() with p.procName
+procedure p, q;
+Select p such that Calls*(p,q) with q.procName = "ANOTHERPROCEDURE"
+ASSIGNANDCALL
+5000
+Evaluating query 39 - Single Call*() with p.procName
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" With="1" CondNum="4" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL 
+Missing: 
+Additional: ANOTHERPROCEDURE THIRDPROCEDURE 
+40 - 
+procedure p, q;
+Select q such that Calls*(p,q) with p.procName = "ANOTHERPROCEDURE"
+THIRDPROCEDURE
+5000
+Evaluating query 40 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" With="1" CondNum="4" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: THIRDPROCEDURE 
+Missing: 
+Additional: ANOTHERPROCEDURE ASSIGNANDCALL 
+41 - 
+procedure p, q;
+Select p such that Calls*(p,_) with q.procName = "ASSIGNANDCALL"
+ASSIGNANDCALL, ANOTHERPROCEDURE
+5000
+Evaluating query 41 - 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+42 - 
+procedure p, q;
+Select q such that Calls*(p,_) with p.procName = "ASSIGNANDCALL"
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 42 - 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+43 - 
+procedure p, q;
+Select p such that Calls*(q,_) with q.procName = "ANOTHERPROCEDURE"
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 43 - 
+q,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+44 - 
+procedure p, q;
+Select p such that Calls*(_,p) with q.procName = "ASSIGNANDCALL"
+ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 44 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+45 - 
+procedure p, q;
+Select q such that Calls*(_,p) with p.procName = "ANOTHERPROCEDURE"
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 45 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+46 - 
+procedure p, q;
+Select p such that Calls*(_,q) with q.procName = "ASSIGNANDCALL"
+
+5000
+Evaluating query 46 - 
+_,q is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: 
+Missing: 
+Additional: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+47 - 
+procedure p, q;
+Select p such that Calls*(_,_) with p.procName = "THIRDPROCEDURE"
+THIRDPROCEDURE
+5000
+Evaluating query 47 - 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: THIRDPROCEDURE 
+Missing: THIRDPROCEDURE 
+Additional: 
+48 - Call() with p.procName
+procedure p, q;
+Select p such that Calls(p,"ANOTHERPROCEDURE")
+ASSIGNANDCALL
+5000
+Evaluating query 48 - Call() with p.procName
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL 
+Missing: ASSIGNANDCALL 
+Additional: 
+49 - 
+procedure p, q;
+Select q such that Calls("ASSIGNANDCALL",q)
+ANOTHERPROCEDURE
+5000
+Evaluating query 49 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: ANOTHERPROCEDURE 
+Missing: ANOTHERPROCEDURE 
+Additional: 
+50 - 
+procedure p, q;
+Select p such that Calls("ANOTHERPROCEDURE",_)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 50 - 
+"ANOTHERPROCEDURE",_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE ASSIGNANDCALL THIRDPROCEDURE 
+Additional: 
+51 - 
+procedure p, q;
+Select q such that Calls("THIRDPROCEDURE",_) with p.procName = "ANOTHERPROCEDURE"
+
+5000
+Evaluating query 51 - 
+"THIRDPROCEDURE",_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+52 - 
+procedure p, q;
+Select p such that Calls("THIRDPROCEDURE",_)
+
+5000
+Evaluating query 52 - 
+"THIRDPROCEDURE",_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+53 - 
+procedure p, q;
+Select p such that Calls(_,p) with q.procName = "ASSIGNANDCALL"
+ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 53 - 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: ANOTHERPROCEDURE THIRDPROCEDURE 
+Missing: ANOTHERPROCEDURE THIRDPROCEDURE 
+Additional: 
+54 - Single Call*() with p.procName
+procedure p, q;
+Select p such that Calls*(p,"THIRDPROCEDURE")
+ASSIGNANDCALL, ANOTHERPROCEDURE
+5000
+Evaluating query 54 - Single Call*() with p.procName
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE 
+55 - 
+procedure p, q;
+Select q such that Calls*("ANOTHERPROCEDURE",q)
+THIRDPROCEDURE
+5000
+Evaluating query 55 - 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: THIRDPROCEDURE 
+Correct answer: THIRDPROCEDURE 
+56 - 
+procedure p, q;
+Select p such that Calls*("THIRDPROCEDURE",_) with q.procName = "ASSIGNANDCALL"
+
+5000
+Evaluating query 56 - 
+"THIRDPROCEDURE",_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+57 - 
+procedure p, q;
+Select q such that Calls*("ANOTHERPROCEDURE",_)
+ASSIGNANDCALL, ANOTHERPROCEDURE, THIRDPROCEDURE
+5000
+Evaluating query 57 - 
+"ANOTHERPROCEDURE",_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+Correct answer: ASSIGNANDCALL ANOTHERPROCEDURE THIRDPROCEDURE 
+58 - Single Next()
+prog_line p, q;
+Select p such that Next(p,q)
+1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 58 - Single Next()
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 9 10 12 13 14 15 16 17 
+Missing: 
+Additional: 11 8 
+59 - 
+prog_line p, q;
+Select q such that Next(13,q)
+14, 15
+5000
+Evaluating query 59 - 
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 14 15 
+Missing: 
+Additional: 1 10 11 12 13 16 17 2 3 4 5 6 7 8 9 
+60 - 
+prog_line p, q;
+Select p such that Next(8,_)
+
+5000
+Evaluating query 60 - 
+prog_line is an Unnamedvar 
+8,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 
+Missing: 
+Additional: 1 10 11 12 13 14 15 16 17 2 3 4 5 6 7 8 9 
+61 - 
+prog_line p, q;
+Select q such that Next(p,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 61 - 
+prog_line is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Missing: 1 10 11 12 13 14 15 16 17 2 3 4 5 6 7 8 9 
+Additional: 
+62 - 
+prog_line p, q;
+Select p such that Next(_,p)
+2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17
+5000
+Evaluating query 62 - 
+prog_line is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 2 3 4 5 6 7 8 10 11 13 14 15 16 17 
+Missing: 
+Additional: 1 12 9 
+63 - 
+prog_line p, q;
+Select q such that Next(_,p)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 63 - 
+prog_line is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+64 - 
+prog_line p, q;
+Select p such that Next(_,16)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 64 - 
+prog_line is an Unnamedvar 
+_,16 is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+65 - 
+prog_line p, q;
+Select p such that Next(_,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 65 - 
+prog_line is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Missing: 1 10 11 12 13 14 15 16 17 2 3 4 5 6 7 8 9 
+Additional: 
+66 - Single Call*()
+prog_line p, q;
+Select p such that Next*(p,12)
+
+5000
+Evaluating query 66 - Single Call*()
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 
+Missing: 
+Additional: 1 10 11 12 13 14 15 16 17 2 3 4 5 6 7 8 9 
+67 - 
+prog_line p, q;
+Select q such that Next*(11,q)
+
+5000
+Evaluating query 67 - 
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 
+Missing: 
+Additional: 1 10 11 12 13 14 15 16 17 2 3 4 5 6 7 8 9 
+68 - 
+prog_line p, q;
+Select p such that Next*(p,_)
+1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 68 - 
+prog_line is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 9 10 12 13 14 15 16 17 
+Missing: 
+Additional: 11 8 
+69 - 
+prog_line p, q;
+Select q such that Next*(4,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 69 - 
+prog_line is an Unnamedvar 
+4,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+70 - 
+prog_line p, q;
+Select p such that Next*(15,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 70 - 
+prog_line is an Unnamedvar 
+15,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+71 - 
+prog_line p, q;
+Select p such that Next*(_,p)
+2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17
+5000
+Evaluating query 71 - 
+prog_line is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 2 3 4 5 6 7 8 10 11 13 14 15 16 17 
+Missing: 
+Additional: 1 12 9 
+72 - 
+prog_line p, q;
+Select q such that Next*(_,p)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 72 - 
+prog_line is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+73 - 
+prog_line p, q;
+Select p such that Next*(_,14)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 73 - 
+prog_line is an Unnamedvar 
+_,14 is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+74 - 
+prog_line p, q;
+Select p such that Next*(_,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+Evaluating query 74 - 
+prog_line is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+75 - Next() with #
+prog_line p, q;
+Select p such that Next(p,q) with q = 16
+14, 15, 17
+5000
+Evaluating query 75 - Next() with #
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 14 15 17 
+Missing: 
+Additional: 1 10 11 12 13 16 2 3 4 5 6 7 8 9 
+76 - 
+prog_line p, q;
+Select q such that Next(p,q) with p = 17
+16
+5000
+Evaluating query 76 - 
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 16 
+Missing: 
+Additional: 1 10 11 12 13 14 15 17 2 3 4 5 6 7 8 9 
+77 - 
+prog_line p, q;
+Select p such that Next(p,_) with p = 7
+7
+5000
+Evaluating query 77 - 

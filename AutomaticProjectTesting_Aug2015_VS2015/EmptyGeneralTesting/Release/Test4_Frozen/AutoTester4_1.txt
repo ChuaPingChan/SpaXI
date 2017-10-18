@@ -1,0 +1,1624 @@
+Parameters : Test4_Frozen\test4source1.txt Test4_Frozen\test4query1.txt Test4_Frozen\out4_1.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(_,_)
+
+5000
+Evaluating query 1 - comment
+_,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+2 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(p,_)
+
+5000
+Evaluating query 2 - comment
+_,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+3 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(v,_)
+
+5000
+Evaluating query 3 - comment
+_,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+4 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(_,p)
+
+5000
+Evaluating query 4 - comment
+_,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+5 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(_,v)
+
+5000
+Evaluating query 5 - comment
+_,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+6 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(p,v)
+
+5000
+Evaluating query 6 - comment
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+7 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(_,_)
+
+5000
+Evaluating query 7 - comment
+p,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+8 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(p,_)
+ASSIGNMENT,NESTEDASSIGNMENTS,NESTEDCALL,NESTEDIF,NESTEDWHILE,SINGLECALL,SINGLEIF,SINGLEWHILE
+5000
+Evaluating query 8 - comment
+p,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: SINGLEIF SINGLECALL SINGLEWHILE NESTEDCALL ASSIGNMENT NESTEDIF NESTEDWHILE NESTEDASSIGNMENTS 
+Correct answer: ASSIGNMENT NESTEDASSIGNMENTS NESTEDCALL NESTEDIF NESTEDWHILE SINGLECALL SINGLEIF SINGLEWHILE 
+9 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(v,_)
+
+5000
+Evaluating query 9 - comment
+p,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+10 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(_,p)
+
+5000
+Evaluating query 10 - comment
+p,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+11 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(_,v)
+
+5000
+Evaluating query 11 - comment
+p,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+12 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(p,v)
+ASSIGNMENT,NESTEDASSIGNMENTS,NESTEDCALL,NESTEDIF,NESTEDWHILE,SINGLECALL,SINGLEIF,SINGLEWHILE
+5000
+Evaluating query 12 - comment
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: SINGLEIF SINGLECALL SINGLEWHILE NESTEDCALL ASSIGNMENT NESTEDIF NESTEDWHILE NESTEDASSIGNMENTS 
+Correct answer: ASSIGNMENT NESTEDASSIGNMENTS NESTEDCALL NESTEDIF NESTEDWHILE SINGLECALL SINGLEIF SINGLEWHILE 
+13 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(_,_)
+
+5000
+Evaluating query 13 - comment
+v,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+14 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(p,_)
+
+5000
+Evaluating query 14 - comment
+v,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+15 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(v,_)
+
+5000
+Evaluating query 15 - comment
+v,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+16 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(_,p)
+
+5000
+Evaluating query 16 - comment
+v,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+17 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(_,v)
+
+5000
+Evaluating query 17 - comment
+v,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+18 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(p,v)
+
+5000
+Evaluating query 18 - comment
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+19 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,_)
+
+5000
+Evaluating query 19 - comment
+_,p is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+20 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(p,_)
+
+5000
+Evaluating query 20 - comment
+_,p is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+21 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(v,_)
+
+5000
+Evaluating query 21 - comment
+_,p is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+22 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,p)
+
+5000
+Evaluating query 22 - comment
+_,p is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+23 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,v)
+
+5000
+Evaluating query 23 - comment
+_,p is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+24 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(p,v)
+
+5000
+Evaluating query 24 - comment
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+25 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(_,_)
+
+5000
+Evaluating query 25 - comment
+_,v is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+26 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(p,_)
+
+5000
+Evaluating query 26 - comment
+_,v is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+27 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(v,_)
+
+5000
+Evaluating query 27 - comment
+_,v is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+28 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(_,p)
+
+5000
+Evaluating query 28 - comment
+_,v is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+29 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(_,v)
+
+5000
+Evaluating query 29 - comment
+_,v is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+30 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(p,v)
+
+5000
+Evaluating query 30 - comment
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+31 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(_,_)
+
+5000
+Evaluating query 31 - comment
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+32 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(p,_)
+ASSIGNMENT,NESTEDASSIGNMENTS,NESTEDCALL,NESTEDIF,NESTEDWHILE,SINGLECALL,SINGLEIF,SINGLEWHILE
+5000
+Evaluating query 32 - comment
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: SINGLEIF SINGLECALL SINGLEWHILE NESTEDCALL ASSIGNMENT NESTEDIF NESTEDWHILE NESTEDASSIGNMENTS 
+Correct answer: ASSIGNMENT NESTEDASSIGNMENTS NESTEDCALL NESTEDIF NESTEDWHILE SINGLECALL SINGLEIF SINGLEWHILE 
+33 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(v,_)
+
+5000
+Evaluating query 33 - comment
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+34 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(_,p)
+
+5000
+Evaluating query 34 - comment
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+35 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(_,v)
+
+5000
+Evaluating query 35 - comment
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+36 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(p,v)
+ASSIGNMENT,NESTEDASSIGNMENTS,NESTEDCALL,NESTEDWHILE,SINGLECALL,SINGLEIF,SINGLEWHILE
+5000
+Evaluating query 36 - comment
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: SINGLEIF SINGLECALL SINGLEWHILE NESTEDCALL ASSIGNMENT NESTEDWHILE NESTEDASSIGNMENTS 
+Correct answer: ASSIGNMENT NESTEDASSIGNMENTS NESTEDCALL NESTEDWHILE SINGLECALL SINGLEIF SINGLEWHILE 
+37 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,_) and Modifies(_,_)
+
+5000
+Evaluating query 37 - comment
+_,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+38 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,_) and Modifies(p,_)
+
+5000
+Evaluating query 38 - comment
+_,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+39 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,_) and Modifies(v,_)
+
+5000
+Evaluating query 39 - comment
+_,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+40 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) with v.varName = p.procName such that Modifies(_,p)
+
+5000
+Evaluating query 40 - comment
+_,_ is an Unnamedvar 
+The happen is 2
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+41 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,_) and Modifies(_,v)
+
+5000
+Evaluating query 41 - comment
+_,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+42 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(p,v) with v.varName = p.procName
+
+5000
+Evaluating query 42 - comment
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+43 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,_) and Modifies(_,_)
+
+5000
+Evaluating query 43 - comment
+p,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+44 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,_) and Modifies(p,_)
+
+5000
+Evaluating query 44 - comment
+p,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: SINGLEIF SINGLECALL SINGLEWHILE NESTEDCALL ASSIGNMENT NESTEDIF NESTEDWHILE NESTEDASSIGNMENTS 
+Correct answer: 
+Missing: 
+Additional: ASSIGNMENT NESTEDASSIGNMENTS NESTEDCALL NESTEDIF NESTEDWHILE SINGLECALL SINGLEIF SINGLEWHILE 
+45 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(v,_) with v.varName = p.procName
+
+5000
+Evaluating query 45 - comment
+p,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+46 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(_,p) with v.varName = p.procName
+
+5000
+Evaluating query 46 - comment
+p,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+47 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,_) and Modifies(_,v)
+
+5000
+Evaluating query 47 - comment
+p,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+48 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) with v.varName = p.procName such that Modifies(p,v)
+
+5000
+Evaluating query 48 - comment
+p,_ is an Unnamedvar 
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="2" With="1" CondNum="7" RelNum="2" 
+Your answer: SINGLEIF SINGLECALL SINGLEWHILE NESTEDCALL ASSIGNMENT NESTEDIF NESTEDWHILE NESTEDASSIGNMENTS 
+Correct answer: 
+Missing: 
+Additional: ASSIGNMENT NESTEDASSIGNMENTS NESTEDCALL NESTEDIF NESTEDWHILE SINGLECALL SINGLEIF SINGLEWHILE 
+49 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(_,_)
+
+5000
+Evaluating query 49 - comment
+v,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+50 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(p,_)
+
+5000
+Evaluating query 50 - comment
+v,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+51 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(v,_) with v.varName = p.procName
+
+5000
+Evaluating query 51 - comment
+v,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+52 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(_,p)
+
+5000
+Evaluating query 52 - comment
+v,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+53 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(_,v)
+
+5000
+Evaluating query 53 - comment
+v,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+54 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(p,v)
+
+5000
+Evaluating query 54 - comment
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+55 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,_) with v.varName = p.procName
+
+5000
+Evaluating query 55 - comment
+_,p is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+56 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,p) and Modifies(p,_)
+
+5000
+Evaluating query 56 - comment
+_,p is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+57 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,p) and Modifies(v,_)
+
+5000
+Evaluating query 57 - comment
+_,p is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+58 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,p) and Modifies(_,p)
+
+5000
+Evaluating query 58 - comment
+_,p is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+59 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,v) with v.varName = p.procName
+
+5000
+Evaluating query 59 - comment
+_,p is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+60 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(p,v) with v.varName = p.procName
+
+5000
+Evaluating query 60 - comment
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+61 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,v) and Modifies(_,_)
+
+5000
+Evaluating query 61 - comment
+_,v is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+62 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+Evaluating query 62 - comment
+_,v is an Unnamedvar 
+The happen is 2
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+63 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,v) and Modifies(v,_)
+
+5000
+Evaluating query 63 - comment
+_,v is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+64 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) with v.varName = p.procName such that Modifies(_,p)
+
+5000
+Evaluating query 64 - comment
+_,v is an Unnamedvar 
+The happen is 2
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+65 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,v) and Modifies(_,v)
+
+5000
+Evaluating query 65 - comment
+_,v is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+66 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) with v.varName = p.procName such that Modifies(p,v)
+
+5000
+Evaluating query 66 - comment
+_,v is an Unnamedvar 
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="2" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+67 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(_,_) with v.varName = p.procName
+
+5000
+Evaluating query 67 - comment
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+68 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+Evaluating query 68 - comment
+The happen is 2
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="2" With="1" CondNum="7" RelNum="2" 
+Your answer: SINGLEIF SINGLECALL SINGLEWHILE NESTEDCALL ASSIGNMENT NESTEDIF NESTEDWHILE NESTEDASSIGNMENTS 
+Correct answer: 
+Missing: 
+Additional: ASSIGNMENT NESTEDASSIGNMENTS NESTEDCALL NESTEDIF NESTEDWHILE SINGLECALL SINGLEIF SINGLEWHILE 
+69 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,v) and Modifies(v,_)
+
+5000
+Evaluating query 69 - comment
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+70 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,v) and Modifies(_,p)
+
+5000
+Evaluating query 70 - comment
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+71 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,v) and Modifies(_,v)
+
+5000
+Evaluating query 71 - comment
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+72 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,v) and Modifies(p,v)
+
+5000
+Evaluating query 72 - comment
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" With="1" CondNum="5" RelNum="2" 
+Your answer: SINGLEIF SINGLECALL SINGLEWHILE NESTEDCALL ASSIGNMENT NESTEDWHILE NESTEDASSIGNMENTS 
+Correct answer: 
+Missing: 
+Additional: ASSIGNMENT NESTEDASSIGNMENTS NESTEDCALL NESTEDWHILE SINGLECALL SINGLEIF SINGLEWHILE 
+73 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(_,_)
+
+5000
+Evaluating query 73 - comment
+_,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+74 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(p,_)
+
+5000
+Evaluating query 74 - comment
+_,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+75 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(v,_)
+
+5000
+Evaluating query 75 - comment
+_,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+76 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(_,p)
+
+5000
+Evaluating query 76 - comment
+_,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+77 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(_,v)
+
+5000
+Evaluating query 77 - comment
+_,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+78 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(p,v)
+
+5000
+Evaluating query 78 - comment
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+79 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(_,_)
+
+5000
+Evaluating query 79 - comment
+p,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+80 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(p,_)
+IFS1,IFS2,IFS3,NO,WHILES,WHILES1,WHILES2,WHILES3,YES,a,alpha,america,anada,apple,b,banana,boston,bravo,c,carrot,charlie,d,delta,denmark,dua,durian,e,echo,eggplant,eight,eleven,empat,enam,five,four,foxtrot,france,germany,grape,honeydew,hungary,iceland,ifs,jackfruit,japan,kiwi,korea,lapan,lemon,lima,mango,nine,nutella,one,orange,pear,rambutan,satu,seven,six,starfruit,ten,three,tiga,tomato,tujoh,two,watermelon,yam
+5000
+Evaluating query 80 - comment
+p,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: a b c ifs d e satu dua tiga empat WHILES lima enam tujoh lapan alpha bravo charlie delta echo foxtrot IFS1 america boston IFS2 anada denmark france germany IFS3 hungary iceland japan korea one two WHILES1 three four WHILES2 five six seven eight WHILES3 nine ten eleven YES NO apple banana carrot durian grape honeydew jackfruit kiwi lemon mango nutella orange pear rambutan starfruit tomato watermelon yam eggplant 
+Correct answer: IFS1 IFS2 IFS3 NO WHILES WHILES1 WHILES2 WHILES3 YES a alpha america anada apple b banana boston bravo c carrot charlie d delta denmark dua durian e echo eggplant eight eleven empat enam five four foxtrot france germany grape honeydew hungary iceland ifs jackfruit japan kiwi korea lapan lemon lima mango nine nutella one orange pear rambutan satu seven six starfruit ten three tiga tomato tujoh two watermelon yam 
+81 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(v,_)
+
+5000
+Evaluating query 81 - comment
+p,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+82 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(_,p)
+
+5000
+Evaluating query 82 - comment
+p,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+83 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(_,v)
+
+5000
+Evaluating query 83 - comment
+p,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+84 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(p,v)
+a,alpha,america,anada,apple,charlie,five,four,foxtrot,france,grape,hungary,japan,lemon,lima,nine,one,rambutan,satu,seven,three,tomato
+5000
+Evaluating query 84 - comment
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: a satu lima alpha charlie foxtrot america anada france hungary japan one three four five seven nine apple grape lemon rambutan tomato 
+Correct answer: a alpha america anada apple charlie five four foxtrot france grape hungary japan lemon lima nine one rambutan satu seven three tomato 
+85 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(_,_)
+
+5000
+Evaluating query 85 - comment
+v,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+86 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(p,_)
+
+5000
+Evaluating query 86 - comment
+v,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+87 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(v,_)
+
+5000
+Evaluating query 87 - comment
+v,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+88 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(_,p)
+
+5000
+Evaluating query 88 - comment
+v,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+89 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(_,v)
+
+5000
+Evaluating query 89 - comment
+v,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+90 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(p,v)
+
+5000
+Evaluating query 90 - comment
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+91 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(_,_)
+
+5000
+Evaluating query 91 - comment
+_,p is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+92 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(p,_)
+
+5000
+Evaluating query 92 - comment
+_,p is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+93 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(v,_)
+
+5000
+Evaluating query 93 - comment
+_,p is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+94 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(_,p)
+
+5000
+Evaluating query 94 - comment
+_,p is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+95 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(_,v)
+
+5000
+Evaluating query 95 - comment
+_,p is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+96 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(p,v)
+
+5000
+Evaluating query 96 - comment
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+97 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,_)
+
+5000
+Evaluating query 97 - comment
+_,v is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+98 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(p,_)
+
+5000
+Evaluating query 98 - comment
+_,v is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+99 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(v,_)
+
+5000
+Evaluating query 99 - comment
+_,v is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+100 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,p)
+
+5000
+Evaluating query 100 - comment
+_,v is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+101 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,v)
+
+5000
+Evaluating query 101 - comment
+_,v is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+102 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(p,v)
+
+5000
+Evaluating query 102 - comment
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+103 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(_,_)
+
+5000
+Evaluating query 103 - comment
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+104 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(p,_)
+IFS1,IFS2,IFS3,NO,WHILES,WHILES1,WHILES2,WHILES3,YES,alpha,apple,b,banana,boston,bravo,c,carrot,d,delta,denmark,dua,durian,e,echo,eggplant,eight,eleven,empat,enam,four,germany,honeydew,iceland,ifs,jackfruit,kiwi,korea,lapan,mango,nutella,orange,pear,six,starfruit,ten,tiga,tujoh,two,watermelon,yam
+5000
+Evaluating query 104 - comment
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: b c ifs d e dua tiga empat WHILES enam tujoh lapan alpha bravo delta echo IFS1 boston IFS2 denmark germany IFS3 iceland korea two WHILES1 four WHILES2 six eight WHILES3 ten eleven YES NO apple banana carrot durian honeydew jackfruit kiwi mango nutella orange pear starfruit watermelon yam eggplant 
+Correct answer: IFS1 IFS2 IFS3 NO WHILES WHILES1 WHILES2 WHILES3 YES alpha apple b banana boston bravo c carrot d delta denmark dua durian e echo eggplant eight eleven empat enam four germany honeydew iceland ifs jackfruit kiwi korea lapan mango nutella orange pear six starfruit ten tiga tujoh two watermelon yam 
+105 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(v,_)
+
+5000
+Evaluating query 105 - comment
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+106 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(_,p)
+
+5000
+Evaluating query 106 - comment
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+107 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(_,v)
+
+5000
+Evaluating query 107 - comment
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="5" RelNum="2" 
+Your answer: 
+Correct answer: 
+108 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(p,v)
+alpha,apple,four
+5000
+Evaluating query 108 - comment
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: alpha four apple 
+Correct answer: alpha apple four 
+109 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) with v.varName = p.procName such that Modifies(_,_)
+
+5000
+Evaluating query 109 - comment
+_,_ is an Unnamedvar 
+The happen is 2
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+110 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,_) and Modifies(p,_)
+
+5000
+Evaluating query 110 - comment
+_,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+111 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(v,_) with v.varName = p.procName
+
+5000
+Evaluating query 111 - comment
+_,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+112 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) with v.varName = p.procName such that Modifies(_,p)
+
+5000
+Evaluating query 112 - comment
+_,_ is an Unnamedvar 
+The happen is 2
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+113 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,_) and Modifies(_,v)
+
+5000
+Evaluating query 113 - comment
+_,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+114 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,_) and Modifies(p,v)
+
+5000
+Evaluating query 114 - comment
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+115 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) with v.varName = p.procName such that Modifies(_,_)
+
+5000
+Evaluating query 115 - comment
+p,_ is an Unnamedvar 
+The happen is 2
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+116 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(p,_) with v.varName = p.procName
+
+5000
+Evaluating query 116 - comment
+p,_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: a b c ifs d e satu dua tiga empat WHILES lima enam tujoh lapan alpha bravo charlie delta echo foxtrot IFS1 america boston IFS2 anada denmark france germany IFS3 hungary iceland japan korea one two WHILES1 three four WHILES2 five six seven eight WHILES3 nine ten eleven YES NO apple banana carrot durian grape honeydew jackfruit kiwi lemon mango nutella orange pear rambutan starfruit tomato watermelon yam eggplant 
+Correct answer: 
+Missing: 
+Additional: IFS1 IFS2 IFS3 NO WHILES WHILES1 WHILES2 WHILES3 YES a alpha america anada apple b banana boston bravo c carrot charlie d delta denmark dua durian e echo eggplant eight eleven empat enam five four foxtrot france germany grape honeydew hungary iceland ifs jackfruit japan kiwi korea lapan lemon lima mango nine nutella one orange pear rambutan satu seven six starfruit ten three tiga tomato tujoh two watermelon yam 
+117 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(v,_) with v.varName = p.procName
+
+5000
+Evaluating query 117 - comment
+p,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+118 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,_) and Modifies(_,p)
+
+5000
+Evaluating query 118 - comment
+p,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+119 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,_) and Modifies(_,v)
+
+5000
+Evaluating query 119 - comment
+p,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+120 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,_) and Modifies(p,v)
+
+5000
+Evaluating query 120 - comment
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: a satu lima alpha charlie foxtrot america anada france hungary japan one three four five seven nine apple grape lemon rambutan tomato 
+Correct answer: 
+Missing: 
+Additional: a alpha america anada apple charlie five four foxtrot france grape hungary japan lemon lima nine one rambutan satu seven three tomato 
+121 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(v,_) and Modifies(_,_)
+
+5000
+Evaluating query 121 - comment
+v,_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+122 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+Evaluating query 122 - comment
+v,_ is an Unnamedvar 
+The happen is 2
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+123 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(v,_) and Modifies(v,_)
+
+5000
+Evaluating query 123 - comment
+v,_ is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+124 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(v,_) and Modifies(_,p)
+
+5000
+Evaluating query 124 - comment
+v,_ is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+125 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(v,_) and Modifies(_,v)
+
+5000
+Evaluating query 125 - comment
+v,_ is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+126 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) with v.varName = p.procName such that Modifies(p,v)
+
+5000
+Evaluating query 126 - comment
+v,_ is an Unnamedvar 
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="2" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+127 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,p) and Modifies(_,_)
+
+5000
+Evaluating query 127 - comment
+_,p is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+128 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+Evaluating query 128 - comment
+_,p is an Unnamedvar 
+The happen is 2
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+129 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,p) and Modifies(v,_)
+
+5000
+Evaluating query 129 - comment
+_,p is an Unnamedvar 
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+130 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) with v.varName = p.procName such that Modifies(_,p)
+
+5000
+Evaluating query 130 - comment
+_,p is an Unnamedvar 
+The happen is 2
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+131 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(_,v) with v.varName = p.procName
+
+5000
+Evaluating query 131 - comment
+_,p is an Unnamedvar 
+_,v is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+132 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) with v.varName = p.procName such that Modifies(p,v)
+
+5000
+Evaluating query 132 - comment
+_,p is an Unnamedvar 
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Uses="1" SuchThat="2" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+133 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,_) with v.varName = p.procName
+
+5000
+Evaluating query 133 - comment
+_,v is an Unnamedvar 
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+134 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,v) and Modifies(p,_)
+
+5000
+Evaluating query 134 - comment
+_,v is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 
+135 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) with v.varName = p.procName such that Modifies(v,_)
+
+5000
+Evaluating query 135 - comment
+_,v is an Unnamedvar 
+The happen is 2
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 
+Correct answer: 
+136 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,p) with v.varName = p.procName
+
+5000
+Evaluating query 136 - comment
+_,v is an Unnamedvar 
+_,p is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
+Your answer: 
+Correct answer: 

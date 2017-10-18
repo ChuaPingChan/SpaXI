@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
+import sys
 from openpyxl import load_workbook
 
-EXCEL_WORKBOOK_PATH = 'Test1/QuerySet1.xlsx'
-OUTPUT_FILE_PATH = 'Test1/testQuery1.txt'
+EXCEL_WORKBOOK_PATH = sys.argv[1]
+OUTPUT_FILE_PATH = sys.argv[2]
 
 INDEX_COLUMN = 'A'
 COMMENT_COLUMN = 'E'
@@ -17,6 +18,8 @@ def main():
 	querySheet = workbook['Sheet']
 		
 	print('Generating Queries ... ')
+	print('Workbook: ', EXCEL_WORKBOOK_PATH)
+	print('Output  : ', OUTPUT_FILE_PATH)
 	
 	text = format(querySheet)
 	
