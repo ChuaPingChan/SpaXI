@@ -61,9 +61,9 @@ pair<list<int>, list<int>> UsesTableProcToVar::getProcPair() {
 
 	for (unordered_map<int, list<int>>::iterator it = usesProcToVarMap.begin(); it != usesProcToVarMap.end(); ++it) {
 		int procIdx = (*it).first;
-		list<int> varList = (*it).second;
+		list<int> currList = (*it).second;
 
-		for (int var : varList) {
+		for (int var : currList) {
 			procList.push_back(procIdx);
 			varList.push_back(var);
 		}
