@@ -14,7 +14,7 @@ void NextValidator::validate()
     string firstArg = extractArgOne(rel, paramStr);
     string secondArg = extractArgTwo(paramStr);
 
-    if (firstArg == secondArg && firstArg != UNDERSCORE_STRING || !isFirstArgValueLessThanSecondArgValue(firstArg, secondArg)) {    //Because can never be 2 underlines or 2 int or 2 same synonym or 2 same synonymType
+    if (this->rel == NEXT && firstArg == secondArg && firstArg != UNDERSCORE_STRING) {    //Because can never be 2 underlines or 2 int or 2 same synonym or 2 same synonymType
         this->validity = false;
         return;
     }
@@ -143,19 +143,5 @@ bool NextValidator::isValidArgTwo(string argTwo)
     else
     {
         return false;
-    }
-}
-
-bool NextValidator::isFirstArgValueLessThanSecondArgValue(string argOne, string argTwo)
-{
-    if (RegexValidators::isValidIntegerRegex(argOne) && RegexValidators::isValidIntegerRegex(argTwo))
-    {
-        int argOneValue = stoi(argOne);
-        int argTwoValue = stoi(argTwo);
-        return (argOneValue < argTwoValue);
-    }
-    else
-    {
-        return true;
     }
 }
