@@ -218,16 +218,6 @@ namespace UnitTesting
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
 
-        /*TEST_METHOD(TestValidity_Pattern_Assign_WhitespaceBtwnIntegers_Invalid)
-        {
-            string str = "a(v, \"1 + a + 2 3 + c\")";
-            QueryTree qt;
-            qt.insertSynonym(ASSIGN, "a");
-            qt.insertSynonym(VARIABLE, "v");
-            PatternHandler pHandler = PatternHandler(&qt);
-            Assert::IsFalse(pHandler.isValidPattern(str));
-        }*/
-
         TEST_METHOD(TestRegex_Pattern_Assign_IncorrectSumOfBrackets_OkInRegex_Valid)
         {
             string str = "   a(v, \"(((1+2)\")   ";
