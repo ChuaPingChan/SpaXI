@@ -16,14 +16,14 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
     Entity leftHandSideType = wClause.getLhsEntity();
     Entity rightHandSideType = wClause.getRhsEntity();
     string leftHandSide = wClause.getLhsValue();
-    string rightHandSide = wClause.getLhsValue();
+    string rightHandSide = wClause.getRhsValue();
 
     if (leftHandSideType == IDENT_WITHQUOTES 
         && (rightHandSideType == PROCEDURE || rightHandSideType == CALL || rightHandSideType == VARIABLE))
     {
         if (pkbInstance->isInstanceOf(rightHandSideType, leftHandSide))
         {
-            int rightHandSideIdx = pkbInstance->convertStringToIdx(rightHandSide, rightHandSideType);
+            int rightHandSideIdx = pkbInstance->convertStringToIdx(leftHandSide, rightHandSideType);
             clauseResult->updateSynResults(rightHandSide, list<int>{rightHandSideIdx});
             return clauseResult->hasResults();
         }
@@ -36,9 +36,10 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
     else if ((leftHandSideType == PROCEDURE || leftHandSideType == CALL || leftHandSideType == VARIABLE)
         && rightHandSideType == IDENT_WITHQUOTES)
     {
+
         if (pkbInstance->isInstanceOf(leftHandSideType, rightHandSide))
         {
-            int leftHandSideIdx = pkbInstance->convertStringToIdx(leftHandSide, leftHandSideType);
+            int leftHandSideIdx = pkbInstance->convertStringToIdx(rightHandSide, leftHandSideType);
             clauseResult->updateSynResults(leftHandSide, list<int>{leftHandSideIdx});
             return clauseResult->hasResults();
         }

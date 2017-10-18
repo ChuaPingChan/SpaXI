@@ -18,22 +18,23 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    //Case 1: Calls(int, int)
+    //Case 1: Next(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
         return pkbInstance->isNext(stoi(argOne), stoi(argTwo));
     }
 
-    //Case 2: Calls(int, _)
+    //Case 2: Next(int, _)
     else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
     {
         return pkbInstance->isExecutedBefore(stoi(argOne));
     }
 
-    //Case 3: Calls(int, synonym)
+    //Case 3: Next(int, synonym)
     else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         list<int> pkbResult = pkbInstance->getExecutedAfter(stoi(argOne), argTwoType);
+
         if (pkbResult.empty())
         {
             return false;
@@ -45,19 +46,19 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
         }
     }
 
-    //Case 4: Calls(_, int)
+    //Case 4: Next(_, int)
     else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
     {
         return pkbInstance->isExecutedAfter(stoi(argTwo));
     }
 
-    //Case 5: Calls(_, _)
+    //Case 5: Next(_, _)
     else if (argOneType == UNDERSCORE && argTwoType == UNDERSCORE)
     {
         return pkbInstance->hasNext();
     }
 
-    //Case 6: Calls(_, synonym)
+    //Case 6: Next(_, synonym)
     else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         list<int> pkbResult = pkbInstance->getAllExecutedAfter(argTwoType);
@@ -72,7 +73,7 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
         }
     }
 
-    //Case 7: Calls(synonym, int)
+    //Case 7: Next(synonym, int)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == INTEGER)
     {
         list<int> pkbResult = pkbInstance->getExecutedBefore(stoi(argTwo), argOneType);
@@ -87,7 +88,7 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
         }
     }
 
-    //Case 8: Calls(synonym, _)
+    //Case 8: Next(synonym, _)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && argTwoType == UNDERSCORE)
     {
         list<int> pkbResult = pkbInstance->getAllExecutedBefore(argOneType);
@@ -102,7 +103,7 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
         }
     }
 
-    //Case 9: Calls(synonym, synonym)
+    //Case 9: Next(synonym, synonym)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
     {
         // Checks if the two synonyms are already present in clauseResult
