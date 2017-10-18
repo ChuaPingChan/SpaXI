@@ -72,6 +72,7 @@ const string RegexValidators::FOLLOWS_REGEX = "(" + SPACE_0 + "(Follows)(\\*)?" 
 const string RegexValidators::PARENT_REGEX = "(" + SPACE_0 + "(Parent)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::CALLS_REGEX = "(" + SPACE_0 + "(Calls)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::NEXT_REGEX = "(" + SPACE_0 + "(Next)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + LINEREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + LINEREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
+const string RegexValidators::AFFECTS_REGEX = "(" + SPACE_0 + "(Affects)(\\*)?" + SPACE_0 + "[(]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[,]" + SPACE_0 + STMTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
 const string RegexValidators::RELREF_REGEX = "(" + MODIFIES_REGEX + "|" + USES_REGEX + "|" + FOLLOWS_REGEX + "|" + PARENT_REGEX + "|" + CALLS_REGEX + "|" + NEXT_REGEX + ")";
 const string RegexValidators::RELCOND_REGEX = "(" + SPACE_0 + RELREF_REGEX + SPACE_0 + "("+ SPACE_0 + "and" + SPACE_1 + RELREF_REGEX + SPACE_0 + ")*" + SPACE_0 + ")";
 const string RegexValidators::SUCH_THAT_Cl_REGEX = "(" + SPACE_0 + "(such that)" + SPACE_1 + RELCOND_REGEX + SPACE_0 + ")";
@@ -284,6 +285,12 @@ bool RegexValidators::isValidNextRegex(string str)
 {
     regex nextRegexCheck(NEXT_REGEX);
     return regex_match(str, nextRegexCheck);
+}
+
+bool RegexValidators::isValidAffectsRegex(string str)
+{
+    regex affectsRegexCheck(AFFECTS_REGEX);
+    return regex_match(str, affectsRegexCheck);
 }
 
 bool RegexValidators::isValidRelCondRegex(string str)
