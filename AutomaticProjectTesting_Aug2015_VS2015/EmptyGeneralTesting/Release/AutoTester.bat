@@ -40,7 +40,11 @@ goto eof
 :generateCompliment
 @echo off
 echo.
-echo You are beautiful :) Thank you for teaching us!
+set compliment[0]=You are beautiful :) Thank you for teaching us!
+set compliment[1]=Have a great day!
+set compliment[2]=This is the best module I've ever taken!
+set /a i=%random%%%3
+call echo %%compliment[%i%]%%
 echo.
 pause
 cls
