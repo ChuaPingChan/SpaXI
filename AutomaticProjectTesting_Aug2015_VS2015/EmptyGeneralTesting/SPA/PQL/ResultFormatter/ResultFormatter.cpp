@@ -93,7 +93,7 @@ list<string> ResultFormatter::handleInvalidQuery(string query)
     list<string> result;
     string SELECT_BOOLEAN = "(;\\s*Select BOOLEAN)";
     regex checkSelectBoolean(SELECT_BOOLEAN);
-    if (regex_match(query, checkSelectBoolean))
+    if (regex_search(query, checkSelectBoolean))
     {
         result.push_back("false");
     }
