@@ -90,6 +90,8 @@ public:
     static const string EXPRESSION_SPEC_EXACT_REGEX;
     static const string EXPRESSION_SPEC_PARTIAL_REGEX;
     static const string EXPRESSION_SPEC;
+    static const string PATTERN_ASSIGN_FIRSTARG_REGEX;
+    static const string PATTERN_ASSIGN_SECONDARG_REGEX;
     static const string PATTERN_ASSIGN_REGEX;
     static const string PATTERN_WHILE_REGEX;
     static const string PATTERN_IF_REGEX;
