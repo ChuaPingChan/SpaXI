@@ -344,6 +344,17 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expectedPc, actualPc));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SinglePattern_DeformedExpression_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("variable v;");
+            query.append("Select a pattern a(v, \"1 2 + 3 + x\")");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+        }
+
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_MultiPattern_Type_BeforeAndAfter_AndKeyword_Valid)
         {
             string query;

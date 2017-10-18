@@ -98,10 +98,11 @@ string AssignPatternValidator::extractArgOne(string str)
 
 string AssignPatternValidator::extractArgTwo(string str)
 {
-    string delimFirst = ",";
-    string delimSecond = ")";
-
-    return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
+    string secondArg = Formatter::getStringAfterDelim(str, ",");
+    smatch argTwoMatch;
+    regex argTwoRegex(RegexValidators::PATTERN_ASSIGN_SECONDARG_REGEX);
+    regex_search(secondArg, argTwoMatch, argTwoRegex);
+    return argTwoMatch[0].str();
 }
 
 bool AssignPatternValidator::isWellFormExpr(string str)
