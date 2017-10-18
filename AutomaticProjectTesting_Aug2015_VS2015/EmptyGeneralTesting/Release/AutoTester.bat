@@ -6,6 +6,7 @@ echo ===========================================================================
 echo Type the test index to run the test
 echo [0] Receive a compliment
 echo [?] Run AutoTester for test ?
+echo [a] Run AutoTester for specified test path
 echo [x] Exit
 set option=
 set /p option=Please select your options: 
@@ -14,6 +15,9 @@ if '%option%'=='0' (
 )
 if '%option%'=='x' (
 	goto :close
+)
+if '%option%'=='a' (
+	goto :runGivenTest
 )
 if '%option%'=='1' (
 	goto :runTest1
@@ -38,6 +42,52 @@ goto eof
 echo.
 echo You are beautiful :) Thank you for teaching us!
 echo.
+pause
+cls
+goto :main
+
+:runGivenTest
+@echo off
+echo ===============================================================================
+echo [cls]  Clear screen
+echo [back] Return to main
+set /p source=Enter your source path: 
+echo Source Path: %source% 
+if '%source%'=='cls' (
+	cls
+	goto :runGivenTest
+)
+if '%source%'=='back' (
+	cls
+	goto :main
+)
+echo.
+set /p query=Enter your query path: 
+echo Query Path : %query%
+if '%query%'=='cls' (
+	cls
+	goto :runGivenTest
+)
+if '%query%'=='back' (
+	cls
+	goto :main
+)
+echo.
+set /p output=Enter your output path: 
+echo Output Path : %output%
+if '%output%'=='cls' (
+	cls
+	goto :runGivenTest
+)
+if '%output%'=='back' (
+	cls
+	goto :main
+)
+echo.
+echo Running [ AutoTester %source% %query% %output% ] ...
+AutoTester %source% %query% %output% > %output%.txt
+echo Finish running AutoTester.
+echo You may view your result at %output% or %output%.txt
 pause
 cls
 goto :main
