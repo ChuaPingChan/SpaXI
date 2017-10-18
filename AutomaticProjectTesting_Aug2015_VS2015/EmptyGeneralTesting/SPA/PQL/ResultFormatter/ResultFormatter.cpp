@@ -91,7 +91,7 @@ list<string> ResultFormatter::handleNoResult(QueryTree qt)
 list<string> ResultFormatter::handleInvalidQuery(string query)
 {
     list<string> result;
-    string SELECT_BOOLEAN = "(;\\s*Select BOOLEAN)";
+    string SELECT_BOOLEAN = "(;\\s*Select BOOLEAN)(\s+\w*)*$";
     regex checkSelectBoolean(SELECT_BOOLEAN);
     if (regex_search(query, checkSelectBoolean))
     {
