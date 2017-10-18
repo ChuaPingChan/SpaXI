@@ -98,9 +98,12 @@ string AssignPatternValidator::extractArgOne(string str)
 
 string AssignPatternValidator::extractArgTwo(string str)
 {
+    /*smatch argTwoMatch;
+    regex argTwoRegex(RegexValidators::PATTERN_ASSIGN_SECONDARG_REGEX);
+    regex_search(str, argTwoMatch, argTwoRegex);
+    return argTwoMatch[0].str();*/
     string delimFirst = ",";
     string delimSecond = ")";
-
     return Formatter::getBetweenTwoDelims(str, delimFirst, delimSecond);
 }
 
