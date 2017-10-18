@@ -1,0 +1,1065 @@
+1 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(_,_)
+
+5000
+2 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(p,_)
+
+5000
+3 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(v,_)
+
+5000
+4 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(_,p)
+
+5000
+5 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(_,v)
+
+5000
+6 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(p,v)
+
+5000
+7 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(_,_)
+
+5000
+8 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(p,_)
+ASSIGNMENT,NESTEDASSIGNMENTS,NESTEDCALL,NESTEDIF,NESTEDWHILE,SINGLECALL,SINGLEIF,SINGLEWHILE
+5000
+9 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(v,_)
+
+5000
+10 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(_,p)
+
+5000
+11 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(_,v)
+
+5000
+12 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(p,v)
+ASSIGNMENT,NESTEDASSIGNMENTS,NESTEDCALL,NESTEDIF,NESTEDWHILE,SINGLECALL,SINGLEIF,SINGLEWHILE
+5000
+13 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(_,_)
+
+5000
+14 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(p,_)
+
+5000
+15 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(v,_)
+
+5000
+16 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(_,p)
+
+5000
+17 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(_,v)
+
+5000
+18 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(p,v)
+
+5000
+19 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,_)
+
+5000
+20 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(p,_)
+
+5000
+21 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(v,_)
+
+5000
+22 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,p)
+
+5000
+23 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,v)
+
+5000
+24 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(p,v)
+
+5000
+25 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(_,_)
+
+5000
+26 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(p,_)
+
+5000
+27 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(v,_)
+
+5000
+28 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(_,p)
+
+5000
+29 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(_,v)
+
+5000
+30 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) and Modifies(p,v)
+
+5000
+31 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(_,_)
+
+5000
+32 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(p,_)
+ASSIGNMENT,NESTEDASSIGNMENTS,NESTEDCALL,NESTEDIF,NESTEDWHILE,SINGLECALL,SINGLEIF,SINGLEWHILE
+5000
+33 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(v,_)
+
+5000
+34 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(_,p)
+
+5000
+35 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(_,v)
+
+5000
+36 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(p,v)
+ASSIGNMENT,NESTEDASSIGNMENTS,NESTEDCALL,NESTEDWHILE,SINGLECALL,SINGLEIF,SINGLEWHILE
+5000
+37 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,_) and Modifies(_,_)
+
+5000
+38 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,_) and Modifies(p,_)
+
+5000
+39 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,_) and Modifies(v,_)
+
+5000
+40 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) with v.varName = p.procName such that Modifies(_,p)
+
+5000
+41 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,_) and Modifies(_,v)
+
+5000
+42 - comment
+procedure p; variable v;
+Select p such that Uses(_,_) and Modifies(p,v) with v.varName = p.procName
+
+5000
+43 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,_) and Modifies(_,_)
+
+5000
+44 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,_) and Modifies(p,_)
+
+5000
+45 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(v,_) with v.varName = p.procName
+
+5000
+46 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) and Modifies(_,p) with v.varName = p.procName
+
+5000
+47 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,_) and Modifies(_,v)
+
+5000
+48 - comment
+procedure p; variable v;
+Select p such that Uses(p,_) with v.varName = p.procName such that Modifies(p,v)
+
+5000
+49 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(_,_)
+
+5000
+50 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(p,_)
+
+5000
+51 - comment
+procedure p; variable v;
+Select p such that Uses(v,_) and Modifies(v,_) with v.varName = p.procName
+
+5000
+52 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(_,p)
+
+5000
+53 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(_,v)
+
+5000
+54 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(v,_) and Modifies(p,v)
+
+5000
+55 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,_) with v.varName = p.procName
+
+5000
+56 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,p) and Modifies(p,_)
+
+5000
+57 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,p) and Modifies(v,_)
+
+5000
+58 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,p) and Modifies(_,p)
+
+5000
+59 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(_,v) with v.varName = p.procName
+
+5000
+60 - comment
+procedure p; variable v;
+Select p such that Uses(_,p) and Modifies(p,v) with v.varName = p.procName
+
+5000
+61 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,v) and Modifies(_,_)
+
+5000
+62 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+63 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,v) and Modifies(v,_)
+
+5000
+64 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) with v.varName = p.procName such that Modifies(_,p)
+
+5000
+65 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(_,v) and Modifies(_,v)
+
+5000
+66 - comment
+procedure p; variable v;
+Select p such that Uses(_,v) with v.varName = p.procName such that Modifies(p,v)
+
+5000
+67 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) and Modifies(_,_) with v.varName = p.procName
+
+5000
+68 - comment
+procedure p; variable v;
+Select p such that Uses(p,v) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+69 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,v) and Modifies(v,_)
+
+5000
+70 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,v) and Modifies(_,p)
+
+5000
+71 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,v) and Modifies(_,v)
+
+5000
+72 - comment
+procedure p; variable v;
+Select p with v.varName = p.procName such that Uses(p,v) and Modifies(p,v)
+
+5000
+73 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(_,_)
+
+5000
+74 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(p,_)
+
+5000
+75 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(v,_)
+
+5000
+76 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(_,p)
+
+5000
+77 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(_,v)
+
+5000
+78 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(p,v)
+
+5000
+79 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(_,_)
+
+5000
+80 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(p,_)
+IFS1,IFS2,IFS3,NO,WHILES,WHILES1,WHILES2,WHILES3,YES,a,alpha,america,anada,apple,b,banana,boston,bravo,c,carrot,charlie,d,delta,denmark,dua,durian,e,echo,eggplant,eight,eleven,empat,enam,five,four,foxtrot,france,germany,grape,honeydew,hungary,iceland,ifs,jackfruit,japan,kiwi,korea,lapan,lemon,lima,mango,nine,nutella,one,orange,pear,rambutan,satu,seven,six,starfruit,ten,three,tiga,tomato,tujoh,two,watermelon,yam
+5000
+81 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(v,_)
+
+5000
+82 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(_,p)
+
+5000
+83 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(_,v)
+
+5000
+84 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(p,v)
+a,alpha,america,anada,apple,charlie,five,four,foxtrot,france,grape,hungary,japan,lemon,lima,nine,one,rambutan,satu,seven,three,tomato
+5000
+85 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(_,_)
+
+5000
+86 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(p,_)
+
+5000
+87 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(v,_)
+
+5000
+88 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(_,p)
+
+5000
+89 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(_,v)
+
+5000
+90 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) and Modifies(p,v)
+
+5000
+91 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(_,_)
+
+5000
+92 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(p,_)
+
+5000
+93 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(v,_)
+
+5000
+94 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(_,p)
+
+5000
+95 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(_,v)
+
+5000
+96 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(p,v)
+
+5000
+97 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,_)
+
+5000
+98 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(p,_)
+
+5000
+99 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(v,_)
+
+5000
+100 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,p)
+
+5000
+101 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,v)
+
+5000
+102 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(p,v)
+
+5000
+103 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(_,_)
+
+5000
+104 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(p,_)
+IFS1,IFS2,IFS3,NO,WHILES,WHILES1,WHILES2,WHILES3,YES,alpha,apple,b,banana,boston,bravo,c,carrot,d,delta,denmark,dua,durian,e,echo,eggplant,eight,eleven,empat,enam,four,germany,honeydew,iceland,ifs,jackfruit,kiwi,korea,lapan,mango,nutella,orange,pear,six,starfruit,ten,tiga,tujoh,two,watermelon,yam
+5000
+105 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(v,_)
+
+5000
+106 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(_,p)
+
+5000
+107 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(_,v)
+
+5000
+108 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(p,v)
+alpha,apple,four
+5000
+109 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) with v.varName = p.procName such that Modifies(_,_)
+
+5000
+110 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,_) and Modifies(p,_)
+
+5000
+111 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) and Modifies(v,_) with v.varName = p.procName
+
+5000
+112 - comment
+procedure p; variable v;
+Select v such that Uses(_,_) with v.varName = p.procName such that Modifies(_,p)
+
+5000
+113 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,_) and Modifies(_,v)
+
+5000
+114 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,_) and Modifies(p,v)
+
+5000
+115 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) with v.varName = p.procName such that Modifies(_,_)
+
+5000
+116 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(p,_) with v.varName = p.procName
+
+5000
+117 - comment
+procedure p; variable v;
+Select v such that Uses(p,_) and Modifies(v,_) with v.varName = p.procName
+
+5000
+118 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,_) and Modifies(_,p)
+
+5000
+119 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,_) and Modifies(_,v)
+
+5000
+120 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,_) and Modifies(p,v)
+
+5000
+121 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(v,_) and Modifies(_,_)
+
+5000
+122 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+123 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(v,_) and Modifies(v,_)
+
+5000
+124 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(v,_) and Modifies(_,p)
+
+5000
+125 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(v,_) and Modifies(_,v)
+
+5000
+126 - comment
+procedure p; variable v;
+Select v such that Uses(v,_) with v.varName = p.procName such that Modifies(p,v)
+
+5000
+127 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,p) and Modifies(_,_)
+
+5000
+128 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+129 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,p) and Modifies(v,_)
+
+5000
+130 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) with v.varName = p.procName such that Modifies(_,p)
+
+5000
+131 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) and Modifies(_,v) with v.varName = p.procName
+
+5000
+132 - comment
+procedure p; variable v;
+Select v such that Uses(_,p) with v.varName = p.procName such that Modifies(p,v)
+
+5000
+133 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,_) with v.varName = p.procName
+
+5000
+134 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,v) and Modifies(p,_)
+
+5000
+135 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) with v.varName = p.procName such that Modifies(v,_)
+
+5000
+136 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) and Modifies(_,p) with v.varName = p.procName
+
+5000
+137 - comment
+procedure p; variable v;
+Select v such that Uses(_,v) with v.varName = p.procName such that Modifies(_,v)
+
+5000
+138 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(_,v) and Modifies(p,v)
+
+5000
+139 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,v) and Modifies(_,_)
+
+5000
+140 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) with v.varName = p.procName such that Modifies(p,_)
+
+5000
+141 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) with v.varName = p.procName such that Modifies(v,_)
+
+5000
+142 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,v) and Modifies(_,p)
+
+5000
+143 - comment
+procedure p; variable v;
+Select v such that Uses(p,v) and Modifies(_,v) with v.varName = p.procName
+
+5000
+144 - comment
+procedure p; variable v;
+Select v with v.varName = p.procName such that Uses(p,v) and Modifies(p,v)
+
+5000
+145 - comment
+procedure p;
+Select p such that Calls(p,"NESTEDASSIGNMENTS")
+NESTEDCALL
+5000
+146 - comment
+procedure p;
+Select p such that Calls(p,_)
+SINGLEIF, SINGLEWHILE, ASSIGNMENT, SINGLECALL, NESTEDCALL
+5000
+147 - comment
+procedure p1, p2;
+Select p1 such that Calls(p1,p2)
+SINGLEIF, SINGLEWHILE, ASSIGNMENT, SINGLECALL, NESTEDCALL
+5000
+148 - comment
+procedure p1, p2;
+Select p2 such that Calls(p1,p2)
+SINGLECALL, NESTEDCALL, NESTEDIF, NESTEDWHILE, NESTEDASSIGNMENTS
+5000
+149 - comment
+procedure p;
+Select p such that Calls("NESTEDCALL",p)
+NESTEDIF, NESTEDWHILE, NESTEDASSIGNMENTS
+5000
+150 - comment
+procedure p;
+Select p such that Calls(p,"SINGLECALL")
+SINGLEIF, SINGLEWHILE, ASSIGNMENT
+5000
+151 - comment
+procedure p1, p2;
+Select p1 such that Calls*(p1,p2)
+SINGLEIF, SINGLEWHILE, ASSIGNMENT, SINGLECALL, NESTEDCALL
+5000
+152 - comment
+procedure p1, p2;
+Select p2 such that Calls*(p1,p2)
+SINGLECALL, NESTEDCALL, NESTEDIF, NESTEDWHILE, NESTEDASSIGNMENTS
+5000
+153 - comment
+assign a;
+Select a such that Next(26,a)
+27, 31
+5000
+154 - comment
+assign a;
+Select a such that Next(29,a)
+30
+5000
+155 - comment
+assign a;
+Select a such that Next(a,12)
+11
+5000
+156 - comment
+while w;
+Select w such that Next(w,27)
+26
+5000
+157 - comment
+call c;
+Select c such that Next(7,c)
+8
+5000
+158 - comment
+assign a;
+Select a such that Next(15,a)
+16
+5000
+159 - comment
+assign a;
+Select a such that Next(18,a)
+
+5000
+160 - comment
+assign a;
+Select a such that Next*(24,a)
+25, 27, 28, 30, 31
+5000
+161 - comment
+assign a;
+Select a such that Next*(34,a)
+
+5000
+162 - comment
+assign a;
+Select a such that Next*(a,13)
+10, 11, 12
+5000
+163 - comment
+assign a;
+Select a such that Next*(15,a)
+16, 18, 19, 21, 22
+5000
+164 - comment
+call c;
+Select c such that Next*(33,c)
+36
+5000
+165 - affects?
+assign a1, a2; variable v;
+Select a1 such that Modifies(a1,v) and Uses(a2, v) and Next*(a1, a2)
+10, 37, 31
+5000
+166 - comment
+if if; call c; variable v;
+Select c such that Modifies(if,v) and Uses(c, v) and Next*(if, c)
+34, 4
+5000
+167 - comment
+assign a; procedure p; variable v;
+Select v with a.stmt# = 10 such that Modifies(a,v) and Uses("ASSIGNMENT",v)
+alpha
+5000
+168 - comment
+assign a1, a2; while w; variable v;
+Select a1 pattern a1(_,_"six"_) such that Uses(a2,v) with v.varName= "eight" such that Follows(a1,a2) and Parent*(w,a1)
+27
+5000
+169 - comment
+procedure p;
+Select p such that Uses(p,"eight") and Calls(p,"NESTEDASSIGNMENTS")
+NESTEDCALL
+5000
+170 - comment
+variable v;
+Select BOOLEAN with v.varName = "echo" such that Uses(11,v) and Modifies(10,v) and Uses(11,v) and Next*(10,11)
+false
+5000
+171 - comment
+variable v;
+Select BOOLEAN with v.varName = "echo" such that Uses(12,v) and Modifies(10,v) and Uses(12,v) and Next*(10,12)
+false
+5000
+172 - comment
+variable v;
+Select BOOLEAN with v.varName = "alpha" such that Modifies(10,v) and Uses(12,v) and Next*(10,12)
+true
+5000
+173 - comment
+assign a; while w;
+Select w such that Parent*(w, a) and Follows*(27,a)
+24, 26
+5000
+174 - comment
+assign a; procedure p; variable v;
+Select a such that Uses(p,v) and Calls*("SINGLEIF",p) pattern a(_,_"apple * eggplant"_)
+41
+5000
+175 - comment
+while w; assign a;
+Select w such that Parent(w,a) pattern w("WHILES2",_)
+26
+5000
+176 - Multiple Clauses
+stmt s; variable v;
+Select v such that Follows*(s, 12) and Follows(12,13)
+IFS1,IFS2,IFS3,NO,WHILES,WHILES1,WHILES2,WHILES3,YES,a,alpha,america,anada,apple,b,banana,boston,bravo,c,carrot,charlie,d,delta,denmark,dua,durian,e,echo,eggplant,eight,eleven,empat,enam,five,four,foxtrot,france,germany,grape,honeydew,hungary,iceland,ifs,jackfruit,japan,kiwi,korea,lapan,lemon,lima,mango,nine,nutella,one,orange,pear,rambutan,satu,seven,six,starfruit,ten,three,tiga,tomato,tujoh,two,watermelon,yam
+5000
+177 - Multiple Clauses
+stmt s;
+Select s such that Follows*(37,41) and Parent(s, 36)
+35
+5000
+178 - Multiple Clauses
+variable v;
+Select v such that Modifies(10,v) and Uses(12,v)
+alpha
+5000
+179 - Multiple Clauses
+call c; variable v;
+Select c such that Next* (32, c) and Uses(c, "ten")
+34
+5000
+180 - Multiple Clauses
+stmt s; while w; 
+Select w such that Next*(35, w) and Parent*(15, _)
+35
+5000
+181 - Multiple Clauses
+assign a; variable v;
+Select v such that Uses(15, v) and Uses(21, v) and Uses("NESTEDIF", v)
+iceland
+5000
+182 - Multiple Clauses
+stmt s; variable v; procedure p; call c;
+Select s such that Parent*(20, s) and Uses(p, v) with p.procName = c.procName
+21, 22
+5000
+183 - Multiple Clauses
+assign a; variable v;
+Select v such that Parent*(20, a) and Modifies(a, v) and Next*(1, 4)
+japan, hungary
+5000
+184 - Multiple Clauses
+if if; stmt s; while w;
+Select if such that Next*(16,if) and Next*(w,31) and Next*(s, w)
+17
+5000
+185 - Multiple Clauses
+assign a;
+Select a such that Calls(_,_) and Next*(25, a) pattern a(_,_"eight"_)
+28
+5000
+186 - Multiple Clauses
+assign a; call c; variable v; while w;
+Select a such that Parent(2,a) and Next*(1,c) and Uses(c, v) pattern w(v,_) 
+3
+5000
+187 - Multiple Clauses
+stmt s; if if; variable v;
+Select v pattern if("  YES  ",_,_) such that Follows(16,s) and Uses(s, v)
+IFS2, denmark, germany
+5000
+188 - Multiple Clauses
+if i;
+Select BOOLEAN pattern i(_,_,_) such that Follows(_,_)
+true
+5000
+189 - Multiple Clauses
+if i;
+Select BOOLEAN pattern i(_,_,_) such that Follows*(_,_)
+true
+5000
+190 - Multiple Clauses
+prog_line s; assign a;
+Select a such that Next (13,_) with a.stmt# = 39
+39
+5000
+191 - Multiple Clauses
+procedure p;
+Select p such that Uses(p,"ten") with p.procName = "NESTEDCALL"
+NESTEDCALL
+5000
+192 - Multiple Clauses
+prog_line n;
+Select n such that Uses("ASSIGNMENT","germany") with n = 15
+15
+5000
+193 - Multiple Clauses
+call c; procedure p;
+Select c such that Calls*(p, _) and Follows*(13,c)
+14
+5000
+194 - Multiple Clauses
+assign a; procedure p; assign a2; variable v;
+Select a such that Calls*(_,p) and Next*(10,a) and Uses(a, v) and Modifies(a2, v)
+12
+5000
+195 - Multiple Clauses
+assign a; if if; variable v; assign a2;
+Select a2 such that Next*(1,a) and Modifies(13,"charlie") pattern a("a", _"c-d"_) such that Parent(if, a) and Modifies(if, v) with v.varName = "apple" such that Modifies(a2, v)
+37
+5000
+196 - Multiple Clauses
+assign a, a2, a3; variable v;
+Select v such that Follows*(12, a) and Uses(35,"yam") pattern a2(v, _"honeydew -    jackfruit"_) and a3(_, _"starfruit"_)
+grape
+5000
+197 - Multiple Clauses
+assign a; while w;stmt s; assign a2;
+Select a such that Follows*(10,a) and Follows*(1,s) and Follows(a,a2) pattern w("NO", _)
+12, 11
+5000
+198 - Multiple Clauses
+stmt s; variable v;
+Select s such that Follows*(12,s) and Uses(12,v) and Follows*(_,_) with s.stmt# = 14
+14
+5000
+199 - Multiple Clauses
+stmt s; if if;
+Select s such that Parent*(24,s) and Next*(27,s) and Parent*(_,_) pattern if(_,_,_)
+26,27,28,29,30, 25, 31
+5000
+200 - Multiple Clauses
+while w; stmt s; variable v;
+Select w pattern w("WHILES1 ",_) such that Modifies(s,v) and Next*(15, s) with s.stmt# =19
+24
+5000
+201 - Multiple Clauses
+while w; stmt s; variable v;
+Select v pattern w(" WHILES1",_) such that Modifies(w,v) and Next*(30, s) such that Calls("NESTEDCALL", "NESTEDIF")
+three, five, seven, nine, four
+5000
+202 - Multiple Clauses
+assign a; constant c; stmt s;
+Select a pattern a(_,_"alpha * bravo   "_) such that Next* (10, a) and Modifies(a, "foxtrot")
+12
+5000
+203 - Multiple Clauses
+assign a; prog_line s; if if;variable v;
+Select v such that Parent* (if, a) and Follows*(16, if) such that Modifies(a,v) and Calls*("SINGLEIF","NESTEDWHILE") and Next*(7,6)
+anada, france
+5000
+204 - Multiple Clauses
+assign a; prog_line s;variable v; assign a2;
+Select v such that Follows* (a2, a) and Uses(a, v) such that Parent(s,27) and Follows(a2,s)
+eleven
+5000
+205 - Multiple Clauses
+assign a; stmt s, s2, s3; while w; variable v; assign a3;
+Select v such that Next* (a, w) pattern w(v,_) such that Follows(s,s2) and Follows(s2, s3) and Parent(s3,a) with s.stmt# = 27 such that Follows(a3,w) and Uses(a3, "two")
+WHILES1
+5000
+206 - Multiple Clauses
+assign a; prog_line s, s1, s2, s3;
+Select a such that Follows(s1, s2) and Follows(s2,s3) and Modifies("SINGLEIF","tomato") and Parent*(s2,a) and Next*(s,s)
+27, 28, 30
+5000
+207 - Multiple Clauses
+assign a; stmt s1, s2, s3; procedure p1,p2;
+Select s1 such that Follows(s1, s2) and Follows(s2,s3) and Uses(s2,"ten") and Calls(p1,p2) with p1.procName = "SINGLEWHILE"
+25
+5000
+208 - Multiple Clauses
+assign a; stmt s1, s2, s3; procedure p1,p2;call c;
+Select c such that Follows(s1, s2) and Follows(s2,s3) and Follows*(7,c) and Calls(p1,p2) with p1.procName = "SINGLECALL"
+8
+5000
+209 - Multiple Clauses
+assign a; stmt s1, s2, s3; procedure p1,p2; call c; if if;
+Select if such that Follows(s1, s2) and Follows(s2,s3) and Parent*(if,c) and Calls(p1,p2) with p1.procName = "SINGLEWHILE"
+2, 32
+5000
+210 - Multiple Clauses
+assign a; stmt s1, s2, s3; procedure p1,p2; call c;
+Select c such that Follows(s1, s2) and Follows(s2,s3) and Follows(s3,c) and Calls*(p1,p2) with c.procName = "SINGLECALL" and p1.procName ="ASSIGNMENT"
+14
+5000
+211 - Multiple Clauses
+variable v, v2; if i; call c1,c2;procedure p1,p2;
+Select i pattern i(v,_,_) such that Modifies(i,v2) and Next*(i,c2) with c2.stmt# = 4 such that Calls(p1,p2) with c2.procName = "SINGLECALL"
+2
+5000
+212 - Multiple Clauses
+constant c; variable v, v1,v2; if i; call c1,c2; procedure p1,p2; stmt s; assign a;
+Select v pattern i(v1,_,_) such that Parent(s, i) and Uses(s, "IFS1") and Modifies(i,v2) and Next*(a,i) and Uses(a, v) such that Calls(p1,p2)
+boston
+5000
+213 - Many Next*
+constant c; variable v, v1,v2; if i; call c1,c2; procedure p1,p2; prog_line s1, s2, s3, s4; assign a; while w;
+Select v1 such that Next*(s1, s2) and Next*(s2, a)and Next*(s2, s3) and Uses(a, v) pattern a("seven",_) with v.varName = "eight" such that Next*(a, w) pattern w(v1,_)
+WHILES1,WHILES2,WHILES3
+5000
