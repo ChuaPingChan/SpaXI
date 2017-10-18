@@ -199,6 +199,7 @@
     <ClCompile Include="TestRegexCalls.cpp" />
     <ClCompile Include="TestRegexNext.cpp" />
     <ClCompile Include="TestRelationshipTable.cpp" />
+    <ClCompile Include="TestResultFormatter.cpp" />
     <ClCompile Include="TestStmtTypeList.cpp" />
     <ClCompile Include="TestUsesTableStmtToVar.cpp" />
     <ClCompile Include="TestVarIdxTable.cpp" />

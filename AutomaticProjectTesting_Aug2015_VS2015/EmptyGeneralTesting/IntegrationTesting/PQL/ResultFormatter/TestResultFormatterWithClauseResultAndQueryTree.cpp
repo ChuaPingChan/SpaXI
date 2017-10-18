@@ -30,7 +30,7 @@ namespace UnitTesting
 			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front()=="true");
 		}
         
-		/*TEST_METHOD(TestResultFormatter_SelectBOOLEAN_ClauseResultEmpty_False)
+		TEST_METHOD(TestResultFormatter_SelectBOOLEAN_ClauseResultEmpty_False)
 		{
 			QueryTree qt;
 			SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
@@ -38,22 +38,9 @@ namespace UnitTesting
 			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
 			ClauseResult cr;
 			ResultFormatter rf;
-           // cr.updateSynResults("s", list<int>());
-			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).size() == 1);
-			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).front() == "false");
+			Assert::IsTrue(rf.handleNoResult(qt).size() == 1);
+			Assert::IsTrue(rf.handleNoResult(qt).front() == "false");
 		}
-
-		TEST_METHOD(TestResultFormatter_SelectSynonym_ClauseResultEmpty_NoResult_EmptyString)
-		{
-			QueryTree qt;
-			string synonym = "s";
-			SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
-			qt.insertSelect(UtilitySelection::makeSelectClause(SELECT_SINGLE,STMT,synonym));
-			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
-			ClauseResult cr;
-			ResultFormatter rf;
-			Assert::IsTrue(rf.finalResultFromSelection(cr, qt).empty());
-		}*/
 
 		TEST_METHOD(TestResultFormatter_SelectSynonym_ClauseResultNonEmpty_OneResult_ResultExpected)
 		{
