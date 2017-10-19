@@ -13,27 +13,34 @@ PQLMain::~PQLMain()
 {
 }
 
+
 list<string> PQLMain::run()
 {
 
     QueryValidator validator = QueryValidator(&qt);
     bool isValid = validator.isValidQuery(query);
+    ResultFormatter formatter;
     list<string> finalResult;
     if (isValid)
     {
         QueryEvaluator evaluator(&qt);
         evaluator.evaluate();
         ClauseResult evaluatorResult = qt.getEvaluatorResult();
-        ResultFormatter formatter;
         if (evaluator.hasResult())
         {          
             finalResult = formatter.finalResultFromSelection(evaluatorResult, qt);
         }
-        
+
         else
         {
-            finalResult = formatter.handleNoResult(evaluatorResult, qt);
+            finalResult = formatter.handleNoResult(qt);
         }
+        
+    }
+    else 
+    {
+       finalResult = formatter.handleInvalidQuery(query);
+                
     }
     return finalResult;
 }

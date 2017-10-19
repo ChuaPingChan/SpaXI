@@ -3,6 +3,7 @@
 #include <string>
 #include <set>
 #include <list>
+#include <regex>
 #include "..\QueryTree.h"
 #include "..\Utilities\ClauseResult.h"
 #include "..\..\PKB\PKBMain.h"
@@ -15,7 +16,8 @@ class ResultFormatter
 public:
 	ResultFormatter();
 	list<string> finalResultFromSelection(ClauseResult cr, QueryTree qt);
-    list<string> handleNoResult(ClauseResult cr, QueryTree qt);
+    list<string> handleNoResult(QueryTree qt);
+    list<string> handleInvalidQuery(string query);
 
 protected:
 	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
