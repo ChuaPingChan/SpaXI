@@ -6,6 +6,7 @@
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
 #include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
+#include <sstream>
 
 using namespace std;
 

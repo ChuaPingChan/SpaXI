@@ -52,6 +52,39 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 
 bool SelectValidator::isValidSelectTuple(string selectedStr)
 {
+    if (RegexValidators::isValidTupleRegex(selectedStr))
+    {
+        vector<string> synonymList;
+        vector<Entity> entityList;
+        selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), '<'), selectedStr.end()); //remove < from tuple
+        selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), '>'), selectedStr.end()); //remove > from tuple
+        selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), ' '), selectedStr.end()); //remove all whitespaces for easier tokenizing
+        char delimiter = ','; //delimit characters using ,
+        stringstream ss(selectedStr);
+        string arguments;
+        while (getline(ss, arguments, delimiter)) 
+        {
+            synonymList.push_back(arguments);
+        }
+
+        for (string s : synonymList)
+        {
+            try {
+                Entity entity = getEntityOfSynonym(s);
+                entityList.push_back(entity);
+            }
+            catch (SynonymNotFoundException& snfe) {
+                //TODO: Add to logging
+                return false;
+            }
+        }
+
+        SelectClause sc = makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+        storeInQueryTree(sc);
+        return true;
+
+    }
+    //TODO: Add support for AttrRef
     return false;
 }
 
