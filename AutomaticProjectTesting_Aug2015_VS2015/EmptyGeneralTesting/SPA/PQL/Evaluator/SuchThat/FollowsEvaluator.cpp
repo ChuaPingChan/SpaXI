@@ -150,8 +150,8 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
             if (argOneExists && !argTwoExists)
             {
                 string existingSyn = argOne;
-                Entity existingSynType = argOneType;
                 string newSyn = argTwo;
+                Entity newSynType = argTwoType;
 
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
@@ -159,7 +159,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getAfter(existingSynVal, existingSynType);
+                    list<int> newSynVals = pkbInstance->getAfter(existingSynVal, newSynType);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
@@ -174,8 +174,8 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
             else if (!argOneExists && argTwoExists)
             {
                 string existingSyn = argTwo;
-                Entity existingSynType = argTwoType;
                 string newSyn = argOne;
+                Entity newSynType = argOneType;
 
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
@@ -183,7 +183,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getBefore(existingSynVal, existingSynType);
+                    list<int> newSynVals = pkbInstance->getBefore(existingSynVal, newSynType);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
