@@ -6,6 +6,10 @@
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
 #include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
+#include <sstream>
+#include <regex>
+#include <algorithm>
+#include <string>
 
 using namespace std;
 
@@ -32,5 +36,6 @@ private:
 
     Entity getEntityOfSynonym(string syn);
     string removeSelectKeyword(string str);
+    string removeSpecialCharactersFromTuple(string selectedStr);
 };
 

@@ -51,14 +51,16 @@ namespace UnitTesting
         {
             ResultFormatter rf;
             string query = "stmt s;Random Select BOOLEAN";
-            Assert::IsTrue(rf.handleInvalidQuery(query).empty());
+            list<string> expectedResult = { "false" };
+            Assert::IsTrue(rf.handleInvalidQuery(query) == expectedResult);
         }
 
         TEST_METHOD(TestRegex_ValidDeclarationFollowedByInvalidDeclaration_EmptyResult)
         {
             ResultFormatter rf;
             string query = "stmt s; 3791237937897192# Select BOOLEAN";
-            Assert::IsTrue(rf.handleInvalidQuery(query).empty());
+            list<string> expectedResult = { "false" };
+            Assert::IsTrue(rf.handleInvalidQuery(query) == expectedResult);
         }
     };
 }
