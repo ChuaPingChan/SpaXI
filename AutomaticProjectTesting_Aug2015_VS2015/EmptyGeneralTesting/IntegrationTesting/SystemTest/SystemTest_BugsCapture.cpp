@@ -13,8 +13,11 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace UnitTesting
 {
 
-    TEST_CLASS(TestParserPopulatePkb)
+    TEST_CLASS(SystemTest)
     {
+        /*
+        This class is to emulate simple system tests.
+        */
     public:
 
         const std::string dummySimpleSourcePath = "../IntegrationTesting/ParserTestDependencies/dummySimpleSource.txt";
@@ -46,32 +49,28 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-        //TEST_METHOD(bug2Test)
-        //{
-        //    /*
-        //    Bug description:
-        //    Throws unknown exception when running system test on AutoTester.
-        //    */
-        //    // Set up
-        //    PKBMain* pkbPtr = PKBMain::getInstance();
-        //    Parser parser(pkbPtr);
-        //    Assert::IsTrue(createDummySimpleSourceFile_SimpleTest2());
-        //    Assert::IsTrue(parser.parse(dummySimpleSourcePath));
-        //    list<string> actualResults;
-        //    list<string> expectedResults;
+        TEST_METHOD(bug2Test)
+        {
+            // Set up
+            PKBMain* pkbPtr = PKBMain::getInstance();
+            Parser parser(pkbPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_SimpleTest2());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+            list<string> actualResults;
+            list<string> expectedResults;
 
-        //    string query =
-        //        "assign a; Select a pattern a(_, \"x\")";
-        //    PQLMain pql = PQLMain(query);
+            string query =
+                "assign a; Select a pattern a(_, \"x\")";
+            PQLMain pql = PQLMain(query);
 
-        //    actualResults = pql.run();
-        //    expectedResults = list<string>{ "36", "37" };
-        //    Assert::IsTrue(actualResults == expectedResults);
+            actualResults = pql.run();
+            expectedResults = list<string>{ "36", "37" };
+            Assert::IsTrue(actualResults == expectedResults);
 
-        //    // Clean up
-        //    pkbPtr->resetInstance();
-        //    Assert::IsTrue(deleteDummySimpleSourceFile());
-        //}
+            // Clean up
+            pkbPtr->resetInstance();
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
 
         /*******************************
          * Utility Methods for Testing *
