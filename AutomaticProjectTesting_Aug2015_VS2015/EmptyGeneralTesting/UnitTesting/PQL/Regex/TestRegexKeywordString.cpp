@@ -16,12 +16,6 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidStmtString(str));
         }
 
-        TEST_METHOD(TestRegex_Modifies_String_Valid)
-        {
-            string str = "Modifies";
-            Assert::IsTrue(RegexValidators::isValidModifiesString(str));
-        }
-
         TEST_METHOD(TestRegex_ProcName_String_Valid)
         {
             string str = "procName";
