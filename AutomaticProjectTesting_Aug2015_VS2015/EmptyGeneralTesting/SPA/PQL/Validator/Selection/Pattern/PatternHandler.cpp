@@ -18,13 +18,13 @@ bool PatternHandler::isValidPattern(string str)
 
     PatternValidator *patternValidator;
 
-    if (patternType == ASSSIGN_PATTERN) {
+    if (patternType == ASSIGN_PATTERN) {
         patternValidator = new AssignPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else if (patternType == WHILE_PATTERN) {
         patternValidator = new WhilePatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
-    else if (patternType == If_PATTERN) {
+    else if (patternType == IF_PATTERN) {
         patternValidator = new IfPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else {
@@ -47,7 +47,7 @@ PatternType PatternHandler::getPatternType(string patternSyn)
 {
     if (qtPtr->isEntitySynonymExist(patternSyn, ASSIGN))
     {
-        return ASSSIGN_PATTERN;
+        return ASSIGN_PATTERN;
     }
     else if (qtPtr->isEntitySynonymExist(patternSyn, WHILE))
     {
@@ -55,7 +55,7 @@ PatternType PatternHandler::getPatternType(string patternSyn)
     }
     else if (qtPtr->isEntitySynonymExist(patternSyn, IF))
     {
-        return If_PATTERN;
+        return IF_PATTERN;
     }
     //else 
     //{

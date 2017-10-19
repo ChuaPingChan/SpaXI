@@ -339,7 +339,7 @@ namespace UnitTesting
             Assert::IsTrue(validator.isValidQuery(query));
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
-            PatternClause expectedPc = UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_");
+            PatternClause expectedPc = UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_");
             PatternClause actualPc = UtilitySelection::getFirstPatternClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expectedPc, actualPc));
         }
@@ -367,8 +367,8 @@ namespace UnitTesting
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedList, qt));
         }
 
@@ -384,8 +384,8 @@ namespace UnitTesting
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedList, qt));
         }
 
@@ -401,9 +401,9 @@ namespace UnitTesting
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedList, qt));
         }
 
@@ -422,9 +422,9 @@ namespace UnitTesting
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_"));
             expectedList.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w", UNDERSCORE, "_", UNDERSCORE, "_"));
-            expectedList.push_back(UtilitySelection::makePatternClause(If_PATTERN, "f", VARIABLE, "v", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(IF_PATTERN, "f", VARIABLE, "v", UNDERSCORE, "_", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedList, qt));
         }
 
@@ -442,7 +442,7 @@ namespace UnitTesting
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
-            expectedList.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedList.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_"));
             expectedList.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w", UNDERSCORE, "_", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedList, qt));
         }
@@ -461,7 +461,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
             vector<PatternClause> expectedListPc;
-            expectedListPc.push_back(UtilitySelection::makePatternClause(If_PATTERN, "f", VARIABLE, "v", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(IF_PATTERN, "f", VARIABLE, "v", UNDERSCORE, "_", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
         }
 
@@ -538,11 +538,11 @@ namespace UnitTesting
             vector<SuchThatClause> expectedListStc;
             vector<PatternClause> expectedListPc;
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENT, STMT, "s1", STMT, "s2"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s2", STMT, "s1"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "x"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
         }
@@ -563,7 +563,7 @@ namespace UnitTesting
             vector<SuchThatClause> expectedListStc;
             vector<PatternClause> expectedListPc;
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENT, STMT, "s1", STMT, "s2"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v2", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a1", VARIABLE, "v2", UNDERSCORE, "_"));
             expectedListPc.push_back(UtilitySelection::makePatternClause(WHILE_PATTERN, "w1", IDENT_WITHQUOTES, "y", UNDERSCORE, "_"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, STMT, "s2", STMT, "s1"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s1", IDENT_WITHQUOTES, "x"));
@@ -587,12 +587,12 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
             vector<PatternClause> expectedListPc;
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a1", VARIABLE, "v", UNDERSCORE, "_"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, STMT, "s1", STMT, "s2"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(PARENTSTAR, STMT, "s2", STMT, "s3"));
             expectedListStc.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, INTEGER, "1", VARIABLE, "v"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
-            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSSIGN_PATTERN, "a2", VARIABLE, "v", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a2", UNDERSCORE, "_", UNDERSCORE, "_"));
+            expectedListPc.push_back(UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a2", VARIABLE, "v", UNDERSCORE, "_"));
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
             Assert::IsTrue(UtilitySelection::areSamePatternClausesContentAsInTree(expectedListPc, qt));
         }
