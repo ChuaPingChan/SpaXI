@@ -49,20 +49,24 @@ def getComment(sheet, rowId):
 def getDeclaration(sheet, rowId):
 	blockId = DECLARATION_COLUMN + str(rowId)
 	declaration = str(sheet[blockId].value)
-	if (declaration == "NONE"):
-		declaration = ""
+	if (declaration == "NONE" or declaration == "None" or declaration == "none"):
+		return ""
 	return declaration
 	
 def getSelect(sheet, rowId):
 	blockId = SELECT_COLUMN + str(rowId)
 	select = str(sheet[blockId].value)
-	if (select == "NONE"):
-		select = ""
+	if (select == "NONE" or select == "None" or select == "none"):
+		return ""
 	return select
 
 def getExpectedAnswer(sheet, rowId):
 	blockId = EXPECTED_ANSWER_COLUMN + str(rowId)
 	expectedAns = str(sheet[blockId].value)
+	if (expectedAns == "TRUE" or expectedAns == "True"):
+		return "true"
+	elif (expectedAns == "FALSE" or expectedAns == "False"):
+		return "false"
 	return expectedAns
 	
 def writeIntoTextFile(text, queryFilePath):
