@@ -4,6 +4,7 @@
 
 PatternEvaluator::PatternEvaluator()
 {
+    this->pkbInstance = PKBMain::getInstance();
 }
 
 
