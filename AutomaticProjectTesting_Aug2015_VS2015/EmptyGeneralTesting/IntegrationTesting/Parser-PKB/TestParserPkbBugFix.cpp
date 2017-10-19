@@ -82,11 +82,35 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(TestBug3Fix)
+        {
+            // Set up
+            PKBMain dummyPkbMain;
+            PKBMain* dummyPkbMainPtr = &dummyPkbMain;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_SimpleTest2());
+            list<int> expectedResults;
+            list<int> actualResults;
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            actualResults = dummyPkbMain.getExactMatchStmt("x");
+            expectedResults = list<int>{ 36, 37 };
+            expectedResults.sort();
+            actualResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         /*******************************
          * Utility Methods for Testing *
          *******************************/
         TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
         {
+            Assert::IsTrue(createDummySimpleSourceFile_SimpleTest2());
+            Assert::IsTrue(deleteDummySimpleSourceFile());
             Assert::IsTrue(createDummySimpleSourceFile_SimpleTest3());
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
@@ -111,6 +135,78 @@ namespace UnitTesting
         */
         bool createDummySimpleSourceFile_bug2() {
             std::string content = "procedure Four { while f { g = 2 * h + (3 * 5) - 14 + 100 * a; } }";
+            std::string newFilePath(dummySimpleSourcePath);
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a source file for test 2.
+        */
+        bool createDummySimpleSourceFile_SimpleTest2() {
+            std::string content =
+                "procedure One { \n"
+                "	while a { \n"
+                "		call Two; } \n"
+                "	call Three; } \n"
+                "	 \n"
+                "procedure Three { \n"
+                "	b = c + d; \n"
+                "	if e then { \n"
+                "		call Four; } \n"
+                "	else { \n"
+                "		call Five; } \n"
+                "	call Six; } \n"
+                "	 \n"
+                "procedure Four { \n"
+                "	while f { \n"
+                "		g = 2 * h + (3 * 5) - 14 + 100 * a; } } \n"
+                " \n"
+                "procedure Five { \n"
+                "	while i { \n"
+                "		j = 10 + (3 * 5) + 100 * a - 2 * h; \n"
+                "		if j then { \n"
+                "			call Six; } \n"
+                "		else { \n"
+                "			call Seven; } \n"
+                "		k = j + g * (100 * a); } } \n"
+                "		 \n"
+                "procedure Six { \n"
+                "	l = 22 + m - 3 * 9 + a; \n"
+                "	if m then { \n"
+                "		call Seven; } \n"
+                "	else { \n"
+                "		while n { \n"
+                "			m = 2 * h; } } \n"
+                "	p = 2 * h; } \n"
+                "	 \n"
+                "procedure Two { \n"
+                "	o = o + i - 100 + a * 2; \n"
+                "	call Eight; \n"
+                "	q = 10 - r; } \n"
+                "	 \n"
+                "procedure Seven { \n"
+                "	while s { \n"
+                "		s = q + 2 - t; } \n"
+                "	call Nine; \n"
+                "	while u { \n"
+                "		if q then { \n"
+                "			t = s; } \n"
+                "		else { \n"
+                "			u = 10 + 2 - t; } } } \n"
+                "			 \n"
+                "procedure Eight { \n"
+                "	call Nine; \n"
+                "	v = w + 3 - 2 * h; } \n"
+                " \n"
+                "procedure Nine { \n"
+                "	x = y; \n"
+                "	y = x; \n"
+                "	z = x; \n"
+                "	z = q; }";
             std::string newFilePath(dummySimpleSourcePath);
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

@@ -324,7 +324,7 @@ namespace UnitTesting
             list<int> actualIntResults;
             list<int> expectedIntResults;
             Parser parser(dummyPkbMainPtr);
-            Assert::IsTrue(createDummySimpleSourceFile_manyCalls());
+            Assert::IsTrue(createDummySimpleSourceFile_SimpleTest2());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
@@ -806,7 +806,7 @@ namespace UnitTesting
         containing assignment statements and non-nested if-else
         statements.
         */
-        bool createDummySimpleSourceFile_manyCalls() {
+        bool createDummySimpleSourceFile_SimpleTest2() {
             std::string content =
                 "procedure One { \n"
                 "	while a { \n"
