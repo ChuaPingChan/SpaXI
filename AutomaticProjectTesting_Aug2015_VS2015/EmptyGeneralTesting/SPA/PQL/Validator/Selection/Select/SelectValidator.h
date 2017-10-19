@@ -7,6 +7,9 @@
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
 #include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
 #include <sstream>
+#include <regex>
+#include <algorithm>
+#include <string>
 
 using namespace std;
 

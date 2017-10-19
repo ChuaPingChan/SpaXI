@@ -133,10 +133,27 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
-
+        /***********************************
+        * Select Clause - Tuple*
+        ***********************************/
         /********************************************
         * Select Clause - Single Synonym - SuchThat *
         ********************************************/
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_OneSynonym_Valid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select <a> ");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<Entity> entityList = { ASSIGN };
+            vector<string> synonymList = { "a" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SingleSuchThat_Relation_Valid)
         {
             string query;
