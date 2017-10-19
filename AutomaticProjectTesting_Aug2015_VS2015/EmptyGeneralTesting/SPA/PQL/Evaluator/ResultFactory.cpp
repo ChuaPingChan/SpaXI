@@ -91,20 +91,20 @@ bool ResultFactory::processClause(PatternClause clause)
 {
     PatternType patternType = clause.getPatternType();
     
-    if (patternType == ASSIGN)
+    if (patternType == ASSSIGN_PATTERN)
     {
         AssignPatternEvaluator evaluator = AssignPatternEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
     }
 
 
-    if (patternType == WHILE)
+    if (patternType == WHILE_PATTERN)
     {
         WhilePatternEvaluator evaluator = WhilePatternEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
     }
 
-    else if (patternType == IF)
+    else if (patternType == If_PATTERN)
     {
         IfPatternEvaluator evaluator = IfPatternEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
