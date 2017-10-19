@@ -68,7 +68,7 @@ bool CallsTable::isCalls(int caller, int callee) {
 }
 
 bool CallsTable::hasCalls() {
-	return callsProcMap.empty();
+	return !callsProcMap.empty();
 }
 
 list<int> CallsTable::getAllCallees() {
