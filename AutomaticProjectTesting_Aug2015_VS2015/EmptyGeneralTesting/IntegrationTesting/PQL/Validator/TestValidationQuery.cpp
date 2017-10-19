@@ -134,11 +134,9 @@ namespace UnitTesting
         }
 
         /***********************************
-        * Select Clause - Tuple*
+        * Select Clause - Tuple s*
         ***********************************/
-        /********************************************
-        * Select Clause - Single Synonym - SuchThat *
-        ********************************************/
+
 
         TEST_METHOD(TestValidity_Query_SelectTuple_OneSynonym_Valid)
         {
@@ -153,6 +151,95 @@ namespace UnitTesting
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_TwoSynonyms_Valid)
+        {
+            string query;
+            query.append("assign a1, a2;");
+            query.append("Select <a1,a2> ");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<Entity> entityList = { ASSIGN, ASSIGN };
+            vector<string> synonymList = { "a1", "a2" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_TwoDifferentSynonyms_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s;");
+            query.append("Select <a, s> ");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<Entity> entityList = { ASSIGN, STMT };
+            vector<string> synonymList = { "a", "s" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_MultipleSynonyms_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; constant c;");
+            query.append("Select <a, s, i, w, c>");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CONSTANT };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_MultipleDifferentSynonyms_WithSpaces_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; constant c;");
+            query.append("Select <a,      s,       i,     w,        c> ");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CONSTANT };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_SingleInvalidSynonym_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select <a,> ");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            vector<Entity> entityList = { ASSIGN };
+            vector<string> synonymList = { "a" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_MultipleInvalidSynonym_Invalid)
+        {
+            string query;
+            query.append("assign a; stmt s;");
+            query.append("Select <a, s invalid character> ");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            vector<Entity> entityList = { ASSIGN, STMT};
+            vector<string> synonymList = { "a", "s" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+
+        /********************************************
+        * Select Clause - Single Synonym - SuchThat *
+        ********************************************/
 
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SingleSuchThat_Relation_Valid)
         {
