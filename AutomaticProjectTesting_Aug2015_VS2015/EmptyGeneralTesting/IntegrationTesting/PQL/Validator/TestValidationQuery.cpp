@@ -757,7 +757,22 @@ namespace UnitTesting
         /***********************************
         * Select Clause - Tuple - SuchThat *
         ***********************************/
-        
+        TEST_METHOD(TestValidity_Query_SelectTuple_MultipleDifferentSynonyms_SuchThat_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; constant c;");
+            query.append("Select <a,s,i,w,c> such that Follows(w,i)");
+            QueryTree qt;
+            QueryValidator validator = QueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CONSTANT };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<SuchThatClause> expectedListStc;
+            expectedListStc.push_back(UtilitySelection::makeSuchThatClause(FOLLOWS, WHILE, "w", IF, "i"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedListStc, qt));
+        }
 
         /******************
         * Invalid Queries *
