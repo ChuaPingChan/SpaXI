@@ -13,7 +13,6 @@ class PQLMain
 public:
 	PQLMain(string query);
 	~PQLMain();
-
 	list<string> run();
 
 private:

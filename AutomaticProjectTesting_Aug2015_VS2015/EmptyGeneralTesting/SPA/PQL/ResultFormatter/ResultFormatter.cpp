@@ -77,7 +77,7 @@ list<string> ResultFormatter::convertListOfListOfIntsToListOfStrings(list<list<i
 	return convertedFromInt;
 }
 
-list<string> ResultFormatter::handleNoResult(ClauseResult cr, QueryTree qt)
+list<string> ResultFormatter::handleNoResult(QueryTree qt)
 {
     SelectClause selectionByQuery = qt.getSelectClause();
     list<string> result;
@@ -85,6 +85,19 @@ list<string> ResultFormatter::handleNoResult(ClauseResult cr, QueryTree qt)
     {
         result.push_back("false");
     }
+    return result;
+}
+
+list<string> ResultFormatter::handleInvalidQuery(string query)
+{
+    list<string> result;
+    string SELECT_BOOLEAN = "(;\\s*Select BOOLEAN$)|(;\\s*Select BOOLEAN)(\\s+)";
+    regex checkSelectBoolean(SELECT_BOOLEAN);
+    if (regex_search(query, checkSelectBoolean))
+    {
+        result.push_back("false");
+    }
+
     return result;
 }
 
