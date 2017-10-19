@@ -112,15 +112,15 @@ bool IntWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResult)
 
             if (leftHandSideExists && !rightHandSideExists)
             {
-                string existingSyn = leftHandSide;
-                string newSyn = rightHandSide;
-                Entity newSynType = rightHandSideType;
+                existingSyn = leftHandSide;
+                newSyn = rightHandSide;
+                newSynType = rightHandSideType;
             }
             else if (!leftHandSideExists && rightHandSideExists)
             {
-                string existingSyn = rightHandSide;
-                string newSyn = leftHandSide;
-                Entity newSynType = leftHandSideType;
+                existingSyn = rightHandSide;
+                newSyn = leftHandSide;
+                newSynType = leftHandSideType;
             }
 
             // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
