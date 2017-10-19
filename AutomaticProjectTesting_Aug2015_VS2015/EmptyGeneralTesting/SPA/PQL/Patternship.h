@@ -10,7 +10,7 @@ enum PATTERNSHIP
 
 enum PatternType
 {
-    ASSSIGN_PATTERN = 0,
+    ASSIGN_PATTERN = 0,
     WHILE_PATTERN,
-    If_PATTERN
+    IF_PATTERN
 };

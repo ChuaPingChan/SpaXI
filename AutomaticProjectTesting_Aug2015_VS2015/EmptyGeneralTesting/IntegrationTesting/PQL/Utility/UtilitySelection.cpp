@@ -150,7 +150,7 @@ bool UtilitySelection::areSamePatternClausesContentAsInTree(vector<PatternClause
             PatternClause actualPc = *iterActual;
             PatternType actualPatternType = actualPc.getPatternType();
 
-            if (actualPatternType == ASSSIGN_PATTERN && isSamePatternClauseAssignWhileContent(expectedPc, actualPc))
+            if (actualPatternType == ASSIGN_PATTERN && isSamePatternClauseAssignWhileContent(expectedPc, actualPc))
             {
                 break;
             }
@@ -158,7 +158,7 @@ bool UtilitySelection::areSamePatternClausesContentAsInTree(vector<PatternClause
             {
                 break;
             }
-            else if (actualPatternType == If_PATTERN && isSamePatternClauseIfContent(expectedPc, actualPc))
+            else if (actualPatternType == IF_PATTERN && isSamePatternClauseIfContent(expectedPc, actualPc))
             {
                 break;
             }

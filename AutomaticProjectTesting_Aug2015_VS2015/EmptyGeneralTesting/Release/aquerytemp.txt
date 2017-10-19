@@ -1,0 +1,10 @@
+1 - temp
+assign pattern;
+Select pattern pattern pattern(_, "x")
+36,37
+5000
+2 - temp
+assign a;
+Select a pattern a(_, "x")
+36,37
+5000

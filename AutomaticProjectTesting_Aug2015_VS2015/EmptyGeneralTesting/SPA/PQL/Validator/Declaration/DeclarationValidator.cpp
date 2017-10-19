@@ -2,8 +2,6 @@
 
 using namespace std;
 
-const string DeclarationValidator::ENTITY_STR[] = {"stmt", "assign", "while", "if", "prog_line", "call", "procedure", "variable", "integer", "underscore", "identWithQuotes", "expressionSpecsPartial", "expressionSpecsExact", "constant", "stmtLst"};
-
 DeclarationValidator::DeclarationValidator(QueryTree *qtPtrNew) {
     setQueryTree(qtPtrNew);
 }
@@ -94,31 +92,31 @@ bool DeclarationValidator::isValidSynonym(string str) {
 
 Entity DeclarationValidator::getEntityIndexReference(string entity)
 {
-    if (entity == ENTITY_STR[STMT]) {
+    if (RegexValidators::isValidStmtString(entity)) {
         return STMT;
     }
-    else if (entity == ENTITY_STR[ASSIGN]) {
+    else if (RegexValidators::isValidAssignString(entity)) {
         return ASSIGN;
     }
-    else if (entity == ENTITY_STR[WHILE]) {
+    else if (RegexValidators::isValidWhileString(entity)) {
         return WHILE;
     }
-    else if (entity == ENTITY_STR[IF]) {
+    else if (RegexValidators::isValidIfString(entity)) {
         return IF;
     }
-    else if (entity == ENTITY_STR[PROG_LINE]) {
+    else if (RegexValidators::isValidProgLineString(entity)) {
         return PROG_LINE;
     }
-    else if (entity == ENTITY_STR[CALL]) {
+    else if (RegexValidators::isValidCallString(entity)) {
         return CALL;
     }
-    else if (entity == ENTITY_STR[PROCEDURE]) {
+    else if (RegexValidators::isValidProcedureString(entity)) {
         return PROCEDURE;
     }
-    else if (entity == ENTITY_STR[VARIABLE]) {
+    else if (RegexValidators::isValidVariableString(entity)) {
         return VARIABLE;
     }
-    else if (entity == ENTITY_STR[CONSTANT]) {
+    else if (RegexValidators::isValidConstantString(entity)) {
         return CONSTANT;
     }
 }

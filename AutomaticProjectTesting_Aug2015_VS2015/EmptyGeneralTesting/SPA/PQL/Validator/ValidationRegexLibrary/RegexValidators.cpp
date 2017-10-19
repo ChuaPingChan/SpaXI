@@ -15,20 +15,6 @@ const string RegexValidators::VARIABLE_STRING = "variable";
 const string RegexValidators::CONSTANT_STRING = "constant";
 const string RegexValidators::STMTLST_STRING = "stmtlst";
 
-/******************** Relationships Strings ********************/
-const string RegexValidators::MODIFIES_STRING = "Modifies";
-const string RegexValidators::USES_STRING = "Uses";
-const string RegexValidators::PARENT_STRING = "Parent";
-const string RegexValidators::PARENTSTAR_STRING = "Parent*";
-const string RegexValidators::FOLLOWS_STRING = "Follows";
-const string RegexValidators::FOLLOWSSTAR_STRING = "Follows*";
-const string RegexValidators::CALLS_STRING = "Calls";
-const string RegexValidators::CALLSSTAR_STRING = "Calls*";
-const string RegexValidators::NEXT_STRING = "Next";
-const string RegexValidators::NEXTSTAR_STRING = "Next*";
-const string RegexValidators::AFFECTS_STRING = "Affects";
-const string RegexValidators::AFFECTSSTAR_STRING = "Affects*";
-
 /******************** Attribute Strings ********************/
 const string RegexValidators::PROCNAME_STRING = "procName";
 const string RegexValidators::STMTNUM_STRING = "stmt#";
@@ -116,11 +102,58 @@ bool RegexValidators::isValidStmtString(string str)
     return regex_match(str, stmtStringCheck);
 }
 
-/******************** Relationshipss ********************/
-bool RegexValidators::isValidModifiesString(string str)
+bool RegexValidators::isValidAssignString(string str)
 {
-    regex modifiesStringCheck = regex(MODIFIES_STRING);
-    return regex_match(str, modifiesStringCheck);
+    regex assignStringCheck = regex(ASSIGN_STRING);
+    return regex_match(str, assignStringCheck);
+}
+
+bool RegexValidators::isValidWhileString(string str)
+{
+    regex whileStringCheck = regex(WHILE_STRING);
+    return regex_match(str, whileStringCheck);
+}
+
+bool RegexValidators::isValidIfString(string str)
+{
+    regex ifStringCheck = regex(IF_STRING);
+    return regex_match(str, ifStringCheck);
+}
+
+bool RegexValidators::isValidProgLineString(string str)
+{
+    regex progLineStringCheck = regex(PROG_LINE_STRING);
+    return regex_match(str, progLineStringCheck);
+}
+
+bool RegexValidators::isValidCallString(string str)
+{
+    regex callStringCheck = regex(CALL_STRING);
+    return regex_match(str, callStringCheck);
+}
+
+bool RegexValidators::isValidProcedureString(string str)
+{
+    regex procedureStringCheck = regex(PROCEDURE_STRING);
+    return regex_match(str, procedureStringCheck);
+}
+
+bool RegexValidators::isValidVariableString(string str)
+{
+    regex variableStringCheck = regex(VARIABLE_STRING);
+    return regex_match(str, variableStringCheck);
+}
+
+bool RegexValidators::isValidConstantString(string str)
+{
+    regex constantStringCheck = regex(CONSTANT_STRING);
+    return regex_match(str, constantStringCheck);
+}
+
+bool RegexValidators::isValidStmtLstString(string str)
+{
+    regex stmtLstStringCheck = regex(STMTLST_STRING);
+    return regex_match(str, stmtLstStringCheck);
 }
 
 /******************** Attributes ********************/

@@ -91,7 +91,7 @@ bool ResultFactory::processClause(PatternClause clause)
 {
     PatternType patternType = clause.getPatternType();
     
-    if (patternType == ASSSIGN_PATTERN)
+    if (patternType == ASSIGN_PATTERN)
     {
         AssignPatternEvaluator evaluator = AssignPatternEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
@@ -104,7 +104,7 @@ bool ResultFactory::processClause(PatternClause clause)
         return evaluator.evaluate(clause, &_clauseResult);
     }
 
-    else if (patternType == If_PATTERN)
+    else if (patternType == IF_PATTERN)
     {
         IfPatternEvaluator evaluator = IfPatternEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);

@@ -20,8 +20,6 @@ public:
     bool setQueryTree(QueryTree *qtPtrNew);
 
 private:
-    static const string ENTITY_STR[];
-
     QueryTree *qtPtr;
 
     unordered_set<string> synonymBank;   //Contains list of used synonyms
