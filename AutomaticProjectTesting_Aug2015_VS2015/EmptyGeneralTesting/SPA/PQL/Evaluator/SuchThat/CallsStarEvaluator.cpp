@@ -103,7 +103,7 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
     }
 
     //Case 9: Calls*(synonym, synonym)
-    else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == WHILE || argOneType == IF || argOneType == PROG_LINE || argOneType == CALL) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == WHILE || argTwoType == IF || argTwoType == PROG_LINE || argTwoType == CALL))
+    else if (argOneType == PROCEDURE && argTwoType == PROCEDURE)
     {
         // Checks if the two synonyms are already present in clauseResult
         bool argOneExists = clauseResult->synonymPresent(argOne);

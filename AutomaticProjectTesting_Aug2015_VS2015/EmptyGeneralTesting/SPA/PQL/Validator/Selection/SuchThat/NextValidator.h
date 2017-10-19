@@ -13,5 +13,4 @@ public:
 private:
     bool isValidArgOne(string argOne);
     bool isValidArgTwo(string argTwo);
-    bool isFirstArgValueLessThanSecondArgValue(string argOne, string argTwo);
 };

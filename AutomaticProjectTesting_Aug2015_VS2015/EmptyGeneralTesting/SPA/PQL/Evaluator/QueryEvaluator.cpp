@@ -33,6 +33,16 @@ void QueryEvaluator::evaluate()
 
     if (hasResultEvaluator)
     {
+        for (WithClause wClause : _qt->getWithClauses())
+        {
+            hasResultEvaluator = factory.processClause(wClause);
+            if (!hasResultEvaluator)
+                break;
+        }
+    }
+
+    if (hasResultEvaluator)
+    {
         SelectClause slClause = _qt->getSelectClause();
         hasResultEvaluator = factory.processClause(slClause);
     }

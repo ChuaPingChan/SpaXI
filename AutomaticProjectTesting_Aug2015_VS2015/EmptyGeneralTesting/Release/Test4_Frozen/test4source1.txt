@@ -1,0 +1,84 @@
+procedure SINGLEIF {
+	a=b-c; 
+	if ifs then {
+		a=b+(c-d)*e ;	
+	} else {	
+		call SINGLECALL; 
+	}
+}
+
+procedure SINGLEWHILE {
+	satu = dua-tiga+ empat;
+	while WHILES {
+		lima= enam *tujoh- lapan;
+		call SINGLECALL  ;
+    } 
+}
+
+procedure SINGLECALL {
+	call NESTEDCALL	;
+}
+
+
+procedure ASSIGNMENT {
+	alpha = bravo;
+	charlie = delta - echo;
+	foxtrot =alpha * bravo;
+	charlie = delta + echo;
+	call SINGLECALL;
+}
+
+
+procedure NESTEDIF {
+	if IFS1 then {
+		america = boston;
+		if IFS2 then {
+			anada=denmark;
+		} else {
+			france = germany;   
+		}
+	} else {
+		if IFS3 then {
+			hungary= iceland;	
+		} else {
+			japan =    korea;
+		}
+	}
+}
+
+
+procedure NESTEDWHILE {
+	one = two;
+	while WHILES1 {
+		three=four;
+		while WHILES2 {
+			five= six;
+			seven =eight;
+			while WHILES3 {
+				nine = ten ;
+			}
+		} 
+		four=eleven;
+	}
+}
+
+
+procedure NESTEDCALL {
+	if YES then {
+		call NESTEDIF		;
+	} else {
+		call NESTEDWHILE 	;
+	}
+	while NO {
+		call NESTEDASSIGNMENTS	 ;
+	}
+}
+
+
+procedure NESTEDASSIGNMENTS {
+	apple= banana + (carrot * durian);
+	grape = (honeydew - jackfruit)* kiwi  ;
+	lemon= (( mango+nutella) * (orange * pear ));
+	rambutan =((starfruit)); 
+	tomato	= watermelon+ yam - apple *eggplant;
+}

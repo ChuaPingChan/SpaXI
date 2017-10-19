@@ -16,7 +16,7 @@ bool IntWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResult)
     Entity leftHandSideType = wClause.getLhsEntity();
     Entity rightHandSideType = wClause.getRhsEntity();
     string leftHandSide = wClause.getLhsValue();
-    string rightHandSide = wClause.getLhsValue();
+    string rightHandSide = wClause.getRhsValue();
 
     if (leftHandSideType == INTEGER && (rightHandSideType == STMT || rightHandSideType == ASSIGN || rightHandSideType == WHILE ||
         rightHandSideType == IF || rightHandSideType == CALL || rightHandSideType == CONSTANT || rightHandSideType == PROG_LINE))

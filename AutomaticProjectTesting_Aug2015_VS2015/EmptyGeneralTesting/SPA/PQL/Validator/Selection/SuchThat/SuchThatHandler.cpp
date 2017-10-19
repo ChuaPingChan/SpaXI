@@ -49,12 +49,12 @@ bool SuchThatHandler::isValidSuchThat(string str)
         case NEXTSTAR:
             suchThatValidator = new NextValidator(NEXTSTAR, processedStr, qtPtr);
             break;
-     /* case AFFECTS:
+      case AFFECTS:
             suchThatValidator = new AffectsValidator(AFFECTS, processedStr, qtPtr);
             break;
         case AFFECTSSTAR:
             suchThatValidator = new AffectsValidator(AFFECTSSTAR, processedStr, qtPtr);
-            break;*/
+            break;
         default: 
             return false;
     }

@@ -33,7 +33,7 @@ bool ResultFactory::processClause(SuchThatClause clause)
         return evaluator.evaluate(clause, &_clauseResult);
     }
 
-    if (rel == PARENT)
+    else if (rel == PARENT)
     {
         ParentEvaluator evaluator = ParentEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
@@ -69,7 +69,7 @@ bool ResultFactory::processClause(SuchThatClause clause)
         return evaluator.evaluate(clause, &_clauseResult);
     }
 
-    else if (rel == CALL)
+    else if (rel == CALLS)
     {
         CallsEvaluator evaluator = CallsEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
