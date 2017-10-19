@@ -36,5 +36,6 @@ private:
 
     Entity getEntityOfSynonym(string syn);
     string removeSelectKeyword(string str);
+    string removeSpecialCharactersFromTuple(string selectedStr);
 };
 
