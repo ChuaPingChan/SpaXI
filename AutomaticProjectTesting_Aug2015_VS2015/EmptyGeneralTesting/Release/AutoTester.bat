@@ -31,6 +31,9 @@ if '%option%'=='3' (
 if '%option%'=='4' (
 	goto :runTest4
 )
+if '%option%'=='5' (
+	goto :runTest5
+)
 cls
 goto :main
 echo ===============================================================================
@@ -103,7 +106,7 @@ echo Generating queries for test 1...
 python Test1_Frozen\QueryGenerator1.py Test1_Frozen\QuerySet1.xlsx Test1_Frozen\test1query.txt
 echo Finish generating queries for test 1.
 echo Running AutoTester for test 1...
-AutoTester Test1_Frozen\test1source.txt Test1_Frozen\test1query.txt Test1_Frozen\out1.xml> Test1_Frozen\AutoTester1.txt
+AutoTester Test1_Frozen\test1source.txt Test1_Frozen\test1query.txt Test1_Frozen\out1.xml > Test1_Frozen\AutoTester1.txt
 echo Finish running AutoTester for test 1.
 pause
 cls
@@ -115,7 +118,7 @@ echo Generating Queries for test 2...
 python Test2\QueryGenerator2.py Test2\QuerySet2.xlsx Test2\test2query.txt
 echo Finish generating queries for test 2.
 echo Running AutoTester for test 2...
-AutoTester Test2\test2source.txt Test2\test2query.txt Test2\out2.xml> Test2\AutoTester2.txt
+AutoTester Test2\test2source.txt Test2\test2query.txt Test2\out2.xml > Test2\AutoTester2.txt
 echo Finish running AutoTester for test 2.
 pause
 cls
@@ -141,6 +144,18 @@ echo Finish running AutoTester for test 4_1.
 echo Running AutoTester for test 4_2...
 AutoTester Test4_Frozen\test4source2.txt Test4_Frozen\test4query2.txt Test4_Frozen\out4_2.xml > Test4_Frozen\AutoTester4_2.txt
 echo Finish running AutoTester for test 4_2.
+pause
+cls
+goto :main
+
+:runTest5
+echo ===============================================================================
+echo Generating Queries for test 5...
+python Test5\QueryGenerator5.py Test5\QuerySet5.xlsx Test5\test5query.txt
+echo Finish generating queries for test 5.
+echo Running AutoTester for test 5...
+AutoTester Test5\test5source.txt Test5\test5query.txt Test5\out5.xml > Test5\AutoTester5.txt
+echo Finish running AutoTester for test 5.
 pause
 cls
 goto :main

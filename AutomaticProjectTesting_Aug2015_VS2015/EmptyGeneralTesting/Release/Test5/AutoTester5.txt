@@ -1,0 +1,18 @@
+Parameters : Test5\test5source.txt Test5\test5query.txt Test5\out5.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - None
+assign a,a1; variable v;
+Select v such that Modifies (a, v) pattern a1 (v, _)
+none
+5000
+Evaluating query 1 - None
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !
