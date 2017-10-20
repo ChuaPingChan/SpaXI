@@ -24,6 +24,9 @@ private:
     DeclarationValidator dv = DeclarationValidator(qtPtr);  //Null when initialised
     SelectionValidator sv = SelectionValidator(qtPtr);      //Null when initialised
 
+    bool isValidDeclarationFlag = true;
+    bool isValidSelectionFlag = true;
+
     bool isValidDeclaration(string str);
     bool isValidSelection(string str);
 
