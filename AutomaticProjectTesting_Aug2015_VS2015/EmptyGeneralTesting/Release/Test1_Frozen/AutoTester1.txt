@@ -1,0 +1,3162 @@
+Parameters : test1source.txt test1query.txt out1.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Test1_Frozen
+Beginning to evaluate Query File.
+1 - All statements HaveResult
+stmt s;
+Select s
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 1 - All statements HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+2 - All assignments HaveResult
+assign a;
+Select a
+1,2,4,5,6,7,8
+5000
+Evaluating query 2 - All assignments HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+3 - All whiles HaveResult
+while w;
+Select w
+3
+5000
+Evaluating query 3 - All whiles HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 3 
+Correct answer: 3 
+4 - All variables HaveResult
+variable v;
+Select v
+a,b,c,d,i,j
+5000
+Evaluating query 4 - All variables HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+5 - Missing SemiColon In Declaration NoResult
+stmt s
+Select s
+none
+5000
+Evaluating query 5 - Missing SemiColon In Declaration NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 
+Correct answer: 
+6 - Missing Whitespace In Declaration Keyword NoResult
+stmts;
+Select s
+none
+5000
+Evaluating query 6 - Missing Whitespace In Declaration Keyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 
+Correct answer: 
+7 - No Whitespace After Select NoResult
+stmt s;
+Selects
+none
+5000
+Evaluating query 7 - No Whitespace After Select NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 
+Correct answer: 
+8 - Nonexistent Entity NoResult
+recursion r;
+Select r
+none
+5000
+Evaluating query 8 - Nonexistent Entity NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 
+Correct answer: 
+9 - SelectKeyword as Entity HaveResult
+stmt Select;
+Select Select
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 9 - SelectKeyword as Entity HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+10 - NonCapitalised SelectKeyword NoResult
+stmt s;
+select s
+none
+5000
+Evaluating query 10 - NonCapitalised SelectKeyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 
+Correct answer: 
+11 - Invalid Select Arg NoResult
+stmt Select;
+Select Select Select
+none
+5000
+Evaluating query 11 - Invalid Select Arg NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 
+Correct answer: 
+12 - Invalid Select Arg NoResult
+stmts; variable v;
+Select s v
+none
+5000
+Evaluating query 12 - Invalid Select Arg NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 
+Correct answer: 
+13 - Nonexistent Relation NoResult
+stmt s;
+Select s such that Mother(1, 2)
+none
+5000
+Evaluating query 13 - Nonexistent Relation NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" SuchThat="1" CondNum="2" RelNum="0" 
+Your answer: 
+Correct answer: 
+14 - Incomplete Query NoResult
+stmt s;
+Select s such that
+none
+5000
+Evaluating query 14 - Incomplete Query NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" SuchThat="1" CondNum="2" RelNum="0" 
+Your answer: 
+Correct answer: 
+15 - Select SingleSynonym SuchThat Follows And FollowsStar HaveResult
+stmt s;
+Select s such that Follows(1, 2) and Follows*(1, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 15 - Select SingleSynonym SuchThat Follows And FollowsStar HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" Followsstar="1" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+16 - Select SingleSynonym SuchThat Follows SuchThat FollowsStar HaveResult
+stmt s;
+Select s such that Follows(1, 2) such that Follows*(1, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 16 - Select SingleSynonym SuchThat Follows SuchThat FollowsStar HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" Followsstar="1" SuchThat="2" CondNum="5" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+17 - Select SingleSynonym SuchThat Follows SuchThat FollowsStar And Follows HaveResult
+stmt s;
+Select s such that Follows(1, 2) such that Follows*(1, 3) and Follows(4, 5)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 17 - Select SingleSynonym SuchThat Follows SuchThat FollowsStar And Follows HaveResult
+The happen is 2
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" Followsstar="1" SuchThat="2" CondNum="6" RelNum="3" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+18 - Select Boolean NoDeclaration HaveResult (Not possible)
+
+Select BOOLEAN
+true
+5000
+Evaluating query 18 - Select Boolean NoDeclaration HaveResult (Not possible)
+The final tag string is ReturnBoolean="1" CondNum="1" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+19 - Select Boolean ValidDeclaration HaveResult
+stmt s;
+Select BOOLEAN
+true
+5000
+Evaluating query 19 - Select Boolean ValidDeclaration HaveResult
+The final tag string is ReturnBoolean="1" CondNum="1" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+20 - Select Boolean Invalid Declaration False
+statement s;
+Select BOOLEAN
+false
+5000
+Evaluating query 20 - Select Boolean Invalid Declaration False
+The final tag string is ReturnBoolean="1" CondNum="1" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+21 - Select Boolean Incorrect ordering of Selection
+stmt s;
+such that Follows(1, 2) Select BOOLEAN
+false
+5000
+Evaluating query 21 - Select Boolean Incorrect ordering of Selection
+The final tag string is ReturnBoolean="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+22 - Select Boolean NoDeclaration InvalidQuery Invalid StartOfQuery False
+
+BadStart Select BOOLEAN 
+false
+5000
+Evaluating query 22 - Select Boolean NoDeclaration InvalidQuery Invalid StartOfQuery False
+The final tag string is ReturnBoolean="1" CondNum="1" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+23 - Select Boolean InvalidDeclaration NoResult
+stmts;
+Select BOOLEAN
+false
+5000
+Evaluating query 23 - Select Boolean InvalidDeclaration NoResult
+The final tag string is ReturnBoolean="1" CondNum="1" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+24 - Select Boolean Invalid Relation False
+stmt s;
+Select BOOLEAN such that Bag(1,2)
+false
+5000
+Evaluating query 24 - Select Boolean Invalid Relation False
+The final tag string is ReturnBoolean="1" SuchThat="1" CondNum="2" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+25 - Select SingleSynonym Stmt Follows IntInt HaveResult
+stmt s;
+Select s such that Follows(1, 2)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 25 - Select SingleSynonym Stmt Follows IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+26 - Select SingleSynonym Stmt Follows IntInt NoResult
+stmt s;
+Select s such that Follows(3, 4)
+none
+5000
+Evaluating query 26 - Select SingleSynonym Stmt Follows IntInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+27 - Follows IntInt 2nd Arg > 1st Arg NoResult
+stmt s;
+Select s such that Follows(2, 1)
+none
+5000
+Evaluating query 27 - Follows IntInt 2nd Arg > 1st Arg NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+28 - Select SingleSynonym Stmt Follows IntInt SameInt NoResult
+stmt s;
+Select s such that Follows(2, 2)
+none
+5000
+Evaluating query 28 - Select SingleSynonym Stmt Follows IntInt SameInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+29 - Follows LackOf Arguments NoResult
+stmt s;
+Select s such that Follows(1)
+none
+5000
+Evaluating query 29 - Follows LackOf Arguments NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+30 - Follows Excessive Arguments NoResult
+stmt s;
+Select s such that Follows(1, 2, 3)
+none
+5000
+Evaluating query 30 - Follows Excessive Arguments NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+31 - Such and That Keywords Separated NoResult
+stmt s;
+Select s such Follows(1, 2) that
+none
+5000
+Evaluating query 31 - Such and That Keywords Separated NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+32 - Tab within Follows Keyword
+stmt s;
+ Select s such that Follows ( 1 , 2 )
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 32 - Tab within Follows Keyword
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+33 - No Whitespace Within SuchThat Keyword NoResult
+stmt s;
+Select s suchthat Follows(1, 2)
+none
+5000
+Evaluating query 33 - No Whitespace Within SuchThat Keyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" CondNum="2" RelNum="1" 
+Your answer: 
+Correct answer: 
+34 - Excessive Whitespace Within SuchThat Keyword NoResult
+stmt s;
+Select s such         that Follows(1, 2)
+none
+5000
+Evaluating query 34 - Excessive Whitespace Within SuchThat Keyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+35 - Select SingleSynonym Stmt Follows IntInt FollowsKeywordAsSynonym HaveResult
+stmt Follows;
+Select Follows such that Follows(1, 2)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 35 - Select SingleSynonym Stmt Follows IntInt FollowsKeywordAsSynonym HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+36 - Missing SuchThat Keyword NoResult
+stmt s;
+Select s Follows(1, 2)
+none
+5000
+Evaluating query 36 - Missing SuchThat Keyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" CondNum="2" RelNum="1" 
+Your answer: 
+Correct answer: 
+37 - Missing SelectKeyword NoResult
+stmt s;
+Follows (1, 2)
+none
+5000
+Evaluating query 37 - Missing SelectKeyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" CondNum="2" RelNum="1" 
+Your answer: 
+Correct answer: 
+38 - Select SingleSynonym Stmt Follows IntUnderscore HaveResult
+stmt s;
+Select s such that Follows(1, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 38 - Select SingleSynonym Stmt Follows IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+39 - Select SingleSynonym Stmt Follows IntSynonym HaveResult
+stmt s;
+Select s such that Follows(1, s)
+2
+5000
+Evaluating query 39 - Select SingleSynonym Stmt Follows IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 
+Correct answer: 2 
+40 - Select SingleSynonym Stmt Follows IntSynonym BehindWhile HaveResult
+stmt s;
+Select s such that Follows(3, s)
+8
+5000
+Evaluating query 40 - Select SingleSynonym Stmt Follows IntSynonym BehindWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 8 
+Correct answer: 8 
+41 - Select SingleSynonym Stmt Follows UnderscoreInt HaveResult
+stmt s;
+Select s such that Follows(_, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 41 - Select SingleSynonym Stmt Follows UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+42 - Select SingleSynonym Stmt Follows UnderscoreInt NoResult
+stmt s;
+Select s such that Follows(_, 1)
+none
+5000
+Evaluating query 42 - Select SingleSynonym Stmt Follows UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+43 - Select SingleSynonym Stmt Follows UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Follows(_, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 43 - Select SingleSynonym Stmt Follows UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+44 - Select SingleSynonym Stmt Follows UnderscoreSynonym HaveResult
+stmt s;
+Select s such that Follows(_, s)
+2,3,5,6,7,8
+5000
+Evaluating query 44 - Select SingleSynonym Stmt Follows UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+45 - Select SingleSynonym Stmt Follows SynonymInt FollowsKeywordAsSynontm As RelationArg HaveResult
+stmt s, Follows;
+Select s such that Follows(Follows, 2)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 45 - Select SingleSynonym Stmt Follows SynonymInt FollowsKeywordAsSynontm As RelationArg HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+46 - Select SingleSynonym Stmt Follows SynonymInt HaveResult
+stmt s;
+Select s such that Follows(s, 2)
+1
+5000
+Evaluating query 46 - Select SingleSynonym Stmt Follows SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+47 - Select SingleSynonym Stmt Follows SynonymInt NoResult
+stmt s;
+Select s such that Follows(s, 1)
+none
+5000
+Evaluating query 47 - Select SingleSynonym Stmt Follows SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+48 - Select SingleSynonym Stmt Follows SynonymInt BeforeWhile HaveResult
+stmt s;
+Select s such that Follows(s, 8)
+3
+5000
+Evaluating query 48 - Select SingleSynonym Stmt Follows SynonymInt BeforeWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+49 - Select SingleSynonym Stmt Follows SynonymUnderscore HaveResult
+stmt s;
+Select s such that Follows(s, _)
+1,2,3,4,5,6
+5000
+Evaluating query 49 - Select SingleSynonym Stmt Follows SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+50 - Select SingleSynonym Stmt Follows SynonymSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows(s1, s2)
+1,2,3,4,5,6
+5000
+Evaluating query 50 - Select SingleSynonym Stmt Follows SynonymSynonym GetFront HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+51 - Select SingleSynonym Stmt Follows SynonymSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows(s1, s2)
+2,3,5,6,7,8
+5000
+Evaluating query 51 - Select SingleSynonym Stmt Follows SynonymSynonym GetBack HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+52 - Select SingleSynonym Stmt Follows SynonymSynonym Same NoResult
+stmt s;
+Select s such that Follows(s, s)
+none
+5000
+Evaluating query 52 - Select SingleSynonym Stmt Follows SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+53 - Select SingleSynonym Variable Follows IntInt HaveResult
+variable v;
+Select v such that Follows(1, 2)
+a,b,c,d,i,j
+5000
+Evaluating query 53 - Select SingleSynonym Variable Follows IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+54 - Select SingleSynonym Variable Follows IntInt NoResult
+variable v;
+Select v such that Follows(3, 4)
+none
+5000
+Evaluating query 54 - Select SingleSynonym Variable Follows IntInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+55 - Select SingleSynonym Variable Follows IntUnderscore HaveResult
+variable v;
+Select v such that Follows(1, _)
+a,b,c,d,i,j
+5000
+Evaluating query 55 - Select SingleSynonym Variable Follows IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+56 - Select SingleSynonym Variable Follows IntSynonym HaveResult
+variable v; stmt s;
+Select v such that Follows(1, s)
+a,b,c,d,i,j
+5000
+Evaluating query 56 - Select SingleSynonym Variable Follows IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+57 - Select SingleSynonym Variable Follows IntSynonym BehindWhile HaveResult
+variable v; stmt s;
+Select v such that Follows(3, s)
+a,b,c,d,i,j
+5000
+Evaluating query 57 - Select SingleSynonym Variable Follows IntSynonym BehindWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+58 - Select SingleSynonym Variable Follows UnderscoreInt HaveResult
+variable v;
+Select v such that Follows(_, 3)
+a,b,c,d,i,j
+5000
+Evaluating query 58 - Select SingleSynonym Variable Follows UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+59 - Select SingleSynonym Variable Follows UnderscoreInt NoResult
+variable v;
+Select v such that Follows(_, 1)
+none
+5000
+Evaluating query 59 - Select SingleSynonym Variable Follows UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+60 - Select SingleSynonym Variable Follows UnderscoreUnderscore HaveResult
+variable v;
+Select v such that Follows(_, _)
+a,b,c,d,i,j
+5000
+Evaluating query 60 - Select SingleSynonym Variable Follows UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+61 - Select SingleSynonym Variable Follows UnderscoreSynonym HaveResult
+variable v; stmt s;
+Select v such that Follows(_, s)
+a,b,c,d,i,j
+5000
+Evaluating query 61 - Select SingleSynonym Variable Follows UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+62 - Select SingleSynonym Variable Follows SynonymInt HaveResult
+variable v; stmt s;
+Select v such that Follows(s, 2)
+a,b,c,d,i,j
+5000
+Evaluating query 62 - Select SingleSynonym Variable Follows SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+63 - Select SingleSynonym Variable Follows SynonymInt NoResult
+variable v; stmt s;
+Select v such that Follows(s, 1)
+none
+5000
+Evaluating query 63 - Select SingleSynonym Variable Follows SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+64 - Select SingleSynonym Variable Follows SynonymInt BeforeWhile HaveResult
+variable v; stmt s;
+Select v such that Follows(s, 8)
+a,b,c,d,i,j
+5000
+Evaluating query 64 - Select SingleSynonym Variable Follows SynonymInt BeforeWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+65 - Select SingleSynonym Variable Follows SynonymUnderscore HaveResult
+variable v; stmt s;
+Select v such that Follows(s, _)
+a,b,c,d,i,j
+5000
+Evaluating query 65 - Select SingleSynonym Variable Follows SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+66 - Select SingleSynonym Variable Follows Illegal Argument NoResult
+variable v; stmt s;
+Select v such that Follows(v, s)
+none
+5000
+Evaluating query 66 - Select SingleSynonym Variable Follows Illegal Argument NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+67 - Select SingleSynonym Assign Follows IntInt HaveResult
+assign a;
+Select a such that Follows(1, 2)
+1,2,4,5,6,7,8
+5000
+Evaluating query 67 - Select SingleSynonym Assign Follows IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+68 - Select SingleSynonym Assign Follows IntInt NoResult
+assign a;
+Select a such that Follows(3, 4)
+none
+5000
+Evaluating query 68 - Select SingleSynonym Assign Follows IntInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+69 - Select SingleSynonym Assign Follows IntUnderscore HaveResult
+assign a;
+Select a such that Follows(1, _)
+1,2,4,5,6,7,8
+5000
+Evaluating query 69 - Select SingleSynonym Assign Follows IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+70 - Select SingleSynonym Assign Follows IntSynonym HaveResult
+assign a;
+Select a such that Follows(1, a)
+2
+5000
+Evaluating query 70 - Select SingleSynonym Assign Follows IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 
+Correct answer: 2 
+71 - Select SingleSynonym Assign Follows IntSynonym BehindWhile HaveResult
+assign a;
+Select a such that Follows(3, a)
+8
+5000
+Evaluating query 71 - Select SingleSynonym Assign Follows IntSynonym BehindWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 8 
+Correct answer: 8 
+72 - Select SingleSynonym Assign Follows UnderscoreInt HaveResult
+assign a;
+Select a such that Follows(_, 3)
+1,2,4,5,6,7,8
+5000
+Evaluating query 72 - Select SingleSynonym Assign Follows UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+73 - Select SingleSynonym Assign Follows UnderscoreInt NoResult
+assign a;
+Select a such that Follows(_, 1)
+none
+5000
+Evaluating query 73 - Select SingleSynonym Assign Follows UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+74 - Select SingleSynonym Assign Follows UnderscoreUnderscore HaveResult
+assign a;
+Select a such that Follows(_, _)
+1,2,4,5,6,7,8
+5000
+Evaluating query 74 - Select SingleSynonym Assign Follows UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+75 - Select SingleSynonym Assign Follows UnderscoreSynonym HaveResult
+assign a;
+Select a such that Follows(_, a)
+2,5,6,7,8
+5000
+Evaluating query 75 - Select SingleSynonym Assign Follows UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 2 5 6 7 8 
+Correct answer: 2 5 6 7 8 
+76 - Select SingleSynonym Assign Follows SynonymInt HaveResult
+assign a;
+Select a such that Follows(a, 2)
+1
+5000
+Evaluating query 76 - Select SingleSynonym Assign Follows SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+77 - Select SingleSynonym Assign Follows SynonymInt NoResult
+assign a;
+Select a such that Follows(a, 1)
+none
+5000
+Evaluating query 77 - Select SingleSynonym Assign Follows SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+78 - Select SingleSynonym Assign Follows SynonymInt BeforeIntNotAssign NoResult
+assign a;
+Select a such that Follows(a, 8)
+none
+5000
+Evaluating query 78 - Select SingleSynonym Assign Follows SynonymInt BeforeIntNotAssign NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+79 - Select SingleSynonym Assign Follows SynonymUnderscore HaveResult
+assign a;
+Select a such that Follows(a, _)
+1,2,4,5,6
+5000
+Evaluating query 79 - Select SingleSynonym Assign Follows SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 4 5 6 
+Correct answer: 1 2 4 5 6 
+80 - Select SingleSynonym Assign Follows SynonymSynonym GetFront HaveResult
+assign a1, a2;
+Select a1 such that Follows(a1, a2)
+1,4,5,6
+5000
+Evaluating query 80 - Select SingleSynonym Assign Follows SynonymSynonym GetFront HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 4 5 6 
+Correct answer: 1 4 5 6 
+81 - Select SingleSynonym Assign Follows SynonymSynonym GetBack HaveResult
+assign a1, a2;
+Select a2 such that Follows(a1, a2)
+2,5,6,7
+5000
+Evaluating query 81 - Select SingleSynonym Assign Follows SynonymSynonym GetBack HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 5 6 7 
+Correct answer: 2 5 6 7 
+82 - Select SingleSynonym Assign Follows SynonymSynonym Same NoResult
+assign a;
+Select a such that Follows(a, a)
+none
+5000
+Evaluating query 82 - Select SingleSynonym Assign Follows SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+83 - Select SingleSynonym While Follows IntInt HaveResult
+while w;
+Select w such that Follows(1, 2)
+3
+5000
+Evaluating query 83 - Select SingleSynonym While Follows IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+84 - Select SingleSynonym While Follows IntInt NoResult
+while w;
+Select w such that Follows(3, 4)
+none
+5000
+Evaluating query 84 - Select SingleSynonym While Follows IntInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+85 - Select SingleSynonym While Follows IntUnderscore HaveResult
+while w;
+Select w such that Follows(1, _)
+3
+5000
+Evaluating query 85 - Select SingleSynonym While Follows IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+86 - Select SingleSynonym While Follows IntSynonym HaveResult
+while w;
+Select w such that Follows(2, w)
+3
+5000
+Evaluating query 86 - Select SingleSynonym While Follows IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+87 - Select SingleSynonym While Follows IntSynonym WhileFollowItself NoResult
+while w;
+Select w such that Follows(3, w)
+none
+5000
+Evaluating query 87 - Select SingleSynonym While Follows IntSynonym WhileFollowItself NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+88 - Select SingleSynonym While Follows UnderscoreInt HaveResult
+while w;
+Select w such that Follows(_, 3)
+3
+5000
+Evaluating query 88 - Select SingleSynonym While Follows UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+89 - Select SingleSynonym While Follows UnderscoreInt NoResult
+while w;
+Select w such that Follows(_, 1)
+none
+5000
+Evaluating query 89 - Select SingleSynonym While Follows UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+90 - Select SingleSynonym While Follows UnderscoreUnderscore HaveResult
+while w;
+Select w such that Follows(_, _)
+3
+5000
+Evaluating query 90 - Select SingleSynonym While Follows UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+91 - Select SingleSynonym While Follows UnderscoreSynonym HaveResult
+while w;
+Select w such that Follows(_, w)
+3
+5000
+Evaluating query 91 - Select SingleSynonym While Follows UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+92 - Select SingleSynonym While Follows SynonymInt HaveResult
+while w;
+Select w such that Follows(w, 8)
+3
+5000
+Evaluating query 92 - Select SingleSynonym While Follows SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+93 - Select SingleSynonym While Follows SynonymInt NoResult
+while w;
+Select w such that Follows(w, 1)
+none
+5000
+Evaluating query 93 - Select SingleSynonym While Follows SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+94 - Select SingleSynonym While Follows SynonymUnderscore HaveResult
+while w;
+Select w such that Follows(w, _)
+3
+5000
+Evaluating query 94 - Select SingleSynonym While Follows SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+95 - Select SingleSynonym While Follows SynonymSynonym GetFront NoResult
+while w1, w2;
+Select w1 such that Follows(w1, w2)
+none
+5000
+Evaluating query 95 - Select SingleSynonym While Follows SynonymSynonym GetFront NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+96 - Select SingleSynonym While Follows SynonymSynonym GetBack NoResult
+while w1, w2;
+Select w2 such that Follows(w1, w2)
+none
+5000
+Evaluating query 96 - Select SingleSynonym While Follows SynonymSynonym GetBack NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+97 - Select SingleSynonym While Follows SynonymSynonym Same NoResult
+while w;
+Select w such that Follows(w, w)
+none
+5000
+Evaluating query 97 - Select SingleSynonym While Follows SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+98 - Select SingleSynonym Stmt SuchThat Follows IntInt and Follows IntInt HaveResult
+stmt s;
+Select s such that Follows(1, 2) and Follows(2, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 98 - Select SingleSynonym Stmt SuchThat Follows IntInt and Follows IntInt HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+99 - AndKeyword StuckToBackOf PreviousRelation HaveResult
+stmt s;
+Select s such that Follows(1, 2)and Follows(2, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 99 - AndKeyword StuckToBackOf PreviousRelation HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+100 - AndKeyword StuckToFrontOf PreviousRelation NoResult
+stmt s;
+Select s such that Follows(1, 2) andFollows(2, 3)
+none
+5000
+Evaluating query 100 - AndKeyword StuckToFrontOf PreviousRelation NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+101 - Select SingleSynonym Stmt SuchThat Follows IntInt SuchThat Follows IntInt HaveResult
+stmt s;
+Select s such that Follows(1, 2) such that Follows(2, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 101 - Select SingleSynonym Stmt SuchThat Follows IntInt SuchThat Follows IntInt HaveResult
+The happen is 2
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="2" CondNum="5" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+102 - SuchThatKeyword StuckToBackOf PreviousRelation HaveResult
+stmt s;
+Select s such that Follows(1, 2)such that Follows(2, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 102 - SuchThatKeyword StuckToBackOf PreviousRelation HaveResult
+The happen is 2
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="2" CondNum="5" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+103 - SuchThatKeyword StuckToFrontOf PreviousRelation NoResult
+stmt s;
+Select s such that Follows(1, 2) such thatFollows(2, 3)
+none
+5000
+Evaluating query 103 - SuchThatKeyword StuckToFrontOf PreviousRelation NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="2" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+104 - Select SingleSynonym Stmt Follows IntUnderscore And Follows IntUnderscore HaveResult
+stmt s;
+Select s such that Follows(1, _) and Follows(2, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 104 - Select SingleSynonym Stmt Follows IntUnderscore And Follows IntUnderscore HaveResult
+_ is an Unnamedvar 
+The happen is 2
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+105 - Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym BothRelationSameSynonym NoResult
+stmt s;
+Select s such that Follows(1, s) and Follows(2, s)
+none
+5000
+Evaluating query 105 - Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym BothRelationSameSynonym NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+106 - Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym BothRelationDiffSynonym HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows(1, s2) and Follows(2, s3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 106 - Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym BothRelationDiffSynonym HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+107 - Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows(1, s1) and Follows(2, s2)
+2
+5000
+Evaluating query 107 - Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym GetFront HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 
+Correct answer: 2 
+108 - Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows(1, s1) and Follows(2, s2)
+3
+5000
+Evaluating query 108 - Select SingleSynonym Stmt Follows IntSynonym And Follows IntSynonym GetBack HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 
+Correct answer: 3 
+109 - Select SingleSynonym Stmt Follows UnderscoreInt And Follows UnderscoreInt HaveResult
+stmt s;
+Select s such that Follows(_, 2) and Follows(_, 5)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 109 - Select SingleSynonym Stmt Follows UnderscoreInt And Follows UnderscoreInt HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+110 - Select SingleSynonym Stmt Follows UnderscoreInt And Follows UnderscoreInt NoResult
+stmt s;
+Select s such that Follows(_, 2) and Follows(_, 4)
+none
+5000
+Evaluating query 110 - Select SingleSynonym Stmt Follows UnderscoreInt And Follows UnderscoreInt NoResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+111 - Select SingleSynonym Stmt Follows UnderscoreUnderscore And Follows UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Follows(_, _) and Follows(_, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 111 - Select SingleSynonym Stmt Follows UnderscoreUnderscore And Follows UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="4" SuchThat="1" CondNum="8" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+112 - Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym CommonSynonym HaveResult
+stmt s;
+Select s such that Follows(_, s) and Follows(_, s)
+2,3,5,6,7,8
+5000
+Evaluating query 112 - Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym CommonSynonym HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+113 - Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym UniqueSynonym HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows(_, s2) and Follows(_, s3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 113 - Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym UniqueSynonym HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+114 - Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows(_, s1) and Follows(_, s2)
+2,3,5,6,7,8
+5000
+Evaluating query 114 - Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym GetFront HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+115 - Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows(_, s1) and Follows(_, s2)
+2,3,5,6,7,8
+5000
+Evaluating query 115 - Select SingleSynonym Stmt Follows UnderscoreSynonym And Follows UnderscoreSynonym GetBack HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+116 - Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt BothRelation SameSynonym NoResult
+stmt s;
+Select s such that Follows(s, 2) and Follows(s, 3)
+none
+5000
+Evaluating query 116 - Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt BothRelation SameSynonym NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+117 - Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows(s1, 2) and Follows(s2, 3)
+1
+5000
+Evaluating query 117 - Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt GetFront HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 
+Correct answer: 1 
+118 - Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows(s1, 2) and Follows(s2, 3)
+2
+5000
+Evaluating query 118 - Select SingleSynonym Stmt Follows SynonymInt And Follows SynonymInt GetBack HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 
+Correct answer: 2 
+119 - Select SingleSynonym Stmt Follows SynonymUnderscore And Follows SynonymUnderscore GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows(s1, _) and Follows(s2, _)
+1,2,3,4,5,6
+5000
+Evaluating query 119 - Select SingleSynonym Stmt Follows SynonymUnderscore And Follows SynonymUnderscore GetFront HaveResult
+_ is an Unnamedvar 
+The happen is 2
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+120 - Select SingleSynonym Stmt Follows SynonymUnderscore And Follows SynonymUnderscore GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows(s1, _) and Follows(s2, _)
+1,2,3,4,5,6
+5000
+Evaluating query 120 - Select SingleSynonym Stmt Follows SynonymUnderscore And Follows SynonymUnderscore GetBack HaveResult
+_ is an Unnamedvar 
+The happen is 2
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+121 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetFirst HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows(s1, s2) and Follows(s2, s3)
+1,2,4,5
+5000
+Evaluating query 121 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetFirst HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 4 5 
+Correct answer: 1 2 4 5 
+122 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetMiddle HaveResult
+stmt s1, s2, s3;
+Select s2 such that Follows(s1, s2) and Follows(s2, s3)
+2,3,5,6
+5000
+Evaluating query 122 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetMiddle HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 3 5 6 
+Correct answer: 2 3 5 6 
+123 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetLast HaveResult
+stmt s1, s2, s3;
+Select s3 such that Follows(s1, s2) and Follows(s2, s3)
+3,6,7,8
+5000
+Evaluating query 123 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain GetLast HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 6 7 8 
+Correct answer: 3 6 7 8 
+124 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain s3ShldNotFollowTwice NoResult
+stmt s1, s2, s3;
+Select s1 such that Follows(s1, s3) and Follows(s2, s3)
+1,2,3,4,5,6
+5000
+Evaluating query 124 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain s3ShldNotFollowTwice NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+125 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain s1ShldNotHaveTwoFollowers NoResult
+stmt s1, s2, s3;
+Select s1 such that Follows(s1, s2) and Follows(s1, s3)
+1,2,3,4,5,6
+5000
+Evaluating query 125 - Select SingleSynonym Stmt Follows SynonymSynonym And Follows SynonymSynonym Chain s1ShldNotHaveTwoFollowers NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+126 - Select SingleSynonym Stmt FollowsStar IntInt HaveResult
+stmt s;
+Select s such that Follows*(1, 8)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 126 - Select SingleSynonym Stmt FollowsStar IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+127 - Select SingleSynonym Stmt FollowsStarIntInt NotSameStmtLst NoResult
+stmt s;
+Select s such that Follows*(1, 4)
+none
+5000
+Evaluating query 127 - Select SingleSynonym Stmt FollowsStarIntInt NotSameStmtLst NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+128 - Select SingleSynonym Stmt FollowsStar IntUnderscore HaveResult
+stmt s;
+Select s such that Follows*(1, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 128 - Select SingleSynonym Stmt FollowsStar IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+129 - Select SingleSynonym Stmt FollowsStar IntSynonym HaveResult
+stmt s;
+Select s such that Follows*(1, s)
+2,3,8
+5000
+Evaluating query 129 - Select SingleSynonym Stmt FollowsStar IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 3 8 
+Correct answer: 2 3 8 
+130 - Select SingleSynonym Stmt FollowsStar IntSynonym BehindWhile HaveResult
+stmt s;
+Select s such that Follows*(3, s)
+8
+5000
+Evaluating query 130 - Select SingleSynonym Stmt FollowsStar IntSynonym BehindWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 8 
+Correct answer: 8 
+131 - Select SingleSynonym Stmt FollowsStar UnderscoreInt HaveResult
+stmt s;
+Select s such that Follows*(_, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 131 - Select SingleSynonym Stmt FollowsStar UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+132 - Select SingleSynonym Stmt FollowsStar UnderscoreInt NoResult
+stmt s;
+Select s such that Follows*(_, 1)
+none
+5000
+Evaluating query 132 - Select SingleSynonym Stmt FollowsStar UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+133 - Select SingleSynonym Stmt FollowsStar UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Follows*(_, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 133 - Select SingleSynonym Stmt FollowsStar UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+134 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym HaveResult
+stmt s;
+Select s such that Follows*(_, s)
+2,3,5,6,7,8
+5000
+Evaluating query 134 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+135 - Select SingleSynonym Stmt FollowsStar SynonymInt HaveResult
+stmt s;
+Select s such that Follows*(s, 2)
+1
+5000
+Evaluating query 135 - Select SingleSynonym Stmt FollowsStar SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+136 - Select SingleSynonym Stmt FollowsStar SynonymInt NoResult
+stmt s;
+Select s such that Follows*(s, 1)
+none
+5000
+Evaluating query 136 - Select SingleSynonym Stmt FollowsStar SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+137 - Select SingleSynonym Stmt FollowsStar SynonymInt BeforeWhile HaveResult
+stmt s;
+Select s such that Follows*(s, 8)
+1,2,3
+5000
+Evaluating query 137 - Select SingleSynonym Stmt FollowsStar SynonymInt BeforeWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 
+Correct answer: 1 2 3 
+138 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore HaveResult
+stmt s;
+Select s such that Follows*(s, _)
+1,2,3,4,5,6
+5000
+Evaluating query 138 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+139 - Select SingleSynonym Stmt FollowsStar SynonymSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(s1, s2)
+1,2,3,4,5,6
+5000
+Evaluating query 139 - Select SingleSynonym Stmt FollowsStar SynonymSynonym GetFront HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+140 - Select SingleSynonym Stmt FollowsStar SynonymSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(s1, s2)
+2,3,5,6,7,8
+5000
+Evaluating query 140 - Select SingleSynonym Stmt FollowsStar SynonymSynonym GetBack HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+141 - Select SingleSynonym Stmt FollowsStar SynonymSynonym Same NoResult
+stmt s;
+Select s such that Follows*(s, s)
+none
+5000
+Evaluating query 141 - Select SingleSynonym Stmt FollowsStar SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+142 - Select SingleSynonym Variable FollowsStar IntInt HaveResult
+variable v;
+Select v such that Follows*(1, 2)
+a,b,c,d,i,j
+5000
+Evaluating query 142 - Select SingleSynonym Variable FollowsStar IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+143 - Select SingleSynonym Variable FollowsStar IntInt NotSameStmtLst NoResult
+variable v;
+Select v such that Follows*(3, 4)
+none
+5000
+Evaluating query 143 - Select SingleSynonym Variable FollowsStar IntInt NotSameStmtLst NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+144 - Select SingleSynonym Variable FollowsStar IntUnderscore HaveResult
+variable v;
+Select v such that Follows*(1, _)
+a,b,c,d,i,j
+5000
+Evaluating query 144 - Select SingleSynonym Variable FollowsStar IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+145 - Select SingleSynonym Variable FollowsStar IntSynonym HaveResult
+variable v; stmt s;
+Select v such that Follows*(1, s)
+a,b,c,d,i,j
+5000
+Evaluating query 145 - Select SingleSynonym Variable FollowsStar IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+146 - Select SingleSynonym Variable FollowsStar IntSynonym BehindWhile HaveResult
+variable v; stmt s;
+Select v such that Follows*(3, s)
+a,b,c,d,i,j
+5000
+Evaluating query 146 - Select SingleSynonym Variable FollowsStar IntSynonym BehindWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+147 - Select SingleSynonym Variable FollowsStar UnderscoreInt HaveResult
+variable v;
+Select v such that Follows*(_, 3)
+a,b,c,d,i,j
+5000
+Evaluating query 147 - Select SingleSynonym Variable FollowsStar UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+148 - Select SingleSynonym Variable FollowsStar UnderscoreInt NoResult
+variable v;
+Select v such that Follows*(_, 1)
+none
+5000
+Evaluating query 148 - Select SingleSynonym Variable FollowsStar UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+149 - Select SingleSynonym Variable FollowsStar UnderscoreUnderscore HaveResult
+variable v;
+Select v such that Follows*(_, _)
+a,b,c,d,i,j
+5000
+Evaluating query 149 - Select SingleSynonym Variable FollowsStar UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+150 - Select SingleSynonym Variable FollowsStar UnderscoreSynonym HaveResult
+variable v; stmt s;
+Select v such that Follows*(_, s)
+a,b,c,d,i,j
+5000
+Evaluating query 150 - Select SingleSynonym Variable FollowsStar UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+151 - Select SingleSynonym Variable FollowsStar SynonymInt HaveResult
+variable v; stmt s;
+Select v such that Follows*(s, 2)
+a,b,c,d,i,j
+5000
+Evaluating query 151 - Select SingleSynonym Variable FollowsStar SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+152 - Select SingleSynonym Variable FollowsStar SynonymInt NoResult
+variable v; stmt s;
+Select v such that Follows*(s, 1)
+none
+5000
+Evaluating query 152 - Select SingleSynonym Variable FollowsStar SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+153 - Select SingleSynonym Variable FollowsStar SynonymInt BeforeWhile HaveResult
+variable v; stmt s;
+Select v such that Follows*(s, 8)
+a,b,c,d,i,j
+5000
+Evaluating query 153 - Select SingleSynonym Variable FollowsStar SynonymInt BeforeWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+154 - Select SingleSynonym Variable FollowsStar SynonymUnderscore HaveResult
+variable v; stmt s;
+Select v such that Follows*(s, _)
+a,b,c,d,i,j
+5000
+Evaluating query 154 - Select SingleSynonym Variable FollowsStar SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+155 - Select SingleSynonym Variable FollowsStar Illegal Argument NoResult
+variable v; stmt s;
+Select v such that Follows*(v, s)
+none
+5000
+Evaluating query 155 - Select SingleSynonym Variable FollowsStar Illegal Argument NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+156 - Select SingleSynonym Assign FollowsStar IntInt HaveResult
+assign a;
+Select a such that Follows*(1, 2)
+1,2,4,5,6,7,8
+5000
+Evaluating query 156 - Select SingleSynonym Assign FollowsStar IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+157 - Select SingleSynonym Assign FollowsStar IntInt NotSameStmtList NoResult
+assign a;
+Select a such that Follows*(3, 4)
+none
+5000
+Evaluating query 157 - Select SingleSynonym Assign FollowsStar IntInt NotSameStmtList NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+158 - Select SingleSynonym Assign FollowsStar IntUnderscore HaveResult
+assign a;
+Select a such that Follows*(1, _)
+1,2,4,5,6,7,8
+5000
+Evaluating query 158 - Select SingleSynonym Assign FollowsStar IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+159 - Select SingleSynonym Assign FollowsStar IntSynonym HaveResult
+assign a;
+Select a such that Follows*(1, a)
+2,8
+5000
+Evaluating query 159 - Select SingleSynonym Assign FollowsStar IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 8 
+Correct answer: 2 8 
+160 - Select SingleSynonym Assign FollowsStar IntSynonym BehindWhile HaveResult
+assign a;
+Select a such that Follows*(3, a)
+8
+5000
+Evaluating query 160 - Select SingleSynonym Assign FollowsStar IntSynonym BehindWhile HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 8 
+Correct answer: 8 
+161 - Select SingleSynonym Assign FollowsStar UnderscoreInt HaveResult
+assign a;
+Select a such that Follows*(_, 3)
+1,2,4,5,6,7,8
+5000
+Evaluating query 161 - Select SingleSynonym Assign FollowsStar UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+162 - Select SingleSynonym Assign FollowsStar UnderscoreInt NoResult
+assign a;
+Select a such that Follows*(_, 1)
+none
+5000
+Evaluating query 162 - Select SingleSynonym Assign FollowsStar UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+163 - Select SingleSynonym Assign FollowsStar UnderscoreUnderscore HaveResult
+assign a;
+Select a such that Follows*(_, _)
+1,2,4,5,6,7,8
+5000
+Evaluating query 163 - Select SingleSynonym Assign FollowsStar UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+164 - Select SingleSynonym Assign FollowsStar UnderscoreSynonym HaveResult
+assign a;
+Select a such that Follows*(_, a)
+2,5,6,7,8
+5000
+Evaluating query 164 - Select SingleSynonym Assign FollowsStar UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 2 5 6 7 8 
+Correct answer: 2 5 6 7 8 
+165 - Select SingleSynonym Assign FollowsStar SynonymInt HaveResult
+assign a;
+Select a such that Follows*(a, 2)
+1
+5000
+Evaluating query 165 - Select SingleSynonym Assign FollowsStar SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+166 - Select SingleSynonym Assign FollowsStar SynonymInt NoResult
+assign a;
+Select a such that Follows*(a, 1)
+none
+5000
+Evaluating query 166 - Select SingleSynonym Assign FollowsStar SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+167 - Select SingleSynonym Assign FollowsStar SynonymInt BeforeIntNotAssign NoResult
+assign a;
+Select a such that Follows*(a, 8)
+1,2
+5000
+Evaluating query 167 - Select SingleSynonym Assign FollowsStar SynonymInt BeforeIntNotAssign NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 
+Correct answer: 1 2 
+168 - Select SingleSynonym Assign FollowsStar SynonymUnderscore HaveResult
+assign a;
+Select a such that Follows*(a, _)
+1,2,4,5,6
+5000
+Evaluating query 168 - Select SingleSynonym Assign FollowsStar SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 4 5 6 
+Correct answer: 1 2 4 5 6 
+169 - Select SingleSynonym Assign FollowsStar SynonymSynonym GetFront HaveResult
+assign a1, a2;
+Select a1 such that Follows*(a1, a2)
+1,2,4,5,6
+5000
+Evaluating query 169 - Select SingleSynonym Assign FollowsStar SynonymSynonym GetFront HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 4 5 6 
+Correct answer: 1 2 4 5 6 
+170 - Select SingleSynonym Assign FollowsStar SynonymSynonym GetBack HaveResult
+assign a1, a2;
+Select a2 such that Follows*(a1, a2)
+2,5,6,7,8
+5000
+Evaluating query 170 - Select SingleSynonym Assign FollowsStar SynonymSynonym GetBack HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 5 6 7 8 
+Correct answer: 2 5 6 7 8 
+171 - Select SingleSynonym Assign FollowsStar SynonymSynonym Same NoResult
+assign a;
+Select a such that Follows*(a, a)
+none
+5000
+Evaluating query 171 - Select SingleSynonym Assign FollowsStar SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+172 - Select SingleSynonym While FollowsStar IntInt HaveResult
+while w;
+Select w such that Follows*(1, 2)
+3
+5000
+Evaluating query 172 - Select SingleSynonym While FollowsStar IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+173 - Select SingleSynonym While FollowsStar IntInt NotSameStmtList NoResult
+while w;
+Select w such that Follows*(3, 4)
+none
+5000
+Evaluating query 173 - Select SingleSynonym While FollowsStar IntInt NotSameStmtList NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+174 - Select SingleSynonym While FollowsStar IntUnderscore HaveResult
+while w;
+Select w such that Follows*(1, _)
+3
+5000
+Evaluating query 174 - Select SingleSynonym While FollowsStar IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+175 - Select SingleSynonym While FollowsStar IntSynonym HaveResult
+while w;
+Select w such that Follows*(2, w)
+3
+5000
+Evaluating query 175 - Select SingleSynonym While FollowsStar IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+176 - Select SingleSynonym While FollowsStar IntSynonym WhileFollowItself NoResult
+while w;
+Select w such that Follows*(3, w)
+none
+5000
+Evaluating query 176 - Select SingleSynonym While FollowsStar IntSynonym WhileFollowItself NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+177 - Select SingleSynonym While FollowsStar UnderscoreInt HaveResult
+while w;
+Select w such that Follows*(_, 3)
+3
+5000
+Evaluating query 177 - Select SingleSynonym While FollowsStar UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+178 - Select SingleSynonym While FollowsStar UnderscoreInt NoResult
+while w;
+Select w such that Follows*(_, 1)
+none
+5000
+Evaluating query 178 - Select SingleSynonym While FollowsStar UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+179 - Select SingleSynonym While FollowsStar UnderscoreUnderscore HaveResult
+while w;
+Select w such that Follows*(_, _)
+3
+5000
+Evaluating query 179 - Select SingleSynonym While FollowsStar UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+180 - Select SingleSynonym While FollowsStar UnderscoreSynonym HaveResult
+while w;
+Select w such that Follows*(_, w)
+3
+5000
+Evaluating query 180 - Select SingleSynonym While FollowsStar UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+181 - Select SingleSynonym While FollowsStar SynonymInt HaveResult
+while w;
+Select w such that Follows*(w, 8)
+3
+5000
+Evaluating query 181 - Select SingleSynonym While FollowsStar SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+182 - Select SingleSynonym While FollowsStar SynonymInt NoResult
+while w;
+Select w such that Follows*(w, 1)
+none
+5000
+Evaluating query 182 - Select SingleSynonym While FollowsStar SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+183 - Select SingleSynonym While FollowsStar SynonymUnderscore HaveResult
+while w;
+Select w such that Follows*(w, _)
+3
+5000
+Evaluating query 183 - Select SingleSynonym While FollowsStar SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+184 - Select SingleSynonym While FollowsStar SynonymSynonym GetFront NoResult
+while w1, w2;
+Select w1 such that Follows*(w1, w2)
+none
+5000
+Evaluating query 184 - Select SingleSynonym While FollowsStar SynonymSynonym GetFront NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+185 - Select SingleSynonym While FollowsStar SynonymSynonym GetBack NoResult
+while w1, w2;
+Select w2 such that Follows*(w1, w2)
+none
+5000
+Evaluating query 185 - Select SingleSynonym While FollowsStar SynonymSynonym GetBack NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+186 - Select SingleSynonym While FollowsStar SynonymSynonym Same NoResult
+while w;
+Select w such that Follows*(w, w)
+none
+5000
+Evaluating query 186 - Select SingleSynonym While FollowsStar SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+187 - Select SingleSynonym Stmt SuchThat FollowsStar IntInt and FollowsStar IntInt HaveResult
+stmt s;
+Select s such that Follows*(1, 2) and Follows*(2, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 187 - Select SingleSynonym Stmt SuchThat FollowsStar IntInt and FollowsStar IntInt HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+188 - AndKeyword StuckToBackOf PreviousRelation HaveResult
+stmt s;
+Select s such that Follows*(1, 2)and Follows*(2, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 188 - AndKeyword StuckToBackOf PreviousRelation HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+189 - AndKeyword StuckToFrontOf PreviousRelation NoResult
+stmt s;
+Select s such that Follows*(1, 2) andFollows*(2, 3)
+none
+5000
+Evaluating query 189 - AndKeyword StuckToFrontOf PreviousRelation NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+190 - Select SingleSynonym Stmt SuchThat FollowsStar IntInt SuchThat FollowsStar IntInt HaveResult
+stmt s;
+Select s such that Follows*(1, 2) such that Follows*(2, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 190 - Select SingleSynonym Stmt SuchThat FollowsStar IntInt SuchThat FollowsStar IntInt HaveResult
+The happen is 2
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="2" CondNum="5" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+191 - SuchThatKeyword StuckToBackOf PreviousRelation HaveResult
+stmt s;
+Select s such that Follows*(1, 2)such that Follows*(2, 3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 191 - SuchThatKeyword StuckToBackOf PreviousRelation HaveResult
+The happen is 2
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="2" CondNum="5" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+192 - SuchThatKeyword StuckToFrontOf PreviousRelation NoResult
+stmt s;
+Select s such that Follows*(1, 2) such thatFollows*(2, 3)
+none
+5000
+Evaluating query 192 - SuchThatKeyword StuckToFrontOf PreviousRelation NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="2" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+193 - Select SingleSynonym Stmt FollowsStar IntUnderscore And FollowsStar IntUnderscore HaveResult
+stmt s;
+Select s such that Follows*(1, _) and Follows*(2, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 193 - Select SingleSynonym Stmt FollowsStar IntUnderscore And FollowsStar IntUnderscore HaveResult
+_ is an Unnamedvar 
+The happen is 2
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+194 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym BothRelationSameSynonym NoResult
+stmt s;
+Select s such that Follows*(1, s) and Follows*(2, s)
+3,8
+5000
+Evaluating query 194 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym BothRelationSameSynonym NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 8 
+Correct answer: 3 8 
+195 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym BothRelationDiffSynonym HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(1, s2) and Follows*(2, s3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 195 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym BothRelationDiffSynonym HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+196 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(1, s1) and Follows*(2, s2)
+2,3,8
+5000
+Evaluating query 196 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym GetFront HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 3 8 
+Correct answer: 2 3 8 
+197 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(1, s1) and Follows*(2, s2)
+3,8
+5000
+Evaluating query 197 - Select SingleSynonym Stmt FollowsStar IntSynonym And FollowsStar IntSynonym GetBack HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 8 
+Correct answer: 3 8 
+198 - Select SingleSynonym Stmt FollowsStar UnderscoreInt And FollowsStar UnderscoreInt HaveResult
+stmt s;
+Select s such that Follows*(_, 2) and Follows*(_, 5)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 198 - Select SingleSynonym Stmt FollowsStar UnderscoreInt And FollowsStar UnderscoreInt HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+199 - Select SingleSynonym Stmt FollowsStar UnderscoreInt And FollowsStar UnderscoreInt NoResult
+stmt s;
+Select s such that Follows*(_, 2) and Follows*(_, 4)
+none
+5000
+Evaluating query 199 - Select SingleSynonym Stmt FollowsStar UnderscoreInt And FollowsStar UnderscoreInt NoResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+200 - Select SingleSynonym Stmt FollowsStar UnderscoreUnderscore And FollowsStar UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Follows*(_, _) and Follows*(_, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 200 - Select SingleSynonym Stmt FollowsStar UnderscoreUnderscore And FollowsStar UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="4" SuchThat="1" CondNum="8" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+201 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym CommonSynonym HaveResult
+stmt s;
+Select s such that Follows*(_, s) and Follows*(_, s)
+2,3,5,6,7,8
+5000
+Evaluating query 201 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym CommonSynonym HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+202 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym UniqueSynonym HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(_, s2) and Follows*(_, s3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 202 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym UniqueSynonym HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+203 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(_, s1) and Follows*(_, s2)
+2,3,5,6,7,8
+5000
+Evaluating query 203 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym GetFront HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+204 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(_, s1) and Follows*(_, s2)
+2,3,5,6,7,8
+5000
+Evaluating query 204 - Select SingleSynonym Stmt FollowsStar UnderscoreSynonym And FollowsStar UnderscoreSynonym GetBack HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 2 3 5 6 7 8 
+Correct answer: 2 3 5 6 7 8 
+205 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt BothRelation SameSynonym NoResult
+stmt s;
+Select s such that Follows*(s, 2) and Follows*(s, 3)
+1
+5000
+Evaluating query 205 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt BothRelation SameSynonym NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 
+Correct answer: 1 
+206 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(s1, 2) and Follows*(s2, 3)
+1
+5000
+Evaluating query 206 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt GetFront HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 
+Correct answer: 1 
+207 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(s1, 2) and Follows*(s2, 3)
+1,2
+5000
+Evaluating query 207 - Select SingleSynonym Stmt FollowsStar SynonymInt And FollowsStar SynonymInt GetBack HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 
+Correct answer: 1 2 
+208 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore And FollowsStar SynonymUnderscore GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Follows*(s1, _) and Follows*(s2, _)
+1,2,3,4,5,6
+5000
+Evaluating query 208 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore And FollowsStar SynonymUnderscore GetFront HaveResult
+_ is an Unnamedvar 
+The happen is 2
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+209 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore And FollowsStar SynonymUnderscore GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Follows*(s1, _) and Follows*(s2, _)
+1,2,3,4,5,6
+5000
+Evaluating query 209 - Select SingleSynonym Stmt FollowsStar SynonymUnderscore And FollowsStar SynonymUnderscore GetBack HaveResult
+_ is an Unnamedvar 
+The happen is 2
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+210 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetFirst HaveResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(s1, s2) and Follows*(s2, s3)
+1,2,4,5
+5000
+Evaluating query 210 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetFirst HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 4 5 
+Correct answer: 1 2 4 5 
+211 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetMiddle HaveResult
+stmt s1, s2, s3;
+Select s2 such that Follows*(s1, s2) and Follows*(s2, s3)
+2,3,5,6
+5000
+Evaluating query 211 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetMiddle HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 3 5 6 
+Correct answer: 2 3 5 6 
+212 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetLast HaveResult
+stmt s1, s2, s3;
+Select s3 such that Follows*(s1, s2) and Follows*(s2, s3)
+3,6,7,8
+5000
+Evaluating query 212 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain GetLast HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 6 7 8 
+Correct answer: 3 6 7 8 
+213 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain s3ShldNotFollowTwice NoResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(s1, s3) and Follows*(s2, s3)
+1,2,3,4,5,6
+5000
+Evaluating query 213 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain s3ShldNotFollowTwice NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+214 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain s1ShldNotHaveTwoFollowers NoResult
+stmt s1, s2, s3;
+Select s1 such that Follows*(s1, s2) and Follows*(s1, s3)
+1,2,3,4,5,6
+5000
+Evaluating query 214 - Select SingleSynonym Stmt FollowsStar SynonymSynonym And FollowsStar SynonymSynonym Chain s1ShldNotHaveTwoFollowers NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 
+Correct answer: 1 2 3 4 5 6 
+215 - Select SingleSynonym Stmt Parent IntInt NoWhile NoResult
+stmt s;
+Select s such that Parent(1, 2)
+none
+5000
+Evaluating query 215 - Select SingleSynonym Stmt Parent IntInt NoWhile NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+216 - Select SingleSynonym Stmt Parent IntInt OneOutsideWhile OneInsideWhileNoResult
+stmt s;
+Select s such that Parent(2, 5)
+none
+5000
+Evaluating query 216 - Select SingleSynonym Stmt Parent IntInt OneOutsideWhile OneInsideWhileNoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+217 - Select SingleSynonym Stmt Parent IntInt HaveResult
+stmt s;
+Select s such that Parent(3, 4)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 217 - Select SingleSynonym Stmt Parent IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+218 - Parent IntInt 2nd Arg > 1st Arg NoResult
+stmt s;
+Select s such that Parent(2, 1)
+none
+5000
+Evaluating query 218 - Parent IntInt 2nd Arg > 1st Arg NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+219 - Select SingleSynonym Stmt Parent IntInt SameInt NoResult
+stmt s;
+Select s such that Parent(2, 2)
+none
+5000
+Evaluating query 219 - Select SingleSynonym Stmt Parent IntInt SameInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+220 - Parent LackOf Arguments NoResult
+stmt s;
+Select s such that Parent(1)
+none
+5000
+Evaluating query 220 - Parent LackOf Arguments NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+221 - Parent Excessive Arguments NoResult
+stmt s;
+Select s such that Parent(1, 2, 3)
+none
+5000
+Evaluating query 221 - Parent Excessive Arguments NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+222 - Tab within Parent Keyword HaveResult
+stmt s;
+ Select s such that Parent ( 1 , 2 )
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 222 - Tab within Parent Keyword HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 1 2 3 4 5 6 7 8 
+Missing: 1 2 3 4 5 6 7 8 
+Additional: 
+223 - No Whitespace Within SuchThat Keyword NoResult
+stmt s;
+Select s suchthat Parent(1, 2)
+none
+5000
+Evaluating query 223 - No Whitespace Within SuchThat Keyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" CondNum="2" RelNum="1" 
+Your answer: 
+Correct answer: 
+224 - Excessive Whitespace Within SuchThat Keyword NoResult
+stmt s;
+Select s such         that Parent(1, 2)
+none
+5000
+Evaluating query 224 - Excessive Whitespace Within SuchThat Keyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+225 - Select SingleSynonym Stmt Parent IntInt ParentKeywordAsSynonym HaveResult
+stmt Parent;
+Select Parent such that Parent(1, 2)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 225 - Select SingleSynonym Stmt Parent IntInt ParentKeywordAsSynonym HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 1 2 3 4 5 6 7 8 
+Missing: 1 2 3 4 5 6 7 8 
+Additional: 
+226 - Missing SuchThat Keyword NoResult
+stmt s;
+Select s Parent(1, 2)
+none
+5000
+Evaluating query 226 - Missing SuchThat Keyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" CondNum="2" RelNum="1" 
+Your answer: 
+Correct answer: 
+227 - Missing SelectKeyword NoResult
+stmt s;
+Parent (1, 2)
+none
+5000
+Evaluating query 227 - Missing SelectKeyword NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" CondNum="2" RelNum="1" 
+Your answer: 
+Correct answer: 
+228 - Select SingleSynonym stmt Parent IntUnderscore NoResult
+stmt s;
+Select s such that Parent(1, _)
+none
+5000
+Evaluating query 228 - Select SingleSynonym stmt Parent IntUnderscore NoResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+229 - Select SingleSynonym Stmt Parent IntUnderscore HaveResult
+stmt s;
+Select s such that Parent(3, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 229 - Select SingleSynonym Stmt Parent IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+230 - Select SingleSynonym Stmt Parent IntSynonym NoResult
+stmt s;
+Select s such that Parent(4, s)
+none
+5000
+Evaluating query 230 - Select SingleSynonym Stmt Parent IntSynonym NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+231 - Select SingleSynonym Stmt Parent IntSynonym HaveResult
+stmt s;
+Select s such that Parent(3, s)
+4,5,6,7
+5000
+Evaluating query 231 - Select SingleSynonym Stmt Parent IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 4 5 6 7 
+Correct answer: 4 5 6 7 
+232 - Select SingleSynonym Stmt Parent UnderscoreInt HaveResult
+stmt s;
+Select s such that Parent(_, 5)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 232 - Select SingleSynonym Stmt Parent UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+233 - Select SingleSynonym Stmt Parent UnderscoreInt NoResult
+stmt s;
+Select s such that Parent(_, 1)
+none
+5000
+Evaluating query 233 - Select SingleSynonym Stmt Parent UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+234 - Select SingleSynonym Stmt Parent UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Parent(_, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 234 - Select SingleSynonym Stmt Parent UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+235 - Select SingleSynonym Stmt Parent UnderscoreSynonym HaveResult
+stmt s;
+Select s such that Parent(_, s)
+4,5,6,7
+5000
+Evaluating query 235 - Select SingleSynonym Stmt Parent UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 4 5 6 7 
+Correct answer: 4 5 6 7 
+236 - Select SingleSynonym Stmt Parent SynonymInt ParentKeywordAsSynontm As RelationArg HaveResult
+stmt s, Parent;
+Select s such that Parent(Parent, 5)
+none
+5000
+Evaluating query 236 - Select SingleSynonym Stmt Parent SynonymInt ParentKeywordAsSynontm As RelationArg HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 
+Missing: 
+Additional: 1 2 3 4 5 6 7 8 
+237 - Select SingleSynonym Stmt Parent SynonymInt HaveResult
+stmt s;
+Select s such that Parent(s, 4)
+3
+5000
+Evaluating query 237 - Select SingleSynonym Stmt Parent SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+238 - Select SingleSynonym Stmt Parent SynonymInt NoResult
+stmt s;
+Select s such that Parent(s, 1)
+none
+5000
+Evaluating query 238 - Select SingleSynonym Stmt Parent SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+239 - Select SingleSynonym Stmt Parent SynonymUnderscore HaveResult
+stmt s;
+Select s such that Parent(s, _)
+3
+5000
+Evaluating query 239 - Select SingleSynonym Stmt Parent SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+240 - Select SingleSynonym Stmt Parent SynonymSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Parent(s1, s2)
+3
+5000
+Evaluating query 240 - Select SingleSynonym Stmt Parent SynonymSynonym GetFront HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+241 - Select SingleSynonym Stmt Parent SynonymSynonym GetBack HaveResult
+stmt s1, s2;
+Select s2 such that Parent(s1, s2)
+4,5,6,7
+5000
+Evaluating query 241 - Select SingleSynonym Stmt Parent SynonymSynonym GetBack HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 4 5 6 7 
+Correct answer: 4 5 6 7 
+242 - Select SingleSynonym Stmt Parent SynonymSynonym Same NoResult
+stmt s;
+Select s such that Parent(s, s)
+none
+5000
+Evaluating query 242 - Select SingleSynonym Stmt Parent SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+243 - Select SingleSynonym Variable Parent IntInt HaveResult
+variable v;
+Select v such that Parent(3, 4)
+a,b,c,d,i,j
+5000
+Evaluating query 243 - Select SingleSynonym Variable Parent IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+244 - Select SingleSynonym Variable Parent IntInt NoResult
+variable v;
+Select v such that Parent(1, 2)
+none
+5000
+Evaluating query 244 - Select SingleSynonym Variable Parent IntInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+245 - Select SingleSynonym Variable Parent IntUnderscore HaveResult
+variable v;
+Select v such that Parent(3, _)
+a,b,c,d,i,j
+5000
+Evaluating query 245 - Select SingleSynonym Variable Parent IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+246 - Select SingleSynonym Variable Parent IntSynonym HaveResult
+variable v; stmt s;
+Select v such that Parent(3, s)
+a,b,c,d,i,j
+5000
+Evaluating query 246 - Select SingleSynonym Variable Parent IntSynonym HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+247 - Select SingleSynonym Variable Parent UnderscoreInt HaveResult
+variable v;
+Select v such that Parent(_, 5)
+a,b,c,d,i,j
+5000
+Evaluating query 247 - Select SingleSynonym Variable Parent UnderscoreInt HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+248 - Select SingleSynonym Variable Parent UnderscoreInt NoResult
+variable v;
+Select v such that Parent(_, 3)
+none
+5000
+Evaluating query 248 - Select SingleSynonym Variable Parent UnderscoreInt NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+249 - Select SingleSynonym Variable Parent UnderscoreUnderscore HaveResult
+variable v;
+Select v such that Parent(_, _)
+a,b,c,d,i,j
+5000
+Evaluating query 249 - Select SingleSynonym Variable Parent UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+250 - Select SingleSynonym Variable Parent UnderscoreSynonym HaveResult
+variable v; stmt s;
+Select v such that Parent(_, s)
+a,b,c,d,i,j
+5000
+Evaluating query 250 - Select SingleSynonym Variable Parent UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+251 - Select SingleSynonym Variable Parent SynonymInt HaveResult
+variable v; stmt s;
+Select v such that Parent(s, 7)
+a,b,c,d,i,j
+5000
+Evaluating query 251 - Select SingleSynonym Variable Parent SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+252 - Select SingleSynonym Variable Parent SynonymInt NoResult
+variable v; stmt s;
+Select v such that Parent(s, 1)
+none
+5000
+Evaluating query 252 - Select SingleSynonym Variable Parent SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+253 - Select SingleSynonym Variable Parent SynonymUnderscore HaveResult
+variable v; stmt s;
+Select v such that Parent(s, _)
+a,b,c,d,i,j
+5000
+Evaluating query 253 - Select SingleSynonym Variable Parent SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i j a b c d 
+Correct answer: a b c d i j 
+254 - Select SingleSynonym Variable Parent Illegal Argument NoResult
+variable v; stmt s;
+Select v such that Parent(v, s)
+none
+5000
+Evaluating query 254 - Select SingleSynonym Variable Parent Illegal Argument NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+255 - Select SingleSynonym Assign Parent IntInt HaveResult
+assign a;
+Select a such that Parent(3, 5)
+1,2,4,5,6,7,8
+5000
+Evaluating query 255 - Select SingleSynonym Assign Parent IntInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 4 5 6 7 8 
+Correct answer: 1 2 4 5 6 7 8 
+256 - Select SingleSynonym Assign Parent UnderscoreSynonym HaveResult
+assign a;
+Select a such that Parent(_, a)
+4,5,6,7
+5000
+Evaluating query 256 - Select SingleSynonym Assign Parent UnderscoreSynonym HaveResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 4 5 6 7 
+Correct answer: 4 5 6 7 
+257 - Select SingleSynonym Assign Parent SynonymInt NoResult
+assign a;
+Select a such that Parent(a, 1)
+none
+5000
+Evaluating query 257 - Select SingleSynonym Assign Parent SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+258 - Select SingleSynonym Assign Parent SynonymUnderscore NoResult
+assign a;
+Select a such that Parent(a, _)
+none
+5000
+Evaluating query 258 - Select SingleSynonym Assign Parent SynonymUnderscore NoResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+259 - Select SingleSynonym Assign Parent SynonymSynonym FirstArgCannotBeAssign NoResult
+assign a1, a2;
+Select a1 such that Parent(a1, a2)
+none
+5000
+Evaluating query 259 - Select SingleSynonym Assign Parent SynonymSynonym FirstArgCannotBeAssign NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+260 - Select SingleSynonym Assign Parent SynonymSynonym Same NoResult
+assign a;
+Select a such that Parent(a, a)
+none
+5000
+Evaluating query 260 - Select SingleSynonym Assign Parent SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+261 - Select SingleSynonym While Parent IntInt NoResult
+while w;
+Select w such that Parent(1, 2)
+none
+5000
+Evaluating query 261 - Select SingleSynonym While Parent IntInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+262 - Select SingleSynonym While Parent IntInt NoResult
+while w;
+Select w such that Parent(3, 4)
+3
+5000
+Evaluating query 262 - Select SingleSynonym While Parent IntInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+263 - Select SingleSynonym While Parent IntUnderscore HaveResult
+while w;
+Select w such that Parent(1, _)
+none
+5000
+Evaluating query 263 - Select SingleSynonym While Parent IntUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+264 - Select SingleSynonym While Parent UnderscoreSynonym NoParentOfWhile NoResult
+while w;
+Select w such that Parent(_, w)
+none
+5000
+Evaluating query 264 - Select SingleSynonym While Parent UnderscoreSynonym NoParentOfWhile NoResult
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+265 - Select SingleSynonym While Parent SynonymInt HaveResult
+while w;
+Select w such that Parent(w, 6)
+3
+5000
+Evaluating query 265 - Select SingleSynonym While Parent SynonymInt HaveResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+266 - Select SingleSynonym While Parent SynonymInt NoResult
+while w;
+Select w such that Parent(w, 1)
+none
+5000
+Evaluating query 266 - Select SingleSynonym While Parent SynonymInt NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+267 - Select SingleSynonym While Parent SynonymUnderscore HaveResult
+while w;
+Select w such that Parent(w, _)
+3
+5000
+Evaluating query 267 - Select SingleSynonym While Parent SynonymUnderscore HaveResult
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+268 - Select SingleSynonym While Parent SynonymSynonym NoParentOfWhile NoResult
+while w1, w2;
+Select w1 such that Parent(w1, w2)
+none
+5000
+Evaluating query 268 - Select SingleSynonym While Parent SynonymSynonym NoParentOfWhile NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+269 - Select SingleSynonym While Parent SynonymSynonym Same NoResult
+while w;
+Select w such that Parent(w, w)
+none
+5000
+Evaluating query 269 - Select SingleSynonym While Parent SynonymSynonym Same NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+270 - Select SingleSynonym Stmt SuchThat Parent IntInt and Parent IntInt HaveResult
+stmt s;
+Select s such that Parent(3, 4) and Parent(3, 6)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 270 - Select SingleSynonym Stmt SuchThat Parent IntInt and Parent IntInt HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+271 - AndKeyword StuckToBackOf PreviousRelation HaveResult
+stmt s;
+Select s such that Parent(3, 4)and Parent(3, 6)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 271 - AndKeyword StuckToBackOf PreviousRelation HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+272 - AndKeyword StuckToFrontOf PreviousRelation NoResult
+stmt s;
+Select s such that Parent(3, 4) andParent(3, 6)
+none
+5000
+Evaluating query 272 - AndKeyword StuckToFrontOf PreviousRelation NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+273 - Select SingleSynonym Stmt SuchThat Parent IntInt SuchThat Parent IntInt HaveResult
+stmt s;
+Select s such that Parent(3, 4) such that Parent(3, 6)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 273 - Select SingleSynonym Stmt SuchThat Parent IntInt SuchThat Parent IntInt HaveResult
+The happen is 2
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="2" CondNum="5" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+274 - SuchThatKeyword StuckToBackOf PreviousRelation HaveResult
+stmt s;
+Select s such that Parent(3, 4)such that Parent(3, 6)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 274 - SuchThatKeyword StuckToBackOf PreviousRelation HaveResult
+The happen is 2
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="2" CondNum="5" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+275 - SuchThatKeyword StuckToFrontOf PreviousRelation NoResult
+stmt s;
+Select s such that Parent(3, 4) such thatParent(3, 6)
+none
+5000
+Evaluating query 275 - SuchThatKeyword StuckToFrontOf PreviousRelation NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="2" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+276 - Select SingleSynonym Stmt Parent IntUnderscore And Parent IntUnderscore HaveResult
+stmt s;
+Select s such that Parent(3, _) and Parent(3, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 276 - Select SingleSynonym Stmt Parent IntUnderscore And Parent IntUnderscore HaveResult
+_ is an Unnamedvar 
+The happen is 2
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+277 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationSameSynonym NoResult
+stmt s;
+Select s such that Parent(1, s) and Parent(2, s)
+none
+5000
+Evaluating query 277 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationSameSynonym NoResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+278 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationDiffSynonym HaveResult
+stmt s1, s2, s3;
+Select s1 such that Parent(1, s2) and Parent(2, s3)
+none
+5000
+Evaluating query 278 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationDiffSynonym HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+279 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Parent(3, s1) and Parent(3, s2)
+4,5,6,7
+5000
+Evaluating query 279 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym GetFront HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 4 5 6 7 
+Correct answer: 4 5 6 7 
+280 - Select SingleSynonym Stmt Parent UnderscoreInt And Parent UnderscoreInt HaveResult
+stmt s;
+Select s such that Parent(_, 4) and Parent(_, 5)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 280 - Select SingleSynonym Stmt Parent UnderscoreInt And Parent UnderscoreInt HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+281 - Select SingleSynonym Stmt Parent UnderscoreInt And Parent UnderscoreInt 1stResult 2ndNoResult NoResult
+stmt s;
+Select s such that Parent(_, 2) and Parent(_, 4)
+none
+5000
+Evaluating query 281 - Select SingleSynonym Stmt Parent UnderscoreInt And Parent UnderscoreInt 1stResult 2ndNoResult NoResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 
+Correct answer: 
+282 - Select SingleSynonym Stmt Parent UnderscoreUnderscore And Parent UnderscoreUnderscore HaveResult
+stmt s;
+Select s such that Parent(_, _) and Parent(_, _)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 282 - Select SingleSynonym Stmt Parent UnderscoreUnderscore And Parent UnderscoreUnderscore HaveResult
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="4" SuchThat="1" CondNum="8" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+283 - Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym CommonSynonym HaveResult
+stmt s;
+Select s such that Parent(_, s) and Parent(_, s)
+4,5,6,7
+5000
+Evaluating query 283 - Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym CommonSynonym HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 4 5 6 7 
+Correct answer: 4 5 6 7 
+284 - Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym UniqueSynonym HaveResult
+stmt s1, s2, s3;
+Select s1 such that Parent(_, s2) and Parent(_, s3)
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 284 - Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym UniqueSynonym HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+285 - Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Parent(_, s1) and Parent(_, s2)
+4,5,6,7
+5000
+Evaluating query 285 - Select SingleSynonym Stmt Parent UnderscoreSynonym And Parent UnderscoreSynonym GetFront HaveResult
+_, is an Unnamedvar 
+The happen is 2
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 4 5 6 7 
+Correct answer: 4 5 6 7 
+286 - Select SingleSynonym Stmt Parent SynonymInt And Parent SynonymInt BothRelation SameSynonym HaveResult
+stmt s;
+Select s such that Parent(s, 4) and Parent(s, 5)
+3
+5000
+Evaluating query 286 - Select SingleSynonym Stmt Parent SynonymInt And Parent SynonymInt BothRelation SameSynonym HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 
+Correct answer: 3 
+287 - Select SingleSynonym Stmt Parent SynonymInt And Parent SynonymInt GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Parent(s1, 4) and Parent(s2, 6)
+3
+5000
+Evaluating query 287 - Select SingleSynonym Stmt Parent SynonymInt And Parent SynonymInt GetFront HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 
+Correct answer: 3 
+288 - Select SingleSynonym Stmt Parent SynonymUnderscore And Parent SynonymUnderscore GetFront HaveResult
+stmt s1, s2;
+Select s1 such that Parent(s1, _) and Parent(s2, _)
+3
+5000
+Evaluating query 288 - Select SingleSynonym Stmt Parent SynonymUnderscore And Parent SynonymUnderscore GetFront HaveResult
+_ is an Unnamedvar 
+The happen is 2
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: 3 
+Correct answer: 3 
+289 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst HaveResult
+stmt s1, s2, s3;
+Select s1 such that Parent(s1, s2) and Parent(s2, s3)
+none
+5000
+Evaluating query 289 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+290 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle HaveResult
+stmt s1, s2, s3;
+Select s2 such that Parent(s1, s2) and Parent(s2, s3)
+none
+5000
+Evaluating query 290 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+291 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast HaveResult
+stmt s1, s2, s3;
+Select s3 such that Parent(s1, s2) and Parent(s2, s3)
+none
+5000
+Evaluating query 291 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+292 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain Same2ndArg HaveResult
+stmt s1, s2, s3;
+Select s1 such that Parent(s1, s3) and Parent(s2, s3)
+3
+5000
+Evaluating query 292 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain Same2ndArg HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 
+Correct answer: 3 
+293 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain Same1stArg HaveResult
+stmt s1, s2, s3;
+Select s1 such that Parent(s1, s2) and Parent(s1, s3)
+3
+5000
+Evaluating query 293 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain Same1stArg HaveResult
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 
+Correct answer: 3 
+End of evaluating Query File.
+AutoTester Completed !

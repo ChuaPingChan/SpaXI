@@ -15,17 +15,17 @@ bool QueryValidator::isValidQuery(string query) {
         string currentLine = *iter;
         if (currentLine == inputVector.back()) {
             if (!isValidSelection(currentLine)) {
-                return false;
+                isValidSelectionFlag = false;
             }
         }
         else {
             if (!isValidDeclaration(currentLine)) {
-                return false;
+                isValidDeclarationFlag = false;
             }
         }
     }
 
-    return true;
+    return isValidDeclarationFlag && isValidSelectionFlag;
 }
 
 bool QueryValidator::isValidDeclaration(string str) {

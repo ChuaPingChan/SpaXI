@@ -14,6 +14,10 @@ SelectValidator::~SelectValidator()
 
 bool SelectValidator::isValid(string str)
 {
+    if (str.empty())
+    {
+        return false;
+    }
     string selectWithoutKeyword = removeSelectKeyword(str);
     string processedStr = Formatter::removeAllSpacesAndTabs(selectWithoutKeyword);
     return isValidSelectBoolean(processedStr) || isValidSelectSingle(processedStr) || isValidSelectTuple(processedStr);

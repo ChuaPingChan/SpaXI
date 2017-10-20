@@ -11,6 +11,8 @@ public:
     UtilityQueryTree();
     ~UtilityQueryTree();
 
+    static bool isSameSelectionType(SelectionType expectedType, QueryTree qt);
+
     static bool isSameContentAllStmts(unordered_set<string> expectedList, QueryTree qt);
     static bool isSameContentAllAssigns(unordered_set<string> expectedList, QueryTree qt);
     static bool isSameContentAllWhiles(unordered_set<string> expectedList, QueryTree qt);

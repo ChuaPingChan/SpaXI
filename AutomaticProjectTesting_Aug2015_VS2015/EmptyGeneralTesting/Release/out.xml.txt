@@ -1,0 +1,32 @@
+Parameters : asourcetemp.txt aquerytemp.txt out.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - temp
+procedure p;
+Select p such that Calls(p, _) and Calls*(p,_)
+none
+5000
+Evaluating query 1 - temp
+_ is an Unnamedvar 
+p,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" Callsstar="1" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
+Your answer: One Two Three Five Six Seven Eight 
+Correct answer: 
+Missing: 
+Additional: Eight Five One Seven Six Three Two 
+2 - temp
+assign a;
+Select a pattern a(_, "x")
+36,37
+5000
+Evaluating query 2 - temp
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: 36 37 
+Correct answer: 36 37 
+End of evaluating Query File.
+AutoTester Completed !
