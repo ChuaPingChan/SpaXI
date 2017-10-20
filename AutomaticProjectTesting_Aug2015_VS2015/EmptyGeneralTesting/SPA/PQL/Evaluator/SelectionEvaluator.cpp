@@ -17,7 +17,8 @@ evaluation is stopped here*/
 bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResult)
 { 
     hasResultForSelection = false;
-    list<int> resultsForSingleSynonym;
+    list<int> resultsForOneSynonym;
+
     //Case 1: Select BOOLEAN
     if (clause.getSelectionType() == SELECT_BOOLEAN)
     {
@@ -28,10 +29,10 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
     //Case 2: Select synonym
     else if (clause.getSelectionType() == SELECT_SINGLE)
     {
-        resultsForSingleSynonym = evaluateSingleSynonymSelection(clause.getSingleArgType(), clause.getSingleArg());
-        if (!resultsForSingleSynonym.empty()) //If Select synonym has results, proceed with evaluation
+        resultsForOneSynonym = evaluateSingleSynonymSelection(clause.getSingleArgType(), clause.getSingleArg());
+        if (!resultsForOneSynonym.empty()) //If Select synonym has results, proceed with evaluation
         {
-            clauseResult->updateSynResults(clause.getSingleArg(), resultsForSingleSynonym);
+            clauseResult->updateSynResults(clause.getSingleArg(), resultsForOneSynonym);
             hasResultForSelection = true;
         }
     }
@@ -39,13 +40,28 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
     //Case 3: Select <arg1,arg2>
     else if (clause.getSelectionType() == SELECT_TUPLE)
     {
-        //To-Do
+        vector<string> getAllSynonymsFromTuple = clause.getTupleArgs();
+        vector<Entity> getAllEntititesFromTuple = clause.getTupleArgTypes();
+        
+        for (int i = 0; i < getAllSynonymsFromTuple.size(); i++)
+        {
+            resultsForOneSynonym = evaluateSingleSynonymSelection(getAllEntititesFromTuple.at(i), getAllSynonymsFromTuple.at(i));
+            if (!resultsForOneSynonym.empty()) //If Select tuple has results for current synonym, proceed with evaluation
+            {
+                clauseResult->updateSynResults(clause.getSingleArg(), resultsForOneSynonym);
+                hasResultForSelection = true;
+            }
+            else
+            {
+                hasResultForSelection = false; //Select synonym has no results for current synonym, break
+                break;
+            }
+        }
     }
     //cout << "Result for select evaluation is"<<hasResultForSelection;
     return hasResultForSelection;
 }
 
-//To-Do: Fill in missing API for PROG_LINES after PKB is finished.
 list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, string synonym)
 {
     if (argType == STMT)
@@ -70,7 +86,6 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
     else if (argType == PROG_LINE)
     {
         return pkbInstance->getAllStatements();
-        return list<int>();
 
     }
     else if (argType == CALL)
