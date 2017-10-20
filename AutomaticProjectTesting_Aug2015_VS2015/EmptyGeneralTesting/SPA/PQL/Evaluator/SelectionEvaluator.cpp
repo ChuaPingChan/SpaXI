@@ -38,27 +38,32 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
     }
 
     //Case 3: Select <arg1,arg2>
+    //TODO: Remove comments
     else if (clause.getSelectionType() == SELECT_TUPLE)
     {
+       // cout << "Has reached evaluation for tuple" << endl;
         vector<string> getAllSynonymsFromTuple = clause.getTupleArgs();
         vector<Entity> getAllEntititesFromTuple = clause.getTupleArgTypes();
         
         for (int i = 0; i < getAllSynonymsFromTuple.size(); i++)
         {
-            resultsForOneSynonym = evaluateSingleSynonymSelection(getAllEntititesFromTuple.at(i), getAllSynonymsFromTuple.at(i));
+            string currentSynonym = getAllSynonymsFromTuple.at(i);
+            Entity currentSynonymType = getAllEntititesFromTuple.at(i);
+            resultsForOneSynonym = evaluateSingleSynonymSelection(currentSynonymType, currentSynonym);
             if (!resultsForOneSynonym.empty()) //If Select tuple has results for current synonym, proceed with evaluation
             {
-                clauseResult->updateSynResults(clause.getSingleArg(), resultsForOneSynonym);
+                clauseResult->updateSynResults(currentSynonym, resultsForOneSynonym);
                 hasResultForSelection = true;
             }
             else
             {
+                //cout << "Breaking at " << currentSynonym <<" as it does not exist in SIMPLE"<< endl;
                 hasResultForSelection = false; //Select synonym has no results for current synonym, break
                 break;
             }
         }
     }
-    //cout << "Result for select evaluation is"<<hasResultForSelection;
+    //cout << "Result for select evaluation is " << hasResultForSelection << endl;
     return hasResultForSelection;
 }
 
