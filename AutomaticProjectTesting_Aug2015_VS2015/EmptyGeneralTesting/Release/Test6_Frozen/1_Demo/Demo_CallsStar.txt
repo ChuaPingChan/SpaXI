@@ -1,0 +1,55 @@
+1 - Calls retrieve all statements that calls
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Calls*(_, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
+5000
+2 - Calls retrieve all procedures that calls
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Calls*(p, _)
+one,two
+5000
+3 - Calls retrieve single statement
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p, p1; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p1 such that Calls*(p1, p) with p.procName="three"
+one,two
+5000
+4 - Calls retrieve single procedure that modify
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Calls*(p, _) with p.procName = "three"
+false
+5000
+5 - Calls incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Calls*(v, _) 
+none
+5000
+6 - Calls incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select c such that Calls*(c, _)
+none
+5000
+7 - Calls incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Calls*(0, "two")
+none
+5000
+8 - Calls incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Calls*(v, s)
+none
+5000
+9 - Calls boundary
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Calls*("x", p)
+none
+5000
+9 - Calls boundary
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Calls*(p, "one")
+none
+5000
+9 - Calls boundary
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Calls*(p, p)
+none
+5000

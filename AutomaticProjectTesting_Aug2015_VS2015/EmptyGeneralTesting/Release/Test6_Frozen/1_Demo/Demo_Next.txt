@@ -1,0 +1,65 @@
+1 - Next retrieve all statements that calls
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Next(_, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
+5000
+2 - Next retrieve all procedures that calls
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Next(ifstmt, s)
+3,7,14,16
+5000
+2 - Next retrieve all procedures that calls
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Next(w, s)
+11,18,5,8
+5000
+3 - Next retrieve single statement
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p, p1; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Next(s, s1) pattern ifstmt(v,_,_)
+x
+5000
+4 - Next retrieve single procedure that modify
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select n1 such that Next(n, n1) with n=11
+12
+5000
+5 - Next incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Next(v, _) 
+none
+5000
+6 - Next incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select c such that Next(c, _)
+none
+5000
+7 - Next incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Next(0, "two")
+none
+5000
+8 - Next incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Next(v, s)
+none
+5000
+9 - Next boundary
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select w such that Next(w, w)
+none
+5000
+9 - Next boundary
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Next(n, n1) with n1=100
+false
+5000
+9 - Next boundary
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Next(s, 1)
+none
+5000
+9 - Next boundary
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Next(8, s)
+false
+5000

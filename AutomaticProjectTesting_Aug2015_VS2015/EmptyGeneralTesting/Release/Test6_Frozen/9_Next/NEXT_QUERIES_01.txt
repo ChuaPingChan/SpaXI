@@ -1,0 +1,35 @@
+1 - Next
+prog_line n;
+Select n such that Next (n, 27)
+23
+5000
+2 - Next
+prog_line n;
+Select n such that Next (n, 1)
+none
+5000
+3 - Next
+prog_line n;
+Select n such that Next (1, n)
+2
+5000
+4 - Next - after while statement
+prog_line n;
+Select n such that Next (18, n)
+19, 22
+5000
+5 - Next - after if statement
+prog_line n;
+Select n such that Next (8, n)
+9, 14
+5000
+6 - Next - get previous if/else
+prog_line n;
+Select n such that Next (n, 17)
+13, 16
+5000
+7 - Next - line before while
+prog_line n;
+Select n such that Next (n, 10)
+9, 12
+5000

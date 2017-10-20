@@ -1,0 +1,235 @@
+procedure one{
+   x=1+z*(y+6);
+   if x then{
+      z=x*x-y;
+	  while z{
+	     x = y + 6;
+		 y =1 + z;
+	  }
+   }
+   else{
+       z=x*(y + 6)*z;
+   }
+   call two;
+}
+procedure two{
+    y = 8*z-x;
+	while y{
+	    x=x*8-z*3;
+	    y=x*(x-y)*z;
+		if x then{
+		    x=x-2;
+			y=y*(z-10);
+		}
+		else{
+		    z=z*(x+y)+3;
+			call three;
+		}
+	}
+    call three;
+}
+procedure three{
+    if x then{
+	    x=x*x;
+		y = x-9;
+		if y then{
+		    x=x-y*z;
+			call four;
+		}
+	    else{
+		    y=x*(z-9);
+		}
+	
+	}
+	else{
+	    call four;
+	}
+}
+procedure four{
+    while x{
+	    y=(x-3)*(x-2);
+		x=x-1;
+		while y{
+		    y=y-2;
+			z=y-5*(x-3);
+		}
+	}
+	p = x+y+z*5;
+	call five;
+}
+procedure five{
+   x=1+z*(y+6);
+   if x then{
+      z=x*x-y;
+	  while z{
+	     x = y + 6;
+		 y =1 + z;
+	  }
+   }
+   else{
+       z=x*(y + 6)*z;
+   }
+   call six;
+}
+procedure six{
+    y = 8*z-x;
+	while y{
+	    x=x*8-z*3;
+	    y=x*(x-y)*z;
+		if x then{
+		    x=x-2;
+			y=y*(z-10);
+		}
+		else{
+		    z=z*(x+y)+3;
+			call seven;
+		}
+	}
+    call seven;
+}
+procedure seven{
+    if x then{
+	    x=x*x;
+		y = x-9;
+		if y then{
+		    x=x-y*z;
+			call eight;
+		}
+	    else{
+		    y=x*(z-9);
+		}
+	
+	}
+	else{
+	    call eight;
+	}
+}
+procedure eight{
+    while x{
+	    y=(x-3)*(x-2);
+		x=x-1;
+		while y{
+		    y=y-2;
+			z=y-5*(x-3);
+		}
+	}
+	p = x+y+z*5;
+	call nine;
+}
+procedure nine{
+   x=1+z*(y+6);
+   if x then{
+      z=x*x-y;
+	  while z{
+	     x = y + 6;
+		 y =1 + z;
+	  }
+   }
+   else{
+       z=x*(y + 6)*z;
+   }
+   call ten;
+}
+procedure ten{
+    y = 8*z-x;
+	while y{
+	    x=x*8-z*3;
+	    y=x*(x-y)*z;
+		if x then{
+		    x=x-2;
+			y=y*(z-10);
+		}
+		else{
+		    z=z*(x+y)+3;
+			call eleven;
+		}
+	}
+    call eleven;
+}
+procedure eleven{
+    if x then{
+	    x=x*x;
+		y = x-9;
+		if y then{
+		    x=x-y*z;
+			call twelve;
+		}
+	    else{
+		    y=x*(z-9);
+		}
+	
+	}
+	else{
+	    call twelve;
+	}
+}
+procedure twelve{
+    while x{
+	    y=(x-3)*(x-2);
+		x=x-1;
+		while y{
+		    y=y-2;
+			z=y-5*(x-3);
+		}
+	}
+	p = x+y+z*5;
+	call thirteen;
+}
+procedure thirteen{
+   x=1+z*(y+6);
+   if x then{
+      z=x*x-y;
+	  while z{
+	     x = y + 6;
+		 y =1 + z;
+	  }
+   }
+   else{
+       z=x*(y + 6)*z;
+   }
+   call fourteen;
+}
+procedure fourteen{
+    y = 8*z-x;
+	while y{
+	    x=x*8-z*3;
+	    y=x*(x-y)*z;
+		if x then{
+		    x=x-2;
+			y=y*(z-10);
+		}
+		else{
+		    z=z*(x+y)+3;
+			call fifteen;
+		}
+	}
+    call fifteen;
+}
+procedure fifteen{
+    if x then{
+	    x=x*x;
+		y = x-9;
+		if y then{
+		    x=x-y*z;
+			call sixteen;
+		}
+	    else{
+		    y=x*(z-9);
+		}
+	
+	}
+	else{
+	    call sixteen;
+	}
+}
+procedure sixteen{
+    while x{
+	    y=(x-3)*(x-2);
+		x=x-1;
+		while y{
+		    y=y-2;
+			z=y-5*(x-3);
+		}
+	}
+	p = x+y+z*5;
+}

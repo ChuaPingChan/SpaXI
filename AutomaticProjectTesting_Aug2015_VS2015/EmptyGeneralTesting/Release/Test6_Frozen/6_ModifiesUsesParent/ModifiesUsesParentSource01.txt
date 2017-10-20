@@ -1,0 +1,16 @@
+procedure nestedWhile {
+	while x {							
+		while y {						
+			while z {					
+				while a {				
+					while b {			
+						while c {		
+							x = 0;		
+						}
+					}
+				}
+			}
+			x = 1;						
+		}
+	}
+}

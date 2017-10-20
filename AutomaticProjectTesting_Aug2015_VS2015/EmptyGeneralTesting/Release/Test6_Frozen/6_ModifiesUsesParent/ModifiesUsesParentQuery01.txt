@@ -1,0 +1,85 @@
+1 - Modifies x
+stmt s;
+Select s such that Modifies (s, "x")
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+2 - Modifies y
+stmt s;
+Select s such that Modifies (s, "y")
+none
+5000
+3 - Uses x - special test for control variable :)
+stmt s;
+Select s such that Uses (s, "x")
+1
+5000
+4 - Uses y - special test for control variable :)
+stmt s;
+Select s such that Uses (s, "y")
+1, 2
+5000
+5 - Uses b - special test for control variable :)
+stmt s;
+Select s such that Uses (s, "b")
+1, 2, 3, 4, 5
+5000
+6 - Parent with unknown before (asking for all the parent stmt)
+stmt s;
+Select s such that Parent (s, _)
+1, 2, 3, 4, 5, 6
+5000
+7 - Parent with unknown after (asking for all the childs)
+stmt s;
+Select s such that Parent (_, s)
+2, 3, 4, 5, 6, 7, 8
+5000
+8 - Specific Parent - special test for while stmt
+while w; assign a;
+Select w such that Parent (w, a)
+2, 6
+5000
+9 - Parented by specific constant stmt 2
+stmt s;
+Select s such that Parent (2, s)
+3, 8
+5000
+10 - Parent by specific constant stmt 2 and assign stmt
+assign a;
+Select a such that Parent (2, a)
+8
+5000
+11 - Parent with Pattern
+assign a;
+Select a such that Parent (_, a) pattern a (_, _)
+7, 8
+5000
+12 - Parent* - special test for while stmt
+while w; assign a;
+Select w such that Parent* (w, a)
+1, 2, 3, 4, 5, 6
+5000
+13 - Parent* by specific constant stmt 2
+stmt s;
+Select s such that Parent* (2, s)
+3, 4, 5, 6, 7, 8
+5000
+14 - Parent* by specific constant stmt 2 and assign stmt
+assign a;
+Select a such that Parent* (2, a)
+7, 8
+5000
+15 - Parent* with pattern
+while w; assign a;
+Select a such that Parent*(2, a) pattern a("x",_)
+7, 8
+5000
+16 - Parent* with pattern and not so deeply nested assign stmt
+while w; assign a;
+Select w such that Parent* (w, a) pattern a (_, _"1"_)
+1, 2
+5000
+17 - Parent* with Pattern
+assign a;
+Select a such that Parent* (_, a) pattern a (_, _"0"_)
+7
+5000

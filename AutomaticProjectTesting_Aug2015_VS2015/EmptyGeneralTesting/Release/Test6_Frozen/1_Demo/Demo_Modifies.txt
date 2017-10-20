@@ -1,0 +1,55 @@
+1 - Modifies retrieve all statements that modifies
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Modifies(s, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
+5000
+2 - Modifies retrieve all procedures that modifies
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Modifies(p, _)
+one,two,three
+5000
+3 - Modifies retrieve single statement
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Modifies(s, _) with s.stmt# = 1
+1
+5000
+4 - Modifies retrieve single procedure that modify
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Modifies(p, _) with p.procName = "three"
+three
+5000
+3.2 - Modifies retrieve single statement
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Modifies(1, v)
+x
+5000
+4.2 - Modifies retrieve single procedure that modify
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Modifies("three", v)
+i
+5000
+5 - Modifies incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Modifies(v, _) 
+none
+5000
+6 - Modifies incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select c such that Modifies(_, _)
+none
+5000
+7 - Modifies boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Modifies(0, v)
+none
+5000
+8 - Modifies boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Modifies(20, v)
+none
+5000
+9 - Modifies boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Modifies("yolo", v)
+none
+5000
