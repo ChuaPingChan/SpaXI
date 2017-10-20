@@ -1,0 +1,45 @@
+1 - Follows before
+stmt s;
+Select s such that Follows (s, _)
+1, 2, 4, 5, 7, 9, 12, 14, 16, 18
+5000
+2 - Follows after
+stmt s;
+Select s such that Follows (_, s)
+3, 4, 6, 8, 10, 12, 14, 16, 18, 20
+5000
+3 - Follows before 3
+stmt s;
+Select s such that Follows (s, 3)
+2
+5000
+4 - Follows aftere 3
+stmt s;
+Select s such that Follows (3, s)
+none
+5000
+5 - Follows 
+stmt s1, s2;
+Select <s1,s2> such that Follows(s1, s2)
+1 4,2 3,4 12,5 6,7 8,9 10,12 14,14 16,16 18,18 20
+5000
+6 - Follows*
+assign a; while w;
+Select a such that Follows* (a, w)
+5, 7, 9
+5000
+7 - Follows* before 3
+stmt s;
+Select s such that Follows* (s, 3)
+2
+5000
+8 - Follows* after 3
+stmt s
+Select s such that Follows* (3, s)
+none
+5000
+9 - FollowsStar - stmt and while
+stmt s; while w;
+Select w such that Follows* (s, w)
+4, 6, 8, 10, 12, 14, 16, 18, 20
+5000

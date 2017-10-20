@@ -1,0 +1,55 @@
+1 - Uses retrieve all statements that modifies
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Uses(s, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+5000
+2 - Uses retrieve all procedures that modifies
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Uses(p, _)
+one,two
+5000
+3 - Uses retrieve single statement
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Uses(s, _) with s.stmt# = 1
+1
+5000
+4 - Uses retrieve single procedure that modify
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Uses(p, _) with p.procName = "three"
+false
+5000
+3.2 - Uses retrieve single statement
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Uses(1, v)
+y,z
+5000
+4.2 - Uses retrieve single procedure that modify
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Uses("three", _)
+none
+5000
+5 - Uses incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Uses(v, _) 
+none
+5000
+6 - Uses incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select c such that Uses(_, _)
+none
+5000
+7 - Uses boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Uses(0, v)
+none
+5000
+8 - Uses boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Uses(20, v)
+none
+5000
+9 - Uses boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Uses("yolo", v)
+none
+5000
