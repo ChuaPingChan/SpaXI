@@ -2285,22 +2285,22 @@ No ReturnBoolean, ReturnTuple=1
 The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: 
 Correct answer: 
-204 - 2 clauses: true && false -> false
+204 - 2 clauses: true and false -> false
 
 Select BOOLEAN such that Calls("Five","Seven") and Calls("Seven","Five")
 false
 5000
-Evaluating query 204 - 2 clauses: true && false -> false
+Evaluating query 204 - 2 clauses: true and false -> false
 The happen is 2
 The final tag string is ReturnBoolean="1" Calls="2" SuchThat="1" CondNum="4" RelNum="2" 
 Your answer: false 
 Correct answer: false 
-205 - 2 clauses: true && true -> true
+205 - 2 clauses: true and true -> true
 
 Select BOOLEAN such that Calls("Five","Seven") and Calls("One","Two")
 true
 5000
-Evaluating query 205 - 2 clauses: true && true -> true
+Evaluating query 205 - 2 clauses: true and true -> true
 The happen is 2
 The final tag string is ReturnBoolean="1" Calls="2" SuchThat="1" CondNum="4" RelNum="2" 
 Your answer: true 
@@ -3155,45 +3155,45 @@ No ReturnBoolean, ReturnTuple=1
 The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
 Your answer: 
 Correct answer: 
-284 - Select all while statements with "a" as control variable
+284 - Select all while statements with a as control variable
 while w;
 Select w pattern w("a", _)
 1
 5000
-Evaluating query 284 - Select all while statements with "a" as control variable
+Evaluating query 284 - Select all while statements with a as control variable
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
 Your answer: 1 
 Correct answer: 1 
-285 - Select all while statements with "f" as control variable
+285 - Select all while statements with f as control variable
 while w;
 Select w pattern w("f", _)
 9
 5000
-Evaluating query 285 - Select all while statements with "f" as control variable
+Evaluating query 285 - Select all while statements with f as control variable
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
 Your answer: 9 
 Correct answer: 9 
-286 - Select all while statements with "i" as control variable
+286 - Select all while statements with i as control variable
 while w;
 Select w pattern w("i", _)
 11
 5000
-Evaluating query 286 - Select all while statements with "i" as control variable
+Evaluating query 286 - Select all while statements with i as control variable
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
 Your answer: 11 
 Correct answer: 11 
-287 - Select all while statements with "s" as control variable
+287 - Select all while statements with s as control variable
 while w;
 Select w pattern w("s", _)
 26
 5000
-Evaluating query 287 - Select all while statements with "s" as control variable
+Evaluating query 287 - Select all while statements with s as control variable
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
@@ -3776,7 +3776,8 @@ none
 Evaluating query 337 - Select SingleSynonym With StmtAssign And AssignWhile NoResult
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
-<exception/>
+Your answer: 
+Correct answer: 
 338 - InSameStmt Modifies and Uses DiffKnownVar HasAnswer
 stmt s;
 Select s such that Modifies(s, "b") and Uses(s, "c")
@@ -3900,6 +3901,7 @@ Evaluating query 348 - ChooseStmt ModifiesStmtUnderscore WithStmtAssign
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
-<exception/>
+Your answer: 4 10 12 16 17 21 22 23 25 27 31 32 34 35 36 37 38 
+Correct answer: 4 10 12 16 17 21 22 23 25 27 31 32 34 35 36 37 38 
 End of evaluating Query File.
 AutoTester Completed !

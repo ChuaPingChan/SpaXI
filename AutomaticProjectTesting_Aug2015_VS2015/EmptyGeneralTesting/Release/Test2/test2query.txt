@@ -1013,12 +1013,12 @@ procedure p;
 Select p such that Calls*("Japan",p)
 none
 5000
-204 - 2 clauses: true && false -> false
+204 - 2 clauses: true and false -> false
 
 Select BOOLEAN such that Calls("Five","Seven") and Calls("Seven","Five")
 false
 5000
-205 - 2 clauses: true && true -> true
+205 - 2 clauses: true and true -> true
 
 Select BOOLEAN such that Calls("Five","Seven") and Calls("One","Two")
 true
@@ -1413,22 +1413,22 @@ while w;
 Select w pattern w("x", _)
 none
 5000
-284 - Select all while statements with "a" as control variable
+284 - Select all while statements with a as control variable
 while w;
 Select w pattern w("a", _)
 1
 5000
-285 - Select all while statements with "f" as control variable
+285 - Select all while statements with f as control variable
 while w;
 Select w pattern w("f", _)
 9
 5000
-286 - Select all while statements with "i" as control variable
+286 - Select all while statements with i as control variable
 while w;
 Select w pattern w("i", _)
 11
 5000
-287 - Select all while statements with "s" as control variable
+287 - Select all while statements with s as control variable
 while w;
 Select w pattern w("s", _)
 26
