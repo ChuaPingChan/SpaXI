@@ -13,6 +13,8 @@ using namespace std;
 
 class QueryValidator
 {
+    friend class FriendQueryValidator;
+
 public:
     QueryValidator(QueryTree *qtPtrNew);
     ~QueryValidator();
