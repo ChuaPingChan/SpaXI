@@ -52,6 +52,38 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 
 bool SelectValidator::isValidSelectTuple(string selectedStr)
 {
+    if (RegexValidators::isValidTupleRegex(selectedStr))
+    {
+        vector<string> synonymList;
+        vector<Entity> entityList;
+        string formattedStr = removeSpecialCharactersFromTuple(selectedStr);
+       
+        char delimiter = ','; //delimit characters using ,     
+        stringstream ss(formattedStr);
+        string arguments;
+        while (getline(ss, arguments, delimiter)) 
+        {
+            synonymList.push_back(arguments);
+        }
+
+        for (string s : synonymList)
+        {
+            try {
+                Entity entity = getEntityOfSynonym(s);
+                entityList.push_back(entity);
+            }
+            catch (SynonymNotFoundException& snfe) {
+                //TODO: Add to logging
+                return false;
+            }
+        }
+
+        SelectClause sc = makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+        storeInQueryTree(sc);
+        return true;
+
+    }
+    //TODO: Add support for AttrRef
     return false;
 }
 
@@ -119,4 +151,13 @@ string SelectValidator::removeSelectKeyword(string str)
     size_t f = str.find("Select");
     str.replace(f, std::string("Select").length(), "");
     return str;
+}
+
+string SelectValidator::removeSpecialCharactersFromTuple(string selectedStr)
+{
+    selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), '<'), selectedStr.end()); //remove < from tuple
+    selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), '>'), selectedStr.end()); //remove > from tuple
+    selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), ' '), selectedStr.end()); //remove all whitespaces for easier tokenizing
+
+    return selectedStr;
 }
