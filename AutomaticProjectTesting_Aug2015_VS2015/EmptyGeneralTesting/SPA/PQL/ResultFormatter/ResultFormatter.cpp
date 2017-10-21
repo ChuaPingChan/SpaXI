@@ -53,17 +53,10 @@ list<string> ResultFormatter::handleNoResult(QueryTree qt)
 /******************
 * Helper methods *
 ******************/
-list<string> ResultFormatter::convertListOfIntsToListOfStrings(list<int> listOfInts)
-{
-	list<string> convertedFromInt;
-	for (int i : listOfInts)
-	{
-		convertedFromInt.push_back(to_string(i));
-	}
-	
-	return convertedFromInt;
-}
 
+
+
+/* Formats result when Select type is BOOLEAN */
 list<string> ResultFormatter::handleSelectBoolean(ClauseResult cr)
 {
     list<string> result;
@@ -78,6 +71,7 @@ list<string> ResultFormatter::handleSelectBoolean(ClauseResult cr)
     return result;
 }
 
+/* Formats result when Select type is a single synonym */
 list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause selectedClause)
 {
     list<string> result;
@@ -103,42 +97,53 @@ list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause 
     return result;
 }
 
+/* Formats result when Select type is a tuple */
 list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause selectedClause)
 {
     list<string> result;
-    list<string> synonyms;
     vector<string> synonymsFromSelectedClause = selectedClause.getTupleArgs();
-    synonyms.assign(synonymsFromSelectedClause.begin(), synonymsFromSelectedClause.end());
+    list<string> synonyms;
+    synonyms.assign(synonymsFromSelectedClause.begin(), synonymsFromSelectedClause.end()); //Convert from vector to list to call ClauseResult API
 
-    list<list<int>> resultListOfTuple = cr.getSynonymResults(synonyms); 
-    int numSynonyms = selectedClause.getTupleArgs().size();
-    bool isMappingNeeded = false;
-    for (int i = 0 ; i < numSynonyms; i++)
+    list<list<int>> resultListOfTuple = cr.getSynonymResults(synonyms); //Get all results for the Selected Synonyms in TUPLE
+    for (auto it : resultListOfTuple) //iterate over each row of tuple result
     {
-        Entity argType = selectedClause.getTupleArgTypeAt(i);
-       if (argType == PROCEDURE || argType == VARIABLE)
+        list<int> curList = it; //current row of tuple result
+        list<string> tempListOfStrings;
+        int index = 0;
+        for (int curElement : curList) //iterate over each column of tuple result
         {
-           isMappingNeeded = true;
+            Entity argType = selectedClause.getTupleArgTypeAt(index); //get Entity type at current index
+            if (argType == VARIABLE || argType == PROCEDURE)
+            {
+                tempListOfStrings.push_back(pkbInstance->convertIdxToString(curElement, argType)); //get mapping of int to string
+            }
+            else
+            {
+                tempListOfStrings.push_back(to_string(curElement)); //convert int to string
+            }
+            index++;
         }
 
+        result.push_back(convertListOfStringsToSingleString(tempListOfStrings)); //convert list of strings to one string
     }
-
-    if (isMappingNeeded)
-    {
-      //TODO: Get mapping
-    }
-    else 
-    {
-        for (auto it : resultListOfTuple)
-        {
-            result.push_back(convertListOfStringsToSingleString(convertListOfIntsToListOfStrings(it))); //Convert list of ints to list of strings, then format into a single string
-        }
-    }
- 
+    
     return result;
 }
 
-//Add whitespaces between elements and comma at the end of the list
+/* Convert a list of integers to a list of strings */
+list<string> ResultFormatter::convertListOfIntsToListOfStrings(list<int> listOfInts)
+{
+    list<string> convertedFromInt;
+    for (int i : listOfInts)
+    {
+        convertedFromInt.push_back(to_string(i));
+    }
+
+    return convertedFromInt;
+}
+
+/* Add whitespaces between elements and comma at the end of the list */
 string ResultFormatter::convertListOfStringsToSingleString(list<string> singleSynResult)
 {
     string result;
