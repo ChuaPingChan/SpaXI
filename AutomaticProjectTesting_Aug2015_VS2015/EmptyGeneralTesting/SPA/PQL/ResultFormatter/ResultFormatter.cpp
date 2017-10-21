@@ -87,13 +87,13 @@ list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause 
         string synonymToGetResultFor = selectedClause.getSingleArg();
 
         //If result is of type int, get direct results from ClauseResult
-        if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CONSTANT || argType == STMTLIST)
+        if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
         {
             result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
         }
 
         //If result is of type string, convert mapping of ints to strings from PKB 
-        else if (argType == PROCEDURE || argType == VARIABLE || argType == CALL)
+        else if (argType == PROCEDURE || argType == VARIABLE )
         {
             result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
         }
@@ -110,30 +110,31 @@ list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause se
     vector<string> synonymsFromSelectedClause = selectedClause.getTupleArgs();
     synonyms.assign(synonymsFromSelectedClause.begin(), synonymsFromSelectedClause.end());
 
-    list<list<int>> tempList = cr.getSynonymResults(synonyms); //to change from list of list<int> to vector of list<int> to get one particular list
-   // vector<list<int>> synonymResults{ std::make_move_iterator(std::begin(tempList)),std::make_move_iterator(std::end(tempList)) };
-    int size = selectedClause.getTupleArgs().size();
-    for (auto it : tempList)
+    list<list<int>> resultListOfTuple = cr.getSynonymResults(synonyms); 
+    int numSynonyms = selectedClause.getTupleArgs().size();
+    bool isMappingNeeded = false;
+    for (int i = 0 ; i < numSynonyms; i++)
     {
-        result.push_back(convertListOfStringsToSingleString(convertListOfIntsToListOfStrings(it)));
-    }
-  /*  for (int i = 0; i < size; i++)
-    {
-        list<int> currentList = synonymResults.at(i);
-        for (int j = 0; j < size; j++)
+        Entity argType = selectedClause.getTupleArgTypeAt(i);
+       if (argType == PROCEDURE || argType == VARIABLE)
         {
-            if (isStringTypeResult(j))
-            {
-                result.push_back(to_string(currentList.front()));
-                currentList.pop_front();
-            }
-            else
-            {
-
-            }
+           isMappingNeeded = true;
         }
-    }*/
 
+    }
+
+    if (isMappingNeeded)
+    {
+      //TODO: Get mapping
+    }
+    else 
+    {
+        for (auto it : resultListOfTuple)
+        {
+            result.push_back(convertListOfStringsToSingleString(convertListOfIntsToListOfStrings(it))); //Convert list of ints to list of strings, then format into a single string
+        }
+    }
+ 
     return result;
 }
 
