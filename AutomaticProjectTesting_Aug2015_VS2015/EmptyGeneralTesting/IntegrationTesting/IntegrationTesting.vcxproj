@@ -196,14 +196,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SystemTest\SystemTest_BugsCapture.cpp" />
-    <ClCompile Include="TestFrontEnd.cpp" />
-    <ClCompile Include="TestPQLValidatorAndTree.cpp" />
-    <ClCompile Include="TestValidationFollowsAndTree.cpp" />
-    <ClCompile Include="TestValidationFollowsStarAndTree.cpp" />
-    <ClCompile Include="TestValidationParentAndTree.cpp" />
-    <ClCompile Include="TestValidationParentStarAndTree.cpp" />
-    <ClCompile Include="TestValidationPatternAndTree.cpp" />
-    <ClCompile Include="TestValidationUsesAndTree.cpp" />
     <ClCompile Include="PQL\Utility\UtilityQueryTree.cpp" />
     <ClCompile Include="PQL\Utility\UtilitySelection.cpp" />
   </ItemGroup>
