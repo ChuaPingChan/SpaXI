@@ -1192,10 +1192,8 @@ false
 Evaluating query 105
 prog_line is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
-Your answer: true 
+Your answer: false 
 Correct answer: false 
-Missing: false 
-Additional: true 
 106
 stmt s, s1; assign a, a1, a2; while w; if ifstat; procedure p; variable v; constant c; prog_line n, n1, n2;
 Select BOOLEAN such that Next (14, 15)  
