@@ -1163,6 +1163,11 @@ bool PKBMain::addStmtToProc(int stmt, string procName) {
 	if (procIdx == -1) {
 		return false;
 	}
+
+	if (procIdxTable.getProcIdxFromStmt(stmt) != -1) {
+		return false;
+	}
+
 	return procIdxTable.addStmtToProc(stmt, procIdx);
 }
 
