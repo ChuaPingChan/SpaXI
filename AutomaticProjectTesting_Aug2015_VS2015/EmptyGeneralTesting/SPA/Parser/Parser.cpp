@@ -284,6 +284,8 @@ void Parser::parseStmt() {
     _stackOfFollowsStacks.top().push(_currentStmtNumber);
     OutputDebugString("FINE: Pushing stmt to top stack of follows stack.\n");
 
+    _pkbMainPtr->addStmtToProc(_currentStmtNumber, _currentProcName);
+
     // Set parent child relation. 0 if no parent.
     if (_parentStack.empty()) {
         (*_pkbMainPtr).setParentChildRel(0, _currentStmtNumber);
