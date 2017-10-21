@@ -184,23 +184,23 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TestCallsTable.cpp" />
-    <ClCompile Include="TestConstantList.cpp" />
-    <ClCompile Include="TestDesignExtractor.cpp" />
+    <ClCompile Include="PKB\TestCallsTable.cpp" />
+    <ClCompile Include="PKB\TestConstantList.cpp" />
+    <ClCompile Include="PKB\TestDesignExtractor.cpp" />
     <ClCompile Include="PQL\TestQueryTree.cpp" />
-    <ClCompile Include="TestFollowsTable.cpp" />
-    <ClCompile Include="TestModTableStmtToVar.cpp" />
-    <ClCompile Include="TestParentToChildTable.cpp" />
+    <ClCompile Include="PKB\TestFollowsTable.cpp" />
+    <ClCompile Include="PKB\TestModTableStmtToVar.cpp" />
+    <ClCompile Include="PKB\TestParentToChildTable.cpp" />
     <ClCompile Include="Parser\TestParserBasic.cpp" />
-    <ClCompile Include="TestParserPKB.cpp" />
-    <ClCompile Include="TestPatternTable.cpp" />
-    <ClCompile Include="TestPKBMain.cpp" />
+    <ClCompile Include="PKB\TestParserPKB.cpp" />
+    <ClCompile Include="PKB\TestPatternTable.cpp" />
+    <ClCompile Include="PKB\TestPKBMain.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexCalls.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexNext.cpp" />
     <ClCompile Include="PQL\ResultFormatter\TestResultFormatter.cpp" />
-    <ClCompile Include="TestStmtTypeList.cpp" />
-    <ClCompile Include="TestUsesTableStmtToVar.cpp" />
-    <ClCompile Include="TestVarIdxTable.cpp" />
+    <ClCompile Include="PKB\TestStmtTypeList.cpp" />
+    <ClCompile Include="PKB\TestUsesTableStmtToVar.cpp" />
+    <ClCompile Include="PKB\TestVarIdxTable.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

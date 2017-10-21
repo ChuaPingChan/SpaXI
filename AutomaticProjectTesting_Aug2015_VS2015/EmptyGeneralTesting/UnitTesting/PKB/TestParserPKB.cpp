@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <regex>
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "CppUnitTest.h"
 #include "../SPA/Parser/Parser.h"
 #include "../SPA/Parser/ParserChildForTest.h"
