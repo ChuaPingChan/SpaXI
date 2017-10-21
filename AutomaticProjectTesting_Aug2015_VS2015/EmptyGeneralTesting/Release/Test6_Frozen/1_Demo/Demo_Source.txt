@@ -1,0 +1,33 @@
+procedure one{
+   x=1+z*(y+6);
+   if x then{
+      z=x*x-y;
+	  while z{
+	     x = y + 6;
+		 y =1 + z;
+	  }
+   }
+   else{
+       z=x*(y + 6)*z;
+   }
+   call two;
+}
+procedure two{
+    y = 8*z-x;
+	while y{
+	    x=x*8-z*3;
+	    y=x*(x-y)*z;
+		if x then{
+		    x=x-2;
+			y=y*(z-10);
+		}
+		else{
+		    z=z*(x+y)+3;
+			call three;
+		}
+	}
+    call three;
+}
+procedure three{
+    i = 5;
+}

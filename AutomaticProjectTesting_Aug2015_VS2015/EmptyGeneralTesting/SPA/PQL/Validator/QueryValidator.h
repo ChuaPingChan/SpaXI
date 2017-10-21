@@ -13,6 +13,8 @@ using namespace std;
 
 class QueryValidator
 {
+    friend class FriendQueryValidator;
+
 public:
     QueryValidator(QueryTree *qtPtrNew);
     ~QueryValidator();
@@ -23,6 +25,9 @@ private:
     QueryTree *qtPtr;
     DeclarationValidator dv = DeclarationValidator(qtPtr);  //Null when initialised
     SelectionValidator sv = SelectionValidator(qtPtr);      //Null when initialised
+
+    bool isValidDeclarationFlag = true;
+    bool isValidSelectionFlag = true;
 
     bool isValidDeclaration(string str);
     bool isValidSelection(string str);

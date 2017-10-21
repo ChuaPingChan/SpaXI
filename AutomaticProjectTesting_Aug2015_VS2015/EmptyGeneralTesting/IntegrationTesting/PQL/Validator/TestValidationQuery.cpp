@@ -1,7 +1,7 @@
 #include "CppUnitTest.h"
 #include "string.h"
 #include "..\SPA\Entity.h"
-#include "..\SPA\PQL\Validator\QueryValidator.h"
+#include "..\PQLFriend\FriendQueryValidator.h"
 #include "..\SPA\PQL\QueryTree.h"
 #include "..\Utility\UtilitySelection.h"
 
@@ -23,8 +23,38 @@ namespace UnitTesting
             query.append("Select BOOLEAN");
             QueryTree qt;
             qt.insertSynonym(STMT, "s");
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectBoolean_InvalidDeclaration_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("statement s;");
+            query.append("Select BOOLEAN");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsFalse(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectBoolean_ExtraSemiColon_InvalidDeclaration_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("stmt s;;;;;;;;");
+            query.append("Select BOOLEAN");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsFalse(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
@@ -43,23 +73,41 @@ namespace UnitTesting
 			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
 		}*/
 
-        TEST_METHOD(TestValidity_Query_SelectBoolean_InvalidDeclaration_ExpectFalse_Invalid)
+        TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_Valid)
         {
             string query;
-            query.append("statement s;");
             query.append("Select BOOLEAN");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
-        TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_Expect_True_Valid)
+        TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_RubbishInFrontOfSelectBoolean_Invalid)
         {
             string query;
-            query.append("Select BOOLEAN");
+            query.append("Rubbish Select BOOLEAN");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_InvalidClauses_Invalid)
+        {
+            string query;
+            query.append("Select BOOLEAN such that Bag(1, 2)");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
@@ -71,8 +119,10 @@ namespace UnitTesting
             query.append("call AllGods;");
             query.append("Select BOOLEAN such that Parent*(RayYan, AllGods)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(PARENTSTAR, IF, "RayYan", CALL, "AllGods");
@@ -91,8 +141,10 @@ namespace UnitTesting
             query.append("Select s");
             QueryTree qt;
             qt.insertSynonym(STMT, "s");
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
@@ -103,8 +155,10 @@ namespace UnitTesting
             query.append("stmt Select;");
             query.append("Select Select");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "Select");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
@@ -115,8 +169,10 @@ namespace UnitTesting
             query.append("assign Modifies;");
             query.append("Select Modifies");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "Modifies");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
@@ -127,8 +183,10 @@ namespace UnitTesting
             query.append("assign assign;");
             query.append("Select assign");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "assign");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
@@ -144,8 +202,10 @@ namespace UnitTesting
             query.append("assign a;");
             query.append("Select <a> ");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             vector<Entity> entityList = { ASSIGN };
             vector<string> synonymList = { "a" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
@@ -158,8 +218,10 @@ namespace UnitTesting
             query.append("assign a1, a2;");
             query.append("Select <a1,a2> ");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             vector<Entity> entityList = { ASSIGN, ASSIGN };
             vector<string> synonymList = { "a1", "a2" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
@@ -172,8 +234,10 @@ namespace UnitTesting
             query.append("assign a; stmt s;");
             query.append("Select <a, s> ");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             vector<Entity> entityList = { ASSIGN, STMT };
             vector<string> synonymList = { "a", "s" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
@@ -186,8 +250,10 @@ namespace UnitTesting
             query.append("assign a; stmt s; if i; while w; constant c;");
             query.append("Select <a, s, i, w, c>");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CONSTANT };
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
@@ -200,8 +266,10 @@ namespace UnitTesting
             query.append("assign a; stmt s; if i; while w; constant c;");
             query.append("Select <a,      s,       i,     w,        c> ");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CONSTANT };
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
@@ -214,8 +282,10 @@ namespace UnitTesting
             query.append("assign a;");
             query.append("Select <a,> ");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
             vector<Entity> entityList = { ASSIGN };
             vector<string> synonymList = { "a" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
@@ -228,8 +298,10 @@ namespace UnitTesting
             query.append("assign a; stmt s;");
             query.append("Select <a, s invalid character> ");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
             vector<Entity> entityList = { ASSIGN, STMT};
             vector<string> synonymList = { "a", "s" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
@@ -248,8 +320,10 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select s such that Modifies(s, v)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(MODIFIES, STMT, "s", VARIABLE, "v");
@@ -264,8 +338,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("   Select    a    such that    Follows*      (   a   ,   w   )  ");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, ASSIGN, "a", WHILE, "w");
@@ -280,8 +356,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select s2 such that Follows(s1, s2) and Parent(w, s2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedList;
@@ -297,8 +375,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select s2 such that Follows(s1, s2)and Parent(w, s2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedList;
@@ -315,8 +395,10 @@ namespace UnitTesting
             query.append("variable v, v2;");
             query.append("Select w such that Follows*(s1, s2) such that Parent*(w, s2) and Modifies(s1, v) such that Uses(w, v2) and Follows(s1, s3)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, WHILE, "w");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedList;
@@ -336,8 +418,10 @@ namespace UnitTesting
             query.append("variable Ash;");
             query.append("Select Charizard such that Modifies(Charizard, Ash)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "Charizard");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(MODIFIES, PROCEDURE, "Charizard", VARIABLE, "Ash");
@@ -351,8 +435,10 @@ namespace UnitTesting
             query.append("variable Masterball;");
             query.append("Select Masterball such that Modifies(\"MewTwo\", Masterball)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, VARIABLE, "Masterball");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(MODIFIES, IDENT_WITHQUOTES, "MewTwo", VARIABLE, "Masterball");
@@ -366,8 +452,10 @@ namespace UnitTesting
             query.append("procedure Pokemon;");
             query.append("Select Pokemon such that Uses(\"Azelf\", \"Psychic\")");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "Pokemon");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(USES, IDENT_WITHQUOTES, "Azelf", IDENT_WITHQUOTES, "Psychic");
@@ -382,8 +470,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select a such that Follows*(a, w)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(FOLLOWSSTAR, ASSIGN, "a", WHILE, "w");
@@ -398,8 +488,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select s2 such that Follows*(s1, s2) such that Parent*(w, s2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedList;
@@ -416,8 +508,10 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select p such that Calls(p, q) and Modifies(p, v)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedList;
@@ -439,8 +533,10 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select a pattern a(v, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             PatternClause expectedPc = UtilitySelection::makePatternClause(ASSIGN_PATTERN, "a", VARIABLE, "v", UNDERSCORE, "_");
@@ -455,8 +551,12 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select a pattern a(v, \"1 2 + 3 + x\")");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_MultiPattern_Type_BeforeAndAfter_AndKeyword_Valid)
@@ -466,8 +566,10 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select a2 pattern a1(v, _) and a2(_,_)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
@@ -483,8 +585,10 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select a2 pattern a1(v, _)and a2(_,_)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
@@ -500,8 +604,10 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select a2 pattern a1(v, _) and a2(_,_) pattern a1 (v, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
@@ -521,8 +627,10 @@ namespace UnitTesting
             query.append("if f;");
             query.append("Select a pattern a(v, _) and w(_,_) and f(v, _ , _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
@@ -541,8 +649,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select a pattern a(v, _) and w(_,_)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<PatternClause> expectedList;
@@ -559,8 +669,10 @@ namespace UnitTesting
             query.append("if f;");
             query.append("Select cl pattern f (v, _, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "cl");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
@@ -578,8 +690,10 @@ namespace UnitTesting
             query.append("procedure p;");
             query.append("Select p with p.procName = \"Pikachu\"");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
             WithClause expectedWith = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", IDENT_WITHQUOTES, "Pikachu");
@@ -595,8 +709,10 @@ namespace UnitTesting
             query.append("constant c;");
             query.append("Select p with p.procName = \"Pikachu\" and c.value = s.stmt#");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
             vector<WithClause> expectedListWc;
@@ -613,8 +729,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select p with p.procName = \"Pikachu\" with w.stmt# = f.stmt#");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
             vector<WithClause> expectedListWc;
@@ -635,8 +753,10 @@ namespace UnitTesting
             query.append("variable v;");
             query.append("Select s2 such that Parent(s1, s2) pattern a1(v, _) and a2(_,_) such that Follows(s2, s1) and Modifies(s1, \"x\") pattern a1 (v, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
@@ -660,8 +780,10 @@ namespace UnitTesting
             query.append("variable v1, v2;");
             query.append("Select s2 such that Parent(s1, s2) pattern a1(v2, _) and w1(\"y\",_) such that Follows(s2, s1) and Modifies(s1, \"x\") pattern w2 (v1, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s2");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
@@ -685,8 +807,10 @@ namespace UnitTesting
             query.append("assign a1, a2;");
             query.append("Select cl pattern a1(v, _) such that Follows*(s1, s2) and Parent*(s2, s3) such that Modifies(1, v) pattern a2(_, _) pattern a2(v, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "cl");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
@@ -712,8 +836,10 @@ namespace UnitTesting
             query.append("stmt s1, s2, s3;");
             query.append("Select cl such that Follows*(s1, s2) with cl.stmt# = s3.stmt# such that Parent(s1, s3)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "cl");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
@@ -733,8 +859,10 @@ namespace UnitTesting
             query.append("procedure p;");
             query.append("Select p with p.procName = v.varName such that Modifies(p, v) with v.varName = \"Pokeball\"");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expectedSelect = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROCEDURE, "p");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expectedSelect, qt.getSelectClause()));
             vector<SuchThatClause> expectedListStc;
@@ -763,8 +891,10 @@ namespace UnitTesting
             query.append("assign a; stmt s; if i; while w; constant c;");
             query.append("Select <a,s,i,w,c> such that Follows(w,i)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
             vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CONSTANT };
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
@@ -783,8 +913,10 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select a");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SuchThatKeyword_ImmediatelyAfter_Select_Invalid)
@@ -793,8 +925,10 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select such that Follows(1, 2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_patternKeyword_ImmediatelyAfter_Select_Invalid)
@@ -803,8 +937,10 @@ namespace UnitTesting
             query.append("assign a;");
             query.append("Select pattern  a(_, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_withKeyword_ImmediatelyAfter_Select_Invalid)
@@ -813,8 +949,10 @@ namespace UnitTesting
             query.append("constant c;");
             query.append("Select with c.value=1");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_Selection_Before_Declaration_Invalid)
@@ -823,8 +961,10 @@ namespace UnitTesting
             query.append("Select s such that Modifies(s, v);");
             query.append("stmt s;");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsFalse(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_Stmt_SingleSuchThat_Modifies_SecondArgInt_Invalid)
@@ -833,8 +973,10 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select s such that Modifies(s, 12)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_FollowsStar_Whitespace_StarNotConnectedToKeyword_Invalid)
@@ -844,8 +986,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select a such that Follows    *      (a,w)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SuchThat_WhitespaceWithinKeyword_Invalid)
@@ -855,8 +999,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select a such            that Follows(a,w)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SuchThat_Keyword_And_Missing_Invalid)
@@ -866,8 +1012,10 @@ namespace UnitTesting
             query.append("while w;");
             query.append("Select s2 such that Follows(s1, s2) Parent(w, s2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SuchThat_Follows_Int_Int_SecondArg_GreaterThan_FirstArg_Invalid)
@@ -876,8 +1024,10 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select s such that Follows(15, 2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SuchThat_Parent_Int_Int_SecondArg_GreaterThan_FirstArg_Invalid)
@@ -886,8 +1036,10 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select s such that Parent(15, 2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SuchThat_KeywordsBackToBack_Invalid)
@@ -896,8 +1048,10 @@ namespace UnitTesting
             query.append("stmt s;");
             query.append("Select s such thatParent(1, 2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SuchThat_Relation_And_Pattern_Type_And_SuchThat_Relation_Invalid)
@@ -909,8 +1063,10 @@ namespace UnitTesting
             query.append("assign a1, a2;");
             query.append("Select s such that Modifies(1, v) and pattern a1(_, _) and such that Parent(w, a2)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SuchThat_Modifies_And_Assign_Invalid)
@@ -921,8 +1077,10 @@ namespace UnitTesting
             query.append("assign a;");
             query.append("Select s such that Modifies(1, v) and a(_, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_Pattern_Assign_And_Modifies_Invalid)
@@ -933,8 +1091,10 @@ namespace UnitTesting
             query.append("assign a;");
             query.append("Select s pattern a(_, _) and Modifies(1, v)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
 
         TEST_METHOD(TestValidity_Query_SuchThat_Assign_Invalid)
@@ -945,8 +1105,10 @@ namespace UnitTesting
             query.append("assign a;");
             query.append("Select s such that a(v, _)");
             QueryTree qt;
-            QueryValidator validator = QueryValidator(&qt);
-            Assert::IsFalse(validator.isValidQuery(query));
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
     };
 }

@@ -1,0 +1,49 @@
+procedure Daisy {
+	a = 10;
+	c = a + 4;
+	i = 14 + a;
+	t = c * a + 5;
+	x = c + t * 12;
+	call Tulip;
+	x = x + a + c;
+	call Violet;
+	b = x + a * c;
+	while i {
+		b = c - t;
+		if a then {
+			t = t + a;
+			i = t + 1;
+		} else {
+			c = t + a;
+			call Violet;
+			i = i - 17;
+		}
+		c = t + a;
+	}
+	call Iris;
+}
+
+procedure Iris {
+	while i {
+		a = t * 3 + 2 * c;
+		call Tulip;
+	}
+	t = t + a + i;
+}
+
+procedure Violet {
+	while x {
+		a = c + a;
+	}
+	c = a + c;
+}
+
+procedure Tulip {
+	while b {
+		if i then {
+			c = a + 80;
+		} else {
+			a = a * c + t + b * x;
+		}
+	}
+}

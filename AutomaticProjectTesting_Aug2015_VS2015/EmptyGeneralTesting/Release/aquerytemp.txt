@@ -1,7 +1,7 @@
 1 - temp
-assign pattern;
-Select pattern pattern pattern(_, "x")
-36,37
+procedure p;
+Select p such that Calls(p, _) and Calls*(p,_)
+none
 5000
 2 - temp
 assign a;

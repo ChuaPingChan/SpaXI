@@ -1,0 +1,35 @@
+procedure Tonic {
+	while J {								
+		I  = I + 1;							
+		a = 1;								
+	}
+
+	while w {								
+		a = 1;								
+		while x {							
+			b = 1;							
+			while y {						
+				c = 1;						
+				while z {					
+					d = 1;					
+				}
+			}
+		}
+	}
+
+	while a {								
+		a = 1;								
+	}
+	while b {								
+		b = 1;								
+	}
+	while c {								
+		c = 1;								
+	}
+	while d {								
+		d = 1;								
+	}
+	while e {								
+		e = 1;								
+	}
+}

@@ -1,0 +1,334 @@
+Parameters : 17_Simple03\Simple03-Source.txt 17_Simple03\Simple03-Queries.txt ZoutputZ\outSimple03.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Test6_Frozen
+Beginning to evaluate Query File.
+1 - Test if SPA tool returns all if statements
+if ifstat;
+Select ifstat
+2, 7, 16
+5000
+Evaluating query 1 - Test if SPA tool returns all if statements
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 2 7 16 
+Correct answer: 2 7 16 
+1 - Test if SPA tool returns all while statements
+while w;
+Select w
+4, 20
+5000
+Evaluating query 1 - Test if SPA tool returns all while statements
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: 4 20 
+Correct answer: 4 20 
+2 - Parent 
+assign a;
+Select a such that Parent(a, 9)
+none
+5000
+Evaluating query 2 - Parent 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+3 - Parent
+variable v;
+Select v such that Parent(2, 10)
+none
+5000
+Evaluating query 3 - Parent
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+4 - Parent
+variable v;
+Select v such that Parent(2, 3)
+x, y, z, d, i, q
+5000
+Evaluating query 4 - Parent
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y z d i q 
+Correct answer: x y z d i q 
+5 - Parent*
+prog_line n;
+Select n such that Parent*(2, n)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+5000
+Evaluating query 5 - Parent*
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parentstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 4 5 6 7 8 9 10 11 12 
+Correct answer: 3 4 5 6 7 8 9 10 11 12 
+6 - Parent*
+stmt s;
+Select s such that Parent*(s, 12)
+2
+5000
+Evaluating query 6 - Parent*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 
+Correct answer: 2 
+7 - Parent*
+procedure p;
+Select p such that Parent*(16, 19)
+none
+5000
+Evaluating query 7 - Parent*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+8 - Return all Follows
+variable v;
+Select v such that Follows(4, 11)
+x, y, z, d, i, q
+5000
+Evaluating query 8 - Return all Follows
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y z d i q 
+Correct answer: x y z d i q 
+9 - Follows
+procedure p;
+Select p such that Follows(2, 3)
+none
+5000
+Evaluating query 9 - Follows
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+10 - Follows
+stmt s;
+Select s such that Follows(s, 4)
+3
+5000
+Evaluating query 10 - Follows
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+11 - Return all Follows*
+assign a;
+Select a such that Follows*(a, 13)
+1
+5000
+Evaluating query 11 - Return all Follows*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+12 - Follows*
+procedure p;
+Select p such that Follows*(14, 15)
+none
+5000
+Evaluating query 12 - Follows*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+13 - Follows*
+stmt s;
+Select s such that Follows*(21, s)
+none
+5000
+Evaluating query 13 - Follows*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+14 - Modifies
+stmt s;
+Select s such that Modifies(8, "q")
+none
+5000
+Evaluating query 14 - Modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+15 - Modifies
+assign a;
+Select a such that Modifies(1, "x")
+1, 3, 5, 6, 8, 9, 10, 11, 12, 13, 15, 19, 21
+5000
+Evaluating query 15 - Modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 3 5 6 8 9 10 11 12 13 15 19 21 
+Correct answer: 1 3 5 6 8 9 10 11 12 13 15 19 21 
+16 - Modifies
+stmt s;
+Select s such that Modifies(s, "q")
+14, 16, 17, 18, 19, 20, 21
+5000
+Evaluating query 16 - Modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 14 16 17 18 19 20 21 
+Correct answer: 14 16 17 18 19 20 21 
+17 - Uses
+variable v;
+Select v such that Uses(2, "x")
+x, y, z, d, i, q
+5000
+Evaluating query 17 - Uses
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y z d i q 
+Correct answer: x y z d i q 
+18 - Uses
+stmt s;
+Select s such that Uses(s, "x")
+2, 4, 5, 16, 17
+5000
+Evaluating query 18 - Uses
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 4 5 16 17 
+Correct answer: 2 4 5 16 17 
+19 - Uses
+prog_line n;
+Select n such that Uses(7, "d")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+5000
+Evaluating query 19 - Uses
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 
+20 - pattern and modifies
+stmt s; assign a;
+Select s pattern a("y", _) such that Modifies(s, "y")
+3, 8, 9, 10, 2, 4, 7, 16, 17
+5000
+Evaluating query 20 - pattern and modifies
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 2 3 4 7 8 9 10 16 17 
+Correct answer: 3 8 9 10 2 4 7 16 17 
+21 - pattern and modifies
+variable v; assign a;
+Select v pattern a(_, _"y"_) such that Modifies(a, v)
+y, z
+5000
+Evaluating query 21 - pattern and modifies
+_, is an Unnamedvar 
+_"y"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Pattern="1" SuchThat="1" CondNum="6" RelNum="1" 
+Your answer: y z 
+Correct answer: y z 
+22 - Uses and pattern
+assign a, a1; variable v;
+Select a such that Uses(a, "x") pattern a1(_, "y")
+none
+5000
+Evaluating query 22 - Uses and pattern
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+23 - Uses and pattern
+assign a;
+Select a such that Uses(a, "y") pattern a("y" , _)
+8, 9, 10
+5000
+Evaluating query 23 - Uses and pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 8 9 10 
+Correct answer: 8 9 10 
+24 - Uses pattern
+assign a; variable v;
+Select a such that Uses(a, "x") pattern a(v,_)
+5
+5000
+Evaluating query 24 - Uses pattern
+v,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 5 
+Correct answer: 5 
+25 - Uses pattern
+assign a; variable v;
+Select a such that Uses(a, v) pattern a(v, _)
+8, 9, 10, 21
+5000
+Evaluating query 25 - Uses pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 8 9 10 21 
+Correct answer: 8 9 10 21 
+26 - Uses pattern
+assign a, a1; variable v;
+Select a such that Uses(a, v) pattern a1(v, _)
+5, 6, 8, 9, 10, 12, 13, 21
+5000
+Evaluating query 26 - Uses pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 5 6 8 9 10 12 13 21 
+Missing: 10 12 13 21 5 6 8 9 
+Additional: 
+27 - Parent pattern
+stmt s; assign a;
+Select s such that Parent(s, 5) pattern a(_, _"y"_)
+4
+5000
+Evaluating query 27 - Parent pattern
+_, is an Unnamedvar 
+_"y"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="2" Pattern="1" SuchThat="1" CondNum="6" RelNum="1" 
+Your answer: 4 
+Correct answer: 4 
+28 - follows pattern
+assign a, a1;
+Select a pattern a1("x", _) such that Follows(a, a1)
+none
+5000
+Evaluating query 28 - follows pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+30 - follows pattern
+assign a, a1;
+Select a pattern a1("d", _) such that Follows(a, a1)
+5
+5000
+Evaluating query 30 - follows pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 5 
+Correct answer: 5 
+31 - multiple common
+assign a; variable v;
+Select a pattern a(v, _) such that Uses(a, v)
+8, 9, 10, 21
+5000
+Evaluating query 31 - multiple common
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 8 9 10 21 
+Correct answer: 8 9 10 21 
+End of evaluating Query File.
+AutoTester Completed !

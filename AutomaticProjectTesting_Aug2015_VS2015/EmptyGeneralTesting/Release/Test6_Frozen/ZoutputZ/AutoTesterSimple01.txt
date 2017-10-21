@@ -1,0 +1,417 @@
+Parameters : 15_Simple01\Simple01-Source.txt 15_Simple01\Simple01-Queries.txt ZoutputZ\outSimple01.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Test6_Frozen
+Beginning to evaluate Query File.
+1 - Test if all variables can be returned
+variable v;
+Select v
+x, y, z, d, i, j
+5000
+Evaluating query 1 - Test if all variables can be returned
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: x y d z j i 
+Correct answer: x y z d i j 
+2 - Test if all procedures can be returned
+procedure p;
+Select p 
+Index, Example
+5000
+Evaluating query 2 - Test if all procedures can be returned
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
+Your answer: Index Example 
+Correct answer: Index Example 
+3 - Test if first stmt of program is a follower
+stmt s;
+Select s such that Follows(s, 1)
+none
+5000
+Evaluating query 3 - Test if first stmt of program is a follower
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+4 - Test if first stmt of program is a follower
+stmt s;
+Select s such that Follows*(s, 1)
+none
+5000
+Evaluating query 4 - Test if first stmt of program is a follower
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+5 - Test definition of Follows
+stmt s;
+Select s such that Follows(s, 4)
+3
+5000
+Evaluating query 5 - Test definition of Follows
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 
+Correct answer: 3 
+6 - Test definition of Follows*
+stmt s;
+Select s such that Follows*(s, 4)
+1, 2, 3
+5000
+Evaluating query 6 - Test definition of Follows*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 
+Correct answer: 1 2 3 
+7 - Test if first stmt of a procedure follows last stmt of the previous procedure
+stmt s;
+Select s such that Follows(s, 7)
+none
+5000
+Evaluating query 7 - Test if first stmt of a procedure follows last stmt of the previous procedure
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+8 - Test if first stmt of a procedure follows last stmt of the previous procedure
+stmt s;
+Select s such that Follows*(s, 7)
+none
+5000
+Evaluating query 8 - Test if first stmt of a procedure follows last stmt of the previous procedure
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+9 - Test basic definition of Modifies
+assign a;
+Select a such that Modifies(a, "x")
+1, 5, 7
+5000
+Evaluating query 9 - Test basic definition of Modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 5 7 
+Correct answer: 1 5 7 
+10 - Test for non-existent modified variable
+assign a; 
+Select a such that Modifies(a, "q")
+none
+5000
+Evaluating query 10 - Test for non-existent modified variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+11 - Test for modified variable
+assign a
+Select a such that Modifies(15, "d")
+none
+5000
+Evaluating query 11 - Test for modified variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+12 - Test if a procedure has modified variables
+procedure p;
+Select p such that Modifies(p, "x")
+Index, Example
+5000
+Evaluating query 12 - Test if a procedure has modified variables
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: Index Example 
+Correct answer: Index Example 
+13 - Test for stmtRef definition using Modifies
+variable v;
+Select v such that Modifies("Index", v)
+d, x, y, z
+5000
+Evaluating query 13 - Test for stmtRef definition using Modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y d z 
+Correct answer: d x y z 
+14 - Test for modified variables in a call stmt
+variable v;
+Select v such that Modifies(9, v)
+x, y, z, d
+5000
+Evaluating query 14 - Test for modified variables in a call stmt
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y d z 
+Correct answer: x y z d 
+15 - Test for pattern in LHS assignment
+prog_line n; assign a;
+Select n pattern a(_, "2")
+1,2,3,4,5,6,7,8,9,10,11
+5000
+Evaluating query 15 - Test for pattern in LHS assignment
+prog_line is an Unnamedvar 
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 
+16 - Test for pattern in RHS assignment
+assign a;
+Select a pattern a("x", _)
+1, 5, 7
+5000
+Evaluating query 16 - Test for pattern in RHS assignment
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: 1 5 7 
+Correct answer: 1 5 7 
+17 - Test for pattern in long RHS assignments
+assign a;
+Select a pattern a(_, _"d"_)
+4, 6, 11
+5000
+Evaluating query 17 - Test for pattern in long RHS assignments
+_, is an Unnamedvar 
+_"d"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: 4 6 11 
+Correct answer: 4 6 11 
+18 - Test for definition of Parent
+stmt s;
+Select s such that Parent(1, s)
+none
+5000
+Evaluating query 18 - Test for definition of Parent
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+19 - Meaningless Testing for Parent
+procedure p; 
+Select p such that Parent(p, 10)
+none
+5000
+Evaluating query 19 - Meaningless Testing for Parent
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+20 - Meaningless Testing for Parent
+prog_line n; stmt s;
+Select s such that Parent(3, n)
+none
+5000
+Evaluating query 20 - Meaningless Testing for Parent
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+21 - Test for definition of Parent*
+stmt s;
+Select s such that Parent*(s, 2)
+none
+5000
+Evaluating query 21 - Test for definition of Parent*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+22 - Meaningless Testing for Parent*
+assign a;
+Select a such that Parent*(1, 2)
+none
+5000
+Evaluating query 22 - Meaningless Testing for Parent*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+23 - Meaningless Testing for Parent*
+variable v;
+Select v such that Parent*(6, 7)
+none
+5000
+Evaluating query 23 - Meaningless Testing for Parent*
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+24 - Test for definition Uses
+assign a;
+Select a such that Uses(a, "x")
+3, 4, 10
+5000
+Evaluating query 24 - Test for definition Uses
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 4 10 
+Correct answer: 3 4 10 
+25 - Test for Invalid Uses
+variable v;
+Select v such that Uses(x, v)
+none
+5000
+Evaluating query 25 - Test for Invalid Uses
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+26 - Test for Uses
+assign a;
+Select a such that Uses(a, "d")
+4, 6, 11
+5000
+Evaluating query 26 - Test for Uses
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 4 6 11 
+Correct answer: 4 6 11 
+27 - Test for Follows and Pattern
+assign a;
+Select a such that Follows(a, 3) pattern a(_, "3")
+2
+5000
+Evaluating query 27 - Test for Follows and Pattern
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 2 
+Correct answer: 2 
+28 - Test for Follows and Pattern
+assign a;
+Select a such that Follows(a, 8) pattern a("x",_)
+7
+5000
+Evaluating query 28 - Test for Follows and Pattern
+"x",_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 7 
+Correct answer: 7 
+29 - Test for Follows and Pattern
+variable v; assign a;
+Select v such that Follows(3, 4) pattern a(_,"x+y*13")
+d,i,j,x,y,z
+5000
+Evaluating query 29 - Test for Follows and Pattern
+_,"x+y*13" is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: x y d z j i 
+Correct answer: d i j x y z 
+30 - Test for Uses and pattern
+assign a; variable v;
+Select a such that Uses(a, "x") pattern a(v, _)
+3, 4, 10
+5000
+Evaluating query 30 - Test for Uses and pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 3 4 10 
+Correct answer: 3 4 10 
+31 - Test for Uses and pattern
+assign a, a1, a2;
+Select a such that Uses(a2, "y") pattern a1("d", _)
+1,2,3,4,5,6,7,8,10,11
+5000
+Evaluating query 31 - Test for Uses and pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 10 11 
+Correct answer: 1 2 3 4 5 6 7 8 10 11 
+32 - Test for Uses and pattern
+assign a, a1; 
+Select a such that Uses(a, "x") pattern a1("x", _)
+3,4,10
+5000
+Evaluating query 32 - Test for Uses and pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 3 4 10 
+Correct answer: 3 4 10 
+33 - Test for Uses and pattern
+variable v; assign a;
+Select v such that Uses(11, "j") pattern a(v, _ )
+j,d,i,x,y,z
+5000
+Evaluating query 33 - Test for Uses and pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: x y d z j i 
+Correct answer: j d i x y z 
+34 - Test for Modifies and pattern
+procedure p; assign a;
+Select p such that Modifies(p, "x") pattern a(_, "2")
+Index,Example
+5000
+Evaluating query 34 - Test for Modifies and pattern
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: Index Example 
+Correct answer: Index Example 
+35 - Test for Modifies and pattern
+assign a; stmt s;
+Select a such that Modifies(s, "x") pattern a("x", _)
+1, 5, 7
+5000
+Evaluating query 35 - Test for Modifies and pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 5 7 
+Correct answer: 1 5 7 
+36 - Test for Modifies and pattern
+assign a, a1;
+Select a pattern a1("x", _) such that Modifies(a, "x")
+1, 5, 7
+5000
+Evaluating query 36 - Test for Modifies and pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 5 7 
+Correct answer: 1 5 7 
+37 - Test for Modifies and pattern
+assign a, a1;
+Select a such that Modifies(a1, "x") pattern a("x", _)
+1,5,7
+5000
+Evaluating query 37 - Test for Modifies and pattern
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 5 7 
+Correct answer: 1 5 7 
+38 - Test for Parent and pattern
+stmt s; assign a;
+Select s pattern a(_, _"d"_) such that Parent(s, 6)
+none
+5000
+Evaluating query 38 - Test for Parent and pattern
+_, is an Unnamedvar 
+_"d"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="2" Pattern="1" SuchThat="1" CondNum="6" RelNum="1" 
+Your answer: 
+Correct answer: 
+39 - Test for Pattern
+variable v; assign a;
+Select a pattern a(_,"x+y")
+none
+5000
+Evaluating query 39 - Test for Pattern
+_,"x+y" is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

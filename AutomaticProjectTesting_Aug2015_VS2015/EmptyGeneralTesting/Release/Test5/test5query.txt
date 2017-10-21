@@ -1,0 +1,5 @@
+1 - None
+assign a,a1; variable v;
+Select v such that Modifies (a, v) pattern a1 (v, _)
+none
+5000

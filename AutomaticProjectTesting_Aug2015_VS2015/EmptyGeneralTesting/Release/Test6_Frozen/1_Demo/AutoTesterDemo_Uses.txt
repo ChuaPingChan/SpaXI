@@ -1,0 +1,144 @@
+Parameters : 1_Demo\Demo_Source.txt 1_Demo\Demo_Uses.txt 1_Demo\outDemo_Uses.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Test6_Frozen
+Beginning to evaluate Query File.
+1 - Uses retrieve all statements that modifies
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Uses(s, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+5000
+Evaluating query 1 - Uses retrieve all statements that modifies
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
+Missing: 
+Additional: 17 18 
+2 - Uses retrieve all procedures that modifies
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Uses(p, _)
+one,two
+5000
+Evaluating query 2 - Uses retrieve all procedures that modifies
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: one two three 
+Correct answer: one two 
+Missing: 
+Additional: three 
+3 - Uses retrieve single statement
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select s such that Uses(s, _) with s.stmt# = 1
+1
+5000
+Evaluating query 3 - Uses retrieve single statement
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+4 - Uses retrieve single procedure that modify
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Uses(p, _) with p.procName = "three"
+false
+5000
+Evaluating query 4 - Uses retrieve single procedure that modify
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="2" Uses="1" SuchThat="1" With="1" CondNum="6" RelNum="1" 
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+3.2 - Uses retrieve single statement
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Uses(1, v)
+y,z
+5000
+Evaluating query 3.2 - Uses retrieve single statement
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: z y 
+Correct answer: y z 
+4.2 - Uses retrieve single procedure that modify
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select p such that Uses("three", _)
+none
+5000
+Evaluating query 4.2 - Uses retrieve single procedure that modify
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: one two three 
+Correct answer: 
+Missing: 
+Additional: one three two 
+5 - Uses incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select BOOLEAN such that Uses(v, _) 
+none
+5000
+Evaluating query 5 - Uses incorrect argument
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: false 
+Correct answer: 
+Missing: 
+Additional: false 
+6 - Uses incorrect argument
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select c such that Uses(_, _)
+none
+5000
+Evaluating query 6 - Uses incorrect argument
+prog_line is an Unnamedvar 
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="3" Uses="1" SuchThat="1" CondNum="6" RelNum="1" 
+Your answer: 
+Correct answer: 
+7 - Uses boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Uses(0, v)
+none
+5000
+Evaluating query 7 - Uses boundary case
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+8 - Uses boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Uses(20, v)
+none
+5000
+Evaluating query 8 - Uses boundary case
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+9 - Uses boundary case
+stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
+Select v such that Uses("yolo", v)
+none
+5000
+Evaluating query 9 - Uses boundary case
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

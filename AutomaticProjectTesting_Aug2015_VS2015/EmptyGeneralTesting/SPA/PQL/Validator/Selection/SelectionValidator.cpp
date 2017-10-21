@@ -8,10 +8,7 @@ SelectionValidator::~SelectionValidator() {}
 
 bool SelectionValidator::isValidSelection(string str)
 {
-    if (!RegexValidators::isValidSelectOverallRegex(str))
-        return false;
-
-    return isValidSelect(str) && areValidClauses(str);
+    return isValidSelect(str) && RegexValidators::isValidSelectOverallRegex(str) && areValidClauses(str);
 }
 
 bool SelectionValidator::setQueryTree(QueryTree *qtPtrNew)

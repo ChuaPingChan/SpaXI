@@ -10,6 +10,13 @@ UtilityQueryTree::~UtilityQueryTree()
 {
 }
 
+bool UtilityQueryTree::isSameSelectionType(SelectionType expectedType, QueryTree qt)
+{
+    SelectClause sc = qt.getSelectClause();
+    SelectionType actualType = sc.getSelectionType();
+    return expectedType == actualType;
+}
+
 bool UtilityQueryTree::isSameContentAllStmts(unordered_set<string> expectedList, QueryTree qt)
 {
     unordered_set<string> stmtVectorFromQt = qt.getStmts();

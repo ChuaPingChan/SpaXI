@@ -1,0 +1,30 @@
+procedure zero {
+	call un;
+}
+
+
+procedure un {
+	call deux;
+}
+
+
+procedure deux {
+	call trois;
+}
+
+
+
+procedure trois {
+	call quatre;
+}
+
+
+procedure quatre {
+	call cinq;
+}
+
+
+
+procedure cinq {
+	a = 1;
+}
