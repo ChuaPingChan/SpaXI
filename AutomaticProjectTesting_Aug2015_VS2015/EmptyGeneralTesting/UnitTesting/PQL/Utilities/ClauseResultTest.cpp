@@ -473,6 +473,17 @@ namespace UnitTesting
             expectedResults.sort();
             Assert::IsTrue(actualResults == expectedResults);
 
+            // Get repeated synonym results
+            synNames = list<string>{ syn2, syn2 };
+            actualResults = cr.getSynonymResults(synNames);
+            expectedResults = list<list<int>>{
+                { 5, 5 },
+                { 6, 6 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
             // Get only single synonym result
             synNames = list<string>{ syn1 };
             actualResults = cr.getSynonymResults(synNames);
