@@ -107,32 +107,33 @@ list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause se
 {
     list<string> result;
     list<string> synonyms;
-    synonyms.assign(selectedClause.getTupleArgs().begin(), selectedClause.getTupleArgs().end());
-    list<list<int>> l = cr.getSynonymResults(synonyms);
-    vector<list<int>> synonymResults{ std::make_move_iterator(std::begin(l)),std::make_move_iterator(std::end(l)) };
+    vector<string> synonymsFromSelectedClause = selectedClause.getTupleArgs();
+    synonyms.assign(synonymsFromSelectedClause.begin(), synonymsFromSelectedClause.end());
+
+    list<list<int>> tempList = cr.getSynonymResults(synonyms); //to change from list of list<int> to vector of list<int> to get one particular list
+   // vector<list<int>> synonymResults{ std::make_move_iterator(std::begin(tempList)),std::make_move_iterator(std::end(tempList)) };
     int size = selectedClause.getTupleArgs().size();
-
-    for (int i = 0; i < size; i++)
+    for (auto it : tempList)
     {
-        Entity argType = selectedClause.getTupleArgTypeAt(i);
-        string synonymToGetResultFor = selectedClause.getTupleArgAt(i);
-        list<int> resultForCurrentSynonym = synonymResults.at(i);
-        //If result is of type int, get direct results from ClauseResult
-        if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CONSTANT || argType == STMTLIST)
-        {
-            list<string> tempResult = convertListOfIntsToListOfStrings(resultForCurrentSynonym);
-            result.push_back(convertListOfStringsToSingleString(tempResult));
-        }
-
-        //If result is of type string, convert mapping of ints to strings from PKB 
-        else if (argType == PROCEDURE || argType == VARIABLE || argType == CALL)
-        {
-            list<string> tempResult = pkbInstance->convertIdxToString(resultForCurrentSynonym, argType);
-            result.push_back(convertListOfStringsToSingleString(tempResult));
-        }
+        result.push_back(convertListOfStringsToSingleString(convertListOfIntsToListOfStrings(it)));
     }
+  /*  for (int i = 0; i < size; i++)
+    {
+        list<int> currentList = synonymResults.at(i);
+        for (int j = 0; j < size; j++)
+        {
+            if (isStringTypeResult(j))
+            {
+                result.push_back(to_string(currentList.front()));
+                currentList.pop_front();
+            }
+            else
+            {
 
-    result = formatForFinalDisplayInTuple(result);
+            }
+        }
+    }*/
+
     return result;
 }
 
@@ -142,34 +143,13 @@ string ResultFormatter::convertListOfStringsToSingleString(list<string> singleSy
     string result;
     for (string s : singleSynResult)
     {
-        result.append(" ");
         result.append(s);
+        result.append(" ");
     }
-    result.append(",");
+    result.erase(result.size() - 1, result.size());
     return result;
 }
 
-//Remove whitespace from first list and comma from the end of the last list
-list<string> ResultFormatter::formatForFinalDisplayInTuple(list<string> unformattedResult)
-{
-    list<string> result;
-    string first = unformattedResult.front();
-    string last = unformattedResult.back();
-    first.erase(0, 1);
-    result.push_back(first);
-    last.erase(last.size() - 1, last.size());
-    
-    unformattedResult.pop_back();
-    unformattedResult.pop_front();
-
-    for (string s : unformattedResult)
-    {
-        result.push_back(s);
-    }
-    result.push_back(last);
-
-    return result;
-}
 
 
 

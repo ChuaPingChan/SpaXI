@@ -4,6 +4,7 @@
 #include <set>
 #include <list>
 #include <regex>
+#include <algorithm>
 #include "..\QueryTree.h"
 #include "..\Utilities\ClauseResult.h"
 #include "..\..\PKB\PKBMain.h"
@@ -24,7 +25,6 @@ protected:
     list<string> handleSelectBoolean(ClauseResult cr);
     list<string> handleSelectSynonym(ClauseResult cr, SelectClause sc);
     list<string> handleSelectTuple(ClauseResult cr, SelectClause selectedClause);
-    list<string> formatForFinalDisplayInTuple(list<string> unformattedResult);
 
 private:
     PKBMain* pkbInstance;
