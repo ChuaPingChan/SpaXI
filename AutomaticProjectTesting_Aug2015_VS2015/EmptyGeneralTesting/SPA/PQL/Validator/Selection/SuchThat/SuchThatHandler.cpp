@@ -64,6 +64,8 @@ bool SuchThatHandler::isValidSuchThat(string str)
     if (suchThatValidator->isValid()) {
         SuchThatClause suchThatClause = makeSuchThatClause(*suchThatValidator);
         storeInQueryTree(suchThatClause);
+        delete suchThatValidator;
+        suchThatValidator = NULL;
         return true;
     }
     else

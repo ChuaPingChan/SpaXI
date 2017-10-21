@@ -36,6 +36,8 @@ bool PatternHandler::isValidPattern(string str)
     if (patternValidator->isValid()) {
         PatternClause patternClause = makePatternClause(*patternValidator);
         storeInQueryTree(patternClause);
+        delete patternValidator;
+        patternValidator = NULL;
         return true;
     }
     else {
