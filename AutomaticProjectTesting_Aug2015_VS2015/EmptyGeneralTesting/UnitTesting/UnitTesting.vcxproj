@@ -197,7 +197,6 @@
     <ClCompile Include="TestPKBMain.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexCalls.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexNext.cpp" />
-    <ClCompile Include="PQL\ResultFormatter\TestResultFormatter.cpp" />
     <ClCompile Include="TestStmtTypeList.cpp" />
     <ClCompile Include="TestUsesTableStmtToVar.cpp" />
     <ClCompile Include="TestVarIdxTable.cpp" />
