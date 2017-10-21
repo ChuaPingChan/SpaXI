@@ -39,8 +39,7 @@ list<string> PQLMain::run()
     }
     else 
     {
-       finalResult = formatter.handleInvalidQuery(query);
-                
+        finalResult = formatter.handleNoResult(qt);
     }
     return finalResult;
 }

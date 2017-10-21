@@ -23,7 +23,7 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 		}
 		else 
 		{
-			result.push_back("true"); //If ClauseResult is empty, BOOLEAN is false
+			result.push_back("true"); //If ClauseResult has results, Select BOOLEAN is true
 		}
 	}
 	
@@ -35,12 +35,14 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
 			Entity argType = selectionByQuery.getSingleArgType();
             string synonymToGetResultFor = selectionByQuery.getSingleArg();
 
-			if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
+            //If result is of type int, get direct results from ClauseResult
+			if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CONSTANT || argType == STMTLIST)
 			{
 				result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
 			}
 
-            else if (argType == PROCEDURE || argType == VARIABLE)
+            //If result is of type string, convert mapping of ints to strings from PKB 
+            else if (argType == PROCEDURE || argType == VARIABLE || argType == CALL)
             {
                 result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
             }
@@ -88,17 +90,5 @@ list<string> ResultFormatter::handleNoResult(QueryTree qt)
     return result;
 }
 
-list<string> ResultFormatter::handleInvalidQuery(string query)
-{
-    list<string> result;
-    string SELECT_BOOLEAN = "((\\;)*\\s*Select BOOLEAN$)|((\\;)*\\s*Select BOOLEAN)(\\s+)";
-    regex checkSelectBoolean(SELECT_BOOLEAN);
-    if (regex_search(query, checkSelectBoolean))
-    {
-        result.push_back("false");
-    }
-
-    return result;
-}
 
 

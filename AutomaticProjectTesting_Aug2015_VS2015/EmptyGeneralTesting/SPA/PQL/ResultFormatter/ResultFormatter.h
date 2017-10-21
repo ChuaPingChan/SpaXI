@@ -17,7 +17,6 @@ public:
 	ResultFormatter();
 	list<string> finalResultFromSelection(ClauseResult cr, QueryTree qt);
     list<string> handleNoResult(QueryTree qt);
-    list<string> handleInvalidQuery(string query);
 
 protected:
 	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
