@@ -21,6 +21,9 @@ public:
 protected:
 	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
 	list<string> convertListOfListOfIntsToListOfStrings(list<list<int>> listOfInts);
+    list<string> handleSelectBoolean(ClauseResult cr);
+    list<string> handleSelectSynonym(ClauseResult cr, SelectClause sc);
+    list<string> handleSelectTuple(ClauseResult cr, SelectClause selectedClause);
 
 private:
     PKBMain* pkbInstance;
