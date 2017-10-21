@@ -34,9 +34,9 @@ using namespace std;
 class PKBMain {
 public:
 	PKBMain();
-    ~PKBMain();
     static PKBMain* getInstance();
     static void resetInstance();
+    static bool deleteInstance();
 
 	bool isSameName(Entity type1, int idx1, Entity type2, int idx2);
 
