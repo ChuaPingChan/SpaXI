@@ -3,19 +3,23 @@
 
 using namespace std;
 
+/*This class checks the selection type of the select clause has 
+(whether it is Select BOOLEAN, Select singleSynonym or Select Tuple)
+and formats the results to be displayed to the UI.*/
 ResultFormatter::ResultFormatter()
 {
     this->pkbInstance = PKBMain::getInstance();
 }
 
+//This method handles result formatter if the ClauseResult has result
 list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTree qt)
 {
 	SelectClause selectionByQuery = qt.getSelectClause();
 	list<string> selectSynonym;
 	list<string> result;
 
-	//Case 1: Select BOOLEAN
-    SelectionType selectedType = selectionByQuery.getSelectionType();
+    SelectionType selectedType = selectionByQuery.getSelectionType(); //Get Selection Type from the SelectClause
+    
     switch (selectedType)
     {
     case SELECT_BOOLEAN: 
@@ -32,6 +36,18 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
     }
 	
 	return result;
+}
+
+//This method handles result if evaluator has no result/query is invalid and Select type is BOOLEAN.
+list<string> ResultFormatter::handleNoResult(QueryTree qt)
+{
+    SelectClause selectionByQuery = qt.getSelectClause();
+    list<string> result;
+    if (selectionByQuery.getSelectionType() == SELECT_BOOLEAN)
+    {
+        result.push_back("false");
+    }
+    return result;
 }
 
 /******************
@@ -99,16 +115,7 @@ list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause se
     return result;
 }
 
-list<string> ResultFormatter::handleNoResult(QueryTree qt)
-{
-    SelectClause selectionByQuery = qt.getSelectClause();
-    list<string> result;
-    if (selectionByQuery.getSelectionType() == SELECT_BOOLEAN)
-    {
-        result.push_back("false");
-    }
-    return result;
-}
+
 
 
 
