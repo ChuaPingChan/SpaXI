@@ -8,6 +8,14 @@ PKBMain::PKBMain()
 {
 }
 
+PKBMain::~PKBMain()
+{
+    if (singleton != NULL) {
+        delete singleton;
+        singleton = NULL;
+    }
+}
+
 PKBMain* PKBMain::getInstance()
 {
     if (singleton == NULL) {

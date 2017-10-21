@@ -34,6 +34,7 @@ using namespace std;
 class PKBMain {
 public:
 	PKBMain();
+    ~PKBMain();
     static PKBMain* getInstance();
     static void resetInstance();
 
