@@ -64,12 +64,6 @@ list<string> ResultFormatter::convertListOfIntsToListOfStrings(list<int> listOfI
 	return convertedFromInt;
 }
 
-list<string> ResultFormatter::convertListOfListOfIntsToListOfStrings(list<list<int>> listOfInts)
-{
-	list<string> convertedFromInt;
-	return convertedFromInt;
-}
-
 list<string> ResultFormatter::handleSelectBoolean(ClauseResult cr)
 {
     list<string> result;
@@ -112,6 +106,68 @@ list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause 
 list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause selectedClause)
 {
     list<string> result;
+    list<string> synonyms;
+    synonyms.assign(selectedClause.getTupleArgs().begin(), selectedClause.getTupleArgs().end());
+    list<list<int>> l = cr.getSynonymResults(synonyms);
+    vector<list<int>> synonymResults{ std::make_move_iterator(std::begin(l)),std::make_move_iterator(std::end(l)) };
+    int size = selectedClause.getTupleArgs().size();
+
+    for (int i = 0; i < size; i++)
+    {
+        Entity argType = selectedClause.getTupleArgTypeAt(i);
+        string synonymToGetResultFor = selectedClause.getTupleArgAt(i);
+        list<int> resultForCurrentSynonym = synonymResults.at(i);
+        //If result is of type int, get direct results from ClauseResult
+        if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CONSTANT || argType == STMTLIST)
+        {
+            list<string> tempResult = convertListOfIntsToListOfStrings(resultForCurrentSynonym);
+            result.push_back(convertListOfStringsToSingleString(tempResult));
+        }
+
+        //If result is of type string, convert mapping of ints to strings from PKB 
+        else if (argType == PROCEDURE || argType == VARIABLE || argType == CALL)
+        {
+            list<string> tempResult = pkbInstance->convertIdxToString(resultForCurrentSynonym, argType);
+            result.push_back(convertListOfStringsToSingleString(tempResult));
+        }
+    }
+
+    result = formatForFinalDisplayInTuple(result);
+    return result;
+}
+
+//Add whitespaces between elements and comma at the end of the list
+string ResultFormatter::convertListOfStringsToSingleString(list<string> singleSynResult)
+{
+    string result;
+    for (string s : singleSynResult)
+    {
+        result.append(" ");
+        result.append(s);
+    }
+    result.append(",");
+    return result;
+}
+
+//Remove whitespace from first list and comma from the end of the last list
+list<string> ResultFormatter::formatForFinalDisplayInTuple(list<string> unformattedResult)
+{
+    list<string> result;
+    string first = unformattedResult.front();
+    string last = unformattedResult.back();
+    first.erase(0, 1);
+    result.push_back(first);
+    last.erase(last.size() - 1, last.size());
+    
+    unformattedResult.pop_back();
+    unformattedResult.pop_front();
+
+    for (string s : unformattedResult)
+    {
+        result.push_back(s);
+    }
+    result.push_back(last);
+
     return result;
 }
 
