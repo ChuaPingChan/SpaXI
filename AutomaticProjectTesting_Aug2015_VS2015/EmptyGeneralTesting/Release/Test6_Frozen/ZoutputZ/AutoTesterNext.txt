@@ -12,10 +12,8 @@ Evaluating query 1 - Next
 prog_line is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
-Your answer: 23 25 26 
+Your answer: 23 
 Correct answer: 23 
-Missing: 
-Additional: 25 26 
 2 - Next
 prog_line n;
 Select n such that Next (n, 1)

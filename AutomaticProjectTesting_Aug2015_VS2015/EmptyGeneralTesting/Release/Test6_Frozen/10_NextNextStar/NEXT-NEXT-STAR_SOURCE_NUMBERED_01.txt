@@ -1,0 +1,235 @@
+procedure one{
+1   x=1+z*(y+6);
+2   if x then{
+3      z=x*x-y;
+4	  while z{
+5	     x = y + 6;
+6		 y =1 + z;
+	  }
+   }
+   else{
+7       z=x*(y + 6)*z;
+   }
+8   call two;
+}
+procedure two{
+9    y = 8*z-x;
+10	while y{
+11	    x=x*8-z*3;
+12	    y=x*(x-y)*z;
+13		if x then{
+14		    x=x-2;
+15			y=y*(z-10);
+		}
+		else{
+16		    z=z*(x+y)+3;
+17			call three;
+		}
+	}
+ 18   call three;
+}
+procedure three{
+19    if x then{
+20	    x=x*x;
+21		y = x-9;
+22		if y then{
+23		    x=x-y*z;
+24			call four;
+		}
+	    else{
+25		    y=x*(z-9);
+		}
+	
+	}
+	else{
+26	    call four;
+	}
+}
+procedure four{
+27    while x{
+28	    y=(x-3)*(x-2);
+29		x=x-1;
+30		while y{
+31		    y=y-2;
+32			z=y-5*(x-3);
+		}
+	}
+33	p = x+y+z*5;
+34	call five;
+}
+procedure five{
+35   x=1+z*(y+6);
+36   if x then{
+37      z=x*x-y;
+38	  while z{
+39	     x = y + 6;
+40		 y =1 + z;
+	  }
+   }
+   else{
+41       z=x*(y + 6)*z;
+   }
+42   call six;
+}
+procedure six{
+43    y = 8*z-x;
+44	while y{
+45	    x=x*8-z*3;
+46	    y=x*(x-y)*z;
+47		if x then{
+48		    x=x-2;
+49			y=y*(z-10);
+		}
+		else{
+50		    z=z*(x+y)+3;
+51			call seven;
+		}
+	}
+52    call seven;
+}
+procedure seven{
+53    if x then{
+54	    x=x*x;
+55		y = x-9;
+56		if y then{
+57		    x=x-y*z;
+58			call eight;
+		}
+	    else{
+59		    y=x*(z-9);
+		}
+	
+	}
+	else{
+60	    call eight;
+	}
+}
+procedure eight{
+61    while x{
+62	    y=(x-3)*(x-2);
+63		x=x-1;
+64		while y{
+65		    y=y-2;
+66			z=y-5*(x-3);
+		}
+	}
+67	p = x+y+z*5;
+68	call nine;
+}
+procedure nine{
+69   x=1+z*(y+6);
+70   if x then{
+71      z=x*x-y;
+72	  while z{
+73	     x = y + 6;
+74		 y =1 + z;
+	  }
+   }
+   else{
+75       z=x*(y + 6)*z;
+   }
+76   call ten;
+}
+procedure ten{
+77    y = 8*z-x;
+78	while y{
+79	    x=x*8-z*3;
+80	    y=x*(x-y)*z;
+81		if x then{
+82		    x=x-2;
+83			y=y*(z-10);
+		}
+		else{
+84		    z=z*(x+y)+3;
+85			call eleven;
+		}
+	}
+86    call eleven;
+}
+procedure eleven{
+87    if x then{
+88	    x=x*x;
+89		y = x-9;
+90		if y then{
+91		    x=x-y*z;
+92			call twelve;
+		}
+	    else{
+93		    y=x*(z-9);
+		}
+	
+	}
+	else{
+94	    call twelve;
+	}
+}
+procedure twelve{
+95    while x{
+96	    y=(x-3)*(x-2);
+97		x=x-1;
+98		while y{
+99		    y=y-2;
+100			z=y-5*(x-3);
+		}
+	}
+101	p = x+y+z*5;
+102	call thirteen;
+}
+procedure thirteen{
+103   x=1+z*(y+6);
+104   if x then{
+105      z=x*x-y;
+106	  while z{
+107	     x = y + 6;
+108		 y =1 + z;
+	  }
+   }
+   else{
+109       z=x*(y + 6)*z;
+   }
+110  call fourteen;
+}
+procedure fourteen{
+111    y = 8*z-x;
+112	while y{
+113	    x=x*8-z*3;
+114	    y=x*(x-y)*z;
+115		if x then{
+116		    x=x-2;
+117			y=y*(z-10);
+		}
+		else{
+118		    z=z*(x+y)+3;
+119			call fifteen;
+		}
+	}
+120    call fifteen;
+}
+procedure fifteen{
+121    if x then{
+122	    x=x*x;
+123		y = x-9;
+124		if y then{
+125		    x=x-y*z;
+126			call sixteen;
+		}
+	    else{
+127		    y=x*(z-9);
+		}
+	
+	}
+	else{
+128	    call sixteen;
+	}
+}
+procedure sixteen{
+129    while x{
+130	    y=(x-3)*(x-2);
+131		x=x-1;
+132		while y{
+133		    y=y-2;
+134			z=y-5*(x-3);
+		}
+	}
+135	p = x+y+z*5;
+}

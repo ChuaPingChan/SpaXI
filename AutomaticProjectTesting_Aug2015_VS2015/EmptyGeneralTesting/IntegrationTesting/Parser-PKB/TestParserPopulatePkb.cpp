@@ -197,14 +197,14 @@ namespace UnitTesting
             Assert::IsTrue(dummyPkbMain.isNext(2, 3));
             Assert::IsTrue(dummyPkbMain.isNext(3, 4));
             Assert::IsTrue(dummyPkbMain.isNext(4, 5));
-            Assert::IsTrue(dummyPkbMain.isNext(5, 6));
-            Assert::IsTrue(dummyPkbMain.isNext(8, 9));
 
             Assert::IsTrue(dummyPkbMain.isNext(5, 7));
             Assert::IsTrue(dummyPkbMain.isNext(6, 8));
             Assert::IsTrue(dummyPkbMain.isNext(7, 8));
             Assert::IsTrue(dummyPkbMain.isNext(8, 3));
             Assert::IsTrue(dummyPkbMain.isNext(3, 9));
+
+            Assert::IsFalse(dummyPkbMain.isNext(8, 9));
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -245,35 +245,46 @@ namespace UnitTesting
             Assert::IsTrue(dummyPkbMain.isNext(8, 14));
             Assert::IsTrue(dummyPkbMain.isNext(38, 41));
 
-            // Next relations when exiting else-block or while-block
+            // Next relations when exiting ifElse-block or while-block
             Assert::IsTrue(dummyPkbMain.isNext(5, 3));
             Assert::IsTrue(dummyPkbMain.isNext(6, 3));
             Assert::IsTrue(dummyPkbMain.isNext(11, 13));
             Assert::IsTrue(dummyPkbMain.isNext(12, 13));
             Assert::IsTrue(dummyPkbMain.isNext(5, 3));
-            Assert::IsTrue(dummyPkbMain.isNext(17, 15));  // Corner-case 1: Nested if-else in else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(20, 15));  // Corner-case 1: Nested if-else in else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(21, 15));  // Corner-case 1: Nested if-else in else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(24, 30));  // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(26, 30));  // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(27, 30));  // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(29, 30));  // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(58, 64));  // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(59, 64));  // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(62, 64));  // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(63, 64));  // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(17, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(20, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(21, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(24, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(27, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(58, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(59, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(62, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(dummyPkbMain.isNext(63, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
             Assert::IsTrue(dummyPkbMain.isNext(13, 8));     // Loop back (while)
-            Assert::IsTrue(dummyPkbMain.isNext(13, 14));
-            Assert::IsTrue(dummyPkbMain.isNext(53, 51));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsTrue(dummyPkbMain.isNext(53, 50));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsTrue(dummyPkbMain.isNext(51, 50));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsTrue(dummyPkbMain.isNext(50, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsTrue(dummyPkbMain.isNext(51, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsTrue(dummyPkbMain.isNext(53, 54));  // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            
+            Assert::IsTrue(dummyPkbMain.isNext(53, 51));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(dummyPkbMain.isNext(51, 50));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(dummyPkbMain.isNext(50, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+
             // Test for false cases
             Assert::IsFalse(dummyPkbMain.isNext(1, 3));
+            Assert::IsFalse(dummyPkbMain.isNext(5, 6));
+            Assert::IsFalse(dummyPkbMain.isNext(5, 7));
+            Assert::IsFalse(dummyPkbMain.isNext(6, 7));
             Assert::IsFalse(dummyPkbMain.isNext(10, 13));
+            Assert::IsFalse(dummyPkbMain.isNext(13, 14));
+            Assert::IsFalse(dummyPkbMain.isNext(17, 22));
+            Assert::IsFalse(dummyPkbMain.isNext(20, 22));
+            Assert::IsFalse(dummyPkbMain.isNext(21, 22));
+            Assert::IsFalse(dummyPkbMain.isNext(26, 23));
+            Assert::IsFalse(dummyPkbMain.isNext(29, 23));
+            Assert::IsFalse(dummyPkbMain.isNext(26, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsFalse(dummyPkbMain.isNext(29, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsFalse(dummyPkbMain.isNext(35, 36));
+            Assert::IsFalse(dummyPkbMain.isNext(40, 41));
+            Assert::IsFalse(dummyPkbMain.isNext(48, 49));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsFalse(dummyPkbMain.isNext(51, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsFalse(dummyPkbMain.isNext(53, 50));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsFalse(dummyPkbMain.isNext(53, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
             Assert::IsFalse(dummyPkbMain.isNext(55, 64));
 
             // Clean up
