@@ -50,8 +50,7 @@ const string RegexValidators::TUPLE_REGEX = "(" + SPACE_1 + ELEM_REGEX + SPACE_0
 const string RegexValidators::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 
 /*--------------- Declaration Regex ---------------*/
-const string RegexValidators::DECLARATION_REGEX = "(" + SPACE_0 + DESIGN_ENTITY_REGEX + SPACE_0 + SYNONYM_REGEX + "(" + SPACE_0 + "[,]" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + ")*" + SPACE_0 + ";" + SPACE_0 + ")";
-const string RegexValidators::DECLARATION_OVERALL_REGEX = DECLARATION_REGEX + "(" + DECLARATION_REGEX + ")*";
+const string RegexValidators::DECLARATION_EXTRACTED_REGEX = "(" + SPACE_0 + DESIGN_ENTITY_REGEX + SPACE_0 + SYNONYM_REGEX + "(" + SPACE_0 + "[,]" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + ")*" + SPACE_0 + ")";
 
 /*--------------- Relationship Clause Regex ---------------*/
 const string RegexValidators::MODIFIES_FIRSTARG_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + INTEGER_REGEX + "|" + IDENT_WITH_QUOTES_REGEX + ")";
@@ -287,16 +286,10 @@ bool RegexValidators::isValidEntityRegex(string str)
     return regex_match(str, entityRegex);
 }
 
-bool RegexValidators::isValidDeclarationRegex(string str)
+bool RegexValidators::isValidDeclarationExtractedRegex(string str)
 {
-    regex declarationRegex(DECLARATION_REGEX);
+    regex declarationRegex(DECLARATION_EXTRACTED_REGEX);
     return regex_match(str, declarationRegex);
-}
-
-bool RegexValidators::isValidDeclarationOverallRegex(string str)
-{
-    regex declarationOverallRegex(DECLARATION_OVERALL_REGEX);
-    return regex_match(str, declarationOverallRegex);
 }
 
 /*--------------- Such That Clauses Regex Methods ---------------*/

@@ -22,10 +22,12 @@ public:
 private:
     QueryTree *qtPtr;
 
-    unordered_set<string> synonymBank;   //Contains list of used synonyms
-    vector<string> unvalidatedQueryVector;  //Holds unvalidated stmts retreived from query tree
+    unordered_set<string> synonymBank;   //Contains list of declared synonyms
 
     bool isValidEntity(string str);
     bool isValidSynonym(string str);
     Entity getEntityIndexReference(string entity);
+
+    bool hasValidEntityAndSynonym(string str);
+    bool isDeclaredSynonym(string synonym);
 };

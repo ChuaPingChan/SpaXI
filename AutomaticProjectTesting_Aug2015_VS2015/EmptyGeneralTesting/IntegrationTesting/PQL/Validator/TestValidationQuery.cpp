@@ -191,6 +191,35 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SameEntity_DuplicatedSynonym_Invalid)
+        {
+            string query;
+            query.append("assign a, a;");
+            query.append("Select a");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsFalse(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_DiffEntity_DuplicatedSynonym_Invalid)
+        {
+            string query;
+            query.append("assign a, a1;");
+            query.append("while a;");
+            query.append("Select a");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsFalse(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
         /***********************************
         * Select Clause - Tuple s*
         ***********************************/

@@ -57,8 +57,7 @@ public:
     static const string DESIGN_ENTITY_REGEX;
 
     /*--------------- Declaration Regex ---------------*/
-    static const string DECLARATION_REGEX;
-    static const string DECLARATION_OVERALL_REGEX;
+    static const string DECLARATION_EXTRACTED_REGEX;    //The semicolon is removed
 
     /*--------------- Relationship Clause Regex ---------------*/
     static const string MODIFIES_FIRSTARG_REGEX;
@@ -145,8 +144,7 @@ public:
     static bool isValidEntityRegex(string str);
     
     /******************** Declaration Regex ********************/
-    static bool isValidDeclarationRegex(string str);
-    static bool isValidDeclarationOverallRegex(string str);
+    static bool isValidDeclarationExtractedRegex(string str);
 
     /******************** Relationship Clause Regex ********************/
     static bool isValidModifiesRegex(string str);
