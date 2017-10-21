@@ -1157,3 +1157,73 @@ bool PKBMain::addConstant(int stmt, int constant)
 	bool added = constantTable.addConstantList(stmt, constant);
 	return added;
 }
+
+bool PKBMain::addStmtToProc(int stmt, string procName) {
+	int procIdx = procIdxTable.getIdxFromProc(procName);
+	if (procIdx == -1) {
+		return false;
+	}
+	return procIdxTable.addStmtToProc(stmt, procIdx);
+}
+
+int PKBMain::getFirstStmtFromProc(int procIdx) {
+	int firstStmt = procIdxTable.getFirstStmtFromProc(procIdx);
+	return firstStmt;
+}
+
+int PKBMain::getProcFromStmt(int stmt) {
+	return procIdxTable.getProcIdxFromStmt(stmt);
+}
+
+//TODO AFFECTSSSSS
+bool PKBMain::isAffects(int stmt1, int stmt2) {
+	return false;
+}
+
+bool PKBMain::isAffector(int stmt1) {
+	return false;
+}
+
+list<int> PKBMain::getAffectedOf(int stmt1) {
+	return list<int>();
+}
+
+bool PKBMain::isAffected(int stmt2) {
+	return false;
+}
+
+bool PKBMain::hasAffects() {
+	return false;
+}
+
+list<int> PKBMain::getAllAffected() {
+	return list<int>();
+}
+
+list<int> PKBMain::getAffectorOf(int stmt2) {
+	return list<int>();
+}
+
+list<int> PKBMain::getAllAffector() {
+	return list<int>();
+}
+
+pair<list<int>, list<int>> PKBMain::getAllAffects() {
+	return make_pair(list<int>(), list<int>());
+}
+
+bool PKBMain::isAffectsStar(int stmt1, int stmt2) {
+	return false;
+}
+
+list<int> PKBMain::getAffectedStarOf(int stmt1) {
+	return list<int>();
+}
+
+list<int> PKBMain::getAffectorStarOf(int stmt2) {
+	return list<int>();
+}
+
+pair<list<int>, list<int>> PKBMain::getAllAffectsStar() {
+	return make_pair(list<int>(), list<int>());
+}

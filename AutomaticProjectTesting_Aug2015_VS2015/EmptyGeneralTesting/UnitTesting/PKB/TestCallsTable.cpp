@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "CppUnitTest.h"
-#include "../SPA/PKB/CallsTable.h"
+#include "../../SPA/PKB/CallsTable.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
