@@ -49,6 +49,9 @@ const string RegexValidators::ELEM_REGEX = "(" + SYNONYM_REGEX + "|" + ATTRREF_R
 const string RegexValidators::TUPLE_REGEX = "(" + SPACE_1 + ELEM_REGEX + SPACE_0 + "|" + SPACE_0 + "<" + SPACE_0 + ELEM_REGEX + SPACE_0 + "(," + SPACE_0 + ELEM_REGEX + SPACE_0 + ")*" + ">" + SPACE_0 + ")";
 const string RegexValidators::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 
+/*--------------- Declaration Regex ---------------*/
+const string RegexValidators::DECLARATION_EXTRACTED_REGEX = "(" + SPACE_0 + DESIGN_ENTITY_REGEX + SPACE_0 + SYNONYM_REGEX + "(" + SPACE_0 + "[,]" + SPACE_0 + SYNONYM_REGEX + SPACE_0 + ")*" + SPACE_0 + ")";
+
 /*--------------- Relationship Clause Regex ---------------*/
 const string RegexValidators::MODIFIES_FIRSTARG_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERSCORE_REGEX + "|" + INTEGER_REGEX + "|" + IDENT_WITH_QUOTES_REGEX + ")";
 const string RegexValidators::MODIFIES_REGEX = "(" + SPACE_0 + "(Modifies)" + SPACE_0 + "[(]" + SPACE_0 + MODIFIES_FIRSTARG_REGEX + SPACE_0 + "[,]" + SPACE_0 + ENTREF_REGEX + SPACE_0 + "[)]" + SPACE_0 + ")";
@@ -281,6 +284,12 @@ bool RegexValidators::isValidEntityRegex(string str)
 {
     regex entityRegex(DESIGN_ENTITY_REGEX);
     return regex_match(str, entityRegex);
+}
+
+bool RegexValidators::isValidDeclarationExtractedRegex(string str)
+{
+    regex declarationRegex(DECLARATION_EXTRACTED_REGEX);
+    return regex_match(str, declarationRegex);
 }
 
 /*--------------- Such That Clauses Regex Methods ---------------*/

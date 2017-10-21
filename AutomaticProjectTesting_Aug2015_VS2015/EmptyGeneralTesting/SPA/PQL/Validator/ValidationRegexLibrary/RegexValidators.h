@@ -54,9 +54,10 @@ public:
     static const string ATTRREF_REGEX;
     static const string ELEM_REGEX;
     static const string TUPLE_REGEX;
+    static const string DESIGN_ENTITY_REGEX;
 
     /*--------------- Declaration Regex ---------------*/
-    static const string DESIGN_ENTITY_REGEX;
+    static const string DECLARATION_EXTRACTED_REGEX;    //The semicolon is removed
 
     /*--------------- Relationship Clause Regex ---------------*/
     static const string MODIFIES_FIRSTARG_REGEX;
@@ -142,6 +143,9 @@ public:
     static bool isValidTupleRegex(string str);
     static bool isValidEntityRegex(string str);
     
+    /******************** Declaration Regex ********************/
+    static bool isValidDeclarationExtractedRegex(string str);
+
     /******************** Relationship Clause Regex ********************/
     static bool isValidModifiesRegex(string str);
     static bool isValidUsesRegex(string str);
