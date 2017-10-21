@@ -9,72 +9,7 @@ DeclarationValidator::DeclarationValidator(QueryTree *qtPtrNew) {
 DeclarationValidator::~DeclarationValidator() {}
 
 bool DeclarationValidator::isValidDeclaration(string str) {
-    string entity;
-    string synonym;
-    int numWord = 0;
-    int numComma = 0;
-    int expectedNumComma = 0;
-
-    string EVERYTHING_EXCEPT_SPACE = "[^[:space:]]+";
-    regex exceptSpaceRegex(EVERYTHING_EXCEPT_SPACE);
-    sregex_iterator pos(str.cbegin(), str.cend(), exceptSpaceRegex);
-    sregex_iterator end;
-
-    int counter = 0;
-    for (; pos != end; pos++) {
-        string token = pos->str(0);
-
-        if (counter == 0 && isValidEntity(token)) {
-            numWord++;
-            entity = token;
-            counter++;
-            continue;
-        }
-        else if (counter == 0 && !isValidEntity(token)) {
-            return false;
-        }
-
-        if (token == ",") {
-            numComma++;
-            counter++;
-            continue;
-        }
-        else if (token.back() == ',') {
-            numComma++;
-            regex removeCommaRegex("([[:w:]]+),");
-            smatch m;
-            regex_search(token, m, removeCommaRegex);
-            string extracted = m[1].str();
-            if (isValidSynonym(extracted)) {
-                numWord++;
-                synonym = extracted;
-            }
-            else {
-                return false;
-            }
-        }
-        else if (isValidSynonym(token)) {
-            numWord++;
-            synonym = token;
-        }
-        else {
-            return false;
-        }
-
-        if (synonymBank.find(synonym) == synonymBank.end()) {
-           synonymBank.insert(synonym);
-            qtPtr->insertSynonym(getEntityIndexReference(entity), synonym);
-        }
-        else {
-            return false;
-        }
-
-        counter++;
-    }
-
-    expectedNumComma = numWord - 2;
-
-    return numComma == expectedNumComma;
+    return RegexValidators::isValidDeclarationExtractedRegex(str) && hasValidEntityAndSynonym(str);
 }
 
 bool DeclarationValidator::setQueryTree(QueryTree *qtPtrNew) {
@@ -119,4 +54,40 @@ Entity DeclarationValidator::getEntityIndexReference(string entity)
     else if (RegexValidators::isValidConstantString(entity)) {
         return CONSTANT;
     }
+}
+
+bool DeclarationValidator::hasValidEntityAndSynonym(string str)
+{
+    bool hasEntityDeclared = false;
+    Entity currentEntity;
+
+    regex declarationSubUnitRegex(RegexValidators::DESIGN_ENTITY_REGEX + "|" + RegexValidators::SYNONYM_REGEX);
+    sregex_iterator it(str.cbegin(), str.cend(), declarationSubUnitRegex);
+    sregex_iterator it_end;
+
+    for (; it != it_end; it++)
+    {
+        string currentToken = it->str(0);
+        if (RegexValidators::isValidEntityRegex(currentToken) && !hasEntityDeclared)
+        {
+            currentEntity = getEntityIndexReference(currentToken);
+            hasEntityDeclared = true;
+        }
+        else if (RegexValidators::isValidSynonymRegex(currentToken) && !isDeclaredSynonym(currentToken))
+        {
+            synonymBank.insert(currentToken);
+            qtPtr->insertSynonym(currentEntity, currentToken);
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    return true;
+}
+
+bool DeclarationValidator::isDeclaredSynonym(string synonym)
+{
+    return synonymBank.find(synonym) != synonymBank.end();
 }
