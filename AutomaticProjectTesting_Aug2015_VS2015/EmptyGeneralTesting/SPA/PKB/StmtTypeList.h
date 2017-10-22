@@ -17,6 +17,7 @@ public:
     bool addToAssignStmtList(int stmt);
     bool addToWhileStmtList(int stmt);
 	bool addToCallsStmtList(int stmt, int calleeProcIdx, string calleeProcName);
+	list<int> getStmtFromCalleeProcName(string calleeProcName);
 	int getProcIdxFromCall(int stmt);
 	list<string> getAllCalleeNames();
 	unordered_map<int, int> getCallToProcIdxMap();
