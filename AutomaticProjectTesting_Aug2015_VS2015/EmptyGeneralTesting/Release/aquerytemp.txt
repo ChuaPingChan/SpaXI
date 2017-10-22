@@ -1,15 +1,5 @@
 1 - temp
-procedure p;
-Select p such that Calls(p, _) and Calls*(p,_)
-none
-5000
-2 - temp
-assign a;
-Select a pattern a(_, "x")
-36,37
-5000
-3 - newline autotester
-assign \n hi;
-Select hi;
-All the assigns
+assign a; while w; prog_line n;
+Select a such that Next(a,n) and Next*(n,n) with n=w.stmt#
+10,16,21,27,31,32
 5000

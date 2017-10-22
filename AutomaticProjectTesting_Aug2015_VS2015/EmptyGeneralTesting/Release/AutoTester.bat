@@ -118,10 +118,10 @@ goto :main
 :runTest2
 echo ===============================================================================
 echo Generating Queries for test 2...
-python Test2\QueryGenerator2.py Test2\QuerySet2.xlsx Test2\test2query.txt
+python Test2_Frozen\QueryGenerator2.py Test2_Frozen\QuerySet2.xlsx Test2_Frozen\test2query.txt
 echo Finish generating queries for test 2.
 echo Running AutoTester for test 2...
-AutoTester Test2\test2source.txt Test2\test2query.txt Test2\out2.xml > Test2\AutoTester2.txt
+AutoTester Test2_Frozen\test2source.txt Test2_Frozen\test2query.txt Test2_Frozen\out2.xml > Test2_Frozen\AutoTester2.txt
 echo Finish running AutoTester for test 2.
 pause
 cls
