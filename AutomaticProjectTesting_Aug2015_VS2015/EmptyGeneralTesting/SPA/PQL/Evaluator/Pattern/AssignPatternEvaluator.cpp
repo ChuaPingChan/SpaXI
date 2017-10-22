@@ -193,7 +193,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getAllAssignments(existingSyn);
+                    list<int> newSynVals = pkbInstance->getAllAssignments(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
