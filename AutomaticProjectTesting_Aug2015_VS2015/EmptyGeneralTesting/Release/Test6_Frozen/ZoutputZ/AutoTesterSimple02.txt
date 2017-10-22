@@ -141,10 +141,8 @@ Select ifstat such that Modifies(ifstat, "x")
 Evaluating query 14 - Test basic function of Modifies for container statement, in this case it is if statement
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 
+Your answer: 10 
 Correct answer: 10 
-Missing: 10 
-Additional: 
 15 - Test basic function of Modifies for container statement, in this case it is while statement
 while w;
 Select w such that Modifies(w, "x")

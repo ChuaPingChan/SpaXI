@@ -26,7 +26,7 @@ Select cl
 6 - Return all constants HasAnswer
 constant c;
 Select c
-2,3,5,14,100,10,22
+2,3,5,14,100,10,22,9
 5000
 7 - Return all variable HasAnswer
 variable v;
@@ -46,12 +46,12 @@ Select pl;
 10 - Select SingleSynonym With StmtStmt NoCommonSynonym HaveResult
 stmt s, s1, s2;
 Select s with s1.stmt#=s2.stmt#
-1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,4,5,6,7,8,10
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,4,5,6,7,8,9
 5000
 11 - Select SingleSynonym With StmtStmt CommonSynonym HaveResult
 stmt s1, s2;
 Select s1 with s1.stmt#=s2.stmt#
-1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,4,5,6,7,8,11
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,4,5,6,7,8,9
 5000
 12 - Select SingleSynonym With StmtInt CommonSynonym HaveResult
 stmt s;

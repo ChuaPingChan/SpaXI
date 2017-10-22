@@ -1938,10 +1938,8 @@ Evaluating query 190 - comment
 v,_ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
-Your answer: 
+Your answer: a b c 
 Correct answer: b c a 
-Missing: a b c 
-Additional: 
 191 - comment
 variable v; while w, w1; assign a;
 Select v such that Uses(w,v) pattern a ( "a ",_)
