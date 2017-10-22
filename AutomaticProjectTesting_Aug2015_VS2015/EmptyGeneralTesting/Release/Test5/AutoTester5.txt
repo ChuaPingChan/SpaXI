@@ -12,9 +12,7 @@ Evaluating query 1 - Get all variables on left hand side of assignment
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
-Your answer: 
+Your answer: x left right temp radius radius1 quota iter 
 Correct answer: x left right temp radius radius1 quota iter 
-Missing: iter left quota radius radius1 right temp x 
-Additional: 
 End of evaluating Query File.
 AutoTester Completed !

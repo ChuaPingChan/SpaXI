@@ -613,10 +613,8 @@ Evaluating query 56 - Combination
 v2,_"1"_ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
-Your answer: 
+Your answer: x z 
 Correct answer: x z 
-Missing: x z 
-Additional: 
 57 - Combination
 assign a;variable v;
 Select v such that Uses(a, v) pattern a(v,_"x"_)
