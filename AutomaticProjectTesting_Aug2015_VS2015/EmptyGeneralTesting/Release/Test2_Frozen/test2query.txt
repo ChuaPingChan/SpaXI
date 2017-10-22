@@ -1588,10 +1588,10 @@ stmt s; assign a; call c;
 Select c such that Next(s,a) with s.stmt# = c.stmt#
 14,15,19,24,33
 5000
-None - None
-
-
-None
+319 - 2 next and with clause substitute synonym
+assign a; while w; prog_line n;
+Select a such that Next(a,n) and Next*(n,n) with n=w.stmt#
+10,16,21,27,31,32
 5000
 320 - 2 next and with clause substitute synonym
 stmt s; while w; constant c;

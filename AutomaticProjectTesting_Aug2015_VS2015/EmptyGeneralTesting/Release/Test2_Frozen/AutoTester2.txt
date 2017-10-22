@@ -3424,18 +3424,17 @@ No ReturnBoolean, ReturnTuple=1
 The final tag string is ReturnTuple="1" Next="1" SuchThat="1" With="1" CondNum="4" RelNum="1" 
 Your answer: 14 15 19 24 33 
 Correct answer: 14 15 19 24 33 
-None - None
-
-
-None
+319 - 2 next and with clause substitute synonym
+assign a; while w; prog_line n;
+Select a such that Next(a,n) and Next*(n,n) with n=w.stmt#
+10,16,21,27,31,32
 5000
-Evaluating query None - None
+Evaluating query 319 - 2 next and with clause substitute synonym
+prog_line is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
-The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
-Your answer: 
-Correct answer: None 
-Missing: None 
-Additional: 
+The final tag string is ReturnTuple="1" Next="1" Nextstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 10 16 21 27 31 32 
+Correct answer: 10 16 21 27 31 32 
 320 - 2 next and with clause substitute synonym
 stmt s; while w; constant c;
 Select s such that Next*(s,s) with s.stmt# = c.value and Next*(s,w)
