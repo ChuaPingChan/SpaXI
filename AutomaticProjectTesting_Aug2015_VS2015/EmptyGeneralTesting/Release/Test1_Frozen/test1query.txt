@@ -1105,7 +1105,7 @@ none
 5000
 222 - Tab within Parent Keyword HaveResult
 stmt s;
- Select s such that Parent ( 1 , 2 )
+ Select s such that Parent ( 3 , 4 )
 1,2,3,4,5,6,7,8
 5000
 223 - No Whitespace Within SuchThat Keyword NoResult
@@ -1120,7 +1120,7 @@ none
 5000
 225 - Select SingleSynonym Stmt Parent IntInt ParentKeywordAsSynonym HaveResult
 stmt Parent;
-Select Parent such that Parent(1, 2)
+Select Parent such that Parent(3, 4)
 1,2,3,4,5,6,7,8
 5000
 226 - Missing SuchThat Keyword NoResult
@@ -1174,9 +1174,9 @@ Select s such that Parent(_, s)
 4,5,6,7
 5000
 236 - Select SingleSynonym Stmt Parent SynonymInt ParentKeywordAsSynontm As RelationArg HaveResult
-stmt s, Parent;
-Select s such that Parent(Parent, 5)
-none
+stmt Parent;
+Select Parent such that Parent(Parent, 5)
+3
 5000
 237 - Select SingleSynonym Stmt Parent SynonymInt HaveResult
 stmt s;
@@ -1308,7 +1308,7 @@ while w;
 Select w such that Parent(3, 4)
 3
 5000
-263 - Select SingleSynonym While Parent IntUnderscore HaveResult
+263 - Select SingleSynonym While Parent IntUnderscore NoResult
 while w;
 Select w such that Parent(1, _)
 none
@@ -1385,8 +1385,8 @@ none
 5000
 278 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationDiffSynonym HaveResult
 stmt s1, s2, s3;
-Select s1 such that Parent(1, s2) and Parent(2, s3)
-none
+Select s1 such that Parent(3, s2) and Parent(3, s3)
+1,2,3,4,5,6,7,8
 5000
 279 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym GetFront HaveResult
 stmt s1, s2;
@@ -1438,17 +1438,17 @@ stmt s1, s2;
 Select s1 such that Parent(s1, _) and Parent(s2, _)
 3
 5000
-289 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst HaveResult
+289 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst NoResult
 stmt s1, s2, s3;
 Select s1 such that Parent(s1, s2) and Parent(s2, s3)
 none
 5000
-290 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle HaveResult
+290 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle NoResult
 stmt s1, s2, s3;
 Select s2 such that Parent(s1, s2) and Parent(s2, s3)
 none
 5000
-291 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast HaveResult
+291 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast NoResult
 stmt s1, s2, s3;
 Select s3 such that Parent(s1, s2) and Parent(s2, s3)
 none
