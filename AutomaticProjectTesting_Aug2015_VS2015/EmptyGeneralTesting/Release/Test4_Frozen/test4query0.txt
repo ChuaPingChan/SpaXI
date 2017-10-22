@@ -4171,7 +4171,7 @@ true
 835 - 
 procedure p; variable v;
 Select BOOLEAN such that Modifies(v,p)
-
+false
 5000
 836 - 
 stmt s; variable v;
@@ -4271,7 +4271,7 @@ false
 855 - 
 procedure p; variable v;
 Select BOOLEAN such that Uses(v,p)
-
+false
 5000
 856 - 
 stmt s; variable v;

@@ -549,7 +549,26 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
         }
 
-        
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SuchThat_Modifies_and_Uses_and_NextStar_Valid)
+        {
+            string query;
+            query.append("if if;");
+            query.append("call c;");
+            query.append("variable v;");
+            query.append("Select c such that Modifies(if,v) and Uses(c, v) and Next*(if, c)");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<SuchThatClause> expectedList;
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(MODIFIES, IF, "if", VARIABLE, "v"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(USES, CALL, "c", VARIABLE, "v"));
+            expectedList.push_back(UtilitySelection::makeSuchThatClause(NEXTSTAR, IF, "if", CALL, "c"));
+            Assert::IsTrue(UtilitySelection::AreSameSuchThatClausesContentAsInTree(expectedList, qt));
+        }
 
 
         /*******************************************

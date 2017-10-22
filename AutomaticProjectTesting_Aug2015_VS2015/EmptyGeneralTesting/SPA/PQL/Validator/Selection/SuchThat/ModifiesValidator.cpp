@@ -54,6 +54,12 @@ bool ModifiesValidator::isValidArgOne(string &argOne)
         return true;
     }
 
+    else if (qtPtr->isEntitySynonymExist(argOne, IF))
+    {
+        this->argOneType = IF;
+        return true;
+    }
+
     else if (qtPtr->isEntitySynonymExist(argOne, PROG_LINE))
     {
         this->argOneType = PROG_LINE;
