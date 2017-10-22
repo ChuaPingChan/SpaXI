@@ -135,6 +135,19 @@ namespace UnitTesting
             Assert::IsTrue(UtilityQueryTree::isSameContentAllWhiles(expectedList, fdv.getQueryTreeCopy()));
         }
 
+        TEST_METHOD(TestValidity_Declaration_Entity_Synonym_MultipleNewline_Valid)
+        {
+            QueryTree qtPtr;
+            FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
+            string str = "while \n w1, w2\n, \n w3";
+            Assert::IsTrue(fdv.isValidDeclaration(str));
+            unordered_set<string> expectedList;
+            expectedList.insert("w1");
+            expectedList.insert("w2");
+            expectedList.insert("w3");
+            Assert::IsTrue(UtilityQueryTree::isSameContentAllWhiles(expectedList, fdv.getQueryTreeCopy()));
+        }
+
         TEST_METHOD(TestValidity_Declaration_Entity_Synonym_Invalid)
         {
             QueryTree qtPtr;

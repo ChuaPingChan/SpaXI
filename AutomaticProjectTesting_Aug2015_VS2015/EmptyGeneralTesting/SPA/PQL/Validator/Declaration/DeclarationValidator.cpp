@@ -17,14 +17,6 @@ bool DeclarationValidator::setQueryTree(QueryTree *qtPtrNew) {
     return true;
 }
 
-bool DeclarationValidator::isValidEntity(string str) {
-    return RegexValidators::isValidEntityRegex(str);
-}
-
-bool DeclarationValidator::isValidSynonym(string str) {
-    return RegexValidators::isValidSynonymRegex(str);
-}
-
 Entity DeclarationValidator::getEntityIndexReference(string entity)
 {
     if (RegexValidators::isValidStmtString(entity)) {
@@ -54,37 +46,55 @@ Entity DeclarationValidator::getEntityIndexReference(string entity)
     else if (RegexValidators::isValidConstantString(entity)) {
         return CONSTANT;
     }
+    else {
+        throw EntityNotFoundException("Inside DeclarationValidator, when calling getEntityIndexReference()");
+    }
 }
 
-bool DeclarationValidator::hasValidEntityAndSynonym(string str)
+bool DeclarationValidator::areValidSynonyms(Entity entity, string str)
 {
-    bool hasEntityDeclared = false;
-    Entity currentEntity;
-
-    regex declarationSubUnitRegex(RegexValidators::DESIGN_ENTITY_REGEX + "|" + RegexValidators::SYNONYM_REGEX);
-    sregex_iterator it(str.cbegin(), str.cend(), declarationSubUnitRegex);
+    regex synonymRegex(RegexValidators::SYNONYM_REGEX);
+    sregex_iterator it(str.cbegin(), str.cend(), synonymRegex);
     sregex_iterator it_end;
 
     for (; it != it_end; it++)
     {
         string currentToken = it->str(0);
-        if (RegexValidators::isValidEntityRegex(currentToken) && !hasEntityDeclared)
-        {
-            currentEntity = getEntityIndexReference(currentToken);
-            hasEntityDeclared = true;
-        }
-        else if (RegexValidators::isValidSynonymRegex(currentToken) && !isDeclaredSynonym(currentToken))
+        if  (RegexValidators::isValidSynonymRegex(currentToken) && !isDeclaredSynonym(currentToken))
         {
             synonymBank.insert(currentToken);
-            qtPtr->insertSynonym(currentEntity, currentToken);
+            qtPtr->insertSynonym(entity, currentToken);
+        }
+        else if (isDeclaredSynonym(currentToken)) 
+        {
+            throw SynonymAlreadyExistException("In DeclarationValidator, when calling areValidSynonyms()");
         }
         else
         {
             return false;
         }
-
     }
-    return true;
+    return "true";
+}
+
+bool DeclarationValidator::hasValidEntityAndSynonym(string str)
+{
+    smatch regexMatch;
+    regex extraction("([a-zA-Z_]+)\\s+([^]*)");
+    regex_search(str, regexMatch, extraction);
+
+    try {
+        string entityString = regexMatch.str(1);
+        string synonymString = regexMatch.str(2);
+        Entity entity = getEntityIndexReference(entityString);
+        return areValidSynonyms(entity, synonymString);
+    }
+    catch (EntityNotFoundException enfe) {
+        return false;
+    }
+    catch (SynonymAlreadyExistException saee) {
+        return false;
+    }
 }
 
 bool DeclarationValidator::isDeclaredSynonym(string synonym)
