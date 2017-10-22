@@ -2370,16 +2370,14 @@ Your answer:
 Correct answer: 
 222 - Tab within Parent Keyword HaveResult
 stmt s;
- Select s such that Parent ( 1 , 2 )
+ Select s such that Parent ( 3 , 4 )
 1,2,3,4,5,6,7,8
 5000
 Evaluating query 222 - Tab within Parent Keyword HaveResult
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 
+Your answer: 1 2 3 4 5 6 7 8 
 Correct answer: 1 2 3 4 5 6 7 8 
-Missing: 1 2 3 4 5 6 7 8 
-Additional: 
 223 - No Whitespace Within SuchThat Keyword NoResult
 stmt s;
 Select s suchthat Parent(1, 2)
@@ -2402,17 +2400,15 @@ Your answer:
 Correct answer: 
 225 - Select SingleSynonym Stmt Parent IntInt ParentKeywordAsSynonym HaveResult
 stmt Parent;
-Select Parent such that Parent(1, 2)
+Select Parent such that Parent(3, 4)
 1,2,3,4,5,6,7,8
 5000
 Evaluating query 225 - Select SingleSynonym Stmt Parent IntInt ParentKeywordAsSynonym HaveResult
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: 
+Your answer: 1 2 3 4 5 6 7 8 
 Correct answer: 1 2 3 4 5 6 7 8 
-Missing: 1 2 3 4 5 6 7 8 
-Additional: 
 226 - Missing SuchThat Keyword NoResult
 stmt s;
 Select s Parent(1, 2)
@@ -2521,17 +2517,16 @@ The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" C
 Your answer: 4 5 6 7 
 Correct answer: 4 5 6 7 
 236 - Select SingleSynonym Stmt Parent SynonymInt ParentKeywordAsSynontm As RelationArg HaveResult
-stmt s, Parent;
-Select s such that Parent(Parent, 5)
-none
+stmt Parent;
+Select Parent such that Parent(Parent, 5)
+3
 5000
 Evaluating query 236 - Select SingleSynonym Stmt Parent SynonymInt ParentKeywordAsSynontm As RelationArg HaveResult
+The happen is 2
 No ReturnBoolean, ReturnTuple=1 
-The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 1 2 3 4 5 6 7 8 
-Correct answer: 
-Missing: 
-Additional: 1 2 3 4 5 6 7 8 
+The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 
+Correct answer: 3 
 237 - Select SingleSynonym Stmt Parent SynonymInt HaveResult
 stmt s;
 Select s such that Parent(s, 4)
@@ -2802,12 +2797,12 @@ No ReturnBoolean, ReturnTuple=1
 The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: 3 
 Correct answer: 3 
-263 - Select SingleSynonym While Parent IntUnderscore HaveResult
+263 - Select SingleSynonym While Parent IntUnderscore NoResult
 while w;
 Select w such that Parent(1, _)
 none
 5000
-Evaluating query 263 - Select SingleSynonym While Parent IntUnderscore HaveResult
+Evaluating query 263 - Select SingleSynonym While Parent IntUnderscore NoResult
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
@@ -2968,15 +2963,15 @@ Your answer:
 Correct answer: 
 278 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationDiffSynonym HaveResult
 stmt s1, s2, s3;
-Select s1 such that Parent(1, s2) and Parent(2, s3)
-none
+Select s1 such that Parent(3, s2) and Parent(3, s3)
+1,2,3,4,5,6,7,8
 5000
 Evaluating query 278 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym BothRelationDiffSynonym HaveResult
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: 
-Correct answer: 
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
 279 - Select SingleSynonym Stmt Parent IntSynonym And Parent IntSynonym GetFront HaveResult
 stmt s1, s2;
 Select s1 such that Parent(3, s1) and Parent(3, s2)
@@ -3103,34 +3098,34 @@ No ReturnBoolean, ReturnTuple=1
 The final tag string is ReturnTuple="1" Parent="2" UnnamedVar="2" SuchThat="1" CondNum="6" RelNum="2" 
 Your answer: 3 
 Correct answer: 3 
-289 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst HaveResult
+289 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst NoResult
 stmt s1, s2, s3;
 Select s1 such that Parent(s1, s2) and Parent(s2, s3)
 none
 5000
-Evaluating query 289 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst HaveResult
+Evaluating query 289 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetFirst NoResult
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
 Your answer: 
 Correct answer: 
-290 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle HaveResult
+290 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle NoResult
 stmt s1, s2, s3;
 Select s2 such that Parent(s1, s2) and Parent(s2, s3)
 none
 5000
-Evaluating query 290 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle HaveResult
+Evaluating query 290 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetMiddle NoResult
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
 Your answer: 
 Correct answer: 
-291 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast HaveResult
+291 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast NoResult
 stmt s1, s2, s3;
 Select s3 such that Parent(s1, s2) and Parent(s2, s3)
 none
 5000
-Evaluating query 291 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast HaveResult
+Evaluating query 291 - Select SingleSynonym Stmt Parent SynonymSynonym And Parent SynonymSynonym Chain GetLast NoResult
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Parent="2" SuchThat="1" CondNum="4" RelNum="2" 
