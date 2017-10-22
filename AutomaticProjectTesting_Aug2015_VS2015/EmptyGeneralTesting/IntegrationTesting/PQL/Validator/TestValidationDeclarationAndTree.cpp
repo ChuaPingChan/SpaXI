@@ -159,5 +159,13 @@ namespace UnitTesting
             Assert::IsFalse(fdv.isValidDeclaration(str));
         }
 
+        TEST_METHOD(TestValidity_Declaration_ValidEntityConcatenateValidSynonym_Invalid)
+        {
+            QueryTree qtPtr;
+            FriendDeclarationValidator fdv = FriendDeclarationValidator(&qtPtr);
+            string str = "stmts";
+            Assert::IsFalse(fdv.isValidDeclaration(str));
+        }
+
     };
 }

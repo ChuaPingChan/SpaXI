@@ -43,6 +43,12 @@ namespace UnitTesting
             Assert::IsFalse(RegexValidators::isValidDeclarationExtractedRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Declaration_ValidEntity_Concatenate_ValidSynonym_Invalid)
+        {
+            string str = "    assignassign        ";
+            Assert::IsFalse(RegexValidators::isValidDeclarationExtractedRegex(str));
+        }
+
         TEST_METHOD(TestRegex_Declaration_NoEntity_Invalid)
         {
             string str = "  synonym      ";
