@@ -16,13 +16,19 @@ PKBMain* PKBMain::getInstance()
     return singleton;
 }
 
+bool PKBMain::deleteInstance()
+{
+    delete singleton;
+    singleton = NULL;
+    return true;
+}
+
 void PKBMain::resetInstance()
 {
     if (singleton != NULL) {
-        delete singleton;
-        singleton = NULL;
-        singleton = new PKBMain();
+        PKBMain::deleteInstance();
     }
+    singleton = new PKBMain();
 }
 
 //Utility functions

@@ -19,6 +19,11 @@ TestWrapper::TestWrapper() {
     _pkbMain = PKBMain::getInstance();
 }
 
+TestWrapper::~TestWrapper()
+{
+    PKBMain::deleteInstance();
+}
+
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
@@ -38,4 +43,5 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
   // store the answers to the query in the results list (it is initially empty)
   // each result must be a string.
     results = pqlMain.run();
+
 }

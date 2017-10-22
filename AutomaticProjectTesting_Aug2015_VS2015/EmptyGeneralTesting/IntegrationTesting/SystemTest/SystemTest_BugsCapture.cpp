@@ -45,7 +45,7 @@ namespace UnitTesting
             Assert::IsTrue(actualResults == expectedResults);
 
             // Clean up
-            pkbPtr->resetInstance();
+            pkbPtr->deleteInstance();
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
@@ -68,7 +68,7 @@ namespace UnitTesting
             Assert::IsTrue(actualResults == expectedResults);
 
             // Clean up
-            pkbPtr->resetInstance();
+            pkbPtr->deleteInstance();
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
