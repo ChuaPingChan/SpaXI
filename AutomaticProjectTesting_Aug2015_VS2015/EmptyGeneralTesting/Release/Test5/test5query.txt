@@ -1,5 +1,5 @@
-1 - None
+1 - Get all variables on left hand side of assignment
 assign a,a1; variable v;
 Select v such that Modifies (a, v) pattern a1 (v, _)
-none
+x,left,right,temp,radius,radius1,quota,iter
 5000
