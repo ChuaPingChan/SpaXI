@@ -110,10 +110,8 @@ Select s1 such that Modifies(s2, v)
 Evaluating query 11 - Declaration SyntaxCheck CommaInfrontSynonym HasAnswer
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 
 Correct answer: 1 10 11 12 13 14 15 16 17 18 19 2 20 21 22 23 24 25 26 27 28 29 3 30 31 32 33 34 35 36 37 38 4 5 6 7 8 9 
-Missing: 1 10 11 12 13 14 15 16 17 18 19 2 20 21 22 23 24 25 26 27 28 29 3 30 31 32 33 34 35 36 37 38 4 5 6 7 8 9 
-Additional: 
 12 - Case 1: return all stmt if true
 stmt s;
 Select s such that Modifies(4, "b")
@@ -824,10 +822,10 @@ None
 Evaluating query 75 - Case 6
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 
+Your answer: a b c d e f g h i j k l m n p o q r s t u v w x y z 
 Correct answer: None 
 Missing: None 
-Additional: 
+Additional: a b c d e f g h i j k l m n o p q r s t u v w x y z 
 76 - Case 6
 stmt s; variable v; procedure p;
 Select p such that Modifies(s, v)
@@ -2809,10 +2807,10 @@ Select s such that Next*(16, s)
 Evaluating query 252 - 1 Clause: 1 synonym (2ndArg), given arg; Has answer
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Nextstar="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 11 12 13 14 15 16 20 21 22 
+Your answer: 11 12 13 14 15 16 
 Correct answer: 11 12 13 14 15 
 Missing: 
-Additional: 16 20 21 22 
+Additional: 16 
 253 - 1 Clause: 1 synonym (2ndArg), _; Has answer
 stmt s;
 Select s such that Next*(_, s)

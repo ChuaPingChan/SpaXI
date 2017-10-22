@@ -8,3 +8,8 @@ assign a;
 Select a pattern a(_, "x")
 36,37
 5000
+3 - newline autotester
+assign \n hi;
+Select hi;
+All the assigns
+5000
