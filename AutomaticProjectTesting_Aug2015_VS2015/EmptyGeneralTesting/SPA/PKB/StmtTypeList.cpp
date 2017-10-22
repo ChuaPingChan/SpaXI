@@ -39,6 +39,14 @@ bool StmtTypeList::addToCallsStmtList(int stmt, int calleeProcIdx, string callee
 	return false;
 }
 
+list<int> StmtTypeList::getStmtFromCalleeProcName(string calleeProcName) {
+	if (procNameToCallMap.find(calleeProcName) == procNameToCallMap.end()) {
+		return list<int>();
+	}
+
+	return procNameToCallMap[calleeProcName];
+}
+
 int StmtTypeList::getProcIdxFromCall(int stmt) {
 	if (callToProcIdxMap.find(stmt) == callToProcIdxMap.end()) {
 		return -1;

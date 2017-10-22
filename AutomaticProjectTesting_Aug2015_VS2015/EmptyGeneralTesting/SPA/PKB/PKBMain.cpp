@@ -222,6 +222,10 @@ list<string> PKBMain::getAllCalleeNames() {
 	return stmtTypeList.getAllCalleeNames();
 }
 
+list<int> PKBMain::getStmtFromCallee(string callee) {
+	return stmtTypeList.getStmtFromCalleeProcName(callee);
+}
+
 bool PKBMain::setCallsRel(int stmt, string callerProcName, string calleeProcName) {
 	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
 
@@ -1182,6 +1186,117 @@ int PKBMain::getProcFromStmt(int stmt) {
 
 //TODO AFFECTSSSSS
 bool PKBMain::isAffects(int stmt1, int stmt2) {
+	// check if both are assignment first
+	if (!isAssignment(stmt1) || !isAssignment(stmt2)) {
+		return false;
+	}
+	//TODO remove this once algo is settled
+	return false;
+	int currStmt = stmt1;
+	// keep track of modified var and which stmts they are modified
+	unordered_map<int, unordered_set<int>> modVarToStmtMap;
+	stack<int> changedNodes, joinNodes, whileNodes;
+	stack<unordered_map<int, unordered_set<int>>> ifSet, whileSet;
+	changedNodes.push(currStmt);
+
+	while (!changedNodes.empty()) {
+		currStmt = changedNodes.top();
+		changedNodes.pop();
+		if (currStmt == -1) { // join node
+
+		}
+
+		if (isAssignment(currStmt)) {
+			list<int> varUsed = getUsesFromStmt(currStmt);
+			for (unordered_map<int, unordered_set<int>>::iterator it = modVarToStmtMap.begin();
+				it != modVarToStmtMap.end(); ++it) {
+				int varIdx = (*it).first;
+				if (find(varUsed.begin(), varUsed.end(), varIdx) == varUsed.end()) {
+					continue;
+				}
+				for (auto &stmt : (*it).second) {
+					if (stmt1 == stmt && stmt2 == currStmt) {
+						return true;
+					}
+				}
+			}
+		}
+
+		if (isIf(currStmt)) {
+			ifSet.push(modVarToStmtMap);
+			joinNodes.push(0);
+		}
+
+		else if (isWhile(currStmt)) {
+			if (!whileNodes.empty() && whileNodes.top() == currStmt) {
+				whileNodes.pop();
+				unordered_map<int, unordered_set<int>> tempMap = whileSet.top();
+				whileSet.pop();
+				for (auto map : tempMap) {
+					if (modVarToStmtMap.find(map.first) == modVarToStmtMap.end()) {
+						modVarToStmtMap.insert(map);
+					}
+					else {
+						modVarToStmtMap[map.first].insert(map.second.begin(), map.second.end());
+					}
+				}
+
+				if (modVarToStmtMap.size() == tempMap.size() && 
+					equal(modVarToStmtMap.begin(), modVarToStmtMap.end(), tempMap.begin())) {
+					whileNodes.push(currStmt);
+					whileSet.push(modVarToStmtMap);
+					list<int> nextList = getExecutedAfter(currStmt, STMT);
+					if (nextList.size() != 0) {
+						changedNodes.push(nextList.front());
+					}
+				}
+				continue;
+			}
+			else {
+				whileNodes.push(currStmt);
+				whileSet.push(modVarToStmtMap);
+			}
+		}
+
+		else { //is assignment or call statement
+			list<int> modifiedList = getModifiesFromStmt(currStmt);
+			for (int i : modifiedList) {
+				modVarToStmtMap.erase(i);
+				//replace if assignment
+				if (isAssignment(currStmt)) {
+					modVarToStmtMap.insert({ i, {currStmt} });
+				}
+			}
+		}
+
+		list<int> nextList = getExecutedAfter(currStmt, STMT);
+		int negCount = 0;
+		for (int next : nextList) {
+			if (next < currStmt) {
+				negCount++;
+			}
+		}
+
+		if (joinNodes.size() < negCount) {
+			negCount = joinNodes.size();
+		}
+
+		if (!joinNodes.empty()) {
+			if (joinNodes.top() == 0) { // the very last join
+				for (int count = 0; count < negCount; count++) {
+					changedNodes.push(-1);
+				}
+				if (isWhile(currStmt)) {
+					changedNodes.push(nextList.front());
+				}
+				continue;
+			}
+			else if (joinNodes.top() == 1 & negCount > 1) {
+
+			}
+		}
+	}
+
 	return false;
 }
 

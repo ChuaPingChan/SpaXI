@@ -143,6 +143,7 @@ public:
 	bool setParentChildRel(int parentStmt, int childStmt);
 	bool setFollowsRel(int stmtBef, int stmtAft);
 	list<string> getAllCalleeNames();
+	list<int> getStmtFromCallee(string callee);
 	bool setCallsRel(int stmt, string callerProcName, string calleeProcName);
     bool addVariable(string var);
     bool addProcedure(string proc);
