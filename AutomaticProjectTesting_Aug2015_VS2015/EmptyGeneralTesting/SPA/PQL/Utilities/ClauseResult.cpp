@@ -320,9 +320,13 @@ bool ClauseResult::removeCombinations(string synName, int value)
 
 bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value)
 {
-    assert(syn1Name != syn2Name);
     assert(ClauseResult::synonymPresent(syn1Name));
     assert(ClauseResult::synonymPresent(syn2Name));
+
+    if (syn1Name == syn2Name) {
+        assert(syn1Value == syn2Value);
+        return removeCombinations(syn1Name, syn1Value);
+    }
 
     int syn1Idx = _synToIdxMap.at(syn1Name);
     int syn2Idx = _synToIdxMap.at(syn2Name);
