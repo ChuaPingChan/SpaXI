@@ -45,6 +45,12 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
+        TEST_METHOD(TestRegex_Select_KeywordAsSynonym_if_Valid)
+        {
+            string str = "Select if";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
         TEST_METHOD(TestRegex_Select_MissingWhitespaces_Invalid)
         {
             string str = "Selects";

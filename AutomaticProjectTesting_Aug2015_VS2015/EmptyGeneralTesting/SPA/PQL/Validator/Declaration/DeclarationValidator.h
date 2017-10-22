@@ -5,6 +5,8 @@
 #include "..\..\QueryTree.h"
 #include "..\..\..\Entity.h"
 #include "..\ValidationRegexLibrary\RegexValidators.h"
+#include "..\..\..\Exceptions\EntityNotFoundException.h"
+#include "..\..\..\Exceptions\SynonymAlreadyExistException.h"
 
 using namespace std;
 
@@ -24,10 +26,11 @@ private:
 
     unordered_set<string> synonymBank;   //Contains list of declared synonyms
 
-    bool isValidEntity(string str);
-    bool isValidSynonym(string str);
     Entity getEntityIndexReference(string entity);
 
+    bool areValidSynonyms(Entity entity, string str);
+
     bool hasValidEntityAndSynonym(string str);
+
     bool isDeclaredSynonym(string synonym);
 };

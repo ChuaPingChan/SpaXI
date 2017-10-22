@@ -1,7 +1,7 @@
-Parameters : Test4_Frozen\test4source1.txt Test4_Frozen\test4query1.txt Test4_Frozen\out4_1.xml
+Parameters : test4source1.txt test4query1.txt out4_1.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
-Release
+Test4_Frozen
 Beginning to evaluate Query File.
 1 - comment
 procedure p; variable v;
