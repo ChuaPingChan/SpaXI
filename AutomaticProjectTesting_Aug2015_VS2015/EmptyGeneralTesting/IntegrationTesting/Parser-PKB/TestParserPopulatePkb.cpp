@@ -170,6 +170,49 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(TestAddStmtsOfProc)
+        {
+            // Set up
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_iteration3complexity());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            int actualIntResult;
+            list<string> actualStrResults;
+            list<string> expectedStrResults;
+
+            expectedStrResults = list<string>{ "ABC" };
+            actualIntResult = dummyPkbMain.getProcFromStmt(4);
+            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            Assert::IsTrue(actualStrResults == expectedStrResults);
+            actualIntResult = dummyPkbMain.getProcFromStmt(10);
+            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            Assert::IsTrue(actualStrResults == expectedStrResults);
+            actualIntResult = dummyPkbMain.getProcFromStmt(14);
+            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            Assert::IsTrue(actualStrResults == expectedStrResults);
+            actualIntResult = dummyPkbMain.getProcFromStmt(20);
+            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            Assert::IsTrue(actualStrResults == expectedStrResults);
+
+            expectedStrResults = list<string>{ "GHI" };
+            actualIntResult = dummyPkbMain.getProcFromStmt(40);
+            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            Assert::IsTrue(actualStrResults == expectedStrResults);
+            actualIntResult = dummyPkbMain.getProcFromStmt(61);
+            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            Assert::IsTrue(actualStrResults == expectedStrResults);
+            actualIntResult = dummyPkbMain.getProcFromStmt(41);
+            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            Assert::IsTrue(actualStrResults == expectedStrResults);
+            actualIntResult = dummyPkbMain.getProcFromStmt(52);
+            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            Assert::IsTrue(actualStrResults == expectedStrResults);
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         TEST_METHOD(simpleNextRelation)
         {
             // Set up

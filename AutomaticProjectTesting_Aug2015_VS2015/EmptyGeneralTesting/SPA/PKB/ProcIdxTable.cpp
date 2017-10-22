@@ -43,3 +43,33 @@ list<string> ProcIdxTable::getAllProceduresName() {
 bool ProcIdxTable::isProcedure(string procName) {
 	return procIdxMap.find(procName) != procIdxMap.end();
 }
+
+bool ProcIdxTable::addStmtToProc(int stmt, int procIdx) {
+	procToStmtMap[procIdx].push_back(stmt);
+	stmtToProcMap[stmt] = procIdx;
+	return true;
+}
+
+int ProcIdxTable::getProcIdxFromStmt(int stmt) {
+	if (stmtToProcMap.find(stmt) == stmtToProcMap.end()) {
+		return -1;
+	}
+
+	return stmtToProcMap[stmt];
+}
+
+int ProcIdxTable::getFirstStmtFromProc(int procIdx) {
+	if (procToStmtMap.find(procIdx) == procToStmtMap.end()) {
+		return -1;
+	}
+
+	return procToStmtMap[procIdx].front();
+}
+
+list<int> ProcIdxTable::getAllStmtsFromProc(int procIdx) {
+	if (procToStmtMap.find(procIdx) == procToStmtMap.end()) {
+		return list<int>();
+	}
+
+	return procToStmtMap[procIdx];
+}

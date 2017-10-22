@@ -4,6 +4,7 @@
 #include <set>
 #include <list>
 #include <regex>
+#include <algorithm>
 #include "..\QueryTree.h"
 #include "..\Utilities\ClauseResult.h"
 #include "..\..\PKB\PKBMain.h"
@@ -17,11 +18,13 @@ public:
 	ResultFormatter();
 	list<string> finalResultFromSelection(ClauseResult cr, QueryTree qt);
     list<string> handleNoResult(QueryTree qt);
-    list<string> handleInvalidQuery(string query);
 
 protected:
 	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
-	list<string> convertListOfListOfIntsToListOfStrings(list<list<int>> listOfInts);
+    string convertListOfStringsToSingleString(list<string> singleSynResult);
+    list<string> handleSelectBoolean(ClauseResult cr);
+    list<string> handleSelectSynonym(ClauseResult cr, SelectClause sc);
+    list<string> handleSelectTuple(ClauseResult cr, SelectClause selectedClause);
 
 private:
     PKBMain* pkbInstance;

@@ -3,80 +3,42 @@
 
 using namespace std;
 
+/*This class checks the selection type of the select clause has 
+(whether it is Select BOOLEAN, Select singleSynonym or Select Tuple)
+and formats the results to be displayed to the UI.*/
 ResultFormatter::ResultFormatter()
 {
     this->pkbInstance = PKBMain::getInstance();
 }
 
+//This method handles result formatter if the ClauseResult has result
 list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTree qt)
 {
 	SelectClause selectionByQuery = qt.getSelectClause();
 	list<string> selectSynonym;
 	list<string> result;
 
-	//Case 1: Select BOOLEAN
-	if (selectionByQuery.getSelectionType()==SELECT_BOOLEAN)
-	{
-		if (!cr.hasResults()) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
-		{
-			result.push_back("false");
-		}
-		else 
-		{
-			result.push_back("true"); //If ClauseResult is empty, BOOLEAN is false
-		}
-	}
+    SelectionType selectedType = selectionByQuery.getSelectionType(); //Get Selection Type from the SelectClause
+    
+    switch (selectedType)
+    {
+    case SELECT_BOOLEAN: 
+        result = handleSelectBoolean(cr); 
+        break;
+    case SELECT_SINGLE:
+        result = handleSelectSynonym(cr, selectionByQuery);
+        break;
+    case SELECT_TUPLE:
+        result = handleSelectTuple(cr, selectionByQuery);
+        break;
+    default:
+        break;
+    }
 	
-	//Case 2: Select synonym
-	else if (selectionByQuery.getSelectionType() == SELECT_SINGLE)
-	{
-		if (cr.hasResults())
-		{
-			Entity argType = selectionByQuery.getSingleArgType();
-            string synonymToGetResultFor = selectionByQuery.getSingleArg();
-
-			if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
-			{
-				result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
-			}
-
-            else if (argType == PROCEDURE || argType == VARIABLE)
-            {
-                result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
-            }
-
-        }
-	
-	}
-
-	//Case 3: Select tuple
-	else if (selectionByQuery.getSelectionType() == SELECT_TUPLE)
-	{
-      //To-Do
-	}
 	return result;
 }
 
-/******************
-* Helper methods *
-******************/
-list<string> ResultFormatter::convertListOfIntsToListOfStrings(list<int> listOfInts)
-{
-	list<string> convertedFromInt;
-	for (int i : listOfInts)
-	{
-		convertedFromInt.push_back(to_string(i));
-	}
-	
-	return convertedFromInt;
-}
-
-list<string> ResultFormatter::convertListOfListOfIntsToListOfStrings(list<list<int>> listOfInts)
-{
-	list<string> convertedFromInt;
-	return convertedFromInt;
-}
-
+//This method handles result if evaluator has no result/query is invalid and Select type is BOOLEAN.
 list<string> ResultFormatter::handleNoResult(QueryTree qt)
 {
     SelectClause selectionByQuery = qt.getSelectClause();
@@ -88,17 +50,114 @@ list<string> ResultFormatter::handleNoResult(QueryTree qt)
     return result;
 }
 
-list<string> ResultFormatter::handleInvalidQuery(string query)
+/******************
+* Helper methods *
+******************/
+
+
+
+/* Formats result when Select type is BOOLEAN */
+list<string> ResultFormatter::handleSelectBoolean(ClauseResult cr)
 {
     list<string> result;
-    string SELECT_BOOLEAN = "((\\;)*\\s*Select BOOLEAN$)|((\\;)*\\s*Select BOOLEAN)(\\s+)";
-    regex checkSelectBoolean(SELECT_BOOLEAN);
-    if (regex_search(query, checkSelectBoolean))
+    if (!cr.hasResults()) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
     {
         result.push_back("false");
+    }
+    else
+    {
+        result.push_back("true"); //If ClauseResult has results, Select BOOLEAN is true
+    }
+    return result;
+}
+
+/* Formats result when Select type is a single synonym */
+list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause selectedClause)
+{
+    list<string> result;
+    if (cr.hasResults())
+    {
+        Entity argType = selectedClause.getSingleArgType();
+        string synonymToGetResultFor = selectedClause.getSingleArg();
+
+        //If result is of type int, get direct results from ClauseResult
+        if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
+        {
+            result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
+        }
+
+        //If result is of type string, convert mapping of ints to strings from PKB 
+        else if (argType == PROCEDURE || argType == VARIABLE )
+        {
+            result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
+        }
+
     }
 
     return result;
 }
+
+/* Formats result when Select type is a tuple */
+list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause selectedClause)
+{
+    list<string> result;
+    vector<string> synonymsFromSelectedClause = selectedClause.getTupleArgs();
+    list<string> synonyms;
+    synonyms.assign(synonymsFromSelectedClause.begin(), synonymsFromSelectedClause.end()); //Convert from vector to list to call ClauseResult API
+
+    list<list<int>> resultListOfTuple = cr.getSynonymResults(synonyms); //Get all results for the Selected Synonyms in TUPLE
+    for (auto it : resultListOfTuple) //iterate over each row of tuple result
+    {
+        list<int> curList = it; //current row of tuple result
+        list<string> tempListOfStrings;
+        int index = 0;
+        for (int curElement : curList) //iterate over each column of tuple result
+        {
+            Entity argType = selectedClause.getTupleArgTypeAt(index); //get Entity type at current index
+            if (argType == VARIABLE || argType == PROCEDURE)
+            {
+                tempListOfStrings.push_back(pkbInstance->convertIdxToString(curElement, argType)); //get mapping of int to string
+            }
+            else
+            {
+                tempListOfStrings.push_back(to_string(curElement)); //convert int to string
+            }
+            index++;
+        }
+
+        result.push_back(convertListOfStringsToSingleString(tempListOfStrings)); //convert list of strings to one string
+    }
+    
+    return result;
+}
+
+/* Convert a list of integers to a list of strings */
+list<string> ResultFormatter::convertListOfIntsToListOfStrings(list<int> listOfInts)
+{
+    list<string> convertedFromInt;
+    for (int i : listOfInts)
+    {
+        convertedFromInt.push_back(to_string(i));
+    }
+
+    return convertedFromInt;
+}
+
+/* Add whitespaces between elements and comma at the end of the list */
+string ResultFormatter::convertListOfStringsToSingleString(list<string> singleSynResult)
+{
+    string result;
+    for (string s : singleSynResult)
+    {
+        result.append(s);
+        result.append(" ");
+    }
+    result.erase(result.size() - 1, result.size());
+    return result;
+}
+
+
+
+
 
 
