@@ -507,5 +507,51 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isNextStar(53, 50));
 			Assert::IsFalse(PKB.isNextStar(54, 49));
 		}
+
+		TEST_METHOD(TestAffects) {
+			PKBMain PKB;
+			PKB.setNext(1, 2);
+			PKB.setNext(2, 3);
+			PKB.setNext(3, 4);
+			PKB.setNext(3, 5);
+			PKB.setNext(4, 1);
+			PKB.setNext(5, 1);
+			PKB.setNext(1, 6);
+
+			PKB.addStmtToProc(1, "Test");
+			PKB.addStmtToProc(2, "Test");
+			PKB.addStmtToProc(3, "Test");
+			PKB.addStmtToProc(4, "Test");
+			PKB.addStmtToProc(5, "Test");
+			PKB.addStmtToProc(6, "Test");
+
+			PKB.addVariable("d");
+			PKB.addVariable("a");
+			PKB.addVariable("b");
+			PKB.addVariable("c");
+			
+			PKB.addWhileStmt(1, "d");
+			PKB.addAssignmentStmt(2);
+			PKB.setUseTableStmtToVar(2, "b");
+			PKB.setModTableStmtToVar(2, "a");
+			PKB.addIfStmt(3, "a");
+			PKB.addAssignmentStmt(4);
+			PKB.setModTableStmtToVar(4, "b");
+			PKB.setUseTableStmtToVar(4, "c");
+			PKB.addAssignmentStmt(5);
+			PKB.setModTableStmtToVar(5, "c");
+			PKB.setUseTableStmtToVar(5, "a");
+			PKB.addAssignmentStmt(6);
+			PKB.setModTableStmtToVar(6, "d");
+			PKB.setUseTableStmtToVar(6, "a");
+			PKB.setParentChildRel(1, 2);
+			PKB.setParentChildRel(1, 3);
+			PKB.setParentChildRel(3, 4);
+			PKB.setParentChildRel(3, 5);
+			PKB.startProcessComplexRelations();
+			Assert::IsTrue(PKB.isAffects(2, 5));
+			Assert::IsTrue(PKB.isAffects(5, 4));
+			Assert::IsFalse(PKB.isAffects(4, 6));
+		}
 	};
 }

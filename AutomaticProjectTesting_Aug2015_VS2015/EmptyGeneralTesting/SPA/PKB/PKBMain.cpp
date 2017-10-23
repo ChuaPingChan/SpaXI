@@ -1196,146 +1196,191 @@ bool PKBMain::isAffects(int stmt1, int stmt2) {
 	if (!isAssignment(stmt1) || !isAssignment(stmt2)) {
 		return false;
 	}
-	//TODO remove this once algo is settled
-	return false;
-	int currStmt = stmt1;
-	// keep track of modified var and which stmts they are modified
-	unordered_map<int, unordered_set<int>> modVarToStmtMap;
-	stack<int> changedNodes, joinNodes, whileNodes;
-	stack<unordered_map<int, unordered_set<int>>> ifSet, whileSet;
-	changedNodes.push(currStmt);
 
-	while (!changedNodes.empty()) {
-		currStmt = changedNodes.top();
-		changedNodes.pop();
-		if (currStmt == -1) { // join node
+	if (getProcFromStmt(stmt1) != getProcFromStmt(stmt2)) {
+		return false;
+	}
 
+	list<int> varModified = getModifiesFromStmt(stmt1);
+	list<int> varUsed = getUsesFromStmt(stmt2);
+
+	int varMod = varModified.front();
+	if (find(varUsed.begin(), varUsed.end(), varMod) == varUsed.end()) { // if stmt2 doesnt used what stmt1 modifies
+		return false;
+	}
+	
+	queue<int> path;
+	unordered_map<int, int> visit;
+	visit[stmt1] = -1;
+	path.push(stmt1);
+
+	while (!path.empty()) {
+		int currStmt = path.front();
+		path.pop();
+
+		if (currStmt == stmt2 && visit[currStmt] != -1) {
+			return true;
 		}
 
-		if (isAssignment(currStmt)) {
-			list<int> varUsed = getUsesFromStmt(currStmt);
-			for (unordered_map<int, unordered_set<int>>::iterator it = modVarToStmtMap.begin();
-				it != modVarToStmtMap.end(); ++it) {
-				int varIdx = (*it).first;
-				if (find(varUsed.begin(), varUsed.end(), varIdx) == varUsed.end()) {
-					continue;
-				}
-				for (auto &stmt : (*it).second) {
-					if (stmt1 == stmt && stmt2 == currStmt) {
-						return true;
-					}
-				}
-			}
-		}
-
-		if (isIf(currStmt)) {
-			ifSet.push(modVarToStmtMap);
-			joinNodes.push(0);
+		else if (visit[currStmt] == 1) {
+			//visited
+			continue;
 		}
 
 		else if (isWhile(currStmt)) {
-			if (!whileNodes.empty() && whileNodes.top() == currStmt) {
-				whileNodes.pop();
-				unordered_map<int, unordered_set<int>> tempMap = whileSet.top();
-				whileSet.pop();
-				for (auto map : tempMap) {
-					if (modVarToStmtMap.find(map.first) == modVarToStmtMap.end()) {
-						modVarToStmtMap.insert(map);
-					}
-					else {
-						modVarToStmtMap[map.first].insert(map.second.begin(), map.second.end());
-					}
-				}
-
-				if (modVarToStmtMap.size() == tempMap.size() && 
-					equal(modVarToStmtMap.begin(), modVarToStmtMap.end(), tempMap.begin())) {
-					whileNodes.push(currStmt);
-					whileSet.push(modVarToStmtMap);
-					list<int> nextList = getExecutedAfter(currStmt, STMT);
-					if (nextList.size() != 0) {
-						changedNodes.push(nextList.front());
-					}
-				}
-				continue;
+			visit[currStmt] = 1;
+			list<int> currChildrenStar = getChildrenStar(currStmt, STMT);
+			currChildrenStar.sort();
+			if (stmt2 >= currChildrenStar.front() && stmt2 <= currChildrenStar.back()) {
+				path.push(currStmt + 1);
 			}
 			else {
-				whileNodes.push(currStmt);
-				whileSet.push(modVarToStmtMap);
-			}
-		}
-
-		else { //is assignment or call statement
-			list<int> modifiedList = getModifiesFromStmt(currStmt);
-			for (int i : modifiedList) {
-				modVarToStmtMap.erase(i);
-				//replace if assignment
-				if (isAssignment(currStmt)) {
-					modVarToStmtMap.insert({ i, {currStmt} });
+				list<int> currNext = getExecutedAfter(currStmt, STMT);
+				for (int tempNext : currNext) {
+					if (tempNext != currStmt + 1) {
+						path.push(tempNext);
+					}
 				}
 			}
 		}
 
-		list<int> nextList = getExecutedAfter(currStmt, STMT);
-		int negCount = 0;
-		for (int next : nextList) {
-			if (next < currStmt) {
-				negCount++;
+		else if (isIf(currStmt)) {
+			visit[currStmt] = 1;
+			list<int> currNext = getExecutedAfter(currStmt, STMT);
+			for (int tempNext : currNext) {
+				path.push(tempNext);
 			}
 		}
 
-		if (joinNodes.size() < negCount) {
-			negCount = joinNodes.size();
-		}
-
-		if (!joinNodes.empty()) {
-			if (joinNodes.top() == 0) { // the very last join
-				for (int count = 0; count < negCount; count++) {
-					changedNodes.push(-1);
+		else {
+			list<int> currModifies = getModifiesFromStmt(currStmt);
+			if (visit[currStmt] == -1 || find(currModifies.begin(), currModifies.end(), varMod) == currModifies.end()) {
+				list<int> currNext = getExecutedAfter(currStmt, STMT);
+				for (int tempNext : currNext) {
+					path.push(tempNext);
 				}
-				if (isWhile(currStmt)) {
-					changedNodes.push(nextList.front());
-				}
-				continue;
 			}
-			else if (joinNodes.top() == 1 & negCount > 1) {
-
-			}
+			visit[currStmt] = 1;
 		}
 	}
 
 	return false;
+
 }
 
 bool PKBMain::isAffector(int stmt1) {
+	list<int> nextStarList = getExecutedAfterStar(stmt1, STMT);
+	for (int next : nextStarList) {
+		if (isAffects(stmt1, next)) {
+			return true;
+		}
+	}
 	return false;
 }
 
 list<int> PKBMain::getAffectedOf(int stmt1) {
-	return list<int>();
+	list<int> affectedList;
+	list<int> nextStarList = getExecutedAfterStar(stmt1, STMT);
+	for (int next : nextStarList) {
+		if (isAffects(stmt1, next)) {
+			affectedList.push_back(next);
+			affectedList.sort();
+			affectedList.unique();
+		}
+	}
+	return affectedList;
 }
 
 bool PKBMain::isAffected(int stmt2) {
+	list<int> prevStarList = getExecutedBeforeStar(stmt2, STMT);
+	for (int prev : prevStarList) {
+		if (isAffects(prev, stmt2)) {
+			return true;
+		}
+	}
 	return false;
 }
 
 bool PKBMain::hasAffects() {
+	list<int> allStmts = getAllAssignments();
+	for (int stmt : allStmts) {
+		list<int> nextStarList = getExecutedAfterStar(stmt, STMT);
+		for (int next : nextStarList) {
+			if (isAffects(stmt, next)) {
+				return true;
+			}
+		}
+	}
 	return false;
 }
 
 list<int> PKBMain::getAllAffected() {
-	return list<int>();
+	list<int> affectedList;
+	list<int> allStmts = getAllAssignments();
+	for (int stmt : allStmts) {
+		list<int> nextStarList = getExecutedAfterStar(stmt, STMT);
+		for (int next : nextStarList) {
+			if (isAffects(stmt, next)) {
+				affectedList.push_back(next);
+				affectedList.sort();
+				affectedList.unique();
+			}
+		}
+	}
+	return affectedList;
 }
 
 list<int> PKBMain::getAffectorOf(int stmt2) {
-	return list<int>();
+	list<int> affectorList;
+	list<int> prevStarList = getExecutedBeforeStar(stmt2, STMT);
+	for (int prev : prevStarList) {
+		if (isAffects(prev, stmt2)) {
+			affectorList.push_back(prev);
+			affectorList.sort();
+			affectorList.unique();
+		}
+	}
+	return affectorList;
 }
 
 list<int> PKBMain::getAllAffector() {
-	return list<int>();
+	list<int> affectorList;
+	list<int> allStmts = getAllAssignments();
+	for (int stmt : allStmts) {
+		list<int> prevStarList = getExecutedBeforeStar(stmt, STMT);
+		for (int prev : prevStarList) {
+			if (isAffects(prev, stmt)) {
+				affectorList.push_back(prev);
+				affectorList.sort();
+				affectorList.unique();
+			}
+		}
+	}
+	return affectorList;
 }
 
 pair<list<int>, list<int>> PKBMain::getAllAffects() {
-	return make_pair(list<int>(), list<int>());
+	list<int> prevList;
+	list<int> nextList;
+	unordered_map<int, unordered_set<int>> affectsRelMap;
+
+	list<int> allStmts = getAllAssignments();
+	for (int stmt : allStmts) {
+		list<int> nextStarList = getExecutedAfterStar(stmt, STMT);
+		for (int next : nextStarList) {
+			if (isAffects(stmt, next)) {
+				if (affectsRelMap.find(stmt) != affectsRelMap.end()) {
+					if (affectsRelMap[stmt].find(next) != affectsRelMap[stmt].end()) {
+						affectsRelMap[stmt].insert(next);
+						prevList.push_back(stmt);
+						nextList.push_back(next);
+					}
+				}
+			}
+		}
+	}
+
+	return make_pair(prevList, nextList);
 }
 
 bool PKBMain::isAffectsStar(int stmt1, int stmt2) {
