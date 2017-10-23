@@ -131,7 +131,7 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
 
         else if (!argOneExists && !argTwoExists)
         {
-            pair<list<int>, list<int>> pkbResult = pkbInstance->getAllCalls();
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getAllCallsStar();
 
             if (pkbResult.first.empty() && pkbResult.second.empty())
             {
