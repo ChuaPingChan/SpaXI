@@ -8,9 +8,7 @@
 #include "Parser.h"
 #include "SyntaxErrorException.h"
 #include "../PKB/PKBMain.h"
-
-// TODO: Remove this output debug string before submission
-#include "Windows.h"
+#include "Windows.h"    // For debugging purposes
 
 using namespace std;
 
@@ -73,8 +71,12 @@ bool Parser::parse(string filename) {
     _pkbMainPtr->startProcessComplexRelations();
 
     /*
-    TODO iteration3.0: Final checks
-    - All calls are to valid procedures
+    TODO:
+    Keep track of actual procedure names with a HashSet<string> (not including
+    procedures called by Call-statements). Here, check if the size of the hash
+    set is the number of procedures registered in the PKB. If there are more
+    procedures registerd in PKB, it means there are call-statements that calls
+    procedures that don't exist.
     */
 
     return _isValidSyntax;
@@ -709,7 +711,7 @@ void Parser::parseWhileStmt() {
 Parses an if-else statement. When this method ends,
 _currentTokenPtr will be advanced after '}'.
 */
-void Parser::parseIfStmt()
+void Parser::parseIfStmt()      // TODO: Rename this to "parseIfElseStmt()"
 {
     OutputDebugString("FINE: If-else statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD);
@@ -825,12 +827,6 @@ void Parser::parseCallStmt()
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
     string calledProcName = _currentTokenPtr;
 
-    /*
-    TODO iteration 3.0:
-    The procedure being called will not be added to PKB. After the whole SIMPLE program is parsed,
-    Ask DesignExtractor to check if all the procedures being called are present.
-    Show error message and exit if a call statement calls an undefined procedure.
-    */
     //PKB: Add calls relation
     OutputDebugString("PKB: Add calls relation.\n");
     _pkbMainPtr->setCallsRel(_currentStmtNumber, _currentProcName, calledProcName);
