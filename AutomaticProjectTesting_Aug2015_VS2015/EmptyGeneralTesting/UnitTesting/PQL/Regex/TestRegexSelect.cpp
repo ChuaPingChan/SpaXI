@@ -163,6 +163,171 @@ namespace UnitTesting
             Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
         }
 
+        /******************************
+        * Select Attribute - Single *
+        ******************************/
+
+        TEST_METHOD(TestRegex_ValidAttribute_ProcName)
+        {
+            string str = "Select p.procName";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ValidAttribute_VarName)
+        {
+            string str = "Select v.varName";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ValidAttribute_CallValue)
+        {
+            string str = "Select c.value";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ValidAttribute_StmtNum)
+        {
+            string str = "Select s.stmt#";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ValidAttribute_CallProcName)
+        {
+            string str = "Select c.procName";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_InvalidAttribute_ProcName)
+        {
+            string str = "Select p.Pr0cName";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_InvalidAttribute_Value)
+        {
+            string str = "Select v.VALUE#";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_InvalidAttribute_StmtNum)
+        {
+            string str = "Select a.stmtNumber";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_InvalidAttribute_VarName)
+        {
+            string str = "Select v.variableName";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_InvalidAttribute_CommaInsteadOfDot)
+        {
+            string str = "Select p,procName";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_InvalidAttribute_InvalidSynonym)
+        {
+            string str = "Select 1.value";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_InvalidAttribute_SpecialCharacter)
+        {
+            string str = "Select p.procName#";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_ValidAttribute_MultipleAttribute)
+        {
+            string str = "Select p.procName,v.varName";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+
+        /****************************
+        * Select Attribute - Tuple *
+        *****************************/
+
+        TEST_METHOD(TestRegex_Tuple_ValidAttribute_ProcName)
+        {
+            string str = "Select <p.procName,v.varName>";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_ValidAttribute_VarName)
+        {
+            string str = "Select <v.varName,c.varName>";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_ValidAttribute_CallValue)
+        {
+            string str = "Select <c.value,call.stmt#>";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_ValidAttribute_StmtNum)
+        {
+            string str = "Select <s.stmt#,v.varName,c.value>";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_ValidAttribute_MultipleAttribute)
+        {
+            string str = "Select <p.procName,v.varName>";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_ValidAttribute_CallProcName)
+        {
+            string str = "Select <c.procName>";
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_InvalidAttribute_ProcName)
+        {
+            string str = "Select <p.Pr0cName>";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_InvalidAttribute_Value)
+        {
+            string str = "Select <v.VALUE#,1>";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_InvalidAttribute_StmtNum)
+        {
+            string str = "Select <a.stmt#,1>";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_InvalidAttribute_VarName)
+        {
+            string str = "Select <c.value,v.variableName>";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_InvalidAttribute_CommaInsteadOfDot)
+        {
+            string str = "Select <p,procName,    1.stmt#>";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_InvalidAttribute_InvalidSynonym)
+        {
+            string str = "Select <1.value,c.stmt#>";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
+        TEST_METHOD(TestRegex_Tuple_InvalidAttribute_SpecialCharacter)
+        {
+            string str = "Select <p.procName@,   hello.name>";
+            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+        }
+
 
         /*****************************************
         * Select, Such that, Single Relationship *
