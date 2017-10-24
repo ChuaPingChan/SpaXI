@@ -37,10 +37,8 @@ Evaluating query 3 - Calls retrieve single statement
 prog_line is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="5" RelNum="1" 
-Your answer: two 
+Your answer: one two 
 Correct answer: one two 
-Missing: one 
-Additional: 
 4 - Calls retrieve single procedure that modify
 stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
 Select BOOLEAN such that Calls*(p, _) with p.procName = "three"
