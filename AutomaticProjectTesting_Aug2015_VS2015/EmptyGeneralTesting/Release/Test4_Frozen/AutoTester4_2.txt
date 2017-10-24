@@ -1470,10 +1470,8 @@ Select c with c.procName = "THIRD"
 Evaluating query 144 - comment
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
-Your answer: 1 
+Your answer: 1 25 
 Correct answer: 1 25 
-Missing: 25 
-Additional: 
 145 - comment
 procedure p;
 Select p with p.procName = "SECOND"

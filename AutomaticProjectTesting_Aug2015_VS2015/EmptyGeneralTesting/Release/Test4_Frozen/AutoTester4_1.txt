@@ -2417,10 +2417,8 @@ The happen is 2
 The happen is 3
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Callsstar="1" Follows="3" SuchThat="1" With="1" CondNum="7" RelNum="4" 
-Your answer: 
+Your answer: 14 
 Correct answer: 14 
-Missing: 14 
-Additional: 
 211 - Multiple Clauses
 variable v, v2; if i; call c1,c2;procedure p1,p2;
 Select i pattern i(v,_,_) such that Modifies(i,v2) and Next*(i,c2) with c2.stmt# = 4 such that Calls(p1,p2) with c2.procName = "SINGLECALL"
@@ -2432,10 +2430,8 @@ The happen is 2
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Calls="1" Modifies="1" Nextstar="1" UnnamedVar="1" Pattern="1" SuchThat="2" With="2" CondNum="10" RelNum="3" 
-Your answer: 
+Your answer: 2 
 Correct answer: 2 
-Missing: 2 
-Additional: 
 212 - Multiple Clauses
 constant c; variable v, v1,v2; if i; call c1,c2; procedure p1,p2; stmt s; assign a;
 Select v pattern i(v1,_,_) such that Parent(s, i) and Uses(s, "IFS1") and Modifies(i,v2) and Next*(a,i) and Uses(a, v) such that Calls(p1,p2)
@@ -2447,10 +2443,8 @@ The happen is 2
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Calls="1" Modifies="1" Nextstar="1" Parent="1" UnnamedVar="1" Uses="2" Pattern="1" SuchThat="2" CondNum="11" RelNum="6" 
-Your answer: IFS1 boston IFS2 denmark germany IFS3 iceland korea 
+Your answer: boston 
 Correct answer: boston 
-Missing: 
-Additional: IFS1 IFS2 IFS3 denmark germany iceland korea 
 213 - Many Next*
 constant c; variable v, v1,v2; if i; call c1,c2; procedure p1,p2; prog_line s1, s2, s3, s4; assign a; while w;
 Select v1 such that Next*(s1, s2) and Next*(s2, a)and Next*(s2, s3) and Uses(a, v) pattern a("seven",_) with v.varName = "eight" such that Next*(a, w) pattern w(v1,_)
@@ -2467,9 +2461,7 @@ The happen is 2
 v1,_ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Nextstar="4" UnnamedVar="3" Uses="1" Pattern="2" SuchThat="2" With="1" CondNum="14" RelNum="5" 
-Your answer: 
+Your answer: WHILES1 WHILES2 WHILES3 
 Correct answer: WHILES1 WHILES2 WHILES3 
-Missing: WHILES1 WHILES2 WHILES3 
-Additional: 
 End of evaluating Query File.
 AutoTester Completed !
