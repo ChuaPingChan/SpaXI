@@ -150,7 +150,6 @@ bool CallsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResul
             if (argOneExists && !argTwoExists)
             {
                 string existingSyn = argOne;
-                Entity existingSynType = argOneType;
                 string newSyn = argTwo;
 
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
@@ -159,7 +158,6 @@ bool CallsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResul
                 
                 for (int existingSynVal : existingSynVals)
                 {
-                    // TODO: PKB update method to take in int
                     list<int> newSynVals = pkbInstance->getCallee(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
@@ -175,7 +173,6 @@ bool CallsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResul
             else if (!argOneExists && argTwoExists)
             {
                 string existingSyn = argTwo;
-                Entity existingSynType = argTwoType;
                 string newSyn = argOne;
 
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
@@ -184,7 +181,6 @@ bool CallsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResul
                 
                 for (int existingSynVal : existingSynVals)
                 {
-                    // TODO: PKB update method to take in int
                     list<int> newSynVals = pkbInstance->getCaller(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
