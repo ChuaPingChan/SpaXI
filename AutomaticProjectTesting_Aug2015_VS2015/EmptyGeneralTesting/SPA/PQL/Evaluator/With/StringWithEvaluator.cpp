@@ -19,7 +19,7 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
     string rightHandSide = wClause.getRhsValue();
 
     if (leftHandSideType == IDENT_WITHQUOTES 
-        && (rightHandSideType == PROCEDURE || rightHandSideType == CALL || rightHandSideType == VARIABLE))
+        && (rightHandSideType == PROCEDURE || rightHandSideType == VARIABLE))
     {
         if (pkbInstance->isInstanceOf(rightHandSideType, leftHandSide))
         {
@@ -33,7 +33,21 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
         }
     }
 
-    else if ((leftHandSideType == PROCEDURE || leftHandSideType == CALL || leftHandSideType == VARIABLE)
+    else if (leftHandSideType == IDENT_WITHQUOTES && rightHandSideType == CALL)
+    {
+        list<int> pkbResult = pkbInstance->getStmtFromCallee(leftHandSide);
+        if (pkbResult.empty())
+        {
+            return false;
+        }
+        else
+        {
+            clauseResult->updateSynResults(rightHandSide, pkbResult);
+            return clauseResult->hasResults();
+        }
+    }
+
+    else if ((leftHandSideType == PROCEDURE || leftHandSideType == VARIABLE)
         && rightHandSideType == IDENT_WITHQUOTES)
     {
 
@@ -46,6 +60,20 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
         else
         {
             return false;
+        }
+    }
+
+    else if (leftHandSideType == CALL && rightHandSideType == IDENT_WITHQUOTES)
+    {
+        list<int> pkbResult = pkbInstance->getStmtFromCallee(rightHandSide);
+        if (pkbResult.empty())
+        {
+            return false;
+        }
+        else
+        {
+            clauseResult->updateSynResults(leftHandSide, pkbResult);
+            return clauseResult->hasResults();
         }
     }
 
