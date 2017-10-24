@@ -150,10 +150,8 @@ none
 Evaluating query 14 - with, IDENT and IDENT
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
-Your answer: 3 16 
+Your answer: 
 Correct answer: 
-Missing: 
-Additional: 16 3 
 15 - with, IDENT and IDENT
 call c;
 Select c with "z" = "z"

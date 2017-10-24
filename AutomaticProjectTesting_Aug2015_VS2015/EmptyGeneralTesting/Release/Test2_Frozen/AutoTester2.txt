@@ -2451,10 +2451,8 @@ One, Three, Five, Six
 Evaluating query 228 - 1 clause + with clause: return result
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" With="1" CondNum="4" RelNum="1" 
-Your answer: Five Six 
+Your answer: One Three Five Six 
 Correct answer: One Three Five Six 
-Missing: One Three 
-Additional: 
 229 - 1 clause + with clause: specified
 procedure p1, p2;
 Select p1 such that Calls*(p1, p2) with p1.procName = "Seven"
