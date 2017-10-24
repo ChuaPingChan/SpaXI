@@ -1367,10 +1367,10 @@ Evaluating query 129 - 2 clauses: a1 v1 and w1 v1
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="2" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: b g j k l m p o q s t u v x y z 
+Your answer: g j k l m p o q s t u v x y z 
 Correct answer: g j k l m o p q s t u x y z 
 Missing: 
-Additional: b v 
+Additional: v 
 130 - 2 clauses: a1 v1 and i1 v1
 assign a1; variable v1; if i1;
 Select v1 such that Modifies(a1, v1) and Modifies(i1, v1)
@@ -1380,10 +1380,8 @@ Evaluating query 130 - 2 clauses: a1 v1 and i1 v1
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="2" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: b g j k l m p o q s t u v x y z 
+Your answer: g j k l m p s t u x y z 
 Correct answer: g j k l m p s t u x y z 
-Missing: 
-Additional: b o q v 
 131 - 2 clauses: c1 v1 and w1 v1
 call c1; variable v1; while w1;
 Select v1 such that Modifies(c1, v1) and Modifies(w1, v1)
@@ -1393,10 +1391,10 @@ Evaluating query 131 - 2 clauses: c1 v1 and w1 v1
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="2" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: b g j k l m p o q s t u v x y z 
+Your answer: g j k l m p o q s t u v x y z 
 Correct answer: g j k l m o p q s t u x y z 
 Missing: 
-Additional: b v 
+Additional: v 
 132 - 2 clauses: c1 v1 and i1 v1
 call c1; variable v1; if i1;
 Select v1 such that Modifies(c1, v1) and Modifies(i1, v1)
@@ -1406,10 +1404,8 @@ Evaluating query 132 - 2 clauses: c1 v1 and i1 v1
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="2" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: b g j k l m p o q s t u v x y z 
+Your answer: g j k l m p s t u x y z 
 Correct answer: g j k l m p s t u x y z 
-Missing: 
-Additional: b o q v 
 133 - 2 clauses: w1 v1 and i1 v1
 while w1; variable v1; if i1;
 Select v1 such that Modifies(w1, v1) and Modifies(i1, v1)
@@ -1419,10 +1415,8 @@ Evaluating query 133 - 2 clauses: w1 v1 and i1 v1
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="2" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: g j k l m p o q s t u v x y z 
+Your answer: g j k l m p s t u x y z 
 Correct answer: g j k l m p s t u x y z 
-Missing: 
-Additional: o q v 
 134 - 2 clauses: p1 v1 and p2 v1 select v1
 procedure p1, p2; variable v1;
 Select v1 such that Modifies(p1, v1) and Modifies(p2, v1)
@@ -3349,10 +3343,10 @@ Evaluating query 312 - nextstar a c and nextstar w c
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Nextstar="2" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: 8 14 15 
+Your answer: 14 15 28 
 Correct answer: 14 15 
 Missing: 
-Additional: 8 
+Additional: 28 
 313 - next s1 s2 and next s2 s3
 stmt s1,s2,s3;
 Select s1 such that Next(s1,s2) and Next(s2,s3)
@@ -3502,10 +3496,10 @@ The happen is 2
 The happen is 3
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Next="3" Nextstar="1" UnnamedVar="1" SuchThat="1" CondNum="7" RelNum="4" 
-Your answer: 36 37 
+Your answer: 
 Correct answer: 12 
 Missing: 12 
-Additional: 36 37 
+Additional: 
 326 - Using pattern keyword as synonym HasAnswer
 assign pattern;
 Select pattern pattern pattern(_, "x")

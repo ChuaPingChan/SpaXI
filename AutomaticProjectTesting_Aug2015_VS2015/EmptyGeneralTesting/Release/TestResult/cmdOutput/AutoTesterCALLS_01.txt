@@ -1,0 +1,159 @@
+Parameters : Test6_Frozen\2_Calls\CALLS_SOURCE_01.txt Test6_Frozen\2_Calls\CALLS_QUERIES_01.txt TestResult\outCALLS_01.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - Calls with varying p before
+procedure p;
+Select p such that Calls(p, "deux")
+un
+5000
+Evaluating query 1 - Calls with varying p before
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: un 
+Correct answer: un 
+2 - Calls with varying p after
+procedure p;
+Select p such that Calls("deux", p)
+trois
+5000
+Evaluating query 2 - Calls with varying p after
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: trois 
+Correct answer: trois 
+3 - Basic Calls with 2 unknown arguments - select first unknown arg
+procedure p1, p2;
+Select p1 such that Calls(p1, p2)
+zero, un, deux, trois, quatre
+5000
+Evaluating query 3 - Basic Calls with 2 unknown arguments - select first unknown arg
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: zero un deux trois quatre 
+Correct answer: zero un deux trois quatre 
+4 - Basic Calls with 2 unknown arguments - select 2nd unknown arg
+procedure p1, p2;
+Select p2 such that Calls(p1, p2)
+un, deux, trois, quatre, cinq
+5000
+Evaluating query 4 - Basic Calls with 2 unknown arguments - select 2nd unknown arg
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: un deux trois quatre cinq 
+Correct answer: un deux trois quatre cinq 
+5 - Basic Calls with 2 unknown arguments - select tuple
+procedure p1, p2;
+Select <p1, p2> such that Calls(p1, p2)
+zero un, un deux, deux trois, trois quatre, quatre cinq
+5000
+Evaluating query 5 - Basic Calls with 2 unknown arguments - select tuple
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: zero un un deux deux trois trois quatre quatre cinq 
+Correct answer: zero un un deux deux trois trois quatre quatre cinq 
+6 - Basic Calls with 1 unknown arguments and 1 const (after)
+procedure p;
+Select p such that Calls(p, "cinq")
+quatre
+5000
+Evaluating query 6 - Basic Calls with 1 unknown arguments and 1 const (after)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: quatre 
+Correct answer: quatre 
+7 - Basic Calls with 1 unknown arguments and 1 const (before)
+procedure p;
+Select p such that Calls("quatre", p)
+cinq
+5000
+Evaluating query 7 - Basic Calls with 1 unknown arguments and 1 const (before)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Calls="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: cinq 
+Correct answer: cinq 
+8 - Calls* with varying p before
+procedure p;
+Select p such that Calls*(p, "deux")
+zero, un
+5000
+Evaluating query 8 - Calls* with varying p before
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: zero un 
+Correct answer: zero un 
+9 - Calls* with varying p after
+procedure p;
+Select p such that Calls*("zero", p)
+un, deux, trois, quatre, cinq
+5000
+Evaluating query 9 - Calls* with varying p after
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: un deux trois quatre cinq 
+Correct answer: un deux trois quatre cinq 
+10 - Basic Calls* with 2 unknown arguments - select first unknown arg
+procedure p1, p2;
+Select p1 such that Calls*(p1, p2)
+zero, un, deux, trois, quatre
+5000
+Evaluating query 10 - Basic Calls* with 2 unknown arguments - select first unknown arg
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: zero un deux trois quatre 
+Correct answer: zero un deux trois quatre 
+11 - Basic Calls with 2 unknown arguments - select 2nd unknown arg
+procedure p1, p2;
+Select p2 such that Calls*(p1, p2)
+un, deux, trois, quatre, cinq
+5000
+Evaluating query 11 - Basic Calls with 2 unknown arguments - select 2nd unknown arg
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: un deux trois quatre cinq 
+Correct answer: un deux trois quatre cinq 
+12 - Basic Calls* with 2 unknown arguments - select tuple
+procedure p1, p2;
+Select <p1, p2> such that Calls*(p1, p2)
+zero un, zero deux, zero trois, zero quatre, zero cinq, un deux, un trois, un quatre, un cinq, deux trois, deux quatre, deux cinq, trois quatre, trois cinq, quatre cinq 
+5000
+Evaluating query 12 - Basic Calls* with 2 unknown arguments - select tuple
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: zero un zero deux zero trois zero quatre zero cinq un deux un trois un quatre un cinq deux trois deux quatre deux cinq trois quatre trois cinq quatre cinq 
+Correct answer: zero un zero deux zero trois zero quatre zero cinq un deux un trois un quatre un cinq deux trois deux quatre deux cinq trois quatre trois cinq quatre cinq 
+13 - Basic Calls* with 1 unknown arguments and 1 const (after)
+procedure p;
+Select p such that Calls*(p, "cinq")
+zero, un, deux, trois, quatre
+5000
+Evaluating query 13 - Basic Calls* with 1 unknown arguments and 1 const (after)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: zero un deux trois quatre 
+Correct answer: zero un deux trois quatre 
+14 - Basic Calls* with 1 unknown arguments and 1 const (before)
+procedure p;
+Select p such that Calls*("deux", p)
+trois, quatre, cinq
+5000
+Evaluating query 14 - Basic Calls* with 1 unknown arguments and 1 const (before)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: trois quatre cinq 
+Correct answer: trois quatre cinq 
+14 - Basic Calls* with 1 unknown arguments and 1 const (before)
+procedure p; call c;
+Select c with c.procName="un"
+none
+5000
+Evaluating query 14 - Basic Calls* with 1 unknown arguments and 1 const (before)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
+Your answer: 1 
+Correct answer: 
+Missing: 
+Additional: 1 
+End of evaluating Query File.
+AutoTester Completed !

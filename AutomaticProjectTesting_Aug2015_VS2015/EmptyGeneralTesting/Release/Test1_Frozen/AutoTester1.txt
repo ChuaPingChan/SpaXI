@@ -1,7 +1,7 @@
-Parameters : test1source.txt test1query.txt out1.xml
+Parameters : Test1_Frozen\test1source.txt Test1_Frozen\test1query.txt TestResult\out1.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
-Test1_Frozen
+Release
 Beginning to evaluate Query File.
 1 - All statements HaveResult
 stmt s;
