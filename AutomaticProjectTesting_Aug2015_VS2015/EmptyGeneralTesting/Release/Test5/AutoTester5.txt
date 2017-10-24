@@ -1,7 +1,7 @@
-Parameters : test5source.txt test5query.txt out5.xml
+Parameters : Test5\test5source.txt Test5\test5query.txt TestResult\out5.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
-Test5
+Release
 Beginning to evaluate Query File.
 1 - Get all variables on left hand side of assignment
 assign a,a1; variable v;
