@@ -59,7 +59,7 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 		
-		/* Uncomment when we extend for selecting synonyms with attributes, i.e Select p.procName
+		/* Uncomment when we extend for selecting synonyms with attributes, i.e Select p.procName */
 		TEST_METHOD(TestValidity_Query_SelectAttributeOfSynonym_ValidDeclaration_ExpectTrue_Valid)
 		{
 			string query;
@@ -69,9 +69,7 @@ namespace UnitTesting
 			qt.insertSynonym(PROCEDURE, "p");
 			QueryValidator validator = QueryValidator(&qt);
 			Assert::IsTrue(validator.isValidQuery(query));
-			SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
-			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
-		}*/
+		}
 
         TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_Valid)
         {

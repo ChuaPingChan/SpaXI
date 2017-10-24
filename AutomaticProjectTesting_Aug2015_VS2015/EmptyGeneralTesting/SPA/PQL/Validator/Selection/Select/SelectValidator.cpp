@@ -50,8 +50,12 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
         }
         
     }
-    //TODO: Add support for AttrRef
-    return false;
+
+    else if (RegexValidators::isValidAttrRefRegex(selectedStr))
+    {
+        //TODO: Add support for AttrRef
+    }
+        return false;
 }
 
 bool SelectValidator::isValidSelectTuple(string selectedStr)
