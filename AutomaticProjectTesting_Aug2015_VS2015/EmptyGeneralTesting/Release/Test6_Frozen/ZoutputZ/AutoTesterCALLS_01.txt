@@ -121,10 +121,8 @@ zero un, zero deux, zero trois, zero quatre, zero cinq, un deux, un trois, un qu
 Evaluating query 12 - Basic Calls* with 2 unknown arguments - select tuple
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: zero un un deux deux trois trois quatre quatre cinq 
+Your answer: zero un zero deux zero trois zero quatre zero cinq un deux un trois un quatre un cinq deux trois deux quatre deux cinq trois quatre trois cinq quatre cinq 
 Correct answer: zero un zero deux zero trois zero quatre zero cinq un deux un trois un quatre un cinq deux trois deux quatre deux cinq trois quatre trois cinq quatre cinq 
-Missing: deux cinq deux quatre trois cinq un cinq un quatre un trois zero cinq zero deux zero quatre zero trois 
-Additional: 
 13 - Basic Calls* with 1 unknown arguments and 1 const (after)
 procedure p;
 Select p such that Calls*(p, "cinq")

@@ -296,13 +296,10 @@ namespace UnitTesting
 
         TEST_METHOD(TestValidity_With_IdentWithQuotes_IdentWithQuotes_DiffIdent_StrStr_Valid)
         {
-            string str = "\"RayYan\" = \"God\"";
+            string str = "\"Happy\" = \"Sad\"";
             QueryTree qt;
             WithHandler wHandler = WithHandler(&qt);
-            Assert::IsTrue(wHandler.isValidWith(str));
-            WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, IDENT_WITHQUOTES, "RayYan", IDENT_WITHQUOTES, "God");
-            WithClause actual = UtilitySelection::getFirstWithClauseFromTree(qt);
-            Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expected, actual));
+            Assert::IsFalse(wHandler.isValidWith(str));
         }
 
         TEST_METHOD(TestValidity_With_IdentWithQuotes_IdentWithQuotes_SameIdent_StrStr_Valid)

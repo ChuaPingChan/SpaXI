@@ -347,10 +347,8 @@ First Second,Third Second,Fourth Third,Fourth Second
 Evaluating query 33 - tuple, Calls*, procedure and procedure
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: First Second Third Second Fourth Third 
+Your answer: First Second Third Second Fourth Second Fourth Third 
 Correct answer: First Second Third Second Fourth Third Fourth Second 
-Missing: Fourth Second 
-Additional: 
 34 - tuple, Calls*, procedure and procedure
 procedure p1,p2;
 Select <p1,p2> such that Calls*("Third",p1) and Calls(p2,"Third")
