@@ -29,6 +29,7 @@ namespace UnitTesting
             Assert::IsFalse(std::regex_match("a_b", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsFalse(std::regex_match("a&", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match("a", Parser::REGEX_VALID_ENTITY_NAME));
+            Assert::IsTrue(std::regex_match("e", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match("A", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match("a1", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match("abc34", Parser::REGEX_VALID_ENTITY_NAME));
@@ -330,6 +331,7 @@ namespace UnitTesting
             Assert::IsTrue(parser.assertIsValidExpression("a134124 + b/3 * 2  "));
             Assert::IsFalse(parser.assertIsValidExpression(" a = 3 + 4 "));
             Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
+            Assert::IsTrue(parser.assertIsValidExpression("e *      (f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20) - 10"));
 
             // Brackets
             Assert::IsFalse(parser.assertIsValidExpression("()"));
@@ -476,10 +478,30 @@ namespace UnitTesting
             actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
             Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
 
-            // LHS & RHS multi-term with brackets
+            // LHS & RHS multi-term with spaces
             expression = "4 - 3 * \n\t6\t";
             expectedLHS = "4";
             expectedRHS = "3 * \n\t6\t";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+
+            // Random complex expression 1
+            expression = "e *      (f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20) - 10";
+            expectedLHS = "e";
+            expectedRHS = "(f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20) - 10";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+            expression = "(f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20) - 10";
+            expectedLHS = "f + 3 	+ 2 + (		a + e)";
+            expectedRHS = "d * (	(	(c * b + 2) - 	5) * 20) - 10";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+            expression = "f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20";
+            expectedLHS = "f";
+            expectedRHS = "3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20";
             expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
             actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
             Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
@@ -534,7 +556,7 @@ namespace UnitTesting
         /*******************************
          * Utility Methods for Testing *
          *******************************/
-        TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
+        TEST_METHOD(testDummySimpleSourceFileUtilityMethods_TestParserBasic)
         {
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
             Assert::IsTrue(deleteDummySimpleSourceFile());

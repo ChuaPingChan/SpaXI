@@ -133,6 +133,22 @@ bool Parser::incrCurrentTokenPtr()
 }
 
 /*
+Given a string, this method extracts the foremost token, remove it from the string
+reference and returns the token.
+*/
+std::string Parser::getNextTokenAndShortenString(std::string &targetString)
+{
+    smatch match;
+    string token = string();
+    if (regex_match(targetString, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1)
+    {
+        token = match.str(1);
+        targetString.erase(0, match.position(1) + match.length(1));
+    }
+    return token;
+}
+
+/*
 Checks if end of the source code has been reached.
 Precondition:
 - Source code has to be concatenated into _concatenatedSourceCode.
@@ -527,6 +543,10 @@ bool Parser::assertIsValidExpression(string expression) {
     if (lhsRhsExpr != pair<string, string>()) {
         leftExpression = lhsRhsExpr.first;
         rightExpression = lhsRhsExpr.second;
+        if (_currentStmtNumber == 7) {
+            cout << endl << "lhs expression: " << rightExpression << endl;
+            cout << "rhs expression: " << rightExpression << endl;
+        }
     } else {
         _isValidSyntax = false;
         OutputDebugString("WARNING: Invalid Expression.\n");
@@ -542,7 +562,7 @@ For example,
 "3 + 3 - 2"         ==> "3" and "3 - 2"
 "(2 + 3) + 6 - 7"   ==> "(2 + 3)" and "6 - 7"
 "2 + (6 - 7)"       ==> "2" and "(6 - 7)"
-"(2 + 3) + (6 - 7)" ==> "(2 + 3)" and "(6 - 7)"
+"(2 + 3) + (6 - 7)" ==> "2 + 3" and "(6 - 7)"
 
 If the format of the expression given is not splittable as above, an empty pair
 of strings will be returned.

@@ -72,6 +72,7 @@ protected:
      *********************/
     bool concatenateLines(std::string filename);
     bool incrCurrentTokenPtr();
+    std::string getNextTokenAndShortenString(std::string &targetString);
     bool endOfSourceCodeReached();
     std::vector<std::string> tokenizeString(std::string stringToTokenize);
     bool assertMatchAndIncrementToken(std::regex re);
