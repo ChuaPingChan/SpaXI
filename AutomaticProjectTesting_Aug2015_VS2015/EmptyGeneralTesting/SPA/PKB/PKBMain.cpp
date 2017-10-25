@@ -1378,14 +1378,18 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 	list<int> prevList;
 	list<int> nextList;
 	unordered_map<int, int> latestMod; //varIdx to stmt
+	stack<pair<int, unordered_map<int, int>>> whileMapStack;
 	while (curr != 0) {
 		if (isAssignment(curr)) {
 			list<int> usedVarList = getUsesFromStmt(curr);
 			for (int usedVar : usedVarList) {
 				if (latestMod.find(usedVar) != latestMod.end()) {
-					prevList.push_back(latestMod[usedVar]);
-					nextList.push_back(curr);
-					affectsRelMap[latestMod[usedVar]].insert(curr);
+					int lastModStmt = latestMod[usedVar];
+					if (!isCall(lastModStmt)) {
+						prevList.push_back(latestMod[usedVar]);
+						nextList.push_back(curr);
+						affectsRelMap[latestMod[usedVar]].insert(curr);
+					}
 				}
 			}
 			int modifiedVar = getModifiesFromStmt(curr).front();
@@ -1399,6 +1403,47 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				curr = getExecutedAfter(curr, STMT).front();
 			}
 		}
+
+		else if (isCall(curr)) {
+			list<int> modifiedVarList = getModifiesFromStmt(stmt);
+			for (int modifiedVar : modifiedVarList) {
+				latestMod.erase(modifiedVar);
+			}
+		}
+
+		else if (isWhile(curr)) {
+			list<int> nextStmtList = getExecutedAfter(curr, STMT);
+			int insideLoop = nextStmtList.front();
+			int afterLoop = 0;
+
+			if (nextStmtList.size() == 2) {
+				afterLoop = nextStmtList.back();
+			}
+
+			if (whileMapStack.empty() || whileMapStack.top().first != curr) {
+				whileMapStack.push(make_pair(curr, latestMod));
+				curr = insideLoop;
+			}
+
+			else {
+				pair<int, unordered_map<int, int>> oldWhileMap = whileMapStack.top();
+				whileMapStack.pop();
+				unordered_map<int, int> oldMod = oldWhileMap.second;
+				if (oldMod == latestMod) {
+					curr = afterLoop;
+				}
+
+				else {
+					curr = insideLoop;
+					whileMapStack.push(make_pair(curr, latestMod));
+				}
+			}
+		}
+
+		else { // if statement
+
+		}
+		
 	}
 
 	return make_pair(prevList, nextList);
