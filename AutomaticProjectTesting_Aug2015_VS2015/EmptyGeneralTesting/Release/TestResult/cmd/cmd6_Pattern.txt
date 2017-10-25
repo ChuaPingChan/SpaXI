@@ -1,4 +1,4 @@
-Parameters : Test6_Frozen\12_Pattern\PATTERN_SOURCE_01.txt Test6_Frozen\12_Pattern\PATTERN_QUERIES_01.txt TestResult\outPattern.xml
+Parameters : Test6_Frozen\12_Pattern\PATTERN_SOURCE_01.txt Test6_Frozen\12_Pattern\PATTERN_QUERIES_01.txt TestResult\out6_Pattern.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
 Release

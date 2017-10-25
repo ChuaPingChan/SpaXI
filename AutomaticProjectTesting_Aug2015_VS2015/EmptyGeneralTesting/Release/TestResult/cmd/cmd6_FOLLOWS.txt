@@ -1,4 +1,4 @@
-Parameters : Test6_Frozen\3_Follows\FOLLOWS_SOURCE_01.txt Test6_Frozen\3_Follows\FOLLOWS_QUERIES_01.txt TestResult\outFOLLOWS.xml
+Parameters : Test6_Frozen\3_Follows\FOLLOWS_SOURCE_01.txt Test6_Frozen\3_Follows\FOLLOWS_QUERIES_01.txt TestResult\out6_FOLLOWS.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
 Release
