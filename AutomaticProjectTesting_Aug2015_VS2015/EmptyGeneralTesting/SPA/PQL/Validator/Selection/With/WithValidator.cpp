@@ -20,6 +20,10 @@ void WithValidator::validate(string str)
         {
             this->validity = false;
         }
+        else if (lhsEntity == IDENT_WITHQUOTES && rhsEntity == IDENT_WITHQUOTES && lhsValue != rhsValue)
+        {
+            this->validity = false;
+        }
         else
         {
             this->validity = true;

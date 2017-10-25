@@ -9,3 +9,10 @@ Select a such that Next(a,n) and Next*(n,n) with n=w.stmt#
 10,16,21,27,31,32
 5000
 Evaluating query 1 - temp
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" Nextstar="1" UnnamedVar="1" SuchThat="1" With="1" CondNum="6" RelNum="2" 
+Your answer: 10 16 21 27 31 32 
+Correct answer: 10 16 21 27 31 32 
+End of evaluating Query File.
+AutoTester Completed !

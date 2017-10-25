@@ -131,6 +131,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
                 resultPairs.clear();
+
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getModifiesFromStmt(existingSynVal);
@@ -148,8 +149,8 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
             else if (!argOneExists && argTwoExists)
             {
                 string existingSyn = argTwo;
-                Entity existingSynType = argTwoType;
                 string newSyn = argOne;
+                Entity newSynType = argOneType;
 
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
@@ -157,7 +158,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
                 for (int existingSynVal : existingSynVals)
                 {
-                    list<int> newSynVals = pkbInstance->getModifiesFromVar(existingSynVal, existingSynType);
+                    list<int> newSynVals = pkbInstance->getModifiesFromVar(existingSynVal, newSynType);
                     for (int newSynVal : newSynVals)
                     {
                         pair<int, int> resultPair(existingSynVal, newSynVal);
