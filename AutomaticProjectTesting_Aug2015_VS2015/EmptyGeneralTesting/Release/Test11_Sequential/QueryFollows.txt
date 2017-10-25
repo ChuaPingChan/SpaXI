@@ -1,0 +1,5 @@
+1 - None
+
+Select BOOLEAN such that Follows(1,2)
+true
+5000
