@@ -552,6 +552,52 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isAffects(2, 5));
 			Assert::IsTrue(PKB.isAffects(5, 4));
 			Assert::IsFalse(PKB.isAffects(4, 6));
+			list<int> expectedList = { 2, 4, 5, 6 };
+			list<int> resultList = PKB.getAllAffected();
+			resultList.sort();
+			Assert::IsTrue(expectedList == resultList);
+
+			expectedList = { 2, 4, 5 };
+			resultList = PKB.getAllAffector();
+			resultList.sort();
+			Assert::IsTrue(expectedList == resultList);
+		}
+
+		TEST_METHOD(TestAffectsPair) {
+			PKBMain PKB;
+			/*
+			procedure Test {
+			1.	a = 1;
+			2.	b = a;
+			3.	a = b;
+			4.	b = a;
+			}
+			*/
+			PKB.addProcedure("Test");
+			PKB.setNext(1, 2);
+			PKB.setNext(2, 3);
+			PKB.setNext(3, 4);
+			PKB.addStmtToProc(1, "Test");
+			PKB.addStmtToProc(2, "Test");
+			PKB.addStmtToProc(3, "Test");
+			PKB.addStmtToProc(4, "Test");
+			PKB.addAssignmentStmt(1);
+			PKB.addAssignmentStmt(2);
+			PKB.addAssignmentStmt(3);
+			PKB.addAssignmentStmt(4);
+			PKB.addVariable("a");
+			PKB.addVariable("b");
+			PKB.setModTableStmtToVar(1, "a");
+			PKB.setModTableStmtToVar(2, "b");
+			PKB.setUseTableStmtToVar(2, "a");
+			PKB.setModTableStmtToVar(3, "a");
+			PKB.setUseTableStmtToVar(3, "b");
+			PKB.setUseTableStmtToVar(4, "a");
+			PKB.setModTableStmtToVar(4, "b");
+
+			pair<list<int>, list<int>> resultPair = PKB.getAllAffects();
+			Assert::IsTrue(resultPair.first.size() == 3);
+			Assert::IsTrue(resultPair.second.size() == 3);
 		}
 	};
 }

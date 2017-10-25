@@ -163,6 +163,8 @@ public:
 	list<int> getAllAffected();
 	list<int> getAffectorOf(int stmt2);
 	list<int> getAllAffector();
+	list<int> getAllFirstStmtOfProc();
+	pair<list<int>, list<int>> getAllAffects(int stmt, unordered_map<int, unordered_set<int>>& affectsRelMap);
 	pair<list<int>, list<int>> getAllAffects();
 	bool isAffectsStar(int stmt1, int stmt2);
 	list<int> getAffectedStarOf(int stmt1);

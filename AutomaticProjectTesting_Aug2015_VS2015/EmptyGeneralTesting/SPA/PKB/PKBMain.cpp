@@ -631,7 +631,8 @@ list<int> PKBMain::getExecutedAfterStar(int befStmt, Entity type) {
 }
 
 list<int> PKBMain::getExecutedBeforeStar(int aftStmt, Entity type) {
-	list<int> stmtList = nextTable.getExecutedBeforeStar(aftStmt);
+	list<int> stmtList;
+	stmtList = nextTable.getExecutedBeforeStar(aftStmt);
 	stmtList = stmtTypeList.getStmtType(stmtList, type);
 	return stmtList;
 }
@@ -1190,7 +1191,7 @@ int PKBMain::getProcFromStmt(int stmt) {
 	return procIdxTable.getProcIdxFromStmt(stmt);
 }
 
-//TODO AFFECTSSSSS
+//TODO AFFECTSSSSS OPTIMISE PLZ
 bool PKBMain::isAffects(int stmt1, int stmt2) {
 	// check if both are assignment first
 	if (!isAssignment(stmt1) || !isAssignment(stmt2)) {
@@ -1348,6 +1349,9 @@ list<int> PKBMain::getAllAffector() {
 	list<int> allStmts = getAllAssignments();
 	for (int stmt : allStmts) {
 		list<int> prevStarList = getExecutedBeforeStar(stmt, STMT);
+		if (prevStarList.size() == 0) {
+			continue;
+		}
 		for (int prev : prevStarList) {
 			if (isAffects(prev, stmt)) {
 				affectorList.push_back(prev);
@@ -1359,11 +1363,59 @@ list<int> PKBMain::getAllAffector() {
 	return affectorList;
 }
 
+list<int> PKBMain::getAllFirstStmtOfProc() {
+	list<int> allProcIdx = getAllProcedures();
+	list<int> allFirstStmt;
+	for (int proc : allProcIdx) {
+		allFirstStmt.push_back(procIdxTable.getFirstStmtFromProc(proc));
+	}
+
+	return allFirstStmt;
+}
+
+pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, unordered_set<int>> &affectsRelMap) {
+	int curr = stmt;
+	list<int> prevList;
+	list<int> nextList;
+	unordered_map<int, int> latestMod; //varIdx to stmt
+	while (curr != 0) {
+		if (isAssignment(curr)) {
+			list<int> usedVarList = getUsesFromStmt(curr);
+			for (int usedVar : usedVarList) {
+				if (latestMod.find(usedVar) != latestMod.end()) {
+					prevList.push_back(latestMod[usedVar]);
+					nextList.push_back(curr);
+					affectsRelMap[latestMod[usedVar]].insert(curr);
+				}
+			}
+			int modifiedVar = getModifiesFromStmt(curr).front();
+			latestMod[modifiedVar] = curr;
+
+			if (getExecutedAfter(curr, STMT).size() == 0) {
+				curr = 0;
+			}
+
+			else {
+				curr = getExecutedAfter(curr, STMT).front();
+			}
+		}
+	}
+
+	return make_pair(prevList, nextList);
+}
+
 pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	list<int> prevList;
 	list<int> nextList;
 	unordered_map<int, unordered_set<int>> affectsRelMap;
-
+	//TODO OPTIMISE
+	list<int> allFirstStmt = getAllFirstStmtOfProc();
+	for (int stmt : allFirstStmt) {
+		pair<list<int>, list<int>> allPairsInStmtList = getAllAffects(stmt, affectsRelMap);
+		prevList.insert(prevList.end(), allPairsInStmtList.first.begin(), allPairsInStmtList.first.end());
+		nextList.insert(nextList.end(), allPairsInStmtList.second.begin(), allPairsInStmtList.second.end());
+	}
+	/*
 	list<int> allStmts = getAllAssignments();
 	for (int stmt : allStmts) {
 		list<int> nextStarList = getExecutedAfterStar(stmt, STMT);
@@ -1379,11 +1431,29 @@ pair<list<int>, list<int>> PKBMain::getAllAffects() {
 			}
 		}
 	}
+	*/
 
 	return make_pair(prevList, nextList);
 }
 
 bool PKBMain::isAffectsStar(int stmt1, int stmt2) {
+	list<int> affected = getAffectedOf(stmt1);
+	unordered_set<int> visited;
+	bool isFirstRound = true;
+	while (!affected.empty()) {
+		int curr = affected.front();
+		affected.pop_front();
+
+		if (curr == stmt2 && !isFirstRound) {
+			return true;
+		}
+
+		if (visited.find(curr) != visited.end() && !isFirstRound) {
+			isFirstRound = false;
+			continue;
+		}
+
+	}
 	return false;
 }
 

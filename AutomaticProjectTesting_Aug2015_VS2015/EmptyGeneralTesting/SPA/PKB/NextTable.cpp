@@ -166,7 +166,7 @@ list<int> NextTable::getExecutedBeforeStar(int stmtAft) {
 		if (visited.find(curr) != visited.end()) {
 			continue;
 		}
-		if (nextMapReverse.find(curr) != nextMap.end()) {
+		if (nextMapReverse.find(curr) != nextMapReverse.end()) {
 			befores = nextMapReverse[curr];
 			for (int i : befores) {
 				toVisit.push(i);
