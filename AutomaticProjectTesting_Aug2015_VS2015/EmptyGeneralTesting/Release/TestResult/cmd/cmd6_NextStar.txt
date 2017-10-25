@@ -1,4 +1,4 @@
-Parameters : Test6_Frozen\11_NextStar\NEXT-STAR_SOURCE_01.txt Test6_Frozen\11_NextStar\NEXT-STAR_QUERIES_01.txt TestResult\outNextStar.xml
+Parameters : Test6_Frozen\11_NextStar\NEXT-STAR_SOURCE_01.txt Test6_Frozen\11_NextStar\NEXT-STAR_QUERIES_01.txt TestResult\out6_NextStar.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
 Release

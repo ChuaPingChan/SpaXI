@@ -1,4 +1,4 @@
-Parameters : Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_ParentStar.txt TestResult\outDemo_ParentStar.xml
+Parameters : Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_ParentStar.txt TestResult\out6_Demo_ParentStar.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
 Release

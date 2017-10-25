@@ -12,14 +12,14 @@ procedure Sequential {
 	j = ((	 ((	( g)	+3  )  * 4	)- 	6)+b);
 	k = (a  +	(b    +(c 	*(  d -  (8		)))));}
 
-procedure TestFollowJumpOverLoop {
+procedure TestJumpOverLoop {
 	l 	  =	 1 	+		 2;
 	while 		a 			{
 		  m  	  = 3 +  	1		;}
 	n 	= 		1   ;
 	o =         b;}
 
-procedure TestFollowJumpOverIf {
+procedure TestJumpOverIf {
 	l = 1 		+			 2			;
 	if    	 	a		   then {
 		m 	=    3 + 	1;}
@@ -27,3 +27,8 @@ procedure TestFollowJumpOverIf {
 			a   = 5;}
 	n = 	1;
 	o = b  ;		}
+	
+procedure TestJumpOverCall {
+p = 1;
+		call 			TestJumpOverLoop;
+	q = 	5 + 2    ;}

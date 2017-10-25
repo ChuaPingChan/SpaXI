@@ -1,4 +1,4 @@
-Parameters : Test6_Frozen\17_Simple03\Simple03-Source.txt Test6_Frozen\17_Simple03\Simple03-Queries.txt TestResult\outSimple03.xml
+Parameters : Test6_Frozen\17_Simple03\Simple03-Source.txt Test6_Frozen\17_Simple03\Simple03-Queries.txt TestResult\out6_Simple03.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
 Release

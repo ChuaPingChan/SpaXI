@@ -1,4 +1,4 @@
-Parameters : Test6_Frozen\4_MixTests01\MixTestsSource01.txt Test6_Frozen\4_MixTests01\MixTestsQuery01.txt TestResult\outMixTests01.xml
+Parameters : Test6_Frozen\4_MixTests01\MixTestsSource01.txt Test6_Frozen\4_MixTests01\MixTestsQuery01.txt TestResult\out6_MixTests01.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
 Release
