@@ -227,6 +227,9 @@ echo Finish running AutoTester for QueryFollowsStar.
 echo Running AutoTester for QueryPatternAssign...
 AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryPatternAssign.txt TestResult\out11_QueryPatternAssign.xml > TestResult\cmd\cmd11_QueryPatternAssign.txt
 echo Finish running AutoTester for QueryPatternAssign.
+echo Running AutoTester for QueryWith...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryWith.txt TestResult\out11_QueryWith.xml > TestResult\cmd\cmd11_QueryWith.txt
+echo Finish running AutoTester for QueryWith.
 echo Finish running AutoTester for test 11.
 echo ===============================================================================
 echo                           Finish Running AutoTester
