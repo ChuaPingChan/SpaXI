@@ -1,0 +1,1 @@
+python QueryGenerator.py QuerySet.xlsx temp.txt
