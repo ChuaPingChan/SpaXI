@@ -33,13 +33,14 @@ const regex Parser::REGEX_MATCH_CLOSE_BRACE = regex("\\s*\\u007D\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACKET = regex("\\s*\\(\\s*");
 const regex Parser::REGEX_MATCH_CLOSE_BRACKET = regex("\\s*\\)\\s*");
 const regex Parser::REGEX_MATCH_SEMICOLON = regex("\\s*;\\s*");
+const regex Parser::REGEX_MATCH_BLANK_OR_EMPTY_STRING = regex("\\s*");
 
 // Char sequence to match should be a statement up to but not including semicolon.
 // To extract contents within a wrapping outside bracket. Having outside bracket is assumed.
 const regex Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT = regex("\\s*\\(([^()]+|[^()]*\\([^]+\\)[^()]*)\\)\\s*");
 
 const regex Parser::REGEX_MATCH_EQUAL = regex("\\s*=\\s*");
-const regex Parser::REGEX_VALID_OPERATOR = regex("\\s*[+\\-*/]\\s*");
+const regex Parser::REGEX_MATCH_OPERATOR = regex("\\s*[+\\-*/]\\s*");
 
 Parser::Parser(PKBMain* pkbMainPtr)
 {
@@ -334,7 +335,7 @@ void Parser::parseStmt() {
             _prevReachableStmts.clear();
         }
     } else if (Parser::ifStmtExpected()) {
-        parseIfStmt();
+        parseIfElseStmt();
 
         if (moreStmtsExistInStmtList()) {
             for (int prevReachableStmt : _prevReachableStmts) {
@@ -514,18 +515,18 @@ Asserts that an expression is syntactically valid.
 */
 bool Parser::assertIsValidExpression(string expression) {
 
-    // Remove outermost bracket (if applicable)
-    smatch contentInBracket;
-    while (regex_match(expression, contentInBracket, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT)
-        && contentInBracket.size() > 1) {
-        expression = contentInBracket.str(1);
-    }
-
     // Check for bracket correctness. Just for redundancy.
     // Does not guarantee bracketing is correct, just counting.
     // e.g. "4 ( + 3)" will be evaluated as correct even though it's wrong.
     if (!isBracketedCorrectly(expression)) {
         return false;
+    }
+
+    // Remove outermost bracket (if applicable)
+    smatch contentInBracket;
+    while (regex_match(expression, contentInBracket, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT)
+        && contentInBracket.size() > 1) {
+        expression = contentInBracket.str(1);
     }
 
     // Base case
@@ -731,7 +732,7 @@ void Parser::parseWhileStmt() {
 Parses an if-else statement. When this method ends,
 _currentTokenPtr will be advanced after '}'.
 */
-void Parser::parseIfStmt()      // TODO: Rename this to "parseIfElseStmt()"
+void Parser::parseIfElseStmt()      // TODO: Rename this to "parseIfElseStmt()"
 {
     OutputDebugString("FINE: If-else statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD);

@@ -132,15 +132,15 @@ namespace UnitTesting
         TEST_METHOD(regexMatchEqualAndOtherOperatorsTest)
         {
             Assert::IsTrue(std::regex_match("=", Parser::REGEX_MATCH_EQUAL));
-            Assert::IsTrue(std::regex_match("+ ", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsTrue(std::regex_match(" -", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsTrue(std::regex_match("\n\t*\n\t", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsTrue(std::regex_match("\r\f/\r\f", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsTrue(std::regex_match("+ ", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsTrue(std::regex_match(" -", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsTrue(std::regex_match("\n\t*\n\t", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsTrue(std::regex_match("\r\f/\r\f", Parser::REGEX_MATCH_OPERATOR));
 
-            Assert::IsFalse(std::regex_match("a=4", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsFalse(std::regex_match("+-", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsFalse(std::regex_match("9+3", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsFalse(std::regex_match("-;", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsFalse(std::regex_match("a=4", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsFalse(std::regex_match("+-", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsFalse(std::regex_match("9+3", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsFalse(std::regex_match("-;", Parser::REGEX_MATCH_OPERATOR));
         }
 
         TEST_METHOD(regexExtractBracketWrappedContent)
@@ -331,6 +331,7 @@ namespace UnitTesting
             Assert::IsTrue(parser.assertIsValidExpression("a134124 + b/3 * 2  "));
             Assert::IsFalse(parser.assertIsValidExpression(" a = 3 + 4 "));
             Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
+            Assert::IsTrue(parser.assertIsValidExpression(" ( ( 3 + 4 ) ) * ( ( 6  * 3 - 1 ) )"));
             Assert::IsTrue(parser.assertIsValidExpression("e *      (f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20) - 10"));
 
             // Brackets
