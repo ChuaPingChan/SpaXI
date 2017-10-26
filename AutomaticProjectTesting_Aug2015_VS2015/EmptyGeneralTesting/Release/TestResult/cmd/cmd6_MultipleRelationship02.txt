@@ -1,4 +1,4 @@
-Parameters : Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipSource02.txt Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipQuery02.txt TestResult\outMultipleRelationship02.xml
+Parameters : Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipSource02.txt Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipQuery02.txt TestResult\out6_MultipleRelationship02.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
 Release

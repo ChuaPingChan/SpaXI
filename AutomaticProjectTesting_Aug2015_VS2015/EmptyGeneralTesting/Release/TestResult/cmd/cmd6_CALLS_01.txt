@@ -1,4 +1,4 @@
-Parameters : Test6_Frozen\2_Calls\CALLS_SOURCE_01.txt Test6_Frozen\2_Calls\CALLS_QUERIES_01.txt TestResult\outCALLS_01.xml
+Parameters : Test6_Frozen\2_Calls\CALLS_SOURCE_01.txt Test6_Frozen\2_Calls\CALLS_QUERIES_01.txt TestResult\out6_CALLS_01.xml
 Beginning to parse Simple Program.
 End of parsing Simple Program.
 Release

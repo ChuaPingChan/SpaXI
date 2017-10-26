@@ -7,6 +7,7 @@ echo Type the test index to run the test
 echo [0] Receive a compliment
 echo [s] Run AutoTester for specified test path
 echo [a] Run All Tests
+echo [?] Run Predefined Test #?
 echo [x] Exit
 set option=
 set /p option=Please select your options: 
@@ -21,6 +22,39 @@ if '%option%'=='s' (
 )
 if '%option%'=='a' (
 	goto :runAllTests
+)
+if '%option%'=='1' (
+	goto :runTest1
+)
+if '%option%'=='2' (
+	goto :runTest2
+)
+if '%option%'=='3' (
+	goto :runTest3
+)
+if '%option%'=='4' (
+	goto :runTest4
+)
+if '%option%'=='5' (
+	goto :runTest5
+)
+if '%option%'=='6' (
+	goto :runTest6
+)
+if '%option%'=='7' (
+	goto :runTest7
+)
+if '%option%'=='8' (
+	goto :runTest8
+)
+if '%option%'=='9' (
+	goto :runTest9
+)
+if '%option%'=='10' (
+	goto :runTest10
+)
+if '%option%'=='11' (
+	goto :runTest11
 )
 cls
 goto :main
@@ -88,6 +122,203 @@ pause
 cls
 goto :main
 
+:runTest1
+echo ===============================================================================
+echo Running AutoTester for test 1...
+AutoTester Test1_Frozen\test1source.txt Test1_Frozen\test1query.txt TestResult\out1.xml > TestResult\cmd\cmd1.txt
+echo Finish running AutoTester for test 1.
+pause
+cls
+goto :main
+
+:runTest2
+echo ===============================================================================
+echo Running AutoTester for test 2...
+AutoTester Test2_Frozen\test2source.txt Test2_Frozen\test2query.txt TestResult\out2.xml > TestResult\cmd\cmd2.txt
+echo Finish running AutoTester for test 2.
+pause
+cls
+goto :main
+
+:runTest3
+echo ===============================================================================
+echo Running AutoTester for test 3...
+AutoTester Test3_Frozen\test3source.txt Test3_Frozen\test3query.txt TestResult\out3.xml > TestResult\cmd\cmd3.txt
+echo Finish running AutoTester for test 3.
+pause
+cls
+goto :main
+
+:runTest4
+echo ===============================================================================
+echo Running AutoTester for test 4_0...
+AutoTester Test4_Frozen\test4source0.txt Test4_Frozen\test4query0.txt TestResult\out4_0.xml > TestResult\cmd\cmd4_0.txt
+echo Finish running AutoTester for test 4_0.
+echo Running AutoTester for test 4_1...
+AutoTester Test4_Frozen\test4source1.txt Test4_Frozen\test4query1.txt TestResult\out4_1.xml > TestResult\cmd\cmd4_1.txt
+echo Finish running AutoTester for test 4_1.
+echo Running AutoTester for test 4_2...
+AutoTester Test4_Frozen\test4source2.txt Test4_Frozen\test4query2.txt TestResult\out4_2.xml > TestResult\cmd\cmd4_2.txt
+echo Finish running AutoTester for test 4_2.
+pause
+cls
+goto :main
+
+:runTest5
+echo ===============================================================================
+echo Running AutoTester for test 5...
+AutoTester Test5\test5source.txt Test5\test5query.txt TestResult\out5.xml > TestResult\cmd\cmd5.txt
+echo Finish running AutoTester for test 5.
+pause
+cls
+goto :main
+
+:runTest6
+echo ===============================================================================
+echo Running AutoTester for test 6...
+echo Running AutoTester for Demo_Calls...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Calls.txt TestResult\out6_Demo_Calls.xml > TestResult\cmd\cmd6_Demo_Calls.txt
+echo Finish running AutoTester for Demo_Calls.
+echo Running AutoTester for Demo_CallsStar...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_CallsStar.txt TestResult\out6_Demo_CallsStar.xml > TestResult\cmd\cmd6_Demo_CallsStar.txt
+echo Finish running AutoTester for Demo_CallsStar.
+echo Running AutoTester for Demo_Follows...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Follows.txt TestResult\out6_Demo_Follows.xml > TestResult\cmd\cmd6_Demo_Follows.txt
+echo Finish running AutoTester for Demo_Follows.
+echo Running AutoTester for Demo_FollowsStar...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_FollowsStar.txt TestResult\out6_Demo_FollowsStar.xml > TestResult\cmd\cmd6_Demo_FollowsStar.txt
+echo Finish running AutoTester for Demo_FollowsStar.
+echo Running AutoTester for Demo_Modifies...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Modifies.txt TestResult\out6_Demo_Modifies.xml > TestResult\cmd\cmd6_Demo_Modifies.txt
+echo Finish running AutoTester for Demo_Modifies.
+echo Running AutoTester for Demo_Next...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Next.txt TestResult\out6_Demo_Next.xml > TestResult\cmd\cmd6_Demo_Next.txt
+echo Finish running AutoTester for Demo_Next.
+echo Running AutoTester for Demo_NextStar...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_NextStar.txt TestResult\out6_Demo_NextStar.xml > TestResult\cmd\cmd6_Demo_NextStar.txt
+echo Finish running AutoTester for Demo_NextStar.
+echo Running AutoTester for Demo_Parent...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Parent.txt TestResult\out6_Demo_Parent.xml > TestResult\cmd\cmd6_Demo_Parent.txt
+echo Finish running AutoTester for Demo_Parent.
+echo Running AutoTester for Demo_ParentStar...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_ParentStar.txt TestResult\out6_Demo_ParentStar.xml > TestResult\cmd\cmd6_Demo_ParentStar.txt
+echo Finish running AutoTester for Demo_ParentStar.
+echo Running AutoTester for Demo_Uses...
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Uses.txt TestResult\out6_Demo_Uses.xml > TestResult\cmd\cmd6_Demo_Uses.txt
+echo Finish running AutoTester for Demo_Uses.
+echo Running AutoTester for CALLS_01...
+AutoTester Test6_Frozen\2_Calls\CALLS_SOURCE_01.txt Test6_Frozen\2_Calls\CALLS_QUERIES_01.txt TestResult\out6_CALLS_01.xml > TestResult\cmd\cmd6_CALLS_01.txt
+echo Finish running AutoTester for CALLS_01.
+echo Running AutoTester for FOLLOWS_01...
+AutoTester Test6_Frozen\3_Follows\FOLLOWS_SOURCE_01.txt Test6_Frozen\3_Follows\FOLLOWS_QUERIES_01.txt TestResult\out6_FOLLOWS.xml > TestResult\cmd\cmd6_FOLLOWS.txt
+echo Finish running AutoTester for FOLLOWS_01.
+echo Running AutoTester for MixTests01...
+AutoTester Test6_Frozen\4_MixTests01\MixTestsSource01.txt Test6_Frozen\4_MixTests01\MixTestsQuery01.txt TestResult\out6_MixTests01.xml > TestResult\cmd\cmd6_MixTests01.txt
+echo Finish running AutoTester for MixTests01.
+echo Running AutoTester for MixTests02...
+AutoTester Test6_Frozen\5_MixTests02\MixTestsSource02.txt Test6_Frozen\5_MixTests02\MixTestsQuery02.txt TestResult\out6_MixTests02.xml > TestResult\cmd\cmd6_MixTests02.txt
+echo Finish running AutoTester for MixTests02.
+echo Running AutoTester for ModifiesUsesParent...
+AutoTester Test6_Frozen\6_ModifiesUsesParent\ModifiesUsesParentSource01.txt Test6_Frozen\6_ModifiesUsesParent\ModifiesUsesParentQuery01.txt TestResult\out6_ModifiesUsesParent.xml > TestResult\cmd\cmd6_ModifiesUsesParent.txt
+echo Finish running AutoTester for ModifiesUsesParent.
+echo Running AutoTester for MultipleRelationship01...
+AutoTester Test6_Frozen\7_MultipleRelationship01\MultipleRelationshipSource01.txt Test6_Frozen\7_MultipleRelationship01\MultipleRelationshipQuery01.txt TestResult\out6_MultipleRelationship01.xml > TestResult\cmd\cmd6_MultipleRelationship01.txt
+echo Finish running AutoTester for MultipleRelationship01.
+echo Running AutoTester for MultipleRelationship02...
+AutoTester Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipSource02.txt Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipQuery02.txt TestResult\out6_MultipleRelationship02.xml > TestResult\cmd\cmd6_MultipleRelationship02.txt
+echo Finish running AutoTester for MultipleRelationship02.
+echo Running AutoTester for Next...
+AutoTester Test6_Frozen\9_Next\NEXT_SOURCE_01.txt Test6_Frozen\9_Next\NEXT_QUERIES_01.txt TestResult\out6_Next.xml > TestResult\cmd\cmd6_Next.txt
+echo Finish running AutoTester for Next.
+echo Running AutoTester for NextNextStar...
+AutoTester Test6_Frozen\10_NextNextStar\NEXT-NEXT-STAR_SOURCE_01.txt Test6_Frozen\10_NextNextStar\NEXT-NEXT-STAR_QUERIES_01.txt TestResult\out6_NextNextStar.xml > TestResult\cmd\cmd6_NextNextStar.txt
+echo Finish running AutoTester for NextNextStar.
+echo Running AutoTester for NextStar...
+AutoTester Test6_Frozen\11_NextStar\NEXT-STAR_SOURCE_01.txt Test6_Frozen\11_NextStar\NEXT-STAR_QUERIES_01.txt TestResult\out6_NextStar.xml > TestResult\cmd\cmd6_NextStar.txt
+echo Finish running AutoTester for NextStar.
+echo Running AutoTester for Pattern...
+AutoTester Test6_Frozen\12_Pattern\PATTERN_SOURCE_01.txt Test6_Frozen\12_Pattern\PATTERN_QUERIES_01.txt TestResult\out6_Pattern.xml > TestResult\cmd\cmd6_Pattern.txt
+echo Finish running AutoTester for Pattern.
+echo Running AutoTester for Tuple...
+AutoTester Test6_Frozen\13_Tuple\TUPLE_TESTS_SOURCE_01.txt Test6_Frozen\13_Tuple\TUPLE_TESTS_QUERIES_01.txt TestResult\out6_Tuple.xml > TestResult\cmd\cmd6_Tuple.txt
+echo Finish running AutoTester for Tuple.
+echo Running AutoTester for With...
+AutoTester Test6_Frozen\14_With\WITH_SOURCE_01.txt Test6_Frozen\14_With\WITH_QUERIES_01.txt TestResult\out6_With.xml > TestResult\cmd\cmd6_With.txt
+echo Finish running AutoTester for With.
+echo Running AutoTester for Simple01...
+AutoTester Test6_Frozen\15_Simple01\Simple01-Source.txt Test6_Frozen\15_Simple01\Simple01-Queries.txt TestResult\out6_Simple01.xml > TestResult\cmd\cmd6_Simple01.txt
+echo Finish running AutoTester for Simple01.
+echo Running AutoTester for Simple02...
+AutoTester Test6_Frozen\16_Simple02\Simple02-Source.txt Test6_Frozen\16_Simple02\Simple02-Queries.txt TestResult\out6_Simple02.xml > TestResult\cmd\cmd6_Simple02.txt
+echo Finish running AutoTester for Simple02.
+echo Running AutoTester for Simple03...
+AutoTester Test6_Frozen\17_Simple03\Simple03-Source.txt Test6_Frozen\17_Simple03\Simple03-Queries.txt TestResult\out6_Simple03.xml > TestResult\cmd\cmd6_Simple03.txt
+echo Finish running AutoTester for Simple03.
+echo Finish running AutoTester for test 6.
+pause
+cls
+goto :main
+
+:runTest7
+echo ===============================================================================
+echo Running AutoTester for test 7...
+echo Test is still being written. Skipping to Test 8 ...
+echo Finish running AutoTester for test 7.
+pause
+cls
+goto :main
+
+:runTest8
+echo ===============================================================================
+echo Running AutoTester for test 8...
+AutoTester Test8_Frozen\Sample-Source.txt Test8_Frozen\Sample-Queries.txt TestResult\out8.xml > TestResult\cmd\cmd8_Sample.txt
+echo Finish running AutoTester for test 8.
+pause
+cls
+goto :main
+
+:runTest9
+echo ===============================================================================
+echo Running AutoTester for test 9...
+echo Test is still being written. Skipping to Test 9 ...
+echo Finish running AutoTester for test 9.
+pause
+cls
+goto :main
+
+:runTest10
+echo ===============================================================================
+echo Running AutoTester for test 10...
+echo Running AutoTester for QueryAffects.txt...
+AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffects.txt TestResult\out10_QueryAffects.xml > TestResult\cmd\cmd10_QueryAffects.txt
+echo Finish running AutoTester for QueryAffects.txt.
+echo Finish running AutoTester for test 10.
+pause
+cls
+goto :main
+
+:runTest11
+echo ===============================================================================
+echo Running AutoTester for test 11...
+echo Running AutoTester for QueryFollows...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryFollows.txt TestResult\out11_QueryFollows.xml > TestResult\cmd\cmd11_QueryFollows.txt
+echo Finish running AutoTester for QueryFollows.
+echo Running AutoTester for QueryFollowsStar...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryFollowsStar.txt TestResult\out11_QueryFollowsStar.xml > TestResult\cmd\cmd11_QueryFollowsStar.txt
+echo Finish running AutoTester for QueryFollowsStar.
+echo Running AutoTester for QueryPatternAssign...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryPatternAssign.txt TestResult\out11_QueryPatternAssign.xml > TestResult\cmd\cmd11_QueryPatternAssign.txt
+echo Finish running AutoTester for QueryPatternAssign.
+echo Running AutoTester for QueryWith...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryWith.txt TestResult\out11_QueryWith.xml > TestResult\cmd\cmd11_QueryWith.txt
+echo Finish running AutoTester for QueryWith.
+echo Finish running AutoTester for test 11.
+pause
+cls
+goto :main
+
+
+
 :runAllTests
 echo ===============================================================================
 echo                           Start Running AutoTester
@@ -122,82 +353,82 @@ echo Finish running AutoTester for test 5.
 echo -------------------------------------------------------------------------------
 echo Running AutoTester for test 6...
 echo Running AutoTester for Demo_Calls...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Calls.txt TestResult\outDemo_Calls.xml > TestResult\cmd\cmd6_Demo_Calls.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Calls.txt TestResult\out6_Demo_Calls.xml > TestResult\cmd\cmd6_Demo_Calls.txt
 echo Finish running AutoTester for Demo_Calls.
 echo Running AutoTester for Demo_CallsStar...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_CallsStar.txt TestResult\outDemo_CallsStar.xml > TestResult\cmd\cmd6_Demo_CallsStar.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_CallsStar.txt TestResult\out6_Demo_CallsStar.xml > TestResult\cmd\cmd6_Demo_CallsStar.txt
 echo Finish running AutoTester for Demo_CallsStar.
 echo Running AutoTester for Demo_Follows...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Follows.txt TestResult\outDemo_Follows.xml > TestResult\cmd\cmd6_Demo_Follows.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Follows.txt TestResult\out6_Demo_Follows.xml > TestResult\cmd\cmd6_Demo_Follows.txt
 echo Finish running AutoTester for Demo_Follows.
 echo Running AutoTester for Demo_FollowsStar...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_FollowsStar.txt TestResult\outDemo_FollowsStar.xml > TestResult\cmd\cmd6_Demo_FollowsStar.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_FollowsStar.txt TestResult\out6_Demo_FollowsStar.xml > TestResult\cmd\cmd6_Demo_FollowsStar.txt
 echo Finish running AutoTester for Demo_FollowsStar.
 echo Running AutoTester for Demo_Modifies...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Modifies.txt TestResult\outDemo_Modifies.xml > TestResult\cmd\cmd6_Demo_Modifies.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Modifies.txt TestResult\out6_Demo_Modifies.xml > TestResult\cmd\cmd6_Demo_Modifies.txt
 echo Finish running AutoTester for Demo_Modifies.
 echo Running AutoTester for Demo_Next...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Next.txt TestResult\outDemo_Next.xml > TestResult\cmd\cmd6_Demo_Next.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Next.txt TestResult\out6_Demo_Next.xml > TestResult\cmd\cmd6_Demo_Next.txt
 echo Finish running AutoTester for Demo_Next.
 echo Running AutoTester for Demo_NextStar...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_NextStar.txt TestResult\outDemo_NextStar.xml > TestResult\cmd\cmd6_Demo_NextStar.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_NextStar.txt TestResult\out6_Demo_NextStar.xml > TestResult\cmd\cmd6_Demo_NextStar.txt
 echo Finish running AutoTester for Demo_NextStar.
 echo Running AutoTester for Demo_Parent...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Parent.txt TestResult\outDemo_Parent.xml > TestResult\cmd\cmd6_Demo_Parent.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Parent.txt TestResult\out6_Demo_Parent.xml > TestResult\cmd\cmd6_Demo_Parent.txt
 echo Finish running AutoTester for Demo_Parent.
 echo Running AutoTester for Demo_ParentStar...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_ParentStar.txt TestResult\outDemo_ParentStar.xml > TestResult\cmd\cmd6_Demo_ParentStar.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_ParentStar.txt TestResult\out6_Demo_ParentStar.xml > TestResult\cmd\cmd6_Demo_ParentStar.txt
 echo Finish running AutoTester for Demo_ParentStar.
 echo Running AutoTester for Demo_Uses...
-AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Uses.txt TestResult\outDemo_Uses.xml > TestResult\cmd\cmd6_Demo_Uses.txt
+AutoTester Test6_Frozen\1_Demo\Demo_Source.txt Test6_Frozen\1_Demo\Demo_Uses.txt TestResult\out6_Demo_Uses.xml > TestResult\cmd\cmd6_Demo_Uses.txt
 echo Finish running AutoTester for Demo_Uses.
 echo Running AutoTester for CALLS_01...
-AutoTester Test6_Frozen\2_Calls\CALLS_SOURCE_01.txt Test6_Frozen\2_Calls\CALLS_QUERIES_01.txt TestResult\outCALLS_01.xml > TestResult\cmd\cmd6_CALLS_01.txt
+AutoTester Test6_Frozen\2_Calls\CALLS_SOURCE_01.txt Test6_Frozen\2_Calls\CALLS_QUERIES_01.txt TestResult\out6_CALLS_01.xml > TestResult\cmd\cmd6_CALLS_01.txt
 echo Finish running AutoTester for CALLS_01.
 echo Running AutoTester for FOLLOWS_01...
-AutoTester Test6_Frozen\3_Follows\FOLLOWS_SOURCE_01.txt Test6_Frozen\3_Follows\FOLLOWS_QUERIES_01.txt TestResult\outFOLLOWS.xml > TestResult\cmd\cmd6_FOLLOWS.txt
+AutoTester Test6_Frozen\3_Follows\FOLLOWS_SOURCE_01.txt Test6_Frozen\3_Follows\FOLLOWS_QUERIES_01.txt TestResult\out6_FOLLOWS.xml > TestResult\cmd\cmd6_FOLLOWS.txt
 echo Finish running AutoTester for FOLLOWS_01.
 echo Running AutoTester for MixTests01...
-AutoTester Test6_Frozen\4_MixTests01\MixTestsSource01.txt Test6_Frozen\4_MixTests01\MixTestsQuery01.txt TestResult\outMixTests01.xml > TestResult\cmd\cmd6_MixTests01.txt
+AutoTester Test6_Frozen\4_MixTests01\MixTestsSource01.txt Test6_Frozen\4_MixTests01\MixTestsQuery01.txt TestResult\out6_MixTests01.xml > TestResult\cmd\cmd6_MixTests01.txt
 echo Finish running AutoTester for MixTests01.
 echo Running AutoTester for MixTests02...
-AutoTester Test6_Frozen\5_MixTests02\MixTestsSource02.txt Test6_Frozen\5_MixTests02\MixTestsQuery02.txt TestResult\outMixTests02.xml > TestResult\cmd\cmd6_MixTests02.txt
+AutoTester Test6_Frozen\5_MixTests02\MixTestsSource02.txt Test6_Frozen\5_MixTests02\MixTestsQuery02.txt TestResult\out6_MixTests02.xml > TestResult\cmd\cmd6_MixTests02.txt
 echo Finish running AutoTester for MixTests02.
 echo Running AutoTester for ModifiesUsesParent...
-AutoTester Test6_Frozen\6_ModifiesUsesParent\ModifiesUsesParentSource01.txt Test6_Frozen\6_ModifiesUsesParent\ModifiesUsesParentQuery01.txt TestResult\outModifiesUsesParent.xml > TestResult\cmd\cmd6_ModifiesUsesParent.txt
+AutoTester Test6_Frozen\6_ModifiesUsesParent\ModifiesUsesParentSource01.txt Test6_Frozen\6_ModifiesUsesParent\ModifiesUsesParentQuery01.txt TestResult\out6_ModifiesUsesParent.xml > TestResult\cmd\cmd6_ModifiesUsesParent.txt
 echo Finish running AutoTester for ModifiesUsesParent.
 echo Running AutoTester for MultipleRelationship01...
-AutoTester Test6_Frozen\7_MultipleRelationship01\MultipleRelationshipSource01.txt Test6_Frozen\7_MultipleRelationship01\MultipleRelationshipQuery01.txt TestResult\outMultipleRelationship01.xml > TestResult\cmd\cmd6_MultipleRelationship01.txt
+AutoTester Test6_Frozen\7_MultipleRelationship01\MultipleRelationshipSource01.txt Test6_Frozen\7_MultipleRelationship01\MultipleRelationshipQuery01.txt TestResult\out6_MultipleRelationship01.xml > TestResult\cmd\cmd6_MultipleRelationship01.txt
 echo Finish running AutoTester for MultipleRelationship01.
 echo Running AutoTester for MultipleRelationship02...
-AutoTester Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipSource02.txt Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipQuery02.txt TestResult\outMultipleRelationship02.xml > TestResult\cmd\cmd6_MultipleRelationship02.txt
+AutoTester Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipSource02.txt Test6_Frozen\8_MultipleRelationship02\MultipleRelationshipQuery02.txt TestResult\out6_MultipleRelationship02.xml > TestResult\cmd\cmd6_MultipleRelationship02.txt
 echo Finish running AutoTester for MultipleRelationship02.
 echo Running AutoTester for Next...
-AutoTester Test6_Frozen\9_Next\NEXT_SOURCE_01.txt Test6_Frozen\9_Next\NEXT_QUERIES_01.txt TestResult\outNext.xml > TestResult\cmd\cmd6_Next.txt
+AutoTester Test6_Frozen\9_Next\NEXT_SOURCE_01.txt Test6_Frozen\9_Next\NEXT_QUERIES_01.txt TestResult\out6_Next.xml > TestResult\cmd\cmd6_Next.txt
 echo Finish running AutoTester for Next.
 echo Running AutoTester for NextNextStar...
-AutoTester Test6_Frozen\10_NextNextStar\NEXT-NEXT-STAR_SOURCE_01.txt Test6_Frozen\10_NextNextStar\NEXT-NEXT-STAR_QUERIES_01.txt TestResult\outNextNextStar.xml > TestResult\cmd\cmd6_NextNextStar.txt
+AutoTester Test6_Frozen\10_NextNextStar\NEXT-NEXT-STAR_SOURCE_01.txt Test6_Frozen\10_NextNextStar\NEXT-NEXT-STAR_QUERIES_01.txt TestResult\out6_NextNextStar.xml > TestResult\cmd\cmd6_NextNextStar.txt
 echo Finish running AutoTester for NextNextStar.
 echo Running AutoTester for NextStar...
-AutoTester Test6_Frozen\11_NextStar\NEXT-STAR_SOURCE_01.txt Test6_Frozen\11_NextStar\NEXT-STAR_QUERIES_01.txt TestResult\outNextStar.xml > TestResult\cmd\cmd6_NextStar.txt
+AutoTester Test6_Frozen\11_NextStar\NEXT-STAR_SOURCE_01.txt Test6_Frozen\11_NextStar\NEXT-STAR_QUERIES_01.txt TestResult\out6_NextStar.xml > TestResult\cmd\cmd6_NextStar.txt
 echo Finish running AutoTester for NextStar.
 echo Running AutoTester for Pattern...
-AutoTester Test6_Frozen\12_Pattern\PATTERN_SOURCE_01.txt Test6_Frozen\12_Pattern\PATTERN_QUERIES_01.txt TestResult\outPattern.xml > TestResult\cmd\cmd6_Pattern.txt
+AutoTester Test6_Frozen\12_Pattern\PATTERN_SOURCE_01.txt Test6_Frozen\12_Pattern\PATTERN_QUERIES_01.txt TestResult\out6_Pattern.xml > TestResult\cmd\cmd6_Pattern.txt
 echo Finish running AutoTester for Pattern.
 echo Running AutoTester for Tuple...
-AutoTester Test6_Frozen\13_Tuple\TUPLE_TESTS_SOURCE_01.txt Test6_Frozen\13_Tuple\TUPLE_TESTS_QUERIES_01.txt TestResult\outTuple.xml > TestResult\cmd\cmd6_Tuple.txt
+AutoTester Test6_Frozen\13_Tuple\TUPLE_TESTS_SOURCE_01.txt Test6_Frozen\13_Tuple\TUPLE_TESTS_QUERIES_01.txt TestResult\out6_Tuple.xml > TestResult\cmd\cmd6_Tuple.txt
 echo Finish running AutoTester for Tuple.
 echo Running AutoTester for With...
-AutoTester Test6_Frozen\14_With\WITH_SOURCE_01.txt Test6_Frozen\14_With\WITH_QUERIES_01.txt TestResult\outWith.xml > TestResult\cmd\cmd6_With.txt
+AutoTester Test6_Frozen\14_With\WITH_SOURCE_01.txt Test6_Frozen\14_With\WITH_QUERIES_01.txt TestResult\out6_With.xml > TestResult\cmd\cmd6_With.txt
 echo Finish running AutoTester for With.
 echo Running AutoTester for Simple01...
-AutoTester Test6_Frozen\15_Simple01\Simple01-Source.txt Test6_Frozen\15_Simple01\Simple01-Queries.txt TestResult\outSimple01.xml > TestResult\cmd\cmd6_Simple01.txt
+AutoTester Test6_Frozen\15_Simple01\Simple01-Source.txt Test6_Frozen\15_Simple01\Simple01-Queries.txt TestResult\out6_Simple01.xml > TestResult\cmd\cmd6_Simple01.txt
 echo Finish running AutoTester for Simple01.
 echo Running AutoTester for Simple02...
-AutoTester Test6_Frozen\16_Simple02\Simple02-Source.txt Test6_Frozen\16_Simple02\Simple02-Queries.txt TestResult\outSimple02.xml > TestResult\cmd\cmd6_Simple02.txt
+AutoTester Test6_Frozen\16_Simple02\Simple02-Source.txt Test6_Frozen\16_Simple02\Simple02-Queries.txt TestResult\out6_Simple02.xml > TestResult\cmd\cmd6_Simple02.txt
 echo Finish running AutoTester for Simple02.
 echo Running AutoTester for Simple03...
-AutoTester Test6_Frozen\17_Simple03\Simple03-Source.txt Test6_Frozen\17_Simple03\Simple03-Queries.txt TestResult\outSimple03.xml > TestResult\cmd\cmd6_Simple03.txt
+AutoTester Test6_Frozen\17_Simple03\Simple03-Source.txt Test6_Frozen\17_Simple03\Simple03-Queries.txt TestResult\out6_Simple03.xml > TestResult\cmd\cmd6_Simple03.txt
 echo Finish running AutoTester for Simple03.
 echo Finish running AutoTester for test 6.
 echo -------------------------------------------------------------------------------
@@ -208,6 +439,31 @@ echo ---------------------------------------------------------------------------
 echo Running AutoTester for test 8...
 AutoTester Test8_Frozen\Sample-Source.txt Test8_Frozen\Sample-Queries.txt TestResult\out8.xml > TestResult\cmd\cmd8_Sample.txt
 echo Finish running AutoTester for test 8.
+echo -------------------------------------------------------------------------------
+echo Running AutoTester for test 9...
+echo ...
+echo Finish running AutoTester for test 9.
+echo -------------------------------------------------------------------------------
+echo Running AutoTester for test 10...
+echo Running AutoTester for QueryAffects.txt...
+AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffects.txt TestResult\out10_QueryAffects.xml > TestResult\cmd\cmd10_QueryAffects.txt
+echo Finish running AutoTester for QueryAffects.txt.
+echo Finish running AutoTester for test 10.
+echo -------------------------------------------------------------------------------
+echo Running AutoTester for test 11...
+echo Running AutoTester for QueryFollows...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryFollows.txt TestResult\out11_QueryFollows.xml > TestResult\cmd\cmd11_QueryFollows.txt
+echo Finish running AutoTester for QueryFollows.
+echo Running AutoTester for QueryFollowsStar...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryFollowsStar.txt TestResult\out11_QueryFollowsStar.xml > TestResult\cmd\cmd11_QueryFollowsStar.txt
+echo Finish running AutoTester for QueryFollowsStar.
+echo Running AutoTester for QueryPatternAssign...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryPatternAssign.txt TestResult\out11_QueryPatternAssign.xml > TestResult\cmd\cmd11_QueryPatternAssign.txt
+echo Finish running AutoTester for QueryPatternAssign.
+echo Running AutoTester for QueryWith...
+AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryWith.txt TestResult\out11_QueryWith.xml > TestResult\cmd\cmd11_QueryWith.txt
+echo Finish running AutoTester for QueryWith.
+echo Finish running AutoTester for test 11.
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
