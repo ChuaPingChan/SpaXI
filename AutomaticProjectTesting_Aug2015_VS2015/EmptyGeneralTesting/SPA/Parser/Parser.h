@@ -40,6 +40,7 @@ public:
     static const std::regex REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT;
     static const std::regex REGEX_MATCH_EQUAL;
     static const std::regex REGEX_MATCH_OPERATOR;
+    static const std::regex REGEX_MATCH_ANYHING;
 
     Parser(PKBMain* pkbMainPtr);
 
@@ -108,6 +109,7 @@ protected:
     // Utility methods
     std::vector<std::string> tokenizeString(std::string stringToTokenize);
     static std::string getNextTokenAndShortenString(std::string &targetString);
+    static std::string getNextTokenInString(const std::string &targetString);
     std::string removeAllWhitespaces(std::string targetString);     // TOOD: Remove if not used
     bool isBracketedCorrectly(std::string expression);      // TODO: Remove if not used
 

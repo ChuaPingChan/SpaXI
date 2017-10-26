@@ -34,6 +34,7 @@ const regex Parser::REGEX_MATCH_OPEN_BRACKET = regex("\\s*\\(\\s*");
 const regex Parser::REGEX_MATCH_CLOSE_BRACKET = regex("\\s*\\)\\s*");
 const regex Parser::REGEX_MATCH_SEMICOLON = regex("\\s*;\\s*");
 const regex Parser::REGEX_MATCH_BLANK_OR_EMPTY_STRING = regex("\\s*");
+const regex Parser::REGEX_MATCH_ANYHING = regex("[^]");
 
 // Char sequence to match should be a statement up to but not including semicolon.
 // To extract contents within a wrapping outside bracket. Having outside bracket is assumed.
@@ -135,17 +136,31 @@ bool Parser::incrCurrentTokenPtr()
 
 /*
 Given a string, this method extracts the foremost token, remove it from the string
-reference and returns the token.
+reference and returns the token. If no token is left in the given string, an empty
+string is returned.
 */
 std::string Parser::getNextTokenAndShortenString(std::string &targetString)
 {
     smatch match;
-    string token = string();
+    string token;
     if (regex_match(targetString, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1)
     {
         token = match.str(1);
         targetString.erase(0, match.position(1) + match.length(1));
     }
+    return token;
+}
+
+/*
+Given a string, this method extracts and returns the foremost token. If no token is left in the
+given string, an empty string is returned.
+*/
+std::string Parser::getNextTokenInString(const std::string &targetString)
+{
+    smatch match;
+    string token;
+    if (regex_match(targetString, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1)
+        token = match.str(1);
     return token;
 }
 
@@ -544,10 +559,6 @@ bool Parser::assertIsValidExpression(string expression) {
     if (lhsRhsExpr != pair<string, string>()) {
         leftExpression = lhsRhsExpr.first;
         rightExpression = lhsRhsExpr.second;
-        if (_currentStmtNumber == 7) {
-            cout << endl << "lhs expression: " << rightExpression << endl;
-            cout << "rhs expression: " << rightExpression << endl;
-        }
     } else {
         _isValidSyntax = false;
         OutputDebugString("WARNING: Invalid Expression.\n");
@@ -561,9 +572,10 @@ bool Parser::assertIsValidExpression(string expression) {
 Splits an expression into two parts, namely the left expression and right expression.
 For example,
 "3 + 3 - 2"         ==> "3" and "3 - 2"
-"(2 + 3) + 6 - 7"   ==> "(2 + 3)" and "6 - 7"
+"(2 + 3) + 6 - 7"   ==> "2 + 3" and "6 - 7"
 "2 + (6 - 7)"       ==> "2" and "(6 - 7)"
 "(2 + 3) + (6 - 7)" ==> "2 + 3" and "(6 - 7)"
+"((2 + 3)) + ((6 - 7))" ==> "(2 + 3)" and "((6 - 7))". Yes, the RHS's brackets are untouched.
 
 If the format of the expression given is not splittable as above, an empty pair
 of strings will be returned.
