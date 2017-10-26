@@ -176,17 +176,17 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-        TEST_METHOD(testParsingSimpleSource_multiProcSimpleLoops_success)
-        {
-            // Set up
-            Parser parser(dummyPkbMainPtr);
-            Assert::IsTrue(createDummySimpleSourceFile_assignments_simpleLoops());
+        //TEST_METHOD(testParsingSimpleSource_multiProcSimpleLoops_success)
+        //{
+        //    // Set up
+        //    Parser parser(dummyPkbMainPtr);
+        //    Assert::IsTrue(createDummySimpleSourceFile_assignments_simpleLoops());
 
-            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+        //    Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
-            // Clean up
-            Assert::IsTrue(deleteDummySimpleSourceFile());
-        }
+        //    // Clean up
+        //    Assert::IsTrue(deleteDummySimpleSourceFile());
+        //}
 
         /*******************************
          * Utility Methods for Testing *
