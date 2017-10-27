@@ -334,6 +334,21 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(TestAffectsComputation)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_affectsSource1());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Ping Chan to Zhang Ying: Write here. You can refer to the method above for reference
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
@@ -1036,6 +1051,31 @@ namespace UnitTesting
                 "	supper = best * best; \n"
                 "	supper = supper * best; \n"
                 "} \n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy SIMPLE source to test
+        PKB's Affects computation.
+        */
+        bool createDummySimpleSourceFile_affectsSource1() {
+            std::string content =
+                "procedure Test { \n"
+                "	a = b; \n"
+                "	while b { \n"
+                "		a = c + a; \n"
+                "		while c { \n"
+                "			a = d + a; \n"
+                "		} \n"
+                "		b = a; \n"
+                "	} \n"
+                "	d = a; \n"
+                "}";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);
