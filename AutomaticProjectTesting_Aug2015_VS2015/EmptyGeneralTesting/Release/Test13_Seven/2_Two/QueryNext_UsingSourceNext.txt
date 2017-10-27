@@ -1,52 +1,52 @@
 1 - check bool r/s exists
 
 Select BOOLEAN such that Next(1,2)
-TRUE
+true
 5000
 2 - check bool r/s exists different procedures
 
 Select BOOLEAN such that Next(38,39)
-FALSE
+false
 5000
 3 - check bool r/s exists end of while and while condition
 
 Select BOOLEAN such that Next(9,6)
-TRUE
+true
 5000
 4 - check bool r/s exists without entering while loop
 
 Select BOOLEAN such that Next(6,10)
-TRUE
+true
 5000
 5 - check bool r/s exists if path
 
 Select BOOLEAN such that Next(3,4)
-TRUE
+true
 5000
 6 - check bool r/s exists else path
 
 Select BOOLEAN such that Next(3,5)
-TRUE
+true
 5000
 7 - check bool r/s exists invalid stmt number
 
 Select BOOLEAN such that Next(3,500)
-FALSE
+false
 5000
 8 - check bool r/s exists not in sequence
 
 Select BOOLEAN such that Next(1,3)
-FALSE
+false
 5000
 9 - check bool statement has a next statement
 
 Select BOOLEAN such that Next(1,_)
-TRUE
+true
 5000
-10 - check bool statement has a next statement FALSE
+10 - check bool statement has a next statement false
 
 Select BOOLEAN such that Next(39,_)
-FALSE
+false
 5000
 11 - get all s1 executed next
 prog_line s1;
@@ -66,22 +66,22 @@ Select s1 such that Next(12,s1)
 14 - check if prog line has preceding stmt
 
 Select BOOLEAN such that Next(_,1)
-FALSE
+false
 5000
 15 - check if prog line has preceding stmt
 
 Select BOOLEAN such that Next(_,39)
-FALSE
+false
 5000
 16 - check if prog line has preceding stmt
 
 Select BOOLEAN such that Next(_,19)
-TRUE
+true
 5000
 17 - check if there exist a next r/s
 
 Select BOOLEAN such that Next(_,_)
-TRUE
+true
 5000
 18 - get all pl which are executed next
 prog_line pl1;

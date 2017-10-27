@@ -31,27 +31,27 @@ DEF, LMN, OPQ, GHI, JKL
 7 - Checks BOOLEAN using procedure and procedure
 procedure p1, p2;
 Select BOOLEAN such that Calls* (p1,p2)
-TRUE
+true
 5000
 8 - Checks BOOLEAN using ident and ident
 
 Select BOOLEAN such that Calls* ("ABC", "DEF")
-TRUE
+true
 5000
 9 - Checks BOOLEAN using ident and all
 
 Select BOOLEAN such that Calls* ("ABC", _)
-TRUE
+true
 5000
 10 - Checks BOOLEAN using all and ident
 
 Select BOOLEAN such that Calls* (_, "LMN")
-TRUE
+true
 5000
 11 - Checks BOOLEAN using all and all
 
 Select BOOLEAN such that Calls* (_, _)
-TRUE
+true
 5000
 12 - Empty result
 procedure p1;
@@ -91,5 +91,5 @@ ABC, DEF, LMN
 19 - Checks BOOLEAN using ident and ident (multiple level)
 
 Select BOOLEAN such that Calls* ("ABC", "JKL")
-TRUE
+true
 5000

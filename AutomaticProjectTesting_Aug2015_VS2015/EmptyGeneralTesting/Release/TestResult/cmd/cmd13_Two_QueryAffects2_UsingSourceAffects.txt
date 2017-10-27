@@ -6,46 +6,46 @@ Beginning to evaluate Query File.
 1 - Select BOOLEAN with no syns
 assign a, a1;
 Select BOOLEAN such that Affects(12, 16)
-TRUE
+true
 5000
 Evaluating query 1 - Select BOOLEAN with no syns
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: TRUE 
-Missing: TRUE 
+Correct answer: true 
+Missing: true 
 Additional: false 
 2 - Select BOOLEAN with 1 syns
 assign a, a1;
 Select BOOLEAN such that Affects(a, 10)
-TRUE
+true
 5000
 Evaluating query 2 - Select BOOLEAN with 1 syns
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: TRUE 
-Missing: TRUE 
+Correct answer: true 
+Missing: true 
 Additional: false 
 3 - Select BOOLEAN with 1 syns
 assign a, a1;
 Select BOOLEAN such that Affects(1, a)
-TRUE
+true
 5000
 Evaluating query 3 - Select BOOLEAN with 1 syns
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: TRUE 
-Missing: TRUE 
+Correct answer: true 
+Missing: true 
 Additional: false 
 4 - Select BOOLEAN with 2 syns
 assign a, a1;
 Select BOOLEAN such that Affects(a, a1)
-TRUE
+true
 5000
 Evaluating query 4 - Select BOOLEAN with 2 syns
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: TRUE 
-Missing: TRUE 
+Correct answer: true 
+Missing: true 
 Additional: false 
 5 - Select ARG1 with 1 syn =stmt int=
 assign a, a1; stmt s;

@@ -21,22 +21,22 @@ x, y, z, i
 5 - Checks BOOLEAN and modified by
 
 Select BOOLEAN such that Modifies (2, _)
-TRUE
+true
 5000
 6 - Checks BOOLEAN and modified by
 variable v;
 Select BOOLEAN such that Modifies (1, v)
-TRUE
+true
 5000
 7 - Checks BOOLEAN and Follows
 
 Select BOOLEAN such that Follows(2, 6)
-TRUE
+true
 5000
 8 - Checks BOOLEAN and Follows
 
 Select BOOLEAN such that Follows(6, _)
-FALSE
+false
 5000
 9 - Checks follows by with result
 stmt s;
@@ -61,27 +61,27 @@ Select s such that Follows*(s, -12345)
 13 - Checks BOOLEAN and parent
 
 Select BOOLEAN such that Parent(4, 5)
-TRUE
+true
 5000
 14 - Checks BOOLEAN and parent
 
 Select BOOLEAN such that Parent(2, _)
-TRUE
+true
 5000
 15 - Checks BOOLEAN and parent
 
 Select BOOLEAN such that Parent(_, 4)
-TRUE
+true
 5000
 16 - Checks BOOLEAN and parent*
 
 Select BOOLEAN such that Parent*(2, 5)
-TRUE
+true
 5000
 17 - Checks BOOLEAN and parent*
 
 Select BOOLEAN such that Parent*(2, _)
-TRUE
+true
 5000
 18 - Checks parent* with result
 stmt s;

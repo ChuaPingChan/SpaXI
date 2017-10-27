@@ -6,7 +6,7 @@ Select s such that Affects(2, s) and Affects(11, s)
 548 - AFFECTS: 2 clauses (similar) - syn-fixed, syn-fixed
 assign a1, a2;
 Select BOOLEAN such that Affects(a1, 16) and Affects(a2, 14)
-TRUE
+true
 5000
 549 - AFFECTS: 2 clauses (similar) - fixed-generic, fixed-generic
 while w;
@@ -41,7 +41,7 @@ Select a1 such that Affects(a1, a2) and Affects(a1, 13)
 555 - AFFECTS: 2 clauses (mixed) - generic-generic, fixed-generic
 
 Select BOOLEAN such that Affects(_, _) and Affects(21, _)
-TRUE
+true
 5000
 556 - AFFECTS: 2 clauses (mixed) - fixed-syn, generic-fixed
 assign a;
@@ -51,7 +51,7 @@ none
 557 - AFFECTS: 2 clauses (mixed) - syn-fixed, syn-generic
 stmt s1, s2;
 Select BOOLEAN such that Affects(s1, 11) and Affects(s2, _)
-TRUE
+true
 5000
 558 - AFFECTS: 2 clauses (mixed) - fixed-generic, generic-syn
 assign a; while w;
@@ -71,7 +71,7 @@ Select a such that Affects(a, _) and Affects(_, a)
 561 - AFFECTS: 2 clauses (mixed) - generic-fixed, generic-syn
 assign a;
 Select BOOLEAN such that Affects(_, 4) and Affects(_, a)
-FALSE
+false
 5000
 562 - AFFECTS: stmt# - select clause (has results)
 assign a;
@@ -116,7 +116,7 @@ none
 570 - AFFECTS*-boolean: fixed-fixed
 
 Select BOOLEAN such that Affects*(1, 13)
-TRUE
+true
 5000
 571 - AFFECTS*-stmt: fixed-fixed (non-assign stmt)
 stmt s;
@@ -126,12 +126,12 @@ none
 572 - AFFECTS*-boolean: fixed-fixed (indirect affects)
 
 Select BOOLEAN such that Affects*(9, 19)
-FALSE
+false
 5000
-573 - AFFECTS*-boolean: fixed-fixed (FALSE)
+573 - AFFECTS*-boolean: fixed-fixed (false)
 
 Select BOOLEAN such that Affects*(2, 4)
-FALSE
+false
 5000
 574 - AFFECTS*-assign: syn-syn (tuple)
 assign a1, a2;
@@ -156,7 +156,7 @@ Select n2 such that Affects*(n1, n2)
 578 - AFFECTS*-boolean: generic-generic
 
 Select BOOLEAN such that Affects*(_, _)
-TRUE
+true
 5000
 579 - AFFECTS*-assign: fixed-syn
 assign a;
@@ -176,7 +176,7 @@ Select n such that Affects*(16, n)
 582 - AFFECTS*-boolean: fixed-syn (non-assign stmt)
 if i;
 Select BOOLEAN such that Affects*(19, i)
-FALSE
+false
 5000
 583 - AFFECTS*-assign: syn-fixed
 assign a;
@@ -196,37 +196,37 @@ Select n such that Affects*(n, 19)
 586 - AFFECTS*-boolean: syn-fixed (non-assign stmt)
 while w;
 Select BOOLEAN such that Affects*(w, 5)
-FALSE
+false
 5000
 587 - AFFECTS*-boolean: fixed-generic (assign)
 
 Select BOOLEAN such that Affects*(22, _)
-TRUE
+true
 5000
 588 - AFFECTS*-boolean: fixed-generic (non-assign stmt)
 
 Select BOOLEAN such that Affects*(17, _)
-FALSE
+false
 5000
-589 - AFFECTS*-boolean: fixed-generic (FALSE)
+589 - AFFECTS*-boolean: fixed-generic (false)
 
 Select BOOLEAN such that Affects*(23, _)
-FALSE
+false
 5000
 590 - AFFECTS*-boolean: generic-fixed (assign)
 
 Select BOOLEAN such that Affects*(_, 6)
-TRUE
+true
 5000
 591 - AFFECTS*-boolean: generic-fixed (non-assign stmt)
 
 Select BOOLEAN such that Affects*(_, 15)
-FALSE
+false
 5000
-592 - AFFECTS*-boolean: generic-fixed (FALSE)
+592 - AFFECTS*-boolean: generic-fixed (false)
 
 Select BOOLEAN such that Affects*(_, 4)
-FALSE
+false
 5000
 593 - AFFECTS*-assign: syn-generic
 assign a;
@@ -311,7 +311,7 @@ Select a such that Affects*(a, _) pattern a(v, "5")
 609 - AFFECTS*: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Affects*(1, 13) and Affects*(2, 22)
-TRUE
+true
 5000
 610 - AFFECTS*: 2 clauses (similar) - syn-syn, syn-syn
 assign a1, a2, a3;
@@ -326,7 +326,7 @@ Select s such that Affects*(2, s) and Affects*(11, s)
 612 - AFFECTS*: 2 clauses (similar) - syn-fixed, syn-fixed
 assign a1, a2;
 Select BOOLEAN such that Affects*(a1, 16) and Affects*(a2, 14)
-TRUE
+true
 5000
 613 - AFFECTS*: 2 clauses (similar) - fixed-generic, fixed-generic
 while w;
@@ -361,7 +361,7 @@ Select a1 such that Affects*(a1, a2) and Affects*(a1, 13)
 619 - AFFECTS*: 2 clauses (mixed) - generic-generic, fixed-generic
 
 Select BOOLEAN such that Affects*(_, _) and Affects*(21, _)
-TRUE
+true
 5000
 620 - AFFECTS*: 2 clauses (mixed) - fixed-syn, generic-fixed
 assign a;
@@ -371,7 +371,7 @@ none
 621 - AFFECTS*: 2 clauses (mixed) - syn-fixed, syn-generic
 stmt s1, s2;
 Select BOOLEAN such that Affects*(s1, 11) and Affects*(s2, _)
-TRUE
+true
 5000
 622 - AFFECTS*: 2 clauses (mixed) - fixed-generic, generic-syn
 assign a; while w;
@@ -391,7 +391,7 @@ Select a such that Affects*(a, _) and Affects*(_, a)
 625 - AFFECTS*: 2 clauses (mixed) - generic-fixed, generic-syn
 assign a;
 Select BOOLEAN such that Affects*(_, 4) and Affects*(_, a)
-FALSE
+false
 5000
 626 - AFFECTS*: stmt# - select clause (has results)
 assign a;
@@ -876,42 +876,42 @@ none
 722 - WITH: constant = constant
 
 Select BOOLEAN with 1 = 1
-TRUE
+true
 5000
 723 - WITH: constant = constant (no result)
 
 Select BOOLEAN with 5 = 10
-FALSE
+false
 5000
 724 - WITH: string = string
 
 Select BOOLEAN with "hello" = "hello"
-TRUE
+true
 5000
 725 - WITH: string = string (no result)
 
 Select BOOLEAN with "harlo" = "hello"
-FALSE
+false
 5000
 726 - WITH: prog_line = prog_line
 prog_line n1; prog_line n2;
 Select BOOLEAN with n1 = n2
-TRUE
+true
 5000
 727 - WITH: stmt# = stmt#
 stmt s;
 Select BOOLEAN with s.stmt# = s.stmt#
-TRUE
+true
 5000
 728 - WITH: stmt# = stmt# (no result)
 assign a; while w;
 Select BOOLEAN with a.stmt# = w.stmt#
-FALSE
+false
 5000
 729 - WITH: c.value = c.value
 constant c;
 Select BOOLEAN with c.value = c.value
-TRUE
+true
 5000
 730 - WITH: c.procName = c.procName
 call c;
@@ -921,5 +921,5 @@ none
 731 - WITH: p.procName = p.procName
 procedure p;
 Select BOOLEAN with p.procName = p.procName
-TRUE
+true
 5000

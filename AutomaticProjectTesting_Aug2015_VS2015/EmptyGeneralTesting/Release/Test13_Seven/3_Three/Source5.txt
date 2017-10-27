@@ -1,178 +1,178 @@
 procedure A{
-  giant = 1;                              // 1
-  b = giant + 2;                          // 2
-  c = giant * b + 100;                    // 3
-  if b then {                         // 4
-    while giant{                          // 5
-      while c{                        // 6
-        if d then{                    // 7
-          while e {                   // 8
-            if f then{                // 9
-              giant = g + 10;             // 10
+  giant = 1;                              
+  b = giant + 2;                          
+  c = giant * b + 100;                    
+  if b then {                         
+    while giant{                          
+      while c{                        
+        if d then{                    
+          while e {                   
+            if f then{                
+              giant = g + 10;             
             }
             else{
-              while d{                // 11
-                if e then {           // 12
-                  giant = giant + 100;        // 13
+              while d{                
+                if e then {           
+                  giant = giant + 100;        
                 }
                 else{
-                  b = h * 1 + b;      // 14
+                  b = h * 1 + b;      
                 }
-                d = 100 * 100 + c;    // 15
+                d = 100 * 100 + c;    
               }
-              c = 2 * giant * b;          // 16
+              c = 2 * giant * b;          
             }
-            e = 100;                  // 17
+            e = 100;                  
           }
         }
         else{
-          if k then {                 // 18
-            c = c * giant * b;            // 19
+          if k then {                 
+            c = c * giant * b;            
           }
           else{
-            c = 100 * giant * b;          // 20
+            c = 100 * giant * b;          
           }
-          giant = 100 + c;                // 21
+          giant = 100 + c;                
         }
-        c = giant + 100;                  // 22
+        c = giant + 100;                  
       }
-      b = giant * b + 200;                // 23
+      b = giant * b + 200;                
     }
-    c = 1000 + giant * b;                 // 24
+    c = 1000 + giant * b;                 
   }
   else{
-    g = h + giant * b + k;                // 25
+    g = h + giant * b + k;                
   }
-  b = 100;                            // 26
+  b = 100;                            
 }
 
 procedure B{
-  Bad = 10 ;                          // 27
-  while Bad{                          // 28
-    if jkbk then{                     // 29
-      if Bc then{                     // 30
-        jkbk = 100;                   // 31
-        egg = Bad + jkbk + o;         // 32
-        while Bd{                     // 33
-          if Be then{                 // 34
-            while Bf{                 // 35
-              if Bg then{             // 36
-                o = 1;                // 37
+  Bad = 10 ;                          
+  while Bad{                          
+    if jkbk then{                     
+      if Bc then{                     
+        jkbk = 100;                   
+        egg = Bad + jkbk + o;         
+        while Bd{                     
+          if Be then{                 
+            while Bf{                 
+              if Bg then{             
+                o = 1;                
               }
               else{
-                egg = 2;              // 38
+                egg = 2;              
               }
-              Bf = 3;                 // 39
+              Bf = 3;                 
             }
-            Be = 4;                   // 40
-            o = egg + Bad;            // 41
+            Be = 4;                   
+            o = egg + Bad;            
           }
           else{
-            while Bf{                 // 42
-              if Bg then{             // 43
-                jkbk = 1;             // 44
+            while Bf{                 
+              if Bg then{             
+                jkbk = 1;             
               }
               else{
-                egg = 2;              // 45
-                Be = Bf + Bd;         // 46
+                egg = 2;              
+                Be = Bf + Bd;         
               }
-              Bf = 3;                 // 47
-              Bd = Bc + egg;          // 48
+              Bf = 3;                 
+              Bd = Bc + egg;          
             }
-            o = 4;                    // 49
+            o = 4;                    
           }
-          o = 5;                      // 50
+          o = 5;                      
         }
-        Bc = 5 + n + egg;             // 51
+        Bc = 5 + n + egg;             
       }
       else{
-        Bb = 1 + Bad;                 // 52
-        while Bc{                     // 53
-          egg = 1;                    // 54
-          while Bd{                   // 55
-            Bd = 1;                   // 56
+        Bb = 1 + Bad;                 
+        while Bc{                     
+          egg = 1;                    
+          while Bd{                   
+            Bd = 1;                   
           }
-          if Be then{                 // 57
-            jkbk = 1;                 // 58
-            Ba = Ba + Be * Bd;        // 59
+          if Be then{                 
+            jkbk = 1;                 
+            Ba = Ba + Be * Bd;        
           }
           else{
-            n = 2;                    // 60
+            n = 2;                    
           }
-          n = n + jkbk + Ba;          // 61
+          n = n + jkbk + Ba;          
         }
-        Ba = 100;                     // 62
+        Ba = 100;                     
       }
     }
     else{
-      while Bg{                       // 63
-        if Bh then{                   // 64
-          if Bk then{                 // 65
-            n = 1;                    // 66
-            Bh = n + o + Bad;         // 67
+      while Bg{                       
+        if Bh then{                   
+          if Bk then{                 
+            n = 1;                    
+            Bh = n + o + Bad;         
           }
           else{
-            o =2;                     // 68
-            n = Bh * o;               // 69
+            o =2;                     
+            n = Bh * o;               
           }
-          Bh = 3;                     // 70
+          Bh = 3;                     
         }
         else{
-          while Bn{                   // 71
-            while Bm{                 // 72
-              Bm = 1;                 // 73
-              egg = Bm * Bn;          // 74
+          while Bn{                   
+            while Bm{                 
+              Bm = 1;                 
+              egg = Bm * Bn;          
             }
-            jkbk = Bm + Bb;           // 75
+            jkbk = Bm + Bb;           
           }
-          Bg = 100;                   // 76
+          Bg = 100;                   
         }
-        jkbk = egg + n + Bo;          // 77
+        jkbk = egg + n + Bo;          
       }
-      if Bo then{                     // 78
-        o = 10;                       // 79
+      if Bo then{                     
+        o = 10;                       
       }
       else{
-        egg = 10 + o;                 // 80
+        egg = 10 + o;                 
       }
-      Br = 100;                       // 81
+      Br = 100;                       
     }
-    if Bj then{                       // 82
-      if Bh then{                     // 83
-        if Bf then{                   // 84
-          Bf = 1 + jkbk;              // 85
-          Bk = Bk + Bg * Bf;          // 86
+    if Bj then{                       
+      if Bh then{                     
+        if Bf then{                   
+          Bf = 1 + jkbk;              
+          Bk = Bk + Bg * Bf;          
         }
         else{
-          Bh = 1;                     // 87
-          Bh = Bh * Bf + Bk;          // 88
+          Bh = 1;                     
+          Bh = Bh * Bf + Bk;          
         }
       }
       else{
-        Bk = 10;                      // 89
+        Bk = 10;                      
       }
     }
     else{
-      if Bg then {                    // 90
-        Bf = 10;                      // 91
+      if Bg then {                    
+        Bf = 10;                      
       }
       else{
-        o = 100 + egg;                // 92
-        n = Bz + 100;                 // 93
+        o = 100 + egg;                
+        n = Bz + 100;                 
       }
     }
   }
-  Bz = 100;                           // 94
+  Bz = 100;                           
 }
 
 procedure C{
-  while Cc{                           // 95
-    Ca = 10;                          // 96
-    Ba = Ab * 10;                     // 97
-    call B;                           // 98
-    g = Ca + Ba * 100;                // 99
-    call A;                           // 100
-    Cd = Cc * g + 10;                 // 101
+  while Cc{                           
+    Ca = 10;                          
+    Ba = Ab * 10;                     
+    call B;                           
+    g = Ca + Ba * 100;                
+    call A;                           
+    Cd = Cc * g + 10;                 
   }
-  Cd = Cd + Cg;                       // 102
+  Cd = Cd + Cg;                       
 }

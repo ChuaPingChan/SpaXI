@@ -406,26 +406,22 @@ Correct answer: 4 5 9 11 12 15
 41 - Checks BOOLEAN and Parent* valid
 
 Select BOOLEAN such that Parent*(5, 8)
-TRUE
+true
 5000
 Evaluating query 41 - Checks BOOLEAN and Parent* valid
 The final tag string is ReturnBoolean="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 42 - Checks BOOLEAN and Parent* invalid
 
 Select BOOLEAN such that Parent*(2, _)
-FALSE
+false
 5000
 Evaluating query 42 - Checks BOOLEAN and Parent* invalid
 _ is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Parentstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 43 - Checks Parent* with no result
 stmt s;
 Select s such that Parent*(10, 1)
@@ -574,14 +570,12 @@ Correct answer: Romeo
 57 - Checks for Parent(s,s)
 stmt s;
 Select BOOLEAN such that Parent(s,s)
-FALSE
+false
 5000
 Evaluating query 57 - Checks for Parent(s,s)
 The final tag string is ReturnBoolean="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 58 - Checks for Parent(s,s)
 stmt s;
 Select s such that Parent(s,s)
@@ -605,13 +599,11 @@ Correct answer:
 60 - Checks for Follows(s,s)
 stmt s;
 Select BOOLEAN such that Follows(s,s)
-FALSE
+false
 5000
 Evaluating query 60 - Checks for Follows(s,s)
 The final tag string is ReturnBoolean="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 End of evaluating Query File.
 AutoTester Completed !

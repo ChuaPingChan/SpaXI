@@ -6,101 +6,83 @@ Beginning to evaluate Query File.
 1 - Select BOOLEAN with no syns, out of bounds
 assign a, a1;
 Select BOOLEAN such that Affects(0, 20)
-FALSE
+false
 5000
 Evaluating query 1 - Select BOOLEAN with no syns, out of bounds
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 2 - Select BOOLEAN with 1 syn, out of bounds
 assign a, a1;
 Select BOOLEAN such that Affects(a, 20)
-FALSE
+false
 5000
 Evaluating query 2 - Select BOOLEAN with 1 syn, out of bounds
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 3 - Select BOOLEAN with 1 syn, out of bounds
 assign a, a1;
 Select BOOLEAN such that Affects(0, a)
-FALSE
+false
 5000
 Evaluating query 3 - Select BOOLEAN with 1 syn, out of bounds
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 4 - Select BOOLEAN with ifs
 assign a, a1; if ifs;
 Select BOOLEAN such that Affects(ifs, a)
-FALSE
+false
 5000
 Evaluating query 4 - Select BOOLEAN with ifs
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 5 - Select BOOLEAN with ifs
 assign a, a1; if ifs;
 Select BOOLEAN such that Affects(a, ifs)
-FALSE
+false
 5000
 Evaluating query 5 - Select BOOLEAN with ifs
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 6 - Select BOOLEAN with whiles
 assign a, a1; if ifs; while w;
 Select BOOLEAN such that Affects(w, a)
-FALSE
+false
 5000
 Evaluating query 6 - Select BOOLEAN with whiles
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 7 - Select BOOLEAN with whiles
 assign a, a1; if ifs; while w;
 Select BOOLEAN such that Affects(a, w)
-FALSE
+false
 5000
 Evaluating query 7 - Select BOOLEAN with whiles
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 8 - Select BOOLEAN with calls
 assign a, a1; if ifs; call c;
 Select BOOLEAN such that Affects(c, a)
-FALSE
+false
 5000
 Evaluating query 8 - Select BOOLEAN with calls
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 9 - Select BOOLEAN with calls
 assign a, a1; if ifs; call c;
 Select BOOLEAN such that Affects(a, c)
-FALSE
+false
 5000
 Evaluating query 9 - Select BOOLEAN with calls
 The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 End of evaluating Query File.
 AutoTester Completed !

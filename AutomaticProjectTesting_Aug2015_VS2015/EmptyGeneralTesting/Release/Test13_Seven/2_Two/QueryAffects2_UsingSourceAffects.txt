@@ -1,22 +1,22 @@
 1 - Select BOOLEAN with no syns
 assign a, a1;
 Select BOOLEAN such that Affects(12, 16)
-TRUE
+true
 5000
 2 - Select BOOLEAN with 1 syns
 assign a, a1;
 Select BOOLEAN such that Affects(a, 10)
-TRUE
+true
 5000
 3 - Select BOOLEAN with 1 syns
 assign a, a1;
 Select BOOLEAN such that Affects(1, a)
-TRUE
+true
 5000
 4 - Select BOOLEAN with 2 syns
 assign a, a1;
 Select BOOLEAN such that Affects(a, a1)
-TRUE
+true
 5000
 5 - Select ARG1 with 1 syn =stmt int=
 assign a, a1; stmt s;

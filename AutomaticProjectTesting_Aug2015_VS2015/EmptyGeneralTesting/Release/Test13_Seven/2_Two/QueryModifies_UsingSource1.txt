@@ -151,42 +151,42 @@ Jane
 31 - Checks BOOLEAN that v1 is modified at the procedure
 variable v1;
 Select BOOLEAN such that Modifies ("OPQ", v1)
-TRUE
+true
 5000
 32 - Checks BOOLEAN that the variable is modified at the procedure
 
 Select BOOLEAN such that Modifies ("ABC", "Jane")
-TRUE
+true
 5000
 33 - Checks BOOLEAN that there is at least one variable modified at the procedure
 
 Select BOOLEAN such that Modifies ("ABC", _)
-TRUE
+true
 5000
 34 - Checks BOOLEAN that the variable is modified at line no
 
 Select BOOLEAN such that Modifies (4, "Jane")
-TRUE
+true
 5000
 35 - Checks BOOLEAN that there is at least one variable modified at the line no
 
 Select BOOLEAN such that Modifies (9, _)
-TRUE
+true
 5000
 36 - Checks BOOLEAN that there is at least one v1 modified at all
 variable v1;
 Select BOOLEAN such that Modifies (_, v1)
-FALSE
+false
 5000
 37 - Checks BOOLEAN that there is at least one variable modified at all
 
 Select BOOLEAN such that Modifies (_, "x")
-FALSE
+false
 5000
 38 - Checks BOOLEAN that there is at least one all modifed at all
 
 Select BOOLEAN such that Modifies (_, _)
-FALSE
+false
 5000
 39 - Get all v1 that modifies
 variable v1;

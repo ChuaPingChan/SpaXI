@@ -68,62 +68,52 @@ Correct answer: DEF LMN OPQ GHI JKL
 7 - Checks BOOLEAN using procedure and procedure
 procedure p1, p2;
 Select BOOLEAN such that Calls* (p1,p2)
-TRUE
+true
 5000
 Evaluating query 7 - Checks BOOLEAN using procedure and procedure
 The final tag string is ReturnBoolean="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 8 - Checks BOOLEAN using ident and ident
 
 Select BOOLEAN such that Calls* ("ABC", "DEF")
-TRUE
+true
 5000
 Evaluating query 8 - Checks BOOLEAN using ident and ident
 The final tag string is ReturnBoolean="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 9 - Checks BOOLEAN using ident and all
 
 Select BOOLEAN such that Calls* ("ABC", _)
-TRUE
+true
 5000
 Evaluating query 9 - Checks BOOLEAN using ident and all
 _ is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 10 - Checks BOOLEAN using all and ident
 
 Select BOOLEAN such that Calls* (_, "LMN")
-TRUE
+true
 5000
 Evaluating query 10 - Checks BOOLEAN using all and ident
 _, is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 11 - Checks BOOLEAN using all and all
 
 Select BOOLEAN such that Calls* (_, _)
-TRUE
+true
 5000
 Evaluating query 11 - Checks BOOLEAN using all and all
 _, is an Unnamedvar 
 _ is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Callsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 12 - Empty result
 procedure p1;
 Select p1 such that Calls* (p1,"ZZZ")
@@ -197,13 +187,11 @@ Correct answer: ABC DEF LMN
 19 - Checks BOOLEAN using ident and ident (multiple level)
 
 Select BOOLEAN such that Calls* ("ABC", "JKL")
-TRUE
+true
 5000
 Evaluating query 19 - Checks BOOLEAN using ident and ident (multiple level)
 The final tag string is ReturnBoolean="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 End of evaluating Query File.
 AutoTester Completed !

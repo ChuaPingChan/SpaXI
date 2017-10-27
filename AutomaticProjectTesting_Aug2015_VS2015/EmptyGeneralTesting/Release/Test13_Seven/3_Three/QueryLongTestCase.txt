@@ -1,7 +1,7 @@
 1 - Simple
 
 Select BOOLEAN  with "a" = "a"
-TRUE
+true
 5000
 2 - selecting variables
 variable v, v1; assign a; stmt s; procedure p;

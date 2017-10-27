@@ -311,12 +311,12 @@ Select c1 such that Parent* (50, c1)
 63 - Checks BOOLEAN of parent line no of child line no
 
 Select BOOLEAN such that Parent* (6, 17)
-TRUE
+true
 5000
 64 - Checks BOOLEAN of parent line no of child all
 
 Select BOOLEAN such that Parent* (15, _)
-TRUE
+true
 5000
 65 - Get all child s1 of any parent
 stmt s1;
@@ -351,10 +351,10 @@ Select c1 such that Parent* (_, c1)
 71 - Checks BOOLEAN of all parent of child line no
 
 Select BOOLEAN such that Parent* (_, 9)
-TRUE
+true
 5000
 72 - Checks BOOLEAN of all parent of child all
 
 Select BOOLEAN such that Parent* (_, _)
-TRUE
+true
 5000

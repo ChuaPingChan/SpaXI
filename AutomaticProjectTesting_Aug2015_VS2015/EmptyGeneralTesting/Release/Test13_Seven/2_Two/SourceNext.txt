@@ -1,80 +1,74 @@
 procedure first {
-	a = b;				//1
-	a = b;				//2
+	a = b;				
+	a = b;				
 
-	//single if-else
-	if a then {			//3
-		b = c;			//4
+	if a then {			
+		b = c;			
 	}
 	else {			
-		b = d;			//5
+		b = d;			
 	}
 
-	// single while
-	while a {			//6
-		a = b + c;		//7
-		hello = world;	//8
-		a = world;		//9
+	while a {			
+		a = b + c;		
+		hello = world;	
+		a = world;		
 	}
-	c = d;				//10
+	c = d;				
 
-	// if within while
-	while d {			//11
-		if a then {		//12
-			a = b + c;	//13
+	while d {			
+		if a then {		
+			a = b + c;	
 		}
 		else {		
-			b = d;		//14
+			b = d;		
 		}
 	}
 	
-	// while within if 
-	if d then {			//15
-		while a {		//16
-			b = c;		//17
-			c = d;		//18
+	if d then {			
+		while a {		
+			b = c;		
+			c = d;		
 		}
 	}
 	else {
-		a = a;			//19
+		a = a;			
 	}
 	
-	// nested while
-	while d {			//20
-		a = a +b;		//21
-		b = c;			//22
-		while a {		//23
-			d = a + b;	//24
-			while c {	//25
-				c = c;	//26
+	while d {			
+		a = a +b;		
+		b = c;			
+		while a {		
+			d = a + b;	
+			while c {	
+				c = c;	
 			}
-			hello = world;	//27
+			hello = world;	
 		}
-		c = d - a;		//28
+		c = d - a;		
 	}
 	
-	// nested if else 
-	if a then {			//29
-		a = b;			//30
-		if d then {		//31
-			hello = world;	//32
-			if c then {		//33
-				a = b;		//34
+	if a then {			
+		a = b;			
+		if d then {		
+			hello = world;	
+			if c then {		
+				a = b;		
 			}
 			else {
-				c = b;		//35
+				c = b;		
 			}
 		}
 		else {
-			b = b + b;		//36
+			b = b + b;		
 		}
 	}
 	else {
-		a = b; 				//37
+		a = b; 				
 	}
-	call a;					//38
+	call a;					
 }
 
 procedure a{
-	a = b;					//39
+	a = b;					
 }

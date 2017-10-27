@@ -311,12 +311,12 @@ Select c1 such that Follows (34, c1)
 63 - Checks BOOLEAN of follows line no of followedBy line no
 
 Select BOOLEAN such that Follows (6, 7)
-FALSE
+false
 5000
 64 - Checks BOOLEAN of follows line no of followedBy all
 
 Select BOOLEAN such that Follows (15, _)
-TRUE
+true
 5000
 65 - Get all followedBy s1 of any follows
 stmt s1;
@@ -351,10 +351,10 @@ Select c1 such that Follows (_, c1)
 71 - Checks BOOLEAN of all follows of followedBy line no
 
 Select BOOLEAN such that Follows (_, 9)
-FALSE
+false
 5000
 72 - Checks BOOLEAN of all follows of followedBy all
 
 Select BOOLEAN such that Follows (_, _)
-TRUE
+true
 5000

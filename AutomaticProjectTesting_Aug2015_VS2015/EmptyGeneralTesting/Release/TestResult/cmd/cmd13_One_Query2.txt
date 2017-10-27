@@ -47,49 +47,41 @@ Correct answer: x y z i
 5 - Checks BOOLEAN and modified by
 
 Select BOOLEAN such that Modifies (2, _)
-TRUE
+true
 5000
 Evaluating query 5 - Checks BOOLEAN and modified by
 _ is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 6 - Checks BOOLEAN and modified by
 variable v;
 Select BOOLEAN such that Modifies (1, v)
-TRUE
+true
 5000
 Evaluating query 6 - Checks BOOLEAN and modified by
 The final tag string is ReturnBoolean="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 7 - Checks BOOLEAN and Follows
 
 Select BOOLEAN such that Follows(2, 6)
-TRUE
+true
 5000
 Evaluating query 7 - Checks BOOLEAN and Follows
 The final tag string is ReturnBoolean="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 8 - Checks BOOLEAN and Follows
 
 Select BOOLEAN such that Follows(6, _)
-FALSE
+false
 5000
 Evaluating query 8 - Checks BOOLEAN and Follows
 _ is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
 Your answer: false 
-Correct answer: FALSE 
-Missing: FALSE 
-Additional: false 
+Correct answer: false 
 9 - Checks follows by with result
 stmt s;
 Select s such that Follows(3, s)
@@ -134,61 +126,51 @@ Correct answer:
 13 - Checks BOOLEAN and parent
 
 Select BOOLEAN such that Parent(4, 5)
-TRUE
+true
 5000
 Evaluating query 13 - Checks BOOLEAN and parent
 The final tag string is ReturnBoolean="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 14 - Checks BOOLEAN and parent
 
 Select BOOLEAN such that Parent(2, _)
-TRUE
+true
 5000
 Evaluating query 14 - Checks BOOLEAN and parent
 _ is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 15 - Checks BOOLEAN and parent
 
 Select BOOLEAN such that Parent(_, 4)
-TRUE
+true
 5000
 Evaluating query 15 - Checks BOOLEAN and parent
 _, is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Parent="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 16 - Checks BOOLEAN and parent*
 
 Select BOOLEAN such that Parent*(2, 5)
-TRUE
+true
 5000
 Evaluating query 16 - Checks BOOLEAN and parent*
 The final tag string is ReturnBoolean="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 17 - Checks BOOLEAN and parent*
 
 Select BOOLEAN such that Parent*(2, _)
-TRUE
+true
 5000
 Evaluating query 17 - Checks BOOLEAN and parent*
 _ is an Unnamedvar 
 The final tag string is ReturnBoolean="1" Parentstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
 Your answer: true 
-Correct answer: TRUE 
-Missing: TRUE 
-Additional: true 
+Correct answer: true 
 18 - Checks parent* with result
 stmt s;
 Select s such that Parent*(_, s)

@@ -201,12 +201,12 @@ Select s such that Uses (s, "delta")
 41 - Checks BOOLEAN and Parent* valid
 
 Select BOOLEAN such that Parent*(5, 8)
-TRUE
+true
 5000
 42 - Checks BOOLEAN and Parent* invalid
 
 Select BOOLEAN such that Parent*(2, _)
-FALSE
+false
 5000
 43 - Checks Parent* with no result
 stmt s;
@@ -281,7 +281,7 @@ Romeo
 57 - Checks for Parent(s,s)
 stmt s;
 Select BOOLEAN such that Parent(s,s)
-FALSE
+false
 5000
 58 - Checks for Parent(s,s)
 stmt s;
@@ -296,5 +296,5 @@ Select s such that Follows(s,s)
 60 - Checks for Follows(s,s)
 stmt s;
 Select BOOLEAN such that Follows(s,s)
-FALSE
+false
 5000

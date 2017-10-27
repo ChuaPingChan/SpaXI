@@ -3,7 +3,7 @@ assign a;
 Select a with a.stmt# = 1
 1
 5000
-2 - Test Single With clause with statement number (FALSE)
+2 - Test Single With clause with statement number (false)
 assign a;
 Select a with a.stmt# = 4
 
@@ -26,12 +26,12 @@ DEF
 6 - Test Single with clause with boolean 
 assign a;
 Select BOOLEAN with a.stmt# = 1
-TRUE
+true
 5000
-7 - Test Single with clause with boolean (FALSE)
+7 - Test Single with clause with boolean (false)
 assign a;
 Select BOOLEAN with a.stmt# = 4
-FALSE
+false
 5000
 8 - Test Single with clause with constant value
 constant c; stmt s;
