@@ -26,6 +26,7 @@
 #include "CallsTable.h"
 #include "CallsStarTable.h"
 #include "NextTable.h"
+#include "Cache.h"
 #include <string>
 #include "../Entity.h"
 
@@ -310,4 +311,5 @@ private:
 	CallsStarTable callsStarTable;
 	DesignExtractor de;
 	NextTable nextTable;
+	Cache cache;
 };

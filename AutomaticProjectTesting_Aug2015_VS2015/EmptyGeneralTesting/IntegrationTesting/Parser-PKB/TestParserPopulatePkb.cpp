@@ -343,7 +343,21 @@ namespace UnitTesting
             Assert::IsTrue(createDummySimpleSourceFile_affectsSource1());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
-            // Ping Chan to Zhang Ying: Write here. You can refer to the method above for reference
+            
+			// Test for affects
+			Assert::IsTrue(dummyPkbMain.isAffects(1, 3));
+			Assert::IsTrue(dummyPkbMain.isAffects(1, 7));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 3));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 3));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 5));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 6));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 7));
+			Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
+
+			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 10);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());

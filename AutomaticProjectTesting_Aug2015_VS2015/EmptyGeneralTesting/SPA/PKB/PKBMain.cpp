@@ -638,7 +638,13 @@ list<int> PKBMain::getExecutedBeforeStar(int aftStmt, Entity type) {
 }
 
 pair<list<int>, list<int>> PKBMain::getAllNextStar(Entity type1, Entity type2) {
+	if (cache.containsAllNextStar()) {
+		return stmtTypeList.getStmtType(cache.getAllNextStar(), type1, type2);
+	}
+
 	pair<list<int>, list<int>> resultPair = nextTable.getAllNextStar();
+	//TODO put in bool for same synonym
+	cache.putAllNextStar(resultPair);
 	return stmtTypeList.getStmtType(resultPair, type1, type2);
 }
 

@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <list>
-#include "NextStarCache.h"
+#include "Cache.h"
 
 using namespace std;
 
@@ -19,7 +19,6 @@ public:
 	bool isExecutedBefore(int stmtBef);
 	pair<list<int>, list<int>> getAllNext();
 	bool isNextStar(int stmtBef, int stmtAft);
-	bool isNextStar(int stmtBef, int stmtAft, NextStarCache & nextStarCache);
 	list<int> getExecutedAfterStar(int stmt);
 	list<int> getExecutedBeforeStar(int stmtAft);
 	list<int> getExecutedAfter(int stmtBef);
