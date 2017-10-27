@@ -1,7 +1,0 @@
-Parameters : Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffectsStar.txt TestResult\out10_QueryAffectsStar.xml
-Beginning to parse Simple Program.
-End of parsing Simple Program.
-Release
-Beginning to evaluate Query File.
-End of evaluating Query File.
-AutoTester Completed !
