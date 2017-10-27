@@ -1,2 +1,0 @@
-Parameters : Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryFollows.txt TestResult\out11_QueryFollows.xml
-Beginning to parse Simple Program.
