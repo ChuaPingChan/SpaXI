@@ -609,7 +609,7 @@ namespace UnitTesting
 			2.	while b {
 			3.		a = b + c;
 			4.		b = 7;
-			5.		call Test2;
+			5.		call Test2; // modifies b, c
 			6.		c = 3 + a;
 			7.		b = a;
 				}
@@ -708,9 +708,20 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isModProc("Test2", "b"));
 			Assert::IsFalse(PKB.isModProc("Test2", "a"));
 
+			Assert::IsTrue(PKB.isAffects(1, 8));
+			Assert::IsTrue(PKB.isAffects(3, 6));
+			Assert::IsTrue(PKB.isAffects(3, 7));
+			Assert::IsTrue(PKB.isAffects(6, 3));
+			Assert::IsTrue(PKB.isAffects(7, 3));
+			Assert::IsTrue(PKB.isAffects(7, 8));
+			Assert::IsTrue(PKB.isAffects(9, 10));
+			Assert::IsFalse(PKB.isAffects(1, 6));
+			Assert::IsFalse(PKB.isAffects(1, 7));
+			Assert::IsFalse(PKB.isAffects(6, 8));
+
 			pair<list<int>, list<int>> resultPair = PKB.getAllAffects();
 			int size = resultPair.first.size();
-			Assert::IsTrue(resultPair.first.size() == 10);
+			Assert::IsTrue(resultPair.first.size() == 8);
 		}
 	};
 }

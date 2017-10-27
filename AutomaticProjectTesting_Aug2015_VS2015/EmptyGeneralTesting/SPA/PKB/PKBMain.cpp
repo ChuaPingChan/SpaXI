@@ -1377,27 +1377,31 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 	int curr = stmt;
 	list<int> prevList;
 	list<int> nextList;
-	unordered_map<int, int> latestMod; //varIdx to stmt
-	stack<pair<int, unordered_map<int, int>>> whileMapStack;
+	unordered_map<int, unordered_set<int>> latestMod; //varIdx to stmt
+	stack<pair<int, unordered_map<int, unordered_set<int>>>> whileMapStack;
 	while (curr != 0) {
 		if (isAssignment(curr)) {
 			list<int> usedVarList = getUsesFromStmt(curr);
 			for (int usedVar : usedVarList) {
 				if (latestMod.find(usedVar) != latestMod.end()) {
-					int lastModStmt = latestMod[usedVar];
-					if (!isCall(lastModStmt)) {
-						if ((affectsRelMap.find(lastModStmt) != affectsRelMap.end() &&
-							affectsRelMap[lastModStmt].find(curr) == affectsRelMap[lastModStmt].end()) ||
-							affectsRelMap.find(lastModStmt) == affectsRelMap.end()) {
-							prevList.push_back(latestMod[usedVar]);
-							nextList.push_back(curr);
-							affectsRelMap[latestMod[usedVar]].insert(curr);
+					unordered_set<int> lastModStmtSet = latestMod[usedVar];
+					for (auto &lastModStmt : lastModStmtSet) {
+						if (!isCall(lastModStmt)) {
+							if ((affectsRelMap.find(lastModStmt) != affectsRelMap.end() &&
+								affectsRelMap[lastModStmt].find(curr) == affectsRelMap[lastModStmt].end()) ||
+								affectsRelMap.find(lastModStmt) == affectsRelMap.end()) {
+								prevList.push_back(lastModStmt);
+								nextList.push_back(curr);
+								affectsRelMap[lastModStmt].insert(curr);
+							}
 						}
 					}
 				}
 			}
+
 			int modifiedVar = getModifiesFromStmt(curr).front();
-			latestMod[modifiedVar] = curr;
+			latestMod[modifiedVar].clear();
+			latestMod[modifiedVar].insert(curr);
 
 			if (getExecutedAfter(curr, STMT).size() == 0) {
 				curr = 0;
@@ -1438,10 +1442,17 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			}
 
 			else {
-				pair<int, unordered_map<int, int>> oldWhileMap = whileMapStack.top();
-				whileMapStack.pop();
-				unordered_map<int, int> oldMod = oldWhileMap.second;
+				pair<int, unordered_map<int, unordered_set<int>>> oldWhileMap = whileMapStack.top();
+				int currWhile = oldWhileMap.first;
+				unordered_map<int, unordered_set<int>> oldMod = oldWhileMap.second;
 				if (oldMod == latestMod) {
+					whileMapStack.pop();
+					// pop and merge
+					while (!whileMapStack.empty() && whileMapStack.top().first == currWhile) {
+						pair<int, unordered_map<int, unordered_set<int>>> prevWhile = whileMapStack.top();
+						whileMapStack.pop();
+						latestMod = joinMap(prevWhile.second, latestMod);
+					}
 					curr = afterLoop;
 				}
 
@@ -1461,6 +1472,24 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 
 
 	return make_pair(prevList, nextList);
+}
+
+unordered_map<int, unordered_set<int>> PKBMain::joinMap(unordered_map<int, unordered_set<int>> firstMap,
+	unordered_map<int, unordered_set<int>> secondMap) {
+
+	for (auto &key : firstMap) {
+		if (secondMap.find(key.first) != secondMap.end()) {
+			firstMap[key.first].insert(secondMap[key.first].begin(), secondMap[key.first].end());
+		}
+	}
+
+	for (auto &key : secondMap) {
+		if (firstMap.find(key.first) == firstMap.end()) {
+			firstMap[key.first] = secondMap[key.first];
+		}
+	}
+
+	return firstMap;
 }
 
 pair<list<int>, list<int>> PKBMain::getAllAffects() {
