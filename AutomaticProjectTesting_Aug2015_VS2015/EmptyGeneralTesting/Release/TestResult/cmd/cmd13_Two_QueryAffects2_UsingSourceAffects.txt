@@ -1,0 +1,216 @@
+Parameters : Test13_Seven\2_Two\SourceAffects.txt Test13_Seven\2_Two\QueryAffects2_UsingSourceAffects.txt TestResult\out13_Two_QueryAffects2_UsingSourceAffects.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - Select BOOLEAN with no syns
+assign a, a1;
+Select BOOLEAN such that Affects(12, 16)
+TRUE
+5000
+Evaluating query 1 - Select BOOLEAN with no syns
+The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: TRUE 
+Missing: TRUE 
+Additional: false 
+2 - Select BOOLEAN with 1 syns
+assign a, a1;
+Select BOOLEAN such that Affects(a, 10)
+TRUE
+5000
+Evaluating query 2 - Select BOOLEAN with 1 syns
+The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: TRUE 
+Missing: TRUE 
+Additional: false 
+3 - Select BOOLEAN with 1 syns
+assign a, a1;
+Select BOOLEAN such that Affects(1, a)
+TRUE
+5000
+Evaluating query 3 - Select BOOLEAN with 1 syns
+The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: TRUE 
+Missing: TRUE 
+Additional: false 
+4 - Select BOOLEAN with 2 syns
+assign a, a1;
+Select BOOLEAN such that Affects(a, a1)
+TRUE
+5000
+Evaluating query 4 - Select BOOLEAN with 2 syns
+The final tag string is Affects="1" ReturnBoolean="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: TRUE 
+Missing: TRUE 
+Additional: false 
+5 - Select ARG1 with 1 syn =stmt int=
+assign a, a1; stmt s;
+Select s such that Affects(s, 6)
+1,6
+5000
+Evaluating query 5 - Select ARG1 with 1 syn =stmt int=
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 1 6 
+Missing: 1 6 
+Additional: 
+6 - Select ARG1 with 1 syn =prog_line int=
+assign a, a1; stmt s; prog_line n;
+Select n such that Affects(n, 8)
+2,3, 11
+5000
+Evaluating query 6 - Select ARG1 with 1 syn =prog_line int=
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 2 3 11 
+Missing: 11 2 3 
+Additional: 
+7 - Select ARG1 with 1 syn =assign int
+assign a, a1; stmt s; prog_line n;
+Select a such that Affects(a, 11)
+3,10
+5000
+Evaluating query 7 - Select ARG1 with 1 syn =assign int
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 3 10 
+Missing: 10 3 
+Additional: 
+8 - Select ARG2 with 1 syn =int stmt=
+assign a, a1; stmt s;
+Select s such that Affects(6, s)
+6,10
+5000
+Evaluating query 8 - Select ARG2 with 1 syn =int stmt=
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 6 10 
+Missing: 10 6 
+Additional: 
+9 - Select ARG2 with 1 syn =int prog_line=
+assign a, a1; stmt s; prog_line n;
+Select n such that Affects(1, n)
+2,3,6,10
+5000
+Evaluating query 9 - Select ARG2 with 1 syn =int prog_line=
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 2 3 6 10 
+Missing: 10 2 3 6 
+Additional: 
+10 - Select ARG2 with 1 syn =int assign=
+assign a, a1; stmt s; prog_line n;
+Select a such that Affects(11, a)
+10, 8
+5000
+Evaluating query 10 - Select ARG2 with 1 syn =int assign=
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 10 8 
+Missing: 10 8 
+Additional: 
+11 - Select ARG1 with 2 syns =stmt assign=
+assign a, a1; stmt s;
+Select s such that Affects(s, a)
+1,2,3,6,10,11,12
+5000
+Evaluating query 11 - Select ARG1 with 2 syns =stmt assign=
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 1 2 3 6 10 11 12 
+Missing: 1 10 11 12 2 3 6 
+Additional: 
+12 - Select ARG1 with 2 syns =prog_line assign=
+assign a, a1; stmt s; prog_line n;
+Select n such that Affects(n, a)
+1,2,3,6,10,11,12
+5000
+Evaluating query 12 - Select ARG1 with 2 syns =prog_line assign=
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 1 2 3 6 10 11 12 
+Missing: 1 10 11 12 2 3 6 
+Additional: 
+13 - Select ARG1 with 2 syns =assign assign=
+assign a, a1; stmt s; prog_line n;
+Select a such that Affects(a, a1)
+1,2,3,6,10,11,12
+5000
+Evaluating query 13 - Select ARG1 with 2 syns =assign assign=
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 1 2 3 6 10 11 12 
+Missing: 1 10 11 12 2 3 6 
+Additional: 
+14 - Select ARG2 with 2 syns =assign stmt=
+assign a, a1; stmt s;
+Select s such that Affects(a, s)
+2,3,6,8,10,11,16
+5000
+Evaluating query 14 - Select ARG2 with 2 syns =assign stmt=
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 2 3 6 8 10 11 16 
+Missing: 10 11 16 2 3 6 8 
+Additional: 
+15 - Select ARG2 with 2 syns =assign prog_line=
+assign a, a1; stmt s; prog_line n;
+Select n such that Affects(a, n)
+2,3,6,8,10,11,16
+5000
+Evaluating query 15 - Select ARG2 with 2 syns =assign prog_line=
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 2 3 6 8 10 11 16 
+Missing: 10 11 16 2 3 6 8 
+Additional: 
+16 - Select ARG2 with 2 syns =assign assign=
+assign a, a1; stmt s; prog_line n;
+Select a1 such that Affects(a, a1)
+2,3,6,8,10,11,16
+5000
+Evaluating query 16 - Select ARG2 with 2 syns =assign assign=
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 2 3 6 8 10 11 16 
+Missing: 10 11 16 2 3 6 8 
+Additional: 
+17 - Select ARG with same syn =assign assign=
+assign a, a1; stmt s; prog_line n;
+Select a such that Affects(a, a)
+6
+5000
+Evaluating query 17 - Select ARG with same syn =assign assign=
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 6 
+Missing: 6 
+Additional: 
+End of evaluating Query File.
+AutoTester Completed !

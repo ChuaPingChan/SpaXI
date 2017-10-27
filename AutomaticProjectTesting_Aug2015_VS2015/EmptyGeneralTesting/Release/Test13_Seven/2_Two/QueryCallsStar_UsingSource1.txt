@@ -1,0 +1,95 @@
+1 - Get all Caller using 2 different procedure synonym
+procedure p1, p2;
+Select p1 such that Calls* (p1,p2)
+ABC, DEF, LMN, GHI
+5000
+2 - Get all Callee using 2 different procedure synonym
+procedure p1, p2;
+Select p2 such that Calls* (p1,p2)
+DEF, LMN, OPQ, GHI, JKL
+5000
+3 - Get all Caller using procedure and ident
+procedure p1;
+Select p1 such that Calls* (p1,"DEF")
+ABC
+5000
+4 - Get all Caller using procedure and all
+procedure p1;
+Select p1 such that Calls* (p1,_)
+ABC, DEF, LMN, GHI
+5000
+5 - Get all Callee using ident and procedure
+procedure p1;
+Select p1 such that Calls* ("ABC",p1)
+DEF, LMN, GHI, OPQ, JKL
+5000
+6 - Get all Callee using all and procedure
+procedure p1;
+Select p1 such that Calls* (_, p1)
+DEF, LMN, OPQ, GHI, JKL
+5000
+7 - Checks BOOLEAN using procedure and procedure
+procedure p1, p2;
+Select BOOLEAN such that Calls* (p1,p2)
+TRUE
+5000
+8 - Checks BOOLEAN using ident and ident
+
+Select BOOLEAN such that Calls* ("ABC", "DEF")
+TRUE
+5000
+9 - Checks BOOLEAN using ident and all
+
+Select BOOLEAN such that Calls* ("ABC", _)
+TRUE
+5000
+10 - Checks BOOLEAN using all and ident
+
+Select BOOLEAN such that Calls* (_, "LMN")
+TRUE
+5000
+11 - Checks BOOLEAN using all and all
+
+Select BOOLEAN such that Calls* (_, _)
+TRUE
+5000
+12 - Empty result
+procedure p1;
+Select p1 such that Calls* (p1,"ZZZ")
+
+5000
+13 - Get all Caller using procedure and ident (left space)
+procedure p1;
+Select p1 such that Calls* (p1,"     DEF")
+ABC
+5000
+14 - Get all Caller using procedure and ident (right space)
+procedure p1;
+Select p1 such that Calls* (p1,"DEF    ")
+ABC
+5000
+15 - Get all Caller using procedure and ident (left tab)
+procedure p1;
+Select p1 such that Calls* (p1,"		DEF")
+ABC
+5000
+16 - Get all Caller using procedure and ident (right tab)
+procedure p1;
+Select p1 such that Calls* (p1,"DEF	")
+ABC
+5000
+17 - Get all Caller using procedure and ident (multiple whitespace)
+procedure p1;
+Select p1 such that Calls* (p1,"	     		DEF		    ")
+ABC
+5000
+18 - Get all Caller using synonym and ident with multiple level
+procedure p1;
+Select p1 such that Calls* (p1,"OPQ")
+ABC, DEF, LMN
+5000
+19 - Checks BOOLEAN using ident and ident (multiple level)
+
+Select BOOLEAN such that Calls* ("ABC", "JKL")
+TRUE
+5000

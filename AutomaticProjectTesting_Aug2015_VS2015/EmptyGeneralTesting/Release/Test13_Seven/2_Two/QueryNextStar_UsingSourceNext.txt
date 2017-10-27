@@ -1,0 +1,125 @@
+1 - check if next* rs exist
+
+Select BOOLEAN such that Next*(1,29)
+TRUE
+5000
+2 - check if next* exist between 2 procedures
+
+Select BOOLEAN such that Next*(38,39)
+FALSE
+5000
+3 - check if next* rs exist within while
+
+Select BOOLEAN such that Next*(6,6)
+TRUE
+5000
+4 - check if next* rs exist within while
+
+Select BOOLEAN such that Next*(7,6)
+TRUE
+5000
+5 - check if next* rs exist within nested while
+
+Select BOOLEAN such that Next*(25,20)
+TRUE
+5000
+6 - check if next* rs exist within if
+
+Select BOOLEAN such that Next*(12,15)
+TRUE
+5000
+7 - check if next* rs exist within nestedif
+
+Select BOOLEAN such that Next*(36,38)
+TRUE
+5000
+8 - check if next* rs exist within nestedif
+
+Select BOOLEAN such that Next*(29,35)
+TRUE
+5000
+9 - check if next* rs exist with out of range stmtNum
+
+Select BOOLEAN such that Next*(29,350)
+FALSE
+5000
+10 - check if next* rs exist within if else branch stmts
+
+Select BOOLEAN such that Next*(16,19)
+FALSE
+5000
+11 - check if progLine has a next* r/s
+
+Select BOOLEAN such that Next*(16,_)
+TRUE
+5000
+12 - check if progLine has a next* r/s
+
+Select BOOLEAN such that Next*(39,_)
+FALSE
+5000
+13 - get all progLines executed after the int
+prog_line pl1;
+Select pl1 such that Next*(39,pl1)
+
+5000
+14 - get all progLines executed after the int
+prog_line pl1;
+Select pl1 such that Next*(24,pl1)
+20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38
+5000
+15 - Checks Boolean if the progLine has a preceding statement
+
+Select BOOLEAN such that Next*(_,1)
+FALSE
+5000
+16 - Checks Boolean if the progLine has a preceding statement
+
+Select BOOLEAN such that Next*(_,20)
+TRUE
+5000
+17 - Checks Boolean if the progLine has a preceding statement
+
+Select BOOLEAN such that Next*(_,39)
+FALSE
+5000
+18 - check if a next* r/s exists
+
+Select BOOLEAN such that Next*(_,_)
+TRUE
+5000
+19 - Get all pl1 which are executed next
+prog_line pl1;
+Select pl1 such that Next*(_,pl1)
+2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38
+5000
+20 - Get all pl1 which are executed next
+prog_line pl1;
+Select pl1 such that Next*(pl1,2)
+1
+5000
+21 - Get all pl1 which are executed next
+prog_line pl1;
+Select pl1 such that Next*(pl1,23)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28
+5000
+22 - Get all pl1 which are executed next
+prog_line pl1;
+Select pl1 such that Next*(pl1,36)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
+5000
+23 - Get all pl1 which are executed next
+prog_line pl1;
+Select pl1 such that Next*(pl1,19)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+5000
+24 - Get all pl1 which are executed next
+prog_line pl1;
+Select pl1 such that Next*(pl1,_)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37
+5000
+25 - Get all pl1 s.t next pl2
+prog_line pl1, pl2;
+Select pl1 such that Next*(pl1,pl2)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37
+15000

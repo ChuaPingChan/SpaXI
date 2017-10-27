@@ -1,0 +1,262 @@
+Parameters : Test13_Seven\1_One\source3.txt Test13_Seven\1_One\query3.txt TestResult\out13_One_Query3.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - Checks follows with result
+stmt s;
+Select s such that Follows(s, 18)
+14
+5000
+Evaluating query 1 - Checks follows with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 14 
+Correct answer: 14 
+2 - Checks follows* with result
+stmt s;
+Select s such that Follows*(9, s)
+10, 13, 14, 18
+5000
+Evaluating query 2 - Checks follows* with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 10 13 14 18 
+Correct answer: 10 13 14 18 
+3 - Checks follows with no result
+stmt s;
+Select s such that Follows(s, 1)
+
+5000
+Evaluating query 3 - Checks follows with no result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+4 - Checks parent with no result
+stmt s;
+Select s such that Parent(9, s)
+
+5000
+Evaluating query 4 - Checks parent with no result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+5 - Checks parent with result
+stmt s;
+Select s such that Parent(5, s)
+6
+5000
+Evaluating query 5 - Checks parent with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 6 
+Correct answer: 6 
+6 - Checks parent* with result
+stmt s;
+Select s such that Parent*(s, 7)
+3, 5, 6
+5000
+Evaluating query 6 - Checks parent* with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 5 6 
+Correct answer: 3 5 6 
+7 - Checks statement uses with result
+stmt s;
+Select s such that Uses(s, "chaRLie")
+3, 8, 10, 12
+5000
+Evaluating query 7 - Checks statement uses with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 8 10 12 
+Correct answer: 3 8 10 12 
+8 - Checks statement Uses with result
+variable v;
+Select v such that Uses(10, v)
+Lima, foxtrot, mike, golf, India, kilo, chaRLie
+5000
+Evaluating query 8 - Checks statement Uses with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: chaRLie kilo Lima foxtrot mike golf India 
+Correct answer: Lima foxtrot mike golf India kilo chaRLie 
+9 - Checks statement USes with result
+variable v;
+Select v such that Uses(5, v)
+y, z, world, cs3201, cs3202
+5000
+Evaluating query 9 - Checks statement USes with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: y z world cs3201 cs3202 
+Correct answer: y z world cs3201 cs3202 
+10 - Checks variable modified by with result
+stmt s;
+Select s such that Modifies(s, "a")
+1, 3, 4, 9, 13
+5000
+Evaluating query 10 - Checks variable modified by with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 3 4 9 13 
+Correct answer: 1 3 4 9 13 
+11 - Checks variable modified by with result
+variable v;
+Select v such that Modifies(3, v)
+a, hello, Alpha
+5000
+Evaluating query 11 - Checks variable modified by with result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: a hello Alpha 
+Correct answer: a hello Alpha 
+12 - Checks variable modified by with no result
+assign a;
+Select a such that Modifies(a, "kilo")
+
+5000
+Evaluating query 12 - Checks variable modified by with no result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+13 - Checks parent and pattern with result
+assign a; stmt s;
+Select s such that Parent(s, a) pattern a(_, _"kilo"_)
+10
+5000
+Evaluating query 13 - Checks parent and pattern with result
+_, is an Unnamedvar 
+_"kilo"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parent="1" UnnamedVar="2" Pattern="1" SuchThat="1" CondNum="6" RelNum="1" 
+Your answer: 10 
+Correct answer: 10 
+14 - Checks parent* and pattern with result
+assign a; stmt s;
+Select s such that Parent*(s, a) pattern a(_, _"cs3201"_)
+3, 5, 6
+5000
+Evaluating query 14 - Checks parent* and pattern with result
+_, is an Unnamedvar 
+_"cs3201"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Parentstar="1" UnnamedVar="2" Pattern="1" SuchThat="1" CondNum="6" RelNum="1" 
+Your answer: 3 5 6 
+Correct answer: 3 5 6 
+15 - Checks follows and pattern with result
+assign a; stmt s;
+Select s such that Follows(s, a) pattern a("a", _)
+3, 10
+5000
+Evaluating query 15 - Checks follows and pattern with result
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 3 10 
+Correct answer: 3 10 
+16 - Checks follows and pattern with result
+assign a; stmt s;
+Select s such that Follows*(s, a) pattern a("a", _)
+1, 2, 3, 10, 9
+5000
+Evaluating query 16 - Checks follows and pattern with result
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Followsstar="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 9 10 
+Correct answer: 1 2 3 10 9 
+17 - Checks Uses and pattern with result
+variable v; stmt s; assign a;
+Select s such that Uses(s, v) pattern a("a", _)
+1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+5000
+Evaluating query 17 - Checks Uses and pattern with result
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 
+Correct answer: 1 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 
+18 - Checks Uses and pattern with result
+variable v; assign a;
+Select a such that Uses(10, v) pattern a("i", _)
+15
+5000
+Evaluating query 18 - Checks Uses and pattern with result
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 15 
+Correct answer: 15 
+19 - Checks Uses and pattern with no result
+assign a;
+Select a such that Uses(a, "foxtrot") pattern a("a", _)
+
+5000
+Evaluating query 19 - Checks Uses and pattern with no result
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+20 - Checks Uses and pattern with no result
+assign a; variable v;
+Select v such that Uses(10, v) pattern a(v, _"foxtrot"_)
+
+5000
+Evaluating query 20 - Checks Uses and pattern with no result
+_"foxtrot"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+21 - Checks modifies and pattern with result
+assign a; variable v;
+Select v such that Modifies(10, v) pattern a(v, _"foxtrot"_)
+echo, j1k
+5000
+Evaluating query 21 - Checks modifies and pattern with result
+_"foxtrot"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: echo j1k 
+Correct answer: echo j1k 
+22 - Checks modifies and pattern with result
+assign a; variable v; stmt s;
+Select v such that Modifies(s, v) pattern a("a", _)
+a, b, hello, Alpha, echo, j1k, i, t, e
+5000
+Evaluating query 22 - Checks modifies and pattern with result
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: a b hello Alpha echo j1k i t e 
+Correct answer: a b hello Alpha echo j1k i t e 
+23 - Checks modifies and pattern with result
+assign a; variable v; stmt s;
+Select s such that Modifies(s, v) pattern a(_, _"foxtrot"_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+5000
+Evaluating query 23 - Checks modifies and pattern with result
+_, is an Unnamedvar 
+_"foxtrot"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" Pattern="1" SuchThat="1" CondNum="6" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 
+24 - Checks modifies and pattern with no result
+assign a; variable v; stmt s;
+Select s such that Modifies(s, v) pattern a(v, _"foxtrot+chaRLie"_)
+
+5000
+Evaluating query 24 - Checks modifies and pattern with no result
+_"foxtrot+chaRLie"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

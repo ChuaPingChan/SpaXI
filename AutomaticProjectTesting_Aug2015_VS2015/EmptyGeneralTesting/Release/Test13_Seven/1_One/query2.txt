@@ -1,0 +1,155 @@
+1 - Checks statement Uses with result
+variable v;
+Select v such that Uses (1, "y")
+x, y, z, i
+5000
+2 - Checks statement Uses with result
+variable v;
+Select v such that Uses (3, _)
+x, y, z, i
+5000
+3 - Checks statement Uses with result
+variable v;
+Select v such that Uses (1, v)
+y
+5000
+4 - Checks variable modified by with result
+variable v;
+Select v such that Modifies (1, "x")
+x, y, z, i
+5000
+5 - Checks BOOLEAN and modified by
+
+Select BOOLEAN such that Modifies (2, _)
+TRUE
+5000
+6 - Checks BOOLEAN and modified by
+variable v;
+Select BOOLEAN such that Modifies (1, v)
+TRUE
+5000
+7 - Checks BOOLEAN and Follows
+
+Select BOOLEAN such that Follows(2, 6)
+TRUE
+5000
+8 - Checks BOOLEAN and Follows
+
+Select BOOLEAN such that Follows(6, _)
+FALSE
+5000
+9 - Checks follows by with result
+stmt s;
+Select s such that Follows(3, s)
+4
+5000
+10 - Checks follows* with result
+stmt s;
+Select s such that Follows*(s, 6)
+1, 2
+5000
+11 - Checks follows* with result
+assign a;
+Select a such that Follows*(a, _)
+1, 3
+5000
+12 - Checks follows* with invalid argument
+stmt s;
+Select s such that Follows*(s, -12345)
+
+5000
+13 - Checks BOOLEAN and parent
+
+Select BOOLEAN such that Parent(4, 5)
+TRUE
+5000
+14 - Checks BOOLEAN and parent
+
+Select BOOLEAN such that Parent(2, _)
+TRUE
+5000
+15 - Checks BOOLEAN and parent
+
+Select BOOLEAN such that Parent(_, 4)
+TRUE
+5000
+16 - Checks BOOLEAN and parent*
+
+Select BOOLEAN such that Parent*(2, 5)
+TRUE
+5000
+17 - Checks BOOLEAN and parent*
+
+Select BOOLEAN such that Parent*(2, _)
+TRUE
+5000
+18 - Checks parent* with result
+stmt s;
+Select s such that Parent*(_, s)
+3, 4, 5
+5000
+19 - Checks pattern with result
+assign a;
+Select a pattern a("x", _"y"_)
+1
+5000
+20 - Checks pattern with result
+assign a;
+Select a pattern a("y", _)
+3
+5000
+21 - Checks pattern with result
+assign a;
+Select a pattern a(_, "y + 2")
+3
+5000
+22 - Checks Uses and pattern with result
+assign a1, a2;variable v;
+Select a1 such that Uses (a1, v) pattern a2 (_, "y + 2")
+1, 3, 5, 6
+5000
+23 - Checks Uses and pattern with result
+assign a1, a2;variable v;
+Select a2 such that Uses (a1, v) pattern a2 (_, "y + 2")
+3
+5000
+24 - Checks Modifies and pattern with result
+assign a1, a2;variable v;
+Select a1 such that Modifies (a1, v) pattern a2 (_, "y + 2")
+1, 3, 5, 6
+5000
+25 - Checks Modifies and pattern with result
+assign a1, a2;variable v;
+Select a2 such that Modifies (a1, v) pattern a2 (_, "y + 2")
+3
+5000
+26 - Checks valid Modifies and invalid pattern with no result
+assign a1, a2;variable v;
+Select a2 such that Modifies (a1, v) pattern a2 (_, "y++")
+
+5000
+27 - Checks Modifies and pattern with result
+assign a1, a2;variable v;
+Select a2 such that Modifies (a1, v) pattern a2 (_, _)
+1, 3, 5, 6
+5000
+28 - Checks Uses and pattern 
+assign a1, a2;variable v;
+Select a2 such that Uses (a1, v) pattern a2 (_, _)
+1, 3, 5, 6
+5000
+29 - Checks parent and pattern with result
+assign a1;variable v;
+Select a1 such that Parent (2, 3) pattern a1 (_, _)
+1, 3, 5, 6
+5000
+30 - Checks parent and pattern with no result
+assign a1, a2;variable v;
+Select a1 such that Parent (a1, 3) pattern a2(_, _)
+
+5000
+31 - Checks parent and pattern with result
+stmt s;assign a1;
+Select s such that Parent (s, 3) pattern a1(_, _)
+2
+5000

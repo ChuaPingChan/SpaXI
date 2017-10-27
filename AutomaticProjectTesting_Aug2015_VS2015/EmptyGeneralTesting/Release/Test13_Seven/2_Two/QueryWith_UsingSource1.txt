@@ -1,0 +1,85 @@
+1 - Test Single With clause with statement number
+assign a;
+Select a with a.stmt# = 1
+1
+5000
+2 - Test Single With clause with statement number (FALSE)
+assign a;
+Select a with a.stmt# = 4
+
+5000
+3 - Test Single With clause with while
+assign a; while w;
+Select w with a.stmt# = 1
+5,6,8,11,14,15,19,25
+5000
+4 - Test Single With clause with two assigns
+assign a,a1;
+Select a1 with a.stmt# = 2
+1,2,3,7,10,13,16,17,18,20,21,22,23,24,27,29,30,31,32,33,35,36,39,40
+5000
+5 - Test Single with clause with procedure
+procedure p;
+Select p with p.procName = "DEF"
+DEF
+5000
+6 - Test Single with clause with boolean 
+assign a;
+Select BOOLEAN with a.stmt# = 1
+TRUE
+5000
+7 - Test Single with clause with boolean (FALSE)
+assign a;
+Select BOOLEAN with a.stmt# = 4
+FALSE
+5000
+8 - Test Single with clause with constant value
+constant c; stmt s;
+Select s with s.stmt# = c.value
+1,2,3,4
+5000
+9 - Test Single with clause with if
+if i;
+Select i with i.stmt# = 28
+28
+5000
+10 - Test Single with clause with variable
+variable v1;
+Select v1 with v1.varName="x"
+x
+5000
+11 - Test multiple with clause with assign and stmt
+assign a; stmt s;
+Select s with a.stmt#=s.stmt# and s.stmt#=3
+3
+5000
+12 - Test multiple with clause with assign and procedure
+assign a; procedure p1,p2;
+Select a with a.stmt#=30 and p1.procName=p2.procName
+30
+5000
+13 - Test multiple with clause with assign and constant value
+assign a; stmt s; constant c;
+Select s with s.stmt# = c.value and a.stmt# = s.stmt#
+1,2,3
+5000
+14 - Test multiple with clause with assign and variable
+assign a; variable v1;
+Select v1 with v1.varName="x" and a.stmt# = 1
+x
+5000
+15 - Test multiple with clause with assign and if
+if i; assign a;
+Select i with i.stmt# = 28 and a.stmt# =  1
+28
+5000
+16 - Test multiple with clause with assign and if
+if i; stmt s;
+Select i with i.stmt# = 28 and s.stmt# = 1
+28
+5000
+17 - Test multiple with clause with variables
+variable v1,v2;
+Select v1 with v1.varName=v2.varName and v2.varName="x" 
+x
+5000

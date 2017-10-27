@@ -1,0 +1,195 @@
+1 - Get all s1 that v1 modifies
+stmt s1; variable v1;
+Select s1 such that Modifies (s1, v1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+5000
+2 - Get all v1 that was modified at s1
+stmt s1; variable v1;
+Select v1 such that Modifies (s1, v1)
+i, b, c, a, oSCar, x, Romeo, w, y, z, Jane
+5000
+3 - Get all s1 that the variable modifies
+stmt s1;
+Select s1 such that Modifies (s1, "oSCar")
+7, 10, 8, 6, 5
+5000
+4 - Get all s1 that all modifies
+stmt s1;
+Select s1 such that Modifies (s1, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+5000
+5 - Get all a1 that v1 modifies
+assign a1; variable v1;
+Select a1 such that Modifies (a1, v1)
+1, 2, 3, 7, 10, 13, 16, 17, 18, 20, 21, 22, 23, 24, 27, 29, 30, 31, 32, 33, 35, 36, 39, 40
+5000
+6 - Get all v1 that was modified at a1
+assign a1; variable v1;
+Select v1 such that Modifies (a1, v1)
+i, b, c, oSCar, x, Romeo, a, w, y, z, Jane
+5000
+7 - Get all a1 that the variable modifies
+assign a1;
+Select a1 such that Modifies (a1, "x")
+13, 21, 24, 30, 32, 33, 35, 39
+5000
+8 - Get all a1 that all modifies
+assign a1;
+Select a1 such that Modifies (a1, _)
+1, 2, 3, 7, 10, 13, 16, 17, 18, 20, 21, 22, 23, 24, 27, 29, 30, 31, 32, 33, 35, 36, 39, 40
+5000
+9 - Get all w1 that v1 modifies
+while w1; variable v1;
+Select w1 such that Modifies (w1, v1)
+5, 6, 8, 11, 14, 15, 19, 25
+5000
+10 - Get all v1 that was modified at w1
+while w1; variable v1;
+Select v1 such that Modifies (w1, v1)
+oSCar, x, Romeo, b, c, a, w, y, z, Jane
+5000
+11 - Get all w1 that variable modifies
+while w1;
+Select w1 such that Modifies (w1, "Jane")
+5, 6, 25, 8
+5000
+12 - Get all w1 that all modifies
+while w1;
+Select w1 such that Modifies (w1, _)
+5, 6, 8, 11, 14, 15, 19, 25
+5000
+13 - Get all ifs1 that v1 modifies
+if ifs1; variable v1;
+Select ifs1 such that Modifies (ifs1, v1)
+28, 38
+5000
+14 - Get all v1 that was modified at ifs1
+if ifs1; variable v1;
+Select v1 such that Modifies (ifs1, v1)
+x, y, z
+5000
+15 - Get all ifs1 that modifies the variable
+if ifs;
+Select ifs such that Modifies (ifs, "x")
+38, 28
+5000
+16 - Get all ifs1 that all modifies
+if ifs;
+Select ifs such that Modifies (ifs, _)
+28, 38
+5000
+17 - Get all pl1 that v1 modifies
+prog_line pl1; variable v1;
+Select pl1 such that Modifies (pl1, v1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+5000
+18 - Get all v1 that was modified at pl1
+prog_line pl1; variable v1;
+Select v1 such that Modifies (pl1, v1)
+i, b, c, a, oSCar, x, Romeo, w, y, z, Jane
+5000
+19 - Get all pl1 that the variable modifies
+prog_line pl1;
+Select pl1 such that Modifies (pl1, "oSCar")
+7, 10, 8, 6, 5
+5000
+20 - Get all pl1 that all modifies
+prog_line pl1;
+Select pl1 such that Modifies (pl1, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+5000
+21 - Get all c1 that v1 modifies
+call c1; variable v1;
+Select c1 such that Modifies (c1, v1)
+4, 9, 12, 26, 37, 34
+5000
+22 - Get all v1 that was modified at c1
+call c1; variable v1;
+Select v1 such that Modifies (c1, v1)
+x, y, z, Jane
+5000
+23 - Get all c1 that the variable modifies
+call c1;
+Select c1 such that Modifies (c1, "Jane")
+26, 4, 9
+5000
+24 - Get all c1 that all modifies
+call c1;
+Select c1 such that Modifies (c1, _)
+4, 9, 12, 26, 37, 34
+5000
+25 - Get all p1 that v1 modifies
+procedure p1; variable v1;
+Select p1 such that Modifies (p1, v1)
+ABC, DEF, GHI, JKL, LMN, OPQ
+5000
+26 - Get all v1 that was modified at p1
+procedure p1; variable v1;
+Select v1 such that Modifies (p1, v1)
+i, b, c, a, oSCar, x, Romeo, w, y, z, Jane
+5000
+27 - Get all p1 that the variable modifies
+procedure p1;
+Select p1 such that Modifies (p1, "z")
+ABC, DEF
+5000
+28 - Get all p1 that all modifies
+procedure p1;
+Select p1 such that Modifies (p1, _)
+ABC, DEF, GHI, JKL, LMN, OPQ
+5000
+29 - Get all v1 that was modified at procedure
+variable v1;
+Select v1 such that Modifies ("JKL", v1)
+x
+5000
+30 - Get all v1 that was modified at line no
+variable v1;
+Select v1 such that Modifies (36, v1)
+Jane
+5000
+31 - Checks BOOLEAN that v1 is modified at the procedure
+variable v1;
+Select BOOLEAN such that Modifies ("OPQ", v1)
+TRUE
+5000
+32 - Checks BOOLEAN that the variable is modified at the procedure
+
+Select BOOLEAN such that Modifies ("ABC", "Jane")
+TRUE
+5000
+33 - Checks BOOLEAN that there is at least one variable modified at the procedure
+
+Select BOOLEAN such that Modifies ("ABC", _)
+TRUE
+5000
+34 - Checks BOOLEAN that the variable is modified at line no
+
+Select BOOLEAN such that Modifies (4, "Jane")
+TRUE
+5000
+35 - Checks BOOLEAN that there is at least one variable modified at the line no
+
+Select BOOLEAN such that Modifies (9, _)
+TRUE
+5000
+36 - Checks BOOLEAN that there is at least one v1 modified at all
+variable v1;
+Select BOOLEAN such that Modifies (_, v1)
+FALSE
+5000
+37 - Checks BOOLEAN that there is at least one variable modified at all
+
+Select BOOLEAN such that Modifies (_, "x")
+FALSE
+5000
+38 - Checks BOOLEAN that there is at least one all modifed at all
+
+Select BOOLEAN such that Modifies (_, _)
+FALSE
+5000
+39 - Get all v1 that modifies
+variable v1;
+Select v1 such that Modifies (_, v1)
+
+5000

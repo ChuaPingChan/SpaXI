@@ -1,0 +1,2 @@
+Parameters : Test13_Seven\2_Two\SourceNext.txt Test13_Seven\2_Two\QueryNext_UsingSourceNext.txt TestResult\out13_Two_QueryNext_UsingSourceNext.xml
+Beginning to parse Simple Program.

@@ -1,0 +1,90 @@
+procedure ABC {
+  i=1;			
+ b=200 ;	
+	c= a   ;		
+call DEF;                                            
+while a							
+{
+   while beta {			
+        oSCar  = 1 + beta + tmp;			
+        while tmp{			
+call LMN;                                               
+          oSCar = I + k + j1k + chArlie; }		
+	while x {					
+call GHI;                                               
+        x = x + 1;					
+        while left {					
+          while right {					
+            Romeo = Romeo + 1;				
+            b = 0;					
+            c = delta    + l  + width + Romeo ; }	
+            while c {					
+              c = c +1   	; } 			
+            x = x+ 1	; }}				
+          a=   2; }					
+   w = w+1  ;						
+}
+}
+
+procedure DEF {
+  x=3;						        
+  while x {                                             
+  call LMN;                                             
+       y = x;                                          
+       if y then {                                      
+          z = y + 1; 	}                               
+    else
+{
+x = y; }}                                               
+z = x       +     y  + z;                               
+}
+
+procedure GHI {
+x= 1 + 3;                                               
+x = x + 4;                                              
+
+if red then {                                           
+		color = red;                            
+} else {                   
+  color = rainbow;                                      
+call OPQ;                                               
+    while color {                                       
+       color = red;                                     
+       color = black;                                   
+}
+}
+
+call JKL;                                               
+}
+
+procedure JKL {
+x = x + 4;                                              
+
+if car then {                                           
+    if hondA then {                                     
+       car = japAn;                                     
+    } else { 
+car = Singapore + japAn;                           	
+}} else {                                
+car = van;                                              
+}
+}
+
+procedure LMN {
+	Jane = 1 + 2;                                   
+call OPQ;                                               
+}
+
+procedure OPQ {
+if y then {                                             
+    call nobody;                                        
+}
+else {
+call nobody;              
+}
+}
+
+procedure nobody {
+	rllNobody = 1;                    
+	yeah = 1 + u;         
+}

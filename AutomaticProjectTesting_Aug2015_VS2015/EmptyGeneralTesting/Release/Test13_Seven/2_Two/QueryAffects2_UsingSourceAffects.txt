@@ -1,0 +1,85 @@
+1 - Select BOOLEAN with no syns
+assign a, a1;
+Select BOOLEAN such that Affects(12, 16)
+TRUE
+5000
+2 - Select BOOLEAN with 1 syns
+assign a, a1;
+Select BOOLEAN such that Affects(a, 10)
+TRUE
+5000
+3 - Select BOOLEAN with 1 syns
+assign a, a1;
+Select BOOLEAN such that Affects(1, a)
+TRUE
+5000
+4 - Select BOOLEAN with 2 syns
+assign a, a1;
+Select BOOLEAN such that Affects(a, a1)
+TRUE
+5000
+5 - Select ARG1 with 1 syn =stmt int=
+assign a, a1; stmt s;
+Select s such that Affects(s, 6)
+1,6
+5000
+6 - Select ARG1 with 1 syn =prog_line int=
+assign a, a1; stmt s; prog_line n;
+Select n such that Affects(n, 8)
+2,3, 11
+5000
+7 - Select ARG1 with 1 syn =assign int
+assign a, a1; stmt s; prog_line n;
+Select a such that Affects(a, 11)
+3,10
+5000
+8 - Select ARG2 with 1 syn =int stmt=
+assign a, a1; stmt s;
+Select s such that Affects(6, s)
+6,10
+5000
+9 - Select ARG2 with 1 syn =int prog_line=
+assign a, a1; stmt s; prog_line n;
+Select n such that Affects(1, n)
+2,3,6,10
+5000
+10 - Select ARG2 with 1 syn =int assign=
+assign a, a1; stmt s; prog_line n;
+Select a such that Affects(11, a)
+10, 8
+5000
+11 - Select ARG1 with 2 syns =stmt assign=
+assign a, a1; stmt s;
+Select s such that Affects(s, a)
+1,2,3,6,10,11,12
+5000
+12 - Select ARG1 with 2 syns =prog_line assign=
+assign a, a1; stmt s; prog_line n;
+Select n such that Affects(n, a)
+1,2,3,6,10,11,12
+5000
+13 - Select ARG1 with 2 syns =assign assign=
+assign a, a1; stmt s; prog_line n;
+Select a such that Affects(a, a1)
+1,2,3,6,10,11,12
+5000
+14 - Select ARG2 with 2 syns =assign stmt=
+assign a, a1; stmt s;
+Select s such that Affects(a, s)
+2,3,6,8,10,11,16
+5000
+15 - Select ARG2 with 2 syns =assign prog_line=
+assign a, a1; stmt s; prog_line n;
+Select n such that Affects(a, n)
+2,3,6,8,10,11,16
+5000
+16 - Select ARG2 with 2 syns =assign assign=
+assign a, a1; stmt s; prog_line n;
+Select a1 such that Affects(a, a1)
+2,3,6,8,10,11,16
+5000
+17 - Select ARG with same syn =assign assign=
+assign a, a1; stmt s; prog_line n;
+Select a such that Affects(a, a)
+6
+5000

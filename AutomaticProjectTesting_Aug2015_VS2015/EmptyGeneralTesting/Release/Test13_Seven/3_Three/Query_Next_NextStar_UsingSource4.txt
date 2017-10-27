@@ -1,0 +1,90 @@
+1 - Check if relation holds
+
+Select BOOLEAN such that Next (5, 6)
+TRUE
+5000
+2 - Check if relation holds
+
+Select BOOLEAN such that Next (6, 7)
+TRUE
+5000
+3 - Check if relation holds
+
+Select BOOLEAN such that Next (6, 10)
+TRUE
+5000
+4 - Check if relation holds
+
+Select BOOLEAN such that Next (8, 9)
+TRUE
+5000
+5 - Check if relation holds
+
+Select BOOLEAN such that Next (9, 7)
+FALSE
+5000
+6 - Check if relation holds
+
+Select BOOLEAN such that Next (10, 12)
+TRUE
+5000
+7 - Check if relation holds
+
+Select BOOLEAN such that Next (10, 13)
+FALSE
+5000
+8 - Check if relation holds
+
+Select BOOLEAN such that Next (11, 12)
+FALSE
+5000
+9 - Check if relation holds
+
+Select BOOLEAN such that Next (11, 13)
+TRUE
+5000
+10 - Check if relation holds
+
+Select BOOLEAN such that Next* (4, 5)
+TRUE
+5000
+11 - Check if relation holds
+
+Select BOOLEAN such that Next* (4, 6)
+TRUE
+5000
+12 - Check if relation holds
+
+Select BOOLEAN such that Next* (5, 8)
+TRUE
+5000
+13 - Check if relation holds
+
+Select BOOLEAN such that Next* (7, 6)
+TRUE
+5000
+14 - Check if relation holds
+
+Select BOOLEAN such that Next* (8, 5)
+FALSE
+5000
+15 - Check if relation holds
+
+Select BOOLEAN such that Next* (8, 8)
+TRUE
+5000
+16 - Check if relation holds
+
+Select BOOLEAN such that Next* (8, 11)
+TRUE
+5000
+17 - Check if relation holds
+
+Select BOOLEAN such that Next* (8, 15)
+TRUE
+5000
+18 - Check if relation holds
+
+Select BOOLEAN such that Next* (11, 12)
+FALSE
+5000
