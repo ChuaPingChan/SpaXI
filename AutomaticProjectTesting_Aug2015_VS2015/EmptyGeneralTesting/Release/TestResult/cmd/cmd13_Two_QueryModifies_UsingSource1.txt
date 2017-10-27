@@ -1,0 +1,407 @@
+Parameters : Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryModifies_UsingSource1.txt TestResult\out13_Two_QueryModifies_UsingSource1.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - Get all s1 that v1 modifies
+stmt s1; variable v1;
+Select s1 such that Modifies (s1, v1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+5000
+Evaluating query 1 - Get all s1 that v1 modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+2 - Get all v1 that was modified at s1
+stmt s1; variable v1;
+Select v1 such that Modifies (s1, v1)
+i, b, c, a, oSCar, x, Romeo, w, y, z, Jane
+5000
+Evaluating query 2 - Get all v1 that was modified at s1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i b c a oSCar x Romeo w y z Jane 
+Correct answer: i b c a oSCar x Romeo w y z Jane 
+3 - Get all s1 that the variable modifies
+stmt s1;
+Select s1 such that Modifies (s1, "oSCar")
+7, 10, 8, 6, 5
+5000
+Evaluating query 3 - Get all s1 that the variable modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 5 6 7 8 10 
+Correct answer: 7 10 8 6 5 
+4 - Get all s1 that all modifies
+stmt s1;
+Select s1 such that Modifies (s1, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+5000
+Evaluating query 4 - Get all s1 that all modifies
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+5 - Get all a1 that v1 modifies
+assign a1; variable v1;
+Select a1 such that Modifies (a1, v1)
+1, 2, 3, 7, 10, 13, 16, 17, 18, 20, 21, 22, 23, 24, 27, 29, 30, 31, 32, 33, 35, 36, 39, 40
+5000
+Evaluating query 5 - Get all a1 that v1 modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 7 10 13 16 17 18 20 21 22 23 24 27 29 30 31 32 33 35 36 39 40 
+Correct answer: 1 2 3 7 10 13 16 17 18 20 21 22 23 24 27 29 30 31 32 33 35 36 39 40 
+6 - Get all v1 that was modified at a1
+assign a1; variable v1;
+Select v1 such that Modifies (a1, v1)
+i, b, c, oSCar, x, Romeo, a, w, y, z, Jane
+5000
+Evaluating query 6 - Get all v1 that was modified at a1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i b c a oSCar x Romeo w y z Jane 
+Correct answer: i b c oSCar x Romeo a w y z Jane 
+7 - Get all a1 that the variable modifies
+assign a1;
+Select a1 such that Modifies (a1, "x")
+13, 21, 24, 30, 32, 33, 35, 39
+5000
+Evaluating query 7 - Get all a1 that the variable modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 13 21 24 30 32 33 35 39 
+Correct answer: 13 21 24 30 32 33 35 39 
+8 - Get all a1 that all modifies
+assign a1;
+Select a1 such that Modifies (a1, _)
+1, 2, 3, 7, 10, 13, 16, 17, 18, 20, 21, 22, 23, 24, 27, 29, 30, 31, 32, 33, 35, 36, 39, 40
+5000
+Evaluating query 8 - Get all a1 that all modifies
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 7 10 13 16 17 18 20 21 22 23 24 27 29 30 31 32 33 35 36 39 40 
+Correct answer: 1 2 3 7 10 13 16 17 18 20 21 22 23 24 27 29 30 31 32 33 35 36 39 40 
+9 - Get all w1 that v1 modifies
+while w1; variable v1;
+Select w1 such that Modifies (w1, v1)
+5, 6, 8, 11, 14, 15, 19, 25
+5000
+Evaluating query 9 - Get all w1 that v1 modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 5 6 8 11 14 15 19 25 
+Correct answer: 5 6 8 11 14 15 19 25 
+10 - Get all v1 that was modified at w1
+while w1; variable v1;
+Select v1 such that Modifies (w1, v1)
+oSCar, x, Romeo, b, c, a, w, y, z, Jane
+5000
+Evaluating query 10 - Get all v1 that was modified at w1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: b c a oSCar x Romeo w y z Jane 
+Correct answer: oSCar x Romeo b c a w y z Jane 
+11 - Get all w1 that variable modifies
+while w1;
+Select w1 such that Modifies (w1, "Jane")
+5, 6, 25, 8
+5000
+Evaluating query 11 - Get all w1 that variable modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 5 6 8 25 
+Correct answer: 5 6 25 8 
+12 - Get all w1 that all modifies
+while w1;
+Select w1 such that Modifies (w1, _)
+5, 6, 8, 11, 14, 15, 19, 25
+5000
+Evaluating query 12 - Get all w1 that all modifies
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 5 6 8 11 14 15 19 25 
+Correct answer: 5 6 8 11 14 15 19 25 
+13 - Get all ifs1 that v1 modifies
+if ifs1; variable v1;
+Select ifs1 such that Modifies (ifs1, v1)
+28, 38
+5000
+Evaluating query 13 - Get all ifs1 that v1 modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 28 38 
+Correct answer: 28 38 
+14 - Get all v1 that was modified at ifs1
+if ifs1; variable v1;
+Select v1 such that Modifies (ifs1, v1)
+x, y, z
+5000
+Evaluating query 14 - Get all v1 that was modified at ifs1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y z 
+Correct answer: x y z 
+15 - Get all ifs1 that modifies the variable
+if ifs;
+Select ifs such that Modifies (ifs, "x")
+38, 28
+5000
+Evaluating query 15 - Get all ifs1 that modifies the variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 28 38 
+Correct answer: 38 28 
+16 - Get all ifs1 that all modifies
+if ifs;
+Select ifs such that Modifies (ifs, _)
+28, 38
+5000
+Evaluating query 16 - Get all ifs1 that all modifies
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 28 38 
+Correct answer: 28 38 
+17 - Get all pl1 that v1 modifies
+prog_line pl1; variable v1;
+Select pl1 such that Modifies (pl1, v1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+5000
+Evaluating query 17 - Get all pl1 that v1 modifies
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+18 - Get all v1 that was modified at pl1
+prog_line pl1; variable v1;
+Select v1 such that Modifies (pl1, v1)
+i, b, c, a, oSCar, x, Romeo, w, y, z, Jane
+5000
+Evaluating query 18 - Get all v1 that was modified at pl1
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: i b c a oSCar x Romeo w y z Jane 
+Correct answer: i b c a oSCar x Romeo w y z Jane 
+19 - Get all pl1 that the variable modifies
+prog_line pl1;
+Select pl1 such that Modifies (pl1, "oSCar")
+7, 10, 8, 6, 5
+5000
+Evaluating query 19 - Get all pl1 that the variable modifies
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 5 6 7 8 10 
+Correct answer: 7 10 8 6 5 
+20 - Get all pl1 that all modifies
+prog_line pl1;
+Select pl1 such that Modifies (pl1, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+5000
+Evaluating query 20 - Get all pl1 that all modifies
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+21 - Get all c1 that v1 modifies
+call c1; variable v1;
+Select c1 such that Modifies (c1, v1)
+4, 9, 12, 26, 37, 34
+5000
+Evaluating query 21 - Get all c1 that v1 modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 4 9 12 26 34 37 
+Correct answer: 4 9 12 26 37 34 
+22 - Get all v1 that was modified at c1
+call c1; variable v1;
+Select v1 such that Modifies (c1, v1)
+x, y, z, Jane
+5000
+Evaluating query 22 - Get all v1 that was modified at c1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y z Jane 
+Correct answer: x y z Jane 
+23 - Get all c1 that the variable modifies
+call c1;
+Select c1 such that Modifies (c1, "Jane")
+26, 4, 9
+5000
+Evaluating query 23 - Get all c1 that the variable modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 4 9 26 
+Correct answer: 26 4 9 
+24 - Get all c1 that all modifies
+call c1;
+Select c1 such that Modifies (c1, _)
+4, 9, 12, 26, 37, 34
+5000
+Evaluating query 24 - Get all c1 that all modifies
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 4 9 12 26 34 37 
+Correct answer: 4 9 12 26 37 34 
+25 - Get all p1 that v1 modifies
+procedure p1; variable v1;
+Select p1 such that Modifies (p1, v1)
+ABC, DEF, GHI, JKL, LMN, OPQ
+5000
+Evaluating query 25 - Get all p1 that v1 modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC DEF LMN GHI JKL OPQ 
+Correct answer: ABC DEF GHI JKL LMN OPQ 
+26 - Get all v1 that was modified at p1
+procedure p1; variable v1;
+Select v1 such that Modifies (p1, v1)
+i, b, c, a, oSCar, x, Romeo, w, y, z, Jane
+5000
+Evaluating query 26 - Get all v1 that was modified at p1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: i b c a oSCar x Romeo w y z Jane 
+Correct answer: i b c a oSCar x Romeo w y z Jane 
+27 - Get all p1 that the variable modifies
+procedure p1;
+Select p1 such that Modifies (p1, "z")
+ABC, DEF
+5000
+Evaluating query 27 - Get all p1 that the variable modifies
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC DEF 
+Correct answer: ABC DEF 
+28 - Get all p1 that all modifies
+procedure p1;
+Select p1 such that Modifies (p1, _)
+ABC, DEF, GHI, JKL, LMN, OPQ
+5000
+Evaluating query 28 - Get all p1 that all modifies
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ABC DEF LMN GHI JKL OPQ 
+Correct answer: ABC DEF GHI JKL LMN OPQ 
+29 - Get all v1 that was modified at procedure
+variable v1;
+Select v1 such that Modifies ("JKL", v1)
+x
+5000
+Evaluating query 29 - Get all v1 that was modified at procedure
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x 
+Correct answer: x 
+30 - Get all v1 that was modified at line no
+variable v1;
+Select v1 such that Modifies (36, v1)
+Jane
+5000
+Evaluating query 30 - Get all v1 that was modified at line no
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: Jane 
+Correct answer: Jane 
+31 - Checks BOOLEAN that v1 is modified at the procedure
+variable v1;
+Select BOOLEAN such that Modifies ("OPQ", v1)
+true
+5000
+Evaluating query 31 - Checks BOOLEAN that v1 is modified at the procedure
+The final tag string is ReturnBoolean="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+32 - Checks BOOLEAN that the variable is modified at the procedure
+
+Select BOOLEAN such that Modifies ("ABC", "Jane")
+true
+5000
+Evaluating query 32 - Checks BOOLEAN that the variable is modified at the procedure
+The final tag string is ReturnBoolean="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+33 - Checks BOOLEAN that there is at least one variable modified at the procedure
+
+Select BOOLEAN such that Modifies ("ABC", _)
+true
+5000
+Evaluating query 33 - Checks BOOLEAN that there is at least one variable modified at the procedure
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+34 - Checks BOOLEAN that the variable is modified at line no
+
+Select BOOLEAN such that Modifies (4, "Jane")
+true
+5000
+Evaluating query 34 - Checks BOOLEAN that the variable is modified at line no
+The final tag string is ReturnBoolean="1" Modifies="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+35 - Checks BOOLEAN that there is at least one variable modified at the line no
+
+Select BOOLEAN such that Modifies (9, _)
+true
+5000
+Evaluating query 35 - Checks BOOLEAN that there is at least one variable modified at the line no
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+36 - Checks BOOLEAN that there is at least one v1 modified at all
+variable v1;
+Select BOOLEAN such that Modifies (_, v1)
+false
+5000
+Evaluating query 36 - Checks BOOLEAN that there is at least one v1 modified at all
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+37 - Checks BOOLEAN that there is at least one variable modified at all
+
+Select BOOLEAN such that Modifies (_, "x")
+false
+5000
+Evaluating query 37 - Checks BOOLEAN that there is at least one variable modified at all
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+38 - Checks BOOLEAN that there is at least one all modifed at all
+
+Select BOOLEAN such that Modifies (_, _)
+false
+5000
+Evaluating query 38 - Checks BOOLEAN that there is at least one all modifed at all
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Modifies="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+39 - Get all v1 that modifies
+variable v1;
+Select v1 such that Modifies (_, v1)
+
+5000
+Evaluating query 39 - Get all v1 that modifies
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Modifies="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

@@ -1,0 +1,32 @@
+procedure first {
+	aladdin = beast + belle;				//1
+	al = shadow + 123;				//2
+
+	if al then {			//3
+		detroit = (cars + tests) * best - (program - yes);			//4
+	}
+	else {			
+		code = code + program + debug * endless * loop;			//5
+	}
+
+
+	while code {			//6
+		disney = beast + aladdin - belle * mermaid;		//7
+		mermaid = disney - beast;	//8
+		beast = (belle + gaston) - father * (mother - brother);		//9
+		code = code - 1;            //10
+	}
+	program = (code + loops - statements * logic);				//11
+
+
+	while detroit {			//12
+		if detroit then {		//13
+			statements = logic + code;	//14
+		}
+		else {		
+			logic = statements + code;		//15
+		}
+		detroit = detroit + 1;      //16
+	}
+	
+}

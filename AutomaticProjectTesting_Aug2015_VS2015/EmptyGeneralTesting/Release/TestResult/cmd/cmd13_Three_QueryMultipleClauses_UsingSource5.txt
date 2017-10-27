@@ -1,0 +1,26 @@
+Parameters : Test13_Seven\3_Three\Source5.txt Test13_Seven\3_Three\QueryMultipleClauses_UsingSource5.txt TestResult\out13_Three_QueryMultipleClauses_UsingSource5.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - 9 Joins query
+assign a, a1, a2; stmt s1, s2, s3; variable v1, v2;
+Select <s1, a, a1, v2> such that Uses (13, "giant") and Uses (s1, v1) and Affects (a1, a2) with a1.stmt#=20 such that Parent(s1, s2) pattern a2("giant",_) such that Next(s2,s3) and Modifies(s1,"o") and Modifies (a, v2) pattern a (v1, _"o"_)
+28 32 20 egg,28 67 20 Bh,28 69 20 n,28 80 20 egg,29 32 20 egg,29 67 20 Bh,29 69 20 n,29 80 20 egg,30 32 20 egg,30 69 20 n,30 80 20 egg,33 32 20 egg,33 80 20 egg,34 32 20 egg,34 80 20 egg,63 32 20 egg,63 67 20 Bh,63 69 20 n,63 80 20 egg,64 67 20 Bh,64 69 20 n,65 67 20 Bh,65 69 20 n,82 32 20 egg,82 67 20 Bh,82 80 20 egg,90 32 20 egg,90 80 20 egg,95 32 20 egg,95 67 20 Bh,95 69 20 n,95 80 20 egg
+5000
+Evaluating query 1 - 9 Joins query
+The happen is 2
+The happen is 2
+"giant",_ is an Unnamedvar 
+The happen is 3
+The happen is 2
+The happen is 2
+_"o"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Affects="1" Modifies="2" Next="1" Parent="1" UnnamedVar="2" Uses="2" Pattern="2" SuchThat="3" With="1" CondNum="16" RelNum="7" 
+Your answer: 
+Correct answer: 28 32 20 egg 28 67 20 Bh 28 69 20 n 28 80 20 egg 29 32 20 egg 29 67 20 Bh 29 69 20 n 29 80 20 egg 30 32 20 egg 30 69 20 n 30 80 20 egg 33 32 20 egg 33 80 20 egg 34 32 20 egg 34 80 20 egg 63 32 20 egg 63 67 20 Bh 63 69 20 n 63 80 20 egg 64 67 20 Bh 64 69 20 n 65 67 20 Bh 65 69 20 n 82 32 20 egg 82 67 20 Bh 82 80 20 egg 90 32 20 egg 90 80 20 egg 95 32 20 egg 95 67 20 Bh 95 69 20 n 95 80 20 egg 
+Missing: 28 32 20 egg 28 67 20 Bh 28 69 20 n 28 80 20 egg 29 32 20 egg 29 67 20 Bh 29 69 20 n 29 80 20 egg 30 32 20 egg 30 69 20 n 30 80 20 egg 33 32 20 egg 33 80 20 egg 34 32 20 egg 34 80 20 egg 63 32 20 egg 63 67 20 Bh 63 69 20 n 63 80 20 egg 64 67 20 Bh 64 69 20 n 65 67 20 Bh 65 69 20 n 82 32 20 egg 82 67 20 Bh 82 80 20 egg 90 32 20 egg 90 80 20 egg 95 32 20 egg 95 67 20 Bh 95 69 20 n 95 80 20 egg 
+Additional: 
+End of evaluating Query File.
+AutoTester Completed !

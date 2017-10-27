@@ -1,0 +1,195 @@
+1 - Get all s1 that uses v1
+stmt s1; variable v1;
+Select s1 such that Uses (s1, v1)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40
+5000
+2 - Get all v1 that was used at s1
+stmt s1; variable v1;
+Select v1 such that Uses (s1, v1)
+a, beta, tmp, I, k, j1k ,chArlie, x, left, right, Romeo, delta, width, c, w, z, y, HELLO, l
+5000
+3 - Get all s1 that uses the variable
+stmt s1;
+Select s1 such that Uses (s1, "HELLO")
+40, 38, 37, 25, 26, 8, 9, 6, 5, 4
+5000
+4 - Get all s1 that uses all
+stmt s1;
+Select s1 such that Uses (s1, _)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40
+5000
+5 - Get all a1 that uses v1
+assign a1; variable v1;
+Select a1 such that Uses (a1, v1)
+3, 7, 10, 13, 16, 18, 20, 21, 23, 27, 29, 30, 31, 33, 35, 39, 40
+5000
+6 - Get all v1 that was used at a1
+assign a1; variable v1;
+Select v1 such that Uses (a1, v1)
+a, beta, tmp, I, k, j1k, chArlie, x, Romeo, delta, l, width, c, w, z, y, HELLO
+5000
+7 - Get all a1 that uses the variable
+assign a1;
+Select a1 such that Uses (a1, "HELLO")
+40
+5000
+8 - Get all a1 that uses all
+assign a1;
+Select a1 such that Uses (a1, _)
+3, 7, 10, 13, 16, 18, 20, 21, 23, 27, 29, 30, 31, 33, 35, 39, 40
+5000
+9 - Get all w1 that uses v1
+while w1; variable v1;
+Select w1 such that Uses (w1, v1)
+5, 6, 8, 11, 14, 15, 19, 25
+5000
+10 - Get all v1 that was used at w1
+while w1; variable v1;
+Select v1 such that Uses (w1, v1)
+a, beta, tmp, x, left, right, c, I, k, j1k, chArlie, Romeo, delta, width, y, HELLO, l, w
+5000
+11 - Get all w1 that uses the variable
+while w1;
+Select w1 such that Uses (w1, "y")
+25, 8, 5, 6
+5000
+12 - Get all w1 that uses all
+while w1;
+Select w1 such that Uses (w1, _)
+5, 6, 8, 11, 14, 15, 19, 25
+5000
+13 - Get all ifs1 that uses v1
+if ifs1; variable v1;
+Select ifs1 such that Uses (ifs1, v1)
+28, 38
+5000
+14 - Get all v1 that was used at ifs1
+if ifs1; variable v1;
+Select v1 such that Uses (ifs1, v1)
+y, HELLO
+5000
+15 - Get all ifs1 that uses the variable
+if ifs1;
+Select ifs1 such that Uses (ifs1, "HELLO")
+38
+5000
+16 - Get all ifs1 that uses all
+if ifs1;
+Select ifs1 such that Uses (ifs1, _)
+28, 38
+5000
+17 - Get all pl1 that uses v1
+prog_line pl1; variable v1;
+Select pl1 such that Uses (pl1, v1)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40
+5000
+18 - Get all v1 that was used at pl1
+prog_line pl1; variable v1;
+Select v1 such that Uses (pl1, v1)
+a, beta, tmp, I, k, j1k ,chArlie, x, left, right, Romeo, delta, width, c, w, z, y, HELLO, l
+5000
+19 - Get all pl1 that uses the variable
+prog_line pl1;
+Select pl1 such that Uses (pl1, "Romeo")
+16, 15, 14, 11, 6, 5, 18
+5000
+20 - Get all pl1 that uses all
+prog_line pl1;
+Select pl1 such that Uses (pl1, _)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40
+5000
+21 - Get all c1 that uses v1
+call c1; variable v1;
+Select c1 such that Uses (c1, v1)
+4, 9, 12, 26, 34, 37
+5000
+22 - Get all v1 that was used at c1
+call c1; variable v1;
+Select v1 such that Uses (c1, v1)
+x, y, z, HELLO
+5000
+23 - Get all c1 that uses the variable
+call c1;
+Select c1 such that Uses (c1, "HELLO")
+37, 26, 9, 4
+5000
+24 - Get all c1 that uses all
+call c1;
+Select c1 such that Uses (c1, _)
+4, 9, 12, 26, 34, 37
+5000
+25 - Get all p1 that uses v1
+procedure p1; variable v1;
+Select p1 such that Uses (p1, v1)
+ABC, DEF, GHI, JKL, LMN, OPQ
+5000
+26 - Get all v1 that was used at p1
+procedure p1; variable v1;
+Select v1 such that Uses (p1, v1)
+a, beta, tmp, I, k, j1k ,chArlie, x, left, right, Romeo, delta, width, c, w, z, y, HELLO, l
+5000
+27 - Get all p1 that uses the variable
+procedure p1;
+Select p1 such that Uses (p1, "HELLO")
+OPQ, LMN, DEF, ABC
+5000
+28 - Get all p1 that uses all
+procedure p1;
+Select p1 such that Uses (p1, _)
+ABC, DEF, GHI, JKL, LMN, OPQ
+5000
+29 - Get all v1 that was used at procedure
+variable v1;
+Select v1 such that Uses ("LMN", v1)
+y, HELLO
+5000
+30 - Get all v1 that was used at line no
+variable v1;
+Select v1 such that Uses (25, v1)
+x, y, HELLO
+5000
+31 - Checks BOOLEAN that v1 is used at the procedure
+variable v1;
+Select BOOLEAN such that Uses ("GHI", v1)
+true
+5000
+32 - Checks BOOLEAN that the variable is used at the procedure
+
+Select BOOLEAN such that Uses ("JKL", "x")
+true
+5000
+33 - Checks BOOLEAN that there is at least one variable used at the procedure
+
+Select BOOLEAN such that Uses ("LMN", _)
+true
+5000
+34 - Checks BOOLEAN that the variable is used at line no
+
+Select BOOLEAN such that Uses (4, "HELLO")
+true
+5000
+35 - Checks BOOLEAN that there is at least one variable used at the line no
+
+Select BOOLEAN such that Uses (36 , _)
+false
+5000
+36 - Checks BOOLEAN that there is at least one v1 used at all
+variable v1;
+Select BOOLEAN such that Uses (_, v1)
+false
+5000
+37 - Checks BOOLEAN that there is at least one variable used at all
+
+Select BOOLEAN such that Uses (_, "x")
+false
+5000
+38 - Checks BOOLEAN that there is at least one all used at all
+
+Select BOOLEAN such that Uses (_, _)
+false
+5000
+39 - Get all v1 that uses
+variable v1;
+Select v1 such that Uses (_, v1)
+
+5000

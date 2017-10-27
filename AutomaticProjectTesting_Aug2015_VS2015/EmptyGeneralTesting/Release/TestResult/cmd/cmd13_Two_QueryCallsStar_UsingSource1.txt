@@ -1,0 +1,197 @@
+Parameters : Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryCallsStar_UsingSource1.txt TestResult\out13_Two_QueryCallsStar_UsingSource1.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - Get all Caller using 2 different procedure synonym
+procedure p1, p2;
+Select p1 such that Calls* (p1,p2)
+ABC, DEF, LMN, GHI
+5000
+Evaluating query 1 - Get all Caller using 2 different procedure synonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC DEF LMN GHI 
+Correct answer: ABC DEF LMN GHI 
+2 - Get all Callee using 2 different procedure synonym
+procedure p1, p2;
+Select p2 such that Calls* (p1,p2)
+DEF, LMN, OPQ, GHI, JKL
+5000
+Evaluating query 2 - Get all Callee using 2 different procedure synonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: DEF LMN GHI JKL OPQ 
+Correct answer: DEF LMN OPQ GHI JKL 
+3 - Get all Caller using procedure and ident
+procedure p1;
+Select p1 such that Calls* (p1,"DEF")
+ABC
+5000
+Evaluating query 3 - Get all Caller using procedure and ident
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC 
+Correct answer: ABC 
+4 - Get all Caller using procedure and all
+procedure p1;
+Select p1 such that Calls* (p1,_)
+ABC, DEF, LMN, GHI
+5000
+Evaluating query 4 - Get all Caller using procedure and all
+p1,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ABC DEF LMN GHI 
+Correct answer: ABC DEF LMN GHI 
+5 - Get all Callee using ident and procedure
+procedure p1;
+Select p1 such that Calls* ("ABC",p1)
+DEF, LMN, GHI, OPQ, JKL
+5000
+Evaluating query 5 - Get all Callee using ident and procedure
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: DEF LMN GHI JKL OPQ 
+Correct answer: DEF LMN GHI OPQ JKL 
+6 - Get all Callee using all and procedure
+procedure p1;
+Select p1 such that Calls* (_, p1)
+DEF, LMN, OPQ, GHI, JKL
+5000
+Evaluating query 6 - Get all Callee using all and procedure
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: DEF LMN GHI JKL OPQ 
+Correct answer: DEF LMN OPQ GHI JKL 
+7 - Checks BOOLEAN using procedure and procedure
+procedure p1, p2;
+Select BOOLEAN such that Calls* (p1,p2)
+true
+5000
+Evaluating query 7 - Checks BOOLEAN using procedure and procedure
+The final tag string is ReturnBoolean="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+8 - Checks BOOLEAN using ident and ident
+
+Select BOOLEAN such that Calls* ("ABC", "DEF")
+true
+5000
+Evaluating query 8 - Checks BOOLEAN using ident and ident
+The final tag string is ReturnBoolean="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+9 - Checks BOOLEAN using ident and all
+
+Select BOOLEAN such that Calls* ("ABC", _)
+true
+5000
+Evaluating query 9 - Checks BOOLEAN using ident and all
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+10 - Checks BOOLEAN using all and ident
+
+Select BOOLEAN such that Calls* (_, "LMN")
+true
+5000
+Evaluating query 10 - Checks BOOLEAN using all and ident
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Callsstar="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+11 - Checks BOOLEAN using all and all
+
+Select BOOLEAN such that Calls* (_, _)
+true
+5000
+Evaluating query 11 - Checks BOOLEAN using all and all
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Callsstar="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+12 - Empty result
+procedure p1;
+Select p1 such that Calls* (p1,"ZZZ")
+
+5000
+Evaluating query 12 - Empty result
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+13 - Get all Caller using procedure and ident (left space)
+procedure p1;
+Select p1 such that Calls* (p1,"     DEF")
+ABC
+5000
+Evaluating query 13 - Get all Caller using procedure and ident (left space)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC 
+Correct answer: ABC 
+14 - Get all Caller using procedure and ident (right space)
+procedure p1;
+Select p1 such that Calls* (p1,"DEF    ")
+ABC
+5000
+Evaluating query 14 - Get all Caller using procedure and ident (right space)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC 
+Correct answer: ABC 
+15 - Get all Caller using procedure and ident (left tab)
+procedure p1;
+Select p1 such that Calls* (p1,"		DEF")
+ABC
+5000
+Evaluating query 15 - Get all Caller using procedure and ident (left tab)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC 
+Correct answer: ABC 
+16 - Get all Caller using procedure and ident (right tab)
+procedure p1;
+Select p1 such that Calls* (p1,"DEF	")
+ABC
+5000
+Evaluating query 16 - Get all Caller using procedure and ident (right tab)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC 
+Correct answer: ABC 
+17 - Get all Caller using procedure and ident (multiple whitespace)
+procedure p1;
+Select p1 such that Calls* (p1,"	     		DEF		    ")
+ABC
+5000
+Evaluating query 17 - Get all Caller using procedure and ident (multiple whitespace)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC 
+Correct answer: ABC 
+18 - Get all Caller using synonym and ident with multiple level
+procedure p1;
+Select p1 such that Calls* (p1,"OPQ")
+ABC, DEF, LMN
+5000
+Evaluating query 18 - Get all Caller using synonym and ident with multiple level
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC DEF LMN 
+Correct answer: ABC DEF LMN 
+19 - Checks BOOLEAN using ident and ident (multiple level)
+
+Select BOOLEAN such that Calls* ("ABC", "JKL")
+true
+5000
+Evaluating query 19 - Checks BOOLEAN using ident and ident (multiple level)
+The final tag string is ReturnBoolean="1" Callsstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+End of evaluating Query File.
+AutoTester Completed !

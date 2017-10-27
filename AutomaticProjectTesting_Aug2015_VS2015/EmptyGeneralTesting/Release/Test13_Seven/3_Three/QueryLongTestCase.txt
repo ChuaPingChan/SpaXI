@@ -1,0 +1,113 @@
+1 - Simple
+
+Select BOOLEAN  with "a" = "a"
+true
+5000
+2 - selecting variables
+variable v, v1; assign a; stmt s; procedure p;
+Select v with p.procName = "eight" such that Uses(p,v) and Modifies(a,v1) with v1.varName = "eC" such that Uses(a,v) and Follows(_,a) and Follows*(_,a)
+eD,eA,eC,eB
+5000
+3 - call long query
+variable v, v1; assign a; stmt s; procedure p,p1,p2; call c, c1,c2; while w;
+Select <w, c.procName> such that Parent(w,c) with c.procName = p.procName such that Calls(p,p1) and Calls(p1,p2) pattern w(_,_)
+95 singleStmt
+5000
+4 - next* long query
+variable v, v1; assign a; stmt s,s1; procedure p,p1,p2; call c, c1,c2; while w;
+Select <w,a> such that Next*(s,s1) and Next(a,w) with w.stmt# = s.stmt# such that Next(s,109) pattern w(v,_) such that Uses("notCalledByAnyone", v) such that Uses(a, "notA") and Modifies(a,v)  
+108 107, 108 110 
+5000
+5 - Select statement
+variable v, v1; assign a; stmt s,s1; procedure p,p1,p2; call c, c1,c2; while w; if ifs, ifs1, ifs2;
+Select s with s.stmt# = ifs.stmt# such that Parent*(ifs, ifs1) and Parent(ifs1, ifs2) pattern ifs1(_,_,_) pattern ifs2("quattroporte",_,_) such that Parent(ifs, a) pattern ifs("lancer",_,_)
+133
+5000
+6 - Select triple
+variable v, v1; assign a; stmt s,s1; procedure p,p1,p2; call c, c1,c2; while w; if ifs, ifs1, ifs2;
+Select <a, v, s1> such that Modifies(a,v) pattern a(_,_"fY*(fA+fB)"_) such that Follows(a,s) and Parent(s1,s) and Next*(s1, w) with w.stmt#= 5
+8 fStart 7
+5000
+7 - Select while
+variable v, v1; assign a; stmt s,s1; procedure p,p1,p2; call c, c1,c2; while w,w1; if ifs, ifs1, ifs2;
+Select w such that Uses(a, "sC") pattern a(_,_"sC-(sC+sC)"_) such that Parent(w,a) and Next(w,w1) pattern w1(_,_)
+47
+5000
+8 - Select stmt
+variable v, v1; assign a; stmt s,s1; procedure p,p1,p2; call c, c1,c2; while w,w1; if ifs, ifs1, ifs2; constant ct;
+Select s with s.stmt# = ct.value and s.stmt# = w.stmt# such that Next*(w,a) and Uses (a, v) with v.varName = "notB" pattern w(v,_)
+99
+5000
+9 - selecting var pass
+variable v,v2; assign a;
+Select v such that Uses(a,v2) and Modifies(a, v) with v2.varName = "tA" such that Follows*(_,a)
+tB, tC, tD
+5000
+10 - selecting stmt pass
+variable v,v2; assign a;
+Select a such that Uses(a,v2) and Modifies(a, v) with v2.varName = "tA" such that Follows*(_,a)
+63, 64, 68, 69
+5000
+11 - multiclause
+while w, w1; variable v; assign a;
+Select v such that Modifies(w,v) and Next(w,w1) and Uses(a,v) and Parent(_,w)
+sC, sE, fE, fF, fEnd, fJ, fB, fD, sA, notK, notA, notB, notZ, notX, notC, notY, notE, a, b, c
+5000
+12 - multiclause empty pattern
+constant c; assign a; while w, w1;
+Select a with a.stmt# = c.value such that Follows(w,a) and Parent(w1,a) pattern a(_,_"sC-sC"_)
+
+5000
+13 - multiclause valid pattern
+constant c; assign a; while w, w1; stmt s;
+Select a with a.stmt# = c.value such that Follows(s,a) and Follows*(w,a) pattern a("fC",_"fX"_)
+24
+5000
+14 - multiclause
+if ifs; assign a; variable v, v1;
+Select ifs pattern ifs(v1,_,_) pattern a(_,_"fC"_) such that Modifies(ifs,v) with v.varName = "fEnd" with v1.varName = "fY" with v.varName = "fEnd" with v1.varName = "fY"
+7
+5000
+15 - multiclause working
+if ifs; assign a; variable v;
+Select ifs pattern ifs("fY",_,_) pattern a(_,_"fC"_) such that Modifies(ifs,v) with v.varName = "fEnd"
+7
+5000
+16 - multiclause
+if ifs; assign a; variable v;
+Select ifs pattern ifs(_,_,_) pattern a(_,_"fC"_) such that Modifies(ifs,v) with v.varName = "fEnd"
+31,7,17
+5000
+17 - multiclause pass
+while w,w2; procedure p,p1,p2;
+Select w2 such that Calls(p,p1) and Calls(p1,p2) with p.procName = "first" such that Parent(w,w2)
+95,96,98,88,93,99,100,101,47,48,49,87
+5000
+18 - multiclause
+while w; procedure p,p1;
+Select w such that Calls(p,p1) and Calls(p1,_) with p.procName = "first" such that Parent(_,w) pattern w(_,_)
+48,49,9,96,33,47,79,101,93,87,88,95,98,99,100,108
+5000
+19 - multiclause
+stmt s; constant ct; variable v; call c;
+Select s with s.stmt# = ct.value such that Parent(_, s) and Modifies(s,v) and Uses(c,v)
+8,10,11,14,20
+5000
+20 - multiclause 
+variable v, v1; assign a; stmt s,s1; procedure p,p1,p2; call c, c1,c2; while w,w1; if ifs, ifs1, ifs2; constant ct;
+Select p1 such that Calls(p,p1) and Calls*(p1,p2) and Modifies(p1,v) with v.varName = "b" such that Uses(p1,v)
+singleStmt, noNesting
+5000
+21 - multiclause
+variable v, v1; assign a; stmt s,s1; procedure p,p1,p2; call c, c1,c2; while w,w1; if ifs, ifs1, ifs2; constant ct;
+Select v such that Uses("unrelatedProcedure", v) and Uses(s, v) and Next(w,s)
+LEL, b, joke
+5000
+22 - multiclause 
+variable v, v1; assign a; stmt s,s1; procedure p,p1,p2; call c, c1,c2; while w,w1; if ifs, ifs1, ifs2; constant ct;
+Select v such that Uses("nestedIfStatements", v) and Modifies(p, v) and Next*(w,s) with p.procName = "nestedIfStatements"
+lancer, murceiago, quattroporte, b, gallardo, mustang, p1, California
+5000
+
+
+

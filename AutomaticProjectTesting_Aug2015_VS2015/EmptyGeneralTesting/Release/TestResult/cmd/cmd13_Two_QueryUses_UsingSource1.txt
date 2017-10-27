@@ -1,0 +1,423 @@
+Parameters : Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryUses_UsingSource1.txt TestResult\out13_Two_QueryUses_UsingSource1.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Release
+Beginning to evaluate Query File.
+1 - Get all s1 that uses v1
+stmt s1; variable v1;
+Select s1 such that Uses (s1, v1)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40
+5000
+Evaluating query 1 - Get all s1 that uses v1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18 19 20 21 23 25 26 27 28 29 30 31 33 34 35 37 38 39 40 
+Correct answer: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18 19 20 21 23 25 26 27 28 29 30 31 33 34 35 37 38 39 40 
+2 - Get all v1 that was used at s1
+stmt s1; variable v1;
+Select v1 such that Uses (s1, v1)
+a, beta, tmp, I, k, j1k ,chArlie, x, left, right, Romeo, delta, width, c, w, z, y, HELLO, l
+5000
+Evaluating query 2 - Get all v1 that was used at s1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: c a beta tmp I k j1k chArlie x left right Romeo delta l width w y z HELLO 
+Correct answer: a beta tmp I k j1k chArlie x left right Romeo delta width c w z y HELLO l 
+3 - Get all s1 that uses the variable
+stmt s1;
+Select s1 such that Uses (s1, "HELLO")
+40, 38, 37, 25, 26, 8, 9, 6, 5, 4
+5000
+Evaluating query 3 - Get all s1 that uses the variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 4 5 6 8 9 25 26 37 38 40 
+Correct answer: 40 38 37 25 26 8 9 6 5 4 
+4 - Get all s1 that uses all
+stmt s1;
+Select s1 such that Uses (s1, _)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40
+5000
+Evaluating query 4 - Get all s1 that uses all
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18 19 20 21 23 25 26 27 28 29 30 31 33 34 35 37 38 39 40 
+Correct answer: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18 19 20 21 23 25 26 27 28 29 30 31 33 34 35 37 38 39 40 
+5 - Get all a1 that uses v1
+assign a1; variable v1;
+Select a1 such that Uses (a1, v1)
+3, 7, 10, 13, 16, 18, 20, 21, 23, 27, 29, 30, 31, 33, 35, 39, 40
+5000
+Evaluating query 5 - Get all a1 that uses v1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 7 10 13 16 18 20 21 23 27 29 30 31 33 35 39 40 
+Correct answer: 3 7 10 13 16 18 20 21 23 27 29 30 31 33 35 39 40 
+6 - Get all v1 that was used at a1
+assign a1; variable v1;
+Select v1 such that Uses (a1, v1)
+a, beta, tmp, I, k, j1k, chArlie, x, Romeo, delta, l, width, c, w, z, y, HELLO
+5000
+Evaluating query 6 - Get all v1 that was used at a1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: c a beta tmp I k j1k chArlie x Romeo delta l width w y z HELLO 
+Correct answer: a beta tmp I k j1k chArlie x Romeo delta l width c w z y HELLO 
+7 - Get all a1 that uses the variable
+assign a1;
+Select a1 such that Uses (a1, "HELLO")
+40
+5000
+Evaluating query 7 - Get all a1 that uses the variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 40 
+Correct answer: 40 
+8 - Get all a1 that uses all
+assign a1;
+Select a1 such that Uses (a1, _)
+3, 7, 10, 13, 16, 18, 20, 21, 23, 27, 29, 30, 31, 33, 35, 39, 40
+5000
+Evaluating query 8 - Get all a1 that uses all
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 7 10 13 16 18 20 21 23 27 29 30 31 33 35 39 40 
+Correct answer: 3 7 10 13 16 18 20 21 23 27 29 30 31 33 35 39 40 
+9 - Get all w1 that uses v1
+while w1; variable v1;
+Select w1 such that Uses (w1, v1)
+5, 6, 8, 11, 14, 15, 19, 25
+5000
+Evaluating query 9 - Get all w1 that uses v1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 5 6 8 11 14 15 19 25 
+Correct answer: 5 6 8 11 14 15 19 25 
+10 - Get all v1 that was used at w1
+while w1; variable v1;
+Select v1 such that Uses (w1, v1)
+a, beta, tmp, x, left, right, c, I, k, j1k, chArlie, Romeo, delta, width, y, HELLO, l, w
+5000
+Evaluating query 10 - Get all v1 that was used at w1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: c a beta tmp I k j1k chArlie x left right Romeo delta l width w y HELLO 
+Correct answer: a beta tmp x left right c I k j1k chArlie Romeo delta width y HELLO l w 
+11 - Get all w1 that uses the variable
+while w1;
+Select w1 such that Uses (w1, "y")
+25, 8, 5, 6
+5000
+Evaluating query 11 - Get all w1 that uses the variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 5 6 8 25 
+Correct answer: 25 8 5 6 
+12 - Get all w1 that uses all
+while w1;
+Select w1 such that Uses (w1, _)
+5, 6, 8, 11, 14, 15, 19, 25
+5000
+Evaluating query 12 - Get all w1 that uses all
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 5 6 8 11 14 15 19 25 
+Correct answer: 5 6 8 11 14 15 19 25 
+13 - Get all ifs1 that uses v1
+if ifs1; variable v1;
+Select ifs1 such that Uses (ifs1, v1)
+28, 38
+5000
+Evaluating query 13 - Get all ifs1 that uses v1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 28 38 
+Correct answer: 28 38 
+14 - Get all v1 that was used at ifs1
+if ifs1; variable v1;
+Select v1 such that Uses (ifs1, v1)
+y, HELLO
+5000
+Evaluating query 14 - Get all v1 that was used at ifs1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: y HELLO 
+Correct answer: y HELLO 
+15 - Get all ifs1 that uses the variable
+if ifs1;
+Select ifs1 such that Uses (ifs1, "HELLO")
+38
+5000
+Evaluating query 15 - Get all ifs1 that uses the variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 38 
+Correct answer: 38 
+16 - Get all ifs1 that uses all
+if ifs1;
+Select ifs1 such that Uses (ifs1, _)
+28, 38
+5000
+Evaluating query 16 - Get all ifs1 that uses all
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 28 38 
+Correct answer: 28 38 
+17 - Get all pl1 that uses v1
+prog_line pl1; variable v1;
+Select pl1 such that Uses (pl1, v1)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40
+5000
+Evaluating query 17 - Get all pl1 that uses v1
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18 19 20 21 23 25 26 27 28 29 30 31 33 34 35 37 38 39 40 
+Correct answer: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18 19 20 21 23 25 26 27 28 29 30 31 33 34 35 37 38 39 40 
+18 - Get all v1 that was used at pl1
+prog_line pl1; variable v1;
+Select v1 such that Uses (pl1, v1)
+a, beta, tmp, I, k, j1k ,chArlie, x, left, right, Romeo, delta, width, c, w, z, y, HELLO, l
+5000
+Evaluating query 18 - Get all v1 that was used at pl1
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: c a beta tmp I k j1k chArlie x left right Romeo delta l width w y z HELLO 
+Correct answer: a beta tmp I k j1k chArlie x left right Romeo delta width c w z y HELLO l 
+19 - Get all pl1 that uses the variable
+prog_line pl1;
+Select pl1 such that Uses (pl1, "Romeo")
+16, 15, 14, 11, 6, 5, 18
+5000
+Evaluating query 19 - Get all pl1 that uses the variable
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 5 6 11 14 15 16 18 
+Correct answer: 16 15 14 11 6 5 18 
+20 - Get all pl1 that uses all
+prog_line pl1;
+Select pl1 such that Uses (pl1, _)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40
+5000
+Evaluating query 20 - Get all pl1 that uses all
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18 19 20 21 23 25 26 27 28 29 30 31 33 34 35 37 38 39 40 
+Correct answer: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18 19 20 21 23 25 26 27 28 29 30 31 33 34 35 37 38 39 40 
+21 - Get all c1 that uses v1
+call c1; variable v1;
+Select c1 such that Uses (c1, v1)
+4, 9, 12, 26, 34, 37
+5000
+Evaluating query 21 - Get all c1 that uses v1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 4 9 12 26 34 37 
+Correct answer: 4 9 12 26 34 37 
+22 - Get all v1 that was used at c1
+call c1; variable v1;
+Select v1 such that Uses (c1, v1)
+x, y, z, HELLO
+5000
+Evaluating query 22 - Get all v1 that was used at c1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y z HELLO 
+Correct answer: x y z HELLO 
+23 - Get all c1 that uses the variable
+call c1;
+Select c1 such that Uses (c1, "HELLO")
+37, 26, 9, 4
+5000
+Evaluating query 23 - Get all c1 that uses the variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 4 9 26 37 
+Correct answer: 37 26 9 4 
+24 - Get all c1 that uses all
+call c1;
+Select c1 such that Uses (c1, _)
+4, 9, 12, 26, 34, 37
+5000
+Evaluating query 24 - Get all c1 that uses all
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 4 9 12 26 34 37 
+Correct answer: 4 9 12 26 34 37 
+25 - Get all p1 that uses v1
+procedure p1; variable v1;
+Select p1 such that Uses (p1, v1)
+ABC, DEF, GHI, JKL, LMN, OPQ
+5000
+Evaluating query 25 - Get all p1 that uses v1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC DEF LMN GHI JKL OPQ 
+Correct answer: ABC DEF GHI JKL LMN OPQ 
+26 - Get all v1 that was used at p1
+procedure p1; variable v1;
+Select v1 such that Uses (p1, v1)
+a, beta, tmp, I, k, j1k ,chArlie, x, left, right, Romeo, delta, width, c, w, z, y, HELLO, l
+5000
+Evaluating query 26 - Get all v1 that was used at p1
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: c a beta tmp I k j1k chArlie x left right Romeo delta l width w y z HELLO 
+Correct answer: a beta tmp I k j1k chArlie x left right Romeo delta width c w z y HELLO l 
+27 - Get all p1 that uses the variable
+procedure p1;
+Select p1 such that Uses (p1, "HELLO")
+OPQ, LMN, DEF, ABC
+5000
+Evaluating query 27 - Get all p1 that uses the variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: ABC DEF LMN OPQ 
+Correct answer: OPQ LMN DEF ABC 
+28 - Get all p1 that uses all
+procedure p1;
+Select p1 such that Uses (p1, _)
+ABC, DEF, GHI, JKL, LMN, OPQ
+5000
+Evaluating query 28 - Get all p1 that uses all
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: ABC DEF LMN GHI JKL OPQ 
+Correct answer: ABC DEF GHI JKL LMN OPQ 
+29 - Get all v1 that was used at procedure
+variable v1;
+Select v1 such that Uses ("LMN", v1)
+y, HELLO
+5000
+Evaluating query 29 - Get all v1 that was used at procedure
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: y HELLO 
+Correct answer: y HELLO 
+30 - Get all v1 that was used at line no
+variable v1;
+Select v1 such that Uses (25, v1)
+x, y, HELLO
+5000
+Evaluating query 30 - Get all v1 that was used at line no
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: x y HELLO 
+Correct answer: x y HELLO 
+31 - Checks BOOLEAN that v1 is used at the procedure
+variable v1;
+Select BOOLEAN such that Uses ("GHI", v1)
+TRUE
+5000
+Evaluating query 31 - Checks BOOLEAN that v1 is used at the procedure
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: TRUE 
+Missing: TRUE 
+Additional: true 
+32 - Checks BOOLEAN that the variable is used at the procedure
+
+Select BOOLEAN such that Uses ("JKL", "x")
+TRUE
+5000
+Evaluating query 32 - Checks BOOLEAN that the variable is used at the procedure
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: TRUE 
+Missing: TRUE 
+Additional: true 
+33 - Checks BOOLEAN that there is at least one variable used at the procedure
+
+Select BOOLEAN such that Uses ("LMN", _)
+TRUE
+5000
+Evaluating query 33 - Checks BOOLEAN that there is at least one variable used at the procedure
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: TRUE 
+Missing: TRUE 
+Additional: true 
+34 - Checks BOOLEAN that the variable is used at line no
+
+Select BOOLEAN such that Uses (4, "HELLO")
+TRUE
+5000
+Evaluating query 34 - Checks BOOLEAN that the variable is used at line no
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: TRUE 
+Missing: TRUE 
+Additional: true 
+35 - Checks BOOLEAN that there is at least one variable used at the line no
+
+Select BOOLEAN such that Uses (36 , _)
+FALSE
+5000
+Evaluating query 35 - Checks BOOLEAN that there is at least one variable used at the line no
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: FALSE 
+Missing: FALSE 
+Additional: false 
+36 - Checks BOOLEAN that there is at least one v1 used at all
+variable v1;
+Select BOOLEAN such that Uses (_, v1)
+FALSE
+5000
+Evaluating query 36 - Checks BOOLEAN that there is at least one v1 used at all
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: FALSE 
+Missing: FALSE 
+Additional: false 
+37 - Checks BOOLEAN that there is at least one variable used at all
+
+Select BOOLEAN such that Uses (_, "x")
+FALSE
+5000
+Evaluating query 37 - Checks BOOLEAN that there is at least one variable used at all
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: FALSE 
+Missing: FALSE 
+Additional: false 
+38 - Checks BOOLEAN that there is at least one all used at all
+
+Select BOOLEAN such that Uses (_, _)
+FALSE
+5000
+Evaluating query 38 - Checks BOOLEAN that there is at least one all used at all
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: false 
+Correct answer: FALSE 
+Missing: FALSE 
+Additional: false 
+39 - Get all v1 that uses
+variable v1;
+Select v1 such that Uses (_, v1)
+
+5000
+Evaluating query 39 - Get all v1 that uses
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

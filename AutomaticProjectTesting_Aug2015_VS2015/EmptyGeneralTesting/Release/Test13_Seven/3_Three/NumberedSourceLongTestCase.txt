@@ -1,0 +1,259 @@
+procedure toCallFirst{
+	call first;		//1
+}
+
+procedure first{
+	fA = fB;									//2
+	call second;								//3
+	fA = fA - fA + fA;							//4
+	
+	while fE {									//5
+		fX = fX+10;								//6
+		if fY then{								//7
+			fStart = fEnd + fX -fY *(fA+fB);	//8
+			while fX {							//9
+				fX = fZ *14;					//10
+				fX = 11 + fY;					//11
+			}
+			fEnd = fStart;						//12
+			fY = fY -8;							//13
+			call third;							//14
+		}
+		else {
+			fStart = fEnd;						//15
+			fY = fY +5;							//16
+			
+			if fStart then {					//17
+				fEnd = fStart * 99;				//18
+			}
+			else {
+				fEnd = fA + fB - fC;			//19
+			}
+			call singleAssignProc;				//20
+		}
+		fA = fB + fC;							//21
+	}
+	fA = fB*fC*fA -    fA + fC;					//22
+	fB = fB - 24 * 10;							//23
+	fC = fX +(fA - fB);							//24
+	while fA{									//25
+		fA = fA *10;							//26
+		fC = fA -fB - fC;						//27
+		call second;							//28
+		call third;								//29
+		
+		fD = fA + fStart;						//30
+		if fD then {							//31
+			fD = 100;							//32
+			while fE	{						//33
+				fE = fF - fD;					//34
+				fF = fE -(fD-fD)+fD;			//35
+				if fH then {					//36
+					fE = fA*fB;					//37
+				}
+				else {
+					fD = fD-1 -1 -2;			//38
+					if fZ then {				//39
+						fB = fB*22 - fA;		//40
+
+					}
+					else {
+						fJ = fJ -1 +fStart;				//41
+					}
+				}
+				fEnd = fStart;					//42
+			}
+		}
+		else {
+			call singleAssignProc;				//43
+		}
+	}
+}
+
+procedure second {
+	sA = sB;									//44
+	while sA{									//45
+		sB = sA + sD;							//46
+		while sB {								//47
+			while sC {							//48
+				while sD{						//49
+					sC = sE + sA * sB;				//50
+					sE = sC - sC *(sA - sB -sC * sC + sC);	//51
+				}
+			}
+			sA = sD + (sC + (sC + (sC - (sC - (sC + sC)))) - sC);	//52
+		}
+	}
+	call eight;								//53
+	sB = sB;								//54
+	sD = sD + sD;							//55
+	sD  = sA - sD;					//56
+	call singleAssignProc;				//57
+}
+
+procedure third {
+	tA = 1;								//58
+	fB = 000000000000000000000;			//59
+	
+	tB = 100 * 100 - 100 + 100 *(14 +(20 *(3 + 3)));	//60
+	tB = 0 * 100;						//61
+	tB = 0 - 1;							//62
+	
+	tB = tB * 100 - tA;							//63
+	tB = tA * tA * (tB - tA);					//64
+	tB = tB;									//65
+	tB = 2;									//66
+	call eight;								//67
+	tC = tA * tA;							//68
+	tD = tA - tC - tB;						//69
+}
+
+procedure eight {
+	tA = 1;									//70
+	sB = 1;									//71
+	
+	eA = eB + eC + eD - eF + eG + eH + eI*      eF + eZ ; //72
+	eC = eD*(eA)-(eC);						//73
+	eA = eA -(eC*eD -eB);					//74
+	eB = eB;								//75
+	eC = eB * eA * eB - eA - eA - eA;		//76
+	if eC then{								//77
+		eC = eB -eA;						//78
+		while eA {							//79
+			eA = eA -eC;					//80
+		}
+	}
+	else {
+		eA = eA - eC;						//81
+	}
+	eB = eB  + eA;							//82
+}
+
+procedure notCalledByAnyone {
+	notA = notB;							//83
+	notC = notC*notA*notB-notB-(notE-notA)*(notB*notB);		//84
+	while notK {							//85
+		notA = notK;						//86
+		while notB{							//87
+			while notC {					//88
+				notX = notY- notZ;			//89
+			}
+			notC = notC;					//90
+			notC = notC;					//91
+			notC = notX;					//92
+			while notX {					//93
+				notX = notY*notZ-notE+(notB*notA-notA+notB);		//94
+				while notX{											//95
+					while notE{										//96
+						notE = notA - notB - notC;					//97
+						while notC{									//98
+							while notB{								//99
+								while notY{							//100
+									while notZ{						//101
+										notZ = notA -1;				//102
+										notB = 100;					//103
+										notA = 1 - 1 - 1 * notB;	//104
+										notK = 2;					//105
+									}
+								}
+							}
+							if notC then{							//106
+								notC = notA + notA;					//107
+								while notC{							//108
+									notB = notC -                  notB;		//109
+									notC  = notA - notA + notA + notD;			//110
+								}
+								notB =113 - 100 *(100 - 100 +(1 - 2));			//111
+							}
+							else {												
+								notX = notY - notZ - notZ;						//112
+								notZ = notY;									//113
+								notY = notX + notZ * notY;						//114
+							}
+						}
+					}
+					call singleAssignProc;										//115
+					call singleStmt	;											//116
+				}
+			}
+		}
+	}
+}
+
+procedure singleAssignProc {
+	a = a;																		//117
+}
+
+procedure singleStmt{
+    call noNesting;						    									//118
+}
+
+procedure noNesting{
+    b = b;    																	//119
+    c = c;    																	//120
+    b = d;    																	//121
+    call whileWithDummyNode;    												//122
+}
+
+procedure whileNoDummyNode{
+    while red {    																//123
+        black = red * black - green;    										//124
+        black = 2;    															//125
+        red = green;    														//126
+    }
+}
+
+procedure unrelatedProcedure{
+    while lame {    							//127
+        haha = LEL;    							//128
+        heHEHEHEHe = haha + LEL - rolf;    		//129
+        KEKEKEKE = joke - haha *(LEL - LOL);    //130
+    }
+    LEL = joke;    								//131
+	call nestedIfStatements;					//132
+}
+
+procedure nestedIfStatements{
+    if lancer then {                							//133
+        if impreza then {            							//134
+            gallardo = lancer - impreza;            			//135
+            if murceiago then {        							//136
+                if quattroporte then {    						//137
+                    quattroporte = quattroporte - impreza;    	//138
+                }
+                else {
+                    lancer = lancer+1;	    					//139
+                }
+            }
+            else {
+                gallardo = gallardo;        					//140
+            }
+        }
+        else {
+			murceiago = gallardo;                				//141
+        }
+    }
+    else {
+        murceiago = lancer*quattroporte-gallardo;               //142
+    }
+	
+	if mustang then {            								//143
+            mustang = p1 + lancer;								//144
+    }
+	else {
+		if p1 then {        									//145
+            if quattroporte then {    							//146
+                California = California;    					//147
+            }
+            else {
+                p1 = p1;    									//148
+            }}
+        else {
+                murceiago = mustang*p1;        					//149
+        }
+		p1 = p1;												//150
+	}
+	
+	a = b;		//151
+	b = 1;		//152
+}

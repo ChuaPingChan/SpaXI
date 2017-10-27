@@ -1,0 +1,74 @@
+procedure hihi {
+	car = apple;                       // 1
+	egg = fish;                        // 2
+	if xmen then {                     // 3
+		call test;                     // 4
+		bot = car;                     // 5
+	} else {
+		bot = car;                     // 6
+		dog = egg;                     // 7
+		egg = dog;                     // 8
+		xmen = blah + wee;             // 9
+	}
+	apple = bot + egg;                 // 10
+	zip = car + b2;                    // 11
+	while xmen {                       // 12
+		fish = apple + zip + car;      // 13
+		if xmen then {                 // 14
+			tomato = tomato;           // 15
+			apple = bot + xmen;        // 16
+			fish = dog + egg + zip;    // 17
+			while apple {              // 18
+				xmen = dog;            // 19
+				c3 = b2 + fish;        // 20
+			}
+		} else {
+			tomato = fish;             // 21
+			apple = dog;               // 22
+			xmen = new;                // 23
+		}
+		wee = apple;                   // 24
+	}
+	call hey;                          // 25
+	w = xmen + bot;                    // 26
+	zip = apple;                       // 27
+}
+
+procedure test {
+	car = zip;                         // 28
+	dog = apple;                       // 29
+	while xmen {                       // 30
+		egg = apple;                   // 31
+		if xmen then {                 // 32
+			choc = dark;               // 33
+			dark = hi;                 // 34
+			hi = wee;                  // 35
+			wee = choc;                // 36
+		} else {
+			dark = throw;              // 37
+		}
+	}
+	light = dark;                      // 38
+	call hey;                          // 39
+	happy = b2;                        // 40
+}
+
+procedure hey {
+	a1 = c3;                           // 41
+	b2 = a1;                           // 42
+	c3 = b2;                           // 43
+	if panda then {                    // 44
+		if panda then {                // 45
+			snake = lion;              // 46
+		} else {
+			snake = goat;              // 47
+		}
+	} else {
+		if panda then {                // 48
+			snake = rob;               // 49
+		} else {
+			snake = hot;               // 50
+		}
+	}
+	lion = snake;                      // 51
+}
