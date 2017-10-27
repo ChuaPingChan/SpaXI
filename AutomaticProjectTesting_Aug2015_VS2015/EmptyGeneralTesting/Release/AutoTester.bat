@@ -56,6 +56,9 @@ if '%option%'=='10' (
 if '%option%'=='11' (
 	goto :runTest11
 )
+if '%option%'=='12' (
+	goto :runTest12
+)
 cls
 goto :main
 echo ===============================================================================
@@ -323,6 +326,18 @@ pause
 cls
 goto :main
 
+:runTest12
+echo ===============================================================================
+echo Running AutoTester for test 12...
+echo Running AutoTester for QueryComplexNext.txt...
+AutoTester Test12_ComplexNext\SourceComplexNext.txt Test12_ComplexNext\QueryComplexNext.txt TestResult\out12_QueryComplexNext.xml > TestResult\cmd\cmd12_QueryComplexNext.txt
+echo Finish running AutoTester for QueryComplexNext.txt.
+echo Running AutoTester for QueryComplexNextStar.txt...
+AutoTester Test12_ComplexNext\SourceComplexNext.txt Test12_ComplexNext\QueryComplexNextStar.txt TestResult\out12_QueryComplexNextStar.xml > TestResult\cmd\cmd12_QueryComplexNextStar.txt
+echo Finish running AutoTester for QueryComplexNextStar.txt.
+pause
+cls
+goto :main
 
 
 :runAllTests
@@ -470,6 +485,14 @@ echo Running AutoTester for QueryWith...
 AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryWith.txt TestResult\out11_QueryWith.xml > TestResult\cmd\cmd11_QueryWith.txt
 echo Finish running AutoTester for QueryWith.
 echo Finish running AutoTester for test 11.
+echo -------------------------------------------------------------------------------
+echo Running AutoTester for test 12...
+echo Running AutoTester for QueryComplexNext.txt...
+AutoTester Test12_ComplexNext\SourceComplexNext.txt Test12_ComplexNext\QueryComplexNext.txt TestResult\out12_QueryComplexNext.xml > TestResult\cmd\cmd12_QueryComplexNext.txt
+echo Finish running AutoTester for QueryComplexNext.txt.
+echo Running AutoTester for QueryComplexNextStar.txt...
+AutoTester Test12_ComplexNext\SourceComplexNext.txt Test12_ComplexNext\QueryComplexNextStar.txt TestResult\out12_QueryComplexNextStar.xml > TestResult\cmd\cmd12_QueryComplexNextStar.txt
+echo Finish running AutoTester for QueryComplexNextStar.txt.
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
