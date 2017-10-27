@@ -29,6 +29,7 @@ namespace UnitTesting
             Assert::IsFalse(std::regex_match("a_b", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsFalse(std::regex_match("a&", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match("a", Parser::REGEX_VALID_ENTITY_NAME));
+            Assert::IsTrue(std::regex_match("e", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match("A", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match("a1", Parser::REGEX_VALID_ENTITY_NAME));
             Assert::IsTrue(std::regex_match("abc34", Parser::REGEX_VALID_ENTITY_NAME));
@@ -131,15 +132,15 @@ namespace UnitTesting
         TEST_METHOD(regexMatchEqualAndOtherOperatorsTest)
         {
             Assert::IsTrue(std::regex_match("=", Parser::REGEX_MATCH_EQUAL));
-            Assert::IsTrue(std::regex_match("+ ", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsTrue(std::regex_match(" -", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsTrue(std::regex_match("\n\t*\n\t", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsTrue(std::regex_match("\r\f/\r\f", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsTrue(std::regex_match("+ ", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsTrue(std::regex_match(" -", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsTrue(std::regex_match("\n\t*\n\t", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsTrue(std::regex_match("\r\f/\r\f", Parser::REGEX_MATCH_OPERATOR));
 
-            Assert::IsFalse(std::regex_match("a=4", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsFalse(std::regex_match("+-", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsFalse(std::regex_match("9+3", Parser::REGEX_VALID_OPERATOR));
-            Assert::IsFalse(std::regex_match("-;", Parser::REGEX_VALID_OPERATOR));
+            Assert::IsFalse(std::regex_match("a=4", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsFalse(std::regex_match("+-", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsFalse(std::regex_match("9+3", Parser::REGEX_MATCH_OPERATOR));
+            Assert::IsFalse(std::regex_match("-;", Parser::REGEX_MATCH_OPERATOR));
         }
 
         TEST_METHOD(regexExtractBracketWrappedContent)
@@ -304,32 +305,34 @@ namespace UnitTesting
         {
             ParserChildForTest parser(dummyPkbMainPtr);
             // TODO: Tidy up, form categories
-            Assert::IsTrue(parser.assertIsValidExpression("a"));
-            Assert::IsTrue(parser.assertIsValidExpression("1"));
-            Assert::IsFalse(parser.assertIsValidExpression(""));
-            Assert::IsFalse(parser.assertIsValidExpression(" "));
-            Assert::IsFalse(parser.assertIsValidExpression("+"));
-            Assert::IsFalse(parser.assertIsValidExpression("+a"));
-            Assert::IsFalse(parser.assertIsValidExpression("b +"));
-            Assert::IsFalse(parser.assertIsValidExpression("$"));
-            Assert::IsFalse(parser.assertIsValidExpression("\n\t\r"));
-            Assert::IsTrue(parser.assertIsValidExpression("a+b"));
-            Assert::IsFalse(parser.assertIsValidExpression("90a+b"));
-            Assert::IsFalse(parser.assertIsValidExpression("a++x"));
-            Assert::IsTrue(parser.assertIsValidExpression("a + b  "));
-            Assert::IsFalse(parser.assertIsValidExpression("a + 3b  "));
-            Assert::IsFalse(parser.assertIsValidExpression("a + a%b  "));
-            Assert::IsFalse(parser.assertIsValidExpression("a_c + b  "));
-            Assert::IsTrue(parser.assertIsValidExpression("\n\t\r a \n\n\t + \t\r\n\fb  \n\t\r"));
-            Assert::IsTrue(parser.assertIsValidExpression("a - b  "));
-            Assert::IsTrue(parser.assertIsValidExpression("a * b  "));
-            Assert::IsTrue(parser.assertIsValidExpression("a / b  "));
-            Assert::IsFalse(parser.assertIsValidExpression("a +/ b  "));
-            Assert::IsTrue(parser.assertIsValidExpression("a + b  - 3"));
-            Assert::IsTrue(parser.assertIsValidExpression("a + b/3 * 2 / d + b  "));
-            Assert::IsTrue(parser.assertIsValidExpression("a134124 + b/3 * 2  "));
-            Assert::IsFalse(parser.assertIsValidExpression(" a = 3 + 4 "));
-            Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
+            //Assert::IsTrue(parser.assertIsValidExpression("a"));
+            //Assert::IsTrue(parser.assertIsValidExpression("1"));
+            //Assert::IsFalse(parser.assertIsValidExpression(""));
+            //Assert::IsFalse(parser.assertIsValidExpression(" "));
+            //Assert::IsFalse(parser.assertIsValidExpression("+"));
+            //Assert::IsFalse(parser.assertIsValidExpression("+a"));
+            //Assert::IsFalse(parser.assertIsValidExpression("b +"));
+            //Assert::IsFalse(parser.assertIsValidExpression("$"));
+            //Assert::IsFalse(parser.assertIsValidExpression("\n\t\r"));
+            //Assert::IsTrue(parser.assertIsValidExpression("a+b"));
+            //Assert::IsFalse(parser.assertIsValidExpression("90a+b"));
+            //Assert::IsFalse(parser.assertIsValidExpression("a++x"));
+            //Assert::IsTrue(parser.assertIsValidExpression("a + b  "));
+            //Assert::IsFalse(parser.assertIsValidExpression("a + 3b  "));
+            //Assert::IsFalse(parser.assertIsValidExpression("a + a%b  "));
+            //Assert::IsFalse(parser.assertIsValidExpression("a_c + b  "));
+            //Assert::IsTrue(parser.assertIsValidExpression("\n\t\r a \n\n\t + \t\r\n\fb  \n\t\r"));
+            //Assert::IsTrue(parser.assertIsValidExpression("a - b  "));
+            //Assert::IsTrue(parser.assertIsValidExpression("a * b  "));
+            //Assert::IsTrue(parser.assertIsValidExpression("a / b  "));
+            //Assert::IsFalse(parser.assertIsValidExpression("a +/ b  "));
+            //Assert::IsTrue(parser.assertIsValidExpression("a + b  - 3"));
+            //Assert::IsTrue(parser.assertIsValidExpression("a + b/3 * 2 / d + b  "));
+            //Assert::IsTrue(parser.assertIsValidExpression("a134124 + b/3 * 2  "));
+            //Assert::IsFalse(parser.assertIsValidExpression(" a = 3 + 4 "));
+            //Assert::IsFalse(parser.assertIsValidExpression(" 3 + 4 ; "));
+            Assert::IsTrue(parser.assertIsValidExpression(" ( ( 3 + 4 ) ) * ( ( 6  * 3 - 1 ) )"));
+            Assert::IsTrue(parser.assertIsValidExpression("e *      (f + 3 \t+ 2 + (\t\ta + e)\t ) + d * (\t(\t(c * b + 2) - \t5) * 20) - 10"));
 
             // Brackets
             Assert::IsFalse(parser.assertIsValidExpression("()"));
@@ -413,17 +416,33 @@ namespace UnitTesting
             pair<string, string> actualLhsRhs, expectedLhsRhs;
 
             // LHS constant, no brackets
-            expression = "2 - 3 * 4";
-            expectedLHS = "2";
-            expectedRHS = "3 * 4";
-            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
-            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
-            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+            //expression = "2 - 3 * 4";
+            //expectedLHS = "2";
+            //expectedRHS = "3 * 4";
+            //expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            //actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            //Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
 
-            // LHS single constant term bracket
-            expression = "(2) + 3 * 4";
-            expectedLHS = "2";
-            expectedRHS = "3 * 4";
+            //// LHS single constant term bracket
+            //expression = "(2) + 3 * 4";
+            //expectedLHS = "2";
+            //expectedRHS = "3 * 4";
+            //expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            //actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            //Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+
+            //// Whole expression bracketed
+            //expression = "(1 + 3)";
+            //expectedLHS = "1 + 3";
+            //expectedRHS = "";
+            //expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            //actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            //Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+
+            // Whole expression bracketed
+            expression = " ( 3 + 4 ) ";
+            expectedLHS = " 3 + 4 ";
+            expectedRHS = "";
             expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
             actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
             Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
@@ -476,10 +495,50 @@ namespace UnitTesting
             actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
             Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
 
-            // LHS & RHS multi-term with brackets
+            // LHS & RHS multi-term with spaces
             expression = "4 - 3 * \n\t6\t";
             expectedLHS = "4";
             expectedRHS = "3 * \n\t6\t";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+
+            // Random complex expression 1
+            expression = " ( ( 3 + 4 ) ) * ( ( 6  * 3 - 1 ) )";
+            expectedLHS = " ( 3 + 4 ) ";
+            expectedRHS = "( ( 6  * 3 - 1 ) )";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+            expression = " ( 3 + 4 ) ";
+            expectedLHS = " 3 + 4 ";
+            expectedRHS = "";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+            expression = "( ( 6  * 3 - 1 ) )";
+            expectedLHS = " ( 6  * 3 - 1 ) ";
+            expectedRHS = "";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+            expression = " ( 6  * 3 - 1 ) ";
+            expectedLHS = " 6  * 3 - 1 ";
+            expectedRHS = "";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+
+            // Random complex expression 2
+            expression = "e *      (f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20) - 10";
+            expectedLHS = "e";
+            expectedRHS = "(f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20) - 10";
+            expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
+            actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
+            Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
+            expression = "(f + 3 \t+ 2 + (\t\ta + e)\t ) + d * (\t(\t(c * b + 2) - \t5) * 20) - 10";
+            expectedLHS = "f + 3 \t+ 2 + (\t\ta + e)\t ";
+            expectedRHS = "d * (	(	(c * b + 2) - 	5) * 20) - 10";
             expectedLhsRhs = pair<string, string>(expectedLHS, expectedRHS);
             actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
             Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
@@ -521,7 +580,7 @@ namespace UnitTesting
             Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
 
             expression = "(- 123)";
-            expectedLhsRhs = pair<string, string>();
+            expectedLhsRhs = pair<string, string>("- 123", "");
             actualLhsRhs = ParserChildForTest::splitExpressionLhsRhs(expression);
             Assert::IsTrue(actualLhsRhs == expectedLhsRhs);
 
@@ -534,7 +593,7 @@ namespace UnitTesting
         /*******************************
          * Utility Methods for Testing *
          *******************************/
-        TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
+        TEST_METHOD(testDummySimpleSourceFileUtilityMethods_TestParserBasic)
         {
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
             Assert::IsTrue(deleteDummySimpleSourceFile());
