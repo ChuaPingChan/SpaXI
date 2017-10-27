@@ -41,6 +41,7 @@ public:
     static const std::regex REGEX_MATCH_EQUAL;
     static const std::regex REGEX_MATCH_OPERATOR;
     static const std::regex REGEX_MATCH_ANYHING;
+    static const std::regex REGEX_MATCH_POSSIBLE_WHITESPACE;
 
     Parser(PKBMain* pkbMainPtr);
 
@@ -83,7 +84,7 @@ protected:
     bool matchToken(std::regex re);
     bool assertMatchAndIncrementToken(std::regex re);
     bool assertMatchWithoutIncrementToken(std::regex re);
-    std::string extractStringUpToSemicolon();
+    std::string extractBackingStringUpToSemicolon();
     void processAndPopTopFollowStack();
     static std::pair<string, string> splitExpressionLhsRhs(std::string expression);     // TODO: Remove if not used
     bool assertIsValidExpression(std::string expression);
@@ -107,10 +108,10 @@ protected:
     void parseIfElseStmt();
 
     // Utility methods
-    std::vector<std::string> tokenizeString(std::string stringToTokenize);
-    static std::string getNextTokenAndShortenString(std::string &targetString);
-    static std::string getNextTokenInString(const std::string &targetString);
-    std::string removeAllWhitespaces(std::string targetString);     // TOOD: Remove if not used
-    bool isBracketedCorrectly(std::string expression);      // TODO: Remove if not used
-
+    static std::vector<std::string> tokenizeString(std::string stringToTokenize);
+    static std::string extractNextTokenAndShortenString(std::string &targetString);
+    static std::string getFirstTokenInString(const std::string &targetString);
+    static std::string removeAllWhitespaces(std::string targetString);     // TOOD: Remove if not used
+    static bool isBracketedCorrectly(const std::string &expression);      // TODO: Remove if not used
+    static std::string trimString(std::string targetString);
 };

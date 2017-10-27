@@ -48,7 +48,7 @@ bool ParserChildForTest::matchToken(std::regex re)
 
 std::string ParserChildForTest::extractStringUpToSemicolon()
 {
-    return Parser::extractStringUpToSemicolon();
+    return Parser::extractBackingStringUpToSemicolon();
 }
 
 bool ParserChildForTest::assertIsValidExpression(std::string expression)
