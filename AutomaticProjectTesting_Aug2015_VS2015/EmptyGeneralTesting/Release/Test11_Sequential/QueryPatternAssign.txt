@@ -56,12 +56,12 @@ true
 12 - Underscore PartialMatch Expr SameSubTree - Test Pattern PostFixMatching Adding Brackets
 assign a;
 Select BOOLEAN pattern a(_, _"(f+3)"_)
-true
+false
 5000
 13 - Underscore PartialMatch Expr SameSubTree - Test Pattern PostFixMatching Rearrange Bracket
 assign a;
 Select BOOLEAN pattern a(_, _"(a+b)"_)
-true
+false
 5000
 14 - Underscore PartialMatch Expr DiffSubTree - Test Pattern PostFixMatching Rearrange Bracket
 assign a;
