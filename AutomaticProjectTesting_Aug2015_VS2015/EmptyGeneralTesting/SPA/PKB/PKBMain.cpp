@@ -1386,9 +1386,13 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				if (latestMod.find(usedVar) != latestMod.end()) {
 					int lastModStmt = latestMod[usedVar];
 					if (!isCall(lastModStmt)) {
-						prevList.push_back(latestMod[usedVar]);
-						nextList.push_back(curr);
-						affectsRelMap[latestMod[usedVar]].insert(curr);
+						if ((affectsRelMap.find(lastModStmt) != affectsRelMap.end() &&
+							affectsRelMap[lastModStmt].find(curr) == affectsRelMap[lastModStmt].end()) ||
+							affectsRelMap.find(lastModStmt) == affectsRelMap.end()) {
+							prevList.push_back(latestMod[usedVar]);
+							nextList.push_back(curr);
+							affectsRelMap[latestMod[usedVar]].insert(curr);
+						}
 					}
 				}
 			}
@@ -1405,9 +1409,17 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 		}
 
 		else if (isCall(curr)) {
-			list<int> modifiedVarList = getModifiesFromStmt(stmt);
+			list<int> modifiedVarList = getModifiesFromStmt(curr);
 			for (int modifiedVar : modifiedVarList) {
 				latestMod.erase(modifiedVar);
+			}
+
+			if (getExecutedAfter(curr, STMT).size() == 0) {
+				curr = 0;
+			}
+
+			else {
+				curr = getExecutedAfter(curr, STMT).front();
 			}
 		}
 
@@ -1434,8 +1446,8 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				}
 
 				else {
-					curr = insideLoop;
 					whileMapStack.push(make_pair(curr, latestMod));
+					curr = insideLoop;
 				}
 			}
 		}
@@ -1445,6 +1457,8 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 		}
 		
 	}
+
+
 
 	return make_pair(prevList, nextList);
 }
