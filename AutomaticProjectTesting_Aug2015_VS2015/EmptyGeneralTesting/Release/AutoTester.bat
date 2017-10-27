@@ -448,12 +448,18 @@ echo Finish running AutoTester for Query4.txt.
 echo Running AutoTester for Query5.txt...
 AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
 echo Finish running AutoTester for Query5.txt.
-echo Running AutoTester for Query6.txt...
-AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6.txt TestResult\out13_Intense_Query6.xml > TestResult\cmd\cmd13_Intense_Query6.txt
-echo Finish running AutoTester for Query6.txt.
-echo Running AutoTester for Query7.txt...
-AutoTester Test13_Seven\4_Intense\Source7.txt Test13_Seven\4_Intense\Query7.txt TestResult\out13_Intense_Query7.xml > TestResult\cmd\cmd13_Intense_Query7.txt
-echo Finish running AutoTester for Query7.txt.
+echo Running AutoTester for Query6a.txt...
+AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6a.txt TestResult\out13_Intense_Query6a.xml > TestResult\cmd\cmd13_Intense_Query6a.txt
+echo Finish running AutoTester for Query6a.txt.
+echo Running AutoTester for Query6b.txt...
+AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6b.txt TestResult\out13_Intense_Query6b.xml > TestResult\cmd\cmd13_Intense_Query6b.txt
+echo Finish running AutoTester for Query6b.txt.
+echo Running AutoTester for Query7a.txt...
+AutoTester Test13_Seven\4_Intense\Source7.txt Test13_Seven\4_Intense\Query7a.txt TestResult\out13_Intense_Query7a.xml > TestResult\cmd\cmd13_Intense_Query7a.txt
+echo Finish running AutoTester for Query7a.txt.
+echo Running AutoTester for Query7b.txt...
+AutoTester Test13_Seven\4_Intense\Source7.txt Test13_Seven\4_Intense\Query7b.txt TestResult\out13_Intense_Query7b.xml > TestResult\cmd\cmd13_Intense_Query7b.txt
+echo Finish running AutoTester for Query7b.txt.
 echo Running AutoTester for Query8.txt...
 AutoTester Test13_Seven\4_Intense\Source8.txt Test13_Seven\4_Intense\Query8.txt TestResult\out13_Intense_Query8.xml > TestResult\cmd\cmd13_Intense_Query8.txt
 echo Finish running AutoTester for Query8.txt.
@@ -667,9 +673,10 @@ echo Finish running AutoTester for QueryMultipleST_UsingSource2.txt.
 echo Running AutoTester for QueryNext_UsingSourceNext.txt...
 AutoTester Test13_Seven\2_Two\SourceNext.txt Test13_Seven\2_Two\QueryNext_UsingSourceNext.txt TestResult\out13_Two_QueryNext_UsingSourceNext.xml > TestResult\cmd\cmd13_Two_QueryNext_UsingSourceNext.txt
 echo Finish running AutoTester for QueryNext_UsingSourceNext.txt.
-echo Running AutoTester for QueryNextStar_Performance_UsingSource2.txt...
-AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryNextStar_Performance_UsingSource2.txt TestResult\out13_Two_QueryNextStar_Performance_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryNextStar_Performance_UsingSource2.txt
-echo Finish running AutoTester for QueryNextStar_Performance_UsingSource2.txt.
+::echo Running AutoTester for QueryNextStar_Performance_UsingSource2.txt...
+::AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryNextStar_Performance_UsingSource2.txt TestResult\out13_Two_QueryNextStar_Performance_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryNextStar_Performance_UsingSource2.txt
+::echo Finish running AutoTester for QueryNextStar_Performance_UsingSource2.txt.
+echo -- ! -- QueryNextStar_Performance_UsingSource2.txt has been commented away in the bat file -- ! --
 echo Running AutoTester for QueryNextStar_UsingSourceNext.txt...
 AutoTester Test13_Seven\2_Two\SourceNext.txt Test13_Seven\2_Two\QueryNextStar_UsingSourceNext.txt TestResult\out13_Two_QueryNextStar_UsingSourceNext.xml > TestResult\cmd\cmd13_Two_QueryNextStar_UsingSourceNext.txt
 echo Finish running AutoTester for QueryNextStar_UsingSourceNext.txt.
@@ -718,22 +725,32 @@ echo Finish running AutoTester for Query2.txt.
 echo Running AutoTester for Query3.txt...
 AutoTester Test13_Seven\4_Intense\Source3.txt Test13_Seven\4_Intense\Query3.txt TestResult\out13_Intense_Query3.xml > TestResult\cmd\cmd13_Intense_Query3.txt
 echo Finish running AutoTester for Query3.txt.
-echo Running AutoTester for Query4.txt...
-AutoTester Test13_Seven\4_Intense\Source4.txt Test13_Seven\4_Intense\Query4.txt TestResult\out13_Intense_Query4.xml > TestResult\cmd\cmd13_Intense_Query4.txt
-echo Finish running AutoTester for Query4.txt.
+::echo Running AutoTester for Query4.txt...
+::AutoTester Test13_Seven\4_Intense\Source4.txt Test13_Seven\4_Intense\Query4.txt TestResult\out13_Intense_Query4.xml > TestResult\cmd\cmd13_Intense_Query4.txt
+::echo Finish running AutoTester for Query4.txt.
+echo -- ! -- Query4.txt has been commented away in the bat file -- ! --
 echo Running AutoTester for Query5.txt...
 AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
 echo Finish running AutoTester for Query5.txt.
-echo Running AutoTester for Query6.txt...
-AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6.txt TestResult\out13_Intense_Query6.xml > TestResult\cmd\cmd13_Intense_Query6.txt
-echo Finish running AutoTester for Query6.txt.
-echo Running AutoTester for Query7.txt...
-AutoTester Test13_Seven\4_Intense\Source7.txt Test13_Seven\4_Intense\Query7.txt TestResult\out13_Intense_Query7.xml > TestResult\cmd\cmd13_Intense_Query7.txt
-echo Finish running AutoTester for Query7.txt.
+echo Running AutoTester for Query6a.txt...
+AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6a.txt TestResult\out13_Intense_Query6a.xml > TestResult\cmd\cmd13_Intense_Query6a.txt
+echo Finish running AutoTester for Query6a.txt.
+echo Running AutoTester for Query6b.txt...
+AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6b.txt TestResult\out13_Intense_Query6b.xml > TestResult\cmd\cmd13_Intense_Query6b.txt
+echo Finish running AutoTester for Query6b.txt.
+echo Running AutoTester for Query7a.txt...
+AutoTester Test13_Seven\4_Intense\Source7.txt Test13_Seven\4_Intense\Query7a.txt TestResult\out13_Intense_Query7a.xml > TestResult\cmd\cmd13_Intense_Query7a.txt
+echo Finish running AutoTester for Query7a.txt.
+echo Running AutoTester for Query7b.txt...
+AutoTester Test13_Seven\4_Intense\Source7.txt Test13_Seven\4_Intense\Query7b.txt TestResult\out13_Intense_Query7b.xml > TestResult\cmd\cmd13_Intense_Query7b.txt
+echo Finish running AutoTester for Query7b.txt.
 echo Running AutoTester for Query8.txt...
 AutoTester Test13_Seven\4_Intense\Source8.txt Test13_Seven\4_Intense\Query8.txt TestResult\out13_Intense_Query8.xml > TestResult\cmd\cmd13_Intense_Query8.txt
 echo Finish running AutoTester for Query8.txt.
 echo Finish running AutoTester for test 13.
+echo Generating Summary ...
+python TestResult\GenerateResultSummary.py TestResult TestResult\Summary.txt
+start TestResult\Summary.txt
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
