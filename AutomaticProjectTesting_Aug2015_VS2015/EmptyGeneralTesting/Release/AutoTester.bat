@@ -56,6 +56,12 @@ if '%option%'=='10' (
 if '%option%'=='11' (
 	goto :runTest11
 )
+if '%option%'=='12' (
+	goto :runTest12
+)
+if '%option%'=='13' (
+	goto :runTest13
+)
 cls
 goto :main
 echo ===============================================================================
@@ -292,6 +298,12 @@ echo Running AutoTester for test 10...
 echo Running AutoTester for QueryAffects.txt...
 AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffects.txt TestResult\out10_QueryAffects.xml > TestResult\cmd\cmd10_QueryAffects.txt
 echo Finish running AutoTester for QueryAffects.txt.
+echo Running AutoTester for QueryAffectsStar.txt...
+AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffectsStar.txt TestResult\out10_QueryAffectsStar.xml > TestResult\cmd\cmd10_QueryAffectsStar.txt
+echo Finish running AutoTester for QueryAffectsStar.txt.
+echo Running AutoTester for QueryModifies.txt...
+AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryModifies.txt TestResult\out10_QueryModifies.xml > TestResult\cmd\cmd10_QueryModifies.txt
+echo Finish running AutoTester for QueryModifies.txt.
 echo Finish running AutoTester for test 10.
 pause
 cls
@@ -317,7 +329,138 @@ pause
 cls
 goto :main
 
+:runTest12
+echo ===============================================================================
+echo Running AutoTester for test 12...
+echo Running AutoTester for QueryComplexNext.txt...
+AutoTester Test12_ComplexNext\SourceComplexNext.txt Test12_ComplexNext\QueryComplexNext.txt TestResult\out12_QueryComplexNext.xml > TestResult\cmd\cmd12_QueryComplexNext.txt
+echo Finish running AutoTester for QueryComplexNext.txt.
+echo Running AutoTester for QueryComplexNextStar.txt...
+AutoTester Test12_ComplexNext\SourceComplexNext.txt Test12_ComplexNext\QueryComplexNextStar.txt TestResult\out12_QueryComplexNextStar.xml > TestResult\cmd\cmd12_QueryComplexNextStar.txt
+echo Finish running AutoTester for QueryComplexNextStar.txt.
+echo Finish running AutoTester for test 12.
+pause
+cls
+goto :main
 
+:runTest13
+echo ===============================================================================
+echo Running AutoTester for test 13...
+echo Running AutoTester for Query1.txt...
+AutoTester Test13_Seven\1_One\source1.txt Test13_Seven\1_One\query1.txt TestResult\out13_One_Query1.xml > TestResult\cmd\cmd13_One_Query1.txt
+echo Finish running AutoTester for Query1.txt.
+echo Running AutoTester for Query2.txt...
+AutoTester Test13_Seven\1_One\source2.txt Test13_Seven\1_One\query2.txt TestResult\out13_One_Query2.xml > TestResult\cmd\cmd13_One_Query2.txt
+echo Finish running AutoTester for Query2.txt.
+echo Running AutoTester for Query3.txt...
+AutoTester Test13_Seven\1_One\source3.txt Test13_Seven\1_One\query3.txt TestResult\out13_One_Query3.xml > TestResult\cmd\cmd13_One_Query3.txt
+echo Finish running AutoTester for Query3.txt.
+echo Running AutoTester for Query_With_ST_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\Query_With_ST_UsingSource2.txt TestResult\out13_Two_Query_With_ST_UsingSource2.xml > TestResult\cmd\cmd13_Two_Query_With_ST_UsingSource2.txt
+echo Finish running AutoTester for Query_With_ST_UsingSource2.txt.
+echo Running AutoTester for QueryAffects1_UsingSourceAffects.txt...
+AutoTester Test13_Seven\2_Two\SourceAffects.txt Test13_Seven\2_Two\QueryAffects1_UsingSourceAffects.txt TestResult\out13_Two_QueryAffects1_UsingSourceAffects.xml > TestResult\cmd\cmd13_Two_QueryAffects1_UsingSourceAffects.txt
+echo Finish running AutoTester for QueryAffects1_UsingSourceAffects.txt.
+echo Running AutoTester for QueryAffects2_UsingSourceAffects.txt...
+AutoTester Test13_Seven\2_Two\SourceAffects.txt Test13_Seven\2_Two\QueryAffects2_UsingSourceAffects.txt TestResult\out13_Two_QueryAffects2_UsingSourceAffects.xml > TestResult\cmd\cmd13_Two_QueryAffects2_UsingSourceAffects.txt
+echo Finish running AutoTester for QueryAffects2_UsingSourceAffects.txt.
+echo Running AutoTester for QueryCalls_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryCalls_UsingSource1.txt TestResult\out13_Two_QueryCalls_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryCalls_UsingSource1.txt
+echo Finish running AutoTester for QueryCalls_UsingSource1.txt.
+echo Running AutoTester for QueryCallsStar_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryCallsStar_UsingSource1.txt TestResult\out13_Two_QueryCallsStar_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryCallsStar_UsingSource1.txt
+echo Finish running AutoTester for QueryCallsStar_UsingSource1.txt.
+echo Running AutoTester for QueryFollows_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryFollows_UsingSource2.txt TestResult\out13_Two_QueryFollows_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryFollows_UsingSource2.txt
+echo Finish running AutoTester for QueryFollows_UsingSource2.txt.
+echo Running AutoTester for QueryFollowsStar_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryFollowsStar_UsingSource2.txt TestResult\out13_Two_QueryFollowsStar_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryFollowsStar_UsingSource2.txt
+echo Finish running AutoTester for QueryFollowsStar_UsingSource2.txt.
+echo Running AutoTester for QueryModifies_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryModifies_UsingSource1.txt TestResult\out13_Two_QueryModifies_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryModifies_UsingSource1.txt
+echo Finish running AutoTester for QueryModifies_UsingSource1.txt.
+echo Running AutoTester for QueryMultiple_ST_Pattern_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryMultiple_ST_Pattern_UsingSource2.txt TestResult\out13_Two_QueryMultiple_ST_Pattern_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryMultiple_ST_Pattern_UsingSource2.txt
+echo Finish running AutoTester for QueryMultiple_ST_Pattern_UsingSource2.txt.
+echo Running AutoTester for QueryMultipleClauses_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryMultipleClauses_UsingSource2.txt TestResult\out13_Two_QueryMultipleClauses_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryMultipleClauses_UsingSource2.txt
+echo Finish running AutoTester for QueryMultipleClauses_UsingSource2.txt.
+echo Running AutoTester for QueryMultipleST_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryMultipleST_UsingSource2.txt TestResult\out13_Two_QueryMultipleST_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryMultipleST_UsingSource2.txt
+echo Finish running AutoTester for QueryMultipleST_UsingSource2.txt.
+echo Running AutoTester for QueryNext_UsingSourceNext.txt...
+AutoTester Test13_Seven\2_Two\SourceNext.txt Test13_Seven\2_Two\QueryNext_UsingSourceNext.txt TestResult\out13_Two_QueryNext_UsingSourceNext.xml > TestResult\cmd\cmd13_Two_QueryNext_UsingSourceNext.txt
+echo Finish running AutoTester for QueryNext_UsingSourceNext.txt.
+echo Running AutoTester for QueryNextStar_Performance_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryNextStar_Performance_UsingSource2.txt TestResult\out13_Two_QueryNextStar_Performance_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryNextStar_Performance_UsingSource2.txt
+echo Finish running AutoTester for QueryNextStar_Performance_UsingSource2.txt.
+echo Running AutoTester for QueryNextStar_UsingSourceNext.txt...
+AutoTester Test13_Seven\2_Two\SourceNext.txt Test13_Seven\2_Two\QueryNextStar_UsingSourceNext.txt TestResult\out13_Two_QueryNextStar_UsingSourceNext.xml > TestResult\cmd\cmd13_Two_QueryNextStar_UsingSourceNext.txt
+echo Finish running AutoTester for QueryNextStar_UsingSourceNext.txt.
+echo Running AutoTester for QueryParentStar_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryParentStar_UsingSource2.txt TestResult\out13_Two_QueryParentStar_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryParentStar_UsingSource2.txt
+echo Finish running AutoTester for QueryParentStar_UsingSource2.txt.
+echo Running AutoTester for QueryParentUsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryParentUsingSource2.txt TestResult\out13_Two_QueryParentUsingSource2.xml > TestResult\cmd\cmd13_Two_QueryParentUsingSource2.txt
+echo Finish running AutoTester for QueryParentUsingSource2.txt.
+echo Running AutoTester for QueryPattern_SourcePattern.txt...
+AutoTester Test13_Seven\2_Two\SourcePattern.txt Test13_Seven\2_Two\QueryPattern_SourcePattern.txt TestResult\out13_Two_QueryPattern_SourcePattern.xml > TestResult\cmd\cmd13_Two_QueryPattern_SourcePattern.txt
+echo Finish running AutoTester for QueryPattern_SourcePattern.txt.
+echo Running AutoTester for QueryUses_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryUses_UsingSource1.txt TestResult\out13_Two_QueryUses_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryUses_UsingSource1.txt
+echo Finish running AutoTester for QueryUses_UsingSource1.txt.
+echo Running AutoTester for QueryWith_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryWith_UsingSource1.txt TestResult\out13_Two_QueryWith_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryWith_UsingSource1.txt
+echo Finish running AutoTester for QueryWith_UsingSource1.txt.
+echo Running AutoTester for Query_Affects_AffectsStar_UsingSource4.txt...
+AutoTester Test13_Seven\3_Three\Source4.txt Test13_Seven\3_Three\Query_Affects_AffectsStar_UsingSource4.txt TestResult\out13_Three_Query_Affects_AffectsStar_UsingSource4.xml > TestResult\cmd\cmd13_Three_Query_Affects_AffectsStar_UsingSource4.txt
+echo Finish running AutoTester for Query_Affects_AffectsStar_UsingSource4.txt.
+echo Running AutoTester for Query_Calls_CallsStar_UsingSource4.txt...
+AutoTester Test13_Seven\3_Three\Source4.txt Test13_Seven\3_Three\Query_Calls_CallsStar_UsingSource4.txt TestResult\out13_Three_Query_Calls_CallsStar_UsingSource4.xml > TestResult\cmd\cmd13_Three_Query_Calls_CallsStar_UsingSource4.txt
+echo Finish running AutoTester for Query_Calls_CallsStar_UsingSource4.txt.
+echo Running AutoTester for Query_Next_NextStar_UsingSource4.txt...
+AutoTester Test13_Seven\3_Three\Source4.txt Test13_Seven\3_Three\Query_Next_NextStar_UsingSource4.txt TestResult\out13_Three_Query_Next_NextStar_UsingSource4.xml > TestResult\cmd\cmd13_Three_Query_Next_NextStar_UsingSource4.txt
+echo Finish running AutoTester for Query_Next_NextStar_UsingSource4.txt.
+echo Running AutoTester for QueryAffects_UsingSource3.txt...
+AutoTester Test13_Seven\3_Three\Source3.txt Test13_Seven\3_Three\QueryAffects_UsingSource3.txt TestResult\out13_Three_QueryAffects_UsingSource3.xml > TestResult\cmd\cmd13_Three_QueryAffects_UsingSource3.txt
+echo Finish running AutoTester for QueryAffects_UsingSource3.txt.
+echo Running AutoTester for QueryLongTestCase.txt...
+AutoTester Test13_Seven\3_Three\SourceLongTestCase.txt Test13_Seven\3_Three\QueryLongTestCase.txt TestResult\out13_Three_QueryLongTestCase.xml > TestResult\cmd\cmd13_Three_QueryLongTestCase.txt
+echo Finish running AutoTester for QueryLongTestCase.txt.
+echo Running AutoTester for QueryMultipleClauses_UsingSource5.txt...
+AutoTester Test13_Seven\3_Three\Source5.txt Test13_Seven\3_Three\QueryMultipleClauses_UsingSource5.txt TestResult\out13_Three_QueryMultipleClauses_UsingSource5.xml > TestResult\cmd\cmd13_Three_QueryMultipleClauses_UsingSource5.txt
+echo Finish running AutoTester for QueryMultipleClauses_UsingSource5.txt.
+echo Running AutoTester for QueryOptimization_UsingSource3.txt...
+AutoTester Test13_Seven\3_Three\Source3.txt Test13_Seven\3_Three\QueryOptimization_UsingSource3.txt TestResult\out13_Three_QueryOptimization_UsingSource3.xml > TestResult\cmd\cmd13_Three_QueryOptimization_UsingSource3.txt
+echo Finish running AutoTester for QueryOptimization_UsingSource3.txt.
+echo Running AutoTester for Query1.txt...
+AutoTester Test13_Seven\4_Intense\Source1.txt Test13_Seven\4_Intense\Query1.txt TestResult\out13_Intense_Query1.xml > TestResult\cmd\cmd13_Intense_Query1.txt
+echo Finish running AutoTester for Query1.txt.
+echo Running AutoTester for Query2.txt...
+AutoTester Test13_Seven\4_Intense\Source2.txt Test13_Seven\4_Intense\Query2.txt TestResult\out13_Intense_Query2.xml > TestResult\cmd\cmd13_Intense_Query2.txt
+echo Finish running AutoTester for Query2.txt.
+echo Running AutoTester for Query3.txt...
+AutoTester Test13_Seven\4_Intense\Source3.txt Test13_Seven\4_Intense\Query3.txt TestResult\out13_Intense_Query3.xml > TestResult\cmd\cmd13_Intense_Query3.txt
+echo Finish running AutoTester for Query3.txt.
+echo Running AutoTester for Query4.txt...
+AutoTester Test13_Seven\4_Intense\Source4.txt Test13_Seven\4_Intense\Query4.txt TestResult\out13_Intense_Query4.xml > TestResult\cmd\cmd13_Intense_Query4.txt
+echo Finish running AutoTester for Query4.txt.
+echo Running AutoTester for Query5.txt...
+AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
+echo Finish running AutoTester for Query5.txt.
+echo Running AutoTester for Query6.txt...
+AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6.txt TestResult\out13_Intense_Query6.xml > TestResult\cmd\cmd13_Intense_Query6.txt
+echo Finish running AutoTester for Query6.txt.
+echo Running AutoTester for Query7.txt...
+AutoTester Test13_Seven\4_Intense\Source7.txt Test13_Seven\4_Intense\Query7.txt TestResult\out13_Intense_Query7.xml > TestResult\cmd\cmd13_Intense_Query7.txt
+echo Finish running AutoTester for Query7.txt.
+echo Running AutoTester for Query8.txt...
+AutoTester Test13_Seven\4_Intense\Source8.txt Test13_Seven\4_Intense\Query8.txt TestResult\out13_Intense_Query8.xml > TestResult\cmd\cmd13_Intense_Query8.txt
+echo Finish running AutoTester for Query8.txt.
+echo Finish running AutoTester for test 13.
+pause
+cls
+goto :main
 
 :runAllTests
 echo ===============================================================================
@@ -345,8 +488,6 @@ echo Running AutoTester for test 4_2...
 AutoTester Test4_Frozen\test4source2.txt Test4_Frozen\test4query2.txt TestResult\out4_2.xml > TestResult\cmd\cmd4_2.txt
 echo Finish running AutoTester for test 4_2.
 echo -------------------------------------------------------------------------------
-python Test5\QueryGenerator5.py Test5\QuerySet5.xlsx Test5\test5query.txt
-echo Finish generating queries for test 5.
 echo Running AutoTester for test 5...
 AutoTester Test5\test5source.txt Test5\test5query.txt TestResult\out5.xml > TestResult\cmd\cmd5.txt
 echo Finish running AutoTester for test 5.
@@ -448,6 +589,12 @@ echo Running AutoTester for test 10...
 echo Running AutoTester for QueryAffects.txt...
 AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffects.txt TestResult\out10_QueryAffects.xml > TestResult\cmd\cmd10_QueryAffects.txt
 echo Finish running AutoTester for QueryAffects.txt.
+echo Running AutoTester for QueryAffectsStar.txt...
+AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffectsStar.txt TestResult\out10_QueryAffectsStar.xml > TestResult\cmd\cmd10_QueryAffectsStar.txt
+echo Finish running AutoTester for QueryAffectsStar.txt.
+echo Running AutoTester for QueryModifies.txt...
+AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryModifies.txt TestResult\out10_QueryModifies.xml > TestResult\cmd\cmd10_QueryModifies.txt
+echo Finish running AutoTester for QueryModifies.txt.
 echo Finish running AutoTester for test 10.
 echo -------------------------------------------------------------------------------
 echo Running AutoTester for test 11...
@@ -464,6 +611,129 @@ echo Running AutoTester for QueryWith...
 AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryWith.txt TestResult\out11_QueryWith.xml > TestResult\cmd\cmd11_QueryWith.txt
 echo Finish running AutoTester for QueryWith.
 echo Finish running AutoTester for test 11.
+echo -------------------------------------------------------------------------------
+echo Running AutoTester for test 12...
+echo Running AutoTester for QueryComplexNext.txt...
+AutoTester Test12_ComplexNext\SourceComplexNext.txt Test12_ComplexNext\QueryComplexNext.txt TestResult\out12_QueryComplexNext.xml > TestResult\cmd\cmd12_QueryComplexNext.txt
+echo Finish running AutoTester for QueryComplexNext.txt.
+echo Running AutoTester for QueryComplexNextStar.txt...
+AutoTester Test12_ComplexNext\SourceComplexNext.txt Test12_ComplexNext\QueryComplexNextStar.txt TestResult\out12_QueryComplexNextStar.xml > TestResult\cmd\cmd12_QueryComplexNextStar.txt
+echo Finish running AutoTester for QueryComplexNextStar.txt.
+echo -------------------------------------------------------------------------------
+echo Running AutoTester for test 13...
+echo Finish running AutoTester for test 13.
+echo Running AutoTester for Query1.txt...
+AutoTester Test13_Seven\1_One\source1.txt Test13_Seven\1_One\query1.txt TestResult\out13_One_Query1.xml > TestResult\cmd\cmd13_One_Query1.txt
+echo Finish running AutoTester for Query1.txt.
+echo Running AutoTester for Query2.txt...
+AutoTester Test13_Seven\1_One\source2.txt Test13_Seven\1_One\query2.txt TestResult\out13_One_Query2.xml > TestResult\cmd\cmd13_One_Query2.txt
+echo Finish running AutoTester for Query2.txt.
+echo Running AutoTester for Query3.txt...
+AutoTester Test13_Seven\1_One\source3.txt Test13_Seven\1_One\query3.txt TestResult\out13_One_Query3.xml > TestResult\cmd\cmd13_One_Query3.txt
+echo Finish running AutoTester for Query3.txt.
+echo Running AutoTester for Query_With_ST_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\Query_With_ST_UsingSource2.txt TestResult\out13_Two_Query_With_ST_UsingSource2.xml > TestResult\cmd\cmd13_Two_Query_With_ST_UsingSource2.txt
+echo Finish running AutoTester for Query_With_ST_UsingSource2.txt.
+echo Running AutoTester for QueryAffects1_UsingSourceAffects.txt...
+AutoTester Test13_Seven\2_Two\SourceAffects.txt Test13_Seven\2_Two\QueryAffects1_UsingSourceAffects.txt TestResult\out13_Two_QueryAffects1_UsingSourceAffects.xml > TestResult\cmd\cmd13_Two_QueryAffects1_UsingSourceAffects.txt
+echo Finish running AutoTester for QueryAffects1_UsingSourceAffects.txt.
+echo Running AutoTester for QueryAffects2_UsingSourceAffects.txt...
+AutoTester Test13_Seven\2_Two\SourceAffects.txt Test13_Seven\2_Two\QueryAffects2_UsingSourceAffects.txt TestResult\out13_Two_QueryAffects2_UsingSourceAffects.xml > TestResult\cmd\cmd13_Two_QueryAffects2_UsingSourceAffects.txt
+echo Finish running AutoTester for QueryAffects2_UsingSourceAffects.txt.
+echo Running AutoTester for QueryCalls_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryCalls_UsingSource1.txt TestResult\out13_Two_QueryCalls_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryCalls_UsingSource1.txt
+echo Finish running AutoTester for QueryCalls_UsingSource1.txt.
+echo Running AutoTester for QueryCallsStar_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryCallsStar_UsingSource1.txt TestResult\out13_Two_QueryCallsStar_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryCallsStar_UsingSource1.txt
+echo Finish running AutoTester for QueryCallsStar_UsingSource1.txt.
+echo Running AutoTester for QueryFollows_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryFollows_UsingSource2.txt TestResult\out13_Two_QueryFollows_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryFollows_UsingSource2.txt
+echo Finish running AutoTester for QueryFollows_UsingSource2.txt.
+echo Running AutoTester for QueryFollowsStar_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryFollowsStar_UsingSource2.txt TestResult\out13_Two_QueryFollowsStar_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryFollowsStar_UsingSource2.txt
+echo Finish running AutoTester for QueryFollowsStar_UsingSource2.txt.
+echo Running AutoTester for QueryModifies_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryModifies_UsingSource1.txt TestResult\out13_Two_QueryModifies_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryModifies_UsingSource1.txt
+echo Finish running AutoTester for QueryModifies_UsingSource1.txt.
+echo Running AutoTester for QueryMultiple_ST_Pattern_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryMultiple_ST_Pattern_UsingSource2.txt TestResult\out13_Two_QueryMultiple_ST_Pattern_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryMultiple_ST_Pattern_UsingSource2.txt
+echo Finish running AutoTester for QueryMultiple_ST_Pattern_UsingSource2.txt.
+echo Running AutoTester for QueryMultipleClauses_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryMultipleClauses_UsingSource2.txt TestResult\out13_Two_QueryMultipleClauses_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryMultipleClauses_UsingSource2.txt
+echo Finish running AutoTester for QueryMultipleClauses_UsingSource2.txt.
+echo Running AutoTester for QueryMultipleST_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryMultipleST_UsingSource2.txt TestResult\out13_Two_QueryMultipleST_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryMultipleST_UsingSource2.txt
+echo Finish running AutoTester for QueryMultipleST_UsingSource2.txt.
+echo Running AutoTester for QueryNext_UsingSourceNext.txt...
+AutoTester Test13_Seven\2_Two\SourceNext.txt Test13_Seven\2_Two\QueryNext_UsingSourceNext.txt TestResult\out13_Two_QueryNext_UsingSourceNext.xml > TestResult\cmd\cmd13_Two_QueryNext_UsingSourceNext.txt
+echo Finish running AutoTester for QueryNext_UsingSourceNext.txt.
+echo Running AutoTester for QueryNextStar_Performance_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryNextStar_Performance_UsingSource2.txt TestResult\out13_Two_QueryNextStar_Performance_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryNextStar_Performance_UsingSource2.txt
+echo Finish running AutoTester for QueryNextStar_Performance_UsingSource2.txt.
+echo Running AutoTester for QueryNextStar_UsingSourceNext.txt...
+AutoTester Test13_Seven\2_Two\SourceNext.txt Test13_Seven\2_Two\QueryNextStar_UsingSourceNext.txt TestResult\out13_Two_QueryNextStar_UsingSourceNext.xml > TestResult\cmd\cmd13_Two_QueryNextStar_UsingSourceNext.txt
+echo Finish running AutoTester for QueryNextStar_UsingSourceNext.txt.
+echo Running AutoTester for QueryParentStar_UsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryParentStar_UsingSource2.txt TestResult\out13_Two_QueryParentStar_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryParentStar_UsingSource2.txt
+echo Finish running AutoTester for QueryParentStar_UsingSource2.txt.
+echo Running AutoTester for QueryParentUsingSource2.txt...
+AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryParentUsingSource2.txt TestResult\out13_Two_QueryParentUsingSource2.xml > TestResult\cmd\cmd13_Two_QueryParentUsingSource2.txt
+echo Finish running AutoTester for QueryParentUsingSource2.txt.
+echo Running AutoTester for QueryPattern_SourcePattern.txt...
+AutoTester Test13_Seven\2_Two\SourcePattern.txt Test13_Seven\2_Two\QueryPattern_SourcePattern.txt TestResult\out13_Two_QueryPattern_SourcePattern.xml > TestResult\cmd\cmd13_Two_QueryPattern_SourcePattern.txt
+echo Finish running AutoTester for QueryPattern_SourcePattern.txt.
+echo Running AutoTester for QueryUses_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryUses_UsingSource1.txt TestResult\out13_Two_QueryUses_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryUses_UsingSource1.txt
+echo Finish running AutoTester for QueryUses_UsingSource1.txt.
+echo Running AutoTester for QueryWith_UsingSource1.txt...
+AutoTester Test13_Seven\2_Two\Source1.txt Test13_Seven\2_Two\QueryWith_UsingSource1.txt TestResult\out13_Two_QueryWith_UsingSource1.xml > TestResult\cmd\cmd13_Two_QueryWith_UsingSource1.txt
+echo Finish running AutoTester for QueryWith_UsingSource1.txt.
+echo Running AutoTester for Query_Affects_AffectsStar_UsingSource4.txt...
+AutoTester Test13_Seven\3_Three\Source4.txt Test13_Seven\3_Three\Query_Affects_AffectsStar_UsingSource4.txt TestResult\out13_Three_Query_Affects_AffectsStar_UsingSource4.xml > TestResult\cmd\cmd13_Three_Query_Affects_AffectsStar_UsingSource4.txt
+echo Finish running AutoTester for Query_Affects_AffectsStar_UsingSource4.txt.
+echo Running AutoTester for Query_Calls_CallsStar_UsingSource4.txt...
+AutoTester Test13_Seven\3_Three\Source4.txt Test13_Seven\3_Three\Query_Calls_CallsStar_UsingSource4.txt TestResult\out13_Three_Query_Calls_CallsStar_UsingSource4.xml > TestResult\cmd\cmd13_Three_Query_Calls_CallsStar_UsingSource4.txt
+echo Finish running AutoTester for Query_Calls_CallsStar_UsingSource4.txt.
+echo Running AutoTester for Query_Next_NextStar_UsingSource4.txt...
+AutoTester Test13_Seven\3_Three\Source4.txt Test13_Seven\3_Three\Query_Next_NextStar_UsingSource4.txt TestResult\out13_Three_Query_Next_NextStar_UsingSource4.xml > TestResult\cmd\cmd13_Three_Query_Next_NextStar_UsingSource4.txt
+echo Finish running AutoTester for Query_Next_NextStar_UsingSource4.txt.
+echo Running AutoTester for QueryAffects_UsingSource3.txt...
+AutoTester Test13_Seven\3_Three\Source3.txt Test13_Seven\3_Three\QueryAffects_UsingSource3.txt TestResult\out13_Three_QueryAffects_UsingSource3.xml > TestResult\cmd\cmd13_Three_QueryAffects_UsingSource3.txt
+echo Finish running AutoTester for QueryAffects_UsingSource3.txt.
+echo Running AutoTester for QueryLongTestCase.txt...
+AutoTester Test13_Seven\3_Three\SourceLongTestCase.txt Test13_Seven\3_Three\QueryLongTestCase.txt TestResult\out13_Three_QueryLongTestCase.xml > TestResult\cmd\cmd13_Three_QueryLongTestCase.txt
+echo Finish running AutoTester for QueryLongTestCase.txt.
+echo Running AutoTester for QueryMultipleClauses_UsingSource5.txt...
+AutoTester Test13_Seven\3_Three\Source5.txt Test13_Seven\3_Three\QueryMultipleClauses_UsingSource5.txt TestResult\out13_Three_QueryMultipleClauses_UsingSource5.xml > TestResult\cmd\cmd13_Three_QueryMultipleClauses_UsingSource5.txt
+echo Finish running AutoTester for QueryMultipleClauses_UsingSource5.txt.
+echo Running AutoTester for QueryOptimization_UsingSource3.txt...
+AutoTester Test13_Seven\3_Three\Source3.txt Test13_Seven\3_Three\QueryOptimization_UsingSource3.txt TestResult\out13_Three_QueryOptimization_UsingSource3.xml > TestResult\cmd\cmd13_Three_QueryOptimization_UsingSource3.txt
+echo Finish running AutoTester for QueryOptimization_UsingSource3.txt.
+echo Running AutoTester for Query1.txt...
+AutoTester Test13_Seven\4_Intense\Source1.txt Test13_Seven\4_Intense\Query1.txt TestResult\out13_Intense_Query1.xml > TestResult\cmd\cmd13_Intense_Query1.txt
+echo Finish running AutoTester for Query1.txt.
+echo Running AutoTester for Query2.txt...
+AutoTester Test13_Seven\4_Intense\Source2.txt Test13_Seven\4_Intense\Query2.txt TestResult\out13_Intense_Query2.xml > TestResult\cmd\cmd13_Intense_Query2.txt
+echo Finish running AutoTester for Query2.txt.
+echo Running AutoTester for Query3.txt...
+AutoTester Test13_Seven\4_Intense\Source3.txt Test13_Seven\4_Intense\Query3.txt TestResult\out13_Intense_Query3.xml > TestResult\cmd\cmd13_Intense_Query3.txt
+echo Finish running AutoTester for Query3.txt.
+echo Running AutoTester for Query4.txt...
+AutoTester Test13_Seven\4_Intense\Source4.txt Test13_Seven\4_Intense\Query4.txt TestResult\out13_Intense_Query4.xml > TestResult\cmd\cmd13_Intense_Query4.txt
+echo Finish running AutoTester for Query4.txt.
+echo Running AutoTester for Query5.txt...
+AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
+echo Finish running AutoTester for Query5.txt.
+echo Running AutoTester for Query6.txt...
+AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6.txt TestResult\out13_Intense_Query6.xml > TestResult\cmd\cmd13_Intense_Query6.txt
+echo Finish running AutoTester for Query6.txt.
+echo Running AutoTester for Query7.txt...
+AutoTester Test13_Seven\4_Intense\Source7.txt Test13_Seven\4_Intense\Query7.txt TestResult\out13_Intense_Query7.xml > TestResult\cmd\cmd13_Intense_Query7.txt
+echo Finish running AutoTester for Query7.txt.
+echo Running AutoTester for Query8.txt...
+AutoTester Test13_Seven\4_Intense\Source8.txt Test13_Seven\4_Intense\Query8.txt TestResult\out13_Intense_Query8.xml > TestResult\cmd\cmd13_Intense_Query8.txt
+echo Finish running AutoTester for Query8.txt.
+echo Finish running AutoTester for test 13.
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================

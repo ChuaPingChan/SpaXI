@@ -1,0 +1,31 @@
+procedure Java {
+        a = 10;                                   
+        b = 12 + a;              
+        c = c - a;               
+        while a {                
+            while b {            
+                a = a + 8;       
+            }
+            if d then {            
+                c = b + c;       
+                call Python;     
+            } else {
+                b = c * a - b;   
+            }
+            b = 12 + b + c;           
+        }
+    }
+
+    procedure Python {
+        b = b + a * 6;                
+        if a then {             
+            a = a - 8;          
+            call Go;            
+        } else {
+            b = b + c;                    
+        }
+    }
+
+    procedure Go {
+        c = b * c + 6 + a;            
+    }

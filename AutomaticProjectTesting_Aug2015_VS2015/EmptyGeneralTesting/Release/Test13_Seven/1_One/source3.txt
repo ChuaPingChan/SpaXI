@@ -1,0 +1,24 @@
+procedure thirdTest {
+	a = x;											
+	b = 10000;										
+	while x{										
+		a = b;										
+		while y{									
+			while z {								
+				hello = world + cs3201 + cs3202;	
+			}}
+		Alpha = omega + beta + chaRLie;				
+	}
+	a = bravo + delta + Juliet + kilo; 				
+	while Lima{										
+		echo = foxtrot + mike + golf + India;		
+		j1k = kilo + foxtrot + chaRLie;				
+	}
+	a = x+a+w+a+a+string;							
+	while i{										
+		i = j + 				1;					
+		while			qwerty {					
+			t = u + r;								
+		}}
+	e = n + d;										
+}

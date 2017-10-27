@@ -1,0 +1,45 @@
+1 - Select BOOLEAN with no syns, out of bounds
+assign a, a1;
+Select BOOLEAN such that Affects(0, 20)
+false
+5000
+2 - Select BOOLEAN with 1 syn, out of bounds
+assign a, a1;
+Select BOOLEAN such that Affects(a, 20)
+false
+5000
+3 - Select BOOLEAN with 1 syn, out of bounds
+assign a, a1;
+Select BOOLEAN such that Affects(0, a)
+false
+5000
+4 - Select BOOLEAN with ifs
+assign a, a1; if ifs;
+Select BOOLEAN such that Affects(ifs, a)
+false
+5000
+5 - Select BOOLEAN with ifs
+assign a, a1; if ifs;
+Select BOOLEAN such that Affects(a, ifs)
+false
+5000
+6 - Select BOOLEAN with whiles
+assign a, a1; if ifs; while w;
+Select BOOLEAN such that Affects(w, a)
+false
+5000
+7 - Select BOOLEAN with whiles
+assign a, a1; if ifs; while w;
+Select BOOLEAN such that Affects(a, w)
+false
+5000
+8 - Select BOOLEAN with calls
+assign a, a1; if ifs; call c;
+Select BOOLEAN such that Affects(c, a)
+false
+5000
+9 - Select BOOLEAN with calls
+assign a, a1; if ifs; call c;
+Select BOOLEAN such that Affects(a, c)
+false
+5000
