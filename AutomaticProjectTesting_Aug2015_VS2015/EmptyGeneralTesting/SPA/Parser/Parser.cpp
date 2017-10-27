@@ -532,6 +532,8 @@ Asserts that an expression is syntactically valid.
 bool Parser::assertIsValidExpression(string expression) {
     const regex REGEX_MATCH_BRACKETED_ENTITY = regex("\\s*\\(\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*\\)\\s*");
 
+    expression = Parser::trimString(expression);
+
     // Check for bracket correctness. Just for redundancy.
     // Does not guarantee bracketing is correct, just counting.
     // e.g. "4 ( + 3)" will be evaluated as correct even though it's wrong.
@@ -592,10 +594,6 @@ std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
     string anyCharRegex = "[^]";
     string extractRemainingRegex = "(" + anyCharRegex + "+)";
 
-    /*
-    CASE 1:
-    When the left expression has no brackets. E.g "2 + (10 * 3)", "2 + 10"
-    */
     regex REGEX_CASE1_EXTRACTOR = regex(possibleWhitespaceRegex
         + extractEntityRegex
         + possibleWhitespaceRegex
@@ -603,25 +601,25 @@ std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
         + possibleWhitespaceRegex
         + extractRemainingRegex);
 
-    /*
-    CASE 2:
-    When the left expression is bracketed.
-    E.g. "(2 + 3) + 4", "(2 + 3) + (4 + 10)", "((2 + 3)) + ((6 - 7))"
-
-    Handled using normal string operations.
-    */
+    expression = Parser::trimString(expression);
 
     smatch match;
     string leftExpression;
     string rightExpression;
     if (regex_match(expression, match, REGEX_CASE1_EXTRACTOR) && match.size() > 2) {
-        // CASE 1
+        /*
+            CASE 1:
+            When the left expression has no brackets. E.g "2 + (10 * 3)", "2 + 10"
+        */
         leftExpression = match.str(1);
         rightExpression = match.str(2);
         return pair<string, string>(leftExpression, rightExpression);
     } else if (Parser::getFirstTokenInString(expression) == "(") {
-        /*  
-            CASE 2
+        /*
+            CASE 2:
+            When the left expression is bracketed.
+            E.g. "(2 + 3) + 4", "(2 + 3) + (4 + 10)", "((2 + 3)) + ((6 - 7))"
+
             Extracts the string starting from after an open bracket, to the last character
             before the matching close bracket. Returns an empty string if matching close
             bracket is not found.
@@ -633,25 +631,28 @@ std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
             - Given "(3 + (5 * 4) - 2)", the function should return "3 + (5 * 4) - 2"
         */
         string stringInMatchingBracket;
-        stack<string> openBracketStack;
-        openBracketStack.push(Parser::extractNextTokenAndShortenString(expression));
+        stack<char> openBracketStack;
         bool matchingBracketFound = false;
 
-        string token;
-        while (!matchingBracketFound && !regex_match(expression, Parser::REGEX_MATCH_BLANK_OR_EMPTY_STRING)) {
-            token = Parser::extractNextTokenAndShortenString(expression);
-            if (token == "(") {
-                openBracketStack.push(token);
-            } else if (token == ")") {
+        openBracketStack.push(expression[0]);
+        expression.erase(expression.begin());
+        for (string::iterator charIter = expression.begin();
+            charIter != expression.end() && !matchingBracketFound;)
+        {
+            if (*charIter == '(') {
+                openBracketStack.push(*charIter);
+            } else if (*charIter == ')') {
                 openBracketStack.pop();
                 if (openBracketStack.empty()) {
                     matchingBracketFound = true;
                 }
             }
 
-            if (!matchingBracketFound) {    // Don't append if token is matching ')'
-                stringInMatchingBracket.append(token);
+            if (!matchingBracketFound) {    // Don't append if token is matching-')'
+                stringInMatchingBracket.push_back(*charIter);
             }
+
+            charIter = expression.erase(charIter);     // Processed char required to be removed by later processes
         }
 
         if (matchingBracketFound) {
@@ -664,8 +665,9 @@ std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
             */
         }
 
-        token = Parser::extractNextTokenAndShortenString(expression);
-        if (matchingBracketFound && !token.empty() && !regex_match(token, Parser::REGEX_MATCH_OPERATOR)) {
+        string token = Parser::extractNextTokenAndShortenString(expression);
+        if (matchingBracketFound && !regex_match(token, Parser::REGEX_MATCH_POSSIBLE_WHITESPACE)
+            && !regex_match(token, Parser::REGEX_MATCH_OPERATOR)) {
             // If there are non-whitespace characters that are not operators after ')' -> cannot split
             leftExpression.clear();
             rightExpression.clear();
