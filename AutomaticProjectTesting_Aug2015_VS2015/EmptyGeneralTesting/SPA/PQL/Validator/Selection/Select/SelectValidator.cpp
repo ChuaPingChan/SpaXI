@@ -68,6 +68,8 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
 {
     if (RegexValidators::isValidTupleRegex(selectedStr))
     {
+        vector<string> synonymListExtracted;
+
         vector<string> synonymList;
         vector<Entity> entityList;
         string formattedStr = removeSpecialCharactersFromTuple(selectedStr);
@@ -77,15 +79,16 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
         string arguments;
         while (getline(ss, arguments, delimiter)) 
         {
-            synonymList.push_back(arguments);
+            synonymListExtracted.push_back(arguments);
         }
 
-        for (string s : synonymList)
+        for (string s : synonymListExtracted)
         {
             if (RegexValidators::isValidSynonymRegex(s))
             {
                 try {
                     Entity entity = getEntityOfSynonym(s);
+                    synonymList.push_back(s);
                     entityList.push_back(entity);
                 }
                 catch (SynonymNotFoundException& snfe) {
@@ -99,7 +102,12 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
                 if (isValidAttrRefForSynonym(s))
                 {
                     Entity entity = getEntityOfSynonym(s);
+                    synonymList.push_back(s);
                     entityList.push_back(entity);
+                }
+                else
+                {
+                    return false;
                 }
             }
         }
