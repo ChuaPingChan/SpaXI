@@ -21,7 +21,6 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
     //Case 1: Affects(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
-        cout << "came in" << endl;
         return pkbInstance->isAffects(stoi(argOne), stoi(argTwo));
     }
 
