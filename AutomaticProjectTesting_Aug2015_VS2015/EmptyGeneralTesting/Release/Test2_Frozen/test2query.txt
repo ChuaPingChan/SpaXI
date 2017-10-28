@@ -694,7 +694,7 @@ Select a such that Parent*(a,s)
 none
 5000
 140 - None
-while w; if I;
+while w; if i;
 Select w such that Parent*(w,i)
 11, 29
 5000
@@ -1081,7 +1081,7 @@ Two, Three, Four, Five, Six, Seven, Eight, Nine
 217 - 3 clauses: select p1 calls p1 p2 with p2 and calls p1 p3
 procedure p1, p2, p3;
 Select p1 such that Calls(p1, p2) with p2.procName = "Six" such that Calls(p1, p3)
-Three
+Three,Five
 5000
 218 - 3 clauses: select p1 calls p1 p2 calls p3 p1 with p3
 procedure p1, p2, p3;
@@ -1091,7 +1091,7 @@ Five, Six
 219 - 4 clauses: select p1 calls p2 p1 with p2 and calls p2 p3 with p3
 procedure p1, p2, p3;
 Select p1 such that Calls(p2, p1) with p2.procName = "Three" such that Calls(p2, p3) with p3.procName = "Six"
-Four, Five
+Four, Five, Six
 5000
 220 - 4 clauses: select p1 calls p1 p2 and calls p1 p3 with p2 and p3
 procedure p1, p2, p3;
@@ -1149,12 +1149,12 @@ Select w such that Next(w, 12)
 11
 5000
 231 - 1 Clause: select calls 1 synonym (1stArg), given arg; No answer
-calls c;
+call c;
 Select c such that Next(c, 11)
 none
 5000
 232 - 1 Clause: select calls 1 synonym (1stArg), given arg; Has answer
-calls c;
+call c;
 Select c such that Next(c, 16)
 14, 15
 5000
@@ -1215,7 +1215,7 @@ true
 5000
 244 - 1 clause: same value on both arg, boolean, false
 
-Select boolean such that Next*(19,19)
+Select BOOLEAN such that Next*(19,19)
 false
 5000
 245 - 1 clause: same value on both arg, boolean, true
@@ -1416,12 +1416,12 @@ Select a such that Next(a,i) and Next*(w,i)
 284 - nextstar a c and nextstar w c
 assign a; while w; call c;
 Select c such that Next*(a,c) and Next*(w,c)
-14,15
+14,15,28
 5000
 285 - next s1 s2 and next s2 s3
 stmt s1,s2,s3;
 Select s1 such that Next(s1,s2) and Next(s2,s3)
-4,5,11,12,13,14,15,16,17,18,20,21,23,26,27,28,29,30,31,32,35,36
+1,2,4,5,9,10,11,12,13,14,15,16,17,18,20,21,23,26,27,28,29,30,31,32,35,36
 5000
 286 - next and with clause no answer
 stmt s,s1;
@@ -1455,8 +1455,8 @@ Select a such that Next(a,n) and Next*(n,n) with n=w.stmt#
 5000
 292 - 2 next and with clause substitute synonym
 stmt s; while w; constant c;
-Select s such that Next*(s,s) with s.stmt# = c.value and Next*(s,w)
-2,10
+Select s such that Next*(s,s) with s.stmt# = c.value such that Next*(s,w)
+2,9,10,14
 5000
 293 - next and pattern clause
 assign a; while w;
@@ -1466,22 +1466,22 @@ Select a such that Next(a,w) pattern a(_,_"2*h"_)
 294 - next and pattern clause get variables
 assign a; while w; variable v;
 Select v such that Next*(a,w) pattern a(v,_)
-g,j,k,m,s,t,u
+g,j,k,m,s,t,u,l
 5000
 295 - next and pattern and with
-stmt s; assign a; while w;
-Select s such that Next*(w,i) pattern w("u",_) and Next*(s,a) with s.stmt# = 31
-32
+stmt s; assign a; while w; if i;
+Select s such that Next*(w,i) pattern w("u",_) such that Next*(s,a) with s.stmt# = 31
+31
 5000
 296 - 3 next
 stmt s1,s2; while w;
 Select s1 such that Next(s1,w) and Next*(s2,w) and Next*(s1,s2)
-16,28,31,32
+2,10,16,18,21,27,28,31,32
 5000
-297 - 4 next
+297 - 4 next NoResult
 assign a; while w; if i; call c;
 Select a such that Next(_,a) and Next(a,i) and Next*(a,w) and Next(a,c)
-12
+none
 5000
 298 - Using pattern keyword as synonym HasAnswer
 assign pattern;
@@ -1511,7 +1511,7 @@ Select a pattern a(_, "2*h")
 303 - Underscore Expr BracketLhsRhsEnclose PartialMatch HasAnswer
 assign a;
 Select a pattern a(_, _"(3*5)"_)
-2017-10-12 00:00:00
+10,12
 5000
 304 - Underscore Expr NotSameSubTree PartialMatch NoAnswer
 assign a;
@@ -1520,8 +1520,8 @@ none
 5000
 305 - Underscore Expr SameSubTree PartialMatch HasAnswer
 assign a;
-Select a pattern a(_, _"14+100*a"_)
-12
+Select a pattern a(_, _"100*a"_)
+10,12,16
 5000
 306 - Underscore Expr IncorrectBracketPair NoAnswer
 assign a;
@@ -1576,7 +1576,7 @@ Select w pattern w(v, _)
 316 - 1 while, 1 synonym, select s
 while w; variable v; stmt s;
 Select s pattern w(v, _)
-1,9,11,20,26,29
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38
 5000
 317 - 1 while, 1 synonym, select all assign
 while w; variable v; assign a;
@@ -1604,12 +1604,12 @@ Select w1 pattern w("a", _) and w1("f", _)
 9
 5000
 322 - 2 whiles, 1 synonym 1 ident
-while w, w1;
+while w, w1; variable v;
 Select w pattern w(v, _) and w1("f",_)
 1,9,11,20,26,29
 5000
 323 - 2 whiles, 1 synonym 1 ident
-while w, w1;
+while w, w1; variable v;
 Select w1 pattern w(v, _) and w1("f", _)
 9
 5000
@@ -1619,14 +1619,14 @@ Select w pattern w("a", _) and w1("f", _) and w2("i", _)
 1
 5000
 325 - 4 whiles
-while w; w1, w2, w3;
+while w, w1, w2, w3;
 Select w pattern w("a", _) and w1("f", _) and w2("i", _) and w3("s", _)
 1
 5000
 326 - InSameStmt Modifies and Uses DiffKnownVar HasAnswer
 stmt s;
 Select s such that Modifies(s, "b") and Uses(s, "c")
-4
+3,4
 5000
 327 - InSameStmt Modifies and Uses DiffUnknownVar HasAnswer
 stmt s; variable v1, v2;
@@ -1636,7 +1636,7 @@ Select s such that Modifies(s, v1) and Uses(s, v2)
 328 - InSameStmt ChooseStmt Modifies and Uses SameUnknownVar HasAnswer
 stmt s; variable v;
 Select s such that Modifies(s, v) and Uses(s, v)
-1,2,3,5,7,8,11,14,15,18,19,23,24,26,28,29,30,33
+1,2,3,5,7,8,11,13,14,15,18,19,23,24,26,28,29,30,33
 5000
 329 - InSameStmt ChooseVariable Modifies and Uses SameUnknownVar HasAnswer
 stmt s; variable v;
@@ -1644,13 +1644,13 @@ Select v such that Modifies(s, v) and Uses(s, v)
 g,j,m,o,q,s,t,u,x,y
 5000
 330 - InSameAssign ChooseAssign Modifies and Uses SameUnknownVar HasAnswer
-assign s; variable v;
+assign a; variable v;
 Select a such that Modifies(a, v) and Uses(a, v)
 23
 5000
 331 - InSameAssign ChooseVariable Modifies and Uses SameUnknownVar HasAnswer
-assign s; variable v;
-Select a such that Modifies(a, v) and Uses(a, v)
+assign a; variable v;
+Select v such that Modifies(a, v) and Uses(a, v)
 o
 5000
 332 - InSameProcedure ChooseProcedure Modifies and Uses SameUnknownVar HasAnswer
@@ -1659,17 +1659,17 @@ Select p such that Modifies(p, v) and Uses(p, v)
 Eight,Five,Nine,One,Seven,Six,Three,Two
 5000
 333 - ChooseStmt ModifiesStmtVar ParentDiffStmt
-stmt s1, s2; variable;
+stmt s1, s2; variable v;
 Select s1 such that Modifies(s1, v) and Parent(s1, s2)
 1,5,9,11,13,18,20,26,29,30
 5000
 334 - ChooseVar ModifiesStmtVar ParentDiffStmt
-stmt s1, s2; variable;
+stmt s1, s2; variable v;
 Select v such that Modifies(s1, v) and Parent(s1, s2)
 o,q,v,x,y,z,g,j,k,l,m,p,s,t,u
 5000
 335 - ChooseStmt ModifiesStmtVar FollowsDiffStmt
-stmt s1, s2; variable;
+stmt s1, s2; variable v;
 Select s1 such that Modifies(s1, v) and Follows(s1, s2)
 1,4,5,12,13,17,18,23,24,26,28,33,35,36,37
 5000
