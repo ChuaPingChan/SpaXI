@@ -2,8 +2,9 @@
 #include <string>
 #include "..\..\Entity.h"
 #include "..\Withship.h"
+#include "Clause.h"
 
-class WithClause
+class WithClause : public Clause
 {
 public:
     WithClause(WithType withType, Entity lhsEntity, string lhsValue, Entity rhsEntity, string rhsValue);

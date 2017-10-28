@@ -2,10 +2,11 @@
 #include <string>
 #include "../../Entity.h"
 #include "../Relationship.h"
+#include "Clause.h"
 
 using namespace std;
 
-class SuchThatClause
+class SuchThatClause : public Clause
 {
 public:
     SuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo);

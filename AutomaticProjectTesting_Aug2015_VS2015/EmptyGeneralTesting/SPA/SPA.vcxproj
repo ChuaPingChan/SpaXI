@@ -11,6 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="PQL\Utilities\Clause.cpp" />
+    <ClCompile Include="PQL\Optimizer\ClauseGroupsManager.cpp" />
+    <ClCompile Include="PQL\Optimizer\Optimizer.cpp" />
+    <ClCompile Include="PQL\Utilities\ClauseWrapper.cpp" />
     <ClCompile Include="Exceptions\EntityNotFoundException.cpp" />
     <ClCompile Include="Exceptions\AttributeNotFoundException.cpp" />
     <ClCompile Include="Exceptions\SynonymNotFoundException.cpp" />
@@ -96,6 +101,10 @@
     <ClCompile Include="Exceptions\SynonymAlreadyExistException.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PQL\Utilities\Clause.h" />
+    <ClInclude Include="PQL\Optimizer\ClauseGroupsManager.h" />
+    <ClInclude Include="PQL\Optimizer\Optimizer.h" />
+    <ClInclude Include="PQL\Utilities\ClauseWrapper.h" />
     <ClInclude Include="Exceptions\EntityNotFoundException.h" />
     <ClInclude Include="Exceptions\AttributeNotFoundException.h" />
     <ClInclude Include="PKB\IfStmt.h" />
