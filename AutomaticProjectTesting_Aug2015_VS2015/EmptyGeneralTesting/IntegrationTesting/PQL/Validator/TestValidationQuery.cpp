@@ -59,17 +59,6 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 		
-		/* Uncomment when we extend for selecting synonyms with attributes, i.e Select p.procName */
-		TEST_METHOD(TestValidity_Query_SelectAttributeOfSynonym_ValidDeclaration_ExpectTrue_Valid)
-		{
-			string query;
-			query.append("procedure p;");
-			query.append("Select p.procName");
-			QueryTree qt;
-			qt.insertSynonym(PROCEDURE, "p");
-			QueryValidator validator = QueryValidator(&qt);
-			Assert::IsTrue(validator.isValidQuery(query));
-		}
 
         TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_Valid)
         {
@@ -203,6 +192,21 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
+        /* Uncomment when we extend for selecting synonyms with attributes, i.e Select p.procName */
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfSynonym_ValidDeclaration_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("call c;");
+            query.append("Select c.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidDeclarationFlag());
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SameEntity_DuplicatedSynonym_Invalid)
         {
             string query;
@@ -232,9 +236,10 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
-        /***********************************
-        * Select Clause - Tuple s*
-        ***********************************/
+
+        /*************************
+        * Select Clause - Tuple *
+        **************************/
 
 
         TEST_METHOD(TestValidity_Query_SelectTuple_OneSynonym_Valid)
@@ -1170,5 +1175,6 @@ namespace UnitTesting
             Assert::IsTrue(friendValidator.getValidDeclarationFlag());
             Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
+
     };
 }
