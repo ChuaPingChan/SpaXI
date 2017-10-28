@@ -80,17 +80,19 @@ list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause 
         Entity argType = selectedClause.getSingleArgType();
         string synonymToGetResultFor = selectedClause.getSingleArg();
 
+        //If result is of type string, convert mapping of ints to strings from PKB 
+        if (argType == PROCEDURE || argType == VARIABLE || selectedClause.isAttributeProcName == true)
+        {
+            result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
+        }
+
         //If result is of type int, get direct results from ClauseResult
-        if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
+        else if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
         {
             result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
         }
 
-        //If result is of type string, convert mapping of ints to strings from PKB 
-        else if (argType == PROCEDURE || argType == VARIABLE )
-        {
-            result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
-        }
+
 
     }
 
@@ -114,7 +116,9 @@ list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause se
         for (int curElement : curList) //iterate over each column of tuple result
         {
             Entity argType = selectedClause.getTupleArgTypeAt(index); //get Entity type at current index
-            if (argType == VARIABLE || argType == PROCEDURE)
+            vector<bool> flagsForCall = selectedClause.isAttributeProcNameForTuple; //get true/false flags for Call.procName to get mapping from PKB
+
+            if (argType == VARIABLE || argType == PROCEDURE || (argType == CALL && flagsForCall.at(index)))
             {
                 tempListOfStrings.push_back(pkbInstance->convertIdxToString(curElement, argType)); //get mapping of int to string
             }

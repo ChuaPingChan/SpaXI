@@ -12,6 +12,7 @@ using namespace std;
 
 class SelectionValidator
 {
+    friend class FriendSelectionValidator;
 public:
     SelectionValidator(QueryTree *qtPtrNew);
     ~SelectionValidator();

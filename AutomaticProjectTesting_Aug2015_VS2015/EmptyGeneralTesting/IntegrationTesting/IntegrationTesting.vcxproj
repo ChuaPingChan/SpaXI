@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="PQL\PQLFriend\FriendQueryValidator.h" />
     <ClInclude Include="PQL\PQLFriend\FriendDeclarationValidator.h" />
+    <ClInclude Include="PQL\PQLFriend\FriendSelectionValidator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="PQL\Utility\UtilityQueryTree.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Parser-PKB\TestParserPopulatePkb.cpp" />
     <ClCompile Include="Parser-PKB\TestParserPkbBugFix.cpp" />
     <ClCompile Include="PQL\PQLFriend\FriendDeclarationValidator.cpp" />
+    <ClCompile Include="PQL\PQLFriend\FriendSelectionValidator.cpp" />
     <ClCompile Include="PQL\ResultFormatter\TestResultFormatterWithClauseResultAndQueryTree.cpp" />
     <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternIf.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatAffects.cpp" />
@@ -188,6 +190,7 @@
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatParentStar.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatUses.cpp" />
     <ClCompile Include="PQL\Validator\TestValidationQuery.cpp" />
+    <ClCompile Include="PQL\Validator\TestValidationSelectionAndTree.cpp" />
     <ClCompile Include="PQL\Validator\With\TestValidationWith.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

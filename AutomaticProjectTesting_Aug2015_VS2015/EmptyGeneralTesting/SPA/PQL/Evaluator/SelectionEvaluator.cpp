@@ -18,33 +18,35 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
 { 
     hasResultForSelection = false;
     list<int> resultsForOneSynonym;
+    SelectionType selectionType = clause.getSelectionType();
 
-    //Case 1: Select BOOLEAN
-    if (clause.getSelectionType() == SELECT_BOOLEAN)
+    switch (selectionType)
     {
-        hasResultForSelection = true;
 
-    }
-
-    //Case 2: Select synonym
-    else if (clause.getSelectionType() == SELECT_SINGLE)
-    {
-        resultsForOneSynonym = evaluateSingleSynonymSelection(clause.getSingleArgType(), clause.getSingleArg());
-        if (!resultsForOneSynonym.empty()) //If Select synonym has results, proceed with evaluation
+    case SELECT_BOOLEAN:
         {
-            clauseResult->updateSynResults(clause.getSingleArg(), resultsForOneSynonym);
             hasResultForSelection = true;
+            break;
         }
-    }
 
-    //Case 3: Select <arg1,arg2>
-    //TODO: Remove comments
-    else if (clause.getSelectionType() == SELECT_TUPLE)
+
+    case SELECT_SINGLE:
+        {
+            resultsForOneSynonym = evaluateSingleSynonymSelection(clause.getSingleArgType(), clause.getSingleArg());
+            if (!resultsForOneSynonym.empty()) //If Select synonym has results, proceed with evaluation
+            {
+                clauseResult->updateSynResults(clause.getSingleArg(), resultsForOneSynonym);
+                hasResultForSelection = true;
+            }
+            break;
+        }
+
+
+    case SELECT_TUPLE:
     {
-       // cout << "Has reached evaluation for tuple" << endl;
         vector<string> getAllSynonymsFromTuple = clause.getTupleArgs();
         vector<Entity> getAllEntititesFromTuple = clause.getTupleArgTypes();
-        
+
         for (int i = 0; i < getAllSynonymsFromTuple.size(); i++)
         {
             string currentSynonym = getAllSynonymsFromTuple.at(i);
@@ -57,13 +59,17 @@ bool SelectionEvaluator::evaluate(SelectClause clause, ClauseResult* clauseResul
             }
             else
             {
-                //cout << "Breaking at " << currentSynonym <<" as it does not exist in SIMPLE"<< endl;
                 hasResultForSelection = false; //Select synonym has no results for current synonym, break
                 break;
             }
         }
+        break;
     }
-    //cout << "Result for select evaluation is " << hasResultForSelection << endl;
+
+    default: hasResultForSelection = false; 
+        break;
+    }
+
     return hasResultForSelection;
 }
 
