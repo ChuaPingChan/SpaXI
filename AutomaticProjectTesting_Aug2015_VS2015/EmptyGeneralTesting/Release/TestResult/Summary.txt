@@ -1,6 +1,6 @@
 Overall Test Ran   : 6322
-Overall Test Passed: 6150
-Overall Test Failed: 172
+Overall Test Passed: 6162
+Overall Test Failed: 160
 
 
 TestResult\out1.xml: 
@@ -34,9 +34,9 @@ Passed  : 43
 Failed  : 0
 
 TestResult\out11_QueryPatternAssign.xml: 
-Test Ran: 29	[BUG]
-Passed  : 25
-Failed  : 4
+Test Ran: 29
+Passed  : 29
+Failed  : 0
 
 TestResult\out11_QueryWith.xml: 
 Test Ran: 61
@@ -64,9 +64,9 @@ Passed  : 324
 Failed  : 0
 
 TestResult\out13_Intense_Query3.xml: 
-Test Ran: 35	[BUG]
-Passed  : 34
-Failed  : 1
+Test Ran: 35
+Passed  : 35
+Failed  : 0
 
 TestResult\out13_Intense_Query5.xml: 
 Test Ran: 20	[BUG]
@@ -85,13 +85,13 @@ Failed  : 20
 
 TestResult\out13_Intense_Query7a.xml: 
 Test Ran: 309	[BUG]
-Passed  : 305
-Failed  : 4
+Passed  : 307
+Failed  : 2
 
 TestResult\out13_Intense_Query7b.xml: 
 Test Ran: 521	[BUG]
-Passed  : 491
-Failed  : 30
+Passed  : 493
+Failed  : 28
 
 TestResult\out13_Intense_Query8.xml: 
 Test Ran: 163	[BUG]
@@ -120,8 +120,8 @@ Failed  : 3
 
 TestResult\out13_Three_QueryLongTestCase.xml: 
 Test Ran: 22	[BUG]
-Passed  : 20
-Failed  : 2
+Passed  : 21
+Failed  : 1
 
 TestResult\out13_Three_QueryMultipleClauses_UsingSource5.xml: 
 Test Ran: 1	[BUG]
@@ -219,9 +219,9 @@ Passed  : 72
 Failed  : 0
 
 TestResult\out13_Two_QueryPattern_UsingSourcePattern.xml: 
-Test Ran: 35	[BUG]
-Passed  : 34
-Failed  : 1
+Test Ran: 35
+Passed  : 35
+Failed  : 0
 
 TestResult\out13_Two_QueryUses_UsingSource1.xml: 
 Test Ran: 39
@@ -240,8 +240,8 @@ Failed  : 3
 
 TestResult\out2.xml: 
 Test Ran: 336	[BUG]
-Passed  : 331
-Failed  : 5
+Passed  : 332
+Failed  : 4
 
 TestResult\out3.xml: 
 Test Ran: 207
