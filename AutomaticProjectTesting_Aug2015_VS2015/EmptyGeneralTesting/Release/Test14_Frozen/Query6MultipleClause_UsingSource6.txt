@@ -1,0 +1,145 @@
+1 - All Clauses With actual value
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
+true
+5000
+2 - All Clauses With actual value 
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(1,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
+false
+5000
+3 - All Clauses With actual value 
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(1,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
+false
+5000
+4 - All Clauses With actual value
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(2,"x") and Uses(42,"z") and Calls("A","C")
+false
+5000
+5 - All Clauses With actual value
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(1,"z") and Calls("A","C")
+false
+5000
+6 - All Clauses With actual value
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("B","C")
+false
+5000
+7 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select ifs such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+45
+5000
+8 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select a such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+9
+5000
+9 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select v such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+a,p,q,x
+5000
+10 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select p such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+A,C,D
+5000
+11 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select q such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+B,C,D
+5000
+12 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select <ifs,a,v,p,q> such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+45 9 a A B,45 9 a A C,45 9 a A D,45 9 a C B,45 9 a C C,45 9 a C D,45 9 a D B,45 9 a D C,45 9 a D D,45 9 p A B,45 9 p A C,45 9 p A D,45 9 p C B,45 9 p C C,45 9 p C D,45 9 p D B,45 9 p D C,45 9 p D D,45 9 q A B,45 9 q A C,45 9 q A D,45 9 q C B,45 9 q C C,45 9 q C D,45 9 q D B,45 9 q D C,45 9 q D D,45 9 x A B,45 9 x A C,45 9 x A D,45 9 x C B,45 9 x C C,45 9 x C D,45 9 x D B,45 9 x D C,45 9 x D D
+5000
+13 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select a such that Parent(ifs,27) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+
+5000
+14 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select ifs such that Parent(ifs,46) and Follows(a,20) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+
+5000
+15 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select ifs such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"g") and Calls*("A",q)
+
+5000
+16 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select ifs such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("B",q)
+
+5000
+17 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select <ifs,a,v,p,q> such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q) with a.stmt#=9
+45 9 a A B,45 9 a A C,45 9 a A D,45 9 a C B,45 9 a C C,45 9 a C D,45 9 a D B,45 9 a D C,45 9 a D D,45 9 p A B,45 9 p A C,45 9 p A D,45 9 p C B,45 9 p C C,45 9 p C D,45 9 p D B,45 9 p D C,45 9 p D D,45 9 q A B,45 9 q A C,45 9 q A D,45 9 q C B,45 9 q C C,45 9 q C D,45 9 q D B,45 9 q D C,45 9 q D D,45 9 x A B,45 9 x A C,45 9 x A D,45 9 x C B,45 9 x C C,45 9 x C D,45 9 x D B,45 9 x D C,45 9 x D D
+5000
+18 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select <ifs,a,v,p,q> such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q) with a.stmt#=10
+
+5000
+19 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q; constant c;
+Select <ifs,a,v,p,q> such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q) with a.stmt#=c.value
+45 9 a A B,45 9 a A C,45 9 a A D,45 9 a C B,45 9 a C C,45 9 a C D,45 9 a D B,45 9 a D C,45 9 a D D,45 9 p A B,45 9 p A C,45 9 p A D,45 9 p C B,45 9 p C C,45 9 p C D,45 9 p D B,45 9 p D C,45 9 p D D,45 9 q A B,45 9 q A C,45 9 q A D,45 9 q C B,45 9 q C C,45 9 q C D,45 9 q D B,45 9 q D C,45 9 q D D,45 9 x A B,45 9 x A C,45 9 x A D,45 9 x C B,45 9 x C C,45 9 x C D,45 9 x D B,45 9 x D C,45 9 x D D
+5000
+20 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q; constant c;
+Select <ifs,a,v,p,q> such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q) with ifs.stmt#=c.value
+
+5000
+21 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q; constant c;
+Select <ifs,a,v,p,q> such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q) with ifs.stmt#=c.value pattern a2("x",_"z+i"_)
+45 9 a A B,45 9 a A C,45 9 a A D,45 9 a C B,45 9 a C C,45 9 a C D,45 9 a D B,45 9 a D C,45 9 a D D,45 9 p A B,45 9 p A C,45 9 p A D,45 9 p C B,45 9 p C C,45 9 p C D,45 9 p D B,45 9 p D C,45 9 p D D,45 9 q A B,45 9 q A C,45 9 q A D,45 9 q C B,45 9 q C C,45 9 q C D,45 9 q D B,45 9 q D C,45 9 q D D,45 9 x A B,45 9 x A C,45 9 x A D,45 9 x C B,45 9 x C C,45 9 x C D,45 9 x D B,45 9 x D C,45 9 x D D
+5000
+22 - All Clauses With One Synonyms
+assign a,a2; stmt s; while w; if ifs; variable v; procedure p,q; constant c;
+Select <ifs,a,v,p,q> such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q) with ifs.stmt#=c.value pattern a2("x",_"g"_)
+
+5000
+23 - All Clauses With TWO Synonyms
+assign a,a1,a2,a3; stmt s; while w; if ifs,ifs2; variable v,v2; procedure p,p1,q,q1; constant c;
+Select BOOLEAN such that Parent(ifs,ifs) and Follows(a,a2) and Modifies(s,v) and Uses(p,v2) and Calls*(p1,q) with ifs.stmt#=c.value pattern a3("x",_)
+true
+5000
+24 - All Clauses With TWO Synonyms
+assign a,a1,a2,a3; stmt s; while w1,w2; if ifs,ifs2; variable v,v2; procedure p,p1,q,q1; constant c;
+Select BOOLEAN such that Parent(ifs,ifs) and Follows(w1,w2) and Modifies(s,v) and Uses(p,v2) and Calls*(p1,q) with ifs.stmt#=c.value pattern a3("x",_)
+false
+5000
+25 - All Clauses with common synonyms in one group
+assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;
+Select BOOLEAN such that such that Follows (3, 4) and Uses (5, "y")
+true
+5000
+26 - All Clauses with common synonyms in one group
+assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;
+Select <a3,v3> such that pattern a3 ("z", _) such that Modifies (a3, v3)
+z p,z y,z z
+5000
+27 - All Clauses with common synonyms in one group
+assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;constant c;
+Select <s3,s1,s2,v1> such that Modifies (s3, "x") and Parent (s3, s1) and Follows (s1, s2) and Uses (s3, v1) and Uses (s2, v1) with s3.stmt#=c.value
+8 9 10 z,17 18 19 y
+5000
+28 - All Clauses with common synonyms in one group
+assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;
+Select <a1,v2> such that pattern a1 (v2, _"y-z"_)
+48 s
+5000
+29 - All Clauses with common synonyms in different group
+assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;constant c;
+Select <s1, s2, v2> such that Uses (s3, v1) and Modifies (s3, "x") and Follows (s1, s2) and Parent (s3, s1) and Uses (s2, v1) such that Uses (5, "y") and Follows (3, 4) pattern a1 (v2, _"y-z"_) with s3.stmt# = c.value such that Modifies (a3, v3) pattern a3 ("z", _) 
+9 10 s,18 19 s
+5000

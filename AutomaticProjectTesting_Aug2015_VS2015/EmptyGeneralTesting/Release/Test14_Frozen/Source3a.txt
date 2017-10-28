@@ -1,0 +1,20 @@
+procedure a{
+	a = 1;                   
+	b = a;					
+	c = a + b;				
+	d = a + b + c;			
+	a = a + b + c + d;		
+	while a {				
+		b = 0;				
+		c = b + c;			
+		a = 0;				
+	}
+	whi = 5;				
+	while b {				
+		e = 5;				
+		while c{			
+			f = 1;          
+		}
+
+	}
+}

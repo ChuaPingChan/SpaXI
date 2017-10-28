@@ -1,0 +1,33 @@
+procedure A {
+	x = y+z;	//1
+	call B;		//2
+	a = b;		//3
+	y = 1 + y;	//4
+	call E;		//5
+	call F;		//6
+}
+
+procedure B {
+	call C;		//7
+	c = b;		//8
+	call D;		//9
+}
+
+procedure C {
+	x = d;		//10
+	d = x;		//11
+}
+
+procedure D{
+	a = a-1;	//12
+	l=3;		//13
+	call E;		//14
+}
+
+procedure E { 
+	call C;		//15
+	call F;		//16
+}
+procedure F{
+    b = a+x* e;	//17
+}

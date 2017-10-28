@@ -1,6 +1,6 @@
-Overall Test Ran   : 6322
-Overall Test Passed: 6162
-Overall Test Failed: 160
+Overall Test Ran   : 6958
+Overall Test Passed: 6750
+Overall Test Failed: 208
 
 
 TestResult\out1.xml: 
@@ -237,6 +237,76 @@ TestResult\out13_Two_Query_With_ST_UsingSource2.xml:
 Test Ran: 6	[BUG]
 Passed  : 3
 Failed  : 3
+
+TestResult\out14_Query1a.xml: 
+Test Ran: 44
+Passed  : 44
+Failed  : 0
+
+TestResult\out14_Query1b.xml: 
+Test Ran: 50	[BUG]
+Passed  : 46
+Failed  : 4
+
+TestResult\out14_Query2a.xml: 
+Test Ran: 31
+Passed  : 31
+Failed  : 0
+
+TestResult\out14_Query2b.xml: 
+Test Ran: 50	[BUG]
+Passed  : 47
+Failed  : 3
+
+TestResult\out14_Query3a.xml: 
+Test Ran: 33
+Passed  : 33
+Failed  : 0
+
+TestResult\out14_Query4a.xml: 
+Test Ran: 15
+Passed  : 15
+Failed  : 0
+
+TestResult\out14_Query4b.xml: 
+Test Ran: 200	[BUG]
+Passed  : 176
+Failed  : 24
+
+TestResult\out14_Query5b.xml: 
+Test Ran: 60	[BUG]
+Passed  : 59
+Failed  : 1
+
+TestResult\out14_Query6Calls_UsingSource6.xml: 
+Test Ran: 10
+Passed  : 10
+Failed  : 0
+
+TestResult\out14_Query6Follows_UsingSource6.xml: 
+Test Ran: 34	[BUG]
+Passed  : 32
+Failed  : 2
+
+TestResult\out14_Query6Modifies_UsingSource6.xml: 
+Test Ran: 20	[BUG]
+Passed  : 18
+Failed  : 2
+
+TestResult\out14_Query6MultipleClause_UsingSource6.xml: 
+Test Ran: 29	[BUG]
+Passed  : 21
+Failed  : 8
+
+TestResult\out14_Query6Parent_UsingSource6.xml: 
+Test Ran: 40
+Passed  : 40
+Failed  : 0
+
+TestResult\out14_Query6Uses_UsingSource6.xml: 
+Test Ran: 20	[BUG]
+Passed  : 16
+Failed  : 4
 
 TestResult\out2.xml: 
 Test Ran: 336	[BUG]
