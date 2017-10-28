@@ -1,6 +1,6 @@
 Overall Test Ran   : 6322
-Overall Test Passed: 6127
-Overall Test Failed: 195
+Overall Test Passed: 6128
+Overall Test Failed: 194
 
 
 TestResult\out1.xml: 
@@ -40,8 +40,8 @@ Failed  : 4
 
 TestResult\out11_QueryWith.xml: 
 Test Ran: 61	[BUG]
-Passed  : 59
-Failed  : 2
+Passed  : 60
+Failed  : 1
 
 TestResult\out12_QueryComplexNext.xml: 
 Test Ran: 65
