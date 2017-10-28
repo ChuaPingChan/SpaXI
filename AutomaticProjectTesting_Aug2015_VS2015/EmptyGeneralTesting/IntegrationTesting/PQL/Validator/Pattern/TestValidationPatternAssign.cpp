@@ -218,6 +218,15 @@ namespace UnitTesting
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
 
+        TEST_METHOD(TestValidity_Pattern_Assign_TooManyArguments_Invalid)
+        {
+            string str = "a(_, _, _)";
+            QueryTree qt;
+            qt.insertSynonym(ASSIGN, "a");
+            PatternHandler pHandler = PatternHandler(&qt);
+            Assert::IsFalse(pHandler.isValidPattern(str));
+        }
+
         TEST_METHOD(TestRegex_Pattern_Assign_IncorrectSumOfBrackets_OkInRegex_Valid)
         {
             string str = "   a(v, \"(((1+2)\")   ";
