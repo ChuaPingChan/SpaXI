@@ -79,7 +79,6 @@ if %isPause%==1 (
 goto :eof
 
 :clearAllResultFiles
-echo Clearing existing result files ...
 if exist TestResult\cmd\*.txt (
 	del TestResult\cmd\*.txt
 )
@@ -89,7 +88,6 @@ if exist TestResult\*.xml (
 if exist TestResult\Summary.txt (
 	del TestResult\Summary.txt
 )
-echo Cleared!
 goto :eof
 
 :createCmdOutputFolder
