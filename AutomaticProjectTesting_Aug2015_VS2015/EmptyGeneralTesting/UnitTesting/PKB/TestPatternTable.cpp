@@ -221,5 +221,27 @@ namespace UnitTesting {
 			Assert::IsTrue(pt.hasPartialMatch(2, "alpha+beta-5*charlie*beta"));
 			Assert::IsFalse(pt.hasPartialMatch(2, "alphabet"));
 		}
+
+        TEST_METHOD(TestBrackets)
+        {
+            PatternTable pt;
+            Assert::IsTrue(pt.addToPatternTable(1, 1, "a*b+c+(d*e)"));
+            Assert::IsTrue(pt.addToPatternTable(2, 2, "(tokyo+osaka)*kyoto-(hiroshima*nagasaki)"));
+
+            Assert::IsTrue(pt.hasPartialMatch(1, "(a*b)"));
+            Assert::IsTrue(pt.hasPartialMatch(1, "(a*b+c)+(d*e)"));
+            Assert::IsTrue(pt.hasPartialMatch(1, "(((a*b+c))+(d*e))"));
+            Assert::IsTrue(pt.hasExactMatch(1, "(((a*b+c))+(d*e))"));
+            Assert::IsFalse(pt.hasPartialMatch(1, "(b+c)"));
+
+            Assert::IsFalse(pt.hasPartialMatch(2, "(osaka*kyoto)"));
+            Assert::IsTrue(pt.hasPartialMatch(2, "(tokyo+osaka)"));
+            Assert::IsTrue(pt.hasPartialMatch(2, "((tokyo+osaka)*kyoto)"));
+            Assert::IsTrue(pt.hasPartialMatch(2, "((hiroshima))"));
+            Assert::IsTrue(pt.hasPartialMatch(2, "(((hiroshima*nagasaki)))"));
+            Assert::IsTrue(pt.hasPartialMatch(2, "((tokyo+osaka)*kyoto)-(((hiroshima*nagasaki)))"));
+            Assert::IsTrue(pt.hasExactMatch(2, "((tokyo+osaka)*kyoto)-(((hiroshima*nagasaki)))"));
+            Assert::IsTrue(pt.hasPartialMatch(2, "((tokyo+osaka))"));
+        }
     };
 }
