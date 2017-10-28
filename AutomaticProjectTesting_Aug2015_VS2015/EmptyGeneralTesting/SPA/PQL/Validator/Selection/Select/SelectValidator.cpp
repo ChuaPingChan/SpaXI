@@ -53,7 +53,13 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 
     else if (RegexValidators::isValidAttrRefRegex(selectedStr))
     {
-        //TODO: Add support for AttrRef
+        if (isValidAttrRefForSynonym(selectedStr))
+        {
+            Entity entity = getEntityOfSynonym(selectedStr);
+            SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
+            storeInQueryTree(sc);
+            return true;
+        }
     }
         return false;
 }
@@ -76,13 +82,25 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
 
         for (string s : synonymList)
         {
-            try {
-                Entity entity = getEntityOfSynonym(s);
-                entityList.push_back(entity);
+            if (RegexValidators::isValidSynonymRegex(s))
+            {
+                try {
+                    Entity entity = getEntityOfSynonym(s);
+                    entityList.push_back(entity);
+                }
+                catch (SynonymNotFoundException& snfe) {
+                    //TODO: Add to logging
+                    return false;
+                }
             }
-            catch (SynonymNotFoundException& snfe) {
-                //TODO: Add to logging
-                return false;
+
+            else if (RegexValidators::isValidAttrRefRegex(s))
+            {
+                if (isValidAttrRefForSynonym(s))
+                {
+                    Entity entity = getEntityOfSynonym(s);
+                    entityList.push_back(entity);
+                }
             }
         }
 
@@ -153,6 +171,62 @@ Entity SelectValidator::getEntityOfSynonym(string syn)
         throw SynonymNotFoundException("Inside SelectValidator, when calling getEntityOfSynonym()");
     }
 }
+
+bool SelectValidator::isValidAttrRefForSynonym(string &str)
+{
+    string synonymWithAttribute = str;
+    synonymWithAttribute.erase(std::remove(synonymWithAttribute.begin(), synonymWithAttribute.end(), ' '), synonymWithAttribute.end()); //remove all whitespaces
+    string synonym = Formatter::getStringBeforeDelim(synonymWithAttribute, ".");
+    string attribute = Formatter::getStringAfterDelim(synonymWithAttribute, ".");
+    Entity entity;
+    try {
+         entity = getEntityOfSynonym(synonym);
+         str = synonym;
+    }
+    catch (SynonymNotFoundException& snfe) {
+        //TODO: Add to logging
+        return false;
+    }
+
+    switch (entity) 
+    {
+    case PROCEDURE: return isProcNameAttribute(attribute);
+    case STMT: return isStmtNumAttribute(attribute);
+    case ASSIGN: return isStmtNumAttribute(attribute);
+    case CALL: return isStmtNumAttribute(attribute) || isProcNameAttribute(attribute);
+    case WHILE: return isStmtNumAttribute(attribute);
+    case IF: return isStmtNumAttribute(attribute);
+    case VARIABLE: return isVarNameAttribute(attribute);
+    case CONSTANT: return isValueAttribute(attribute);
+    default: return false;
+    }
+    return true;
+}
+
+bool SelectValidator::isProcNameAttribute(string attribute)
+{
+    string procName = "procName";
+    return(attribute == procName);
+}
+
+bool SelectValidator::isStmtNumAttribute(string attribute)
+{
+    string stmtNum = "stmt#";
+    return(attribute == stmtNum);
+}
+
+bool SelectValidator::isVarNameAttribute(string attribute)
+{
+    string varName = "varName";
+    return(attribute == varName);
+}
+
+bool SelectValidator::isValueAttribute(string attribute)
+{
+    string value = "value";
+    return(attribute == value);
+}
+
 
 string SelectValidator::removeSelectKeyword(string str)
 {

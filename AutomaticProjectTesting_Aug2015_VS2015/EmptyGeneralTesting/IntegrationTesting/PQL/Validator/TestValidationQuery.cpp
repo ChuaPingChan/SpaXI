@@ -192,21 +192,6 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
-        /* Uncomment when we extend for selecting synonyms with attributes, i.e Select p.procName
-        TEST_METHOD(TestValidity_Query_SelectAttributeOfSynonym_ValidDeclaration_ExpectTrue_Valid)
-        {
-            string query;
-            query.append("call c;");
-            query.append("Select c.varName");
-            QueryTree qt;
-            FriendQueryValidator validator = FriendQueryValidator(&qt);
-            Assert::IsTrue(validator.isValidQuery(query));
-            Assert::IsTrue(validator.getValidDeclarationFlag());
-            Assert::IsTrue(validator.getValidSelectionFlag());
-            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
-            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
-        } */
-
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_SameEntity_DuplicatedSynonym_Invalid)
         {
             string query;
@@ -234,6 +219,244 @@ namespace UnitTesting
             Assert::IsTrue(friendValidator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        /************************************************
+        * Select Clause - Single Synonym with Attribute *
+        *************************************************/
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfCall_ValidDeclaration_ProcName_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("call c;");
+            query.append("Select c.procName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfCall_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("call c;");
+            query.append("Select c.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfCall_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("call c;");
+            query.append("Select c.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfStmt_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select s.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfStmt_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select s.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfAssign_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select a.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfAssign_ValidDeclaration_VarName_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select a.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfAssign_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select a.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfWhile_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("while w;");
+            query.append("Select w.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, WHILE, "w");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfWhile_ValidDeclaration_VarName_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("while w;");
+            query.append("Select w.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, WHILE, "w");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfWhile_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("while w;");
+            query.append("Select w.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, WHILE, "w");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfIf_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("if i;");
+            query.append("Select i.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, IF, "i");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfIf_ValidDeclaration_VarName_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("if i;");
+            query.append("Select i.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, IF, "i");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfIf_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("if i;");
+            query.append("Select i.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, IF, "i");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfVar_ValidDeclaration_VarName_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("variable v;");
+            query.append("Select v.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, VARIABLE, "v");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfVar_ValidDeclaration_StmtNum_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("variable v;");
+            query.append("Select v.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, VARIABLE, "v");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfConstant_ValidDeclaration_Value_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("constant c;");
+            query.append("Select c.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CONSTANT, "c");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfConstant_ValidDeclaration_StmtNum_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("constant c;");
+            query.append("Select c.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CONSTANT, "c");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
 
