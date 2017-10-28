@@ -65,5 +65,14 @@ namespace UnitTesting
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
+
+        TEST_METHOD(TestValidity_Pattern_While_TooManyArguments_Invalid)
+        {
+            string str = "w(_, _, _)";
+            QueryTree qt;
+            qt.insertSynonym(WHILE, "w");
+            PatternHandler pHandler = PatternHandler(&qt);
+            Assert::IsFalse(pHandler.isValidPattern(str));
+        }
     };
 }
