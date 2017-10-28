@@ -1,0 +1,52 @@
+procedure A {
+	if c then {					//1
+		b = i+f;				//2
+	} else {
+		while f {				//3
+			d = 1 + b - c;		//4
+			e = c*2;			//5
+			if g then {			//6
+				b = a + c + d;	//7
+			} else {
+				while b {		//8
+					a = f;		//9
+					f = e*a;	//10
+				}
+			}
+		}
+	}
+	if a then {					//11
+		if b then {				//12
+			while g {			//13
+				h = 1;			//14
+				while c {		//15
+					c = d;		//16
+				}
+				g=a;			//17
+			}
+		} else {
+			d = 2;				//18
+			d = a+b;			//19
+		}
+	} else {
+		if g then {				//20
+			b = (c+0)*4;		//21
+			a = 2*(a+b);		//22
+			c = c - d;			//23
+		} else {
+			a = 2;				//24
+		}
+	}
+	while g {					//25
+		if g then {				//26
+			f = i;				//27
+		} else {
+			c = d-e+f*a;		//28
+			while b {			//29
+				a = 1+d*3;		//30
+				b = g;			//31
+			}
+		}
+	}
+	h = 0;						//32
+}

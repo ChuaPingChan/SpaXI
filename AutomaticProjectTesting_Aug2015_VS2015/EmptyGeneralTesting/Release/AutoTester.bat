@@ -63,6 +63,9 @@ if '%option%'=='12' (
 if '%option%'=='13' (
 	goto :runTest13
 )
+if '%option%'=='14' (
+	goto :runTest14
+)
 cls
 goto :main
 echo ===============================================================================
@@ -178,6 +181,7 @@ call :runTest10
 call :runTest11
 call :runTest12
 call :runTest13
+call :runTest14
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -219,6 +223,7 @@ goto :eof
 :runTest4
 call :createCmdOutputFolder
 echo ===============================================================================
+echo Running AutoTester for test 4...
 echo Running AutoTester for test 4_0...
 AutoTester Test4_Frozen\test4source0.txt Test4_Frozen\test4query0.txt TestResult\out4_0.xml > TestResult\cmd\cmd4_0.txt
 echo Finish running AutoTester for test 4_0.
@@ -228,6 +233,7 @@ echo Finish running AutoTester for test 4_1.
 echo Running AutoTester for test 4_2...
 AutoTester Test4_Frozen\test4source2.txt Test4_Frozen\test4query2.txt TestResult\out4_2.xml > TestResult\cmd\cmd4_2.txt
 echo Finish running AutoTester for test 4_2.
+echo Finish running AutoTester for test 4.
 call :getPauseAction
 goto :eof
 
@@ -457,7 +463,7 @@ echo Finish running AutoTester for QueryNext_UsingSourceNext.txt.
 ::echo Running AutoTester for QueryNextStar_Performance_UsingSource2.txt...
 ::AutoTester Test13_Seven\2_Two\Source2.txt Test13_Seven\2_Two\QueryNextStar_Performance_UsingSource2.txt TestResult\out13_Two_QueryNextStar_Performance_UsingSource2.xml > TestResult\cmd\cmd13_Two_QueryNextStar_Performance_UsingSource2.txt
 ::echo Finish running AutoTester for QueryNextStar_Performance_UsingSource2.txt.
-echo -- ! -- QueryNextStar_Performance_UsingSource2.txt has been commented away in the bat file -- ! --
+echo -- TIMEOUT! -- QueryNextStar_Performance_UsingSource2.txt has been commented away in the bat file -- ! --
 echo Running AutoTester for QueryNextStar_UsingSourceNext.txt...
 AutoTester Test13_Seven\2_Two\SourceNext.txt Test13_Seven\2_Two\QueryNextStar_UsingSourceNext.txt TestResult\out13_Two_QueryNextStar_UsingSourceNext.xml > TestResult\cmd\cmd13_Two_QueryNextStar_UsingSourceNext.txt
 echo Finish running AutoTester for QueryNextStar_UsingSourceNext.txt.
@@ -509,7 +515,7 @@ echo Finish running AutoTester for Query3.txt.
 ::echo Running AutoTester for Query4.txt...
 ::AutoTester Test13_Seven\4_Intense\Source4.txt Test13_Seven\4_Intense\Query4.txt TestResult\out13_Intense_Query4.xml > TestResult\cmd\cmd13_Intense_Query4.txt
 ::echo Finish running AutoTester for Query4.txt.
-echo -- ! -- Query4.txt has been commented away in the bat file -- ! --
+echo -- TIMEOUT! -- Query4.txt has been commented away in the bat file -- ! --
 echo Running AutoTester for Query5.txt...
 AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
 echo Finish running AutoTester for Query5.txt.
@@ -529,5 +535,59 @@ echo Running AutoTester for Query8.txt...
 AutoTester Test13_Seven\4_Intense\Source8.txt Test13_Seven\4_Intense\Query8.txt TestResult\out13_Intense_Query8.xml > TestResult\cmd\cmd13_Intense_Query8.txt
 echo Finish running AutoTester for Query8.txt.
 echo Finish running AutoTester for test 13.
+call :getPauseAction
+goto :eof
+
+:runTest14
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 14...
+echo Running AutoTester for Query1a.txt...
+AutoTester Test14_Frozen\Source1a.txt Test14_Frozen\Query1a.txt TestResult\out14_Query1a.xml > TestResult\cmd\cmd14_Query1a.txt
+echo Finish running AutoTester for Query1a.txt.
+echo Running AutoTester for Query1b.txt...
+AutoTester Test14_Frozen\Source1b.txt Test14_Frozen\Query1b.txt TestResult\out14_Query1b.xml > TestResult\cmd\cmd14_Query1b.txt
+echo Finish running AutoTester for Query1b.txt.
+echo Running AutoTester for Query2a.txt...
+AutoTester Test14_Frozen\Source2a.txt Test14_Frozen\Query2a.txt TestResult\out14_Query2a.xml > TestResult\cmd\cmd14_Query2a.txt
+echo Finish running AutoTester for Query2a.txt.
+echo Running AutoTester for Query2b.txt...
+AutoTester Test14_Frozen\Source2b.txt Test14_Frozen\Query2b.txt TestResult\out14_Query2b.xml > TestResult\cmd\cmd14_Query2b.txt
+echo Finish running AutoTester for Query2b.txt.
+echo Running AutoTester for Query3a.txt...
+AutoTester Test14_Frozen\Source3a.txt Test14_Frozen\Query3a.txt TestResult\out14_Query3a.xml > TestResult\cmd\cmd14_Query3a.txt
+::echo Finish running AutoTester for Query3a.txt.
+::echo Running AutoTester for Query3b.txt...
+::AutoTester Test14_Frozen\Source3b.txt Test14_Frozen\Query3b.txt TestResult\out14_Query3b.xml > TestResult\cmd\cmd14_Query3b.txt
+echo -- TIMEOUT! -- Query3b.txt has been commented away in the bat file -- ! --
+echo Finish running AutoTester for Query3b.txt.
+echo Running AutoTester for Query4a.txt...
+AutoTester Test14_Frozen\Source4a.txt Test14_Frozen\Query4a.txt TestResult\out14_Query4a.xml > TestResult\cmd\cmd14_Query4a.txt
+echo Finish running AutoTester for Query4a.txt.
+echo Running AutoTester for Query4b.txt...
+AutoTester Test14_Frozen\Source4b.txt Test14_Frozen\Query4b.txt TestResult\out14_Query4b.xml > TestResult\cmd\cmd14_Query4b.txt
+echo Finish running AutoTester for Query4b.txt.
+echo Running AutoTester for Query5b.txt...
+AutoTester Test14_Frozen\Source5b.txt Test14_Frozen\Query5b.txt TestResult\out14_Query5b.xml > TestResult\cmd\cmd14_Query5b.txt
+echo Finish running AutoTester for Query5b.txt.
+echo Running AutoTester for Query6Calls_UsingSource6.txt...
+AutoTester Test14_Frozen\Source6.txt Test14_Frozen\Query6Calls_UsingSource6.txt TestResult\out14_Query6Calls_UsingSource6.xml > TestResult\cmd\cmd14_Query6Calls_UsingSource6.txt
+echo Finish running AutoTester for Query6Calls_UsingSource6.txt.
+echo Running AutoTester for Query6Follows_UsingSource6.txt...
+AutoTester Test14_Frozen\Source6.txt Test14_Frozen\Query6Follows_UsingSource6.txt TestResult\out14_Query6Follows_UsingSource6.xml > TestResult\cmd\cmd14_Query6Follows_UsingSource6.txt
+echo Finish running AutoTester for Query6Follows_UsingSource6.txt.
+echo Running AutoTester for Query6Modifies_UsingSource6.txt...
+AutoTester Test14_Frozen\Source6.txt Test14_Frozen\Query6Modifies_UsingSource6.txt TestResult\out14_Query6Modifies_UsingSource6.xml > TestResult\cmd\cmd14_Query6Modifies_UsingSource6.txt
+echo Finish running AutoTester for Query6Modifies_UsingSource6.txt.
+echo Running AutoTester for Query6MultipleClause_UsingSource6.txt...
+AutoTester Test14_Frozen\Source6.txt Test14_Frozen\Query6MultipleClause_UsingSource6.txt TestResult\out14_Query6MultipleClause_UsingSource6.xml > TestResult\cmd\cmd14_Query6MultipleClause_UsingSource6.txt
+echo Finish running AutoTester for Query6MultipleClause_UsingSource6.txt.
+echo Running AutoTester for Query6Parent_UsingSource6.txt...
+AutoTester Test14_Frozen\Source6.txt Test14_Frozen\Query6Parent_UsingSource6.txt TestResult\out14_Query6Parent_UsingSource6.xml > TestResult\cmd\cmd14_Query6Parent_UsingSource6.txt
+echo Finish running AutoTester for Query6Parent_UsingSource6.txt.
+echo Running AutoTester for Query6Uses_UsingSource6.txt...
+AutoTester Test14_Frozen\Source6.txt Test14_Frozen\Query6Uses_UsingSource6.txt TestResult\out14_Query6Uses_UsingSource6.xml > TestResult\cmd\cmd14_Query6Uses_UsingSource6.txt
+echo Finish running AutoTester for Query6Uses_UsingSource6.txt.
+echo Finish running AutoTester for test 14.
 call :getPauseAction
 goto :eof
