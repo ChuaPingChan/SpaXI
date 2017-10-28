@@ -15,6 +15,9 @@ Optimizer::Optimizer(QueryTree &queryTree)
     */
     processQueryTree(queryTree);
     formClauseGroups();
+    sortClausesWithinGroup();
+    sortClauseGroups();
+    _clauseGroupsManager = ClauseGroupsManager(createClauseGroupQueue())      // TODO: Implement
 }
 
 /*
@@ -139,4 +142,32 @@ void Optimizer::formClauseGroups()
         _clauseGroups.push_back(clauseGroup);
 
     }
+}
+
+void Optimizer::sortClausesWithinGroup()
+{
+    // TODO: Implement
+}
+
+void Optimizer::sortClauseGroups()
+{
+    // TODO: Implement
+}
+
+/*
+    Enforces FIFO policy of evaluating sorted clause groups and clauses in 
+    groups using queues.
+*/
+queue<queue<ClauseWrapper>> Optimizer::createClauseGroupQueue()
+{
+    queue<queue<ClauseWrapper>> clauseGroupsQueue;
+
+    for (vector<ClauseWrapper> clauseGroup : _clauseGroups) {
+        queue<ClauseWrapper> clauseQueue;
+        for (ClauseWrapper clause : clauseGroup) {
+            clauseQueue.push(clause);
+        }
+        clauseGroupsQueue.push(clauseQueue);
+    }
+    return clauseGroupsQueue;
 }

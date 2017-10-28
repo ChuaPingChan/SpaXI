@@ -26,5 +26,8 @@ protected:
     bool processQueryTree(QueryTree &queryTree);
     list<ClauseWrapper> extractClausesFromQueryTree(QueryTree &queryTree);    // TODO: Rename if QueryTree's name changes
     void formClauseGroups();
+    void sortClausesWithinGroup();
+    void sortClauseGroups();
+    queue<queue<ClauseWrapper>> createClauseGroupQueue();
 
 };

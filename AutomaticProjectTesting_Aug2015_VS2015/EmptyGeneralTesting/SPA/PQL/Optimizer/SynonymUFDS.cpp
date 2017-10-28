@@ -9,12 +9,13 @@ SynonymUFDS::SynonymUFDS()
 {
 }
 
-SynonymUFDS::SynonymUFDS(int size)
-{
-    for (int i = 0; i < size; i++) {
-        addSynonym(i);
-    }
-}
+// TODO: Remove if not needed at the end
+//SynonymUFDS::SynonymUFDS(int size)
+//{
+//    for (int i = 0; i < size; i++) {
+//        addSynonym(i);
+//    }
+//}
 
 bool SynonymUFDS::addSynonym(int synIdx)
 {

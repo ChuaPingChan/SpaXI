@@ -8,7 +8,7 @@ class SynonymUFDS
 {
 public:
     SynonymUFDS();
-    SynonymUFDS(int size);
+    // SynonymUFDS(int size);
 
     bool addSynonym(int synIdx);
     int findSet(int synIdx);
