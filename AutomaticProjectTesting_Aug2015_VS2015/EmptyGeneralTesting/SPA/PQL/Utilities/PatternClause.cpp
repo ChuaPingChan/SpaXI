@@ -1,4 +1,5 @@
 #include "PatternClause.h"
+#include "../../Entity.h"
 
 using namespace std;
 
@@ -10,6 +11,11 @@ PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity 
     this->_patternSyn = patternSyn;
     this->_argOne = argOne;
     this->_argTwo = argTwo;
+
+    addSynonym(patternSyn);
+    if (entityIsSynonym(argOneType)) {
+        addSynonym(argOne);
+    }
 }
 
 PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree)

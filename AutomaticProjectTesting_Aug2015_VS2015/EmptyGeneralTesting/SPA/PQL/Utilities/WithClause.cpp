@@ -1,4 +1,5 @@
 #include "WithClause.h"
+#include "../../Entity.h"
 
 WithClause::WithClause(WithType withType, Entity lhsEntity, string lhsValue, Entity rhsEntity, string rhsValue)
 {
@@ -7,6 +8,13 @@ WithClause::WithClause(WithType withType, Entity lhsEntity, string lhsValue, Ent
     this->lhsValue = lhsValue;
     this->rhsEntity = rhsEntity;
     this->rhsValue = rhsValue;
+
+    if (entityIsSynonym(lhsEntity)) {
+        addSynonym(lhsValue);
+    }
+    if (entityIsSynonym(rhsEntity)) {
+        addSynonym(rhsValue);
+    }
 }
 
 WithClause::~WithClause()
