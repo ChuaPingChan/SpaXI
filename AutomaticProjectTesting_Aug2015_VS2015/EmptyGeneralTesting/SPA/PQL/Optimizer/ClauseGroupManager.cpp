@@ -1,11 +1,11 @@
-#include "ClauseGroupsManager.h"
+#include "ClauseGroupManager.h"
 #include "../Utilities/ClauseResult.h"
 
-ClauseGroupsManager::ClauseGroupsManager()
+ClauseGroupManager::ClauseGroupManager()
 {
 }
 
-queue<ClauseWrapper> ClauseGroupsManager::getNextClauseGroup()
+queue<ClauseWrapper> ClauseGroupManager::getNextClauseGroup()
 {
     queue<ClauseWrapper> nextClauseGroup = _clauseGroupQueue.front();
     _clauseGroupQueue.pop();
@@ -15,7 +15,7 @@ queue<ClauseWrapper> ClauseGroupsManager::getNextClauseGroup()
 /*
     Merges the newly computed results of a new clause group into _mergedClauseResult
 */
-void ClauseGroupsManager::processClauseResult(ClauseResult clauseResult)
+void ClauseGroupManager::processClauseResult(ClauseResult clauseResult)
 {
     // Get all selected synonyms in clause result
     list<string> synsInClauseResult = clauseResult.getAllSynonyms();
@@ -29,23 +29,23 @@ void ClauseGroupsManager::processClauseResult(ClauseResult clauseResult)
     _mergedClauseResult.updateSynResults(selectedSyns, resultsToMerge);
 }
 
-void ClauseGroupsManager::setSelectedSynonyms(list<string> synonyms)
+void ClauseGroupManager::setSelectedSynonyms(list<string> synonyms)
 {
     for (string synName : synonyms)
         _selectedSynonyms.insert(synName);
 }
 
-void ClauseGroupsManager::setClauseGroupQueue(queue<queue<ClauseWrapper>>& clauseGroupQueue)
+void ClauseGroupManager::setClauseGroupQueue(queue<queue<ClauseWrapper>>& clauseGroupQueue)
 {
     _clauseGroupQueue = clauseGroupQueue;
 }
 
-ClauseResult ClauseGroupsManager::getMergedClauseResult()
+ClauseResult ClauseGroupManager::getMergedClauseResult()
 {
     return _mergedClauseResult;
 }
 
-bool ClauseGroupsManager::synonymIsSelected(string synName)
+bool ClauseGroupManager::synonymIsSelected(string synName)
 {
     return _selectedSynonyms.find(synName) != _selectedSynonyms.end();
 }

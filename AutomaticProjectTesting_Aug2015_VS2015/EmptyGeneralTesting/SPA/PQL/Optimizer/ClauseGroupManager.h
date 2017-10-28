@@ -7,10 +7,10 @@
 
 using namespace std;
 
-class ClauseGroupsManager
+class ClauseGroupManager
 {
 public:
-    ClauseGroupsManager();
+    ClauseGroupManager();
 
     /*
         TODO:

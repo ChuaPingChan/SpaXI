@@ -1,6 +1,6 @@
 #include <cassert>
 #include "Optimizer.h"
-#include "ClauseGroupsManager.h"
+#include "ClauseGroupManager.h"
 #include "../Utilities/ClauseWrapper.h"
 #include "SynonymUFDS.h"
 
@@ -25,7 +25,7 @@ Optimizer::Optimizer(QueryTree &queryTree)
     Gets a ClauseGroupManager object that contains processed clause groups
     for efficient evaluation and handles evaluated results of clause groups.
 */
-ClauseGroupsManager Optimizer::getClauseGroupManager()
+ClauseGroupManager Optimizer::getClauseGroupManager()
 {
     return _clauseGroupsManager;
 }

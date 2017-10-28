@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../QueryTree.h"
-#include "ClauseGroupsManager.h"
+#include "ClauseGroupManager.h"
 #include "../Utilities/ClauseWrapper.h"
 
 using namespace std;
@@ -11,7 +11,7 @@ class Optimizer
 public:
     Optimizer(QueryTree &queryTree);
 
-    ClauseGroupsManager getClauseGroupManager();
+    ClauseGroupManager getClauseGroupManager();
 
 protected:
 
@@ -20,7 +20,7 @@ protected:
     vector<ClauseWrapper> _clauseVector;     // Index to clause map
     unordered_map<int, list<int>> _synIdxToClauseIdxsMap;   // Synonym to clause index map
 
-    ClauseGroupsManager _clauseGroupsManager;
+    ClauseGroupManager _clauseGroupsManager;
     
     // Vector is chosen to swap elements easily. To be converted to queues before passing to evaluator.
     vector<vector<ClauseWrapper>> _clauseGroups;
