@@ -334,6 +334,35 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(TestAffectsComputation)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_affectsSource1());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            
+			// Test for affects
+			Assert::IsTrue(dummyPkbMain.isAffects(1, 3));
+			Assert::IsTrue(dummyPkbMain.isAffects(1, 7));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 3));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 3));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 5));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 6));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 7));
+			Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
+
+			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 10);
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
@@ -1036,6 +1065,31 @@ namespace UnitTesting
                 "	supper = best * best; \n"
                 "	supper = supper * best; \n"
                 "} \n";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy SIMPLE source to test
+        PKB's Affects computation.
+        */
+        bool createDummySimpleSourceFile_affectsSource1() {
+            std::string content =
+                "procedure Test { \n"
+                "	a = b; \n"
+                "	while b { \n"
+                "		a = c + a; \n"
+                "		while c { \n"
+                "			a = d + a; \n"
+                "		} \n"
+                "		b = a; \n"
+                "	} \n"
+                "	d = a; \n"
+                "}";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

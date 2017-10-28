@@ -26,6 +26,8 @@
 #include "CallsTable.h"
 #include "CallsStarTable.h"
 #include "NextTable.h"
+#include "Cache.h"
+#include "IfStmt.h"
 #include <string>
 #include "../Entity.h"
 
@@ -36,6 +38,7 @@ public:
 	PKBMain();
     static PKBMain* getInstance();
     static void resetInstance();
+	void clearCache();
     static bool deleteInstance();
 
 	bool isSameName(Entity type1, int idx1, Entity type2, int idx2);
@@ -163,6 +166,9 @@ public:
 	list<int> getAllAffected();
 	list<int> getAffectorOf(int stmt2);
 	list<int> getAllAffector();
+	list<int> getAllFirstStmtOfProc();
+	pair<list<int>, list<int>> getAllAffects(int stmt, unordered_map<int, unordered_set<int>>& affectsRelMap);
+	unordered_map<int, unordered_set<int>> joinMap(unordered_map<int, unordered_set<int>> firstMap, unordered_map<int, unordered_set<int>> secondMap);
 	pair<list<int>, list<int>> getAllAffects();
 	bool isAffectsStar(int stmt1, int stmt2);
 	list<int> getAffectedStarOf(int stmt1);
@@ -307,4 +313,5 @@ private:
 	CallsStarTable callsStarTable;
 	DesignExtractor de;
 	NextTable nextTable;
+	Cache cache;
 };
