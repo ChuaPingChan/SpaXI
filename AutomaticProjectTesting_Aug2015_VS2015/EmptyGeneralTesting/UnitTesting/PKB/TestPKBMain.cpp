@@ -552,6 +552,176 @@ namespace UnitTesting
 			Assert::IsTrue(PKB.isAffects(2, 5));
 			Assert::IsTrue(PKB.isAffects(5, 4));
 			Assert::IsFalse(PKB.isAffects(4, 6));
+			list<int> expectedList = { 2, 4, 5, 6 };
+			list<int> resultList = PKB.getAllAffected();
+			resultList.sort();
+			Assert::IsTrue(expectedList == resultList);
+
+			expectedList = { 2, 4, 5 };
+			resultList = PKB.getAllAffector();
+			resultList.sort();
+			Assert::IsTrue(expectedList == resultList);
+		}
+
+		TEST_METHOD(TestAffectsPair) {
+			PKBMain PKB;
+			/*
+			procedure Test {
+			1.	a = 1;
+			2.	b = a;
+			3.	a = b;
+			4.	b = a;
+			}
+			*/
+			PKB.addProcedure("Test");
+			PKB.setNext(1, 2);
+			PKB.setNext(2, 3);
+			PKB.setNext(3, 4);
+			PKB.addStmtToProc(1, "Test");
+			PKB.addStmtToProc(2, "Test");
+			PKB.addStmtToProc(3, "Test");
+			PKB.addStmtToProc(4, "Test");
+			PKB.addAssignmentStmt(1);
+			PKB.addAssignmentStmt(2);
+			PKB.addAssignmentStmt(3);
+			PKB.addAssignmentStmt(4);
+			PKB.addVariable("a");
+			PKB.addVariable("b");
+			PKB.setModTableStmtToVar(1, "a");
+			PKB.setModTableStmtToVar(2, "b");
+			PKB.setUseTableStmtToVar(2, "a");
+			PKB.setModTableStmtToVar(3, "a");
+			PKB.setUseTableStmtToVar(3, "b");
+			PKB.setUseTableStmtToVar(4, "a");
+			PKB.setModTableStmtToVar(4, "b");
+
+			pair<list<int>, list<int>> resultPair = PKB.getAllAffects();
+			Assert::IsTrue(resultPair.first.size() == 3);
+			Assert::IsTrue(resultPair.second.size() == 3);
+		}
+
+		TEST_METHOD(TestAffectsPairACW) { //affects, calls, while
+			PKBMain PKB;
+
+			/*
+			procedure Test {
+			1.	a = 3;
+			2.	while b {
+			3.		a = b + c;
+			4.		b = 7;
+			5.		call Test2; // modifies b, c
+			6.		c = 3 + a;
+			7.		b = a;
+				}
+			8.	c = a + b;
+			}
+
+			procedure Test2 { // modifies b, c
+			9.	c = 2;
+			10.	b = c;
+			}
+			*/
+
+			PKB.addVariable("a");
+			PKB.addVariable("b");
+			PKB.addVariable("c");
+
+			PKB.addProcedure("Test");
+			PKB.addProcedure("Test2");
+
+			PKB.addStmtToProc(1, "Test");
+			PKB.addStmtToProc(2, "Test");
+			PKB.addStmtToProc(3, "Test");
+			PKB.addStmtToProc(4, "Test");
+			PKB.addStmtToProc(5, "Test");
+			PKB.addStmtToProc(6, "Test");
+			PKB.addStmtToProc(7, "Test");
+			PKB.addStmtToProc(8, "Test");
+			PKB.addStmtToProc(9, "Test2");
+			PKB.addStmtToProc(10, "Test2");
+
+			PKB.setNext(1, 2);
+			PKB.setNext(2, 3);
+			PKB.setNext(3, 4);
+			PKB.setNext(4, 5);
+			PKB.setNext(5, 6);
+			PKB.setNext(6, 7);
+			PKB.setNext(7, 2);
+			PKB.setNext(2, 8);
+			PKB.setNext(9, 10);
+
+			PKB.addAssignmentStmt(1);
+			PKB.setModTableStmtToVar(1, "a");
+
+			PKB.addWhileStmt(2, "b");
+
+			PKB.setParentChildRel(2, 3);
+			PKB.addAssignmentStmt(3);
+			PKB.setModTableStmtToVar(3, "a");
+			PKB.setUseTableStmtToVar(3, "b");
+			PKB.setUseTableStmtToVar(3, "c");
+
+			PKB.setParentChildRel(2, 4);
+			PKB.addAssignmentStmt(4);
+			PKB.setModTableStmtToVar(4, "b");
+
+			PKB.setParentChildRel(2, 5);
+			PKB.setCallsRel(5, "Test", "Test2");
+
+			PKB.setParentChildRel(2, 6);
+			PKB.addAssignmentStmt(6);
+			PKB.setModTableStmtToVar(6, "c");
+			PKB.setUseTableStmtToVar(6, "a");
+
+			PKB.setParentChildRel(2, 7);
+			PKB.addAssignmentStmt(7);
+			PKB.setModTableStmtToVar(7, "b");
+			PKB.setUseTableStmtToVar(7, "a");
+
+			PKB.addAssignmentStmt(8);
+			PKB.setModTableStmtToVar(8, "c");
+			PKB.setUseTableStmtToVar(8, "a");
+			PKB.setUseTableStmtToVar(8, "b");
+
+			PKB.addAssignmentStmt(9);
+			PKB.setModTableStmtToVar(9, "c");
+			
+			PKB.addAssignmentStmt(10);
+			PKB.setModTableStmtToVar(10, "b");
+			PKB.setUseTableStmtToVar(10, "c");
+
+			PKB.setModTableProcToVar("Test", "a");
+			PKB.setModTableProcToVar("Test", "b");
+			PKB.setModTableProcToVar("Test", "c");
+			PKB.setUseTableProcToVar("Test", "b");
+			PKB.setUseTableProcToVar("Test", "c");
+			PKB.setUseTableProcToVar("Test", "a");
+
+			PKB.setModTableProcToVar("Test2", "c");
+			PKB.setModTableProcToVar("Test2", "b");
+			PKB.setUseTableProcToVar("Test2", "c");
+
+			PKB.startProcessComplexRelations();
+
+			Assert::IsTrue(PKB.isModProc(1, 2));
+			Assert::IsTrue(PKB.isModProc("Test2", "c"));
+			Assert::IsTrue(PKB.isModProc("Test2", "b"));
+			Assert::IsFalse(PKB.isModProc("Test2", "a"));
+
+			Assert::IsTrue(PKB.isAffects(1, 8));
+			Assert::IsTrue(PKB.isAffects(3, 6));
+			Assert::IsTrue(PKB.isAffects(3, 7));
+			Assert::IsTrue(PKB.isAffects(6, 3));
+			Assert::IsTrue(PKB.isAffects(7, 3));
+			Assert::IsTrue(PKB.isAffects(7, 8));
+			Assert::IsTrue(PKB.isAffects(9, 10));
+			Assert::IsFalse(PKB.isAffects(1, 6));
+			Assert::IsFalse(PKB.isAffects(1, 7));
+			Assert::IsFalse(PKB.isAffects(6, 8));
+
+			pair<list<int>, list<int>> resultPair = PKB.getAllAffects();
+			int size = resultPair.first.size();
+			Assert::IsTrue(resultPair.first.size() == 8);
 		}
 	};
 }

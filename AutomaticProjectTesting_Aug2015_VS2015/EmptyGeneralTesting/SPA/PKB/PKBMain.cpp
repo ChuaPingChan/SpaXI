@@ -31,6 +31,12 @@ void PKBMain::resetInstance()
     singleton = new PKBMain();
 }
 
+void PKBMain::clearCache()
+{
+	Cache newCache;
+	cache = newCache;
+}
+
 //Utility functions
 bool PKBMain::isSameName(Entity type1, int idx1, Entity type2, int idx2) {
 	string arg1 = convertIdxToString(idx1, type1);
@@ -140,8 +146,12 @@ list<int> PKBMain::getAllIntOfIntEntity(Entity type) {
 		return getAllCallsStmt();
 	}
 
-	else if (type == IF) {
+	else if (type == CONSTANT) {
 		return getAllConstants();
+	}
+
+	else if (type == IF) {
+		return getAllIfs();
 	}
 
 	else if (type == PROG_LINE) {
@@ -631,13 +641,20 @@ list<int> PKBMain::getExecutedAfterStar(int befStmt, Entity type) {
 }
 
 list<int> PKBMain::getExecutedBeforeStar(int aftStmt, Entity type) {
-	list<int> stmtList = nextTable.getExecutedBeforeStar(aftStmt);
+	list<int> stmtList;
+	stmtList = nextTable.getExecutedBeforeStar(aftStmt);
 	stmtList = stmtTypeList.getStmtType(stmtList, type);
 	return stmtList;
 }
 
 pair<list<int>, list<int>> PKBMain::getAllNextStar(Entity type1, Entity type2) {
+	if (cache.containsAllNextStar()) {
+		return stmtTypeList.getStmtType(cache.getAllNextStar(), type1, type2);
+	}
+
 	pair<list<int>, list<int>> resultPair = nextTable.getAllNextStar();
+	//TODO put in bool for same synonym
+	cache.putAllNextStar(resultPair);
 	return stmtTypeList.getStmtType(resultPair, type1, type2);
 }
 
@@ -1190,7 +1207,7 @@ int PKBMain::getProcFromStmt(int stmt) {
 	return procIdxTable.getProcIdxFromStmt(stmt);
 }
 
-//TODO AFFECTSSSSS
+//TODO AFFECTSSSSS OPTIMISE PLZ
 bool PKBMain::isAffects(int stmt1, int stmt2) {
 	// check if both are assignment first
 	if (!isAssignment(stmt1) || !isAssignment(stmt2)) {
@@ -1348,6 +1365,9 @@ list<int> PKBMain::getAllAffector() {
 	list<int> allStmts = getAllAssignments();
 	for (int stmt : allStmts) {
 		list<int> prevStarList = getExecutedBeforeStar(stmt, STMT);
+		if (prevStarList.size() == 0) {
+			continue;
+		}
 		for (int prev : prevStarList) {
 			if (isAffects(prev, stmt)) {
 				affectorList.push_back(prev);
@@ -1359,11 +1379,208 @@ list<int> PKBMain::getAllAffector() {
 	return affectorList;
 }
 
+list<int> PKBMain::getAllFirstStmtOfProc() {
+	list<int> allProcIdx = getAllProcedures();
+	list<int> allFirstStmt;
+	for (int proc : allProcIdx) {
+		allFirstStmt.push_back(procIdxTable.getFirstStmtFromProc(proc));
+	}
+
+	return allFirstStmt;
+}
+
+pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, unordered_set<int>> &affectsRelMap) {
+	int curr = stmt;
+	list<int> prevList;
+	list<int> nextList;
+	unordered_map<int, unordered_set<int>> latestMod; //varIdx to stmt
+	stack<pair<int, unordered_map<int, unordered_set<int>>>> whileMapStack;
+	stack<IfStmt> ifMapStack;
+	while (curr != 0) {
+		if (isAssignment(curr)) {
+			list<int> usedVarList = getUsesFromStmt(curr);
+			for (int usedVar : usedVarList) {
+				if (latestMod.find(usedVar) != latestMod.end()) {
+					unordered_set<int> lastModStmtSet = latestMod[usedVar];
+					for (auto &lastModStmt : lastModStmtSet) {
+						if (!isCall(lastModStmt)) {
+							if ((affectsRelMap.find(lastModStmt) != affectsRelMap.end() &&
+								affectsRelMap[lastModStmt].find(curr) == affectsRelMap[lastModStmt].end()) ||
+								affectsRelMap.find(lastModStmt) == affectsRelMap.end()) {
+								prevList.push_back(lastModStmt);
+								nextList.push_back(curr);
+								affectsRelMap[lastModStmt].insert(curr);
+							}
+						}
+					}
+				}
+			}
+
+			int modifiedVar = getModifiesFromStmt(curr).front();
+			latestMod[modifiedVar].clear();
+			latestMod[modifiedVar].insert(curr);
+			list<int> nextList = getExecutedAfter(curr, STMT);
+
+			if (getParent(curr, IF).size() != 0) { //is in an if
+				IfStmt ifStmt = ifMapStack.top();
+				if (ifStmt.isEndIf(curr)) {
+					ifStmt.setIfMap(latestMod);
+					latestMod = ifStmt.getElseMap();
+					curr = ifStmt.getBranchElse();
+					ifStmt.visitElse();
+				}
+				
+				else if (ifStmt.isEndElse(curr)) {
+					if (nextList.size() == 0) {
+
+					}
+
+					else {
+
+					}
+					//TODO REMOVE
+					if (nextList.size() == 0) {
+						curr = 0;
+					}
+
+					else {
+						curr = nextList.front();
+					}
+				}
+
+				else {
+					if (nextList.size() == 0) {
+						curr = 0;
+					}
+
+					else {
+						curr = nextList.front();
+					}
+				}
+			}
+
+			else {
+				if (nextList.size() == 0) {
+					curr = 0;
+				}
+
+				else {
+					curr = nextList.front();
+				}
+			}
+		}
+
+		else if (isCall(curr)) {
+			list<int> modifiedVarList = getModifiesFromStmt(curr);
+			for (int modifiedVar : modifiedVarList) {
+				latestMod.erase(modifiedVar);
+			}
+
+			if (getExecutedAfter(curr, STMT).size() == 0) {
+				curr = 0;
+			}
+
+			else {
+				curr = getExecutedAfter(curr, STMT).front();
+			}
+		}
+
+		else if (isWhile(curr)) {
+			list<int> nextStmtList = getExecutedAfter(curr, STMT);
+			int insideLoop = nextStmtList.front();
+			int afterLoop = 0;
+
+			if (nextStmtList.size() == 2) {
+				afterLoop = nextStmtList.back();
+			}
+
+			if (whileMapStack.empty() || whileMapStack.top().first != curr) {
+				whileMapStack.push(make_pair(curr, latestMod));
+				curr = insideLoop;
+			}
+
+			else {
+				pair<int, unordered_map<int, unordered_set<int>>> oldWhileMap = whileMapStack.top();
+				int currWhile = oldWhileMap.first;
+				unordered_map<int, unordered_set<int>> oldMod = oldWhileMap.second;
+				if (oldMod == latestMod) {
+					whileMapStack.pop();
+					// pop and merge
+					while (!whileMapStack.empty() && whileMapStack.top().first == currWhile) {
+						pair<int, unordered_map<int, unordered_set<int>>> prevWhile = whileMapStack.top();
+						whileMapStack.pop();
+						latestMod = joinMap(prevWhile.second, latestMod);
+					}
+					curr = afterLoop;
+				}
+
+				else {
+					whileMapStack.push(make_pair(curr, latestMod));
+					curr = insideLoop;
+				}
+			}
+		}
+
+		else { // if statement
+			list<int> next = getExecutedAfter(curr, STMT);
+			next.sort();
+			int nextIf = next.front();
+			int nextElse = next.back();
+			list<int> children = getChildren(curr, STMT);
+			children.sort();
+			int endElse = children.back();
+			list<int> afterIfList = getExecutedAfter(endElse, STMT);
+			int afterIf;
+			if (afterIfList.size() == 0) {
+				afterIf = 0;
+			}
+
+			else {
+				afterIf = afterIfList.front();
+			}
+
+			IfStmt currIfStmt = IfStmt(curr, nextIf, nextElse - 1, nextElse, endElse, false, afterIf, latestMod, latestMod);
+			ifMapStack.push(currIfStmt);
+			curr = nextIf;
+		}
+		
+	}
+
+
+
+	return make_pair(prevList, nextList);
+}
+
+unordered_map<int, unordered_set<int>> PKBMain::joinMap(unordered_map<int, unordered_set<int>> firstMap,
+	unordered_map<int, unordered_set<int>> secondMap) {
+
+	for (auto &key : firstMap) {
+		if (secondMap.find(key.first) != secondMap.end()) {
+			firstMap[key.first].insert(secondMap[key.first].begin(), secondMap[key.first].end());
+		}
+	}
+
+	for (auto &key : secondMap) {
+		if (firstMap.find(key.first) == firstMap.end()) {
+			firstMap[key.first] = secondMap[key.first];
+		}
+	}
+
+	return firstMap;
+}
+
 pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	list<int> prevList;
 	list<int> nextList;
 	unordered_map<int, unordered_set<int>> affectsRelMap;
-
+	//TODO OPTIMISE
+	list<int> allFirstStmt = getAllFirstStmtOfProc();
+	for (int stmt : allFirstStmt) {
+		pair<list<int>, list<int>> allPairsInStmtList = getAllAffects(stmt, affectsRelMap);
+		prevList.insert(prevList.end(), allPairsInStmtList.first.begin(), allPairsInStmtList.first.end());
+		nextList.insert(nextList.end(), allPairsInStmtList.second.begin(), allPairsInStmtList.second.end());
+	}
+	/*
 	list<int> allStmts = getAllAssignments();
 	for (int stmt : allStmts) {
 		list<int> nextStarList = getExecutedAfterStar(stmt, STMT);
@@ -1379,11 +1596,29 @@ pair<list<int>, list<int>> PKBMain::getAllAffects() {
 			}
 		}
 	}
+	*/
 
 	return make_pair(prevList, nextList);
 }
 
 bool PKBMain::isAffectsStar(int stmt1, int stmt2) {
+	list<int> affected = getAffectedOf(stmt1);
+	unordered_set<int> visited;
+	bool isFirstRound = true;
+	while (!affected.empty()) {
+		int curr = affected.front();
+		affected.pop_front();
+
+		if (curr == stmt2 && !isFirstRound) {
+			return true;
+		}
+
+		if (visited.find(curr) != visited.end() && !isFirstRound) {
+			isFirstRound = false;
+			continue;
+		}
+
+	}
 	return false;
 }
 
