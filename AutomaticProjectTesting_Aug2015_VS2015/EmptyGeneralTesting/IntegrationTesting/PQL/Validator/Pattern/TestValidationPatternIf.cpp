@@ -85,5 +85,14 @@ namespace UnitTesting
             PatternHandler pHandler = PatternHandler(&qt);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
+
+        TEST_METHOD(TestValidity_Pattern_While_TooLittleArguments_Invalid)
+        {
+            string str = "f(_, _)";
+            QueryTree qt;
+            qt.insertSynonym(IF, "f");
+            PatternHandler pHandler = PatternHandler(&qt);
+            Assert::IsFalse(pHandler.isValidPattern(str));
+        }
     };
 }

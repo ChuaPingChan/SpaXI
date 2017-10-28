@@ -21,10 +21,10 @@ bool PatternHandler::isValidPattern(string str)
     if (patternType == ASSIGN_PATTERN && RegexValidators::isValidPatternAssignRegex(processedStr)) {
         patternValidator = new AssignPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
-    else if (patternType == WHILE_PATTERN) {
+    else if (patternType == WHILE_PATTERN && RegexValidators::isValidPatternWhileRegex(processedStr)) {
         patternValidator = new WhilePatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
-    else if (patternType == IF_PATTERN) {
+    else if (patternType == IF_PATTERN && RegexValidators::isValidPatternIfRegex(processedStr)) {
         patternValidator = new IfPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else {
