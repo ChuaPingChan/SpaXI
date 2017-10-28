@@ -80,17 +80,19 @@ list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause 
         Entity argType = selectedClause.getSingleArgType();
         string synonymToGetResultFor = selectedClause.getSingleArg();
 
+        //If result is of type string, convert mapping of ints to strings from PKB 
+        if (argType == PROCEDURE || argType == VARIABLE || selectedClause.isAttributeProcName == true)
+        {
+            result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
+        }
+
         //If result is of type int, get direct results from ClauseResult
-        if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
+        else if (argType == STMT || argType == ASSIGN || argType == WHILE || argType == IF || argType == PROG_LINE || argType == CALL || argType == CONSTANT || argType == STMTLIST)
         {
             result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
         }
 
-        //If result is of type string, convert mapping of ints to strings from PKB 
-        else if (argType == PROCEDURE || argType == VARIABLE )
-        {
-            result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
-        }
+
 
     }
 

@@ -393,18 +393,16 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change this to IsTrue when implement Affects
         TEST_METHOD(TestRegex_SingleRelation_Affects_Valid)
         {
             string str = "Select s such that Affects(a1,a2)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
-        //TODO: Change this to IsTrue when implement Affects*
         TEST_METHOD(TestRegex_SingleRelation_AffectsStar_Valid)
         {
             string str = "Select s such that Affects*(a1,a2)";
-            Assert::IsFalse(RegexValidators::isValidSelectOverallRegex(str));
+            Assert::IsTrue(RegexValidators::isValidSelectOverallRegex(str));
         }
 
         TEST_METHOD(TestRegex_SingleRelation_Whitespace_Valid)

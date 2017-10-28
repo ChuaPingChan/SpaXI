@@ -53,11 +53,21 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 
     else if (RegexValidators::isValidAttrRefRegex(selectedStr))
     {
+        bool hasProcName = selectedStr.find(RegexValidators::PROCNAME_STRING) != std::string::npos;
+
         if (isValidAttrRefForSynonym(selectedStr))
         {
             Entity entity = getEntityOfSynonym(selectedStr);
             SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
+
+            //in case the attribute selected is procName and the entity is call, we change the flag for CallsSingleSynonym in SelectClause to true
+            if (hasProcName && entity == CALL)
+            {
+                sc.isAttributeProcName = true;
+            }
+
             storeInQueryTree(sc);
+
             return true;
         }
     }
@@ -201,38 +211,37 @@ bool SelectValidator::isValidAttrRefForSynonym(string &str)
     case PROCEDURE: return isProcNameAttribute(attribute);
     case STMT: return isStmtNumAttribute(attribute);
     case ASSIGN: return isStmtNumAttribute(attribute);
-    case CALL: return isStmtNumAttribute(attribute) || isProcNameAttribute(attribute);
     case WHILE: return isStmtNumAttribute(attribute);
     case IF: return isStmtNumAttribute(attribute);
     case VARIABLE: return isVarNameAttribute(attribute);
     case CONSTANT: return isValueAttribute(attribute);
+    case CALL: return isStmtNumAttribute(attribute) || isProcNameAttribute(attribute);
+    
     default: return false;
     }
+
     return true;
 }
 
+
 bool SelectValidator::isProcNameAttribute(string attribute)
 {
-    string procName = "procName";
-    return(attribute == procName);
+    return(attribute == RegexValidators::PROCNAME_STRING);
 }
 
 bool SelectValidator::isStmtNumAttribute(string attribute)
 {
-    string stmtNum = "stmt#";
-    return(attribute == stmtNum);
+    return(attribute == RegexValidators::STMTNUM_STRING);
 }
 
 bool SelectValidator::isVarNameAttribute(string attribute)
 {
-    string varName = "varName";
-    return(attribute == varName);
+    return(attribute == RegexValidators::VARNAME_STRING);
 }
 
 bool SelectValidator::isValueAttribute(string attribute)
 {
-    string value = "value";
-    return(attribute == value);
+    return(attribute == RegexValidators::VALUE_STRING);
 }
 
 
@@ -242,6 +251,7 @@ string SelectValidator::removeSelectKeyword(string str)
     str.replace(f, std::string("Select").length(), "");
     return str;
 }
+
 
 string SelectValidator::removeSpecialCharactersFromTuple(string selectedStr)
 {

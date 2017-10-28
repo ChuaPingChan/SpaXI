@@ -236,6 +236,7 @@ namespace UnitTesting
             Assert::IsTrue(validator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            Assert::IsTrue(qt.getSelectClause().isAttributeProcName);
         }
 
         TEST_METHOD(TestValidity_Query_SelectAttributeOfCall_ValidDeclaration_StmtNum_ExpectTrue_Valid)
@@ -249,6 +250,8 @@ namespace UnitTesting
             Assert::IsTrue(validator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            Assert::IsFalse(qt.getSelectClause().isAttributeProcName);
+
         }
 
         TEST_METHOD(TestValidity_Query_SelectAttributeOfCall_ValidDeclaration_Value_ExpectFalse_Invalid)
@@ -262,6 +265,8 @@ namespace UnitTesting
             Assert::IsFalse(validator.getValidSelectionFlag());
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
             Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            Assert::IsFalse(qt.getSelectClause().isAttributeProcName);
+
         }
 
         TEST_METHOD(TestValidity_Query_SelectAttributeOfStmt_ValidDeclaration_StmtNum_ExpectTrue_Valid)
