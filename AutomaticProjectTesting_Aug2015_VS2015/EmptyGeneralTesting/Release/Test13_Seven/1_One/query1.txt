@@ -1,0 +1,300 @@
+1 - Get all variables
+variable v;
+Select v
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, width, w, l
+5000
+2 - Checks follows by with result
+stmt s;
+Select s such that Follows (1, s)
+2
+5000
+3 - Checks follows by without result
+stmt s;
+Select s such that Follows (4, s)
+
+5000
+4 - Checks follows by at parent with result
+stmt s;
+Select s such that Follows (5, s)
+20
+5000
+5 - Checks follows by inside parent with result
+stmt s;
+Select s such that Follows (14, s)
+15
+5000
+6 - Checks follows by at parent with result
+stmt s;
+Select s such that Follows (7, s)
+9
+5000
+7 - Checks follows by at parent with result
+stmt s;
+Select s such that Follows (12, s)
+16
+5000
+8 - Checks follows by at parent with result
+stmt s;
+Select s such that Follows (9, s)
+19
+5000
+9 - Checks follows with no result
+stmt s;
+Select s such that Follows (s, 1)
+
+5000
+10 - Checks follows with result
+stmt s;
+Select s such that Follows (s, 2)
+1
+5000
+11 - Checks follows with result
+stmt s;
+Select s such that Follows (s, 4)
+3
+5000
+12 - Checks follows inside parent with result
+stmt s;
+Select s such that Follows (s, 15)
+14
+5000
+13 - Checks follows at parent with result
+stmt s;
+Select s such that Follows (s, 9)
+7
+5000
+14 - Checks follows at parent with result
+stmt s;
+Select s such that Follows (s, 16)
+12
+5000
+15 - Checks follows at parent with result
+stmt s;
+Select s such that Follows (s, 19)
+9
+5000
+16 - Checks follows* inside parent with no result
+stmt s;
+Select s such that Follows* (s, 6)
+
+5000
+17 - Checks follows* inside parent with result
+stmt s;
+Select s such that Follows* (16, s)
+18
+5000
+18 - Checks follows* with no result
+stmt s;
+Select s such that Follows* (2,1)
+
+5000
+19 - Checks parent with result
+stmt s;
+Select s such that Parent (12, s)
+13, 14, 15
+5000
+20 - Checks parent with result
+stmt s;
+Select s such that Parent (5, s)
+6, 7, 9, 19
+5000
+21 - Checks parent with result
+stmt s;
+Select s such that Parent (4, s)
+5, 20
+5000
+22 - Checks parent with no result
+stmt s;
+Select s such that Parent (0, s)
+
+5000
+23 - Checks parent with result
+stmt s;
+Select s such that Parent (s, 15)
+12
+5000
+24 - Checks parent with result
+stmt s;
+Select s such that Parent (s, 19)
+5
+5000
+25 - Checks parent with result
+stmt s;
+Select s such that Parent (s, 20)
+4
+5000
+26 - Checks parent with no result
+stmt s;
+Select s such that Parent (s, 1)
+
+5000
+27 - Checks modifies variables with result 
+variable v;
+Select v such that Modifies (3, v)
+c
+5000
+28 - Checks modifies variables with result
+variable v;
+Select v such that Modifies (13, v)
+Romeo
+5000
+29 - Checks modifies variables with result
+variable v;
+Select v such that Modifies (9, v)
+x, Romeo, b, c
+5000
+30 - Checks modifies variables with result
+variable v;
+Select v such that Modifies (4, v)
+oSCar, x, Romeo, b, c, a, w
+5000
+31 - Checks variable modified by with result
+stmt s;
+Select s such that Modifies (s, "c")
+3, 15, 17, 9, 11, 12, 16, 4, 5
+5000
+32 - Checks variable modified by with result
+stmt s;
+Select s such that Modifies (s, "i")
+1
+5000
+33 - Checks undeclared variable with no result
+stmt s;
+Select s such that Modifies (s, "nothing")
+
+5000
+34 - Checks statement Uses with result
+variable v;
+Select v such that Uses (8, v)
+I, k, j1k, chArlie
+5000
+35 - Checks statement Uses with result
+variable v;
+Select v such that Uses (11, v)
+left, right, Romeo, delta, l, width, c , x
+5000
+36 - Checks statement Uses with result
+variable v;
+Select v such that Uses (4, v)
+a, beta, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, l, width, c, w
+5000
+37 - Checks statement Uses with result
+variable v;
+Select v such that Uses (3, v)
+a
+5000
+38 - Checks variable used by statments with result
+stmt s;
+Select s such that Uses (s, "w")
+4, 20 
+5000
+39 - Checks variable used by statements with result
+stmt s;
+Select s such that Uses (s, "a")
+3, 4 
+5000
+40 - Checks variable used by statements with result
+stmt s;
+Select s such that Uses (s, "delta")
+4,5,9,11,12,15 
+5000
+41 - Checks BOOLEAN and Parent* valid
+
+Select BOOLEAN such that Parent*(5, 8)
+true
+5000
+42 - Checks BOOLEAN and Parent* invalid
+
+Select BOOLEAN such that Parent*(2, _)
+false
+5000
+43 - Checks Parent* with no result
+stmt s;
+Select s such that Parent*(10, 1)
+
+5000
+44 - Checks pattern with no result
+variable v; assign a;
+Select v pattern a (v, "delta")
+
+5000
+45 - Checks pattern with result
+variable v; assign a;
+Select v pattern a (v, _"Romeo + 1"_)
+Romeo
+5000
+46 - Checks pattern with invalid expression spec
+variable v; assign a;
+Select v pattern a (v, _"+++++++"_)
+
+5000
+47 - Checks Uses and pattern with no result
+variable v; assign a;stmt s;
+Select s such that Uses (s, _) pattern a (v, "delta")
+
+5000
+48 - Checks Uses and pattern with result
+variable v; assign a;stmt s;
+Select v such that Uses (s, v) pattern a (v, "Romeo + 1")
+Romeo
+5000
+49 - Checks Uses and pattern with result
+variable v; assign a;stmt s;
+Select s such that Uses (s, v) pattern a (v, "Romeo + 1")
+13, 15, 12, 11, 9, 5, 4
+5000
+50 - Checks Modifies and pattern with no result
+variable v; assign a;stmt s;
+Select s such that Modifies (s, _) pattern a (v, "delta")
+
+5000
+51 - Checks Modifies and pattern with result
+variable v; assign a;stmt s;
+Select v such that Modifies (1, "i") pattern a (v, "Romeo + 1")
+Romeo
+5000
+52 - Checks Modifies and pattern with no result
+variable v; assign a;
+Select v such that Modifies (1, v) pattern a (v, "Romeo + 1")
+
+5000
+53 - Checks Modifies and pattern with no result
+variable v; assign a;
+Select v such that Modifies (17, v) pattern a (v, "Romeo + 1")
+
+5000
+54 - Checks Parent and pattern with result
+variable v; assign a;
+Select v such that Parent (4, 5) pattern a (v, "Romeo + 1")
+Romeo
+5000
+55 - Checks valid nested parent and valid pattern expression
+variable v; assign a;
+Select v such that Parent* (4, 18) pattern a (v, "Romeo + 1")
+Romeo
+5000
+56 - Checks valid follows* and valid pattern expression
+variable v; assign a;
+Select v such that Follows* (6, 9) pattern a (v, "Romeo + 1")
+Romeo
+5000
+57 - Checks for Parent(s,s)
+stmt s;
+Select BOOLEAN such that Parent(s,s)
+false
+5000
+58 - Checks for Parent(s,s)
+stmt s;
+Select s such that Parent(s,s)
+
+5000
+59 - Checks for Follows(s,s)
+stmt s;
+Select s such that Follows(s,s)
+
+5000
+60 - Checks for Follows(s,s)
+stmt s;
+Select BOOLEAN such that Follows(s,s)
+false
+5000

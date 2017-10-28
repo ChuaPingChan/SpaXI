@@ -1,0 +1,88 @@
+procedure ABC {
+	a = 5;			//1
+	while x {		//2
+		c = a + d;	//3
+		a = 20 + c;	//4
+		d = b;		//5
+		a = a;		//6
+		call DEF;	//7
+	}
+	d = a + c;		//8
+}
+
+procedure DEF {
+	e = 5;			//9
+	while x {		//10
+		c = e + d;	//11
+		e = 20 + c;	//12
+		d = b;		//13
+		e = e;		//14
+		call GHI;	//15
+	}
+	d = e + c;		//16
+}
+
+procedure GHI {
+	e = 5;					//17
+	while x {				//18
+		c = e + d;			//19
+		e = 20 + c;			//20
+		d = b;				//21
+		e = e;				//22
+		call JKL;			//23
+		if x then {			//24
+			c = e + d;		//25
+			e = 20 + c;		//26
+			d = b;			//27
+			e = e;			//28
+			call JKL;		//29
+		} else {
+			f = b+c+d+b+c+d;	//30
+		}
+	}
+}
+
+procedure JKL {
+	d = b+f+a+b+d;				//31
+}
+
+procedure MNO {
+	while a {					//32
+		while b {				//33
+			while c {			//34
+				e = d;			//35
+				if d then {		//36
+					e = a;		//37
+				} else {
+					e = b;		//38
+				}
+				e = c;			//39
+			}
+			if x then {			//40
+				c = e + d;		//41
+				e = 20 + c;		//42
+				d = b;			//43
+				e = e;			//44
+				if x then {		//45
+					c = 1;		//46
+				} else {
+					if x then {	//47
+						a = d;	//48
+					} else {
+						d = a;	//49
+					}
+				}
+			} else {
+				a = a;			//50
+				b = b;			//51
+				c = c;			//52
+				d = a+b+c;		//53
+			}
+			d = a;				//54
+			a = b;				//55
+			b = c;				//56
+			c = d + e + c;			//57
+		}
+		a = b + a + c;				//58
+	}
+}

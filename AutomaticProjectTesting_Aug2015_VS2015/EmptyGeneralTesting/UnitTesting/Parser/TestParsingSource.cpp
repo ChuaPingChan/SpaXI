@@ -176,10 +176,22 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(testParsingSimpleSource_multiProcSimpleLoops_success)
+        {
+            // Set up
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_simpleLoops());
+
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         /*******************************
          * Utility Methods for Testing *
          *******************************/
-        TEST_METHOD(testDummySimpleSourceFileUtilityMethods)
+        TEST_METHOD(testDummySimpleSourceFileUtilityMethods_testParsingSource)
         {
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -188,6 +200,8 @@ namespace UnitTesting
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
             Assert::IsTrue(deleteDummySimpleSourceFile());
             Assert::IsTrue(createDummySimpleSourceFile_assignments_2LevelNestedWhile());
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+            Assert::IsTrue(createDummySimpleSourceFile_assignments_simpleLoops());
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
@@ -383,6 +397,54 @@ namespace UnitTesting
         */
         bool createDummySimpleSourceFile_assignments_nonNestedIfElse() {
             std::string content = "procedure ABC { \n	i=1; \n	b=200 ; \n	c= a   ; \n	if a then \n	{ \n		a = 3; \n		w = w+1  ; \n	} else { \n		a = c + b; \n		w = a; \n	} \n	d = c + 200 * 400 - i; \n}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a dummy SIMPLE source
+        containing assignment statements and simple loops only.
+        */
+        bool createDummySimpleSourceFile_assignments_simpleLoops() {
+            std::string content = 
+                "procedure Sequential { \n"
+                "	a =     1; \n"
+                "	b = a 		+ b; \n"
+                "	c = c 	* 	2; \n"
+                "	d    =   2    +  (  20   * a)  +  5  -   10; \n"
+                "	a 	= 	4 + 	e ; \n"
+                "	e = c * a   + 		9 -  	20	 +   6   ; \n"
+                "	f = e *      (f + 3 	+ 2 + (		a + e)	 ) + d * (	(	(c * b + 2) - 	5) * 20) - 10; \n"
+                "	g =		 (		b	); \n"
+                "	h = (2		) ; \n"
+                "	i = (		((	((f    ))  ) )  )   ; \n"
+                "	j = ((	 ((	( g)	+3  )  * 4	)- 	6)+b); \n"
+                "	k = (a  +	(b    +(c 	*(  d -  (8		)))));} \n"
+                " \n"
+                "procedure TestJumpOverLoop { \n"
+                "	l 	  =	 1 	+		 2; \n"
+                "	while 		a 			{ \n"
+                "		  m  	  = 3 +  	1		;} \n"
+                "	n 	= 		1   ; \n"
+                "	o =         b;} \n"
+                " \n"
+                "procedure TestJumpOverIf { \n"
+                "	l = 1 		+			 2			; \n"
+                "	if    	 	a		   then { \n"
+                "		m 	=    3 + 	1;} \n"
+                "	else  	{ \n"
+                "			a   = 5;} \n"
+                "	n = 	1; \n"
+                "	o = b  ;		} \n"
+                "	 \n"
+                "procedure TestJumpOverCall { \n"
+                "p = 1; \n"
+                "		call 			TestJumpOverLoop; \n"
+                "	q = 	5 + 2    ;}";
             std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
             std::ofstream outfile(newFilePath);
             std::string inputString(content);

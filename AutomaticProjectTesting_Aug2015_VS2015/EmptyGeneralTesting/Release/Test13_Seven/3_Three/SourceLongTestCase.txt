@@ -1,0 +1,259 @@
+procedure toCallFirst{
+	call first;		
+}
+
+procedure first{
+	fA = fB;									
+	call second;								
+	fA = fA - fA + fA;							
+	
+	while fE {									
+		fX = fX+10;								
+		if fY then{								
+			fStart = fEnd + fX -fY *(fA+fB);	
+			while fX {							
+				fX = fZ *14;					
+				fX = 11 + fY;					
+			}
+			fEnd = fStart;						
+			fY = fY -8;							
+			call third;							
+		}
+		else {
+			fStart = fEnd;						
+			fY = fY +5;							
+			
+			if fStart then {					
+				fEnd = fStart * 99;				
+			}
+			else {
+				fEnd = fA + fB - fC;			
+			}
+			call singleAssignProc;				
+		}
+		fA = fB + fC;							
+	}
+	fA = fB*fC*fA -    fA + fC;					
+	fB = fB - 24 * 10;							
+	fC = fX +(fA - fB);							
+	while fA{									
+		fA = fA *10;							
+		fC = fA -fB - fC;						
+		call second;							
+		call third;								
+		
+		fD = fA + fStart;						
+		if fD then {							
+			fD = 100;							
+			while fE	{						
+				fE = fF - fD;					
+				fF = fE -(fD-fD)+fD;			
+				if fH then {					
+					fE = fA*fB;					
+				}
+				else {
+					fD = fD-1 -1 -2;			
+					if fZ then {				
+						fB = fB*22 - fA;		
+
+					}
+					else {
+						fJ = fJ -1 +fStart;				
+					}
+				}
+				fEnd = fStart;					
+			}
+		}
+		else {
+			call singleAssignProc;				
+		}
+	}
+}
+
+procedure second {
+	sA = sB;									
+	while sA{									
+		sB = sA + sD;							
+		while sB {								
+			while sC {							
+				while sD{						
+					sC = sE + sA * sB;				
+					sE = sC - sC *(sA - sB -sC * sC + sC);	
+				}
+			}
+			sA = sD + (sC + (sC + (sC - (sC - (sC + sC)))) - sC);	
+		}
+	}
+	call eight;								
+	sB = sB;								
+	sD = sD + sD;							
+	sD  = sA - sD;					
+	call singleAssignProc;				
+}
+
+procedure third {
+	tA = 1;								
+	fB = 000000000000000000000;			
+	
+	tB = 100 * 100 - 100 + 100 *(14 +(20 *(3 + 3)));	
+	tB = 0 * 100;						
+	tB = 0 - 1;							
+	
+	tB = tB * 100 - tA;							
+	tB = tA * tA * (tB - tA);					
+	tB = tB;									
+	tB = 2;									
+	call eight;								
+	tC = tA * tA;							
+	tD = tA - tC - tB;						
+}
+
+procedure eight {
+	tA = 1;									
+	sB = 1;									
+	
+	eA = eB + eC + eD - eF + eG + eH + eI*      eF + eZ ; 
+	eC = eD*(eA)-(eC);						
+	eA = eA -(eC*eD -eB);					
+	eB = eB;								
+	eC = eB * eA * eB - eA - eA - eA;		
+	if eC then{								
+		eC = eB -eA;						
+		while eA {							
+			eA = eA -eC;					
+		}
+	}
+	else {
+		eA = eA - eC;						
+	}
+	eB = eB  + eA;							
+}
+
+procedure notCalledByAnyone {
+	notA = notB;							
+	notC = notC*notA*notB-notB-(notE-notA)*(notB*notB);		
+	while notK {							
+		notA = notK;						
+		while notB{							
+			while notC {					
+				notX = notY- notZ;			
+			}
+			notC = notC;					
+			notC = notC;					
+			notC = notX;					
+			while notX {					
+				notX = notY*notZ-notE+(notB*notA-notA+notB);		
+				while notX{											
+					while notE{										
+						notE = notA - notB - notC;					
+						while notC{									
+							while notB{								
+								while notY{							
+									while notZ{						
+										notZ = notA -1;				
+										notB = 100;					
+										notA = 1 - 1 - 1 * notB;	
+										notK = 2;					
+									}
+								}
+							}
+							if notC then{							
+								notC = notA + notA;					
+								while notC{							
+									notB = notC -                  notB;		
+									notC  = notA - notA + notA + notD;			
+								}
+								notB =113 - 100 *(100 - 100 +(1 - 2));			
+							}
+							else {												
+								notX = notY - notZ - notZ;						
+								notZ = notY;									
+								notY = notX + notZ * notY;						
+							}
+						}
+					}
+					call singleAssignProc;										
+					call singleStmt	;											
+				}
+			}
+		}
+	}
+}
+
+procedure singleAssignProc {
+	a = a;																		
+}
+
+procedure singleStmt{
+    call noNesting;						    									
+}
+
+procedure noNesting{
+    b = b;    																	
+    c = c;    																	
+    b = d;    																	
+    call whileWithDummyNode;    												
+}
+
+procedure whileNoDummyNode{
+    while red {    																
+        black = red * black - green;    										
+        black = 2;    															
+        red = green;    														
+    }
+}
+
+procedure unrelatedProcedure{
+    while lame {    							
+        haha = LEL;    							
+        heHEHEHEHe = haha + LEL - rolf;    		
+        KEKEKEKE = joke - haha *(LEL - LOL);    
+    }
+    LEL = joke;    								
+	call nestedIfStatements;					
+}
+
+procedure nestedIfStatements{
+    if lancer then {                							
+        if impreza then {            							
+            gallardo = lancer - impreza;            			
+            if murceiago then {        							
+                if quattroporte then {    						
+                    quattroporte = quattroporte - impreza;    	
+                }
+                else {
+                    lancer = lancer+1;	    					
+                }
+            }
+            else {
+                gallardo = gallardo;        					
+            }
+        }
+        else {
+			murceiago = gallardo;                				
+        }
+    }
+    else {
+        murceiago = lancer*quattroporte-gallardo;               
+    }
+	
+	if mustang then {            								
+            mustang = p1 + lancer;								
+    }
+	else {
+		if p1 then {        									
+            if quattroporte then {    							
+                California = California;    					
+            }
+            else {
+                p1 = p1;    									
+            }}
+        else {
+                murceiago = mustang*p1;        					
+        }
+		p1 = p1;												
+	}
+	
+	a = b;		
+	b = 1;		
+}

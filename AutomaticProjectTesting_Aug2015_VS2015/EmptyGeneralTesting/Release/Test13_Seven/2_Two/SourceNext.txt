@@ -1,0 +1,74 @@
+procedure first {
+	a = b;				
+	a = b;				
+
+	if a then {			
+		b = c;			
+	}
+	else {			
+		b = d;			
+	}
+
+	while a {			
+		a = b + c;		
+		hello = world;	
+		a = world;		
+	}
+	c = d;				
+
+	while d {			
+		if a then {		
+			a = b + c;	
+		}
+		else {		
+			b = d;		
+		}
+	}
+	
+	if d then {			
+		while a {		
+			b = c;		
+			c = d;		
+		}
+	}
+	else {
+		a = a;			
+	}
+	
+	while d {			
+		a = a +b;		
+		b = c;			
+		while a {		
+			d = a + b;	
+			while c {	
+				c = c;	
+			}
+			hello = world;	
+		}
+		c = d - a;		
+	}
+	
+	if a then {			
+		a = b;			
+		if d then {		
+			hello = world;	
+			if c then {		
+				a = b;		
+			}
+			else {
+				c = b;		
+			}
+		}
+		else {
+			b = b + b;		
+		}
+	}
+	else {
+		a = b; 				
+	}
+	call a;					
+}
+
+procedure a{
+	a = b;					
+}

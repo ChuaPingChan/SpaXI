@@ -8,9 +8,7 @@
 #include "Parser.h"
 #include "SyntaxErrorException.h"
 #include "../PKB/PKBMain.h"
-
-// TODO: Remove this output debug string before submission
-#include "Windows.h"
+#include "Windows.h"    // For debugging purposes
 
 using namespace std;
 
@@ -35,13 +33,16 @@ const regex Parser::REGEX_MATCH_CLOSE_BRACE = regex("\\s*\\u007D\\s*");
 const regex Parser::REGEX_MATCH_OPEN_BRACKET = regex("\\s*\\(\\s*");
 const regex Parser::REGEX_MATCH_CLOSE_BRACKET = regex("\\s*\\)\\s*");
 const regex Parser::REGEX_MATCH_SEMICOLON = regex("\\s*;\\s*");
+const regex Parser::REGEX_MATCH_BLANK_OR_EMPTY_STRING = regex("\\s*");
+const regex Parser::REGEX_MATCH_ANYHING = regex("[^]");
+const regex Parser::REGEX_MATCH_POSSIBLE_WHITESPACE = regex("\\s*");
 
 // Char sequence to match should be a statement up to but not including semicolon.
 // To extract contents within a wrapping outside bracket. Having outside bracket is assumed.
 const regex Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT = regex("\\s*\\(([^()]+|[^()]*\\([^]+\\)[^()]*)\\)\\s*");
 
 const regex Parser::REGEX_MATCH_EQUAL = regex("\\s*=\\s*");
-const regex Parser::REGEX_VALID_OPERATOR = regex("\\s*[+\\-*/]\\s*");
+const regex Parser::REGEX_MATCH_OPERATOR = regex("\\s*[+\\-*/]\\s*");
 
 Parser::Parser(PKBMain* pkbMainPtr)
 {
@@ -73,8 +74,12 @@ bool Parser::parse(string filename) {
     _pkbMainPtr->startProcessComplexRelations();
 
     /*
-    TODO iteration3.0: Final checks
-    - All calls are to valid procedures
+    TODO:
+    Keep track of actual procedure names with a HashSet<string> (not including
+    procedures called by Call-statements). Here, check if the size of the hash
+    set is the number of procedures registered in the PKB. If there are more
+    procedures registerd in PKB, it means there are call-statements that calls
+    procedures that don't exist.
     */
 
     return _isValidSyntax;
@@ -131,6 +136,36 @@ bool Parser::incrCurrentTokenPtr()
 }
 
 /*
+Given a string, this method extracts the foremost token, remove it from the string
+reference and returns the token. If no token is left in the given string, an empty
+string is returned.
+*/
+std::string Parser::extractNextTokenAndShortenString(std::string &targetString)
+{
+    smatch match;
+    string token;
+    if (regex_match(targetString, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1)
+    {
+        token = match.str(1);
+        targetString.erase(0, match.position(1) + match.length(1));
+    }
+    return token;
+}
+
+/*
+Given a string, this method extracts and returns the foremost token. If no token is left in the
+given string, an empty string is returned.
+*/
+std::string Parser::getFirstTokenInString(const std::string &targetString)
+{
+    smatch match;
+    string token;
+    if (regex_match(targetString, match, Parser::REGEX_EXTRACT_NEXT_TOKEN) && match.size() > 1)
+        token = match.str(1);
+    return token;
+}
+
+/*
 Checks if end of the source code has been reached.
 Precondition:
 - Source code has to be concatenated into _concatenatedSourceCode.
@@ -157,7 +192,7 @@ Indicate SIMPLE syntax error if no semicolon is encountered in the remaining of 
 This method assumes there's a semicolon ahead in the _concatenatedSourceCode.
 Note that this method does not remove whitespaces and does not move _currentTokenPtr forward.
 */
-string Parser::extractStringUpToSemicolon() {
+string Parser::extractBackingStringUpToSemicolon() {
     smatch match;
     string targetSubstring;
     if (regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON) && match.size() > 1) {
@@ -316,7 +351,7 @@ void Parser::parseStmt() {
             _prevReachableStmts.clear();
         }
     } else if (Parser::ifStmtExpected()) {
-        parseIfStmt();
+        parseIfElseStmt();
 
         if (moreStmtsExistInStmtList()) {
             for (int prevReachableStmt : _prevReachableStmts) {
@@ -425,7 +460,7 @@ void Parser::parseAssignment() {
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_EQUAL);
 
     // Process RHS
-    string rhsExpression = extractStringUpToSemicolon();
+    string rhsExpression = extractBackingStringUpToSemicolon();
     if (assertIsValidExpression(rhsExpression)) {
         while (!matchToken(Parser::REGEX_MATCH_SEMICOLON)) {
             if (matchToken(Parser::REGEX_VALID_ENTITY_NAME)) {
@@ -495,13 +530,9 @@ void Parser::parseAssignment() {
 Asserts that an expression is syntactically valid.
 */
 bool Parser::assertIsValidExpression(string expression) {
+    const regex REGEX_MATCH_BRACKETED_ENTITY = regex("\\s*\\(\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*\\)\\s*");
 
-    // Remove outermost bracket (if applicable)
-    smatch contentInBracket;
-    while (regex_match(expression, contentInBracket, Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT)
-        && contentInBracket.size() > 1) {
-        expression = contentInBracket.str(1);
-    }
+    expression = Parser::trimString(expression);
 
     // Check for bracket correctness. Just for redundancy.
     // Does not guarantee bracketing is correct, just counting.
@@ -512,8 +543,8 @@ bool Parser::assertIsValidExpression(string expression) {
 
     // Base case
     if (regex_match(expression, Parser::REGEX_VALID_ENTITY_NAME)
-        || regex_match(expression, Parser::REGEX_MATCH_CONSTANT)
-        )
+        || regex_match(expression, REGEX_MATCH_BRACKETED_ENTITY)
+        || regex_match(expression, Parser::REGEX_MATCH_CONSTANT))
     {
         //OutputDebugString("FINE: Expression is valid.\n");
         return true;
@@ -531,16 +562,26 @@ bool Parser::assertIsValidExpression(string expression) {
         // TODO: Throw exception?
         return false;
     }
-    return assertIsValidExpression(leftExpression) && assertIsValidExpression(rightExpression);
+
+    if (!rightExpression.empty()) {
+        return assertIsValidExpression(leftExpression) && assertIsValidExpression(rightExpression);
+    } else {
+        return assertIsValidExpression(leftExpression);
+    }
 }
 
 /*
 Splits an expression into two parts, namely the left expression and right expression.
-For example,
+
+For the following forms:
 "3 + 3 - 2"         ==> "3" and "3 - 2"
-"(2 + 3) + 6 - 7"   ==> "(2 + 3)" and "6 - 7"
+"(2 + 3) + 6 - 7"   ==> "2 + 3" and "6 - 7"
 "2 + (6 - 7)"       ==> "2" and "(6 - 7)"
-"(2 + 3) + (6 - 7)" ==> "(2 + 3)" and "(6 - 7)"
+"(2 + 3) + (6 - 7)" ==> "2 + 3" and "(6 - 7)"
+
+If expression is surrounded by othermost bracket:
+"((2 + 3) + (6 - 7))" ==> "(2 + 3) + (6 - 7)" and ""
+Notice that the right expression is empty
 
 If the format of the expression given is not splittable as above, an empty pair
 of strings will be returned.
@@ -550,15 +591,9 @@ std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
     string operatorRegex = "[+\\-*/]";
     string possibleWhitespaceRegex = "\\s*";
     string extractEntityRegex = "([A-Za-z][A-Za-z0-9]*|\\d+)";
-    //string anyCharRegex = "[\\sa-zA-Z0-9+\\-*/()]";
     string anyCharRegex = "[^]";
     string extractRemainingRegex = "(" + anyCharRegex + "+)";
-    string extractBracketWrappedContentRegex = "\\(([^()]+|[^()]*\\(" + anyCharRegex + "+\\)[^()]*)\\)";
 
-    /*
-    CASE 1:
-    When the left expression has no brackets. E.g "2 + (10 * 3)", "2 + 10"
-    */
     regex REGEX_CASE1_EXTRACTOR = regex(possibleWhitespaceRegex
         + extractEntityRegex
         + possibleWhitespaceRegex
@@ -566,31 +601,93 @@ std::pair<string, string> Parser::splitExpressionLhsRhs(std::string expression)
         + possibleWhitespaceRegex
         + extractRemainingRegex);
 
-    /*
-    CASE 2:
-    When the left expression is bracketed. E.g. "(2 + 3) + 4", "(2 + 3) + (4 + 10)"
-    */
-    regex REGEX_CASE2_EXTRACTOR = regex(possibleWhitespaceRegex
-        + extractBracketWrappedContentRegex
-        + possibleWhitespaceRegex
-        + operatorRegex
-        + possibleWhitespaceRegex
-        + extractRemainingRegex);
+    expression = Parser::trimString(expression);
 
     smatch match;
     string leftExpression;
     string rightExpression;
     if (regex_match(expression, match, REGEX_CASE1_EXTRACTOR) && match.size() > 2) {
+        /*
+            CASE 1:
+            When the left expression has no brackets. E.g "2 + (10 * 3)", "2 + 10"
+        */
         leftExpression = match.str(1);
         rightExpression = match.str(2);
         return pair<string, string>(leftExpression, rightExpression);
-    } else if (regex_match(expression, match, REGEX_CASE2_EXTRACTOR) && match.size() > 2) {
-        leftExpression = match.str(1);
-        rightExpression = match.str(2);
+    } else if (Parser::getFirstTokenInString(expression) == "(") {
+        /*
+            CASE 2:
+            When the left expression is bracketed.
+            E.g. "(2 + 3) + 4", "(2 + 3) + (4 + 10)", "((2 + 3)) + ((6 - 7))"
+
+            Extracts the string starting from after an open bracket, to the last character
+            before the matching close bracket. Returns an empty string if matching close
+            bracket is not found.
+
+            Pre-condition:
+            - First non-whitespace character of targetString is '('
+
+            Example:
+            - Given "(3 + (5 * 4) - 2)", the function should return "3 + (5 * 4) - 2"
+        */
+        string stringInMatchingBracket;
+        stack<char> openBracketStack;
+        bool matchingBracketFound = false;
+
+        openBracketStack.push(expression[0]);
+        expression.erase(expression.begin());
+        for (string::iterator charIter = expression.begin();
+            charIter != expression.end() && !matchingBracketFound;)
+        {
+            if (*charIter == '(') {
+                openBracketStack.push(*charIter);
+            } else if (*charIter == ')') {
+                openBracketStack.pop();
+                if (openBracketStack.empty()) {
+                    matchingBracketFound = true;
+                }
+            }
+
+            if (!matchingBracketFound) {    // Don't append if token is matching-')'
+                stringInMatchingBracket.push_back(*charIter);
+            }
+
+            charIter = expression.erase(charIter);     // Processed char required to be removed by later processes
+        }
+
+        if (matchingBracketFound) {
+            leftExpression = stringInMatchingBracket;
+        } else {
+            /*
+            Leave leftExpression empty if
+            1. No matching bracket encountered
+            2. No non-whitespace character within bracket (e.g. "(  )")
+            */
+        }
+
+        string token = Parser::extractNextTokenAndShortenString(expression);
+        if (matchingBracketFound && !regex_match(token, Parser::REGEX_MATCH_POSSIBLE_WHITESPACE)
+            && !regex_match(token, Parser::REGEX_MATCH_OPERATOR)) {
+            // If there are non-whitespace characters that are not operators after ')' -> cannot split
+            leftExpression.clear();
+            rightExpression.clear();
+        } else if (matchingBracketFound && !token.empty()) {
+            rightExpression = Parser::trimString(expression);
+        }
         return pair<string, string>(leftExpression, rightExpression);
     } else {
         return pair<string, string>();
     }
+}
+
+std::string Parser::trimString(std::string targetString)
+{
+    regex extractTrimmedStringRegex = regex("\\s*([^]*)\\s*");
+    smatch match;
+    string trimmedString;
+    if (regex_match(targetString, match, extractTrimmedStringRegex) && match.size() > 1)
+        trimmedString = match.str(1);
+    return trimmedString;
 }
 
 /*
@@ -605,7 +702,7 @@ string Parser::removeAllWhitespaces(string targetString)
 Checks if the brackets in a given string pairs up properly.
 Does not ensure correctness other than brackets pairing.
 */
-bool Parser::isBracketedCorrectly(std::string expression)
+bool Parser::isBracketedCorrectly(const std::string &expression)
 {
     stack<char> openBracketStack;
     string targetString = removeAllWhitespaces(expression);
@@ -709,7 +806,7 @@ void Parser::parseWhileStmt() {
 Parses an if-else statement. When this method ends,
 _currentTokenPtr will be advanced after '}'.
 */
-void Parser::parseIfStmt()
+void Parser::parseIfElseStmt()      // TODO: Rename this to "parseIfElseStmt()"
 {
     OutputDebugString("FINE: If-else statement identified.\n");
     assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD);
@@ -825,12 +922,6 @@ void Parser::parseCallStmt()
     assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
     string calledProcName = _currentTokenPtr;
 
-    /*
-    TODO iteration 3.0:
-    The procedure being called will not be added to PKB. After the whole SIMPLE program is parsed,
-    Ask DesignExtractor to check if all the procedures being called are present.
-    Show error message and exit if a call statement calls an undefined procedure.
-    */
     //PKB: Add calls relation
     OutputDebugString("PKB: Add calls relation.\n");
     _pkbMainPtr->setCallsRel(_currentStmtNumber, _currentProcName, calledProcName);

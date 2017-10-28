@@ -1,11 +1,2 @@
-Parameters : asourcetemp.txt aquerytemp.txt out.xml
+Parameters : C:\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\Release\Test11_Sequential\Saaa.txt C:\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\Release\Test11_Sequential\QueryFollows.txt out.xml
 Beginning to parse Simple Program.
-End of parsing Simple Program.
-Release
-Beginning to evaluate Query File.
-1 - temp
-assign a; while w; prog_line n;
-Select a such that Next(a,n) and Next*(n,n) with n=w.stmt#
-10,16,21,27,31,32
-5000
-Evaluating query 1 - temp

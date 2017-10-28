@@ -1,0 +1,88 @@
+procedure ABC {
+	a = 5;			
+	while x {		
+		c = a + d;	
+		a = 20 + c;	
+		d = b;		
+		a = a;		
+		call DEF;	
+	}
+	d = a + c;		
+}
+
+procedure DEF {
+	e = 5;			
+	while x {		
+		c = e + d;	
+		e = 20 + c;	
+		d = b;		
+		e = e;		
+		call GHI;	
+	}
+	d = e + c;		
+}
+
+procedure GHI {
+	e = 5;					
+	while x {				
+		c = e + d;			
+		e = 20 + c;			
+		d = b;				
+		e = e;				
+		call JKL;			
+		if x then {			
+			c = e + d;		
+			e = 20 + c;		
+			d = b;			
+			e = e;			
+			call JKL;		
+		} else {
+			f = b+c+d+b+c+d;	
+		}
+	}
+}
+
+procedure JKL {
+	d = b+f+a+b+d;				
+}
+
+procedure MNO {
+	while a {					
+		while b {				
+			while c {			
+				e = d;			
+				if d then {		
+					e = a;		
+				} else {
+					e = b;		
+				}
+				e = c;			
+			}
+			if x then {			
+				c = e + d;		
+				e = 20 + c;		
+				d = b;			
+				e = e;			
+				if x then {		
+					c = 1;		
+				} else {
+					if x then {	
+						a = d;	
+					} else {
+						d = a;	
+					}
+				}
+			} else {
+				a = a;			
+				b = b;			
+				c = c;			
+				d = a+b+c;		
+			}
+			d = a;				
+			a = b;				
+			b = c;				
+			c = d + e + c;			
+		}
+		a = b + a + c;				
+	}
+}

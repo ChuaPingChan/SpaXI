@@ -1,0 +1,80 @@
+procedure first {
+	a = b;				//1
+	a = b;				//2
+
+	//single if-else
+	if a then {			//3
+		b = c;			//4
+	}
+	else {			
+		b = d;			//5
+	}
+
+	// single while
+	while a {			//6
+		a = b + c;		//7
+		hello = world;	//8
+		a = world;		//9
+	}
+	c = d;				//10
+
+	// if within while
+	while d {			//11
+		if a then {		//12
+			a = b + c;	//13
+		}
+		else {		
+			b = d;		//14
+		}
+	}
+	
+	// while within if 
+	if d then {			//15
+		while a {		//16
+			b = c;		//17
+			c = d;		//18
+		}
+	}
+	else {
+		a = a;			//19
+	}
+	
+	// nested while
+	while d {			//20
+		a = a +b;		//21
+		b = c;			//22
+		while a {		//23
+			d = a + b;	//24
+			while c {	//25
+				c = c;	//26
+			}
+			hello = world;	//27
+		}
+		c = d - a;		//28
+	}
+	
+	// nested if else 
+	if a then {			//29
+		a = b;			//30
+		if d then {		//31
+			hello = world;	//32
+			if c then {		//33
+				a = b;		//34
+			}
+			else {
+				c = b;		//35
+			}
+		}
+		else {
+			b = b + b;		//36
+		}
+	}
+	else {
+		a = b; 				//37
+	}
+	call a;					//38
+}
+
+procedure a{
+	a = b;					//39
+}

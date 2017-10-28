@@ -1,0 +1,24 @@
+procedure thirdTest {
+	a = x;											//1
+	b = 10000;										//2
+	while x{										//3
+		a = b;										//4
+		while y{									//5
+			while z {								//6
+				hello = world + cs3201 + cs3202;	//7
+			}}
+		Alpha = omega + beta + chaRLie;				//8
+	}
+	a = bravo + delta + Juliet + kilo; 				//9
+	while Lima{										//10
+		echo = foxtrot + mike + golf + India;		//11
+		j1k = kilo + foxtrot + chaRLie;				//12
+	}
+	a = x+a+w+a+a+string;							//13
+	while i{										//14
+		i = j + 				1;					//15
+		while			qwerty {					//16
+			t = u + r;								//17
+		}}
+	e = n + d;										//18
+}
