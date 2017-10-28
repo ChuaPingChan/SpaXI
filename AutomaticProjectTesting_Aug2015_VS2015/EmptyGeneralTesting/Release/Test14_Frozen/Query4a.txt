@@ -1,0 +1,75 @@
+1 - get all statement
+assign a; stmt s; while w; variable v;
+Select s
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+5000
+2 - parent(var s,actual s)
+assign a; stmt s; while w; variable v; procedure p;
+Select s such that Parent*(s,15)
+4,5,9,11,12
+5000
+3 - parent(var s,var s or _)
+assign a; stmt s; while w; variable v; procedure p;
+Select s such that Parent(s,_)
+4,5,7,9,11,12,16
+5000
+4 - parent(_,var s)
+assign a; stmt s; while w; variable v; procedure p;
+Select s such that Parent(_,s)
+5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+5000
+5 - parent(var s,var s)
+assign a; stmt s1; stmt s2; while w; variable v; procedure p;
+Select s2 such that Parent(s1,s2)
+5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+5000
+6 - parent(actual s,var s)
+assign a; stmt s; while w; variable v; procedure p;
+Select s such that Parent(11,s)
+12,16,18
+5000
+7 - parent(actual s,var s)
+assign a; stmt s; while w; variable v; procedure p;
+Select s such that Parent(12,s)
+13,14,15
+5000
+8 - parent*(actual s,var a)
+assign a; stmt s; while w; variable v; procedure p;
+Select w such that Parent*(9,w)
+11,12,16
+5000
+9 - follows(var s,actual a)
+assign a; stmt s; while w; variable v; procedure p;
+Select a such that Follows(12,a)
+
+5000
+10 - follows*(var s,actual a)
+assign a; stmt s; while w; variable v; procedure p;
+Select s such that Follows*(12,s)
+16,18
+5000
+11 - modifies(w,actual v)
+assign a; stmt s; while w; variable v; procedure p;
+Select s such that Modifies(s,"c")
+3,4,5,9,11,12,15,16,17
+5000
+12 - modifies(actual s,var v)
+assign a; stmt s; while w; variable v; procedure p;
+Select v such that Modifies(4,v)
+a,b,c,oSCar,Romeo,w,x
+5000
+13 - uses(actual s,var v)
+assign a; stmt s; while w; variable v; procedure p;
+Select v such that Uses(4,v)
+a,beta,c,chArlie,delta,I,j1k,k,l,left,right,Romeo,tmp,w,width,x
+5000
+14 - PFMU with pattern
+assign a; stmt s; while w; variable v; procedure p;
+Select a pattern a(_,_"Romeo"_) such that Uses(a,"width")
+15
+5000
+15 - Follows(_,_)
+assign a; stmt s; while w; variable v; procedure p;
+Select BOOLEAN such that Follows(_,_)
+true
+5000

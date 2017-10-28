@@ -35,6 +35,13 @@ private:
     bool storeInQueryTree(SelectClause sc);
 
     Entity getEntityOfSynonym(string syn);
+
+    bool isValidAttrRefForSynonym(string &str);
+    bool isProcNameAttribute(string attribute);
+    bool isStmtNumAttribute(string attribute);
+    bool isVarNameAttribute(string attribute);
+    bool isValueAttribute(string attribute);
+
     string removeSelectKeyword(string str);
     string removeSpecialCharactersFromTuple(string selectedStr);
 };

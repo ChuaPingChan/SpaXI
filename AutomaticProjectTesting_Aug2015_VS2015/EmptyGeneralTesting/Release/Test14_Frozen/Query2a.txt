@@ -1,0 +1,155 @@
+﻿1 - Parent(int,int) 
+assign a; stmt s; variable v;
+Select BOOLEAN such that Parent(1, 2)
+false
+5000
+2 - Parent(int,int) 
+assign a; stmt s; variable v;
+Select BOOLEAN such that Parent(6, 8)
+true
+5000
+3 - Parent(var,int) 
+assign a; stmt s; variable v;
+Select s such that Parent(s, 8)
+6
+5000
+4 - Parent(int,var) 
+assign a; stmt s; variable v;
+Select s such that Parent(10, s)
+11
+5000
+5 - Parent*(int,var) 
+assign a; stmt s; variable v;
+Select s such that Parent*(10, s)
+11
+5000
+6 - Parent*(var,int) 
+assign a; stmt s; variable v;
+Select s such that Parent*(s, 8)
+6
+5000
+7 - Parent*(int,var) 
+assign a; stmt s; variable v;
+Select s such that Parent*(10, s)
+11
+5000
+8 - Follows(int,int)
+assign a; stmt s; variable v;
+Select BOOLEAN such that Follows(1,2)
+true
+5000
+9 - Follows(int,int)
+assign a; stmt s; variable v;
+Select BOOLEAN such that Follows(6,7)
+false
+5000
+10 - Follows(var,int)
+assign a; stmt s; variable v;
+Select s such that Follows(s,2)
+1
+5000
+11 - Follows*(int,int)
+assign a; stmt s; variable v;
+Select BOOLEAN such that Follows*(1,9)
+false
+5000
+12 - Follows*(int,var)
+assign a; stmt s; variable v;
+Select s such that Follows*(5,s)
+6,10
+5000
+13 - Follows*(var,int)
+assign a; stmt s; variable v;
+Select s such that Follows*(s,9)
+7,8
+5000
+14 - Modifies(int,actual var)
+assign a; stmt s; variable v;
+Select BOOLEAN such that Modifies(5,"a")
+true
+5000
+15 - Modifies(s,actual var)
+assign a; stmt s; variable v;
+Select s such that Modifies(s,"a")
+1,5,6,9
+5000
+16 - Modifies(int,v)
+assign a; stmt s; variable v;
+Select v such that Modifies(4,v)
+d
+5000
+17 - Uses(int,actual var)
+assign a; stmt s; variable v;
+Select BOOLEAN such that Uses(5,"a")
+true
+5000
+18 - Uses(s,actual var)
+assign a; stmt s; variable v;
+Select s such that Uses(s,"a")
+2,3,4,5,6
+5000
+19 - Uses(int,v)
+assign a; stmt s; variable v;
+Select v such that Uses(5,v)
+a,b,c,d
+5000
+20 - Parent(s,int) Pattern a(actual value,_)  
+assign a; stmt s; variable v;
+Select s such that Parent(s, 8) pattern a("f",_)
+
+5000
+21 - Pattern a(actual value,_) Parent(int,var) 
+assign a; stmt s; variable v;
+Select s pattern a("e",_) such that Parent(10, s)
+11
+5000
+22 - Parent(s,int) Pattern a(actual value,_)  
+assign a; stmt s; variable v;
+Select s such that Parent(s, 8) pattern a("f",_)
+
+5000
+23 - Pattern a(actual value,_) Parent(int,var) 
+assign a; stmt s; variable v;
+Select a pattern a("e",_) such that Parent(10, a)
+11
+5000
+24 - Follows(s,int) Pattern a(actual value,_)  
+assign a; stmt s; variable v;
+Select a such that Follows(a, 8) pattern a(_,_"0"_)
+7
+5000
+25 - Pattern a(actual value,_) Parent(int,var) 
+assign a; stmt s; variable v;
+Select a pattern a("e",_) such that Follows(7, a)
+
+5000
+26 - Modifies(int,actual var) Pattern(_,_)
+assign a; stmt s; variable v;
+Select BOOLEAN such that Modifies(5,"a") pattern a(_,_)
+true
+5000
+27 - Pattern(_,_'c'_) Modifies(a,actual var)
+assign a; stmt s; variable v;
+Select a pattern a("a",_"d"_) such that Modifies(s,"a") 
+5
+5000
+28 - Modifies(int,v) Pattern(v,_'e'_)
+assign a; stmt s; variable v;
+Select v such that Modifies(4,v)
+d
+5000
+29 - Pattern(actual value, actual value) Uses(int,actual var)
+assign a; stmt s; variable v;
+Select BOOLEAN pattern a("a",_"e"_) such that Uses(5,"a")
+false
+5000
+30 - Uses(s,actual var) Pattern(actual value,_)
+assign a; stmt s; variable v;
+Select a such that Uses(a,"a") pattern a("a",_)
+5
+5000
+31 - Uses(int,v) Pattern(v,actual value)
+assign a; stmt s; variable v;
+Select v such that Uses(5,v) pattern a(v,_"0"_)
+a,b
+5000

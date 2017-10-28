@@ -105,6 +105,9 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
     //Case 9: Follows(synonym, synonym)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == PROG_LINE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == PROG_LINE))
     {
+        // TODO: Wait for PKB to be ready
+        return false;
+
         // Checks if the two synonyms are already present in clauseResult
         bool argOneExists = clauseResult->synonymPresent(argOne);
         bool argTwoExists = clauseResult->synonymPresent(argTwo);

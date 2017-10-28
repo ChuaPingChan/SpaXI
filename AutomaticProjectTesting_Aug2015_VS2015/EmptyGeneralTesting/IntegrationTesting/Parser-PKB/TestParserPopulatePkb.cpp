@@ -363,6 +363,28 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+		TEST_METHOD(TestAffectsComputation2)
+		{
+			// Set up
+			list<int> actualResults;
+			list<int> expectedResults;
+			Parser parser(dummyPkbMainPtr);
+			Assert::IsTrue(createDummySimpleSourceFile_affectsSource2());
+			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+			// Test for affects
+			Assert::IsTrue(dummyPkbMain.isAffects(1, 8));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
+			Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
+
+			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 3);
+
+			// Clean up
+			Assert::IsTrue(deleteDummySimpleSourceFile());
+		}
+
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
@@ -1097,6 +1119,34 @@ namespace UnitTesting
             outfile.close();
             return true;
         }
+
+		/*
+		This is a utility method to create a dummy SIMPLE source to test
+		PKB's Affects computation.
+		*/
+		bool createDummySimpleSourceFile_affectsSource2() {
+			std::string content =
+				"procedure Test { \n"
+				"	a = b; \n"
+				"	if x then { \n"
+				"		a = c; \n"
+				"		if y then { \n"
+				"			y = a; \n"
+				"           a = b; \n"
+				"		} else { \n"
+				"		    q = b + a; \n"
+				"	    } \n"
+				"	} else { \n"
+				"       x = a + b; \n"
+				"   } \n"
+				"}";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
 
         // This is a utility method to destroy the dummy text file created by createDummyTextFile()
         bool deleteDummySimpleSourceFile() {

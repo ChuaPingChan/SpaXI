@@ -56,7 +56,7 @@ list<int> NextTable::getExecutedBefore() {
 }
 
 bool NextTable::isExecutedAfter(int stmtAft) {
-	return nextMapReverse.find(stmtAft) != nextMap.end();
+	return nextMapReverse.find(stmtAft) != nextMapReverse.end();
 }
 
 list<int> NextTable::getAllExecutedBefore() {

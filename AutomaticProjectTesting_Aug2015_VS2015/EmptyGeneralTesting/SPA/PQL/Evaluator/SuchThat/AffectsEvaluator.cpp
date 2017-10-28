@@ -105,6 +105,10 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
     //Case 9: Affects(synonym, synonym)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == PROG_LINE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == PROG_LINE))
     {
+
+        // TODO: Wait for PKB to be ready
+        return false;
+
         // Checks if the two synonyms are already present in clauseResult
         bool argOneExists = clauseResult->synonymPresent(argOne);
         bool argTwoExists = clauseResult->synonymPresent(argTwo);

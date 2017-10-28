@@ -1,0 +1,100 @@
+1 - Modifies(known assign,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(42,"x")
+true
+5000
+2 - Modifies(known ifs,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(23,"q")
+true
+5000
+3 - Modifies(known while,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(33,"a")
+true
+5000
+4 - Modifies(known proc,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies("C","q")
+true
+5000
+5 - Modifies(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Modifies(a,"x")
+1,19,24
+5000
+6 - Modifies(known assign,unknown var)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies(48,v)
+s
+5000
+7 - Modifies(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Modifies(ifs,"x")
+5,23,28,31,44,45
+5000
+8 - Modifies(known ifs,unknown var)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies(31,v)
+a,p,q,x
+5000
+9 - Modifies(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select w such that Modifies(w,"x")
+17,30,33,41,43
+5000
+10 - Modifies(known while,unknown var) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies(30,v)
+a,p,q,x
+5000
+11 - Modifies(unknown proc,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select p such that Modifies(p,"s")
+A,C,D
+5000
+12 - Modifies(known proc,unknown var) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies("C",v)
+a,i,j,p,q,r,s,x,y
+5000
+13 - Modifies(unknown assign,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(a,v)
+true
+5000
+14 - Modifies(unknown if,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(ifs,v)
+true
+5000
+15 - Modifies(unknown while,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(w,v)
+true
+5000
+16 - Modifies(unknown proc,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(p,v)
+true
+5000
+17 - Modifies(known call,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(3,"p")
+true
+5000
+18 - Modifies(known call,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies(3,v)
+a,p,q,x
+5000
+19 - Modifies(unknown call,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(c,"q")
+3,7,12,14,25,35,47
+5000
+20 - Modifies(unknown call,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(c,v)
+true
+5000

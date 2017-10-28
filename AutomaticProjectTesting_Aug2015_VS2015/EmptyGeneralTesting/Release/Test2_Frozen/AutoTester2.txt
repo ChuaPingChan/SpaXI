@@ -172,10 +172,8 @@ Select s with s.stmt# = f.stmt#
 Evaluating query 17 - Select SingleSynonym With StmtIf HaveResult
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
-Your answer: 2 3 5 9 10 14 22 
+Your answer: 5 13 18 30 
 Correct answer: 5 13 18 30 
-Missing: 13 18 30 
-Additional: 10 14 2 22 3 9 
 18 - Select SingleSynonym With StmtProgLine HaveResult
 stmt s; prog_line pl;
 Select s with s.stmt# = pl
@@ -205,10 +203,8 @@ Select s with s.stmt# = c.value
 Evaluating query 20 - Select SingleSynonym With StmtConstant HaveResult
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
-Your answer: 
+Your answer: 2 3 5 9 10 14 22 
 Correct answer: 2 3 5 9 10 14 22 
-Missing: 10 14 2 22 3 5 9 
-Additional: 
 21 - Select SingleSynonym With AssignInt HaveResult
 assign a;
 Select a with a.stmt# = 4
@@ -267,10 +263,8 @@ none
 Evaluating query 26 - Select SingleSynonym With AssignIf NoResult
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
-Your answer: 10 22 
+Your answer: 
 Correct answer: 
-Missing: 
-Additional: 10 22 
 27 - Select SingleSynonym With AssignProgLine HaveResult
 assign a; prog_line pl;
 Select a with a.stmt#=pl
@@ -340,10 +334,8 @@ none
 Evaluating query 33 - Select SingleSynonym With WhileIf NoResult
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
-Your answer: 9 
+Your answer: 
 Correct answer: 
-Missing: 
-Additional: 9 
 34 - Select SingleSynonym With WhileProgLine HaveResult
 while w; prog_line;
 Select w with w.stmt# = pl
@@ -375,10 +367,8 @@ Select w with w.stmt# = c.value
 Evaluating query 36 - Select SingleSynonym With WhileConstant HasResult
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" With="1" CondNum="2" RelNum="0" 
-Your answer: 
+Your answer: 9 
 Correct answer: 9 
-Missing: 9 
-Additional: 
 37 - Select SingleSynonym With StmtAssign And AssignWhile NoResult
 stmt s; assign a; while w;
 Select s with s.stmt# = a.stmt# and a.stmt# = w.stmt#
@@ -1443,17 +1433,15 @@ The final tag string is ReturnTuple="1" Parentstar="1" SuchThat="1" CondNum="3" 
 Your answer: 
 Correct answer: 
 140 - None
-while w; if I;
+while w; if i;
 Select w such that Parent*(w,i)
 11, 29
 5000
 Evaluating query 140 - None
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Parentstar="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 
+Your answer: 11 29 
 Correct answer: 11 29 
-Missing: 11 29 
-Additional: 
 141 - None
 while w; if i;
 Select i such that Parent*(w,i)
@@ -2255,7 +2243,7 @@ Correct answer: Two Three Four Five Six Seven Eight Nine
 217 - 3 clauses: select p1 calls p1 p2 with p2 and calls p1 p3
 procedure p1, p2, p3;
 Select p1 such that Calls(p1, p2) with p2.procName = "Six" such that Calls(p1, p3)
-Three
+Three,Five
 5000
 Evaluating query 217 - 3 clauses: select p1 calls p1 p2 with p2 and calls p1 p3
 The happen is 2
@@ -2263,9 +2251,7 @@ The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Calls="2" SuchThat="2" With="1" CondNum="6" RelNum="2" 
 Your answer: Three Five 
-Correct answer: Three 
-Missing: 
-Additional: Five 
+Correct answer: Three Five 
 218 - 3 clauses: select p1 calls p1 p2 calls p3 p1 with p3
 procedure p1, p2, p3;
 Select p1 such that Calls(p1, p2) and Calls(p3, p1) with p3.procName = "Three"
@@ -2280,7 +2266,7 @@ Correct answer: Five Six
 219 - 4 clauses: select p1 calls p2 p1 with p2 and calls p2 p3 with p3
 procedure p1, p2, p3;
 Select p1 such that Calls(p2, p1) with p2.procName = "Three" such that Calls(p2, p3) with p3.procName = "Six"
-Four, Five
+Four, Five, Six
 5000
 Evaluating query 219 - 4 clauses: select p1 calls p2 p1 with p2 and calls p2 p3 with p3
 The happen is 2
@@ -2289,9 +2275,7 @@ The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Calls="2" SuchThat="2" With="2" CondNum="7" RelNum="2" 
 Your answer: Four Five Six 
-Correct answer: Four Five 
-Missing: 
-Additional: Six 
+Correct answer: Four Five Six 
 220 - 4 clauses: select p1 calls p1 p2 and calls p1 p3 with p2 and p3
 procedure p1, p2, p3;
 Select p1 such that Calls(p1, p2) and Calls(p1, p3) with p2.procName = "Six" and p3.procName = "Seven"
@@ -2400,7 +2384,7 @@ The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum
 Your answer: 11 
 Correct answer: 11 
 231 - 1 Clause: select calls 1 synonym (1stArg), given arg; No answer
-calls c;
+call c;
 Select c such that Next(c, 11)
 none
 5000
@@ -2410,17 +2394,15 @@ The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum
 Your answer: 
 Correct answer: 
 232 - 1 Clause: select calls 1 synonym (1stArg), given arg; Has answer
-calls c;
+call c;
 Select c such that Next(c, 16)
 14, 15
 5000
 Evaluating query 232 - 1 Clause: select calls 1 synonym (1stArg), given arg; Has answer
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 
+Your answer: 14 15 
 Correct answer: 14 15 
-Missing: 14 15 
-Additional: 
 233 - 1 Clause: select ifs 1 synonym (1stArg), given arg; No answer
 if i;
 Select i such that Next(i, 13)
@@ -2534,16 +2516,13 @@ Your answer: true
 Correct answer: true 
 244 - 1 clause: same value on both arg, boolean, false
 
-Select boolean such that Next*(19,19)
+Select BOOLEAN such that Next*(19,19)
 false
 5000
 Evaluating query 244 - 1 clause: same value on both arg, boolean, false
-No ReturnBoolean, ReturnTuple=1 
-The final tag string is ReturnTuple="1" Nextstar="1" SuchThat="1" CondNum="3" RelNum="1" 
-Your answer: 
+The final tag string is ReturnBoolean="1" Nextstar="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
 Correct answer: false 
-Missing: false 
-Additional: 
 245 - 1 clause: same value on both arg, boolean, true
 
 Select BOOLEAN such that Next*(20,20)
@@ -2945,29 +2924,25 @@ Correct answer: 12
 284 - nextstar a c and nextstar w c
 assign a; while w; call c;
 Select c such that Next*(a,c) and Next*(w,c)
-14,15
+14,15,28
 5000
 Evaluating query 284 - nextstar a c and nextstar w c
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Nextstar="2" SuchThat="1" CondNum="4" RelNum="2" 
 Your answer: 14 15 28 
-Correct answer: 14 15 
-Missing: 
-Additional: 28 
+Correct answer: 14 15 28 
 285 - next s1 s2 and next s2 s3
 stmt s1,s2,s3;
 Select s1 such that Next(s1,s2) and Next(s2,s3)
-4,5,11,12,13,14,15,16,17,18,20,21,23,26,27,28,29,30,31,32,35,36
+1,2,4,5,9,10,11,12,13,14,15,16,17,18,20,21,23,26,27,28,29,30,31,32,35,36
 5000
 Evaluating query 285 - next s1 s2 and next s2 s3
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
 Your answer: 1 2 4 5 9 10 11 12 13 14 15 16 17 18 20 21 23 26 27 28 29 30 31 32 35 36 
-Correct answer: 4 5 11 12 13 14 15 16 17 18 20 21 23 26 27 28 29 30 31 32 35 36 
-Missing: 
-Additional: 1 10 2 9 
+Correct answer: 1 2 4 5 9 10 11 12 13 14 15 16 17 18 20 21 23 26 27 28 29 30 31 32 35 36 
 286 - next and with clause no answer
 stmt s,s1;
 Select s such that Next(s1, 9) with s1.stmt# = 9
@@ -3031,17 +3006,16 @@ Your answer: 10 16 21 27 31 32
 Correct answer: 10 16 21 27 31 32 
 292 - 2 next and with clause substitute synonym
 stmt s; while w; constant c;
-Select s such that Next*(s,s) with s.stmt# = c.value and Next*(s,w)
-2,10
+Select s such that Next*(s,s) with s.stmt# = c.value such that Next*(s,w)
+2,9,10,14
 5000
 Evaluating query 292 - 2 next and with clause substitute synonym
 The happen is 2
+The happen is 2
 No ReturnBoolean, ReturnTuple=1 
-The final tag string is ReturnTuple="1" Nextstar="2" SuchThat="1" With="1" CondNum="5" RelNum="2" 
-Your answer: 
-Correct answer: 2 10 
-Missing: 10 2 
-Additional: 
+The final tag string is ReturnTuple="1" Nextstar="2" SuchThat="2" With="1" CondNum="6" RelNum="2" 
+Your answer: 2 9 10 14 
+Correct answer: 2 9 10 14 
 293 - next and pattern clause
 assign a; while w;
 Select a such that Next(a,w) pattern a(_,_"2*h"_)
@@ -3056,58 +3030,51 @@ Correct answer: 10 21
 294 - next and pattern clause get variables
 assign a; while w; variable v;
 Select v such that Next*(a,w) pattern a(v,_)
-g,j,k,m,s,t,u
+g,j,k,m,s,t,u,l
 5000
 Evaluating query 294 - next and pattern clause get variables
 v,_ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Nextstar="1" UnnamedVar="1" Pattern="1" SuchThat="1" CondNum="5" RelNum="1" 
 Your answer: g j k l m s t u 
-Correct answer: g j k m s t u 
-Missing: 
-Additional: l 
+Correct answer: g j k m s t u l 
 295 - next and pattern and with
-stmt s; assign a; while w;
-Select s such that Next*(w,i) pattern w("u",_) and Next*(s,a) with s.stmt# = 31
-32
+stmt s; assign a; while w; if i;
+Select s such that Next*(w,i) pattern w("u",_) such that Next*(s,a) with s.stmt# = 31
+31
 5000
 Evaluating query 295 - next and pattern and with
 "u",_ is an Unnamedvar 
 The happen is 2
+The happen is 2
 No ReturnBoolean, ReturnTuple=1 
-The final tag string is ReturnTuple="1" Nextstar="2" UnnamedVar="1" Pattern="1" SuchThat="1" With="1" CondNum="7" RelNum="2" 
-Your answer: 
-Correct answer: 32 
-Missing: 32 
-Additional: 
+The final tag string is ReturnTuple="1" Nextstar="2" UnnamedVar="1" Pattern="1" SuchThat="2" With="1" CondNum="8" RelNum="2" 
+Your answer: 31 
+Correct answer: 31 
 296 - 3 next
 stmt s1,s2; while w;
 Select s1 such that Next(s1,w) and Next*(s2,w) and Next*(s1,s2)
-16,28,31,32
+2,10,16,18,21,27,28,31,32
 5000
 Evaluating query 296 - 3 next
 The happen is 2
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Next="1" Nextstar="2" SuchThat="1" CondNum="5" RelNum="3" 
 Your answer: 2 10 16 18 21 27 28 31 32 
-Correct answer: 16 28 31 32 
-Missing: 
-Additional: 10 18 2 21 27 
-297 - 4 next
+Correct answer: 2 10 16 18 21 27 28 31 32 
+297 - 4 next NoResult
 assign a; while w; if i; call c;
 Select a such that Next(_,a) and Next(a,i) and Next*(a,w) and Next(a,c)
-12
+none
 5000
-Evaluating query 297 - 4 next
+Evaluating query 297 - 4 next NoResult
 _,a is an Unnamedvar 
 The happen is 2
 The happen is 3
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Next="3" Nextstar="1" UnnamedVar="1" SuchThat="1" CondNum="7" RelNum="4" 
 Your answer: 
-Correct answer: 12 
-Missing: 12 
-Additional: 
+Correct answer: 
 298 - Using pattern keyword as synonym HasAnswer
 assign pattern;
 Select pattern pattern pattern(_, "x")
@@ -3170,7 +3137,7 @@ Correct answer: 21 22
 303 - Underscore Expr BracketLhsRhsEnclose PartialMatch HasAnswer
 assign a;
 Select a pattern a(_, _"(3*5)"_)
-2017-10-12 00:00:00
+10,12
 5000
 Evaluating query 303 - Underscore Expr BracketLhsRhsEnclose PartialMatch HasAnswer
 _, is an Unnamedvar 
@@ -3179,8 +3146,8 @@ _" is an Unnamedvar
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="3" Pattern="1" CondNum="5" RelNum="0" 
 Your answer: 
-Correct answer: 2017-10-12 00:00:00 
-Missing: 2017-10-12 00:00:00 
+Correct answer: 10 12 
+Missing: 10 12 
 Additional: 
 304 - Underscore Expr NotSameSubTree PartialMatch NoAnswer
 assign a;
@@ -3197,18 +3164,16 @@ Your answer:
 Correct answer: 
 305 - Underscore Expr SameSubTree PartialMatch HasAnswer
 assign a;
-Select a pattern a(_, _"14+100*a"_)
-12
+Select a pattern a(_, _"100*a"_)
+10,12,16
 5000
 Evaluating query 305 - Underscore Expr SameSubTree PartialMatch HasAnswer
 _, is an Unnamedvar 
-_"14+100*a"_ is an Unnamedvar 
+_"100*a"_ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
-Your answer: 
-Correct answer: 12 
-Missing: 12 
-Additional: 
+Your answer: 10 12 16 
+Correct answer: 10 12 16 
 306 - Underscore Expr IncorrectBracketPair NoAnswer
 assign a;
 Select a pattern a(_, "(((abc)")
@@ -3322,16 +3287,14 @@ Correct answer: 1 9 11 20 26 29
 316 - 1 while, 1 synonym, select s
 while w; variable v; stmt s;
 Select s pattern w(v, _)
-1,9,11,20,26,29
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38
 5000
 Evaluating query 316 - 1 while, 1 synonym, select s
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
 Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 
-Correct answer: 1 9 11 20 26 29 
-Missing: 
-Additional: 10 12 13 14 15 16 17 18 19 2 21 22 23 24 25 27 28 3 30 31 32 33 34 35 36 37 38 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 
 317 - 1 while, 1 synonym, select all assign
 while w; variable v; assign a;
 Select a pattern w(v, _)
@@ -3391,7 +3354,7 @@ The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" R
 Your answer: 9 
 Correct answer: 9 
 322 - 2 whiles, 1 synonym 1 ident
-while w, w1;
+while w, w1; variable v;
 Select w pattern w(v, _) and w1("f",_)
 1,9,11,20,26,29
 5000
@@ -3400,12 +3363,10 @@ _ is an Unnamedvar
 "f",_ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
-Your answer: 
+Your answer: 1 9 11 20 26 29 
 Correct answer: 1 9 11 20 26 29 
-Missing: 1 11 20 26 29 9 
-Additional: 
 323 - 2 whiles, 1 synonym 1 ident
-while w, w1;
+while w, w1; variable v;
 Select w1 pattern w(v, _) and w1("f", _)
 9
 5000
@@ -3414,10 +3375,8 @@ _ is an Unnamedvar
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
-Your answer: 
+Your answer: 9 
 Correct answer: 9 
-Missing: 9 
-Additional: 
 324 - 3 whiles
 while w, w1, w2;
 Select w pattern w("a", _) and w1("f", _) and w2("i", _)
@@ -3432,7 +3391,7 @@ The final tag string is ReturnTuple="1" UnnamedVar="3" Pattern="1" CondNum="5" R
 Your answer: 1 
 Correct answer: 1 
 325 - 4 whiles
-while w; w1, w2, w3;
+while w, w1, w2, w3;
 Select w pattern w("a", _) and w1("f", _) and w2("i", _) and w3("s", _)
 1
 5000
@@ -3443,22 +3402,18 @@ _ is an Unnamedvar
 _ is an Unnamedvar 
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" UnnamedVar="4" Pattern="1" CondNum="6" RelNum="0" 
-Your answer: 
+Your answer: 1 
 Correct answer: 1 
-Missing: 1 
-Additional: 
 326 - InSameStmt Modifies and Uses DiffKnownVar HasAnswer
 stmt s;
 Select s such that Modifies(s, "b") and Uses(s, "c")
-4
+3,4
 5000
 Evaluating query 326 - InSameStmt Modifies and Uses DiffKnownVar HasAnswer
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" CondNum="4" RelNum="2" 
 Your answer: 3 4 
-Correct answer: 4 
-Missing: 
-Additional: 3 
+Correct answer: 3 4 
 327 - InSameStmt Modifies and Uses DiffUnknownVar HasAnswer
 stmt s; variable v1, v2;
 Select s such that Modifies(s, v1) and Uses(s, v2)
@@ -3472,15 +3427,13 @@ Correct answer: 1 10 11 12 13 14 15 16 17 18 19 2 20 21 22 23 24 25 26 27 28 29 
 328 - InSameStmt ChooseStmt Modifies and Uses SameUnknownVar HasAnswer
 stmt s; variable v;
 Select s such that Modifies(s, v) and Uses(s, v)
-1,2,3,5,7,8,11,14,15,18,19,23,24,26,28,29,30,33
+1,2,3,5,7,8,11,13,14,15,18,19,23,24,26,28,29,30,33
 5000
 Evaluating query 328 - InSameStmt ChooseStmt Modifies and Uses SameUnknownVar HasAnswer
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" CondNum="4" RelNum="2" 
 Your answer: 1 2 3 5 7 8 11 13 14 15 18 19 23 24 26 28 29 30 33 
-Correct answer: 1 2 3 5 7 8 11 14 15 18 19 23 24 26 28 29 30 33 
-Missing: 
-Additional: 13 
+Correct answer: 1 2 3 5 7 8 11 13 14 15 18 19 23 24 26 28 29 30 33 
 329 - InSameStmt ChooseVariable Modifies and Uses SameUnknownVar HasAnswer
 stmt s; variable v;
 Select v such that Modifies(s, v) and Uses(s, v)
@@ -3492,29 +3445,25 @@ The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" CondN
 Your answer: g j m o q s t u x y 
 Correct answer: g j m o q s t u x y 
 330 - InSameAssign ChooseAssign Modifies and Uses SameUnknownVar HasAnswer
-assign s; variable v;
+assign a; variable v;
 Select a such that Modifies(a, v) and Uses(a, v)
 23
 5000
 Evaluating query 330 - InSameAssign ChooseAssign Modifies and Uses SameUnknownVar HasAnswer
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: 
+Your answer: 23 
 Correct answer: 23 
-Missing: 23 
-Additional: 
 331 - InSameAssign ChooseVariable Modifies and Uses SameUnknownVar HasAnswer
-assign s; variable v;
-Select a such that Modifies(a, v) and Uses(a, v)
+assign a; variable v;
+Select v such that Modifies(a, v) and Uses(a, v)
 o
 5000
 Evaluating query 331 - InSameAssign ChooseVariable Modifies and Uses SameUnknownVar HasAnswer
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: 
+Your answer: o 
 Correct answer: o 
-Missing: o 
-Additional: 
 332 - InSameProcedure ChooseProcedure Modifies and Uses SameUnknownVar HasAnswer
 procedure p; variable v;
 Select p such that Modifies(p, v) and Uses(p, v)
@@ -3526,41 +3475,35 @@ The final tag string is ReturnTuple="1" Modifies="1" Uses="1" SuchThat="1" CondN
 Your answer: One Two Three Five Six Seven Eight Nine 
 Correct answer: Eight Five Nine One Seven Six Three Two 
 333 - ChooseStmt ModifiesStmtVar ParentDiffStmt
-stmt s1, s2; variable;
+stmt s1, s2; variable v;
 Select s1 such that Modifies(s1, v) and Parent(s1, s2)
 1,5,9,11,13,18,20,26,29,30
 5000
 Evaluating query 333 - ChooseStmt ModifiesStmtVar ParentDiffStmt
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" Parent="1" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: 
+Your answer: 1 5 9 11 13 18 20 26 29 30 
 Correct answer: 1 5 9 11 13 18 20 26 29 30 
-Missing: 1 11 13 18 20 26 29 30 5 9 
-Additional: 
 334 - ChooseVar ModifiesStmtVar ParentDiffStmt
-stmt s1, s2; variable;
+stmt s1, s2; variable v;
 Select v such that Modifies(s1, v) and Parent(s1, s2)
 o,q,v,x,y,z,g,j,k,l,m,p,s,t,u
 5000
 Evaluating query 334 - ChooseVar ModifiesStmtVar ParentDiffStmt
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Modifies="1" Parent="1" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: 
+Your answer: g j k l m p o q s t u v x y z 
 Correct answer: o q v x y z g j k l m p s t u 
-Missing: g j k l m o p q s t u v x y z 
-Additional: 
 335 - ChooseStmt ModifiesStmtVar FollowsDiffStmt
-stmt s1, s2; variable;
+stmt s1, s2; variable v;
 Select s1 such that Modifies(s1, v) and Follows(s1, s2)
 1,4,5,12,13,17,18,23,24,26,28,33,35,36,37
 5000
 Evaluating query 335 - ChooseStmt ModifiesStmtVar FollowsDiffStmt
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" Follows="1" Modifies="1" SuchThat="1" CondNum="4" RelNum="2" 
-Your answer: 
+Your answer: 1 4 5 12 13 17 18 23 24 26 28 33 35 36 37 
 Correct answer: 1 4 5 12 13 17 18 23 24 26 28 33 35 36 37 
-Missing: 1 12 13 17 18 23 24 26 28 33 35 36 37 4 5 
-Additional: 
 336 - ChooseStmt ModifiesStmtUnderscore WithStmtAssign
 stmt s; assign a;
 Select s such that Modifies(s, _) with s.stmt# = a.stmt#

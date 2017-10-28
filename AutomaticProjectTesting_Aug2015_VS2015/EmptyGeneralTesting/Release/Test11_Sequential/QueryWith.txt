@@ -245,7 +245,7 @@ Select pl with pl = cl.stmt#
 5000
 50 - ProgLine Constant
 prog_line pl; constant cl;
-Select pl with pl = c.value
+Select pl with pl = cl.value
 1,2,3,4,5,6,8,9,10,20
 5000
 51 - Call Call
@@ -270,17 +270,17 @@ true
 5000
 55 - Variable Procedure
 variable v; procedure p;
-Select BOOLEAN v.varName = p.procName
+Select BOOLEAN with v.varName = p.procName
 false
 5000
 56 - Variable Call
 variable v; call cl;
-Select BOOLEAN v.varName = cl.procName
+Select BOOLEAN with v.varName = cl.procName
 false
 5000
 57 - Procedure Call
 procedure p; call c;
-Select BOOLEAN p.procName = c.procName
+Select BOOLEAN with p.procName = c.procName
 true
 5000
 58 - Ident Variable

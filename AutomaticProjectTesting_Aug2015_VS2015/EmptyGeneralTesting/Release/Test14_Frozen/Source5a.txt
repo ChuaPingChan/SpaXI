@@ -1,0 +1,66 @@
+procedure Oscar { 
+
+1.	alpha = 1; 
+
+2.	beta = 2 * charlie; 
+
+3.	call Tango; 
+
+4.	charlie = romeo - beta; 
+
+5.	if juliet then { 
+
+6.	 	charlie = alpha + 24; 
+
+7.	 	call Violet;} 
+
+	else { 
+
+8.	 	while charlie { 
+
+9.	 		beta = alpha * juliet - 5; 
+
+10.	 		charlie = charlie - 1;} 
+
+11.	 	beta = alpha + beta * charlie + romeo * juliet; 
+
+12.	 	call Violet;} 
+
+13.	i = alpha + j + charlie; 
+
+14.	call Whisky;} 
+
+procedure Tango { 
+
+15. 	romeo = alpha * 10;
+
+16. 	juliet = beta + beta * 10;
+
+17. 	while t { 
+
+18. 		a = 5 * romeo - 5;
+ 
+19. 		alpha = 1 + beta;}
+
+20. 	juliet = romeo * 5;} 
+
+procedure Violet { 
+
+21. 	i = alpha * 10;
+
+22. 	j = alpha + beta * 10;
+
+23. 	if i then { 
+
+24. 		alpha = j + 2;
+
+25. 		call Whisky;} 
+
+	else { 
+
+26. 		beta = i + alpha + beta * charlie;}} 
+
+procedure Whisky {
+
+27. 	juliet = i * alpha * j + beta + romeo * juliet;} 
+

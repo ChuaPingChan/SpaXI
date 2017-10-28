@@ -1,6 +1,7 @@
 #include "PatternTable.h"
 
 list<string> infixToPostfix(string infix);
+list<string> filterEmptyElement(list<string> inputlist);
 bool isOperator(string c);
 int getPrecedence(string sign);
 
@@ -366,7 +367,7 @@ list<string> infixToPostfix(string infix) {
         }
         signStack.pop();
     }
-    return postfix;
+    return filterEmptyElement(postfix);
 }
 
 bool isOperator(string c) {
@@ -386,4 +387,18 @@ int getPrecedence(string sign) {
     else if (sign.compare("*") == 0 || sign.compare("/") == 0)
         weight = 2;
     return weight;
+}
+
+list<string> filterEmptyElement(list<string> inputlist)
+{
+    list<string> newList = list<string>();
+    for (list<string>::iterator it = inputlist.begin(); it != inputlist.end(); ++it)
+    {
+        string curr = *it;
+        if (curr.compare("") != 0)
+        {
+            newList.push_back(*it);
+        }
+    }
+    return newList;
 }

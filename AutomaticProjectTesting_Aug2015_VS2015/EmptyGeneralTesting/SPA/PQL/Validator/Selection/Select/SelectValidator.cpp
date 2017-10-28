@@ -38,26 +38,51 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 {
     if (RegexValidators::isValidSynonymRegex(selectedStr))
     {
-        try {
+        try 
+        {
             Entity entity = getEntityOfSynonym(selectedStr);
             SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
             storeInQueryTree(sc);
             return true;
         }
-        catch (SynonymNotFoundException& snfe) {
+        catch (SynonymNotFoundException& snfe) 
+        {
             //TODO: Add to logging
             return false;
         }
         
     }
-    //TODO: Add support for AttrRef
-    return false;
+
+    else if (RegexValidators::isValidAttrRefRegex(selectedStr))
+    {
+        bool hasProcName = selectedStr.find(RegexValidators::PROCNAME_STRING) != std::string::npos;
+
+        if (isValidAttrRefForSynonym(selectedStr))
+        {
+            Entity entity = getEntityOfSynonym(selectedStr);
+            SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
+
+            //in case the attribute selected is procName and the entity is call, we change the flag for CallsSingleSynonym in SelectClause to true
+            if (hasProcName && entity == CALL)
+            {
+                sc.isAttributeProcName = true;
+            }
+
+            storeInQueryTree(sc);
+
+            return true;
+        }
+    }
+        return false;
 }
 
 bool SelectValidator::isValidSelectTuple(string selectedStr)
 {
     if (RegexValidators::isValidTupleRegex(selectedStr))
     {
+        vector<string> synonymListExtracted;
+        vector<bool> flagForCallProcName;
+
         vector<string> synonymList;
         vector<Entity> entityList;
         string formattedStr = removeSpecialCharactersFromTuple(selectedStr);
@@ -67,22 +92,56 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
         string arguments;
         while (getline(ss, arguments, delimiter)) 
         {
-            synonymList.push_back(arguments);
+            synonymListExtracted.push_back(arguments);
         }
 
-        for (string s : synonymList)
+        for (string s : synonymListExtracted)
         {
-            try {
-                Entity entity = getEntityOfSynonym(s);
-                entityList.push_back(entity);
+            if (RegexValidators::isValidSynonymRegex(s))
+            {
+                try
+                {
+                    Entity entity = getEntityOfSynonym(s);
+                    synonymList.push_back(s);
+                    entityList.push_back(entity);
+                    flagForCallProcName.push_back(false);
+                }
+                catch (SynonymNotFoundException& snfe)
+                {
+                    //TODO: Add to logging
+                    return false;
+                }
             }
-            catch (SynonymNotFoundException& snfe) {
-                //TODO: Add to logging
-                return false;
+
+            else if (RegexValidators::isValidAttrRefRegex(s))
+            {
+                bool hasProcName = selectedStr.find(RegexValidators::PROCNAME_STRING) != std::string::npos;
+
+                if (isValidAttrRefForSynonym(s))
+                {
+                    Entity entity = getEntityOfSynonym(s);
+                    synonymList.push_back(s);
+                    entityList.push_back(entity);
+                    //in case the attribute selected is procName and the entity is call, we change the flag for CallsSingleSynonym in SelectClause to true
+                    if (hasProcName && entity == CALL)
+                    {
+                        flagForCallProcName.push_back(true);
+                    }
+                    else
+                    {
+                        flagForCallProcName.push_back(false);
+
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
         SelectClause sc = makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+        sc.isAttributeProcNameForTuple = flagForCallProcName;
         storeInQueryTree(sc);
         return true;
 
@@ -150,12 +209,68 @@ Entity SelectValidator::getEntityOfSynonym(string syn)
     }
 }
 
+bool SelectValidator::isValidAttrRefForSynonym(string &str)
+{
+    string synonymWithAttribute = str;
+    synonymWithAttribute.erase(std::remove(synonymWithAttribute.begin(), synonymWithAttribute.end(), ' '), synonymWithAttribute.end()); //remove all whitespaces
+    string synonym = Formatter::getStringBeforeDelim(synonymWithAttribute, ".");
+    string attribute = Formatter::getStringAfterDelim(synonymWithAttribute, ".");
+    Entity entity;
+    try {
+         entity = getEntityOfSynonym(synonym);
+         str = synonym;
+    }
+    catch (SynonymNotFoundException& snfe) {
+        //TODO: Add to logging
+        return false;
+    }
+
+    switch (entity) 
+    {
+    case PROCEDURE: return isProcNameAttribute(attribute);
+    case STMT: return isStmtNumAttribute(attribute);
+    case ASSIGN: return isStmtNumAttribute(attribute);
+    case WHILE: return isStmtNumAttribute(attribute);
+    case IF: return isStmtNumAttribute(attribute);
+    case VARIABLE: return isVarNameAttribute(attribute);
+    case CONSTANT: return isValueAttribute(attribute);
+    case CALL: return isStmtNumAttribute(attribute) || isProcNameAttribute(attribute);
+    
+    default: return false;
+    }
+
+    return true;
+}
+
+
+bool SelectValidator::isProcNameAttribute(string attribute)
+{
+    return(attribute == RegexValidators::PROCNAME_STRING);
+}
+
+bool SelectValidator::isStmtNumAttribute(string attribute)
+{
+    return(attribute == RegexValidators::STMTNUM_STRING);
+}
+
+bool SelectValidator::isVarNameAttribute(string attribute)
+{
+    return(attribute == RegexValidators::VARNAME_STRING);
+}
+
+bool SelectValidator::isValueAttribute(string attribute)
+{
+    return(attribute == RegexValidators::VALUE_STRING);
+}
+
+
 string SelectValidator::removeSelectKeyword(string str)
 {
     size_t f = str.find("Select");
     str.replace(f, std::string("Select").length(), "");
     return str;
 }
+
 
 string SelectValidator::removeSpecialCharactersFromTuple(string selectedStr)
 {

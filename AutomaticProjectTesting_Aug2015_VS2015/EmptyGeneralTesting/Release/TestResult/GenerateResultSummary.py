@@ -2,7 +2,6 @@
 import sys
 import os
 import xml.etree.ElementTree as ET
-from bs4 import BeautifulSoup
 
 #CURRENT_WORKING_DIRECTORY = os.getcwd()
 CURRENT_WORKING_DIRECTORY = sys.argv[1]

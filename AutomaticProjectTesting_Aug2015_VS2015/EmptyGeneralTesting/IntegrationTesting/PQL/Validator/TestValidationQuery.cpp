@@ -59,19 +59,6 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 		
-		/* Uncomment when we extend for selecting synonyms with attributes, i.e Select p.procName
-		TEST_METHOD(TestValidity_Query_SelectAttributeOfSynonym_ValidDeclaration_ExpectTrue_Valid)
-		{
-			string query;
-			query.append("procedure p;");
-			query.append("Select p.procName");
-			QueryTree qt;
-			qt.insertSynonym(PROCEDURE, "p");
-			QueryValidator validator = QueryValidator(&qt);
-			Assert::IsTrue(validator.isValidQuery(query));
-			SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
-			Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
-		}*/
 
         TEST_METHOD(TestValidity_Query_SelectBoolean_NoDeclaration_Valid)
         {
@@ -128,6 +115,28 @@ namespace UnitTesting
             SuchThatClause expectedStc = UtilitySelection::makeSuchThatClause(PARENTSTAR, IF, "RayYan", CALL, "AllGods");
             SuchThatClause actualStc = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
+        }
+
+        /*********************************
+        * Select Clause - Boolean - With *
+        *********************************/
+        TEST_METHOD(TestValidation_Query_SelectBoolean_With_Procedure_Call)
+        {
+            string query;
+            query.append("procedure p;");
+            query.append("call c;");
+            query.append("Select BOOLEAN with p.procName = c.procName");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+
+            WithClause expectedWc = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", CALL, "c");
+            WithClause actualWc = UtilitySelection::getFirstWithClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expectedWc, actualWc));
         }
 
         
@@ -234,9 +243,266 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
-        /***********************************
-        * Select Clause - Tuple s*
-        ***********************************/
+        /************************************************
+        * Select Clause - Single Synonym with Attribute *
+        *************************************************/
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfCall_ValidDeclaration_ProcName_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("call c;");
+            query.append("Select c.procName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            Assert::IsTrue(qt.getSelectClause().isAttributeProcName);
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfCall_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("call c;");
+            query.append("Select c.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            Assert::IsFalse(qt.getSelectClause().isAttributeProcName);
+
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfCall_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("call c;");
+            query.append("Select c.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CALL, "c");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            Assert::IsFalse(qt.getSelectClause().isAttributeProcName);
+
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfStmt_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select s.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfStmt_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("stmt s;");
+            query.append("Select s.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMT, "s");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfAssign_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select a.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfAssign_ValidDeclaration_VarName_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select a.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfAssign_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select a.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, ASSIGN, "a");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfWhile_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("while w;");
+            query.append("Select w.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, WHILE, "w");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfWhile_ValidDeclaration_VarName_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("while w;");
+            query.append("Select w.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, WHILE, "w");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfWhile_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("while w;");
+            query.append("Select w.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, WHILE, "w");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfIf_ValidDeclaration_StmtNum_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("if i;");
+            query.append("Select i.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, IF, "i");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfIf_ValidDeclaration_VarName_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("if i;");
+            query.append("Select i.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, IF, "i");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfIf_ValidDeclaration_Value_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("if i;");
+            query.append("Select i.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, IF, "i");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfVar_ValidDeclaration_VarName_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("variable v;");
+            query.append("Select v.varName");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, VARIABLE, "v");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfVar_ValidDeclaration_StmtNum_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("variable v;");
+            query.append("Select v.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, VARIABLE, "v");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfConstant_ValidDeclaration_Value_ExpectTrue_Valid)
+        {
+            string query;
+            query.append("constant c;");
+            query.append("Select c.value");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsTrue(validator.isValidQuery(query));
+            Assert::IsTrue(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CONSTANT, "c");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfConstant_ValidDeclaration_StmtNum_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("constant c;");
+            query.append("Select c.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, CONSTANT, "c");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfProgLine_ValidDeclaration_StmtNum_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("prog_line pl;");
+            query.append("Select pl.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROG_LINE, "pl");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
+
+        /*************************
+        * Select Clause - Tuple *
+        **************************/
 
 
         TEST_METHOD(TestValidity_Query_SelectTuple_OneSynonym_Valid)
@@ -253,6 +519,9 @@ namespace UnitTesting
             vector<string> synonymList = { "a" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 1);
+            Assert::IsFalse(flagsForCall.front());
         }
 
         TEST_METHOD(TestValidity_Query_SelectTuple_TwoSynonyms_Valid)
@@ -269,6 +538,11 @@ namespace UnitTesting
             vector<string> synonymList = { "a1", "a2" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+
         }
 
         TEST_METHOD(TestValidity_Query_SelectTuple_TwoDifferentSynonyms_Valid)
@@ -285,6 +559,10 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
         }
 
         TEST_METHOD(TestValidity_Query_SelectTuple_MultipleSynonyms_Valid)
@@ -301,7 +579,15 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
         }
+
 
         TEST_METHOD(TestValidity_Query_SelectTuple_MultipleDifferentSynonyms_WithSpaces_Valid)
         {
@@ -317,6 +603,13 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
         }
 
         TEST_METHOD(TestValidity_Query_SelectTuple_SingleInvalidSynonym_Invalid)
@@ -351,6 +644,198 @@ namespace UnitTesting
             Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
+        /***************************************
+        * Select Clause - Tuple With Attributes*
+        ****************************************/
+        TEST_METHOD(TestValidity_Query_SelectTupleAttribute_OneSynonym_Valid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select <a.stmt#> ");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN };
+            vector<string> synonymList = { "a" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 1);
+            Assert::IsFalse(flagsForCall.at(0));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTupleAttribute_TwoSynonyms_Valid)
+        {
+            string query;
+            query.append("assign a1, a2;");
+            query.append("Select <a1,a2.stmt#> ");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, ASSIGN };
+            vector<string> synonymList = { "a1", "a2" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTupleAttribute_TwoDifferentSynonyms_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s;");
+            query.append("Select <a.stmt#, s.stmt#> ");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, STMT };
+            vector<string> synonymList = { "a", "s" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_MultipleSynonyms_CallProcName_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; call c;");
+            query.append("Select <a, s, i, w, c.procName>");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CALL };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsTrue(flagsForCall.at(4));
+        }
+
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_MultipleSynonyms_CallProcName_Invalid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; call c;");
+            query.append("Select <a, s, i, w, c.stmt#>");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CALL };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
+        }
+
+
+        TEST_METHOD(TestValidity_Query_SelectTupleAttribute_MultipleSynonyms_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; constant c;");
+            query.append("Select <a, s, i.stmt#, w, c.value>");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CONSTANT };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTupleAttribute_MultipleDifferentSynonyms_WithSpaces_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; constant c;");
+            query.append("Select <a,      s.stmt#,       i,     w,        c> ");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CONSTANT };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTupleAttribute_SingleInvalidSynonym_Invalid)
+        {
+            string query;
+            query.append("assign a;");
+            query.append("Select <a.varName> ");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN };
+            vector<string> synonymList = { "a" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.empty());
+        }
+
+        TEST_METHOD(TestValidity_Query_SelectTupleAttribute_MultipleInvalidSynonym_Invalid)
+        {
+            string query;
+            query.append("assign a; stmt s;");
+            query.append("Select <a, s.value> ");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsFalse(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsFalse(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, STMT };
+            vector<string> synonymList = { "a", "s" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.empty());
+        }
 
         /********************************************
         * Select Clause - Single Synonym - SuchThat *
@@ -1172,5 +1657,6 @@ namespace UnitTesting
             Assert::IsTrue(friendValidator.getValidDeclarationFlag());
             Assert::IsFalse(friendValidator.getValidSelectionFlag());
         }
+
     };
 }
