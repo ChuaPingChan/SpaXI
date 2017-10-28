@@ -116,7 +116,9 @@ list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause se
         for (int curElement : curList) //iterate over each column of tuple result
         {
             Entity argType = selectedClause.getTupleArgTypeAt(index); //get Entity type at current index
-            if (argType == VARIABLE || argType == PROCEDURE)
+            vector<bool> flagsForCall = selectedClause.isAttributeProcNameForTuple; //get true/false flags for Call.procName to get mapping from PKB
+
+            if (argType == VARIABLE || argType == PROCEDURE || (argType == CALL && flagsForCall.at(index)))
             {
                 tempListOfStrings.push_back(pkbInstance->convertIdxToString(curElement, argType)); //get mapping of int to string
             }

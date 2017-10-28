@@ -38,13 +38,15 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
 {
     if (RegexValidators::isValidSynonymRegex(selectedStr))
     {
-        try {
+        try 
+        {
             Entity entity = getEntityOfSynonym(selectedStr);
             SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, selectedStr);
             storeInQueryTree(sc);
             return true;
         }
-        catch (SynonymNotFoundException& snfe) {
+        catch (SynonymNotFoundException& snfe) 
+        {
             //TODO: Add to logging
             return false;
         }
@@ -79,6 +81,7 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
     if (RegexValidators::isValidTupleRegex(selectedStr))
     {
         vector<string> synonymListExtracted;
+        vector<bool> flagForCallProcName;
 
         vector<string> synonymList;
         vector<Entity> entityList;
@@ -96,12 +99,15 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
         {
             if (RegexValidators::isValidSynonymRegex(s))
             {
-                try {
+                try
+                {
                     Entity entity = getEntityOfSynonym(s);
                     synonymList.push_back(s);
                     entityList.push_back(entity);
+                    flagForCallProcName.push_back(false);
                 }
-                catch (SynonymNotFoundException& snfe) {
+                catch (SynonymNotFoundException& snfe)
+                {
                     //TODO: Add to logging
                     return false;
                 }
@@ -109,11 +115,23 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
 
             else if (RegexValidators::isValidAttrRefRegex(s))
             {
+                bool hasProcName = selectedStr.find(RegexValidators::PROCNAME_STRING) != std::string::npos;
+
                 if (isValidAttrRefForSynonym(s))
                 {
                     Entity entity = getEntityOfSynonym(s);
                     synonymList.push_back(s);
                     entityList.push_back(entity);
+                    //in case the attribute selected is procName and the entity is call, we change the flag for CallsSingleSynonym in SelectClause to true
+                    if (hasProcName && entity == CALL)
+                    {
+                        flagForCallProcName.push_back(true);
+                    }
+                    else
+                    {
+                        flagForCallProcName.push_back(false);
+
+                    }
                 }
                 else
                 {
@@ -123,6 +141,7 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
         }
 
         SelectClause sc = makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+        sc.isAttributeProcNameForTuple = flagForCallProcName;
         storeInQueryTree(sc);
         return true;
 

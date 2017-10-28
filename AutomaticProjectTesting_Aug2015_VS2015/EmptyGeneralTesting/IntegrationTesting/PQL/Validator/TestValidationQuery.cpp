@@ -497,6 +497,9 @@ namespace UnitTesting
             vector<string> synonymList = { "a" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 1);
+            Assert::IsFalse(flagsForCall.front());
         }
 
         TEST_METHOD(TestValidity_Query_SelectTuple_TwoSynonyms_Valid)
@@ -513,6 +516,11 @@ namespace UnitTesting
             vector<string> synonymList = { "a1", "a2" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+
         }
 
         TEST_METHOD(TestValidity_Query_SelectTuple_TwoDifferentSynonyms_Valid)
@@ -529,6 +537,10 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
         }
 
         TEST_METHOD(TestValidity_Query_SelectTuple_MultipleSynonyms_Valid)
@@ -545,7 +557,15 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
         }
+
 
         TEST_METHOD(TestValidity_Query_SelectTuple_MultipleDifferentSynonyms_WithSpaces_Valid)
         {
@@ -561,6 +581,13 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
         }
 
         TEST_METHOD(TestValidity_Query_SelectTuple_SingleInvalidSynonym_Invalid)
@@ -612,6 +639,9 @@ namespace UnitTesting
             vector<string> synonymList = { "a" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 1);
+            Assert::IsFalse(flagsForCall.at(0));
         }
 
         TEST_METHOD(TestValidity_Query_SelectTupleAttribute_TwoSynonyms_Valid)
@@ -628,6 +658,10 @@ namespace UnitTesting
             vector<string> synonymList = { "a1", "a2" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
         }
 
         TEST_METHOD(TestValidity_Query_SelectTupleAttribute_TwoDifferentSynonyms_Valid)
@@ -644,7 +678,60 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+
         }
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_MultipleSynonyms_CallProcName_Valid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; call c;");
+            query.append("Select <a, s, i, w, c.procName>");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CALL };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsTrue(flagsForCall.at(4));
+        }
+
+
+        TEST_METHOD(TestValidity_Query_SelectTuple_MultipleSynonyms_CallProcName_Invalid)
+        {
+            string query;
+            query.append("assign a; stmt s; if i; while w; call c;");
+            query.append("Select <a, s, i, w, c.stmt#>");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { ASSIGN, STMT, IF, WHILE, CALL };
+            vector<string> synonymList = { "a", "s", "i", "w", "c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
+        }
+
 
         TEST_METHOD(TestValidity_Query_SelectTupleAttribute_MultipleSynonyms_Valid)
         {
@@ -660,6 +747,13 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
         }
 
         TEST_METHOD(TestValidity_Query_SelectTupleAttribute_MultipleDifferentSynonyms_WithSpaces_Valid)
@@ -676,6 +770,13 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s", "i", "w", "c" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 5);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsFalse(flagsForCall.at(1));
+            Assert::IsFalse(flagsForCall.at(2));
+            Assert::IsFalse(flagsForCall.at(3));
+            Assert::IsFalse(flagsForCall.at(4));
         }
 
         TEST_METHOD(TestValidity_Query_SelectTupleAttribute_SingleInvalidSynonym_Invalid)
@@ -692,6 +793,8 @@ namespace UnitTesting
             vector<string> synonymList = { "a" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.empty());
         }
 
         TEST_METHOD(TestValidity_Query_SelectTupleAttribute_MultipleInvalidSynonym_Invalid)
@@ -708,6 +811,8 @@ namespace UnitTesting
             vector<string> synonymList = { "a", "s" };
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
             Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.empty());
         }
 
         /********************************************
