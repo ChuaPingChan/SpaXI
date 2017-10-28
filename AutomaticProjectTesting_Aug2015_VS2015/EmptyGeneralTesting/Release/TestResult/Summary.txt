@@ -1,6 +1,6 @@
 Overall Test Ran   : 6322
-Overall Test Passed: 6126
-Overall Test Failed: 196
+Overall Test Passed: 6150
+Overall Test Failed: 172
 
 
 TestResult\out1.xml: 
@@ -240,8 +240,8 @@ Failed  : 3
 
 TestResult\out2.xml: 
 Test Ran: 336	[BUG]
-Passed  : 307
-Failed  : 29
+Passed  : 331
+Failed  : 5
 
 TestResult\out3.xml: 
 Test Ran: 207
