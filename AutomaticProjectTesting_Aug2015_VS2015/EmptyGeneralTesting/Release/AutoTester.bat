@@ -78,6 +78,24 @@ if %isPause%==1 (
 )
 goto :eof
 
+:clearAllResultFiles
+if exist TestResult\cmd\*.txt (
+	del TestResult\cmd\*.txt
+)
+if exist TestResult\*.xml (
+	del TestResult\*.xml
+)
+if exist TestResult\Summary.txt (
+	del TestResult\Summary.txt
+)
+goto :eof
+
+:createCmdOutputFolder
+if not exist TestResult\cmd (
+	mkdir TestResult\cmd
+)
+goto :eof
+
 :generateCompliment
 @echo off
 echo.
@@ -139,6 +157,7 @@ goto :main
 
 :runAllTests
 set isPause=0 
+call :clearAllResultFiles
 echo ===============================================================================
 echo                           Start Running AutoTester
 echo ===============================================================================
@@ -171,6 +190,7 @@ cls
 goto :main
 
 :runTest1
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 1...
 AutoTester Test1_Frozen\test1source.txt Test1_Frozen\test1query.txt TestResult\out1.xml > TestResult\cmd\cmd1.txt
@@ -179,6 +199,7 @@ call :getPauseAction
 goto :eof
 
 :runTest2
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 2...
 AutoTester Test2_Frozen\test2source.txt Test2_Frozen\test2query.txt TestResult\out2.xml > TestResult\cmd\cmd2.txt
@@ -187,6 +208,7 @@ call :getPauseAction
 goto :eof
 
 :runTest3
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 3...
 AutoTester Test3_Frozen\test3source.txt Test3_Frozen\test3query.txt TestResult\out3.xml > TestResult\cmd\cmd3.txt
@@ -195,6 +217,7 @@ call :getPauseAction
 goto :eof
 
 :runTest4
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 4_0...
 AutoTester Test4_Frozen\test4source0.txt Test4_Frozen\test4query0.txt TestResult\out4_0.xml > TestResult\cmd\cmd4_0.txt
@@ -209,6 +232,7 @@ call :getPauseAction
 goto :eof
 
 :runTest5
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 5...
 AutoTester Test5\test5source.txt Test5\test5query.txt TestResult\out5.xml > TestResult\cmd\cmd5.txt
@@ -217,6 +241,7 @@ call :getPauseAction
 goto :eof
 
 :runTest6
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 6...
 echo Running AutoTester for Demo_Calls...
@@ -302,6 +327,7 @@ call :getPauseAction
 goto :eof
 
 :runTest7
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 7...
 echo Test is still being written. Skipping to Test 8 ...
@@ -310,6 +336,7 @@ call :getPauseAction
 goto :eof
 
 :runTest8
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 8...
 AutoTester Test8_Frozen\Sample-Source.txt Test8_Frozen\Sample-Queries.txt TestResult\out8.xml > TestResult\cmd\cmd8_Sample.txt
@@ -318,6 +345,7 @@ call :getPauseAction
 goto :eof
 
 :runTest9
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 9...
 echo Test is still being written. Skipping to Test 9 ...
@@ -326,6 +354,7 @@ call :getPauseAction
 goto :eof
 
 :runTest10
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 10...
 echo Running AutoTester for QueryAffects.txt...
@@ -342,6 +371,7 @@ call :getPauseAction
 goto :eof
 
 :runTest11
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 11...
 echo Running AutoTester for QueryFollows...
@@ -361,6 +391,7 @@ call :getPauseAction
 goto :eof
 
 :runTest12
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 12...
 echo Running AutoTester for QueryComplexNext.txt...
@@ -374,6 +405,7 @@ call :getPauseAction
 goto :eof
 
 :runTest13
+call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 13...
 echo Finish running AutoTester for test 13.
