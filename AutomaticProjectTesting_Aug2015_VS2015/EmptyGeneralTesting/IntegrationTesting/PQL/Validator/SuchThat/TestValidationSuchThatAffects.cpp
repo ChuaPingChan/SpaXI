@@ -219,16 +219,15 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-
-        /**********
-        * Invalid *
-        **********/
-        TEST_METHOD(TestValidity_SuchThat_Affects_Int_Int_SameStmtNum_Invalid)
+        TEST_METHOD(TestValidity_SuchThat_Affects_Int_Int_SameStmtNum_Valid)
         {
-            string str = "Affects(1, 1)";
+            string str = "Affects(2, 2)";
             QueryTree qt;
             SuchThatHandler stHandler = SuchThatHandler(&qt);
-            Assert::IsFalse(stHandler.isValidSuchThat(str));
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(AFFECTS, INTEGER, "2", INTEGER, "2");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
         TEST_METHOD(TestValidity_SuchThat_Affects_Int_Int_SameSynonymName_Invalid)
@@ -237,7 +236,10 @@ namespace UnitTesting
             QueryTree qt;
             qt.insertSynonym(STMT, "s");
             SuchThatHandler stHandler = SuchThatHandler(&qt);
-            Assert::IsFalse(stHandler.isValidSuchThat(str));
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(AFFECTS, STMT, "s", STMT, "s");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
     };
 }
