@@ -130,6 +130,28 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expectedStc, actualStc));
         }
 
+        /*********************************
+        * Select Clause - Boolean - With *
+        *********************************/
+        TEST_METHOD(TestValidation_Query_SelectBoolean_With_Procedure_Call)
+        {
+            string query;
+            query.append("procedure p;");
+            query.append("call c;");
+            query.append("Select BOOLEAN with p.procName = c.procName");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+
+            WithClause expectedWc = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", CALL, "c");
+            WithClause actualWc = UtilitySelection::getFirstWithClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameWithClauseContent(expectedWc, actualWc));
+        }
+
         
         /*********************************
         * Select Clause - Single Synonym *
