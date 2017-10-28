@@ -51,3 +51,11 @@ void IfStmt::visitElse() {
 bool IfStmt::hasVisitedElse() {
 	return visitedElse;
 }
+
+int IfStmt::getAfterIf() {
+	return afterIf;
+}
+
+int IfStmt::getStmtNum() {
+	return stmtNum;
+}

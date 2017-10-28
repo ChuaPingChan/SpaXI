@@ -35,6 +35,10 @@ public:
 
 	bool hasVisitedElse();
 
+	int getAfterIf();
+
+	int getStmtNum();
+
 
 private:
 	int stmtNum;
