@@ -1,0 +1,1 @@
+This directory is to store the redirected output of AutoTester.
