@@ -168,6 +168,9 @@ public:
 	list<int> getAllAffector();
 	list<int> getAllFirstStmtOfProc();
 	pair<list<int>, list<int>> getAllAffects(int stmt, unordered_map<int, unordered_set<int>>& affectsRelMap);
+	int processBranchIf(stack<IfStmt>& ifMapStack, unordered_map<int, unordered_set<int>>& latestMod);
+	int processBranchElseWithNoNext(stack<IfStmt>& ifMapStack, unordered_map<int, unordered_set<int>>& latestMod);
+	int processBranchElseWithNext(stack<IfStmt>& ifMapStack, unordered_map<int, unordered_set<int>>& latestMod, int next);
 	unordered_map<int, unordered_set<int>> joinMap(unordered_map<int, unordered_set<int>> firstMap, unordered_map<int, unordered_set<int>> secondMap);
 	pair<list<int>, list<int>> getAllAffects();
 	bool isAffectsStar(int stmt1, int stmt2);
