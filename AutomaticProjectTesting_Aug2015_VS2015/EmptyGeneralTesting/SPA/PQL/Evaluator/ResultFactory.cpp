@@ -21,6 +21,8 @@ bool ResultFactory::processClause(SuchThatClause clause)
 {
     Relationship rel = clause.getRel();
 
+    cout << "REL: " << endl;
+
     if (rel == FOLLOWS)
     {
         FollowsEvaluator evaluator = FollowsEvaluator();
@@ -78,6 +80,19 @@ bool ResultFactory::processClause(SuchThatClause clause)
     else if (rel == CALLSSTAR)
     {
         CallsStarEvaluator evaluator = CallsStarEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
+    else if (rel == AFFECTS)
+    {
+        cout << "factory correct liao" << endl;
+        AffectsEvaluator evaluator = AffectsEvaluator();
+        return evaluator.evaluate(clause, &_clauseResult);
+    }
+
+    else if (rel == AFFECTSSTAR)
+    {
+        AffectsStarEvaluator evaluator = AffectsStarEvaluator();
         return evaluator.evaluate(clause, &_clauseResult);
     }
 
