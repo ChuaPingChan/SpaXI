@@ -4,9 +4,9 @@
 class AffectsStarEvaluator : public SuchThatRelEvaluator
 {
 public:
-	AffectsStarEvaluator();
-	~AffectsStarEvaluator();
+    AffectsStarEvaluator();
+    ~AffectsStarEvaluator();
 
-	ClauseResult evaluate(SuchThatClause clause);
+    bool evaluate(SuchThatClause stClause, ClauseResult* clauseResult);
 };
 
