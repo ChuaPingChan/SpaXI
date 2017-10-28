@@ -1,4 +1,7 @@
 #pragma once
+
+using namespace std;
+
 enum Entity
 {
     STMT = 0,
@@ -17,3 +20,5 @@ enum Entity
     CONSTANT,
     STMTLIST
 };
+
+bool entityIsSynonym(Entity entity);

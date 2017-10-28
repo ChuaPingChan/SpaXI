@@ -50,13 +50,21 @@ bool ClauseWrapper::isWithClause()
 }
 
 /*
+    Returns the clause stored in the wrapper in the form of the superclass Clause.
+*/
+Clause ClauseWrapper::getClause()
+{
+    return Clause();
+}
+
+/*
     Returns the "such that" clause stored in the wrapper.
     Pre-condition:
         Ensure wrapper stores a "such that" clause using the isSuchThatClause() method.
 */
 SuchThatClause ClauseWrapper::getSuchThatClause()
 {
-    assert(isSuchThatClause);
+    assert(isSuchThatClause());
     return *_suchThatClausePtr;
 }
 
@@ -67,6 +75,7 @@ SuchThatClause ClauseWrapper::getSuchThatClause()
 */
 PatternClause ClauseWrapper::getPatternClause()
 {
+    assert(isPatternClause());
     return *_patternClausePtr;
 }
 
@@ -77,5 +86,6 @@ PatternClause ClauseWrapper::getPatternClause()
 */
 WithClause ClauseWrapper::getWithClause()
 {
+    assert(isWithClause());
     return *_withClausePtr;
 }

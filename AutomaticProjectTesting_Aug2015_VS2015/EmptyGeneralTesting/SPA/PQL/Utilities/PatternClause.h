@@ -2,10 +2,11 @@
 #include <string>
 #include "../../Entity.h"
 #include "../Patternship.h"
+#include "Clause.h"
 
 using namespace std;
 
-class PatternClause
+class PatternClause : public Clause
 {
 public:
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Clause.h"
 #include "SuchThatClause.h"
 #include "PatternClause.h"
 #include "WithClause.h"
@@ -18,6 +19,7 @@ public:
     bool isPatternClause();
     bool isWithClause();
 
+    Clause getClause();
     SuchThatClause getSuchThatClause();
     PatternClause getPatternClause();
     WithClause getWithClause();

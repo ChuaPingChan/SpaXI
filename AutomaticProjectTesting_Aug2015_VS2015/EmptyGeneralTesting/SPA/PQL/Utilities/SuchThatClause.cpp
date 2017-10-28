@@ -1,4 +1,5 @@
 #include "SuchThatClause.h"
+#include "../../Entity.h"
 
 
 SuchThatClause::SuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
@@ -8,6 +9,13 @@ SuchThatClause::SuchThatClause(Relationship rel, Entity argOneType, string argOn
 	this->_argTwoType = argTwoType;
 	this->_argOne = argOne;
 	this->_argTwo = argTwo;
+
+    if (entityIsSynonym(argOneType)) {
+        addSynonym(argOne);
+    }
+    if (entityIsSynonym(argTwoType)) {
+        addSynonym(argTwo);
+    }
 }
 
 SuchThatClause::~SuchThatClause()

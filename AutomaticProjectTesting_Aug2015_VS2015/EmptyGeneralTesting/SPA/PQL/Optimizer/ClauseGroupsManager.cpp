@@ -1,7 +1,7 @@
-#include "ClauseGroupManager.h"
+#include "ClauseGroupsManager.h"
 
 
 
-ClauseGroupManager::ClauseGroupsManager()
+ClauseGroupsManager::ClauseGroupsManager()
 {
 }
