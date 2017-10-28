@@ -459,6 +459,19 @@ namespace UnitTesting
             Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectAttributeOfProgLine_ValidDeclaration_StmtNum_ExpectFalse_Invalid)
+        {
+            string query;
+            query.append("prog_line pl;");
+            query.append("Select pl.stmt#");
+            QueryTree qt;
+            FriendQueryValidator validator = FriendQueryValidator(&qt);
+            Assert::IsFalse(validator.isValidQuery(query));
+            Assert::IsFalse(validator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, PROG_LINE, "pl");
+            Assert::IsFalse(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
 
         /*************************
         * Select Clause - Tuple *
