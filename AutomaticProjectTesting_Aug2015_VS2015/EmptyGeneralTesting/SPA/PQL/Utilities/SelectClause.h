@@ -28,9 +28,12 @@ public:
     
     vector<string> getTupleArgs();
     string getTupleArgAt(int index);
-    
+
+    bool isAttributeProcName = false;
+    vector<bool> isAttributeProcNameForTuple;
 
 private:
+
     SelectionType selectionType;
     Entity singleArgType;
     string singleArg;
