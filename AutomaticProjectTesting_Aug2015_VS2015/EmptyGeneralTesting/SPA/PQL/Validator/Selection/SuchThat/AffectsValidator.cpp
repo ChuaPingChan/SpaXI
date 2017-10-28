@@ -14,11 +14,6 @@ void AffectsValidator::validate()
     string firstArg = extractArgOne(rel, paramStr);
     string secondArg = extractArgTwo(paramStr);
 
-    if (this->rel==AFFECTS && firstArg == secondArg && firstArg != UNDERSCORE_STRING) {    //Because can never be 2 underlines or 2 int or 2 same synonym or 2 same synonymType
-        this->validity = false;
-        return;
-    }
-
     if (isValidArgOne(firstArg) && isValidArgTwo(secondArg)) {
         this->argOne = firstArg;
         this->argTwo = secondArg;
