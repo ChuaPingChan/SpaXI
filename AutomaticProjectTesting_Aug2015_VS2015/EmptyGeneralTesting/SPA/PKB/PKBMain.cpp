@@ -1419,53 +1419,42 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			int modifiedVar = getModifiesFromStmt(curr).front();
 			latestMod[modifiedVar].clear();
 			latestMod[modifiedVar].insert(curr);
-			list<int> nextList = getExecutedAfter(curr, STMT);
+			list<int> nextStmtList = getExecutedAfter(curr, STMT);
 
 			if (getParent(curr, IF).size() != 0) { //is in an if
 				IfStmt ifStmt = ifMapStack.top();
 				if (ifStmt.isEndIf(curr)) {
-					ifStmt.setIfMap(latestMod);
-					latestMod = ifStmt.getElseMap();
-					curr = ifStmt.getBranchElse();
-					ifStmt.visitElse();
+					curr = processBranchIf(ifMapStack, latestMod);
 				}
 				
 				else if (ifStmt.isEndElse(curr)) {
-					if (nextList.size() == 0) {
-
+					if (nextStmtList.size() == 0) { // no next after else i.e. pt to dummy
+						curr = processBranchElseWithNoNext(ifMapStack, latestMod);
 					}
 
-					else {
-
-					}
-					//TODO REMOVE
-					if (nextList.size() == 0) {
-						curr = 0;
-					}
-
-					else {
-						curr = nextList.front();
+					else { // got next
+						curr = processBranchElseWithNext(ifMapStack, latestMod, nextStmtList.front());
 					}
 				}
 
 				else {
-					if (nextList.size() == 0) {
+					if (nextStmtList.size() == 0) {
 						curr = 0;
 					}
 
 					else {
-						curr = nextList.front();
+						curr = nextStmtList.front();
 					}
 				}
 			}
 
 			else {
-				if (nextList.size() == 0) {
+				if (nextStmtList.size() == 0) {
 					curr = 0;
 				}
 
 				else {
-					curr = nextList.front();
+					curr = nextStmtList.front();
 				}
 			}
 		}
@@ -1476,12 +1465,43 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				latestMod.erase(modifiedVar);
 			}
 
-			if (getExecutedAfter(curr, STMT).size() == 0) {
-				curr = 0;
+			list<int> nextStmtList = getExecutedAfter(curr, STMT);
+
+			if (getParent(curr, IF).size() != 0) { //is in an if
+				IfStmt ifStmt = ifMapStack.top();
+				if (ifStmt.isEndIf(curr)) {
+					curr = processBranchIf(ifMapStack, latestMod);
+				}
+
+				else if (ifStmt.isEndElse(curr)) {
+					if (nextStmtList.size() == 0) { // no next after else i.e. pt to dummy
+						curr = processBranchElseWithNoNext(ifMapStack, latestMod);
+					}
+
+					else { // got next
+						curr = processBranchElseWithNext(ifMapStack, latestMod, nextStmtList.front());
+					}
+				}
+
+				else {
+					if (nextStmtList.size() == 0) {
+						curr = 0;
+					}
+
+					else {
+						curr = nextStmtList.front();
+					}
+				}
 			}
 
 			else {
-				curr = getExecutedAfter(curr, STMT).front();
+				if (nextStmtList.size() == 0) {
+					curr = 0;
+				}
+
+				else {
+					curr = nextStmtList.front();
+				}
 			}
 		}
 
@@ -1519,6 +1539,8 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 					curr = insideLoop;
 				}
 			}
+
+
 		}
 
 		else { // if statement
@@ -1529,17 +1551,19 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			list<int> children = getChildren(curr, STMT);
 			children.sort();
 			int endElse = children.back();
-			list<int> afterIfList = getExecutedAfter(endElse, STMT);
+			list<int> afterIfList = getAfter(endElse, STMT);
 			int afterIf;
 			if (afterIfList.size() == 0) {
 				afterIf = 0;
 			}
 
 			else {
+				afterIfList.sort();
 				afterIf = afterIfList.front();
 			}
 
-			IfStmt currIfStmt = IfStmt(curr, nextIf, nextElse - 1, nextElse, endElse, false, afterIf, latestMod, latestMod);
+			bool visitedElse = false;
+			IfStmt currIfStmt = IfStmt(curr, nextIf, nextElse - 1, nextElse, endElse, visitedElse, afterIf, latestMod, latestMod);
 			ifMapStack.push(currIfStmt);
 			curr = nextIf;
 		}
@@ -1549,6 +1573,73 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 
 
 	return make_pair(prevList, nextList);
+}
+int PKBMain::processBranchIf(stack<IfStmt> &ifMapStack, unordered_map<int, unordered_set<int>> &latestMod) {
+	IfStmt ifStmt = ifMapStack.top();
+	ifStmt.setIfMap(latestMod);
+	latestMod = ifStmt.getElseMap();
+	int curr = ifStmt.getBranchElse();
+	ifStmt.visitElse();
+	return curr;
+}
+
+int PKBMain::processBranchElseWithNoNext(stack<IfStmt> &ifMapStack, unordered_map<int, unordered_set<int>> &latestMod) {
+	int curr;
+	IfStmt ifStmt = ifMapStack.top();
+	latestMod = joinMap(ifStmt.getIfMap(), latestMod);
+	ifMapStack.pop();
+	if (ifMapStack.empty()) {
+		curr = 0;
+	}
+
+	else {
+		IfStmt parentIf = ifMapStack.top();
+		if (parentIf.hasVisitedElse()) {
+			curr = processBranchElseWithNoNext(ifMapStack, latestMod);
+		}
+
+		else {
+			curr = processBranchIf(ifMapStack, latestMod);
+		}
+	}
+
+	return curr;
+}
+
+int PKBMain::processBranchElseWithNext(stack<IfStmt> &ifMapStack, unordered_map<int, unordered_set<int>> &latestMod, int next) {
+	IfStmt ifStmt = ifMapStack.top();
+	latestMod = joinMap(latestMod, ifStmt.getIfMap());
+	int firstIfStmt = ifStmt.getStmtNum();
+	int afterIf = ifStmt.getAfterIf();
+	ifMapStack.pop();
+	if (next == afterIf) {
+		return next;
+	}
+
+	else {
+		if (isWhile(next)) {
+			if (isParentChild(next, firstIfStmt)) {
+				return next;
+			}
+			else {
+				if (ifMapStack.top().hasVisitedElse()) {
+					return processBranchElseWithNext(ifMapStack, latestMod, next);
+				}
+				else {
+					return processBranchIf(ifMapStack, latestMod);
+				}
+			}
+		}
+
+		else {
+			if (ifMapStack.top().isEndIf(firstIfStmt)) {
+				return processBranchIf(ifMapStack, latestMod);
+			}
+			else {
+				return processBranchElseWithNext(ifMapStack, latestMod, next);
+			}
+		}
+	}
 }
 
 unordered_map<int, unordered_set<int>> PKBMain::joinMap(unordered_map<int, unordered_set<int>> firstMap,

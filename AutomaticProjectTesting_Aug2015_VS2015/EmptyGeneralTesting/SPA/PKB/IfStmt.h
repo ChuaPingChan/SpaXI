@@ -25,9 +25,19 @@ public:
 
 	unordered_map<int, unordered_set<int>> getElseMap();
 
+	unordered_map<int, unordered_set<int>> getIfMap();
+
 	int getBranchElse();
 
+	int getBranchIf();
+
 	void visitElse();
+
+	bool hasVisitedElse();
+
+	int getAfterIf();
+
+	int getStmtNum();
 
 
 private:
