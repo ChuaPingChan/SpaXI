@@ -45,7 +45,7 @@ const string RegexValidators::LINEREF_REGEX = "(" + SYNONYM_REGEX + "|" + UNDERS
 const string RegexValidators::NAME_REGEX = "(" + LETTER_REGEX + "(" + LETTER_REGEX + "|" + DIGIT_REGEX + ")*)";
 const string RegexValidators::ATTRNAME_REGEX = "(procName|varName|value|stmt#)";
 const string RegexValidators::ATTRREF_REGEX = "(" + SPACE_0 + SYNONYM_REGEX + "[.]" + ATTRNAME_REGEX + SPACE_0 + ")";
-const string RegexValidators::ELEM_REGEX = "(" + SYNONYM_REGEX + "|" + ATTRREF_REGEX + ")";
+const string RegexValidators::ELEM_REGEX = "(" + ATTRREF_REGEX +  "|" + SYNONYM_REGEX + ")";
 const string RegexValidators::TUPLE_REGEX = "(" + SPACE_1 + ELEM_REGEX + SPACE_0 + "|" + SPACE_0 + "<" + SPACE_0 + ELEM_REGEX + SPACE_0 + "(," + SPACE_0 + ELEM_REGEX + SPACE_0 + ")*" + ">" + SPACE_0 + ")";
 const string RegexValidators::DESIGN_ENTITY_REGEX = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 

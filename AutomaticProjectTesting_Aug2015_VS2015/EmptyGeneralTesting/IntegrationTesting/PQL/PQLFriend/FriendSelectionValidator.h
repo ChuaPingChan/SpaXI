@@ -7,7 +7,6 @@ class FriendSelectionValidator
 
 public:
     FriendSelectionValidator(QueryTree *qtPtrNew);
-    ~FriendSelectionValidator();
 
     string extractRawString(string str);
     QueryTree getQueryTreeCopy();
