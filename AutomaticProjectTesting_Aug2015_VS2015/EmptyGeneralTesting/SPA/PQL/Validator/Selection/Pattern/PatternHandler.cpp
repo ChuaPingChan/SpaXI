@@ -18,7 +18,7 @@ bool PatternHandler::isValidPattern(string str)
 
     PatternValidator *patternValidator;
 
-    if (patternType == ASSIGN_PATTERN) {
+    if (patternType == ASSIGN_PATTERN && RegexValidators::isValidPatternAssignRegex(processedStr)) {
         patternValidator = new AssignPatternValidator(patternType, patternSyn, processedStr, qtPtr);
     }
     else if (patternType == WHILE_PATTERN) {
