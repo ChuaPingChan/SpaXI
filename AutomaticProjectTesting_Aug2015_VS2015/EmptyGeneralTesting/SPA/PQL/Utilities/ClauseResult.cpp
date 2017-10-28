@@ -183,6 +183,44 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     return true;
 }
 
+bool ClauseResult::updateSynResults(list<string> selectedSyns, list<list<int>> newSynsResults)
+{
+    int numberNewSyns = selectedSyns.size();
+
+    for (string newSynName : selectedSyns)
+    {
+        // Add to _synList
+        _synList.push_back(newSynName);
+        int newSynIdx = _synList.size() - 1;
+
+        // Add to _synToIdxMap
+        _synToIdxMap.insert({ newSynName, newSynIdx });
+    }
+
+    // Merge with _result - Cartesian product
+    if (_results.empty()) {
+        for (list<int> newComb : newSynsResults) {
+            vector<int> newCombToMerge = convertListToVector(newComb);
+            _results.push_back(newCombToMerge);
+        }
+        return true;
+    }
+
+    int repeatNumber = newSynsResults.size();
+    list<vector<int>> outdatedResult = _results;
+    _results.clear();
+
+    for (vector<int> currComb : outdatedResult) {
+        for (list<int> newSynsResList : newSynsResults) {
+            vector<int> newSynsResVec = convertListToVector(newSynsResList);
+            vector<int> newComb = joinTwoVectors(currComb, newSynsResVec);
+            _results.push_back(newComb);
+        }
+    }
+
+    return true;
+}
+
 bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults)
 {
     assert(pairResults.size() > 0);

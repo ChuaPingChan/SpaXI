@@ -11,6 +11,8 @@ class Optimizer
 public:
     Optimizer(QueryTree &queryTree);
 
+    ClauseGroupsManager getClauseGroupManager();
+
 protected:
 
     vector<string> _synVector;    // Index to synonym map
@@ -23,6 +25,9 @@ protected:
     // Vector is chosen to swap elements easily. To be converted to queues before passing to evaluator.
     vector<vector<ClauseWrapper>> _clauseGroups;
     
+    /******************
+     * Helper Methods *
+     ******************/
     bool processQueryTree(QueryTree &queryTree);
     list<ClauseWrapper> extractClausesFromQueryTree(QueryTree &queryTree);    // TODO: Rename if QueryTree's name changes
     void formClauseGroups();

@@ -8,6 +8,7 @@ Optimizer::Optimizer(QueryTree &queryTree)
 {
     // TODO: Implement
     /*
+        Process description:
         1. Populates and initialises internal data structures
         2. Split clauses into groups
         3. Sort clauses within groups for efficient evaluation
@@ -17,7 +18,16 @@ Optimizer::Optimizer(QueryTree &queryTree)
     formClauseGroups();
     sortClausesWithinGroup();
     sortClauseGroups();
-    _clauseGroupsManager = ClauseGroupsManager(createClauseGroupQueue());      // TODO: Implement
+    _clauseGroupsManager.setClauseGroupQueue(createClauseGroupQueue());
+}
+
+/*
+    Gets a ClauseGroupManager object that contains processed clause groups
+    for efficient evaluation and handles evaluated results of clause groups.
+*/
+ClauseGroupsManager Optimizer::getClauseGroupManager()
+{
+    return _clauseGroupsManager;
 }
 
 /*
@@ -26,8 +36,8 @@ Optimizer::Optimizer(QueryTree &queryTree)
 */
 bool Optimizer::processQueryTree(QueryTree &queryTree)
 {
+    _clauseGroupsManager.setSelectedSynonyms(queryTree.getSelectClause().getSynonyms());
 
-    // TODO: Implement
     list<ClauseWrapper> allClauses = extractClausesFromQueryTree(queryTree);
 
     for (ClauseWrapper clause : allClauses) {
@@ -53,7 +63,7 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 }
 
 /*
-    Extracts all clauses in a given query.
+    Extracts all non-"select" clauses in a given query.
 */
 list<ClauseWrapper> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 {

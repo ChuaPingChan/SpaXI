@@ -5,10 +5,11 @@
 #include <list>
 #include "../../Entity.h"
 #include "../Selectionship.h"
+#include "Clause.h"
 
 using namespace std;
 
-class SelectClause
+class SelectClause : public Clause
 {
 public:
     SelectClause();

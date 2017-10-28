@@ -5,6 +5,12 @@
 #include "PatternClause.h"
 #include "WithClause.h"
 
+ClauseWrapper::ClauseWrapper(SelectClause & clause)
+{
+    _clauseCategory = ClauseCategory::SELECT;
+    _selectClausePtr = &clause;
+}
+
 ClauseWrapper::ClauseWrapper(SuchThatClause &clause)
 {
     _clauseCategory = ClauseCategory::SUCH_THAT;
@@ -29,9 +35,15 @@ ClauseWrapper::ClauseWrapper(WithClause &clause)
 */
 ClauseWrapper::ClauseWrapper()
 {
+    _selectClausePtr = NULL;
     _suchThatClausePtr = NULL;
     _patternClausePtr = NULL;
     _withClausePtr = NULL;
+}
+
+bool ClauseWrapper::isSelectClause()
+{
+    return _clauseCategory == ClauseCategory::SELECT;
 }
 
 bool ClauseWrapper::isSuchThatClause()
@@ -58,6 +70,17 @@ Clause ClauseWrapper::getClause()
 }
 
 /*
+Returns the "select" clause stored in the wrapper.
+Pre-condition:
+Ensure wrapper stores a "select" clause using the isSelectClause() method.
+*/
+SelectClause ClauseWrapper::getSelectClause()
+{
+    assert(isSelectClause());
+    return *_selectClausePtr;
+}
+
+/*
     Returns the "such that" clause stored in the wrapper.
     Pre-condition:
         Ensure wrapper stores a "such that" clause using the isSuchThatClause() method.
@@ -71,7 +94,7 @@ SuchThatClause ClauseWrapper::getSuchThatClause()
 /*
     Returns the "pattern" clause stored in the wrapper.
     Pre-condition:
-        Ensure wrapper stores a "such that" clause using the isPatternClause() method.
+        Ensure wrapper stores a "pattern" clause using the isPatternClause() method.
 */
 PatternClause ClauseWrapper::getPatternClause()
 {
@@ -82,7 +105,7 @@ PatternClause ClauseWrapper::getPatternClause()
 /*
     Returns the "with " clause stored in the wrapper.
     Pre-condition:
-        Ensure wrapper stores a "such that" clause using the isPatternClause() method.
+        Ensure wrapper stores a "with" clause using the isWithClause() method.
 */
 WithClause ClauseWrapper::getWithClause()
 {
