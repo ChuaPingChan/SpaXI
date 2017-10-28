@@ -10,6 +10,7 @@ IfStmt::IfStmt(int stmtNum, int branchIf, int endIf,
 	this->endIf = endIf;
 	this->branchElse = branchElse;
 	this->endElse = endElse;
+	this->visitedElse = visitedElse;
 	this->afterIf = afterIf;
 	this->ifLatestMod = ifLatestMod;
 	this->elseLatestMod = elseLatestMod;
@@ -24,17 +25,29 @@ bool IfStmt::isEndElse(int target) {
 }
 
 void IfStmt::setIfMap(unordered_map<int, unordered_set<int>> newMap) {
-	this->ifLatestMod = newMap;
+	ifLatestMod = newMap;
 }
 
 unordered_map<int, unordered_set<int>> IfStmt::getElseMap() {
 	return elseLatestMod;
 }
 
+unordered_map<int, unordered_set<int>> IfStmt::getIfMap() {
+	return ifLatestMod;
+}
+
 int IfStmt::getBranchElse() {
 	return branchElse;
 }
 
+int IfStmt::getBranchIf() {
+	return branchIf;
+}
+
 void IfStmt::visitElse() {
 	visitedElse = true;
+}
+
+bool IfStmt::hasVisitedElse() {
+	return visitedElse;
 }

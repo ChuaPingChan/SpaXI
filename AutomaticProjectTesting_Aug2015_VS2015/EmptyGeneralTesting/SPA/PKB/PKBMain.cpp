@@ -1419,7 +1419,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			int modifiedVar = getModifiesFromStmt(curr).front();
 			latestMod[modifiedVar].clear();
 			latestMod[modifiedVar].insert(curr);
-			list<int> nextList = getExecutedAfter(curr, STMT);
+			list<int> nextStmtList = getExecutedAfter(curr, STMT);
 
 			if (getParent(curr, IF).size() != 0) { //is in an if
 				IfStmt ifStmt = ifMapStack.top();
@@ -1431,41 +1431,50 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				}
 				
 				else if (ifStmt.isEndElse(curr)) {
-					if (nextList.size() == 0) {
+					if (nextStmtList.size() == 0) { // no next after else i.e. pt to dummy
+						latestMod = joinMap(ifStmt.getIfMap(), latestMod);
+						ifMapStack.pop();
+						if (ifMapStack.empty()) {
+							curr = 0;
+						}
 
+						else {
+							IfStmt parentIf = ifMapStack.top();
+							if (parentIf.hasVisitedElse()) {
+								curr = 0;
+							}
+
+							else {
+								parentIf.visitElse();
+								curr = parentIf.getBranchElse();
+								latestMod = parentIf.getElseMap();
+							}
+						}
 					}
 
-					else {
-
-					}
-					//TODO REMOVE
-					if (nextList.size() == 0) {
-						curr = 0;
-					}
-
-					else {
-						curr = nextList.front();
+					else { // got next
+						curr = nextStmtList.front();
 					}
 				}
 
 				else {
-					if (nextList.size() == 0) {
+					if (nextStmtList.size() == 0) {
 						curr = 0;
 					}
 
 					else {
-						curr = nextList.front();
+						curr = nextStmtList.front();
 					}
 				}
 			}
 
 			else {
-				if (nextList.size() == 0) {
+				if (nextStmtList.size() == 0) {
 					curr = 0;
 				}
 
 				else {
-					curr = nextList.front();
+					curr = nextStmtList.front();
 				}
 			}
 		}
@@ -1539,7 +1548,8 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				afterIf = afterIfList.front();
 			}
 
-			IfStmt currIfStmt = IfStmt(curr, nextIf, nextElse - 1, nextElse, endElse, false, afterIf, latestMod, latestMod);
+			bool visitedElse = false;
+			IfStmt currIfStmt = IfStmt(curr, nextIf, nextElse - 1, nextElse, endElse, visitedElse, afterIf, latestMod, latestMod);
 			ifMapStack.push(currIfStmt);
 			curr = nextIf;
 		}
