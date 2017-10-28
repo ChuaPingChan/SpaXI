@@ -17,7 +17,7 @@ Optimizer::Optimizer(QueryTree &queryTree)
     formClauseGroups();
     sortClausesWithinGroup();
     sortClauseGroups();
-    _clauseGroupsManager = ClauseGroupsManager(createClauseGroupQueue())      // TODO: Implement
+    _clauseGroupsManager = ClauseGroupsManager(createClauseGroupQueue());      // TODO: Implement
 }
 
 /*
@@ -155,7 +155,7 @@ void Optimizer::sortClauseGroups()
 }
 
 /*
-    Enforces FIFO policy of evaluating sorted clause groups and clauses in 
+    Enforces FIFO policy of evaluating sorted clause groups and clauses in
     groups using queues.
 */
 queue<queue<ClauseWrapper>> Optimizer::createClauseGroupQueue()
