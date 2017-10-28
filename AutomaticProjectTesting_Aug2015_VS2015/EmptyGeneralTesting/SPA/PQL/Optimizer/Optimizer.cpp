@@ -78,12 +78,18 @@ list<ClauseWrapper> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
     return allClauses;
 }
 
+/*
+    Based on the information extracted from the "query tree", this method groups
+    the clauses based on common synonyms and store them in the _clauseGroups private
+    attribute.
+*/
 void Optimizer::formClauseGroups()
 {
     SynonymUFDS synUfds;
 
     vector<ClauseWrapper> clausesWithoutSynonym;
 
+    // Group synonyms
     for (ClauseWrapper clauseWrapper : _clauseVector) {
         Clause clause = clauseWrapper.getClause();
         list<string> synonyms = clause.getSynonyms();
@@ -96,11 +102,11 @@ void Optimizer::formClauseGroups()
                 synUfds.addSynonym(syn1Idx);
         } else {
             assert(synonyms.size() == 2);
-            
+
             int syn1Idx = _synToIdxMap.at(synonyms.front());
             synonyms.pop_front();
             int syn2Idx = _synToIdxMap.at(synonyms.front());
-            
+
             if (!synUfds.synonymPresent(syn1Idx))
                 synUfds.addSynonym(syn1Idx);
             if (!synUfds.synonymPresent(syn2Idx))
@@ -112,9 +118,10 @@ void Optimizer::formClauseGroups()
 
     list<list<int>> synGroups = synUfds.getSynonymGroups();
 
+    // Get clause groups from synonym groups
     _clauseGroups.push_back(clausesWithoutSynonym);
     for (list<int> synGroup : synGroups) {
-        
+
         unordered_set<int> clauseGroupUnique;
         vector<ClauseWrapper> clauseGroup;
 
