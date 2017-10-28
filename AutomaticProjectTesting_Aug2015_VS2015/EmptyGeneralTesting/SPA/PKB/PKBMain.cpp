@@ -1438,6 +1438,14 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 					else {
 
 					}
+					//TODO REMOVE
+					if (nextList.size() == 0) {
+						curr = 0;
+					}
+
+					else {
+						curr = nextList.front();
+					}
 				}
 
 				else {
