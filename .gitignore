@@ -34,3 +34,4 @@ AutomaticProjectTesting_Aug2015_VS2015/EmptyGeneralTesting/UpgradeLog.htm
 AutomaticProjectTesting_Aug2015_VS2015/EmptyGeneralTesting/Release/TestResult/**/*.txt
 !AutomaticProjectTesting_Aug2015_VS2015/EmptyGeneralTesting/Release/TestResult/Summary.txt
 !*.xsl
+!**/*README*
