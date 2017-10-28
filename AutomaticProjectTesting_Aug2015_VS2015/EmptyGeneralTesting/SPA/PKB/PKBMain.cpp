@@ -31,6 +31,12 @@ void PKBMain::resetInstance()
     singleton = new PKBMain();
 }
 
+void PKBMain::clearCache()
+{
+	Cache newCache;
+	cache = newCache;
+}
+
 //Utility functions
 bool PKBMain::isSameName(Entity type1, int idx1, Entity type2, int idx2) {
 	string arg1 = convertIdxToString(idx1, type1);
@@ -140,8 +146,12 @@ list<int> PKBMain::getAllIntOfIntEntity(Entity type) {
 		return getAllCallsStmt();
 	}
 
-	else if (type == IF) {
+	else if (type == CONSTANT) {
 		return getAllConstants();
+	}
+
+	else if (type == IF) {
+		return getAllIfs();
 	}
 
 	else if (type == PROG_LINE) {
@@ -1385,6 +1395,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 	list<int> nextList;
 	unordered_map<int, unordered_set<int>> latestMod; //varIdx to stmt
 	stack<pair<int, unordered_map<int, unordered_set<int>>>> whileMapStack;
+	stack<IfStmt> ifMapStack;
 	while (curr != 0) {
 		if (isAssignment(curr)) {
 			list<int> usedVarList = getUsesFromStmt(curr);
@@ -1408,13 +1419,46 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			int modifiedVar = getModifiesFromStmt(curr).front();
 			latestMod[modifiedVar].clear();
 			latestMod[modifiedVar].insert(curr);
+			list<int> nextList = getExecutedAfter(curr, STMT);
 
-			if (getExecutedAfter(curr, STMT).size() == 0) {
-				curr = 0;
+			if (getParent(curr, IF).size() != 0) { //is in an if
+				IfStmt ifStmt = ifMapStack.top();
+				if (ifStmt.isEndIf(curr)) {
+					ifStmt.setIfMap(latestMod);
+					latestMod = ifStmt.getElseMap();
+					curr = ifStmt.getBranchElse();
+					ifStmt.visitElse();
+				}
+				
+				else if (ifStmt.isEndElse(curr)) {
+					if (nextList.size() == 0) {
+
+					}
+
+					else {
+
+					}
+				}
+
+				else {
+					if (nextList.size() == 0) {
+						curr = 0;
+					}
+
+					else {
+						curr = nextList.front();
+					}
+				}
 			}
 
 			else {
-				curr = getExecutedAfter(curr, STMT).front();
+				if (nextList.size() == 0) {
+					curr = 0;
+				}
+
+				else {
+					curr = nextList.front();
+				}
 			}
 		}
 
@@ -1470,7 +1514,26 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 		}
 
 		else { // if statement
+			list<int> next = getExecutedAfter(curr, STMT);
+			next.sort();
+			int nextIf = next.front();
+			int nextElse = next.back();
+			list<int> children = getChildren(curr, STMT);
+			children.sort();
+			int endElse = children.back();
+			list<int> afterIfList = getExecutedAfter(endElse, STMT);
+			int afterIf;
+			if (afterIfList.size() == 0) {
+				afterIf = 0;
+			}
 
+			else {
+				afterIf = afterIfList.front();
+			}
+
+			IfStmt currIfStmt = IfStmt(curr, nextIf, nextElse - 1, nextElse, endElse, false, afterIf, latestMod, latestMod);
+			ifMapStack.push(currIfStmt);
+			curr = nextIf;
 		}
 		
 	}

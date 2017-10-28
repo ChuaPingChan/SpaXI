@@ -27,6 +27,7 @@
 #include "CallsStarTable.h"
 #include "NextTable.h"
 #include "Cache.h"
+#include "IfStmt.h"
 #include <string>
 #include "../Entity.h"
 
@@ -37,6 +38,7 @@ public:
 	PKBMain();
     static PKBMain* getInstance();
     static void resetInstance();
+	void clearCache();
     static bool deleteInstance();
 
 	bool isSameName(Entity type1, int idx1, Entity type2, int idx2);
