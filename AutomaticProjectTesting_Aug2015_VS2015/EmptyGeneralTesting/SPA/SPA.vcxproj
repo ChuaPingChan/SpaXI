@@ -99,6 +99,7 @@
     <ClCompile Include="PQL\Evaluator\With\WithEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\With\StringWithEvaluator.cpp" />
     <ClCompile Include="Exceptions\SynonymAlreadyExistException.cpp" />
+    <ClCompile Include="PQL\Optimizer\SynonymUFDS.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Utilities\Clause.h" />
@@ -143,6 +144,7 @@
     <ClInclude Include="PQL\Evaluator\With\WithEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\With\StringWithEvaluator.h" />
     <ClInclude Include="Exceptions\SynonymAlreadyExistException.h" />
+    <ClInclude Include="PQL\Optimizer\SynonymUFDS.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />

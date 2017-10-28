@@ -40,7 +40,7 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
                 _synVector.push_back(synonym);
                 int synIdx = _synVector.size() - 1;     // Synonym just added should be the last element
                 _synToIdxMap[synonym] = synIdx;
-                _synToClauseIdxsMap[synonym].push_back(clauseIdx);
+                _synIdxToClauseIdxsMap[synIdx].push_back(clauseIdx);
             }
         }
 
@@ -82,11 +82,15 @@ void Optimizer::formClauseGroups()
 {
     SynonymUFDS synUfds;
 
+    vector<ClauseWrapper> clausesWithoutSynonym;
+
     for (ClauseWrapper clauseWrapper : _clauseVector) {
         Clause clause = clauseWrapper.getClause();
         list<string> synonyms = clause.getSynonyms();
 
-        if (synonyms.size() == 1) {
+        if (synonyms.size() == 0) {
+            clausesWithoutSynonym.push_back(clauseWrapper);
+        } else if (synonyms.size() == 1) {
             int syn1Idx = _synToIdxMap.at(synonyms.front());
             if (!synUfds.synonymPresent(syn1Idx))
                 synUfds.addSynonym(syn1Idx);
@@ -107,4 +111,25 @@ void Optimizer::formClauseGroups()
     }
 
     list<list<int>> synGroups = synUfds.getSynonymGroups();
+
+    _clauseGroups.push_back(clausesWithoutSynonym);
+    for (list<int> synGroup : synGroups) {
+        
+        unordered_set<int> clauseGroupUnique;
+        vector<ClauseWrapper> clauseGroup;
+
+        for (int synIdx : synGroup) {
+            list<int> relevantClausesIdxs = _synIdxToClauseIdxsMap[synIdx];
+            for (int relevantClauseIdx : relevantClausesIdxs) {
+                clauseGroupUnique.insert(relevantClauseIdx);
+            }
+            for (int relevantClauseIdx : clauseGroupUnique) {
+                ClauseWrapper clauseWrapper = _clauseVector[relevantClauseIdx];
+                clauseGroup.push_back(clauseWrapper);
+            }
+        }
+
+        _clauseGroups.push_back(clauseGroup);
+
+    }
 }
