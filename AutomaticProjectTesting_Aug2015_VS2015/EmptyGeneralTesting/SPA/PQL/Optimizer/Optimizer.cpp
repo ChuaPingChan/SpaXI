@@ -1,6 +1,8 @@
+#include <cassert>
 #include "Optimizer.h"
 #include "ClauseGroupsManager.h"
 #include "../Utilities/ClauseWrapper.h"
+#include "SynonymUFDS.h"
 
 Optimizer::Optimizer(QueryTree &queryTree)
 {
@@ -78,5 +80,31 @@ list<ClauseWrapper> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 
 void Optimizer::formClauseGroups()
 {
-    // TODO: Implement
+    SynonymUFDS synUfds;
+
+    for (ClauseWrapper clauseWrapper : _clauseVector) {
+        Clause clause = clauseWrapper.getClause();
+        list<string> synonyms = clause.getSynonyms();
+
+        if (synonyms.size() == 1) {
+            int syn1Idx = _synToIdxMap.at(synonyms.front());
+            if (!synUfds.synonymPresent(syn1Idx))
+                synUfds.addSynonym(syn1Idx);
+        } else {
+            assert(synonyms.size() == 2);
+            
+            int syn1Idx = _synToIdxMap.at(synonyms.front());
+            synonyms.pop_front();
+            int syn2Idx = _synToIdxMap.at(synonyms.front());
+            
+            if (!synUfds.synonymPresent(syn1Idx))
+                synUfds.addSynonym(syn1Idx);
+            if (!synUfds.synonymPresent(syn2Idx))
+                synUfds.addSynonym(syn2Idx);
+
+            synUfds.unionSet(syn1Idx, syn2Idx);
+        }
+    }
+
+    list<list<int>> synGroups = synUfds.getSynonymGroups();
 }
