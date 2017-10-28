@@ -245,7 +245,7 @@ Select pl with pl = cl.stmt#
 5000
 50 - ProgLine Constant
 prog_line pl; constant cl;
-Select pl with pl = c.value
+Select pl with pl = cl.value
 1,2,3,4,5,6,8,9,10,20
 5000
 51 - Call Call
