@@ -16,10 +16,10 @@ namespace UnitTesting
 
         TEST_METHOD(TestMultiMethods_success) {
             /*
-            Methods tested:
-            1. getAllSynonyms()
-            2. synonymPresent()
-            3. hasResults()
+                Methods tested:
+                1. getAllSynonyms()
+                2. synonymPresent()
+                3. hasResults()
             */
             ClauseResult cr;
             Assert::IsTrue(cr.hasResults());
