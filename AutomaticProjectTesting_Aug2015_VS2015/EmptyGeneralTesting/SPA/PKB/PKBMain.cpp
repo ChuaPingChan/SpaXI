@@ -1598,6 +1598,12 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			next.sort();
 			int nextIf = next.front();
 			int nextElse = next.back();
+			list<int> followsIf = getAfterStar(nextIf, STMT);
+			followsIf.sort();
+			int endIf = followsIf.back();
+			if (endIf == 0) {
+				endIf = nextIf;
+			}
 			list<int> children = getChildren(curr, STMT);
 			children.sort();
 			int endElse = children.back();
@@ -1613,7 +1619,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			}
 
 			bool visitedElse = false;
-			IfStmt currIfStmt = IfStmt(curr, nextIf, nextElse - 1, nextElse, endElse, visitedElse, afterIf, latestMod, latestMod);
+			IfStmt currIfStmt = IfStmt(curr, nextIf, endIf, nextElse, endElse, visitedElse, afterIf, latestMod, latestMod);
 			ifMapStack.push(currIfStmt);
 			curr = nextIf;
 		}
