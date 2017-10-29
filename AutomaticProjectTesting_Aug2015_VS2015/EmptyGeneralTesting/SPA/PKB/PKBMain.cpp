@@ -1718,18 +1718,24 @@ unordered_map<int, unordered_set<int>> PKBMain::joinMap(unordered_map<int, unord
 	return firstMap;
 }
 
+list<int> PKBMain::getAllAffectsSameSyn() {
+	//TODO
+	return list<int>();
+}
+
 pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	list<int> prevList;
 	list<int> nextList;
 	unordered_map<int, unordered_set<int>> affectsRelMap;
 	//TODO OPTIMISE
+	//cout << "get all affects" << endl;
 	if (cache.containsAllAffects()) {
-		cout << "hasAllAffects" << endl;
+		//cout << "hasAllAffects" << endl;
 		return cache.getAllAffects();
 	}
 
 	else {
-		cout << "doesnt have all affects"  << endl;
+		//cout << "doesnt have all affects"  << endl;
 	}
 
 	list<int> allFirstStmt = getAllFirstStmtOfProc();

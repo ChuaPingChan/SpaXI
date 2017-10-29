@@ -174,6 +174,7 @@ public:
 	int processBranchElseWithNoNext(stack<IfStmt>& ifMapStack, unordered_map<int, unordered_set<int>>& latestMod);
 	int processBranchElseWithNext(stack<IfStmt>& ifMapStack, unordered_map<int, unordered_set<int>>& latestMod, int next);
 	unordered_map<int, unordered_set<int>> joinMap(unordered_map<int, unordered_set<int>> firstMap, unordered_map<int, unordered_set<int>> secondMap);
+	list<int> getAllAffectsSameSyn();
 	pair<list<int>, list<int>> getAllAffects();
 	bool isAffectsStar(int stmt1, int stmt2);
 	list<int> getAffectedStarOf(int stmt1);
