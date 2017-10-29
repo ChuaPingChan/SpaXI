@@ -176,6 +176,7 @@
     <ClCompile Include="PQL\Regex\TestRegexSelect.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexUses.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexWith.cpp" />
+    <ClCompile Include="PQL\TestOptimizer.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultChildForTest.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultTest.cpp" />
     <ClCompile Include="PQL\Utilities\TestFormatter.cpp" />
