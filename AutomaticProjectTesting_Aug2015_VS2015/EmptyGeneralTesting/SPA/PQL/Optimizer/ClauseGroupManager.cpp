@@ -17,7 +17,7 @@ queue<ClauseWrapper> ClauseGroupManager::getNextClauseGroup()
 */
 void ClauseGroupManager::mergeClauseResult(ClauseResult clauseResult)
 {
-    _mergedClauseResult.mergeClauseResult(_selectedSynonyms, clauseResult);
+    _mergedClauseResult.mergeClauseResult(clauseResult, _selectedSynonyms);
 }
 
 void ClauseGroupManager::setSelectedSynonyms(list<string> synonyms)

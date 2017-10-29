@@ -183,7 +183,7 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     return true;
 }
 
-bool ClauseResult::mergeClauseResult(unordered_set<string> selectedSyns, ClauseResult clauseResultToMerge)
+bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered_set<string> selectedSyns)
 {
     // Get all selected synonyms in clause result
     list<string> synsInClauseResult = clauseResultToMerge.getAllSynonyms();
@@ -193,9 +193,12 @@ bool ClauseResult::mergeClauseResult(unordered_set<string> selectedSyns, ClauseR
             synsToMerge.push_back(synName);
     }
     list<list<int>> resultsToMerge = clauseResultToMerge.getSynonymResults(synsToMerge);
+    resultsToMerge.unique();
 
     for (string newSynName : synsToMerge)
     {
+        assert(_synToIdxMap.find(newSynName) == _synToIdxMap.end());
+
         // Add to _synList
         _synList.push_back(newSynName);
         int newSynIdx = _synList.size() - 1;

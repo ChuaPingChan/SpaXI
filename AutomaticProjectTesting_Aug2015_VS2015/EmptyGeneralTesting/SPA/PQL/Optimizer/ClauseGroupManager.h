@@ -12,11 +12,6 @@ class ClauseGroupManager
 public:
     ClauseGroupManager();
 
-    /*
-        TODO:
-        - API for evaluator to get ClauseGroup
-        - API for evaluator to add computed results for each clausegroup
-    */
     queue<ClauseWrapper> getNextClauseGroup();
     void mergeClauseResult(ClauseResult clauseResult);     // TODO: Rename this to ClauseGroupResult nearing submission
     void setSelectedSynonyms(list<string> synonyms);

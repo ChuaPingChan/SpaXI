@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include <string>
+#include <unordered_set>
 
 #include "ClauseResultChildForTest.h"
 #include "../SPA/PQL/Utilities/ClauseResult.h"
@@ -419,6 +420,148 @@ namespace UnitTesting
             cr.removeCombinations(syn1, 3, syn2, 6);
             list<list<int>> expectedResults{};
             list<list<int>> actualResults = cr.getAllResults();
+            Assert::IsTrue(actualResults == expectedResults);
+        }
+
+        TEST_METHOD(TestMergeClauseResult)
+        {
+            list<list<int>> actualResults;
+            list<list<int>> expectedResults;
+
+            ClauseResult cr1;
+
+            ClauseResult cr2;
+            Assert::IsTrue(cr2.hasResults());
+            string syn1 = "a";
+            list<int> syn1Results{ 1, 2 };
+            string syn2 = "b";
+            list<int> syn2Results{ 5, 6 };
+            string syn3 = "c";
+            list<int> syn3Results{ 7 };
+            cr2.updateSynResults(syn1, syn1Results);
+            cr2.updateSynResults(syn2, syn2Results);
+            cr2.updateSynResults(syn3, syn3Results);
+            /********
+            ClauseResult 2:
+            ---------
+            a	b	c
+            ---------
+            1	5	7
+            1	6	7
+            2	5	7
+            2	6	7
+            *********/
+
+            unordered_set<string> selectedSyns;
+            list<string> selectedSynsList;
+
+            // Merge all synonyms into empty ClauseResult
+            selectedSynsList = cr2.getAllSynonyms();
+            selectedSyns = unordered_set<string>(selectedSynsList.begin(), selectedSynsList.end());
+            cr1.mergeClauseResult(cr2, selectedSyns);
+
+            expectedResults = list<list<int>>{ {1, 5, 7}, {1, 6, 7}, {2, 5, 7}, {2, 6, 7} };
+            actualResults = cr1.getAllResults();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Merge only some synonyms into empty ClauseResult
+            cr1 = ClauseResult();
+            selectedSyns.clear();
+            selectedSyns = unordered_set<string>{ syn1, syn3 };
+            cr1.mergeClauseResult(cr2, selectedSyns);
+
+            expectedResults = list<list<int>>{ { 1, 7 } ,{ 2, 7 } };
+            actualResults = cr1.getAllResults();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Merge all synonyms into non-empty ClauseResult
+            cr1 = ClauseResult();
+            Assert::IsTrue(cr1.hasResults());
+            string syn4 = "d";
+            list<int> syn4Results{ 10 };
+            string syn5 = "e";
+            list<int> syn5Results{ 11, 12 };
+            cr1.updateSynResults(syn4, syn4Results);
+            cr1.updateSynResults(syn5, syn5Results);
+            /***************
+            ClauseResult 1:
+            ------
+            d   e
+            ------
+            10  11
+            10  12
+            ***************/
+
+            selectedSynsList = cr2.getAllSynonyms();
+            selectedSyns = unordered_set<string>(selectedSynsList.begin(), selectedSynsList.end());
+            cr1.mergeClauseResult(cr2, selectedSyns);
+            /****************************
+            Expected ClauseResult 1:
+            -----------------
+            d   e   a   b   c
+            -----------------
+            10  11  1   5   7
+            10  11  1   6   7
+            10  11  2   5   7
+            10  11  2   6   7
+            10  12  1   5   7
+            10  12  1   6   7
+            10  12  2   5   7
+            10  12  2   6   7
+            ****************************/
+
+            expectedResults = list<list<int>>{
+                // d  e   a   b   c
+                { 10, 11, 1,  5,  7 },
+                { 10, 11, 1,  6,  7 },
+                { 10, 11, 2,  5,  7 },
+                { 10, 11, 2,  6,  7 },
+                { 10, 12, 1,  5,  7 },
+                { 10, 12, 1,  6,  7 },
+                { 10, 12, 2,  5,  7 },
+                { 10, 12, 2,  6,  7 } };
+            actualResults = cr1.getAllResults();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Merge some synonyms into non-empty ClauseResult
+            cr1 = ClauseResult();
+            Assert::IsTrue(cr1.hasResults());
+            syn4 = "d";
+            syn4Results = list<int>{ 10 };
+            syn5 = "e";
+            syn5Results = list<int>{ 11, 12 };
+            cr1.updateSynResults(syn4, syn4Results);
+            cr1.updateSynResults(syn5, syn5Results);
+            /****************************
+                ClauseResult 1:
+                ------
+                d   e
+                ------
+                10  11
+                10  12
+            ****************************/
+
+            selectedSynsList = list<string>{ syn2, syn3 };
+            selectedSyns = unordered_set<string>(selectedSynsList.begin(), selectedSynsList.end());
+            cr1.mergeClauseResult(cr2, selectedSyns);
+            /****************************
+                Expected ClauseResult 1:
+                -------------
+                d   e   b   c
+                -------------
+                10  11  5   7
+                10  11  6   7
+                10  12  5   7
+                10  12  6   7
+            ****************************/
+
+            expectedResults = list<list<int>>{
+                // d  e   b  c
+                { 10, 11, 5, 7 },
+                { 10, 11, 6, 7 },
+                { 10, 12, 5, 7 },
+                { 10, 12, 6, 7 } };
+            actualResults = cr1.getAllResults();
             Assert::IsTrue(actualResults == expectedResults);
         }
 
