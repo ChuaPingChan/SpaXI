@@ -183,11 +183,18 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     return true;
 }
 
-bool ClauseResult::updateSynResults(list<string> selectedSyns, list<list<int>> newSynsResults)
+bool ClauseResult::mergeClauseResult(unordered_set<string> selectedSyns, ClauseResult clauseResultToMerge)
 {
-    int numberNewSyns = selectedSyns.size();
+    // Get all selected synonyms in clause result
+    list<string> synsInClauseResult = clauseResultToMerge.getAllSynonyms();
+    list<string> synsToMerge;
+    for (string synName : synsInClauseResult) {
+        if (selectedSyns.find(synName) != selectedSyns.end())
+            synsToMerge.push_back(synName);
+    }
+    list<list<int>> resultsToMerge = clauseResultToMerge.getSynonymResults(synsToMerge);
 
-    for (string newSynName : selectedSyns)
+    for (string newSynName : synsToMerge)
     {
         // Add to _synList
         _synList.push_back(newSynName);
@@ -199,19 +206,19 @@ bool ClauseResult::updateSynResults(list<string> selectedSyns, list<list<int>> n
 
     // Merge with _result - Cartesian product
     if (_results.empty()) {
-        for (list<int> newComb : newSynsResults) {
+        for (list<int> newComb : resultsToMerge) {
             vector<int> newCombToMerge = convertListToVector(newComb);
             _results.push_back(newCombToMerge);
         }
         return true;
     }
 
-    int repeatNumber = newSynsResults.size();
+    int repeatNumber = resultsToMerge.size();
     list<vector<int>> outdatedResult = _results;
     _results.clear();
 
     for (vector<int> currComb : outdatedResult) {
-        for (list<int> newSynsResList : newSynsResults) {
+        for (list<int> newSynsResList : resultsToMerge) {
             vector<int> newSynsResVec = convertListToVector(newSynsResList);
             vector<int> newComb = joinTwoVectors(currComb, newSynsResVec);
             _results.push_back(newComb);

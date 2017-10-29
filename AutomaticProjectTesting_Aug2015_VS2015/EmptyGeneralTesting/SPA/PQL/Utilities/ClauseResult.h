@@ -23,7 +23,7 @@ public:
     list<list<int>> getAllResults();
     bool synonymPresent(string synName);
     bool updateSynResults(string synName, list<int> newSynResults);
-    bool updateSynResults(list<string> selectedSyns, list<list<int>> newSynsResults);   // TODO: Unit testing
+    bool mergeClauseResult(unordered_set<string> selectedSyns, ClauseResult clauseResultToMerge);   // TODO: Unit testing
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
     bool removeCombinations(string synName, int value);
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);

@@ -15,18 +15,9 @@ queue<ClauseWrapper> ClauseGroupManager::getNextClauseGroup()
 /*
     Merges the newly computed results of a new clause group into _mergedClauseResult
 */
-void ClauseGroupManager::processClauseResult(ClauseResult clauseResult)
+void ClauseGroupManager::mergeClauseResult(ClauseResult clauseResult)
 {
-    // Get all selected synonyms in clause result
-    list<string> synsInClauseResult = clauseResult.getAllSynonyms();
-    list<string> selectedSyns;
-    for (string synName : synsInClauseResult) {
-        if (synonymIsSelected(synName))
-            selectedSyns.push_back(synName);
-    }
-    list<list<int>> resultsToMerge = clauseResult.getSynonymResults(selectedSyns);
-
-    _mergedClauseResult.updateSynResults(selectedSyns, resultsToMerge);
+    _mergedClauseResult.mergeClauseResult(_selectedSynonyms, clauseResult);
 }
 
 void ClauseGroupManager::setSelectedSynonyms(list<string> synonyms)
@@ -43,9 +34,4 @@ void ClauseGroupManager::setClauseGroupQueue(queue<queue<ClauseWrapper>>& clause
 ClauseResult ClauseGroupManager::getMergedClauseResult()
 {
     return _mergedClauseResult;
-}
-
-bool ClauseGroupManager::synonymIsSelected(string synName)
-{
-    return _selectedSynonyms.find(synName) != _selectedSynonyms.end();
 }
