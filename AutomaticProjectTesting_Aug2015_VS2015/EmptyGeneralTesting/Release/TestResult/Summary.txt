@@ -1,6 +1,6 @@
-Overall Test Ran   : 7087
-Overall Test Passed: 6879
-Overall Test Failed: 208
+Overall Test Ran   : 7218
+Overall Test Passed: 7007
+Overall Test Failed: 211
 
 
 TestResult\out1.xml: 
@@ -27,6 +27,11 @@ TestResult\out10_QueryNext.xml:
 Test Ran: 129
 Passed  : 129
 Failed  : 0
+
+TestResult\out10_QueryNextStar.xml: 
+Test Ran: 131	[BUG]
+Passed  : 128
+Failed  : 3
 
 TestResult\out11_QueryFollows.xml: 
 Test Ran: 57
