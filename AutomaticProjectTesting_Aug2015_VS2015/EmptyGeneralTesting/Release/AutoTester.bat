@@ -372,6 +372,9 @@ echo Finish running AutoTester for QueryAffectsStar.txt.
 echo Running AutoTester for QueryModifies.txt...
 AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryModifies.txt TestResult\out10_QueryModifies.xml > TestResult\cmd\cmd10_QueryModifies.txt
 echo Finish running AutoTester for QueryModifies.txt.
+echo Running AutoTester for QueryNext.txt...
+AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryNext.txt TestResult\out10_QueryNext.xml > TestResult\cmd\cmd10_QueryNext.txt
+echo Finish running AutoTester for QueryNext.txt.
 echo Finish running AutoTester for test 10.
 call :getPauseAction
 goto :eof
