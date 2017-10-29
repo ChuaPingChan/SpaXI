@@ -385,6 +385,33 @@ namespace UnitTesting
 			Assert::IsTrue(deleteDummySimpleSourceFile());
 		}
 
+		TEST_METHOD(TestAffectsComputation3)
+		{
+			// Set up
+			list<int> actualResults;
+			list<int> expectedResults;
+			Parser parser(dummyPkbMainPtr);
+			Assert::IsTrue(createDummySimpleSourceFile_affectsSource3());
+			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+			// Test for affects
+			Assert::IsTrue(dummyPkbMain.isAffects(2, 5));
+			Assert::IsTrue(dummyPkbMain.isAffects(5, 2));
+			Assert::IsTrue(dummyPkbMain.isAffects(7, 2));
+			Assert::IsTrue(dummyPkbMain.isAffects(7, 5));
+			Assert::IsTrue(dummyPkbMain.isAffects(7, 8));
+			Assert::IsTrue(dummyPkbMain.isAffects(8, 2));
+			Assert::IsTrue(dummyPkbMain.isAffects(8, 5));
+			Assert::IsTrue(dummyPkbMain.isAffects(8, 8));
+			Assert::IsFalse(dummyPkbMain.isAffects(7, 7));
+
+			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 8);
+
+			// Clean up
+			Assert::IsTrue(deleteDummySimpleSourceFile());
+		}
+
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
@@ -1139,6 +1166,33 @@ namespace UnitTesting
 				"	} else { \n"
 				"       x = a + b; \n"
 				"   } \n"
+				"}";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
+
+		bool createDummySimpleSourceFile_affectsSource3() {
+			std::string content =
+				"procedure Test { \n"
+				"	while battle1{ \n"
+				"		charmeleon = wartortle + ivysaur; \n"
+				"		while battle2{ \n"
+				"			while battle3{ \n"
+				"				ivysaur = charmeleon + wartortle; \n"
+				"			} \n "
+				"			if wartortle then{ \n"
+				"				wartortle = squirtle + 3; \n"
+				"			} \n"
+				"			else { \n"
+				"				wartortle = wartortle - 1; \n"
+				"			} \n"
+				"		} \n"
+				"		lastPokemon = 3; \n"
+				"	} \n"
 				"}";
 			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
 			std::ofstream outfile(newFilePath);

@@ -1531,7 +1531,34 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 						whileMapStack.pop();
 						latestMod = joinMap(prevWhile.second, latestMod);
 					}
-					curr = afterLoop;
+
+					if (ifMapStack.empty()) {
+						curr = afterLoop;
+					}
+
+					else {
+						if (ifMapStack.top().isEndIf(curr)) {
+							curr = processBranchIf(ifMapStack, latestMod);
+						}
+
+						else {
+							if (ifMapStack.top().isEndElse(curr)) {
+								list<int> nextStmtList = getExecutedAfter(curr, STMT);
+								if (nextStmtList.size() != 0) { //has next
+									curr = processBranchElseWithNext(ifMapStack, latestMod, nextStmtList.front());
+								}
+
+								else {
+									curr = processBranchElseWithNoNext(ifMapStack, latestMod);
+								}
+							}
+
+							else {
+								curr = afterLoop;
+							}
+						}
+					}
+
 				}
 
 				else {
@@ -1576,10 +1603,12 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 }
 int PKBMain::processBranchIf(stack<IfStmt> &ifMapStack, unordered_map<int, unordered_set<int>> &latestMod) {
 	IfStmt ifStmt = ifMapStack.top();
+	ifMapStack.pop();
 	ifStmt.setIfMap(latestMod);
 	latestMod = ifStmt.getElseMap();
 	int curr = ifStmt.getBranchElse();
 	ifStmt.visitElse();
+	ifMapStack.push(ifStmt);
 	return curr;
 }
 
