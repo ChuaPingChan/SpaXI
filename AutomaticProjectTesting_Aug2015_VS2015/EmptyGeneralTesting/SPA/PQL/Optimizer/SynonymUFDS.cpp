@@ -22,6 +22,7 @@ bool SynonymUFDS::addSynonym(int synIdx)
     p.push_back(synIdx);
     rank.push_back(0);
     assert(p.size() == rank.size());
+    return true;
 }
 
 int SynonymUFDS::findSet(int synIdx)
