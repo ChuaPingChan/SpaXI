@@ -120,6 +120,8 @@ public:
 
 	list<int> getExecutedBeforeStar(int aftStmt, Entity type);
 
+	list<int> getAllNextStarSameSyn(Entity type);
+
 	pair<list<int>, list<int>> getAllNextStar(Entity type1, Entity type2);
 
 	//General Purpose API for query evaluator
