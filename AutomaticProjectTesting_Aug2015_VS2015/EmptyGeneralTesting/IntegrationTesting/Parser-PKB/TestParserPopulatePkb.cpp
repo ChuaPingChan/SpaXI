@@ -438,6 +438,23 @@ namespace UnitTesting
 			Assert::IsTrue(deleteDummySimpleSourceFile());
 		}
 
+		TEST_METHOD(TestAffectsComputation5)
+		{
+			// Set up
+			list<int> actualResults;
+			list<int> expectedResults;
+			Parser parser(dummyPkbMainPtr);
+			Assert::IsTrue(createDummySimpleSourceFile_affectsSource5());
+			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+			// Test for affects
+
+			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 14);
+
+			// Clean up
+			Assert::IsTrue(deleteDummySimpleSourceFile());
+		}
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
@@ -1256,6 +1273,28 @@ namespace UnitTesting
 				"} \n"
 				"procedure John { \n"
 				"	b = 3; \n"
+				"}";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
+
+		bool createDummySimpleSourceFile_affectsSource5() {
+			std::string content =
+				"procedure IfWhile { \n"
+				"	if dream then { \n"
+				"		sleep = 100 + 5; \n"
+				"		while sleep { \n"
+				"			inBattle = 100 - 5 - sleep; \n"
+				"			knowledge = 5 - 20; }\n"
+				"	} else { \n "
+				"		sleep = knowledge + dream; }\n"
+				"	while sleep { \n"
+				"		sleep = sleep + 2; }\n"
+				"	dream = sleep * 5000; \n"
 				"}";
 			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
 			std::ofstream outfile(newFilePath);

@@ -36,3 +36,13 @@ bool Cache::containsAllAffects() {
 pair<list<int>, list<int>> Cache::getAllAffects() {
 	return allAffectsPair;
 }
+
+bool Cache::putAllAffectsStar(pair<list<int>, list<int>> allAffectsStar,
+	unordered_map<int, unordered_set<int>> affectsStarRelMap) {
+
+	return true;
+}
+
+bool Cache::containsAllAffectsStar() {
+	return hasAllAffectsStar;
+}

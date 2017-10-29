@@ -28,11 +28,16 @@ public:
 
 	pair<list<int>, list<int>> getAllAffects();
 
+	bool putAllAffectsStar(pair<list<int>, list<int>> allAffectsStar, unordered_map<int, unordered_set<int>> affectsStarRelMap);
+
+	bool containsAllAffectsStar();
+
 private:
 	pair<list<int>, list<int>> allNextStarPair;
 	bool hasAllNextStar = false;
 	pair<list<int>, list<int>> allAffectsPair;
 	unordered_map<int, unordered_set<int>> affectsRelMap;
 	bool hasAllAffects = false;
+	bool hasAllAffectsStar = false;
 	unordered_map<int, unordered_map<int, pair<list<int>, list<int>>>> allNextStarPairMap;
 };

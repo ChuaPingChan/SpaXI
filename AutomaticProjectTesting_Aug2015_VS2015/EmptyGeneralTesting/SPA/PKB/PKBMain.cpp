@@ -1734,43 +1734,13 @@ pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	}
 
 	cache.putAllAffects(make_pair(prevList, nextList), affectsRelMap);
-	/*
-	list<int> allStmts = getAllAssignments();
-	for (int stmt : allStmts) {
-		list<int> nextStarList = getExecutedAfterStar(stmt, STMT);
-		for (int next : nextStarList) {
-			if (isAffects(stmt, next)) {
-				if (affectsRelMap.find(stmt) != affectsRelMap.end()) {
-					if (affectsRelMap[stmt].find(next) != affectsRelMap[stmt].end()) {
-						affectsRelMap[stmt].insert(next);
-						prevList.push_back(stmt);
-						nextList.push_back(next);
-					}
-				}
-			}
-		}
-	}
-	*/
 
 	return make_pair(prevList, nextList);
 }
 
+
 bool PKBMain::isAffectsStar(int stmt1, int stmt2) {
-	list<int> affected = getAffectedOf(stmt1);
-	unordered_set<int> visited;
-	bool isFirstRound = true;
-	while (!affected.empty()) {
-		int curr = affected.front();
-		affected.pop_front();
-
-		if (curr == stmt2 && !isFirstRound) {
-			return true;
-		}
-
-		if (visited.find(curr) != visited.end() && !isFirstRound) {
-			isFirstRound = false;
-			continue;
-		}
+	if (cache.containsAllAffectsStar()) {
 
 	}
 	return false;
