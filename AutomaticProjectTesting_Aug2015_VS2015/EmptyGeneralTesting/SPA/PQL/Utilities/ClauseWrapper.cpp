@@ -5,36 +5,40 @@
 #include "PatternClause.h"
 #include "WithClause.h"
 
-ClauseWrapper::ClauseWrapper(SelectClause clause)
+ClauseWrapper::ClauseWrapper(SelectClause* clause)
 {
     _clauseCategory = ClauseCategory::SELECT;
-    _selectClausePtr = new SelectClause(clause);
+    _selectClausePtr = clause;
 }
 
-ClauseWrapper::ClauseWrapper(SuchThatClause clause)
+ClauseWrapper::ClauseWrapper(SuchThatClause* clause)
 {
     _clauseCategory = ClauseCategory::SUCH_THAT;
-    _suchThatClausePtr = new SuchThatClause(clause);
+    _suchThatClausePtr = clause;
 }
 
-ClauseWrapper::ClauseWrapper(PatternClause clause)
+ClauseWrapper::ClauseWrapper(PatternClause* clause)
 {
     _clauseCategory = ClauseCategory::PATTERN;
-    _patternClausePtr = new PatternClause(clause);
+    _patternClausePtr = clause;
 }
 
-ClauseWrapper::ClauseWrapper(WithClause clause)
+ClauseWrapper::ClauseWrapper(WithClause* clause)
 {
     _clauseCategory = ClauseCategory::WITH;
-    _withClausePtr = new WithClause(clause);
+    _withClausePtr = clause;
 }
 
 ClauseWrapper::~ClauseWrapper()
 {
-    delete _selectClausePtr;
-    delete _suchThatClausePtr;
-    delete _patternClausePtr;
-    delete _withClausePtr;
+    if (_selectClausePtr != NULL)
+        delete _selectClausePtr;
+    if (_suchThatClausePtr != NULL)
+        delete _suchThatClausePtr;
+    if (_patternClausePtr != NULL)
+        delete _patternClausePtr;
+    if (_withClausePtr != NULL)
+        delete _withClausePtr;
 }
 
 /*

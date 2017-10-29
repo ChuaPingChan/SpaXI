@@ -34,16 +34,6 @@ SelectClause::SelectClause(SelectionType selectionType, vector<Entity> tupleArgT
     }
 }
 
-SelectClause::SelectClause(SelectClause & selectClause)
-{
-    selectionType = selectClause.getSelectionType();
-    singleArgType = selectClause.getSingleArgType();
-    singleArg = selectClause.getSingleArg();
-    tupleArgTypes = selectClause.getTupleArgTypes();
-    tupleArgs = selectClause.getTupleArgs();
-    setSynonyms(selectClause.getSynonyms());
-}
-
 SelectClause::~SelectClause()
 {
 }

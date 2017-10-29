@@ -35,20 +35,6 @@ PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity 
     }
 }
 
-PatternClause::PatternClause(PatternClause & patternClause)
-{
-    this->_patternType = patternClause.getPatternType();
-    this->_argOneType = patternClause.getArgOneType();
-    this->_argTwoType = patternClause.getArgTwoType();
-    this->_argThreeType = patternClause.getArgThreeType();
-    this->_patternSyn = patternClause.getPatternSynonym();
-    this->_argOne = patternClause.getArgOne();
-    this->_argTwo = patternClause.getArgTwo();
-    this->_argThree = patternClause.getArgThree();
-
-    setSynonyms(patternClause.getSynonyms());
-}
-
 PatternClause::~PatternClause()
 {
 }

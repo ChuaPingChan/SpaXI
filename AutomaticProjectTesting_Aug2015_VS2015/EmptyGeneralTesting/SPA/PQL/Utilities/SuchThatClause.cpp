@@ -18,16 +18,6 @@ SuchThatClause::SuchThatClause(Relationship rel, Entity argOneType, string argOn
     }
 }
 
-SuchThatClause::SuchThatClause(SuchThatClause & suchThatClause)
-{
-    _rel = suchThatClause.getRel();
-    _argOneType = suchThatClause.getArgOneType();
-    _argOne = suchThatClause.getArgOne();
-    _argTwoType = suchThatClause.getArgTwoType();
-    _argTwo = suchThatClause.getArgTwo();
-    setSynonyms(suchThatClause.getSynonyms());
-}
-
 SuchThatClause::~SuchThatClause()
 {
 }
