@@ -412,6 +412,32 @@ namespace UnitTesting
 			Assert::IsTrue(deleteDummySimpleSourceFile());
 		}
 
+		TEST_METHOD(TestAffectsComputation4)
+		{
+			// Set up
+			list<int> actualResults;
+			list<int> expectedResults;
+			Parser parser(dummyPkbMainPtr);
+			Assert::IsTrue(createDummySimpleSourceFile_affectsSource4());
+			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+			// Test for affects
+			Assert::IsTrue(dummyPkbMain.isAffects(1, 4));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 11));
+			Assert::IsTrue(dummyPkbMain.isAffects(3, 12));
+			Assert::IsTrue(dummyPkbMain.isAffects(6, 7));
+			Assert::IsTrue(dummyPkbMain.isAffects(14, 4));
+			Assert::IsTrue(dummyPkbMain.isAffects(14, 11));
+			Assert::IsTrue(dummyPkbMain.isFollows(5, 15));
+
+			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 14);
+
+			// Clean up
+			Assert::IsTrue(deleteDummySimpleSourceFile());
+		}
+
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
@@ -1193,6 +1219,43 @@ namespace UnitTesting
 				"		} \n"
 				"		lastPokemon = 3; \n"
 				"	} \n"
+				"}";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
+
+		bool createDummySimpleSourceFile_affectsSource4() {
+			std::string content =
+				"procedure Test { \n"
+				"	a = 5; \n"
+				"	while x { \n"
+				"		b = c + b; \n"
+				"		t = t + a; \n"
+				"		if b then { \n"
+				"			n = b + m; \n"
+				"			b = n * 2 + k; \n"
+				"			n = b - b; \n"
+				"			call Bob; \n" //modifies b & n
+				"			m = n + k - n + n; }\n"
+				"		else { \n"
+				"			a = a + b; \n"
+				"			b = b; \n"
+				"			call John; \n" //modifies b
+				"			a = b * m * n; } \n"
+				"		m = b; \n"
+				"		n = 2; } \n"
+				"	call Bob; \n" //modifies b & n
+				"} \n"
+				"procedure Bob { \n "
+				"	b = 3; \n"
+				"	n = b; \n"
+				"} \n"
+				"procedure John { \n"
+				"	b = 3; \n"
 				"}";
 			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
 			std::ofstream outfile(newFilePath);

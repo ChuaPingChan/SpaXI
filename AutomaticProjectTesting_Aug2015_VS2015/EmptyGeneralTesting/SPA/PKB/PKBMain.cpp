@@ -647,15 +647,38 @@ list<int> PKBMain::getExecutedBeforeStar(int aftStmt, Entity type) {
 	return stmtList;
 }
 
-pair<list<int>, list<int>> PKBMain::getAllNextStar(Entity type1, Entity type2) {
-	if (cache.containsAllNextStar()) {
-		return stmtTypeList.getStmtType(cache.getAllNextStar(), type1, type2);
+list<int> PKBMain::getAllNextStarSameSyn(Entity type) {
+	list<int> entityTypeList = getAllIntOfIntEntity(type);
+	list<int> resultList;
+
+	for (int stmt : entityTypeList) {
+		if (isNextStar(stmt, stmt)) {
+			resultList.push_back(stmt);
+		}
 	}
 
-	pair<list<int>, list<int>> resultPair = nextTable.getAllNextStar();
-	//TODO put in bool for same synonym
-	cache.putAllNextStar(resultPair);
-	return stmtTypeList.getStmtType(resultPair, type1, type2);
+	return resultList;
+}
+
+pair<list<int>, list<int>> PKBMain::getAllNextStar(Entity type1, Entity type2) {
+	pair<list<int>, list<int>> resultPair;
+	if (cache.containsAllNextStar(type1, type2)) {
+		return cache.getAllNextStar(type1, type2);
+	}
+
+	else if (cache.containsAllNextStar(STMT, STMT)) {
+		resultPair = stmtTypeList.getStmtType(cache.getAllNextStar(STMT, STMT), type1, type2);
+		cache.putAllNextStar(resultPair, type1, type2);
+		return resultPair;
+	}
+
+	else {
+		pair<list<int>, list<int>> resultPair = nextTable.getAllNextStar();
+		cache.putAllNextStar(resultPair, STMT, STMT);
+		resultPair = stmtTypeList.getStmtType(resultPair, type1, type2);
+		cache.putAllNextStar(resultPair, type1, type2);
+		return resultPair;
+	}
 }
 
 bool PKBMain::isPresent(string var)
@@ -1578,7 +1601,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			list<int> children = getChildren(curr, STMT);
 			children.sort();
 			int endElse = children.back();
-			list<int> afterIfList = getAfter(endElse, STMT);
+			list<int> afterIfList = getAfter(curr, STMT);
 			int afterIf;
 			if (afterIfList.size() == 0) {
 				afterIf = 0;
@@ -1694,12 +1717,23 @@ pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	list<int> nextList;
 	unordered_map<int, unordered_set<int>> affectsRelMap;
 	//TODO OPTIMISE
+	if (cache.containsAllAffects()) {
+		cout << "hasAllAffects" << endl;
+		return cache.getAllAffects();
+	}
+
+	else {
+		cout << "doesnt have all affects"  << endl;
+	}
+
 	list<int> allFirstStmt = getAllFirstStmtOfProc();
 	for (int stmt : allFirstStmt) {
 		pair<list<int>, list<int>> allPairsInStmtList = getAllAffects(stmt, affectsRelMap);
 		prevList.insert(prevList.end(), allPairsInStmtList.first.begin(), allPairsInStmtList.first.end());
 		nextList.insert(nextList.end(), allPairsInStmtList.second.begin(), allPairsInStmtList.second.end());
 	}
+
+	cache.putAllAffects(make_pair(prevList, nextList), affectsRelMap);
 	/*
 	list<int> allStmts = getAllAssignments();
 	for (int stmt : allStmts) {
