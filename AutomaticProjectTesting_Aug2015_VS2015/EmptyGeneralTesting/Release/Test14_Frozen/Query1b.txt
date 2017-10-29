@@ -140,12 +140,12 @@ Select a pattern a("ab","a+b") and a(v,_"a+b"_)
 5000
 29 - pattern a(known,_) and pattern a(v,_)
 assign a; variable v;
-Select v pattern a("a",_) and pattern a(v,_)
+Select v pattern a("a",_)  pattern a(v,_)
 a
 5000
-30 - pattern a(known,known) and pattern a(_,known)
+30 - pattern a(known,known) and  a(_,known)
 assign a;
-Select a pattern a("x",_"1"_) and pattern a(_,_"a"_)
+Select a pattern a("x",_"1"_) and  a(_,_"a"_)
 1
 5000
 31 - pattern a(v,known) and pattern a(v,known)
@@ -153,9 +153,9 @@ assign a1,a2; variable v;
 Select a1 pattern a1(v,_"(a+b)*aa+a"_) and a2(v,_"CD"_)
 7
 5000
-32 - pattern a(_,_) and pattern a(v,known) and pattern a(v,known)
+32 - pattern a(_,_) and pattern a(v,known) and  a(v,known)
 assign a; variable v;
-Select v pattern a(_,_) and pattern a(v,_"1"_) and pattern a(v,_"a"_)
+Select v pattern a(_,_) and  a(v,_"1"_) and  a(v,_"a"_)
 x,a
 5000
 33 - Modifies(s,known) and Modifies(a,known)
@@ -240,7 +240,7 @@ Select a such that Uses(s,"a") and Modifies(s,v) with v.varName = "a" pattern a(
 5000
 49 - Uses(s,v) and Modifies(s,v) and Modifies(s,v) pattern a(v,_)
 stmt s1,s2; variable v1,v2; assign a;
-Select s1 such that Uses(s1,v1) and Modifies(s1,v2) and Modifies(s2,v1) and pattern a(v1,_)
+Select s1 such that Uses(s1,v1) and Modifies(s1,v2) and Modifies(s2,v1) pattern a(v1,_)
 1,2,3,7,8
 5000
 50 - Uses(s,v) and Uses(a,v) pattern a(v,_) with stmt
