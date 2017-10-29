@@ -179,6 +179,8 @@
     <ClCompile Include="PQL\TestOptimizer.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultChildForTest.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultTest.cpp" />
+    <ClCompile Include="PQL\Utilities\TestClause.cpp" />
+    <ClCompile Include="TestEntity.cpp" />
     <ClCompile Include="PQL\Utilities\TestFormatter.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

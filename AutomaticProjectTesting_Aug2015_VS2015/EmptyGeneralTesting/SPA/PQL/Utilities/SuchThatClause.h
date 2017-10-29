@@ -10,6 +10,7 @@ class SuchThatClause : public Clause
 {
 public:
     SuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo);
+    SuchThatClause(SuchThatClause &suchThatClause);
     ~SuchThatClause();
 
     /* Getters */

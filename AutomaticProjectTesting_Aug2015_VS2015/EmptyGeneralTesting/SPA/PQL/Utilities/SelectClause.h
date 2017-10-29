@@ -16,6 +16,7 @@ public:
     SelectClause(SelectionType selectionType);
     SelectClause(SelectionType selectionType, Entity singleArgType, string singleArg);
     SelectClause(SelectionType selectionType, vector<Entity> tupleArgTypes, vector<string> tupleArgs);
+    SelectClause(SelectClause &selectClause);
     ~SelectClause();
 
     /* Getters */

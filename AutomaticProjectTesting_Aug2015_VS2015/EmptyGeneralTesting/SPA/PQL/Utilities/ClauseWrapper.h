@@ -12,10 +12,11 @@
 class ClauseWrapper
 {
 public:
-    ClauseWrapper(SelectClause &clause);
-    ClauseWrapper(SuchThatClause &clause);
-    ClauseWrapper(PatternClause &clause);
-    ClauseWrapper(WithClause &clause);
+    ClauseWrapper(SelectClause clause);
+    ClauseWrapper(SuchThatClause clause);
+    ClauseWrapper(PatternClause clause);
+    ClauseWrapper(WithClause clause);
+    ~ClauseWrapper();
 
     bool isSelectClause();
     bool isSuchThatClause();

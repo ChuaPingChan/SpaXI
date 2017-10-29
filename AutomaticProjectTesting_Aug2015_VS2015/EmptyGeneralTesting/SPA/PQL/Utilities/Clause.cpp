@@ -6,7 +6,7 @@ Clause::Clause()
 
 list<string> Clause::getSynonyms()
 {
-    return list<string>();
+    return _synonyms;
 }
 
 bool Clause::setSynonyms(list<string> synonyms)

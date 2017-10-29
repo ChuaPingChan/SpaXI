@@ -5,28 +5,36 @@
 #include "PatternClause.h"
 #include "WithClause.h"
 
-ClauseWrapper::ClauseWrapper(SelectClause & clause)
+ClauseWrapper::ClauseWrapper(SelectClause clause)
 {
     _clauseCategory = ClauseCategory::SELECT;
-    _selectClausePtr = &clause;
+    _selectClausePtr = new SelectClause(clause);
 }
 
-ClauseWrapper::ClauseWrapper(SuchThatClause &clause)
+ClauseWrapper::ClauseWrapper(SuchThatClause clause)
 {
     _clauseCategory = ClauseCategory::SUCH_THAT;
-    _suchThatClausePtr = &clause;
+    _suchThatClausePtr = new SuchThatClause(clause);
 }
 
-ClauseWrapper::ClauseWrapper(PatternClause &clause)
+ClauseWrapper::ClauseWrapper(PatternClause clause)
 {
     _clauseCategory = ClauseCategory::PATTERN;
-    _patternClausePtr = &clause;
+    _patternClausePtr = new PatternClause(clause);
 }
 
-ClauseWrapper::ClauseWrapper(WithClause &clause)
+ClauseWrapper::ClauseWrapper(WithClause clause)
 {
     _clauseCategory = ClauseCategory::WITH;
-    _withClausePtr = &clause;
+    _withClausePtr = new WithClause(clause);
+}
+
+ClauseWrapper::~ClauseWrapper()
+{
+    delete _selectClausePtr;
+    delete _suchThatClausePtr;
+    delete _patternClausePtr;
+    delete _withClausePtr;
 }
 
 /*

@@ -8,6 +8,7 @@ class WithClause : public Clause
 {
 public:
     WithClause(WithType withType, Entity lhsEntity, string lhsValue, Entity rhsEntity, string rhsValue);
+    WithClause(WithClause &withClause);
     ~WithClause();
 
     WithType getWithType();

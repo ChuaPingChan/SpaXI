@@ -17,6 +17,17 @@ WithClause::WithClause(WithType withType, Entity lhsEntity, string lhsValue, Ent
     }
 }
 
+WithClause::WithClause(WithClause & withClause)
+{
+    this->withType = withClause.getWithType();
+    this->lhsEntity = withClause.getLhsEntity();
+    this->lhsValue = withClause.getLhsValue();
+    this->rhsEntity = withClause.getRhsEntity();
+    this->rhsValue = withClause.getRhsValue();
+
+    setSynonyms(withClause.getSynonyms());
+}
+
 WithClause::~WithClause()
 {
 }

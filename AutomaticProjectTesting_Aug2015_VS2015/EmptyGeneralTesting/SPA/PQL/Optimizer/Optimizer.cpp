@@ -38,16 +38,16 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 {
     _clauseGroupsManager.setSelectedSynonyms(queryTree.getSelectClause().getSynonyms());
 
-    list<ClauseWrapper> allClauses = extractClausesFromQueryTree(queryTree);
+    list<ClauseWrapper> allClauseWrappers = extractClausesFromQueryTree(queryTree);
 
-    for (ClauseWrapper clause : allClauses) {
+    for (ClauseWrapper clauseWrapper : allClauseWrappers) {
 
         // TODO: Optimisation idea - ignore duplicate clauses, or remove them earlier
-        _clauseVector.push_back(clause);
+        _clauseVector.push_back(clauseWrapper);
         int clauseIdx = _clauseVector.size() - 1;   // Clause just added should be the last element
 
         // Assign index to each new synonyms
-        list<string> synonyms = clause.getClause().getSynonyms();
+        list<string> synonyms = clauseWrapper.getClause().getSynonyms();
         for (string synonym : synonyms) {
             if (_synToIdxMap.find(synonym) == _synToIdxMap.end()) {
                 _synVector.push_back(synonym);
@@ -56,7 +56,6 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
                 _synIdxToClauseIdxsMap[synIdx].push_back(clauseIdx);
             }
         }
-
     }
 
     return true;
@@ -74,7 +73,7 @@ list<ClauseWrapper> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
     vector<WithClause> withClauses = queryTree.getWithClauses();
 
     for (SuchThatClause suchThatClause : suchThatClauses) {
-        ClauseWrapper clause(suchThatClause);
+        ClauseWrapper clause = ClauseWrapper(suchThatClause);
         allClauses.push_back(clause);
     }
 
