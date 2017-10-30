@@ -46,8 +46,12 @@ bool PKBMain::isSameName(Entity type1, int idx1, Entity type2, int idx2) {
 
 string PKBMain::convertIdxToString(int index, Entity type) {
 	string result;
-	if (type == PROCEDURE || type == CALL) {
+	if (type == PROCEDURE) {
 		result = procIdxTable.getProcFromIdx(index);
+	}
+
+	if (type == CALL) {
+		result = stmtTypeList.getCalleeProcNameFromStmt(index);
 	}
 
 	if (type == VARIABLE) {
@@ -60,13 +64,26 @@ string PKBMain::convertIdxToString(int index, Entity type) {
 list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 	list<string> resultList;
 	string result;
-	if (type == PROCEDURE || type == CALL)
+	if (type == PROCEDURE)
     {
 		for (int i : indexList) 
         {
 			result = procIdxTable.getProcFromIdx(i);
 			if (result == "") 
             {
+				continue;
+			}
+
+			resultList.push_back(result);
+		}
+	}
+
+	if (type == CALL) {
+		for (int i : indexList)
+		{
+			result = stmtTypeList.getCalleeProcNameFromStmt(i);
+			if (result == "")
+			{
 				continue;
 			}
 
