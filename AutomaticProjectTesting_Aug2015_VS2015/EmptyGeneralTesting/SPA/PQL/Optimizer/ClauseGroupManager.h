@@ -16,6 +16,7 @@ public:
     ClauseGroupManager();
 
     // API for evaluator
+    bool hasNextClauseGroup();
     queue<ClausePtr> getNextClauseGroup();
     void mergeClauseResult(ClauseResult clauseResult);     // TODO: Rename this to ClauseGroupResult nearing submission
 

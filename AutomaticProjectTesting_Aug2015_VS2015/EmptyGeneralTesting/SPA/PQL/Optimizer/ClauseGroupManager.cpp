@@ -5,6 +5,11 @@ ClauseGroupManager::ClauseGroupManager()
 {
 }
 
+bool ClauseGroupManager::hasNextClauseGroup()
+{
+    return !(_clauseGroupQueue.empty());
+}
+
 queue<ClausePtr> ClauseGroupManager::getNextClauseGroup()
 {
     queue<ClausePtr> nextClauseGroup = _clauseGroupQueue.front();
