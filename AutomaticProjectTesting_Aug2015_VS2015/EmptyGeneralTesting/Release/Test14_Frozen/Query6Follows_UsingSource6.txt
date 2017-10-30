@@ -121,7 +121,7 @@ false
 25 - Follows*(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select a such that Follows*(a,13)
-1,2,3,4,5
+1,2,4
 5000
 26 - Follows*(known assign,unknown s)
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -166,5 +166,5 @@ Select c such that Follows*(c,14)
 34 - Follows*(known call,unknown s)
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select c such that Follows*(3,s)
-4,5,13,14
+12,25,3,35,47,7,14
 5000
