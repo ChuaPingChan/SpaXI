@@ -58,7 +58,7 @@ namespace UnitTesting
             //Optimizer optimizer(qt);
             //ClauseGroupManager clauseGroupManager = optimizer.getClauseGroupManager();
 
-            //queue<ClauseWrapper> nextClauseGroup = clauseGroupManager.getNextClauseGroup();
+            //queue<Clause> nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             //Assert::IsTrue(nextClauseGroup.size() == 1);
 
         }

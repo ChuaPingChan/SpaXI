@@ -1,7 +1,7 @@
 #include <cassert>
 #include "Optimizer.h"
 #include "ClauseGroupManager.h"
-#include "../Utilities/ClauseWrapper.h"
+#include "../Utilities/Clause.h"
 #include "SynonymUFDS.h"
 
 Optimizer::Optimizer(QueryTree &queryTree)
@@ -38,16 +38,16 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 {
     _clauseGroupsManager.setSelectedSynonyms(queryTree.getSelectClause().getSynonyms());
 
-    list<ClauseWrapper> allClauseWrappers = extractClausesFromQueryTree(queryTree);
+    list<Clause> allClauses = extractClausesFromQueryTree(queryTree);
 
-    for (ClauseWrapper clauseWrapper : allClauseWrappers) {
+    for (Clause clause : allClauses) {
 
         // TODO: Optimisation idea - ignore duplicate clauses, or remove them earlier
-        _clauseVector.push_back(clauseWrapper);
+        _clauseVector.push_back(clause);
         int clauseIdx = _clauseVector.size() - 1;   // Clause just added should be the last element
 
         // Assign index to each new synonyms
-        list<string> synonyms = clauseWrapper.getClause().getSynonyms();
+        list<string> synonyms = clause.getSynonyms();
         for (string synonym : synonyms) {
             if (_synToIdxMap.find(synonym) == _synToIdxMap.end()) {
                 _synVector.push_back(synonym);
@@ -64,26 +64,26 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 /*
     Extracts all non-"select" clauses in a given query.
 */
-list<ClauseWrapper> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
+list<Clause> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 {
-    list<ClauseWrapper> allClauses;
+    list<Clause> allClauses;
 
     vector<SuchThatClause> suchThatClauses = queryTree.getSuchThatClauses();
     vector<PatternClause> patternClauses = queryTree.getPatternClauses();
     vector<WithClause> withClauses = queryTree.getWithClauses();
 
     for (SuchThatClause suchThatClause : suchThatClauses) {
-        ClauseWrapper clause(suchThatClause);
+        Clause clause(suchThatClause);
         allClauses.push_back(clause);
     }
 
     for (PatternClause patternClause : patternClauses) {
-        ClauseWrapper clause(patternClause);
+        Clause clause(patternClause);
         allClauses.push_back(clause);
     }
 
     for (WithClause withClause : withClauses) {
-        ClauseWrapper clause(withClause);
+        Clause clause(withClause);
         allClauses.push_back(clause);
     }
 
@@ -99,15 +99,14 @@ void Optimizer::formClauseGroups()
 {
     SynonymUFDS synUfds;
 
-    vector<ClauseWrapper> clausesWithoutSynonym;
+    vector<Clause> clausesWithoutSynonym;
 
     // Group synonyms
-    for (ClauseWrapper clauseWrapper : _clauseVector) {
-        Clause clause = clauseWrapper.getClause();
+    for (Clause clause : _clauseVector) {
         list<string> synonyms = clause.getSynonyms();
 
         if (synonyms.size() == 0) {
-            clausesWithoutSynonym.push_back(clauseWrapper);
+            clausesWithoutSynonym.push_back(clause);
         } else if (synonyms.size() == 1) {
             int syn1Idx = _synToIdxMap.at(synonyms.front());
             if (!synUfds.synonymPresent(syn1Idx))
@@ -135,7 +134,7 @@ void Optimizer::formClauseGroups()
     for (list<int> synGroup : synGroups) {
 
         unordered_set<int> clauseGroupUnique;
-        vector<ClauseWrapper> clauseGroup;
+        vector<Clause> clauseGroup;
 
         for (int synIdx : synGroup) {
             list<int> relevantClausesIdxs = _synIdxToClauseIdxsMap[synIdx];
@@ -143,7 +142,7 @@ void Optimizer::formClauseGroups()
                 clauseGroupUnique.insert(relevantClauseIdx);
             }
             for (int relevantClauseIdx : clauseGroupUnique) {
-                ClauseWrapper clauseWrapper = _clauseVector[relevantClauseIdx];
+                Clause clauseWrapper = _clauseVector[relevantClauseIdx];
                 clauseGroup.push_back(clauseWrapper);
             }
         }
@@ -167,13 +166,13 @@ void Optimizer::sortClauseGroups()
     Enforces FIFO policy of evaluating sorted clause groups and clauses in
     groups using queues.
 */
-queue<queue<ClauseWrapper>> Optimizer::createClauseGroupQueue()
+queue<queue<Clause>> Optimizer::createClauseGroupQueue()
 {
-    queue<queue<ClauseWrapper>> clauseGroupsQueue;
+    queue<queue<Clause>> clauseGroupsQueue;
 
-    for (vector<ClauseWrapper> clauseGroup : _clauseGroups) {
-        queue<ClauseWrapper> clauseQueue;
-        for (ClauseWrapper clause : clauseGroup) {
+    for (vector<Clause> clauseGroup : _clauseGroups) {
+        queue<Clause> clauseQueue;
+        for (Clause clause : clauseGroup) {
             clauseQueue.push(clause);
         }
         clauseGroupsQueue.push(clauseQueue);

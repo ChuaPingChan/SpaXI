@@ -2,18 +2,18 @@
 #include "SelectClause.h"
 
 SelectClause::SelectClause()
-    : Clause(ClauseType::SELECT)
+    : Clause(Clause::ClauseType::SELECT)
 {
 }
 
 SelectClause::SelectClause(SelectionType selectionType)
-    : Clause(ClauseType::SELECT)
+    : Clause(Clause::ClauseType::SELECT)
 {
     this->selectionType = selectionType;
 }
 
 SelectClause::SelectClause(SelectionType selectionType, Entity singleArgType, string singleArg)
-    : Clause(ClauseType::SELECT)
+    : Clause(Clause::ClauseType::SELECT)
 {
     this->selectionType = selectionType;
     this->singleArgType = singleArgType;
@@ -24,7 +24,7 @@ SelectClause::SelectClause(SelectionType selectionType, Entity singleArgType, st
 }
 
 SelectClause::SelectClause(SelectionType selectionType, vector<Entity> tupleArgTypes, vector<string> tupleArgs)
-    : Clause(ClauseType::SELECT)
+    : Clause(Clause::ClauseType::SELECT)
 {
     assert(tupleArgTypes.size() == tupleArgs.size());
 
