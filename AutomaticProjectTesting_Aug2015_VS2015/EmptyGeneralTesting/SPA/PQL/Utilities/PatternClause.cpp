@@ -1,3 +1,4 @@
+#include <cassert>
 #include "PatternClause.h"
 #include "../../Entity.h"
 
@@ -39,6 +40,19 @@ PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity 
 
 PatternClause::~PatternClause()
 {
+}
+
+PatternClausePtr PatternClause::getSharedPtr()
+{
+    if (getPatternType() == PatternType::ASSIGN_PATTERN
+        || getPatternType() == PatternType::WHILE_PATTERN) {
+        return PatternClausePtr(new PatternClause(getPatternType(), getPatternSynonym(),
+            getArgOneType(), getArgOne(), getArgTwoType(), getArgTwo()));
+    } else {
+        assert(getPatternType() == PatternType::IF_PATTERN);
+        return PatternClausePtr(new PatternClause(getPatternType(), getPatternSynonym(),
+            getArgOneType(), getArgOne(), getArgTwoType(), getArgTwo(), getArgThreeType(), getArgThree()));
+    }
 }
 
 PatternType PatternClause::getPatternType()

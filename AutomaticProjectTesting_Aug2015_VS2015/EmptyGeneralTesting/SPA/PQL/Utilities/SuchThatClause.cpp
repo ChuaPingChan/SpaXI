@@ -20,6 +20,13 @@ SuchThatClause::SuchThatClause(Relationship rel, Entity argOneType, string argOn
     }
 }
 
+SuchThatClausePtr SuchThatClause::getSharedPtr()
+{
+    return SuchThatClausePtr(new SuchThatClause(getRel(), getArgOneType(), getArgOne(),
+        getArgTwoType(), getArgTwo()));
+}
+
+
 SuchThatClause::~SuchThatClause()
 {
 }
