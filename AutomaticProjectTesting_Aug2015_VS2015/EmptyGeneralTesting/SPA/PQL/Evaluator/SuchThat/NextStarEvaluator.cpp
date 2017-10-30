@@ -21,7 +21,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
     //Case 1: Next*(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
-       return pkbInstance->isNextStar(stoi(argOne), stoi(argTwo));
+        return pkbInstance->isNextStar(stoi(argOne), stoi(argTwo));
     }
 
     //Case 2: Next*(int, _)
@@ -109,94 +109,114 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
         bool argOneExists = clauseResult->synonymPresent(argOne);
         bool argTwoExists = clauseResult->synonymPresent(argTwo);
 
-        if (argOneExists && argTwoExists)
+        if (argOne == argTwo)
         {
-            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(argOne, argTwo);
-
-            for (pair<int, int> pair : resultPairs)
-            {
-                int argOneVal = pair.first;
-                int argTwoVal = pair.second;
-
-                // Removes from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isNextStar(argOneVal, argTwoVal))
-                {
-                    clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
-                }
-            }
-
-            return clauseResult->hasResults();
-
-        }
-
-        else if (!argOneExists && !argTwoExists)
-        {
-            pair<list<int>, list<int>> pkbResult = pkbInstance->getAllNextStar(argOneType, argTwoType);
-
-            if (pkbResult.first.empty() && pkbResult.second.empty())
+            // TODO: add new api for case when both synonym are same
+            list<int> pkbResult = pkbInstance->getAllAffectsSameSyn();
+            if (pkbResult.empty())
             {
                 return false;
             }
             else
             {
-                // Both synonyms are new thus merging with existing results
-                clauseResult->addNewSynPairResults(argOne, pkbResult.first, argTwo, pkbResult.second);
+                clauseResult->updateSynResults(argOne, pkbResult);
                 return clauseResult->hasResults();
             }
         }
 
         else
         {
-            if (argOneExists && !argTwoExists)
+            if (argOneExists && argTwoExists)
             {
-                string existingSyn = argOne;
-                Entity existingSynType = argOneType;
-                string newSyn = argTwo;
-                Entity newSynType = argTwoType;
+                list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(argOne, argTwo);
 
-                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
-                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
-                list<pair<int, int>> resultPairs;
-                resultPairs.clear();
-
-                for (int existingSynVal : existingSynVals)
+                for (pair<int, int> pair : resultPairs)
                 {
-                    list<int> newSynVals = pkbInstance->getExecutedAfterStar(existingSynVal, newSynType);
-                    for (int newSynVal : newSynVals)
+                    int argOneVal = pair.first;
+                    int argTwoVal = pair.second;
+
+                    // Removes from clauseResult as it is no longer valid due to new relation
+                    if (!pkbInstance->isNextStar(argOneVal, argTwoVal))
                     {
-                        pair<int, int> resultPair(existingSynVal, newSynVal);
-                        resultPairs.push_back(resultPair);
+                        clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
                     }
                 }
-                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
 
                 return clauseResult->hasResults();
+
             }
 
-            else if (!argOneExists && argTwoExists)
+            else if (!argOneExists && !argTwoExists)
             {
-                string existingSyn = argTwo;
-                string newSyn = argOne;
-                Entity newSynType = argOneType;
+                pair<list<int>, list<int>> pkbResult = pkbInstance->getAllNextStar(argOneType, argTwoType);
 
-                // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
-                list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
-                list<pair<int, int>> resultPairs;
-                resultPairs.clear();
-                for (int existingSynVal : existingSynVals)
+                if (pkbResult.first.empty() && pkbResult.second.empty())
                 {
-                    list<int> newSynVals = pkbInstance->getExecutedBeforeStar(existingSynVal, newSynType);
-                    for (int newSynVal : newSynVals)
-                    {
-                        pair<int, int> resultPair(existingSynVal, newSynVal);
-                        resultPairs.push_back(resultPair);
-                    }
+                    return false;
                 }
-                clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+                else
+                {
+                    // Both synonyms are new thus merging with existing results
+                    clauseResult->addNewSynPairResults(argOne, pkbResult.first, argTwo, pkbResult.second);
+                    return clauseResult->hasResults();
+                }
+            }
 
-                return clauseResult->hasResults();
+            else
+            {
+                if (argOneExists && !argTwoExists)
+                {
+                    string existingSyn = argOne;
+                    Entity existingSynType = argOneType;
+                    string newSyn = argTwo;
+                    Entity newSynType = argTwoType;
+
+                    // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                    list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                    list<pair<int, int>> resultPairs;
+                    resultPairs.clear();
+
+                    for (int existingSynVal : existingSynVals)
+                    {
+                        list<int> newSynVals = pkbInstance->getExecutedAfterStar(existingSynVal, newSynType);
+                        for (int newSynVal : newSynVals)
+                        {
+                            pair<int, int> resultPair(existingSynVal, newSynVal);
+                            resultPairs.push_back(resultPair);
+                        }
+                    }
+                    clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                    return clauseResult->hasResults();
+                }
+
+                else if (!argOneExists && argTwoExists)
+                {
+                    string existingSyn = argTwo;
+                    string newSyn = argOne;
+                    Entity newSynType = argOneType;
+
+                    // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
+                    list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
+                    list<pair<int, int>> resultPairs;
+                    resultPairs.clear();
+                    for (int existingSynVal : existingSynVals)
+                    {
+                        list<int> newSynVals = pkbInstance->getExecutedBeforeStar(existingSynVal, newSynType);
+                        for (int newSynVal : newSynVals)
+                        {
+                            pair<int, int> resultPair(existingSynVal, newSynVal);
+                            resultPairs.push_back(resultPair);
+                        }
+                    }
+                    clauseResult->pairWithOldSyn(existingSyn, newSyn, resultPairs);
+
+                    return clauseResult->hasResults();
+                }
             }
         }
+
+
     }
     else
     {
