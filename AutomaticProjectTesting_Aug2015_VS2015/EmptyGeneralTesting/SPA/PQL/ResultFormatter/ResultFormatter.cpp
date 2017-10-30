@@ -6,6 +6,10 @@ using namespace std;
 /*This class checks the selection type of the select clause has 
 (whether it is Select BOOLEAN, Select singleSynonym or Select Tuple)
 and formats the results to be displayed to the UI.*/
+
+const string ResultFormatter::TRUE = "true";
+const string ResultFormatter::FALSE = "false";
+
 ResultFormatter::ResultFormatter()
 {
     this->pkbInstance = PKBMain::getInstance();
@@ -45,7 +49,7 @@ list<string> ResultFormatter::handleNoResult(QueryTree qt)
     list<string> result;
     if (selectionByQuery.getSelectionType() == SELECT_BOOLEAN)
     {
-        result.push_back("false");
+        result.push_back(FALSE);
     }
     return result;
 }
@@ -62,11 +66,11 @@ list<string> ResultFormatter::handleSelectBoolean(ClauseResult cr)
     list<string> result;
     if (!cr.hasResults()) //If merging has finished and ClauseResult has no results, then BOOLEAN is false
     {
-        result.push_back("false");
+        result.push_back(FALSE);
     }
     else
     {
-        result.push_back("true"); //If ClauseResult has results, Select BOOLEAN is true
+        result.push_back(TRUE); //If ClauseResult has results, Select BOOLEAN is true
     }
     return result;
 }
@@ -80,17 +84,9 @@ list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause 
         Entity argType = selectedClause.getSingleArgType();
         string synonymToGetResultFor = selectedClause.getSingleArg();
 
-        //If result is of type string, convert mapping of ints to strings from PKB 
         if (argType == PROCEDURE || argType == VARIABLE || selectedClause.isAttributeProcName == true)
-        {
-            cout << "Reaches here" << endl;
-            list<int> resulttemp = cr.getSynonymResults(synonymToGetResultFor);
-            for (int i : resulttemp)
-            {
-                cout << "Clause result int result is"<<i << endl;
-            }
+        {            
             result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
-            cout << "PKB Result is" << result.front() << endl;
         }
 
         //If result is of type int, get direct results from ClauseResult
@@ -98,8 +94,6 @@ list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause 
         {
             result = convertListOfIntsToListOfStrings(cr.getSynonymResults(synonymToGetResultFor));
         }
-
-
 
     }
 
@@ -125,7 +119,7 @@ list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause se
             Entity argType = selectedClause.getTupleArgTypeAt(index); //get Entity type at current index
             vector<bool> flagsForCall = selectedClause.isAttributeProcNameForTuple; //get true/false flags for Call.procName to get mapping from PKB
 
-            if (argType == VARIABLE || argType == PROCEDURE)// || (argType == CALL && flagsForCall.at(index)))
+            if (argType == VARIABLE || argType == PROCEDURE || (argType == CALL && flagsForCall.at(index)))
             {
                 tempListOfStrings.push_back(pkbInstance->convertIdxToString(curElement, argType)); //get mapping of int to string
             }
