@@ -186,7 +186,7 @@ Select a such that Next(a,9)
 38 - Next(w,a)
 while w; assign a;
 Select a such that Next(w,a)
-4,7,10,13,16,17,19,21,24
+4,7,10,13,16,17,20,21,24
 5000
 39 - Next(known,known) and Follows*(s,s)
 stmt s1,s2;
@@ -206,7 +206,7 @@ Select a such that Next(12,a) and Modifies(a,"b")
 42 - Next(w,w) and Uses(w,known)
 while w1,w2;
 Select w1 such that Next(w1,w2) and Uses(w2,"a")
-3,18,19
+18,19
 5000
 43 - pattern w(v,_) and Uses(w,v) and Follows(w,a)
 assign a; while w; variable v;
@@ -230,7 +230,7 @@ Select a such that Uses(a,v) pattern a(v,_"a+1*b"_) such that Next(a,19)
 5000
 47 - Follows*(w,a) pattern w(_,_) and pattern a(v,_) with var
 while w; assign a; variable v;
-Select w such that Follows*(w,a) pattern w(_,_) and pattern a(v,_) with v.varName = "c"
+Select w such that Follows*(w,a) pattern w(_,_) and a(v,_) with v.varName = "c"
 3,6
 5000
 48 - with stmt such that Next(s,s) and Modifies(s,v) and Parent(s,s)
