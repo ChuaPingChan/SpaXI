@@ -16,7 +16,10 @@ class ResultFormatter
 
 public:
 	ResultFormatter();
-	list<string> finalResultFromSelection(ClauseResult cr, QueryTree qt);
+    static const string TRUE;
+    static const string FALSE;
+
+    list<string> finalResultFromSelection(ClauseResult cr, QueryTree qt);
     list<string> handleNoResult(QueryTree qt);
 
 protected:
