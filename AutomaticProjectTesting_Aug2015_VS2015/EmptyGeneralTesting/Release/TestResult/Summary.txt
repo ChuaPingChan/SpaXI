@@ -1,5 +1,5 @@
-Overall Test Ran   : 7444
-Overall Test Passed: 7289
+Overall Test Ran   : 7565
+Overall Test Passed: 7410
 Overall Test Failed: 155
 
 
@@ -46,6 +46,11 @@ Failed  : 0
 TestResult\out10_QueryPattern.xml: 
 Test Ran: 28
 Passed  : 28
+Failed  : 0
+
+TestResult\out10_QueryUses.xml: 
+Test Ran: 120
+Passed  : 120
 Failed  : 0
 
 TestResult\out11_QueryFollows.xml: 
@@ -319,8 +324,8 @@ Passed  : 20
 Failed  : 0
 
 TestResult\out14_Query6MultipleClause_UsingSource6.xml: 
-Test Ran: 28
-Passed  : 28
+Test Ran: 29
+Passed  : 29
 Failed  : 0
 
 TestResult\out14_Query6Parent_UsingSource6.xml: 

@@ -387,6 +387,9 @@ echo Finish running AutoTester for QueryParentStar.txt.
 echo Running AutoTester for QueryPattern.txt...
 AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryPattern.txt TestResult\out10_QueryPattern.xml > TestResult\cmd\cmd10_QueryPattern.txt
 echo Finish running AutoTester for QueryPattern.txt.
+echo Running AutoTester for QueryUses.txt...
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryUses.txt TestResult\out10_QueryUses.xml > TestResult\cmd\cmd10_QueryUses.txt
+echo Finish running AutoTester for QueryUses.txt.
 echo Finish running AutoTester for test 10.
 call :getPauseAction
 goto :eof
