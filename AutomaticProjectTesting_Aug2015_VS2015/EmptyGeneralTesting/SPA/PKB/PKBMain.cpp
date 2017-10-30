@@ -33,8 +33,7 @@ void PKBMain::resetInstance()
 
 void PKBMain::clearCache()
 {
-	Cache newCache;
-	cache = newCache;
+	cache = Cache();
 }
 
 //Utility functions
