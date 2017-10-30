@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 #include "../../Entity.h"
 #include "../Patternship.h"
 #include "Clause.h"
@@ -34,3 +35,5 @@ private:
     string _argTwo;
     string _argThree;
 };
+
+typedef shared_ptr<PatternClause> PatternClausePtr;

@@ -4,6 +4,7 @@
 using namespace std;
 
 PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
+    : Clause(Clause::ClauseType::PATTERN)
 {
     this->_patternType = patternType;
     this->_argOneType = argOneType;
@@ -19,6 +20,7 @@ PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity 
 }
 
 PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree)
+    : Clause(Clause::ClauseType::PATTERN)
 {
     this->_patternType = patternType;
     this->_argOneType = argOneType;
@@ -28,6 +30,11 @@ PatternClause::PatternClause(PatternType patternType, string patternSyn, Entity 
     this->_argOne = argOne;
     this->_argTwo = argTwo;
     this->_argThree = argThree;
+
+    addSynonym(patternSyn);
+    if (entityIsSynonym(argOneType)) {
+        addSynonym(argOne);
+    }
 }
 
 PatternClause::~PatternClause()
