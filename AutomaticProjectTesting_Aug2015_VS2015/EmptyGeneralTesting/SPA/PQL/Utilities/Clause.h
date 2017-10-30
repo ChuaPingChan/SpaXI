@@ -5,6 +5,9 @@
 
 using namespace std;
 
+/*
+    This is a superclass for all clauses.
+*/
 class Clause
 {
 public:
@@ -19,13 +22,14 @@ public:
 
     Clause(ClauseType clauseType);
 
-    list<string> getSynonyms();
+    virtual list<string> getSynonyms();
+    virtual ClauseType getClauseType();
+
+    // API for optimizer
     bool setSynonyms(list<string> synonyms);
     bool addSynonym(string synonym);
-    ClauseType getClauseType();
 
-
-private:
+protected:
 
     list<string> _synonyms;
     ClauseType _clauseType;

@@ -11,6 +11,7 @@ class Optimizer
 public:
     Optimizer(QueryTree &queryTree);
 
+    // API for evaluator
     ClauseGroupManager getClauseGroupManager();
 
 protected:

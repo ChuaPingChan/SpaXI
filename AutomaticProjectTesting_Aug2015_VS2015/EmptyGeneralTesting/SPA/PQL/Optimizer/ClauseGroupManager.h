@@ -7,15 +7,23 @@
 
 using namespace std;
 
+/*
+    Manages clause groups and the results of clause groups.
+*/
 class ClauseGroupManager
 {
 public:
     ClauseGroupManager();
 
+    // API for evaluator
     queue<Clause> getNextClauseGroup();
     void mergeClauseResult(ClauseResult clauseResult);     // TODO: Rename this to ClauseGroupResult nearing submission
+
+    // API for optimizer
     void setSelectedSynonyms(list<string> synonyms);
     void setClauseGroupQueue(queue<queue<Clause>> &clauseGroupQueue);
+
+    // API for result formatter
     ClauseResult getMergedClauseResult();
 
 protected:

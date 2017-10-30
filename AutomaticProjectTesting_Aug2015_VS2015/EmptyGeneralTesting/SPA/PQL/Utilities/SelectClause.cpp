@@ -1,5 +1,6 @@
 #include <cassert>
 #include "SelectClause.h"
+#include "Clause.h"
 
 SelectClause::SelectClause()
     : Clause(Clause::ClauseType::SELECT)

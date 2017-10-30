@@ -73,18 +73,15 @@ list<Clause> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
     vector<WithClause> withClauses = queryTree.getWithClauses();
 
     for (SuchThatClause suchThatClause : suchThatClauses) {
-        Clause clause(suchThatClause);
-        allClauses.push_back(clause);
+        allClauses.push_back(suchThatClause);
     }
 
     for (PatternClause patternClause : patternClauses) {
-        Clause clause(patternClause);
-        allClauses.push_back(clause);
+        allClauses.push_back(patternClause);
     }
 
     for (WithClause withClause : withClauses) {
-        Clause clause(withClause);
-        allClauses.push_back(clause);
+        allClauses.push_back(withClause);
     }
 
     return allClauses;
@@ -93,10 +90,12 @@ list<Clause> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 /*
     Based on the information extracted from the "query tree", this method groups
     the clauses based on common synonyms and store them in the _clauseGroups private
-    attribute.
+    attribute. Note that the "select" clause is not included because it doesn't need
+    to be "evaluated".
 */
 void Optimizer::formClauseGroups()
 {
+    // TODO before submission: Consider refactoring into helper methods to achieve SLA
     SynonymUFDS synUfds;
 
     vector<Clause> clausesWithoutSynonym;
@@ -130,7 +129,7 @@ void Optimizer::formClauseGroups()
     list<list<int>> synGroups = synUfds.getSynonymGroups();
 
     // Get clause groups from synonym groups
-    _clauseGroups.push_back(clausesWithoutSynonym);
+    _clauseGroups.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
     for (list<int> synGroup : synGroups) {
 
         unordered_set<int> clauseGroupUnique;
@@ -141,25 +140,24 @@ void Optimizer::formClauseGroups()
             for (int relevantClauseIdx : relevantClausesIdxs) {
                 clauseGroupUnique.insert(relevantClauseIdx);
             }
+            // Get actual clause from clause index and add to clause group
             for (int relevantClauseIdx : clauseGroupUnique) {
                 Clause clauseWrapper = _clauseVector[relevantClauseIdx];
                 clauseGroup.push_back(clauseWrapper);
             }
         }
-
         _clauseGroups.push_back(clauseGroup);
-
     }
 }
 
 void Optimizer::sortClausesWithinGroup()
 {
-    // TODO: Implement
+    // TODO: Implement after integration is done
 }
 
 void Optimizer::sortClauseGroups()
 {
-    // TODO: Implement
+    // TODO: Implement after integration is done
 }
 
 /*
