@@ -1,5 +1,5 @@
-Overall Test Ran   : 7544
-Overall Test Passed: 7507
+Overall Test Ran   : 7546
+Overall Test Passed: 7509
 Overall Test Failed: 37
 
 
@@ -484,8 +484,8 @@ Passed  : 31
 Failed  : 0
 
 TestResult\out6_Tuple.xml: 
-Test Ran: 48
-Passed  : 48
+Test Ran: 50
+Passed  : 50
 Failed  : 0
 
 TestResult\out6_With.xml: 
