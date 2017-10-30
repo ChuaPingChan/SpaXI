@@ -112,7 +112,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
         if (argOne == argTwo)
         {
             // TODO: add new api for case when both synonym are same
-            list<int> pkbResult = pkbInstance->getAllAffectsSameSyn();
+            list<int> pkbResult = pkbInstance->getAllNextStarSameSyn(argOneType);
             if (pkbResult.empty())
             {
                 return false;
