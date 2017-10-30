@@ -179,7 +179,10 @@ public:
 	bool isAffectsStar(int stmt1, int stmt2);
 	list<int> getAffectedStarOf(int stmt1);
 	list<int> getAffectorStarOf(int stmt2);
+	list<int> getAllAffectsStarSameSyn();
 	pair<list<int>, list<int>> getAllAffectsStar();
+	pair<list<int>, list<int>> getAllAffectsStar(int stmt, unordered_map<int, unordered_set<int>>& affectsStarRelMap, unordered_map<int, list<int>>& affectsStarMap, unordered_map<int, list<int>>& affectsStarMapReverse);
+	pair<list<int>, list<int>> getAllAffectsStar(int stmt, unordered_map<int, unordered_set<int>>& affectsStarRelMap);
 	list<string> getAllVariableNames();
 	list<int> getAllProcedures();
 	list<string> getAllProcNames();

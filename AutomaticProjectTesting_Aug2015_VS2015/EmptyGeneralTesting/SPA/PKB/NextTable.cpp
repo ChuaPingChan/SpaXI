@@ -182,14 +182,14 @@ list<int> NextTable::getExecutedBeforeStar(int stmtAft) {
 	return beforeStar;
 }
 
-pair<list<int>, list<int>> NextTable::getAllNextStar() {
+pair<list<int>, list<int>> NextTable::getAllNextStar(unordered_map<int, list<int>> &nextStarMap, 
+	unordered_map<int, list<int>> &nextStarMapReverse, unordered_map<int, unordered_set<int>> &nextStarRelMap) {
 	list<int> befList;
 	list<int> aftList;
 	list<int> afters;
 	int befStmt;
 	string currPair;
 	queue<int> toVisit;
-	unordered_set<string> nextStarRel;
 	for (unordered_map<int, list<int>>::iterator it = nextMap.begin(); it != nextMap.end(); ++it) {
 		unordered_set<int> visited;
 		befStmt = (*it).first;
@@ -202,8 +202,8 @@ pair<list<int>, list<int>> NextTable::getAllNextStar() {
 		while (!toVisit.empty()) {
 			int aftStmt = toVisit.front();
 			toVisit.pop();
-			currPair = to_string(befStmt) + "," + to_string(aftStmt);
-			if (nextStarRel.find(currPair) != nextStarRel.end()) {
+			if (nextStarRelMap.find(befStmt) != nextStarRelMap.end()
+				&& nextStarRelMap[befStmt].find(aftStmt) != nextStarRelMap[befStmt].end()) {
 				continue;
 			}
 			if (visited.find(aftStmt) != visited.end()) {
@@ -211,7 +211,9 @@ pair<list<int>, list<int>> NextTable::getAllNextStar() {
 			}
 			befList.push_back(befStmt);
 			aftList.push_back(aftStmt);
-			nextStarRel.insert(currPair);
+			nextStarRelMap[befStmt].insert(aftStmt);
+			nextStarMap[befStmt].push_back(aftStmt);
+			nextStarMap[aftStmt].push_back(befStmt);
 			if (nextMap.find(aftStmt) != nextMap.end()) {
 				for (int i : nextMap[aftStmt]) {
 					toVisit.push(i);

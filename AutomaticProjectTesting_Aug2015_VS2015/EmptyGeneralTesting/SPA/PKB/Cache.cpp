@@ -10,6 +10,26 @@ bool Cache::putAllNextStar(pair<list<int>, list<int>> allNextStar, Entity type1,
 	return true;
 }
 
+bool Cache::putAllNextStar(unordered_map<int, list<int>> nextStarMap, unordered_map<int, list<int>> nextStarMapReverse,
+	unordered_map<int, unordered_set<int>> nextStarRelMap) {
+	this->nextStarMap = nextStarMap;
+	this->nextStarMapReverse = nextStarMapReverse;
+	this->nextStarRelMap = nextStarRelMap;
+	return true;
+}
+
+unordered_map<int, list<int>> Cache::getNextStarMap() {
+	return nextStarMap;
+}
+
+unordered_map<int, list<int>> Cache::getNextStarMapReverse() {
+	return nextStarMapReverse;
+}
+
+unordered_map<int, unordered_set<int>> Cache::getNextStarRelMap() {
+	return nextStarRelMap;
+}
+
 bool Cache::containsAllNextStar(Entity type1, Entity type2) {
 	return (allNextStarPairMap.find(type1) != allNextStarPairMap.end() &&
 		allNextStarPairMap[type1].find(type2) != allNextStarPairMap[type1].end());
@@ -38,11 +58,64 @@ pair<list<int>, list<int>> Cache::getAllAffects() {
 }
 
 bool Cache::putAllAffectsStar(pair<list<int>, list<int>> allAffectsStar,
-	unordered_map<int, unordered_set<int>> affectsStarRelMap) {
-
+	unordered_map<int, unordered_set<int>> affectsStarRelMap, unordered_map<int, list<int>> affectsStarMap,
+	unordered_map<int, list<int>> affectsStarMapReverse) {
+	this->allAffectsStarPair = allAffectsStar;
+	this->affectsStarRelMap = affectsStarRelMap;
+	this->affectsStarMap = affectsStarMap;
+	this->affectsStarMapReverse = affectsStarMapReverse;
+	hasAllAffectsStar = true;
 	return true;
+}
+
+unordered_map<int, list<int>> Cache::getAffectsStarMap() {
+	return affectsStarMap;
+}
+
+unordered_map<int, list<int>> Cache::getAffectsStarMapReverse() {
+	return affectsStarMapReverse;
 }
 
 bool Cache::containsAllAffectsStar() {
 	return hasAllAffectsStar;
+}
+
+pair<list<int>, list<int>> Cache::getAllAffectsStar() {
+	return allAffectsStarPair;
+}
+
+unordered_map<int, unordered_set<int>> Cache::getAllAffectsStarRelMap() {
+	return affectsStarRelMap;
+}
+
+unordered_map<int, unordered_set<int>> Cache::getAllAffectsRelMap() {
+	return affectsRelMap;
+}
+
+bool Cache::putAllAffectsSameSyn(list<int> allAffectsSameSynList) {
+	allAffectsSameSyn = allAffectsSameSynList;
+	hasAllAffectsSameSyn = true;
+	return true;
+}
+
+bool Cache::containsAllAffectsSameSyn() {
+	return hasAllAffectsSameSyn;
+}
+
+list<int> Cache::getAllAffectsSameSyn() {
+	return allAffectsSameSyn;
+}
+
+bool Cache::putAllAffectsStarSameSyn(list<int> allAffectsStarSameSynList) {
+	allAffectsStarSameSyn = allAffectsStarSameSynList;
+	hasAllAffectsStarSameSyn = true;
+	return true;
+}
+
+bool Cache::containsAllAffectsStarSameSyn() {
+	return hasAllAffectsStarSameSyn;
+}
+
+list<int> Cache::getAllAffectsStarSameSyn() {
+	return allAffectsStarSameSyn;
 }

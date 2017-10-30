@@ -431,6 +431,7 @@ namespace UnitTesting
 			Assert::IsTrue(dummyPkbMain.isAffects(14, 4));
 			Assert::IsTrue(dummyPkbMain.isAffects(14, 11));
 			Assert::IsTrue(dummyPkbMain.isFollows(5, 15));
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(15, 4));
 
 			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 14);
 
@@ -455,6 +456,24 @@ namespace UnitTesting
 			// Clean up
 			Assert::IsTrue(deleteDummySimpleSourceFile());
 		}
+
+		TEST_METHOD(TestAffectsStarComputation)
+		{
+			// Set up
+			list<int> actualResults;
+			list<int> expectedResults;
+			Parser parser(dummyPkbMainPtr);
+			Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource());
+			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+			// Test for affects
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 3));
+
+			// Clean up
+			Assert::IsTrue(deleteDummySimpleSourceFile());
+		}
+
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
@@ -1295,6 +1314,21 @@ namespace UnitTesting
 				"	while sleep { \n"
 				"		sleep = sleep + 2; }\n"
 				"	dream = sleep * 5000; \n"
+				"}";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
+
+		bool createDummySimpleSourceFile_affectsStarSource() {
+			std::string content =
+				"procedure IfWhile { \n"
+				"	a = 2; \n"
+				"	b = a; \n"
+				"	c = b; \n"
 				"}";
 			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
 			std::ofstream outfile(newFilePath);
