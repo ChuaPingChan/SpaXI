@@ -38,7 +38,9 @@ list<int> ModTableStmtToVar::getStmtThatModifies()
     list<int> listOfStmt;
     for (itr = modStmtToVarMap.begin(); itr != modStmtToVarMap.end(); ++itr) 
     {
-        listOfStmt.push_back(itr->first);
+		if (itr->second.size() > 0) {
+			listOfStmt.push_back(itr->first);
+		}
     }
 
     return listOfStmt;

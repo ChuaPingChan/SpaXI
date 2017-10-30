@@ -43,14 +43,16 @@ bool UsesTableProcToVar::isUses(int procIdx, int varIdx) {
 }
 
 bool UsesTableProcToVar::isUsingAnything(int procIdx) {
-	return usesProcToVarMap.find(procIdx) != usesProcToVarMap.end();
+	return usesProcToVarMap.find(procIdx) != usesProcToVarMap.end() && usesProcToVarMap[procIdx].size() > 0;
 }
 
 list<int> UsesTableProcToVar::getProcThatUses() {
 	list<int> procList;
 	for (unordered_map<int, list<int>>::iterator it = usesProcToVarMap.begin(); it != usesProcToVarMap.end(); ++it) {
 		int procIdx = (*it).first;
-		procList.push_back(procIdx);
+		if ((*it).second.size() > 0) {
+			procList.push_back(procIdx);
+		}
 	}
 	return procList;
 }
