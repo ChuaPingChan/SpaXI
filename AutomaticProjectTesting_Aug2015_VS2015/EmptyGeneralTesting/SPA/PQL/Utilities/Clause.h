@@ -2,6 +2,7 @@
 
 #include <string>
 #include <list>
+#include <memory>
 
 using namespace std;
 
@@ -36,3 +37,4 @@ protected:
 
 };
 
+typedef shared_ptr<Clause> ClausePtr;
