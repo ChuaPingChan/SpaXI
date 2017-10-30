@@ -213,7 +213,7 @@ pair<list<int>, list<int>> NextTable::getAllNextStar(unordered_map<int, list<int
 			aftList.push_back(aftStmt);
 			nextStarRelMap[befStmt].insert(aftStmt);
 			nextStarMap[befStmt].push_back(aftStmt);
-			nextStarMap[aftStmt].push_back(befStmt);
+			nextStarMapReverse[aftStmt].push_back(befStmt);
 			if (nextMap.find(aftStmt) != nextMap.end()) {
 				for (int i : nextMap[aftStmt]) {
 					toVisit.push(i);
