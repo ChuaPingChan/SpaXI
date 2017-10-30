@@ -33,8 +33,7 @@ void PKBMain::resetInstance()
 
 void PKBMain::clearCache()
 {
-	Cache newCache;
-	cache = newCache;
+	cache = Cache();
 }
 
 //Utility functions
@@ -1623,7 +1622,13 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			int nextElse = next.back();
 			list<int> followsIf = getAfterStar(nextIf, STMT);
 			followsIf.sort();
-			int endIf = followsIf.back();
+			int endIf;
+			if (followsIf.size() == 0) {
+				endIf = 0;
+			}
+			else {
+				endIf = followsIf.back();
+			}
 			if (endIf == 0) {
 				endIf = nextIf;
 			}
@@ -2086,7 +2091,13 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<in
 			int nextElse = next.back();
 			list<int> followsIf = getAfterStar(nextIf, STMT);
 			followsIf.sort();
-			int endIf = followsIf.back();
+			int endIf;
+			if (followsIf.size() == 0) {
+				endIf = 0;
+			}
+			else {
+				endIf = followsIf.back();
+			}
 			if (endIf == 0) {
 				endIf = nextIf;
 			}
