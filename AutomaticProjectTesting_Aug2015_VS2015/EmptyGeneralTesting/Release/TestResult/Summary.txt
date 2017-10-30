@@ -1,6 +1,6 @@
-Overall Test Ran   : 6958
-Overall Test Passed: 6750
-Overall Test Failed: 208
+Overall Test Ran   : 7565
+Overall Test Passed: 7457
+Overall Test Failed: 108
 
 
 TestResult\out1.xml: 
@@ -15,12 +15,42 @@ Failed  : 2
 
 TestResult\out10_QueryAffectsStar.xml: 
 Test Ran: 11	[BUG]
-Passed  : 6
-Failed  : 5
+Passed  : 9
+Failed  : 2
 
 TestResult\out10_QueryModifies.xml: 
 Test Ran: 47
 Passed  : 47
+Failed  : 0
+
+TestResult\out10_QueryNext.xml: 
+Test Ran: 129
+Passed  : 129
+Failed  : 0
+
+TestResult\out10_QueryNextStar.xml: 
+Test Ran: 131	[BUG]
+Passed  : 128
+Failed  : 3
+
+TestResult\out10_QueryParent.xml: 
+Test Ran: 97
+Passed  : 97
+Failed  : 0
+
+TestResult\out10_QueryParentStar.xml: 
+Test Ran: 102
+Passed  : 102
+Failed  : 0
+
+TestResult\out10_QueryPattern.xml: 
+Test Ran: 28
+Passed  : 28
+Failed  : 0
+
+TestResult\out10_QueryUses.xml: 
+Test Ran: 120
+Passed  : 120
 Failed  : 0
 
 TestResult\out11_QueryFollows.xml: 
@@ -80,8 +110,8 @@ Failed  : 4
 
 TestResult\out13_Intense_Query6b.xml: 
 Test Ran: 185	[BUG]
-Passed  : 165
-Failed  : 20
+Passed  : 174
+Failed  : 11
 
 TestResult\out13_Intense_Query7a.xml: 
 Test Ran: 309	[BUG]
@@ -90,13 +120,13 @@ Failed  : 2
 
 TestResult\out13_Intense_Query7b.xml: 
 Test Ran: 521	[BUG]
-Passed  : 493
-Failed  : 28
+Passed  : 501
+Failed  : 20
 
 TestResult\out13_Intense_Query8.xml: 
 Test Ran: 163	[BUG]
-Passed  : 150
-Failed  : 13
+Passed  : 152
+Failed  : 11
 
 TestResult\out13_One_Query1.xml: 
 Test Ran: 60
@@ -135,8 +165,8 @@ Failed  : 2
 
 TestResult\out13_Three_Query_Affects_AffectsStar_UsingSource4.xml: 
 Test Ran: 13	[BUG]
-Passed  : 8
-Failed  : 5
+Passed  : 10
+Failed  : 3
 
 TestResult\out13_Three_Query_Calls_CallsStar_UsingSource4.xml: 
 Test Ran: 7
@@ -244,9 +274,9 @@ Passed  : 44
 Failed  : 0
 
 TestResult\out14_Query1b.xml: 
-Test Ran: 50	[BUG]
-Passed  : 46
-Failed  : 4
+Test Ran: 50
+Passed  : 50
+Failed  : 0
 
 TestResult\out14_Query2a.xml: 
 Test Ran: 31
@@ -254,9 +284,9 @@ Passed  : 31
 Failed  : 0
 
 TestResult\out14_Query2b.xml: 
-Test Ran: 50	[BUG]
-Passed  : 47
-Failed  : 3
+Test Ran: 50
+Passed  : 50
+Failed  : 0
 
 TestResult\out14_Query3a.xml: 
 Test Ran: 33
@@ -270,8 +300,8 @@ Failed  : 0
 
 TestResult\out14_Query4b.xml: 
 Test Ran: 200	[BUG]
-Passed  : 176
-Failed  : 24
+Passed  : 199
+Failed  : 1
 
 TestResult\out14_Query5b.xml: 
 Test Ran: 60	[BUG]
@@ -284,19 +314,19 @@ Passed  : 10
 Failed  : 0
 
 TestResult\out14_Query6Follows_UsingSource6.xml: 
-Test Ran: 34	[BUG]
-Passed  : 32
-Failed  : 2
+Test Ran: 34
+Passed  : 34
+Failed  : 0
 
 TestResult\out14_Query6Modifies_UsingSource6.xml: 
-Test Ran: 20	[BUG]
-Passed  : 18
-Failed  : 2
+Test Ran: 20
+Passed  : 20
+Failed  : 0
 
 TestResult\out14_Query6MultipleClause_UsingSource6.xml: 
-Test Ran: 29	[BUG]
-Passed  : 21
-Failed  : 8
+Test Ran: 29
+Passed  : 29
+Failed  : 0
 
 TestResult\out14_Query6Parent_UsingSource6.xml: 
 Test Ran: 40
@@ -304,9 +334,9 @@ Passed  : 40
 Failed  : 0
 
 TestResult\out14_Query6Uses_UsingSource6.xml: 
-Test Ran: 20	[BUG]
-Passed  : 16
-Failed  : 4
+Test Ran: 20
+Passed  : 20
+Failed  : 0
 
 TestResult\out2.xml: 
 Test Ran: 336	[BUG]
@@ -344,54 +374,54 @@ Passed  : 14
 Failed  : 1
 
 TestResult\out6_Demo_Calls.xml: 
-Test Ran: 11	[BUG]
-Passed  : 10
-Failed  : 1
+Test Ran: 11
+Passed  : 11
+Failed  : 0
 
 TestResult\out6_Demo_CallsStar.xml: 
-Test Ran: 11	[BUG]
-Passed  : 10
-Failed  : 1
+Test Ran: 11
+Passed  : 11
+Failed  : 0
 
 TestResult\out6_Demo_Follows.xml: 
-Test Ran: 12	[BUG]
-Passed  : 11
-Failed  : 1
+Test Ran: 12
+Passed  : 12
+Failed  : 0
 
 TestResult\out6_Demo_FollowsStar.xml: 
-Test Ran: 12	[BUG]
-Passed  : 11
-Failed  : 1
+Test Ran: 12
+Passed  : 12
+Failed  : 0
 
 TestResult\out6_Demo_Modifies.xml: 
-Test Ran: 11	[BUG]
-Passed  : 10
-Failed  : 1
+Test Ran: 11
+Passed  : 11
+Failed  : 0
 
 TestResult\out6_Demo_Next.xml: 
-Test Ran: 13	[BUG]
-Passed  : 12
-Failed  : 1
+Test Ran: 13
+Passed  : 13
+Failed  : 0
 
 TestResult\out6_Demo_NextStar.xml: 
-Test Ran: 13	[BUG]
-Passed  : 12
-Failed  : 1
+Test Ran: 13
+Passed  : 13
+Failed  : 0
 
 TestResult\out6_Demo_Parent.xml: 
-Test Ran: 10	[BUG]
-Passed  : 9
-Failed  : 1
+Test Ran: 10
+Passed  : 10
+Failed  : 0
 
 TestResult\out6_Demo_ParentStar.xml: 
-Test Ran: 10	[BUG]
-Passed  : 9
-Failed  : 1
+Test Ran: 10
+Passed  : 10
+Failed  : 0
 
 TestResult\out6_Demo_Uses.xml: 
-Test Ran: 11	[BUG]
-Passed  : 6
-Failed  : 5
+Test Ran: 11
+Passed  : 11
+Failed  : 0
 
 TestResult\out6_FOLLOWS.xml: 
 Test Ran: 9
@@ -400,13 +430,13 @@ Failed  : 0
 
 TestResult\out6_MixTests01.xml: 
 Test Ran: 142	[BUG]
-Passed  : 133
-Failed  : 9
+Passed  : 140
+Failed  : 2
 
 TestResult\out6_MixTests02.xml: 
 Test Ran: 146	[BUG]
-Passed  : 130
-Failed  : 16
+Passed  : 141
+Failed  : 5
 
 TestResult\out6_ModifiesUsesParent.xml: 
 Test Ran: 17
@@ -470,6 +500,6 @@ Failed  : 0
 
 TestResult\out8.xml: 
 Test Ran: 25	[BUG]
-Passed  : 21
-Failed  : 4
+Passed  : 22
+Failed  : 3
 

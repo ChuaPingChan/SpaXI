@@ -37,7 +37,9 @@ list<int> UsesTableStmtToVar::getStmtThatUses()
     list<int> listOfStmt = list<int>();
     for (itr = usesStmtToVarMap.begin(); itr != usesStmtToVarMap.end(); ++itr)
     {
-        listOfStmt.push_back(itr->first);
+		if (itr->second.size() > 0) {
+			listOfStmt.push_back(itr->first);
+		}
     }
 
     return listOfStmt;

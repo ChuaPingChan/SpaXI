@@ -26,7 +26,7 @@ Select n1 such that Next*(n, n1) with n=11
 5 - Next  incorrect argument
 stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
 Select BOOLEAN such that Next*(v, _) 
-none
+false
 5000
 6 - Next  incorrect argument
 stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;

@@ -431,8 +431,43 @@ namespace UnitTesting
 			Assert::IsTrue(dummyPkbMain.isAffects(14, 4));
 			Assert::IsTrue(dummyPkbMain.isAffects(14, 11));
 			Assert::IsTrue(dummyPkbMain.isFollows(5, 15));
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(15, 4));
 
 			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 14);
+
+			// Clean up
+			Assert::IsTrue(deleteDummySimpleSourceFile());
+		}
+
+		TEST_METHOD(TestAffectsStarComputation)
+		{
+			// Set up
+			list<int> actualResults;
+			list<int> expectedResults;
+			Parser parser(dummyPkbMainPtr);
+			Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource());
+			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+			// Test for affects
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 3));
+
+			// Clean up
+			Assert::IsTrue(deleteDummySimpleSourceFile());
+		}
+
+		TEST_METHOD(TestAffectsStarComputation2)
+		{
+			// Set up
+			list<int> actualResults;
+			list<int> expectedResults;
+			Parser parser(dummyPkbMainPtr);
+			Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource2());
+			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+			// Test for affects
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(9, 21));
 
 			// Clean up
 			Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -1257,6 +1292,53 @@ namespace UnitTesting
 				"procedure John { \n"
 				"	b = 3; \n"
 				"}";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
+
+		bool createDummySimpleSourceFile_affectsSource5() {
+			std::string content =
+				"procedure IfWhile { \n"
+				"	if dream then { \n"
+				"		sleep = 100 + 5; \n"
+				"		while sleep { \n"
+				"			inBattle = 100 - 5 - sleep; \n"
+				"			knowledge = 5 - 20; }\n"
+				"	} else { \n "
+				"		sleep = knowledge + dream; }\n"
+				"	while sleep { \n"
+				"		sleep = sleep + 2; }\n"
+				"	dream = sleep * 5000; \n"
+				"}";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
+
+		bool createDummySimpleSourceFile_affectsStarSource() {
+			std::string content =
+				"procedure IfWhile { \n"
+				"	a = 2; \n"
+				"	b = a; \n"
+				"	c = b; \n"
+				"}";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
+
+		bool createDummySimpleSourceFile_affectsStarSource2() {
+			std::string content = "procedure WhileMultiple { sarada = sakura + sasuke; shikamaru = shikamaru + 100 ; while naruto { naruto = 2 + kurama ; sakura = love - 5; while sasuke { sakura = love + 100 ; sakura = naruto - 100 ; attack = 10 + 100; while kakashi { shadowClone = naruto + kakashi; while sageMode { while inBattle { jiraya = attack + 100 * knowledge - 5;} naruto = attack +100; } while inBattle { kakashi = naruto + jiraya; attack = attack * 5; } } sarada = love * 100; } inBattle= sageMode * love* knowledge; } knowledge =sleep + inBattle + love + naruto; } procedure IfMultiple { boruto = naruto + hinata; if inBattle then { boruto = attack + 5; boruto = shadowClone + 5; if naruto then { boruto = love - 20 ; boruto = boruto*shadowClone - 20 ; hinata = love + 100; if hinata then { himawari = love + 100; if inBattle then { hinata= attack +100* naruto * love+ 100 - boruto ; himawari=hinata*naruto+love; } else { knowledge =naruto + hinata * himawari - boruto ; } } else { knowledge = love * 0; } if sakura then { knowledge = hinata * love -sakura * love; } else { shadowClone = shadowClone+ 3; } naruto = sleep; } else { boruto = knowledge + 2; love = sarada + boruto; } } else { kakashi = inBattle; if inBattle then { kakashi = sageMode - 5 + boruto - 5; shadowClone = 100 * shadowClone ; } else { kakashi = sleep + 5; shadowClone = shadowClone - 10; knowledge = sleep + 10; } kakashi = shadowClone * 0; if love then { kakashi = love + 5 ; love = knowledge + shadowClone + sageMode; } else { naruto = inBattle ; boruto = inBattle; } } } procedure WhileIf { inBattle = naruto + sasuke ; while inBattle { if naruto then { naruto = shadowClone* sageMode *attack+ 100; } else { sasuke = knowledge* 100 - naruto; } } if sleep then { dream =naruto + hinata + boruto + himawari; } else { boruto = hinata + himawari - naruto; } } procedure IfWhile { if dream then { sleep = 100 + 5; while sleep { inBattle = 100 - 5 -sleep; knowledge = 5 - 20; } } else { sleep = knowledge + dream; } while sleep { sleep = sleep + 2; } dream = sleep * 5000; } ";
 			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
 			std::ofstream outfile(newFilePath);
 			std::string inputString(content);

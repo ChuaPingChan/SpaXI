@@ -364,14 +364,32 @@ call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 10...
 echo Running AutoTester for QueryAffects.txt...
-AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffects.txt TestResult\out10_QueryAffects.xml > TestResult\cmd\cmd10_QueryAffects.txt
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryAffects.txt TestResult\out10_QueryAffects.xml > TestResult\cmd\cmd10_QueryAffects.txt
 echo Finish running AutoTester for QueryAffects.txt.
 echo Running AutoTester for QueryAffectsStar.txt...
-AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryAffectsStar.txt TestResult\out10_QueryAffectsStar.xml > TestResult\cmd\cmd10_QueryAffectsStar.txt
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryAffectsStar.txt TestResult\out10_QueryAffectsStar.xml > TestResult\cmd\cmd10_QueryAffectsStar.txt
 echo Finish running AutoTester for QueryAffectsStar.txt.
 echo Running AutoTester for QueryModifies.txt...
-AutoTester Test10_Loop\SourceWithLoops.txt Test10_Loop\QueryModifies.txt TestResult\out10_QueryModifies.xml > TestResult\cmd\cmd10_QueryModifies.txt
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryModifies.txt TestResult\out10_QueryModifies.xml > TestResult\cmd\cmd10_QueryModifies.txt
 echo Finish running AutoTester for QueryModifies.txt.
+echo Running AutoTester for QueryNext.txt...
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryNext.txt TestResult\out10_QueryNext.xml > TestResult\cmd\cmd10_QueryNext.txt
+echo Finish running AutoTester for QueryNext.txt.
+echo Running AutoTester for QueryNextStar.txt...
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryNextStar.txt TestResult\out10_QueryNextStar.xml > TestResult\cmd\cmd10_QueryNextStar.txt
+echo Finish running AutoTester for QueryNextStar.txt.
+echo Running AutoTester for QueryParent.txt...
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryParent.txt TestResult\out10_QueryParent.xml > TestResult\cmd\cmd10_QueryParent.txt
+echo Finish running AutoTester for QueryParent.txt.
+echo Running AutoTester for QueryParentStar.txt...
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryParentStar.txt TestResult\out10_QueryParentStar.xml > TestResult\cmd\cmd10_QueryParentStar.txt
+echo Finish running AutoTester for QueryParentStar.txt.
+echo Running AutoTester for QueryPattern.txt...
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryPattern.txt TestResult\out10_QueryPattern.xml > TestResult\cmd\cmd10_QueryPattern.txt
+echo Finish running AutoTester for QueryPattern.txt.
+echo Running AutoTester for QueryUses.txt...
+AutoTester Test10_Loop\SourceLoop.txt Test10_Loop\QueryUses.txt TestResult\out10_QueryUses.xml > TestResult\cmd\cmd10_QueryUses.txt
+echo Finish running AutoTester for QueryUses.txt.
 echo Finish running AutoTester for test 10.
 call :getPauseAction
 goto :eof
@@ -381,16 +399,16 @@ call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 11...
 echo Running AutoTester for QueryFollows...
-AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryFollows.txt TestResult\out11_QueryFollows.xml > TestResult\cmd\cmd11_QueryFollows.txt
+AutoTester Test11_Sequential\SourceSequential.txt Test11_Sequential\QueryFollows.txt TestResult\out11_QueryFollows.xml > TestResult\cmd\cmd11_QueryFollows.txt
 echo Finish running AutoTester for QueryFollows.
 echo Running AutoTester for QueryFollowsStar...
-AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryFollowsStar.txt TestResult\out11_QueryFollowsStar.xml > TestResult\cmd\cmd11_QueryFollowsStar.txt
+AutoTester Test11_Sequential\SourceSequential.txt Test11_Sequential\QueryFollowsStar.txt TestResult\out11_QueryFollowsStar.xml > TestResult\cmd\cmd11_QueryFollowsStar.txt
 echo Finish running AutoTester for QueryFollowsStar.
 echo Running AutoTester for QueryPatternAssign...
-AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryPatternAssign.txt TestResult\out11_QueryPatternAssign.xml > TestResult\cmd\cmd11_QueryPatternAssign.txt
+AutoTester Test11_Sequential\SourceSequential.txt Test11_Sequential\QueryPatternAssign.txt TestResult\out11_QueryPatternAssign.xml > TestResult\cmd\cmd11_QueryPatternAssign.txt
 echo Finish running AutoTester for QueryPatternAssign.
 echo Running AutoTester for QueryWith...
-AutoTester Test11_Sequential\SourceWithNoLoop.txt Test11_Sequential\QueryWith.txt TestResult\out11_QueryWith.xml > TestResult\cmd\cmd11_QueryWith.txt
+AutoTester Test11_Sequential\SourceSequential.txt Test11_Sequential\QueryWith.txt TestResult\out11_QueryWith.xml > TestResult\cmd\cmd11_QueryWith.txt
 echo Finish running AutoTester for QueryWith.
 echo Finish running AutoTester for test 11.
 call :getPauseAction
