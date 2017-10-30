@@ -31,7 +31,7 @@ none
 5 - Uses incorrect argument
 stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
 Select BOOLEAN such that Uses(v, _) 
-none
+false
 5000
 6 - Uses incorrect argument
 stmt s, s1; assign a, a1, a2; while w, w1; if ifstmt, iftstmt1; procedure p; variable v; constant c; prog_line n, n1, n2; call ca1, ca2;
