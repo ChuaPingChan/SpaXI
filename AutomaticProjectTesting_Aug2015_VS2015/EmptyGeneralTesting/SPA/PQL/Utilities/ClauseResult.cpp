@@ -183,6 +183,54 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     return true;
 }
 
+bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered_set<string> selectedSyns)
+{
+    // Get all selected synonyms in clause result
+    list<string> synsInClauseResult = clauseResultToMerge.getAllSynonyms();
+    list<string> synsToMerge;
+    for (string synName : synsInClauseResult) {
+        if (selectedSyns.find(synName) != selectedSyns.end())
+            synsToMerge.push_back(synName);
+    }
+    list<list<int>> resultsToMerge = clauseResultToMerge.getSynonymResults(synsToMerge);
+    resultsToMerge.unique();
+
+    for (string newSynName : synsToMerge)
+    {
+        assert(_synToIdxMap.find(newSynName) == _synToIdxMap.end());
+
+        // Add to _synList
+        _synList.push_back(newSynName);
+        int newSynIdx = _synList.size() - 1;
+
+        // Add to _synToIdxMap
+        _synToIdxMap.insert({ newSynName, newSynIdx });
+    }
+
+    // Merge with _result - Cartesian product
+    if (_results.empty()) {
+        for (list<int> newComb : resultsToMerge) {
+            vector<int> newCombToMerge = convertListToVector(newComb);
+            _results.push_back(newCombToMerge);
+        }
+        return true;
+    }
+
+    int repeatNumber = resultsToMerge.size();
+    list<vector<int>> outdatedResult = _results;
+    _results.clear();
+
+    for (vector<int> currComb : outdatedResult) {
+        for (list<int> newSynsResList : resultsToMerge) {
+            vector<int> newSynsResVec = convertListToVector(newSynsResList);
+            vector<int> newComb = joinTwoVectors(currComb, newSynsResVec);
+            _results.push_back(newComb);
+        }
+    }
+
+    return true;
+}
+
 bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults)
 {
     assert(pairResults.size() > 0);

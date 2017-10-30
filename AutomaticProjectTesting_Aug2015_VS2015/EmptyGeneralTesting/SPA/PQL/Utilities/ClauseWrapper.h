@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Clause.h"
+#include "SelectClause.h"
 #include "SuchThatClause.h"
 #include "PatternClause.h"
 #include "WithClause.h"
@@ -11,15 +12,18 @@
 class ClauseWrapper
 {
 public:
+    ClauseWrapper(SelectClause &clause);
     ClauseWrapper(SuchThatClause &clause);
     ClauseWrapper(PatternClause &clause);
     ClauseWrapper(WithClause &clause);
 
+    bool isSelectClause();
     bool isSuchThatClause();
     bool isPatternClause();
     bool isWithClause();
 
     Clause getClause();
+    SelectClause getSelectClause();
     SuchThatClause getSuchThatClause();
     PatternClause getPatternClause();
     WithClause getWithClause();
@@ -30,11 +34,13 @@ protected:
 
     enum ClauseCategory
     {
-        SUCH_THAT = 0,
-        PATTERN = 1,
-        WITH = 2
+        SELECT = 0,
+        SUCH_THAT = 1,
+        PATTERN = 2,
+        WITH = 3
     };
 
+    SelectClause *_selectClausePtr;
     SuchThatClause *_suchThatClausePtr;
     PatternClause *_patternClausePtr;
     WithClause *_withClausePtr;

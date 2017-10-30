@@ -13,7 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="PQL\Utilities\Clause.cpp" />
-    <ClCompile Include="PQL\Optimizer\ClauseGroupsManager.cpp" />
+    <ClCompile Include="PQL\Optimizer\ClauseGroupManager.cpp" />
     <ClCompile Include="PQL\Optimizer\Optimizer.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseWrapper.cpp" />
     <ClCompile Include="Exceptions\EntityNotFoundException.cpp" />
@@ -99,10 +99,11 @@
     <ClCompile Include="PQL\Evaluator\With\WithEvaluator.cpp" />
     <ClCompile Include="PQL\Evaluator\With\StringWithEvaluator.cpp" />
     <ClCompile Include="Exceptions\SynonymAlreadyExistException.cpp" />
+    <ClCompile Include="PQL\Optimizer\SynonymUFDS.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Utilities\Clause.h" />
-    <ClInclude Include="PQL\Optimizer\ClauseGroupsManager.h" />
+    <ClInclude Include="PQL\Optimizer\ClauseGroupManager.h" />
     <ClInclude Include="PQL\Optimizer\Optimizer.h" />
     <ClInclude Include="PQL\Utilities\ClauseWrapper.h" />
     <ClInclude Include="Exceptions\EntityNotFoundException.h" />
@@ -143,6 +144,7 @@
     <ClInclude Include="PQL\Evaluator\With\WithEvaluator.h" />
     <ClInclude Include="PQL\Evaluator\With\StringWithEvaluator.h" />
     <ClInclude Include="Exceptions\SynonymAlreadyExistException.h" />
+    <ClInclude Include="PQL\Optimizer\SynonymUFDS.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />

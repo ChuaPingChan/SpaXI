@@ -1,3 +1,4 @@
+#include <cassert>
 #include "SelectClause.h"
 
 SelectClause::SelectClause()
@@ -14,13 +15,23 @@ SelectClause::SelectClause(SelectionType selectionType, Entity singleArgType, st
     this->selectionType = selectionType;
     this->singleArgType = singleArgType;
     this->singleArg = singleArg;
+
+    if (entityIsSynonym(singleArgType))
+        addSynonym(singleArg);
 }
 
 SelectClause::SelectClause(SelectionType selectionType, vector<Entity> tupleArgTypes, vector<string> tupleArgs)
 {
+    assert(tupleArgTypes.size() == tupleArgs.size());
+
     this->selectionType = selectionType;
     this->tupleArgTypes = tupleArgTypes;
     this->tupleArgs = tupleArgs;
+
+    for (int i = 0; i < tupleArgTypes.size(); i++) {
+        if (entityIsSynonym(tupleArgTypes[i]))
+            addSynonym(tupleArgs[i]);
+    }
 }
 
 SelectClause::~SelectClause()
