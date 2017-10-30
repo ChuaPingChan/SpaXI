@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "Clause.h"
 #include "SelectClause.h"
 #include "SuchThatClause.h"
@@ -12,10 +13,10 @@
 class ClauseWrapper
 {
 public:
-    ClauseWrapper(SelectClause clause);
-    ClauseWrapper(SuchThatClause clause);
-    ClauseWrapper(PatternClause clause);
-    ClauseWrapper(WithClause clause);
+    ClauseWrapper(SelectClause &clause);
+    ClauseWrapper(SuchThatClause &clause);
+    ClauseWrapper(PatternClause &clause);
+    ClauseWrapper(WithClause &clause);
     ~ClauseWrapper();
 
     bool isSelectClause();

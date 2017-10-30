@@ -73,20 +73,17 @@ list<ClauseWrapper> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
     vector<WithClause> withClauses = queryTree.getWithClauses();
 
     for (SuchThatClause suchThatClause : suchThatClauses) {
-        SuchThatClause clauseCopy = suchThatClause;
-        ClauseWrapper clause(&clauseCopy);
+        ClauseWrapper clause(suchThatClause);
         allClauses.push_back(clause);
     }
 
     for (PatternClause patternClause : patternClauses) {
-        PatternClause clauseCopy = patternClause;
-        ClauseWrapper clause(&clauseCopy);
+        ClauseWrapper clause(patternClause);
         allClauses.push_back(clause);
     }
 
     for (WithClause withClause : withClauses) {
-        WithClause clauseCopy = withClause;
-        ClauseWrapper clause(&clauseCopy);
+        ClauseWrapper clause(withClause);
         allClauses.push_back(clause);
     }
 

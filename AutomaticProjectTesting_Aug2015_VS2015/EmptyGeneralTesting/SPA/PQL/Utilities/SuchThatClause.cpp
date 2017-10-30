@@ -3,6 +3,7 @@
 
 
 SuchThatClause::SuchThatClause(Relationship rel, Entity argOneType, string argOne, Entity argTwoType, string argTwo)
+    : Clause(ClauseType::SUCH_THAT)
 {
 	this->_rel = rel;
 	this->_argOneType = argOneType;

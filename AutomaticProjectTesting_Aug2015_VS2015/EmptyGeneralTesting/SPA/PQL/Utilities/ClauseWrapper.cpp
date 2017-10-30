@@ -5,40 +5,62 @@
 #include "PatternClause.h"
 #include "WithClause.h"
 
-ClauseWrapper::ClauseWrapper(SelectClause* clause)
+ClauseWrapper::ClauseWrapper(SelectClause &clause)
 {
     _clauseCategory = ClauseCategory::SELECT;
-    _selectClausePtr = clause;
+
+    SelectionType selectiontype = clause.getSelectionType();
+    if (selectiontype == SelectionType::SELECT_BOOLEAN) {
+        _selectClausePtr = new SelectClause(selectiontype);
+    } else if (selectiontype == SelectionType::SELECT_SINGLE) {
+        _selectClausePtr = new SelectClause(selectiontype, clause.getSingleArgType(), clause.getSingleArg());
+    } else {
+        assert(selectiontype == SelectionType::SELECT_TUPLE);
+        _selectClausePtr = new SelectClause(selectiontype, clause.getTupleArgTypes(), clause.getTupleArgs());
+    }
 }
 
-ClauseWrapper::ClauseWrapper(SuchThatClause* clause)
+ClauseWrapper::ClauseWrapper(SuchThatClause &clause)
 {
     _clauseCategory = ClauseCategory::SUCH_THAT;
-    _suchThatClausePtr = clause;
+
+    _suchThatClausePtr = new SuchThatClause(clause.getRel(), clause.getArgOneType(), clause.getArgOne(),
+        clause.getArgTwoType(), clause.getArgTwo());
 }
 
-ClauseWrapper::ClauseWrapper(PatternClause* clause)
+ClauseWrapper::ClauseWrapper(PatternClause &clause)
 {
     _clauseCategory = ClauseCategory::PATTERN;
-    _patternClausePtr = clause;
+
+    PatternType patternType = clause.getPatternType();
+    if (patternType == PatternType::ASSIGN_PATTERN || patternType == PatternType::WHILE_PATTERN) {
+        _patternClausePtr = new PatternClause(patternType, clause.getPatternSynonym(),
+            clause.getArgOneType(), clause.getArgOne(), clause.getArgTwoType(), clause.getArgTwo());
+    } else {
+        assert(patternType == PatternType::IF_PATTERN);
+        _patternClausePtr = new PatternClause(patternType, clause.getPatternSynonym(),
+            clause.getArgOneType(), clause.getArgOne(), clause.getArgTwoType(), clause.getArgTwo(),
+            clause.getArgThreeType(), clause.getArgThree());
+    }
 }
 
-ClauseWrapper::ClauseWrapper(WithClause* clause)
+ClauseWrapper::ClauseWrapper(WithClause &clause)
 {
     _clauseCategory = ClauseCategory::WITH;
-    _withClausePtr = clause;
+    _withClausePtr = new WithClause(clause.getWithType(), clause.getLhsEntity(), clause.getLhsValue(),
+        clause.getRhsEntity(), clause.getRhsValue());
 }
 
 ClauseWrapper::~ClauseWrapper()
 {
-    if (_selectClausePtr != NULL)
-        delete _selectClausePtr;
-    if (_suchThatClausePtr != NULL)
-        delete _suchThatClausePtr;
-    if (_patternClausePtr != NULL)
-        delete _patternClausePtr;
-    if (_withClausePtr != NULL)
-        delete _withClausePtr;
+    //if (_selectClausePtr != NULL)
+    //    delete _selectClausePtr;
+    //if (_suchThatClausePtr != NULL)
+    //    delete _suchThatClausePtr;
+    //if (_patternClausePtr != NULL)
+    //    delete _patternClausePtr;
+    //if (_withClausePtr != NULL)
+    //    delete _withClausePtr;
 }
 
 /*

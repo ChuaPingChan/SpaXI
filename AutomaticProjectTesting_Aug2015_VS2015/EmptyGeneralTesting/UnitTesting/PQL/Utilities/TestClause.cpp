@@ -23,12 +23,12 @@ namespace UnitTesting
             SuchThatClause uses_a1_v1 = SuchThatClause(Relationship::USES,
                 Entity::ASSIGN, "a1",
                 Entity::VARIABLE, "v1");
-            
+
             actualSynonyms = uses_a1_v1.getSynonyms();
             expectedSynonyms = list<string>{ "a1", "v1" };
 
             actualSynonyms.sort();
-            expectedSynonyms.sort();            
+            expectedSynonyms.sort();
             Assert::IsTrue(actualSynonyms == expectedSynonyms);
         }
     };
