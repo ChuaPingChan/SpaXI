@@ -439,24 +439,6 @@ namespace UnitTesting
 			Assert::IsTrue(deleteDummySimpleSourceFile());
 		}
 
-		TEST_METHOD(TestAffectsComputation5)
-		{
-			// Set up
-			list<int> actualResults;
-			list<int> expectedResults;
-			Parser parser(dummyPkbMainPtr);
-			Assert::IsTrue(createDummySimpleSourceFile_affectsSource5());
-			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
-
-
-			// Test for affects
-
-			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 14);
-
-			// Clean up
-			Assert::IsTrue(deleteDummySimpleSourceFile());
-		}
-
 		TEST_METHOD(TestAffectsStarComputation)
 		{
 			// Set up
