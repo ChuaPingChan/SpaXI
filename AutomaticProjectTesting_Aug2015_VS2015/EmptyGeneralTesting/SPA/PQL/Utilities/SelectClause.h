@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 #include <list>
+#include <memory>
 #include "../../Entity.h"
 #include "../Selectionship.h"
 #include "Clause.h"
@@ -42,3 +43,4 @@ private:
     vector<string> tupleArgs;
 };
 
+typedef shared_ptr<SelectClause> SelectClausePtr;

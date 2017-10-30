@@ -15,7 +15,6 @@
     <ClCompile Include="PQL\Utilities\Clause.cpp" />
     <ClCompile Include="PQL\Optimizer\ClauseGroupManager.cpp" />
     <ClCompile Include="PQL\Optimizer\Optimizer.cpp" />
-    <ClCompile Include="PQL\Utilities\ClauseWrapper.cpp" />
     <ClCompile Include="Exceptions\EntityNotFoundException.cpp" />
     <ClCompile Include="Exceptions\AttributeNotFoundException.cpp" />
     <ClCompile Include="Exceptions\SynonymNotFoundException.cpp" />
@@ -105,7 +104,6 @@
     <ClInclude Include="PQL\Utilities\Clause.h" />
     <ClInclude Include="PQL\Optimizer\ClauseGroupManager.h" />
     <ClInclude Include="PQL\Optimizer\Optimizer.h" />
-    <ClInclude Include="PQL\Utilities\ClauseWrapper.h" />
     <ClInclude Include="Exceptions\EntityNotFoundException.h" />
     <ClInclude Include="Exceptions\AttributeNotFoundException.h" />
     <ClInclude Include="PKB\IfStmt.h" />

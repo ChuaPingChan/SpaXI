@@ -1,7 +1,9 @@
 #include "WithClause.h"
 #include "../../Entity.h"
+#include "Clause.h"
 
 WithClause::WithClause(WithType withType, Entity lhsEntity, string lhsValue, Entity rhsEntity, string rhsValue)
+    : Clause(Clause::ClauseType::WITH)
 {
     this->withType = withType;
     this->lhsEntity = lhsEntity;

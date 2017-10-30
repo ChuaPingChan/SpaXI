@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 #include "../../Entity.h"
 #include "../Relationship.h"
 #include "Clause.h"
@@ -26,4 +27,6 @@ private:
     string _argOne;
     string _argTwo;
 };
+
+typedef shared_ptr<SuchThatClause> SuchThatClausePtr;
 

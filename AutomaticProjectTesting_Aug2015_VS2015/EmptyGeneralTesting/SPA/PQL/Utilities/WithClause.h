@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 #include "..\..\Entity.h"
 #include "..\Withship.h"
 #include "Clause.h"
@@ -23,4 +24,6 @@ private:
     string lhsValue;
     string rhsValue;
 };
+
+typedef shared_ptr<WithClause> WithClausePtr;
 

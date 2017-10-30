@@ -2,25 +2,33 @@
 
 #include <queue>
 #include <unordered_set>
-#include "../Utilities/ClauseWrapper.h"
+#include "../Utilities/Clause.h"
 #include "../Utilities/ClauseResult.h"
 
 using namespace std;
 
+/*
+    Manages clause groups and the results of clause groups.
+*/
 class ClauseGroupManager
 {
 public:
     ClauseGroupManager();
 
-    queue<ClauseWrapper> getNextClauseGroup();
+    // API for evaluator
+    queue<Clause> getNextClauseGroup();
     void mergeClauseResult(ClauseResult clauseResult);     // TODO: Rename this to ClauseGroupResult nearing submission
+
+    // API for optimizer
     void setSelectedSynonyms(list<string> synonyms);
-    void setClauseGroupQueue(queue<queue<ClauseWrapper>> &clauseGroupQueue);
+    void setClauseGroupQueue(queue<queue<Clause>> &clauseGroupQueue);
+
+    // API for result formatter
     ClauseResult getMergedClauseResult();
 
 protected:
     unordered_set<string> _selectedSynonyms;
-    queue<queue<ClauseWrapper>> _clauseGroupQueue;
+    queue<queue<Clause>> _clauseGroupQueue;
     ClauseResult _mergedClauseResult;
 
 };
