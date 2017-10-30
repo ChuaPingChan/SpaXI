@@ -41,14 +41,16 @@ bool ModTableProcToVar::setMap(unordered_map<int, list<int>> map) {
 }
 
 bool ModTableProcToVar::isModifyingAnything(int procIdx) {
-	return modProcToVarMap.find(procIdx) != modProcToVarMap.end();
+	return modProcToVarMap.find(procIdx) != modProcToVarMap.end() && modProcToVarMap[procIdx].size() > 0;
 }
 
 list<int> ModTableProcToVar::getProcThatModifies() {
 	list<int> procList;
 	for (unordered_map<int, list<int>>::iterator it = modProcToVarMap.begin(); it != modProcToVarMap.end(); ++it) {
 		int procIdx = (*it).first;
-		procList.push_back(procIdx);
+		if ((*it).second.size() > 0) {
+			procList.push_back(procIdx);
+		}
 	}
 
 	return procList;

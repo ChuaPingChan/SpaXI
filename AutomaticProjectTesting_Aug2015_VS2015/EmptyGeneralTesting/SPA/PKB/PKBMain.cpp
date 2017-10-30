@@ -635,14 +635,33 @@ bool PKBMain::isNextStar(int befStmt, int aftStmt) {
 }
 
 list<int> PKBMain::getExecutedAfterStar(int befStmt, Entity type) {
-	list<int> stmtList = nextTable.getExecutedAfterStar(befStmt);
+	list<int> stmtList;
+	if (cache.containsAllNextStar(STMT, STMT)) {
+		unordered_map<int, list<int>> nextStarMap = cache.getNextStarMap();
+		if (nextStarMap.find(befStmt) != nextStarMap.end()) {
+			stmtList = nextStarMap[befStmt];
+		}
+	}
+	else {
+		stmtList = nextTable.getExecutedAfterStar(befStmt);
+	}
+
 	stmtList = stmtTypeList.getStmtType(stmtList, type);
 	return stmtList;
 }
 
 list<int> PKBMain::getExecutedBeforeStar(int aftStmt, Entity type) {
 	list<int> stmtList;
-	stmtList = nextTable.getExecutedBeforeStar(aftStmt);
+	if (cache.containsAllNextStar(STMT, STMT)) {
+		unordered_map<int, list<int>> nextStarMapReverse = cache.getNextStarMapReverse();
+		if (nextStarMapReverse.find(aftStmt) != nextStarMapReverse.end()) {
+			stmtList = nextStarMapReverse[aftStmt];
+		}
+	}
+	else {
+		stmtList = nextTable.getExecutedBeforeStar(aftStmt);
+	}
+
 	stmtList = stmtTypeList.getStmtType(stmtList, type);
 	return stmtList;
 }
@@ -673,9 +692,13 @@ pair<list<int>, list<int>> PKBMain::getAllNextStar(Entity type1, Entity type2) {
 	}
 
 	else {
-		pair<list<int>, list<int>> resultPair = nextTable.getAllNextStar();
+		unordered_map<int, list<int>> nextStarMap;
+		unordered_map<int, list<int>> nextStarMapReverse;
+		unordered_map<int, unordered_set<int>> nextStarRelMap;
+		pair<list<int>, list<int>> resultPair = nextTable.getAllNextStar(nextStarMap, nextStarMapReverse, nextStarRelMap);
 		cache.putAllNextStar(resultPair, STMT, STMT);
 		resultPair = stmtTypeList.getStmtType(resultPair, type1, type2);
+		cache.putAllNextStar(nextStarMap, nextStarMapReverse, nextStarRelMap);
 		cache.putAllNextStar(resultPair, type1, type2);
 		return resultPair;
 	}
@@ -1598,6 +1621,12 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			next.sort();
 			int nextIf = next.front();
 			int nextElse = next.back();
+			list<int> followsIf = getAfterStar(nextIf, STMT);
+			followsIf.sort();
+			int endIf = followsIf.back();
+			if (endIf == 0) {
+				endIf = nextIf;
+			}
 			list<int> children = getChildren(curr, STMT);
 			children.sort();
 			int endElse = children.back();
@@ -1613,7 +1642,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			}
 
 			bool visitedElse = false;
-			IfStmt currIfStmt = IfStmt(curr, nextIf, nextElse - 1, nextElse, endElse, visitedElse, afterIf, latestMod, latestMod);
+			IfStmt currIfStmt = IfStmt(curr, nextIf, endIf, nextElse, endElse, visitedElse, afterIf, latestMod, latestMod);
 			ifMapStack.push(currIfStmt);
 			curr = nextIf;
 		}
@@ -1712,18 +1741,43 @@ unordered_map<int, unordered_set<int>> PKBMain::joinMap(unordered_map<int, unord
 	return firstMap;
 }
 
+list<int> PKBMain::getAllAffectsSameSyn() {
+	list<int> result;
+	
+	if (cache.containsAllAffectsSameSyn()) {
+		return cache.getAllAffectsSameSyn();
+	}
+
+	if (!cache.containsAllAffects()) {
+		getAllAffects();
+	}
+
+	unordered_map<int, unordered_set<int>> affectsRelMap = cache.getAllAffectsRelMap();
+	
+	for (auto &affectsRel : affectsRelMap) {
+		if (affectsRel.second.find(affectsRel.first) != affectsRel.second.end()) {
+			result.push_back(affectsRel.first);
+		}
+	}
+
+	cache.putAllAffectsSameSyn(result);
+
+	return result;
+}
+
 pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	list<int> prevList;
 	list<int> nextList;
 	unordered_map<int, unordered_set<int>> affectsRelMap;
 	//TODO OPTIMISE
+	//cout << "get all affects" << endl;
 	if (cache.containsAllAffects()) {
-		cout << "hasAllAffects" << endl;
+		//cout << "hasAllAffects" << endl;
 		return cache.getAllAffects();
 	}
 
 	else {
-		cout << "doesnt have all affects"  << endl;
+		//cout << "doesnt have all affects"  << endl;
 	}
 
 	list<int> allFirstStmt = getAllFirstStmtOfProc();
@@ -1734,56 +1788,331 @@ pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	}
 
 	cache.putAllAffects(make_pair(prevList, nextList), affectsRelMap);
-	/*
-	list<int> allStmts = getAllAssignments();
-	for (int stmt : allStmts) {
-		list<int> nextStarList = getExecutedAfterStar(stmt, STMT);
-		for (int next : nextStarList) {
-			if (isAffects(stmt, next)) {
-				if (affectsRelMap.find(stmt) != affectsRelMap.end()) {
-					if (affectsRelMap[stmt].find(next) != affectsRelMap[stmt].end()) {
-						affectsRelMap[stmt].insert(next);
-						prevList.push_back(stmt);
-						nextList.push_back(next);
-					}
-				}
-			}
-		}
-	}
-	*/
 
 	return make_pair(prevList, nextList);
 }
 
+
 bool PKBMain::isAffectsStar(int stmt1, int stmt2) {
-	list<int> affected = getAffectedOf(stmt1);
-	unordered_set<int> visited;
-	bool isFirstRound = true;
-	while (!affected.empty()) {
-		int curr = affected.front();
-		affected.pop_front();
-
-		if (curr == stmt2 && !isFirstRound) {
-			return true;
-		}
-
-		if (visited.find(curr) != visited.end() && !isFirstRound) {
-			isFirstRound = false;
-			continue;
-		}
-
+	if (!cache.containsAllAffectsStar()) {
+		getAllAffectsStar();
 	}
+
+	unordered_map<int, unordered_set<int>> affectsStarRelMap = cache.getAllAffectsStarRelMap();
+	if (affectsStarRelMap.find(stmt1) != affectsStarRelMap.end() && 
+		affectsStarRelMap[stmt1].find(stmt2) != affectsStarRelMap[stmt1].end()) {
+		return true;
+	}
+
 	return false;
 }
 
 list<int> PKBMain::getAffectedStarOf(int stmt1) {
-	return list<int>();
+	if (!cache.containsAllAffectsStar()) {
+		getAllAffectsStar();
+	}
+
+	unordered_map<int, list<int>> affectsStarMap = cache.getAffectsStarMap();
+	list<int> result;
+
+	if (affectsStarMap.find(stmt1) != affectsStarMap.end()) {
+		result = affectsStarMap[stmt1];
+	}
+	return result;
 }
 
 list<int> PKBMain::getAffectorStarOf(int stmt2) {
-	return list<int>();
+	if (!cache.containsAllAffectsStar()) {
+		getAllAffectsStar();
+	}
+
+	unordered_map<int, list<int>> affectsStarMapReverse = cache.getAffectsStarMapReverse();
+	list<int> result;
+
+	if (affectsStarMapReverse.find(stmt2) != affectsStarMapReverse.end()) {
+		result = affectsStarMapReverse[stmt2];
+	}
+
+	return result;
+}
+
+list<int> PKBMain::getAllAffectsStarSameSyn() {
+	if (cache.containsAllAffectsStarSameSyn()) {
+		return cache.getAllAffectsStarSameSyn();
+	}
+
+	if (!cache.containsAllAffectsStar()) {
+		getAllAffectsStar();
+	}
+
+	list<int> result;
+
+	unordered_map<int, unordered_set<int>> affectsStarRelMap = cache.getAllAffectsStarRelMap();
+
+	for (auto &affectsStarRel : affectsStarRelMap) {
+		if (affectsStarRel.second.find(affectsStarRel.first) != affectsStarRel.second.end()) {
+			result.push_back(affectsStarRel.first);
+		}
+	}
+
+	cache.putAllAffectsStarSameSyn(result);
+
+	return result;
 }
 
 pair<list<int>, list<int>> PKBMain::getAllAffectsStar() {
-	return make_pair(list<int>(), list<int>());
+	list<int> prevList;
+	list<int> nextList;
+	unordered_map<int, unordered_set<int>> affectsStarRelMap;
+	unordered_map<int, list<int>> affectsStarMap;
+	unordered_map<int, list<int>> affectsStarMapReverse;
+	//TODO OPTIMISE
+	//cout << "get all affects" << endl;
+	if (cache.containsAllAffectsStar()) {
+		//cout << "hasAllAffects" << endl;
+		return cache.getAllAffectsStar();
+	}
+
+	else {
+		//cout << "doesnt have all affects"  << endl;
+	}
+
+	list<int> allFirstStmt = getAllFirstStmtOfProc();
+	for (int stmt : allFirstStmt) {
+		pair<list<int>, list<int>> allPairsInStmtList = getAllAffectsStar(stmt, affectsStarRelMap, affectsStarMap, affectsStarMapReverse);
+		prevList.insert(prevList.end(), allPairsInStmtList.first.begin(), allPairsInStmtList.first.end());
+		nextList.insert(nextList.end(), allPairsInStmtList.second.begin(), allPairsInStmtList.second.end());
+	}
+
+	cache.putAllAffectsStar(make_pair(prevList, nextList), affectsStarRelMap, affectsStarMap, affectsStarMapReverse);
+
+	return make_pair(prevList, nextList);
+}
+
+pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<int, unordered_set<int>> &affectsStarRelMap,
+	unordered_map<int, list<int>> &affectsStarMap, unordered_map<int, list<int>> &affectsStarMapReverse) {
+	int curr = stmt;
+	list<int> prevList;
+	list<int> nextList;
+	unordered_map<int, unordered_set<int>> latestMod; //varIdx to stmt
+	stack<pair<int, unordered_map<int, unordered_set<int>>>> whileMapStack;
+	stack<IfStmt> ifMapStack;
+	while (curr != 0) {
+		if (isAssignment(curr)) {
+			list<int> usedVarList = getUsesFromStmt(curr);
+			int modifiedVar = getModifiesFromStmt(curr).front();
+			for (int usedVar : usedVarList) {
+				if (latestMod.find(usedVar) != latestMod.end()) {
+					unordered_set<int> lastModStmtSet = latestMod[usedVar];
+					for (auto &lastModStmt : lastModStmtSet) {
+						if (!isCall(lastModStmt)) {
+							if ((affectsStarRelMap.find(lastModStmt) != affectsStarRelMap.end() &&
+								affectsStarRelMap[lastModStmt].find(curr) == affectsStarRelMap[lastModStmt].end()) ||
+								affectsStarRelMap.find(lastModStmt) == affectsStarRelMap.end()) {
+								prevList.push_back(lastModStmt);
+								nextList.push_back(curr);
+								affectsStarMap[lastModStmt].push_back(curr);
+								affectsStarMapReverse[curr].push_back(lastModStmt);
+								affectsStarRelMap[lastModStmt].insert(curr);
+								latestMod[modifiedVar].insert(lastModStmt);
+							}
+						}
+					}
+				}
+			}
+
+
+			if (find(usedVarList.begin(), usedVarList.end(), modifiedVar) != usedVarList.end()) {
+				latestMod[modifiedVar].clear();
+			}
+
+			latestMod[modifiedVar].insert(curr);
+
+			list<int> nextStmtList = getExecutedAfter(curr, STMT);
+
+			if (getParent(curr, IF).size() != 0) { //is in an if
+				IfStmt ifStmt = ifMapStack.top();
+				if (ifStmt.isEndIf(curr)) {
+					curr = processBranchIf(ifMapStack, latestMod);
+				}
+
+				else if (ifStmt.isEndElse(curr)) {
+					if (nextStmtList.size() == 0) { // no next after else i.e. pt to dummy
+						curr = processBranchElseWithNoNext(ifMapStack, latestMod);
+					}
+
+					else { // got next
+						curr = processBranchElseWithNext(ifMapStack, latestMod, nextStmtList.front());
+					}
+				}
+
+				else {
+					if (nextStmtList.size() == 0) {
+						curr = 0;
+					}
+
+					else {
+						curr = nextStmtList.front();
+					}
+				}
+			}
+
+			else {
+				if (nextStmtList.size() == 0) {
+					curr = 0;
+				}
+
+				else {
+					curr = nextStmtList.front();
+				}
+			}
+		}
+
+		else if (isCall(curr)) {
+			list<int> modifiedVarList = getModifiesFromStmt(curr);
+			for (int modifiedVar : modifiedVarList) {
+				latestMod.erase(modifiedVar);
+			}
+
+			list<int> nextStmtList = getExecutedAfter(curr, STMT);
+
+			if (getParent(curr, IF).size() != 0) { //is in an if
+				IfStmt ifStmt = ifMapStack.top();
+				if (ifStmt.isEndIf(curr)) {
+					curr = processBranchIf(ifMapStack, latestMod);
+				}
+
+				else if (ifStmt.isEndElse(curr)) {
+					if (nextStmtList.size() == 0) { // no next after else i.e. pt to dummy
+						curr = processBranchElseWithNoNext(ifMapStack, latestMod);
+					}
+
+					else { // got next
+						curr = processBranchElseWithNext(ifMapStack, latestMod, nextStmtList.front());
+					}
+				}
+
+				else {
+					if (nextStmtList.size() == 0) {
+						curr = 0;
+					}
+
+					else {
+						curr = nextStmtList.front();
+					}
+				}
+			}
+
+			else {
+				if (nextStmtList.size() == 0) {
+					curr = 0;
+				}
+
+				else {
+					curr = nextStmtList.front();
+				}
+			}
+		}
+
+		else if (isWhile(curr)) {
+			list<int> nextStmtList = getExecutedAfter(curr, STMT);
+			int insideLoop = nextStmtList.front();
+			int afterLoop = 0;
+
+			if (nextStmtList.size() == 2) {
+				afterLoop = nextStmtList.back();
+			}
+
+			if (whileMapStack.empty() || whileMapStack.top().first != curr) {
+				whileMapStack.push(make_pair(curr, latestMod));
+				curr = insideLoop;
+			}
+
+			else {
+				pair<int, unordered_map<int, unordered_set<int>>> oldWhileMap = whileMapStack.top();
+				int currWhile = oldWhileMap.first;
+				unordered_map<int, unordered_set<int>> oldMod = oldWhileMap.second;
+				if (oldMod == latestMod) {
+					whileMapStack.pop();
+					// pop and merge
+					while (!whileMapStack.empty() && whileMapStack.top().first == currWhile) {
+						pair<int, unordered_map<int, unordered_set<int>>> prevWhile = whileMapStack.top();
+						whileMapStack.pop();
+						latestMod = joinMap(prevWhile.second, latestMod);
+					}
+
+					if (ifMapStack.empty()) {
+						curr = afterLoop;
+					}
+
+					else {
+						if (ifMapStack.top().isEndIf(curr)) {
+							curr = processBranchIf(ifMapStack, latestMod);
+						}
+
+						else {
+							if (ifMapStack.top().isEndElse(curr)) {
+								list<int> nextStmtList = getExecutedAfter(curr, STMT);
+								if (nextStmtList.size() != 0) { //has next
+									curr = processBranchElseWithNext(ifMapStack, latestMod, nextStmtList.front());
+								}
+
+								else {
+									curr = processBranchElseWithNoNext(ifMapStack, latestMod);
+								}
+							}
+
+							else {
+								curr = afterLoop;
+							}
+						}
+					}
+
+				}
+
+				else {
+					whileMapStack.push(make_pair(curr, latestMod));
+					curr = insideLoop;
+				}
+			}
+
+
+		}
+
+		else { // if statement
+			list<int> next = getExecutedAfter(curr, STMT);
+			next.sort();
+			int nextIf = next.front();
+			int nextElse = next.back();
+			list<int> followsIf = getAfterStar(nextIf, STMT);
+			followsIf.sort();
+			int endIf = followsIf.back();
+			if (endIf == 0) {
+				endIf = nextIf;
+			}
+			list<int> children = getChildren(curr, STMT);
+			children.sort();
+			int endElse = children.back();
+			list<int> afterIfList = getAfter(curr, STMT);
+			int afterIf;
+			if (afterIfList.size() == 0) {
+				afterIf = 0;
+			}
+
+			else {
+				afterIfList.sort();
+				afterIf = afterIfList.front();
+			}
+
+			bool visitedElse = false;
+			IfStmt currIfStmt = IfStmt(curr, nextIf, endIf, nextElse, endElse, visitedElse, afterIf, latestMod, latestMod);
+			ifMapStack.push(currIfStmt);
+			curr = nextIf;
+		}
+
+	}
+
+
+
+	return make_pair(prevList, nextList);
 }
