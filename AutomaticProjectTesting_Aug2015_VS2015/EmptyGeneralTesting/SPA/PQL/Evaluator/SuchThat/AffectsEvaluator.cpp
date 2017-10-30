@@ -106,9 +106,6 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == PROG_LINE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == PROG_LINE))
     {
 
-        // TODO: Wait for PKB to be ready
-        return false;
-
         // Checks if the two synonyms are already present in clauseResult
         bool argOneExists = clauseResult->synonymPresent(argOne);
         bool argTwoExists = clauseResult->synonymPresent(argTwo);
@@ -116,7 +113,7 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
         if (argOne == argTwo)
         {
             // TODO: add new api for case when both synonym are same
-            list<int> pkbResult;// = pkbInstance->();
+            list<int> pkbResult = pkbInstance->getAllAffectsSameSyn();
             if (pkbResult.empty())
             {
                 return false;

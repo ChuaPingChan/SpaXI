@@ -534,9 +534,9 @@ echo Finish running AutoTester for Query3.txt.
 ::AutoTester Test13_Seven\4_Intense\Source4.txt Test13_Seven\4_Intense\Query4.txt TestResult\out13_Intense_Query4.xml > TestResult\cmd\cmd13_Intense_Query4.txt
 ::echo Finish running AutoTester for Query4.txt.
 echo -- TIMEOUT! -- Query4.txt has been commented away in the bat file -- ! --
-echo Running AutoTester for Query5.txt...
-AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
-echo Finish running AutoTester for Query5.txt.
+rem echo Running AutoTester for Query5.txt...
+rem AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
+rem echo Finish running AutoTester for Query5.txt.
 echo Running AutoTester for Query6a.txt...
 AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6a.txt TestResult\out13_Intense_Query6a.xml > TestResult\cmd\cmd13_Intense_Query6a.txt
 echo Finish running AutoTester for Query6a.txt.
