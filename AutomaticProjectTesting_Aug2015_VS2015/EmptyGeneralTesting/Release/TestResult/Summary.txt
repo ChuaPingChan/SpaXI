@@ -1,5 +1,5 @@
-Overall Test Ran   : 7416
-Overall Test Passed: 7261
+Overall Test Ran   : 7444
+Overall Test Passed: 7289
 Overall Test Failed: 155
 
 
@@ -41,6 +41,11 @@ Failed  : 0
 TestResult\out10_QueryParentStar.xml: 
 Test Ran: 102
 Passed  : 102
+Failed  : 0
+
+TestResult\out10_QueryPattern.xml: 
+Test Ran: 28
+Passed  : 28
 Failed  : 0
 
 TestResult\out11_QueryFollows.xml: 
