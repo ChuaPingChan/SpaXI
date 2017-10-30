@@ -83,7 +83,14 @@ list<string> ResultFormatter::handleSelectSynonym(ClauseResult cr, SelectClause 
         //If result is of type string, convert mapping of ints to strings from PKB 
         if (argType == PROCEDURE || argType == VARIABLE || selectedClause.isAttributeProcName == true)
         {
+            cout << "Reaches here" << endl;
+            list<int> resulttemp = cr.getSynonymResults(synonymToGetResultFor);
+            for (int i : resulttemp)
+            {
+                cout << "Clause result int result is"<<i << endl;
+            }
             result = pkbInstance->convertIdxToString(cr.getSynonymResults(synonymToGetResultFor), argType);
+            cout << "PKB Result is" << result.front() << endl;
         }
 
         //If result is of type int, get direct results from ClauseResult
@@ -118,7 +125,7 @@ list<string> ResultFormatter::handleSelectTuple(ClauseResult cr, SelectClause se
             Entity argType = selectedClause.getTupleArgTypeAt(index); //get Entity type at current index
             vector<bool> flagsForCall = selectedClause.isAttributeProcNameForTuple; //get true/false flags for Call.procName to get mapping from PKB
 
-            if (argType == VARIABLE || argType == PROCEDURE || (argType == CALL && flagsForCall.at(index)))
+            if (argType == VARIABLE || argType == PROCEDURE)// || (argType == CALL && flagsForCall.at(index)))
             {
                 tempListOfStrings.push_back(pkbInstance->convertIdxToString(curElement, argType)); //get mapping of int to string
             }
