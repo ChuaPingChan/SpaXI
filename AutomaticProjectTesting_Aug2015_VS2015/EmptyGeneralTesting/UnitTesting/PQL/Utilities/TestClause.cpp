@@ -139,9 +139,6 @@ namespace UnitTesting
             SuchThatClausePtr uses_a1_v1_ptr(new SuchThatClause(Relationship::USES,
                 Entity::ASSIGN, "a1",
                 Entity::VARIABLE, "v1"));
-            //SuchThatClause* uses_a1_v1 = new SuchThatClause(Relationship::USES,
-            //    Entity::ASSIGN, "a1",
-            //    Entity::VARIABLE, "v1");
 
             // Put the sample clause in a queue of the parent type, then take it out and cast back
             queue<ClausePtr> clauseQueue;

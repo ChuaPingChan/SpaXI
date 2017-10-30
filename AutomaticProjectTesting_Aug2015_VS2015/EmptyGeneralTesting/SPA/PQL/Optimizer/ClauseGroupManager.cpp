@@ -5,9 +5,9 @@ ClauseGroupManager::ClauseGroupManager()
 {
 }
 
-queue<Clause> ClauseGroupManager::getNextClauseGroup()
+queue<ClausePtr> ClauseGroupManager::getNextClauseGroup()
 {
-    queue<Clause> nextClauseGroup = _clauseGroupQueue.front();
+    queue<ClausePtr> nextClauseGroup = _clauseGroupQueue.front();
     _clauseGroupQueue.pop();
     return nextClauseGroup;
 }
@@ -26,7 +26,7 @@ void ClauseGroupManager::setSelectedSynonyms(list<string> synonyms)
         _selectedSynonyms.insert(synName);
 }
 
-void ClauseGroupManager::setClauseGroupQueue(queue<queue<Clause>>& clauseGroupQueue)
+void ClauseGroupManager::setClauseGroupQueue(queue<queue<ClausePtr>>& clauseGroupQueue)
 {
     _clauseGroupQueue = clauseGroupQueue;
 }
