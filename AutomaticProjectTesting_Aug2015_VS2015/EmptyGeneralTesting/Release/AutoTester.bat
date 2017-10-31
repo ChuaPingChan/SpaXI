@@ -357,6 +357,9 @@ echo Running AutoTester for test 9...
 echo Running AutoTester for QueryAffects.txt...
 AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryAffects.txt TestResult\out9_QueryAffects.xml > TestResult\cmd\cmd9_QueryAffects.txt
 echo Finish running AutoTester for QueryAffects.txt.
+echo Running AutoTester for QueryAffectsStar.txt...
+AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryAffectsStar.txt TestResult\out9_QueryAffectsStar.xml > TestResult\cmd\cmd9_QueryAffectsStar.txt
+echo Finish running AutoTester for QueryAffectsStar.txt.
 echo Finish running AutoTester for test 9.
 call :getPauseAction
 goto :eof
