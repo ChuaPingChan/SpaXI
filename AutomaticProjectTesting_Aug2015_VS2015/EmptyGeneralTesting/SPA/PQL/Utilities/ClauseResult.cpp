@@ -185,13 +185,14 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
 
 bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered_set<string> selectedSyns)
 {
-    // Get all selected synonyms in clause result
+    // Get all selected synonyms in the other clause result
     list<string> synsInClauseResult = clauseResultToMerge.getAllSynonyms();
     list<string> synsToMerge;
     for (string synName : synsInClauseResult) {
         if (selectedSyns.find(synName) != selectedSyns.end())
             synsToMerge.push_back(synName);
     }
+    // Get the results of only the synonyms to merge and remove duplicates
     list<list<int>> resultsToMerge = clauseResultToMerge.getSynonymResults(synsToMerge);
     resultsToMerge.unique();
 

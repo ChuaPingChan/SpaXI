@@ -27,6 +27,9 @@ public:
     // API for result formatter
     ClauseResult getMergedClauseResult();
 
+    // Redundant Utility API
+    unordered_set<string> getSelectedSynonyms();
+
 protected:
     unordered_set<string> _selectedSynonyms;
     queue<queue<ClausePtr>> _clauseGroupQueue;

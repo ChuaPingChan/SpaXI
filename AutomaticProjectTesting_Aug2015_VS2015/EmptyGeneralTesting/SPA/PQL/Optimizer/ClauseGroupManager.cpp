@@ -40,3 +40,8 @@ ClauseResult ClauseGroupManager::getMergedClauseResult()
 {
     return _mergedClauseResult;
 }
+
+unordered_set<string> ClauseGroupManager::getSelectedSynonyms()
+{
+    return _selectedSynonyms;
+}
