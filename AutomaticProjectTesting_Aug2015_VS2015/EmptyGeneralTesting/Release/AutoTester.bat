@@ -66,6 +66,9 @@ if '%option%'=='13' (
 if '%option%'=='14' (
 	goto :runTest14
 )
+if '%option%'=='15' (
+	goto :runTest15
+)
 cls
 goto :main
 echo ===============================================================================
@@ -178,6 +181,7 @@ call :runTest11
 call :runTest12
 call :runTest13
 call :runTest14
+call :runTest15
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -353,6 +357,9 @@ echo Running AutoTester for test 9...
 echo Running AutoTester for QueryAffects.txt...
 AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryAffects.txt TestResult\out9_QueryAffects.xml > TestResult\cmd\cmd9_QueryAffects.txt
 echo Finish running AutoTester for QueryAffects.txt.
+echo Running AutoTester for QueryAffectsStar.txt...
+AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryAffectsStar.txt TestResult\out9_QueryAffectsStar.xml > TestResult\cmd\cmd9_QueryAffectsStar.txt
+echo Finish running AutoTester for QueryAffectsStar.txt.
 echo Finish running AutoTester for test 9.
 call :getPauseAction
 goto :eof
@@ -606,5 +613,16 @@ echo Running AutoTester for Query6Uses_UsingSource6.txt...
 AutoTester Test14_Frozen\Source6.txt Test14_Frozen\Query6Uses_UsingSource6.txt TestResult\out14_Query6Uses_UsingSource6.xml > TestResult\cmd\cmd14_Query6Uses_UsingSource6.txt
 echo Finish running AutoTester for Query6Uses_UsingSource6.txt.
 echo Finish running AutoTester for test 14.
+call :getPauseAction
+goto :eof
+
+:runTest15
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 15...
+echo Running AutoTester for Query_Test1 ...
+AutoTester Testing15_Verb\Acceptance\Source_prog_1.txt Testing15_Verb\Acceptance\Query_Test1.txt TestResult\out15_Acceptance_Query_Test1.xml > TestResult\cmd\cmd15_Acceptance_Query_Test1.txt
+echo Finish running AutoTester for Query_Test1.
+echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof

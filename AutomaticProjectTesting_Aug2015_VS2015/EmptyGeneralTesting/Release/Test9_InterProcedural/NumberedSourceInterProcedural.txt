@@ -182,9 +182,9 @@ procedure WeeSun {
 }
 
 procedure Wynne {
-97.	happy = love * kindness + 5;
-98.	stress = happy - 100 * 20 + lecture * skip;
-99.	tutorial = difficulty * easy + stress;
+97.		happy = love * kindness + 5;
+98.		stress = happy - 100 * 20 + lecture * skip;
+99.		tutorial = difficulty * easy + stress;
 100.	stress = stress * love;
 101.	stress = 100 - (20 * 5 + (kindness - happy)) * stress * skip * 5 - 20 + 100;
 102.	kindness = tutorial + cancel;
