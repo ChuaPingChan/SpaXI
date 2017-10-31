@@ -38,16 +38,16 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 {
     _clauseGroupsManager.setSelectedSynonyms(queryTree.getSelectClause().getSynonyms());
 
-    list<Clause> allClauses = extractClausesFromQueryTree(queryTree);
+    list<ClausePtr> allClauses = extractClausesFromQueryTree(queryTree);
 
-    for (Clause clause : allClauses) {
+    for (ClausePtr clause : allClauses) {
 
         // TODO: Optimisation idea - ignore duplicate clauses, or remove them earlier
         _clauseVector.push_back(clause);
         int clauseIdx = _clauseVector.size() - 1;   // Clause just added should be the last element
 
         // Assign index to each new synonyms
-        list<string> synonyms = clause.getSynonyms();
+        list<string> synonyms = clause->getSynonyms();
         for (string synonym : synonyms) {
             if (_synToIdxMap.find(synonym) == _synToIdxMap.end()) {
                 _synVector.push_back(synonym);
@@ -64,24 +64,30 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 /*
     Extracts all non-"select" clauses in a given query.
 */
-list<Clause> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
+list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 {
-    list<Clause> allClauses;
+    list<ClausePtr> allClauses;
 
     vector<SuchThatClause> suchThatClauses = queryTree.getSuchThatClauses();
     vector<PatternClause> patternClauses = queryTree.getPatternClauses();
     vector<WithClause> withClauses = queryTree.getWithClauses();
 
     for (SuchThatClause suchThatClause : suchThatClauses) {
-        allClauses.push_back(suchThatClause);
+        SuchThatClausePtr stPtr;
+        stPtr = suchThatClause.getSharedPtr();
+        allClauses.push_back(stPtr);
     }
 
     for (PatternClause patternClause : patternClauses) {
-        allClauses.push_back(patternClause);
+        PatternClausePtr pcPtr;
+        pcPtr = patternClause.getSharedPtr();
+        allClauses.push_back(pcPtr);
     }
 
     for (WithClause withClause : withClauses) {
-        allClauses.push_back(withClause);
+        WithClausePtr wcPtr;
+        wcPtr = withClause.getSharedPtr();
+        allClauses.push_back(wcPtr);
     }
 
     return allClauses;
@@ -98,11 +104,11 @@ void Optimizer::formClauseGroups()
     // TODO before submission: Consider refactoring into helper methods to achieve SLA
     SynonymUFDS synUfds;
 
-    vector<Clause> clausesWithoutSynonym;
+    vector<ClausePtr> clausesWithoutSynonym;
 
     // Group synonyms
-    for (Clause clause : _clauseVector) {
-        list<string> synonyms = clause.getSynonyms();
+    for (ClausePtr clause : _clauseVector) {
+        list<string> synonyms = clause->getSynonyms();
 
         if (synonyms.size() == 0) {
             clausesWithoutSynonym.push_back(clause);
@@ -133,7 +139,7 @@ void Optimizer::formClauseGroups()
     for (list<int> synGroup : synGroups) {
 
         unordered_set<int> clauseGroupUnique;
-        vector<Clause> clauseGroup;
+        vector<ClausePtr> clauseGroup;
 
         for (int synIdx : synGroup) {
             list<int> relevantClausesIdxs = _synIdxToClauseIdxsMap[synIdx];
@@ -142,7 +148,7 @@ void Optimizer::formClauseGroups()
             }
             // Get actual clause from clause index and add to clause group
             for (int relevantClauseIdx : clauseGroupUnique) {
-                Clause clauseWrapper = _clauseVector[relevantClauseIdx];
+                ClausePtr clauseWrapper = _clauseVector[relevantClauseIdx];
                 clauseGroup.push_back(clauseWrapper);
             }
         }
@@ -164,13 +170,13 @@ void Optimizer::sortClauseGroups()
     Enforces FIFO policy of evaluating sorted clause groups and clauses in
     groups using queues.
 */
-queue<queue<Clause>> Optimizer::createClauseGroupQueue()
+queue<queue<ClausePtr>> Optimizer::createClauseGroupQueue()
 {
-    queue<queue<Clause>> clauseGroupsQueue;
+    queue<queue<ClausePtr>> clauseGroupsQueue;
 
-    for (vector<Clause> clauseGroup : _clauseGroups) {
-        queue<Clause> clauseQueue;
-        for (Clause clause : clauseGroup) {
+    for (vector<ClausePtr> clauseGroup : _clauseGroups) {
+        queue<ClausePtr> clauseQueue;
+        for (ClausePtr clause : clauseGroup) {
             clauseQueue.push(clause);
         }
         clauseGroupsQueue.push(clauseQueue);

@@ -23,6 +23,12 @@ WithClause::~WithClause()
 {
 }
 
+shared_ptr<WithClause> WithClause::getSharedPtr()
+{
+    return WithClausePtr(new WithClause(getWithType(), getLhsEntity(),
+        getLhsValue(), getRhsEntity(), getRhsValue()));
+}
+
 WithType WithClause::getWithType()
 {
     return this->withType;

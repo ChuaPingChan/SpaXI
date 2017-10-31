@@ -167,6 +167,7 @@
     <ClCompile Include="Exception\TestExceptionSynonymNotFound.cpp" />
     <ClCompile Include="Parser\TestParsingSource.cpp" />
     <ClCompile Include="PQL\Optimizer\TestClauseGroupManager.cpp" />
+    <ClCompile Include="PQL\Optimizer\TestUFDS.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexDeclaration.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexFollows.cpp" />
@@ -181,7 +182,6 @@
     <ClCompile Include="PQL\Utilities\ClauseResultChildForTest.cpp" />
     <ClCompile Include="PQL\Utilities\ClauseResultTest.cpp" />
     <ClCompile Include="PQL\Utilities\TestClause.cpp" />
-    <ClCompile Include="PQL\Utilities\TestClauseWrapper.cpp" />
     <ClCompile Include="TestEntity.cpp" />
     <ClCompile Include="PQL\Utilities\TestFormatter.cpp" />
     <ClCompile Include="stdafx.cpp">

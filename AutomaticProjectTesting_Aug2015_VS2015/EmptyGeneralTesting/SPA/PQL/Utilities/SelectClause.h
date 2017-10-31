@@ -19,6 +19,8 @@ public:
     SelectClause(SelectionType selectionType, vector<Entity> tupleArgTypes, vector<string> tupleArgs);
     ~SelectClause();
 
+    shared_ptr<SelectClause> getSharedPtr();
+
     /* Getters */
     SelectionType getSelectionType();
 

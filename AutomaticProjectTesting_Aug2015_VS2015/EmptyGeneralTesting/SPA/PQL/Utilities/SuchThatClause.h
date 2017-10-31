@@ -19,6 +19,8 @@ public:
     Entity getArgTwoType();
     string getArgOne();
     string getArgTwo();
+    
+    shared_ptr<SuchThatClause> getSharedPtr();
 
 private:
     Relationship _rel;

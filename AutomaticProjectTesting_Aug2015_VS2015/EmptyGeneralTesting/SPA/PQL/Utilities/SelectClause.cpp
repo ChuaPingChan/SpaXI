@@ -43,6 +43,19 @@ SelectClause::~SelectClause()
 {
 }
 
+SelectClausePtr SelectClause::getSharedPtr()
+{
+    SelectionType selectionType = getSelectionType();
+
+    if (selectionType == SelectionType::SELECT_BOOLEAN) {
+        return SelectClausePtr(new SelectClause(selectionType));
+    } else if (selectionType == SelectionType::SELECT_SINGLE) {
+        return SelectClausePtr(new SelectClause(selectionType, getSingleArgType(), getSingleArg()));
+    } else {
+        return SelectClausePtr(new SelectClause(selectionType, getTupleArgTypes(), getTupleArgs()));
+    }
+}
+
 SelectionType SelectClause::getSelectionType()
 {
     return this->selectionType;
