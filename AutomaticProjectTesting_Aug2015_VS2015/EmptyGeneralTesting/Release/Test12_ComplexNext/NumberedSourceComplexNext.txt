@@ -16,61 +16,61 @@ procedure One {
 14.				r = l + k;
 15.				call Two;
 			}
-16.			else {
-17.				o = o + q;
-18.				while e {
-19.					f = h + y;
-20.					call Two;
+			else {
+16.				o = o + q;
+17.				while e {
+18.					f = h + y;
+19.					call Two;
 				}
 			}
 		}
 		else {
-21.			call Two;
-22.			if m then {
-23.				call Two;
-24.				i = 71;
+20.			call Two;
+21.			if m then {
+22.				call Two;
+23.				i = 71;
 			}
 			else {
-25.				j = w;
+24.				j = w;
 			}
-26.			t = x + u;
+25.			t = x + u;
 		}
 	}
 	else {
-27.		if n then {
-28.			while k {
-29.				n = o;
+26.		if n then {
+27.			while k {
+28.				n = o;
 			}
 		}
 		else {
-30.			o = p;
-31.			if v then{
-32.				v = c;
+29.			o = p;
+30.			if v then{
+31.				v = c;
 			}
 			else {
-33.				s = w + x + u + z;
+32.				s = w + x + u + z;
 			}
 		}
 	}
-34.	call Two;
-35.	while g {
-36.		call Two;
-37.		z = i;
+33.	call Two;
+34.	while g {
+35.		call Two;
+36.		z = i;
 	}
-38.	while i {
-39.		z = k + m;
+37.	while i {
+38.		z = k + m;
 	}
-40.	call Two;
-41.	while k {
-42.		if b then {
-43.			b = c;
+39.	call Two;
+40.	while k {
+41.		if b then {
+42.			b = c;
 		}
 		else {
-44.			c = d;
+43.			c = d;
 		}
 	}
 }
 
 procedure Two {
-45.	test = only;
+44.	test = only;
 }
