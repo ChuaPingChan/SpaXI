@@ -144,3 +144,9 @@ ClauseResult ResultFactory::makeClauseResult()
 {
     return _clauseResult;
 }
+
+bool ResultFactory::resetClauseResult()
+{
+    _clauseResult = ClauseResult();
+    return true;
+}

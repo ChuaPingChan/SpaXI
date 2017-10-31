@@ -69,9 +69,14 @@ list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 {
     list<ClausePtr> allClauses;
 
+    SelectClause selectClause = queryTree.getSelectClause();
     vector<SuchThatClause> suchThatClauses = queryTree.getSuchThatClauses();
     vector<PatternClause> patternClauses = queryTree.getPatternClauses();
     vector<WithClause> withClauses = queryTree.getWithClauses();
+
+    SelectClausePtr scPtr;
+    scPtr = selectClause.getSharedPtr();
+    allClauses.push_back(scPtr);
 
     for (SuchThatClause suchThatClause : suchThatClauses) {
         SuchThatClausePtr stPtr;
@@ -136,7 +141,10 @@ void Optimizer::formClauseGroups()
     list<list<int>> synGroups = synUfds.getSynonymGroups();
 
     // Get clause groups from synonym groups
-    _clauseGroups.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
+    if (!clausesWithoutSynonym.empty()) {
+        _clauseGroups.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
+    }
+
     for (list<int> synGroup : synGroups) {
 
         unordered_set<int> clauseGroupUnique;
