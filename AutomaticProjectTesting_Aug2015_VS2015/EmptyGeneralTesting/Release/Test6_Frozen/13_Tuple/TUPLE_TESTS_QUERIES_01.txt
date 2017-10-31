@@ -238,3 +238,13 @@ constant c;if i;
 Select <c.value,i.stmt#> with c.value=i.stmt#
 3 3
 5000
+49 - tuple, synonym.attrName,stmt#
+if i;call c;
+Select <i.stmt#,c.procName> such that Follows(i,c)
+3 Second
+5000
+50 - tuple, synonym.attrName,stmt#
+if i;call c;
+Select c.procName such that Follows(i,c)
+Second
+5000

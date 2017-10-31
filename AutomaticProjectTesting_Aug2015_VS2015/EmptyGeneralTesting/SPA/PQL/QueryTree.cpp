@@ -10,7 +10,7 @@ QueryTree::~QueryTree()
 {
 }
 
-void QueryTree::insertSynonym(int type, string synonym)
+void QueryTree::insertSynonym(Entity type, string synonym)
 {
     if (type == STMT) 
     {

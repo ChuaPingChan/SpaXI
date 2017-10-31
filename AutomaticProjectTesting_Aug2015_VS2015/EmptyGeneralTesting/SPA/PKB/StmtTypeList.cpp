@@ -47,6 +47,14 @@ list<int> StmtTypeList::getStmtFromCalleeProcName(string calleeProcName) {
 	return procNameToCallMap[calleeProcName];
 }
 
+string StmtTypeList::getCalleeProcNameFromStmt(int stmt) {
+	if (callToProcNameMap.find(stmt) == callToProcNameMap.end()) {
+		return "";
+	}
+
+	return callToProcNameMap[stmt];
+}
+
 int StmtTypeList::getProcIdxFromCall(int stmt) {
 	if (callToProcIdxMap.find(stmt) == callToProcIdxMap.end()) {
 		return -1;
