@@ -27,7 +27,7 @@ bool SynonymUFDS::addSynonym(int synIdx)
 
 int SynonymUFDS::findSet(int synIdx)
 {
-    if (p[synIdx] = synIdx)
+    if (p[synIdx] == synIdx)
         return synIdx;
     int ret = findSet(p[synIdx]);
     p[synIdx] = ret;

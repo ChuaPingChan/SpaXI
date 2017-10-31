@@ -16,19 +16,20 @@ public:
     ClauseGroupManager();
 
     // API for evaluator
-    queue<Clause> getNextClauseGroup();
+    bool hasNextClauseGroup();
+    queue<ClausePtr> getNextClauseGroup();
     void mergeClauseResult(ClauseResult clauseResult);     // TODO: Rename this to ClauseGroupResult nearing submission
 
     // API for optimizer
     void setSelectedSynonyms(list<string> synonyms);
-    void setClauseGroupQueue(queue<queue<Clause>> &clauseGroupQueue);
+    void setClauseGroupQueue(queue<queue<ClausePtr>> &clauseGroupQueue);
 
     // API for result formatter
     ClauseResult getMergedClauseResult();
 
 protected:
     unordered_set<string> _selectedSynonyms;
-    queue<queue<Clause>> _clauseGroupQueue;
+    queue<queue<ClausePtr>> _clauseGroupQueue;
     ClauseResult _mergedClauseResult;
 
 };

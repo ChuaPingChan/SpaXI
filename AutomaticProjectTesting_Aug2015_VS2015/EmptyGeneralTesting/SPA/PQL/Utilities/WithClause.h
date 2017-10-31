@@ -11,6 +11,8 @@ public:
     WithClause(WithType withType, Entity lhsEntity, string lhsValue, Entity rhsEntity, string rhsValue);
     ~WithClause();
 
+    shared_ptr<WithClause> getSharedPtr();
+
     WithType getWithType();
     Entity getLhsEntity();
     Entity getRhsEntity();

@@ -15,6 +15,8 @@ public:
     PatternClause(PatternType patternType, string patternSyn, Entity argOneType, string argOne, Entity argTwoType, string argTwo, Entity argThreeType, string argThree);    //If
     ~PatternClause();
 
+    shared_ptr<PatternClause> getSharedPtr();
+
     /* Getters */
     PatternType getPatternType();
     Entity getArgOneType();
