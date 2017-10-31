@@ -1,5 +1,5 @@
-Overall Test Ran   : 7546
-Overall Test Passed: 7509
+Overall Test Ran   : 7608
+Overall Test Passed: 7571
 Overall Test Failed: 37
 
 
@@ -154,8 +154,8 @@ Passed  : 0
 Failed  : 0
 
 TestResult\out13_Three_QueryOptimization_UsingSource3.xml: 
-Test Ran: 5
-Passed  : 5
+Test Ran: 3
+Passed  : 3
 Failed  : 0
 
 TestResult\out13_Three_Query_Affects_AffectsStar_UsingSource4.xml: 
@@ -319,8 +319,8 @@ Passed  : 20
 Failed  : 0
 
 TestResult\out14_Query6MultipleClause_UsingSource6.xml: 
-Test Ran: 29
-Passed  : 29
+Test Ran: 28
+Passed  : 28
 Failed  : 0
 
 TestResult\out14_Query6Parent_UsingSource6.xml: 
@@ -496,5 +496,10 @@ Failed  : 0
 TestResult\out8.xml: 
 Test Ran: 25
 Passed  : 25
+Failed  : 0
+
+TestResult\out9_QueryAffects.xml: 
+Test Ran: 65
+Passed  : 65
 Failed  : 0
 
