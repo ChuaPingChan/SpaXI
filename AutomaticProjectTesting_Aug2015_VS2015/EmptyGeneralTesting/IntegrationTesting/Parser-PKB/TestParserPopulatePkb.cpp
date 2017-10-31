@@ -473,6 +473,33 @@ namespace UnitTesting
 			Assert::IsTrue(deleteDummySimpleSourceFile());
 		}
 
+		TEST_METHOD(TestAffectsStarComputation3)
+		{
+			// Set up
+			list<int> actualResults;
+			list<int> expectedResults;
+			Parser parser(dummyPkbMainPtr);
+			Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource3());
+			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+			// Test for affects
+			Assert::IsFalse(dummyPkbMain.isAffectsStar(1, 16));
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(11, 19));
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(16, 16));
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(19, 19));
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(3, 19));
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(7, 19));
+			Assert::IsFalse(dummyPkbMain.isAffectsStar(9, 19));
+			Assert::IsFalse(dummyPkbMain.isAffectsStar(1, 16));
+			Assert::IsFalse(dummyPkbMain.isAffectsStar(6, 16));
+			Assert::IsFalse(dummyPkbMain.isAffectsStar(9, 16));
+			Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 13));
+
+			// Clean up
+			Assert::IsTrue(deleteDummySimpleSourceFile());
+		}
+
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
@@ -1339,6 +1366,16 @@ namespace UnitTesting
 
 		bool createDummySimpleSourceFile_affectsStarSource2() {
 			std::string content = "procedure WhileMultiple { sarada = sakura + sasuke; shikamaru = shikamaru + 100 ; while naruto { naruto = 2 + kurama ; sakura = love - 5; while sasuke { sakura = love + 100 ; sakura = naruto - 100 ; attack = 10 + 100; while kakashi { shadowClone = naruto + kakashi; while sageMode { while inBattle { jiraya = attack + 100 * knowledge - 5;} naruto = attack +100; } while inBattle { kakashi = naruto + jiraya; attack = attack * 5; } } sarada = love * 100; } inBattle= sageMode * love* knowledge; } knowledge =sleep + inBattle + love + naruto; } procedure IfMultiple { boruto = naruto + hinata; if inBattle then { boruto = attack + 5; boruto = shadowClone + 5; if naruto then { boruto = love - 20 ; boruto = boruto*shadowClone - 20 ; hinata = love + 100; if hinata then { himawari = love + 100; if inBattle then { hinata= attack +100* naruto * love+ 100 - boruto ; himawari=hinata*naruto+love; } else { knowledge =naruto + hinata * himawari - boruto ; } } else { knowledge = love * 0; } if sakura then { knowledge = hinata * love -sakura * love; } else { shadowClone = shadowClone+ 3; } naruto = sleep; } else { boruto = knowledge + 2; love = sarada + boruto; } } else { kakashi = inBattle; if inBattle then { kakashi = sageMode - 5 + boruto - 5; shadowClone = 100 * shadowClone ; } else { kakashi = sleep + 5; shadowClone = shadowClone - 10; knowledge = sleep + 10; } kakashi = shadowClone * 0; if love then { kakashi = love + 5 ; love = knowledge + shadowClone + sageMode; } else { naruto = inBattle ; boruto = inBattle; } } } procedure WhileIf { inBattle = naruto + sasuke ; while inBattle { if naruto then { naruto = shadowClone* sageMode *attack+ 100; } else { sasuke = knowledge* 100 - naruto; } } if sleep then { dream =naruto + hinata + boruto + himawari; } else { boruto = hinata + himawari - naruto; } } procedure IfWhile { if dream then { sleep = 100 + 5; while sleep { inBattle = 100 - 5 -sleep; knowledge = 5 - 20; } } else { sleep = knowledge + dream; } while sleep { sleep = sleep + 2; } dream = sleep * 5000; } ";
+			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+			std::ofstream outfile(newFilePath);
+			std::string inputString(content);
+			outfile << inputString;
+			outfile.close();
+			return true;
+		}
+
+		bool createDummySimpleSourceFile_affectsStarSource3() {
+			std::string content = "procedure pokemon { charmander = 5; squirtle = 5; bulbasaur = 5; firstStageEvolution = 11; while firstStageEvolution { charmander = charmander + 1; bulbasaur = bulbasaur + 1; squirtle = squirtle + 1; } charmeleon = charmander; wartortle = squirtle; ivysaur = bulbasaur; battle1 = charmeleon - wartortle; battle2 = ivysaur - charmeleon; battle3 = squirtle - ivysaur; while battle1 { charmeleon = wartortle + ivysaur; while battle2 { while battle3 { ivysaur = charmeleon + wartortle; } if wartortle then { wartortle = squirtle + 3; } else { wartortle = wartortle - 1; } } lastPokemon = 3; } }";
 			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
 			std::ofstream outfile(newFilePath);
 			std::string inputString(content);

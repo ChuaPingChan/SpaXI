@@ -1,6 +1,6 @@
-Overall Test Ran   : 7608
-Overall Test Passed: 7571
-Overall Test Failed: 37
+Overall Test Ran   : 7611
+Overall Test Passed: 7598
+Overall Test Failed: 13
 
 
 TestResult\out1.xml: 
@@ -14,9 +14,9 @@ Passed  : 26
 Failed  : 0
 
 TestResult\out10_QueryAffectsStar.xml: 
-Test Ran: 11	[BUG]
-Passed  : 10
-Failed  : 1
+Test Ran: 11
+Passed  : 11
+Failed  : 0
 
 TestResult\out10_QueryModifies.xml: 
 Test Ran: 47
@@ -104,9 +104,9 @@ Passed  : 526
 Failed  : 0
 
 TestResult\out13_Intense_Query6b.xml: 
-Test Ran: 185	[BUG]
-Passed  : 179
-Failed  : 6
+Test Ran: 185
+Passed  : 185
+Failed  : 0
 
 TestResult\out13_Intense_Query7a.xml: 
 Test Ran: 309
@@ -115,13 +115,13 @@ Failed  : 0
 
 TestResult\out13_Intense_Query7b.xml: 
 Test Ran: 521	[BUG]
-Passed  : 514
-Failed  : 7
+Passed  : 519
+Failed  : 2
 
 TestResult\out13_Intense_Query8.xml: 
-Test Ran: 163	[BUG]
-Passed  : 158
-Failed  : 5
+Test Ran: 163
+Passed  : 163
+Failed  : 0
 
 TestResult\out13_One_Query1.xml: 
 Test Ran: 60
@@ -154,14 +154,14 @@ Passed  : 0
 Failed  : 0
 
 TestResult\out13_Three_QueryOptimization_UsingSource3.xml: 
-Test Ran: 3
-Passed  : 3
+Test Ran: 5
+Passed  : 5
 Failed  : 0
 
 TestResult\out13_Three_Query_Affects_AffectsStar_UsingSource4.xml: 
-Test Ran: 13	[BUG]
-Passed  : 10
-Failed  : 3
+Test Ran: 13
+Passed  : 13
+Failed  : 0
 
 TestResult\out13_Three_Query_Calls_CallsStar_UsingSource4.xml: 
 Test Ran: 7
@@ -319,8 +319,8 @@ Passed  : 20
 Failed  : 0
 
 TestResult\out14_Query6MultipleClause_UsingSource6.xml: 
-Test Ran: 28
-Passed  : 28
+Test Ran: 29
+Passed  : 29
 Failed  : 0
 
 TestResult\out14_Query6Parent_UsingSource6.xml: 
@@ -429,9 +429,9 @@ Passed  : 142
 Failed  : 0
 
 TestResult\out6_MixTests02.xml: 
-Test Ran: 146	[BUG]
-Passed  : 142
-Failed  : 4
+Test Ran: 146
+Passed  : 146
+Failed  : 0
 
 TestResult\out6_ModifiesUsesParent.xml: 
 Test Ran: 17
