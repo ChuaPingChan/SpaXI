@@ -19,7 +19,7 @@ namespace UnitTesting
     public:
 
         TEST_METHOD(TestSetAndGetNextClauseGroup) {
-            
+
             /**********
              * Set up *
              **********/
@@ -67,12 +67,12 @@ namespace UnitTesting
 
             tempClauseGroup.push(uses_10_ident_ptr);
             tempClauseGroupQueue.push(tempClauseGroup);
-            
+
             tempClauseGroup = queue<ClausePtr>();
             tempClauseGroup.push(uses_a1_v1_ptr);
             tempClauseGroup.push(modifies_w1_v1_ptr);
             tempClauseGroupQueue.push(tempClauseGroup);
-            
+
             tempClauseGroup = queue<ClausePtr>();
             tempClauseGroup.push(uses_a2_v2_ptr);
             tempClauseGroupQueue.push(tempClauseGroup);
@@ -86,7 +86,7 @@ namespace UnitTesting
             queue<ClausePtr> nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 1);
             Assert::IsTrue(nextClauseGroup.front() == uses_10_ident_ptr);
-            
+
             nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 2);
             Assert::IsTrue(nextClauseGroup.front() == uses_a1_v1_ptr);
@@ -98,6 +98,132 @@ namespace UnitTesting
             Assert::IsTrue(nextClauseGroup.front() == uses_a2_v2_ptr);
 
             Assert::IsFalse(clauseGroupManager.hasNextClauseGroup());
+        }
+
+        TEST_METHOD(TestMergeAndGetMergedClauseResult) {
+
+            /***********
+             * Testing *
+             ***********/
+            ClauseGroupManager clauseGroupManager;
+            ClauseResult expectedCr;
+            ClauseResult actualCr;
+            list<list<int>> expectedResults;
+            list<list<int>> actualResults;
+
+            Assert::IsTrue(expectedCr.hasResults());
+            string syn1 = "a";
+            list<int> syn1Results{ 1, 2 };
+            string syn2 = "b";
+            list<int> syn2Results{ 5, 6 };
+            string syn3 = "c";
+            list<int> syn3Results{ 7 };
+            expectedCr.updateSynResults(syn1, syn1Results);
+            expectedCr.updateSynResults(syn2, syn2Results);
+            expectedCr.updateSynResults(syn3, syn3Results);
+            /********
+            a	b	c
+            ---------
+            1	5	7
+            1	6	7
+            2	5	7
+            2	6	7
+            *********/
+
+            // All synonyms in clause result are selected. Merge only one clause result.
+            clauseGroupManager.setSelectedSynonyms(list<string>{syn1, syn2, syn3});
+            clauseGroupManager.mergeClauseResult(expectedCr);
+            actualCr = clauseGroupManager.getMergedClauseResult();
+            actualResults = actualCr.getAllResults();
+            expectedResults = expectedCr.getAllResults();
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Only some of the synonyms in clause result are selected. Merge only one clause result.
+            expectedCr = ClauseResult();
+            expectedCr.updateSynResults(syn1, syn1Results);
+            expectedCr.updateSynResults(syn3, syn3Results);
+            /********
+            a	c
+            -----
+            1	7
+            2   7
+            *********/
+            clauseGroupManager = ClauseGroupManager();
+            clauseGroupManager.setSelectedSynonyms(list<string>{syn1, syn3});
+            clauseGroupManager.mergeClauseResult(expectedCr);
+            actualCr = clauseGroupManager.getMergedClauseResult();
+            actualResults = actualCr.getAllResults();
+            expectedResults = expectedCr.getAllResults();
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Merge two clause results. Select all synonyms.
+            expectedCr = ClauseResult();
+            expectedCr.updateSynResults(syn1, syn1Results);
+            expectedCr.updateSynResults(syn3, syn3Results);
+            /********
+            a	c
+            -----
+            1	7
+            2   7
+            *********/
+            clauseGroupManager = ClauseGroupManager();
+            clauseGroupManager.setSelectedSynonyms(list<string>{syn1, syn2, syn3});
+
+            clauseGroupManager.mergeClauseResult(expectedCr);   // Merge first clause result
+            
+            expectedCr = ClauseResult();
+            expectedCr.updateSynResults(syn2, syn2Results);
+            /********
+            b
+            ---------
+            5
+            6
+            *********/
+            clauseGroupManager.mergeClauseResult(expectedCr);   // Merge second result
+
+            actualCr = clauseGroupManager.getMergedClauseResult();
+            actualResults = actualCr.getAllResults();
+            expectedResults = list<list<int>>{ {1, 7, 5}, {1, 7, 6}, {2, 7, 5}, {2, 7, 6} };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Merge two clause results. Select only some synonyms.
+            expectedCr = ClauseResult();
+            expectedCr.updateSynResults(syn1, syn1Results);
+            expectedCr.updateSynResults(syn3, syn3Results);
+            /********
+            a	c
+            -----
+            1	7
+            2   7
+            *********/
+            clauseGroupManager = ClauseGroupManager();
+            clauseGroupManager.setSelectedSynonyms(list<string>{syn1, syn2});
+
+            clauseGroupManager.mergeClauseResult(expectedCr);   // Merge first clause result
+            
+            expectedCr = ClauseResult();
+            expectedCr.updateSynResults(syn2, syn2Results);
+            /********
+            b
+            ---------
+            5
+            6
+            *********/
+            clauseGroupManager.mergeClauseResult(expectedCr);   // Merge second result
+
+            actualCr = clauseGroupManager.getMergedClauseResult();
+            actualResults = actualCr.getAllResults();
+            expectedResults = list<list<int>>{ { 1, 5 },{ 1, 6 },{ 2, 5 },{ 2, 6 } };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
         }
     };
 }
