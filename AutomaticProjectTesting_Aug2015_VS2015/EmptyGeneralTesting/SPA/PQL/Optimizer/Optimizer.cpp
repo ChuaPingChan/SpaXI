@@ -127,7 +127,7 @@ void Optimizer::formClauseGroups()
                 synUfds.addSynonym(syn1Idx);
 
             // Need to remember last synonym for union purposes
-            int lastSynonym = syn1Idx;
+            int prevSynonym = syn1Idx;
             int currSynonym;
             while (!synonyms.empty()) {
                 currSynonym = _synToIdxMap.at(synonyms.front());
@@ -136,8 +136,8 @@ void Optimizer::formClauseGroups()
                 if (!synUfds.synonymPresent(currSynonym))
                     synUfds.addSynonym(currSynonym);
 
-                synUfds.unionSet(lastSynonym, currSynonym);
-                lastSynonym = currSynonym;
+                synUfds.unionSet(prevSynonym, currSynonym);
+                prevSynonym = currSynonym;
             }
         }
     }

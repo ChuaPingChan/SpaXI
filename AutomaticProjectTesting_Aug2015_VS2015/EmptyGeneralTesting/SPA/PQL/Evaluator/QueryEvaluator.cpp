@@ -46,7 +46,7 @@ void QueryEvaluator::evaluate()
                 hasResultEvaluator = factory.processClause(*selectClausePtr);
             }
 
-            clauseGroup.pop();      // TODO: Pop immediately after front() after integration works
+            clauseGroup.pop();      // TODO: Try popping immediately after front() after integration works
         }
         // Finished processing a clause group
 
