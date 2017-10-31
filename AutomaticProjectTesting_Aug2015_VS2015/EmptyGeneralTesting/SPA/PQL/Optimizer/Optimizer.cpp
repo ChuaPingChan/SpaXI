@@ -118,23 +118,27 @@ void Optimizer::formClauseGroups()
 
         if (synonyms.size() == 0) {
             clausesWithoutSynonym.push_back(clause);
-        } else if (synonyms.size() == 1) {
-            int syn1Idx = _synToIdxMap.at(synonyms.front());
-            if (!synUfds.synonymPresent(syn1Idx))
-                synUfds.addSynonym(syn1Idx);
         } else {
-            assert(synonyms.size() == 2);
 
+            // Add the first synonym
             int syn1Idx = _synToIdxMap.at(synonyms.front());
             synonyms.pop_front();
-            int syn2Idx = _synToIdxMap.at(synonyms.front());
-
             if (!synUfds.synonymPresent(syn1Idx))
                 synUfds.addSynonym(syn1Idx);
-            if (!synUfds.synonymPresent(syn2Idx))
-                synUfds.addSynonym(syn2Idx);
 
-            synUfds.unionSet(syn1Idx, syn2Idx);
+            // Need to remember last synonym for union purposes
+            int lastSynonym = syn1Idx;
+            int currSynonym;
+            while (!synonyms.empty()) {
+                currSynonym = _synToIdxMap.at(synonyms.front());
+                synonyms.pop_front();
+
+                if (!synUfds.synonymPresent(currSynonym))
+                    synUfds.addSynonym(currSynonym);
+
+                synUfds.unionSet(lastSynonym, currSynonym);
+                lastSynonym = currSynonym;
+            }
         }
     }
 
