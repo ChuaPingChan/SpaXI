@@ -53,9 +53,10 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
                 _synVector.push_back(synonym);
                 int synIdx = _synVector.size() - 1;     // Synonym just added should be the last element
                 _synToIdxMap[synonym] = synIdx;
-                _synIdxToClauseIdxsMap[synIdx].push_back(clauseIdx);
             }
+            _synIdxToClauseIdxsMap[_synToIdxMap[synonym]].push_back(clauseIdx);
         }
+
     }
 
     return true;
@@ -146,12 +147,14 @@ void Optimizer::formClauseGroups()
             for (int relevantClauseIdx : relevantClausesIdxs) {
                 clauseGroupUnique.insert(relevantClauseIdx);
             }
-            // Get actual clause from clause index and add to clause group
-            for (int relevantClauseIdx : clauseGroupUnique) {
-                ClausePtr clauseWrapper = _clauseVector[relevantClauseIdx];
-                clauseGroup.push_back(clauseWrapper);
-            }
         }
+
+        // Get actual clause from clause index and add to clause group
+        for (int relevantClauseIdx : clauseGroupUnique) {
+            ClausePtr clauseWrapper = _clauseVector[relevantClauseIdx];
+            clauseGroup.push_back(clauseWrapper);
+        }
+
         _clauseGroups.push_back(clauseGroup);
     }
 }

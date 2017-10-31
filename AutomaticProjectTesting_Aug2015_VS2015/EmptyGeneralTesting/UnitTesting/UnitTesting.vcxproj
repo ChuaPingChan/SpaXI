@@ -167,6 +167,7 @@
     <ClCompile Include="Exception\TestExceptionSynonymNotFound.cpp" />
     <ClCompile Include="Parser\TestParsingSource.cpp" />
     <ClCompile Include="PQL\Optimizer\TestClauseGroupManager.cpp" />
+    <ClCompile Include="PQL\Optimizer\TestOptimizer.cpp" />
     <ClCompile Include="PQL\Optimizer\TestUFDS.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexBasic.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexDeclaration.cpp" />
