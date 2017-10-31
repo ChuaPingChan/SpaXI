@@ -72,6 +72,32 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(bug3Test)
+        {
+            // Set up
+            PKBMain* pkbPtr = PKBMain::getInstance();
+            Parser parser(pkbPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_SimpleTest2());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+            list<string> actualResults;
+            list<string> expectedResults;
+
+            string query =
+                "variable v, v1; assign a; stmt s; procedure p;"
+                "Select v with p.procName = \"eight\" such that "
+                "Uses(p,v) and Modifies(a,v1) with v1.varName = \"eC\" "
+                "such that Uses(a,v) and Follows(_,a) and Follows*(_,a)";
+            PQLMain pql = PQLMain(query);
+
+            actualResults = pql.run();
+            expectedResults = list<string>{ "eD", "eA", "eC", "eB" };
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Clean up
+            pkbPtr->deleteInstance();
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         /*******************************
          * Utility Methods for Testing *
          *******************************/
