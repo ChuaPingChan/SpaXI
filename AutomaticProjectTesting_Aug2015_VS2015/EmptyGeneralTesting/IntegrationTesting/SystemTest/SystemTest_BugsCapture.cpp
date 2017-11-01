@@ -77,7 +77,7 @@ namespace UnitTesting
             // Set up
             PKBMain* pkbPtr = PKBMain::getInstance();
             Parser parser(pkbPtr);
-            Assert::IsTrue(createDummySimpleSourceFile_SimpleTest2());
+            Assert::IsTrue(createDummySimpleSourceFile_SimpleTest4());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
             list<string> actualResults;
             list<string> expectedResults;
@@ -91,6 +91,8 @@ namespace UnitTesting
 
             actualResults = pql.run();
             expectedResults = list<string>{ "eD", "eA", "eC", "eB" };
+            actualResults.sort();
+            expectedResults.sort();
             Assert::IsTrue(actualResults == expectedResults);
 
             // Clean up
