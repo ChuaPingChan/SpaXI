@@ -207,7 +207,7 @@ goto :eof
 call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 2...
-AutoTester Test2_Frozen\test2source.txt Test2_Frozen\test2query.txt TestResult\out2.xml > TestResult\cmd\cmd2.txt
+AutoTester Test2_Frozen\Source_Simple02.txt Test2_Frozen\Query_Simple02.txt TestResult\out2_Query_Simple02.xml > TestResult\cmd\cmd2_Query_Simple02.txt
 echo Finish running AutoTester for test 2.
 call :getPauseAction
 goto :eof

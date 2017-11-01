@@ -1,7 +1,7 @@
 Overall Test Ran    : 7733
 Overall Test Passed : 7719
-Overall Test Failed : 13
-Overall Test Timeout: 1
+Overall Test Failed : 10
+Overall Test Timeout: 4
 
 
 TestResult\out1.xml: 
@@ -186,9 +186,9 @@ Timeout  : 1
 
 TestResult\out13_Three_QueryOptimization_UsingSource3.xml: 
 Test Ran: 5
-Passed   : 5
+Passed   : 3
 Failed   : 0
-Timeout  : 0
+Timeout  : 2
 
 TestResult\out13_Three_Query_Affects_AffectsStar_UsingSource4.xml: 
 Test Ran: 13
@@ -384,9 +384,9 @@ Timeout  : 0
 
 TestResult\out14_Query6MultipleClause_UsingSource6.xml: 
 Test Ran: 29
-Passed   : 29
+Passed   : 28
 Failed   : 0
-Timeout  : 0
+Timeout  : 1
 
 TestResult\out14_Query6Parent_UsingSource6.xml: 
 Test Ran: 40
@@ -406,10 +406,10 @@ Passed   : 55
 Failed   : 0
 Timeout  : 0
 
-TestResult\out2.xml: 
-Test Ran: 336	[BUG]
-Passed   : 333
-Failed   : 3
+TestResult\out2_Query_Simple02.xml: 
+Test Ran: 336
+Passed   : 336
+Failed   : 0
 Timeout  : 0
 
 TestResult\out3.xml: 

@@ -5,6 +5,7 @@ from openpyxl import load_workbook
 
 EXCEL_WORKBOOK_PATH = sys.argv[1]
 OUTPUT_FILE_PATH = sys.argv[2]
+SHEET = sys.argv[3]
 
 INDEX_COLUMN = 'A'
 COMMENT_COLUMN = 'E'
@@ -15,7 +16,7 @@ TIME_LIMIT = 5000
 
 def main():
 	workbook = load_workbook(filename = EXCEL_WORKBOOK_PATH)
-	querySheet = workbook['Sheet']
+	querySheet = workbook[SHEET]
 		
 	print('Generating Queries ... ')
 	print('Workbook: ', EXCEL_WORKBOOK_PATH)
