@@ -173,7 +173,8 @@ call :runTest3
 call :runTest4
 call :runTest5
 call :runTest6
-call :runTest7
+REM call :runTest7
+echo -- ! -- AUTOTESTER CRASHED FOR TEST 7 -- ! --
 call :runTest8
 call :runTest9
 call :runTest10
@@ -336,7 +337,7 @@ goto :eof
 call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 7...
-echo Test is still being written. Skipping to Test 8 ...
+AutoTester Test7_Animal\Source_Simple01.txt Test7_Animal\Query_Simple01.txt TestResult\out7_Query_Simple01.xml > TestResult\cmd\cmd7_Query_Simple01.txt
 echo Finish running AutoTester for test 7.
 call :getPauseAction
 goto :eof
@@ -621,7 +622,7 @@ call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 15...
 echo Running AutoTester for Query_Test1 ...
-AutoTester Testing15_Verb\Acceptance\Source_prog_1.txt Testing15_Verb\Acceptance\Query_Test1.txt TestResult\out15_Acceptance_Query_Test1.xml > TestResult\cmd\cmd15_Acceptance_Query_Test1.txt
+AutoTester Test15_Verb\Acceptance\Source_prog_1.txt Test15_Verb\Acceptance\Query_Test1.txt TestResult\out15_Acceptance_Query_Test1.xml > TestResult\cmd\cmd15_Acceptance_Query_Test1.txt
 echo Finish running AutoTester for Query_Test1.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
