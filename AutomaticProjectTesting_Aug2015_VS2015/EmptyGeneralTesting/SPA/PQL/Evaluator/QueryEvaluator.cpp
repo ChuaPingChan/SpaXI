@@ -28,9 +28,10 @@ void QueryEvaluator::evaluate()
         while (hasResultEvaluator && !clauseGroup.empty()) {
             
             ClausePtr clausePtr = clauseGroup.front();
+            clauseGroup.pop();
 
+            // Checks for the actual type of clause and do type-conversion to use subclass's methods
             if (clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT) {
-                // Dynamic cast to use subclass-specific method
                 SuchThatClausePtr stClausePtr = dynamic_pointer_cast<SuchThatClause>(clausePtr);
                 hasResultEvaluator = factory.processClause(*stClausePtr);
             } else if (clausePtr->getClauseType() == Clause::ClauseType::PATTERN) {
@@ -45,11 +46,9 @@ void QueryEvaluator::evaluate()
                 SelectClausePtr selectClausePtr = dynamic_pointer_cast<SelectClause>(clausePtr);
                 hasResultEvaluator = factory.processClause(*selectClausePtr);
             }
-
-            clauseGroup.pop();      // TODO: Try popping immediately after front() after integration works
         }
-        // Finished processing a clause group
-
+        
+        // Finished processing a clause group, pass the result of the clause group to ClauseGroupManager
         ClauseResult clauseResult = factory.makeClauseResult();
         clauseGroupManager.mergeClauseResult(clauseResult);
         factory.resetClauseResult();

@@ -63,7 +63,7 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 }
 
 /*
-    Extracts all non-"select" clauses in a given query.
+    Extracts all clauses in a given QueryTree.
 */
 list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 {
@@ -107,7 +107,7 @@ list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 */
 void Optimizer::formClauseGroups()
 {
-    // TODO before submission: Consider refactoring into helper methods to achieve SLA
+    // TODO: Consider refactoring into helper methods to achieve SLA
     SynonymUFDS synUfds;
 
     vector<ClausePtr> clausesWithoutSynonym;
@@ -182,8 +182,8 @@ void Optimizer::sortClauseGroups()
 }
 
 /*
-    Enforces FIFO policy of evaluating sorted clause groups and clauses in
-    groups using queues.
+    Use queues to enforces FIFO policy of evaluating sorted clause groups
+    and clauses within clause groups.
 */
 queue<queue<ClausePtr>> Optimizer::createClauseGroupQueue()
 {
