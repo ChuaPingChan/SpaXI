@@ -173,7 +173,8 @@ call :runTest3
 call :runTest4
 call :runTest5
 call :runTest6
-call :runTest7
+REM call :runTest7
+echo -- ! -- AUTOTESTER CRASHED FOR TEST 7 -- ! --
 call :runTest8
 call :runTest9
 call :runTest10
