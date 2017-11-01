@@ -1923,6 +1923,11 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<in
 		if (isAssignment(curr)) {
 			list<int> usedVarList = getUsesFromStmt(curr);
 			int modifiedVar = getModifiesFromStmt(curr).front();
+			bool existedBefore = (latestMod.find(modifiedVar) != latestMod.end());
+			if (find(usedVarList.begin(), usedVarList.end(), modifiedVar) == usedVarList.end() && existedBefore) {
+				latestMod[modifiedVar].clear();
+			}
+			
 			for (int usedVar : usedVarList) {
 				if (latestMod.find(usedVar) != latestMod.end()) {
 					unordered_set<int> lastModStmtSet = latestMod[usedVar];
@@ -1944,9 +1949,6 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<in
 			}
 
 
-			if (find(usedVarList.begin(), usedVarList.end(), modifiedVar) != usedVarList.end()) {
-				latestMod[modifiedVar].clear();
-			}
 
 			latestMod[modifiedVar].insert(curr);
 
