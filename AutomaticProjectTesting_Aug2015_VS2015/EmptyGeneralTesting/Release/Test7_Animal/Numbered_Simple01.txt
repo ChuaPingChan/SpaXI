@@ -1,5 +1,5 @@
  procedure Ten {
-1-.	alpaca = 2 + 7 - 100 * (99 + 47);
+1.	alpaca = 2 + 7 - 100 * (99 + 47);
 2.	antelope = 2 + alpaca;
 3.	while alpaca {
 4.		badger = 77 * antelope - 20 + 100;
