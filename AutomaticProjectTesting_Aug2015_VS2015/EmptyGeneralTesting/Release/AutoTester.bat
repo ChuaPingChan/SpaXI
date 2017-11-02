@@ -69,6 +69,9 @@ if '%option%'=='14' (
 if '%option%'=='15' (
 	goto :runTest15
 )
+if '%option%'=='16' (
+	goto :runTest16
+)
 cls
 goto :main
 echo ===============================================================================
@@ -183,6 +186,7 @@ call :runTest12
 call :runTest13
 call :runTest14
 call :runTest15
+call :runTest16
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -361,6 +365,24 @@ echo Finish running AutoTester for QueryAffects.txt.
 echo Running AutoTester for QueryAffectsStar.txt...
 AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryAffectsStar.txt TestResult\out9_QueryAffectsStar.xml > TestResult\cmd\cmd9_QueryAffectsStar.txt
 echo Finish running AutoTester for QueryAffectsStar.txt.
+echo Running AutoTester for QueryCalls.txt...
+AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryCalls.txt TestResult\out9_QueryCalls.xml > TestResult\cmd\cmd9_QueryCalls.txt
+echo Finish running AutoTester for QueryCalls.txt.
+echo Running AutoTester for QueryCallsStar.txt...
+AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryCallsStar.txt TestResult\out9_QueryCallsStar.xml > TestResult\cmd\cmd9_QueryCallsStar.txt
+echo Finish running AutoTester for QueryCallsStar.txt.
+echo Running AutoTester for QueryModifies.txt...
+AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryModifies.txt TestResult\out9_QueryModifies.xml > TestResult\cmd\cmd9_QueryModifies.txt
+echo Finish running AutoTester for QueryModifies.txt.
+echo Running AutoTester for QueryNext.txt...
+AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryNext.txt TestResult\out9_QueryNext.xml > TestResult\cmd\cmd9_QueryNext.txt
+echo Finish running AutoTester for QueryNext.txt.
+echo Running AutoTester for QueryNextStar.txt...
+AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryNextStar.txt TestResult\out9_QueryNextStar.xml > TestResult\cmd\cmd9_QueryNextStar.txt
+echo Finish running AutoTester for QueryNextStar.txt.
+echo Running AutoTester for QueryUses.txt...
+AutoTester Test9_InterProcedural\SourceInterProcedural.txt Test9_InterProcedural\QueryUses.txt TestResult\out9_QueryUses.xml > TestResult\cmd\cmd9_QueryUses.txt
+echo Finish running AutoTester for QueryUses.txt.
 echo Finish running AutoTester for test 9.
 call :getPauseAction
 goto :eof
@@ -625,5 +647,14 @@ echo Running AutoTester for Query_Test1 ...
 AutoTester Test15_Verb\Acceptance\Source_prog_1.txt Test15_Verb\Acceptance\Query_Test1.txt TestResult\out15_Acceptance_Query_Test1.xml > TestResult\cmd\cmd15_Acceptance_Query_Test1.txt
 echo Finish running AutoTester for Query_Test1.
 echo Finish running AutoTester for test 15.
+call :getPauseAction
+goto :eof
+
+:runTest16
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 16...
+AutoTester Test16_Stress\SourceStress.txt Test16_Stress\QueryStressNext.txt TestResult\out16_QueryStressNext.xml > TestResult\cmd\cmd16_QueryStressNext.txt
+echo Finish running AutoTester for test 16.
 call :getPauseAction
 goto :eof
