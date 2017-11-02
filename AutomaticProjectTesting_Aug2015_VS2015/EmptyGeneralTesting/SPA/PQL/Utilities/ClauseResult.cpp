@@ -192,6 +192,12 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
         if (selectedSyns.find(synName) != selectedSyns.end())
             synsToMerge.push_back(synName);
     }
+
+    if (synsToMerge.size() == 0) {
+        // No merging takes place if no synonyms in the new clause result is "selected" in the query
+        return true;
+    }
+
     // Get the results of only the synonyms to merge and remove duplicates
     list<list<int>> resultsToMerge = clauseResultToMerge.getSynonymResults(synsToMerge);
     resultsToMerge.unique();

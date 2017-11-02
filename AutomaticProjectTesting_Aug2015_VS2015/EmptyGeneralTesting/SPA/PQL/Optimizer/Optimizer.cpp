@@ -6,7 +6,6 @@
 
 Optimizer::Optimizer(QueryTree &queryTree)
 {
-    // TODO: Implement
     /*
         Process description:
         1. Populates and initialises internal data structures
@@ -42,19 +41,20 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 
     for (ClausePtr clause : allClauses) {
 
-        // TODO: Optimisation idea - ignore duplicate clauses, or remove them earlier
         _clauseVector.push_back(clause);
         int clauseIdx = _clauseVector.size() - 1;   // Clause just added should be the last element
 
         // Assign index to each new synonyms
         list<string> synonyms = clause->getSynonyms();
         for (string synonym : synonyms) {
+
             if (_synToIdxMap.find(synonym) == _synToIdxMap.end()) {
                 _synVector.push_back(synonym);
                 int synIdx = _synVector.size() - 1;     // Synonym just added should be the last element
                 _synToIdxMap[synonym] = synIdx;
             }
             _synIdxToClauseIdxsMap[_synToIdxMap[synonym]].push_back(clauseIdx);
+
         }
 
     }
@@ -63,15 +63,20 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 }
 
 /*
-    Extracts all non-"select" clauses in a given query.
+    Extracts all clauses in a given QueryTree.
 */
 list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 {
     list<ClausePtr> allClauses;
 
+    SelectClause selectClause = queryTree.getSelectClause();
     vector<SuchThatClause> suchThatClauses = queryTree.getSuchThatClauses();
     vector<PatternClause> patternClauses = queryTree.getPatternClauses();
     vector<WithClause> withClauses = queryTree.getWithClauses();
+
+    SelectClausePtr scPtr;
+    scPtr = selectClause.getSharedPtr();
+    allClauses.push_back(scPtr);
 
     for (SuchThatClause suchThatClause : suchThatClauses) {
         SuchThatClausePtr stPtr;
@@ -102,7 +107,7 @@ list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 */
 void Optimizer::formClauseGroups()
 {
-    // TODO before submission: Consider refactoring into helper methods to achieve SLA
+    // TODO: Consider refactoring into helper methods to achieve SLA
     SynonymUFDS synUfds;
 
     vector<ClausePtr> clausesWithoutSynonym;
@@ -113,30 +118,37 @@ void Optimizer::formClauseGroups()
 
         if (synonyms.size() == 0) {
             clausesWithoutSynonym.push_back(clause);
-        } else if (synonyms.size() == 1) {
-            int syn1Idx = _synToIdxMap.at(synonyms.front());
-            if (!synUfds.synonymPresent(syn1Idx))
-                synUfds.addSynonym(syn1Idx);
         } else {
-            assert(synonyms.size() == 2);
 
+            // Add the first synonym
             int syn1Idx = _synToIdxMap.at(synonyms.front());
             synonyms.pop_front();
-            int syn2Idx = _synToIdxMap.at(synonyms.front());
-
             if (!synUfds.synonymPresent(syn1Idx))
                 synUfds.addSynonym(syn1Idx);
-            if (!synUfds.synonymPresent(syn2Idx))
-                synUfds.addSynonym(syn2Idx);
 
-            synUfds.unionSet(syn1Idx, syn2Idx);
+            // Need to remember last synonym for union purposes
+            int prevSynonym = syn1Idx;
+            int currSynonym;
+            while (!synonyms.empty()) {
+                currSynonym = _synToIdxMap.at(synonyms.front());
+                synonyms.pop_front();
+
+                if (!synUfds.synonymPresent(currSynonym))
+                    synUfds.addSynonym(currSynonym);
+
+                synUfds.unionSet(prevSynonym, currSynonym);
+                prevSynonym = currSynonym;
+            }
         }
     }
 
     list<list<int>> synGroups = synUfds.getSynonymGroups();
 
     // Get clause groups from synonym groups
-    _clauseGroups.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
+    if (!clausesWithoutSynonym.empty()) {
+        _clauseGroups.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
+    }
+
     for (list<int> synGroup : synGroups) {
 
         unordered_set<int> clauseGroupUnique;
@@ -170,8 +182,8 @@ void Optimizer::sortClauseGroups()
 }
 
 /*
-    Enforces FIFO policy of evaluating sorted clause groups and clauses in
-    groups using queues.
+    Use queues to enforces FIFO policy of evaluating sorted clause groups
+    and clauses within clause groups.
 */
 queue<queue<ClausePtr>> Optimizer::createClauseGroupQueue()
 {

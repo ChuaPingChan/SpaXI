@@ -1,4 +1,7 @@
+#include <cassert>
 #include "QueryEvaluator.h"
+#include "../Optimizer/Optimizer.h"
+#include "../Optimizer/ClauseGroupManager.h"
 
 QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
 {
@@ -13,43 +16,48 @@ QueryEvaluator::~QueryEvaluator()
 void QueryEvaluator::evaluate()
 {
     ResultFactory factory = ResultFactory();
+    Optimizer optimizer(*_qt);
+    ClauseGroupManager clauseGroupManager = optimizer.getClauseGroupManager();
 
-    for (SuchThatClause stClause : _qt->getSuchThatClauses())
-    {
-        hasResultEvaluator = factory.processClause(stClause);
-        if (!hasResultEvaluator)
-            break;
-    }
+    // For each clause groups..
+    while (hasResultEvaluator && clauseGroupManager.hasNextClauseGroup()) {
 
-    if (hasResultEvaluator)
-    {
-        for (PatternClause ptClause : _qt->getPatternClauses())
-        {
-            hasResultEvaluator = factory.processClause(ptClause);
-            if (!hasResultEvaluator)
-                break;
+        queue<ClausePtr> clauseGroup = clauseGroupManager.getNextClauseGroup();
+
+        // For each clause in a clause group..
+        while (hasResultEvaluator && !clauseGroup.empty()) {
+            
+            ClausePtr clausePtr = clauseGroup.front();
+            clauseGroup.pop();
+
+            // Checks for the actual type of clause and do type-conversion to use subclass's methods
+            if (clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT) {
+                SuchThatClausePtr stClausePtr = dynamic_pointer_cast<SuchThatClause>(clausePtr);
+                hasResultEvaluator = factory.processClause(*stClausePtr);
+            } else if (clausePtr->getClauseType() == Clause::ClauseType::PATTERN) {
+                PatternClausePtr pattClausePtr = dynamic_pointer_cast<PatternClause>(clausePtr);
+                hasResultEvaluator = factory.processClause(*pattClausePtr);
+            } else if (clausePtr->getClauseType() == Clause::ClauseType::WITH) {
+                WithClausePtr withClausePtr = dynamic_pointer_cast<WithClause>(clausePtr);
+                hasResultEvaluator = factory.processClause(*withClausePtr);
+            } else {
+                // This assertion might need to be changed if new clause types are introduced to SIMPLE
+                assert(clausePtr->getClauseType() == Clause::ClauseType::SELECT);
+                SelectClausePtr selectClausePtr = dynamic_pointer_cast<SelectClause>(clausePtr);
+                hasResultEvaluator = factory.processClause(*selectClausePtr);
+            }
         }
+        
+        // Finished processing a clause group, pass the result of the clause group to ClauseGroupManager
+        ClauseResult clauseResult = factory.makeClauseResult();
+        clauseGroupManager.mergeClauseResult(clauseResult);
+        factory.resetClauseResult();
     }
 
+    // Store result in query tree
     if (hasResultEvaluator)
     {
-        for (WithClause wClause : _qt->getWithClauses())
-        {
-            hasResultEvaluator = factory.processClause(wClause);
-            if (!hasResultEvaluator)
-                break;
-        }
-    }
-
-    if (hasResultEvaluator)
-    {
-        SelectClause slClause = _qt->getSelectClause();
-        hasResultEvaluator = factory.processClause(slClause);
-    }
-
-    if (hasResultEvaluator)
-    {
-        _qt->storeEvaluatorResult(factory.makeClauseResult());
+        _qt->storeEvaluatorResult(clauseGroupManager.getMergedClauseResult());
     }
 }
 

@@ -67,7 +67,7 @@ list<list<int>> SynonymUFDS::getSynonymGroups()
     unordered_map<int, list<int>> setRepToMembersMap;
     
     for (int synIdx = 0; synIdx < p.size(); synIdx++) {
-        int setRep = p[synIdx];
+        int setRep = findSet(synIdx);
         setRepToMembersMap[setRep].push_back(synIdx);
     }
 
