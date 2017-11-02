@@ -6,7 +6,6 @@
 
 Optimizer::Optimizer(QueryTree &queryTree)
 {
-    // TODO: Implement
     /*
         Process description:
         1. Populates and initialises internal data structures
@@ -42,19 +41,20 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 
     for (ClausePtr clause : allClauses) {
 
-        // TODO: Optimisation idea - ignore duplicate clauses, or remove them earlier
         _clauseVector.push_back(clause);
         int clauseIdx = _clauseVector.size() - 1;   // Clause just added should be the last element
 
         // Assign index to each new synonyms
         list<string> synonyms = clause->getSynonyms();
         for (string synonym : synonyms) {
+
             if (_synToIdxMap.find(synonym) == _synToIdxMap.end()) {
                 _synVector.push_back(synonym);
                 int synIdx = _synVector.size() - 1;     // Synonym just added should be the last element
                 _synToIdxMap[synonym] = synIdx;
             }
             _synIdxToClauseIdxsMap[_synToIdxMap[synonym]].push_back(clauseIdx);
+
         }
 
     }
