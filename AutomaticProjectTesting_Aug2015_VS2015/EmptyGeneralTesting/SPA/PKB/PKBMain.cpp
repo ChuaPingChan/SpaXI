@@ -1720,7 +1720,13 @@ int PKBMain::processBranchElseWithNext(stack<IfStmt> &ifMapStack, unordered_map<
 	}
 
 	else {
-		if (isWhile(next)) {
+		if (ifMapStack.empty()) {
+			if (afterIf == 0) {
+				return next;
+			}
+			return afterIf;
+		}
+		else if (isWhile(next)) {
 			if (isParentChild(next, firstIfStmt)) {
 				return next;
 			}
