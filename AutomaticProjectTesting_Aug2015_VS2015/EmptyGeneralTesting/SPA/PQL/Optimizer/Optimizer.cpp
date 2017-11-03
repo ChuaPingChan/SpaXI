@@ -3,6 +3,7 @@
 #include "ClauseGroupManager.h"
 #include "../Utilities/Clause.h"
 #include "SynonymUFDS.h"
+#include "ClauseCostCalculator.h"
 
 Optimizer::Optimizer(QueryTree &queryTree)
 {
@@ -35,6 +36,8 @@ ClauseGroupManager Optimizer::getClauseGroupManager()
 */
 bool Optimizer::processQueryTree(QueryTree &queryTree)
 {
+    // TODO: Populate _clauseIdxToCost at the correct place
+
     _clauseGroupsManager.setSelectedSynonyms(queryTree.getSelectClause().getSynonyms());
 
     list<ClausePtr> allClauses = extractClausesFromQueryTree(queryTree);
