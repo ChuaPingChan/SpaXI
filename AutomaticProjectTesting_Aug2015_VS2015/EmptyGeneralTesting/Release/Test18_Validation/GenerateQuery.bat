@@ -1,2 +1,2 @@
-python GenerateQuery.py ExcelQuery.xlsx QueryValidation.txt Validation
+REM python GenerateQuery.py ExcelQuery.xlsx QueryValidation.txt Validation
 pause
