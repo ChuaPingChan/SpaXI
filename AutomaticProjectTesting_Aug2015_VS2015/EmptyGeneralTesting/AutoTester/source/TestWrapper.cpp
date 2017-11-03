@@ -43,5 +43,5 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
   // store the answers to the query in the results list (it is initially empty)
   // each result must be a string.
     results = pqlMain.run();
-
+    _pkbMain->clearCache();
 }
