@@ -10,7 +10,8 @@ ClauseResult::ClauseResult()
 {
     _synToIdxMap = unordered_map<string, int>();
     _synList = vector<string>();
-    _results = list<vector<int>>();
+    _resultsPtr = ResultsPtr(new list<vector<int>>());
+    //_results = list<vector<int>>();   // TODO: Remove?
     _isNew = true;
 }
 
@@ -39,7 +40,7 @@ list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
     }
 
     // For each combinations, filter the selected synonyms only.
-    for (vector<int> existingComb : _results) {
+    for (vector<int> existingComb : *_resultsPtr) {
         list<int> selectedSynCombinations;
 
         for (int synIndex : synIndices)
@@ -111,7 +112,7 @@ list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string
 
 list<list<int>> ClauseResult::getAllResults()
 {
-    return ClauseResult::convertListOfVectorsToListOfLists(_results);
+    return ClauseResult::convertListOfVectorsToListOfLists(*_resultsPtr);
 }
 
 bool ClauseResult::synonymPresent(string synName)
@@ -144,33 +145,27 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     _synToIdxMap.insert({ newSynName, newSynIdx });
 
     // Update _result - Cartesian product
-    if (_results.empty()) {
+    if (_resultsPtr->empty()) {
         for (vector<int>::iterator newSynResPtr = newSynResults.begin();
             newSynResPtr != newSynResults.end();
             newSynResPtr++)
         {
             vector<int> newComb;
             newComb.push_back(*newSynResPtr);
-            _results.push_back(newComb);
+            _resultsPtr->push_back(newComb);
         }
         return true;
     }
 
     int repeatNumber = newSynResults.size();
-    list<vector<int>> outdatedResult = _results;
-    _results.clear();
+    ResultsPtr outdatedResult = _resultsPtr;
+    _resultsPtr = ResultsPtr(new Result());
 
-    for (list<vector<int>>::iterator combPtr = outdatedResult.begin();
-        combPtr != outdatedResult.end();
-        combPtr++)
-    {
-        for (vector<int>::iterator newSynResPtr = newSynResults.begin();
-            newSynResPtr != newSynResults.end();
-            newSynResPtr++)
-        {
-            vector<int> newComb = *combPtr;
-            newComb.push_back(*newSynResPtr);
-            _results.push_back(newComb);
+    for (vector<int> comb : *outdatedResult) {
+        for (int newSynRes : newSynResults) {
+            vector<int> newComb = comb;
+            newComb.push_back(newSynRes);
+            _resultsPtr->push_back(newComb);
         }
     }
 
@@ -207,23 +202,23 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
     }
 
     // Merge with _result - Cartesian product
-    if (_results.empty()) {
+    if (_resultsPtr->empty()) {
         for (list<int> newComb : resultsToMerge) {
             vector<int> newCombToMerge = convertListToVector(newComb);
-            _results.push_back(newCombToMerge);
+            _resultsPtr->push_back(newCombToMerge);
         }
         return true;
     }
 
     int repeatNumber = resultsToMerge.size();
-    list<vector<int>> outdatedResult = _results;
-    _results.clear();
+    ResultsPtr outdatedResult = _resultsPtr;
+    _resultsPtr = ResultsPtr(new Result());
 
-    for (vector<int> currComb : outdatedResult) {
+    for (vector<int> currComb : *outdatedResult) {
         for (list<int> newSynsResList : resultsToMerge) {
             vector<int> newSynsResVec = convertListToVector(newSynsResList);
             vector<int> newComb = joinTwoVectors(currComb, newSynsResVec);
-            _results.push_back(newComb);
+            _resultsPtr->push_back(newComb);
         }
     }
 
@@ -247,28 +242,28 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
     _synToIdxMap.insert({ syn2Name, syn2Idx });
 
     // Update _result - Cartesian product
-    if (_results.empty()) {
+    if (_resultsPtr->empty()) {
         for (list<vector<int>>::iterator pairResultPtr = pairResults.begin();
             pairResultPtr != pairResults.end();
             pairResultPtr++)
         {
-            _results.push_back(*pairResultPtr);
+            _resultsPtr->push_back(*pairResultPtr);
         }
         return true;
     }
 
-    list<vector<int>> updatedResults;
+    ResultsPtr updatedResultsPtr = ResultsPtr(new Result());
 
-    for (vector<int> existingComb : _results)
+    for (vector<int> existingComb : *_resultsPtr)
     {
         for (vector<int> pairResult : pairResults)
         {
             vector<int> newComb = existingComb;
             newComb = ClauseResult::joinTwoVectors(newComb, pairResult);
-            updatedResults.push_back(newComb);
+            updatedResultsPtr->push_back(newComb);
         }
     }
-    _results = updatedResults;
+    _resultsPtr = updatedResultsPtr;
 
     return true;
 }
@@ -312,16 +307,16 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
     int synIdx = _synToIdxMap.at(synName);
     unordered_set<int> resultsSetToOverlap(synResultsToOverlap.begin(), synResultsToOverlap.end());
 
-    list<vector<int>> updatedResults;   // to overwrite _results at the end of this method
+    ResultsPtr updatedResultsPtr = ResultsPtr(new Result());    // to overwrite _results at the end of this method
 
-    for (vector<int> comb : _results)
+    for (vector<int> comb : *_resultsPtr)
     {
         int valueInComb = (comb).at(synIdx);
         if (resultsSetToOverlap.find(valueInComb) != resultsSetToOverlap.end()) {
-            updatedResults.push_back(comb);
+            updatedResultsPtr->push_back(comb);
         }
     }
-    _results = updatedResults;
+    _resultsPtr = updatedResultsPtr;
     return true;
 }
 
@@ -337,11 +332,11 @@ bool ClauseResult::removeCombinations(string synName, int value)
     assert(ClauseResult::synonymPresent(synName));
 
     int synIdx = _synToIdxMap.at(synName);
-    list<vector<int>>::iterator existingResultsIter = _results.begin();
-    while (existingResultsIter != _results.end())
+    list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
+    while (existingResultsIter != _resultsPtr->end())
     {
         if ((*existingResultsIter).at(synIdx) == value)
-            existingResultsIter = _results.erase(existingResultsIter);
+            existingResultsIter = _resultsPtr->erase(existingResultsIter);
         else
             existingResultsIter++;
     }
@@ -360,11 +355,11 @@ bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn
 
     int syn1Idx = _synToIdxMap.at(syn1Name);
     int syn2Idx = _synToIdxMap.at(syn2Name);
-    list<vector<int>>::iterator existingResultsIter = _results.begin();
-    while (existingResultsIter != _results.end())
+    list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
+    while (existingResultsIter != _resultsPtr->end())
     {
         if (((*existingResultsIter).at(syn1Idx) == syn1Value) && ((*existingResultsIter).at(syn2Idx) == syn2Value))
-            existingResultsIter = _results.erase(existingResultsIter);
+            existingResultsIter = _resultsPtr->erase(existingResultsIter);
         else
             existingResultsIter++;
     }
@@ -398,8 +393,8 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
 
     // Merging with existing combinations
     int oldSynIdx = _synToIdxMap.at(oldSyn);
-    list<vector<int>> updatedResults;
-    for (vector<int> existingCombination : _results)
+    ResultsPtr updatedResultsPtr = ResultsPtr(new Result());
+    for (vector<int> existingCombination : *_resultsPtr)
     {
         const int oldSynVal = existingCombination[oldSynIdx];
         // TODO: Consider refactoring to avoid arrowhead code.
@@ -410,11 +405,11 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
             {
                 vector<int> newComb = existingCombination;
                 newComb.push_back(newSynResult);
-                updatedResults.push_back(newComb);
+                updatedResultsPtr->push_back(newComb);
             }
         }
     }
-    _results = updatedResults;
+    _resultsPtr = updatedResultsPtr;
 
     return true;
 }
@@ -429,7 +424,7 @@ bool ClauseResult::hasResults()
     if (_isNew) {
         return true;
     } else {
-        return !(_results.empty());
+        return !(_resultsPtr->empty());
     }
 }
 

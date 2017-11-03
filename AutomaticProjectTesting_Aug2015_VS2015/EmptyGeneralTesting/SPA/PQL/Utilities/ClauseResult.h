@@ -5,6 +5,7 @@
 #include <set>
 #include <iterator>
 #include <utility>
+#include <memory>
 
 using namespace std;
 
@@ -34,7 +35,9 @@ public:
 protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
-    list<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
+    shared_ptr<list<vector<int>>> _resultsPtr;  // All results are stored as int (i.e. indices of entities in PKB)
+    // TODO: Remove this?
+    // list<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
     bool _isNew;    // Flag to indicate whether ClauseResult has been populated before
 
     /******************
@@ -118,3 +121,6 @@ protected:
         return v;
     }
 };
+
+typedef list<vector<int>> Result;
+typedef shared_ptr<list<vector<int>>> ResultsPtr;
