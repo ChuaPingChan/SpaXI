@@ -1,5 +1,5 @@
-Overall Test Ran    : 7733
-Overall Test Passed : 7720
+Overall Test Ran    : 7878
+Overall Test Passed : 7865
 Overall Test Failed : 9
 Overall Test Timeout: 4
 
@@ -613,6 +613,42 @@ Timeout  : 0
 TestResult\out9_QueryAffectsStar.xml: 
 Test Ran: 66
 Passed   : 66
+Failed   : 0
+Timeout  : 0
+
+TestResult\out9_QueryCalls.xml: 
+Test Ran: 36
+Passed   : 36
+Failed   : 0
+Timeout  : 0
+
+TestResult\out9_QueryCallsStar.xml: 
+Test Ran: 38
+Passed   : 38
+Failed   : 0
+Timeout  : 0
+
+TestResult\out9_QueryModifies.xml: 
+Test Ran: 9
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out9_QueryNext.xml: 
+Test Ran: 26
+Passed   : 26
+Failed   : 0
+Timeout  : 0
+
+TestResult\out9_QueryNextStar.xml: 
+Test Ran: 26
+Passed   : 26
+Failed   : 0
+Timeout  : 0
+
+TestResult\out9_QueryUses.xml: 
+Test Ran: 10
+Passed   : 10
 Failed   : 0
 Timeout  : 0
 
