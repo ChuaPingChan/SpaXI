@@ -11,7 +11,6 @@ ClauseResult::ClauseResult()
     _synToIdxMap = unordered_map<string, int>();
     _synList = vector<string>();
     _resultsPtr = ResultsPtr(new list<vector<int>>());
-    //_results = list<vector<int>>();   // TODO: Remove?
     _isNew = true;
 }
 
