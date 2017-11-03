@@ -1,0 +1,500 @@
+procedure Japan {
+	iwate = iwate;
+	tokyo = tokyo;
+	tokyo = tokyo2020;
+	tokyo = osaka + 20;
+	osaka = tokyo + (hiroshima - kyoto * 12);
+	chiba = chiba;
+	while fukuoka {
+		hiroshima = 45;
+		shizuoka = hiroshima + osaka;
+		shizuoka = kyoto + shinosaka;
+		osaka = osaka * (osaka * osaka) - ((15 - kyoto));   
+	}
+	tokyo = tokyo2020 + (2020-7-24);
+	tokyo = 2020-7-24;
+	tokyo2020 = 24-7-2020;
+	tokyo = tokyo2020 + tokyo + 24*7*2020;
+	kanagawa = tokyo;
+	while shizuoka {
+		while shizuoka {
+			okayama = okayama;
+			while chiba {
+				yamaguchi = ibaraki;
+				ibaraki = 0 + 3; 
+			}
+			while ibaraki {
+				osaka = (5+55)*(((3)));
+				chiba = 3 + (((ibaraki)));
+				Japan = (((3 + ((5+55)))));
+				akita = 5+55*3;
+				if shizuoka then {
+					japan = Japan;
+					Japan = japan; 
+				} else {
+					shizuoka = shizuoka; 
+				} 
+			}
+			if osaka then {
+				osaka = osaka;
+				osaka = 10+(60*75)*ibaraki;
+				ibaraki = (10+60)*75*ibaraki;
+				nara = 10+60*(75*ibaraki);
+				if shizuoka then {
+					osaka = Japan + (5+55)*(5+5); 
+				} else {
+					ibaraki = (saitama + (200*89));
+					saitama = aomori;
+					while saitama {
+						aomori = aomori; 
+					}
+					saitama = saitama;	
+				}
+				while nagasaki {
+					nagasaki = (15-8-1945)*(hiroshima+nagasaki);
+					hiroshima = nagasaki - (nagasaki - ((19+45)));
+					nagasaki = (15-8-1945)*(nagasaki+hiroshima); 
+				}
+				if hiroshima then {
+					hiroshima = hiroshima+19-45;
+					nagasaki = nagasaki-45+19; 
+				} else {
+					okayama = osaka - (99*150-Japan);
+					Japan = (15*88)+okayama; 	
+				} 
+			} else {
+				saitama = ibaraki * 200;
+			}
+		}
+	}
+	nagano = (42*42);
+	nagano = nagasaki *(fukuoka-tochigi+tokyo);
+	chiba = chiba*78;
+	aichi = 321;
+	Japan = aichi;
+	kumamoto = 123;
+	hokkaido = kumamoto + kagoshima;
+	kagoshima = ((16+32)-(99*7)+3*5-66+79)-34;
+	fukushima = 2011-3-11;
+	if kumamoto then {
+		Japan = tokyo;
+		nagasaki = kumamoto -(7*6+55-4);
+		fukushima = nagasaki + fukushima;
+		okayama = nagasaki + Japan - (34 * 56) + Japan - okinawa + kagoshima * ((fukuoka - kagawa));
+		hokkaido = hokkaido + gifu - saitama * saitama * gifu + kagawa;
+		saitama = okayama + Japan + saitama * (Japan * Japan) + gifu - ((tokyo)) * saitama *(saitama*(saitama)) * nagano + nagasaki * aichi + hokkaido;
+		nagasaki = saitama + Japan - hokkaido * nagasaki + nara - ((((shizuoka))));
+		nagasaki = nagasaki + Japan - kumamoto * okayama * nagasaki + okinawa;
+		gunma = 12 * (45 + 75 * (((6))));
+	} else {
+		fukushima = ((2011-3-11)) * (((fukushima)));
+		nagasaki = chiba + nagano-(1*2*3*4);
+		yamaguchi = nagasaki + Japan;
+		nagasaki = nagano + Japan;
+		nagano = yamaguchi + Japan;
+		yamaguchi = nagano + Japan;
+		nagano = yamaguchi + Japan;
+		okayama = nagano + Japan;
+		saitama = okayama + Japan;
+		kobe = saitama + Japan;
+		miyazaki = kobe + Japan;
+		nagasaki = miyazaki + Japan;
+		fukushima = nagasaki;
+		nagasaki = fukushima;
+		aomori = fukushima;
+		akita = aomori;
+		if hokkaido then {
+			hokkaido = nagasaki + Japan; 
+		} else {
+			hokkaido = hokkaido + Japan; 
+		}
+	}
+	Japan = Japan + 77;
+	if tokyo then {
+		if osaka then {
+			if shinosaka then {
+				if osaka then {
+					if shinosaka then {
+						if ibaraki then {
+							ibaraki = ibaraki;
+						} else {
+							osaka = shinosaka; 
+						}
+					} else {
+						hokkaido = Japan + 77;
+					}
+				} else {
+					if Japan then {
+						Japan = Japan + Japan;
+					} else {
+						miyazaki = hokkaido; 
+					}
+				}
+			} else {
+				if hokkaido then {
+					if hokkaido then {
+						hokkaido = hiroshima;
+						if hokkaido then {
+							hokkaido = hokkaido;
+						} else {
+							ibaraki = (23+14*777); 
+						}
+					} else {
+						yamaguchi = nagano + (18*18); 
+					}
+				} else {
+					yamaguchi = yamaguchi + (18*18); 
+				}
+			}
+		} else {
+			yamaguchi = hiroshima + nagasaki; 
+		}
+	} else {
+		if aichi then {
+			if nagano then {
+				if aichi then {
+					if fukuoka then {
+						fukuoka = 12+kyoto-56*43+(19+45); 
+					} else {
+						kyoto = kyoto; 
+					}
+				} else {
+					fukuoka = kyoto; 
+				}
+			} else {
+				if aichi then {
+					if aichi then {
+						if aichi then {
+							saitama = 200*888;
+						} else {
+							saitama = 19+45; 
+						}
+					} else {
+						nara = 19+45; 
+					}
+				} else {
+					akita = 19+45; 
+				}
+			}
+		} else {
+			if fukuoka then {
+				fukuoka = fukuoka + (saitama + (200*89));
+			} else {
+				akita = akita - hokkaido;
+				akita = akita; 
+			}
+		}
+	}
+	kumamoto = kumamoto + 200*888;
+	kagoshima = (((kagoshima*kagoshima+osaka)-kyoto));
+	while chiba {
+		chiba = nara;
+		nara = chiba;
+		nara = aomori;
+		aomori = chiba; 
+	}
+	while chiba {
+		while chiba {
+			kumamoto = kumamoto;
+			while Japan {
+				tokyo = tokyo;
+				kumamoto = osaka - hokkaido;
+				while tokyo {
+					osaka = osaka;
+					osaka = kumamoto;
+					kumamoto = osaka;
+					while osaka {
+						yamaguchi = yamaguchi + 18*18;
+						while kyoto {
+							while osaka {
+								osaka = ((kagoshima + 200*888 - 200*89) + 12+kyoto-56*43+(19+45)); 
+							}
+							while kagoshima {
+								kagoshima = kagoshima; 
+							}
+						}
+						nagasaki = ((56*43));
+						while nara {
+							osaka = kumamoto; 
+						}
+					}
+				}
+				while osaka {
+					osaka = nagasaki -56*43;
+					nagasaki = osaka;
+				}
+				japan = Japan - japan + Japan + Japan;
+			}
+		}
+	}
+	Japan = 200*888 + tokyo;
+	nara = nara + aomori;
+	nara = nara;
+	if nara then {
+		nara = nara;
+		kyoto = nara;
+		while ibaraki {
+			osaka = kyoto + nara - yamaguchi*Japan;
+			aichi = nara;
+			if osaka then {
+				yamaguchi = Japan * osaka;
+			} else {
+				yamaguchi = yamaguchi;
+			}
+		}
+		aichi = aichi;
+	} else {
+		kyoto = nara;
+		while kyoto {
+			hiroshima = aichi + hokkaido - ((123))-12-34-56*78-90;
+			hokkaido = 12-(34-56)*78-90;
+		}
+		nara = kyoto;
+	}
+	kagoshima = nara;
+	nara = 123;
+	yamaguchi = nara + 123;
+	while nara {
+		if nara then {
+			while aomori {
+				nara = nara + nara;
+			}
+		} else {
+			saitama = kyoto;
+		}
+	}
+	while ibaraki {
+		if ibaraki then {
+			aichi = aichi*aichi; 
+		} else {
+			while nara {
+				nara = nara+nara;
+			}
+		}
+	}
+	while akita {
+		if osaka then {
+			akita = osaka;
+		} else {
+			nara = aomori;
+			aomori = nara;
+		}
+	}
+	akita = hiroshima + (12-(34-56)*78-90);
+	hiroshima = hiroshima + (34-56);
+	nagasaki = hiroshima + 34 - 56;
+	if nagano then {
+		while nagasaki {
+			akita = nagasaki; 
+		}
+		nagasaki = aichi+aomori-okayama;
+		while aichi {
+			aichi = nagasaki-aomori +(13*27);
+			aomori = aichi;
+		}
+	} else {
+		akita = hiroshima + 34;
+	}
+	while akita {
+		while akita {
+			while akita {
+				tochigi = kumamoto +(kobe * kobe + kumamoto * kumamoto);
+				gunma = 133;
+			}
+			kobe = 157;
+		}
+		osaka = 19-50;
+	}
+	tokyo = 20*20+((35+72))-84*85+111;
+	gunma = 56;
+	niigata = 112 * ((444)) - 200 * 888 * 144;
+	kagawa = okayama + hiroshima;
+	kagawa = 101;
+	Japan = 55*168;
+	if Japan then {
+		akita = 158*(74+33);
+		while tochigi {
+			aichi = kumamoto + 178;
+		}
+		if nagano then {
+			nara = saitama + 180 * (199-23);
+		} else {
+			kumamoto = aichi;
+		}
+	} else {
+		osaka = kyoto * (okayama + hiroshima);
+	}
+	kumamoto = akita + hiroshima;
+	if Japan then {
+		kumamoto = kyoto * chiba;
+	} else {
+		shizuoka = kumamoto + chiba;
+		shizuoka = osaka - kumamoto;
+		kumamoto = chiba * chiba - (kumamoto*shizuoka*osaka);
+		osaka = kumamoto - (77*65);
+		akita = osaka;
+	}
+	while Japan {
+		if Japan then {
+			japan = Japan;
+			Japan = japan;
+		} else {
+			akita = kumamoto * okayama;
+		}
+		Japan = Japan;
+		if tokyo then {
+			osaka = tokyo;
+			gunma = 111;
+			tokyo = osaka;
+		} else {
+			tokyo = osaka;
+		}
+		hokkaido = osaka + (hokkaido * iwata - akita);
+		while okayama {
+			hiroshima = nagasaki;
+		}
+		hiroshima = nagasaki;
+		japan = Japan + hiroshima - nagasaki;
+	}
+	okayama = 5;
+	okayama = okayama;
+	tochigi = okayama;
+	tochigi = okinawa;
+	tochigi = okayama + 5;
+	tochigi = chiba + kyoto * osaka;
+	tochigi = osaka - okayama;
+	tochigi = kanagawa;
+	chiba = kyoto;
+	osaka = kyoto;
+	if kobe then {
+		kobe = kobe + okayama * osaka;
+		while kobe {
+			tochigi = tochigi;
+			nagasaki = tochigi;
+		}
+		osaka = kobe;	
+	} else {
+		hiroshima = tochigi;
+		nagasaki = tochigi;
+		while okinawa {
+			kobe = okinawa + (okinawa * okinawa) - 33 + 70;
+		}
+		tochigi = okinawa + tochigi;
+		if nagasaki then {
+			nagasaki = nagasaki * kanagawa * okinawa;
+			while gifu {
+				kagawa = kanagawa + nagasaki;
+				kagawa = kobe + (600 - (123));
+				kagawa = (200*888);
+			}
+		} else {
+			tochigi = okinawa;
+			okinama = nagasaki + ibaraki - kobe;
+		}
+		nagasaki = Japan;
+		kagawa = nagasaki;
+	}
+	saitama = aomori + ibaraki - (47*68) + ibaraki - chiba + hiroshima * okayama + nara;
+	okayama = nara + aichi - tochigi * saitama - 44 + 66 * 99 * (13 + 14) - tokyo;
+	niigata = nara + fukushima * kyoto * nagasaki * (saitama * saitama - nagasaki + okinawa);
+	kyoto = osaka - saitama * nagasaki - tokyo * saitama + (saitama - yamaguchi) + nara * nara * kyoto + okayama;
+	fukushima = osaka * kyoto + nagasaki - tokyo * saitama - aichi * gifu - akita * aomori - gifu + fukushima;
+	fukushima = gifu + okinawa + 68 * 78;
+	nagano = 100 * 90 * ((fukushima)) + okayama;
+	while gifu {
+		if gifu then {
+			while aichi {
+				if hokkaido then {
+					saitama = saitama * aomori + akita;
+					fukushima = hiroshima + okinawa;
+				} else {
+					hokkaido = 123;
+					niigata = kagawa + gifu - okinawa;
+					hokkaido = hokkaido + gifu;
+					gunma = hokkaido;
+				}
+			}
+		} else {
+			fukushima = okinawa + okayama * kagawa;
+			fukushima = fukushima;
+		}
+		gunma = (((300)))+(80);
+	}
+	if gifu then{
+		while kagawa {
+			if fukushima then {
+				while okinawa {
+					gunma = okinawa;
+					niigata = gifu;
+				}
+			} else {
+				akita = nara + fukuoka * nagasaki * miyazaki * hiroshima * yamaguchi;
+				akita = nagasaki * miyazaki - (900 - 380) * 72;
+				akita = kobe - kagoshima * Japan;
+			}
+			akita = kumamoto * 56 * 78 + 90 - (200*888);
+			akita = akita;
+			kumamoto = akita;
+		}
+		akita = kumamoto; 
+	} else {
+		if nagano then {
+			shizuoka = okayama * chiba;
+			kyoto = chiba * shizuoka * okayama;
+			shizuoka = kyoto * okayama;
+			okayama = 12;
+			shizuoka = (33 + 45) * nagano + fukushima;
+		} else {
+			while okayama {
+				fukushima = okayama;
+				okayama = 34;
+				while fukushima {
+					fukushima = 2011-3-11;
+				}
+			}
+			fukushima = 2011-3-11;
+		}
+		nara = akita * miyazaki * (800 * 400);
+		nagano = 333 * (fukushima-2011-3-11);
+		okayama = nagano;
+	}
+	okayama = gifu + okayama;
+	fukushima = gifu * aichi;
+	aichi = gifu * aichi;
+	while tokyo {
+		if osaka then {
+			if tokyo then {
+				while ibaraki {
+					osaka = shinosaka - tokyo + Japan - japan;
+					akita = chiba + osaka * osaka - osaka + chiba;
+					akita = osaka - aichi * okayama - fukushima * 15 - 16 + 19;
+				}
+				tokyo = 2020 * 888;
+				tokyo = 20 + 20;
+				osaka = tokyo - 15 + akita * miyazaki;
+				osaka = fukushima * okayama + 15;
+				while okinawa {
+					fukushima = osaka;
+					hokkaido = okinawa;
+					fukushima = 11-3-2011*hokkaido;
+					Japan = 1868;
+					Japan = osaka + fukushima;
+					fukushima = fukushima + hiroshima;
+					osaka = 111;
+				}
+			} else {
+				osaka = tokyo;
+			}
+		} else {
+			tokyo = 2020;
+		}
+		tokyo = 2020 * tokyo * (Japan+japan);
+		tokyo = 2020-7-24;
+		Japan = 24-7-2020;
+	}
+	tokyo = 24-7-2020;
+	Japan = tokyo + osaka * kobe + shizuoka + 111 - 222 * nara + kyoto - hokkaido + fukuoka + okinawa;
+	tokyo = Japan+24-7-2020;
+	kanagawa = kanagawa;
+	kanagawa = iwate;
+}
