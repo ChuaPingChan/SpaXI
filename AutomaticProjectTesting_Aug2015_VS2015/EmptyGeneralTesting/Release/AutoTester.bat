@@ -69,9 +69,6 @@ if '%option%'=='14' (
 if '%option%'=='15' (
 	goto :runTest15
 )
-if '%option%'=='16' (
-	goto :runTest16
-)
 cls
 goto :main
 echo ===============================================================================
@@ -647,14 +644,5 @@ echo Running AutoTester for Query_Test1 ...
 AutoTester Test15_Verb\Acceptance\Source_prog_1.txt Test15_Verb\Acceptance\Query_Test1.txt TestResult\out15_Acceptance_Query_Test1.xml > TestResult\cmd\cmd15_Acceptance_Query_Test1.txt
 echo Finish running AutoTester for Query_Test1.
 echo Finish running AutoTester for test 15.
-call :getPauseAction
-goto :eof
-
-:runTest16
-call :createCmdOutputFolder
-echo ===============================================================================
-echo Running AutoTester for test 16...
-AutoTester Test16_Stress\SourceStress.txt Test16_Stress\QueryStressNext.txt TestResult\out16_QueryStressNext.xml > TestResult\cmd\cmd16_QueryStressNext.txt
-echo Finish running AutoTester for test 16.
 call :getPauseAction
 goto :eof

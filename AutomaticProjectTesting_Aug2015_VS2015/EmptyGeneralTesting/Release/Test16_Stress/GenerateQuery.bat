@@ -1,2 +1,2 @@
-python GenerateQuery.py ExcelQuery.xlsx QueryStressAffects.txt Affects
+python GenerateQuery.py ExcelQuery.xlsx QueryStressMixed.txt Mixed
 pause
