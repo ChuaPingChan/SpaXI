@@ -2,7 +2,7 @@
 :main
 set isPause=1
 echo ===============================================================================
-echo Welcome to Team 11 AutoTester (o.o)
+echo Welcome to Team 11 static analyzer program. I am SpaXI.
 echo ===============================================================================
 echo Type the test index to run the test
 echo [0] Receive a compliment
@@ -10,6 +10,7 @@ echo [s] Run AutoTester for specified test path
 echo [a] Run All Tests
 echo [?] Run Predefined Test #?
 echo [x] Exit
+SpaxiSpeech\spaxi_welcome.vbs
 set option=
 set /p option=Please select your options: 
 if '%option%'=='0' (
