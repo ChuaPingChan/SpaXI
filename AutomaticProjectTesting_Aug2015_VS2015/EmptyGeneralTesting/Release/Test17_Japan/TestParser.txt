@@ -1,0 +1,10 @@
+1 - Parser test
+stmt s;
+Select BOOLEAN
+true
+5000
+2 - Parser test
+variable v;
+Select v such that Uses(5,v)
+tokyo,hiroshima,kyoto
+5000
