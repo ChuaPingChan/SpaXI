@@ -34,7 +34,6 @@ list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
     list<list<int>> result;
 
     list<int> synIndices;
-    synIndices.clear();
     for (string synName : synNames) {
         synIndices.push_back(_synToIdxMap.at(synName));
     }
@@ -42,7 +41,6 @@ list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
     // For each combinations, filter the selected synonyms only.
     for (vector<int> existingComb : _results) {
         list<int> selectedSynCombinations;
-        selectedSynCombinations.clear();
 
         for (int synIndex : synIndices)
         {
@@ -64,14 +62,12 @@ list<int> ClauseResult::getSynonymResults(string synName)
 {
     // Construct a list with only one synonym name
     list<string> synNameVec;
-    synNameVec.clear();
     synNameVec.push_back(synName);
 
     list<list<int>> resultVerticalList = getSynonymResults(synNameVec);
 
     // Put resutls into a single list for the convenience of evaluators
     list<int> resultHorizontalList;
-    resultHorizontalList.clear();
     for (list<int> oneResult : resultVerticalList)
     {
         assert(oneResult.size() == 1);
@@ -88,14 +84,12 @@ list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string
     takes in a list of synonym names.
     */
     list<string> synNameList;
-    synNameList.clear();
     synNameList.push_back(syn1Name);
     synNameList.push_back(syn2Name);
 
     list<list<int>> synPairResultList = getSynonymResults(synNameList);
 
     list<pair<int, int>> synPairResult;
-    synPairResult.clear();
     // Convert inner lists to pairs
     // TODO: Can consider refactoring, but not for now, not reused by others.
     for (list<list<int>>::iterator synPairResultInnerListPtr = synPairResultList.begin();
@@ -122,7 +116,7 @@ list<list<int>> ClauseResult::getAllResults()
 
 bool ClauseResult::synonymPresent(string synName)
 {
-    return _synToIdxMap.count(synName) > 0;
+    return _synToIdxMap.find(synName) != _synToIdxMap.end();
 }
 
 /*
@@ -135,7 +129,7 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     assert(newSynResultsList.size() > 0);       // TODO: Can consider clearing everything if this happens
 
     _isNew = false;
-    if (_synToIdxMap.count(newSynName) == 1)
+    if (_synToIdxMap.find(newSynName) != _synToIdxMap.end())
     {
         return overlapExistingSynResults(newSynName, newSynResultsList);
     }
@@ -193,10 +187,8 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
             synsToMerge.push_back(synName);
     }
 
-    if (synsToMerge.size() == 0) {
-        // No merging takes place if no synonyms in the new clause result is "selected" in the query
-        return true;
-    }
+    if (synsToMerge.size() == 0)
+        return true;    // No merging takes place if no synonyms in the new clause result is "selected" in the query
 
     // Get the results of only the synonyms to merge and remove duplicates
     list<list<int>> resultsToMerge = clauseResultToMerge.getSynonymResults(synsToMerge);
@@ -241,8 +233,8 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
 bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults)
 {
     assert(pairResults.size() > 0);
-    assert(_synToIdxMap.count(syn1Name) == 0);    // syn1 must be new synonym
-    assert(_synToIdxMap.count(syn2Name) == 0);    // syn2 must be new synonym
+    assert(_synToIdxMap.find(syn1Name) == _synToIdxMap.end());    // syn1 must be new synonym
+    assert(_synToIdxMap.find(syn2Name) == _synToIdxMap.end());    // syn2 must be new synonym
 
     _isNew = false;
 
@@ -266,7 +258,6 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
     }
 
     list<vector<int>> updatedResults;
-    updatedResults.clear();
 
     for (vector<int> existingComb : _results)
     {
@@ -301,14 +292,12 @@ list<vector<int>> ClauseResult::pairUpListsResults(list<int>& syn1Results, list<
     assert(syn1Results.size() == syn2Results.size());
 
     list<vector<int>> pairResults;
-    pairResults.clear();
 
     // Simulate zip iterator
     list<int>::iterator iter1 = syn1Results.begin();
     list<int>::iterator iter2 = syn2Results.begin();
     for (; iter1 != syn1Results.end() && iter2 != syn2Results.end(); iter1++, iter2++) {
         vector<int> pairResult;
-        pairResult.clear();
         pairResult.push_back(*iter1);
         pairResult.push_back(*iter2);
         pairResults.push_back(pairResult);
@@ -325,13 +314,11 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
 
     list<vector<int>> updatedResults;   // to overwrite _results at the end of this method
 
-    for (list<vector<int>>::iterator combPtr = _results.begin();
-        combPtr != _results.end();
-        combPtr++)
+    for (vector<int> comb : _results)
     {
-        int valueInComb = (*combPtr).at(synIdx);
-        if (resultsSetToOverlap.count(valueInComb) == 1) {
-            updatedResults.push_back(*combPtr);
+        int valueInComb = (comb).at(synIdx);
+        if (resultsSetToOverlap.find(valueInComb) != resultsSetToOverlap.end()) {
+            updatedResults.push_back(comb);
         }
     }
     _results = updatedResults;
@@ -341,10 +328,10 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
 bool ClauseResult::removeCombinations(string synName, int value)
 {
     /*
-    Note:
-    There's no need to remove anything from _synList and _synToIdxMap
-    because once a synonym is introduced into the intermetiate result,
-    it MUST always have at least 1 possible result.
+        Note:
+        There's no need to remove anything from _synList and _synToIdxMap
+        because once a synonym is introduced into the intermetiate result,
+        it MUST always have at least 1 possible result.
     */
 
     assert(ClauseResult::synonymPresent(synName));
@@ -358,18 +345,6 @@ bool ClauseResult::removeCombinations(string synName, int value)
         else
             existingResultsIter++;
     }
-
-    /*
-    list<vector<int>> updatedResult;    // To be assigned to _results at the end of this method
-    updatedResult.clear();
-
-    for (vector<int> existingComb : _results)
-    {
-        if (existingComb.at(synIdx) != value)
-            updatedResult.push_back(existingComb);
-    }
-    _results = updatedResult;
-    */
     return true;
 }
 
@@ -408,14 +383,14 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
     // Add to _synList and _synToIdxMap
     _synList.push_back(newSyn);
     int newSynIdx = _synList.size() - 1;
-    assert(_synToIdxMap.count(newSyn) == 0);
+    assert(_synToIdxMap.find(newSyn) == _synToIdxMap.end());
     _synToIdxMap.insert({ newSyn, newSynIdx });
 
     // Create hash map to hasten merging with existing results
     unordered_map<int, vector<int>> oldSynValToNewSynResultMap;
-    oldSynValToNewSynResultMap.clear();
 
     // Populate oldSynValToNewSynResultMap
+    resultPairs.unique();
     for (pair<int, int> resultPair : resultPairs)
     {   // Convert pair to vector so that it can be appended to existing vector easily
         oldSynValToNewSynResultMap[resultPair.first].push_back(resultPair.second);
@@ -424,12 +399,11 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
     // Merging with existing combinations
     int oldSynIdx = _synToIdxMap.at(oldSyn);
     list<vector<int>> updatedResults;
-    updatedResults.clear();
     for (vector<int> existingCombination : _results)
     {
         const int oldSynVal = existingCombination[oldSynIdx];
         // TODO: Consider refactoring to avoid arrowhead code.
-        if (oldSynValToNewSynResultMap.count(oldSynVal) == 1)
+        if (oldSynValToNewSynResultMap.find(oldSynVal) != oldSynValToNewSynResultMap.end())
         {
             vector<int> newSynResults = oldSynValToNewSynResultMap.at(oldSynVal);
             for (int newSynResult : newSynResults)
