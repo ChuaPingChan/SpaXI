@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-Overall Test Ran    : 7878
-Overall Test Passed : 7877
-Overall Test Failed : 1
-Overall Test Timeout: 0
-=======
 Overall Test Ran    : 8147
 Overall Test Passed : 8144
 Overall Test Failed : 1
 Overall Test Timeout: 2
->>>>>>> iteration3.0
 
 
 TestResult\out1.xml: 
