@@ -11,6 +11,10 @@ bool StmtTypeList::addToStmtList(int stmt) {
 	return true;
 }
 
+list<int> StmtTypeList::getStmtList() {
+	return stmtList;
+}
+
 bool StmtTypeList::addToAssignStmtList(int stmt) {
     // if stmt number does not exists in assignment list, add to list
     if (find(assignStmtList.begin(), assignStmtList.end(), stmt) == assignStmtList.end()) {
