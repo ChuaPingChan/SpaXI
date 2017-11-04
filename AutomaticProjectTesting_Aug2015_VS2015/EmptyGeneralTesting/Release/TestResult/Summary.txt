@@ -1,7 +1,7 @@
 Overall Test Ran    : 7878
-Overall Test Passed : 7865
+Overall Test Passed : 7867
 Overall Test Failed : 9
-Overall Test Timeout: 4
+Overall Test Timeout: 2
 
 
 TestResult\out1.xml: 
@@ -384,9 +384,9 @@ Timeout  : 0
 
 TestResult\out14_Query6MultipleClause_UsingSource6.xml: 
 Test Ran: 29
-Passed   : 27
+Passed   : 29
 Failed   : 0
-Timeout  : 2
+Timeout  : 0
 
 TestResult\out14_Query6Parent_UsingSource6.xml: 
 Test Ran: 40
