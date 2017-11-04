@@ -61,6 +61,8 @@ public:
 
 	bool addStmtList(int stmt);
 
+	list<int> getStmtList();
+
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
     bool isParent(int parentStmt);

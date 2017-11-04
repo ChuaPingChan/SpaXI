@@ -253,6 +253,10 @@ bool PKBMain::addStmtList(int stmt) {
 	return stmtTypeList.addToStmtList(stmt);
 }
 
+list<int> PKBMain::getStmtList() {
+	return stmtTypeList.getStmtList();
+}
+
 //CALLS
 list<string> PKBMain::getAllCalleeNames() {
 	return stmtTypeList.getAllCalleeNames();

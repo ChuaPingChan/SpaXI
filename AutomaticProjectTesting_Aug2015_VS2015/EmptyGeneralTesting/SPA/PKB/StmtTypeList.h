@@ -15,6 +15,7 @@ class StmtTypeList {
 public:
     StmtTypeList();
 	bool addToStmtList(int stmt);
+	list<int> getStmtList();
     bool addToAssignStmtList(int stmt);
     bool addToWhileStmtList(int stmt);
 	bool addToCallsStmtList(int stmt, int calleeProcIdx, string calleeProcName);
