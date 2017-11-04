@@ -510,9 +510,12 @@ namespace UnitTesting
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Test for correct adding of stmtList in PKB
+            actualResults = dummyPkbMain.getStmtList();
             expectedResults = list<int>{
                 1, 7, 8, 10, 13, 17, 19, 31, 33, 36, 38, 40,
                 42, 45, 49, 52,54, 57, 62, 65, 69, 72 };
+            actualResults.sort();
+            expectedResults.sort();
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
