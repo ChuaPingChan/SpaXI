@@ -1,3 +1,4 @@
+set isWelcome=1
 @echo off
 :main
 set isPause=1
@@ -15,8 +16,13 @@ echo [3] Run Simple03 Test
 echo [4] Run FocusTest\Sequential
 echo [5] Run FocusTest\Loop
 echo [6] Run FocusTest\InterProcedural
+echo [7] Run Validation Test
+echo [8] Run Stress Test
 echo [x] Exit
-SpaxiSpeech\spaxi_welcome.vbs
+if %isWelcome%==1 (
+	SpaxiSpeech\spaxi_welcome.vbs
+	set isWelcome=0
+)
 set option=
 set /p option=Please select your options: 
 if '%option%'=='c' (
@@ -141,17 +147,22 @@ call :clearAllResultFiles
 echo ===============================================================================
 echo                           Start Running AutoTester
 echo ===============================================================================
+SpaxiSpeech\spaxi_AutotesterStart.vbs
 call :runSampleTest
-call :runSimple01
-call :runSimple02
-call :runSimple03
+REM call :runSimple01
+REM call :runSimple02
+REM call :runSimple03
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
 echo Generating Summary ...
+SpaxiSpeech\spaxi_AutotesterFinish.vbs
+SpaxiSpeech\spaxi_generatingSummary.vbs
 python TestResult\GenerateResultSummary.py TestResult TestResult\Summary.txt
 echo Summary Generated.
 start TestResult\Summary.txt
+SpaxiSpeech\spaxi_summaryGenerated.vbs
+SpaxiSpeech\spaxi_thankYouHaveANiceDay.vbs
 pause
 cls
 goto :main
@@ -160,7 +171,7 @@ goto :main
 call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for Sample Test...
-AutoTester SampleTest\Sample-Source.txt SampleTest\Sample-Queries.txt TestResult\out_SampleTest_Sample-Queries.xml > TestResult\cmd\cmd_SampleTest_Sample-Queries.txt
+AutoTester 1_SampleTest\Sample-Source.txt 1_SampleTest\Sample-Queries.txt TestResult\out_SampleTest_Sample-Queries.xml > TestResult\cmd\cmd_SampleTest_Sample-Queries.txt
 echo Finish running AutoTester for Sample Test.
 call :getPauseAction
 goto :eof
@@ -169,7 +180,7 @@ goto :eof
 call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for Simple Test 1...
-AutoTester SimpleTest\Source_Simple01.txt SimpleTest\Query_Simple01.txt TestResult\out_SimpleTest_Query_Simple01.xml > TestResult\cmd\cmd_SimpleTest_Query_Simple01.txt
+AutoTester 2_SimpleTest\Source_Simple01.txt 2_SimpleTest\Query_Simple01.txt TestResult\out_SimpleTest_Query_Simple01.xml > TestResult\cmd\cmd_SimpleTest_Query_Simple01.txt
 echo Finish running AutoTester Simple Test 1.
 call :getPauseAction
 goto :eof
@@ -178,7 +189,7 @@ goto :eof
 call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for Simple Test 2...
-AutoTester SimpleTest\Source_Simple02.txt SimpleTest\Query_Simple02.txt TestResult\out_SimpleTest_Query_Simple02.xml > TestResult\cmd\cmd_SimpleTest_Query_Simple02.txt
+AutoTester 2_SimpleTest\Source_Simple02.txt 2_SimpleTest\Query_Simple02.txt TestResult\out_SimpleTest_Query_Simple02.xml > TestResult\cmd\cmd_SimpleTest_Query_Simple02.txt
 echo Finish running AutoTester Simple Test 2.
 call :getPauseAction
 goto :eof
@@ -187,7 +198,7 @@ goto :eof
 call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for Simple Test 3...
-AutoTester SimpleTest\Source_Simple03.txt SimpleTest\Query_Simple03.txt TestResult\out_SimpleTest_Query_Simple03.xml > TestResult\cmd\cmd_SimpleTest_Query_Simple03.txt
+AutoTester 2_SimpleTest\Source_Simple03.txt 2_SimpleTest\Query_Simple03.txt TestResult\out_SimpleTest_Query_Simple03.xml > TestResult\cmd\cmd_SimpleTest_Query_Simple03.txt
 echo Finish running AutoTester Simple Test 3.
 call :getPauseAction
 goto :eof
