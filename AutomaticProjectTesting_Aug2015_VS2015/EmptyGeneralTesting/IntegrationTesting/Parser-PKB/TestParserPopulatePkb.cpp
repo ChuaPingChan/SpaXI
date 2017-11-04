@@ -343,162 +343,181 @@ namespace UnitTesting
             Assert::IsTrue(createDummySimpleSourceFile_affectsSource1());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
-            
-			// Test for affects
-			Assert::IsTrue(dummyPkbMain.isAffects(1, 3));
-			Assert::IsTrue(dummyPkbMain.isAffects(1, 7));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 3));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
-			Assert::IsTrue(dummyPkbMain.isAffects(5, 3));
-			Assert::IsTrue(dummyPkbMain.isAffects(5, 5));
-			Assert::IsTrue(dummyPkbMain.isAffects(5, 6));
-			Assert::IsTrue(dummyPkbMain.isAffects(5, 7));
-			Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
 
-			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 10);
+            // Test for affects
+            Assert::IsTrue(dummyPkbMain.isAffects(1, 3));
+            Assert::IsTrue(dummyPkbMain.isAffects(1, 7));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 3));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
+            Assert::IsTrue(dummyPkbMain.isAffects(5, 3));
+            Assert::IsTrue(dummyPkbMain.isAffects(5, 5));
+            Assert::IsTrue(dummyPkbMain.isAffects(5, 6));
+            Assert::IsTrue(dummyPkbMain.isAffects(5, 7));
+            Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
+
+            Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 10);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-		TEST_METHOD(TestAffectsComputation2)
-		{
-			// Set up
-			list<int> actualResults;
-			list<int> expectedResults;
-			Parser parser(dummyPkbMainPtr);
-			Assert::IsTrue(createDummySimpleSourceFile_affectsSource2());
-			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+        TEST_METHOD(TestAffectsComputation2)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_affectsSource2());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
-			// Test for affects
-			Assert::IsTrue(dummyPkbMain.isAffects(1, 8));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
-			Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
+            // Test for affects
+            Assert::IsTrue(dummyPkbMain.isAffects(1, 8));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
+            Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
 
-			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 3);
+            Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 3);
 
-			// Clean up
-			Assert::IsTrue(deleteDummySimpleSourceFile());
-		}
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
 
-		TEST_METHOD(TestAffectsComputation3)
-		{
-			// Set up
-			list<int> actualResults;
-			list<int> expectedResults;
-			Parser parser(dummyPkbMainPtr);
-			Assert::IsTrue(createDummySimpleSourceFile_affectsSource3());
-			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
-
-
-			// Test for affects
-			Assert::IsTrue(dummyPkbMain.isAffects(2, 5));
-			Assert::IsTrue(dummyPkbMain.isAffects(5, 2));
-			Assert::IsTrue(dummyPkbMain.isAffects(7, 2));
-			Assert::IsTrue(dummyPkbMain.isAffects(7, 5));
-			Assert::IsTrue(dummyPkbMain.isAffects(7, 8));
-			Assert::IsTrue(dummyPkbMain.isAffects(8, 2));
-			Assert::IsTrue(dummyPkbMain.isAffects(8, 5));
-			Assert::IsTrue(dummyPkbMain.isAffects(8, 8));
-			Assert::IsFalse(dummyPkbMain.isAffects(7, 7));
-
-			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 8);
-
-			// Clean up
-			Assert::IsTrue(deleteDummySimpleSourceFile());
-		}
-
-		TEST_METHOD(TestAffectsComputation4)
-		{
-			// Set up
-			list<int> actualResults;
-			list<int> expectedResults;
-			Parser parser(dummyPkbMainPtr);
-			Assert::IsTrue(createDummySimpleSourceFile_affectsSource4());
-			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+        TEST_METHOD(TestAffectsComputation3)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_affectsSource3());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
-			// Test for affects
-			Assert::IsTrue(dummyPkbMain.isAffects(1, 4));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 11));
-			Assert::IsTrue(dummyPkbMain.isAffects(3, 12));
-			Assert::IsTrue(dummyPkbMain.isAffects(6, 7));
-			Assert::IsTrue(dummyPkbMain.isAffects(14, 4));
-			Assert::IsTrue(dummyPkbMain.isAffects(14, 11));
-			Assert::IsTrue(dummyPkbMain.isFollows(5, 15));
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(15, 4));
+            // Test for affects
+            Assert::IsTrue(dummyPkbMain.isAffects(2, 5));
+            Assert::IsTrue(dummyPkbMain.isAffects(5, 2));
+            Assert::IsTrue(dummyPkbMain.isAffects(7, 2));
+            Assert::IsTrue(dummyPkbMain.isAffects(7, 5));
+            Assert::IsTrue(dummyPkbMain.isAffects(7, 8));
+            Assert::IsTrue(dummyPkbMain.isAffects(8, 2));
+            Assert::IsTrue(dummyPkbMain.isAffects(8, 5));
+            Assert::IsTrue(dummyPkbMain.isAffects(8, 8));
+            Assert::IsFalse(dummyPkbMain.isAffects(7, 7));
 
-			Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 14);
+            Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 8);
 
-			// Clean up
-			Assert::IsTrue(deleteDummySimpleSourceFile());
-		}
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
 
-		TEST_METHOD(TestAffectsStarComputation)
-		{
-			// Set up
-			list<int> actualResults;
-			list<int> expectedResults;
-			Parser parser(dummyPkbMainPtr);
-			Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource());
-			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
-
-
-			// Test for affects
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 3));
-
-			// Clean up
-			Assert::IsTrue(deleteDummySimpleSourceFile());
-		}
-
-		TEST_METHOD(TestAffectsStarComputation2)
-		{
-			// Set up
-			list<int> actualResults;
-			list<int> expectedResults;
-			Parser parser(dummyPkbMainPtr);
-			Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource2());
-			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+        TEST_METHOD(TestAffectsComputation4)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_affectsSource4());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
-			// Test for affects
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(9, 21));
+            // Test for affects
+            Assert::IsTrue(dummyPkbMain.isAffects(1, 4));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 11));
+            Assert::IsTrue(dummyPkbMain.isAffects(3, 12));
+            Assert::IsTrue(dummyPkbMain.isAffects(6, 7));
+            Assert::IsTrue(dummyPkbMain.isAffects(14, 4));
+            Assert::IsTrue(dummyPkbMain.isAffects(14, 11));
+            Assert::IsTrue(dummyPkbMain.isFollows(5, 15));
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(15, 4));
 
-			// Clean up
-			Assert::IsTrue(deleteDummySimpleSourceFile());
-		}
+            Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 14);
 
-		TEST_METHOD(TestAffectsStarComputation3)
-		{
-			// Set up
-			list<int> actualResults;
-			list<int> expectedResults;
-			Parser parser(dummyPkbMainPtr);
-			Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource3());
-			Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(TestAffectsStarComputation)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
-			// Test for affects
-			Assert::IsFalse(dummyPkbMain.isAffectsStar(1, 16));
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(11, 19));
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(16, 16));
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(19, 19));
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(3, 19));
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(7, 19));
-			Assert::IsFalse(dummyPkbMain.isAffectsStar(9, 19));
-			Assert::IsFalse(dummyPkbMain.isAffectsStar(1, 16));
-			Assert::IsFalse(dummyPkbMain.isAffectsStar(6, 16));
-			Assert::IsFalse(dummyPkbMain.isAffectsStar(9, 16));
-			Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 13));
+            // Test for affects
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 3));
 
-			// Clean up
-			Assert::IsTrue(deleteDummySimpleSourceFile());
-		}
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(TestAffectsStarComputation2)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource2());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+            // Test for affects
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(9, 21));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(TestAffectsStarComputation3)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource3());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+
+            // Test for affects
+            Assert::IsFalse(dummyPkbMain.isAffectsStar(1, 16));
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(11, 19));
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(16, 16));
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(19, 19));
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(3, 19));
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(7, 19));
+            Assert::IsFalse(dummyPkbMain.isAffectsStar(9, 19));
+            Assert::IsFalse(dummyPkbMain.isAffectsStar(1, 16));
+            Assert::IsFalse(dummyPkbMain.isAffectsStar(6, 16));
+            Assert::IsFalse(dummyPkbMain.isAffectsStar(9, 16));
+            Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 13));
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(testAddStmtList)
+        {
+            // Set up
+            list<int> actualResults;
+            list<int> expectedResults;
+            Parser parser(dummyPkbMainPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_iteration3complexity());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+
+            // Test for correct adding of stmtList in PKB
+            expectedResults = list<int>{
+                1, 7, 8, 10, 13, 17, 19, 31, 33, 36, 38, 40,
+                42, 45, 49, 52,54, 57, 62, 65, 69, 72 };
+
+            // Clean up
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+
+        }
 
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
@@ -1235,154 +1254,154 @@ namespace UnitTesting
             return true;
         }
 
-		/*
-		This is a utility method to create a dummy SIMPLE source to test
-		PKB's Affects computation.
-		*/
-		bool createDummySimpleSourceFile_affectsSource2() {
-			std::string content =
-				"procedure Test { \n"
-				"	a = b; \n"
-				"	if x then { \n"
-				"		a = c; \n"
-				"		if y then { \n"
-				"			y = a; \n"
-				"           a = b; \n"
-				"		} else { \n"
-				"		    q = b + a; \n"
-				"	    } \n"
-				"	} else { \n"
-				"       x = a + b; \n"
-				"   } \n"
-				"}";
-			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
-			std::ofstream outfile(newFilePath);
-			std::string inputString(content);
-			outfile << inputString;
-			outfile.close();
-			return true;
-		}
+        /*
+        This is a utility method to create a dummy SIMPLE source to test
+        PKB's Affects computation.
+        */
+        bool createDummySimpleSourceFile_affectsSource2() {
+            std::string content =
+                "procedure Test { \n"
+                "	a = b; \n"
+                "	if x then { \n"
+                "		a = c; \n"
+                "		if y then { \n"
+                "			y = a; \n"
+                "           a = b; \n"
+                "		} else { \n"
+                "		    q = b + a; \n"
+                "	    } \n"
+                "	} else { \n"
+                "       x = a + b; \n"
+                "   } \n"
+                "}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
 
-		bool createDummySimpleSourceFile_affectsSource3() {
-			std::string content =
-				"procedure Test { \n"
-				"	while battle1{ \n"
-				"		charmeleon = wartortle + ivysaur; \n"
-				"		while battle2{ \n"
-				"			while battle3{ \n"
-				"				ivysaur = charmeleon + wartortle; \n"
-				"			} \n "
-				"			if wartortle then{ \n"
-				"				wartortle = squirtle + 3; \n"
-				"			} \n"
-				"			else { \n"
-				"				wartortle = wartortle - 1; \n"
-				"			} \n"
-				"		} \n"
-				"		lastPokemon = 3; \n"
-				"	} \n"
-				"}";
-			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
-			std::ofstream outfile(newFilePath);
-			std::string inputString(content);
-			outfile << inputString;
-			outfile.close();
-			return true;
-		}
+        bool createDummySimpleSourceFile_affectsSource3() {
+            std::string content =
+                "procedure Test { \n"
+                "	while battle1{ \n"
+                "		charmeleon = wartortle + ivysaur; \n"
+                "		while battle2{ \n"
+                "			while battle3{ \n"
+                "				ivysaur = charmeleon + wartortle; \n"
+                "			} \n "
+                "			if wartortle then{ \n"
+                "				wartortle = squirtle + 3; \n"
+                "			} \n"
+                "			else { \n"
+                "				wartortle = wartortle - 1; \n"
+                "			} \n"
+                "		} \n"
+                "		lastPokemon = 3; \n"
+                "	} \n"
+                "}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
 
-		bool createDummySimpleSourceFile_affectsSource4() {
-			std::string content =
-				"procedure Test { \n"
-				"	a = 5; \n"
-				"	while x { \n"
-				"		b = c + b; \n"
-				"		t = t + a; \n"
-				"		if b then { \n"
-				"			n = b + m; \n"
-				"			b = n * 2 + k; \n"
-				"			n = b - b; \n"
-				"			call Bob; \n" //modifies b & n
-				"			m = n + k - n + n; }\n"
-				"		else { \n"
-				"			a = a + b; \n"
-				"			b = b; \n"
-				"			call John; \n" //modifies b
-				"			a = b * m * n; } \n"
-				"		m = b; \n"
-				"		n = 2; } \n"
-				"	call Bob; \n" //modifies b & n
-				"} \n"
-				"procedure Bob { \n "
-				"	b = 3; \n"
-				"	n = b; \n"
-				"} \n"
-				"procedure John { \n"
-				"	b = 3; \n"
-				"}";
-			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
-			std::ofstream outfile(newFilePath);
-			std::string inputString(content);
-			outfile << inputString;
-			outfile.close();
-			return true;
-		}
+        bool createDummySimpleSourceFile_affectsSource4() {
+            std::string content =
+                "procedure Test { \n"
+                "	a = 5; \n"
+                "	while x { \n"
+                "		b = c + b; \n"
+                "		t = t + a; \n"
+                "		if b then { \n"
+                "			n = b + m; \n"
+                "			b = n * 2 + k; \n"
+                "			n = b - b; \n"
+                "			call Bob; \n" //modifies b & n
+                "			m = n + k - n + n; }\n"
+                "		else { \n"
+                "			a = a + b; \n"
+                "			b = b; \n"
+                "			call John; \n" //modifies b
+                "			a = b * m * n; } \n"
+                "		m = b; \n"
+                "		n = 2; } \n"
+                "	call Bob; \n" //modifies b & n
+                "} \n"
+                "procedure Bob { \n "
+                "	b = 3; \n"
+                "	n = b; \n"
+                "} \n"
+                "procedure John { \n"
+                "	b = 3; \n"
+                "}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
 
-		bool createDummySimpleSourceFile_affectsSource5() {
-			std::string content =
-				"procedure IfWhile { \n"
-				"	if dream then { \n"
-				"		sleep = 100 + 5; \n"
-				"		while sleep { \n"
-				"			inBattle = 100 - 5 - sleep; \n"
-				"			knowledge = 5 - 20; }\n"
-				"	} else { \n "
-				"		sleep = knowledge + dream; }\n"
-				"	while sleep { \n"
-				"		sleep = sleep + 2; }\n"
-				"	dream = sleep * 5000; \n"
-				"}";
-			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
-			std::ofstream outfile(newFilePath);
-			std::string inputString(content);
-			outfile << inputString;
-			outfile.close();
-			return true;
-		}
+        bool createDummySimpleSourceFile_affectsSource5() {
+            std::string content =
+                "procedure IfWhile { \n"
+                "	if dream then { \n"
+                "		sleep = 100 + 5; \n"
+                "		while sleep { \n"
+                "			inBattle = 100 - 5 - sleep; \n"
+                "			knowledge = 5 - 20; }\n"
+                "	} else { \n "
+                "		sleep = knowledge + dream; }\n"
+                "	while sleep { \n"
+                "		sleep = sleep + 2; }\n"
+                "	dream = sleep * 5000; \n"
+                "}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
 
-		bool createDummySimpleSourceFile_affectsStarSource() {
-			std::string content =
-				"procedure IfWhile { \n"
-				"	a = 2; \n"
-				"	b = a; \n"
-				"	c = b; \n"
-				"}";
-			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
-			std::ofstream outfile(newFilePath);
-			std::string inputString(content);
-			outfile << inputString;
-			outfile.close();
-			return true;
-		}
+        bool createDummySimpleSourceFile_affectsStarSource() {
+            std::string content =
+                "procedure IfWhile { \n"
+                "	a = 2; \n"
+                "	b = a; \n"
+                "	c = b; \n"
+                "}";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
 
-		bool createDummySimpleSourceFile_affectsStarSource2() {
-			std::string content = "procedure WhileMultiple { sarada = sakura + sasuke; shikamaru = shikamaru + 100 ; while naruto { naruto = 2 + kurama ; sakura = love - 5; while sasuke { sakura = love + 100 ; sakura = naruto - 100 ; attack = 10 + 100; while kakashi { shadowClone = naruto + kakashi; while sageMode { while inBattle { jiraya = attack + 100 * knowledge - 5;} naruto = attack +100; } while inBattle { kakashi = naruto + jiraya; attack = attack * 5; } } sarada = love * 100; } inBattle= sageMode * love* knowledge; } knowledge =sleep + inBattle + love + naruto; } procedure IfMultiple { boruto = naruto + hinata; if inBattle then { boruto = attack + 5; boruto = shadowClone + 5; if naruto then { boruto = love - 20 ; boruto = boruto*shadowClone - 20 ; hinata = love + 100; if hinata then { himawari = love + 100; if inBattle then { hinata= attack +100* naruto * love+ 100 - boruto ; himawari=hinata*naruto+love; } else { knowledge =naruto + hinata * himawari - boruto ; } } else { knowledge = love * 0; } if sakura then { knowledge = hinata * love -sakura * love; } else { shadowClone = shadowClone+ 3; } naruto = sleep; } else { boruto = knowledge + 2; love = sarada + boruto; } } else { kakashi = inBattle; if inBattle then { kakashi = sageMode - 5 + boruto - 5; shadowClone = 100 * shadowClone ; } else { kakashi = sleep + 5; shadowClone = shadowClone - 10; knowledge = sleep + 10; } kakashi = shadowClone * 0; if love then { kakashi = love + 5 ; love = knowledge + shadowClone + sageMode; } else { naruto = inBattle ; boruto = inBattle; } } } procedure WhileIf { inBattle = naruto + sasuke ; while inBattle { if naruto then { naruto = shadowClone* sageMode *attack+ 100; } else { sasuke = knowledge* 100 - naruto; } } if sleep then { dream =naruto + hinata + boruto + himawari; } else { boruto = hinata + himawari - naruto; } } procedure IfWhile { if dream then { sleep = 100 + 5; while sleep { inBattle = 100 - 5 -sleep; knowledge = 5 - 20; } } else { sleep = knowledge + dream; } while sleep { sleep = sleep + 2; } dream = sleep * 5000; } ";
-			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
-			std::ofstream outfile(newFilePath);
-			std::string inputString(content);
-			outfile << inputString;
-			outfile.close();
-			return true;
-		}
+        bool createDummySimpleSourceFile_affectsStarSource2() {
+            std::string content = "procedure WhileMultiple { sarada = sakura + sasuke; shikamaru = shikamaru + 100 ; while naruto { naruto = 2 + kurama ; sakura = love - 5; while sasuke { sakura = love + 100 ; sakura = naruto - 100 ; attack = 10 + 100; while kakashi { shadowClone = naruto + kakashi; while sageMode { while inBattle { jiraya = attack + 100 * knowledge - 5;} naruto = attack +100; } while inBattle { kakashi = naruto + jiraya; attack = attack * 5; } } sarada = love * 100; } inBattle= sageMode * love* knowledge; } knowledge =sleep + inBattle + love + naruto; } procedure IfMultiple { boruto = naruto + hinata; if inBattle then { boruto = attack + 5; boruto = shadowClone + 5; if naruto then { boruto = love - 20 ; boruto = boruto*shadowClone - 20 ; hinata = love + 100; if hinata then { himawari = love + 100; if inBattle then { hinata= attack +100* naruto * love+ 100 - boruto ; himawari=hinata*naruto+love; } else { knowledge =naruto + hinata * himawari - boruto ; } } else { knowledge = love * 0; } if sakura then { knowledge = hinata * love -sakura * love; } else { shadowClone = shadowClone+ 3; } naruto = sleep; } else { boruto = knowledge + 2; love = sarada + boruto; } } else { kakashi = inBattle; if inBattle then { kakashi = sageMode - 5 + boruto - 5; shadowClone = 100 * shadowClone ; } else { kakashi = sleep + 5; shadowClone = shadowClone - 10; knowledge = sleep + 10; } kakashi = shadowClone * 0; if love then { kakashi = love + 5 ; love = knowledge + shadowClone + sageMode; } else { naruto = inBattle ; boruto = inBattle; } } } procedure WhileIf { inBattle = naruto + sasuke ; while inBattle { if naruto then { naruto = shadowClone* sageMode *attack+ 100; } else { sasuke = knowledge* 100 - naruto; } } if sleep then { dream =naruto + hinata + boruto + himawari; } else { boruto = hinata + himawari - naruto; } } procedure IfWhile { if dream then { sleep = 100 + 5; while sleep { inBattle = 100 - 5 -sleep; knowledge = 5 - 20; } } else { sleep = knowledge + dream; } while sleep { sleep = sleep + 2; } dream = sleep * 5000; } ";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
 
-		bool createDummySimpleSourceFile_affectsStarSource3() {
-			std::string content = "procedure pokemon { charmander = 5; squirtle = 5; bulbasaur = 5; firstStageEvolution = 11; while firstStageEvolution { charmander = charmander + 1; bulbasaur = bulbasaur + 1; squirtle = squirtle + 1; } charmeleon = charmander; wartortle = squirtle; ivysaur = bulbasaur; battle1 = charmeleon - wartortle; battle2 = ivysaur - charmeleon; battle3 = squirtle - ivysaur; while battle1 { charmeleon = wartortle + ivysaur; while battle2 { while battle3 { ivysaur = charmeleon + wartortle; } if wartortle then { wartortle = squirtle + 3; } else { wartortle = wartortle - 1; } } lastPokemon = 3; } }";
-			std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
-			std::ofstream outfile(newFilePath);
-			std::string inputString(content);
-			outfile << inputString;
-			outfile.close();
-			return true;
-		}
+        bool createDummySimpleSourceFile_affectsStarSource3() {
+            std::string content = "procedure pokemon { charmander = 5; squirtle = 5; bulbasaur = 5; firstStageEvolution = 11; while firstStageEvolution { charmander = charmander + 1; bulbasaur = bulbasaur + 1; squirtle = squirtle + 1; } charmeleon = charmander; wartortle = squirtle; ivysaur = bulbasaur; battle1 = charmeleon - wartortle; battle2 = ivysaur - charmeleon; battle3 = squirtle - ivysaur; while battle1 { charmeleon = wartortle + ivysaur; while battle2 { while battle3 { ivysaur = charmeleon + wartortle; } if wartortle then { wartortle = squirtle + 3; } else { wartortle = wartortle - 1; } } lastPokemon = 3; } }";
+            std::string newFilePath("../UnitTesting/ParserTestDependencies/dummySimpleSource.txt");
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
 
         // This is a utility method to destroy the dummy text file created by createDummyTextFile()
         bool deleteDummySimpleSourceFile() {
