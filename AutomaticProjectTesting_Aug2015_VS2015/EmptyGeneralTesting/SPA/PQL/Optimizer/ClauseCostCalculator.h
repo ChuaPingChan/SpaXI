@@ -20,8 +20,6 @@ public:
     static int getCost(PatternClausePtr patternClausePtr);
     static int getCost(WithClausePtr withClausePtr);
 
-private:
-
     enum ClauseCost
     {
         // TODO: Consider calculating cost dynamically by querying PKB
@@ -68,13 +66,15 @@ private:
         PARENT_STAR_1ARG = 20,
         PARENT_STAR_2ARGS = 3000,
         PARENT_STAR_BOOLEAN = 10,
-        PATTERN_ANY = 2,
+        PATTERN_ANY_ARGS = 2,
         SELECT_1ARG = 1000,
-        SELECT_1ARGS = 1500000,
+        SELECT_TUPLE = 1500000,
         USES_1ARG = 100,
         USES_2ARGS = 30000,
         USES_BOOLEAN = 50,
-        WITH_ANY = 1
+        WITH_ANY_ARGS = 1
     };
+
+private:
 
 };

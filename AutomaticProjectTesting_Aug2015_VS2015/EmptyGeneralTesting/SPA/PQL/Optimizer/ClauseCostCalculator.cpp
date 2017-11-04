@@ -64,7 +64,7 @@ int ClauseCostCalculator::getCost(SuchThatClausePtr suchThatClausePtr)
         break;
     case Relationship::FOLLOWSSTAR:
         if (synonyms.empty()) {
-            return ClauseCostCalculator::ClauseCost::FOLLOW_STAR_BOOLEAN;
+            return ClauseCostCalculator::ClauseCost::FOLLOWS_STAR_BOOLEAN;
         } else if (synonyms.size() == 1) {
             return ClauseCostCalculator::ClauseCost::FOLLOWS_STAR_1ARG;
         } else if (synonyms.size() == 2) {
