@@ -44,5 +44,6 @@ private:
 
     string removeSelectKeyword(string str);
     string removeSpecialCharactersFromTuple(string selectedStr);
+    vector<string> extractSynonymsFromTuple(string formattedStr);
 };
 

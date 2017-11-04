@@ -80,22 +80,16 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
 {
     if (RegexValidators::isValidTupleRegex(selectedStr))
     {
-        vector<string> synonymListExtracted;
+        vector<string> extractedSynonyms;
         vector<bool> flagForCallProcName;
 
         vector<string> synonymList;
         vector<Entity> entityList;
-        string formattedStr = removeSpecialCharactersFromTuple(selectedStr);
-       
-        char delimiter = ','; //delimit characters using ,     
-        stringstream ss(formattedStr);
-        string arguments;
-        while (getline(ss, arguments, delimiter)) 
-        {
-            synonymListExtracted.push_back(arguments);
-        }
 
-        for (string s : synonymListExtracted)
+        string formattedStr = removeSpecialCharactersFromTuple(selectedStr); //remove <,> and comma(,)
+        extractedSynonyms = extractSynonymsFromTuple(formattedStr); //extract synonyms from tuple arguments
+
+        for (string s : extractedSynonyms)
         {
             if (RegexValidators::isValidSynonymRegex(s))
             {
@@ -279,4 +273,18 @@ string SelectValidator::removeSpecialCharactersFromTuple(string selectedStr)
     selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), ' '), selectedStr.end()); //remove all whitespaces for easier tokenizing
 
     return selectedStr;
+}
+
+vector<string> SelectValidator::extractSynonymsFromTuple(string formattedStr)
+{
+    vector<string> synonyms;
+
+    char delimiter = ','; //delimit characters using ,     
+    stringstream ss(formattedStr);
+    string arguments;
+    while (getline(ss, arguments, delimiter))
+    {
+        synonyms.push_back(arguments);
+    }
+    return synonyms;
 }
