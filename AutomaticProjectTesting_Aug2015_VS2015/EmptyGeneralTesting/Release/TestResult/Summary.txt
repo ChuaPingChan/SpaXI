@@ -1,7 +1,7 @@
-Overall Test Ran    : 8127
-Overall Test Passed : 8124
+Overall Test Ran    : 8147
+Overall Test Passed : 8142
 Overall Test Failed : 3
-Overall Test Timeout: 0
+Overall Test Timeout: 2
 
 
 TestResult\out1.xml: 
@@ -117,6 +117,12 @@ Test Ran: 35
 Passed   : 35
 Failed   : 0
 Timeout  : 0
+
+TestResult\out13_Intense_Query5.xml: 
+Test Ran: 20
+Passed   : 18
+Failed   : 0
+Timeout  : 2
 
 TestResult\out13_Intense_Query6a.xml: 
 Test Ran: 526
