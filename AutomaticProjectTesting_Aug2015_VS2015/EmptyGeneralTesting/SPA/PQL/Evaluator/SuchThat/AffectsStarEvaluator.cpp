@@ -18,19 +18,19 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
     string argOne = stClause.getArgOne();
     string argTwo = stClause.getArgTwo();
 
-    //Case 1: Follows(int, int)
+    //Case 1: AffectsStar(int, int)
     if (argOneType == INTEGER && argTwoType == INTEGER)
     {
         return pkbInstance->isAffectsStar(stoi(argOne), stoi(argTwo));
     }
 
-    //Case 2: Follows(int, _)
+    //Case 2: AffectsStar(int, _)
     else if (argOneType == INTEGER && argTwoType == UNDERSCORE)
     {
         return pkbInstance->isAffector(stoi(argOne));
     }
 
-    //Case 3: Follows(int, synonym)
+    //Case 3: AffectsStar(int, synonym)
     else if (argOneType == INTEGER && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == PROG_LINE))
     {
         list<int> pkbResult = pkbInstance->getAffectedStarOf(stoi(argOne));
@@ -45,19 +45,19 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
         }
     }
 
-    //Case 4: Follows(_, int)
+    //Case 4: Affects*(_, int)
     else if (argOneType == UNDERSCORE && argTwoType == INTEGER)
     {
         return pkbInstance->isAffected(stoi(argTwo));
     }
 
-    //Case 5: Follows(_, _)
+    //Case 5: Affects*(_, _)
     else if (argOneType == UNDERSCORE && argTwoType == UNDERSCORE)
     {
         return pkbInstance->hasAffects();
     }
 
-    //Case 6: Follows(_, synonym)
+    //Case 6: Affects*(_, synonym)
     else if (argOneType == UNDERSCORE && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == PROG_LINE))
     {
         list<int> pkbResult = pkbInstance->getAllAffected();
@@ -72,7 +72,7 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
         }
     }
 
-    //Case 7: Follows(synonym, int)
+    //Case 7: Affects*(synonym, int)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == PROG_LINE) && argTwoType == INTEGER)
     {
         list<int> pkbResult = pkbInstance->getAffectorStarOf(stoi(argTwo));
@@ -87,7 +87,7 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
         }
     }
 
-    //Case 8: Follows(synonym, _)
+    //Case 8: Affects*(synonym, _)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == PROG_LINE) && argTwoType == UNDERSCORE)
     {
         list<int> pkbResult = pkbInstance->getAllAffector();
@@ -102,7 +102,7 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
         }
     }
 
-    //Case 9: Follows(synonym, synonym)
+    //Case 9: Affects*(synonym, synonym)
     else if ((argOneType == STMT || argOneType == ASSIGN || argOneType == PROG_LINE) && (argTwoType == STMT || argTwoType == ASSIGN || argTwoType == PROG_LINE))
     {
 
@@ -215,7 +215,7 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
     }
     else
     {
-        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
+        throw UnrecognisedTypeException("in AffectsStarEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
     }
 }
 

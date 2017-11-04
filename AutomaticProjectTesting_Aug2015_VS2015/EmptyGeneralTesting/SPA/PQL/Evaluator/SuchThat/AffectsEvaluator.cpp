@@ -215,8 +215,6 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
     }
     else
     {
-        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
+        throw UnrecognisedTypeException("in AffectsEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
     }
 }
-
-

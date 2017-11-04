@@ -17,7 +17,7 @@ bool IfPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clauseR
     string patternSyn = ptClause.getPatternSynonym();
     string argOne = ptClause.getArgOne();
 
-    //Case 1: pattern w(_, _)
+    //Case 1: pattern i(_, _, _)
     if (argOneType == UNDERSCORE)
     {
         list<int> pkbResult = pkbInstance->getAllIfs();
@@ -32,7 +32,7 @@ bool IfPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clauseR
         }
     }
 
-    //Case 2: pattern w(ident, _)
+    //Case 2: pattern i(ident, _, _)
     else if (argOneType == IDENT_WITHQUOTES)
     {
         list<int> pkbResult = pkbInstance->getIfsWithControlVariable(argOne);
@@ -47,7 +47,7 @@ bool IfPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clauseR
         }
     }
 
-    //Case 3: pattern w(synonym, _)
+    //Case 3: pattern i(synonym, _, _)
     else if (argOneType == VARIABLE)
     {
         string controlVar = argOne;
@@ -145,5 +145,10 @@ bool IfPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clauseR
                 return clauseResult->hasResults();
             }
         }
+    } 
+
+    else
+    {
+        throw UnrecognisedTypeException("in IfPatternEvaluator. argOneType: " + to_string(argOneType));
     }
 }

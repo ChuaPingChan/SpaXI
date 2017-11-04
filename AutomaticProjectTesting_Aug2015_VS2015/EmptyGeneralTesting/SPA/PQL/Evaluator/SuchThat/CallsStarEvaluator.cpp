@@ -196,6 +196,6 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
     }
     else
     {
-        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
+        throw UnrecognisedTypeException("in CallsStarEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
     }
 }

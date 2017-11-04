@@ -331,6 +331,6 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
     else
     {
-        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
+        throw UnrecognisedTypeException("in ModifiesEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
     }
 }
