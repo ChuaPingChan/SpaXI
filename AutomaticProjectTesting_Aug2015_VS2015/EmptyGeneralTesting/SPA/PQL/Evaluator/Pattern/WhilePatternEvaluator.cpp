@@ -145,5 +145,10 @@ bool WhilePatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clau
                 return clauseResult->hasResults();
             }
         }
+    } 
+
+    else 
+    {
+        throw UnrecognisedTypeException("in WhilePatternEvaluator. argOneType: " + to_string(argOneType));
     }
 }

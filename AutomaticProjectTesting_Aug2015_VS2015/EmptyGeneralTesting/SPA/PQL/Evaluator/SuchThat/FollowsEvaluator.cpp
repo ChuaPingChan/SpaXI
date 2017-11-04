@@ -198,6 +198,6 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
     }
     else
     {
-        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
+        throw UnrecognisedTypeException("in FollowsEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
     }
 }

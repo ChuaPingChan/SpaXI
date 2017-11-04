@@ -100,6 +100,7 @@
     <ClCompile Include="PQL\Evaluator\With\StringWithEvaluator.cpp" />
     <ClCompile Include="Exceptions\SynonymAlreadyExistException.cpp" />
     <ClCompile Include="PQL\Optimizer\SynonymUFDS.cpp" />
+    <ClCompile Include="Exceptions\UnrecognisedTypeException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Optimizer\ClauseCostCalculator.h" />
@@ -132,8 +133,6 @@
     <ClInclude Include="PQL\Evaluator\Pattern\PatternEvaluator.h" />
     <ClInclude Include="PQL\ResultFormatter\ResultFormatter.h" />
     <ClInclude Include="PQL\Utilities\ClauseResult.h" />
-    <ClCompile Include="PQL\Validator\Selection\RelationshipTable\Relationship.cpp" />
-    <ClCompile Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.cpp" />
     <ClCompile Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.cpp" />
     <ClCompile Include="PQL\Validator\Selection\Select\SelectValidator.cpp" />
     <ClInclude Include="PQL\Utilities\WithClause.h" />
@@ -145,6 +144,7 @@
     <ClInclude Include="PQL\Evaluator\With\StringWithEvaluator.h" />
     <ClInclude Include="Exceptions\SynonymAlreadyExistException.h" />
     <ClInclude Include="PQL\Optimizer\SynonymUFDS.h" />
+    <ClInclude Include="Exceptions\UnrecognisedTypeException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />
@@ -205,8 +205,6 @@
     <ClInclude Include="PQL\Validator\Selection\SuchThat\UsesValidator.h" />
     <ClInclude Include="PQL\Validator\Selection\SuchThat\SuchThatHandler.h" />
     <ClInclude Include="PQL\QueryTreeStub.h" />
-    <ClInclude Include="PQL\Validator\Selection\RelationshipTable\Relationship.h" />
-    <ClInclude Include="PQL\Validator\Selection\RelationshipTable\RelationshipTable.h" />
     <ClInclude Include="PQL\Validator\ValidationRegexLibrary\RegexValidators.h" />
     <ClInclude Include="PQL\Utilities\SuchThatClause.h" />
     <ClInclude Include="PQL\Utilities\SelectClause.h" />
