@@ -181,6 +181,6 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
 
     else
     {
-        cerr << "Unrecognised type: <" << leftHandSideType << ":" << leftHandSide << ", " << rightHandSideType << ":" << rightHandSide << ">" << endl;
+        throw UnrecognisedTypeException("in StringWithEvaluator. leftHandSideType: " + to_string(leftHandSideType) + ", rightHandSideType: " + to_string(rightHandSideType));
     }
 }

@@ -96,6 +96,12 @@ namespace UnitTesting
             Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
         }
 
+        TEST_METHOD(TestRegex_ExpressionSpecExact_BracketInFrontOfOperator_Valid)
+        {
+            string str = "\"(((2020))) - ((7)) - 24\"";
+            Assert::IsTrue(RegexValidators::isValidExpressionSpecExactRegex(str));
+        }
+
         TEST_METHOD(TestRegex_ExpressionSpecExact_Plus_Invalid)
         {
             string str = "\"+\"";

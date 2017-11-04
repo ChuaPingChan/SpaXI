@@ -404,7 +404,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
 
     else
     {
-        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argOneType << ":" << argTwo << ", " << argTwoType << ":" << argTwo << ">" << endl;
+        throw UnrecognisedTypeException("in AssignPatternEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
     }
 
 }

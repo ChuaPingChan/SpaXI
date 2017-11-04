@@ -198,6 +198,6 @@ bool ParentEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseResu
     }
     else
     {
-        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
+        throw UnrecognisedTypeException("in ParentEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
     }
 }

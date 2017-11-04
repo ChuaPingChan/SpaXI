@@ -200,6 +200,6 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
 
     else 
     {
-        cerr << "Unrecognised type: <" << argOneType << ":" << argOne << ", " << argTwoType << ":" << argTwo << ">" << endl;
+        throw UnrecognisedTypeException("in NextEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
     }
 }

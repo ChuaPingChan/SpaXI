@@ -778,6 +778,27 @@ namespace UnitTesting
             Assert::IsFalse(flagsForCall.at(4));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectTupleAttribute_MultipleAttributes_SameSynonym_Valid)
+        {
+            string query;
+            query.append("call c;");
+            query.append("Select <c.stmt#,c.procName>");
+            QueryTree qt;
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            vector<Entity> entityList = { CALL, CALL };
+            vector<string> synonymList = { "c","c" };
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_TUPLE, entityList, synonymList);
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+            vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
+            Assert::IsTrue(flagsForCall.size() == 2);
+            Assert::IsFalse(flagsForCall.at(0));
+            Assert::IsTrue(flagsForCall.at(1));
+            
+        }
+
         TEST_METHOD(TestValidity_Query_SelectTupleAttribute_MultipleDifferentSynonyms_WithSpaces_Valid)
         {
             string query;
@@ -836,6 +857,7 @@ namespace UnitTesting
             vector<bool> flagsForCall = qt.getSelectClause().isAttributeProcNameForTuple;
             Assert::IsTrue(flagsForCall.empty());
         }
+
 
         /********************************************
         * Select Clause - Single Synonym - SuchThat *

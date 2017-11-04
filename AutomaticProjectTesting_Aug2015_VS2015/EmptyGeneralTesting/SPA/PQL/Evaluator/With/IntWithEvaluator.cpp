@@ -148,6 +148,6 @@ bool IntWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResult)
 
     else
     {
-        cerr << "Unrecognised type: <" << leftHandSideType << ":" << leftHandSide << ", " << rightHandSideType << ":" << rightHandSide << ">" << endl;
+        throw UnrecognisedTypeException("in IntWithEvaluator. leftHandSideType: " + to_string(leftHandSideType) + ", rightHandSideType: " + to_string(rightHandSideType));
     }
 }
