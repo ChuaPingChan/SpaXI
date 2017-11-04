@@ -185,7 +185,7 @@ list<int> PKBMain::getAllIdxOfStringEntity(Entity type) {
 	}
 
 	else if (type == CALL) {
-		return getAllCallees();
+		return getAllCallsStmt();
 	}
 
 	else if (type == VARIABLE) {
