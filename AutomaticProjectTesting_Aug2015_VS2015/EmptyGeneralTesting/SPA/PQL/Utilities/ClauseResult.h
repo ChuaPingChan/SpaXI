@@ -5,6 +5,7 @@
 #include <set>
 #include <iterator>
 #include <utility>
+#include <memory>
 
 using namespace std;
 
@@ -34,7 +35,7 @@ public:
 protected:
     unordered_map<string, int> _synToIdxMap;
     vector<string> _synList;
-    list<vector<int>> _results;   // All results are stored as int (i.e. indices of entities in PKB)
+    shared_ptr<list<vector<int>>> _resultsPtr;  // All results are stored as int (i.e. indices of entities in PKB)
     bool _isNew;    // Flag to indicate whether ClauseResult has been populated before
 
     /******************
@@ -44,7 +45,6 @@ protected:
     bool overlapExistingSynResults(string synName, list<int> synResultsToOverlap);
     bool addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults);
 
-    // TODO: Unit testing
     template<typename T> static list<T> convertVectorToList(vector<T> &v)
     {
         list<T> newList;
@@ -53,7 +53,6 @@ protected:
         return newList;
     }
 
-    // TODO: Unit testing
     template<typename T> static list<list<T>> convertListOfVectorsToListOfLists(list<vector<T>> &v)
     {
         list<list<T>> newListOfLists;
@@ -67,7 +66,6 @@ protected:
         return newListOfLists;
     }
 
-    // TODO: Unit testing
     template<typename T> static vector<T> convertListToVector(list<T> &listToConvert)
     {
         vector<T> newVector;
@@ -118,3 +116,6 @@ protected:
         return v;
     }
 };
+
+typedef list<vector<int>> Result;
+typedef shared_ptr<list<vector<int>>> ResultsPtr;
