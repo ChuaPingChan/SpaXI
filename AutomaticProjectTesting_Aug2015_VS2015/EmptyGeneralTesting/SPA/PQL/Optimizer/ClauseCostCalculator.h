@@ -24,7 +24,7 @@ private:
 
     enum ClauseCost
     {
-        // TODO: Implement dynamic sorting
+        // TODO: Consider calculating cost dynamically by querying PKB
         /*
         Hard assignment of cost to different clause types
 
@@ -35,50 +35,46 @@ private:
         processing
         */
 
-        FOLLOWS_BOOLEAN = 0,
-        NEXT_BOOLEAN,
-        CALLS_BOOLEAN,
-        PARENT_BOOLEAN,
-        MODIFIES_BOOLEAN,
-        USES_BOOLEAN,
-        CALLS_STAR_BOOLEAN,
-        PARENT_STAR_BOOLEAN,
-        FOLLOW_STAR_BOOLEAN,
-
-        WITH_ANY_ARGS,
-        PATTERN_ANY_ARGS,
-        FOLLOWS_1ARG,
-        NEXT_1ARG,
-        CALLS_1ARG,
-        CALLS_STAR_1ARG,
-        PARENT_1ARG,
-        MODIFIES_1ARG,
-        USES_1ARG,
-        SELECT_1ARG,
-        PARENT_STAR_1ARG,
-        FOLLOWS_STAR_1ARG,
-
-        CALLS_2ARGS,
-        CALLS_STAR_2ARGS,
-        PARENT_2ARGS,
-        MODIFIES_2ARGS,
-        USES_2ARGS,
-        FOLLOWS_2ARGS,
-        PARENT_STAR_2ARGS,
-        NEXT_2ARGS,
-        FOLLOWS_STAR_2ARGS,
-
-        NEXT_STAR_BOOLEAN,
-        NEXT_STAR_1ARG,
-        AFFECTS_BOOLEAN,
-        NEXT_STAR_2ARGS,
-        AFFECTS_1ARG,
-        AFFECTS_STAR_BOOLEAN,
-        AFFECTS_STAR_1ARG,
-        AFFECTS_2ARGS,
-        AFFECTS_STAR_2ARGS,
-
-        SELECT_TUPLE
+        AFFECTS_1ARG = 800000,
+        AFFECTS_2ARGS = 1030000,
+        AFFECTS_BOOLEAN = 250000,
+        AFFECTS_STAR_1ARG = 1000100,
+        AFFECTS_STAR_2ARGS = 1120000,
+        AFFECTS_STAR_BOOLEAN = 1000000,
+        CALLS_1ARG = 20,
+        CALLS_2ARGS = 240,
+        CALLS_BOOLEAN = 10,
+        CALLS_STAR_1ARG = 60,
+        CALLS_STAR_2ARGS = 300,
+        CALLS_STAR_BOOLEAN = 30,
+        FOLLOWS_1ARG = 2,
+        FOLLOWS_2ARGS = 1000,
+        FOLLOWS_BOOLEAN = 1,
+        FOLLOWS_STAR_1ARG = 1000,
+        FOLLOWS_STAR_2ARGS = 100000,
+        FOLLOWS_STAR_BOOLEAN = 500,
+        MODIFIES_1ARG = 60,
+        MODIFIES_2ARGS = 10000,
+        MODIFIES_BOOLEAN = 30,
+        NEXT_1ARG = 2,
+        NEXT_2ARGS = 1000,
+        NEXT_BOOLEAN = 1,
+        NEXT_STAR_1ARG = 200000,
+        NEXT_STAR_2ARGS = 500000,
+        NEXT_STAR_BOOLEAN = 10000,
+        PARENT_1ARG = 2,
+        PARENT_2ARGS = 1000,
+        PARENT_BOOLEAN = 1,
+        PARENT_STAR_1ARG = 20,
+        PARENT_STAR_2ARGS = 3000,
+        PARENT_STAR_BOOLEAN = 10,
+        PATTERN_ANY = 2,
+        SELECT_1ARG = 1000,
+        SELECT_1ARGS = 1500000,
+        USES_1ARG = 100,
+        USES_2ARGS = 30000,
+        USES_BOOLEAN = 50,
+        WITH_ANY = 1
     };
 
 };
