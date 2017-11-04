@@ -15,6 +15,7 @@ public:
     ClauseGroup(vector<ClausePtr> clauseGroup);
 
     int getCost();
+    void sortClauses();
     vector<ClausePtr> getClauseGroup();
 
 private:
