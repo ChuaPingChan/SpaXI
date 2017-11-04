@@ -1,5 +1,9 @@
+#include <algorithm>
+
 #include "ClauseGroup.h"
 #include "ClauseCostCalculator.h"
+
+using namespace std;
 
 ClauseGroup::ClauseGroup(vector<ClausePtr> clauseGroup)
 {
@@ -14,7 +18,7 @@ int ClauseGroup::getCost()
 
 void ClauseGroup::sortClauses()
 {
-    // TODO: Implement
+    sort(_clauseGroup.begin(), _clauseGroup.end(), ClauseGroup::compareClauseCost);
 }
 
 vector<ClausePtr> ClauseGroup::getClauseGroup()
@@ -30,4 +34,12 @@ int ClauseGroup::computeCost()
         totalCost += ClauseCostCalculator::getCost(clausePtr);
     }
     return totalCost;
+}
+
+/*
+    Returns true if the first clause should be ordered before the second clause
+*/
+bool ClauseGroup::compareClauseCost(ClausePtr clausePtr1, ClausePtr clausePtr2)
+{
+    return ClauseCostCalculator::getCost(clausePtr1) < ClauseCostCalculator::getCost(clausePtr2);
 }

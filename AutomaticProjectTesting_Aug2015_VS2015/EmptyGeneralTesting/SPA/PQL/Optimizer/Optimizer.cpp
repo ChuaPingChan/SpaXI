@@ -219,7 +219,6 @@ void Optimizer::sortClausesWithinGroup()
 void Optimizer::sortClauseGroups()
 {
     // TODO: Implement
-    queue<ClauseGroup> clauseGroups;
 }
 
 /*
