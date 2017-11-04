@@ -909,6 +909,8 @@ void Parser::processAndPopTopFollowStack()
         _pkbMainPtr->setFollowsRel(stmtBefore, stmtAfter);
         stmtAfter = stmtBefore;
         topFollowsStack.pop();
+        if (topFollowsStack.empty())    // Means stmtBefore is first stmt in stmtList
+            _pkbMainPtr->addStmtList(stmtBefore);
     }
     _pkbMainPtr->setFollowsRel(0, stmtAfter);
 

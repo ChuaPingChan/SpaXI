@@ -185,7 +185,7 @@ list<int> PKBMain::getAllIdxOfStringEntity(Entity type) {
 	}
 
 	else if (type == CALL) {
-		return getAllCallees();
+		return getAllCallsStmt();
 	}
 
 	else if (type == VARIABLE) {
@@ -247,6 +247,14 @@ bool PKBMain::isInstanceOf(Entity type, string arg) {
 	else {
 		return false;
 	}
+}
+//GENERAL
+bool PKBMain::addStmtList(int stmt) {
+	return stmtTypeList.addToStmtList(stmt);
+}
+
+list<int> PKBMain::getStmtList() {
+	return stmtTypeList.getStmtList();
 }
 
 //CALLS
