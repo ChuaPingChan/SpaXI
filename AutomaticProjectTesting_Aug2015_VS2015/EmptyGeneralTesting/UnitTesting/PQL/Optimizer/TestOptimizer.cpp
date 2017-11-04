@@ -96,13 +96,7 @@ namespace UnitTesting
             Assert::IsTrue(tempStcPtr->getArgTwo() == "dummyVar");
 
             nextClauseGroup = clauseGroupManager.getNextClauseGroup();
-            Assert::IsTrue(nextClauseGroup.size() == 3);
-            tempClausePtr = nextClauseGroup.front();
-            Assert::IsTrue(tempClausePtr->getClauseType() == Clause::ClauseType::SELECT);
-            tempScPtr = dynamic_pointer_cast<SelectClause>(tempClausePtr);
-            Assert::IsTrue(tempScPtr->getSingleArgType() == Entity::ASSIGN);
-            Assert::IsTrue(tempScPtr->getSingleArg() == "a1");
-            nextClauseGroup.pop();
+            Assert::IsTrue(nextClauseGroup.size() == 2);
             tempClausePtr = nextClauseGroup.front();
             Assert::IsTrue(tempClausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
             tempStcPtr = dynamic_pointer_cast<SuchThatClause>(tempClausePtr);

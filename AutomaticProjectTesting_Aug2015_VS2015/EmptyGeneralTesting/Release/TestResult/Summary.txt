@@ -1,7 +1,7 @@
 Overall Test Ran    : 7878
-Overall Test Passed : 7867
-Overall Test Failed : 9
-Overall Test Timeout: 2
+Overall Test Passed : 7868
+Overall Test Failed : 10
+Overall Test Timeout: 0
 
 
 TestResult\out1.xml: 
@@ -138,8 +138,8 @@ Timeout  : 0
 
 TestResult\out13_Intense_Query7b.xml: 
 Test Ran: 521	[BUG]
-Passed   : 520
-Failed   : 1
+Passed   : 519
+Failed   : 2
 Timeout  : 0
 
 TestResult\out13_Intense_Query8.xml: 
@@ -174,15 +174,15 @@ Timeout  : 0
 
 TestResult\out13_Three_QueryLongTestCase.xml: 
 Test Ran: 22
-Passed   : 21
+Passed   : 22
 Failed   : 0
-Timeout  : 1
+Timeout  : 0
 
 TestResult\out13_Three_QueryMultipleClauses_UsingSource5.xml: 
 Test Ran: 1
-Passed   : 0
+Passed   : 1
 Failed   : 0
-Timeout  : 1
+Timeout  : 0
 
 TestResult\out13_Three_QueryOptimization_UsingSource3.xml: 
 Test Ran: 5

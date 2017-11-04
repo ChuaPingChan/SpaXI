@@ -58,6 +58,6 @@ private:
     };
 
     unordered_map<ClauseCostCalculator::ClauseType, int> _costTable;
-    
+
 };
 
