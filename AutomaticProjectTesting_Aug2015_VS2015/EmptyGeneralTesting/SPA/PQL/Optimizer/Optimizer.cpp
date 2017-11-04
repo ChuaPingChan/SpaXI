@@ -1,6 +1,9 @@
 #include <cassert>
+#include <algorithm>
+
 #include "Optimizer.h"
 #include "ClauseGroupManager.h"
+#include "ClauseGroup.h"
 #include "../Utilities/Clause.h"
 #include "SynonymUFDS.h"
 #include "ClauseCostCalculator.h"
@@ -140,8 +143,9 @@ list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 /*
     Based on the information extracted from the "query tree", this method groups
     the clauses based on common synonyms and store them in the _clauseGroups private
-    attribute. Note that the "select" clause is not included because it doesn't need
-    to be "evaluated".
+    attribute.
+
+    Note: This method does not sort the clauses within the clause group.
 */
 void Optimizer::formClauseGroups()
 {
@@ -211,12 +215,19 @@ void Optimizer::formClauseGroups()
 
 void Optimizer::sortClausesWithinGroup()
 {
-    // TODO: Implement after integration is done
+    vector<vector<ClausePtr>> updatedClauseGroups;
+
+    for (vector<ClausePtr> rawClauseGroup : _clauseGroups) {
+        ClauseGroup clauseGroup(rawClauseGroup);
+        clauseGroup.sortClauses();
+        updatedClauseGroups.push_back(clauseGroup.getClauseGroup());
+    }
+    _clauseGroups = updatedClauseGroups;
 }
 
 void Optimizer::sortClauseGroups()
 {
-    // TODO: Implement after integration is done
+    sort(_clauseGroups.begin(), _clauseGroups.end(), Optimizer::compareClauseGroupCost);
 }
 
 /*
@@ -235,4 +246,9 @@ queue<queue<ClausePtr>> Optimizer::createClauseGroupQueue()
         clauseGroupsQueue.push(clauseQueue);
     }
     return clauseGroupsQueue;
+}
+
+bool Optimizer::compareClauseGroupCost(vector<ClausePtr> clauseGroup1, vector<ClausePtr> clauseGroup2)
+{
+    return ClauseGroup(clauseGroup1).getCost() < ClauseGroup(clauseGroup2).getCost();
 }

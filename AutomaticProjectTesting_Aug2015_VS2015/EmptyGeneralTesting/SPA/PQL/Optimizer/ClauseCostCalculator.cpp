@@ -1,58 +1,179 @@
 #include "ClauseCostCalculator.h"
 
+#include <cassert>
 #include <unordered_map>
 
 ClauseCostCalculator::ClauseCostCalculator()
 {
-    // TODO: Implement dynamic sorting
-    /*
-        Hard assignment of cost to different clause types
-    */
-    _costTable = unordered_map<ClauseCostCalculator::ClauseType, int>(
-    { { ClauseCostCalculator::ClauseType::PATTERN_BOOLEAN, 1 },
-    { ClauseCostCalculator::ClauseType::FOLLOWS_BOOLEAN, 2 },
-    { ClauseCostCalculator::ClauseType::NEXT_BOOLEAN, 3 },
-    { ClauseCostCalculator::ClauseType::CALLS_BOOLEAN, 4 },
-    { ClauseCostCalculator::ClauseType::PARENT_BOOLEAN, 5 },
-    { ClauseCostCalculator::ClauseType::MODIFIES_BOOLEAN, 6 },
-    { ClauseCostCalculator::ClauseType::USES_BOOLEAN, 7 },
-    { ClauseCostCalculator::ClauseType::CALLS_STAR_BOOLEAN, 8 },
-    { ClauseCostCalculator::ClauseType::PARENT_STAR_BOOLEAN, 9 },
-    { ClauseCostCalculator::ClauseType::FOLLOW_STAR_BOOLEAN, 10 },
-
-    { ClauseCostCalculator::ClauseType::WITH_ANY_ARGS, 11 },
-    { ClauseCostCalculator::ClauseType::PATTERN_ANY_ARGS, 12 },
-    { ClauseCostCalculator::ClauseType::FOLLOWS_1ARG, 13 },
-    { ClauseCostCalculator::ClauseType::NEXT_ARGS, 14 },
-    { ClauseCostCalculator::ClauseType::CALLS_ARGS, 15 },
-    { ClauseCostCalculator::ClauseType::PARENT_ARGS, 16 },
-    { ClauseCostCalculator::ClauseType::MODIFIES_ARGS, 17 },
-    { ClauseCostCalculator::ClauseType::USES_ARGS, 18 },
-    { ClauseCostCalculator::ClauseType::CALLS_STAR_ARGS, 19 },
-    { ClauseCostCalculator::ClauseType::PARENT_STAR_ARGS, 20 },
-    { ClauseCostCalculator::ClauseType::FOLLOWS_STAR_ARGS, 21 },
-
-    { ClauseCostCalculator::ClauseType::CALLS_2ARGS, 22 },
-    { ClauseCostCalculator::ClauseType::CALLS_STAR_2ARGS, 23 },
-    { ClauseCostCalculator::ClauseType::PARENT_2ARGS, 24 },
-    { ClauseCostCalculator::ClauseType::MODIFIES_2ARGS, 25 },
-    { ClauseCostCalculator::ClauseType::USES_2ARGS, 26 },
-    { ClauseCostCalculator::ClauseType::FOLLOWS_2ARGS, 27 },
-    { ClauseCostCalculator::ClauseType::PARENT_STAR_2ARGS, 28 },
-    { ClauseCostCalculator::ClauseType::NEXT_2ARGS, 29 },
-    { ClauseCostCalculator::ClauseType::FOLLOWS_STAR_2ARGS, 30 },
-
-    { ClauseCostCalculator::ClauseType::NEXT_STAR_1ARG, 31 },
-    { ClauseCostCalculator::ClauseType::NEXT_STAR_2ARGS, 32 },
-    { ClauseCostCalculator::ClauseType::AFFECTS_1ARG, 33 },
-    { ClauseCostCalculator::ClauseType::AFFECTS_STAR_1ARG, 34 },
-    { ClauseCostCalculator::ClauseType::AFFECTS_2ARGS, 35 },
-    { ClauseCostCalculator::ClauseType::AFFECTS_STAR_2ARGS, 36 } }
-    );
 }
 
 int ClauseCostCalculator::getCost(ClausePtr clausePtr)
 {
-    // TODO: Implement
+    Clause::ClauseType clauseType = clausePtr->getClauseType();
+
+    if (clauseType == Clause::ClauseType::SUCH_THAT) {
+        SuchThatClausePtr stcPtr;
+        stcPtr = dynamic_pointer_cast<SuchThatClause>(clausePtr);
+        return getCost(stcPtr);
+    } else if (clauseType == Clause::ClauseType::PATTERN) {
+        PatternClausePtr pcPtr;
+        pcPtr = dynamic_pointer_cast<PatternClause>(clausePtr);
+        return getCost(pcPtr);
+    } else if (clauseType == Clause::ClauseType::WITH) {
+        WithClausePtr wcPtr;
+        wcPtr = dynamic_pointer_cast<WithClause>(clausePtr);
+        return getCost(wcPtr);
+    } else if (clauseType == Clause::ClauseType::SELECT) {
+        SelectClausePtr scPtr;
+        scPtr = dynamic_pointer_cast<SelectClause>(clausePtr);
+        return getCost(scPtr);
+    } else {
+        assert(false);  // Shouldn't reach here
+    }
+}
+
+int ClauseCostCalculator::getCost(SelectClausePtr selectClausePtr)
+{
+    // Assumes that a select-clause will always have >= 1 synonym, because select
+    // BOOLEAN will not be added into clause groups
+    list<string> synonyms = selectClausePtr->getSynonyms();
+    assert(synonyms.size() > 0);
+
+    if (synonyms.size() == 1)
+        return ClauseCostCalculator::SELECT_1ARG;
+    else
+        return ClauseCostCalculator::SELECT_TUPLE;
     return 0;
+}
+
+int ClauseCostCalculator::getCost(SuchThatClausePtr suchThatClausePtr)
+{
+    list<string> synonyms = suchThatClausePtr->getSynonyms();
+    Relationship rel = suchThatClausePtr->getRel();
+
+    switch (rel) {
+    case Relationship::FOLLOWS:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::FOLLOWS_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::FOLLOWS_1ARG;
+        } else {
+            assert(synonyms.size() == 2);
+            return ClauseCostCalculator::ClauseCost::FOLLOWS_2ARGS;
+        }
+        break;
+    case Relationship::FOLLOWSSTAR:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::FOLLOWS_STAR_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::FOLLOWS_STAR_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::FOLLOWS_STAR_2ARGS;
+        }
+        break;
+    case Relationship::USES:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::USES_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::USES_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::USES_2ARGS;
+        }
+        break;
+    case Relationship::MODIFIES:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::MODIFIES_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::MODIFIES_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::MODIFIES_2ARGS;
+        }
+        break;
+    case Relationship::PARENT:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::PARENT_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::PARENT_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::PARENT_2ARGS;
+        }
+        break;
+    case Relationship::PARENTSTAR:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::PARENT_STAR_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::PARENT_STAR_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::PARENT_STAR_2ARGS;
+        }
+        break;
+    case Relationship::CALLS:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::CALLS_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::CALLS_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::CALLS_2ARGS;
+        }
+        break;
+    case Relationship::CALLSSTAR:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::CALLS_STAR_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::CALLS_STAR_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::CALLS_STAR_2ARGS;
+        }
+        break;
+    case Relationship::NEXT:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::NEXT_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::NEXT_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::NEXT_2ARGS;
+        }
+        break;
+    case Relationship::NEXTSTAR:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::NEXT_STAR_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::NEXT_STAR_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::NEXT_2ARGS;
+        }
+        break;
+    case Relationship::AFFECTS:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::AFFECTS_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::AFFECTS_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::AFFECTS_2ARGS;
+        }
+        break;
+    case Relationship::AFFECTSSTAR:
+        if (synonyms.empty()) {
+            return ClauseCostCalculator::ClauseCost::AFFECTS_STAR_BOOLEAN;
+        } else if (synonyms.size() == 1) {
+            return ClauseCostCalculator::ClauseCost::AFFECTS_STAR_1ARG;
+        } else if (synonyms.size() == 2) {
+            return ClauseCostCalculator::ClauseCost::AFFECTS_STAR_2ARGS;
+        }
+        break;
+    default:
+        assert(false);  // Shouldn't reach here
+    }
+}
+
+int ClauseCostCalculator::getCost(PatternClausePtr patternClausePtr)
+{
+    return ClauseCostCalculator::ClauseCost::PATTERN_ANY_ARGS;
+}
+
+int ClauseCostCalculator::getCost(WithClausePtr withClausePtr)
+{
+    // Assumes that a with-clause received always has synonyms, because of validator's processing
+    assert((withClausePtr->getSynonyms()).size() > 0);
+    return ClauseCostCalculator::ClauseCost::WITH_ANY_ARGS;
 }

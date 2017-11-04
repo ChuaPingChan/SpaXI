@@ -36,5 +36,6 @@ protected:
     void sortClausesWithinGroup();
     void sortClauseGroups();
     queue<queue<ClausePtr>> createClauseGroupQueue();
+    static bool compareClauseGroupCost(vector<ClausePtr> clauseGroup1, vector<ClausePtr> clauseGroup2);
 
 };
