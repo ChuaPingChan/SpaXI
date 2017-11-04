@@ -2,6 +2,9 @@
 
 #include <unordered_map>
 #include "../Utilities/Clause.h"
+#include "../Utilities/SuchThatClause.h"
+#include "../Utilities/PatternClause.h"
+#include "../Utilities/WithClause.h"
 
 using namespace std;
 
@@ -10,7 +13,10 @@ class ClauseCostCalculator
 public:
     ClauseCostCalculator();
 
-    static int getCost(ClausePtr clausePtr);
+    static int getCost(Clause clause);
+    static int getCost(SuchThatClause suchThatClause);
+    static int getCost(PatternClause patternClause);
+    static int getCost(WithClause withClause);
 
 private:
 
