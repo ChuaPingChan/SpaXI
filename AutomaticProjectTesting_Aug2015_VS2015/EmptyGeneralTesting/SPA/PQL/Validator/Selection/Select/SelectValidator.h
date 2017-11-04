@@ -36,7 +36,7 @@ private:
 
     Entity getEntityOfSynonym(string syn);
 
-    bool isValidAttrRefForSynonym(string &str);
+    bool isValidAttrRefForSynonym(string str);
     bool isProcNameAttribute(string attribute);
     bool isStmtNumAttribute(string attribute);
     bool isVarNameAttribute(string attribute);
@@ -44,5 +44,7 @@ private:
 
     string removeSelectKeyword(string str);
     string removeSpecialCharactersFromTuple(string selectedStr);
+    vector<string> splitSynonymProcName(string selectedStr);
+    vector<string> extractSynonymsFromTuple(string formattedStr);
 };
 
