@@ -140,8 +140,9 @@ list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 /*
     Based on the information extracted from the "query tree", this method groups
     the clauses based on common synonyms and store them in the _clauseGroups private
-    attribute. Note that the "select" clause is not included because it doesn't need
-    to be "evaluated".
+    attribute.
+
+    Note: This method does not sort the clauses within the clause group.
 */
 void Optimizer::formClauseGroups()
 {
