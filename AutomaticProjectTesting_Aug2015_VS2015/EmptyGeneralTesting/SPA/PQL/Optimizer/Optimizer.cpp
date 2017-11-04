@@ -1,6 +1,7 @@
 #include <cassert>
 #include "Optimizer.h"
 #include "ClauseGroupManager.h"
+#include "ClauseGroup.h"
 #include "../Utilities/Clause.h"
 #include "SynonymUFDS.h"
 #include "ClauseCostCalculator.h"
@@ -212,12 +213,13 @@ void Optimizer::formClauseGroups()
 
 void Optimizer::sortClausesWithinGroup()
 {
-    // TODO: Implement after integration is done
+    // TODO: Implement
 }
 
 void Optimizer::sortClauseGroups()
 {
-    // TODO: Implement after integration is done
+    // TODO: Implement
+    queue<ClauseGroup> clauseGroups;
 }
 
 /*
