@@ -20,6 +20,7 @@ protected:
     unordered_map<string, int> _synToIdxMap;    // Synonym to index map
     vector<ClausePtr> _clauseVector;     // Index to clause map
     unordered_map<int, list<int>> _synIdxToClauseIdxsMap;   // Synonym to clause index map
+    unordered_map<int, int> _clauseIdxToCostMap;   // Maps clause to their respective costs
 
     ClauseGroupManager _clauseGroupsManager;
     

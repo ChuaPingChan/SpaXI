@@ -3,6 +3,7 @@
 #include "ClauseGroupManager.h"
 #include "../Utilities/Clause.h"
 #include "SynonymUFDS.h"
+#include "ClauseCostCalculator.h"
 
 Optimizer::Optimizer(QueryTree &queryTree)
 {
@@ -35,6 +36,7 @@ ClauseGroupManager Optimizer::getClauseGroupManager()
 */
 bool Optimizer::processQueryTree(QueryTree &queryTree)
 {
+    // TODO: Populate _clauseIdxToCost at the correct place
     _clauseGroupsManager.setSelectedSynonyms(queryTree.getSelectClause().getSynonyms());
 
     list<ClausePtr> allClauses = extractClausesFromQueryTree(queryTree);
@@ -67,6 +69,7 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 */
 list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 {
+    unordered_set<string> synsInNonSelectClauses;
     list<ClausePtr> allClauses;
 
     SelectClause selectClause = queryTree.getSelectClause();
@@ -74,26 +77,61 @@ list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
     vector<PatternClause> patternClauses = queryTree.getPatternClauses();
     vector<WithClause> withClauses = queryTree.getWithClauses();
 
-    SelectClausePtr scPtr;
-    scPtr = selectClause.getSharedPtr();
-    allClauses.push_back(scPtr);
-
     for (SuchThatClause suchThatClause : suchThatClauses) {
+        list<string> synonyms = suchThatClause.getSynonyms();
+        synsInNonSelectClauses.insert(synonyms.begin(), synonyms.end());
+
         SuchThatClausePtr stPtr;
         stPtr = suchThatClause.getSharedPtr();
         allClauses.push_back(stPtr);
     }
 
     for (PatternClause patternClause : patternClauses) {
+        list<string> synonyms = patternClause.getSynonyms();
+        synsInNonSelectClauses.insert(synonyms.begin(), synonyms.end());
+
         PatternClausePtr pcPtr;
         pcPtr = patternClause.getSharedPtr();
         allClauses.push_back(pcPtr);
     }
 
     for (WithClause withClause : withClauses) {
+        list<string> synonyms = withClause.getSynonyms();
+        synsInNonSelectClauses.insert(synonyms.begin(), synonyms.end());
+
         WithClausePtr wcPtr;
         wcPtr = withClause.getSharedPtr();
         allClauses.push_back(wcPtr);
+    }
+
+    /*
+        Create a smaller version of SelectClause that only contains the
+        synonyms that are not in the other clauses (if applicable)
+    */
+    unordered_set<string> absentSynsInNonSelectClause;
+    list<string> selectedSyns = selectClause.getSynonyms();
+    for (string syn : selectedSyns) {
+        if (synsInNonSelectClauses.find(syn) == synsInNonSelectClauses.end())
+            absentSynsInNonSelectClause.insert(syn);
+    }
+
+    if (absentSynsInNonSelectClause.size() > 0) {
+        // If there are synonyms in the select clause that are absent in the non-select clauses,
+        // create a "modified select clause" to evaluate the said synonyms.
+        SelectionType selectionType = selectClause.getSelectionType();
+
+        SelectClausePtr scPtr;
+        if (selectionType == SelectionType::SELECT_SINGLE) {
+            Entity singleArgType = selectClause.getSingleArgType();
+            string singleArg = selectClause.getSingleArg();
+            scPtr = SelectClausePtr(new SelectClause(selectionType, singleArgType, singleArg));
+        } else {
+            assert(selectionType == SelectionType::SELECT_TUPLE);
+            vector<Entity> tupleArgTypes = selectClause.getTupleArgTypes();
+            vector<string> tupleArgs = selectClause.getTupleArgs();
+            scPtr = SelectClausePtr(new SelectClause(selectionType, tupleArgTypes, tupleArgs));
+        }
+        allClauses.push_back(scPtr);
     }
 
     return allClauses;

@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PQL\Optimizer\ClauseCostCalculator.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="PQL\Utilities\Clause.cpp" />
     <ClCompile Include="PQL\Optimizer\ClauseGroupManager.cpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="PQL\Optimizer\SynonymUFDS.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PQL\Optimizer\ClauseCostCalculator.h" />
     <ClInclude Include="PQL\Utilities\Clause.h" />
     <ClInclude Include="PQL\Optimizer\ClauseGroupManager.h" />
     <ClInclude Include="PQL\Optimizer\Optimizer.h" />
