@@ -248,6 +248,10 @@ bool PKBMain::isInstanceOf(Entity type, string arg) {
 		return false;
 	}
 }
+//GENERAL
+bool PKBMain::addStmtList(int stmt) {
+	return stmtTypeList.addToStmtList(stmt);
+}
 
 //CALLS
 list<string> PKBMain::getAllCalleeNames() {

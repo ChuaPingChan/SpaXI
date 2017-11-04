@@ -4,6 +4,13 @@ StmtTypeList::StmtTypeList() {
 
 }
 
+bool StmtTypeList::addToStmtList(int stmt) {
+	stmtList.push_back(stmt);
+	stmtList.sort();
+	stmtList.unique();
+	return true;
+}
+
 bool StmtTypeList::addToAssignStmtList(int stmt) {
     // if stmt number does not exists in assignment list, add to list
     if (find(assignStmtList.begin(), assignStmtList.end(), stmt) == assignStmtList.end()) {

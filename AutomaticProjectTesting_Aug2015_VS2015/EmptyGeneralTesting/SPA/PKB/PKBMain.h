@@ -59,6 +59,8 @@ public:
 
 	bool isInstanceOf(Entity type, string arg);
 
+	bool addStmtList(int stmt);
+
 	//Parent
     bool isParentChild(int parentStmt, int childStmt);
     bool isParent(int parentStmt);
