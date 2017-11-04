@@ -14,6 +14,8 @@ using namespace std;
 class StmtTypeList {
 public:
     StmtTypeList();
+	bool addToStmtList(int stmt);
+	list<int> getStmtList();
     bool addToAssignStmtList(int stmt);
     bool addToWhileStmtList(int stmt);
 	bool addToCallsStmtList(int stmt, int calleeProcIdx, string calleeProcName);
@@ -39,6 +41,7 @@ public:
 	pair<list<int>, list<int>> getStmtType(pair<list<int>, list<int>> pairOfList, Entity type1, Entity type2);
 	list<int> getStmtType(int stmt, Entity type);
 private:
+	list<int> stmtList;
 	list<int> allStmtList;
     list<int> assignStmtList;
     list<int> whileStmtList;

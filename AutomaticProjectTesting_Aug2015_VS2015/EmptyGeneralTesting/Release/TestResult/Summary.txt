@@ -1,6 +1,6 @@
-Overall Test Ran    : 7878
-Overall Test Passed : 7867
-Overall Test Failed : 9
+Overall Test Ran    : 8147
+Overall Test Passed : 8144
+Overall Test Failed : 1
 Overall Test Timeout: 2
 
 
@@ -83,9 +83,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out11_QueryWith.xml: 
-Test Ran: 61	[BUG]
-Passed   : 60
-Failed   : 1
+Test Ran: 61
+Passed   : 61
+Failed   : 0
 Timeout  : 0
 
 TestResult\out12_QueryComplexNext.xml: 
@@ -118,6 +118,12 @@ Passed   : 35
 Failed   : 0
 Timeout  : 0
 
+TestResult\out13_Intense_Query5.xml: 
+Test Ran: 20
+Passed   : 18
+Failed   : 0
+Timeout  : 2
+
 TestResult\out13_Intense_Query6a.xml: 
 Test Ran: 526
 Passed   : 526
@@ -137,9 +143,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query7b.xml: 
-Test Ran: 521	[BUG]
-Passed   : 520
-Failed   : 1
+Test Ran: 521
+Passed   : 521
+Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query8.xml: 
@@ -174,15 +180,15 @@ Timeout  : 0
 
 TestResult\out13_Three_QueryLongTestCase.xml: 
 Test Ran: 22
-Passed   : 21
+Passed   : 22
 Failed   : 0
-Timeout  : 1
+Timeout  : 0
 
 TestResult\out13_Three_QueryMultipleClauses_UsingSource5.xml: 
 Test Ran: 1
-Passed   : 0
+Passed   : 1
 Failed   : 0
-Timeout  : 1
+Timeout  : 0
 
 TestResult\out13_Three_QueryOptimization_UsingSource3.xml: 
 Test Ran: 5
@@ -311,9 +317,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_Query_With_ST_UsingSource2.xml: 
-Test Ran: 6	[BUG]
-Passed   : 3
-Failed   : 3
+Test Ran: 6
+Passed   : 6
+Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query1a.xml: 
@@ -359,9 +365,9 @@ Failed   : 1
 Timeout  : 0
 
 TestResult\out14_Query5b.xml: 
-Test Ran: 60	[BUG]
-Passed   : 59
-Failed   : 1
+Test Ran: 60
+Passed   : 60
+Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query6Calls_UsingSource6.xml: 
@@ -425,9 +431,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out4_1.xml: 
-Test Ran: 213	[BUG]
-Passed   : 212
-Failed   : 1
+Test Ran: 213
+Passed   : 213
+Failed   : 0
 Timeout  : 0
 
 TestResult\out4_2.xml: 
@@ -443,9 +449,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out6_CALLS_01.xml: 
-Test Ran: 15	[BUG]
-Passed   : 14
-Failed   : 1
+Test Ran: 15
+Passed   : 15
+Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_Calls.xml: 
@@ -595,6 +601,12 @@ Timeout  : 0
 TestResult\out6_With.xml: 
 Test Ran: 20
 Passed   : 20
+Failed   : 0
+Timeout  : 0
+
+TestResult\out7_Query_Simple01.xml: 
+Test Ran: 249
+Passed   : 249
 Failed   : 0
 Timeout  : 0
 

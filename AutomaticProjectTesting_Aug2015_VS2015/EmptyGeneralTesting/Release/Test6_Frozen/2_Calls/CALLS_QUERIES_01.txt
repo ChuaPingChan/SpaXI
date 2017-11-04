@@ -68,8 +68,8 @@ procedure p;
 Select p such that Calls*("deux", p)
 trois, quatre, cinq
 5000
-14 - Basic Calls* with 1 unknown arguments and 1 const (before)
+15 - Basic Calls* with 1 unknown arguments and 1 const (before)
 procedure p; call c;
 Select c with c.procName="un"
-none
+1
 5000

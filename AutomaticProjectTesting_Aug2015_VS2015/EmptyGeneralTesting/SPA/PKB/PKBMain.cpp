@@ -185,7 +185,7 @@ list<int> PKBMain::getAllIdxOfStringEntity(Entity type) {
 	}
 
 	else if (type == CALL) {
-		return getAllCallees();
+		return getAllCallsStmt();
 	}
 
 	else if (type == VARIABLE) {
@@ -247,6 +247,14 @@ bool PKBMain::isInstanceOf(Entity type, string arg) {
 	else {
 		return false;
 	}
+}
+//GENERAL
+bool PKBMain::addStmtList(int stmt) {
+	return stmtTypeList.addToStmtList(stmt);
+}
+
+list<int> PKBMain::getStmtList() {
+	return stmtTypeList.getStmtList();
 }
 
 //CALLS
@@ -1607,7 +1615,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 							if (ifMapStack.top().isEndElse(curr)) {
 								list<int> nextStmtList = getExecutedAfter(curr, STMT);
 								if (nextStmtList.size() != 0) { //has next
-									curr = processBranchElseWithNext(ifMapStack, latestMod, nextStmtList.front());
+									curr = processBranchElseWithNext(ifMapStack, latestMod, afterLoop);
 								}
 
 								else {
@@ -2080,11 +2088,11 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<in
 							curr = processBranchIf(ifMapStack, latestMod);
 						}
 
-						else {
-							if (ifMapStack.top().isEndElse(curr)) {
+						else { 
+							if (ifMapStack.top().isEndElse(curr)) { //if is end else
 								list<int> nextStmtList = getExecutedAfter(curr, STMT);
 								if (nextStmtList.size() != 0) { //has next
-									curr = processBranchElseWithNext(ifMapStack, latestMod, nextStmtList.front());
+									curr = processBranchElseWithNext(ifMapStack, latestMod, afterLoop);
 								}
 
 								else {

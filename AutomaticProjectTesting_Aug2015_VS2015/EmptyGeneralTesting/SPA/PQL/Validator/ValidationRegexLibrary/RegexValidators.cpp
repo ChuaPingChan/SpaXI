@@ -68,7 +68,7 @@ const string RegexValidators::SUCH_THAT_Cl_REGEX = "(" + SPACE_0 + "(such that)"
 const string RegexValidators::RELATIONSHIP_KEYWORD_REGEX = "(Modifies|Uses|Parent[\\*]|Parent|Follows[\\*]|Follows|Calls[\\*]|Calls|Next[\\*]|Next|Affects[\\*]|Affects)";
 
 /*--------------- Pattern Clause Regex ---------------*/
-const string RegexValidators::EXPRESSION_SPEC_EXACT_REGEX = "(" + SPACE_0 + "\"\\s*\\(*\\s*(\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*|\\s*\\(*\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*(\\s*[+\\-*]\\s*\\(*\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*\\)*\\s*\\)*\\s*)*\\s*)\\s*\\)*\\s*\"" + SPACE_0 + ")";
+const string RegexValidators::EXPRESSION_SPEC_EXACT_REGEX = "(" + SPACE_0 + "\"\\s*\\(*\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*\\)*\\s*(\\s*[+\\-*]\\s*\\(*\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*\\)*\\s*)+\\s*\"|\"\\s*\\(*\\s*(\\d+|[a-zA-Z][a-zA-Z0-9]*)\\s*\\)*\\s*\"" + SPACE_0 + ")";
 const string RegexValidators::EXPRESSION_SPEC_PARTIAL_REGEX = "(" + SPACE_0 + "_" + SPACE_0 + EXPRESSION_SPEC_EXACT_REGEX + SPACE_0 + "_" + SPACE_0 + ")";
 const string RegexValidators::EXPRESSION_SPEC = "(" + EXPRESSION_SPEC_PARTIAL_REGEX + "|" + EXPRESSION_SPEC_EXACT_REGEX + ")";
 const string RegexValidators::PATTERN_ASSIGN_FIRSTARG_REGEX = "(" + SPACE_0 + ENTREF_REGEX + SPACE_0 + ")";

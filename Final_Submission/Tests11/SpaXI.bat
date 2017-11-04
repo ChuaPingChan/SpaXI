@@ -2,7 +2,7 @@
 :main
 set isPause=1
 echo ===============================================================================
-echo Welcome to Team 11 static analyzer program. I am SpaXI.
+echo Welcome to Team 11 static program analyzer. I am SpaXI.
 echo ===============================================================================
 echo Type the test index to run the test
 echo [c] Receive a compliment

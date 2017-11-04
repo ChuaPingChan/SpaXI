@@ -12,4 +12,4 @@ spaxi.speak "Good afternoon, I am Spaxi."
 end if
 end if
 end if
-spaxi.speak "Welcome to Team 11's static analyzer program."
+spaxi.speak "Welcome to Team 11's static program analyzer."

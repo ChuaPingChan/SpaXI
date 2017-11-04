@@ -2,7 +2,7 @@
 :main
 set isPause=1
 echo ===============================================================================
-echo Welcome to Team 11 static analyzer program. I am SpaXI.
+echo Welcome to Team 11 static program analyzer. I am SpaXI.
 echo ===============================================================================
 echo Type the test index to run the test
 echo [0] Receive a compliment
@@ -10,7 +10,6 @@ echo [s] Run AutoTester for specified test path
 echo [a] Run All Tests
 echo [?] Run Predefined Test #?
 echo [x] Exit
-SpaxiSpeech\spaxi_welcome.vbs
 set option=
 set /p option=Please select your options: 
 if '%option%'=='0' (
@@ -69,6 +68,9 @@ if '%option%'=='14' (
 )
 if '%option%'=='15' (
 	goto :runTest15
+)
+if '%option%'=='16' (
+	goto :runTest16
 )
 cls
 goto :main
@@ -174,8 +176,7 @@ call :runTest3
 call :runTest4
 call :runTest5
 call :runTest6
-REM call :runTest7
-echo -- ! -- AUTOTESTER CRASHED FOR TEST 7 -- ! --
+call :runTest7
 call :runTest8
 call :runTest9
 call :runTest10
@@ -184,7 +185,6 @@ call :runTest12
 call :runTest13
 call :runTest14
 call :runTest15
-call :runTest16
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -560,10 +560,10 @@ echo Finish running AutoTester for Query3.txt.
 ::AutoTester Test13_Seven\4_Intense\Source4.txt Test13_Seven\4_Intense\Query4.txt TestResult\out13_Intense_Query4.xml > TestResult\cmd\cmd13_Intense_Query4.txt
 ::echo Finish running AutoTester for Query4.txt.
 echo -- TIMEOUT! -- Query4.txt has been commented away in the bat file -- ! --
-REM echo Running AutoTester for Query5.txt...
-REM AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
-REM echo Finish running AutoTester for Query5.txt.
-echo -- TIMEOUT! -- Query5.txt has been commented away in the bat file -- ! --
+echo Running AutoTester for Query5.txt...
+AutoTester Test13_Seven\4_Intense\Source5.txt Test13_Seven\4_Intense\Query5.txt TestResult\out13_Intense_Query5.xml > TestResult\cmd\cmd13_Intense_Query5.txt
+echo Finish running AutoTester for Query5.txt.
+REM echo -- TIMEOUT! -- Query5.txt has been commented away in the bat file -- ! --
 echo Running AutoTester for Query6a.txt...
 AutoTester Test13_Seven\4_Intense\Source6.txt Test13_Seven\4_Intense\Query6a.txt TestResult\out13_Intense_Query6a.xml > TestResult\cmd\cmd13_Intense_Query6a.txt
 echo Finish running AutoTester for Query6a.txt.
@@ -645,5 +645,14 @@ echo Running AutoTester for Query_Test1 ...
 AutoTester Test15_Verb\Acceptance\Source_prog_1.txt Test15_Verb\Acceptance\Query_Test1.txt TestResult\out15_Acceptance_Query_Test1.xml > TestResult\cmd\cmd15_Acceptance_Query_Test1.txt
 echo Finish running AutoTester for Query_Test1.
 echo Finish running AutoTester for test 15.
+call :getPauseAction
+goto :eof
+
+:runTest16
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 16...
+AutoTester Test16_Stress\SourceStress.txt Test16_Stress\QueryStressNext.txt TestResult\out16_QueryStressNext.xml > TestResult\cmd\cmd16_QueryStressNext.txt
+echo Finish running AutoTester for test 16.
 call :getPauseAction
 goto :eof
