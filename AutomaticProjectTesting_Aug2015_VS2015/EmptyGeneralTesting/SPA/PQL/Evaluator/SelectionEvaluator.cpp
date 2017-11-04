@@ -121,7 +121,7 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
     }
     else if (argType == STMTLIST)
     {
-        return pkbInstance->getAllStatements();
+        return pkbInstance->getStmtList();
 
     }
     else
