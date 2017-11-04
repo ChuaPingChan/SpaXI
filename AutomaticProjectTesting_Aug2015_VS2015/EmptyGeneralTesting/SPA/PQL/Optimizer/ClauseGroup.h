@@ -28,6 +28,4 @@ private:
     int _cost;
 
     int computeCost();
-
 };
-

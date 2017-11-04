@@ -96,26 +96,6 @@ namespace UnitTesting
             Assert::IsTrue(tempStcPtr->getArgTwo() == "dummyVar");
 
             nextClauseGroup = clauseGroupManager.getNextClauseGroup();
-            Assert::IsTrue(nextClauseGroup.size() == 2);
-            tempClausePtr = nextClauseGroup.front();
-            Assert::IsTrue(tempClausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
-            tempStcPtr = dynamic_pointer_cast<SuchThatClause>(tempClausePtr);
-            Assert::IsTrue(tempStcPtr->getRel() == Relationship::USES);
-            Assert::IsTrue(tempStcPtr->getArgOneType() == Entity::ASSIGN);
-            Assert::IsTrue(tempStcPtr->getArgTwoType() == Entity::VARIABLE);
-            Assert::IsTrue(tempStcPtr->getArgOne() == "a1");
-            Assert::IsTrue(tempStcPtr->getArgTwo() == "v1");
-            nextClauseGroup.pop();
-            tempClausePtr = nextClauseGroup.front();
-            Assert::IsTrue(tempClausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
-            tempStcPtr = dynamic_pointer_cast<SuchThatClause>(tempClausePtr);
-            Assert::IsTrue(tempStcPtr->getRel() == Relationship::MODIFIES);
-            Assert::IsTrue(tempStcPtr->getArgOneType() == Entity::WHILE);
-            Assert::IsTrue(tempStcPtr->getArgTwoType() == Entity::VARIABLE);
-            Assert::IsTrue(tempStcPtr->getArgOne() == "w1");
-            Assert::IsTrue(tempStcPtr->getArgTwo() == "v1");
-
-            nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 1);
             tempClausePtr = nextClauseGroup.front();
             Assert::IsTrue(tempClausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
@@ -125,6 +105,27 @@ namespace UnitTesting
             Assert::IsTrue(tempStcPtr->getArgTwoType() == Entity::VARIABLE);
             Assert::IsTrue(tempStcPtr->getArgOne() == "a2");
             Assert::IsTrue(tempStcPtr->getArgTwo() == "v2");
+
+            nextClauseGroup = clauseGroupManager.getNextClauseGroup();
+            Assert::IsTrue(nextClauseGroup.size() == 2);
+            tempClausePtr = nextClauseGroup.front();
+            Assert::IsTrue(tempClausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
+            tempStcPtr = dynamic_pointer_cast<SuchThatClause>(tempClausePtr);
+            Assert::IsTrue(tempStcPtr->getRel() == Relationship::MODIFIES);
+            Assert::IsTrue(tempStcPtr->getArgOneType() == Entity::WHILE);
+            Assert::IsTrue(tempStcPtr->getArgTwoType() == Entity::VARIABLE);
+            Assert::IsTrue(tempStcPtr->getArgOne() == "w1");
+            Assert::IsTrue(tempStcPtr->getArgTwo() == "v1");
+            nextClauseGroup.pop();
+            tempClausePtr = nextClauseGroup.front();
+            Assert::IsTrue(tempClausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
+            tempStcPtr = dynamic_pointer_cast<SuchThatClause>(tempClausePtr);
+            Assert::IsTrue(tempStcPtr->getRel() == Relationship::USES);
+            Assert::IsTrue(tempStcPtr->getArgOneType() == Entity::ASSIGN);
+            Assert::IsTrue(tempStcPtr->getArgTwoType() == Entity::VARIABLE);
+            Assert::IsTrue(tempStcPtr->getArgOne() == "a1");
+            Assert::IsTrue(tempStcPtr->getArgTwo() == "v1");
+            nextClauseGroup.pop();
 
             Assert::IsFalse(clauseGroupManager.hasNextClauseGroup());
         }

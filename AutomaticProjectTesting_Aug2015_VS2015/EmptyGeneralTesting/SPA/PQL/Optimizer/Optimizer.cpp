@@ -1,4 +1,6 @@
 #include <cassert>
+#include <algorithm>
+
 #include "Optimizer.h"
 #include "ClauseGroupManager.h"
 #include "ClauseGroup.h"
@@ -213,12 +215,19 @@ void Optimizer::formClauseGroups()
 
 void Optimizer::sortClausesWithinGroup()
 {
-    // TODO: Implement
+    vector<vector<ClausePtr>> updatedClauseGroups;
+
+    for (vector<ClausePtr> rawClauseGroup : _clauseGroups) {
+        ClauseGroup clauseGroup(rawClauseGroup);
+        clauseGroup.sortClauses();
+        updatedClauseGroups.push_back(clauseGroup.getClauseGroup());
+    }
+    _clauseGroups = updatedClauseGroups;
 }
 
 void Optimizer::sortClauseGroups()
 {
-    // TODO: Implement
+    sort(_clauseGroups.begin(), _clauseGroups.end(), Optimizer::compareClauseGroupCost);
 }
 
 /*
@@ -237,4 +246,9 @@ queue<queue<ClausePtr>> Optimizer::createClauseGroupQueue()
         clauseGroupsQueue.push(clauseQueue);
     }
     return clauseGroupsQueue;
+}
+
+bool Optimizer::compareClauseGroupCost(vector<ClausePtr> clauseGroup1, vector<ClausePtr> clauseGroup2)
+{
+    return ClauseGroup(clauseGroup1).getCost() < ClauseGroup(clauseGroup2).getCost();
 }
