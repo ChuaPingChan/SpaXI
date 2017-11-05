@@ -28,7 +28,6 @@ protected:
     QueryTree *qtPtr;
     string paramStr;
 
-    //TODO: Might need unknown type
     PatternType patternType;// = UNKNOWN;
     Entity argOneType;// = UNKNOWN;
     Entity argTwoType;// = UNKNOWN;

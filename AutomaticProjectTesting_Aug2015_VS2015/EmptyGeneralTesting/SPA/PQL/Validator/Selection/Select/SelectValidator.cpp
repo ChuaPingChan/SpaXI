@@ -47,7 +47,6 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
         }
         catch (SynonymNotFoundException& snfe) 
         {
-            //TODO: Add to logging
             return false;
         }
         
@@ -103,7 +102,7 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
                 }
                 catch (SynonymNotFoundException& snfe)
                 {
-                    //TODO: Add to logging
+                    cerr << snfe.what() << endl;
                     return false;
                 }
             }
@@ -200,7 +199,7 @@ Entity SelectValidator::getEntityOfSynonym(string syn)
         return STMTLIST;
     }
     else {
-        throw SynonymNotFoundException("Inside SelectValidator, when calling getEntityOfSynonym()");
+        throw SynonymNotFoundException("Inside SelectValidator.getEntityOfSynonym(syn). Synonym Not Found in QueryTree and Entity cannot be assigned. Input String: " + syn);
     }
 }
 
@@ -216,7 +215,7 @@ bool SelectValidator::isValidAttrRefForSynonym(string str)
          str = synonym;
     }
     catch (SynonymNotFoundException& snfe) {
-        //TODO: Add to logging
+        cerr << snfe.what() << endl;
         return false;
     }
 

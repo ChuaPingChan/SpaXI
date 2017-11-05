@@ -102,6 +102,7 @@
     <ClCompile Include="Exceptions\SynonymAlreadyExistException.cpp" />
     <ClCompile Include="PQL\Optimizer\SynonymUFDS.cpp" />
     <ClCompile Include="Exceptions\UnrecognisedTypeException.cpp" />
+    <ClCompile Include="Exceptions\RelationshipNotFoundException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Optimizer\ClauseGroup.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Exceptions\SynonymAlreadyExistException.h" />
     <ClInclude Include="PQL\Optimizer\SynonymUFDS.h" />
     <ClInclude Include="Exceptions\UnrecognisedTypeException.h" />
+    <ClInclude Include="Exceptions\RelationshipNotFoundException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PQL\Patternship.h" />
