@@ -1,4 +1,4 @@
-Welcome, I am SpaXI, the static program analyzer of Team 11.
+Welcome, I am SpaXI, the static program analyzer of Team 11. (Turn up your volume, I do talk)
 
 To get me started, 
 - execute SpaXI.bat
@@ -10,6 +10,10 @@ To receive a praise from me,
 To run all the tests that I owned,
 - enter [a]
 Sit back and watch the magic unfolds.
+All the results will be directed to [TestResult].
+Output from cmd will be directed to [TestResult\cmd]
+A summary will be generated at the end.
+Note: Python has to be installed for summary to be generated. Python can be installed at https://www.python.org/
 
 If you are interested in a specific test, you just need to give me the test number:
 [0] Run Sample Test
@@ -29,12 +33,15 @@ Don't worry, I will guide you along.
 That's all! Thank you! Have a great day ahead!
 
 ======================================================================
+My shortcomings
 ======================================================================
-
 Should I fail to run as expected, try the following:
-1) Open Visual Studio 2015, build in release mode
+1) Open Visual Studio 2015, build in release mode (The project can be found in Code11)
 2) Copy the output AutoTester.exe into this directory
 3) Run AutoTester with ths command:
-	AutoTester [Source File] [Qeury File] [Output XML File]
+	AutoTester [Source File] [Query File] [Output File]
+	
+If onstart up and a message occurs, it is probably because I had lost my voice (ate too much snacks), then:
+- Run SpaXI_Voiceless.bat instead.
 	
 I apologise for any inconvenience caused.
