@@ -1,4 +1,3 @@
-set isWelcome=1
 @echo off
 :main
 set isPause=1
@@ -19,10 +18,6 @@ echo [6] Run FocusTest\InterProcedural
 echo [7] Run Validation Test
 echo [8] Run Stress Test
 echo [x] Exit
-if %isWelcome%==1 (
-	SpaxiSpeech\spaxi_welcome.vbs
-	set isWelcome=0
-)
 set option=
 set /p option=Please select your options: 
 if '%option%'=='c' (
@@ -84,7 +79,14 @@ goto :eof
 
 :generateCompliment
 @echo off
-SpaxiSpeech\spaxi_compliment.vbs
+echo.
+set compliment[0]=You are beautiful :) Thank you for teaching us!
+set compliment[1]=Have a great day!
+set compliment[2]=This is the best module I've ever taken!
+set /a i=%random%%%3
+call echo %%compliment[%i%]%%
+echo.
+pause
 cls
 goto :main
 
@@ -140,7 +142,6 @@ call :clearAllResultFiles
 echo ===============================================================================
 echo                           Start Running AutoTester
 echo ===============================================================================
-SpaxiSpeech\spaxi_AutotesterStart.vbs
 call :runSampleTest
 REM call :runSimple01
 REM call :runSimple02
@@ -149,13 +150,9 @@ echo ===========================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
 echo Generating Summary ...
-SpaxiSpeech\spaxi_AutotesterFinish.vbs
-SpaxiSpeech\spaxi_generatingSummary.vbs
 python TestResult\GenerateResultSummary.py TestResult TestResult\Summary.txt
 echo Summary Generated.
 start TestResult\Summary.txt
-SpaxiSpeech\spaxi_summaryGenerated.vbs
-SpaxiSpeech\spaxi_thankYouHaveANiceDay.vbs
 pause
 cls
 goto :main
