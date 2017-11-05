@@ -349,7 +349,7 @@ procedure Japan {
 		} else {
 			tokyo = osaka;
 		}
-		hokkaido = osaka + (hokkaido * iwata - akita);
+		hokkaido = osaka + (hokkaido * iwate - akita);
 		while okayama {
 			hiroshima = nagasaki;
 		}
@@ -389,7 +389,7 @@ procedure Japan {
 			}
 		} else {
 			tochigi = okinawa;
-			okinama = nagasaki + ibaraki - kobe;
+			okinawa = nagasaki + ibaraki - kobe;
 		}
 		nagasaki = Japan;
 		kagawa = nagasaki;
