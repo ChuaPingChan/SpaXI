@@ -1,6 +1,10 @@
 #pragma once
 #include "PatternValidator.h"
 
+/** 
+ * Semantic Validation of Pattern-Assign
+ * Assumes the form of ASSIGN(ARGONE, ARGTWO)
+ */
 class AssignPatternValidator : public PatternValidator
 {
 public:
@@ -17,6 +21,6 @@ private:
     string extractArgOne(string str);
     string extractArgTwo(string str);
 
-    bool isWellFormExpr(string str);
+    bool isWellFormExpr(string str);        // Check if a given expression is well-formed by counting number of brackets
 };
 

@@ -1,6 +1,10 @@
 #pragma once
 #include "PatternValidator.h"
 
+/**
+* Semantic Validation of Pattern-If
+* Assumes the form of IF(ARGONE, ARGTWO, ARGTHREE)
+*/
 class IfPatternValidator : public PatternValidator
 {
 public:

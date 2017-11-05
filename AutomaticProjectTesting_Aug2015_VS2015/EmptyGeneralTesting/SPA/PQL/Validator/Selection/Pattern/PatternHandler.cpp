@@ -1,6 +1,5 @@
 #include "PatternHandler.h"
 
-
 PatternHandler::PatternHandler(QueryTree *qtPtrNew)
 {
     this->qtPtr = qtPtrNew;
@@ -10,6 +9,11 @@ PatternHandler::~PatternHandler()
 {
 }
 
+/*
+* Pre-cond: str pass PATTERNREF_REGEX
+* Post-Cond: If true, Pattern clause stored in QueryTree
+* Returns true when pattern is semantically valid
+*/
 bool PatternHandler::isValidPattern(string str)
 {
     string processedStr = Formatter::removeAllSpacesAndTabs(str);
@@ -50,6 +54,10 @@ bool PatternHandler::isValidPattern(string str)
     }
 }
 
+/*
+* Returns the mapping of synonym to its pattern type
+* Throws SynonymNotFoundException when pattern type cannot be determined
+*/
 PatternType PatternHandler::getPatternType(string patternSyn)
 {
     if (qtPtr->isEntitySynonymExist(patternSyn, ASSIGN))

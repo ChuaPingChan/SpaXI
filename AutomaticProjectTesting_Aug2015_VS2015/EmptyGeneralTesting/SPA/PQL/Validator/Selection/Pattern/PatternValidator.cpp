@@ -2,7 +2,6 @@
 
 const string PatternValidator::PATTERN_KEYWORD = "pattern";
 
-
 PatternValidator::PatternValidator(PatternType patternType, string patternSyn, string paramStr, QueryTree * qtPtrNew)
 {
     this->patternType = patternType;

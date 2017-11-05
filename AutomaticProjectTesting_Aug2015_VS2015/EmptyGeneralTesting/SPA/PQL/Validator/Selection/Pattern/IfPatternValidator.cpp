@@ -5,7 +5,6 @@ IfPatternValidator::IfPatternValidator(PatternType patternType, string patternSy
 {
 }
 
-
 IfPatternValidator::~IfPatternValidator()
 {
 }
