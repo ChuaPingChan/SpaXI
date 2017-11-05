@@ -1,5 +1,5 @@
-set isWelcome=1
 @echo off
+set isWelcome=1
 :main
 set isPause=1
 echo ===============================================================================
