@@ -1,6 +1,10 @@
 #pragma once
 #include "SuchThatValidator.h"
 
+/**
+* Semantic Validation of SuchThat-Calls/Calls*
+* Assumes the form of Calls(ARGONE, ARGTWO) or Calls*(ARGONE, ARGTWO)
+*/
 class CallsValidator : public SuchThatValidator
 {
 public:

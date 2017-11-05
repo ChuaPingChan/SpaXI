@@ -15,6 +15,11 @@
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\..\..\Exceptions\RelationshipNotFoundException.h"
 
+/**
+* Checks the validation of suchthat clause
+* Wrap into SuchThatClause
+* Store SuchThatClause in QueryTree
+*/
 class SuchThatHandler
 {
 public:

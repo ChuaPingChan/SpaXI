@@ -1,6 +1,10 @@
 #pragma once
 #include "SuchThatValidator.h"
 
+/**
+* Semantic Validation of SuchThat-Next/Next*
+* Assumes the form of Next(ARGONE, ARGTWO) or Next*(ARGONE, ARGTWO)
+*/
 class NextValidator : public SuchThatValidator
 {
 public:

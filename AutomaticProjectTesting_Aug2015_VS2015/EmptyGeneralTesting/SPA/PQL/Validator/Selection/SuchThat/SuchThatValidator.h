@@ -10,6 +10,9 @@
 
 using namespace std;
 
+/**
+* Super class of all suchthat validators
+*/
 class SuchThatValidator
 {
 public:
@@ -31,9 +34,9 @@ protected:
     QueryTree *qtPtr;
     string paramStr;
 
-    Relationship rel;// = UNKNWON;
-    Entity argOneType;// = UNKNWON;
-    Entity argTwoType;// = UNKNWON;
+    Relationship rel;
+    Entity argOneType;
+    Entity argTwoType;
     string argOne = "";
     string argTwo = "";
     bool validity = false;
