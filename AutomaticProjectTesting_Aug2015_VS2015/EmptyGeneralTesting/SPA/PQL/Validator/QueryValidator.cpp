@@ -13,7 +13,7 @@ bool QueryValidator::isValidQuery(string query) {
 
     for (vector<string>::iterator iter = inputVector.begin(); iter != inputVector.end(); ++iter) {
         string currentLine = *iter;
-        if (currentLine == inputVector.back()) {
+        if (currentLine == inputVector.back()) {        // Last line will be assumed to be Selection
             if (!isValidSelection(currentLine)) {
                 isValidSelectionFlag = false;
             }
