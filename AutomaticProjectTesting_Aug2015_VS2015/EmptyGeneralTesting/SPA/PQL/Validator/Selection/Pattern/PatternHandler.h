@@ -9,6 +9,7 @@
 #include "IfPatternValidator.h"
 #include "..\..\..\Utilities\PatternClause.h"
 #include "..\..\..\Utilities\Formatter.h"
+#include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
 
 class PatternHandler
 {

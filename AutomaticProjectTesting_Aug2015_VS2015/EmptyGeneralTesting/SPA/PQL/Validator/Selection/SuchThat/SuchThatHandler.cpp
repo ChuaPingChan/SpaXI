@@ -14,7 +14,14 @@ bool SuchThatHandler::isValidSuchThat(string str)
 {
     string processedStr = Formatter::removeAllSpacesAndTabs(str);
     string relStr = getSuchThatKeyWord(processedStr);
-    int rel = getRelIndex(relStr);
+    
+    int rel;
+    try {
+        rel = getRelIndex(relStr);
+    }
+    catch (RelationshipNotFoundException& rnfe) {
+        return false;
+    }
 
     SuchThatValidator *suchThatValidator;
 
@@ -74,7 +81,6 @@ bool SuchThatHandler::isValidSuchThat(string str)
     }
 }
 
-//TODO: Throw exception if cant find
 string SuchThatHandler::getSuchThatKeyWord(string str)
 {
     regex suchThatKeywordRegex(RegexValidators::RELATIONSHIP_KEYWORD_REGEX);
@@ -123,7 +129,7 @@ int SuchThatHandler::getRelIndex(string rel)
         return AFFECTSSTAR;
     }
     else {
-        return -1;  //TODO: Throw exception to say inalid
+        throw RelationshipNotFoundException("In SuchThatHandler.getRelIndex(rel). Relationship do not match valid Relationship. Relationship cannot be assigned. Input String: " + rel);
     }
 }
 

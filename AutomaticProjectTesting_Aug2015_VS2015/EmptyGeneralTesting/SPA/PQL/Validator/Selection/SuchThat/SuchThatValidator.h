@@ -31,7 +31,6 @@ protected:
     QueryTree *qtPtr;
     string paramStr;
 
-    //TODO: Might need to set unknown type
     Relationship rel;// = UNKNWON;
     Entity argOneType;// = UNKNWON;
     Entity argTwoType;// = UNKNWON;

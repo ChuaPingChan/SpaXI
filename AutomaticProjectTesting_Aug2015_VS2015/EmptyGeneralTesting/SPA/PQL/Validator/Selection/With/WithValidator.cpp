@@ -95,11 +95,9 @@ bool WithValidator::isValidLhs(string lhs)
             return true;
         }
         catch (SynonymNotFoundException& snfe) {
-            //TODO: Log msg from snfe.what()
             return false;
         }
         catch (AttributeNotFoundException& anfe) {
-            //TODO: Log msg from anfe.what()
             return false;
         }
     }
@@ -149,11 +147,9 @@ bool WithValidator::isValidRhs(string rhs)
             return true;
         }
         catch (SynonymNotFoundException& snfe) {
-            //TODO: Log msg from snfe.what()
             return false;
         }
         catch (AttributeNotFoundException& anfe) {
-            //TODO: Log msg from anfe.what()
             return false;
         }
     }
@@ -229,7 +225,7 @@ Entity WithValidator::getEntityOfSynonym(string syn)
     }
     else
     {
-        throw SynonymNotFoundException("In WithValidator.cpp, when calling getEntityOfSynonym(). Synonym cannot be found in the QueryTree and no Entity can be assigned.");
+        throw SynonymNotFoundException("In WithValidator.cpp, when calling getEntityOfSynonym(). Synonym cannot be found in the QueryTree and Entity cannot be assigned. Input string: " + syn);
     }
 }
 
@@ -263,7 +259,7 @@ WithType WithValidator::getWithType(Entity entity, string attr)
         return INTEGER_WITH;
     }
     else {
-        throw AttributeNotFoundException("In WithValidator.cpp, when calling getAttributeOfAttrRefAttribute(). Attribute does not match defined attribute or Entity does not have that attribute");
+        throw AttributeNotFoundException("In WithValidator.cpp, when calling getAttributeOfAttrRefAttribute(). Attribute does not match defined attribute or Entity does not have that attribute. Input Entity: " + to_string(entity) + ", Input String: " + attr);
     }
 }
 

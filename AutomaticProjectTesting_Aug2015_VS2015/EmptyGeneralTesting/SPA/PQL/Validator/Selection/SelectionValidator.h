@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <regex>        //TODO:Remove after implementing regex teable
 #include "..\..\QueryTree.h"
 #include "Select\SelectValidator.h"
 #include "SuchThat\SuchThatHandler.h"

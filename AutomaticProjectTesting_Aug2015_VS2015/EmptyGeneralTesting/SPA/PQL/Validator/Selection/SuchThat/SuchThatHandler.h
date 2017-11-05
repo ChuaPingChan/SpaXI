@@ -13,6 +13,7 @@
 #include "..\..\..\Relationship.h"
 #include "..\..\..\Utilities\SuchThatClause.h"
 #include "..\..\..\Utilities\Formatter.h"
+#include "..\..\..\..\Exceptions\RelationshipNotFoundException.h"
 
 class SuchThatHandler
 {
