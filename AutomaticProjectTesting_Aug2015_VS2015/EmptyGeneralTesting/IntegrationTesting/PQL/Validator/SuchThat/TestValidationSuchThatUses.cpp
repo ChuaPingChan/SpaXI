@@ -86,7 +86,20 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
 
-        TEST_METHOD(TestValidity_SuchThat_Uses_IdentWithQuotes_IdentWithQuotes_Valid)
+        TEST_METHOD(TestValidity_SuchThat_Uses_Synonym_IdentWithQuotes_Similar_Valid)
+        {
+            string str = "Uses(Pikachu, \"Pikachu\")";
+            QueryTree qt;
+            qt.insertSynonym(PROCEDURE, "Pikachu");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Pikachu\"");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(USES, PROCEDURE, "Pikachu", IDENT_WITHQUOTES, "Pikachu");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_SuchThat_Uses_IdentWithQuotes_IdentWithQuotes_Diff_Valid)
         {
             string str = "Uses(\"Pikachu\", \"pokeball\")";
             QueryTree qt;
@@ -95,6 +108,19 @@ namespace UnitTesting
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(USES, IDENT_WITHQUOTES, "Pikachu", IDENT_WITHQUOTES, "pokeball");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_SuchThat_Uses_IdentWithQuotes_IdentWithQuotes_Same_Valid)
+        {
+            string str = "Uses(\"Pikachu\", \"Pikachu\")";
+            QueryTree qt;
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Pikachu\"");
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Pikachu\"");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(USES, IDENT_WITHQUOTES, "Pikachu", IDENT_WITHQUOTES, "Pikachu");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
@@ -121,6 +147,19 @@ namespace UnitTesting
             SuchThatHandler stHandler = SuchThatHandler(&qt);
             Assert::IsTrue(stHandler.isValidSuchThat(str));
             SuchThatClause expected = UtilitySelection::makeSuchThatClause(USES, IDENT_WITHQUOTES, "Pikachu", VARIABLE, "thunderstone");
+            SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
+            Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
+        }
+
+        TEST_METHOD(TestValidity_SuchThat_Uses_IdentWithQuotes_Variable_Similar_Valid)
+        {
+            string str = "Uses(\"Pikachu\", Pikachu)";
+            QueryTree qt;
+            qt.insertSynonym(IDENT_WITHQUOTES, "\"Pikachu\"");
+            qt.insertSynonym(VARIABLE, "Pikachu");
+            SuchThatHandler stHandler = SuchThatHandler(&qt);
+            Assert::IsTrue(stHandler.isValidSuchThat(str));
+            SuchThatClause expected = UtilitySelection::makeSuchThatClause(USES, IDENT_WITHQUOTES, "Pikachu", VARIABLE, "Pikachu");
             SuchThatClause actual = UtilitySelection::getFirstSuchThatClauseFromTree(qt);
             Assert::IsTrue(UtilitySelection::isSameSuchThatClauseContent(expected, actual));
         }
