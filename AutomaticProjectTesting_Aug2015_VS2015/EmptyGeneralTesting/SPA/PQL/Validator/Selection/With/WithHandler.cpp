@@ -9,6 +9,11 @@ WithHandler::~WithHandler()
 {
 }
 
+/*
+* Pre-cond: str pass ATTRCOMPARE_REGEX
+* Post-Cond: If true, With clause stored in QueryTree
+* Returns true when with is semantically valid
+*/
 bool WithHandler::isValidWith(string str)
 {
     string processedStr = Formatter::removeAllSpacesAndTabs(str);

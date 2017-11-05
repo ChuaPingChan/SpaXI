@@ -25,6 +25,9 @@ bool SelectionValidator::isValidSelect(string str)
     return sv.isValid(selectRawStr);
 }
 
+/*
+* Pre-cond: str is syntactically valid
+*/
 bool SelectionValidator::areValidClauses(string str)
 {
     SuchThatHandler stHandler = SuchThatHandler(qtPtr);

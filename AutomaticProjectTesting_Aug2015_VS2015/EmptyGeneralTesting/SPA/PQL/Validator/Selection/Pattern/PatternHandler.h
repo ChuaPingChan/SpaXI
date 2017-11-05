@@ -11,6 +11,11 @@
 #include "..\..\..\Utilities\Formatter.h"
 #include "..\..\..\..\Exceptions\SynonymNotFoundException.h"
 
+/**
+ * Checks the validation of pattern clause
+ * Wrap into PatternClause
+ * Store PatternClause in QueryTree
+ */
 class PatternHandler
 {
 public:
@@ -22,9 +27,9 @@ public:
 private:
     QueryTree *qtPtr;
 
-    PatternType getPatternType(string str);
+    PatternType getPatternType(string str);                 // Get mapping of synonym to its pattern type
 
-    string extractPatternSynonym(string str);
+    string extractPatternSynonym(string str);               // Get synonym that determines pattern type
 
     PatternClause makePatternClause(PatternValidator pv);
     bool storeInQueryTree(PatternClause pc);

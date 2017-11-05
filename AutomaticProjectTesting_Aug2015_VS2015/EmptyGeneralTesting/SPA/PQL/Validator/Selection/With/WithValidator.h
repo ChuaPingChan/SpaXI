@@ -9,6 +9,10 @@
 
 using namespace std;
 
+/**
+* Semantic Validation of With
+* Assumes the form of LHS.ATTR=RHS.ATTR or LHS.ATTR=Int or LHS.ATTR=STRNG or LHS=PROG_LINE
+*/
 class WithValidator
 {
 public:

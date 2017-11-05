@@ -9,17 +9,21 @@
 
 using namespace std;
 
+/**
+* Checks the overall selection validation of a query
+* Breaks query into clauses
+* Check validity of individual clause
+* Store in QueryTree
+*/
 class SelectionValidator
 {
-    friend class FriendSelectionValidator;
+    friend class FriendSelectionValidator;          // Class to be used for testing purposes
 public:
     SelectionValidator(QueryTree *qtPtrNew);
     ~SelectionValidator();
 
     bool isValidSelection(string str);
     bool setQueryTree(QueryTree *qtPtrNew);
-
-    
 
 private:
     QueryTree *qtPtr;

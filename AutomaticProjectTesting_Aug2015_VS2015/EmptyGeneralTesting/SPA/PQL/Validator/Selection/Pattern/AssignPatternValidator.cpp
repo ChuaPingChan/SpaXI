@@ -5,7 +5,6 @@ AssignPatternValidator::AssignPatternValidator(PatternType patternType, string p
 {
 }
 
-
 AssignPatternValidator::~AssignPatternValidator()
 {
 }
@@ -56,7 +55,6 @@ bool AssignPatternValidator::isValidArgOne(string &argOne)
     {
         return false;
     }
-    
 }
 
 bool AssignPatternValidator::isValidArgTwo(string &argTwo)
@@ -105,11 +103,14 @@ string AssignPatternValidator::extractArgTwo(string str)
     return argTwoMatch[0].str();
 }
 
+/*
+* Pre-cond: str passes EXPRESSION_SPEC regex
+* Returns true when expression is well-formed
+*/
 bool AssignPatternValidator::isWellFormExpr(string str)
 {
     int countOpenBracket = 0;
     int countCloseBracket = 0;
-
 
     regex bracketRegex(RegexValidators::OPEN_BRACKET_REGEX+ "|" + RegexValidators::CLOSE_BRACKET_REGEX);
     sregex_iterator it(str.cbegin(), str.cend(), bracketRegex);

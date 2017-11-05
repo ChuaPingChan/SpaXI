@@ -4,6 +4,9 @@
 #include "..\..\ValidationRegexLibrary\RegexValidators.h"
 #include "..\..\..\QueryTree.h"
 
+/**
+ * Super class of all pattern validators
+ */
 class PatternValidator
 {
 public:
@@ -28,10 +31,10 @@ protected:
     QueryTree *qtPtr;
     string paramStr;
 
-    PatternType patternType;// = UNKNOWN;
-    Entity argOneType;// = UNKNOWN;
-    Entity argTwoType;// = UNKNOWN;
-    Entity argThreeType;// = UNKNOWN;
+    PatternType patternType;
+    Entity argOneType;
+    Entity argTwoType;
+    Entity argThreeType;
     string patternSyn = "";
     string argOne = "";
     string argTwo = "";

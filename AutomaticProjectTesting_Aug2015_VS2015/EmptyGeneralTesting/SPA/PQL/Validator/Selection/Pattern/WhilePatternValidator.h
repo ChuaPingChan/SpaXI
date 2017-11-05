@@ -1,6 +1,10 @@
 #pragma once
 #include "PatternValidator.h"
 
+/**
+* Semantic Validation of Pattern-While
+* Assumes the form of WHILE(ARGONE, ARGTWO)
+*/
 class WhilePatternValidator : public PatternValidator
 {
 public:

@@ -10,6 +10,11 @@ SuchThatHandler::~SuchThatHandler()
 {
 }
 
+/*
+* Pre-cond: str pass RELREF_REGEX
+* Post-Cond: If true, SuchThat clause stored in QueryTree
+* Returns true when suchthat is semantically valid
+*/
 bool SuchThatHandler::isValidSuchThat(string str)
 {
     string processedStr = Formatter::removeAllSpacesAndTabs(str);
@@ -90,6 +95,10 @@ string SuchThatHandler::getSuchThatKeyWord(string str)
     return foundMatch[1];
 }
 
+/*
+* Returns the enum form of relationship
+* Throws RelationshipNotFoundException when suchthat relationship cannot be determined
+*/
 int SuchThatHandler::getRelIndex(string rel)
 {
     if (rel == RELATIONSHIP_STRING_ARRAY[MODIFIES]) {

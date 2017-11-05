@@ -17,6 +17,10 @@ bool DeclarationValidator::setQueryTree(QueryTree *qtPtrNew) {
     return true;
 }
 
+/*
+* Returns enum form of entity
+* Throws EntityNotFoundException when string form cannot be mapped into its enum form
+*/
 Entity DeclarationValidator::getEntityIndexReference(string entity)
 {
     if (RegexValidators::isValidStmtString(entity)) {
@@ -47,10 +51,15 @@ Entity DeclarationValidator::getEntityIndexReference(string entity)
         return CONSTANT;
     }
     else {
-        throw EntityNotFoundException("Inside DeclarationValidator, when calling getEntityIndexReference()");
+        throw EntityNotFoundException("Inside DeclarationValidator.getEntityIndexReference(). Input Entity: " + entity);
     }
 }
 
+/*
+* Pre-cond: entity is valid
+* Returns true when all synonyms are valid and stored in the QueryTree
+* Throws SynonymAlreadyExistException
+*/
 bool DeclarationValidator::areValidSynonyms(Entity entity, string str)
 {
     regex synonymRegex(RegexValidators::SYNONYM_REGEX);
@@ -67,7 +76,7 @@ bool DeclarationValidator::areValidSynonyms(Entity entity, string str)
         }
         else if (isDeclaredSynonym(currentToken)) 
         {
-            throw SynonymAlreadyExistException("In DeclarationValidator, when calling areValidSynonyms()");
+            throw SynonymAlreadyExistException("In DeclarationValidator.areValidSynonyms(). Current Token: " + currentToken);
         }
         else
         {
@@ -80,7 +89,7 @@ bool DeclarationValidator::areValidSynonyms(Entity entity, string str)
 bool DeclarationValidator::hasValidEntityAndSynonym(string str)
 {
     smatch regexMatch;
-    regex extraction("([a-zA-Z_]+)\\s+([^]*)");
+    regex extraction("([a-zA-Z_]+)\\s+([^]*)");     // Assumes the form of (entity) (synonym, synonym, ...)
     regex_search(str, regexMatch, extraction);
 
     try {

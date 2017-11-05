@@ -1,6 +1,10 @@
 #pragma once
 #include "SuchThatValidator.h"
 
+/**
+* Semantic Validation of SuchThat-Modifies
+* Assumes the form of Modifies(ARGONE, ARGTWO)
+*/
 class ModifiesValidator : public SuchThatValidator
 {
 public:

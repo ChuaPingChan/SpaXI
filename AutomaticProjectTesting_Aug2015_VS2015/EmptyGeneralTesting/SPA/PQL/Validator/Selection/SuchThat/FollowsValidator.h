@@ -1,6 +1,10 @@
 #pragma once
 #include "SuchThatValidator.h"
 
+/**
+* Semantic Validation of SuchThat-Follows/Follows*
+* Assumes the form of Follows(ARGONE, ARGTWO) or Follows*(ARGONE, ARGTWO)
+*/
 class FollowsValidator : public SuchThatValidator
 {
 public:
