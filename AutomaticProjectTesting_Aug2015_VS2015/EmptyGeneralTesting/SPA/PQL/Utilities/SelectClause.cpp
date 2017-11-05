@@ -19,6 +19,7 @@ SelectClause::SelectClause(SelectionType selectionType, Entity singleArgType, st
     this->selectionType = selectionType;
     this->singleArgType = singleArgType;
     this->singleArg = singleArg;
+    this->isAttributeProcName = false;
 
     if (entityIsSynonym(singleArgType))
         addSynonym(singleArg);
