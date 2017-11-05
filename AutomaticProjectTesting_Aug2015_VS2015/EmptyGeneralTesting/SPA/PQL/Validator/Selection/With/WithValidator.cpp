@@ -189,6 +189,10 @@ bool WithValidator::isLhsSameTypeAsRhs()
     return this->lhsWithType == this->rhsWithType;
 }
 
+/*
+* Returns the enum form of entity
+* Throws SynonymNotFoundException when entity of synonym cannot be determined
+*/
 Entity WithValidator::getEntityOfSynonym(string syn)
 {
     if (qtPtr->isEntitySynonymExist(syn, PROCEDURE))
@@ -229,6 +233,10 @@ Entity WithValidator::getEntityOfSynonym(string syn)
     }
 }
 
+/*
+* Returns the with type given an entity
+* Throws AttributeNotFoundException when attribute of entity cannot be determined
+*/
 WithType WithValidator::getWithType(Entity entity, string attr)
 {
     if (entity == PROCEDURE && RegexValidators::isValidProcNameString(attr)) {

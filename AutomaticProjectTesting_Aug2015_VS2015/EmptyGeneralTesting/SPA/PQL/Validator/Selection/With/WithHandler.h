@@ -5,6 +5,11 @@
 #include "..\..\..\Utilities\WithClause.h"
 #include "..\..\..\Utilities\Formatter.h"
 
+/**
+* Checks the validation of with clause
+* Wrap into WithClause
+* Store WithClause in QueryTree
+*/
 class WithHandler
 {
 public:
