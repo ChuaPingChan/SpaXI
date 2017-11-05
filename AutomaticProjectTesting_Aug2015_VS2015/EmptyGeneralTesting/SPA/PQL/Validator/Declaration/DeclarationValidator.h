@@ -10,6 +10,9 @@
 
 using namespace std;
 
+/**
+ * Checks the validation of a given declaration
+ */
 class DeclarationValidator
 {
     friend class FriendDeclarationValidator;
@@ -24,13 +27,13 @@ public:
 private:
     QueryTree *qtPtr;
 
-    unordered_set<string> synonymBank;   //Contains list of declared synonyms
+    unordered_set<string> synonymBank;                  // Contains list of declared synonyms
 
-    Entity getEntityIndexReference(string entity);
+    Entity getEntityIndexReference(string entity);      // Converts string form of entity into its enum form
 
-    bool areValidSynonyms(Entity entity, string str);
+    bool areValidSynonyms(Entity entity, string str);   // Checks if string contains valid synonyms and store them in the QueryTree
 
-    bool hasValidEntityAndSynonym(string str);
+    bool hasValidEntityAndSynonym(string str);          // Checks if a given string contains a single valid entity followed by valid synonyms
 
-    bool isDeclaredSynonym(string synonym);
+    bool isDeclaredSynonym(string synonym);             // Check if a synonym has been declared before
 };
