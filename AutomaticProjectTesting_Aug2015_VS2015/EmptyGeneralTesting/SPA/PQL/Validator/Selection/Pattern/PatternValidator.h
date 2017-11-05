@@ -5,7 +5,7 @@
 #include "..\..\..\QueryTree.h"
 
 /**
- * Parent class of all pattern validators
+ * Super class of all pattern validators
  */
 class PatternValidator
 {
