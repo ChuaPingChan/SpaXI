@@ -175,5 +175,167 @@ namespace UnitTesting
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgTwo() == "v1");
         }
 
+        TEST_METHOD(TestPruneClauseResult) {
+
+            /**********
+            * Set up *
+            **********/
+            /*
+            Select <a1, w1>
+            such that Modifies(a2, "c")
+            such that Modifies(w1, v1)
+            such that Uses(s1, v2)
+            */
+
+            SelectClause select_a1_w1 = SelectClause(SelectionType::SELECT_TUPLE, vector<Entity>{Entity::ASSIGN, Entity::WHILE}, vector<string>{"a1", "w1"});
+            SuchThatClause modifies_a2_ident = SuchThatClause(Relationship::MODIFIES,
+                Entity::ASSIGN, "a2",
+                Entity::IDENT_WITHQUOTES, "c");
+            SuchThatClause uses_w1_v1 = SuchThatClause(Relationship::MODIFIES,
+                Entity::WHILE, "w1",
+                Entity::VARIABLE, "v1");
+            SuchThatClause uses_s1_v2 = SuchThatClause(Relationship::USES,
+                Entity::STMT, "s1",
+                Entity::VARIABLE, "v2");
+
+            vector<ClausePtr> rawClauseGroup;
+            rawClauseGroup.push_back(select_a1_w1.getSharedPtr());
+            rawClauseGroup.push_back(modifies_a2_ident.getSharedPtr());
+            rawClauseGroup.push_back(uses_w1_v1.getSharedPtr());
+            rawClauseGroup.push_back(uses_s1_v2.getSharedPtr());
+
+            ClauseResult cr1;
+
+            string a1 = "a1";
+            list<int> a1Results{ 1 };
+            string a2 = "a2";
+            list<int> a2Results{ 2 };
+            string v1 = "v1";
+            list<int> v1Results{ 3 };
+            string w1 = "w1";
+            list<int> w1Results{ 4 };
+            string v2 = "v2";
+            list<int> v2Results{ 5 };
+            string s1 = "s1";
+            list<int> s1Results{ 6 };
+
+            /***********
+            * Testing *
+            ***********/
+            list<list<int>> actualResults;
+            list<list<int>> expectedResults;
+
+            ClauseGroup clauseGroup(rawClauseGroup);
+            list<string> selectedSyns = select_a1_w1.getSynonyms();
+            clauseGroup.setSelectedSynonyms(unordered_set<string>{selectedSyns.begin(), selectedSyns.end()});
+            
+            // Evaluate Modifies(a2, "c")
+            clauseGroup.getNextClause();
+            cr1.updateSynResults(a2, a2Results);
+            /*************
+            ClauseResult:
+            --------------
+            a2
+            --------------
+            2
+            **************/
+            actualResults = cr1.getAllResults();    // Before pruning
+            expectedResults = list<list<int>>{
+                {2}
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+            clauseGroup.pruneClauseResult(&cr1);
+            actualResults = cr1.getAllResults();    // Afer pruning
+            expectedResults = list<list<int>>{
+                { -1 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Evaluate Modifies(w1,v1)
+            clauseGroup.getNextClause();
+            cr1.updateSynResults(w1, w1Results);
+            cr1.updateSynResults(v1, v1Results);
+            /*************
+            ClauseResult:
+            --------------
+            a2	w1  v1
+            --------------
+            -1  4   3
+            **************/
+            actualResults = cr1.getAllResults();    // Before pruning
+            expectedResults = list<list<int>>{
+                { -1, 4, 3 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+            clauseGroup.pruneClauseResult(&cr1);
+            actualResults = cr1.getAllResults();    // After pruning
+            expectedResults = list<list<int>>{
+                { -1, 4, -1 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Evaluate Uses(s1,v2)
+            clauseGroup.getNextClause();
+            cr1.updateSynResults(s1, s1Results);
+            cr1.updateSynResults(v2, v2Results);
+            /*****************
+            ClauseResult:
+            ------------------
+            a2	w1  v1  s1  v2
+            ------------------
+            -1  4   -1   6   5
+            ******************/
+            actualResults = cr1.getAllResults();    // Before pruning
+            expectedResults = list<list<int>>{
+                { -1, 4, -1, 6, 5 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+            clauseGroup.pruneClauseResult(&cr1);
+            actualResults = cr1.getAllResults();    // After pruning
+            expectedResults = list<list<int>>{
+                { -1, 4, -1, -1, -1 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Evaluate Select<a1, w1>
+            clauseGroup.getNextClause();
+            cr1.updateSynResults(a1, a1Results);
+            cr1.updateSynResults(w1, w1Results);
+            /*********************
+            ClauseResult:
+            ----------------------
+            a2	w1  v1  s1  v2  a1
+            ----------------------
+            -1  4   -1  -1  -1  1
+            **********************/
+            actualResults = cr1.getAllResults();    // Before pruning
+            expectedResults = list<list<int>>{
+                { -1, 4, -1, -1, -1, 1 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+            clauseGroup.pruneClauseResult(&cr1);
+            actualResults = cr1.getAllResults();    // After pruning
+            expectedResults = list<list<int>>{
+                { -1, 4, -1, -1, -1, 1 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+        }
+
     };
 }
