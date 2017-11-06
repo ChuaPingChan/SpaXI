@@ -1,359 +1,359 @@
 Overall Test Ran    : 8217
-Overall Test Passed : 8213
+Overall Test Passed : 8215
 Overall Test Failed : 1
-Overall Test Timeout: 3
+Overall Test Timeout: 1
 
 
 TestResult\out1.xml: 
-Test Ran: 293
+Test Ran: 293	
 Passed   : 293
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryAffects.xml: 
-Test Ran: 26
+Test Ran: 26	
 Passed   : 26
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryAffectsStar.xml: 
-Test Ran: 11
+Test Ran: 11	
 Passed   : 11
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryModifies.xml: 
-Test Ran: 47
+Test Ran: 47	
 Passed   : 47
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryNext.xml: 
-Test Ran: 129
+Test Ran: 129	
 Passed   : 129
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryNextStar.xml: 
-Test Ran: 131
+Test Ran: 131	
 Passed   : 131
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryParent.xml: 
-Test Ran: 97
+Test Ran: 97	
 Passed   : 97
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryParentStar.xml: 
-Test Ran: 102
+Test Ran: 102	
 Passed   : 102
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryPattern.xml: 
-Test Ran: 28
+Test Ran: 28	
 Passed   : 28
 Failed   : 0
 Timeout  : 0
 
 TestResult\out10_QueryUses.xml: 
-Test Ran: 120
+Test Ran: 120	
 Passed   : 120
 Failed   : 0
 Timeout  : 0
 
 TestResult\out11_QueryFollows.xml: 
-Test Ran: 57
+Test Ran: 57	
 Passed   : 57
 Failed   : 0
 Timeout  : 0
 
 TestResult\out11_QueryFollowsStar.xml: 
-Test Ran: 43
+Test Ran: 43	
 Passed   : 43
 Failed   : 0
 Timeout  : 0
 
 TestResult\out11_QueryPatternAssign.xml: 
-Test Ran: 29
+Test Ran: 29	
 Passed   : 29
 Failed   : 0
 Timeout  : 0
 
 TestResult\out11_QueryWith.xml: 
-Test Ran: 61
+Test Ran: 61	
 Passed   : 61
 Failed   : 0
 Timeout  : 0
 
 TestResult\out12_QueryComplexNext.xml: 
-Test Ran: 65
+Test Ran: 65	
 Passed   : 65
 Failed   : 0
 Timeout  : 0
 
 TestResult\out12_QueryComplexNextStar.xml: 
-Test Ran: 65
+Test Ran: 65	
 Passed   : 65
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query1.xml: 
-Test Ran: 140
+Test Ran: 140	
 Passed   : 140
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query2.xml: 
-Test Ran: 324
+Test Ran: 324	
 Passed   : 324
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query3.xml: 
-Test Ran: 35
+Test Ran: 35	
 Passed   : 35
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query5.xml: 
-Test Ran: 20
-Passed   : 18
+Test Ran: 20	[TIMEOUT]
+Passed   : 19
 Failed   : 0
-Timeout  : 2
+Timeout  : 1
 
 TestResult\out13_Intense_Query6a.xml: 
-Test Ran: 526
+Test Ran: 526	
 Passed   : 526
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query6b.xml: 
-Test Ran: 185
+Test Ran: 185	
 Passed   : 185
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query7a.xml: 
-Test Ran: 309
+Test Ran: 309	
 Passed   : 309
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query7b.xml: 
-Test Ran: 521
+Test Ran: 521	
 Passed   : 521
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query8.xml: 
-Test Ran: 163
+Test Ran: 163	
 Passed   : 163
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_One_Query1.xml: 
-Test Ran: 60
+Test Ran: 60	
 Passed   : 60
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_One_Query2.xml: 
-Test Ran: 31
+Test Ran: 31	
 Passed   : 31
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_One_Query3.xml: 
-Test Ran: 24
+Test Ran: 24	
 Passed   : 24
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Three_QueryAffects_UsingSource3.xml: 
-Test Ran: 3
+Test Ran: 3	
 Passed   : 3
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Three_QueryLongTestCase.xml: 
-Test Ran: 22
+Test Ran: 22	
 Passed   : 22
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Three_QueryMultipleClauses_UsingSource5.xml: 
-Test Ran: 1
+Test Ran: 1	
 Passed   : 1
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Three_QueryOptimization_UsingSource3.xml: 
-Test Ran: 5
+Test Ran: 5	
 Passed   : 5
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Three_Query_Affects_AffectsStar_UsingSource4.xml: 
-Test Ran: 13
+Test Ran: 13	
 Passed   : 13
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Three_Query_Calls_CallsStar_UsingSource4.xml: 
-Test Ran: 7
+Test Ran: 7	
 Passed   : 7
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Three_Query_Next_NextStar_UsingSource4.xml: 
-Test Ran: 18
+Test Ran: 18	
 Passed   : 18
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryAffects1_UsingSourceAffects.xml: 
-Test Ran: 9
+Test Ran: 9	
 Passed   : 9
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryAffects2_UsingSourceAffects.xml: 
-Test Ran: 17
+Test Ran: 17	
 Passed   : 17
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryCallsStar_UsingSource1.xml: 
-Test Ran: 19
+Test Ran: 19	
 Passed   : 19
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryCalls_UsingSource1.xml: 
-Test Ran: 17
+Test Ran: 17	
 Passed   : 17
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryFollowsStar_UsingSource2.xml: 
-Test Ran: 72
+Test Ran: 72	
 Passed   : 72
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryFollows_UsingSource2.xml: 
-Test Ran: 72
+Test Ran: 72	
 Passed   : 72
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryModifies_UsingSource1.xml: 
-Test Ran: 39
+Test Ran: 39	
 Passed   : 39
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryMultipleClauses_UsingSource2.xml: 
-Test Ran: 10
+Test Ran: 10	
 Passed   : 10
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryMultipleST_UsingSource2.xml: 
-Test Ran: 20
+Test Ran: 20	
 Passed   : 20
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryMultiple_ST_Pattern_UsingSource2.xml: 
-Test Ran: 12
+Test Ran: 12	
 Passed   : 12
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryNextStar_UsingSourceNext.xml: 
-Test Ran: 25
+Test Ran: 25	
 Passed   : 25
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryNext_UsingSourceNext.xml: 
-Test Ran: 23
+Test Ran: 23	
 Passed   : 23
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryParentStar_UsingSource2.xml: 
-Test Ran: 72
+Test Ran: 72	
 Passed   : 72
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryParent_UsingSource2.xml: 
-Test Ran: 72
+Test Ran: 72	
 Passed   : 72
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryPattern_UsingSourcePattern.xml: 
-Test Ran: 35
+Test Ran: 35	
 Passed   : 35
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryUses_UsingSource1.xml: 
-Test Ran: 39
+Test Ran: 39	
 Passed   : 39
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_QueryWith_UsingSource1.xml: 
-Test Ran: 17
+Test Ran: 17	
 Passed   : 17
 Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Two_Query_With_ST_UsingSource2.xml: 
-Test Ran: 6
+Test Ran: 6	
 Passed   : 6
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query1a.xml: 
-Test Ran: 44
+Test Ran: 44	
 Passed   : 44
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query1b.xml: 
-Test Ran: 50
+Test Ran: 50	
 Passed   : 50
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query2a.xml: 
-Test Ran: 31
+Test Ran: 31	
 Passed   : 31
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query2b.xml: 
-Test Ran: 50
+Test Ran: 50	
 Passed   : 50
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query3a.xml: 
-Test Ran: 33
+Test Ran: 33	
 Passed   : 33
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query4a.xml: 
-Test Ran: 15
+Test Ran: 15	
 Passed   : 15
 Failed   : 0
 Timeout  : 0
@@ -365,307 +365,307 @@ Failed   : 1
 Timeout  : 0
 
 TestResult\out14_Query5b.xml: 
-Test Ran: 60
+Test Ran: 60	
 Passed   : 60
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query6Calls_UsingSource6.xml: 
-Test Ran: 10
+Test Ran: 10	
 Passed   : 10
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query6Follows_UsingSource6.xml: 
-Test Ran: 34
+Test Ran: 34	
 Passed   : 34
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query6Modifies_UsingSource6.xml: 
-Test Ran: 20
+Test Ran: 20	
 Passed   : 20
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query6MultipleClause_UsingSource6.xml: 
-Test Ran: 29
+Test Ran: 29	
 Passed   : 29
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query6Parent_UsingSource6.xml: 
-Test Ran: 40
+Test Ran: 40	
 Passed   : 40
 Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query6Uses_UsingSource6.xml: 
-Test Ran: 20
+Test Ran: 20	
 Passed   : 20
 Failed   : 0
 Timeout  : 0
 
 TestResult\out15_Acceptance_Query_Test1.xml: 
-Test Ran: 55
+Test Ran: 55	
 Passed   : 55
 Failed   : 0
 Timeout  : 0
 
 TestResult\out18_QueryValidation.xml: 
-Test Ran: 70
-Passed   : 69
+Test Ran: 70	
+Passed   : 70
 Failed   : 0
-Timeout  : 1
+Timeout  : 0
 
 TestResult\out2_Query_Simple02.xml: 
-Test Ran: 336
+Test Ran: 336	
 Passed   : 336
 Failed   : 0
 Timeout  : 0
 
 TestResult\out3.xml: 
-Test Ran: 207
+Test Ran: 207	
 Passed   : 207
 Failed   : 0
 Timeout  : 0
 
 TestResult\out4_0.xml: 
-Test Ran: 907
+Test Ran: 907	
 Passed   : 907
 Failed   : 0
 Timeout  : 0
 
 TestResult\out4_1.xml: 
-Test Ran: 213
+Test Ran: 213	
 Passed   : 213
 Failed   : 0
 Timeout  : 0
 
 TestResult\out4_2.xml: 
-Test Ran: 153
+Test Ran: 153	
 Passed   : 153
 Failed   : 0
 Timeout  : 0
 
 TestResult\out5.xml: 
-Test Ran: 1
+Test Ran: 1	
 Passed   : 1
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_CALLS_01.xml: 
-Test Ran: 15
+Test Ran: 15	
 Passed   : 15
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_Calls.xml: 
-Test Ran: 11
+Test Ran: 11	
 Passed   : 11
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_CallsStar.xml: 
-Test Ran: 11
+Test Ran: 11	
 Passed   : 11
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_Follows.xml: 
-Test Ran: 12
+Test Ran: 12	
 Passed   : 12
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_FollowsStar.xml: 
-Test Ran: 12
+Test Ran: 12	
 Passed   : 12
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_Modifies.xml: 
-Test Ran: 11
+Test Ran: 11	
 Passed   : 11
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_Next.xml: 
-Test Ran: 13
+Test Ran: 13	
 Passed   : 13
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_NextStar.xml: 
-Test Ran: 13
+Test Ran: 13	
 Passed   : 13
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_Parent.xml: 
-Test Ran: 10
+Test Ran: 10	
 Passed   : 10
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_ParentStar.xml: 
-Test Ran: 10
+Test Ran: 10	
 Passed   : 10
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Demo_Uses.xml: 
-Test Ran: 11
+Test Ran: 11	
 Passed   : 11
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_FOLLOWS.xml: 
-Test Ran: 9
+Test Ran: 9	
 Passed   : 9
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_MixTests01.xml: 
-Test Ran: 142
+Test Ran: 142	
 Passed   : 142
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_MixTests02.xml: 
-Test Ran: 146
+Test Ran: 146	
 Passed   : 146
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_ModifiesUsesParent.xml: 
-Test Ran: 17
+Test Ran: 17	
 Passed   : 17
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_MultipleRelationship01.xml: 
-Test Ran: 59
+Test Ran: 59	
 Passed   : 59
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_MultipleRelationship02.xml: 
-Test Ran: 47
+Test Ran: 47	
 Passed   : 47
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Next.xml: 
-Test Ran: 7
+Test Ran: 7	
 Passed   : 7
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_NextNextStar.xml: 
-Test Ran: 50
+Test Ran: 50	
 Passed   : 50
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_NextStar.xml: 
-Test Ran: 15
+Test Ran: 15	
 Passed   : 15
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Pattern.xml: 
-Test Ran: 10
+Test Ran: 10	
 Passed   : 10
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Simple01.xml: 
-Test Ran: 39
+Test Ran: 39	
 Passed   : 39
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Simple02.xml: 
-Test Ran: 31
+Test Ran: 31	
 Passed   : 31
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Simple03.xml: 
-Test Ran: 31
+Test Ran: 31	
 Passed   : 31
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_Tuple.xml: 
-Test Ran: 50
+Test Ran: 50	
 Passed   : 50
 Failed   : 0
 Timeout  : 0
 
 TestResult\out6_With.xml: 
-Test Ran: 20
+Test Ran: 20	
 Passed   : 20
 Failed   : 0
 Timeout  : 0
 
 TestResult\out7_Query_Simple01.xml: 
-Test Ran: 249
+Test Ran: 249	
 Passed   : 249
 Failed   : 0
 Timeout  : 0
 
 TestResult\out8.xml: 
-Test Ran: 25
+Test Ran: 25	
 Passed   : 25
 Failed   : 0
 Timeout  : 0
 
 TestResult\out9_QueryAffects.xml: 
-Test Ran: 65
+Test Ran: 65	
 Passed   : 65
 Failed   : 0
 Timeout  : 0
 
 TestResult\out9_QueryAffectsStar.xml: 
-Test Ran: 66
+Test Ran: 66	
 Passed   : 66
 Failed   : 0
 Timeout  : 0
 
 TestResult\out9_QueryCalls.xml: 
-Test Ran: 36
+Test Ran: 36	
 Passed   : 36
 Failed   : 0
 Timeout  : 0
 
 TestResult\out9_QueryCallsStar.xml: 
-Test Ran: 38
+Test Ran: 38	
 Passed   : 38
 Failed   : 0
 Timeout  : 0
 
 TestResult\out9_QueryModifies.xml: 
-Test Ran: 9
+Test Ran: 9	
 Passed   : 9
 Failed   : 0
 Timeout  : 0
 
 TestResult\out9_QueryNext.xml: 
-Test Ran: 26
+Test Ran: 26	
 Passed   : 26
 Failed   : 0
 Timeout  : 0
 
 TestResult\out9_QueryNextStar.xml: 
-Test Ran: 26
+Test Ran: 26	
 Passed   : 26
 Failed   : 0
 Timeout  : 0
 
 TestResult\out9_QueryUses.xml: 
-Test Ran: 10
+Test Ran: 10	
 Passed   : 10
 Failed   : 0
 Timeout  : 0
