@@ -18,6 +18,7 @@ Optimizer::Optimizer(QueryTree &queryTree)
         4. Sort clause groups for efficient evaluation
     */
     processQueryTree(queryTree);
+    extractSelectedSyns(queryTree);
     formClauseGroups();
     sortClauseGroups();
     _clauseGroupsManager.setClauseGroupQueue(createClauseGroupQueue());
@@ -63,6 +64,13 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 
     }
 
+    return true;
+}
+
+bool Optimizer::extractSelectedSyns(QueryTree& queryTree)
+{
+    list<string> selectedSyns = queryTree.getSelectClause().getSynonyms();
+    _selectedSynonyms = unordered_set<string>{ selectedSyns.begin(), selectedSyns.end() };
     return true;
 }
 
@@ -209,7 +217,9 @@ void Optimizer::formClauseGroups()
             clauseGroupVec.push_back(clauseWrapper);
         }
 
-        _clauseGroupsVec.push_back(ClauseGroup(clauseGroupVec));
+        ClauseGroup clauseGroup = ClauseGroup(clauseGroupVec);
+        clauseGroup.setSelectedSynonyms(_selectedSynonyms); // TODO: Remove after setting selected syns is included in ClauseGroup's constructor
+        _clauseGroupsVec.push_back(clauseGroup);
     }
 }
 

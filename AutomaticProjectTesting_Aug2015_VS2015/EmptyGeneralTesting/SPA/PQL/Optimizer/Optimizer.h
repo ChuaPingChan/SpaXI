@@ -16,6 +16,7 @@ public:
 
 protected:
 
+    unordered_set<string> _selectedSynonyms;
     vector<string> _synVector;    // Index to synonym map
     unordered_map<string, int> _synToIdxMap;    // Synonym to index map
     vector<ClausePtr> _clauseVector;     // Index to clause map
@@ -31,6 +32,7 @@ protected:
      * Helper Methods *
      ******************/
     bool processQueryTree(QueryTree &queryTree);
+    bool extractSelectedSyns(QueryTree &queryTree);
     list<ClausePtr> extractClausesFromQueryTree(QueryTree &queryTree);    // TODO: Rename if QueryTree's name changes
     void formClauseGroups();
     void sortClauseGroups();

@@ -28,8 +28,7 @@ void QueryEvaluator::evaluate()
         // For each clause in a clause group..
         while (hasResultEvaluator && clauseGroup.hasNextClause()) {
             
-            ClausePtr clausePtr = clauseGroup.front();
-            clauseGroup.pop();      // TODO: Abstract the popping, do it inside ClauseGroup.
+            ClausePtr clausePtr = clauseGroup.getNextClause();
 
             // Checks for the actual type of clause and do type-conversion to use subclass's methods
             if (clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT) {

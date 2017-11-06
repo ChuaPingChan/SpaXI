@@ -85,17 +85,16 @@ namespace UnitTesting
 
             ClauseGroup nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 1);
-            Assert::IsTrue(nextClauseGroup.front() == uses_10_ident_ptr);
+            Assert::IsTrue(nextClauseGroup.getNextClause() == uses_10_ident_ptr);
 
             nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 2);
-            Assert::IsTrue(nextClauseGroup.front() == modifies_w1_v1_ptr);
-            nextClauseGroup.pop();
-            Assert::IsTrue(nextClauseGroup.front() == uses_a1_v1_ptr);
+            Assert::IsTrue(nextClauseGroup.getNextClause() == modifies_w1_v1_ptr);
+            Assert::IsTrue(nextClauseGroup.getNextClause() == uses_a1_v1_ptr);
 
             nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 1);
-            Assert::IsTrue(nextClauseGroup.front() == uses_a2_v2_ptr);
+            Assert::IsTrue(nextClauseGroup.getNextClause() == uses_a2_v2_ptr);
 
             Assert::IsFalse(clauseGroupManager.hasNextClauseGroup());
         }

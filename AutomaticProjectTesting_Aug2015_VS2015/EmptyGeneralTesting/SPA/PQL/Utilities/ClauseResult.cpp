@@ -374,7 +374,6 @@ bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn
 */
 bool ClauseResult::pruneColumns(unordered_set<string> synsToRetain)
 {
-    // TODO: Implement
     list<int> synsIdxToPrune;
     for (string syn : _synList) {
         if (synsToRetain.find(syn) == synsToRetain.end()) {

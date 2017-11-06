@@ -754,7 +754,7 @@ namespace UnitTesting
 
             unordered_set<string> synsToRetain;
 
-            synsToRetain = unordered_set<string>({ syn1, syn4 });
+            synsToRetain = unordered_set<string>({ syn1, syn4, syn5 });
             cr1.pruneColumns(synsToRetain);
             actualResults = cr1.getAllResults();
             expectedResults = list<list<int>>{
@@ -765,7 +765,7 @@ namespace UnitTesting
             expectedResults.sort();
             Assert::IsTrue(actualResults == expectedResults);
 
-            synsToRetain = unordered_set<string>({ syn4 });
+            synsToRetain = unordered_set<string>({ syn4, syn5 });
             cr1.pruneColumns(synsToRetain);
             actualResults = cr1.getAllResults();
             expectedResults = list<list<int>>{

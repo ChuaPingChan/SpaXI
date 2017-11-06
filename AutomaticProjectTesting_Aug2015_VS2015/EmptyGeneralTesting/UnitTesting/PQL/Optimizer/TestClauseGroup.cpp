@@ -157,25 +157,22 @@ namespace UnitTesting
             ClauseGroup clauseGroup(rawClauseGroup);
             ClausePtr clausePtr;
 
-            clausePtr = clauseGroup.front();
+            clausePtr = clauseGroup.getNextClause();
             Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getRel() == Relationship::USES);
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgOne() == "10");
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgTwo() == "dummyVar");
-            clauseGroup.pop();
 
-            clausePtr = clauseGroup.front();
+            clausePtr = clauseGroup.getNextClause();
             Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SELECT);
             Assert::IsTrue(dynamic_pointer_cast<SelectClause>(clausePtr)->getSelectionType() == SelectionType::SELECT_SINGLE);
             Assert::IsTrue(dynamic_pointer_cast<SelectClause>(clausePtr)->getSingleArg() == "a1");
-            clauseGroup.pop();
 
-            clausePtr = clauseGroup.front();
+            clausePtr = clauseGroup.getNextClause();
             Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getRel() == Relationship::MODIFIES);
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgOne() == "w1");
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgTwo() == "v1");
-            clauseGroup.pop();
         }
 
     };
