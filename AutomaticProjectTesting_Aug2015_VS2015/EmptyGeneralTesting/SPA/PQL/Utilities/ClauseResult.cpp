@@ -366,6 +366,36 @@ bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn
 }
 
 /*
+    Removes the synonyms in the intermediate result table that are not present
+    in synsToRetain.
+
+    Instead of actually removing columns, this method sets the values to
+    ClauseResult::INT_PRUNED (-1).
+*/
+bool ClauseResult::pruneColumns(unordered_set<string> synsToRetain)
+{
+    // TODO: Implement
+    list<int> synsIdxToPrune;
+    for (string syn : _synList) {
+        if (synsToRetain.find(syn) == synsToRetain.end()) {
+            synsIdxToPrune.push_back(_synToIdxMap.at(syn));
+        }
+    }
+
+    for (list<vector<int>>::iterator resIter = _resultsPtr->begin();
+        resIter != _resultsPtr->end();
+        resIter++) {
+        for (int synIdxToPrune : synsIdxToPrune) {
+            (*resIter)[synIdxToPrune] = ClauseResult::INT_PRUNED;
+        }
+    }
+
+    _resultsPtr->unique();
+
+    return true;
+}
+
+/*
 Merges the results of a new synonym to that of an existing synonym.
 */
 bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs)

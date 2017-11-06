@@ -16,6 +16,8 @@ multiple PQL query clauses.
 class ClauseResult
 {
 public:
+    static const int INT_PRUNED = -1;
+
     ClauseResult();
 
     list<string> getAllSynonyms();
@@ -29,6 +31,7 @@ public:
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
     bool removeCombinations(string synName, int value);
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
+    bool pruneColumns(unordered_set<string> synsToRetain);
     bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);
     bool hasResults();
 

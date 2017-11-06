@@ -22,7 +22,7 @@ public:
     void mergeClauseResult(ClauseResult clauseResult);     // TODO: Rename this to ClauseGroupResult nearing submission
 
     // API for optimizer
-    void setSelectedSynonyms(list<string> synonyms);
+    void setSelectedSynonyms(list<string> synonyms);    // TODO: Make this embedded in the constructor
     void setClauseGroupQueue(queue<ClauseGroup> &clauseGroupQueue);
 
     // API for result formatter
