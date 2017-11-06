@@ -186,6 +186,7 @@ void Optimizer::formClauseGroups()
 
     list<list<int>> synGroups = synUfds.getSynonymGroups();
 
+    // TODO: Remove this part because the group reordering already took this into account
     // Get clause groups from synonym groups
     if (!clausesWithoutSynonym.empty()) {
         _clauseGroupsVec.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
@@ -194,7 +195,7 @@ void Optimizer::formClauseGroups()
     for (list<int> synGroup : synGroups) {
 
         unordered_set<int> clauseGroupUnique;
-        vector<ClausePtr> clauseGroup;
+        vector<ClausePtr> clauseGroupVec;
 
         for (int synIdx : synGroup) {
             list<int> relevantClausesIdxs = _synIdxToClauseIdxsMap[synIdx];
@@ -206,10 +207,10 @@ void Optimizer::formClauseGroups()
         // Get actual clause from clause index and add to clause group
         for (int relevantClauseIdx : clauseGroupUnique) {
             ClausePtr clauseWrapper = _clauseVector[relevantClauseIdx];
-            clauseGroup.push_back(clauseWrapper);
+            clauseGroupVec.push_back(clauseWrapper);
         }
 
-        _clauseGroupsVec.push_back(clauseGroup);
+        _clauseGroupsVec.push_back(ClauseGroup(clauseGroupVec));
     }
 }
 
@@ -238,8 +239,7 @@ queue<ClauseGroup> Optimizer::createClauseGroupQueue()
 {
     queue<ClauseGroup> clauseGroupsQueue;
 
-    for (vector<ClausePtr> clauseGroupVec : _clauseGroupsVec) {
-        ClauseGroup clauseGroup(clauseGroupVec);
+    for (ClauseGroup clauseGroup : _clauseGroupsVec) {
         clauseGroupsQueue.push(clauseGroup);
     }
     return clauseGroupsQueue;

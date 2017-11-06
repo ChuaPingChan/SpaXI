@@ -25,7 +25,7 @@ protected:
     ClauseGroupManager _clauseGroupsManager;
     
     // Vector is chosen to swap elements easily. To be converted to queues before passing to evaluator.
-    vector<vector<ClausePtr>> _clauseGroupsVec;
+    vector<ClauseGroup> _clauseGroupsVec;
     
     /******************
      * Helper Methods *

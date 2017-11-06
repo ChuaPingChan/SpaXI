@@ -10,7 +10,7 @@ ClauseGroup::ClauseGroup(vector<ClausePtr> clauseGroup)
     _initClauseVec = clauseGroup;
     sortInitClauseVec();
 
-    for (ClausePtr clausePtr : clauseGroup) {
+    for (ClausePtr clausePtr : _initClauseVec) {
         _clauseQueue.push(clausePtr);
     }
 
