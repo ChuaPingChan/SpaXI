@@ -7,7 +7,13 @@ using namespace std;
 
 ClauseGroup::ClauseGroup(vector<ClausePtr> clauseGroup)
 {
-    _clauseGroup = clauseGroup;
+    _initClauseVec = clauseGroup;
+    sortInitClauseVec();
+
+    for (ClausePtr clausePtr : clauseGroup) {
+        _clauseQueue.push(clausePtr);
+    }
+
     _cost = computeCost();
 }
 
@@ -16,21 +22,41 @@ int ClauseGroup::getCost()
     return _cost;
 }
 
-void ClauseGroup::sortClauses()
+bool ClauseGroup::hasNextClause()
 {
-    sort(_clauseGroup.begin(), _clauseGroup.end(), ClauseGroup::compareClauseCost);
+    return !(_clauseQueue.empty());
 }
 
-vector<ClausePtr> ClauseGroup::getClauseGroup()
+ClausePtr& ClauseGroup::front()
 {
-    return _clauseGroup;
+    return _clauseQueue.front();
 }
+
+void ClauseGroup::pop()
+{
+    _clauseQueue.pop();
+}
+
+int ClauseGroup::size()
+{
+    return _clauseQueue.size();
+}
+
+void ClauseGroup::sortInitClauseVec()
+{
+    sort(_initClauseVec.begin(), _initClauseVec.end(), ClauseGroup::compareClauseCost);
+}
+
+//vector<ClausePtr> ClauseGroup::getClauseGroup()
+//{
+//    return _initClauseVec;
+//}
 
 int ClauseGroup::computeCost()
 {
     int totalCost = 0;
 
-    for (ClausePtr clausePtr : _clauseGroup) {
+    for (ClausePtr clausePtr : _initClauseVec) {
         totalCost += ClauseCostCalculator::getCost(clausePtr);
     }
     return totalCost;

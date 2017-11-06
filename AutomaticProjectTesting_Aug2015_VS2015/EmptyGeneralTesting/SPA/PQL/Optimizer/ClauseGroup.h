@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <queue>
 
 #include "../Utilities/Clause.h"
 
@@ -17,14 +18,19 @@ public:
     ClauseGroup(vector<ClausePtr> clauseGroup);
 
     int getCost();
-    void sortClauses();
-    vector<ClausePtr> getClauseGroup();
+    bool hasNextClause();
+    ClausePtr& front();
+    void pop();
+    int size();
+    //vector<ClausePtr> getClauseGroup();
 
     /* Used for sorting clauses in clause group */
     static bool compareClauseCost(ClausePtr clausePtr1, ClausePtr clausePtr2);
 
 private:
-    vector<ClausePtr> _clauseGroup;
+    void sortInitClauseVec();
+    vector<ClausePtr> _initClauseVec;
+    queue<ClausePtr> _clauseQueue;
     int _cost;
 
     int computeCost();

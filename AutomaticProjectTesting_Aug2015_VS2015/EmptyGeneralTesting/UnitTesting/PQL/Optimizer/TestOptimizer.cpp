@@ -77,14 +77,13 @@ namespace UnitTesting
             Optimizer optimizer(qTree);
             ClauseGroupManager clauseGroupManager = optimizer.getClauseGroupManager();
             
-            queue<ClausePtr> nextClauseGroup;
             ClausePtr tempClausePtr;
             SelectClausePtr tempScPtr;
             SuchThatClausePtr tempStcPtr;
             PatternClausePtr tempPcPtr;
             WithClausePtr tempWcPtr;
 
-            nextClauseGroup = clauseGroupManager.getNextClauseGroup();
+            ClauseGroup nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 1);
             tempClausePtr = nextClauseGroup.front();
             Assert::IsTrue(tempClausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);

@@ -155,22 +155,27 @@ namespace UnitTesting
              * Testing *
              ***********/
             ClauseGroup clauseGroup(rawClauseGroup);
-            clauseGroup.sortClauses();
-            vector<ClausePtr> sortedClauseGroup = clauseGroup.getClauseGroup();
+            ClausePtr clausePtr;
 
-            Assert::IsTrue(sortedClauseGroup[0]->getClauseType() == Clause::ClauseType::SUCH_THAT);
-            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(sortedClauseGroup[0])->getRel() == Relationship::USES);
-            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(sortedClauseGroup[0])->getArgOne() == "10");
-            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(sortedClauseGroup[0])->getArgTwo() == "dummyVar");
+            clausePtr = clauseGroup.front();
+            Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getRel() == Relationship::USES);
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgOne() == "10");
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgTwo() == "dummyVar");
+            clauseGroup.pop();
 
-            Assert::IsTrue(sortedClauseGroup[1]->getClauseType() == Clause::ClauseType::SELECT);
-            Assert::IsTrue(dynamic_pointer_cast<SelectClause>(sortedClauseGroup[1])->getSelectionType() == SelectionType::SELECT_SINGLE);
-            Assert::IsTrue(dynamic_pointer_cast<SelectClause>(sortedClauseGroup[1])->getSingleArg() == "a1");
+            clausePtr = clauseGroup.front();
+            Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SELECT);
+            Assert::IsTrue(dynamic_pointer_cast<SelectClause>(clausePtr)->getSelectionType() == SelectionType::SELECT_SINGLE);
+            Assert::IsTrue(dynamic_pointer_cast<SelectClause>(clausePtr)->getSingleArg() == "a1");
+            clauseGroup.pop();
 
-            Assert::IsTrue(sortedClauseGroup[2]->getClauseType() == Clause::ClauseType::SUCH_THAT);
-            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(sortedClauseGroup[2])->getRel() == Relationship::MODIFIES);
-            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(sortedClauseGroup[2])->getArgOne() == "w1");
-            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(sortedClauseGroup[2])->getArgTwo() == "v1");
+            clausePtr = clauseGroup.front();
+            Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getRel() == Relationship::MODIFIES);
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgOne() == "w1");
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgTwo() == "v1");
+            clauseGroup.pop();
         }
 
     };

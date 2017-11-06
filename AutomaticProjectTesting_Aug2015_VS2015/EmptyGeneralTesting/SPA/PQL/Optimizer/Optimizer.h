@@ -25,7 +25,7 @@ protected:
     ClauseGroupManager _clauseGroupsManager;
     
     // Vector is chosen to swap elements easily. To be converted to queues before passing to evaluator.
-    vector<vector<ClausePtr>> _clauseGroups;
+    vector<vector<ClausePtr>> _clauseGroupsVec;
     
     /******************
      * Helper Methods *
@@ -35,7 +35,7 @@ protected:
     void formClauseGroups();
     void sortClausesWithinGroup();
     void sortClauseGroups();
-    queue<queue<ClausePtr>> createClauseGroupQueue();
-    static bool compareClauseGroupCost(vector<ClausePtr> clauseGroup1, vector<ClausePtr> clauseGroup2);
+    queue<ClauseGroup> createClauseGroupQueue();
+    static bool compareClauseGroupCost(ClauseGroup clauseGroup1, ClauseGroup clauseGroup2);
 
 };

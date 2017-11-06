@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include "../Utilities/Clause.h"
 #include "../Utilities/ClauseResult.h"
+#include "ClauseGroup.h"
 
 using namespace std;
 
@@ -13,16 +14,16 @@ using namespace std;
 class ClauseGroupManager
 {
 public:
-    ClauseGroupManager();
+    ClauseGroupManager();   // TODO: Disallow default constructor. Set clauseGroupQueue upon construction
 
     // API for evaluator
     bool hasNextClauseGroup();
-    queue<ClausePtr> getNextClauseGroup();
+    ClauseGroup getNextClauseGroup();
     void mergeClauseResult(ClauseResult clauseResult);     // TODO: Rename this to ClauseGroupResult nearing submission
 
     // API for optimizer
     void setSelectedSynonyms(list<string> synonyms);
-    void setClauseGroupQueue(queue<queue<ClausePtr>> &clauseGroupQueue);
+    void setClauseGroupQueue(queue<ClauseGroup> &clauseGroupQueue);
 
     // API for result formatter
     ClauseResult getMergedClauseResult();
@@ -32,7 +33,7 @@ public:
 
 protected:
     unordered_set<string> _selectedSynonyms;
-    queue<queue<ClausePtr>> _clauseGroupQueue;
+    queue<ClauseGroup> _clauseGroupQueue;
     ClauseResult _mergedClauseResult;
 
 };
