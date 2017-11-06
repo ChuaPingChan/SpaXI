@@ -33,7 +33,6 @@ protected:
     bool processQueryTree(QueryTree &queryTree);
     list<ClausePtr> extractClausesFromQueryTree(QueryTree &queryTree);    // TODO: Rename if QueryTree's name changes
     void formClauseGroups();
-    void sortClausesWithinGroup();
     void sortClauseGroups();
     queue<ClauseGroup> createClauseGroupQueue();
     static bool compareClauseGroupCost(ClauseGroup clauseGroup1, ClauseGroup clauseGroup2);

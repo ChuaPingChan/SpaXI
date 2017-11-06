@@ -87,17 +87,17 @@ namespace UnitTesting
             Assert::IsTrue(nextClauseGroup.size() == 1);
             Assert::IsTrue(nextClauseGroup.front() == uses_10_ident_ptr);
 
-            //nextClauseGroup = clauseGroupManager.getNextClauseGroup();
-            //Assert::IsTrue(nextClauseGroup.size() == 2);
-            //Assert::IsTrue(nextClauseGroup.front() == uses_a1_v1_ptr);
-            //nextClauseGroup.pop();
-            //Assert::IsTrue(nextClauseGroup.front() == modifies_w1_v1_ptr);
+            nextClauseGroup = clauseGroupManager.getNextClauseGroup();
+            Assert::IsTrue(nextClauseGroup.size() == 2);
+            Assert::IsTrue(nextClauseGroup.front() == modifies_w1_v1_ptr);
+            nextClauseGroup.pop();
+            Assert::IsTrue(nextClauseGroup.front() == uses_a1_v1_ptr);
 
-            //nextClauseGroup = clauseGroupManager.getNextClauseGroup();
-            //Assert::IsTrue(nextClauseGroup.size() == 1);
-            //Assert::IsTrue(nextClauseGroup.front() == uses_a2_v2_ptr);
+            nextClauseGroup = clauseGroupManager.getNextClauseGroup();
+            Assert::IsTrue(nextClauseGroup.size() == 1);
+            Assert::IsTrue(nextClauseGroup.front() == uses_a2_v2_ptr);
 
-            //Assert::IsFalse(clauseGroupManager.hasNextClauseGroup());
+            Assert::IsFalse(clauseGroupManager.hasNextClauseGroup());
         }
 
         TEST_METHOD(TestMergeAndGetMergedClauseResult) {

@@ -47,11 +47,6 @@ void ClauseGroup::sortInitClauseVec()
     sort(_initClauseVec.begin(), _initClauseVec.end(), ClauseGroup::compareClauseCost);
 }
 
-//vector<ClausePtr> ClauseGroup::getClauseGroup()
-//{
-//    return _initClauseVec;
-//}
-
 int ClauseGroup::computeCost()
 {
     int totalCost = 0;

@@ -19,7 +19,6 @@ Optimizer::Optimizer(QueryTree &queryTree)
     */
     processQueryTree(queryTree);
     formClauseGroups();
-    //sortClausesWithinGroup();     // TODO: Remove?
     sortClauseGroups();
     _clauseGroupsManager.setClauseGroupQueue(createClauseGroupQueue());
 }
@@ -186,7 +185,7 @@ void Optimizer::formClauseGroups()
 
     list<list<int>> synGroups = synUfds.getSynonymGroups();
 
-    // TODO: Remove this part because the group reordering already took this into account
+    // TODO: Consider handling non-synonym clauses more consistently with the rest
     // Get clause groups from synonym groups
     if (!clausesWithoutSynonym.empty()) {
         _clauseGroupsVec.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
@@ -213,18 +212,6 @@ void Optimizer::formClauseGroups()
         _clauseGroupsVec.push_back(ClauseGroup(clauseGroupVec));
     }
 }
-
-//void Optimizer::sortClausesWithinGroup()
-//{
-//    vector<vector<ClausePtr>> updatedClauseGroups;
-//
-//    for (vector<ClausePtr> rawClauseGroup : _clauseGroups) {
-//        ClauseGroup clauseGroup(rawClauseGroup);
-//        clauseGroup.sortInitClauseVec();
-//        updatedClauseGroups.push_back(clauseGroup.getClauseGroup());
-//    }
-//    _clauseGroups = updatedClauseGroups;
-//}
 
 void Optimizer::sortClauseGroups()
 {
