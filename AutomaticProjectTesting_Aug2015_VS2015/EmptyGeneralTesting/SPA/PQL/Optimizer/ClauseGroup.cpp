@@ -74,13 +74,13 @@ int ClauseGroup::size()
 
     Pre-condition: The clause result must be corresponding to this clause group
 */
-bool ClauseGroup::pruneClauseResult(ClauseResult crToPrune)
+bool ClauseGroup::pruneClauseResult(ClauseResult* crToPrune)
 {
     unordered_set<string> synsToRetain;
     synsToRetain.insert(_synsInRemainingClauses.begin(), _synsInRemainingClauses.end());
     synsToRetain.insert(_selectedSynonyms.begin(), _selectedSynonyms.end());
 
-    return crToPrune.pruneColumns(synsToRetain);
+    return crToPrune->pruneColumns(synsToRetain);
 }
 
 void ClauseGroup::sortInitClauseVec()

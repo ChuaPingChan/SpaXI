@@ -46,6 +46,8 @@ void QueryEvaluator::evaluate()
                 SelectClausePtr selectClausePtr = dynamic_pointer_cast<SelectClause>(clausePtr);
                 hasResultEvaluator = factory.processClause(*selectClausePtr);
             }
+
+            clauseGroup.pruneClauseResult(factory.getClauseResultPtr());
         }
         
         // Finished processing a clause group, pass the result of the clause group to ClauseGroupManager

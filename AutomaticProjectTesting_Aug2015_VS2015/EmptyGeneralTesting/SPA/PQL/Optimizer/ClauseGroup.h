@@ -26,7 +26,7 @@ public:
     ClausePtr& getNextClause();
     int size();
 
-    bool pruneClauseResult(ClauseResult crToPrune);
+    bool pruneClauseResult(ClauseResult* crToPrune);
 
     /* Used for sorting clauses in clause group */
     static bool compareClauseCost(ClausePtr clausePtr1, ClausePtr clausePtr2);
