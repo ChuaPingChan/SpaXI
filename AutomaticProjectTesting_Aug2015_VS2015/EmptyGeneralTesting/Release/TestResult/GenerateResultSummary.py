@@ -36,12 +36,14 @@ def main():
 					elif (elem.tag == 'timeout'):
 						numTotalTestRanForThisFile += 1
 						numTimeoutForThisFile += 1
-
+				
+				tags = ''
 				summary += filePath + ': \n'
-				if numFailForThisFile is 0:
-					summary += 'Test Ran: ' + str(numTotalTestRanForThisFile) +'\n'
-				else:
-					summary += 'Test Ran: ' + str(numTotalTestRanForThisFile) + '	[BUG]' +'\n'
+				if numFailForThisFile is not 0:
+					tags += '[BUG]'
+				if numTimeoutForThisFile is not 0:
+					tags += '[TIMEOUT]'
+				summary += 'Test Ran: ' + str(numTotalTestRanForThisFile) + '\t' + tags + '\n'
 				summary += 'Passed   : ' + str(numPassForThisFile) + '\n'
 				summary += 'Failed   : ' + str(numFailForThisFile) + '\n'
 				summary += 'Timeout  : ' + str(numTimeoutForThisFile) + '\n'
