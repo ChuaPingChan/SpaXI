@@ -694,6 +694,15 @@ echo Finish running AutoTester for System\Affects\QueryAffectsTest2.
 echo Running AutoTester for System\Affects\QueryAffectsTest3 ...
 AutoTester Test15_Verb\System\Affects\SourceAffectsTest3.txt Test15_Verb\System\Affects\QueryAffectsTest3.txt TestResult\out15_SystemAffects_QueryAffectsTest3.xml > TestResult\cmd\cmd15_SystemAffects_QueryAffectsTest3.txt
 echo Finish running AutoTester for System\Affects\QueryAffectsTest3.
+echo Running AutoTester for System\Calls\QueryCallsTest1 ...
+AutoTester Test15_Verb\System\Calls\SourceCallsTest1.txt Test15_Verb\System\Calls\QueryCallsTest1.txt TestResult\out15_SystemCalls_QueryCallsTest1.xml > TestResult\cmd\cmd15_SystemCalls_QueryCallsTest1.txt
+echo Finish running AutoTester for System\Calls\QueryCallsTest1.
+echo Running AutoTester for System\Calls\QueryCallsTest2 ...
+AutoTester Test15_Verb\System\Calls\SourceCallsTest2.txt Test15_Verb\System\Calls\QueryCallsTest2.txt TestResult\out15_SystemCalls_QueryCallsTest2.xml > TestResult\cmd\cmd15_SystemCalls_QueryCallsTest2.txt
+echo Finish running AutoTester for System\Calls\QueryCallsTest2.
+echo Running AutoTester for System\Calls\QueryCallsTest3 ...
+AutoTester Test15_Verb\System\Calls\SourceCallsTest3.txt Test15_Verb\System\Calls\QueryCallsTest3.txt TestResult\out15_SystemCalls_QueryCallsTest3.xml > TestResult\cmd\cmd15_SystemCalls_QueryCallsTest3.txt
+echo Finish running AutoTester for System\Calls\QueryCallsTest3.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
