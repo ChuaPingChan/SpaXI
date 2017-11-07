@@ -72,6 +72,32 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(bug3Test)
+        {
+            // Set up
+            PKBMain* pkbPtr = PKBMain::getInstance();
+            Parser parser(pkbPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_Test13());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+            list<string> actualResults;
+            list<string> expectedResults;
+
+            string query =
+                "constant co; variable v; if i; call c1,c2;procedure p1,p2; "
+                "Select i pattern i(v, _, _) such that Modifies(i, v) and Next*(c1, i) with c2.stmt#  = co.value such that Calls(p1, p2)";
+            PQLMain pql = PQLMain(query);
+
+            actualResults = pql.run();
+            expectedResults = list<string>{ "4", "33", "34" };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Clean up
+            pkbPtr->deleteInstance();
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         /*******************************
          * Utility Methods for Testing *
          *******************************/
@@ -179,6 +205,208 @@ namespace UnitTesting
                 "			b = b + b; \n"
                 "		} \n"
                 "	} \n"
+                "}";
+            std::string newFilePath(dummySimpleSourcePath);
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a source file for Test 13.
+        */
+        bool createDummySimpleSourceFile_Test13() {
+            std::string content =
+                "procedure p{ a = x + y * b; \n"
+                "	c = m - y + z * 3; \n"
+                "	call a; \n"
+                "	if b then { \n"
+                "		while m { \n"
+                "			m = m - 1; \n"
+                "			k = m + b + d; } \n"
+                "		b = b - m; \n"
+                "	} else { x = b - d + x; \n"
+                "		call q; \n"
+                "		y = x + 5 * b; } } \n"
+                "procedure q{ if i then { \n"
+                "		b = x + (y - m) * i; \n"
+                "		x = 2 - 8; \n"
+                "		while b { \n"
+                "			y = b - c - 3; \n"
+                "			x = x + y; \n"
+                "			if z then { \n"
+                "				a = b * 3 + x + y; \n"
+                "				x = i - y * 5; \n"
+                "				while z { \n"
+                "					a = b; \n"
+                "					b = c + 3; \n"
+                "					c = b - e; \n"
+                "					e = c + d; \n"
+                "					while x { \n"
+                "						x = x + b; \n"
+                "						b = b - 1; }} \n"
+                "				if m then { \n"
+                "					e = m - 1; \n"
+                "					a = x - i; \n"
+                "				} else { k = b + k - m; } \n"
+                "			} else { if x then { \n"
+                "					if m then { \n"
+                "						y = x - 5; \n"
+                "						call a; \n"
+                "						m = y - 1; \n"
+                "					} else { b = x + y - m; } \n"
+                "					b = x + y + k; \n"
+                "				} else { i = m - i; \n"
+                "					while i { \n"
+                "						y = x; \n"
+                "						k = k + 1; \n"
+                "						y = z - k - i; }}} \n"
+                "			y = m + 3 * (5 * x) * b; } \n"
+                "		y = x * x - 3; \n"
+                "	} else { y = k - 5; \n"
+                "		while k { \n"
+                "			x = y; \n"
+                "			call a; }}} \n"
+                "procedure a{ while b { \n"
+                "		while d { \n"
+                "			x = m + i; \n"
+                "			k = x - z - y; }} \n"
+                "	b = m * i - k; \n"
+                "	call d; \n"
+                "	if i then { \n"
+                "		a = b - m - x; \n"
+                "	} else { e = b - m; \n"
+                "		c = e + b * x; } \n"
+                "	a = e + k; } \n"
+                "procedure d { y = i + m + b; \n"
+                "	if y then { \n"
+                "		if m then { \n"
+                "			if k then { \n"
+                "				k = k + 1; \n"
+                "			} else { y = y - 1; } \n"
+                "		} else { y = y + 1; } \n"
+                "	} else { while y { \n"
+                "			y = y + k; \n"
+                "			if y then { \n"
+                "				k = k - m; \n"
+                "			} else { c = b - m - x; }}} \n"
+                "	c = k + y * 3;}";
+            std::string newFilePath(dummySimpleSourcePath);
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a source file for Test 13.
+        */
+        bool createDummySimpleSourceFile_Test18() {
+            std::string content =
+                "procedure A { \n"
+                "	and = and + 2 * variable + ((Modifies * Uses - assign) + 5 + 7 * pattern - with) + such * that; \n"
+                "	while and { \n"
+                "		Uses = Modifies + tab13 * 5 - 9 + 5 + 7; \n"
+                "	} \n"
+                "	call stmt; \n"
+                "	if pattern then { \n"
+                "		such = with * and + (and + 2 * variable) - 5 + 7; \n"
+                "	} \n"
+                "	else { \n"
+                "		tab13 = pattern + 8 * 5 + (Modifies - Uses + (assign - with + and) * variable) - tab13 + (assign - 4 * 8 + 3) - (5 * 7) + pattern; \n"
+                "	} \n"
+                "	call Modifies; \n"
+                "} \n"
+                " \n"
+                "procedure stmt { \n"
+                "	pattern = with + and - such + that + (5 * 7); \n"
+                "	call Key; \n"
+                "	Uses = with * pattern; \n"
+                "} \n"
+                " \n"
+                "procedure Modifies { \n"
+                "	Modifies = Uses * 3 + 4 - 1000 - 5 + and; \n"
+                "	tab13 = Modifies - Uses * and; \n"
+                "	call Chair; \n"
+                "	tab13 = Modifies - pattern + with * such; \n"
+                "	while Modifies { \n"
+                "		Uses = Modifies; \n"
+                "	} \n"
+                "} \n"
+                " \n"
+                "procedure Key { \n"
+                "	variable = tab13 + 3 * Modifies - and; \n"
+                "	and = variable + tab13; \n"
+                "	call Wire; \n"
+                "	call Cave; \n"
+                "} \n"
+                " \n"
+                "procedure Wire { \n"
+                "	call Sugar; \n"
+                "	call Sugar; \n"
+                "} \n"
+                " \n"
+                "procedure Sugar { \n"
+                "	and = Modifies - Uses * 7; \n"
+                "	call Salt; \n"
+                "	Modifies = Uses + 9; \n"
+                "} \n"
+                " \n"
+                "procedure Salt { \n"
+                "	Uses = Uses; \n"
+                "	call Tab13; \n"
+                "	call Tab13; \n"
+                "} \n"
+                " \n"
+                "procedure Tab13 { \n"
+                "	such = 0 + and - tab13; \n"
+                "	call Chair; \n"
+                "} \n"
+                " \n"
+                "procedure Chair { \n"
+                "	call Kite; \n"
+                "	while Uses { \n"
+                "		and = and; \n"
+                "		assign = assignment - and; \n"
+                "		assignment = and * with - 50; \n"
+                "	} \n"
+                "} \n"
+                " \n"
+                "procedure Kite { \n"
+                "	call Wifi; \n"
+                "	assign = pattern * such + that - 5; \n"
+                "	if assign then { \n"
+                "		Modifies = with - pattern + 3 * 4; \n"
+                "	} \n"
+                "	else { \n"
+                "		variable = 100 + 3 - 2; \n"
+                "	} \n"
+                "} \n"
+                " \n"
+                "procedure Cave { \n"
+                "	call Smile; \n"
+                "	call Wifi; \n"
+                "	pattern = and - with * 4 + 2 - 100; \n"
+                "} \n"
+                " \n"
+                "procedure Smile { \n"
+                "	call Pencil; \n"
+                "	Modifies = Uses + 1; \n"
+                "	Uses = pattern * 100 - 2 * 5 + pattern - assign; \n"
+                "	assign = assign + assign + assign; \n"
+                "} \n"
+                " \n"
+                "procedure Pencil { \n"
+                "	variable = variable + variable * 2; \n"
+                "	call Kite; \n"
+                "} \n"
+                " \n"
+                "procedure Wifi { \n"
+                "	assignment = assignment + pattern + assign - and * 100 - 20 + 5 * 2; \n"
+                "	and = Uses; \n"
                 "}";
             std::string newFilePath(dummySimpleSourcePath);
             std::ofstream outfile(newFilePath);

@@ -1,0 +1,74 @@
+1	procedure p{ a = x + y * b;
+2		c = m - y + z * 3;
+3		call a;
+4		if b then {
+5			while m {
+6				m = m - 1;
+7				k = m + b + d; }
+8			b = b - m;
+9		} else { x = b - d + x;
+10			call q;
+11			y = x + 5 * b; } }
+12	procedure q{ if i then {
+13			b = x + (y - m) * i;
+14			x = 2 - 8;
+15			while b {
+16				y = b - c - 3;
+17				x = x + y;
+18				if z then {
+19					a = b * 3 + x + y;
+20					x = i - y * 5;
+21					while z {
+22						a = b;
+23						b = c + 3;
+24						c = b - e;
+25						e = c + d;
+26						while x {
+27							x = x + b;
+28							b = b - 1; }}
+29					if m then {
+30						e = m - 1;
+31						a = x - i;
+32					} else { k = b + k - m; }
+33				} else { if x then {
+34						if m then {
+35							y = x - 5;
+36							call a;
+37							m = y - 1;
+38						} else { b = x + y - m; }
+39						b = x + y + k;
+40					} else { i = m - i;
+41						while i {
+42							y = x;
+43							k = k + 1;
+44							y = z - k - i; }}}
+45				y = m + 3 * (5 * x) * b; }
+46			y = x * x - 3;
+47		} else { y = k - 5;
+48			while k {
+49				x = y;
+50				call a; }}}
+51	procedure a{ while b {
+52			while d {
+53				x = m + i;
+54				k = x - z - y; }}
+55		b = m * i - k;
+56		call d;
+57		if i then {
+58			a = b - m - x;
+59		} else { e = b - m;
+60			c = e + b * x; }
+61		a = e + k; }
+62	procedure d { y = i + m + b;
+63		if y then {
+64			if m then {
+65				if k then {
+66					k = k + 1;
+67				} else { y = y - 1; }
+68			} else { y = y + 1; }
+69		} else { while y {
+70				y = y + k;
+71				if y then {
+72					k = k - m;
+73				} else { c = b - m - x; }}}
+74		c = k + y * 3;}

@@ -18,8 +18,8 @@ Optimizer::Optimizer(QueryTree &queryTree)
         4. Sort clause groups for efficient evaluation
     */
     processQueryTree(queryTree);
+    extractSelectedSyns(queryTree);
     formClauseGroups();
-    sortClausesWithinGroup();
     sortClauseGroups();
     _clauseGroupsManager.setClauseGroupQueue(createClauseGroupQueue());
 }
@@ -64,6 +64,13 @@ bool Optimizer::processQueryTree(QueryTree &queryTree)
 
     }
 
+    return true;
+}
+
+bool Optimizer::extractSelectedSyns(QueryTree& queryTree)
+{
+    list<string> selectedSyns = queryTree.getSelectClause().getSynonyms();
+    _selectedSynonyms = unordered_set<string>{ selectedSyns.begin(), selectedSyns.end() };
     return true;
 }
 
@@ -186,15 +193,16 @@ void Optimizer::formClauseGroups()
 
     list<list<int>> synGroups = synUfds.getSynonymGroups();
 
+    // TODO: Consider handling non-synonym clauses more consistently with the rest
     // Get clause groups from synonym groups
     if (!clausesWithoutSynonym.empty()) {
-        _clauseGroups.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
+        _clauseGroupsVec.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
     }
 
     for (list<int> synGroup : synGroups) {
 
         unordered_set<int> clauseGroupUnique;
-        vector<ClausePtr> clauseGroup;
+        vector<ClausePtr> clauseGroupVec;
 
         for (int synIdx : synGroup) {
             list<int> relevantClausesIdxs = _synIdxToClauseIdxsMap[synIdx];
@@ -206,49 +214,35 @@ void Optimizer::formClauseGroups()
         // Get actual clause from clause index and add to clause group
         for (int relevantClauseIdx : clauseGroupUnique) {
             ClausePtr clauseWrapper = _clauseVector[relevantClauseIdx];
-            clauseGroup.push_back(clauseWrapper);
+            clauseGroupVec.push_back(clauseWrapper);
         }
 
-        _clauseGroups.push_back(clauseGroup);
+        ClauseGroup clauseGroup = ClauseGroup(clauseGroupVec);
+        clauseGroup.setSelectedSynonyms(_selectedSynonyms); // TODO: Remove after setting selected syns is included in ClauseGroup's constructor
+        _clauseGroupsVec.push_back(clauseGroup);
     }
-}
-
-void Optimizer::sortClausesWithinGroup()
-{
-    vector<vector<ClausePtr>> updatedClauseGroups;
-
-    for (vector<ClausePtr> rawClauseGroup : _clauseGroups) {
-        ClauseGroup clauseGroup(rawClauseGroup);
-        clauseGroup.sortClauses();
-        updatedClauseGroups.push_back(clauseGroup.getClauseGroup());
-    }
-    _clauseGroups = updatedClauseGroups;
 }
 
 void Optimizer::sortClauseGroups()
 {
-    sort(_clauseGroups.begin(), _clauseGroups.end(), Optimizer::compareClauseGroupCost);
+    sort(_clauseGroupsVec.begin(), _clauseGroupsVec.end(), Optimizer::compareClauseGroupCost);
 }
 
 /*
     Use queues to enforces FIFO policy of evaluating sorted clause groups
     and clauses within clause groups.
 */
-queue<queue<ClausePtr>> Optimizer::createClauseGroupQueue()
+queue<ClauseGroup> Optimizer::createClauseGroupQueue()
 {
-    queue<queue<ClausePtr>> clauseGroupsQueue;
+    queue<ClauseGroup> clauseGroupsQueue;
 
-    for (vector<ClausePtr> clauseGroup : _clauseGroups) {
-        queue<ClausePtr> clauseQueue;
-        for (ClausePtr clause : clauseGroup) {
-            clauseQueue.push(clause);
-        }
-        clauseGroupsQueue.push(clauseQueue);
+    for (ClauseGroup clauseGroup : _clauseGroupsVec) {
+        clauseGroupsQueue.push(clauseGroup);
     }
     return clauseGroupsQueue;
 }
 
-bool Optimizer::compareClauseGroupCost(vector<ClausePtr> clauseGroup1, vector<ClausePtr> clauseGroup2)
+bool Optimizer::compareClauseGroupCost(ClauseGroup clauseGroup1, ClauseGroup clauseGroup2)
 {
-    return ClauseGroup(clauseGroup1).getCost() < ClauseGroup(clauseGroup2).getCost();
+    return clauseGroup1.getCost() < clauseGroup2.getCost();
 }

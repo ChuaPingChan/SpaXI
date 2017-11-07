@@ -62,20 +62,20 @@ namespace UnitTesting
             uses_a2_v2_ptr = uses_a2_v2.getSharedPtr();
             uses_10_ident_ptr = uses_10_ident.getSharedPtr();
 
-            queue<queue<ClausePtr>> tempClauseGroupQueue;
-            queue<ClausePtr> tempClauseGroup;
+            queue<ClauseGroup> tempClauseGroupQueue;
+            vector<ClausePtr> tempClausesVec;
 
-            tempClauseGroup.push(uses_10_ident_ptr);
-            tempClauseGroupQueue.push(tempClauseGroup);
+            tempClausesVec.push_back(uses_10_ident_ptr);
+            tempClauseGroupQueue.push(tempClausesVec);
 
-            tempClauseGroup = queue<ClausePtr>();
-            tempClauseGroup.push(uses_a1_v1_ptr);
-            tempClauseGroup.push(modifies_w1_v1_ptr);
-            tempClauseGroupQueue.push(tempClauseGroup);
+            tempClausesVec = vector<ClausePtr>();
+            tempClausesVec.push_back(uses_a1_v1_ptr);
+            tempClausesVec.push_back(modifies_w1_v1_ptr);
+            tempClauseGroupQueue.push(tempClausesVec);
 
-            tempClauseGroup = queue<ClausePtr>();
-            tempClauseGroup.push(uses_a2_v2_ptr);
-            tempClauseGroupQueue.push(tempClauseGroup);
+            tempClausesVec = vector<ClausePtr>();
+            tempClausesVec.push_back(uses_a2_v2_ptr);
+            tempClauseGroupQueue.push(tempClausesVec);
 
             /***********
              * Testing *
@@ -83,19 +83,18 @@ namespace UnitTesting
             ClauseGroupManager clauseGroupManager;
             clauseGroupManager.setClauseGroupQueue(tempClauseGroupQueue);
 
-            queue<ClausePtr> nextClauseGroup = clauseGroupManager.getNextClauseGroup();
+            ClauseGroup nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 1);
-            Assert::IsTrue(nextClauseGroup.front() == uses_10_ident_ptr);
+            Assert::IsTrue(nextClauseGroup.getNextClause() == uses_10_ident_ptr);
 
             nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 2);
-            Assert::IsTrue(nextClauseGroup.front() == uses_a1_v1_ptr);
-            nextClauseGroup.pop();
-            Assert::IsTrue(nextClauseGroup.front() == modifies_w1_v1_ptr);
+            Assert::IsTrue(nextClauseGroup.getNextClause() == modifies_w1_v1_ptr);
+            Assert::IsTrue(nextClauseGroup.getNextClause() == uses_a1_v1_ptr);
 
             nextClauseGroup = clauseGroupManager.getNextClauseGroup();
             Assert::IsTrue(nextClauseGroup.size() == 1);
-            Assert::IsTrue(nextClauseGroup.front() == uses_a2_v2_ptr);
+            Assert::IsTrue(nextClauseGroup.getNextClause() == uses_a2_v2_ptr);
 
             Assert::IsFalse(clauseGroupManager.hasNextClauseGroup());
         }

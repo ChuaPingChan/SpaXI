@@ -16,6 +16,8 @@ multiple PQL query clauses.
 class ClauseResult
 {
 public:
+    static const int INT_PRUNED = -1;
+
     ClauseResult();
 
     list<string> getAllSynonyms();
@@ -29,6 +31,7 @@ public:
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
     bool removeCombinations(string synName, int value);
     bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
+    bool pruneColumns(unordered_set<string> synsToRetain);
     bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);
     bool hasResults();
 
@@ -48,7 +51,6 @@ protected:
     template<typename T> static list<T> convertVectorToList(vector<T> &v)
     {
         list<T> newList;
-        newList.clear();
         copy(v.begin(), v.end(), back_inserter(newList));
         return newList;
     }
@@ -56,7 +58,6 @@ protected:
     template<typename T> static list<list<T>> convertListOfVectorsToListOfLists(list<vector<T>> &v)
     {
         list<list<T>> newListOfLists;
-        newListOfLists.clear();
         for (list<vector<T>>::iterator innerVecPtr = v.begin();
             innerVecPtr != v.end();
             innerVecPtr++) {
@@ -69,7 +70,6 @@ protected:
     template<typename T> static vector<T> convertListToVector(list<T> &listToConvert)
     {
         vector<T> newVector;
-        newVector.clear();
         copy(listToConvert.begin(), listToConvert.end(), back_inserter(newVector));
         return newVector;
     }
@@ -94,7 +94,6 @@ protected:
     {
         set<T> s(vec.begin(), vec.end());
         vector<T> uniqueVec;
-        uniqueVec.clear();
         uniqueVec.assign(s.begin(), s.end());
         return uniqueVec;
     }
@@ -110,7 +109,6 @@ protected:
     template<typename T> static vector<T> convertPairToVector(const pair<T, T> &p)
     {
         vector<T> v;
-        v.clear();
         v.push_back(p.first);
         v.push_back(p.second);
         return v;

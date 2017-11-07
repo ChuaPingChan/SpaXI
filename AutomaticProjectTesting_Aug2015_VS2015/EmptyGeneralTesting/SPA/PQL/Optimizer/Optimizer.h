@@ -16,6 +16,7 @@ public:
 
 protected:
 
+    unordered_set<string> _selectedSynonyms;
     vector<string> _synVector;    // Index to synonym map
     unordered_map<string, int> _synToIdxMap;    // Synonym to index map
     vector<ClausePtr> _clauseVector;     // Index to clause map
@@ -25,17 +26,17 @@ protected:
     ClauseGroupManager _clauseGroupsManager;
     
     // Vector is chosen to swap elements easily. To be converted to queues before passing to evaluator.
-    vector<vector<ClausePtr>> _clauseGroups;
+    vector<ClauseGroup> _clauseGroupsVec;
     
     /******************
      * Helper Methods *
      ******************/
     bool processQueryTree(QueryTree &queryTree);
+    bool extractSelectedSyns(QueryTree &queryTree);
     list<ClausePtr> extractClausesFromQueryTree(QueryTree &queryTree);    // TODO: Rename if QueryTree's name changes
     void formClauseGroups();
-    void sortClausesWithinGroup();
     void sortClauseGroups();
-    queue<queue<ClausePtr>> createClauseGroupQueue();
-    static bool compareClauseGroupCost(vector<ClausePtr> clauseGroup1, vector<ClausePtr> clauseGroup2);
+    queue<ClauseGroup> createClauseGroupQueue();
+    static bool compareClauseGroupCost(ClauseGroup clauseGroup1, ClauseGroup clauseGroup2);
 
 };
