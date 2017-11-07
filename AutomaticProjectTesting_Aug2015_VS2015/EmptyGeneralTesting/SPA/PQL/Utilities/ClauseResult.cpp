@@ -167,7 +167,7 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
             newComb.push_back(newSynRes);
             _resultsPtr->push_back(newComb);
 
-            if (AbstractWrapper::GlobalStop) {
+            if (AbstractWrapper::GlobalStop) {  // TODO: Refactor method, reduce repetitive code
                 return true;    // Consider returning false, check the consequence.
             }
         }
