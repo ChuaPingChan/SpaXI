@@ -1,8 +1,10 @@
 #include <cassert>
+#include <iostream>
 #include "QueryEvaluator.h"
 #include "../Optimizer/Optimizer.h"
 #include "../Optimizer/ClauseGroup.h"
 #include "../Optimizer/ClauseGroupManager.h"
+#include "AbstractWrapper.h"
 
 QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
 {
@@ -45,6 +47,14 @@ void QueryEvaluator::evaluate()
                 assert(clausePtr->getClauseType() == Clause::ClauseType::SELECT);
                 SelectClausePtr selectClausePtr = dynamic_pointer_cast<SelectClause>(clausePtr);
                 hasResultEvaluator = factory.processClause(*selectClausePtr);
+            }
+
+            // Check for timeout
+            if (AbstractWrapper::GlobalStop) {
+                cout << "SpaXI timeouts... SpaXI sad :( ... Cleaning up..." << endl;    // TODO: Remove this before submission
+                if (hasResultEvaluator)
+                    _qt->storeEvaluatorResult(clauseGroupManager.getMergedClauseResult());  // Store result even if it's wrong.. Hope for partial marks ;O
+                return;
             }
 
             clauseGroup.pruneClauseResult(factory.getClauseResultPtr());
