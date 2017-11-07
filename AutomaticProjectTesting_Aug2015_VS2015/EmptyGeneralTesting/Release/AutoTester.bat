@@ -194,6 +194,7 @@ call :runTest12
 call :runTest13
 call :runTest14
 call :runTest15
+call :runTest16
 call :runTest18
 call :runTest19
 echo ===============================================================================
