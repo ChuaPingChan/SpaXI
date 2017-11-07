@@ -787,6 +787,9 @@ echo Finish running AutoTester for System\With\QueryWithTest2.
 echo Running AutoTester for System\With\QueryWithTest3 ...
 AutoTester Test15_Verb\System\With\SourceWithTest3.txt Test15_Verb\System\With\QueryWithTest3.txt TestResult\out15_SystemWith_QueryWithTest3.xml > TestResult\cmd\cmd15_SystemWith_QueryWithTest3.txt
 echo Finish running AutoTester for System\With\QueryWithTest3.
+echo Running AutoTester for Validation\QueryValidation ...
+AutoTester Test15_Verb\Validation\SourceValidation.txt Test15_Verb\Validation\QueryValidation.txt TestResult\out15_Validation_QueryValidation.xml > TestResult\cmd\cmd15_Validation_QueryValidation.txt
+echo Finish running AutoTester for Validation\QueryValidation.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
