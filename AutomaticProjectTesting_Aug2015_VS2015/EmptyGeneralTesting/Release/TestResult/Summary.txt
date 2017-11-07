@@ -1,5 +1,5 @@
-Overall Test Ran    : 11431
-Overall Test Passed : 11359
+Overall Test Ran    : 11656
+Overall Test Passed : 11584
 Overall Test Failed : 69
 Overall Test Timeout: 3
 
@@ -608,6 +608,24 @@ TestResult\out15_SystemParent_QueryParentTest3.xml:
 Test Ran: 75	[BUG]
 Passed   : 71
 Failed   : 4
+Timeout  : 0
+
+TestResult\out15_SystemPattern_QueryPatternTest1.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemPattern_QueryPatternTest2.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemPattern_QueryPatternTest3.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
 Timeout  : 0
 
 TestResult\out18_QueryValidation.xml: 

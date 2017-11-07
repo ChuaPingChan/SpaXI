@@ -754,6 +754,15 @@ echo Finish running AutoTester for System\Parent\QueryParentTest2.
 echo Running AutoTester for System\Parent\QueryParentTest3 ...
 AutoTester Test15_Verb\System\Parent\SourceParentTest3.txt Test15_Verb\System\Parent\QueryParentTest3.txt TestResult\out15_SystemParent_QueryParentTest3.xml > TestResult\cmd\cmd15_SystemParent_QueryParentTest3.txt
 echo Finish running AutoTester for System\Parent\QueryParentTest3.
+echo Running AutoTester for System\Pattern\QueryPatternTest1 ...
+AutoTester Test15_Verb\System\Pattern\SourcePatternTest1.txt Test15_Verb\System\Pattern\QueryPatternTest1.txt TestResult\out15_SystemPattern_QueryPatternTest1.xml > TestResult\cmd\cmd15_SystemPattern_QueryPatternTest1.txt
+echo Finish running AutoTester for System\Pattern\QueryPatternTest1.
+echo Running AutoTester for System\Pattern\QueryPatternTest2 ...
+AutoTester Test15_Verb\System\Pattern\SourcePatternTest2.txt Test15_Verb\System\Pattern\QueryPatternTest2.txt TestResult\out15_SystemPattern_QueryPatternTest2.xml > TestResult\cmd\cmd15_SystemPattern_QueryPatternTest2.txt
+echo Finish running AutoTester for System\Pattern\QueryPatternTest2.
+echo Running AutoTester for System\Pattern\QueryPatternTest3 ...
+AutoTester Test15_Verb\System\Pattern\SourcePatternTest3.txt Test15_Verb\System\Pattern\QueryPatternTest3.txt TestResult\out15_SystemPattern_QueryPatternTest3.xml > TestResult\cmd\cmd15_SystemPattern_QueryPatternTest3.txt
+echo Finish running AutoTester for System\Pattern\QueryPatternTest3.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
