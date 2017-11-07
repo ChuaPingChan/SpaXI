@@ -1,5 +1,5 @@
-Overall Test Ran    : 11814
-Overall Test Passed : 11735
+Overall Test Ran    : 12021
+Overall Test Passed : 11942
 Overall Test Failed : 78
 Overall Test Timeout: 1
 
@@ -656,6 +656,24 @@ TestResult\out15_SystemTuple_QueryTupleTest1.xml:
 Test Ran: 91	[BUG]
 Passed   : 86
 Failed   : 5
+Timeout  : 0
+
+TestResult\out15_SystemWith_QueryWithTest1.xml: 
+Test Ran: 69	
+Passed   : 69
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemWith_QueryWithTest2.xml: 
+Test Ran: 69	
+Passed   : 69
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemWith_QueryWithTest3.xml: 
+Test Ran: 69	
+Passed   : 69
+Failed   : 0
 Timeout  : 0
 
 TestResult\out18_QueryValidation.xml: 

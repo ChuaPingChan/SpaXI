@@ -778,6 +778,15 @@ echo Finish running AutoTester for System\Select\QuerySelectTest3.
 echo Running AutoTester for System\Tuple\QueryTupleTest1 ...
 AutoTester Test15_Verb\System\Tuple\SourceTupleTest1.txt Test15_Verb\System\Tuple\QueryTupleTest1.txt TestResult\out15_SystemTuple_QueryTupleTest1.xml > TestResult\cmd\cmd15_SystemTuple_QueryTupleTest1.txt
 echo Finish running AutoTester for System\Tuple\QueryTupleTest1.
+echo Running AutoTester for System\With\QueryWithTest1 ...
+AutoTester Test15_Verb\System\With\SourceWithTest1.txt Test15_Verb\System\With\QueryWithTest1.txt TestResult\out15_SystemWith_QueryWithTest1.xml > TestResult\cmd\cmd15_SystemWith_QueryWithTest1.txt
+echo Finish running AutoTester for System\With\QueryWithTest1.
+echo Running AutoTester for System\With\QueryWithTest2 ...
+AutoTester Test15_Verb\System\With\SourceWithTest2.txt Test15_Verb\System\With\QueryWithTest2.txt TestResult\out15_SystemWith_QueryWithTest2.xml > TestResult\cmd\cmd15_SystemWith_QueryWithTest2.txt
+echo Finish running AutoTester for System\With\QueryWithTest2.
+echo Running AutoTester for System\With\QueryWithTest3 ...
+AutoTester Test15_Verb\System\With\SourceWithTest3.txt Test15_Verb\System\With\QueryWithTest3.txt TestResult\out15_SystemWith_QueryWithTest3.xml > TestResult\cmd\cmd15_SystemWith_QueryWithTest3.txt
+echo Finish running AutoTester for System\With\QueryWithTest3.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
