@@ -160,7 +160,7 @@ public:
     bool addAssignmentStmt(int stmt);
 	bool addWhileStmt(int stmt, string controlVar);
 	bool addIfStmt(int stmt, string controlVar);
-    bool addConstant(int stmt, int constant);
+	bool addConstant(int constant);
 	bool addStmtToProc(int stmt, string procName);
 	int getFirstStmtFromProc(int procIdx);
 	int getProcFromStmt(int stmt);

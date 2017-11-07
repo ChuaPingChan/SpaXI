@@ -1249,9 +1249,9 @@ bool PKBMain::addIfStmt(int stmt, string controlVar)
     return added;
 }
 
-bool PKBMain::addConstant(int stmt, int constant)
+bool PKBMain::addConstant(int constant)
 {
-	bool added = constantTable.addConstantList(stmt, constant);
+	bool added = constantTable.addConstantList(constant);
 	return added;
 }
 
