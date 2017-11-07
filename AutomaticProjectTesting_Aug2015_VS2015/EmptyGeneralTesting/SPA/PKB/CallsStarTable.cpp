@@ -5,6 +5,10 @@ using namespace std;
 CallsStarTable::CallsStarTable() {
 }
 
+/*
+This method sets the call star map from the one we generated in design extractor
+It will iterate all relations and populate the required tables
+*/
 bool CallsStarTable::setCallsStarMap(pair<unordered_map<int, list<int>>, unordered_map<int, list<int>>> callsStarPair) {
 	callsStarProcMap = callsStarPair.first;
 	callsStarProcMapReverse = callsStarPair.second;
@@ -17,8 +21,7 @@ bool CallsStarTable::setCallsStarMap(pair<unordered_map<int, list<int>>, unorder
 			callerList.push_back(caller);
 			callee = (*it2);
 			calleeList.push_back(*it2);
-			string callsStarRel = to_string(caller) + "," + to_string(callee);
-			callsStarRelPairs[callsStarRel] = true;
+			callsStarRelMap[caller].insert(callee);
 		}
 	}
 
@@ -35,8 +38,10 @@ list<int> CallsStarTable::getCallerStar(int callee) {
 }
 
 bool CallsStarTable::isCallsStar(int caller, int callee) {
-	string callsStarRel = to_string(caller) + "," + to_string(callee);
-	return callsStarRelPairs[callsStarRel];
+	if (callsStarRelMap.find(caller) == callsStarRelMap.end()) {
+		return false;
+	}
+	return callsStarRelMap[caller].find(callee) != callsStarRelMap[caller].end();
 }
 
 pair<list<int>, list<int>> CallsStarTable::getAllCallsStar() {
