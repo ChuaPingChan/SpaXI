@@ -1,5 +1,5 @@
-Overall Test Ran    : 10729
-Overall Test Passed : 10673
+Overall Test Ran    : 10897
+Overall Test Passed : 10841
 Overall Test Failed : 53
 Overall Test Timeout: 3
 
@@ -536,6 +536,24 @@ TestResult\out15_SystemFollows_QueryFollowsTest3.xml:
 Test Ran: 78	[BUG]
 Passed   : 74
 Failed   : 4
+Timeout  : 0
+
+TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest1.xml: 
+Test Ran: 56	
+Passed   : 56
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest2.xml: 
+Test Ran: 56	
+Passed   : 56
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest3.xml: 
+Test Ran: 56	
+Passed   : 56
+Failed   : 0
 Timeout  : 0
 
 TestResult\out18_QueryValidation.xml: 

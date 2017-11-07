@@ -718,6 +718,15 @@ echo Finish running AutoTester for System\Follows\QueryFollowsTest2.
 echo Running AutoTester for System\Follows\QueryFollowsTest3 ...
 AutoTester Test15_Verb\System\Follows\SourceFollowsTest3.txt Test15_Verb\System\Follows\QueryFollowsTest3.txt TestResult\out15_SystemFollows_QueryFollowsTest3.xml > TestResult\cmd\cmd15_SystemFollows_QueryFollowsTest3.txt
 echo Finish running AutoTester for System\Follows\QueryFollowsTest3.
+echo Running AutoTester for System\ModifiesUses\QueryModifiesUsesTest1 ...
+AutoTester Test15_Verb\System\ModifiesUses\SourceModifiesUsesTest1.txt Test15_Verb\System\ModifiesUses\QueryModifiesUsesTest1.txt TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest1.xml > TestResult\cmd\cmd15_SystemModifiesUses_QueryModifiesUsesTest1.txt
+echo Finish running AutoTester for System\ModifiesUses\QueryModifiesUsesTest1.
+echo Running AutoTester for System\ModifiesUses\QueryModifiesUsesTest2 ...
+AutoTester Test15_Verb\System\ModifiesUses\SourceModifiesUsesTest2.txt Test15_Verb\System\ModifiesUses\QueryModifiesUsesTest2.txt TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest2.xml > TestResult\cmd\cmd15_SystemModifiesUses_QueryModifiesUsesTest2.txt
+echo Finish running AutoTester for System\ModifiesUses\QueryModifiesUsesTest2.
+echo Running AutoTester for System\ModifiesUses\QueryModifiesUsesTest3 ...
+AutoTester Test15_Verb\System\ModifiesUses\SourceModifiesUsesTest3.txt Test15_Verb\System\ModifiesUses\QueryModifiesUsesTest3.txt TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest3.xml > TestResult\cmd\cmd15_SystemModifiesUses_QueryModifiesUsesTest3.txt
+echo Finish running AutoTester for System\ModifiesUses\QueryModifiesUsesTest3.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
