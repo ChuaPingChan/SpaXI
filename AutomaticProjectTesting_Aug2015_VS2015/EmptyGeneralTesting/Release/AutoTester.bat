@@ -78,6 +78,9 @@ if '%option%'=='17' (
 if '%option%'=='18' (
 	goto :runTest18
 )
+if '%option%'=='19' (
+	goto :runTest19
+) 
 cls
 goto :main
 echo ===============================================================================
@@ -192,6 +195,7 @@ call :runTest13
 call :runTest14
 call :runTest15
 call :runTest18
+call :runTest19
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -651,6 +655,45 @@ echo Running AutoTester for test 15...
 echo Running AutoTester for Query_Test1 ...
 AutoTester Test15_Verb\Acceptance\Source_prog_1.txt Test15_Verb\Acceptance\Query_Test1.txt TestResult\out15_Acceptance_Query_Test1.xml > TestResult\cmd\cmd15_Acceptance_Query_Test1.txt
 echo Finish running AutoTester for Query_Test1.
+echo Running AutoTester for Query_Test2 ...
+AutoTester Test15_Verb\Acceptance\Source_prog_2.txt Test15_Verb\Acceptance\Query_Test2.txt TestResult\out15_Acceptance_Query_Test2.xml > TestResult\cmd\cmd15_Acceptance_Query_Test2.txt
+echo Finish running AutoTester for Query_Test2.
+echo Running AutoTester for Query_Test3 ...
+AutoTester Test15_Verb\Acceptance\Source_prog_3.txt Test15_Verb\Acceptance\Query_Test3.txt TestResult\out15_Acceptance_Query_Test3.xml > TestResult\cmd\cmd15_Acceptance_Query_Test3.txt
+echo Finish running AutoTester for Query_Test3.
+echo Running AutoTester for Query_Test4 ...
+AutoTester Test15_Verb\Acceptance\Source_prog_4.txt Test15_Verb\Acceptance\Query_Test4.txt TestResult\out15_Acceptance_Query_Test4.xml > TestResult\cmd\cmd15_Acceptance_Query_Test4.txt
+echo Finish running AutoTester for Query_Test4.
+echo Running AutoTester for Query_Test5 ...
+AutoTester Test15_Verb\Acceptance\Source_prog_5.txt Test15_Verb\Acceptance\Query_Test5.txt TestResult\out15_Acceptance_Query_Test5.xml > TestResult\cmd\cmd15_Acceptance_Query_Test5.txt
+echo Finish running AutoTester for Query_Test5.
+echo Running AutoTester for QueryStmtLst ...
+AutoTester Test15_Verb\Acceptance\SourceStmtLst_prog.txt Test15_Verb\Acceptance\QueryStmtLst.txt TestResult\out15_Acceptance_QueryStmtLst.xml > TestResult\cmd\cmd15_Acceptance_QueryStmtLst.txt
+echo Finish running AutoTester for QueryStmtLst.
+echo Running AutoTester for QueryAffects1_UsingSource2 ...
+AutoTester Test15_Verb\Regression\Source2.txt Test15_Verb\Regression\QueryAffects1_UsingSource2.txt TestResult\out15_Regression_QueryAffects1_UsingSource2.xml > TestResult\cmd\cmd15_Regression_QueryAffects1_UsingSource2.txt
+echo Finish running AutoTester for QueryAffects1_UsingSource2.
+echo Running AutoTester for QueryBoolean1_UsingSource1 ...
+AutoTester Test15_Verb\Regression\Source1.txt Test15_Verb\Regression\QueryBoolean1_UsingSource1.txt TestResult\out15_Regression_QueryBoolean1_UsingSource1.xml > TestResult\cmd\cmd15_Regression_QueryBoolean1_UsingSource1.txt
+echo Finish running AutoTester for QueryBoolean1_UsingSource1.
+echo Running AutoTester for QueryModifies1_UsingSource1 ...
+AutoTester Test15_Verb\Regression\Source1.txt Test15_Verb\Regression\QueryModifies1_UsingSource1.txt TestResult\out15_Regression_QueryModifies1_UsingSource1.xml > TestResult\cmd\cmd15_Regression_QueryModifies1_UsingSource1.txt
+echo Finish running AutoTester for QueryModifies1_UsingSource1.
+echo Running AutoTester for QueryUses1_UsingSource1 ...
+AutoTester Test15_Verb\Regression\Source1.txt Test15_Verb\Regression\QueryUses1_UsingSource1.txt TestResult\out15_Regression_QueryUses1_UsingSource1.xml > TestResult\cmd\cmd15_Regression_QueryUses1_UsingSource1.txt
+echo Finish running AutoTester for QueryUses1_UsingSource1.
+echo Running AutoTester for QueryWith1_UsingSource1 ...
+AutoTester Test15_Verb\Regression\Source1.txt Test15_Verb\Regression\QueryWith1_UsingSource1.txt TestResult\out15_Regression_QueryWith1_UsingSource1.xml > TestResult\cmd\cmd15_Regression_QueryWith1_UsingSource1.txt
+echo Finish running AutoTester for QueryWith1_UsingSource1.
+echo Running AutoTester for System\Affects\QueryAffectsTest1 ...
+AutoTester Test15_Verb\System\Affects\SourceAffectsTest1.txt Test15_Verb\System\Affects\QueryAffectsTest1.txt TestResult\out15_SystemAffects_QueryAffectsTest1.xml > TestResult\cmd\cmd15_SystemAffects_QueryAffectsTest1.txt
+echo Finish running AutoTester for System\Affects\QueryAffectsTest1.
+echo Running AutoTester for System\Affects\QueryAffectsTest2 ...
+AutoTester Test15_Verb\System\Affects\SourceAffectsTest2.txt Test15_Verb\System\Affects\QueryAffectsTest2.txt TestResult\out15_SystemAffects_QueryAffectsTest2.xml > TestResult\cmd\cmd15_SystemAffects_QueryAffectsTest2.txt
+echo Finish running AutoTester for System\Affects\QueryAffectsTest2.
+echo Running AutoTester for System\Affects\QueryAffectsTest3 ...
+AutoTester Test15_Verb\System\Affects\SourceAffectsTest3.txt Test15_Verb\System\Affects\QueryAffectsTest3.txt TestResult\out15_SystemAffects_QueryAffectsTest3.xml > TestResult\cmd\cmd15_SystemAffects_QueryAffectsTest3.txt
+echo Finish running AutoTester for System\Affects\QueryAffectsTest3.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
@@ -679,5 +722,31 @@ echo ===========================================================================
 echo Running AutoTester for test 18...
 AutoTester Test18_Validation\SourceValidation.txt Test18_Validation\QueryValidation.txt TestResult\out18_QueryValidation.xml > TestResult\cmd\cmd18_QueryValidation.txt
 echo Finish running AutoTester for test 18.
+call :getPauseAction
+goto :eof
+
+:runTest19
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 19...
+echo Running AutoTester for Query_std1_adv ...
+AutoTester Test19_Mat\Source_std1.txt Test19_Mat\Query_std1_adv.txt TestResult\out19_Query_std1_adv.xml > TestResult\cmd\cmd19_Query_std1_adv.txt
+echo Finish running AutoTester for Query_std1_adv.
+echo Running AutoTester for Query_std1_basic ...
+AutoTester Test19_Mat\Source_std1.txt Test19_Mat\Query_std1_basic.txt TestResult\out19_Query_std1_basic.xml > TestResult\cmd\cmd19_Query_std1_basic.txt
+echo Finish running AutoTester for Query_std1_basic.
+echo Running AutoTester for Query_std2_adv ...
+AutoTester Test19_Mat\Source_std2.txt Test19_Mat\Query_std2_adv.txt TestResult\out19_Query_std2_adv.xml > TestResult\cmd\cmd19_Query_std2_adv.txt
+echo Finish running AutoTester for Query_std2_adv.
+echo Running AutoTester for Query_std2_basic ...
+AutoTester Test19_Mat\Source_std2.txt Test19_Mat\Query_std2_basic.txt TestResult\out19_Query_std2_basic.xml > TestResult\cmd\cmd19_Query_std2_basic.txt
+echo Finish running AutoTester for Query_std2_basic.
+echo Running AutoTester for Query_std3_adv ...
+AutoTester Test19_Mat\Source_std3.txt Test19_Mat\Query_std3_adv.txt TestResult\out19_Query_std3_adv.xml > TestResult\cmd\cmd19_Query_std3_adv.txt
+echo Finish running AutoTester for Query_std3_adv.
+echo Running AutoTester for Query_std3_basic ...
+AutoTester Test19_Mat\Source_std3.txt Test19_Mat\Query_std3_basic.txt TestResult\out19_Query_std3_basic.xml > TestResult\cmd\cmd19_Query_std3_basic.txt
+echo Finish running AutoTester for Query_std3_basic.
+echo Finish running AutoTester for test 19.
 call :getPauseAction
 goto :eof
