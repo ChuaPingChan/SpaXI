@@ -703,6 +703,12 @@ echo Finish running AutoTester for System\Calls\QueryCallsTest2.
 echo Running AutoTester for System\Calls\QueryCallsTest3 ...
 AutoTester Test15_Verb\System\Calls\SourceCallsTest3.txt Test15_Verb\System\Calls\QueryCallsTest3.txt TestResult\out15_SystemCalls_QueryCallsTest3.xml > TestResult\cmd\cmd15_SystemCalls_QueryCallsTest3.txt
 echo Finish running AutoTester for System\Calls\QueryCallsTest3.
+echo Running AutoTester for System\CommonSynonym\QueryCommonSynonymTest1 ...
+AutoTester Test15_Verb\System\CommonSynonym\SourceCommonSynonymTest1.txt Test15_Verb\System\CommonSynonym\QueryCommonSynonymTest1.txt TestResult\out15_SystemCommonSynonym_QueryCommonSynonymTest1.xml > TestResult\cmd\cmd15_SystemCommonSynonym_QueryCommonSynonymTest1.txt
+echo Finish running AutoTester for System\CommonSynonym\QueryCommonSynonymTest1.
+echo Running AutoTester for System\CommonSynonym\QueryCommonSynonymTest2 ...
+AutoTester Test15_Verb\System\CommonSynonym\SourceCommonSynonymTest2.txt Test15_Verb\System\CommonSynonym\QueryCommonSynonymTest2.txt TestResult\out15_SystemCommonSynonym_QueryCommonSynonymTest2.xml > TestResult\cmd\cmd15_SystemCommonSynonym_QueryCommonSynonymTest2.txt
+echo Finish running AutoTester for System\CommonSynonym\QueryCommonSynonymTest2.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
