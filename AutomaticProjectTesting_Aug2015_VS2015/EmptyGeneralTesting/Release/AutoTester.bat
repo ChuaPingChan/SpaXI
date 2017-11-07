@@ -775,6 +775,9 @@ echo Finish running AutoTester for System\Select\QuerySelectTest2.
 echo Running AutoTester for System\Select\QuerySelectTest3 ...
 AutoTester Test15_Verb\System\Select\SourceSelectTest3.txt Test15_Verb\System\Select\QuerySelectTest3.txt TestResult\out15_SystemSelect_QuerySelectTest3.xml > TestResult\cmd\cmd15_SystemSelect_QuerySelectTest3.txt
 echo Finish running AutoTester for System\Select\QuerySelectTest3.
+echo Running AutoTester for System\Tuple\QueryTupleTest1 ...
+AutoTester Test15_Verb\System\Tuple\SourceTupleTest1.txt Test15_Verb\System\Tuple\QueryTupleTest1.txt TestResult\out15_SystemTuple_QueryTupleTest1.xml > TestResult\cmd\cmd15_SystemTuple_QueryTupleTest1.txt
+echo Finish running AutoTester for System\Tuple\QueryTupleTest1.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
