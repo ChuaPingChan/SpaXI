@@ -709,6 +709,15 @@ echo Finish running AutoTester for System\CommonSynonym\QueryCommonSynonymTest1.
 echo Running AutoTester for System\CommonSynonym\QueryCommonSynonymTest2 ...
 AutoTester Test15_Verb\System\CommonSynonym\SourceCommonSynonymTest2.txt Test15_Verb\System\CommonSynonym\QueryCommonSynonymTest2.txt TestResult\out15_SystemCommonSynonym_QueryCommonSynonymTest2.xml > TestResult\cmd\cmd15_SystemCommonSynonym_QueryCommonSynonymTest2.txt
 echo Finish running AutoTester for System\CommonSynonym\QueryCommonSynonymTest2.
+echo Running AutoTester for System\Follows\QueryFollowsTest1 ...
+AutoTester Test15_Verb\System\Follows\SourceFollowsTest1.txt Test15_Verb\System\Follows\QueryFollowsTest1.txt TestResult\out15_SystemFollows_QueryFollowsTest1.xml > TestResult\cmd\cmd15_SystemFollows_QueryFollowsTest1.txt
+echo Finish running AutoTester for System\Follows\QueryFollowsTest1.
+echo Running AutoTester for System\Follows\QueryFollowsTest2 ...
+AutoTester Test15_Verb\System\Follows\SourceFollowsTest2.txt Test15_Verb\System\Follows\QueryFollowsTest2.txt TestResult\out15_SystemFollows_QueryFollowsTest2.xml > TestResult\cmd\cmd15_SystemFollows_QueryFollowsTest2.txt
+echo Finish running AutoTester for System\Follows\QueryFollowsTest2.
+echo Running AutoTester for System\Follows\QueryFollowsTest3 ...
+AutoTester Test15_Verb\System\Follows\SourceFollowsTest3.txt Test15_Verb\System\Follows\QueryFollowsTest3.txt TestResult\out15_SystemFollows_QueryFollowsTest3.xml > TestResult\cmd\cmd15_SystemFollows_QueryFollowsTest3.txt
+echo Finish running AutoTester for System\Follows\QueryFollowsTest3.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof

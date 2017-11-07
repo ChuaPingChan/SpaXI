@@ -1,6 +1,6 @@
-Overall Test Ran    : 10495
-Overall Test Passed : 10451
-Overall Test Failed : 41
+Overall Test Ran    : 10729
+Overall Test Passed : 10673
+Overall Test Failed : 53
 Overall Test Timeout: 3
 
 
@@ -518,6 +518,24 @@ TestResult\out15_SystemCommonSynonym_QueryCommonSynonymTest2.xml:
 Test Ran: 46	[BUG]
 Passed   : 44
 Failed   : 2
+Timeout  : 0
+
+TestResult\out15_SystemFollows_QueryFollowsTest1.xml: 
+Test Ran: 78	[BUG]
+Passed   : 74
+Failed   : 4
+Timeout  : 0
+
+TestResult\out15_SystemFollows_QueryFollowsTest2.xml: 
+Test Ran: 78	[BUG]
+Passed   : 74
+Failed   : 4
+Timeout  : 0
+
+TestResult\out15_SystemFollows_QueryFollowsTest3.xml: 
+Test Ran: 78	[BUG]
+Passed   : 74
+Failed   : 4
 Timeout  : 0
 
 TestResult\out18_QueryValidation.xml: 
