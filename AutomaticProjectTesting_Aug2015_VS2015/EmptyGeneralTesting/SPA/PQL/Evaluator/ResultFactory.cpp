@@ -180,3 +180,8 @@ bool ResultFactory::resetClauseResult()
     _clauseResult = ClauseResult();
     return true;
 }
+
+ClauseResult* ResultFactory::getClauseResultPtr()
+{
+    return &_clauseResult;
+}

@@ -720,6 +720,62 @@ namespace UnitTesting
             Assert::IsTrue(actualSynPairResults == expectedSynPairResults);
         }
 
+        TEST_METHOD(TestPruneColumns)
+        {
+            list<list<int>> actualResults;
+            list<list<int>> expectedResults;
+
+            ClauseResult cr1;
+
+            string syn1 = "a";
+            list<int> syn1Results{ 1, 2 };
+            string syn2 = "b";
+            list<int> syn2Results{ 5, 6 };
+            string syn3 = "c";
+            list<int> syn3Results{ 7 };
+            string syn4 = "d";
+            list<int> syn4Results{ 10 };
+            string syn5 = "e";
+            list<int> syn5Results{ 11, 12 };
+            cr1.updateSynResults(syn1, syn1Results);
+            cr1.updateSynResults(syn2, syn2Results);
+            cr1.updateSynResults(syn3, syn3Results);
+            cr1.updateSynResults(syn4, syn4Results);
+            /*************
+            ClauseResult:
+            --------------
+            a	b	c   d
+            --------------
+            1	5	7   10
+            1	6	7   10
+            2	5	7   10
+            2	6	7   10
+            **************/
+
+            unordered_set<string> synsToRetain;
+
+            synsToRetain = unordered_set<string>({ syn1, syn4, syn5 });
+            cr1.pruneColumns(synsToRetain);
+            actualResults = cr1.getAllResults();
+            expectedResults = list<list<int>>{
+                {1, -1, -1, 10},
+                {2, -1, -1, 10}
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            synsToRetain = unordered_set<string>({ syn4, syn5 });
+            cr1.pruneColumns(synsToRetain);
+            actualResults = cr1.getAllResults();
+            expectedResults = list<list<int>>{
+                { -1, -1, -1, 10 }
+            };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+        }
+
         /***********************
          * Test Helper Methods *
          ***********************/

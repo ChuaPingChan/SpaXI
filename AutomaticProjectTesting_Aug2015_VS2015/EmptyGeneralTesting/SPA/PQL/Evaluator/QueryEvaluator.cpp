@@ -1,6 +1,7 @@
 #include <cassert>
 #include "QueryEvaluator.h"
 #include "../Optimizer/Optimizer.h"
+#include "../Optimizer/ClauseGroup.h"
 #include "../Optimizer/ClauseGroupManager.h"
 
 QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
@@ -22,13 +23,12 @@ void QueryEvaluator::evaluate()
     // For each clause groups..
     while (hasResultEvaluator && clauseGroupManager.hasNextClauseGroup()) {
 
-        queue<ClausePtr> clauseGroup = clauseGroupManager.getNextClauseGroup();
+        ClauseGroup clauseGroup = clauseGroupManager.getNextClauseGroup();
 
         // For each clause in a clause group..
-        while (hasResultEvaluator && !clauseGroup.empty()) {
+        while (hasResultEvaluator && clauseGroup.hasNextClause()) {
             
-            ClausePtr clausePtr = clauseGroup.front();
-            clauseGroup.pop();
+            ClausePtr clausePtr = clauseGroup.getNextClause();
 
             // Checks for the actual type of clause and do type-conversion to use subclass's methods
             if (clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT) {
@@ -46,6 +46,8 @@ void QueryEvaluator::evaluate()
                 SelectClausePtr selectClausePtr = dynamic_pointer_cast<SelectClause>(clausePtr);
                 hasResultEvaluator = factory.processClause(*selectClausePtr);
             }
+
+            clauseGroup.pruneClauseResult(factory.getClauseResultPtr());
         }
         
         // Finished processing a clause group, pass the result of the clause group to ClauseGroupManager

@@ -24,6 +24,7 @@
 
 class ResultFactory
 {
+    friend class QueryEvaluator;
 public:
     ResultFactory();
     ~ResultFactory();
@@ -39,6 +40,8 @@ public:
 private:
 
     ClauseResult _clauseResult;
+    
+    ClauseResult* getClauseResultPtr();
 
     template<typename Base, typename T>
     inline bool instanceof(const T *ptr) {
