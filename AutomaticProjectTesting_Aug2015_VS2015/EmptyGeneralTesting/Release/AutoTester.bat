@@ -763,6 +763,18 @@ echo Finish running AutoTester for System\Pattern\QueryPatternTest2.
 echo Running AutoTester for System\Pattern\QueryPatternTest3 ...
 AutoTester Test15_Verb\System\Pattern\SourcePatternTest3.txt Test15_Verb\System\Pattern\QueryPatternTest3.txt TestResult\out15_SystemPattern_QueryPatternTest3.xml > TestResult\cmd\cmd15_SystemPattern_QueryPatternTest3.txt
 echo Finish running AutoTester for System\Pattern\QueryPatternTest3.
+echo Running AutoTester for System\Select\QuerySelectTest1 ...
+AutoTester Test15_Verb\System\Select\SourceSelectTest1.txt Test15_Verb\System\Select\QuerySelectTest1.txt TestResult\out15_SystemSelect_QuerySelectTest1.xml > TestResult\cmd\cmd15_SystemSelect_QuerySelectTest1.txt
+echo Finish running AutoTester for System\Select\QuerySelectTest1.
+echo Running AutoTester for System\Select\QuerySelectTest1_InvalidAttributes ...
+AutoTester Test15_Verb\System\Select\SourceSelectTest1.txt Test15_Verb\System\Select\QuerySelectTest1_InvalidAttributes.txt TestResult\out15_SystemSelect_QuerySelectTest1_InvalidAttributes.xml > TestResult\cmd\cmd15_SystemSelect_QuerySelectTest1_InvalidAttributes.txt
+echo Finish running AutoTester for System\Select\QuerySelectTest1_InvalidAttributes.
+echo Running AutoTester for System\Select\QuerySelectTest2 ...
+AutoTester Test15_Verb\System\Select\SourceSelectTest2.txt Test15_Verb\System\Select\QuerySelectTest2.txt TestResult\out15_SystemSelect_QuerySelectTest2.xml > TestResult\cmd\cmd15_SystemSelect_QuerySelectTest2.txt
+echo Finish running AutoTester for System\Select\QuerySelectTest2.
+echo Running AutoTester for System\Select\QuerySelectTest3 ...
+AutoTester Test15_Verb\System\Select\SourceSelectTest3.txt Test15_Verb\System\Select\QuerySelectTest3.txt TestResult\out15_SystemSelect_QuerySelectTest3.xml > TestResult\cmd\cmd15_SystemSelect_QuerySelectTest3.txt
+echo Finish running AutoTester for System\Select\QuerySelectTest3.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof

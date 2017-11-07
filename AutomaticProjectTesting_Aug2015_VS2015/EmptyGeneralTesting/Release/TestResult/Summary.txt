@@ -1,7 +1,7 @@
-Overall Test Ran    : 11656
-Overall Test Passed : 11584
-Overall Test Failed : 69
-Overall Test Timeout: 3
+Overall Test Ran    : 11723
+Overall Test Passed : 11649
+Overall Test Failed : 73
+Overall Test Timeout: 1
 
 
 TestResult\out1.xml: 
@@ -120,9 +120,9 @@ Timeout  : 0
 
 TestResult\out13_Intense_Query5.xml: 
 Test Ran: 20	[TIMEOUT]
-Passed   : 18
+Passed   : 19
 Failed   : 0
-Timeout  : 2
+Timeout  : 1
 
 TestResult\out13_Intense_Query6a.xml: 
 Test Ran: 526	
@@ -628,11 +628,35 @@ Passed   : 75
 Failed   : 0
 Timeout  : 0
 
-TestResult\out18_QueryValidation.xml: 
-Test Ran: 70	[TIMEOUT]
-Passed   : 69
+TestResult\out15_SystemSelect_QuerySelectTest1.xml: 
+Test Ran: 11	[BUG]
+Passed   : 10
+Failed   : 1
+Timeout  : 0
+
+TestResult\out15_SystemSelect_QuerySelectTest1_InvalidAttributes.xml: 
+Test Ran: 34	
+Passed   : 34
 Failed   : 0
-Timeout  : 1
+Timeout  : 0
+
+TestResult\out15_SystemSelect_QuerySelectTest2.xml: 
+Test Ran: 11	[BUG]
+Passed   : 10
+Failed   : 1
+Timeout  : 0
+
+TestResult\out15_SystemSelect_QuerySelectTest3.xml: 
+Test Ran: 11	[BUG]
+Passed   : 9
+Failed   : 2
+Timeout  : 0
+
+TestResult\out18_QueryValidation.xml: 
+Test Ran: 70	
+Passed   : 70
+Failed   : 0
+Timeout  : 0
 
 TestResult\out19_Query_std1_adv.xml: 
 Test Ran: 42	
