@@ -51,7 +51,7 @@ void QueryEvaluator::evaluate()
 
             // Check for timeout
             if (AbstractWrapper::GlobalStop) {
-                cout << "SpaXI detected timeout in QueryEvaluator. SpaXI sad :(.. Cleaning up..." << endl;    // TODO: Remove this before submission
+                cout << "SpaXI timeouts... SpaXI sad :( ... Cleaning up..." << endl;    // TODO: Remove this before submission
                 if (hasResultEvaluator)
                     _qt->storeEvaluatorResult(clauseGroupManager.getMergedClauseResult());  // Store result even if it's wrong.. Hope for partial marks ;O
                 return;
