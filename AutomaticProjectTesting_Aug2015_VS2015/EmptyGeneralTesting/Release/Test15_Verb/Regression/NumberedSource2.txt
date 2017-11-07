@@ -1,0 +1,38 @@
+procedure main {
+1  a=b+1+c;
+2  b=c+a;
+3  while i {
+4	b=a*c;
+5	if j then {
+6	  d=a-b+c;
+7	  e=f+g;}
+	else {
+8	  a=b+1-g;
+9	  c=d*c;
+10	  call second;
+11	  g=e-f+b;}
+12	c=b+c;
+13	d=e+f;}
+14  h=g+a-b;
+15  call third;
+16  f=a*c;
+17  h=b-f+h;
+}
+
+procedure second {
+18  if i then {
+19	if j then {
+20	  d=1-g;}
+	else {
+21	  g=d*c;}}
+  else {
+22	while i {
+23	  a=1-g-a;
+24	  b=d*c;
+25	  call third;
+26	  b=a-1+b;}}
+}
+
+procedure third {
+27  b=a-c;
+}

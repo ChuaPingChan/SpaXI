@@ -1,6 +1,6 @@
-Overall Test Ran    : 9461
-Overall Test Passed : 9458
-Overall Test Failed : 2
+Overall Test Ran    : 10229
+Overall Test Passed : 10191
+Overall Test Failed : 37
 Overall Test Timeout: 1
 
 
@@ -406,10 +406,88 @@ Passed   : 20
 Failed   : 0
 Timeout  : 0
 
+TestResult\out15_Acceptance_QueryStmtLst.xml: 
+Test Ran: 27	[BUG]
+Passed   : 0
+Failed   : 27
+Timeout  : 0
+
 TestResult\out15_Acceptance_Query_Test1.xml: 
 Test Ran: 55	
 Passed   : 55
 Failed   : 0
+Timeout  : 0
+
+TestResult\out15_Acceptance_Query_Test2.xml: 
+Test Ran: 55	
+Passed   : 55
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_Acceptance_Query_Test3.xml: 
+Test Ran: 74	
+Passed   : 74
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_Acceptance_Query_Test4.xml: 
+Test Ran: 55	
+Passed   : 55
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_Acceptance_Query_Test5.xml: 
+Test Ran: 209	
+Passed   : 209
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_Regression_QueryAffects1_UsingSource2.xml: 
+Test Ran: 32	
+Passed   : 32
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_Regression_QueryBoolean1_UsingSource1.xml: 
+Test Ran: 9	
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_Regression_QueryModifies1_UsingSource1.xml: 
+Test Ran: 24	[BUG]
+Passed   : 23
+Failed   : 1
+Timeout  : 0
+
+TestResult\out15_Regression_QueryUses1_UsingSource1.xml: 
+Test Ran: 24	[BUG]
+Passed   : 23
+Failed   : 1
+Timeout  : 0
+
+TestResult\out15_Regression_QueryWith1_UsingSource1.xml: 
+Test Ran: 40	
+Passed   : 40
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemAffects_QueryAffectsTest1.xml: 
+Test Ran: 68	[BUG]
+Passed   : 66
+Failed   : 2
+Timeout  : 0
+
+TestResult\out15_SystemAffects_QueryAffectsTest2.xml: 
+Test Ran: 67	[BUG]
+Passed   : 65
+Failed   : 2
+Timeout  : 0
+
+TestResult\out15_SystemAffects_QueryAffectsTest3.xml: 
+Test Ran: 84	[BUG]
+Passed   : 82
+Failed   : 2
 Timeout  : 0
 
 TestResult\out18_QueryValidation.xml: 

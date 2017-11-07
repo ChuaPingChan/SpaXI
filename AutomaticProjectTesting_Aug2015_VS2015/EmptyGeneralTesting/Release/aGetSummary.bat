@@ -1,0 +1,1 @@
+python TestResult\GenerateResultSummary.py TestResult TestResult\Summary.txt
