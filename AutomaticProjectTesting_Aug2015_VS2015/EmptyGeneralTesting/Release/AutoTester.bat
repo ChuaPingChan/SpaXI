@@ -736,6 +736,15 @@ echo Finish running AutoTester for System\MultipleClauses\QueryMultipleClausesTe
 echo Running AutoTester for System\MultipleClauses\QueryMultipleClausesTest3 ...
 AutoTester Test15_Verb\System\MultipleClauses\SourceMultipleClausesTest3.txt Test15_Verb\System\MultipleClauses\QueryMultipleClausesTest3.txt TestResult\out15_SystemMultipleClauses_QueryMultipleClausesTest3.xml > TestResult\cmd\cmd15_SystemMultipleClauses_QueryMultipleClausesTest3.txt
 echo Finish running AutoTester for System\MultipleClauses\QueryMultipleClausesTest3.
+echo Running AutoTester for System\Next\QueryNextTest1 ...
+AutoTester Test15_Verb\System\Next\SourceNextTest1.txt Test15_Verb\System\Next\QueryNextTest1.txt TestResult\out15_SystemNext_QueryNextTest1.xml > TestResult\cmd\cmd15_SystemNext_QueryNextTest1.txt
+echo Finish running AutoTester for System\Next\QueryNextTest1.
+echo Running AutoTester for System\Next\QueryNextTest2 ...
+AutoTester Test15_Verb\System\Next\SourceNextTest2.txt Test15_Verb\System\Next\QueryNextTest2.txt TestResult\out15_SystemNext_QueryNextTest2.xml > TestResult\cmd\cmd15_SystemNext_QueryNextTest2.txt
+echo Finish running AutoTester for System\Next\QueryNextTest2.
+echo Running AutoTester for System\Next\QueryNextTest3 ...
+AutoTester Test15_Verb\System\Next\SourceNextTest3.txt Test15_Verb\System\Next\QueryNextTest3.txt TestResult\out15_SystemNext_QueryNextTest3.xml > TestResult\cmd\cmd15_SystemNext_QueryNextTest3.txt
+echo Finish running AutoTester for System\Next\QueryNextTest3.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof

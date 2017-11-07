@@ -1,5 +1,5 @@
-Overall Test Ran    : 11044
-Overall Test Passed : 10988
+Overall Test Ran    : 11206
+Overall Test Passed : 11150
 Overall Test Failed : 53
 Overall Test Timeout: 3
 
@@ -571,6 +571,24 @@ Timeout  : 0
 TestResult\out15_SystemMultipleClauses_QueryMultipleClausesTest3.xml: 
 Test Ran: 49	
 Passed   : 49
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemNext_QueryNextTest1.xml: 
+Test Ran: 54	
+Passed   : 54
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemNext_QueryNextTest2.xml: 
+Test Ran: 54	
+Passed   : 54
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemNext_QueryNextTest3.xml: 
+Test Ran: 54	
+Passed   : 54
 Failed   : 0
 Timeout  : 0
 
