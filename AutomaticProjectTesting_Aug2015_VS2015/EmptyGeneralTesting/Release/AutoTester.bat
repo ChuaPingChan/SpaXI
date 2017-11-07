@@ -78,6 +78,9 @@ if '%option%'=='17' (
 if '%option%'=='18' (
 	goto :runTest18
 )
+if '%option%'=='19' (
+	goto :runTest19
+) 
 cls
 goto :main
 echo ===============================================================================
@@ -192,6 +195,7 @@ call :runTest13
 call :runTest14
 call :runTest15
 call :runTest18
+call :runTest19
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -679,5 +683,31 @@ echo ===========================================================================
 echo Running AutoTester for test 18...
 AutoTester Test18_Validation\SourceValidation.txt Test18_Validation\QueryValidation.txt TestResult\out18_QueryValidation.xml > TestResult\cmd\cmd18_QueryValidation.txt
 echo Finish running AutoTester for test 18.
+call :getPauseAction
+goto :eof
+
+:runTest19
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 19...
+echo Running AutoTester for Query_std1_adv ...
+AutoTester Test19_Mat\Source_std1.txt Test19_Mat\Query_std1_adv.txt TestResult\out19_Query_std1_adv.xml > TestResult\cmd\cmd19_Query_std1_adv.txt
+echo Finish running AutoTester for Query_std1_adv.
+echo Running AutoTester for Query_std1_basic ...
+AutoTester Test19_Mat\Source_std1.txt Test19_Mat\Query_std1_basic.txt TestResult\out19_Query_std1_basic.xml > TestResult\cmd\cmd19_Query_std1_basic.txt
+echo Finish running AutoTester for Query_std1_basic.
+echo Running AutoTester for Query_std2_adv ...
+AutoTester Test19_Mat\Source_std2.txt Test19_Mat\Query_std2_adv.txt TestResult\out19_Query_std2_adv.xml > TestResult\cmd\cmd19_Query_std2_adv.txt
+echo Finish running AutoTester for Query_std2_adv.
+echo Running AutoTester for Query_std2_basic ...
+AutoTester Test19_Mat\Source_std2.txt Test19_Mat\Query_std2_basic.txt TestResult\out19_Query_std2_basic.xml > TestResult\cmd\cmd19_Query_std2_basic.txt
+echo Finish running AutoTester for Query_std2_basic.
+echo Running AutoTester for Query_std3_adv ...
+AutoTester Test19_Mat\Source_std3.txt Test19_Mat\Query_std3_adv.txt TestResult\out19_Query_std3_adv.xml > TestResult\cmd\cmd19_Query_std3_adv.txt
+echo Finish running AutoTester for Query_std3_adv.
+echo Running AutoTester for Query_std3_basic ...
+AutoTester Test19_Mat\Source_std3.txt Test19_Mat\Query_std3_basic.txt TestResult\out19_Query_std3_basic.xml > TestResult\cmd\cmd19_Query_std3_basic.txt
+echo Finish running AutoTester for Query_std3_basic.
+echo Finish running AutoTester for test 19.
 call :getPauseAction
 goto :eof
