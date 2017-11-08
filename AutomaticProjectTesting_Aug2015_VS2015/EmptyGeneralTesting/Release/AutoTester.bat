@@ -881,6 +881,44 @@ echo Finish running AutoTester for queries5.
 echo Running AutoTester for queries6 ...
 AutoTester Test20_ZYOne\Grp\source6.txt Test20_ZYOne\Grp\queries6.txt TestResult\out20_Grp_queries6.xml > TestResult\cmd\cmd20_Grp_queries6.txt
 echo Finish running AutoTester for queries6.
+echo Running AutoTester for queries1 ...
+AutoTester Test20_ZYOne\Others\source1.txt Test20_ZYOne\Others\queries1.txt TestResult\out20_Others_queries1.xml > TestResult\cmd\cmd20_Others_queries1.txt
+echo Finish running AutoTester for queries1.
+echo Running AutoTester for queries2 ...
+AutoTester Test20_ZYOne\Others\source2.txt Test20_ZYOne\Others\queries2.txt TestResult\out20_Others_queries2.xml > TestResult\cmd\cmd20_Others_queries2.txt
+echo Finish running AutoTester for queries2.
+echo Running AutoTester for queries3 ...
+AutoTester Test20_ZYOne\Others\source3.txt Test20_ZYOne\Others\queries3.txt TestResult\out20_Others_queries3.xml > TestResult\cmd\cmd20_Others_queries3.txt
+echo Finish running AutoTester for queries3.
+echo Running AutoTester for queries4 ...
+AutoTester Test20_ZYOne\Others\source4.txt Test20_ZYOne\Others\queries4.txt TestResult\out20_Others_queries4.xml > TestResult\cmd\cmd20_Others_queries4.txt
+echo Finish running AutoTester for queries4.
+echo Running AutoTester for queries5 ...
+AutoTester Test20_ZYOne\Others\source5.txt Test20_ZYOne\Others\queries5.txt TestResult\out20_Others_queries5.xml > TestResult\cmd\cmd20_Others_queries5.txt
+echo Finish running AutoTester for queries5.
+AutoTester Test20_ZYOne\Others\source6.txt Test20_ZYOne\Others\queries6.txt TestResult\out20_Others_queries6.xml > TestResult\cmd\cmd20_Others_queries6.txt
+echo Finish running AutoTester for queries6.
+echo Running AutoTester for queries6b ...
+AutoTester Test20_ZYOne\Others\source6b.txt Test20_ZYOne\Others\queries6b.txt TestResult\out20_Others_queries6b.xml > TestResult\cmd\cmd20_Others_queries6b.txt
+echo Finish running AutoTester for queries6b.
+echo Running AutoTester for queries7 ...
+AutoTester Test20_ZYOne\Others\source7.txt Test20_ZYOne\Others\queries7.txt TestResult\out20_Others_queries7.xml > TestResult\cmd\cmd20_Others_queries7.txt
+echo Finish running AutoTester for queries7.
+echo Running AutoTester for queries7b ...
+AutoTester Test20_ZYOne\Others\source7b.txt Test20_ZYOne\Others\queries7b.txt TestResult\out20_Others_queries7b.xml > TestResult\cmd\cmd20_Others_queries7b.txt
+echo Finish running AutoTester for queries7b.
+echo Running AutoTester for queries8 ...
+AutoTester Test20_ZYOne\Others\source8.txt Test20_ZYOne\Others\queries8.txt TestResult\out20_Others_queries8.xml > TestResult\cmd\cmd20_Others_queries8.txt
+echo Finish running AutoTester for queries8.
+echo Running AutoTester for queries8b ...
+AutoTester Test20_ZYOne\Others\source8b.txt Test20_ZYOne\Others\queries8b.txt TestResult\out20_Others_queries8b.xml > TestResult\cmd\cmd20_Others_queries8b.txt
+echo Finish running AutoTester for queries8b.
+echo Running AutoTester for queries9 ...
+AutoTester Test20_ZYOne\Others\source9.txt Test20_ZYOne\Others\queries9.txt TestResult\out20_Others_queries9.xml > TestResult\cmd\cmd20_Others_queries9.txt
+echo Finish running AutoTester for queries9.
+echo Running AutoTester for queries10 ...
+AutoTester Test20_ZYOne\Others\source10.txt Test20_ZYOne\Others\queries10.txt TestResult\out20_Others_queries10.xml > TestResult\cmd\cmd20_Others_queries10.txt
+echo Finish running AutoTester for queries10.
 echo Finish running AutoTester for test 20.
 call :getPauseAction
 goto :eof
