@@ -12,14 +12,17 @@ class FollowsTable {
 	public:
 		FollowsTable();
 
-		//adds follows relation with stmt2 being the statment before and stmt3 being after
-		bool addFollows(int stmt1, int stmt2, int stmt3);
+		bool addFollows(int before, int after);
 
 		int getStmtBef(int stmt);
 
 		int getStmtAft(int stmt);
 
-		unordered_map<int, pair<int, int>> getMap();
+		bool hasFollows();
+
+		unordered_map<int, int> getFollowsBeforeMap();
+
+		unordered_map<int, int> getFollowsAfterMap();
 
 		bool hasBefore(int afterStmt);
 
@@ -32,9 +35,11 @@ class FollowsTable {
 		list<int> getAllAfter();
 
 		pair<list<int>, list<int>> getAllFollows();
-
-		void setMap(unordered_map<int, pair<int, int>> map);
 	
 	private:
 		unordered_map<int, pair<int, int>> followsMap;
+		unordered_map<int, int> followsBeforeMap;
+		unordered_map<int, int> followsAfterMap;
+		list<int> beforeList;
+		list<int> afterList;
 };

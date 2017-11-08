@@ -12,6 +12,11 @@ bool ChildToParentTable::addChildParent(int childStmt, int parentStmt)
 		return true;
 	}
 
+	//add to list of all children
+	childList.push_back(childStmt);
+	childList.sort();
+	childList.unique();
+
 	//If parent doesnt exist in map, create new parent
 	if (childToParentMap.find(childStmt) == childToParentMap.end()) {
 		childToParentMap[childStmt] = parentStmt;

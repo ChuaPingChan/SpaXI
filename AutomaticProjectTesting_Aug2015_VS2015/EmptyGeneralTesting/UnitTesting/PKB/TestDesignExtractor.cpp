@@ -105,16 +105,13 @@ namespace UnitTesting
 			DesignExtractor de;
 			FollowsTable ft;
 
-			ft.addFollows(1, 0, 2);
-			ft.addFollows(2, 1, 3);
-			ft.addFollows(3, 2, 9);
-			ft.addFollows(4, 0, 5);
-			ft.addFollows(5, 4, 6);
-			ft.addFollows(6, 5, 8);
-			ft.addFollows(7, 0, 0);
-			ft.addFollows(8, 6, 0);
-			ft.addFollows(9, 3, 10);
-			ft.addFollows(10, 9, 0);
+			ft.addFollows(1, 2);
+			ft.addFollows(2, 3);
+			ft.addFollows(3, 9);
+			ft.addFollows(4, 5);
+			ft.addFollows(5, 6);
+			ft.addFollows(6, 8);
+			ft.addFollows(9, 10);
 
 			FollowsStarAfter fsa;
 			fsa.setMap(de.computeFollowsStarAfterTable(ft));

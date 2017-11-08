@@ -452,32 +452,13 @@ pair<list<int>, list<int>> PKBMain::getAllFollows(Entity type1, Entity type2) {
 }
 
 bool PKBMain::hasFollows() {
-	for (std::unordered_map<int, int>::iterator it = followsBeforeMap.begin(); it != followsBeforeMap.end(); ++it) {
-		int before = (*it).first;
-		int after = (*it).second;
-		if (before != 0 && after != 0) {
-			return true;
-		}
-	}
-
-	return false;
+	return followsTable.hasFollows();
 }
 
 bool PKBMain::setFollowsRel(int stmtBef, int stmtCurr) {
 	if (stmtBef != 0) {
-		followsAfterMap[stmtBef] = stmtCurr;
+		followsTable.addFollows(stmtBef, stmtCurr);
 	}
-
-	followsBeforeMap[stmtCurr] = stmtBef;
-
-	//if there is a statement before the stmtBef (not the first line of a new nest)
-	if (followsBeforeMap.find(stmtBef) != followsBeforeMap.end()) {
-		followsTable.addFollows(stmtBef, followsBeforeMap[stmtBef], stmtCurr);
-	}
-
-	//add next statement as 0 for all unless if statement if considered above
-	//which in that case will be overwritten
-	followsTable.addFollows(stmtCurr, stmtBef, 0);
 	return true;
 }
 
@@ -494,23 +475,11 @@ bool PKBMain::isFollows(int stmtBef, int stmtAft) {
 }
 
 int PKBMain::getBefore(int currStmt) {
-	if (followsBeforeMap.find(currStmt) == followsBeforeMap.end()) {
-		return 0;
-	}
-
-	else {
-		return followsBeforeMap[currStmt];
-	}
+	return followsTable.getStmtBef(currStmt);
 }
 
 int PKBMain::getAfter(int currStmt) {
-	if (followsAfterMap.find(currStmt) == followsAfterMap.end()) {
-		return 0;
-	}
-
-	else {
-		return followsAfterMap[currStmt];
-	}
+	return followsTable.getStmtAft(currStmt);
 }
 
 list<int> PKBMain::getAfter(int currStmt, Entity type) {
@@ -573,7 +542,6 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(Entity type1, Entity type2
 }
 
 bool PKBMain::startProcessComplexRelations() {
-	followsTable.setMap(de.computeFollowsTable(followsBeforeMap, followsAfterMap));
 	childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
 	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
