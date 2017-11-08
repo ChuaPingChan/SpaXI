@@ -1,22 +1,22 @@
 174 - With, Typed :: assign1.stmt# = 27
 assign a;
 Select BOOLEAN with a.stmt# = 27
-TRUE
+true
 5000
 175 - With, Typed :: assign1.stmt# = 200
 assign ASSIGN; 
 Select BOOLEAN with ASSIGN.stmt# = 200
-FALSE
+false
 5000
 176 - With, Typed :: while.stmt# = if.stmt#
 while w; if i;
 Select BOOLEAN with w.stmt# = i.stmt#
-FALSE
+false
 5000
 177 - With, Typed :: while.stmt# = t.stmt#
 while w; assign t;
 Select BOOLEAN with w.stmt# = t.stmt#
-FALSE
+false
 5000
 178 - With, Typed :: while.stmt# = t.stmt#
 while w; stmt t;
@@ -36,17 +36,17 @@ none
 181 - With, Typed :: if.stmt# = calls.stmt#
 if i; call c;
 Select BOOLEAN with i.stmt# = c.stmt#
-FALSE
+false
 5000
 182 - With, Typed :: if.stmt# = calls.stmt#
 if i; call c;
 Select BOOLEAN with i.stmt# = i.stmt#
-TRUE
+true
 5000
 183 - With, Typed :: if.stmt# = calls.stmt#
 if i; while WHILE;
 Select BOOLEAN with i.stmt# = WHILE.stmt#
-FALSE
+false
 5000
 184 - With, Typed :: if.stmt# = calls.stmt#
 if i; stmt WHILE;
@@ -201,7 +201,7 @@ none
 214 - With, Typed :: prog_line = stmt.stmt#
 stmt s; 
 Select BOOLEAN with s.stmt# = 35 and s.stmt# = 50 with s.stmt# = 40
-FALSE
+false
 5000
 215 - With, Typed :: prog_line = stmt.stmt#
 stmt s; call c;

@@ -1,6 +1,6 @@
 Overall Test Ran    : 17520
-Overall Test Passed : 17051
-Overall Test Failed : 463
+Overall Test Passed : 17060
+Overall Test Failed : 454
 Overall Test Timeout: 6
 
 
@@ -809,9 +809,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries10.xml: 
-Test Ran: 47	[BUG]
-Passed   : 39
-Failed   : 8
+Test Ran: 47	
+Passed   : 47
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries2.xml: 
@@ -827,9 +827,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries4.xml: 
-Test Ran: 261	[BUG]
-Passed   : 260
-Failed   : 1
+Test Ran: 261	
+Passed   : 261
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries5.xml: 
