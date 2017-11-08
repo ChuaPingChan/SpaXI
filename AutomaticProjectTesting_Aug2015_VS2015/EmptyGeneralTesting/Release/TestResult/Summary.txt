@@ -1,7 +1,7 @@
 Overall Test Ran    : 17520
-Overall Test Passed : 16443
-Overall Test Failed : 1069
-Overall Test Timeout: 8
+Overall Test Passed : 16519
+Overall Test Failed : 995
+Overall Test Timeout: 6
 
 
 TestResult\out1.xml: 
@@ -282,9 +282,9 @@ Timeout  : 0
 
 TestResult\out13_Two_QueryNextStar_Performance_UsingSource2.xml: 
 Test Ran: 5	[TIMEOUT]
-Passed   : 3
+Passed   : 4
 Failed   : 0
-Timeout  : 2
+Timeout  : 1
 
 TestResult\out13_Two_QueryNextStar_UsingSourceNext.xml: 
 Test Ran: 25	
@@ -365,9 +365,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query3b.xml: 
-Test Ran: 50	[BUG]
-Passed   : 46
-Failed   : 4
+Test Ran: 50	
+Passed   : 50
+Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query4a.xml: 
@@ -377,9 +377,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query4b.xml: 
-Test Ran: 200	[BUG]
-Passed   : 199
-Failed   : 1
+Test Ran: 200	
+Passed   : 200
+Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query5b.xml: 
@@ -426,8 +426,8 @@ Timeout  : 0
 
 TestResult\out15_Acceptance_QueryStmtLst.xml: 
 Test Ran: 27	[BUG]
-Passed   : 0
-Failed   : 27
+Passed   : 26
+Failed   : 1
 Timeout  : 0
 
 TestResult\out15_Acceptance_Query_Test1.xml: 
@@ -473,15 +473,15 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out15_Regression_QueryModifies1_UsingSource1.xml: 
-Test Ran: 24	[BUG]
-Passed   : 23
-Failed   : 1
+Test Ran: 24	
+Passed   : 24
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_Regression_QueryUses1_UsingSource1.xml: 
-Test Ran: 24	[BUG]
-Passed   : 23
-Failed   : 1
+Test Ran: 24	
+Passed   : 24
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_Regression_QueryWith1_UsingSource1.xml: 
@@ -509,21 +509,21 @@ Failed   : 2
 Timeout  : 0
 
 TestResult\out15_SystemAffects_QueryAffectsTest1.xml: 
-Test Ran: 68	[BUG]
-Passed   : 66
-Failed   : 2
+Test Ran: 68	
+Passed   : 68
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemAffects_QueryAffectsTest2.xml: 
-Test Ran: 67	[BUG]
-Passed   : 65
-Failed   : 2
+Test Ran: 67	
+Passed   : 67
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemAffects_QueryAffectsTest3.xml: 
-Test Ran: 84	[BUG]
-Passed   : 82
-Failed   : 2
+Test Ran: 84	
+Passed   : 84
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemCalls_QueryCallsTest1.xml: 
@@ -557,21 +557,21 @@ Failed   : 2
 Timeout  : 0
 
 TestResult\out15_SystemFollows_QueryFollowsTest1.xml: 
-Test Ran: 78	[BUG]
-Passed   : 74
-Failed   : 4
+Test Ran: 78	
+Passed   : 78
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemFollows_QueryFollowsTest2.xml: 
-Test Ran: 78	[BUG]
-Passed   : 74
-Failed   : 4
+Test Ran: 78	
+Passed   : 78
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemFollows_QueryFollowsTest3.xml: 
-Test Ran: 78	[BUG]
-Passed   : 74
-Failed   : 4
+Test Ran: 78	
+Passed   : 78
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest1.xml: 
@@ -630,20 +630,20 @@ Timeout  : 0
 
 TestResult\out15_SystemParent_QueryParentTest1.xml: 
 Test Ran: 75	[BUG]
-Passed   : 67
-Failed   : 8
+Passed   : 71
+Failed   : 4
 Timeout  : 0
 
 TestResult\out15_SystemParent_QueryParentTest2.xml: 
-Test Ran: 75	[BUG]
-Passed   : 71
-Failed   : 4
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemParent_QueryParentTest3.xml: 
-Test Ran: 75	[BUG]
-Passed   : 71
-Failed   : 4
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemPattern_QueryPatternTest1.xml: 
@@ -665,9 +665,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemSelect_QuerySelectTest1.xml: 
-Test Ran: 11	[BUG]
-Passed   : 10
-Failed   : 1
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemSelect_QuerySelectTest1_InvalidAttributes.xml: 
@@ -677,21 +677,21 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemSelect_QuerySelectTest2.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemSelect_QuerySelectTest3.xml: 
 Test Ran: 11	[BUG]
 Passed   : 10
 Failed   : 1
 Timeout  : 0
 
-TestResult\out15_SystemSelect_QuerySelectTest3.xml: 
-Test Ran: 11	[BUG]
-Passed   : 9
-Failed   : 2
-Timeout  : 0
-
 TestResult\out15_SystemTuple_QueryTupleTest1.xml: 
 Test Ran: 91	[BUG]
-Passed   : 86
-Failed   : 5
+Passed   : 90
+Failed   : 1
 Timeout  : 0
 
 TestResult\out15_SystemWith_QueryWithTest1.xml: 
@@ -725,10 +725,10 @@ Failed   : 0
 Timeout  : 4
 
 TestResult\out18_QueryValidation.xml: 
-Test Ran: 70	[TIMEOUT]
-Passed   : 69
+Test Ran: 70	
+Passed   : 70
 Failed   : 0
-Timeout  : 1
+Timeout  : 0
 
 TestResult\out19_Query_std1_adv.xml: 
 Test Ran: 42	
@@ -755,9 +755,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out19_Query_std3_adv.xml: 
-Test Ran: 15	[BUG]
-Passed   : 14
-Failed   : 1
+Test Ran: 15	
+Passed   : 15
+Failed   : 0
 Timeout  : 0
 
 TestResult\out19_Query_std3_basic.xml: 
@@ -912,8 +912,8 @@ Timeout  : 0
 
 TestResult\out20_Valid_queries4.xml: 
 Test Ran: 209	[BUG]
-Passed   : 166
-Failed   : 43
+Passed   : 167
+Failed   : 42
 Timeout  : 0
 
 TestResult\out20_Valid_queries5.xml: 
@@ -1008,8 +1008,8 @@ Timeout  : 0
 
 TestResult\out21_Queries21.xml: 
 Test Ran: 345	[BUG]
-Passed   : 292
-Failed   : 53
+Passed   : 293
+Failed   : 52
 Timeout  : 0
 
 TestResult\out21_Queries21a.xml: 
@@ -1158,8 +1158,8 @@ Timeout  : 0
 
 TestResult\out23_QueryComplexNoClause.xml: 
 Test Ran: 11	[BUG]
-Passed   : 9
-Failed   : 2
+Passed   : 10
+Failed   : 1
 Timeout  : 0
 
 TestResult\out23_QueryComplexParent.xml: 

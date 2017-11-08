@@ -158,6 +158,21 @@ namespace UnitTesting
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
 
+        TEST_METHOD(TestValidity_Query_SelectSingleSynonym_StmtList_Valid)
+        {
+            string query;
+            query.append("stmtLst sl;");
+            query.append("Select sl");
+            QueryTree qt;
+            qt.insertSynonym(STMTLIST, "sl");
+            FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+            Assert::IsTrue(friendValidator.isValidQuery(query));
+            Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+            Assert::IsTrue(friendValidator.getValidSelectionFlag());
+            SelectClause expected = UtilitySelection::makeSelectClause(SELECT_SINGLE, STMTLIST, "sl");
+            Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
+        }
+
         TEST_METHOD(TestValidity_Query_SelectSingleSynonym_KeywordAsSynonym_Select_Valid)
         {
             string query;

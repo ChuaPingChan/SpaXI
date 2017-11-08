@@ -13,7 +13,7 @@ const string RegexValidators::CALL_STRING = "call";
 const string RegexValidators::PROCEDURE_STRING ="procedure";
 const string RegexValidators::VARIABLE_STRING = "variable";
 const string RegexValidators::CONSTANT_STRING = "constant";
-const string RegexValidators::STMTLST_STRING = "stmtlst";
+const string RegexValidators::STMTLST_STRING = "stmtLst";
 
 /******************** Attribute Strings ********************/
 const string RegexValidators::PROCNAME_STRING = "procName";
