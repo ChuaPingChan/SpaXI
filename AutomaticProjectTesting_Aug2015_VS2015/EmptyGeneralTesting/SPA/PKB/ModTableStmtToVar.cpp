@@ -6,21 +6,12 @@ ModTableStmtToVar::ModTableStmtToVar() {
 
 }
 
+/*
+This method adds the relation to the modifies table
+*/
 bool ModTableStmtToVar::addModStmtToVarList(int stmtNumber, int varIdx) {
-    // if stmt number does not exist as a key, create new list and insert data to hash map
-    if (modStmtToVarMap.find(stmtNumber) == modStmtToVarMap.end()) {
-        modStmtToVarMap[stmtNumber] = list<int>();
-        modStmtToVarMap[stmtNumber].push_back(varIdx);
-        return true;
-    }
-    else {
-        // else, expand the list of variables
-        modStmtToVarMap[stmtNumber].push_back(varIdx);
-		modStmtToVarMap[stmtNumber].sort();
-        modStmtToVarMap[stmtNumber].unique();
-        return true;
-    }
-    return false;
+	modStmtToVarMap[stmtNumber].push_back(varIdx);
+    return true;
 }
 
 list<int> ModTableStmtToVar::getModVariablesFromStmt(int stmtNumber) 
@@ -34,41 +25,20 @@ list<int> ModTableStmtToVar::getModVariablesFromStmt(int stmtNumber)
 
 list<int> ModTableStmtToVar::getStmtThatModifies()
 {
-    unordered_map<int, list<int>>::iterator itr;
-    list<int> listOfStmt;
-    for (itr = modStmtToVarMap.begin(); itr != modStmtToVarMap.end(); ++itr) 
-    {
-		if (itr->second.size() > 0) {
-			listOfStmt.push_back(itr->first);
-		}
-    }
-
-    return listOfStmt;
+	return modStmtList;
 }
 
 pair<list<int>,list<int>> ModTableStmtToVar::getModPair()
 {
-    unordered_map<int, list<int>>::iterator itr;
-    pair<list<int>,list<int>> pairOfList;
-  
-    for (itr = modStmtToVarMap.begin(); itr != modStmtToVarMap.end(); ++itr)
-    {
-        int stmtNumber = itr->first;
-        list<int> modVarList = itr->second;
-
-        list<int>::iterator listitr;
-        for (listitr = modVarList.begin(); listitr != modVarList.end(); ++listitr)
-        {
-            pairOfList.first.push_back(stmtNumber);
-            pairOfList.second.push_back(*listitr);
-        }
-    }
-    return pairOfList;
+	return modStmtToVarPair;
 }
 
 bool ModTableStmtToVar::isMod(int stmtNumber, int varIdx)
 {
-    return find(modStmtToVarMap[stmtNumber].begin(),modStmtToVarMap[stmtNumber].end(),varIdx) != modStmtToVarMap[stmtNumber].end();
+	if (modStmtToVarRelMap.find(stmtNumber) != modStmtToVarRelMap.end()) {
+		return modStmtToVarRelMap[stmtNumber].find(varIdx) != modStmtToVarRelMap[stmtNumber].end();
+	}
+	return false;
 }
 
 bool ModTableStmtToVar::isModifyingAnything(int stmtNumber)
@@ -76,7 +46,27 @@ bool ModTableStmtToVar::isModifyingAnything(int stmtNumber)
     return modStmtToVarMap.find(stmtNumber) != modStmtToVarMap.end();
 }
 
+/*
+This method iterates through each value of the map and 
+populate the modifies table respectively
+*/
 bool ModTableStmtToVar::setMap(unordered_map<int, list<int>> map) {
+	int key;
+	list<int> valueList;
+	for (auto it : map) {
+		key = it.first;
+		valueList = it.second;
+		for (int value : valueList) {
+			modStmtList.push_back(key);
+			modVarList.push_back(value);
+			modStmtToVarRelMap[key].insert(value);
+		}
+	}
+	modStmtToVarPair = make_pair(modStmtList, modVarList);
+	modStmtList.sort();
+	modStmtList.unique();
+	modVarList.sort();
+	modVarList.unique();
 	modStmtToVarMap = map;
 	return true;
 }
