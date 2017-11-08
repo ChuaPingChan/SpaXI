@@ -1,0 +1,180 @@
+1 - Find all statements that Calls statement 18
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(18, s1)
+
+5000
+2 - Find all proglines that Calls 22
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Calls*(e1, 22)
+
+5000
+3 - Find all if statements that Calls any statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Calls*(if1, s1)
+
+5000
+4 - Find all statement such that statement 3 that Calls others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(3, _)
+
+5000
+5 - Find all progline such that statement 16 that Calls others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Calls*(16, _)
+
+5000
+6 - Find all constants such that statement 80 that Calls others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c1 such that Calls*(80, _)
+
+5000
+7 - Find all procedures such that statement 17 that Calls 19
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Calls*(17, 19)
+
+5000
+8 - Find statements that Calls 55
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(s1, 55)
+
+5000
+9 - Find proglines that Calls 33
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Calls*(e1, 33)
+
+5000
+10 - Find statements that Calls other statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(s1, s2)
+
+5000
+11 - Find statements that Calls if statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(s1, if1)
+
+5000
+12 - Find statements that Calls while statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(s1, w1)
+
+5000
+13 - Find statements that Calls call statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(s1, o1)
+
+5000
+14 - Find statements that Calls assign statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(s1, a1)
+
+5000
+15 - Find statements that called by statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s2 such that Calls*(s1, s2)
+
+5000
+16 - Find all if statements that called by statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select ifs such that Calls*(s1, if1)
+
+5000
+17 - Find all while statements that called by statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Calls*(s1, w1)
+
+5000
+18 - Find all call statements that called by statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Calls*(s1, o1)
+
+5000
+19 - Find all assignment statements that called by statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select a1 such that Calls*(s1, a1)
+
+5000
+20 - Find all if statements that Calls other if statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Calls*(if1, if2)
+
+5000
+21 - Find all if statements that called by if statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if2 such that Calls*(if1, if2)
+
+5000
+22 - Find all while assignment statements that Calls other while statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Calls*(w1, w2)
+
+5000
+23 - Find all while assignment statements that called by while statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w2 such that Calls*(w1, w2)
+
+5000
+24 - Find all Calls statements that Calls other Calls statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Calls*(o1, o2)
+
+5000
+25 - Find all Calls statements that called by Calls statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o2 such that Calls*(o1, o2)
+
+5000
+26 - Find all assignment statements that Calls other statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select a1 such that Calls*(a1, a2)
+
+5000
+27 - Find all assignment statements that called by statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select a2 such that Calls*(a1, a2)
+
+5000
+28 - Find all statements that called bys
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select constant such that Calls*(s1, _)
+
+5000
+29 - Find all if statements that called bys
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Calls*(if1, _)
+
+5000
+30 - Find all while statements that called bys
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Calls*(w1, _)
+
+5000
+31 - Find all call statements that called bys
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Calls*(o1, _)
+
+5000
+32 - Find all statements that called by
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Calls*(_, s1)
+
+5000
+33 - Find all if statements that called by
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Calls*(_, if1)
+
+5000
+34 - Find all while statements that called by
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Calls*(_, w1)
+
+5000
+35 - Find all call statements that called by
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Calls*(_, o1)
+
+5000
+36 - Find all assignment statements that called by
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select a1 such that Calls*(_, a1)
+
+5000

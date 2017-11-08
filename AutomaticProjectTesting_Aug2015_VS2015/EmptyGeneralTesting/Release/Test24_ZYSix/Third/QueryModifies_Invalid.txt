@@ -1,0 +1,60 @@
+1 - Find all statements that modifies a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Modifies(s1, s2)
+
+5000
+2 - Find all procedures that modifies a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Modifies(p1, s1)
+
+5000
+3 - Find all if statements that modifies a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Modifies(if1, s2)
+
+5000
+4 - Find all while statements that modifies a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Modifies(w1, s2)
+
+5000
+5 - Find all calls statements that modifies a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Modifies(o1, s2)
+
+5000
+6 - Find all proglines that modifies a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Modifies(e1, s2)
+
+5000
+7 - Find all variables that modifies a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Modifies(v1, s1)
+
+5000
+8 - Find all procedure that modifies a variable
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Modifies(_, _)
+
+5000
+9 - Find all calls that modifies a variable
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Modifies(o1, v1)
+11,24,39
+5000
+10 - Find all variables that modifies a variable
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Modifies(v1, v2)
+
+5000
+11 - Find all constant that modifies a variable
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c1 such that Modifies(c1, v1)
+
+5000
+12 - Find all variables modfied by any other
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Modifies(_, v1)
+
+5000

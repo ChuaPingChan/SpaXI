@@ -1,0 +1,77 @@
+procedure lalaland {
+  a = 1;
+  b = a + 2;
+  c = b + 12;
+  d = a + 1;
+  e = 2;
+  if a then {
+    a = a * b;
+    b = c - 1;
+    if b then {
+      c = c + 1;
+      call lulu;
+      while c {
+        a = a + b + c;
+        b = a;
+          while a {
+            b = a + 1;
+            if b then {
+              c = a + 3;
+              a = c + 2;
+            } 
+            else {
+              d = a + 1;
+              e = d + e;
+              while d {
+                d = e + 2;
+                call lolo;
+              }
+            }
+          } 
+        }
+      }
+      else {
+        a = 1;
+        e = d + 1;
+      }
+    }
+    else {
+      b = a + c;
+    }
+  } 
+
+procedure lolo {
+  a = 1;
+  while a {
+    d = d * 1;
+    while e {
+      d = d + e;
+      e = 2;
+      if a then {
+        d = 1;
+        while d {
+          e = a + 1;
+        }
+      }
+      else {
+        d = a + 1;
+      }  
+    }
+    call lulu;
+  }
+}
+
+procedure lulu {
+	b = 2;
+    c = 1;
+	if c then {
+		b = b + c;
+		while b {
+			c = b + 1;
+	 	}
+	}
+	else {
+		b = c + 1;
+        c = 4;
+	}
+}

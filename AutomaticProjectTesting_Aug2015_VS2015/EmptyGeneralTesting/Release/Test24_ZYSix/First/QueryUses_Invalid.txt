@@ -1,0 +1,55 @@
+1 - Find all statements that uses a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Uses(s1, s2)
+
+5000
+2 - Find all procedures that uses a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Uses(p1, s1)
+
+5000
+3 - Find all if statements that uses a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Uses(if1, s2)
+
+5000
+4 - Find all while statements that uses a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Uses(w1, s2)
+
+5000
+5 - Find all calls statements that uses a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Uses(o1, s2)
+
+5000
+6 - Find all proglines that uses a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Uses(e1, s2)
+
+5000
+7 - Find all variables that uses a statement
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Uses(v1, s1)
+
+5000
+8 - Find all procedure that uses a variable
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Uses(_, _)
+
+5000
+9 - Find all variables that uses a variable
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Uses(v1, v2)
+
+5000
+10 - Find all constant that uses a variable
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c1 such that Uses(c1, v1)
+
+5000
+11 - Find all variables used by any other
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Uses(_, v1)
+
+5000
