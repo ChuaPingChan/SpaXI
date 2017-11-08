@@ -1,0 +1,35 @@
+1 - Find all variable used by if assignment statement non empty argument 1
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; that affects
+Select v1 Pattern if1(v1, v2, _)
+
+5000
+1 - Find all variable used by if assignment statement non empty argument 2
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; that affects
+Select v1 Pattern if1(v1, _, v2)
+
+5000
+1 - Find all variable used by if assignment statement non empty argument2 and argument 3
+stmt s1, s2; prog_line e1, e2if ; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2, v3; constant c1, c2; that affects
+Select v1 Pattern if1(v1, v2, v3)
+
+5000
+1 - Find all variable used by while assignment statement non empty argument 1
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; that affects
+Select v1 Pattern w1(v1, v2)
+
+5000
+1 - Find all variable used by while assignment statement non empty argument 2
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; that affects
+Select v1 Pattern w1(v1, v2)
+
+5000
+1 - Find all variable such that assignment statement LHS is x and RHS is x + ( y +)
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; #
+Select v1 Pattern a1("x", "x + ( y +")
+
+5000
+1 - Find all variable such that assignment statement LHS is x and RHS is y + z)
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; #
+Select v1 Pattern a1("x", "y + z)")
+
+5000

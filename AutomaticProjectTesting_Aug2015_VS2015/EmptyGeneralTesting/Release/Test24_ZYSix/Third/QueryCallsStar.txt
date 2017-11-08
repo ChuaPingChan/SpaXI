@@ -1,0 +1,45 @@
+1 - Find all procedure that indirectly calls other procedure
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Calls*(p1, p2)
+lalaland,lolo
+5000
+2 - Find all procedure that indirectly called by other procedure
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p2 such that Calls*(p1, p2)
+lolo,lulu
+5000
+3 - Find all procedure that indirectly calls procedure - Pink
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Calls*(p1, "Pink")
+none
+5000
+4 - Find all procedure that indirectly called by procedure - Black
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Calls*("Black", p1)
+none
+5000
+5 - Return boolean such that procedure - Pink indirectly calls others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select BOOLEAN such that Calls*("Pink", _)
+false
+5000
+6 - Return boolean such that procedure - Blue indirectly calls others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select BOOLEAN such that Calls*("Pink", _)
+false
+5000
+7 - Return boolean such that procedure - Black is indirectly called by others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select BOOLEAN such that Calls*(_, "Black")
+false
+5000
+8 - Return boolean such that procedure - Purple is indirectly called by others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select BOOLEAN such that Calls*(_, "Purple")
+false
+5000
+9 - Return boolean such indirectly calls exists
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select BOOLEAN such that Calls*(_, _)
+true
+5000
