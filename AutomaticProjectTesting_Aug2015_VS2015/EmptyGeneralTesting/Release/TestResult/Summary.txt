@@ -1,6 +1,6 @@
 Overall Test Ran    : 17520
-Overall Test Passed : 16519
-Overall Test Failed : 995
+Overall Test Passed : 16521
+Overall Test Failed : 993
 Overall Test Timeout: 6
 
 
@@ -545,9 +545,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemCommonSynonym_QueryCommonSynonymTest1.xml: 
-Test Ran: 46	[BUG]
-Passed   : 44
-Failed   : 2
+Test Ran: 46	
+Passed   : 46
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemCommonSynonym_QueryCommonSynonymTest2.xml: 
