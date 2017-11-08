@@ -1,7 +1,7 @@
 Overall Test Ran    : 17520
-Overall Test Passed : 16511
-Overall Test Failed : 1002
-Overall Test Timeout: 7
+Overall Test Passed : 16519
+Overall Test Failed : 995
+Overall Test Timeout: 6
 
 
 TestResult\out1.xml: 
@@ -365,9 +365,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query3b.xml: 
-Test Ran: 50	[BUG]
-Passed   : 46
-Failed   : 4
+Test Ran: 50	
+Passed   : 50
+Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query4a.xml: 
@@ -491,9 +491,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out15_StressCommonSynonym_QueryStressCommonSynonymTest1.xml: 
-Test Ran: 6	[BUG]
-Passed   : 3
-Failed   : 3
+Test Ran: 6	
+Passed   : 6
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_StressMultipleClauses_QueryStressMultipleClausesTest1.xml: 
@@ -725,10 +725,10 @@ Failed   : 0
 Timeout  : 4
 
 TestResult\out18_QueryValidation.xml: 
-Test Ran: 70	[TIMEOUT]
-Passed   : 69
+Test Ran: 70	
+Passed   : 70
 Failed   : 0
-Timeout  : 1
+Timeout  : 0
 
 TestResult\out19_Query_std1_adv.xml: 
 Test Ran: 42	
