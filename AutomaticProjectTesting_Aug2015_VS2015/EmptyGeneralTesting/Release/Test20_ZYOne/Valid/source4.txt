@@ -1,0 +1,52 @@
+procedure A {
+	if c then {					
+		b = i+f;				
+	} else {
+		while f {				
+			d = 1 + b - c;		
+			e = c*2;			
+			if g then {			
+				b = a + c + d;	
+			} else {
+				while b {		
+					a = f;		
+					f = e*a;	
+				}
+			}
+		}
+	}
+	if a then {					
+		if b then {				
+			while g {			
+				h = 1;			
+				while c {		
+					c = d;		
+				}
+				g=a;			
+			}
+		} else {
+			d = 2;				
+			d = a+b;			
+		}
+	} else {
+		if g then {				
+			b = (c+0)*4;		
+			a = 2*(a+b);		
+			c = c - d;			
+		} else {
+			a = 2;				
+		}
+	}
+	while g {					
+		if g then {				
+			f = i;				
+		} else {
+			c = d-e+f*a;		
+			while b {			
+				a = 1+d*3;		
+				b = g;			
+			}
+		}
+	}
+	h = 0;						
+}

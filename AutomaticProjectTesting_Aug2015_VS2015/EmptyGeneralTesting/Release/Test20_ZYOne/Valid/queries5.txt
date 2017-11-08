@@ -1,0 +1,300 @@
+1 - Calls(known,known) -- true
+
+Select BOOLEAN such that Calls("B","D")
+TRUE
+5000
+2 - Calls(known,known) -- false
+
+Select BOOLEAN such that Calls("A","C")
+FALSE
+5000
+3 - Calls(known,p)
+procedure p;
+Select p such that Calls("E",p)
+C,F
+5000
+4 - Calls(p,known)
+procedure p;
+Select p such that Calls(p,"C")
+B,E
+5000
+5 - Calls(p,p)
+procedure p1,p2;
+Select p1 such that Calls(p1,p2)
+A,B,D,E
+5000
+6 - Calls*(known,known) -- true
+
+Select BOOLEAN such that Calls*("B","F")
+TRUE
+5000
+7 - Calls*(known,known) -- false
+
+Select BOOLEAN such that Calls*("C","A")
+FALSE
+5000
+8 - Calls*(known,p)
+procedure p;
+Select p such that Calls*("D",p)
+C,E,F
+5000
+9 - Calls*(p,known)
+procedure p;
+Select p such that Calls*(p,"E")
+A,B,D
+5000
+10 - Calls*(p,p)
+procedure p1,p2;
+Select p2 such that Calls*(p1,p2)
+B,C,D,E,F
+5000
+11 - Modifies(known,known) -- within proc
+
+Select BOOLEAN such that Modifies("B","c")
+TRUE
+5000
+12 - Modifies(known,known) -- nested proc
+
+Select BOOLEAN such that Modifies("B","d")
+TRUE
+5000
+13 - Modifies(known,known) -- within call
+
+Select BOOLEAN such that Modifies(16,"b")
+TRUE
+5000
+14 - Modifies(known,known) -- nested call
+
+Select BOOLEAN such that Modifies(9,"x")
+TRUE
+5000
+15 - Modifies(p,known)
+procedure p;
+Select p such that Modifies(p,"x")
+A,B,C,D,E
+5000
+16 - Modifies(c,known)
+call c;
+Select c such that Modifies(c,"a")
+2,9
+5000
+17 - Modifies(known,v) -- proc
+variable v;
+Select v such that Modifies("E",v)
+b,d,x
+5000
+18 - Modifies(known,v) -- call
+variable v;
+Select v such that Modifies(2,v)
+a,b,c,d,l,x
+5000
+19 - Modifies(p,v)
+procedure p; variable v;
+Select p such that Modifies(p,v)
+A,B,C,D,E,F
+5000
+20 - Modifies(c,v)
+call c; variable v;
+Select c such that Modifies(c,v)
+2,5,6,7,9,14,15,16
+5000
+21 - Uses(known,known) -- within proc
+
+Select BOOLEAN such that Uses("B","b")
+TRUE
+5000
+22 - Uses(known,known) -- nested proc
+
+Select BOOLEAN such that Uses("B","x")
+TRUE
+5000
+23 - Uses(known,known) -- within call
+
+Select BOOLEAN such that Uses(16,"a")
+TRUE
+5000
+24 - Uses(known,known) -- nested call
+
+Select BOOLEAN such that Uses(9,"x")
+TRUE
+5000
+25 - Uses(p,known)
+procedure p;
+Select p such that Uses(p,"e")
+A,B,D,E,F
+5000
+26 - Uses(c,known)
+call c;
+Select c such that Uses(c,"b")
+2
+5000
+27 - Uses(known,v) -- proc
+variable v;
+Select v such that Uses("E",v)
+a,d,e,x
+5000
+28 - Uses(known,v) -- call
+variable v;
+Select v such that Uses(7,v)
+d,x
+5000
+29 - Uses(p,v)
+procedure p; variable v;
+Select v such that Uses(p,v)
+a,b,d,e,x,y,z
+5000
+30 - Uses(c,v)
+call c; variable v;
+Select c such that Uses(c,v)
+2,5,6,7,9,14,15,16
+5000
+31 - with proc
+procedure p;
+Select p with p.procName = "D"
+D
+5000
+32 - with call
+call c;
+Select c with c.procName = "B"
+2
+5000
+33 - with proc and call
+procedure p; call c;
+Select p with p.procName = c.procName
+B,C,D,E,F
+5000
+34 - with proc and variable
+procedure p; variable v;
+Select v with p.procName = v.varName
+
+5000
+35 - with call and variable
+call c; variable v;
+Select c with c.procName = p.procName
+
+5000
+36 - Calls(p,known) and Calls(known,p)
+procedure p;
+Select p such that Calls(p,"E") and Calls("B",p)
+D
+5000
+37 - Calls(p,p) and Calls(p,p)
+procedure p1,p2,p3;
+Select p2 such that Calls(p1,p2) and Calls(p2,p3)
+B,D,E
+5000
+38 - Calls*(p,known) and Calls(known,p)
+procedure p;
+Select p such that Calls*(p,"C") and Calls("A",p)
+B,E
+5000
+39 - Calls*(p,known) and Calls*(known,known)
+procedure p;
+Select p such that Calls*("B",p) and Calls*("C","D")
+
+5000
+40 - Calls*(p,p) and Calls*(p,p) and Calls*(p,p)
+procedure p1,p2,p3;
+Select p such that Calls*(p1,p2) and Calls*(p2,p3) and Calls*(p3,p1)
+
+5000
+41 - Modifies(known,v) and Modifies(p,known)
+procedure p; variable v;
+Select p such that Modifies(5,v) and Modifies(p,"a")
+A,B,D
+5000
+42 - Modifies(c,known) and Modifies(c,known)
+call c;
+Select c such that Modifies(c,"b") and Modifies(c,"l")
+2,9
+5000
+43 - Modifies(c,v) and Modifies(p,v)
+call c; variable v; procedure p;
+Select v such that Modifies(c,v) and Modifies(p,v)
+a,b,c,d,l,x
+5000
+44 - Modifies(c,v) and Modifies(p,v) and Modifies(c,known)
+call c; variable v1,v2; procedure p;
+Select v1 such that Modifies(c,v1) and Modifies(p,v2) and Modifies(c,"d")
+a,b,c,d,l,x
+5000
+45 - Modifies(known,known) and Modifies(known,v) and Modifies(p,v)
+procedure p; variable v;
+Select v such that Modifies("D","c") and Modifies("C",v) and Modifies(p,v)
+
+5000
+46 - Uses(known,v) and Uses(known,v)
+variable v;
+Select v such that Uses("A",v) and Uses("D",v)
+a,d,e,x
+5000
+47 - Uses(c,known) and Uses(c,known)
+call c;
+Select c such that Uses(c,"x") and Uses(c,"a")
+2,5,6,9,14,16
+5000
+48 - Uses(c,v) and Uses(p,v)
+call c; variable v; procedure p;
+Select v such that Uses(c,v) and Uses(p,v)
+a,b,d,e,x
+5000
+49 - Uses(c,v) and Uses(p,v) and Uses(c,known)
+call c; variable v1,v2; procedure p;
+Select v2 such that Uses(c,v1) and Uses(p,v2) and Uses(c,"d")
+a,b,d,e,x,y,z
+5000
+50 - Uses(known,known) and Uses(known,v) and Uses(p,v)
+procedure p; variable v;
+Select v such that Uses("D","d") and Uses("C",v) and Uses(p,v)
+d,x
+5000
+51 - Calls*(known,p) and Modifies(p,v) and Uses(c,v)
+procedure p; variable v; call c;
+Select v such that Calls*("D",p) and Modifies(p,v) and Uses(c,v)
+d,x,b
+5000
+52 - Calls(p,known) and Modifies(c,v) and Uses(p,v)
+procedure p; call c; variable v;
+Select p such that Calls(p,"C") and Uses(c,v) and Modifies(p,v)
+B,E
+5000
+53 - Calls*(p,p) and Modifies(p,v) with proc
+procedure p1,p2; variable v;
+Select p1 such that Calls*(p1,p2) and Modifies(p1,v) with p2.procName = "F"
+A,B,D,E
+5000
+54 - Calls(p,p) and Uses(p,v) with proc
+procedure p1,p2; variable v;
+Select p2 such that Calls(p1,p2) and Uses(p2,v) with p1.procName = "A"
+B,E,F
+5000
+55 - Modifies(p,v) and Modifies(c,v) and Uses(p,v) with var
+procedure p; call c; variable v;
+Select c such that Modifies(p,v) and Modifies(c,v) and Uses(p,v) with v.varName = "d"
+2,5,7,9,14,15
+5000
+56 - Uses(p,v) and Uses(c,v) with var with call
+procedure p; call c; variable v;
+Select p such that Uses(p,v) and Uses(c,v) with v.varName = "a" and c.procName = "D"
+A,B,D,E,F
+5000
+57 - Calls(p,p) and Uses(c,v) with call
+procedure p1, p2; call c; variable v;
+Select v such that Calls(p1,p2) and Uses(c,v) with c.procName = "B"
+a,b,d,e,x
+5000
+58 - with var with call with proc such that Uses(c,v)
+procedure p; variable v; call c;
+Select v with v.varName = "b" with c.procName = "D" and proc.procName = "F" such that Uses(c,v)
+
+5000
+59 - Calls*(known,p) and Uses(p,known) and Calls(p,p) with proc
+procedure p1,p2,p3; variable v;
+Select p2 such that Calls*("B",p1) and Uses(p2,"e") and Calls(p1,p3) with p2.procName = p3.procName
+E,F
+5000
+60 - with proc=call such that Modifies(c,v) and Uses(c,v) and Calls(p,p)
+procedure p1,p2; call c; variable v;
+Select c with p1.procName = c.procName such that Modifies(c,v) and Uses(c,v) and Calls(p1,p2)
+2,5,9,14
+5000
