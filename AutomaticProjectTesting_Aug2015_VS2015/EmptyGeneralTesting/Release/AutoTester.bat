@@ -919,6 +919,12 @@ echo Finish running AutoTester for queries9.
 echo Running AutoTester for queries10 ...
 AutoTester Test20_ZYOne\Others\source10.txt Test20_ZYOne\Others\queries10.txt TestResult\out20_Others_queries10.xml > TestResult\cmd\cmd20_Others_queries10.txt
 echo Finish running AutoTester for queries10.
+echo Running AutoTester for queriesCalls ...
+AutoTester Test20_ZYOne\Relation\sourceCalls.txt Test20_ZYOne\Relation\queriesCalls.txt TestResult\out20_Relation_queriesCalls.xml > TestResult\cmd\cmd20_Relation_queriesCalls.txt
+echo Finish running AutoTester for queriesCalls.
+echo Running AutoTester for queriesNext ...
+AutoTester Test20_ZYOne\Relation\sourceNext.txt Test20_ZYOne\Relation\queriesNext.txt TestResult\out20_Relation_queriesNext.xml > TestResult\cmd\cmd20_Relation_queriesNext.txt
+echo Finish running AutoTester for queriesNext.
 echo Finish running AutoTester for test 20.
 call :getPauseAction
 goto :eof
