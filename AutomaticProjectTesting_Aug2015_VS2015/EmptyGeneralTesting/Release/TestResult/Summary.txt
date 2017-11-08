@@ -1,6 +1,6 @@
 Overall Test Ran    : 17520
-Overall Test Passed : 16524
-Overall Test Failed : 990
+Overall Test Passed : 16528
+Overall Test Failed : 986
 Overall Test Timeout: 6
 
 
@@ -629,9 +629,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemParent_QueryParentTest1.xml: 
-Test Ran: 75	[BUG]
-Passed   : 71
-Failed   : 4
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemParent_QueryParentTest2.xml: 
