@@ -4,6 +4,11 @@ using namespace std;
 
 DesignExtractor::DesignExtractor() {
 }
+
+/*
+This method computes the transitive closure of all the relations
+It propagates through each key and populates the star relations
+*/
 unordered_map<int, list<int>> DesignExtractor::computeTransitiveClosure(unordered_map<int, list<int>> initialMap) {
 	unordered_map<int, list<int>> resultMap;
 	int currKey;
@@ -41,6 +46,9 @@ unordered_map<int, list<int>> DesignExtractor::computeTransitiveClosure(unordere
 	return resultMap;
 }
 
+/*
+Overloaded method for different kind of map
+*/
 unordered_map<int, list<int>> DesignExtractor::computeTransitiveClosure(unordered_map<int, int> initialMap) {
 	int currKey;
 	int currValue;
@@ -112,24 +120,10 @@ pair<unordered_map<int, list<int>>, unordered_map<int, list<int>>> DesignExtract
 	return make_pair(callsStarMap, callsStarMapReverse);
 }
 
-unordered_map<int, pair<int, int>> DesignExtractor::computeFollowsTable(unordered_map<int, int> followsBefore, unordered_map<int, int> followsAfter) {
-	unordered_map<int, pair<int, int>> followsMap;
-	for (std::unordered_map<int, int>::iterator it = followsBefore.begin(); it != followsBefore.end(); ++it) {
-		int currStmt = (*it).first;
-		int befStmt = (*it).second;
-		if (followsAfter.find(currStmt) != followsAfter.end()) {
-			int aftStmt = followsAfter[currStmt];
-			followsMap[currStmt] = make_pair(befStmt, aftStmt);
-		}
-		else {
-			followsMap[currStmt] = make_pair(befStmt, 0);
-		}
-	}
-
-	return followsMap;
-}
-
-// TODO 1 implement postorder
+/*
+This method performs a depth first search, propagating
+the uses table(procedure and variable) updates from the leaf nodes
+*/
 unordered_map<int, list<int>> DesignExtractor::computeUsesTable(UsesTableProcToVar usesTable, CallsStarTable callsStarTable) {
 	unordered_map<int, list<int>> usesMap = usesTable.getMap();
 	unordered_map<int, list<int>> callsStarMap = callsStarTable.getMap();
@@ -155,24 +149,27 @@ unordered_map<int, list<int>> DesignExtractor::computeUsesTable(UsesTableProcToV
 	}
 	return usesMap;
 }
-// TODO 1 void DesignExtractor::dfsWalk()
-void DesignExtractor::DFS(int curr, unordered_map<int, list<int>> &map, unordered_set<int> &visited, unordered_map<int, list<int>> &callsStarMap) {
+/*
+This is the depth first search algorithm used
+*/
+void DesignExtractor::DFS(int curr, unordered_map<int, list<int>> &map, unordered_set<int> &visited, 
+	unordered_map<int, list<int>> &callsStarMap) {
 	if (callsStarMap.find(curr) == callsStarMap.end()) {
-		visited.insert(curr);
+		visited.insert(curr); //If it is the end, aka the leaf
 	}
 
 	list<int> children = callsStarMap[curr];
 	for(int it : children) {
-		if (visited.find(it) == visited.end()) {
+		if (visited.find(it) == visited.end()) { //If it still has children, visit through it
 			DFS(it, map, visited, callsStarMap);
 			if (map.find(curr) == map.end()) {
 				map[curr] = map[it];
 			}
-			map[curr].insert(map[curr].end(), map[it].begin(), map[it].end());
+			map[curr].insert(map[curr].end(), map[it].begin(), map[it].end()); //After visited children, visit itself
 			map[curr].sort();
 			map[curr].unique();
 		}
-		else {
+		else { //have alr been visited can just propagate upwards back
 			if (map.find(curr) == map.end()) {
 				map[curr] = map[it];
 			}
@@ -184,6 +181,10 @@ void DesignExtractor::DFS(int curr, unordered_map<int, list<int>> &map, unordere
 	visited.insert(curr);
 }
 
+/*
+This method is to populate the modifies procedure to var table with help from callsStarTable
+It is similar to that of the computeUsesTable above
+*/
 unordered_map<int, list<int>> DesignExtractor::computeModifiesTable(ModTableProcToVar modTable, CallsStarTable callsStarTable) {
 	unordered_map<int, list<int>> modMap = modTable.getMap();
 	unordered_map<int, list<int>> callsStarMap = callsStarTable.getMap();
@@ -210,6 +211,9 @@ unordered_map<int, list<int>> DesignExtractor::computeModifiesTable(ModTableProc
 	return modMap;
 }
 
+/*
+This method updates all the statements that are affected by procedure calls statements
+*/
 unordered_map<int, list<int>> DesignExtractor::computeUsesTable(UsesTableStmtToVar usesTableStmtToVar, 
 	StmtTypeList stmtTypeList, UsesTableProcToVar usesTableProcToVar, ChildToParentStarTable childToParentStarTable) {
 	unordered_map<int, list<int>> usesStmtToVarMap = usesTableStmtToVar.getMap();
@@ -222,8 +226,8 @@ unordered_map<int, list<int>> DesignExtractor::computeUsesTable(UsesTableStmtToV
 		
 		list<int> procUses = usesProcToVarMap[procIdx];
 		list<int> parentStar = childToParentStarTable.getParentStar(callStmt);
-		usesStmtToVarMap[callStmt] = procUses;
-		for (int i : parentStar) {
+		usesStmtToVarMap[callStmt] = procUses; //updates the call statement with the variables used in called procedure
+		for (int i : parentStar) { //updates parent statement of the call statement with the variables used
 			usesStmtToVarMap[i].insert(usesStmtToVarMap[i].end(), procUses.begin(), procUses.end());
 			usesStmtToVarMap[i].sort();
 			usesStmtToVarMap[i].unique();
@@ -233,6 +237,9 @@ unordered_map<int, list<int>> DesignExtractor::computeUsesTable(UsesTableStmtToV
 	return usesStmtToVarMap;
 }
 
+/*
+Updates all modifies statements with additional variablesas from call stmt
+*/
 unordered_map<int, list<int>> DesignExtractor::computeModifiesTable(ModTableStmtToVar modTableStmtToVar,
 	StmtTypeList stmtTypeList, ModTableProcToVar modTableProcToVar, ChildToParentStarTable childToParentStarTable) {
 	unordered_map<int, list<int>> modStmtToVarMap = modTableStmtToVar.getMap();
@@ -243,11 +250,11 @@ unordered_map<int, list<int>> DesignExtractor::computeModifiesTable(ModTableStmt
 		int callStmt = (*it).first;
 		int procIdx = (*it).second;
 
-		list<int> procUses = modProcToVarMap[procIdx];
+		list<int> procModifies = modProcToVarMap[procIdx];
 		list<int> parentStar = childToParentStarTable.getParentStar(callStmt);
-		modStmtToVarMap[callStmt] = procUses;
+		modStmtToVarMap[callStmt] = procModifies;
 		for (int i : parentStar) {
-			modStmtToVarMap[i].insert(modStmtToVarMap[i].end(), procUses.begin(), procUses.end());
+			modStmtToVarMap[i].insert(modStmtToVarMap[i].end(), procModifies.begin(), procModifies.end());
 			modStmtToVarMap[i].sort();
 			modStmtToVarMap[i].unique();
 		}
@@ -256,6 +263,9 @@ unordered_map<int, list<int>> DesignExtractor::computeModifiesTable(ModTableStmt
 	return modStmtToVarMap;
 }
 
+/*
+Updates relations for uses for all reverse maps from variable to statement
+*/
 unordered_map<int, list<int>> DesignExtractor::computeUsesTableStmt(UsesTableStmtToVar usesTableStmtToVar) {
 	unordered_map<int, list<int>> usesStmtToVarMap = usesTableStmtToVar.getMap();
 	unordered_map<int, list<int>> usesVarToStmtMap;
@@ -279,6 +289,9 @@ unordered_map<int, list<int>> DesignExtractor::computeUsesTableStmt(UsesTableStm
 	return usesVarToStmtMap;
 }
 
+/*
+Updates reverse mapping from variable to procedure
+*/
 unordered_map<int, list<int>> DesignExtractor::computeUsesTableProc(UsesTableProcToVar usesTableProcToVar) {
 	unordered_map<int, list<int>> usesProcToVarMap = usesTableProcToVar.getMap();
 	unordered_map<int, list<int>> usesVarToProcMap;
@@ -302,6 +315,9 @@ unordered_map<int, list<int>> DesignExtractor::computeUsesTableProc(UsesTablePro
 	return usesVarToProcMap;
 }
 
+/*
+Updates reverse mapping from variables to statement
+*/
 unordered_map<int, list<int>> DesignExtractor::computeModTableStmt(ModTableStmtToVar modTableStmtToVar) {
 	unordered_map<int, list<int>> modStmtToVarMap = modTableStmtToVar.getMap();
 	unordered_map<int, list<int>> modVarToStmtMap;
@@ -325,6 +341,9 @@ unordered_map<int, list<int>> DesignExtractor::computeModTableStmt(ModTableStmtT
 	return modVarToStmtMap;
 }
 
+/*
+Updates reverse mapping from variable to procedure
+*/
 unordered_map<int, list<int>> DesignExtractor::computeModTableProc(ModTableProcToVar modTableProcToVar) {
 	unordered_map<int, list<int>> modProcToVarMap = modTableProcToVar.getMap();
 	unordered_map<int, list<int>> modVarToProcMap;

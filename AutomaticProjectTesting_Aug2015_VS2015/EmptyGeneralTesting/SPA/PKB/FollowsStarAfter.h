@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unordered_map>
 #include <list>
+#include <unordered_set>
 
 using namespace std;
 
@@ -20,4 +21,7 @@ public:
 	pair <list<int>, list<int>> getAllFollows();
 private:
 	unordered_map<int, list<int>> followsStarAfterMap;
+	list<int> beforeList;
+	list<int> afterList;
+	unordered_map<int, unordered_set<int>> followsStarAfterRelMap;
 };
