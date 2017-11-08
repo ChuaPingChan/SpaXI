@@ -1,0 +1,25 @@
+247 - Try with clause
+stmt s;
+Select s with s.stmt#=2
+2
+5000
+248 - Try with clause
+variable v, v1;
+Select <v, v1> with v.varName="a2" and v1.varName="a4"
+a2 a4
+5000
+84 - Try with clause
+stmt s; constant c;
+Select s with s.stmt#=c.value
+5
+5000
+249 - Try pattern while clause
+while w; variable v;
+Select <w, v> pattern w(v, _)
+2 a, 3 a3
+5000
+255 - Try selecting attributes
+assign a;
+Select a.stmt#
+1, 4, 5
+5000

@@ -1,0 +1,81 @@
+procedure A {
+ 	x = 1;  						
+ 	y = 2 * z;  					
+ 	call B;  						
+ 	z = p - y;  					
+ 	if q then {  					
+ 		z = x + 24;					
+		call C;						
+	} else {
+ 		while z { 					
+ 			y = x * q - 5;			
+ 			z = z - 1; 				
+		}
+ 		y = x + y * z + p * q;		
+ 		call C;						
+	}
+ 	i = x + j + z;					
+ 	call D;							
+}
+
+procedure B {
+	p = x * 10;						
+ 	q = y + y * 10;					
+ 	while t {						
+ 		a = 5 * p - 5;				
+ 		x = 1 + y;					
+	}
+ 	q = p * 5; 						
+}
+
+procedure C {
+	i = x * 10;						
+ 	j = x + y * 10;					
+ 	if i then {						
+ 		x = j + 2;					
+ 		call D;						
+	}
+	else {
+ 		y = i + x + y * z;			
+	}
+}
+
+procedure D {
+ 	q = i * x * j + y + p * q;		
+ 	if q then{						
+ 		r = i * j;					
+ 		while q {					
+			if r then {				
+				q = r + i;			
+				while q {			
+					q = q - 1;		
+					call B;  		
+				}
+			} else {			
+				q = r + j;			
+				if q then {			
+					q = i * q + j - z;	
+				} else {
+					q = r + 14;		
+				}
+			} 		
+ 		}
+ 	} else {
+ 		r = x - (3 + 12 * z)  + q;	
+ 		while r{					
+ 			x = 24 * (z + i);		
+ 			while x{				
+ 				if y then {			
+ 					if q then {		
+ 						s = 17 + i * y - z;		
+ 						call B;					
+ 					} else {
+ 						s = (13 + i) * (y - z); 
+ 					}
+ 				} else {
+ 					s = (((8 + x) * y) - z);		
+ 				}
+ 			}
+ 		}
+ 	}
+}

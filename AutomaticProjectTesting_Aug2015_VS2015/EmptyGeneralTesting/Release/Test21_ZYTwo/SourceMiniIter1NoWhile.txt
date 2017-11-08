@@ -1,0 +1,7 @@
+procedure MINIITERONENOWHILE {
+  a = a + b + 40;
+  c = 41 + c + d;
+  d = d + 42 + e;
+  e = a + b + 43 + c + d + 44 + f;
+  g = a;
+}

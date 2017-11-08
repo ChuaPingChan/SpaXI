@@ -1,0 +1,1725 @@
+1 - Comment
+
+Select BOOLEAN such that Follows(_, _)
+TRUE
+5000
+2 - Comment
+
+Select BOOLEAN such that Follows(_, 2)
+TRUE
+5000
+3 - Comment
+
+Select BOOLEAN such that Follows(2, _)
+FALSE
+5000
+4 - Comment
+
+Select BOOLEAN such that Follows(6, 8)
+TRUE
+5000
+5 - Comment
+
+Select BOOLEAN such that Follows*(_, _)
+TRUE
+5000
+6 - Comment
+
+Select BOOLEAN such that Follows*(_, 16)
+TRUE
+5000
+7 - Comment
+
+Select BOOLEAN such that Follows*(3, _)
+TRUE
+5000
+8 - Comment
+
+Select BOOLEAN such that Follows*(3, 4)
+FALSE
+5000
+9 - Comment
+
+Select BOOLEAN such that Parent(_, _)
+TRUE
+5000
+10 - Comment
+
+Select BOOLEAN such that Parent(_, 9)
+TRUE
+5000
+11 - Comment
+
+Select BOOLEAN such that Parent(11, _)
+FALSE
+5000
+12 - Comment
+
+Select BOOLEAN such that Parent(3, 8)
+TRUE
+5000
+13 - Comment
+
+Select BOOLEAN such that Parent*(_, _)
+TRUE
+5000
+14 - Comment
+
+Select BOOLEAN such that Parent*(_, 1)
+FALSE
+5000
+15 - Comment
+
+Select BOOLEAN such that Parent*(2, _)
+TRUE
+5000
+16 - Comment
+
+Select BOOLEAN such that Parent*(3, 7)
+TRUE
+5000
+17 - Comment
+
+Select BOOLEAN such that Modifies(_, _)
+FALSE
+5000
+18 - Comment
+
+Select BOOLEAN such that Modifies(_, "x") 
+FALSE
+5000
+19 - Comment
+
+Select BOOLEAN such that Modifies(10, _)
+TRUE
+5000
+20 - Comment
+
+Select BOOLEAN such that Modifies(10, "z")
+TRUE
+5000
+21 - Comment
+
+Select BOOLEAN such that Modifies("delta", _)
+TRUE
+5000
+22 - Comment
+
+Select BOOLEAN such that Modifies("gamma", z)
+FALSE
+5000
+23 - Comment
+
+Select BOOLEAN such that Uses(_, _)
+FALSE
+5000
+24 - Comment
+
+Select BOOLEAN such that Uses(_, "i") 
+FALSE
+5000
+25 - Comment
+
+Select BOOLEAN such that Uses(7, _)
+TRUE
+5000
+26 - Comment
+
+Select BOOLEAN such that Uses(1, "a1")
+FALSE
+5000
+27 - Comment
+
+Select BOOLEAN such that Uses("proc_name", _)
+FALSE
+5000
+28 - Comment
+
+Select BOOLEAN such that Uses("gamma", "v")
+FALSE
+5000
+29 - Comment
+
+Select BOOLEAN such that Calls(_, _)
+TRUE
+5000
+30 - Comment
+
+Select BOOLEAN such that Calls(_, "alpha")
+FALSE
+5000
+31 - Comment
+
+Select BOOLEAN such that Calls("delta", _)
+TRUE
+5000
+32 - Comment
+
+Select BOOLEAN such that Calls("alpha", "delta")
+FALSE
+5000
+33 - Comment
+
+Select BOOLEAN such that Calls*(_, _)
+TRUE
+5000
+34 - Comment
+
+Select BOOLEAN such that Calls*(_, "beta")
+TRUE
+5000
+35 - Comment
+
+Select BOOLEAN such that Calls*("beta", _)
+TRUE
+5000
+36 - Comment
+
+Select BOOLEAN such that Calls*("alpha", "delta")
+TRUE
+5000
+37 - Comment
+
+Select BOOLEAN such that Next(_, _)
+TRUE
+5000
+38 - Comment
+
+Select BOOLEAN such that Next(_, 9)
+TRUE
+5000
+39 - Comment
+
+Select BOOLEAN such that Next(9, _)
+TRUE
+5000
+40 - Comment
+
+Select BOOLEAN such that Next(7, 6)
+TRUE
+5000
+41 - Comment
+
+Select BOOLEAN such that Next*(_, _)
+TRUE
+5000
+42 - Comment
+
+Select BOOLEAN such that Next*(_, 17)
+FALSE
+5000
+43 - Comment
+
+Select BOOLEAN such that Next*(17, _)
+FALSE
+5000
+44 - Comment
+
+Select BOOLEAN such that Next*(5, 7)
+TRUE
+5000
+45 - Comment
+if ifs;
+Select ifs
+3
+5000
+46 - Comment
+procedure p;
+Select p
+alpha, beta, delta, gamma
+5000
+47 - Comment
+if ifs;
+Select ifs such that Follows(13, 15)
+none
+5000
+48 - Comment
+if ifs;
+Select ifs such that Follows(_, 15)
+3
+5000
+49 - Comment
+if ifs;
+Select ifs such that Follows(17, _)
+none
+5000
+50 - Comment
+if ifs;
+Select ifs such that Follows(2, ifs)
+none
+5000
+51 - Comment
+if ifs;
+Select ifs such that Follows(ifs, 9)
+3
+5000
+52 - Comment
+if ifs;
+Select ifs such that Follows(_, _)
+3
+5000
+53 - Comment
+if ifs;
+Select ifs such that Follows(_, ifs)
+none
+5000
+54 - Comment
+if ifs;
+Select ifs such that Follows(ifs, _)
+3
+5000
+55 - Comment
+if ifs;
+Select ifs such that Follows(ifs, ifs)
+none
+5000
+56 - Comment
+if ifs, ifs1;
+Select ifs such that Follows(ifs, ifs1)
+none
+5000
+57 - Comment
+if ifs, ifs1;
+Select ifs1 such that Follows(ifs, ifs1)
+none
+5000
+58 - Comment
+if ifs, ifs1, ifs2;
+Select ifs such that Follows(ifs1, ifs2)
+none
+5000
+59 - Comment
+stmt s; if ifs;
+Select s such that Follows(s, ifs)
+none
+5000
+60 - Comment
+stmt s; if ifs;
+Select ifs such that Follows(s, ifs)
+none
+5000
+61 - Comment
+stmt s; if ifs;
+Select s such that Follows(ifs, s)
+9
+5000
+62 - Comment
+stmt s; if ifs;
+Select ifs such that Follows(ifs, s)
+3
+5000
+63 - Comment
+assign a; if ifs;
+Select a such that Follows(a, ifs)
+none
+5000
+64 - Comment
+assign a; if ifs;
+Select ifs such that Follows(a, ifs)
+none
+5000
+65 - Comment
+assign a; if ifs;
+Select a such that Follows(ifs, a)
+9
+5000
+66 - Comment
+assign a; if ifs;
+Select ifs such that Follows(ifs, a)
+3
+5000
+67 - Comment
+while w; if ifs;
+Select w such that Follows(w, ifs)
+none
+5000
+68 - Comment
+while w; if ifs;
+Select ifs such that Follows(w, ifs)
+none
+5000
+69 - Comment
+while w; if ifs;
+Select w such that Follows(ifs, w)
+none
+5000
+70 - Comment
+while w; if ifs;
+Select ifs such that Follows(ifs, w)
+none
+5000
+71 - Comment
+if ifs;
+Select ifs such that Follows*(13, 16)
+3
+5000
+72 - Comment
+if ifs;
+Select ifs such that Follows*(_, 17)
+none
+5000
+73 - Comment
+if ifs;
+Select ifs such that Follows*(13, _)
+3
+5000
+74 - Comment
+if ifs;
+Select ifs such that Follows*(5, ifs)
+none
+5000
+75 - Comment
+if ifs;
+Select ifs such that Follows*(ifs, 9)
+3
+5000
+76 - Comment
+if ifs;
+Select ifs such that Follows*(_, _)
+3
+5000
+77 - Comment
+if ifs;
+Select ifs such that Follows*(_, ifs)
+none
+5000
+78 - Comment
+if ifs;
+Select ifs such that Follows*(ifs, _)
+3
+5000
+79 - Comment
+if ifs;
+Select ifs such that Follows*(ifs, ifs) 
+none
+5000
+80 - Comment
+if ifs, ifs1;
+Select ifs such that Follows*(ifs, ifs1)
+none
+5000
+81 - Comment
+if ifs, ifs1;
+Select ifs1 such that Follows*(ifs, ifs1)
+none
+5000
+82 - Comment
+if ifs, ifs1, ifs2;
+Select ifs such that Follows*(ifs1, ifs2)
+none
+5000
+83 - Comment
+stmt s; if ifs;
+Select s such that Follows*(s, ifs)
+none
+5000
+84 - Comment
+stmt s; if ifs;
+Select ifs such that Follows*(s, ifs)
+none
+5000
+85 - Comment
+stmt s; if ifs;
+Select s such that Follows*(ifs, s)
+9
+5000
+86 - Comment
+stmt s; if ifs;
+Select ifs such that Follows*(ifs, s)
+3
+5000
+87 - Comment
+assign a; if ifs;
+Select a such that Follows*(a, ifs)
+none
+5000
+88 - Comment
+assign a; if ifs;
+Select ifs such that Follows*(a, ifs)
+none
+5000
+89 - Comment
+assign a; if ifs;
+Select a such that Follows*(ifs, a)
+9
+5000
+90 - Comment
+assign a; if ifs;
+Select ifs such that Follows*(ifs, a)
+3
+5000
+91 - Comment
+while w; if ifs;
+Select w such that Follows*(w, ifs)
+none
+5000
+92 - Comment
+while w; if ifs;
+Select ifs such that Follows*(w, ifs)
+none
+5000
+93 - Comment
+while w; if ifs;
+Select w such that Follows*(ifs, w)
+none
+5000
+94 - Comment
+while w; if ifs;
+Select ifs such that Follows*(ifs, w)
+none
+5000
+95 - Comment
+if ifs;
+Select ifs such that Parent(2, 9)
+3
+5000
+96 - Comment
+if ifs;
+Select ifs such that Parent(_, 10)
+none
+5000
+97 - Comment
+if ifs;
+Select ifs such that Parent(12, _)
+3
+5000
+98 - Comment
+if ifs;
+Select ifs such that Parent(2, ifs)
+3
+5000
+99 - Comment
+if ifs;
+Select ifs such that Parent(ifs, 7)
+none
+5000
+100 - Comment
+if ifs;
+Select ifs such that Parent(_, _)
+3
+5000
+101 - Comment
+if ifs;
+Select ifs such that Parent(_, ifs)
+3
+5000
+102 - Comment
+if ifs;
+Select ifs such that Parent(ifs, _)
+3
+5000
+103 - Comment
+if ifs;
+Select ifs such that Parent(ifs, ifs) 
+none
+5000
+104 - Comment
+if ifs, ifs1;
+Select ifs such that Parent(ifs, ifs1)
+none
+5000
+105 - Comment
+if ifs, ifs1;
+Select ifs1 such that Parent(ifs, ifs1)
+none
+5000
+106 - Comment
+if ifs, ifs1, ifs2;
+Select ifs such that Parent(ifs1, ifs2)
+none
+5000
+107 - Comment
+stmt s; if ifs;
+Select s such that Parent(s, ifs)
+2
+5000
+108 - Comment
+stmt s; if ifs;
+Select ifs such that Parent(s, ifs)
+3
+5000
+109 - Comment
+stmt s; if ifs;
+Select s such that Parent(ifs, s)
+4, 5, 6, 8
+5000
+110 - Comment
+stmt s; if ifs;
+Select ifs such that Parent(ifs, s)
+3
+5000
+111 - Comment
+assign a; if ifs;
+Select a such that Parent(a, ifs)
+none
+5000
+112 - Comment
+assign a; if ifs;
+Select ifs such that Parent(a, ifs) 
+none
+5000
+113 - Comment
+assign a; if ifs;
+Select a such that Parent(ifs, a)
+4, 5, 8
+5000
+114 - Comment
+assign a; if ifs;
+Select ifs such that Parent(ifs, a)
+3
+5000
+115 - Comment
+while w; if ifs;
+Select w such that Parent(w, ifs)
+2
+5000
+116 - Comment
+while w; if ifs;
+Select ifs such that Parent(w, ifs)
+3
+5000
+117 - Comment
+while w; if ifs;
+Select w such that Parent(ifs, w)
+6
+5000
+118 - Comment
+while w; if ifs;
+Select ifs such that Parent(ifs, w)
+3
+5000
+119 - Comment
+if ifs;
+Select ifs such that Parent*(3, 7)
+3
+5000
+120 - Comment
+if ifs;
+Select ifs such that Parent*(_, 17)
+none
+5000
+121 - Comment
+if ifs;
+Select ifs such that Parent*(6, _)
+3
+5000
+122 - Comment
+if ifs;
+Select ifs such that Parent*(2, ifs)
+3
+5000
+123 - Comment
+if ifs;
+Select ifs such that Parent*(ifs, 7)
+3
+5000
+124 - Comment
+if ifs;
+Select ifs such that Parent*(_, _)
+3
+5000
+125 - Comment
+if ifs;
+Select ifs such that Parent*(_, ifs)
+3
+5000
+126 - Comment
+if ifs;
+Select ifs such that Parent*(ifs, _)
+3
+5000
+127 - Comment
+if ifs;
+Select ifs such that Parent*(ifs, ifs) 
+none
+5000
+128 - Comment
+if ifs, ifs1;
+Select ifs such that Parent*(ifs, ifs1)
+none
+5000
+129 - Comment
+if ifs, ifs1;
+Select ifs1 such that Parent*(ifs, ifs1)
+none
+5000
+130 - Comment
+if ifs, ifs1, ifs2;
+Select ifs such that Parent*(ifs1, ifs2)
+none
+5000
+131 - Comment
+stmt s; if ifs;
+Select s such that Parent*(s, ifs)
+2
+5000
+132 - Comment
+stmt s; if ifs;
+Select ifs such that Parent*(s, ifs)
+3
+5000
+133 - Comment
+stmt s; if ifs;
+Select s such that Parent*(ifs, s)
+4, 5, 6, 7, 8
+5000
+134 - Comment
+stmt s; if ifs;
+Select ifs such that Parent*(ifs, s)
+3
+5000
+135 - Comment
+assign a; if ifs;
+Select a such that Parent*(a, ifs) 
+none
+5000
+136 - Comment
+assign a; if ifs;
+Select ifs such that Parent*(a, ifs) 
+none
+5000
+137 - Comment
+assign a; if ifs;
+Select a such that Parent*(ifs, a)
+4, 5, 8
+5000
+138 - Comment
+assign a; if ifs;
+Select ifs such that Parent*(ifs, a)
+3
+5000
+139 - Comment
+while w; if ifs;
+Select w such that Parent*(w, ifs)
+2
+5000
+140 - Comment
+while w; if ifs;
+Select ifs such that Parent*(w, ifs)
+3
+5000
+141 - Comment
+while w; if ifs;
+Select w such that Parent*(ifs, w)
+6
+5000
+142 - Comment
+while w; if ifs;
+Select ifs such that Parent*(ifs, w)
+3
+5000
+143 - Comment
+procedure p; 
+Select p such that Modifies("gamma", "y")
+alpha, beta, delta, gamma
+5000
+144 - Comment
+procedure p; 
+Select p such that Modifies(_, _)
+none
+5000
+145 - Comment
+procedure p; 
+Select p such that Modifies(_, "x")
+none
+5000
+146 - Comment
+procedure p; 
+Select p such that Modifies("alpha", _)
+alpha, beta, delta, gamma
+5000
+147 - Comment
+procedure p; variable v;
+Select p such that Modifies("beta", v)
+alpha, beta, delta, gamma
+5000
+148 - Comment
+procedure p; variable v;
+Select v such that Modifies("delta", v)
+x, y, z
+5000
+149 - Comment
+procedure p; 
+Select p such that Modifies(p, "i")
+none
+5000
+150 - Comment
+procedure p; 
+Select p such that Modifies(p, _)
+alpha, beta, delta, gamma
+5000
+151 - Comment
+procedure p; variable v;
+Select p such that Modifies(p, v)
+alpha, beta, delta, gamma
+5000
+152 - Comment
+procedure p; variable v;
+Select v such that Modifies(p, v)
+t, v, w, x, y, z
+5000
+153 - Comment
+procedure p; 
+Select p such that Uses("delta", "t")
+none
+5000
+154 - Comment
+procedure p; 
+Select p such that Uses(_, _)
+none
+5000
+155 - Comment
+procedure p; 
+Select p such that Uses(_, "x")
+none
+5000
+156 - Comment
+procedure p; 
+Select p such that Uses("gamma", _)
+none
+5000
+157 - Comment
+procedure p; variable v;
+Select p such that Uses("alpha", v)
+alpha, beta, delta, gamma
+5000
+158 - Comment
+procedure p; variable v;
+Select v such that Uses("gamma", v)
+none
+5000
+159 - Comment
+procedure p; 
+Select p such that Uses(p, _)
+alpha, beta, delta
+5000
+160 - Comment
+procedure p; variable v;
+Select p such that Uses(p, v)
+alpha, beta, delta
+5000
+161 - Comment
+procedure p; variable v;
+Select v such that Uses(p, v)
+a1, a2, i, t, u, v, w, x, y
+5000
+162 - Comment
+procedure p; 
+Select p such that Uses(p, "u")
+alpha
+5000
+163 - Comment
+assign a; 
+Select a pattern a(_, "x")
+11
+5000
+164 - Comment
+assign a; 
+Select a pattern a(_, "6")
+17
+5000
+165 - Comment
+assign a; 
+Select a pattern a(_, "x + 2")
+13
+5000
+166 - Comment
+assign a; 
+Select a pattern a(_, _"x + v"_)
+none
+5000
+167 - Comment
+assign a; variable v;
+Select a pattern a(v, "w")
+none
+5000
+168 - Comment
+assign a; variable v;
+Select v pattern a(v, "x")
+w
+5000
+169
+assign a; variable v;
+Select a pattern a(v, "6")
+17
+5000
+170 - Comment
+assign a; variable v;
+Select v pattern a(v, "2")
+none
+5000
+171 - Comment
+assign a; variable v;
+Select a pattern a(v, "x*w")
+14
+5000
+172 - Comment
+assign a; variable v;
+Select v pattern a(v, "a1+a2")
+v
+5000
+173 - Comment
+assign a; variable v;
+Select a pattern a(v, _"t+u"_)
+5, 9
+5000
+174 - Comment
+assign a; variable v;
+Select v pattern a(v, _"u+v"_)
+none
+5000
+175 - Comment
+assign a; 
+Select a pattern a("w", "x")
+11
+5000
+176 - Comment
+assign a; 
+Select a pattern a("y", "6")
+17
+5000
+177 - Comment
+assign a; 
+Select a pattern a("z", "x+z")
+none
+5000
+178 - Comment
+assign a; 
+Select a pattern a("x", _"x+2"_)
+13
+5000
+179 - Comment
+while w;
+Select w pattern w(_, _)
+2, 6, 12
+5000
+180 - Comment
+while w; variable v;
+Select w pattern w(v, _)
+2, 6, 12
+5000
+181 - Comment
+while w; variable v;
+Select v pattern w(v, _)
+i, x
+5000
+182 - Comment
+while w;
+Select w pattern w("y", _)
+none
+5000
+183 - Comment
+if ifs;
+Select ifs pattern ifs(_, _, _)
+3
+5000
+184 - Comment
+if ifs; variable v;
+Select ifs pattern ifs(v, _, _)
+3
+5000
+185 - Comment
+if ifs; variable v;
+Select v pattern ifs(v, _, _)
+y
+5000
+186 - Comment
+if ifs;
+Select ifs pattern ifs("x", _, _)
+none
+5000
+187 - Comment
+procedure p;
+Select p such that Calls("alpha", "delta")
+none
+5000
+188 - Comment
+procedure p;
+Select p such that Calls(_, "alpha")
+none
+5000
+189 - Comment
+procedure p;
+Select p such that Calls(p, "delta")
+beta
+5000
+190 - Comment
+procedure p;
+Select p such that Calls("alpha", _)
+alpha, beta, delta, gamma
+5000
+191 - Comment
+procedure p;
+Select p such that Calls("beta", p)
+delta
+5000
+192 - Comment
+procedure p;
+Select p such that Calls(_, _)
+alpha, beta, delta, gamma
+5000
+193 - Comment
+procedure p;
+Select p such that Calls(_, p)
+beta, delta, gamma
+5000
+194 - Comment
+procedure p;
+Select p such that Calls(p, _)
+alpha, beta, delta
+5000
+195 - Comment
+procedure p;
+Select p such that Calls(p, p) 
+none
+5000
+196 - Comment
+procedure p, p1;
+Select p such that Calls(p, p1)
+alpha, beta, delta
+5000
+197 - Comment
+procedure p, p1;
+Select p1 such that Calls(p, p1)
+beta, delta, gamma
+5000
+198 - Comment
+procedure p, p1, p2;
+Select p such that Calls(p1, p2)
+alpha, beta, delta, gamma
+5000
+199 - Comment
+procedure p;
+Select p such that Calls*("alpha", "gamma")
+alpha, beta, delta, gamma
+5000
+200 - Comment
+procedure p;
+Select p such that Calls*(p, "delta")
+alpha, beta
+5000
+201 - Comment
+procedure p;
+Select p such that Calls*(p, "beta")
+alpha
+5000
+202 - Comment
+procedure p;
+Select p such that Calls*("alpha", p)
+beta, delta, gamma
+5000
+203 - Comment
+procedure p;
+Select p such that Calls*("alpha", p)
+beta, delta, gamma
+5000
+204 - Comment
+procedure p;
+Select p such that Calls*(_, _)
+alpha, beta, delta, gamma
+5000
+205 - Comment
+procedure p;
+Select p such that Calls*(_, p)
+beta, delta, gamma
+5000
+206 - Comment
+procedure p;
+Select p such that Calls*(p, _)
+alpha, beta, delta
+5000
+207 - Comment
+procedure p;
+Select p such that Calls*(p, p) 
+none
+5000
+208 - Comment
+procedure p, p1;
+Select p such that Calls*(p, p1)
+alpha, beta, delta
+5000
+209 - Comment
+procedure p, p1;
+Select p1 such that Calls*(p, p1)
+beta, delta, gamma
+5000
+210 - Comment
+procedure p, p1, p2;
+Select p such that Calls*(p1, p2)
+alpha, beta, delta, gamma
+5000
+211 - Comment
+prog_line n;
+Select n such that Next(9, 2)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+212 - Comment
+stmt s;
+Select s such that Next(1, 2)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+213 - Comment
+assign a;
+Select a such that Next(3, 6)
+1, 4, 5, 8, 9, 11, 13, 14, 16, 17
+5000
+214 - Comment
+while w;
+Select w such that Next(16, 12)
+2, 6, 12
+5000
+215 - Comment
+if ifs;
+Select ifs such that Next(4, 8)
+none
+5000
+216 - Comment
+prog_line n;
+Select n such that Next(_, 12)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+217 - Comment
+stmt s;
+Select s such that Next(_, 10)
+none
+5000
+218 - Comment
+assign a;
+Select a such that Next(_, 10)
+none
+5000
+219 - Comment
+while w;
+Select w such that Next(_, 14)
+2, 6, 12
+5000
+220 - Comment
+if ifs;
+Select ifs such that Next(_, 9)
+3
+5000
+221 - Comment
+prog_line n;
+Select n such that Next(5, n)
+9
+5000
+222 - Comment
+stmt s;
+Select s such that Next(17, s)
+none
+5000
+223 - Comment
+assign a;
+Select a such that Next(2, a)
+none
+5000
+224 - Comment
+while w;
+Select w such that Next(16, w)
+12
+5000
+225 - Comment
+if ifs;
+Select ifs such that Next(1, ifs)
+none
+5000
+226
+prog_line n;
+Select n such that Next(n, 8)
+6
+5000
+227 - Comment
+stmt s;
+Select s such that Next(s, 5)
+4
+5000
+228 - Comment
+assign a;
+Select a such that Next(a, 2)
+1, 9
+5000
+229 - Comment
+while w;
+Select w such that Next(w, 3)
+2
+5000
+230 - Comment
+if ifs;
+Select ifs such that Next(ifs, 5)
+none
+5000
+231 - Comment
+prog_line n;
+Select n such that Next(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+232 - Comment
+stmt s;
+Select s such that Next(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+233 - Comment
+assign a;
+Select a such that Next(_, _)
+1, 4, 5, 8, 9, 11, 13, 14, 16, 17
+5000
+234 - Comment
+while w;
+Select w such that Next(_, _)
+2, 6, 12
+5000
+235 - Comment
+if ifs;
+Select ifs such that Next(_, _)
+3
+5000
+236 - Comment
+prog_line n;
+Select n such that Next(_, n)
+2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+5000
+237 - Comment
+stmt s;
+Select s such that Next(_, s)
+2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+5000
+238 - Comment
+assign a;
+Select a such that Next(_, a)
+4, 5, 8, 9, 11, 13, 14, 16
+5000
+239 - Comment
+while w;
+Select w such that Next(_, w)
+2, 6, 12
+5000
+240 - Comment
+if ifs;
+Select ifs such that Next(_, ifs)
+3
+5000
+241 - Comment
+prog_line n;
+Select n such that Next(n, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16
+5000
+242 - Comment
+stmt s;
+Select s such that Next(s, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16
+5000
+243 - Comment
+assign a;
+Select a such that Next(a, _)
+1, 4, 5, 8, 9, 13, 14, 16
+5000
+244 - Comment
+while w;
+Select w such that Next(w, _)
+2, 6, 12
+5000
+245 - Comment
+if ifs;
+Select ifs such that Next(ifs, _)
+3
+5000
+246 - Comment
+prog_line n;
+Select n such that Next(n, n) 
+none
+5000
+247 - Comment
+stmt s;
+Select s such that Next(s, s)
+none
+5000
+248 - Comment
+assign a;
+Select a such that Next(a, a)
+none
+5000
+249 - Comment
+while w;
+Select w such that Next(w, w)
+none
+5000
+250 - Comment
+if ifs;
+Select ifs such that Next(ifs, ifs) 
+none
+5000
+251 - Comment
+prog_line n, n1;
+Select n such that Next(n, n1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16
+5000
+252 - Comment
+prog_line n, n1;
+Select n1 such that Next(n, n1)
+2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+5000
+253 - Comment
+stmt s, s1;
+Select s such that Next(s, s1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16
+5000
+254 - Comment
+stmt s, s1;
+Select s1 such that Next(s, s1)
+2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+5000
+255 - Comment
+assign a, a1;
+Select a such that Next(a, a1)
+4, 5, 8, 13
+5000
+256 - Comment
+assign a, a1;
+Select a1 such that Next(a, a1)
+5, 9, 14
+5000
+257 - Comment
+while w, w1;
+Select w such that Next(w, w1)
+none
+5000
+258 - Comment
+while w, w1;
+Select w1 such that Next(w, w1)
+none
+5000
+259 - Comment
+if ifs, ifs1;
+Select ifs such that Next(ifs, ifs1)
+none
+5000
+260 - Comment
+if ifs, ifs1;
+Select ifs1 such that Next(ifs, ifs1)
+none
+5000
+261 - Comment
+prog_line n, n1, n2;
+Select n such that Next(n1, n2)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+262 - Comment
+stmt s, s1, s2;
+Select s such that Next(s1, s2)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+263 - Comment
+assign a, a1, a2;
+Select a such that Next(a1, a2)
+1, 4, 5, 8, 9, 11, 13, 14, 16, 17
+5000
+264 - Comment
+while w, w1, w2;
+Select w such that Next(w1, w2)
+none
+5000
+265 - Comment
+if ifs, ifs1, ifs2;
+Select ifs such that Next(ifs1, ifs2)
+none
+5000
+266 - Comment
+prog_line n;
+Select n such that Next*(8, 6)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+267 - Comment
+stmt s;
+Select s such that Next*(7, 2)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+268 - Comment
+assign a;
+Select a such that Next*(7, 3)
+1, 4, 5, 8, 9, 11, 13, 14, 16, 17
+5000
+269 - Comment
+while w;
+Select w such that Next*(16, 16)
+2, 6, 12
+5000
+270 - Comment
+if ifs;
+Select ifs such that Next*(4, 8)
+3
+5000
+271 - Comment
+prog_line n;
+Select n such that Next*(_, 10)
+none
+5000
+272 - Comment
+stmt s;
+Select s such that Next*(_, 1)
+none
+5000
+273 - Comment
+assign a;
+Select a such that Next*(_, 10)
+none
+5000
+274 - Comment
+while w;
+Select w such that Next*(_, 2)
+2, 6, 12
+5000
+275 - Comment
+if ifs;
+Select ifs such that Next*(_, 17)
+none
+5000
+276 - Comment
+prog_line n;
+Select n such that Next*(17, n)
+none
+5000
+277 - Comment
+stmt s;
+Select s such that Next*(11, s)
+none
+5000
+278 - Comment
+assign a;
+Select a such that Next*(11, a)
+none
+5000
+279 - Comment
+while w;
+Select w such that Next*(2, w)
+2, 6
+5000
+280 - Comment
+if ifs;
+Select ifs such that Next*(7, ifs)
+3
+5000
+281 - Comment
+prog_line n;
+Select n such that Next*(n, 17)
+none
+5000
+282 - Comment
+stmt s;
+Select s such that Next*(s, 12)
+12, 13, 14, 15, 16
+5000
+283 - Comment
+assign a;
+Select a such that Next*(a, 12)
+13, 14, 16
+5000
+284 - Comment
+while w;
+Select w such that Next*(w, 13)
+12
+5000
+285 - Comment
+if ifs;
+Select ifs such that Next*(ifs, 7)
+3
+5000
+286 - Comment
+prog_line n;
+Select n such that Next*(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+287 - Comment
+stmt s;
+Select s such that Next*(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+288 - Comment
+assign a;
+Select a such that Next*(_, _)
+1, 4, 5, 8, 9, 11, 13, 14, 16, 17
+5000
+289 - Comment
+while w;
+Select w such that Next*(_, _)
+2, 6, 12
+5000
+290 - Comment
+if ifs;
+Select ifs such that Next*(_, _)
+3
+5000
+291 - Comment
+prog_line n;
+Select n such that Next*(_, n)
+2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+5000
+292 - Comment
+stmt s;
+Select s such that Next*(_, s)
+2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+5000
+293 - Comment
+assign a;
+Select a such that Next*(_, a)
+4, 5, 8, 9, 11, 13, 14, 16
+5000
+294 - Comment
+while w;
+Select w such that Next*(_, w)
+2, 6, 12
+5000
+295 - Comment
+if ifs;
+Select ifs such that Next*(_, ifs)
+3
+5000
+296 - Comment
+prog_line n;
+Select n such that Next*(n, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16
+5000
+297 - Comment
+stmt s;
+Select s such that Next*(s, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16
+5000
+298 - Comment
+assign a;
+Select a such that Next*(a, _)
+1, 4, 5, 8, 9, 13, 14, 16
+5000
+299 - Comment
+while w;
+Select w such that Next*(w, _)
+2, 6, 12
+5000
+300 - Comment
+if ifs;
+Select ifs such that Next*(ifs, _)
+3
+5000
+301 - Comment
+prog_line n;
+Select n such that Next*(n, n) 
+2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16
+5000
+302 - Comment
+stmt s;
+Select s such that Next*(s, s)
+2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16
+5000
+303 - Comment
+assign a;
+Select a such that Next*(a, a)
+4, 5, 8, 9, 13, 14, 16
+5000
+304 - Comment
+while w;
+Select w such that Next*(w, w) 
+2, 6, 12
+5000
+305 - Comment
+if ifs;
+Select ifs such that Next*(ifs, ifs) 
+3
+5000
+306 - Comment
+prog_line n, n1;
+Select n such that Next*(n, n1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16
+5000
+307 - Comment
+prog_line n, n1;
+Select n1 such that Next*(n, n1)
+2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+5000
+308 - Comment
+stmt s, s1;
+Select s such that Next*(s, s1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16
+5000
+309 - Comment
+stmt s, s1;
+Select s1 such that Next*(s, s1)
+2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+5000
+310 - Comment
+assign a, a1;
+Select a such that Next*(a, a1)
+1, 4, 5, 8, 9, 13, 14, 16
+5000
+311 - Comment
+assign a, a1;
+Select a1 such that Next*(a, a1)
+4, 5, 8, 9, 13, 14, 16
+5000
+312 - Comment
+while w, w1;
+Select w such that Next*(w, w1)
+2, 6, 12
+5000
+313 - Comment
+while w, w1;
+Select w1 such that Next*(w, w1)
+2, 6, 12
+5000
+314 - Comment
+if ifs, ifs1;
+Select ifs such that Next*(ifs, ifs1)
+3
+5000
+315 - Comment
+if ifs, ifs1;
+Select ifs1 such that Next*(ifs, ifs1)
+3
+5000
+316 - Comment
+prog_line n, n1, n2;
+Select n such that Next*(n1, n2)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+317 - Comment
+stmt s, s1, s2;
+Select s such that Next*(s1, s2)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+318 - Comment
+assign a, a1, a2;
+Select a such that Next*(a1, a2)
+1, 4, 5, 8, 9, 11, 13, 14, 16, 17
+5000
+319 - Comment
+while w, w1, w2;
+Select w such that Next*(w1, w2)
+2, 6, 12
+5000
+320 - Comment
+if ifs, ifs1, ifs2;
+Select ifs such that Next*(ifs1, ifs2)
+3
+5000
+321 - Comment
+stmtLst t;
+Select t
+1, 3, 4, 6, 7, 10, 12, 13, 17
+5000
+322 - Comment
+assign a, a1;
+Select <a, a1> such that Affects (a, a1)
+1 9, 4 5, 4 9, 5 9, 8 5, 8 9, 9 9, 13 13, 13 14, 13 16
+5000
+323 - Comment
+
+Select BOOLEAN such that Affects (9, 9)
+TRUE
+5000
+324 - Comment
+assign a;
+Select a such that Affects(a, 16)
+13
+5000
+325 - Comment
+assign a;
+Select a such that Affects(8, a)
+5, 9
+5000
+326 - Comment
+stmt s; constant c; procedure p;
+Select <s, c.value, p> with s.stmt#=c.value
+2 2 alpha, 5 5 alpha, 6 6 alpha, 2 2 beta, 5 5 beta, 6 6 beta, 2 2 gamma, 5 5 gamma, 6 6 gamma, 2 2 delta, 5 5 delta, 6 6 delta
+5000
+327 - Comment
+ 
+Select BOOLEAN with 3 = 3
+TRUE
+5000
+328 - Comment
+
+Select BOOLEAN with 3 = 5
+FALSE
+5000
+329 - Comment
+
+Select BOOLEAN with "x" = "x"
+TRUE
+5000
+330 - Comment
+
+Select BOOLEAN with "y" = "x"
+FALSE
+5000
+331 - Comment
+stmt s;
+Select BOOLEAN with s = s
+FALSE
+5000
+332 - Comment
+stmt s; assign a;
+Select s with s = a
+none
+5000
+333 - Comment
+assign a; while w;
+Select w with w = 5
+none
+5000
+334 - Comment
+variable v;
+Select v with v.varName = "x"
+x
+5000
+335 - Comment
+procedure p;
+Select p with p.procName = "xxx"
+none
+5000
+336 - Comment
+procedure p; variable v;
+Select v with v.varName = p.procName
+none
+5000
+337 - Comment
+call c; assign a;
+Select s with c.stmt# = a.stmt#
+none
+5000
+338 - Comment
+stmt s; while w;
+Select s.stmt# with s.stmt# = w.stmt#
+2, 6, 12
+5000
+339 - Comment
+stmtLst sl; 
+Select sl with sl.stmt# = 4
+none
+5000
+340 - Comment
+variable v; assign a;
+Select v with v.varName = a.stmt#
+none
+5000
+341 - Comment
+stmt s; 
+Select s with s.stmt# = 3
+3
+5000
+342 - Comment
+variable v;
+Select BOOLEAN with v.varName=5
+FALSE
+5000
+343 - Comment
+prog_line n;
+Select n with n = n
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+344 - Comment
+prog_line n, n1;
+Select n with n = n1
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+5000
+345 - Comment
+
+Select BOOLEAN
+TRUE
+5000

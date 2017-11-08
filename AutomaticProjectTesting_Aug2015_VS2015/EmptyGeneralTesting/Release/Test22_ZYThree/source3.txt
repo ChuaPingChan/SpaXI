@@ -1,0 +1,74 @@
+procedure pie{a = x + y * boy;
+	cat = man - y + zebra + 6;
+	call apple;
+	if boy then {
+		while man {
+			man = man - 1;
+			kid = man + boy + dog;}
+		boy = boy - man;
+	} else{ x = boy - dog + x;
+	call banana;
+		y = x + 5 * boy;}}
+procedure banana{if i then {
+		boy = x + (y - man) * i;
+		x = 2 - 8;
+		while boy{
+			y = boy - cat - 3;
+			x = x + y; 
+			if zebra then {
+				a = boy * 3 + x + y;
+				x = i - y * 5;
+				while zebra {
+					a = boy;
+					boy = cat + 3;
+					cat = boy - egg;
+					egg = cat + dog;
+					while x {
+						x = x + boy;
+						boy = boy - 1;}}
+				if man then {
+					egg = man - 1;
+					a = x - i;
+				} else{kid = boy + kid - man; }
+			} else { if x then {
+					if man then{
+						y = x - 5;
+						call apple;
+						man = y - 1;
+					} else{	boy = x + y - man;}
+					boy = x + y + kid;
+				} else {i = man - i;
+					while i{
+						y = x;
+						kid = kid + 1;
+						y = zebra - kid - i;}}}
+			y = man + 3 * (5 * x) * boy;}
+		y = x * x - 3; 
+	} else {y = kid - 5;
+		while kid {
+			x = y;
+			call apple;}}}
+procedure apple {while boy{
+		while dog{
+			x = man + i;
+			kid = x - zebra - y;}}
+	boy = man * i - kid;
+	call orange ;
+	if i then {
+		a = boy - man - x;
+	} else {egg = boy - man;
+		cat = egg + boy * x;}
+	a = egg + kid;}
+procedure orange {y = i + man + boy;
+	if y then {
+		if man then {
+			if kid then {
+				kid = kid + 1;
+			} else{y = y - 1;}
+		} else {y = y + 1;}
+	} else {while y {
+			y = y + kid;
+			if y then {
+				kid = kid - man;
+			} else {cat = boy - man - x;}}}
+	cat = kid + y * 3;}

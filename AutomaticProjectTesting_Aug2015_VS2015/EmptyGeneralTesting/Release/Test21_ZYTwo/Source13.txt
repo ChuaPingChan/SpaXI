@@ -1,0 +1,26 @@
+procedure Main {
+  zero = zero + one;
+  one = one + two   ;
+  while two {
+    three = 100 + two + three + four;
+  }
+  while four {
+    four = four + five + six + 101;
+    while five {
+      five = five + six + seven + 102 + eight;
+    }
+    six = six + seven + eight;
+  }
+  while seven {
+    while eight {
+      nine = nine + ten + eleven;
+      eleven = ten + 103 + eleven;
+      while twelve {
+        thirteen = thirteen + fourteen + fifteen;
+      }
+      fourteen = fourteen;
+    }
+    fifteen = one + two + three + four + five;
+  }
+  correct = five + six + seven + eight + one + two + three + four;
+}

@@ -1,0 +1,18 @@
+procedure MINIITERONE {
+  a = a + b;
+  b = b + c;
+  while c {
+    c = c + d;
+    while d {
+      while b {
+        e = d;
+      }
+      while a {
+        c = b;
+      }
+      e = a + b + c;
+    }
+    a = a;
+  }
+  e = a + b + c + d;
+}

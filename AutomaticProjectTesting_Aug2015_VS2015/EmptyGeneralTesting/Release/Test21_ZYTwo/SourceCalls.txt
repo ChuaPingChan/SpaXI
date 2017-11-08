@@ -1,0 +1,21 @@
+procedure One {
+	a = a + 1;
+	while x {
+		call Two;
+		call Three;
+	}
+}
+
+procedure Two {
+	b = b + 1;
+	call Four;
+}
+
+procedure Three {
+	c = c + 1;
+	call Four;
+}
+
+procedure Four {
+	d = d + 1;
+}

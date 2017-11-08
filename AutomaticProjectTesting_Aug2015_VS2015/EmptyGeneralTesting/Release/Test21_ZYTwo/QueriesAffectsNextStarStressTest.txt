@@ -1,0 +1,20 @@
+1 - 1 NextStar
+stmt s, s1;
+Select <s, s1> such that Next*(s, s1)
+none
+5000
+2 - 3 NextStar (Tangled)
+stmt s, s1, s2;
+Select <s, s1, s2> such that Next*(s, s1) and Next*(s, s2) and Next*(s1, s2)
+none
+5000
+3 - 5 NextStar (1 common synonym)
+stmt s, s1, s2, s3, s4, s5;
+Select s such that Next*(s, s1) and Next*(s, s2) and Next*(s, s3) and Next*(s, s4) and Next*(s, s5)
+none
+5000
+4 - 3 NextStar (Disjoint)
+stmt s, s1, s2, s3, s4, s5;
+Select s such that Next*(s, s1) and Next*(s2, s3) and Next*(s4, s5)
+none
+5000

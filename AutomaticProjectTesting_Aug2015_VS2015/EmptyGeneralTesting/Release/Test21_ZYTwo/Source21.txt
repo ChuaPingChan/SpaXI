@@ -1,0 +1,30 @@
+procedure alpha {
+  x = w + y;
+  while i {
+    if y then {
+      v = a1 + a2;
+      y = t + u + v + w; }
+    else {
+      while x {
+        call beta;
+      }
+      t = w * 5; 
+    } 
+    y= (t + u) * x + v * 2 * y;
+  } 
+}
+procedure beta {
+  call delta; 
+  w = x; 
+}
+procedure delta {
+  while x {
+    x = x + 2; 
+    y = x * w;
+    call gamma;
+    z = x + y;
+  }
+}
+procedure gamma {
+  y = 6;
+}

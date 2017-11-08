@@ -1,0 +1,5 @@
+724 - WITH: string = string
+
+Select BOOLEAN with "hello" = "hello"
+TRUE
+5000

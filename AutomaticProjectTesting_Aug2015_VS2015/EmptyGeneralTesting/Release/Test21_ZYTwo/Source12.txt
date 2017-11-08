@@ -1,0 +1,9 @@
+procedure Main {
+  a = a1+a2;
+  while a {
+    while a3 {
+    	a3 = a1+a2+a3;
+    }
+    a4 = 5;
+  } 
+}

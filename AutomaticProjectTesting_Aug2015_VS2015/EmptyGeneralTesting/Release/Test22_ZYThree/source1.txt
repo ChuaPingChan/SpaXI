@@ -1,0 +1,46 @@
+procedure Bumblebee{
+	x = 1;
+	y = 2 * z;
+	call Megatron;
+	z = p - y;
+	if q then {
+		z = x + 24;
+		call Ironhide;
+	}
+	else{
+		while z{
+			y = x * q - 5;
+			z = z - 1;
+		}
+		y = x + y * z + p * q;
+		call Ironhide;
+	}
+	i = x + j + z;
+	call Barricade; 
+}
+
+procedure Megatron {
+	p = x * 10; 
+	q = y + y * 10;
+	while t {
+		a = 5 * p - 5;
+		x = 1 + y;
+	}
+	q = p * 5;
+}
+
+procedure Ironhide{
+	i = x * 10;
+	j = x + y * 10;
+	if i then {
+		x = j + 2;
+		call Barricade;
+	}
+	else {
+		y = i + x + y * z;
+	}
+}
+
+procedure Barricade {
+	q = i * x * j + y + p * q;
+}
