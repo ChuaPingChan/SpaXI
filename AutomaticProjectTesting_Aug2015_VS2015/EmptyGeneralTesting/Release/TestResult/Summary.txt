@@ -1,6 +1,6 @@
 Overall Test Ran    : 17520
-Overall Test Passed : 17343
-Overall Test Failed : 171
+Overall Test Passed : 17347
+Overall Test Failed : 167
 Overall Test Timeout: 6
 
 
@@ -1025,9 +1025,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out21_QueriesAffectsNextStarStressTest.xml: 
-Test Ran: 4	[BUG]
-Passed   : 0
-Failed   : 4
+Test Ran: 4	
+Passed   : 4
+Failed   : 0
 Timeout  : 0
 
 TestResult\out21_QueriesAffectsStar.xml: 
