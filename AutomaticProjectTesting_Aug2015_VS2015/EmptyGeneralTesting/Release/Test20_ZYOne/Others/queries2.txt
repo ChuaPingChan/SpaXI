@@ -311,12 +311,12 @@ Select c1 such that Follows (34, c1)
 63 - Checks BOOLEAN of follows line no of followedBy line no
 
 Select BOOLEAN such that Follows (6, 7)
-FALSE
+false
 5000
 64 - Checks BOOLEAN of follows line no of followedBy all
 
 Select BOOLEAN such that Follows (15, _)
-TRUE
+true
 5000
 65 - Get all followedBy s1 of any follows
 stmt s1;
@@ -351,12 +351,12 @@ Select c1 such that Follows (_, c1)
 71 - Checks BOOLEAN of all follows of followedBy line no
 
 Select BOOLEAN such that Follows (_, 9)
-FALSE
+false
 5000
 72 - Checks BOOLEAN of all follows of followedBy all
 
 Select BOOLEAN such that Follows (_, _)
-TRUE
+true
 5000
 1 - Get all follows* s1 of followedBy* s2
 stmt s1, s2;
@@ -671,12 +671,12 @@ Select c1 such that Follows* (34, c1)
 63 - Checks BOOLEAN of follows* line no of followedBy* line no
 
 Select BOOLEAN such that Follows* (6, 7)
-FALSE
+false
 5000
 64 - Checks BOOLEAN of follows* line no of followedBy* all
 
 Select BOOLEAN such that Follows* (15, _)
-TRUE
+true
 5000
 65 - Get all followedBy* s1 of any follows*
 stmt s1;
@@ -711,12 +711,12 @@ Select c1 such that Follows* (_, c1)
 71 - Checks BOOLEAN of all follows* of followedBy* line no
 
 Select BOOLEAN such that Follows* (_, 9)
-FALSE
+false
 5000
 72 - Checks BOOLEAN of all follows* of followedBy* all
 
 Select BOOLEAN such that Follows* (_, _)
-TRUE
+true
 5000
 1 - Check multiple such that clauses
 variable v; stmt s,s1,s2;
@@ -1176,12 +1176,12 @@ Select c1 such that Parent (50, c1)
 63 - Checks BOOLEAN of parent line no of child line no
 
 Select BOOLEAN such that Parent (6, 7)
-TRUE
+true
 5000
 64 - Checks BOOLEAN of parent line no of child all
 
 Select BOOLEAN such that Parent (15, _)
-TRUE
+true
 5000
 65 - Get all child s1 of any parent
 stmt s1;
@@ -1216,12 +1216,12 @@ Select c1 such that Parent (_, c1)
 71 - Checks BOOLEAN of all parent of child line no
 
 Select BOOLEAN such that Parent (_, 9)
-TRUE
+true
 5000
 72 - Checks BOOLEAN of all parent of child all
 
 Select BOOLEAN such that Parent (_, _)
-TRUE
+true
 5000
 1 - Get all parent s1 of child s2
 stmt s1, s2;
@@ -1536,12 +1536,12 @@ Select c1 such that Parent* (50, c1)
 63 - Checks BOOLEAN of parent line no of child line no
 
 Select BOOLEAN such that Parent* (6, 17)
-TRUE
+true
 5000
 64 - Checks BOOLEAN of parent line no of child all
 
 Select BOOLEAN such that Parent* (15, _)
-TRUE
+true
 5000
 65 - Get all child s1 of any parent
 stmt s1;
@@ -1576,12 +1576,12 @@ Select c1 such that Parent* (_, c1)
 71 - Checks BOOLEAN of all parent of child line no
 
 Select BOOLEAN such that Parent* (_, 9)
-TRUE
+true
 5000
 72 - Checks BOOLEAN of all parent of child all
 
 Select BOOLEAN such that Parent* (_, _)
-TRUE
+true
 5000
 1 - Check multiple such that clauses with constant value clause
 stmt s, s1; variable v; constant c;

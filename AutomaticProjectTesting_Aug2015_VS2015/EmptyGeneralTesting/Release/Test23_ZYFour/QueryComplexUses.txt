@@ -106,12 +106,12 @@ a,b,c,d,g,Bad,jkbk,egg,o,Bf,Be,Bd,Bc,Bb,Ba,n,Bh,Bg,Bk,Ca,Cd,Bm,Bz,e,Ab,Bj,Bn,Bo,
 22 - Comment
 
 Select BOOLEAN such that Uses(95,"Bz")
-TRUE
+true
 5000
 23 - Comment
 
 Select BOOLEAN such that Uses(100,"Bz")
-FALSE
+false
 5000
 24 - Comment
 variable v;
@@ -131,6 +131,6 @@ none
 27 - Comment
 
 Select BOOLEAN such that Uses(_,_)
-FALSE
+false
 5000
 

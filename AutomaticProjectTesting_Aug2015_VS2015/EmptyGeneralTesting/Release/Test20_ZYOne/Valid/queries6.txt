@@ -1,22 +1,22 @@
-1 - Follows(known ,known) -- TRUE
+1 - Follows(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows(17,20)
-TRUE
+true
 5000
-2 - Follows(known ,known) -- FALSE
+2 - Follows(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows(17,18)
-FALSE
+false
 5000
-3 - Follows(known ,known) -- TRUE
+3 - Follows(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows(5,13)
-TRUE
+true
 5000
-4 - Follows(known ,known) -- FALSE
+4 - Follows(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows(14,15)
-FALSE
+false
 5000
 5 - Follows(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -98,25 +98,25 @@ assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select s such that Follows(3,s)
 4
 5000
-21 - Follows*(known ,known) -- TRUE
+21 - Follows*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows*(1,14)
-TRUE
+true
 5000
-22 - Follows*(known ,known) -- FALSE
+22 - Follows*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows*(14,27)
-FALSE
+false
 5000
-23 - Follows*(known ,known) -- TRUE
+23 - Follows*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows*(8,12)
-TRUE
+true
 5000
-24 - Follows*(known ,known) -- FALSE
+24 - Follows*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows*(5,21)
-FALSE
+false
 5000
 25 - Follows*(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -168,25 +168,25 @@ assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select s such that Follows*(3,s)
 4,5,13,14
 5000
-1 - Parent(known ,known) -- TRUE
+1 - Parent(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent(45,48)
-TRUE
+true
 5000
-2 - Parent(known ,known) -- FALSE
+2 - Parent(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent(28,48)
-FALSE
+false
 5000
-3 - Parent(known ,known) -- TRUE
+3 - Parent(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent(5,6)
-TRUE
+true
 5000
-4 - Parent(known ,known) -- FALSE
+4 - Parent(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent(5,21)
-FALSE
+false
 5000
 5 - Parent(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -268,25 +268,25 @@ assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select c such that Parent(3,s)
 
 5000
-21 - Parent*(known ,known) -- TRUE
+21 - Parent*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent*(28,48)
-TRUE
+true
 5000
-22 - Parent*(known ,known) -- FALSE
+22 - Parent*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent*(14,27)
-FALSE
+false
 5000
-23 - Parent*(known ,known) -- TRUE
+23 - Parent*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent*(5,6)
-TRUE
+true
 5000
-24 - Parent*(known ,known) -- FALSE
+24 - Parent*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent*(5,21)
-FALSE
+false
 5000
 25 - Parent*(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -371,22 +371,22 @@ Select c such that Parent*(3,s)
 1 - Calls(known,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Calls("A","C")
-TRUE
+true
 5000
 2 - Calls(known,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Calls("A","D")
-TRUE
+true
 5000
 3 - Calls*(known,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Calls*("A","D")
-TRUE
+true
 5000
 4 - Calls*(known,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Calls*("D","C")
-FALSE
+false
 5000
 5 - Calls(unknown,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
@@ -411,32 +411,32 @@ B,C,D
 9 - Calls(unknown,unknown) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p,q;
 Select BOOLEAN such that Calls(p,q)
-TRUE
+true
 5000
 10 - Calls*(unknown,unknown) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p,q;
 Select BOOLEAN such that Calls*(p,q)
-TRUE
+true
 5000
-1 - Modifies(known assign,known) -- TRUE
+1 - Modifies(known assign,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(42,"x")
-TRUE
+true
 5000
-2 - Modifies(known ifs,known) -- TRUE
+2 - Modifies(known ifs,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(23,"q")
-TRUE
+true
 5000
-3 - Modifies(known while,known) -- TRUE
+3 - Modifies(known while,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(33,"a")
-TRUE
+true
 5000
-4 - Modifies(known proc,known) -- TRUE
+4 - Modifies(known proc,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies("C","q")
-TRUE
+true
 5000
 5 - Modifies(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -478,65 +478,65 @@ assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select v such that Modifies("C",v)
 a,i,j,p,q,r,s,x,y
 5000
-13 - Modifies(unknown assign,unknown var) -- TRUE
+13 - Modifies(unknown assign,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(a,v)
-TRUE
+true
 5000
-14 - Modifies(unknown if,unknown var) -- TRUE
+14 - Modifies(unknown if,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(ifs,v)
-TRUE
+true
 5000
-15 - Modifies(unknown while,unknown var) -- TRUE
+15 - Modifies(unknown while,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(w,v)
-TRUE
+true
 5000
-16 - Modifies(unknown proc,unknown var) -- TRUE
+16 - Modifies(unknown proc,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(p,v)
-TRUE
+true
 5000
-17 - Modifies(known call,known) -- TRUE
+17 - Modifies(known call,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(3,"p")
-TRUE
+true
 5000
-18 - Modifies(known call,unknown) -- TRUE
+18 - Modifies(known call,unknown) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select v such that Modifies(3,v)
 a,p,q,x
 5000
-19 - Modifies(unknown call,known) -- TRUE
+19 - Modifies(unknown call,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(c,"q")
-TRUE
+true
 5000
-20 - Modifies(unknown call,unknown var) -- TRUE
+20 - Modifies(unknown call,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Modifies(c,v)
-TRUE
+true
 5000
-1 - Uses(known assign,known) -- TRUE
+1 - Uses(known assign,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(42,"z")
-TRUE
+true
 5000
-2 - Uses(known ifs,known) -- TRUE
+2 - Uses(known ifs,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(23,"q")
-TRUE
+true
 5000
-3 - Uses(known while,known) -- TRUE
+3 - Uses(known while,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(33,"y")
-TRUE
+true
 5000
-4 - Uses(known proc,known) -- TRUE
+4 - Uses(known proc,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Modifies("D","a")
-TRUE
+true
 5000
 5 - Uses(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p;
@@ -578,75 +578,75 @@ assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select v such that Uses("D",v)
 i,j,p,q,r,x,y,z,t
 5000
-13 - Uses(unknown assign,unknown var) -- TRUE
+13 - Uses(unknown assign,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(a,v)
-TRUE
+true
 5000
-14 - Uses(unknown if,unknown var) -- TRUE
+14 - Uses(unknown if,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(ifs,v)
-TRUE
+true
 5000
-15 - Uses(unknown while,known var) -- TRUE
+15 - Uses(unknown while,known var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(w,v)
-TRUE
+true
 5000
-16 - Uses(unknown proc,known var) -- TRUE
+16 - Uses(unknown proc,known var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(p,v)
-TRUE
+true
 5000
-17 - Uses(known call,known) -- TRUE
+17 - Uses(known call,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Uses(3,"p")
-TRUE
+true
 5000
-18 - Uses(known call,unknown) -- TRUE
+18 - Uses(known call,unknown) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select v such that Uses(3,v)
 p,t,x,y
 5000
-19 - Uses(unknown call,known) -- TRUE
+19 - Uses(unknown call,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Uses(c,"q")
-TRUE
+true
 5000
-20 - Uses(unknown call,unknown var) -- TRUE
+20 - Uses(unknown call,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Uses(c,v)
-TRUE
+true
 5000
 1 - All Clauses With actual value
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
-TRUE
+true
 5000
 2 - All Clauses With actual value 
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(1,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
-FALSE
+false
 5000
 3 - All Clauses With actual value 
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(1,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
-FALSE
+false
 5000
 4 - All Clauses With actual value
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(2,"x") and Uses(42,"z") and Calls("A","C")
-FALSE
+false
 5000
 5 - All Clauses With actual value
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(1,"z") and Calls("A","C")
-FALSE
+false
 5000
 6 - All Clauses With actual value
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("B","C")
-FALSE
+false
 5000
 7 - All Clauses With One Synonyms
 assign a; stmt s; while w; if ifs; variable v; procedure p,q;
@@ -696,27 +696,27 @@ Select ifs such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Use
 23 - All Clauses With TWO Synonyms
 assign a,a1,a2,a3; stmt s; while w; if ifs,ifs2; variable v,v2; procedure p,p1,q,q1; constant c;
 Select BOOLEAN such that Parent(ifs,ifs2) and Follows(a,a2) and Modifies(s,v) and Uses(p,v2) and Calls*(p1,q) with ifs.stmt#=c.value pattern a3("x",_) 
-FALSE
+false
 5000
 24 - All Clauses With TWO Synonyms
 assign a,a1,a2,a3; stmt s; while w1,w2; if ifs,ifs2; variable v,v2; procedure p,p1,q,q1; constant c;
 Select BOOLEAN such that Parent(ifs,ifs) and Follows(w1,w2) and Modifies(s,v) and Uses(p,v2) and Calls*(p1,q) with ifs.stmt#=c.value pattern a3("x",_)
-FALSE
+false
 5000
 25 - All Clauses with common synonyms in one group
 assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;
 Select BOOLEAN such that Follows (3, 4) and Uses (5, "y")
-TRUE
+true
 5000
 1 - Next(known,known) -- true
 
 Select BOOLEAN such that Next(7,13)
-TRUE
+true
 5000
 2 - Next(known,known) -- false
 
 Select BOOLEAN such that Next(5,16)
-FALSE
+false
 5000
 3 - Next(known,n)
 prog_line n;
@@ -746,12 +746,12 @@ Select s such that Next(s,w)
 8 - Next*(known,known) -- true
 
 Select BOOLEAN such that Next*(39,32)
-TRUE
+true
 5000
 9 - Next*(known,known) -- false
 
 Select BOOLEAN such that Next*(31,48)
-FALSE
+false
 5000
 10 - Next*(known,n)
 prog_line n;
@@ -781,7 +781,7 @@ Select s such that Next*(s,w)
 15 - Next*(known,known) and Next(known,known) -- true
 
 Select BOOLEAN such that Next*(6,14) and Next(44,49)
-TRUE
+true
 5000
 16 - Next*(known,a) and Next*(known,a) -- common synonym
 assign a;

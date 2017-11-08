@@ -1,22 +1,22 @@
-1 - Uses(known assign,known) -- TRUE
+1 - Uses(known assign,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(42,"z")
-TRUE
+true
 5000
-2 - Uses(known ifs,known) -- TRUE
+2 - Uses(known ifs,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(23,"q")
-TRUE
+true
 5000
-3 - Uses(known while,known) -- TRUE
+3 - Uses(known while,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(33,"y")
-TRUE
+true
 5000
-4 - Uses(known proc,known) -- TRUE
+4 - Uses(known proc,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses("D","a")
-FALSE
+false
 5000
 5 - Uses(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p;
@@ -58,43 +58,43 @@ assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select v such that Uses("D",v)
 i,j,p,q,r,x,y,z,t
 5000
-13 - Uses(unknown assign,unknown var) -- TRUE
+13 - Uses(unknown assign,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(a,v)
-TRUE
+true
 5000
-14 - Uses(unknown if,unknown var) -- TRUE
+14 - Uses(unknown if,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(ifs,v)
-TRUE
+true
 5000
-15 - Uses(unknown while,known var) -- TRUE
+15 - Uses(unknown while,known var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(w,v)
-TRUE
+true
 5000
-16 - Uses(unknown proc,known var) -- TRUE
+16 - Uses(unknown proc,known var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Uses(p,v)
-TRUE
+true
 5000
-17 - Uses(known call,known) -- TRUE
+17 - Uses(known call,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Uses(3,"p")
-TRUE
+true
 5000
-18 - Uses(known call,unknown) -- TRUE
+18 - Uses(known call,unknown) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select v such that Uses(3,v)
 p,t,x,y
 5000
-19 - Uses(unknown call,known) -- TRUE
+19 - Uses(unknown call,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select c such that Uses(c,"q")
 7,12,14,25
 5000
-20 - Uses(unknown call,unknown var) -- TRUE
+20 - Uses(unknown call,unknown var) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Uses(c,v)
-TRUE
+true
 5000

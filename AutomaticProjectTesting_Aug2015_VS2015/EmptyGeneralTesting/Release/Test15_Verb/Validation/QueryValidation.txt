@@ -18,25 +18,25 @@ stmt s; s1; assign a; variable v;
 Select a such that Follows(2,7) pattern a(v, "y")
 none
 5000
-5 - Syntax Error: More than one such that clause
+5 - Allow
 stmt s; assign a; variable v;
 Select a such that Follows(2,7) such that Follows(1,2) pattern a(v, "y")
-none
+3,7,10
 5000
-6 - Syntax Error: More than one pattern clause
+6 - Allow - More than one pattern clause
 stmt s; assign a; variable v;
 Select a such that Follows(2,7) pattern a(v, _) pattern a(v, "y")
-none
+3,7,10
 5000
-7 - Syntax Error: More than one such that clause using and
+7 - Allow - More than one such that clause using and
 stmt s; assign a; variable v;
 Select a such that Follows(2,7) and Follows(1,2) pattern a(v, "y")
-none
+3,7,10
 5000
-8 - Syntax Error: More than one pattern clause using and
+8 - Allow -  More than one pattern clause using and
 stmt s; assign a; variable v;
 Select a such that Follows(2,7) pattern a(v, "y") and a(v, _)
-none
+3,7,10
 5000
 9 - Syntax Error: Invalid naming for synonym
 stmt 1s; assign a; variable v;

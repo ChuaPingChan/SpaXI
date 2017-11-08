@@ -18,14 +18,14 @@ smt s;
 Select s such that Next(14, 21)
 none
 5000
-5 - INVALID: synonym used is a synonym type
+5 - VALID: synonym used is a synonym type
 stmt s, constants;
-Select constants such that Next(14, 21)
+Select constants such that Next(14, 15)
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
 5000
-6 - INVALID: synonym used is a clause
+6 - VALID: synonym used is a clause
 stmt s, Affect;
-Select Affect such that Next(14, 21)
+Select Affect such that Next(14, 15)
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
 5000
 7 - INVALID: synonym used is a asterik
@@ -68,9 +68,9 @@ stmt s;
 Select s such that NEXT(14, 21)
 none
 5000
-15 - INVALID: spacing issues in query
+15 - VALID: spacing issues in query
 stmt s;
-Select      			s			such			that						Next(14 , 21)
+Select      			s			such			that						Next(14 , 15)
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
 5000
 16 - INVALID: repeated synonym in clause

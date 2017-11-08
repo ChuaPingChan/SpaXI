@@ -1,32 +1,32 @@
 1 - All Clauses With actual value
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
-TRUE
+true
 5000
 2 - All Clauses With actual value 
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(1,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
-FALSE
+false
 5000
 3 - All Clauses With actual value 
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(1,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
-FALSE
+false
 5000
 4 - All Clauses With actual value
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(2,"x") and Uses(42,"z") and Calls("A","C")
-FALSE
+false
 5000
 5 - All Clauses With actual value
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(1,"z") and Calls("A","C")
-FALSE
+false
 5000
 6 - All Clauses With actual value
 assign a; stmt s; while w; if ifs; variable v; procedure p;
 Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("B","C")
-FALSE
+false
 5000
 7 - All Clauses With One Synonyms
 assign a; stmt s; while w; if ifs; variable v; procedure p,q;
@@ -111,17 +111,17 @@ none
 23 - All Clauses With TWO Synonyms
 assign a,a1,a2,a3; stmt s; while w; if ifs,ifs2; variable v,v2; procedure p,p1,q,q1; constant c;
 Select BOOLEAN such that Parent(ifs,ifs) and Follows(a,a2) and Modifies(s,v) and Uses(p,v2) and Calls*(p1,q) with ifs.stmt#=c.value pattern a3("x",_)
-FALSE
+false
 5000
 24 - All Clauses With TWO Synonyms
 assign a,a1,a2,a3; stmt s; while w1,w2; if ifs,ifs2; variable v,v2; procedure p,p1,q,q1; constant c;
 Select BOOLEAN such that Parent(ifs,ifs) and Follows(w1,w2) and Modifies(s,v) and Uses(p,v2) and Calls*(p1,q) with ifs.stmt#=c.value pattern a3("x",_)
-FALSE
+false
 5000
 25 - All Clauses with common synonyms in one group
 assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;
 Select BOOLEAN such that Follows (3, 4) and Uses (5, "y")
-TRUE
+true
 5000
 26 - All Clauses with common synonyms in one group
 assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;

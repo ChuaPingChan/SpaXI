@@ -1,22 +1,22 @@
-1 - Follows(known ,known) -- TRUE
+1 - Follows(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows(17,20)
-TRUE
+true
 5000
-2 - Follows(known ,known) -- FALSE
+2 - Follows(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows(17,18)
-FALSE
+false
 5000
-3 - Follows(known ,known) -- TRUE
+3 - Follows(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows(5,13)
-TRUE
+true
 5000
-4 - Follows(known ,known) -- FALSE
+4 - Follows(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows(14,15)
-FALSE
+false
 5000
 5 - Follows(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -98,25 +98,25 @@ assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select s such that Follows(3,s)
 4
 5000
-21 - Follows*(known ,known) -- TRUE
+21 - Follows*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows*(1,14)
-TRUE
+true
 5000
-22 - Follows*(known ,known) -- FALSE
+22 - Follows*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows*(14,27)
-FALSE
+false
 5000
-23 - Follows*(known ,known) -- TRUE
+23 - Follows*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows*(8,12)
-TRUE
+true
 5000
-24 - Follows*(known ,known) -- FALSE
+24 - Follows*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Follows*(5,21)
-FALSE
+false
 5000
 25 - Follows*(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;

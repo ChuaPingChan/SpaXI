@@ -171,7 +171,7 @@ Select a with c.value = a.stmt# pattern a("x", _"j"_)
 35 - Next Boolean 
 assign a;
 Select BOOLEAN such that Next(7, 9)
-FALSE
+false
 5000
 36 - Next* and Next*
 assign a; 
@@ -196,7 +196,7 @@ Bumblebee, Ironhide
 40 - Next boolean 
 assign a; 
 Select BOOLEAN such that Next(5, 6)
-TRUE 
+true 
 5000
 41 - Next*
 assign a; 
@@ -281,7 +281,7 @@ Select a such that Affects(a, 10)
 57 - Boolean Affect*
 assign a;
 Select BOOLEAN such that Affects*(1, 11)
-FALSE
+false
 5000
 58 - Affects, Parent
 stmt s;  

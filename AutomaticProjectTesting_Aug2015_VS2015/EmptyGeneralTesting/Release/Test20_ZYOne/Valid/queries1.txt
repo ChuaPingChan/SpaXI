@@ -66,12 +66,12 @@ Select a pattern a(_,_)
 14 - Modifies(known,known) -- true
 
 Select BOOLEAN such that Modifies(5,"x")
-TRUE
+true
 5000
 15 - Modifies(known,known) -- false
 
 Select BOOLEAN such that Modifies(3,"cd")
-FALSE
+false
 5000
 16 - Modifies(known,v)
 variable v;
@@ -91,12 +91,12 @@ Select a such that Modifies(a,v)
 19 - Uses(known,known) -- true
 
 Select BOOLEAN such that Uses(6,"averylonglonglonglongvar")
-TRUE
+true
 5000
 20 - Uses(known,known) -- false
 
 Select BOOLEAN such that Uses(3,"CD")
-FALSE
+false
 5000
 21 - Uses(known,v)
 variable v;
