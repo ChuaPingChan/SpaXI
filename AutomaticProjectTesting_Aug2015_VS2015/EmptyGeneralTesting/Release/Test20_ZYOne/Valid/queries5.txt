@@ -1,12 +1,12 @@
 1 - Calls(known,known) -- true
 
 Select BOOLEAN such that Calls("B","D")
-TRUE
+true
 5000
 2 - Calls(known,known) -- false
 
 Select BOOLEAN such that Calls("A","C")
-FALSE
+false
 5000
 3 - Calls(known,p)
 procedure p;
@@ -26,12 +26,12 @@ A,B,D,E
 6 - Calls*(known,known) -- true
 
 Select BOOLEAN such that Calls*("B","F")
-TRUE
+true
 5000
 7 - Calls*(known,known) -- false
 
 Select BOOLEAN such that Calls*("C","A")
-FALSE
+false
 5000
 8 - Calls*(known,p)
 procedure p;
@@ -51,22 +51,22 @@ B,C,D,E,F
 11 - Modifies(known,known) -- within proc
 
 Select BOOLEAN such that Modifies("B","c")
-TRUE
+true
 5000
 12 - Modifies(known,known) -- nested proc
 
 Select BOOLEAN such that Modifies("B","d")
-TRUE
+true
 5000
 13 - Modifies(known,known) -- within call
 
 Select BOOLEAN such that Modifies(16,"b")
-TRUE
+true
 5000
 14 - Modifies(known,known) -- nested call
 
 Select BOOLEAN such that Modifies(9,"x")
-TRUE
+true
 5000
 15 - Modifies(p,known)
 procedure p;
@@ -101,22 +101,22 @@ Select c such that Modifies(c,v)
 21 - Uses(known,known) -- within proc
 
 Select BOOLEAN such that Uses("B","b")
-TRUE
+true
 5000
 22 - Uses(known,known) -- nested proc
 
 Select BOOLEAN such that Uses("B","x")
-TRUE
+true
 5000
 23 - Uses(known,known) -- within call
 
 Select BOOLEAN such that Uses(16,"a")
-TRUE
+true
 5000
 24 - Uses(known,known) -- nested call
 
 Select BOOLEAN such that Uses(9,"x")
-TRUE
+true
 5000
 25 - Uses(p,known)
 procedure p;

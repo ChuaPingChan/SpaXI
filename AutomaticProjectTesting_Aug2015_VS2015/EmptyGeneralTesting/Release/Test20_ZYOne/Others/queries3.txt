@@ -1,77 +1,77 @@
 1 - Select BOOLEAN pattern case 1-a1
 assign a;
 Select BOOLEAN pattern a("aladdin", "beast")
-FALSE
+false
 5000
 2 - Select BOOLEAN pattern case 1-a2
 assign a;
 Select BOOLEAN pattern a("aladdin", _"beast"_)
-TRUE
+true
 5000
 3 - Select BOOLEAN pattern case 1-a3
 assign a;
 Select BOOLEAN pattern a("aladdin", _)
-TRUE
+true
 5000
 4 - Select BOOLEAN pattern case 2-a1
 assign a;
 Select BOOLEAN pattern a(_, "bea")
-FALSE
+false
 5000
 5 - Select BOOLEAN pattern case 2-a2
 assign a;
 Select BOOLEAN pattern a(_, _"bea"_)
-FALSE
+false
 5000
 6 - Select BOOLEAN pattern case 2-a3
 assign a; variable v;
 Select BOOLEAN pattern a(_, _)
-TRUE
+true
 5000
 7 - Select BOOLEAN pattern case 3-a1
 assign a; variable v;
 Select BOOLEAN pattern a(v, "program")
-FALSE
+false
 5000
 8 - Select BOOLEAN pattern case 3-a2
 assign a; variable v;
 Select BOOLEAN pattern a(v, _"program"_)
-TRUE
+true
 5000
 9 - Select BOOLEAN pattern case 3-a3
 assign a; variable v;
 Select BOOLEAN pattern a(v, _)
-TRUE
+true
 5000
 10 - Select BOOLEAN pattern case 1
 while w;
 Select BOOLEAN pattern w("code", _)
-TRUE
+true
 5000
 11 - Select BOOLEAN pattern case 2
 while w;
 Select BOOLEAN pattern w(_, _)
-TRUE
+true
 5000
 12 - Select BOOLEAN pattern case 3
 while w; variable v;
 Select BOOLEAN pattern w(v, _)
-TRUE
+true
 5000
 13 - Select BOOLEAN pattern case 1
 if ifs;
 Select BOOLEAN pattern ifs("code", _, _)
-FALSE
+false
 5000
 14 - Select BOOLEAN pattern case 2
 if ifs;
 Select BOOLEAN pattern ifs(_, _, _)
-TRUE
+true
 5000
 15 - Select BOOLEAN pattern case 3
 if ifs;  variable v;
 Select BOOLEAN pattern ifs(v, _, _)
-TRUE
+true
 5000
 16 - Select ARG1 pattern case 1-a1
 assign a;

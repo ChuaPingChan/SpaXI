@@ -1,7 +1,7 @@
 1 - USES-boolean: fixed-fixed (regular stmt)
 
 Select BOOLEAN such that Uses(12, "charmeleon")
-TRUE
+true
 5000
 2 - USES-stmt: fixed-fixed (while stmt)
 stmt s;
@@ -11,19 +11,19 @@ Select s such that Uses(18, "battle3")
 3 - USES-boolean: fixed-fixed (within while stmt)
 
 Select BOOLEAN such that Uses(17, "wartortle")
-TRUE
+true
 5000
 4 - USES-boolean: fixed-fixed (if stmt)
 
 Select BOOLEAN such that Uses(20, "wartortle")
-TRUE
+true
 5000
 5 - USES-boolean: fixed-fixed (within if stmt)
 
 Select BOOLEAN such that Uses(20, "squirtle")
-TRUE
+true
 5000
-6 - USES-stmt: fixed-fixed (FALSE)
+6 - USES-stmt: fixed-fixed (false)
 stmt s;
 Select s such that Uses(14, "charmeleon")
 none
@@ -106,7 +106,7 @@ none
 23 - USES-boolean: fixed-generic
 
 Select BOOLEAN such that Uses(14, _)
-TRUE
+true
 5000
 25 - USES-assign: syn-generic
 assign a;
@@ -196,7 +196,7 @@ none
 43 - USES: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Uses(12, "charmeleon") and Uses(17, "battle2")
-TRUE
+true
 5000
 44 - USES: 2 clauses (similar) - syn-syn, syn-syn
 stmt s; variable v1, v2;
@@ -276,12 +276,12 @@ none
 66 - USES: procName - with clause (has results)
 procedure p;
 Select BOOLEAN such that Uses(p, "battle1") with p.procName = "pokemon"
-TRUE
+true
 5000
 67 - USES: procName - with clause (no results)
 procedure p;
 Select BOOLEAN such that Uses(p, "battle1") with p.procName = "digimon"
-FALSE
+false
 5000
 68 - USES: varName - select clause (has results)
 variable v;
@@ -296,12 +296,12 @@ none
 70 - USES: varName - with clause (has results)
 variable v;
 Select BOOLEAN such that Uses(19, v) with v.varName = "wartortle"
-TRUE
+true
 5000
 71 - USES: varName - with clause (no results)
 variable v;
 Select BOOLEAN such that Uses(19, v) with v.varName = "charmander"
-FALSE
+false
 5000
 72 - USES: const - with clause (has results)
 variable v; constant c;
@@ -311,7 +311,7 @@ Select c such that Uses(17, v) with c.value = 3
 73 - USES: const - with clause (no results)
 variable v; constant c;
 Select BOOLEAN such that Uses(17, v) with c.value = 6
-FALSE
+false
 5000
 74 - USES: prog_line
 prog_line n;
@@ -341,19 +341,19 @@ none
 79 - MODIFIES-boolean: fixed-fixed (regular stmt)
 
 Select BOOLEAN such that Modifies(12, "battle1")
-TRUE
+true
 5000
 80 - MODIFIES-boolean: fixed-fixed (within while stmt)
 
 Select BOOLEAN such that Modifies(17, "wartortle")
-TRUE
+true
 5000
 81 - MODIFIES-boolean: fixed-fixed (if stmt)
 
 Select BOOLEAN such that Modifies(20, "wartortle")
-TRUE
+true
 5000
-82 - MODIFIES-stmt: fixed-fixed (FALSE)
+82 - MODIFIES-stmt: fixed-fixed (false)
 stmt s;
 Select s such that Modifies(20, "charmeleon")
 none
@@ -436,7 +436,7 @@ pokemon
 99 - MODIFIES-boolean: fixed-generic
 
 Select BOOLEAN such that Modifies(14, _)
-TRUE
+true
 5000
 101 - MODIFIES-assign: syn-generic
 assign a;
@@ -526,7 +526,7 @@ none
 119 - MODIFIES: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Modifies(12, "battle1") and Modifies(17, "ivysaur")
-TRUE
+true
 5000
 120 - MODIFIES: 2 clauses (similar) - syn-syn, syn-syn
 stmt s1, s2; variable v;
@@ -546,7 +546,7 @@ Select s such that Modifies(s, "ivysaur") and Modifies(a, "battle2")
 123 - MODIFIES: 2 clauses (similar) - fixed-generic, fixed-generic
 
 Select BOOLEAN such that Modifies(23, _) and Modifies(20, _)
-TRUE
+true
 5000
 125 - MODIFIES: 2 clauses (similar) - syn-generic, syn-generic
 if i; while w;
@@ -601,12 +601,12 @@ none
 142 - MODIFIES: procName - with clause (has results)
 procedure p;
 Select BOOLEAN such that Modifies(p, "battle1") with p.procName = "pokemon"
-TRUE
+true
 5000
 143 - MODIFIES: procName - with clause (no results)
 procedure p;
 Select BOOLEAN such that Modifies(p, "battle1") with p.procName = "digimon"
-FALSE
+false
 5000
 144 - MODIFIES: varName - select clause (has results)
 variable v;
@@ -616,12 +616,12 @@ wartortle
 145 - Modifies: varName - with clause (has results)
 variable v;
 Select BOOLEAN such that Modifies(19, v) with v.varName = "ivysaur"
-TRUE
+true
 5000
 146 - MODIFIES: varName - with clause (no results)
 variable v;
 Select BOOLEAN such that Modifies(19, v) with v.varName = "charmander"
-FALSE
+false
 5000
 147 - MODIFIES: const - with clause (has results)
 variable v; constant c;
@@ -631,7 +631,7 @@ Select c such that Modifies(17, v) with c.value = 3
 148 - MODIFIES: const - with clause (no results)
 variable v; constant c;
 Select BOOLEAN such that Modifies(17, v) with c.value = 6
-FALSE
+false
 5000
 149 - MODIFIES: prog_line
 prog_line n;
@@ -641,7 +641,7 @@ Select n such that Modifies(n, "wartortle")
 150 - PARENT-boolean: fixed-fixed (regular stmt)
 
 Select BOOLEAN such that Parent(5, 6)
-TRUE
+true
 5000
 151 - PARENT-stmt: fixed-fixed (while stmt)
 stmt s;
@@ -651,14 +651,14 @@ Select s such that Parent(15, 17)
 152 - PARENT-boolean: fixed-fixed (if stmt, if block)
 
 Select BOOLEAN such that Parent(20, 21)
-TRUE
+true
 5000
 153 - PARENT-boolean: fixed-fixed (fi stmt, else block)
 
 Select BOOLEAN such that Parent(20, 22)
-TRUE
+true
 5000
-154 - PARENT-stmt: fixed-fixed (FALSE)
+154 - PARENT-stmt: fixed-fixed (false)
 stmt s;
 Select s such that Parent(14, 15)
 none
@@ -686,7 +686,7 @@ Select i such that Parent(i, s)
 159 - PARENT-boolean: generic-generic
 
 Select BOOLEAN such that Parent(_, _)
-TRUE
+true
 5000
 160 - PARENT-assign: fixed-syn (while stmt)
 assign a;
@@ -716,12 +716,12 @@ Select i such that Parent(i, 22)
 165 - PARENT-boolean: fixed-generic
 
 Select BOOLEAN such that Parent(14, _)
-FALSE
+false
 5000
 166 - PARENT-boolean: generic-fixed
 
 Select BOOLEAN such that Parent(_, 23)
-TRUE
+true
 5000
 167 - PARENT-assign: syn-generic
 assign a;
@@ -781,7 +781,7 @@ Select i such that Parent(i, 21) pattern i(v, _, _)
 178 - PARENT: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Parent(15, 17) and Parent(17, 18)
-TRUE
+true
 5000
 179 - PARENT: 2 clauses (similar) - syn-syn, syn-syn
 stmt s1, s2;
@@ -801,7 +801,7 @@ Select w such that Parent(15, w) and Parent(w, 18)
 182 - PARENT: 2 clauses (similar) - fixed-generic, fixed-generic
 
 Select BOOLEAN such that Parent(5, _) and Parent(20, _)
-TRUE
+true
 5000
 183 - PARENT: 2 clauses (similar) - generic-fixed, generic-fixed
 stmt s
@@ -846,7 +846,7 @@ none
 191 - PARENT: 2 clauses (mixed) - fixed-generic, generic-syn
 
 Select BOOLEAN such that Parent(18, _) and Parent(_, 18)
-TRUE
+true
 5000
 192 - PARENT: 2 clauses (mixed) - generic-fixed, syn-generic
 stmt s;
@@ -911,7 +911,7 @@ none
 204 - PARENT*-boolean: fixed-fixed (regular stmt)
 
 Select BOOLEAN such that Parent*(15, 22)
-TRUE
+true
 5000
 205 - PARENT*-stmt: fixed-fixed (while stmt)
 stmt s;
@@ -921,14 +921,14 @@ Select s such that Parent*(15, 18)
 206 - PARENT*-boolean: fixed-fixed (if stmt, if block)
 
 Select BOOLEAN such that Parent*(20, 21)
-TRUE
+true
 5000
 207 - PARENT*-boolean: fixed-fixed (fi stmt, then block)
 
 Select BOOLEAN such that Parent*(20, 22)
-TRUE
+true
 5000
-208 - PARENT*-stmt: fixed-fixed (FALSE)
+208 - PARENT*-stmt: fixed-fixed (false)
 stmt s;
 Select s such that Parent*(14, 15)
 none
@@ -956,7 +956,7 @@ Select i such that Parent*(i, s)
 213 - PARENT*-boolean: generic-generic
 
 Select BOOLEAN such that Parent*(_, _)
-TRUE
+true
 5000
 214 - PARENT*-assign: fixed-syn (while stmt)
 assign a;
@@ -986,12 +986,12 @@ Select i such that Parent*(i, 22)
 219 - PARENT*-boolean: fixed-generic
 
 Select BOOLEAN such that Parent*(14, _)
-FALSE
+false
 5000
 220 - PARENT*-boolean: generic-fixed
 
 Select BOOLEAN such that Parent*(_, 23)
-TRUE
+true
 5000
 221 - PARENT*-assign: syn-generic
 assign a;
@@ -1051,7 +1051,7 @@ Select i such that Parent*(i, 21) pattern i(v, _, _)
 232 - PARENT*: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Parent*(15, 17) and Parent*(17, 18)
-TRUE
+true
 5000
 233 - PARENT*: 2 clauses (similar) - syn-syn, syn-syn
 stmt s1, s2;
@@ -1071,7 +1071,7 @@ Select w such that Parent*(15, w) and Parent*(w, 18)
 236 - PARENT*: 2 clauses (similar) - fixed-generic, fixed-generic
 
 Select BOOLEAN such that Parent*(5, _) and Parent*(20, _)
-TRUE
+true
 5000
 237 - PARENT*: 2 clauses (similar) - generic-fixed, generic-fixed
 stmt s
@@ -1116,7 +1116,7 @@ none
 245 - PARENT*: 2 clauses (mixed) - fixed-generic, generic-syn
 
 Select BOOLEAN such that Parent*(18, _) and Parent*(_, 18)
-TRUE
+true
 5000
 246 - PARENT*: 2 clauses (mixed) - generic-fixed, syn-generic
 stmt s;
@@ -1181,7 +1181,7 @@ none
 258 - FOLLOWS-boolean: fixed-fixed (regular stmt)
 
 Select BOOLEAN such that Follows(1, 2)
-TRUE
+true
 5000
 259 - FOLLOWS-stmt: fixed-fixed (while stmt)
 stmt s;
@@ -1191,7 +1191,7 @@ Select s such that Follows(5, 9)
 260 - FOLLOWS-boolean: fixed-fixed (if stmt)
 
 Select BOOLEAN such that Follows(20, 21)
-FALSE
+false
 5000
 261 - FOLLOWS-stmt: syn-syn (tuple)
 stmt s1, s2;
@@ -1216,7 +1216,7 @@ none
 265 - FOLLOWS-boolean: generic-generic
 
 Select BOOLEAN such that Follows(_, _)
-TRUE
+true
 5000
 266 - FOLLOWS-stmt: fixed-syn
 stmt s;
@@ -1256,12 +1256,12 @@ none
 273 - FOLLOWS-boolean: fixed-generic
 
 Select BOOLEAN such that Follows(18, _)
-TRUE
+true
 5000
 274 - FOLLOWS-boolean: generic-fixed
 
 Select BOOLEAN such that Follows(_, 23)
-TRUE
+true
 5000
 275 - FOLLOWS-assign: syn-generic
 assign a;
@@ -1281,7 +1281,7 @@ none
 278 - FOLLOWS-boolean : generic-syn
 stmt s;
 Select BOOLEAN such that Follows(_, s)
-TRUE
+true
 5000
 279 - FOLLOWS-assign: pattern-right defined (match select)
 assign a;
@@ -1356,7 +1356,7 @@ Select i such that Follows(_, i) pattern i(v, _, _)
 293 - FOLLOWS: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Follows(6, 7) and Follows(18, 20)
-TRUE
+true
 5000
 294 - FOLLOWS: 2 clauses (similar) - syn-syn, syn-syn
 stmt s1, s2, s3;
@@ -1381,7 +1381,7 @@ Select s such that Follows(13, _) and Follows(9, _)
 298 - FOLLOWS: 2 clauses (similar) - generic-fixed, generic-fixed
 
 Select BOOLEAN such that Follows(_, 15) and Follows(_, 23)
-TRUE
+true
 5000
 299 - FOLLOWS: 2 clauses (similar) - syn-generic, syn-generic
 while w; if i;
@@ -1396,7 +1396,7 @@ Select w such that Follows(_, w) and Follows(_, i)
 301 - FOLLOWS: 2 clauses (mixed) - fixed-fixed, fixed-syn
 assign a;
 Select BOOLEAN such that Follows(1, 2) and Follows(4, a)
-FALSE
+false
 5000
 302 - FOLLOWS: 2 clauses (mixed) - syn-syn, syn-fixed
 assign a1, a2;
@@ -1406,7 +1406,7 @@ Select a2 such that Follows(a1, a2) and Follows(a1, 7)
 303 - FOLLOWS: 2 clauses (mixed) - generic-generic, fixed-generic
 
 Select BOOLEAN such that Follows(_, _) and Follows(18, _)
-TRUE
+true
 5000
 304 - FOLLOWS: 2 clauses (mixed) - fixed-syn, generic-fixed
 stmt s;
@@ -1436,7 +1436,7 @@ Select s such that Follows(s, _) and Follows(_, s)
 309 - FOLLOWS: 2 clauses (mixed) - generic-fixed, generic-syn
 while w;
 Select BOOLEAN such that Follows(_, 20) and Follows(_, w)
-TRUE
+true
 5000
 310 - FOLLOWS: stmt# - select clause (has results)
 assign a;
@@ -1486,7 +1486,7 @@ none
 319 - FOLLOWS*-boolean: fixed-fixed (regular stmt)
 
 Select BOOLEAN such that Follows*(1, 4)
-TRUE
+true
 5000
 320 - FOLLOWS*-stmt: fixed-fixed (while stmt)
 stmt s;
@@ -1496,7 +1496,7 @@ Select s such that Follows*(5, 12)
 321 - FOLLOWS*-boolean: fixed-fixed (if stmt)
 
 Select BOOLEAN such that Follows*(20, 21)
-FALSE
+false
 5000
 322 - FOLLOWS*-stmt: syn-syn (tuple)
 stmt s1, s2;
@@ -1521,7 +1521,7 @@ none
 326 - FOLLOWS*-boolean: generic-generic
 
 Select BOOLEAN such that Follows*(_, _)
-TRUE
+true
 5000
 327 - FOLLOWS*-stmt: fixed-syn
 stmt s;
@@ -1561,12 +1561,12 @@ none
 334 - FOLLOWS*-boolean: fixed-generic
 
 Select BOOLEAN such that Follows*(18, _)
-TRUE
+true
 5000
 335 - FOLLOWS*-boolean: generic-fixed
 
 Select BOOLEAN such that Follows*(_, 23)
-TRUE
+true
 5000
 336 - FOLLOWS*-assign: syn-generic
 assign a;
@@ -1586,7 +1586,7 @@ none
 339 - FOLLOWS*-boolean : generic-syn
 stmt s;
 Select BOOLEAN such that Follows*(_, s)
-TRUE
+true
 5000
 340 - FOLLOWS*-assign: pattern-right defined (match select)
 assign a;
@@ -1661,7 +1661,7 @@ Select i such that Follows*(_, i) pattern i(v, _, _)
 354 - FOLLOWS*: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Follows*(6, 7) and Follows*(18, 20)
-TRUE
+true
 5000
 355 - FOLLOWS*: 2 clauses (similar) - syn-syn, syn-syn
 stmt s1, s2, s3;
@@ -1686,7 +1686,7 @@ Select s such that Follows*(13, _) and Follows*(9, _)
 359 - FOLLOWS*: 2 clauses (similar) - generic-fixed, generic-fixed
 
 Select BOOLEAN such that Follows*(_, 15) and Follows*(_, 23)
-TRUE
+true
 5000
 360 - FOLLOWS*: 2 clauses (similar) - syn-generic, syn-generic
 while w; if i;
@@ -1701,7 +1701,7 @@ Select w such that Follows*(_, w) and Follows*(_, i)
 362 - FOLLOWS*: 2 clauses (mixed) - fixed-fixed, fixed-syn
 assign a;
 Select BOOLEAN such that Follows*(1, 2) and Follows*(4, a)
-TRUE
+true
 5000
 363 - FOLLOWS*: 2 clauses (mixed) - syn-syn, syn-fixed
 assign a1, a2;
@@ -1711,7 +1711,7 @@ Select a2 such that Follows*(a1, a2) and Follows*(a1, 7)
 364 - FOLLOWS*: 2 clauses (mixed) - generic-generic, fixed-generic
 
 Select BOOLEAN such that Follows*(_, _) and Follows*(18, _)
-TRUE
+true
 5000
 365 - FOLLOWS*: 2 clauses (mixed) - fixed-syn, generic-fixed
 stmt s;
@@ -1741,7 +1741,7 @@ Select s such that Follows*(s, _) and Follows*(_, s)
 370 - FOLLOWS*: 2 clauses (mixed) - generic-fixed, generic-syn
 while w;
 Select BOOLEAN such that Follows*(_, 20) and Follows*(_, w)
-TRUE
+true
 5000
 371 - FOLLOWS*: stmt# - select clause (has results)
 assign a;
@@ -1791,7 +1791,7 @@ none
 380 - NEXT-boolean: fixed-fixed (regular stmt)
 
 Select BOOLEAN such that Next(7, 8)
-TRUE
+true
 5000
 381 - NEXT-stmt: fixed-fixed (while stmt)
 stmt s;
@@ -1801,19 +1801,19 @@ Select s such that Next(14, 15)
 382 - NEXT-boolean: fixed-fixed (loop while stmt)
 
 Select BOOLEAN such that Next(23, 15)
-TRUE
+true
 5000
 383 - NEXT-boolean: fixed-fixed (if stmt)
 
 Select BOOLEAN such that Next(18, 20)
-TRUE
+true
 5000
 384 - NEXT-boolean: fixed-fixed (if stmt to then block)
 
 Select BOOLEAN such that Next(20, 22)
-TRUE
+true
 5000
-385 - NEXT-stmt: fixed-fixed (FALSE)
+385 - NEXT-stmt: fixed-fixed (false)
 stmt s;
 Select s such that Next(21, 22)
 none
@@ -1841,7 +1841,7 @@ Select i such that Next(i, s)
 390 - NEXT-boolean: generic-generic
 
 Select BOOLEAN such that Next(_, _)
-TRUE
+true
 5000
 391 - NEXT-stmt: fixed-syn (regular stmt)
 stmt s;
@@ -1881,12 +1881,12 @@ Select i such that Next(i, 21)
 398 - NEXT-boolean: fixed-generic
 
 Select BOOLEAN such that Next(22, _)
-TRUE
+true
 5000
 399 - NEXT-boolean: generic-fixed
 
 Select BOOLEAN such that Next(_, 18)
-TRUE
+true
 5000
 400 - NEXT-assign: syn-generic
 assign a;
@@ -1976,7 +1976,7 @@ Select i such that Next(i, _) pattern i(v, _, _)
 417 - NEXT: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Next(1, 2) and Next(7, 8)
-TRUE
+true
 5000
 418 - NEXT: 2 clauses (similar) - syn-syn, syn-syn
 stmt s; while w; assign a;
@@ -1996,7 +1996,7 @@ none
 421 - NEXT: 2 clauses (similar) - fixed-generic, fixed-generic
 
 Select BOOLEAN such that Next(23, _) and Next(22, _)
-TRUE
+true
 5000
 422 - NEXT: 2 clauses (similar) - generic-fixed, generic-fixed
 stmt s; while w;
@@ -2026,7 +2026,7 @@ none
 427 - NEXT: 2 clauses (mixed) - generic-generic, fixed-generic
 
 Select BOOLEAN such that Next(_, _) and Next(23, _)
-TRUE
+true
 5000
 428 - NEXT: 2 clauses (mixed) - fixed-syn, generic-fixed
 while w;
@@ -2106,7 +2106,7 @@ none
 443 - NEXT*-boolean: fixed-fixed (regular stmt)
 
 Select BOOLEAN such that Next*(7, 21)
-TRUE
+true
 5000
 444 - NEXT*-stmt: fixed-fixed (while stmt)
 stmt s;
@@ -2116,17 +2116,17 @@ Select s such that Next*(9, 15)
 445 - NEXT*-boolean: fixed-fixed (loop while stmt)
 
 Select BOOLEAN such that Next*(19, 15)
-TRUE
+true
 5000
 446 - NEXT*-boolean: fixed-fixed (if stmt)
 
 Select BOOLEAN such that Next*(17, 20)
-TRUE
+true
 5000
 447 - NEXT*-boolean: fixed-fixed (if stmt to then block)
 
 Select BOOLEAN such that Next*(20, 22)
-TRUE
+true
 5000
 448 - NEXT*-stmt: fixed-fixed (loop to previously unreachable)
 stmt s;
@@ -2156,7 +2156,7 @@ Select i such that Next*(i, s)
 453 - NEXT*-boolean: generic-generic
 
 Select BOOLEAN such that Next*(_, _)
-TRUE
+true
 5000
 454 - NEXT*-stmt: fixed-syn (regular stmt)
 stmt s;
@@ -2196,12 +2196,12 @@ Select i such that Next*(i, 15)
 461 - NEXT*-boolean: fixed-generic
 
 Select BOOLEAN such that Next*(23, _)
-TRUE
+true
 5000
 462 - NEXT*-boolean: generic-fixed
 
 Select BOOLEAN such that Next*(_, 18)
-TRUE
+true
 5000
 463 - NEXT*-assign: syn-generic
 assign a;
@@ -2291,7 +2291,7 @@ Select i such that Next*(_, i) pattern i(v, _, _)
 480 - NEXT*: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Next*(1, 5) and Next*(7, 15)
-TRUE
+true
 5000
 481 - NEXT*: 2 clauses (similar) - syn-syn, syn-syn
 stmt s; while w;
@@ -2311,7 +2311,7 @@ Select a such that Next*(a, 17) and Next* (w, 13)
 484 - NEXT*: 2 clauses (similar) - fixed-generic, fixed-generic
 
 Select BOOLEAN such that Next*(23, _) and Next*(22, _)
-TRUE
+true
 5000
 485 - NEXT*: 2 clauses (similar) - generic-fixed, generic-fixed
 stmt s; while w;
@@ -2341,7 +2341,7 @@ none
 490 - NEXT*: 2 clauses (mixed) - generic-generic, fixed-generic
 
 Select BOOLEAN such that Next*(_, _) and Next*(23, _)
-TRUE
+true
 5000
 491 - NEXT*: 2 clauses (mixed) - fixed-syn, generic-fixed
 while w;
@@ -2421,7 +2421,7 @@ none
 506 - AFFECTS-boolean: fixed-fixed
 
 Select BOOLEAN such that Affects(1, 6)
-TRUE
+true
 5000
 507 - AFFECTS-stmt: fixed-fixed (non-assign stmt)
 stmt s;
@@ -2431,12 +2431,12 @@ none
 508 - AFFECTS-boolean: fixed-fixed (indirect affects)
 
 Select BOOLEAN such that Affects(9, 19)
-FALSE
+false
 5000
-509 - AFFECTS-boolean: fixed-fixed (FALSE)
+509 - AFFECTS-boolean: fixed-fixed (false)
 
 Select BOOLEAN such that Affects(2, 4)
-FALSE
+false
 5000
 510 - AFFECTS-assign: syn-syn (tuple)
 assign a1, a2;
@@ -2461,7 +2461,7 @@ Select n2 such that Affects(n1, n2)
 514 - AFFECTS-boolean: generic-generic
 
 Select BOOLEAN such that Affects(_, _)
-TRUE
+true
 5000
 515 - AFFECTS-assign: fixed-syn
 assign a;
@@ -2481,7 +2481,7 @@ Select n such that Affects(16, n)
 518 - AFFECTS-boolean: fixed-syn (non-assign stmt)
 if i;
 Select BOOLEAN such that Affects(19, i)
-FALSE
+false
 5000
 519 - AFFECTS-assign: syn-fixed
 assign a;
@@ -2501,37 +2501,37 @@ Select n such that Affects(n, 19)
 522 - AFFECTS-boolean: syn-fixed (non-assign stmt)
 while w;
 Select BOOLEAN such that Affects(w, 5)
-FALSE
+false
 5000
 523 - AFFECTS-boolean: fixed-generic (assign)
 
 Select BOOLEAN such that Affects(22, _)
-TRUE
+true
 5000
 524 - AFFECTS-boolean: fixed-generic (non-assign stmt)
 
 Select BOOLEAN such that Affects(17, _)
-FALSE
+false
 5000
-525 - AFFECTS-boolean: fixed-generic (FALSE)
+525 - AFFECTS-boolean: fixed-generic (false)
 
 Select BOOLEAN such that Affects(23, _)
-FALSE
+false
 5000
 526 - AFFECTS-boolean: generic-fixed (assign)
 
 Select BOOLEAN such that Affects(_, 6)
-TRUE
+true
 5000
 527 - AFFECTS-boolean: generic-fixed (non-assign stmt)
 
 Select BOOLEAN such that Affects(_, 15)
-FALSE
+false
 5000
-528 - AFFECTS-boolean: generic-fixed (FALSE)
+528 - AFFECTS-boolean: generic-fixed (false)
 
 Select BOOLEAN such that Affects(_, 4)
-FALSE
+false
 5000
 529 - AFFECTS-assign: syn-generic
 assign a;
@@ -2616,7 +2616,7 @@ Select a such that Affects(a, _) pattern a(v, "5")
 545 - AFFECTS: 2 clauses (similar) - fixed-fixed, fixed-fixed
 
 Select BOOLEAN such that Affects(1, 6) and Affects(2, 8)
-TRUE
+true
 5000
 546 - AFFECTS: 2 clauses (similar) - syn-syn, syn-syn
 assign a1, a2, a3;

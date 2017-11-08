@@ -11,5 +11,5 @@ A B, A C, C D, D B, D F, B E, E F, A D, A E, A F, B F, C B, C F, D E, C E
 3 - c.procName
 call c; prog_line n;
 Select BOOLEAN with c.procName = "E" and c.stmt# = 3
-TRUE 
+true
 5000

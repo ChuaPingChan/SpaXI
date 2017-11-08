@@ -31,27 +31,27 @@ DEF, LMN, OPQ, GHI, JKL
 7 - Checks BOOLEAN using procedure and procedure
 procedure p1, p2;
 Select BOOLEAN such that Calls(p1, p2)
-TRUE
+true
 5000
 8 - Checks BOOLEAN using ident and ident
 
 Select BOOLEAN such that Calls ("ABC", "DEF")
-TRUE
+true
 5000
 9 - Checks BOOLEAN using ident and all
 
 Select BOOLEAN such that Calls ("ABC", _)
-TRUE
+true
 5000
 10 - Checks BOOLEAN using all and ident
 
 Select BOOLEAN such that Calls (_, "LMN")
-TRUE
+true
 5000
 11 - Checks BOOLEAN if there is any Caller and Callee
 
 Select BOOLEAN such that Calls (_, _)
-TRUE
+true
 5000
 12 - Empty result
 procedure p1, p2;
@@ -116,27 +116,27 @@ DEF, LMN, OPQ, GHI, JKL
 7 - Checks BOOLEAN using procedure and procedure
 procedure p1, p2;
 Select BOOLEAN such that Calls* (p1,p2)
-TRUE
+true
 5000
 8 - Checks BOOLEAN using ident and ident
 
 Select BOOLEAN such that Calls* ("ABC", "DEF")
-TRUE
+true
 5000
 9 - Checks BOOLEAN using ident and all
 
 Select BOOLEAN such that Calls* ("ABC", _)
-TRUE
+true
 5000
 10 - Checks BOOLEAN using all and ident
 
 Select BOOLEAN such that Calls* (_, "LMN")
-TRUE
+true
 5000
 11 - Checks BOOLEAN using all and all
 
 Select BOOLEAN such that Calls* (_, _)
-TRUE
+true
 5000
 12 - Empty result
 procedure p1;
@@ -176,7 +176,7 @@ ABC, DEF, LMN
 19 - Checks BOOLEAN using ident and ident (multiple level)
 
 Select BOOLEAN such that Calls* ("ABC", "JKL")
-TRUE
+true
 5000
 1 - Get all s1 that v1 modifies
 stmt s1; variable v1;
@@ -331,42 +331,42 @@ Jane
 31 - Checks BOOLEAN that v1 is modified at the procedure
 variable v1;
 Select BOOLEAN such that Modifies ("OPQ", v1)
-TRUE
+true
 5000
 32 - Checks BOOLEAN that the variable is modified at the procedure
 
 Select BOOLEAN such that Modifies ("ABC", "Jane")
-TRUE
+true
 5000
 33 - Checks BOOLEAN that there is at least one variable modified at the procedure
 
 Select BOOLEAN such that Modifies ("ABC", _)
-TRUE
+true
 5000
 34 - Checks BOOLEAN that the variable is modified at line no
 
 Select BOOLEAN such that Modifies (4, "Jane")
-TRUE
+true
 5000
 35 - Checks BOOLEAN that there is at least one variable modified at the line no
 
 Select BOOLEAN such that Modifies (9, _)
-TRUE
+true
 5000
 36 - Checks BOOLEAN that there is at least one v1 modified at all
 variable v1;
 Select BOOLEAN such that Modifies (_, v1)
-FALSE
+false
 5000
 37 - Checks BOOLEAN that there is at least one variable modified at all
 
 Select BOOLEAN such that Modifies (_, "x")
-FALSE
+false
 5000
 38 - Checks BOOLEAN that there is at least one all modifed at all
 
 Select BOOLEAN such that Modifies (_, _)
-FALSE
+false
 5000
 39 - Get all v1 that modifies
 variable v1;
@@ -526,42 +526,42 @@ x, y, HELLO
 31 - Checks BOOLEAN that v1 is used at the procedure
 variable v1;
 Select BOOLEAN such that Uses ("GHI", v1)
-TRUE
+true
 5000
 32 - Checks BOOLEAN that the variable is used at the procedure
 
 Select BOOLEAN such that Uses ("JKL", "x")
-TRUE
+true
 5000
 33 - Checks BOOLEAN that there is at least one variable used at the procedure
 
 Select BOOLEAN such that Uses ("LMN", _)
-TRUE
+true
 5000
 34 - Checks BOOLEAN that the variable is used at line no
 
 Select BOOLEAN such that Uses (4, "HELLO")
-TRUE
+true
 5000
 35 - Checks BOOLEAN that there is at least one variable used at the line no
 
 Select BOOLEAN such that Uses (36 , _)
-FALSE
+false
 5000
 36 - Checks BOOLEAN that there is at least one v1 used at all
 variable v1;
 Select BOOLEAN such that Uses (_, v1)
-FALSE
+false
 5000
 37 - Checks BOOLEAN that there is at least one variable used at all
 
 Select BOOLEAN such that Uses (_, "x")
-FALSE
+false
 5000
 38 - Checks BOOLEAN that there is at least one all used at all
 
 Select BOOLEAN such that Uses (_, _)
-FALSE
+false
 5000
 39 - Get all v1 that uses
 variable v1;
@@ -573,7 +573,7 @@ assign a;
 Select a with a.stmt# = 1
 1
 5000
-2 - Test Single With clause with statement number (FALSE)
+2 - Test Single With clause with statement number (false)
 assign a;
 Select a with a.stmt# = 4
 
@@ -596,12 +596,12 @@ DEF
 6 - Test Single with clause with boolean 
 assign a;
 Select BOOLEAN with a.stmt# = 1
-TRUE
+true
 5000
-7 - Test Single with clause with boolean (FALSE)
+7 - Test Single with clause with boolean (false)
 assign a;
 Select BOOLEAN with a.stmt# = 4
-FALSE
+false
 5000
 8 - Test Single with clause with constant value
 stmt s; constant c;
@@ -623,7 +623,7 @@ assign a;
 Select a with a.stmt# = 1
 1
 5000
-2 - Test Single With clause with statement number (FALSE)
+2 - Test Single With clause with statement number (false)
 assign a;
 Select a with a.stmt# = 4
 
@@ -646,12 +646,12 @@ DEF
 6 - Test Single with clause with boolean 
 assign a;
 Select BOOLEAN with a.stmt# = 1
-TRUE
+true
 5000
-7 - Test Single with clause with boolean (FALSE)
+7 - Test Single with clause with boolean (false)
 assign a;
 Select BOOLEAN with a.stmt# = 4
-FALSE
+false
 5000
 8 - Test Single with clause with constant value
 stmt s; constant c;

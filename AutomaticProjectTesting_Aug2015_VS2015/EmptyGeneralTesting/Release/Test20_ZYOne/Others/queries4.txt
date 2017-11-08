@@ -101,42 +101,42 @@ none
 21 - Parent, ParentStar ::
 stmt s;
 Select BOOLEAN such that Parent(s,_)
-TRUE
+true
 5000
 22 - Parent, ParentStar ::
 stmt s;
 Select BOOLEAN such that Parent*(s,_)
-TRUE
+true
 5000
 23 - Parent, ParentStar ::
 stmt foo;
 Select BOOLEAN such that Parent(_,foo)
-TRUE
+true
 5000
 24 - Parent, ParentStar ::
 stmt foo;
 Select BOOLEAN such that Parent*(_,foo)
-TRUE
+true
 5000
 25 - Parent, ParentStar ::
 stmt foo;
 Select BOOLEAN such that Parent(_,_)
-TRUE
+true
 5000
 26 - Parent, ParentStar ::
 stmt foo;
 Select BOOLEAN such that Parent(1,9)
-FALSE
+false
 5000
 27 - Parent, ParentStar ::
 stmt foo;
 Select BOOLEAN such that Parent(63,66)
-FALSE
+false
 5000
 28 - Parent, ParentStar ::
 stmt foo;
 Select BOOLEAN such that Parent*(63,66)
-TRUE
+true
 5000
 29 - Parent, ParentStar ::
 stmt foo;
@@ -146,7 +146,7 @@ none
 30 - Parent, ParentStar ::
 stmt foo;
 Select BOOLEAN such that Parent(foo,foo)
-FALSE
+false
 5000
 31 - Follows, FollowsStar ::
 stmt s; 
@@ -201,52 +201,52 @@ Select s such that Follows*(s, 54)
 41 - Follows, FollowsStar ::
 stmt s;
 Select BOOLEAN such that Follows(s,_)
-TRUE
+true
 5000
 42 - Follows, FollowsStar ::
 stmt s;
 Select BOOLEAN such that Follows*(s,_)
-TRUE
+true
 5000
 43 - Follows, FollowsStar ::
 stmt foo;
 Select BOOLEAN such that Follows(_,foo)
-TRUE
+true
 5000
 44 - Follows, FollowsStar ::
 stmt foo;
 Select BOOLEAN such that Follows*(_,foo)
-TRUE
+true
 5000
 45 - Follows, FollowsStar ::
 stmt foo;
 Select BOOLEAN such that Follows(_,_)
-TRUE
+true
 5000
 46 - Follows, FollowsStar ::
 stmt foo;
 Select BOOLEAN such that Follows(14,46)
-FALSE
+false
 5000
 47 - Follows, FollowsStar ::
 stmt foo;
 Select BOOLEAN such that Follows(15,46)
-TRUE
+true
 5000
 48 - Follows, FollowsStar ::
 stmt foo;
 Select BOOLEAN such that Follows*(13,46)
-TRUE
+true
 5000
 49 - Follows, FollowsStar ::
 stmt foo;
 Select BOOLEAN such that Follows*(foo,foo)
-FALSE
+false
 5000
 50 - Follows, FollowsStar ::
 stmt foo;
 Select BOOLEAN such that Follows*(foo,foo)
-FALSE
+false
 5000
 51 - Modifies, Typed :: Modifies(INTEGER,_)
 variable v;
@@ -261,12 +261,12 @@ a,b,c,e,x
 53 - Modifies, Typed :: Modifies(INTEGER,_)
 
 Select BOOLEAN such that Modifies(12,_)
-TRUE
+true
 5000
 54 - Modifies, Typed :: Modifies(INTEGER,IDENT)
 
 Select BOOLEAN such that Modifies(13,"y")
-FALSE
+false
 5000
 55 - Modifies, Typed :: Modifies(INTEGER,SYNONYM)
 variable v;
@@ -291,7 +291,7 @@ Select c such that Modifies(c,_)
 59 - Modifies, Typed :: Modifies(SYNONYM,_)
 procedure p;
 Select BOOLEAN such that Modifies(p,_)
-TRUE
+true
 5000
 60 - Modifies, Typed :: Modifies(SYNONYM,SYNONYM)
 stmt s; variable v;
@@ -321,32 +321,32 @@ Select n such that Modifies("q","x")
 65 - Modifies, Typed :: Modifies(IDENT,IDENT)
 
 Select BOOLEAN such that Modifies(14,_)
-TRUE
+true
 5000
 66 - Modifies, Typed :: Modifies(IDENT,IDENT)
 
 Select BOOLEAN such that Modifies(18,"b")
-TRUE
+true
 5000
 67 - Modifies, Typed :: Modifies(IDENT,IDENT)
 prog_line n;
 Select BOOLEAN such that Modifies("q","x")
-TRUE
+true
 5000
 68 - Modifies, Typed :: Modifies(IDENT,IDENT)
 prog_line n;
 Select BOOLEAN such that Modifies(n,_)
-TRUE
+true
 5000
 69 - Modifies, Typed :: Modifies(IDENT,IDENT)
 prog_line n;
 Select BOOLEAN such that Modifies(42,"x")
-FALSE
+false
 5000
 70 - Modifies, Typed :: Modifies(IDENT,IDENT)
 
 Select BOOLEAN such that Modifies(36,"k")
-TRUE
+true
 5000
 71 - Uses, Typed :: Uses(INTEGER,_)
 variable v;
@@ -361,12 +361,12 @@ b,c,d,e,x,z
 73 - Uses, Typed :: Uses(INTEGER,_)
 
 Select BOOLEAN such that Uses(12,_)
-TRUE
+true
 5000
 74 - Uses, Typed :: Uses(INTEGER,IDENT)
 
 Select BOOLEAN such that Uses(13,"y")
-TRUE
+true
 5000
 75 - Uses, Typed :: Uses(INTEGER,SYNONYM)
 variable v;
@@ -391,7 +391,7 @@ Select c such that Uses(c,_)
 79 - Uses, Typed :: Uses(SYNONYM,_)
 procedure p;
 Select BOOLEAN such that Uses(p,_)
-TRUE
+true
 5000
 80 - Uses, Typed :: Uses(SYNONYM,SYNONYM)
 stmt s; variable v;
@@ -421,32 +421,32 @@ Select n such that Uses("q","x")
 85 - Uses, Typed :: Uses(IDENT,IDENT)
 
 Select BOOLEAN such that Uses(14,_)
-FALSE
+false
 5000
 86 - Uses, Typed :: Uses(IDENT,IDENT)
 
 Select BOOLEAN such that Uses(18,"b")
-TRUE
+true
 5000
 87 - Uses, Typed :: Uses(IDENT,IDENT)
 prog_line n;
 Select BOOLEAN such that Uses("q","x")
-TRUE
+true
 5000
 88 - Uses, Typed :: Uses(IDENT,IDENT)
 prog_line n;
 Select BOOLEAN such that Uses(n,_)
-TRUE
+true
 5000
 89 - Uses, Typed :: Uses(IDENT,IDENT)
 prog_line n;
 Select BOOLEAN such that Uses(42,"lala")
-FALSE
+false
 5000
 90 - Uses, Typed :: Uses(IDENT,IDENT)
 
 Select BOOLEAN such that Uses(36,"k")
-TRUE
+true
 5000
 91 - Next, NextStar ::
 stmt s; 
@@ -501,52 +501,52 @@ Select s such that Next*(s, 54)
 101 - Next, NextStar ::
 stmt s;
 Select BOOLEAN such that Next(s,_)
-TRUE
+true
 5000
 102 - Next, NextStar ::
 stmt s;
 Select BOOLEAN such that Next*(s,_)
-TRUE
+true
 5000
 103 - Next, NextStar ::
 stmt foo;
 Select BOOLEAN such that Next(_,foo)
-TRUE
+true
 5000
 104 - Next, NextStar ::
 stmt foo;
 Select BOOLEAN such that Next*(_,foo)
-TRUE
+true
 5000
 105 - Next, NextStar ::
 stmt foo;
 Select BOOLEAN such that Next(_,_)
-TRUE
+true
 5000
 106 - Next, NextStar ::
 stmt foo;
 Select BOOLEAN such that Next(14,46)
-FALSE
+false
 5000
 107 - Next, NextStar ::
 stmt foo;
 Select BOOLEAN such that Next(15,46)
-TRUE
+true
 5000
 108 - Next, NextStar ::
 stmt foo;
 Select BOOLEAN such that Next*(1,74)
-FALSE
+false
 5000
 109 - Next, NextStar ::
 stmt foo;
 Select BOOLEAN such that Next*(foo,foo)
-TRUE
+true
 5000
 110 - Next, NextStar ::
 stmt foo;
 Select BOOLEAN such that Next(foo,foo)
-FALSE
+false
 5000
 111 - Affects :: 
 assign a; 
@@ -566,7 +566,7 @@ Select a such that Affects (14,_)
 114 - Affects ::
 assign a; 
 Select BOOLEAN such that Affects (17, 49)
-FALSE
+false
 5000
 115 - Affects ::
 assign a; 
@@ -581,7 +581,7 @@ Select a such that Affects (23, a)
 117 - Affects ::
 assign a; 
 Select BOOLEAN such that Affects (62,_)
-TRUE
+true
 5000
 118 - AffectsStar ::
 assign a; 
@@ -596,7 +596,7 @@ Select a such that Affects* (53, a)
 120 - Affects ::
 assign a; 
 Select BOOLEAN such that Affects* (_,_)
-TRUE
+true
 5000
 121 - AffectsStar ::
 assign ASSIGN; 
@@ -611,7 +611,7 @@ Select a such that Affects* (17, a)
 123 - Affects::
 assign a;
 Select BOOLEAN such that Affects (9, 11)
-FALSE
+false
 5000
 124 - Affects::
 if i;
@@ -621,17 +621,17 @@ Select i.stmt# such that Affects (13, 16)
 125 - Affects::
 assign a;
 Select BOOLEAN such that Affects (17, 19)
-TRUE
+true
 5000
 126 - Affects::
 assign a;
 Select BOOLEAN such that Affects (20, 27)
-TRUE
+true
 5000
 127 - Affects::
 assign a;
 Select BOOLEAN such that Affects (_,58)
-TRUE
+true
 5000
 128 - Affects::
 assign a;
@@ -751,7 +751,7 @@ Select a pattern a(_,_"3"_)
 151 - IfPattern, Typed, ImplStmtLine :: Pattern matching?
 if i;
 Select BOOLEAN pattern i(_,_,_)
-TRUE
+true
 5000
 152 - IfPattern, Typed, ImplStmtLine :: Pattern matching?
 if i; variable v;
@@ -801,7 +801,7 @@ Select AvERYlONGaSSIGNnAMEwHICHiSuSEDtOtEST pattern i("i",_,_)
 161 - WhilePattern, Typed, ImplStmtLine :: Pattern matching?
 while w;
 Select BOOLEAN pattern w(_,_)
-TRUE
+true
 5000
 162 - WhilePattern, Typed, ImplStmtLine :: Pattern matching?
 while w; variable v;
@@ -866,22 +866,22 @@ Select a with a.stmt# = c.value
 174 - With, Typed :: assign1.stmt# = 27
 assign a;
 Select BOOLEAN with a.stmt# = 27
-TRUE
+true
 5000
 175 - With, Typed :: assign1.stmt# = 200
 assign ASSIGN; 
 Select BOOLEAN with ASSIGN.stmt# = 200
-FALSE
+false
 5000
 176 - With, Typed :: while.stmt# = if.stmt#
 while w; if i;
 Select BOOLEAN with w.stmt# = i.stmt#
-FALSE
+false
 5000
 177 - With, Typed :: while.stmt# = t.stmt#
 while w; assign t;
 Select BOOLEAN with w.stmt# = t.stmt#
-FALSE
+false
 5000
 178 - With, Typed :: while.stmt# = t.stmt#
 while w; stmt t;
@@ -901,17 +901,17 @@ none
 181 - With, Typed :: if.stmt# = calls.stmt#
 if i; call c;
 Select BOOLEAN with i.stmt# = c.stmt#
-FALSE
+false
 5000
 182 - With, Typed :: if.stmt# = calls.stmt#
 if i; call c;
 Select BOOLEAN with i.stmt# = i.stmt#
-TRUE
+true
 5000
 183 - With, Typed :: if.stmt# = calls.stmt#
 if i; while WHILE;
 Select BOOLEAN with i.stmt# = WHILE.stmt#
-FALSE
+false
 5000
 184 - With, Typed :: if.stmt# = calls.stmt#
 if i; stmt WHILE;
@@ -1066,7 +1066,7 @@ none
 214 - With, Typed :: prog_line = stmt.stmt#
 stmt s; 
 Select BOOLEAN with s.stmt# = 35 and s.stmt# = 50 with s.stmt# = 40
-FALSE
+false
 5000
 215 - With, Typed :: prog_line = stmt.stmt#
 stmt s; call c;
@@ -1161,12 +1161,12 @@ Select a pattern i("  z  ",_,_) such that Affects(62,a)
 233 - Multiple_Clauses, Typed :: IfPattern and Affects
 if i;
 Select BOOLEAN pattern i(_,_,_) such that Affects(_,_)
-TRUE
+true
 5000
 234 - Multiple_Clauses, Typed :: IfPattern and Affects*
 if i;
 Select BOOLEAN pattern i(_,_,_) such that Affects*(_,_)
-TRUE
+true
 5000
 235 - Multiple_Clauses, Typed :: Affects and With
 assign a; 

@@ -26,42 +26,42 @@ Select w
 6 - Modifies(known,known) in if block -- true
 
 Select BOOLEAN such that Modifies(6,"b")
-TRUE
+true
 5000
 7 - Modifies(known,known) in if block -- false
 
 Select BOOLEAN such that Modifies(20,"d")
-FALSE
+false
 5000
 8 - Modifies(known,known) in nested if block -- true
 
 Select BOOLEAN such that Modifies(11,"h")
-TRUE
+true
 5000
 9 - Modifies(known,known) in nested if block -- false
 
 Select BOOLEAN such that Modifies(11,"i")
-FALSE
+false
 5000
 10 - Modifies(known,known) in while block -- true
 
 Select BOOLEAN such that Modifies(29,"a")
-TRUE
+true
 5000
 11 - Modifies(known,known) in while block -- false
 
 Select BOOLEAN such that Modifies(8,"e")
-FALSE
+false
 5000
 12 - Modifies(known,known) in nested while block -- true
 
 Select BOOLEAN such that Modifies(25,"b")
-TRUE
+true
 5000
 13 - Modifies(known,known) in nested while block -- false
 
 Select BOOLEAN such that Modifies(3,"g")
-FALSE
+false
 5000
 14 - Modifies(s,known)
 stmt s;
@@ -136,27 +136,27 @@ Select w such that Modifies(w,_)
 28 - Uses(known,known) in if block -- true
 
 Select BOOLEAN such that Uses(20,"g")
-TRUE
+true
 5000
 29 - Uses(known,known) in if block -- false
 
 Select BOOLEAN such that Uses(20,"f")
-FALSE
+false
 5000
 30 - Uses(known,known) in nested if block -- true
 
 Select BOOLEAN such that Uses(1,"g")
-TRUE
+true
 5000
 31 - Uses(known,known) in while block -- true
 
 Select BOOLEAN such that Uses(13,"g")
-TRUE
+true
 5000
 32 - Uses(known,known) in nested while block -- true
 
 Select BOOLEAN such that Uses(3,"e")
-TRUE
+true
 5000
 33 - Uses(s,known)
 stmt s;
@@ -231,22 +231,22 @@ Select w such that Uses(_,_)
 47 - Parent(known,known) -- true
 
 Select BOOLEAN such that Parent(12,19)
-TRUE
+true
 5000
 48 - Parent(known,known) -- false
 
 Select BOOLEAN such that Parent(11,19)
-FALSE
+false
 5000
 49 - Parent*(known,known) -- true
 
 Select BOOLEAN such that Parent*(1,8)
-TRUE
+true
 5000
 50 - Parent*(known,known) -- false
 
 Select BOOLEAN such that Parent*(13,19)
-FALSE
+false
 5000
 51 - Parent(known,s)
 stmt s;
@@ -361,22 +361,22 @@ A
 73 - Follows(known,known) -- true
 
 Select BOOLEAN such that Follows(25,32)
-TRUE
+true
 5000
 74 - Follows(known,known) -- false
 
 Select BOOLEAN such that Follows(20,21)
-FALSE
+false
 5000
 75 - Follows*(known,known) -- true
 
 Select BOOLEAN such that Follows*(1,25)
-TRUE
+true
 5000
 76 - Follows*(known,known) -- false
 
 Select BOOLEAN such that Follows*(26,31)
-FALSE
+false
 5000
 77 - Follows(known,s)
 stmt s;
@@ -466,12 +466,12 @@ A
 94 - Next(known,known) -- true
 
 Select BOOLEAN such that Next(8,3)
-TRUE
+true
 5000
 95 - Next(known,known) -- false
 
 Select BOOLEAN such that Next(11,18)
-FALSE
+false
 5000
 96 - Next(known,n)
 prog_line n;
@@ -526,12 +526,12 @@ Select i such that Next(a,i)
 106 - Modifies(known,known) and Modifies(known,known) -- true
 
 Select BOOLEAN such that Modifies(3,"a") and Modifies(11,"d")
-TRUE
+true
 5000
 107 - Modifies(known,known) and Modifies(known,known) -- false
 
 Select BOOLEAN such that Modifies(3,"a") and Modifies(13,"d")
-FALSE
+false
 5000
 108 - Modifies(s,known) and Modifies(s,known) -- no common synonym
 stmt s1,s2;
@@ -581,12 +581,12 @@ Select s such that Modifies(s,"e") and Modifies(s,v)
 118 - Uses(known,known) and Uses(known,known) -- true
 
 Select BOOLEAN such that Uses(3,"a") and Uses(11,"d")
-TRUE
+true
 5000
 119 - Uses(known,known) and Uses(known,known) -- false
 
 Select BOOLEAN such that Uses(3,"a") and Uses(13,"b")
-FALSE
+false
 5000
 120 - Uses(s,known) and Uses(s,known) -- no common synonym
 stmt s1,s2;
@@ -631,22 +631,22 @@ Select n such that Uses(n,"e") and Uses(n,v)
 129 - Parent(known,known) and Parent(known,known) -- true
 
 Select BOOLEAN such that Parent(3,6) and Parent(6,8)
-TRUE
+true
 5000
 130 - Parent(known,known) and Parent(known,known) -- false
 
 Select BOOLEAN such that Parent(3,6) and Parent(1,6)
-FALSE
+false
 5000
 131 - Parent*(known,known) and Parent*(known,known) -- true
 
 Select BOOLEAN such that Parent*(1,8) and Parent*(11,22)
-TRUE
+true
 5000
 132 - Parent*(known,known) and Parent*(known,known) -- false
 
 Select BOOLEAN such that Parent*(12,16) and Parent*(12,20)
-FALSE
+false
 5000
 133 - Parent(known,s) and Parent(known,s) -- common synonym
 stmt s;
@@ -696,7 +696,7 @@ Select i such that Parent*(i,17) and Parent*(11,i)
 142 - Parent(s,s) and Parent(s,s) -- 2 common synonyms
 stmt s1,s2;
 Select BOOLEAN such that Parent(s1,s2) and Parent(s2,s1)
-FALSE
+false
 5000
 143 - Parent(s,s) and Parent(s,s) -- common synonym
 stmt s1,s2; assign a;
@@ -741,22 +741,22 @@ Select s1 such that Parent(s1,i) and Parent*(i,s2)
 151 - Follows(known,known) and Follows(known,known) -- true
 
 Select BOOLEAN such that Follows(5,6) and Follows(11,25)
-TRUE
+true
 5000
 152 - Follows(known,known) and Follows(known,known) -- false
 
 Select BOOLEAN such that Follows(5,6) and Follows(6,7)
-FALSE
+false
 5000
 153 - Follows*(known,known) and Follows*(known,known) -- true
 
 Select BOOLEAN such that Follows*(14,17) and Follows*(4,6)
-TRUE
+true
 5000
 154 - Follows*(known,known) and Follows*(known,known) -- false
 
 Select BOOLEAN such that Follows*(4,10) and Follows*(12,20)
-FALSE
+false
 5000
 155 - Follows(known,s) and Follows(known,s) -- common synonym
 stmt s;
@@ -781,7 +781,7 @@ Select s such that Follows*(s,32) and Follows*(11,s)
 159 - Follows(s,s) and Follows(s,s) -- 2 common synonyms
 stmt s1,s2;
 Select BOOLEAN such that Follows(s1,s2) and Follows(s2,s1)
-FALSE
+false
 5000
 160 - Follows(s,s) and Follows(s,s) -- common synonym
 stmt s1,s2; assign a;
@@ -816,12 +816,12 @@ Select s1 such that Follows(s1,i) and Follows*(i,s2)
 166 - Next(known,known) and Next(known,known) -- true
 
 Select BOOLEAN such that Next(10,8) and Next(3,11)
-TRUE
+true
 5000
 167 - Next(known,known) and Next(known,known) -- false
 
 Select BOOLEAN such that Next(13,25) and Next(13,20)
-FALSE
+false
 5000
 168 - Next(known,s) and Next(known,s) -- common synonym
 stmt s;
@@ -991,12 +991,12 @@ Select i such that Modifies(w,v) and Uses(i,"g") and Parent*(w,i) and Follows(s1
 201 - Next*(known,known) -- true
 
 Select BOOLEAN such that Next*(24,30)
-TRUE
+true
 5000
 202 - Next*(known,known) -- false
 
 Select BOOLEAN such that Next*(15,19)
-FALSE
+false
 5000
 203 - Next*(known,n)
 prog_line n;
@@ -1026,7 +1026,7 @@ Select n such that Next*(_,_)
 208 - Next*(known,known) and Next(known,known) -- true
 
 Select BOOLEAN such that Next*(12,27) and Next(29,25)
-TRUE
+true
 5000
 209 - Next*(known,s) and Next*(known,s) -- common synonym
 assign a;

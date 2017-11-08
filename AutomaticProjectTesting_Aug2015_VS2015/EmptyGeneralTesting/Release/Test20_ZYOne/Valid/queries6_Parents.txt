@@ -1,22 +1,22 @@
-1 - Parent(known ,known) -- TRUE
+1 - Parent(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent(45,48)
-TRUE
+true
 5000
-2 - Parent(known ,known) -- FALSE
+2 - Parent(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent(28,48)
-FALSE
+false
 5000
-3 - Parent(known ,known) -- TRUE
+3 - Parent(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent(5,6)
-TRUE
+true
 5000
-4 - Parent(known ,known) -- FALSE
+4 - Parent(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent(5,21)
-FALSE
+false
 5000
 5 - Parent(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -98,25 +98,25 @@ assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select c such that Parent(3,s)
 
 5000
-21 - Parent*(known ,known) -- TRUE
+21 - Parent*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent*(28,48)
-TRUE
+true
 5000
-22 - Parent*(known ,known) -- FALSE
+22 - Parent*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent*(14,27)
-FALSE
+false
 5000
-23 - Parent*(known ,known) -- TRUE
+23 - Parent*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent*(5,6)
-TRUE
+true
 5000
-24 - Parent*(known ,known) -- FALSE
+24 - Parent*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Parent*(5,21)
-FALSE
+false
 5000
 25 - Parent*(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;

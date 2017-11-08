@@ -1,5 +1,5 @@
 724 - WITH: string = string
 
 Select BOOLEAN with "hello" = "hello"
-TRUE
+true
 5000

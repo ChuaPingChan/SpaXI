@@ -1,22 +1,22 @@
-1 - Affects(known ,known) -- TRUE
+1 - Affects(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Affects(10,13)
-TRUE
+true
 5000
-2 - Affects(known ,known) -- FALSE
+2 - Affects(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Affects(17,18)
-FALSE
+false
 5000
-3 - Affects(known ,known) -- TRUE
+3 - Affects(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Affects(10,10)
-TRUE
+true
 5000
-4 - Affects(known ,known) -- FALSE
+4 - Affects(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Affects(10,11)
-TRUE
+true
 5000
 5 - Affects(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
@@ -38,25 +38,25 @@ assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select a such that Affects(15,a)
 18,20
 5000
-21 - Affects*(known ,known) -- TRUE
+21 - Affects*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Affects*(4,11)
-TRUE
+true
 5000
-22 - Affects*(known ,known) -- FALSE
+22 - Affects*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Affects*(29,37)
-FALSE
+false
 5000
-23 - Affects*(known ,known) -- TRUE
+23 - Affects*(known ,known) -- true
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Affects*(29,38)
-TRUE
+true
 5000
-24 - Affects*(known ,known) -- FALSE
+24 - Affects*(known ,known) -- false
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
 Select BOOLEAN such that Affects*(5,21)
-FALSE
+false
 5000
 25 - Affects*(unknown assign,known) 
 assign a; stmt s; while w; if ifs; variable v; procedure p; call c;

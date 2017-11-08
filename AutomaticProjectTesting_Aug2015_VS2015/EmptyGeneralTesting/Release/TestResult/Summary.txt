@@ -1,6 +1,6 @@
 Overall Test Ran    : 17520
-Overall Test Passed : 16533
-Overall Test Failed : 981
+Overall Test Passed : 17051
+Overall Test Failed : 463
 Overall Test Timeout: 6
 
 
@@ -803,9 +803,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries1.xml: 
-Test Ran: 140	[BUG]
-Passed   : 109
-Failed   : 31
+Test Ran: 140	
+Passed   : 140
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries10.xml: 
@@ -815,21 +815,21 @@ Failed   : 8
 Timeout  : 0
 
 TestResult\out20_Others_queries2.xml: 
-Test Ran: 323	[BUG]
-Passed   : 307
-Failed   : 16
+Test Ran: 323	
+Passed   : 323
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries3.xml: 
-Test Ran: 35	[BUG]
-Passed   : 20
-Failed   : 15
+Test Ran: 35	
+Passed   : 35
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries4.xml: 
 Test Ran: 261	[BUG]
-Passed   : 194
-Failed   : 67
+Passed   : 260
+Failed   : 1
 Timeout  : 0
 
 TestResult\out20_Others_queries5.xml: 
@@ -839,21 +839,21 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries6.xml: 
-Test Ran: 526	[BUG]
-Passed   : 431
-Failed   : 95
+Test Ran: 526	
+Passed   : 526
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries6b.xml: 
-Test Ran: 1	[BUG]
-Passed   : 0
-Failed   : 1
+Test Ran: 1	
+Passed   : 1
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries7.xml: 
-Test Ran: 309	[BUG]
-Passed   : 255
-Failed   : 54
+Test Ran: 309	
+Passed   : 309
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries7b.xml: 
@@ -863,9 +863,9 @@ Failed   : 1
 Timeout  : 0
 
 TestResult\out20_Others_queries8.xml: 
-Test Ran: 163	[BUG]
-Passed   : 123
-Failed   : 40
+Test Ran: 163	
+Passed   : 163
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries8b.xml: 
@@ -881,9 +881,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Relation_queriesCalls.xml: 
-Test Ran: 3	[BUG]
-Passed   : 2
-Failed   : 1
+Test Ran: 3	
+Passed   : 3
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Relation_queriesNext.xml: 
@@ -893,81 +893,81 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries1.xml: 
-Test Ran: 50	[BUG]
-Passed   : 46
-Failed   : 4
+Test Ran: 50	
+Passed   : 50
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries2.xml: 
-Test Ran: 60	[BUG]
-Passed   : 48
-Failed   : 12
+Test Ran: 60	
+Passed   : 60
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries3.xml: 
-Test Ran: 60	[BUG]
-Passed   : 48
-Failed   : 12
+Test Ran: 60	
+Passed   : 60
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries4.xml: 
-Test Ran: 209	[BUG]
-Passed   : 167
-Failed   : 42
+Test Ran: 209	
+Passed   : 209
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries5.xml: 
-Test Ran: 60	[BUG]
-Passed   : 48
-Failed   : 12
+Test Ran: 60	
+Passed   : 60
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries6.xml: 
-Test Ran: 160	[BUG]
-Passed   : 102
-Failed   : 58
+Test Ran: 160	
+Passed   : 160
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries6_Affects.xml: 
-Test Ran: 15	[BUG]
-Passed   : 7
-Failed   : 8
+Test Ran: 15	
+Passed   : 15
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries6_Calls.xml: 
-Test Ran: 10	[BUG]
-Passed   : 4
-Failed   : 6
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries6_Follows.xml: 
-Test Ran: 34	[BUG]
-Passed   : 26
-Failed   : 8
+Test Ran: 34	
+Passed   : 34
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries6_Modifies.xml: 
-Test Ran: 20	[BUG]
-Passed   : 10
-Failed   : 10
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries6_MultipleClause.xml: 
-Test Ran: 29	[BUG]
-Passed   : 20
-Failed   : 9
+Test Ran: 29	
+Passed   : 29
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries6_Parents.xml: 
-Test Ran: 40	[BUG]
-Passed   : 32
-Failed   : 8
+Test Ran: 40	
+Passed   : 40
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Valid_queries6_Uses.xml: 
-Test Ran: 20	[BUG]
-Passed   : 10
-Failed   : 10
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
 Timeout  : 0
 
 TestResult\out21_Queries1.xml: 
