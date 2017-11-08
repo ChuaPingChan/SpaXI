@@ -793,6 +793,12 @@ echo Finish running AutoTester for Validation\QueryValidation.
 echo Running AutoTester for Stress\CommonSynonym\QueryStressCommonSynonymTest1 ...
 AutoTester Test15_Verb\Stress\CommonSynonym\SourceStressCommonSynonymTest1.txt Test15_Verb\Stress\CommonSynonym\QueryStressCommonSynonymTest1.txt TestResult\out15_StressCommonSynonym_QueryStressCommonSynonymTest1.xml > TestResult\cmd\cmd15_StressCommonSynonym_QueryStressCommonSynonymTest1.txt
 echo Finish running AutoTester for Stress\CommonSynonym\QueryStressCommonSynonymTest1.
+echo Running AutoTester for Stress\MultipleClauses\QueryStressMultipleClausesTest1 ...
+AutoTester Test15_Verb\Stress\MultipleClauses\SourceStressMultipleClausesTest1.txt Test15_Verb\Stress\MultipleClauses\QueryStressMultipleClausesTest1.txt TestResult\out15_StressMultipleClauses_QueryStressMultipleClausesTest1.xml > TestResult\cmd\cmd15_StressMultipleClauses_QueryStressMultipleClausesTest1.txt
+echo Finish running AutoTester for Stress\MultipleClauses\QueryStressMultipleClausesTest1.
+echo Running AutoTester for Stress\Next\QueryStressNextTest1 ...
+AutoTester Test15_Verb\Stress\Next\SourceStressNextTest1.txt Test15_Verb\Stress\Next\QueryStressNextTest1.txt TestResult\out15_StressNext_QueryStressNextTest1.xml > TestResult\cmd\cmd15_StressNext_QueryStressNextTest1.txt
+echo Finish running AutoTester for Stress\Next\QueryStressNextTest1.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
