@@ -93,6 +93,9 @@ if '%option%'=='22' (
 if '%option%'=='23' (
 	goto :runTest23
 )
+if '%option%'=='24' (
+	goto :runTest24
+)
 cls
 goto :main
 echo ===============================================================================
@@ -213,6 +216,7 @@ call :runTest20
 call :runTest21
 call :runTest22
 call :runTest23
+call :runTest24
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -1117,5 +1121,94 @@ echo Running AutoTester for QueryComplexWith ...
 AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexWith.txt TestResult\out23_QueryComplexWith.xml > TestResult\cmd\cmd23_QueryComplexWith.txt
 echo Finish running AutoTester for QueryComplexWith.
 echo Finish running AutoTester for test 23.
+call :getPauseAction
+goto :eof
+
+:runTest24
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 24...
+echo Running AutoTester for QueryAffects ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryAffects.txt TestResult\out24_First_QueryAffects.xml > TestResult\cmd\cmd24_First_QueryAffects.txt
+echo Finish running AutoTester for QueryAffects.
+echo Running AutoTester for QueryAffects_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryAffects_Invalid.txt TestResult\out24_First_QueryAffects_Invalid.xml > TestResult\cmd\cmd24_First_QueryAffects_Invalid.txt
+echo Finish running AutoTester for QueryAffects_Invalid.
+echo Running AutoTester for QueryAffectsStar ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryAffectsStar.txt TestResult\out24_First_QueryAffectsStar.xml > TestResult\cmd\cmd24_First_QueryAffectsStar.txt
+echo Finish running AutoTester for QueryAffectsStar.
+echo Running AutoTester for QueryAffectsStar_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryAffectsStar_Invalid.txt TestResult\out24_First_QueryAffectsStar_Invalid.xml > TestResult\cmd\cmd24_First_QueryAffectsStar_Invalid.txt
+echo Finish running AutoTester for QueryAffectsStar_Invalid.
+echo Running AutoTester for QueryCalls ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryCalls.txt TestResult\out24_First_QueryCalls.xml > TestResult\cmd\cmd24_First_QueryCalls.txt
+echo Finish running AutoTester for QueryCalls.
+echo Running AutoTester for QueryCalls_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryCalls_Invalid.txt TestResult\out24_First_QueryCalls_Invalid.xml > TestResult\cmd\cmd24_First_QueryCalls_Invalid.txt
+echo Finish running AutoTester for QueryCalls_Invalid.
+echo Running AutoTester for QueryCallsStar ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryCallsStar.txt TestResult\out24_First_QueryCallsStar.xml > TestResult\cmd\cmd24_First_QueryCallsStar.txt
+echo Finish running AutoTester for QueryCallsStar.
+echo Running AutoTester for QueryCallsStar_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryCallsStar_Invalid.txt TestResult\out24_First_QueryCallsStar_Invalid.xml > TestResult\cmd\cmd24_First_QueryCallsStar_Invalid.txt
+echo Finish running AutoTester for QueryCallsStar_Invalid.
+echo Running AutoTester for QueryFollows ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryFollows.txt TestResult\out24_First_QueryFollows.xml > TestResult\cmd\cmd24_First_QueryFollows.txt
+echo Finish running AutoTester for QueryFollows.
+echo Running AutoTester for QueryFollows_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryFollows_Invalid.txt TestResult\out24_First_QueryFollows_Invalid.xml > TestResult\cmd\cmd24_First_QueryFollows_Invalid.txt
+echo Finish running AutoTester for QueryFollows_Invalid.
+echo Running AutoTester for QueryFollowsStar ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryFollowsStar.txt TestResult\out24_First_QueryFollowsStar.xml > TestResult\cmd\cmd24_First_QueryFollowsStar.txt
+echo Finish running AutoTester for QueryFollowsStar.
+echo Running AutoTester for QueryFollowsStar_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryFollowsStar_Invalid.txt TestResult\out24_First_QueryFollowsStar_Invalid.xml > TestResult\cmd\cmd24_First_QueryFollowsStar_Invalid.txt
+echo Finish running AutoTester for QueryFollowsStar_Invalid.
+echo Running AutoTester for QueryModifies ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryModifies.txt TestResult\out24_First_QueryModifies.xml > TestResult\cmd\cmd24_First_QueryModifies.txt
+echo Finish running AutoTester for QueryModifies.
+echo Running AutoTester for QueryModifies_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryModifies_Invalid.txt TestResult\out24_First_QueryModifies_Invalid.xml > TestResult\cmd\cmd24_First_QueryModifies_Invalid.txt
+echo Finish running AutoTester for QueryModifies_Invalid.
+echo Running AutoTester for QueryMultipleClauses ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryMultipleClauses.txt TestResult\out24_First_QueryMultipleClauses.xml > TestResult\cmd\cmd24_First_QueryMultipleClauses.txt
+echo Finish running AutoTester for QueryMultipleClauses.
+echo Running AutoTester for QueryNext ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryNext.txt TestResult\out24_First_QueryNext.xml > TestResult\cmd\cmd24_First_QueryNext.txt
+echo Finish running AutoTester for QueryNext.
+echo Running AutoTester for QueryNext_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryNext_Invalid.txt TestResult\out24_First_QueryNext_Invalid.xml > TestResult\cmd\cmd24_First_QueryNext_Invalid.txt
+echo Finish running AutoTester for QueryNext_Invalid.
+echo Running AutoTester for QueryNextStar ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryNextStar.txt TestResult\out24_First_QueryNextStar.xml > TestResult\cmd\cmd24_First_QueryNextStar.txt
+echo Finish running AutoTester for QueryNextStar.
+echo Running AutoTester for QueryNextStar_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryNextStar_Invalid.txt TestResult\out24_First_QueryNextStar_Invalid.xml > TestResult\cmd\cmd24_First_QueryNextStar_Invalid.txt
+echo Finish running AutoTester for QueryNextStar_Invalid.
+echo Running AutoTester for QueryParent ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryParent.txt TestResult\out24_First_QueryParent.xml > TestResult\cmd\cmd24_First_QueryParent.txt
+echo Finish running AutoTester for QueryParent.
+echo Running AutoTester for QueryParent_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryParent_Invalid.txt TestResult\out24_First_QueryParent_Invalid.xml > TestResult\cmd\cmd24_First_QueryParent_Invalid.txt
+echo Finish running AutoTester for QueryParent_Invalid.
+echo Running AutoTester for QueryParentStar ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryParentStar.txt TestResult\out24_First_QueryParentStar.xml > TestResult\cmd\cmd24_First_QueryParentStar.txt
+echo Finish running AutoTester for QueryParentStar.
+echo Running AutoTester for QueryParentStar_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryParentStar_Invalid.txt TestResult\out24_First_QueryParentStar_Invalid.xml > TestResult\cmd\cmd24_First_QueryParentStar_Invalid.txt
+echo Finish running AutoTester for QueryParentStar_Invalid.
+echo Running AutoTester for QueryPattern ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryPattern.txt TestResult\out24_First_QueryPattern.xml > TestResult\cmd\cmd24_First_QueryPattern.txt
+echo Finish running AutoTester for QueryPattern.
+echo Running AutoTester for QueryPattern_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryPattern_Invalid.txt TestResult\out24_First_QueryPattern_Invalid.xml > TestResult\cmd\cmd24_First_QueryPattern_Invalid.txt
+echo Finish running AutoTester for QueryPattern_Invalid.
+echo Running AutoTester for QueryUses ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryUses.txt TestResult\out24_First_QueryUses.xml > TestResult\cmd\cmd24_First_QueryUses.txt
+echo Finish running AutoTester for QueryUses.
+echo Running AutoTester for QueryUses_Invalid ...
+AutoTester Test24_ZYSix\First\Source1.txt Test24_ZYSix\First\QueryUses_Invalid.txt TestResult\out24_First_QueryUses_Invalid.xml > TestResult\cmd\cmd24_First_QueryUses_Invalid.txt
+echo Finish running AutoTester for QueryUses_Invalid.
+echo Finish running AutoTester for test 24.
 call :getPauseAction
 goto :eof

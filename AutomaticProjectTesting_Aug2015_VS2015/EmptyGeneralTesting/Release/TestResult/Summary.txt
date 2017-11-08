@@ -1,6 +1,6 @@
-Overall Test Ran    : 17520
-Overall Test Passed : 17505
-Overall Test Failed : 7
+Overall Test Ran    : 18625
+Overall Test Passed : 18608
+Overall Test Failed : 9
 Overall Test Timeout: 8
 
 
@@ -1195,6 +1195,168 @@ Timeout  : 0
 TestResult\out23_QueryComplexWith.xml: 
 Test Ran: 20	
 Passed   : 20
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryAffects.xml: 
+Test Ran: 8	
+Passed   : 8
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryAffectsStar.xml: 
+Test Ran: 7	
+Passed   : 7
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryAffectsStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryAffects_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryCalls.xml: 
+Test Ran: 9	
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryCallsStar.xml: 
+Test Ran: 7	
+Passed   : 7
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryCallsStar_Invalid.xml: 
+Test Ran: 36	
+Passed   : 36
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryCalls_Invalid.xml: 
+Test Ran: 36	
+Passed   : 36
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryFollows.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryFollowsStar.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryFollowsStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryFollows_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryModifies.xml: 
+Test Ran: 34	
+Passed   : 34
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryModifies_Invalid.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryMultipleClauses.xml: 
+Test Ran: 70	[BUG]
+Passed   : 68
+Failed   : 2
+Timeout  : 0
+
+TestResult\out24_First_QueryNext.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryNextStar.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryNextStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryNext_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryParent.xml: 
+Test Ran: 89	
+Passed   : 89
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryParentStar.xml: 
+Test Ran: 89	
+Passed   : 89
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryParentStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryParent_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryPattern.xml: 
+Test Ran: 9	
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryPattern_Invalid.xml: 
+Test Ran: 7	
+Passed   : 7
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryUses.xml: 
+Test Ran: 34	
+Passed   : 34
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryUses_Invalid.xml: 
+Test Ran: 11	
+Passed   : 11
 Failed   : 0
 Timeout  : 0
 

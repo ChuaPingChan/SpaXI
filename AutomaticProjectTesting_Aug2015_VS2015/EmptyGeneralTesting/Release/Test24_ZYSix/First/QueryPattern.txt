@@ -1,0 +1,45 @@
+1 - Find all variable used by if assignment statement non empty argument 1
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2;
+Select v1 pattern if1(v1, _, _)
+c,d1,j,o,q,t1,u,x
+5000
+2 - Find all variable used by if assignment statement non empty argument 2
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2;
+Select BOOLEAN pattern if1("q", _, _)
+true
+5000
+3 - Find all variable used by if assignment statement non empty argument2 and argument 3
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2;
+Select BOOLEAN pattern if1(_, _, _)
+true
+5000
+4 - Find all variable used by while assignment statement non empty argument 1
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2;
+Select v1 pattern w1(v1, _)
+g,i,j,k,o,q,u,v,x,z
+5000
+5 - Find all variable used by while assignment statement non empty argument 2
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2;
+Select BOOLEAN pattern w1("k", _)
+true
+5000
+6 - Find all variable used by while assignment statement non empty argument 2
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2;
+Select BOOLEAN pattern w1("p", _)
+false
+5000
+7 - Find all variable such that assignment statement LHS is x and RHS is x + ( y +)
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select BOOLEAN pattern a1("y", "x + y * z")
+false
+5000
+8 - Find all variable such that assignment statement LHS is x and RHS is y + z)
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select BOOLEAN pattern a1("y", _"x + (y * z)"_)
+true
+5000
+9 - Find all variable used for assignment statements
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select BOOLEAN pattern a1(v1, _)
+true
+5000

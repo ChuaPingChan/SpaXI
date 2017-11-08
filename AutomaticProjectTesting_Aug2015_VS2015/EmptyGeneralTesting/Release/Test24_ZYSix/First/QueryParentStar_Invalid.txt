@@ -1,0 +1,185 @@
+1 - Find all variables that is parent of other
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Parent*(v1, _)
+
+5000
+2 - Find all variables that is child of other
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Parent*(_, v1)
+
+5000
+3 - Find all statements is child of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Parent*(s1, v1)
+
+5000
+4 - Find all if statements is parent of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Parent*(if1, v1)
+
+5000
+5 - Find all while statements is parent of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Parent*(w1, v1)
+
+5000
+6 - Find all calls statements is parent of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Parent*(o1, v1)
+
+5000
+7 - Find all statements is child of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Parent*(v1, s1)
+
+5000
+8 - Find all if statements is child of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Parent*(v1, if1)
+
+5000
+9 - Find all while statements is child of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Parent*(v1, w1)
+
+5000
+10 - Find all call statements is child of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Parent*(v1, o1)
+
+5000
+11 - Find all variables is parent of other variables
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select v1 such that Parent*(v1, v2)
+
+5000
+12 - Find all procedures that is parent of others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Parent*(p1, _)
+
+5000
+13 - Find all procedures thatis child of other any others
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select p1 such that Parent*(_, p1)
+
+5000
+14 - Find all statements that is chile of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Parent*(p1, s1)
+
+5000
+15 - Find all statements that is parent of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select s1 such that Parent*(s1, p1)
+
+5000
+16 - Find all proglines that is child of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Parent*(p1, e1)
+
+5000
+17 - Find all proglines that is parent of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Parent*(e1, p1)
+
+5000
+18 - Find all if statements thatis child of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Parent*(p1, if1)
+
+5000
+19 - Find all if statements that is parent of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Parent*(if1, p1)
+
+5000
+20 - Find all while statements that is child of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Parent*(p1, w1)
+
+5000
+21 - Find all while statements that is parent of  other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Parent*(w1, p1)
+
+5000
+22 - Find all call statements that is child of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Parent*(p1, o1)
+
+5000
+23 - Find all call statements that is parent of other procedures
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Parent*(o1, p1)
+
+5000
+24 - Find all constants that is parent of other
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c1 such that Parent*(c1, _)
+
+5000
+25 - Find all constants that is child of other
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c1 such that Parent*(_, c1)
+
+5000
+26 - Find all constants that is parent of other constant
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c1 such that Parent*(c1, c2)
+
+5000
+27 - Find all constants that is child of other constant
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c2 such that Parent*(c1, c2)
+
+5000
+28 - Find all statements is parent of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c1 such that Parent*(s1, c1)
+
+5000
+29 - Find all if statements is parent of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Parent*(if1, c1)
+
+5000
+30 - Find all while statements is parent of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Parent*(w1, c1)
+
+5000
+31 - Find all call statements is parent of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Parent*(o1, c1)
+
+5000
+32 - Find all proglines is parent of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Parent*(e1, c1)
+
+5000
+33 - Find all statements is child of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select c1 such that Parent*(c1, s1)
+
+5000
+34 - Find all if statements is child of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select if1 such that Parent*(c1, if1)
+
+5000
+35 - Find all while statements is child of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select w1 such that Parent*(c1, w1)
+
+5000
+36 - Find all call statements is child of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select o1 such that Parent*(c1, o1)
+
+5000
+37 - Find all proglinesis child of other constants
+stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
+Select e1 such that Parent*(c1, e1)
+
+5000
