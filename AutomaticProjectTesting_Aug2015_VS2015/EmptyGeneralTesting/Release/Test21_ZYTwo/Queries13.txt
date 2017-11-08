@@ -1,0 +1,470 @@
+148 - Select whiles that uses VAR_NAME
+while w;
+Select w such that Uses (w, "eight")
+5, 7, 10, 11
+5000
+149 - Select whiles that do not use VAR_NAME
+while w;
+Select w such that Uses (w, "wrong")
+none
+5000
+150 - Select statements that uses some variable
+stmt s; variable v;
+Select s such that Uses (s, v)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+5000
+151 - Select variables used by some statement
+stmt s; variable v;
+Select v such that Uses (s, v)
+zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen
+5000
+152 - Select assignments that use some variable
+assign a; variable v;
+Select a such that Uses (a, v)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+153 - Select variables used by some assignment
+assign a; variable v;
+Select v such that Uses (a, v)
+zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, thirteen, fourteen, fifteen
+5000
+154 - Select whiles that use some variable
+while w; variable v;
+Select w such that Uses (w, v)
+3, 5, 7, 10, 11, 14
+5000
+155 - Select variables used by some while
+while w; variable v;
+Select v such that Uses (w, v)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen
+5000
+156 - Select some variable used by any
+variable v;
+Select v such that Uses(_, v)
+none
+5000
+157 - Select variables (if any statement use any variable)
+variable v;
+Select v such that Uses(_, _)
+none
+5000
+158 - Select some variable used by STMT_NUM
+variable v;
+Select v such that Uses (5, v)
+four, five, six, seven, eight
+5000
+159 - Select some variable used by INVALID_STMT_NUM
+variable v;
+Select v such that Uses (19, v)
+none
+5000
+160 -  Select statements that modifies VAR_NAME
+stmt s;
+Select s such that Modifies (s, "five")
+5, 7, 8
+5000
+161 - Select statements that does not modify VAR_NAME
+stmt s;
+Select s such that Modifies (s, "wrong")
+none
+5000
+162 - Select assignments that modifies VAR_NAME
+assign a;
+Select a such that Modifies (a, "nine")
+12
+5000
+163 - Select assignments that do not modify VAR_NAME
+assign a;
+Select a such that Modifies (a, "wrong")
+none
+5000
+164 - Select whiles that modifies VAR_NAME
+while w;
+Select w such that Modifies (w, "fourteen")
+10, 11
+5000
+165 - Select whiles that do not modify VAR_NAME
+while w;
+Select w such that Modifies (w, "wrong")
+none
+5000
+166 - Select statements that modify some variable
+stmt s; variable v;
+Select s such that Modifies (s, v)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+5000
+167 - Select variables modified by some statement
+stmt s; variable v;
+Select v such that Modifies (s, v)
+zero, one, three, four, five, six, nine, eleven, thirteen, fourteen, fifteen, correct
+5000
+168 - Select assignments that modify some variable
+assign a; variable v;
+Select a such that Modifies (a, v)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+169 - Select variables modified by some assignment
+assign a; variable v;
+Select v such that Modifies (a, v)
+zero, one, three, four, five, six, nine, eleven, thirteen, fourteen, fifteen, correct
+5000
+170 - Select whiles that modify some variable
+while w; variable v;
+Select w such that Modifies (w, v)
+3, 5, 7, 10, 11, 14
+5000
+171 - Select variables modified by some while
+while w; variable v;
+Select v such that Modifies (w, v)
+three, four, five, six, nine, eleven, thirteen, fourteen, fifteen
+5000
+172 - Select some variable modified by any
+variable v;
+Select v such that Modifies(_,v)
+none
+5000
+173 - Select variables (if any statement modify any variable)
+variable v;
+Select v such that Modifies(_, _)
+none
+5000
+174 - Select some variable modified by STMT_NUM
+variable v;
+Select v such that Modifies (10, v)
+nine, eleven, thirteen, fourteen, fifteen
+5000
+175 - Select some variable modified by INVALID_STMT_NUM
+variable v;
+Select v such that Modifies (19, v)
+none
+5000
+176 - Select assignment pattern(any, any)
+assign a;
+Select a pattern a (_, _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+177 - Select assignment pattern (any, VAR_NAME)
+assign a; 
+Select a pattern a (_, "one")
+none
+5000
+178 - Select assignment pattern (any, _VAR_NAME_)
+assign a; 
+Select a pattern a (_, _"one"_)
+1, 2, 17, 18
+5000
+179 - Select assignment pattern (any, EXPR)
+assign a; 
+Select a pattern a (_, "one + two")
+2
+5000
+180 - Select assignment pattern(any, _EXPR_)
+assign a; 
+Select a pattern a (_, _"one + two"_)
+2, 17
+5000
+181 - Select assignment pattern(synonym, any)
+assign a; variable v;
+Select a pattern a (v, _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+182 - Select assignment pattern(synonym, VAR_NAME)
+assign a; variable v;
+Select a pattern a (v, "one")
+none
+5000
+183 - Select assignment pattern(synonym, _VAR_NAME_)
+assign a; variable v;
+Select a pattern a (v, _"one"_)
+1, 2, 17, 18
+5000
+184 - Select assignment pattern(synonym, EXPR)
+assign a; variable v;
+Select a pattern a (v, "one + two")
+2
+5000
+185 - Select assignment pattern(synonym, _EXPR_)
+assign a; variable v;
+Select a pattern a (v, _"one + two"_)
+2, 17
+5000
+186 - Select assignment pattern(VAR_NAME, any)
+assign a;
+Select a pattern a ("correct", _)
+18
+5000
+187 - Select assignment pattern(VAR_NAME, VAR_NAME)
+assign a; 
+Select a pattern a ("fifteen", "one")
+none
+5000
+188 - Select assignment pattern(VAR_NAME, _VAR_NAME_)
+assign a; 
+Select a pattern a ("correct", _"one"_)
+18
+5000
+189 - Select assignment pattern(VAR_NAME, EXPR)
+assign a; 
+Select a pattern a ("one", "one + two")
+2
+5000
+190 - Select assignment pattern(VAR_NAME, _EXPR_)
+assign a; 
+Select a pattern a ("fifteen", _"one + two"_)
+17
+5000
+191 - Select Uses(assignment, synonym) assignment pattern(any, any)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a (_, _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+192 - Select Uses(assignment, synonym) assignment pattern(any, VAR_NAME)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a (_, "five")
+none
+5000
+193 - Select Uses(assignment, synonym) assignment pattern(any, _VAR_NAME_)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a (_, _"five"_)
+6, 8, 17, 18
+5000
+194 - Select Uses(assignment, synonym) assignment pattern(any, EXPR)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a (_, "zero + one")
+1
+5000
+195 - Select Uses(assignment, synonym) assignment pattern(any, _EXPR_)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a (_, _"five + six"_)
+8, 18
+5000
+196 - Select Uses(assignment, synonym) assignment pattern(VAR_NAME, any)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a ("correct", _)
+18
+5000
+197 - Select Uses(assignment, synonym) assignment pattern(VAR_NAME, VAR_NAME)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a ("fourteen", "fourteen")
+16
+5000
+198 - Select Uses(assignment, synonym) assignment pattern(VAR_NAME, _VAR_NAME_)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a ("six", _"seven"_)
+9
+5000
+199 - Select Uses(assignment, synonym) assignment pattern(VAR_NAME, EXPR)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a ("thirteen", "thirteen + fourteen")
+none
+5000
+200 - Select Uses(assignment, synonym) assignment pattern(VAR_NAME, _EXPR_)
+assign a; variable v;
+Select a such that Uses (a, v) pattern a ("thirteen", _"thirteen + fourteen"_)
+15
+5000
+201 - Select Uses(assignment, synonym) other assignment pattern(any, any)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (_, _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+202 - Select Uses(assignment, synonym) other assignment pattern(any, VAR_NAME)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (_, "fourteen")
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+203 - Select Uses(assignment, synonym) other assignment pattern(any, _VAR_NAME_)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (_, _"fourteen"_)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+204 - Select Uses(assignment, synonym) other assignment pattern(any, EXPR)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (_, "nine + ten")
+none
+5000
+205 - Select Uses(assignment, synonym) other assignment pattern(any, _EXPR_)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (_, _"nine + ten"_)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+206 - Select Uses(assignment, synonym) other assignment pattern(synonym, any)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (v, _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+207 - Select Uses(assignment, synonym) other assignment pattern(synonym, VAR_NAME)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (v, "four")
+none
+5000
+208 - Select Uses(assignment, synonym) other assignment pattern(synonym, _VAR_NAME_)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (v, _"five"_)
+4, 6, 8, 15, 17, 18
+5000
+209 - Select Uses(assignment, synonym) other assignment pattern(synonym, EXPR)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (v, "six + seven")
+none
+5000
+210 - Select Uses(assignment, synonym) other assignment pattern(synonym, _EXPR_)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 (v, _"six + seven"_)
+6, 8, 9, 18
+5000
+211 - Select Uses(assignment, synonym) other assignment pattern(VAR_NAME, any)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 ("nine", _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+212 - Select Uses(assignment, synonym) other assignment pattern(VAR_NAME, VAR_NAME)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 ("fourteen", "fourteen")
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+213 - Select Uses(assignment, synonym) other assignment pattern(VAR_NAME, _VAR_NAME_)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 ("four", _"six"_)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+214 - Select Uses(assignment, synonym) other assignment pattern(VAR_NAME, EXPR)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 ("four", "four + five")
+none
+5000
+215 - Select Uses(assignment, synonym) other assignment pattern(VAR_NAME, _EXPR_)
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1 ("four", _"four + five"_)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+216 - Select Modifies(assignment, synonym) assignment pattern(any, any)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a (_, _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+217 - Select Modifies(assignment, synonym) assignment pattern(any, VAR_NAME)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a (_, "fourteen")
+16
+5000
+218 - Select Modifies(assignment, synonym) assignment pattern(any, _VAR_NAME_)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a (_, _"eleven"_)
+12, 13
+5000
+219 - Select Modifies(assignment, synonym) assignment pattern(any, EXPR)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a (_, "six + seven")
+none
+5000
+220 - Select Modifies(assignment, synonym) assignment pattern(any, _EXPR_)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a (_, _"six + seven"_)
+9
+5000
+221 - Select Modifies(assignment, synonym) assignment pattern(VAR_NAME, any)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a ("zero", _)
+1
+5000
+222 - Select Modifies(assignment, synonym) assignment pattern(VAR_NAME, VAR_NAME)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a ("zero", "one")
+none
+5000
+223 - Select Modifies(assignment, synonym) assignment pattern(VAR_NAME, _VAR_NAME_)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a ("one", _"two"_)
+2
+5000
+224 - Select Modifies(assignment, synonym) assignment pattern(VAR_NAME, EXPR)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a ("fifteen", "one + two")
+none
+5000
+225 - Select Modifies(assignment, synonym) assignment pattern(VAR_NAME, _EXPR_)
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a ("fifteen", _"one + two"_)
+17
+5000
+226 - Select Modifies(assignment, synonym) other assignment pattern(any, any)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (_, _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+227 -  Select Modifies(assignment, synonym) other assignment pattern(any, VAR_NAME)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (_, "eight")
+none
+5000
+228 - Select Modifies(assignment, synonym) other assignment pattern(any, _VAR_NAME_)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (_, _"six"_)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+229 - Select Modifies(assignment, synonym) other assignment pattern(any, EXPR)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (_, "thirteen + fourteen")
+none
+5000
+230 - Select Modifies(assignment, synonym) other assignment pattern(any, _EXPR_)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (_, _"nine + ten"_)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+231 - Select Modifies(assignment, synonym) other assignment pattern(synonym, any)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (v, _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+232 -  Select Modifies(assignment, synonym) other assignment pattern(synonym, VAR_NAME)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (v, "eleven")
+none
+5000
+233 - Select Modifies(assignment, synonym) other assignment pattern(synonym, _VAR_NAME_)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (v, _"eleven"_)
+12, 13
+5000
+234 - Select Modifies(assignment, synonym) other assignment pattern(synonym, EXPR)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (v, "four + five")
+none
+5000
+235 - Select Modifies(assignment, synonym) other assignment pattern(synonym, _EXPR_)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 (v, _"four + five"_)
+6
+5000
+236 - Select Modifies(assignment, synonym) other assignment pattern(VAR_NAME, any)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 ("six", _)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+237 - Select Modifies(assignment, synonym) other assignment pattern(VAR_NAME, VAR_NAME)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 ("fourteen", "fourteen")
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+238 - Select Modifies(assignment, synonym) other assignment pattern(VAR_NAME, _VAR_NAME_)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 ("six", _"six + seven"_)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+239 - Select Modifies(assignment, synonym) other assignment pattern(VAR_NAME, EXPR)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 ("one", "one + two")
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+240 - Select Modifies(assignment, synonym) other assignment pattern(VAR_NAME, _EXPR_)
+assign a, a1; variable v;
+Select a such that Modifies (a, v) pattern a1 ("correct", _"five + six + seven"_)
+1, 2, 4, 6, 8, 9, 12, 13, 15, 16, 17, 18
+5000
+241 - Select all prog_lines
+prog_line n;
+Select n
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+5000

@@ -1,0 +1,45 @@
+procedure A {
+	
+		
+		if k then{
+			a = b;
+			if k then{
+				while abc {
+					if n then{
+						a = b;
+					}
+					else {
+						c = d;
+					}
+					if n then{
+						a = b;
+					}
+					else {
+						c = d;
+					}
+
+				}
+			}
+			else {
+				while x {
+					a = b;
+				}
+				while a {
+					while a {
+						c = d;
+					}
+				}
+				e = f;
+			}
+			g = h;
+		}
+		else {
+			a = b;
+		}
+
+
+
+	
+
+
+}

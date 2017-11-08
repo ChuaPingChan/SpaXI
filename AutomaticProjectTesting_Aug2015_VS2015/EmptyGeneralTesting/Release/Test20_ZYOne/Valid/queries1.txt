@@ -1,0 +1,250 @@
+1 - get all variable
+variable v;
+Select v
+a,aa,ab,A1b2C3,averylonglonglonglongvar,b,ba,cd,CD,x,y
+5000
+2 - get all const
+constant c;
+Select c
+1,2,3,2147483647
+5000
+3 - pattern a(known,known) -- expr
+assign a;
+Select a pattern a("ab","a+b")
+8
+5000
+4 - pattern a(known,known) -- one var subexpr
+assign a;
+Select a pattern a("x",_"  a  "_)
+1,3
+5000
+5 - pattern a(known,known) -- one const subexpr
+assign a;
+Select a pattern a("A1b2C3",_"2147483647"_)
+6
+5000
+6 - pattern a(known,known) -- multi var subexpr
+assign a;
+Select a pattern a("a",_"b*x"_)
+7
+5000
+7 - pattern a(known,known) -- multi const subexpr
+assign a;
+Select a pattern a("a",_"2 - 1"_)
+7
+5000
+8 - pattern a(known,_)
+assign a;
+Select a pattern a("x",_)
+1,3,5
+5000
+9 - pattern a(v,known) -- expr
+assign a; variable v;
+Select v pattern a(v,"(a+b)*aa+a-(b*x)+CD-(( 2 )-1)")
+a
+5000
+10 - pattern a(v,known) -- subexpr
+assign a; variable v;
+Select a pattern a(v,_"a+b"_)
+7,8
+5000
+11 - pattern a(v,known) -- subexpr not found
+assign a; variable v;
+Select a pattern a(v,_"ab-cd"_)
+
+5000
+12 - pattern a(v,_)
+assign a; variable v;
+Select v pattern a(v,_)
+a,ab,A1b2C3,b,x,ba
+5000
+13 - pattern a(_,_)
+assign a;
+Select a pattern a(_,_)
+1,2,3,4,5,6,7,8
+5000
+14 - Modifies(known,known) -- true
+
+Select BOOLEAN such that Modifies(5,"x")
+TRUE
+5000
+15 - Modifies(known,known) -- false
+
+Select BOOLEAN such that Modifies(3,"cd")
+FALSE
+5000
+16 - Modifies(known,v)
+variable v;
+Select v such that Modifies(2,v)
+b
+5000
+17 - Modifies(s,known)
+stmt s;
+Select s such that Modifies(s,"x")
+1,3,5
+5000
+18 - Modifies(a,v)
+assign a; variable v;
+Select a such that Modifies(a,v)
+1,2,3,4,5,6,7,8
+5000
+19 - Uses(known,known) -- true
+
+Select BOOLEAN such that Uses(6,"averylonglonglonglongvar")
+TRUE
+5000
+20 - Uses(known,known) -- false
+
+Select BOOLEAN such that Uses(3,"CD")
+FALSE
+5000
+21 - Uses(known,v)
+variable v;
+Select v such that Uses(3,v)
+a,ab,cd
+5000
+22 - Uses(s,known)
+stmt s;
+Select s such that Uses(s,"x")
+2,7
+5000
+23 - Uses(a,v)
+assign a; variable v;
+Select v such that Uses(a,v)
+a,aa,ab,averylonglonglonglongvar,b,cd,CD,x,y
+5000
+24 - with const
+constant c;
+Select c with c.value = 1
+1
+5000
+25 - with var
+variable v;
+Select v with v.varName = "abcde"
+
+5000
+26 - with stmt
+stmt s;
+Select s with stmt.stmt# = 20
+
+5000
+27 - with const and stmt
+stmt s; constant c;
+Select c with c.value = s.stmt#
+1,2,3
+5000
+28 - pattern a(known,known) and pattern a(v,known) -- expr and subexpr
+assign a; variable v;
+Select a pattern a("ab","a+b") and a(v,_"a+b"_)
+8
+5000
+29 - pattern a(known,_) and pattern a(v,_)
+assign a; variable v;
+Select v pattern a("a",_) pattern a(v,_)
+a
+5000
+30 - pattern a(known,known) and pattern a(_,known)
+assign a;
+Select a pattern a("x",_"1"_) and a(_,_"a"_)
+1
+5000
+31 - pattern a(v,known) and pattern a(v,known)
+assign a1,a2; variable v;
+Select a1 pattern a1(v,_"(a+b)*aa+a"_) and a2(v,_"CD"_)
+7
+5000
+32 - pattern a(_,_) and pattern a(v,known) and pattern a(v,known)
+assign a; variable v;
+Select v pattern a(_,_) pattern a(v,_"1"_) pattern a(v,_"a"_)
+x,a
+5000
+33 - Modifies(s,known) and Modifies(a,known)
+assign a; stmt s;
+Select a such that Modifies(s,"x") and Modifies(a,"ab")
+8
+5000
+34 - Modifies(known,v) and Modifies(known,v)
+variable v;
+Select v such that Modifies(3,v) and Modifies(5,v)
+x
+5000
+35 - Modifies(s,v) and Modifies(s,v)
+stmt s; variable v;
+Select s such that Modifies(s,v) and Modifies(s,v)
+1,2,3,4,5,6,7,8
+5000
+36 - Modifies(s,_) and Modifies(a,known) and Modifies(a,_)
+stmt s; assign a;
+Select a such that Modifies(s,_) and Modifies(a,"ba") and Modifies(a,_)
+4
+5000
+37 - Modifies(s,v) and Modifies(s,v) and Modifies(s,v) and Modifies(known,v)
+stmt s1,s2; variable v1,v2;
+Select v2 such that Modifies(s1,v1) and Modifies(s2,v1) and Modifies(s1,v2) and Modifies(2,v2)
+b
+5000
+38 - Uses(a,known) and Uses(a,known)
+assign a;
+Select a such that Uses(a,"x") and Uses(a,"ab")
+
+5000
+39 - Uses(known,v) and Uses(known,v)
+variable v;
+Select v such that Uses(8,v) and Uses(7,v)
+a,b
+5000
+40 - Uses(s,v) and Uses(s,v)
+stmt s; variable v;
+Select s such that Uses(s,v) and Uses(s,v)
+1,2,3,4,6,7,8
+5000
+41 - Uses(s,_) and Uses(a,known) and Uses(a,_)
+stmt s; assign a;
+Select a such that Uses(s,_) and Uses(a,"b") and Uses(a,_)
+7,8
+5000
+42 - Uses(s,v) and Uses(s,v) and Uses(s,v) and Uses(known,v)
+stmt s1,s2; variable v1,v2;
+Select v2 such that Uses(s1,v1) and Uses(s2,v1) and Uses(s1,v2) and Uses(2,v2)
+x,y
+5000
+43 - pattern a(v,known) such that Modifies(s,v) and Uses(s,v)
+assign a; stmt s; variable v;
+Select a pattern a(v,_"CD"_) such that Modifies(s,v) and Uses(s,v)
+7
+5000
+44 - pattern a(v,_) with var such that Uses(a,v)
+assign a; variable v;
+Select a such that a(v,_) with v.varName = "x" such that Uses(a,v)
+
+5000
+45 - pattern a(_,known) such that Modifies(s,v) with stmt
+stmt s; assign a; variable v;
+Select v pattern a(_,_"1"_) such that Modifies(s,v) with s.stmt# = 2
+b
+5000
+46 - with const and stmt such that Modifies(s,v) and Uses(s,known)
+stmt s; constant c; variable v;
+Select v with c.value = s.stmt# such that Modifies(s,v) and Uses(s,"ab")
+x
+5000
+47 - Modifies(s,v) with stmt and with var
+stmt s; variable v;
+Select s such that Modifies(s,v) with s.stmt# = 2 and v.varName = "x"
+
+5000
+48 - Uses(s,known) and Modifies(s,v) with var pattern a(v,known)
+stmt s; variable v; assign a;
+Select a such that Uses(s,"a") and Modifies(s,v) with v.varName = "a" pattern a(v,_"(a+b)*aa+a-b*x"_)
+7
+5000
+49 - Uses(s,v) and Modifies(s,v) and Modifies(s,v) pattern a(v,_)
+stmt s1,s2; variable v1,v2; assign a;
+Select s1 such that Uses(s1,v1) and Modifies(s1,v2) and Modifies(s2,v1) pattern a(v1,_)
+1,2,3,7,8
+5000
+50 - Uses(s,v) and Uses(a,v) pattern a(v,_) with stmt
+stmt s; variable v1,v2; assign a;
+Select v1 such that Uses(s,v1) and Uses(a,v1) pattern a(v2,_) with s.stmt# = 5
+
+5000

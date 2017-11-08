@@ -1,0 +1,53 @@
+procedure A {
+	a=b;						
+	b=c;						
+	if d then {					
+		b=1+a;					
+		e=3*(c+e);				
+		if a then {				
+			c = a * e;			
+			d = 11;				
+			if f then {			
+				a = d - e - f;	
+				b = a+(c*e)+a;	
+			} else {
+				b=3;			
+				d = f - 1;		
+				a = c-1;		
+			}
+			g=b;				
+		} else {
+			e = d;				
+			a = 4;				
+		}
+		c=c;					
+		if a then {				
+			e = 1-2;			
+			c = a+1*b-c;		
+		} else {
+			if c then {			
+				a=1;			
+			} else {
+				c=3;			
+			}
+		}
+	} else {
+		a=b+c;					
+		if a then {				
+			d = c*b*d;			
+			a = a+2;			
+		} else {
+			e = 0;				
+			a= f;				
+		}
+	}
+	c= d-c;						
+	f=0;						
+	if c then {					
+		a = 1-2+3;				
+		b = b+e*4;				
+		a = a*(3+1)-c*b;		
+	} else {
+		c=d+e;					
+	}
+}

@@ -1,0 +1,30 @@
+1 - all variables
+variable v;
+Select v
+a, b, c, d, e, f, g
+100000
+2 - all statments
+stmt s;
+Select s
+1, 2, 3, 4, 5
+5000
+3 - all assign statments
+assign a;
+Select a
+1, 2, 3, 4, 5
+5000
+4 - all while statments
+while w;
+Select w;
+none
+5000
+5 - all constants
+constant c;
+Select c
+40, 41, 42, 43, 44
+5000
+6 - combination
+assign a; constant c;
+Select <a, c>
+1 40, 1 41, 1 42, 1 43, 1 44, 2 40, 2 41, 2 42, 2 43, 2 44, 3 40, 3 41, 3 42, 3 43, 3 44, 4 40, 4 41, 4 42, 4 43, 4 44, 5 40, 5 41, 5 42, 5 43, 5 44
+5000

@@ -1,0 +1,170 @@
+1 - Follows(known ,known) -- TRUE
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows(17,20)
+TRUE
+5000
+2 - Follows(known ,known) -- FALSE
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows(17,18)
+FALSE
+5000
+3 - Follows(known ,known) -- TRUE
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows(5,13)
+TRUE
+5000
+4 - Follows(known ,known) -- FALSE
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows(14,15)
+FALSE
+5000
+5 - Follows(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows(a,10)
+9
+5000
+6 - Follows(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows(6,s)
+7
+5000
+7 - Follows(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows(ifs,46)
+
+5000
+8 - Follows(known ifs,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows(32,s)
+33
+5000
+9 - Follows(known ifs,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows(31,a)
+
+5000
+10 - Follows(known ifs,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows(31,ifs)
+
+5000
+11 - Follows(known ifs,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Follows(31,w)
+
+5000
+12 - Follows(known ifs,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows(31,c)
+
+5000
+13 - Follows(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Follows(w,11)
+8
+5000
+14 - Follows(known while,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows(17,s)
+20
+5000
+15 - Follows(known while,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows(17,a)
+20
+5000
+16 - Follows(known while,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows(17,ifs)
+
+5000
+17 - Follows(known while,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Follows(17,w)
+
+5000
+18 - Follows(known while,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows(33,c)
+
+5000
+19 - Follows(unknown call,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows(c,46)
+
+5000
+20 - Follows(known call,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows(3,s)
+4
+5000
+21 - Follows*(known ,known) -- TRUE
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows*(1,14)
+TRUE
+5000
+22 - Follows*(known ,known) -- FALSE
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows*(14,27)
+FALSE
+5000
+23 - Follows*(known ,known) -- TRUE
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows*(8,12)
+TRUE
+5000
+24 - Follows*(known ,known) -- FALSE
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows*(5,21)
+FALSE
+5000
+25 - Follows*(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows*(a,13)
+1,2,4
+5000
+26 - Follows*(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows*(27,s)
+28
+5000
+27 - Follows*(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows*(ifs,14)
+5
+5000
+28 - Follows*(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows*(1,s)
+2,3,4,5,13,14
+5000
+29 - Follows*(known assign,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows*(1,a)
+2,4,13
+5000
+30 - Follows*(known assign,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows*(1,ifs)
+5
+5000
+31 - Follows*(known assign,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Follows*(1,w)
+
+5000
+32 - Follows*(known assign,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows*(1,c)
+3,14
+5000
+33 - Follows*(unknown call,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows*(c,14)
+3
+5000
+34 - Follows*(known call,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows*(3,s)
+4,5,13,14
+5000

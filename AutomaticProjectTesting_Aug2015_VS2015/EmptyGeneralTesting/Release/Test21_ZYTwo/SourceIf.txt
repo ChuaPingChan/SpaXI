@@ -1,0 +1,7 @@
+procedure Main {
+	if x then {
+		x = x + 1;
+	} else {
+		y = y + 1;
+	}
+}

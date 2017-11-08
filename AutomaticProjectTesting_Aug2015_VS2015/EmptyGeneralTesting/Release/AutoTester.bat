@@ -80,7 +80,19 @@ if '%option%'=='18' (
 )
 if '%option%'=='19' (
 	goto :runTest19
-) 
+)
+if '%option%'=='20' (
+	goto :runTest20
+)
+if '%option%'=='21' (
+	goto :runTest21
+)
+if '%option%'=='22' (
+	goto :runTest22
+)
+if '%option%'=='23' (
+	goto :runTest23
+)
 cls
 goto :main
 echo ===============================================================================
@@ -197,6 +209,10 @@ call :runTest15
 call :runTest16
 call :runTest18
 call :runTest19
+call :runTest20
+call :runTest21
+call :runTest22
+call :runTest23
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -790,6 +806,15 @@ echo Finish running AutoTester for System\With\QueryWithTest3.
 echo Running AutoTester for Validation\QueryValidation ...
 AutoTester Test15_Verb\Validation\SourceValidation.txt Test15_Verb\Validation\QueryValidation.txt TestResult\out15_Validation_QueryValidation.xml > TestResult\cmd\cmd15_Validation_QueryValidation.txt
 echo Finish running AutoTester for Validation\QueryValidation.
+echo Running AutoTester for Stress\CommonSynonym\QueryStressCommonSynonymTest1 ...
+AutoTester Test15_Verb\Stress\CommonSynonym\SourceStressCommonSynonymTest1.txt Test15_Verb\Stress\CommonSynonym\QueryStressCommonSynonymTest1.txt TestResult\out15_StressCommonSynonym_QueryStressCommonSynonymTest1.xml > TestResult\cmd\cmd15_StressCommonSynonym_QueryStressCommonSynonymTest1.txt
+echo Finish running AutoTester for Stress\CommonSynonym\QueryStressCommonSynonymTest1.
+echo Running AutoTester for Stress\MultipleClauses\QueryStressMultipleClausesTest1 ...
+AutoTester Test15_Verb\Stress\MultipleClauses\SourceStressMultipleClausesTest1.txt Test15_Verb\Stress\MultipleClauses\QueryStressMultipleClausesTest1.txt TestResult\out15_StressMultipleClauses_QueryStressMultipleClausesTest1.xml > TestResult\cmd\cmd15_StressMultipleClauses_QueryStressMultipleClausesTest1.txt
+echo Finish running AutoTester for Stress\MultipleClauses\QueryStressMultipleClausesTest1.
+echo Running AutoTester for Stress\Next\QueryStressNextTest1 ...
+AutoTester Test15_Verb\Stress\Next\SourceStressNextTest1.txt Test15_Verb\Stress\Next\QueryStressNextTest1.txt TestResult\out15_StressNext_QueryStressNextTest1.xml > TestResult\cmd\cmd15_StressNext_QueryStressNextTest1.txt
+echo Finish running AutoTester for Stress\Next\QueryStressNextTest1.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
@@ -844,5 +869,253 @@ echo Running AutoTester for Query_std3_basic ...
 AutoTester Test19_Mat\Source_std3.txt Test19_Mat\Query_std3_basic.txt TestResult\out19_Query_std3_basic.xml > TestResult\cmd\cmd19_Query_std3_basic.txt
 echo Finish running AutoTester for Query_std3_basic.
 echo Finish running AutoTester for test 19.
+call :getPauseAction
+goto :eof
+
+:runTest20
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 20...
+echo Running AutoTester for queries1 ...
+AutoTester Test20_ZYOne\Grp\source1.txt Test20_ZYOne\Grp\queries1.txt TestResult\out20_Grp_queries1.xml > TestResult\cmd\cmd20_Grp_queries1.txt
+echo Finish running AutoTester for queries1.
+echo Running AutoTester for queries2 ...
+AutoTester Test20_ZYOne\Grp\source2.txt Test20_ZYOne\Grp\queries2.txt TestResult\out20_Grp_queries2.xml > TestResult\cmd\cmd20_Grp_queries2.txt
+echo Finish running AutoTester for queries2.
+echo Running AutoTester for queries3 ...
+AutoTester Test20_ZYOne\Grp\source3.txt Test20_ZYOne\Grp\queries3.txt TestResult\out20_Grp_queries3.xml > TestResult\cmd\cmd20_Grp_queries3.txt
+echo Finish running AutoTester for queries3.
+echo Running AutoTester for queries4 ...
+AutoTester Test20_ZYOne\Grp\source4.txt Test20_ZYOne\Grp\queries4.txt TestResult\out20_Grp_queries4.xml > TestResult\cmd\cmd20_Grp_queries4.txt
+echo Finish running AutoTester for queries4.
+echo Running AutoTester for queries5 ...
+AutoTester Test20_ZYOne\Grp\source5.txt Test20_ZYOne\Grp\queries5.txt TestResult\out20_Grp_queries5.xml > TestResult\cmd\cmd20_Grp_queries5.txt
+echo Finish running AutoTester for queries5.
+echo Running AutoTester for queries6 ...
+AutoTester Test20_ZYOne\Grp\source6.txt Test20_ZYOne\Grp\queries6.txt TestResult\out20_Grp_queries6.xml > TestResult\cmd\cmd20_Grp_queries6.txt
+echo Finish running AutoTester for queries6.
+echo Running AutoTester for queries1 ...
+AutoTester Test20_ZYOne\Others\source1.txt Test20_ZYOne\Others\queries1.txt TestResult\out20_Others_queries1.xml > TestResult\cmd\cmd20_Others_queries1.txt
+echo Finish running AutoTester for queries1.
+echo Running AutoTester for queries2 ...
+AutoTester Test20_ZYOne\Others\source2.txt Test20_ZYOne\Others\queries2.txt TestResult\out20_Others_queries2.xml > TestResult\cmd\cmd20_Others_queries2.txt
+echo Finish running AutoTester for queries2.
+echo Running AutoTester for queries3 ...
+AutoTester Test20_ZYOne\Others\source3.txt Test20_ZYOne\Others\queries3.txt TestResult\out20_Others_queries3.xml > TestResult\cmd\cmd20_Others_queries3.txt
+echo Finish running AutoTester for queries3.
+echo Running AutoTester for queries4 ...
+AutoTester Test20_ZYOne\Others\source4.txt Test20_ZYOne\Others\queries4.txt TestResult\out20_Others_queries4.xml > TestResult\cmd\cmd20_Others_queries4.txt
+echo Finish running AutoTester for queries4.
+echo Running AutoTester for queries5 ...
+AutoTester Test20_ZYOne\Others\source5.txt Test20_ZYOne\Others\queries5.txt TestResult\out20_Others_queries5.xml > TestResult\cmd\cmd20_Others_queries5.txt
+echo Finish running AutoTester for queries5.
+echo Running AutoTester for queries6 ...
+AutoTester Test20_ZYOne\Others\source6.txt Test20_ZYOne\Others\queries6.txt TestResult\out20_Others_queries6.xml > TestResult\cmd\cmd20_Others_queries6.txt
+echo Finish running AutoTester for queries6.
+echo Running AutoTester for queries6b ...
+AutoTester Test20_ZYOne\Others\source6b.txt Test20_ZYOne\Others\queries6b.txt TestResult\out20_Others_queries6b.xml > TestResult\cmd\cmd20_Others_queries6b.txt
+echo Finish running AutoTester for queries6b.
+echo Running AutoTester for queries7 ...
+AutoTester Test20_ZYOne\Others\source7.txt Test20_ZYOne\Others\queries7.txt TestResult\out20_Others_queries7.xml > TestResult\cmd\cmd20_Others_queries7.txt
+echo Finish running AutoTester for queries7.
+echo Running AutoTester for queries7b ...
+AutoTester Test20_ZYOne\Others\source7b.txt Test20_ZYOne\Others\queries7b.txt TestResult\out20_Others_queries7b.xml > TestResult\cmd\cmd20_Others_queries7b.txt
+echo Finish running AutoTester for queries7b.
+echo Running AutoTester for queries8 ...
+AutoTester Test20_ZYOne\Others\source8.txt Test20_ZYOne\Others\queries8.txt TestResult\out20_Others_queries8.xml > TestResult\cmd\cmd20_Others_queries8.txt
+echo Finish running AutoTester for queries8.
+echo Running AutoTester for queries8b ...
+AutoTester Test20_ZYOne\Others\source8b.txt Test20_ZYOne\Others\queries8b.txt TestResult\out20_Others_queries8b.xml > TestResult\cmd\cmd20_Others_queries8b.txt
+echo Finish running AutoTester for queries8b.
+echo Running AutoTester for queries9 ...
+AutoTester Test20_ZYOne\Others\source9.txt Test20_ZYOne\Others\queries9.txt TestResult\out20_Others_queries9.xml > TestResult\cmd\cmd20_Others_queries9.txt
+echo Finish running AutoTester for queries9.
+echo Running AutoTester for queries10 ...
+AutoTester Test20_ZYOne\Others\source10.txt Test20_ZYOne\Others\queries10.txt TestResult\out20_Others_queries10.xml > TestResult\cmd\cmd20_Others_queries10.txt
+echo Finish running AutoTester for queries10.
+echo Running AutoTester for queriesCalls ...
+AutoTester Test20_ZYOne\Relation\sourceCalls.txt Test20_ZYOne\Relation\queriesCalls.txt TestResult\out20_Relation_queriesCalls.xml > TestResult\cmd\cmd20_Relation_queriesCalls.txt
+echo Finish running AutoTester for queriesCalls.
+echo Running AutoTester for queriesNext ...
+AutoTester Test20_ZYOne\Relation\sourceNext.txt Test20_ZYOne\Relation\queriesNext.txt TestResult\out20_Relation_queriesNext.xml > TestResult\cmd\cmd20_Relation_queriesNext.txt
+echo Finish running AutoTester for queriesNext.
+echo Running AutoTester for queries1 ...
+AutoTester Test20_ZYOne\Valid\source1.txt Test20_ZYOne\Valid\queries1.txt TestResult\out20_Valid_queries1.xml > TestResult\cmd\cmd20_Valid_queries1.txt
+echo Finish running AutoTester for queries1.
+echo Running AutoTester for queries2 ...
+AutoTester Test20_ZYOne\Valid\source2.txt Test20_ZYOne\Valid\queries2.txt TestResult\out20_Valid_queries2.xml > TestResult\cmd\cmd20_Valid_queries2.txt
+echo Finish running AutoTester for queries2.
+echo Running AutoTester for queries3 ...
+AutoTester Test20_ZYOne\Valid\source3.txt Test20_ZYOne\Valid\queries3.txt TestResult\out20_Valid_queries3.xml > TestResult\cmd\cmd20_Valid_queries3.txt
+echo Finish running AutoTester for queries3.
+echo Running AutoTester for queries4 ...
+AutoTester Test20_ZYOne\Valid\source4.txt Test20_ZYOne\Valid\queries4.txt TestResult\out20_Valid_queries4.xml > TestResult\cmd\cmd20_Valid_queries4.txt
+echo Finish running AutoTester for queries4.
+echo Running AutoTester for queries5 ...
+AutoTester Test20_ZYOne\Valid\source5.txt Test20_ZYOne\Valid\queries5.txt TestResult\out20_Valid_queries5.xml > TestResult\cmd\cmd20_Valid_queries5.txt
+echo Finish running AutoTester for queries5.
+echo Running AutoTester for queries6 ...
+AutoTester Test20_ZYOne\Valid\source6.txt Test20_ZYOne\Valid\queries6.txt TestResult\out20_Valid_queries6.xml > TestResult\cmd\cmd20_Valid_queries6.txt
+echo Finish running AutoTester for queries6.
+echo Running AutoTester for queries6_Affects ...
+AutoTester Test20_ZYOne\Valid\source6.txt Test20_ZYOne\Valid\queries6_Affects.txt TestResult\out20_Valid_queries6_Affects.xml > TestResult\cmd\cmd20_Valid_queries6_Affects.txt
+echo Finish running AutoTester for queries6_Affects.
+echo Running AutoTester for queries6_Calls ...
+AutoTester Test20_ZYOne\Valid\source6.txt Test20_ZYOne\Valid\queries6_Calls.txt TestResult\out20_Valid_queries6_Calls.xml > TestResult\cmd\cmd20_Valid_queries6_Calls.txt
+echo Finish running AutoTester for queries6_Calls.
+echo Running AutoTester for queries6_Follows ...
+AutoTester Test20_ZYOne\Valid\source6.txt Test20_ZYOne\Valid\queries6_Follows.txt TestResult\out20_Valid_queries6_Follows.xml > TestResult\cmd\cmd20_Valid_queries6_Follows.txt
+echo Finish running AutoTester for queries6_Follows.
+echo Running AutoTester for queries6_Modifies ...
+AutoTester Test20_ZYOne\Valid\source6.txt Test20_ZYOne\Valid\queries6_Modifies.txt TestResult\out20_Valid_queries6_Modifies.xml > TestResult\cmd\cmd20_Valid_queries6_Modifies.txt
+echo Finish running AutoTester for queries6_Modifies.
+echo Running AutoTester for queries6_MultipleClause ...
+AutoTester Test20_ZYOne\Valid\source6.txt Test20_ZYOne\Valid\queries6_MultipleClause.txt TestResult\out20_Valid_queries6_MultipleClause.xml > TestResult\cmd\cmd20_Valid_queries6_MultipleClause.txt
+echo Finish running AutoTester for queries6_MultipleClause.
+echo Running AutoTester for queries6_Parents ...
+AutoTester Test20_ZYOne\Valid\source6.txt Test20_ZYOne\Valid\queries6_Parents.txt TestResult\out20_Valid_queries6_Parents.xml > TestResult\cmd\cmd20_Valid_queries6_Parents.txt
+echo Finish running AutoTester for queries6_Parents.
+echo Running AutoTester for queries6_Uses ...
+AutoTester Test20_ZYOne\Valid\source6.txt Test20_ZYOne\Valid\queries6_Uses.txt TestResult\out20_Valid_queries6_Uses.xml > TestResult\cmd\cmd20_Valid_queries6_Uses.txt
+echo Finish running AutoTester for queries6_Uses.
+echo Finish running AutoTester for test 20.
+call :getPauseAction
+goto :eof
+
+:runTest21
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 21...
+echo Running AutoTester for Queries1 ...
+AutoTester Test21_ZYTwo\Source1.txt Test21_ZYTwo\Queries1.txt TestResult\out21_Queries1.xml > TestResult\cmd\cmd21_Queries1.txt
+echo Finish running AutoTester for Queries1.
+echo Running AutoTester for Queries1Bonus ...
+AutoTester Test21_ZYTwo\Source1Bonus.txt Test21_ZYTwo\Queries1Bonus.txt TestResult\out21_Queries1Bonus.xml > TestResult\cmd\cmd21_Queries1Bonus.txt
+echo Finish running AutoTester for Queries1Bonus.
+echo Running AutoTester for Queries11 ...
+AutoTester Test21_ZYTwo\Source11.txt Test21_ZYTwo\Queries11.txt TestResult\out21_Queries11.xml > TestResult\cmd\cmd21_Queries11.txt
+echo Finish running AutoTester for Queries11.
+echo Running AutoTester for Queries12 ...
+AutoTester Test21_ZYTwo\Source12.txt Test21_ZYTwo\Queries12.txt TestResult\out21_Queries12.xml > TestResult\cmd\cmd21_Queries12.txt
+echo Finish running AutoTester for Queries12.
+echo Running AutoTester for Queries12a ...
+AutoTester Test21_ZYTwo\Source12.txt Test21_ZYTwo\Queries12a.txt TestResult\out21_Queries12a.xml > TestResult\cmd\cmd21_Queries12a.txt
+echo Finish running AutoTester for Queries12a.
+echo Running AutoTester for Queries13 ...
+AutoTester Test21_ZYTwo\Source13.txt Test21_ZYTwo\Queries13.txt TestResult\out21_Queries13.xml > TestResult\cmd\cmd21_Queries13.txt
+echo Finish running AutoTester for Queries13.
+echo Running AutoTester for Queries21 ...
+AutoTester Test21_ZYTwo\Source21.txt Test21_ZYTwo\Queries21.txt TestResult\out21_Queries21.xml > TestResult\cmd\cmd21_Queries21.txt
+echo Finish running AutoTester for Queries21.
+echo Running AutoTester for Queries21a ...
+AutoTester Test21_ZYTwo\Source21.txt Test21_ZYTwo\Queries21a.txt TestResult\out21_Queries21a.xml > TestResult\cmd\cmd21_Queries21a.txt
+echo Finish running AutoTester for Queries21a.
+echo Running AutoTester for QueriesAffects ...
+AutoTester Test21_ZYTwo\SourceAffects.txt Test21_ZYTwo\QueriesAffects.txt TestResult\out21_QueriesAffects.xml > TestResult\cmd\cmd21_QueriesAffects.txt
+echo Finish running AutoTester for QueriesAffects.
+echo Running AutoTester for QueriesAffectsNextStarStressTest ...
+AutoTester Test21_ZYTwo\Source13.txt Test21_ZYTwo\QueriesAffectsNextStarStressTest.txt TestResult\out21_QueriesAffectsNextStarStressTest.xml > TestResult\cmd\cmd21_QueriesAffectsNextStarStressTest.txt
+echo Finish running AutoTester for QueriesAffectsNextStarStressTest.
+echo Running AutoTester for QueriesAffectsStar ...
+AutoTester Test21_ZYTwo\SourceAffects.txt Test21_ZYTwo\QueriesAffectsStar.txt TestResult\out21_QueriesAffectsStar.xml > TestResult\cmd\cmd21_QueriesAffectsStar.txt
+echo Finish running AutoTester for QueriesAffectsStar.
+echo Running AutoTester for QueriesAffectsStressTest ...
+AutoTester Test21_ZYTwo\SourceAffects.txt Test21_ZYTwo\QueriesAffectsStressTest.txt TestResult\out21_QueriesAffectsStressTest.xml > TestResult\cmd\cmd21_QueriesAffectsStressTest.txt
+echo Finish running AutoTester for QueriesAffectsStressTest.
+echo Running AutoTester for QueriesCalls ...
+AutoTester Test21_ZYTwo\SourceCalls.txt Test21_ZYTwo\QueriesCalls.txt TestResult\out21_QueriesCalls.xml > TestResult\cmd\cmd21_QueriesCalls.txt
+echo Finish running AutoTester for QueriesCalls.
+echo Running AutoTester for QueriesIf ...
+AutoTester Test21_ZYTwo\SourceIf.txt Test21_ZYTwo\QueriesIf.txt TestResult\out21_QueriesIf.xml > TestResult\cmd\cmd21_QueriesIf.txt
+echo Finish running AutoTester for QueriesIf.
+echo Running AutoTester for QueriesMiniIter1 ...
+AutoTester Test21_ZYTwo\SourceMiniIter1.txt Test21_ZYTwo\QueriesMiniIter1.txt TestResult\out21_QueriesMiniIter1.xml > TestResult\cmd\cmd21_QueriesMiniIter1.txt
+echo Finish running AutoTester for QueriesMiniIter1.
+echo Running AutoTester for QueriesMiniIter1NoWhile ...
+AutoTester Test21_ZYTwo\SourceMiniIter1NoWhile.txt Test21_ZYTwo\QueriesMiniIter1NoWhile.txt TestResult\out21_QueriesMiniIter1NoWhile.xml > TestResult\cmd\cmd21_QueriesMiniIter1NoWhile.txt
+echo Finish running AutoTester for QueriesMiniIter1NoWhile.
+echo Running AutoTester for QueriesNextStar ...
+AutoTester Test21_ZYTwo\SourceNextStar.txt Test21_ZYTwo\QueriesNextStar.txt TestResult\out21_QueriesNextStar.xml > TestResult\cmd\cmd21_QueriesNextStar.txt
+echo Finish running AutoTester for QueriesNextStar.
+echo Finish running AutoTester for test 21.
+call :getPauseAction
+goto :eof
+
+:runTest22
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 22...
+echo Running AutoTester for queries1 ...
+AutoTester Test22_ZYThree\source1.txt Test22_ZYThree\queries1.txt TestResult\out22_queries1.xml > TestResult\cmd\cmd22_queries1.txt
+echo Finish running AutoTester for queries1.
+echo Running AutoTester for queries2 ...
+AutoTester Test22_ZYThree\source2.txt Test22_ZYThree\queries2.txt TestResult\out22_queries2.xml > TestResult\cmd\cmd22_queries2.txt
+echo Finish running AutoTester for queries2.
+echo Running AutoTester for queries3 ...
+AutoTester Test22_ZYThree\source2.txt Test22_ZYThree\queries3.txt TestResult\out22_queries3.xml > TestResult\cmd\cmd22_queries3.txt
+echo Finish running AutoTester for queries3.
+echo Finish running AutoTester for test 22.
+call :getPauseAction
+goto :eof
+
+:runTest23
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 23...
+echo Running AutoTester for QueryComplexAffects ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexAffects.txt TestResult\out23_QueryComplexAffects.xml > TestResult\cmd\cmd23_QueryComplexAffects.txt
+echo Finish running AutoTester for QueryComplexAffects.
+echo Running AutoTester for QueryComplexAffectsStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexAffectsStar.txt TestResult\out23_QueryComplexAffectsStar.xml > TestResult\cmd\cmd23_QueryComplexAffectsStar.txt
+echo Finish running AutoTester for QueryComplexAffectsStar.
+echo Running AutoTester for QueryComplexAll ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexAll.txt TestResult\out23_QueryComplexAll.xml > TestResult\cmd\cmd23_QueryComplexAll.txt
+echo Finish running AutoTester for QueryComplexAll.
+echo Running AutoTester for QueryComplexCalls ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexCalls.txt TestResult\out23_QueryComplexCalls.xml > TestResult\cmd\cmd23_QueryComplexCalls.txt
+echo Finish running AutoTester for QueryComplexCalls.
+echo Running AutoTester for QueryComplexCallsStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexCallsStar.txt TestResult\out23_QueryComplexCallsStar.xml > TestResult\cmd\cmd23_QueryComplexCallsStar.txt
+echo Finish running AutoTester for QueryComplexCallsStar.
+echo Running AutoTester for QueryComplexFollows ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexFollows.txt TestResult\out23_QueryComplexFollows.xml > TestResult\cmd\cmd23_QueryComplexFollows.txt
+echo Finish running AutoTester for QueryComplexFollows.
+echo Running AutoTester for QueryComplexFollowsStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexFollowsStar.txt TestResult\out23_QueryComplexFollowsStar.xml > TestResult\cmd\cmd23_QueryComplexFollowsStar.txt
+echo Finish running AutoTester for QueryComplexFollowsStar.
+echo Running AutoTester for QueryComplexModifies ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexModifies.txt TestResult\out23_QueryComplexModifies.xml > TestResult\cmd\cmd23_QueryComplexModifies.txt
+echo Finish running AutoTester for QueryComplexModifies.
+echo Running AutoTester for QueryComplexMultipleClauses ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexMultipleClauses.txt TestResult\out23_QueryComplexMultipleClauses.xml > TestResult\cmd\cmd23_QueryComplexMultipleClauses.txt
+echo Finish running AutoTester for QueryComplexMultipleClauses.
+echo Running AutoTester for QueryComplexNext ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexNext.txt TestResult\out23_QueryComplexNext.xml > TestResult\cmd\cmd23_QueryComplexNext.txt
+echo Finish running AutoTester for QueryComplexNext.
+echo Running AutoTester for QueryComplexNextStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexNextStar.txt TestResult\out23_QueryComplexNextStar.xml > TestResult\cmd\cmd23_QueryComplexNextStar.txt
+echo Finish running AutoTester for QueryComplexNextStar.
+echo Running AutoTester for QueryComplexNoClause ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexNoClause.txt TestResult\out23_QueryComplexNoClause.xml > TestResult\cmd\cmd23_QueryComplexNoClause.txt
+echo Finish running AutoTester for QueryComplexNoClause.
+echo Running AutoTester for QueryComplexParent ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexParent.txt TestResult\out23_QueryComplexParent.xml > TestResult\cmd\cmd23_QueryComplexParent.txt
+echo Finish running AutoTester for QueryComplexParent.
+echo Running AutoTester for QueryComplexParentStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexParentStar.txt TestResult\out23_QueryComplexParentStar.xml > TestResult\cmd\cmd23_QueryComplexParentStar.txt
+echo Finish running AutoTester for QueryComplexParentStar.
+echo Running AutoTester for QueryComplexPattern ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexPattern.txt TestResult\out23_QueryComplexPattern.xml > TestResult\cmd\cmd23_QueryComplexPattern.txt
+echo Finish running AutoTester for QueryComplexPattern.
+echo Running AutoTester for QueryComplexTuple ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexTuple.txt TestResult\out23_QueryComplexTuple.xml > TestResult\cmd\cmd23_QueryComplexTuple.txt
+echo Finish running AutoTester for QueryComplexTuple.
+echo Running AutoTester for QueryComplexUses ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexUses.txt TestResult\out23_QueryComplexUses.xml > TestResult\cmd\cmd23_QueryComplexUses.txt
+echo Finish running AutoTester for QueryComplexUses.
+echo Running AutoTester for QueryComplexWith ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexWith.txt TestResult\out23_QueryComplexWith.xml > TestResult\cmd\cmd23_QueryComplexWith.txt
+echo Finish running AutoTester for QueryComplexWith.
+echo Finish running AutoTester for test 23.
 call :getPauseAction
 goto :eof

@@ -1,0 +1,100 @@
+procedure a { 
+  x = 1 + 2 - 4; // 1
+  if i then { // 2
+    while i { // 3
+      i = i * 13; // 4
+      call b; // 5
+    }
+    while b { // 6
+      if c then { // 7
+        y = x + 9;  // 8
+      }
+      else {
+        k = r + s + t; // 9
+      }
+      while y { // 10
+        a = (c + d) * x + y; // 11
+      }
+      m = b + c + d; // 12
+    }
+    call b; // 13
+  }
+  else {
+    call while; // 14
+    if d then { // 15
+      while b { // 16
+        b = x + a + (b + y) + j; // 17
+      }
+      call while; // 18
+    }
+    else {
+      b = c + d; // 19
+      if x then { // 20
+        x = c + d; // 21
+      }
+      else {
+        p = p * (q * r) * (s * 4); // 22
+      }
+    }
+  }
+}
+procedure b {
+  call if; // 23
+  while p { // 24
+    if q then { // 25
+      while i { // 26
+        i = i + 16; // 27
+      }
+      a1 = a2; // 28
+    }
+    else {
+      if r then { // 29
+        call if; // 30 call while; // 31 a = (b + c)* d + e * 5; // 32 d = d * b; // 33
+      }
+      else {
+        r = s + t * 14; // 34
+        call if; // 35
+      }
+      if s then { // 36
+        r = r * 12 * 19 + n; // 37
+      }
+      else {
+        a = (a + b + c) * d;// 38
+      }
+      call while; // 49
+    }
+    a1 = a * b + c * d; // 40
+    while a2 { // 41
+      while a1 { // 42
+        r = r + (s + t); // 43
+      }
+      if u then { // 44
+        y = Call * wHile; // 45
+      }
+      else {
+        if = if - while + assign2; // 46
+      }
+      call if; // 47
+    }
+  }
+}
+procedure call {
+  call assign;// 48
+}
+procedure assign {
+  a = 16; // 49
+}
+procedure if {
+  if p then { // 50
+    call while; // 51
+  }
+  else {
+    p = p + q - r; // 52
+  }
+}
+procedure while {
+  while x { // 53
+    y = 10; // 54
+  }
+}
+procedure Main2 { a = a + b * c; // 56}

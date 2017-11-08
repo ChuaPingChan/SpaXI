@@ -1,0 +1,10 @@
+procedure A {
+    x= 1 + a;										
+    b    =  x * y;									
+    x  = (a+ ab) - cd;								
+    ba = CD;										
+    x = 3;											
+    A1b2C3 = averylonglonglonglongvar - 2147483647;	
+    a=(a+b)*aa+a-(b*x)+CD-(( 2 )-1);				
+    ab = a+b;										
+}
