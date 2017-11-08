@@ -181,12 +181,12 @@ Select n such that Next(3,n)
 37 - Next(a,known)
 assign a;
 Select a such that Next(a,31)
-21,24,28,30
+21,23,24,28,30
 5000
 38 - Next(i,a)
 if i; assign a;
 Select a such that Next(i,a)
-4,7,10,12,16,19,20,23,24,25,27,29,34,37
+4,7,10,12,16,20,23,24,25,27,29,34,37
 5000
 39 - Next(known,known) and Follows*(s,s)
 stmt s1,s2;
@@ -215,7 +215,7 @@ a,d,f
 5000
 44 - with var and Parent(s,s) and Uses(s,v)
 stmt s1,s2; variable v;
-Select s2 with v.varName = "e" and Parent(s1,s2) and Uses(s1,v)
+Select s2 with v.varName = "e" such that Parent(s1,s2) and Uses(s1,v)
 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,25,26,34,35,36,37
 5000
 45 - Parent*(i,a) and Uses(a,v) and Modifies(i,v)
@@ -230,7 +230,7 @@ Select a such that Uses(a,v) pattern a(v,_"c*b"_) such that Next(a,_)
 5000
 47 - Follows*(i,a) pattern i(_,_,_) and pattern a(v,_) with var
 if i; assign a; variable v;
-Select i such that Follows*(i,a) pattern i(_,_,_) and pattern a(v,_) with v.varName = "c"
+Select i such that Follows*(i,a) pattern i(_,_,_) pattern a(v,_) with v.varName = "c"
 3,6
 5000
 48 - with stmt such that Next(s,s) and Modifies(s,v) and Parent(s,s)
