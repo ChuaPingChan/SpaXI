@@ -1,0 +1,74 @@
+procedure abc {
+	c = a; 
+	e = f;
+	if x then {
+		call bcd;
+		b = c;
+	} else {
+		b = c;
+		d = e;
+		e = d;
+		x = ba + wwe;
+	}
+	a = b + e;
+	z = c + bb;
+	while x{
+		f = a + z + c;
+		if x then {
+			t = t;
+			a = b + x;
+			f = d + e + z;
+			while a {
+				x = d;
+				cat = bb + f;
+			}
+		} else {
+			t = f;
+			a = d;
+			x = n; 
+		}
+		wwe = a;
+	}
+	call hello;
+	wow = x + b;
+	z = a;
+}
+
+procedure bcd {
+	c = z;
+	d = a;
+	while x{
+		e = a;
+		if x then {
+			coke = zero;
+			zero = one;
+			one = wwe;
+			wwe = coke;
+		} else {
+			zero = ten;
+		}	
+	}
+	lol = zero;
+	call hello;
+	hi = bb;
+}
+
+procedure hello {
+	i = k;
+	j = i; 
+	k = j;
+	if pop then {
+		if pop then {
+			stack = loop; 
+		} else {
+			stack = goto;
+		}
+	} else {
+		if pop then {
+			stack = run;
+		} else {
+			stack = hop;
+		}
+	}
+	loop = stack;
+}	

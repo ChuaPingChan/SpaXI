@@ -86,7 +86,10 @@ if '%option%'=='20' (
 )
 if '%option%'=='21' (
 	goto :runTest21
-)  
+)
+if '%option%'=='22' (
+	goto :runTest22
+)
 cls
 goto :main
 echo ===============================================================================
@@ -205,6 +208,7 @@ call :runTest18
 call :runTest19
 call :runTest20
 call :runTest21
+call :runTest22
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -1033,3 +1037,19 @@ echo Finish running AutoTester for test 21.
 call :getPauseAction
 goto :eof
 
+:runTest22
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 22...
+echo Running AutoTester for queries1 ...
+AutoTester Test22_ZYThree\source1.txt Test22_ZYThree\queries1.txt TestResult\out22_queries1.xml > TestResult\cmd\cmd22_queries1.txt
+echo Finish running AutoTester for queries1.
+echo Running AutoTester for queries2 ...
+AutoTester Test22_ZYThree\source2.txt Test22_ZYThree\queries2.txt TestResult\out22_queries2.xml > TestResult\cmd\cmd22_queries2.txt
+echo Finish running AutoTester for queries2.
+echo Running AutoTester for queries3 ...
+AutoTester Test22_ZYThree\source2.txt Test22_ZYThree\queries3.txt TestResult\out22_queries3.xml > TestResult\cmd\cmd22_queries3.txt
+echo Finish running AutoTester for queries3.
+echo Finish running AutoTester for test 22.
+call :getPauseAction
+goto :eof
