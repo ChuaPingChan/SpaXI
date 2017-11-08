@@ -1,17 +1,17 @@
 19 - Comment
 
 Select BOOLEAN such that Modifies(10, _)
-TRUE
+true
 5000
 20 - Comment
 
 Select BOOLEAN such that Modifies(10, "z")
-TRUE
+true
 5000
 21 - Comment
 
 Select BOOLEAN such that Modifies("delta", _)
-TRUE
+true
 5000
 146 - Comment
 procedure p; 

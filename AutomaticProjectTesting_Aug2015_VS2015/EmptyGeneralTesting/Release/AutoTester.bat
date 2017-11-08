@@ -919,13 +919,13 @@ echo Running AutoTester for queries7 ...
 AutoTester Test20_ZYOne\Others\source7.txt Test20_ZYOne\Others\queries7.txt TestResult\out20_Others_queries7.xml > TestResult\cmd\cmd20_Others_queries7.txt
 echo Finish running AutoTester for queries7.
 echo Running AutoTester for queries7b ...
-AutoTester Test20_ZYOne\Others\source7b.txt Test20_ZYOne\Others\queries7b.txt TestResult\out20_Others_queries7b.xml > TestResult\cmd\cmd20_Others_queries7b.txt
+AutoTester Test20_ZYOne\Others\source7.txt Test20_ZYOne\Others\queries7b.txt TestResult\out20_Others_queries7b.xml > TestResult\cmd\cmd20_Others_queries7b.txt
 echo Finish running AutoTester for queries7b.
 echo Running AutoTester for queries8 ...
 AutoTester Test20_ZYOne\Others\source8.txt Test20_ZYOne\Others\queries8.txt TestResult\out20_Others_queries8.xml > TestResult\cmd\cmd20_Others_queries8.txt
 echo Finish running AutoTester for queries8.
 echo Running AutoTester for queries8b ...
-AutoTester Test20_ZYOne\Others\source8b.txt Test20_ZYOne\Others\queries8b.txt TestResult\out20_Others_queries8b.xml > TestResult\cmd\cmd20_Others_queries8b.txt
+AutoTester Test20_ZYOne\Others\source8.txt Test20_ZYOne\Others\queries8b.txt TestResult\out20_Others_queries8b.xml > TestResult\cmd\cmd20_Others_queries8b.txt
 echo Finish running AutoTester for queries8b.
 echo Running AutoTester for queries9 ...
 AutoTester Test20_ZYOne\Others\source9.txt Test20_ZYOne\Others\queries9.txt TestResult\out20_Others_queries9.xml > TestResult\cmd\cmd20_Others_queries9.txt
@@ -1052,7 +1052,7 @@ echo Running AutoTester for queries2 ...
 AutoTester Test22_ZYThree\source2.txt Test22_ZYThree\queries2.txt TestResult\out22_queries2.xml > TestResult\cmd\cmd22_queries2.txt
 echo Finish running AutoTester for queries2.
 echo Running AutoTester for queries3 ...
-AutoTester Test22_ZYThree\source2.txt Test22_ZYThree\queries3.txt TestResult\out22_queries3.xml > TestResult\cmd\cmd22_queries3.txt
+AutoTester Test22_ZYThree\source3.txt Test22_ZYThree\queries3.txt TestResult\out22_queries3.xml > TestResult\cmd\cmd22_queries3.txt
 echo Finish running AutoTester for queries3.
 echo Finish running AutoTester for test 22.
 call :getPauseAction
