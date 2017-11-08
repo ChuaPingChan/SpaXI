@@ -1,222 +1,222 @@
 1 - Comment
 
 Select BOOLEAN such that Follows(_, _)
-TRUE
+true
 5000
 2 - Comment
 
 Select BOOLEAN such that Follows(_, 2)
-TRUE
+true
 5000
 3 - Comment
 
 Select BOOLEAN such that Follows(2, _)
-FALSE
+false
 5000
 4 - Comment
 
 Select BOOLEAN such that Follows(6, 8)
-TRUE
+true
 5000
 5 - Comment
 
 Select BOOLEAN such that Follows*(_, _)
-TRUE
+true
 5000
 6 - Comment
 
 Select BOOLEAN such that Follows*(_, 16)
-TRUE
+true
 5000
 7 - Comment
 
 Select BOOLEAN such that Follows*(3, _)
-TRUE
+true
 5000
 8 - Comment
 
 Select BOOLEAN such that Follows*(3, 4)
-FALSE
+false
 5000
 9 - Comment
 
 Select BOOLEAN such that Parent(_, _)
-TRUE
+true
 5000
 10 - Comment
 
 Select BOOLEAN such that Parent(_, 9)
-TRUE
+true
 5000
 11 - Comment
 
 Select BOOLEAN such that Parent(11, _)
-FALSE
+false
 5000
 12 - Comment
 
 Select BOOLEAN such that Parent(3, 8)
-TRUE
+true
 5000
 13 - Comment
 
 Select BOOLEAN such that Parent*(_, _)
-TRUE
+true
 5000
 14 - Comment
 
 Select BOOLEAN such that Parent*(_, 1)
-FALSE
+false
 5000
 15 - Comment
 
 Select BOOLEAN such that Parent*(2, _)
-TRUE
+true
 5000
 16 - Comment
 
 Select BOOLEAN such that Parent*(3, 7)
-TRUE
+true
 5000
 17 - Comment
 
 Select BOOLEAN such that Modifies(_, _)
-FALSE
+false
 5000
 18 - Comment
 
 Select BOOLEAN such that Modifies(_, "x") 
-FALSE
+false
 5000
 19 - Comment
 
 Select BOOLEAN such that Modifies(10, _)
-TRUE
+true
 5000
 20 - Comment
 
 Select BOOLEAN such that Modifies(10, "z")
-TRUE
+true
 5000
 21 - Comment
 
 Select BOOLEAN such that Modifies("delta", _)
-TRUE
+true
 5000
 22 - Comment
 
 Select BOOLEAN such that Modifies("gamma", z)
-FALSE
+false
 5000
 23 - Comment
 
 Select BOOLEAN such that Uses(_, _)
-FALSE
+false
 5000
 24 - Comment
 
 Select BOOLEAN such that Uses(_, "i") 
-FALSE
+false
 5000
 25 - Comment
 
 Select BOOLEAN such that Uses(7, _)
-TRUE
+true
 5000
 26 - Comment
 
 Select BOOLEAN such that Uses(1, "a1")
-FALSE
+false
 5000
 27 - Comment
 
 Select BOOLEAN such that Uses("proc_name", _)
-FALSE
+false
 5000
 28 - Comment
 
 Select BOOLEAN such that Uses("gamma", "v")
-FALSE
+false
 5000
 29 - Comment
 
 Select BOOLEAN such that Calls(_, _)
-TRUE
+true
 5000
 30 - Comment
 
 Select BOOLEAN such that Calls(_, "alpha")
-FALSE
+false
 5000
 31 - Comment
 
 Select BOOLEAN such that Calls("delta", _)
-TRUE
+true
 5000
 32 - Comment
 
 Select BOOLEAN such that Calls("alpha", "delta")
-FALSE
+false
 5000
 33 - Comment
 
 Select BOOLEAN such that Calls*(_, _)
-TRUE
+true
 5000
 34 - Comment
 
 Select BOOLEAN such that Calls*(_, "beta")
-TRUE
+true
 5000
 35 - Comment
 
 Select BOOLEAN such that Calls*("beta", _)
-TRUE
+true
 5000
 36 - Comment
 
 Select BOOLEAN such that Calls*("alpha", "delta")
-TRUE
+true
 5000
 37 - Comment
 
 Select BOOLEAN such that Next(_, _)
-TRUE
+true
 5000
 38 - Comment
 
 Select BOOLEAN such that Next(_, 9)
-TRUE
+true
 5000
 39 - Comment
 
 Select BOOLEAN such that Next(9, _)
-TRUE
+true
 5000
 40 - Comment
 
 Select BOOLEAN such that Next(7, 6)
-TRUE
+true
 5000
 41 - Comment
 
 Select BOOLEAN such that Next*(_, _)
-TRUE
+true
 5000
 42 - Comment
 
 Select BOOLEAN such that Next*(_, 17)
-FALSE
+false
 5000
 43 - Comment
 
 Select BOOLEAN such that Next*(17, _)
-FALSE
+false
 5000
 44 - Comment
 
 Select BOOLEAN such that Next*(5, 7)
-TRUE
+true
 5000
 45 - Comment
 if ifs;
@@ -1611,7 +1611,7 @@ Select <a, a1> such that Affects (a, a1)
 323 - Comment
 
 Select BOOLEAN such that Affects (9, 9)
-TRUE
+true
 5000
 324 - Comment
 assign a;
@@ -1631,27 +1631,27 @@ Select <s, c.value, p> with s.stmt#=c.value
 327 - Comment
  
 Select BOOLEAN with 3 = 3
-TRUE
+true
 5000
 328 - Comment
 
 Select BOOLEAN with 3 = 5
-FALSE
+false
 5000
 329 - Comment
 
 Select BOOLEAN with "x" = "x"
-TRUE
+true
 5000
 330 - Comment
 
 Select BOOLEAN with "y" = "x"
-FALSE
+false
 5000
 331 - Comment
 stmt s;
 Select BOOLEAN with s = s
-FALSE
+false
 5000
 332 - Comment
 stmt s; assign a;
@@ -1706,7 +1706,7 @@ Select s with s.stmt# = 3
 342 - Comment
 variable v;
 Select BOOLEAN with v.varName=5
-FALSE
+false
 5000
 343 - Comment
 prog_line n;
@@ -1721,5 +1721,5 @@ Select n with n = n1
 345 - Comment
 
 Select BOOLEAN
-TRUE
+true
 5000

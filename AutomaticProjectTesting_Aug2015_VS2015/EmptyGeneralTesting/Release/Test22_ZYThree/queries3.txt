@@ -51,42 +51,42 @@ none
 11 - Parent - BOOLEAN
 stmt s;
 Select BOOLEAN such that Parent(s,_)
-TRUE
+true
 5000
 12 - Parent* - BOOLEAN
 stmt s;
 Select BOOLEAN such that Parent*(s,_)
-TRUE
+true
 5000
 13 - Parent
 stmt s;
 Select BOOLEAN such that Parent(_,s)
-TRUE
+true
 5000
 14 - Parent*
 stmt s;
 Select BOOLEAN such that Parent*(_,s)
-TRUE
+true
 5000
 15 - Parent
 
 Select BOOLEAN such that Parent(_,_)
-TRUE
+true
 5000
 16 - Parent
 stmt s;
 Select BOOLEAN such that Parent(1,9)
-FALSE
+false
 5000
 17 - Parent
 
 Select BOOLEAN such that Parent(63,66)
-FALSE
+false
 5000
 18 - Parent*
 
 Select BOOLEAN such that Parent*(63,66)
-TRUE
+true
 5000
 19 - Parent*
 stmt s;
@@ -96,7 +96,7 @@ none
 20 - Parent
 stmt s;
 Select BOOLEAN such that Parent(s,s)
-FALSE
+false
 5000
 21 - Follows
 stmt s; 
@@ -151,52 +151,52 @@ Select s such that Follows*(s, 54)
 31 - Follows*
 stmt s;
 Select BOOLEAN such that Follows(s,_)
-TRUE
+true
 5000
 32 - Follows*
 stmt s;
 Select BOOLEAN such that Follows*(s,_)
-TRUE
+true
 5000
 33 - Follows
 stmt s;
 Select BOOLEAN such that Follows(_,s)
-TRUE
+true
 5000
 34 - Follows*
 stmt s;
 Select BOOLEAN such that Follows*(_,s)
-TRUE
+true
 5000
 35 - Follows
 
 Select BOOLEAN such that Follows(_,_)
-TRUE
+true
 5000
 36 - Follows
 
 Select BOOLEAN such that Follows(14,46)
-FALSE
+false
 5000
 37 - Follows
 
 Select BOOLEAN such that Follows(15,46)
-TRUE
+true
 5000
 38 - Follows*
 
 Select BOOLEAN such that Follows*(13,46)
-TRUE
+true
 5000
 39 - Follows*
 stmt s;
 Select BOOLEAN such that Follows*(s,s)
-FALSE
+false
 5000
 40 - Follows*
 stmt s;
 Select BOOLEAN such that Follows*(s,s)
-FALSE
+false
 5000
 41 - Modifies
 variable v;
@@ -211,12 +211,12 @@ a,boy,cat,egg,x
 43 - Modifies
 
 Select BOOLEAN such that Modifies(12,_)
-TRUE
+true
 5000
 44 - Modifies
 
 Select BOOLEAN such that Modifies(13,"y")
-FALSE
+false
 5000
 45 - Modifies
 variable v;
@@ -241,7 +241,7 @@ Select c such that Modifies(c,_)
 49 - Modifies
 procedure p;
 Select BOOLEAN such that Modifies(p,_)
-TRUE
+true
 5000
 50 - Modifies
 stmt s; variable v;
@@ -271,32 +271,32 @@ Select n such that Modifies("banana","x")
 55 - Modifies
 
 Select BOOLEAN such that Modifies(14,_)
-TRUE
+true
 5000
 56 - Modifies
 
 Select BOOLEAN such that Modifies(18,"boy")
-TRUE
+true
 5000
 57 - Modifies
 prog_line n;
 Select BOOLEAN such that Modifies("banana","x")
-TRUE
+true
 5000
 58 - Modifies
 prog_line n;
 Select BOOLEAN such that Modifies(n,_)
-TRUE
+true
 5000
 59 - Modifies
 prog_line n;
 Select BOOLEAN such that Modifies(42,"x")
-FALSE
+false
 5000
 60 - Modifies
 
 Select BOOLEAN such that Modifies(36,"kid")
-TRUE
+true
 5000
 61 - Uses
 variable v;
@@ -311,12 +311,12 @@ boy,cat,dog,egg,x,zebra
 63 - Uses
 
 Select BOOLEAN such that Uses(12,_)
-TRUE
+true
 5000
 64 - Uses
 
 Select BOOLEAN such that Uses(13,"y")
-TRUE
+true
 5000
 65 - Uses
 variable v;
@@ -341,7 +341,7 @@ Select c such that Uses(c,_)
 69 - Uses
 procedure p;
 Select BOOLEAN such that Uses(p,_)
-TRUE
+true
 5000
 70 - Uses
 stmt s; variable v;
@@ -371,32 +371,32 @@ Select n such that Uses("banana","x")
 75 - Uses
 
 Select BOOLEAN such that Uses(14,_)
-FALSE
+false
 5000
 76 - Uses
 
 Select BOOLEAN such that Uses(18,"boy")
-TRUE
+true
 5000
 77 - Uses
 prog_line n;
 Select BOOLEAN such that Uses("banana","x")
-TRUE
+true
 5000
 78 - Uses
 prog_line n;
 Select BOOLEAN such that Uses(n,_)
-TRUE
+true
 5000
 79 - Uses
 prog_line n;
 Select BOOLEAN such that Uses(42,"lol")
-FALSE
+false
 5000
 80 - Uses
 
 Select BOOLEAN such that Uses(36,"kid")
-TRUE
+true
 5000
 81 - Next
 stmt s; 
@@ -451,52 +451,52 @@ Select s such that Next*(s, 54)
 91 - Next
 stmt s;
 Select BOOLEAN such that Next(s,_)
-TRUE
+true
 5000
 92 - Next*
 stmt s;
 Select BOOLEAN such that Next*(s,_)
-TRUE
+true
 5000
 93 - Next
 stmt s;
 Select BOOLEAN such that Next(_,s)
-TRUE
+true
 5000
 94 - Next*
 stmt s;
 Select BOOLEAN such that Next*(_,s)
-TRUE
+true
 5000
 95 - Next
 stmt s;
 Select BOOLEAN such that Next(_,_)
-TRUE
+true
 5000
 96 - Next
 stmt s;
 Select BOOLEAN such that Next(14,46)
-FALSE
+false
 5000
 97 - Next
 stmt s;
 Select BOOLEAN such that Next(15,46)
-TRUE
+true
 5000
 98 - Next*
 stmt s;
 Select BOOLEAN such that Next*(1,74)
-FALSE
+false
 5000
 99 - Next*
 stmt s;
 Select BOOLEAN such that Next*(s,s)
-TRUE
+true
 5000
 100 - Next
 stmt s;
 Select BOOLEAN such that Next(s,s)
-FALSE
+false
 5000
 101 - Affects
 assign a; 
@@ -516,7 +516,7 @@ Select a such that Affects (14,_)
 104 - Affects 
 assign a; 
 Select BOOLEAN such that Affects (17, 49)
-FALSE
+false
 5000
 105 - Affects 
 assign a; 
@@ -531,7 +531,7 @@ Select a such that Affects (23, a)
 107 - Affects 
 assign a; 
 Select BOOLEAN such that Affects (62,_)
-TRUE
+true
 5000
 108 - Affects*
 assign a; 
@@ -546,7 +546,7 @@ Select a such that Affects* (53, a)
 110 - Affects*
 assign a; 
 Select BOOLEAN such that Affects* (_,_)
-TRUE
+true
 5000
 111 - Affects*
 assign a; 
@@ -561,7 +561,7 @@ Select a such that Affects* (17, a)
 113 - Affects
 assign a;
 Select BOOLEAN such that Affects (9, 11)
-FALSE
+false
 5000
 114 - Affects
 if i;
@@ -571,17 +571,17 @@ Select i.stmt# such that Affects (13, 16)
 115 - Affects
 assign a;
 Select BOOLEAN such that Affects (17, 19)
-TRUE
+true
 5000
 116 - Affects
 assign a;
 Select BOOLEAN such that Affects (20, 27)
-TRUE
+true
 5000
 117 - Affects
 assign a;
 Select BOOLEAN such that Affects (_,58)
-TRUE
+true
 5000
 118 - Affects
 assign a;
@@ -701,7 +701,7 @@ Select a pattern a(_,_"3"_)
 141 - PatternIf
 if i;
 Select BOOLEAN pattern i(_,_,_)
-TRUE
+true
 5000
 142 - PatternIf
 if i; variable v;
@@ -741,7 +741,7 @@ Select a pattern i("zebra",_,_)
 149 - PatternWhile
 while w;
 Select BOOLEAN pattern w(_,_)
-TRUE
+true
 5000
 150 - PatternWhile
 while w; variable v;
@@ -801,22 +801,22 @@ Select a with a.stmt# = c.value
 161 - With
 assign a;
 Select BOOLEAN with a.stmt# = 27
-TRUE
+true
 5000
 162 - With
 assign a; 
 Select BOOLEAN with a.stmt# = 200
-FALSE
+false
 5000
 163 - With
 while w; if i;
 Select BOOLEAN with w.stmt# = i.stmt#
-FALSE
+false
 5000
 164 - With
 while w; assign t;
 Select BOOLEAN with w.stmt# = t.stmt#
-FALSE
+false
 5000
 165 - With
 while w; stmt t;
@@ -836,17 +836,17 @@ none
 168 - With
 if i; call c;
 Select BOOLEAN with i.stmt# = c.stmt#
-FALSE
+false
 5000
 169 - With
 if i; call c;
 Select BOOLEAN with i.stmt# = i.stmt#
-TRUE
+true
 5000
 170 - With
 if i; while w;
 Select BOOLEAN with i.stmt# = w.stmt#
-FALSE
+false
 5000
 171 - With
 if i; stmt s;
@@ -971,7 +971,7 @@ none
 195 - With
 stmt s; 
 Select BOOLEAN with s.stmt# = 35 and s.stmt# = 50 with s.stmt# = 40
-FALSE
+false
 5000
 196 - With
 stmt s; call c;
@@ -1046,12 +1046,12 @@ Select a pattern i("  zebra  ",_,_) such that Affects(62,a)
 210 - Multiple Clauses
 if i;
 Select BOOLEAN pattern i(_,_,_) such that Affects(_,_)
-TRUE
+true
 5000
 211 - Multiple Clauses
 if i;
 Select BOOLEAN pattern i(_,_,_) such that Affects*(_,_)
-TRUE
+true
 5000
 212 - Multiple Clauses
 assign a; 

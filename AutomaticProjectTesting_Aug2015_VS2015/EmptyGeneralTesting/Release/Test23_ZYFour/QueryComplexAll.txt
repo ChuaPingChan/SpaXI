@@ -206,12 +206,12 @@ a,b,c,d,g,Bad,jkbk,egg,o,Bf,Be,Bd,Bc,Bb,Ba,n,Bh,Bg,Bk,Ca,Cd,Bm,Bz,e,Ab,Bj,Bn,Bo,
 42 - Comment
 
 Select BOOLEAN such that Uses(95,"Bz")
-TRUE
+true
 5000
 43 - Comment
 
 Select BOOLEAN such that Uses(100,"Bz")
-FALSE
+false
 5000
 44 - Comment
 variable v;
@@ -231,7 +231,7 @@ none
 47 - Comment
 
 Select BOOLEAN such that Uses(_,_)
-FALSE
+false
 5000
 48 - Uses stmt variable
 stmt s; variable v;
@@ -378,7 +378,7 @@ stmt s;
 Select s pattern s(_, _)
 none
 5000
-77 - Parent*(num,num) with TRUE result
+77 - Parent*(num,num) with true result
 while w;
 Select w such that Parent*(5, 14)
 5,6,8,11,28,33,35,42,53,55,63,71,72,95
@@ -403,7 +403,7 @@ stmt s;
 Select s such that Parent*(s, 94)
 none
 5000
-82 - Parent*(underscore, num) for FALSE result
+82 - Parent*(underscore, num) for false result
 while w;
 Select w such that Parent*(_, 4)
 none
@@ -413,7 +413,7 @@ procedure p;
 Select p such that Parent*(p, 2)
 none
 5000
-84 - Parent*(_,_) for TRUE result
+84 - Parent*(_,_) for true result
 procedure p;
 Select p such that Parent*(_,_)
 A,B,C
@@ -456,12 +456,12 @@ Select s such that Parent(s, 49)
 92 - boolean no parent
 stmt s;
 Select BOOLEAN such that Parent(s, 4)
-FALSE
+false
 5000
 93 - boolean parent exists
 stmt s;
 Select BOOLEAN such that Parent(s, 15)
-TRUE
+true
 5000
 94 - stmt is a parent
 stmt s1, s2;
@@ -476,7 +476,7 @@ Select s such that Parent(s1, s) and Parent(s, s2)
 96 - invalid with same statement number as parent
 
 Select BOOLEAN such that Parent(59, 59)
-FALSE
+false
 5000
 97 - invalid with same stmt synonym
 stmt s;
@@ -486,7 +486,7 @@ none
 98 - does there exist parent stmt at all
 
 Select BOOLEAN such that Parent(_, _)
-TRUE
+true
 5000
 99 - Find all stmt
 stmt s;
@@ -523,7 +523,7 @@ variable v;
 Select v 
 a,b,c,d,e,f,g,h,k,Bad,jkbk,Bc,egg,o,Bd,Be,Bf,Bg,Bb,Ba,n,Bh,Bk,Bn,Bo,Bj,Bz,Cc,Ab,Ca,Cd,Cg,Bm,Br
 5000
-106 - Next*(num,num) with TRUE result
+106 - Next*(num,num) with true result
 stmt s;
 Select s such that Next*(s, s)
 12,13,14,15,16,17,18,19,20,21,22,23,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,10,100,101,11,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,5,6,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,87,88,89,9,90,91,92,93,95,96,97,98,99
@@ -548,7 +548,7 @@ stmt s;
 Select s such that Next*(s, 27)
 none
 5000
-111 - Next*(underscore, num) for FALSE result
+111 - Next*(underscore, num) for false result
 while w;
 Select w such that Next*(_, 1)
 none
@@ -558,7 +558,7 @@ procedure p;
 Select p such that Next*(p, 2)
 none
 5000
-113 - Next*(_,_) for TRUE result
+113 - Next*(_,_) for true result
 procedure p;
 Select p such that Next*(_,_)
 A,B,C
@@ -573,7 +573,7 @@ call c;
 Select c such that Next*(c, c)
 98,100
 5000
-116 - Next(num,num) with TRUE result
+116 - Next(num,num) with true result
 while w;
 Select w such that Next(4, 25)
 5,6,8,11,28,33,35,42,53,55,63,71,72,95
@@ -593,12 +593,12 @@ call c;
 Select c such that Next(58, c)
 none
 5000
-120 - Next(stmt, num) for FALSE result
+120 - Next(stmt, num) for false result
 stmt s;
 Select s such that Next(s, 27)
 none
 5000
-121 - Next(underscore, num) for TRUE result
+121 - Next(underscore, num) for true result
 while w;
 Select w such that Next(_, 46)
 5,6,8,11,28,33,35,42,53,55,63,71,72,95
@@ -608,7 +608,7 @@ procedure p;
 Select p such that Next(p, 2)
 none
 5000
-123 - Next(_,_) for TRUE result
+123 - Next(_,_) for true result
 procedure p;
 Select p such that Next(_,_)
 A,B,C
@@ -623,7 +623,7 @@ assign a;
 Select a such that Next(a, a)
 none
 5000
-126 - Next(stmt, num) for TRUE result
+126 - Next(stmt, num) for true result
 stmt s;
 Select s such that Next(s, 95)
 101
@@ -851,12 +851,12 @@ a,b,c,d,g,Bad,jkbk,egg,o,Bf,Be,Bd,Bc,Bb,Ba,n,Bh,Bg,Br,Bk,Ca,Cd,Bm,Bz,e
 171 - Comment
 
 Select BOOLEAN such that Modifies(95,"Bz")
-TRUE
+true
 5000
 172 - Comment
 
 Select BOOLEAN such that Modifies(100,"Bz")
-FALSE
+false
 5000
 173 - Comment
 variable v;
@@ -876,9 +876,9 @@ none
 176 - Comment
 
 Select BOOLEAN such that Modifies(_,_)
-FALSE
+false
 5000
-177 - Follows*(num,num) with TRUE result
+177 - Follows*(num,num) with true result
 while w;
 Select w such that Follows*(2, 4)
 5,6,8,11,28,33,35,42,53,55,63,71,72,95
@@ -913,7 +913,7 @@ procedure p;
 Select p such that Follows*(p, 2)
 none
 5000
-184 - Follows*(_,_) for TRUE result
+184 - Follows*(_,_) for true result
 procedure p;
 Select p such that Follows*(_,_)
 A,B,C
@@ -928,7 +928,7 @@ while w;
 Select w such that Follows*(w, w)
 none
 5000
-187 - Follows(num,num) with FALSE result
+187 - Follows(num,num) with false result
 while w;
 Select w such that Follows(1, 3)
 none
@@ -963,7 +963,7 @@ procedure p;
 Select p such that Follows(p, "C")
 none
 5000
-194 - Follows(_,_) for TRUE result
+194 - Follows(_,_) for true result
 procedure p;
 Select p such that Follows(_,_)
 A,B,C
@@ -1001,37 +1001,37 @@ A,B
 201 - Find BOOLEAN of Calls*(_,_)
 
 Select BOOLEAN such that Calls*(_,_)
-TRUE
+true
 5000
-202 - Find BOOLEAN of Calls*(proc_name_) TRUE
+202 - Find BOOLEAN of Calls*(proc_name_) true
 
 Select BOOLEAN such that Calls*("C",_) 
-TRUE
+true
 5000
-203 - Find BOOLEAN of Calls*(proc_name,_) FALSE
+203 - Find BOOLEAN of Calls*(proc_name,_) false
 
 Select BOOLEAN such that Calls*("A",_) 
-FALSE
+false
 5000
-204 - Find BOOLEAN of Calls*(_,proc_name) TRUE
+204 - Find BOOLEAN of Calls*(_,proc_name) true
 
 Select BOOLEAN such that Calls*(_,"B")
-TRUE
+true
 5000
-205 - Find BOOLEAN of Calls*(_,proc_name) FALSE
+205 - Find BOOLEAN of Calls*(_,proc_name) false
 
 Select BOOLEAN such that Calls*(_,"C")
-FALSE
+false
 5000
-206 - Find BOOLEAN of Calls*(proc_name,proc_name) TRUE
+206 - Find BOOLEAN of Calls*(proc_name,proc_name) true
 
 Select BOOLEAN such that Calls*("C","A")
-TRUE
+true
 5000
-207 - Find BOOLEAN of Calls*(proc_name,proc_name) FALSE
+207 - Find BOOLEAN of Calls*(proc_name,proc_name) false
 
 Select BOOLEAN such that Calls*("A","C")
-FALSE
+false
 5000
 208 - Find p1 of Calls(p1,p2)
 procedure p1, p2;
@@ -1056,37 +1056,37 @@ A,B
 212 - Find BOOLEAN of Calls(_,_)
 
 Select BOOLEAN such that Calls(_,_)
-TRUE
+true
 5000
-213 - Find BOOLEAN of Calls(proc_name_) TRUE
+213 - Find BOOLEAN of Calls(proc_name_) true
 
 Select BOOLEAN such that Calls("C",_) 
-TRUE
+true
 5000
-214 - Find BOOLEAN of Calls(proc_name,_) FALSE
+214 - Find BOOLEAN of Calls(proc_name,_) false
 
 Select BOOLEAN such that Calls("A",_) 
-FALSE
+false
 5000
-215 - Find BOOLEAN of Calls(_,proc_name) TRUE
+215 - Find BOOLEAN of Calls(_,proc_name) true
 
 Select BOOLEAN such that Calls(_,"B")
-TRUE
+true
 5000
-216 - Find BOOLEAN of Calls(_,proc_name) FALSE
+216 - Find BOOLEAN of Calls(_,proc_name) false
 
 Select BOOLEAN such that Calls(_,"C")
-FALSE
+false
 5000
-217 - Find BOOLEAN of Calls(proc_name,proc_name) TRUE
+217 - Find BOOLEAN of Calls(proc_name,proc_name) true
 
 Select BOOLEAN such that Calls("C","A")
-TRUE
+true
 5000
-218 - Find BOOLEAN of Calls(proc_name,proc_name) FALSE
+218 - Find BOOLEAN of Calls(proc_name,proc_name) false
 
 Select BOOLEAN such that Calls("A","C")
-FALSE
+false
 5000
 219 - Find s1 Affects*(s1,s2)
 stmt s1, s2;
@@ -1103,15 +1103,15 @@ stmt s1;
 Select s1 such that Affects*(s1,86)
 27,31,32,38,39,40,44,45,,46,47,48,50,51,54,56,58,59,60,61,62,66,68,69,70,73,74,76,77,79,80,85,86,87,88,89,91,92,93
 5000
-222 - Find BOOLEAN Affects*(s1,num) - FALSE
+222 - Find BOOLEAN Affects*(s1,num) - false
 stmt s1;
 Select BOOLEAN such that Affects*(s1,38)
-FALSE
+false
 5000
-223 - Find BOOLEAN Affects*(s1,num) - TRUE
+223 - Find BOOLEAN Affects*(s1,num) - true
 stmt s1;
 Select BOOLEAN such that Affects*(s1,41)
-TRUE
+true
 5000
 224 - Find s1 Affects*(s1,_)
 stmt s1;
@@ -1121,7 +1121,7 @@ Select s1 such that Affects*(s1,_)
 225 - Find BOOLEAN Affects*(s1_)
 stmt s1;
 Select BOOLEAN such that Affects*(s1,_)
-TRUE
+true
 5000
 226 - Find s2 Affects*(num,s2) - HAS RESULTS
 stmt s2;
@@ -1133,55 +1133,55 @@ stmt s2;
 Select s2 such that Affects*(102,s2)
 none
 5000
-228 - Find BOOLEAN Affects*(num,s2) - TRUE
+228 - Find BOOLEAN Affects*(num,s2) - true
 stmt s2;
 Select BOOLEAN such that Affects*(93,s2)
-TRUE
+true
 5000
-229 - Find BOOLEAN Affects*(num,s2) - FALSE
+229 - Find BOOLEAN Affects*(num,s2) - false
 stmt s2;
 Select BOOLEAN such that Affects*(94,s2)
-FALSE
+false
 5000
-230 - Find BOOLEAN Affects*(num,num) - TRUE
+230 - Find BOOLEAN Affects*(num,num) - true
 
 Select BOOLEAN such that Affects*(91,88)
-TRUE
+true
 5000
-231 - Find BOOLEAN Affects*(num,num) - FALSE
+231 - Find BOOLEAN Affects*(num,num) - false
 
 Select BOOLEAN such that Affects*(97,99)
-FALSE
+false
 5000
-232 - Find BOOLEAN Affects*(num,_) - TRUE
+232 - Find BOOLEAN Affects*(num,_) - true
 
 Select BOOLEAN such that Affects*(92,_)
-TRUE
+true
 5000
-233 - Find BOOLEAN Affects*(num,_) - FALSE
+233 - Find BOOLEAN Affects*(num,_) - false
 
 Select BOOLEAN such that Affects*(99,_)
-FALSE
+false
 5000
 234 - Find s2 Affects*(_,s2) 
 stmt s2;
 Select s2 such that Affects*(_,s2)
 2,3,13,14,15,16,19,20,21,22,23,24,25,32,41,46,48,51,52,59,61,,67,69,74,75,77,80,85,86,88,92,99,102
 5000
-235 - Find BOOLEAN Affects*(_,num) - TRUE
+235 - Find BOOLEAN Affects*(_,num) - true
 
 Select BOOLEAN such that Affects*(_,92)
-TRUE
+true
 5000
-236 - Find BOOLEAN Affects*(_,num) - FALSE
+236 - Find BOOLEAN Affects*(_,num) - false
 
 Select BOOLEAN such that Affects*(_,101)
-FALSE
+false
 5000
 237 - Find BOOLEAN Affects*(_,_) 
 
 Select BOOLEAN such that Affects*(_,_)
-TRUE
+true
 5000
 238 - Find all Affects*
 assign a1; stmt s1;
@@ -1213,15 +1213,15 @@ stmt s1;
 Select s1 such that Affects(s1,86)
 76,85,86,89
 5000
-244 - Find BOOLEAN Affects(s1,num) - FALSE
+244 - Find BOOLEAN Affects(s1,num) - false
 stmt s1;
 Select BOOLEAN such that Affects(s1,38)
-FALSE
+false
 5000
-245 - Find BOOLEAN Affects(s1,num) - TRUE
+245 - Find BOOLEAN Affects(s1,num) - true
 stmt s1;
 Select BOOLEAN such that Affects(s1,41)
-TRUE
+true
 5000
 246 - Find s1 Affects(s1,_)
 stmt s1;
@@ -1231,7 +1231,7 @@ Select s1 such that Affects(s1,_)
 247 - Find BOOLEAN Affects(s1_)
 stmt s1;
 Select BOOLEAN such that Affects(s1,_)
-TRUE
+true
 5000
 248 - Find s2 Affects(num,s2) - HAS RESULTS
 stmt s2;
@@ -1243,55 +1243,55 @@ stmt s2;
 Select s2 such that Affects(102,s2)
 none
 5000
-250 - Find BOOLEAN Affects(num,s2) - TRUE
+250 - Find BOOLEAN Affects(num,s2) - true
 stmt s2;
 Select BOOLEAN such that Affects(93,s2)
-TRUE
+true
 5000
-251 - Find BOOLEAN Affects(num,s2) - FALSE
+251 - Find BOOLEAN Affects(num,s2) - false
 stmt s2;
 Select BOOLEAN such that Affects(94,s2)
-FALSE
+false
 5000
-252 - Find BOOLEAN Affects(num,num) - TRUE
+252 - Find BOOLEAN Affects(num,num) - true
 
 Select BOOLEAN such that Affects(91,88)
-TRUE
+true
 5000
-253 - Find BOOLEAN Affects(num,num) - FALSE
+253 - Find BOOLEAN Affects(num,num) - false
 
 Select BOOLEAN such that Affects(97,99)
-FALSE
+false
 5000
-254 - Find BOOLEAN Affects(num,_) - TRUE
+254 - Find BOOLEAN Affects(num,_) - true
 
 Select BOOLEAN such that Affects(92,_)
-TRUE
+true
 5000
-255 - Find BOOLEAN Affects(num,_) - FALSE
+255 - Find BOOLEAN Affects(num,_) - false
 
 Select BOOLEAN such that Affects(99,_)
-FALSE
+false
 5000
 256 - Find s2 Affects(_,s2) 
 stmt s2;
 Select s2 such that Affects(_,s2)
 2,3,13,14,15,16,19,20,21,22,23,24,25,32,41,46,48,51,52,59,61,,67,69,74,75,77,80,85,86,88,92,99,102
 5000
-257 - Find BOOLEAN Affects(_,num) - TRUE
+257 - Find BOOLEAN Affects(_,num) - true
 
 Select BOOLEAN such that Affects(_,92)
-TRUE
+true
 5000
-258 - Find BOOLEAN Affects(_,num) - FALSE
+258 - Find BOOLEAN Affects(_,num) - false
 
 Select BOOLEAN such that Affects(_,101)
-FALSE
+false
 5000
 259 - Find BOOLEAN Affects(_,_) 
 
 Select BOOLEAN such that Affects(_,_)
-TRUE
+true
 5000
 260 - Find all assign stmt that affects itself
 assign a;

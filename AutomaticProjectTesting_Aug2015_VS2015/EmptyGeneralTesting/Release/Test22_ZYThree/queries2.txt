@@ -276,12 +276,12 @@ Select c1 such that Follows (38, c1)
 56 - FOLLOWS
 
 Select BOOLEAN such that Follows (6, 7)
-TRUE
+true
 5000
 57 - FOLLOWS
 
 Select BOOLEAN such that Follows (15, _)
-TRUE
+true
 5000
 58 - FOLLOWS
 stmt s1;
@@ -316,12 +316,12 @@ Select c1 such that Follows (_, c1)
 64 - FOLLOWS
 
 Select BOOLEAN such that Follows (_, 9)
-TRUE
+true
 5000
 65 - FOLLOWS
 
 Select BOOLEAN such that Follows (_, _)
-TRUE
+true
 5000
 66 - FOLLOWS* 
 stmt s1, s2;
@@ -571,7 +571,7 @@ Select c1 such that Follows* (pl1, c1)
 115 - FOLLOWS* 
 
 Select BOOLEAN such that Follows* (15, _)
-TRUE
+true
 5000
 116 - FOLLOWS* 
 stmt s1;
@@ -606,12 +606,12 @@ Select c1 such that Follows* (_, c1)
 122 - FOLLOWS* 
 
 Select BOOLEAN such that Follows* (_, 9)
-TRUE
+true
 5000
 123 - FOLLOWS* 
 
 Select BOOLEAN such that Follows* (_, _)
-TRUE
+true
 5000
 124 - PARENT
 stmt s1, s2;
@@ -901,7 +901,7 @@ Select c1 such that Parent (_, c1)
 181 - PARENT
 
 Select BOOLEAN such that Parent (_, _)
-TRUE
+true
 5000
 182 - PARENT*
 stmt s1, s2;
@@ -1186,7 +1186,7 @@ Select c1 such that Parent* (_, c1)
 238 - PARENT*
 
 Select BOOLEAN such that Parent* (_, _)
-TRUE
+true
 5000
 239 - CALLS
 procedure p1, p2;
@@ -1221,27 +1221,27 @@ bcd,hello
 245 - CALLS
 procedure p1, p2;
 Select BOOLEAN such that Calls(p1, p2)
-TRUE
+true
 5000
 246 - CALLS
 
 Select BOOLEAN such that Calls ("abc", "bcd")
-TRUE
+true
 5000
 247 - CALLS
 
 Select BOOLEAN such that Calls ("abc", _)
-TRUE
+true
 5000
 248 - CALLS
 
 Select BOOLEAN such that Calls (_, "hello")
-TRUE
+true
 5000
 249 - CALLS
 
 Select BOOLEAN such that Calls (_, _)
-TRUE
+true
 5000
 250 - CALLS
 procedure p1;
@@ -1286,27 +1286,27 @@ bcd,hello
 258 - CALLS*
 procedure p1, p2;
 Select BOOLEAN such that Calls* (p1,p2)
-TRUE
+true
 5000
 259 - CALLS*
 
 Select BOOLEAN such that Calls* ("abc", "bcd")
-TRUE
+true
 5000
 260 - CALLS*
 
 Select BOOLEAN such that Calls* ("abc", _)
-TRUE
+true
 5000
 261 - CALLS*
 
 Select BOOLEAN such that Calls* (_, "hello")
-TRUE
+true
 5000
 262 - CALLS*
 
 Select BOOLEAN such that Calls* (_, _)
-TRUE
+true
 5000
 263 - MODIFIES
 stmt s1; variable v1;
@@ -1446,27 +1446,27 @@ a,b,c,cat,coke,d,e,f,hi,i,j,k,lol,loop,one,stack,t,wow,wwe,x,z,zero
 290 - MODIFIES
 variable v1;
 Select BOOLEAN such that Modifies ("abc", v1)
-TRUE
+true
 5000
 291 - MODIFIES
 
 Select BOOLEAN such that Modifies ("abc", _)
-TRUE
+true
 5000
 292 - MODIFIES
 variable v1;
 Select BOOLEAN such that Modifies (_, v1)
-FALSE
+false
 5000
 293 - MODIFIES
 
 Select BOOLEAN such that Modifies (_, "x")
-FALSE
+false
 5000
 294 - MODIFIES
 
 Select BOOLEAN such that Modifies (_, _)
-FALSE
+false
 5000
 295 - MODIFIES
 variable v1;
@@ -1616,27 +1616,27 @@ a,bb,coke,goto,hop,i,j,k,loop,one,pop,run,stack,ten,wwe,x,z,zero
 324 - USES
 variable v1;
 Select BOOLEAN such that Uses ("abc", v1)
-TRUE
+true
 5000
 325 - USES
 
 Select BOOLEAN such that Uses ("abc", "x")
-TRUE
+true
 5000
 326 - USES
 variable v1;
 Select BOOLEAN such that Uses (_, v1)
-FALSE
+false
 5000
 327 - USES
 
 Select BOOLEAN such that Uses (_, "x")
-FALSE
+false
 5000
 328 - USES
 
 Select BOOLEAN such that Uses (_, _)
-FALSE
+false
 5000
 329 - USES
 variable v1;
@@ -1761,12 +1761,12 @@ abc
 353 - WITH
 assign a;
 Select BOOLEAN with a.stmt# = 1
-TRUE
+true
 5000
 354 - WITH
 assign a;
 Select BOOLEAN with a.stmt# = 4
-FALSE
+false
 5000
 355 - WITH
 stmt s; constant c;
@@ -1796,72 +1796,72 @@ hello
 360 - PATTERN
 assign a;
 Select BOOLEAN pattern a("coke", _"zero"_)
-TRUE
+true
 5000
 361 - PATTERN
 assign a;
 Select BOOLEAN pattern a("a", _)
-TRUE
+true
 5000
 362 - PATTERN
 assign a;
 Select BOOLEAN pattern a(_, "e+z")
-FALSE
+false
 5000
 363 - PATTERN
 assign a;
 Select BOOLEAN pattern a(_, _"bo"_)
-FALSE
+false
 5000
 364 - PATTERN
 assign a; variable v;
 Select BOOLEAN pattern a(_, _)
-TRUE
+true
 5000
 365 - PATTERN
 assign a; variable v;
 Select BOOLEAN pattern a(v, "wwe")
-TRUE
+true
 5000
 366 - PATTERN
 assign a; variable v;
 Select BOOLEAN pattern a(v, _"bb"_)
-TRUE
+true
 5000
 367 - PATTERN
 assign a; variable v;
 Select BOOLEAN pattern a(v, _)
-TRUE
+true
 5000
 368 - PATTERN - WHILE
 while w;
 Select BOOLEAN pattern w("x", _)
-TRUE
+true
 5000
 369 - PATTERN - WHILE
 while w;
 Select BOOLEAN pattern w(_, _)
-TRUE
+true
 5000
 370 - PATTERN - WHILE
 while w; variable v;
 Select BOOLEAN pattern w(v, _)
-TRUE
+true
 5000
 371 - PATTERN - IF
 if ifs;
 Select BOOLEAN pattern ifs("x", _, _)
-TRUE
+true
 5000
 372 - PATTERN - IF
 if ifs;
 Select BOOLEAN pattern ifs(_, _, _)
-TRUE
+true
 5000
 373 - PATTERN - IF
 if ifs;  variable v;
 Select BOOLEAN pattern ifs(v, _, _)
-TRUE
+true
 5000
 374 - PATTERN
 assign a; variable v;
@@ -1886,7 +1886,7 @@ Select w pattern w("x", _)
 378 - NEXT-boolean
 
 Select BOOLEAN such that Next(20, 18)
-TRUE
+true
 5000
 379 - NEXT
 stmt s;
@@ -1896,17 +1896,17 @@ Select s such that Next(14, 21)
 380 - NEXT-boolean
 
 Select BOOLEAN such that Next(36, 30)
-TRUE
+true
 5000
 381 - NEXT-boolean
 
 Select BOOLEAN such that Next(12, 25)
-TRUE
+true
 5000
 382 - NEXT-boolean
 
 Select BOOLEAN such that Next(44, 48)
-TRUE
+true
 5000
 383 - NEXT
 stmt s;
@@ -1941,7 +1941,7 @@ Select c such that Next(c, s)
 389 - NEXT-boolean
 
 Select BOOLEAN such that Next(_, _)
-TRUE
+true
 5000
 390 - NEXT
 stmt s;
@@ -1986,12 +1986,12 @@ Select c such that Next(c, 5)
 398 - NEXT
 
 Select BOOLEAN such that Next(20, _)
-TRUE
+true
 5000
 399 - NEXT
 
 Select BOOLEAN such that Next(_, 50)
-TRUE
+true
 5000
 400 - NEXT
 assign a;
@@ -2091,7 +2091,7 @@ Select s such that Next(s, 12)
 419 - NEXT - BOOLEAN
 
 Select BOOLEAN such that Next(3, 4) and Next(20, 18)
-TRUE
+true
 5000
 420 - NEXT - TUPLE
 if i1; if i2; stmt s;
@@ -2111,7 +2111,7 @@ Select a such that Next(a, 17) and Next (w, 13)
 423 - NEXT
 
 Select BOOLEAN such that Next(27, _) and Next(40, _)
-FALSE
+false
 5000
 424 - NEXT
 stmt s; while w; call c;
@@ -2141,7 +2141,7 @@ Select a such that Next(i, a) and Next(44, i)
 429 - NEXT
 
 Select BOOLEAN such that Next(_, _) and Next(30, _)
-TRUE
+true
 5000
 430 - NEXT
 while w;
@@ -2201,7 +2201,7 @@ Select n such that Next(n, i)
 441 - NEXT* - BOOLEAN
 
 Select BOOLEAN such that Next*(6, 9)
-TRUE
+true
 5000
 442 - NEXT*
 stmt s;
@@ -2211,17 +2211,17 @@ Select s such that Next*(14, 23)
 443 - NEXT* - BOOLEAN
 
 Select BOOLEAN such that Next*(35, 32)
-TRUE
+true
 5000
 444 - NEXT* - BOOLEAN
 
 Select BOOLEAN such that Next*(30, 38)
-TRUE
+true
 5000
 445 - NEXT* - BOOLEAN
 
 Select BOOLEAN such that Next*(44, 48)
-TRUE
+true
 5000
 446 - NEXT*
 stmt s;
@@ -2256,7 +2256,7 @@ Select c such that Next*(c, s)
 452 - NEXT* - BOOLEAN
 
 Select BOOLEAN such that Next*(_, _)
-TRUE
+true
 5000
 453 - NEXT*
 stmt s;
@@ -2301,12 +2301,12 @@ Select c such that Next*(c, 5)
 461 - NEXT* - BOOLEAN
 
 Select BOOLEAN such that Next*(20, _)
-TRUE
+true
 5000
 462 - NEXT* - BOOLEAN
 
 Select BOOLEAN such that Next*(_, 50)
-TRUE
+true
 5000
 463 - NEXT*
 assign a;
@@ -2356,7 +2356,7 @@ Select a such that Next*(a, w)
 473 - AFFECTS - BOOLEAN
 
 Select BOOLEAN such that Affects(33, 36)
-TRUE
+true
 5000
 474 - AFFECTS
 stmt s;
@@ -2366,12 +2366,12 @@ none
 475 - AFFECTS - BOOLEAN
 
 Select BOOLEAN such that Affects(8, 21)
-FALSE
+false
 5000
 476 - AFFECTS - BOOLEAN 
 
 Select BOOLEAN such that Affects(44, 45)
-FALSE
+false
 5000
 477 - AFFECTS
 assign a1, a2;
@@ -2396,7 +2396,7 @@ Select n2 such that Affects(n1, n2)
 481 - AFFECTS - BOOLEAN
 
 Select BOOLEAN such that Affects(_, _)
-TRUE
+true
 5000
 482 - AFFECTS
 assign a;
@@ -2416,7 +2416,7 @@ Select n such that Affects(16, n)
 485 - AFFECTS - BOOLEAN
 if i;
 Select BOOLEAN such that Affects(31, i)
-FALSE
+false
 5000
 486 - AFFECTS 
 assign a;
@@ -2436,17 +2436,17 @@ Select n such that Affects(n, 26)
 489 - AFFECTS - BOOLEAN
 while w;
 Select BOOLEAN such that Affects(w, 30)
-FALSE
+false
 5000
 490 - AFFECTS - BOOLEAN
 
 Select BOOLEAN such that Affects(1, _)
-TRUE
+true
 5000
 491 - AFFECTS-boolean: fixed-generic (non-assign stmt)
 
 Select BOOLEAN such that Affects(32, _)
-FALSE
+false
 5000
 492 - AFFECTS 
 assign a;
@@ -2501,7 +2501,7 @@ none
 502 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(33, 38)
-TRUE
+true
 5000
 503 - AFFECTS* 
 stmt s;
@@ -2511,7 +2511,7 @@ none
 504 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(51, 50)
-FALSE
+false
 5000
 505 - AFFECTS* - TUPLE
 assign a1, a2;
@@ -2536,7 +2536,7 @@ Select n2 such that Affects*(n1, n2)
 509 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(_, _)
-TRUE
+true
 5000
 510 - AFFECTS*
 assign a;
@@ -2556,7 +2556,7 @@ Select n such that Affects*(16, n)
 513 - AFFECTS* - BOOLEAN
 if i;
 Select BOOLEAN such that Affects*(30, i)
-FALSE
+false
 5000
 514 - AFFECTS*
 assign a;
@@ -2576,37 +2576,37 @@ Select n such that Affects*(n, 26)
 517 - AFFECTS* - BOOLEAN
 while w;
 Select BOOLEAN such that Affects*(w, 30)
-FALSE
+false
 5000
 518 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(1, _)
-TRUE
+true
 5000
 519 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(32, _)
-FALSE
+false
 5000
 520 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(51, _)
-FALSE
+false
 5000
 521 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(_, 26)
-TRUE
+true
 5000
 522 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(_, 18)
-FALSE
+false
 5000
 523 - AFFECTS* - BOOLEAN
 
 Select BOOLEAN such that Affects*(_, 37)
-FALSE
+false
 5000
 524 - AFFECTS*
 assign a;
