@@ -903,6 +903,11 @@ void Parser::processAndPopTopFollowStack()
 
     int stmtAfter = topFollowsStack.top();
     topFollowsStack.pop();
+
+    // If stmtList has only 1 stmt
+    if (topFollowsStack.empty()) 
+        _pkbMainPtr->addStmtList(stmtAfter);
+
     int stmtBefore = 0;
     while (!topFollowsStack.empty()) {
         stmtBefore = topFollowsStack.top();

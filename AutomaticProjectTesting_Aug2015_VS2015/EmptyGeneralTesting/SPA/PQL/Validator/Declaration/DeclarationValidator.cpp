@@ -50,6 +50,9 @@ Entity DeclarationValidator::getEntityIndexReference(string entity)
     else if (RegexValidators::isValidConstantString(entity)) {
         return CONSTANT;
     }
+    else if (RegexValidators::isValidStmtLstString(entity)) {
+        return STMTLIST;
+    }
     else {
         throw EntityNotFoundException("Inside DeclarationValidator.getEntityIndexReference(). Input Entity: " + entity);
     }
