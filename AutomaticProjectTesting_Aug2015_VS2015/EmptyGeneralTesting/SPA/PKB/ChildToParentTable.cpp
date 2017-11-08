@@ -52,11 +52,5 @@ unordered_map<int, int> ChildToParentTable::getTable() {
 }
 
 list<int> ChildToParentTable::getAllChildren() {
-	list<int> stmtList;
-
-	for (std::unordered_map<int, int>::iterator it = childToParentMap.begin(); it != childToParentMap.end(); ++it) {
-		stmtList.push_back((*it).first);
-	}
-
-	return stmtList;
+	return childList;
 }
