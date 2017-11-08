@@ -790,6 +790,9 @@ echo Finish running AutoTester for System\With\QueryWithTest3.
 echo Running AutoTester for Validation\QueryValidation ...
 AutoTester Test15_Verb\Validation\SourceValidation.txt Test15_Verb\Validation\QueryValidation.txt TestResult\out15_Validation_QueryValidation.xml > TestResult\cmd\cmd15_Validation_QueryValidation.txt
 echo Finish running AutoTester for Validation\QueryValidation.
+echo Running AutoTester for Stress\CommonSynonym\QueryStressCommonSynonymTest1 ...
+AutoTester Test15_Verb\Stress\CommonSynonym\SourceStressCommonSynonymTest1.txt Test15_Verb\Stress\CommonSynonym\QueryStressCommonSynonymTest1.txt TestResult\out15_StressCommonSynonym_QueryStressCommonSynonymTest1.xml > TestResult\cmd\cmd15_StressCommonSynonym_QueryStressCommonSynonymTest1.txt
+echo Finish running AutoTester for Stress\CommonSynonym\QueryStressCommonSynonymTest1.
 echo Finish running AutoTester for test 15.
 call :getPauseAction
 goto :eof
