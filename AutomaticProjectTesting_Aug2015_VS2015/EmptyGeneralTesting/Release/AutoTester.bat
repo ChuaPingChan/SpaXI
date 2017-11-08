@@ -90,6 +90,9 @@ if '%option%'=='21' (
 if '%option%'=='22' (
 	goto :runTest22
 )
+if '%option%'=='23' (
+	goto :runTest23
+)
 cls
 goto :main
 echo ===============================================================================
@@ -209,6 +212,7 @@ call :runTest19
 call :runTest20
 call :runTest21
 call :runTest22
+call :runTest23
 echo ===============================================================================
 echo                           Finish Running AutoTester
 echo ===============================================================================
@@ -1051,5 +1055,67 @@ echo Running AutoTester for queries3 ...
 AutoTester Test22_ZYThree\source2.txt Test22_ZYThree\queries3.txt TestResult\out22_queries3.xml > TestResult\cmd\cmd22_queries3.txt
 echo Finish running AutoTester for queries3.
 echo Finish running AutoTester for test 22.
+call :getPauseAction
+goto :eof
+
+:runTest23
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 23...
+echo Running AutoTester for QueryComplexAffects ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexAffects.txt TestResult\out23_QueryComplexAffects.xml > TestResult\cmd\cmd23_QueryComplexAffects.txt
+echo Finish running AutoTester for QueryComplexAffects.
+echo Running AutoTester for QueryComplexAffectsStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexAffectsStar.txt TestResult\out23_QueryComplexAffectsStar.xml > TestResult\cmd\cmd23_QueryComplexAffectsStar.txt
+echo Finish running AutoTester for QueryComplexAffectsStar.
+echo Running AutoTester for QueryComplexAll ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexAll.txt TestResult\out23_QueryComplexAll.xml > TestResult\cmd\cmd23_QueryComplexAll.txt
+echo Finish running AutoTester for QueryComplexAll.
+echo Running AutoTester for QueryComplexCalls ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexCalls.txt TestResult\out23_QueryComplexCalls.xml > TestResult\cmd\cmd23_QueryComplexCalls.txt
+echo Finish running AutoTester for QueryComplexCalls.
+echo Running AutoTester for QueryComplexCallsStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexCallsStar.txt TestResult\out23_QueryComplexCallsStar.xml > TestResult\cmd\cmd23_QueryComplexCallsStar.txt
+echo Finish running AutoTester for QueryComplexCallsStar.
+echo Running AutoTester for QueryComplexFollows ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexFollows.txt TestResult\out23_QueryComplexFollows.xml > TestResult\cmd\cmd23_QueryComplexFollows.txt
+echo Finish running AutoTester for QueryComplexFollows.
+echo Running AutoTester for QueryComplexFollowsStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexFollowsStar.txt TestResult\out23_QueryComplexFollowsStar.xml > TestResult\cmd\cmd23_QueryComplexFollowsStar.txt
+echo Finish running AutoTester for QueryComplexFollowsStar.
+echo Running AutoTester for QueryComplexModifies ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexModifies.txt TestResult\out23_QueryComplexModifies.xml > TestResult\cmd\cmd23_QueryComplexModifies.txt
+echo Finish running AutoTester for QueryComplexModifies.
+echo Running AutoTester for QueryComplexMultipleClauses ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexMultipleClauses.txt TestResult\out23_QueryComplexMultipleClauses.xml > TestResult\cmd\cmd23_QueryComplexMultipleClauses.txt
+echo Finish running AutoTester for QueryComplexMultipleClauses.
+echo Running AutoTester for QueryComplexNext ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexNext.txt TestResult\out23_QueryComplexNext.xml > TestResult\cmd\cmd23_QueryComplexNext.txt
+echo Finish running AutoTester for QueryComplexNext.
+echo Running AutoTester for QueryComplexNextStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexNextStar.txt TestResult\out23_QueryComplexNextStar.xml > TestResult\cmd\cmd23_QueryComplexNextStar.txt
+echo Finish running AutoTester for QueryComplexNextStar.
+echo Running AutoTester for QueryComplexNoClause ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexNoClause.txt TestResult\out23_QueryComplexNoClause.xml > TestResult\cmd\cmd23_QueryComplexNoClause.txt
+echo Finish running AutoTester for QueryComplexNoClause.
+echo Running AutoTester for QueryComplexParent ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexParent.txt TestResult\out23_QueryComplexParent.xml > TestResult\cmd\cmd23_QueryComplexParent.txt
+echo Finish running AutoTester for QueryComplexParent.
+echo Running AutoTester for QueryComplexParentStar ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexParentStar.txt TestResult\out23_QueryComplexParentStar.xml > TestResult\cmd\cmd23_QueryComplexParentStar.txt
+echo Finish running AutoTester for QueryComplexParentStar.
+echo Running AutoTester for QueryComplexPattern ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexPattern.txt TestResult\out23_QueryComplexPattern.xml > TestResult\cmd\cmd23_QueryComplexPattern.txt
+echo Finish running AutoTester for QueryComplexPattern.
+echo Running AutoTester for QueryComplexTuple ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexTuple.txt TestResult\out23_QueryComplexTuple.xml > TestResult\cmd\cmd23_QueryComplexTuple.txt
+echo Finish running AutoTester for QueryComplexTuple.
+echo Running AutoTester for QueryComplexUses ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexUses.txt TestResult\out23_QueryComplexUses.xml > TestResult\cmd\cmd23_QueryComplexUses.txt
+echo Finish running AutoTester for QueryComplexUses.
+echo Running AutoTester for QueryComplexWith ...
+AutoTester Test23_ZYFour\SourceComplex.txt Test23_ZYFour\QueryComplexWith.txt TestResult\out23_QueryComplexWith.xml > TestResult\cmd\cmd23_QueryComplexWith.txt
+echo Finish running AutoTester for QueryComplexWith.
+echo Finish running AutoTester for test 23.
 call :getPauseAction
 goto :eof

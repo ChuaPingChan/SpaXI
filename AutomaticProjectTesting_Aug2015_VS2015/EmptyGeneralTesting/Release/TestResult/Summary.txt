@@ -1,6 +1,6 @@
-Overall Test Ran    : 16994
-Overall Test Passed : 16012
-Overall Test Failed : 974
+Overall Test Ran    : 17520
+Overall Test Passed : 16440
+Overall Test Failed : 1072
 Overall Test Timeout: 8
 
 
@@ -1088,6 +1088,114 @@ TestResult\out22_queries3.xml:
 Test Ran: 234	[BUG]
 Passed   : 30
 Failed   : 204
+Timeout  : 0
+
+TestResult\out23_QueryComplexAffects.xml: 
+Test Ran: 20	[BUG]
+Passed   : 8
+Failed   : 12
+Timeout  : 0
+
+TestResult\out23_QueryComplexAffectsStar.xml: 
+Test Ran: 22	[BUG]
+Passed   : 10
+Failed   : 12
+Timeout  : 0
+
+TestResult\out23_QueryComplexAll.xml: 
+Test Ran: 262	[BUG]
+Passed   : 214
+Failed   : 48
+Timeout  : 0
+
+TestResult\out23_QueryComplexCalls.xml: 
+Test Ran: 11	[BUG]
+Passed   : 4
+Failed   : 7
+Timeout  : 0
+
+TestResult\out23_QueryComplexCallsStar.xml: 
+Test Ran: 11	[BUG]
+Passed   : 4
+Failed   : 7
+Timeout  : 0
+
+TestResult\out23_QueryComplexFollows.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexFollowsStar.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexModifies.xml: 
+Test Ran: 27	[BUG]
+Passed   : 24
+Failed   : 3
+Timeout  : 0
+
+TestResult\out23_QueryComplexMultipleClauses.xml: 
+Test Ran: 23	
+Passed   : 23
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexNext.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexNextStar.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexNoClause.xml: 
+Test Ran: 11	[BUG]
+Passed   : 9
+Failed   : 2
+Timeout  : 0
+
+TestResult\out23_QueryComplexParent.xml: 
+Test Ran: 12	[BUG]
+Passed   : 8
+Failed   : 4
+Timeout  : 0
+
+TestResult\out23_QueryComplexParentStar.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexPattern.xml: 
+Test Ran: 15	
+Passed   : 15
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexTuple.xml: 
+Test Ran: 14	
+Passed   : 14
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexUses.xml: 
+Test Ran: 27	[BUG]
+Passed   : 24
+Failed   : 3
+Timeout  : 0
+
+TestResult\out23_QueryComplexWith.xml: 
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
 Timeout  : 0
 
 TestResult\out2_Query_Simple02.xml: 
