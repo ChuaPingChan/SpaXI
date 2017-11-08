@@ -1,5 +1,5 @@
-Overall Test Ran    : 12422
-Overall Test Passed : 12323
+Overall Test Ran    : 12511
+Overall Test Passed : 12412
 Overall Test Failed : 93
 Overall Test Timeout: 6
 
@@ -763,6 +763,42 @@ Timeout  : 0
 TestResult\out19_Query_std3_basic.xml: 
 Test Ran: 907	
 Passed   : 907
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries1.xml: 
+Test Ran: 38	
+Passed   : 38
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries2.xml: 
+Test Ran: 31	
+Passed   : 31
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries3.xml: 
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries4.xml: 
+Test Ran: 0	
+Passed   : 0
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries5.xml: 
+Test Ran: 0	
+Passed   : 0
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries6.xml: 
+Test Ran: 0	
+Passed   : 0
 Failed   : 0
 Timeout  : 0
 

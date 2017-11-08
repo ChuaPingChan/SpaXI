@@ -80,7 +80,10 @@ if '%option%'=='18' (
 )
 if '%option%'=='19' (
 	goto :runTest19
-) 
+)
+if '%option%'=='20' (
+	goto :runTest20
+)  
 cls
 goto :main
 echo ===============================================================================
@@ -853,5 +856,31 @@ echo Running AutoTester for Query_std3_basic ...
 AutoTester Test19_Mat\Source_std3.txt Test19_Mat\Query_std3_basic.txt TestResult\out19_Query_std3_basic.xml > TestResult\cmd\cmd19_Query_std3_basic.txt
 echo Finish running AutoTester for Query_std3_basic.
 echo Finish running AutoTester for test 19.
+call :getPauseAction
+goto :eof
+
+:runTest20
+call :createCmdOutputFolder
+echo ===============================================================================
+echo Running AutoTester for test 20...
+echo Running AutoTester for queries1 ...
+AutoTester Test20_ZYOne\Grp\source1.txt Test20_ZYOne\Grp\queries1.txt TestResult\out20_Grp_queries1.xml > TestResult\cmd\cmd20_Grp_queries1.txt
+echo Finish running AutoTester for queries1.
+echo Running AutoTester for queries2 ...
+AutoTester Test20_ZYOne\Grp\source2.txt Test20_ZYOne\Grp\queries2.txt TestResult\out20_Grp_queries2.xml > TestResult\cmd\cmd20_Grp_queries2.txt
+echo Finish running AutoTester for queries2.
+echo Running AutoTester for queries3 ...
+AutoTester Test20_ZYOne\Grp\source3.txt Test20_ZYOne\Grp\queries3.txt TestResult\out20_Grp_queries3.xml > TestResult\cmd\cmd20_Grp_queries3.txt
+echo Finish running AutoTester for queries3.
+echo Running AutoTester for queries4 ...
+AutoTester Test20_ZYOne\Grp\source4.txt Test20_ZYOne\Grp\queries4.txt TestResult\out20_Grp_queries4.xml > TestResult\cmd\cmd20_Grp_queries4.txt
+echo Finish running AutoTester for queries4.
+echo Running AutoTester for queries5 ...
+AutoTester Test20_ZYOne\Grp\source5.txt Test20_ZYOne\Grp\queries5.txt TestResult\out20_Grp_queries5.xml > TestResult\cmd\cmd20_Grp_queries5.txt
+echo Finish running AutoTester for queries5.
+echo Running AutoTester for queries6 ...
+AutoTester Test20_ZYOne\Grp\source6.txt Test20_ZYOne\Grp\queries6.txt TestResult\out20_Grp_queries6.xml > TestResult\cmd\cmd20_Grp_queries6.txt
+echo Finish running AutoTester for queries6.
+echo Finish running AutoTester for test 20.
 call :getPauseAction
 goto :eof
