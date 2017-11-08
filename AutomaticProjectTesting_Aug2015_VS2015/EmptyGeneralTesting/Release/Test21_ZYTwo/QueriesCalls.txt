@@ -1,0 +1,30 @@
+1 - comment
+procedure p, p1;
+Select p such that Calls(p, p1)
+One, Two, Three
+5000
+2 - comment
+procedure p, p1, p2;
+Select <p, p1, p2> such that Calls(p, p1) and Calls(p1, p2)
+One Two Four, One Three Four
+5000
+3 - comment
+procedure p; variable v;
+Select <p, v> such that Modifies(p, v)
+One a, One b, One c, One d, Two b, Two d, Three c, Three d, Four d
+5000
+4 - comment
+stmt s; variable v;
+Select <s, v> such that Modifies(s, v)
+1 a, 5 b, 7 c, 9 d, 8 d, 6 d, 3 b, 3 d, 4 c, 4 d, 2 b, 2 c, 2 d
+5000
+5 - comment
+procedure p; variable v;
+Select <p, v> such that Uses(p, v)
+One a, One x, Two b, Three c, Four d, Three d, One c, One d, Two d, One b
+5000
+6 - comment
+stmt s; variable v;
+Select <s, v> such that Uses(s, v)
+9 d, 7 c, 5 b, 2 x, 1 a, 8 d, 6 d, 3 b, 3 d, 4 c, 4 d, 2 b, 2 c, 2 d
+5000

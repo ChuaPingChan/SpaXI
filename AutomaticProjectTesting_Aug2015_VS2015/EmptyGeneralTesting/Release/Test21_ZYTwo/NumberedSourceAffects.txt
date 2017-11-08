@@ -1,0 +1,38 @@
+procedure Main {
+	a = 1; // 1
+	b = 2; // 2
+	call Main2; // 3
+	while x { // 4
+		c = a + b; // 5
+		if x then { // 6
+			d = c; // 7
+			y = e; // 8
+			while x { // 9
+				f = g; // 10
+				g = h; // 11
+				while x { // 12
+					i = f + g + h; // 13
+				}
+				h = f; // 14
+			}
+		} else {
+			e = c; // 15
+			y = d; // 16
+			if x then { // 17
+				j = y; // 18
+			} else {
+				call Main3; // 19
+				j = y; // 20
+			}
+		}
+	}
+}
+
+procedure Main2 {
+	b = 3; // 21
+}
+
+procedure Main3 {
+	aaa = 123 + 456; // 22
+	y = aaa; // 23
+}

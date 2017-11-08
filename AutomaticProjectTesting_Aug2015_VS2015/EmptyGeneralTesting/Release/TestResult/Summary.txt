@@ -1,7 +1,7 @@
-Overall Test Ran    : 15214
-Overall Test Passed : 14583
-Overall Test Failed : 625
-Overall Test Timeout: 6
+Overall Test Ran    : 16156
+Overall Test Passed : 15462
+Overall Test Failed : 686
+Overall Test Timeout: 8
 
 
 TestResult\out1.xml: 
@@ -282,9 +282,9 @@ Timeout  : 0
 
 TestResult\out13_Two_QueryNextStar_Performance_UsingSource2.xml: 
 Test Ran: 5	[TIMEOUT]
-Passed   : 4
+Passed   : 3
 Failed   : 0
-Timeout  : 1
+Timeout  : 2
 
 TestResult\out13_Two_QueryNextStar_UsingSourceNext.xml: 
 Test Ran: 25	
@@ -725,10 +725,10 @@ Failed   : 0
 Timeout  : 4
 
 TestResult\out18_QueryValidation.xml: 
-Test Ran: 70	
-Passed   : 70
+Test Ran: 70	[TIMEOUT]
+Passed   : 69
 Failed   : 0
-Timeout  : 0
+Timeout  : 1
 
 TestResult\out19_Query_std1_adv.xml: 
 Test Ran: 42	
@@ -968,6 +968,108 @@ TestResult\out20_Valid_queries6_Uses.xml:
 Test Ran: 20	[BUG]
 Passed   : 10
 Failed   : 10
+Timeout  : 0
+
+TestResult\out21_Queries1.xml: 
+Test Ran: 68	
+Passed   : 68
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries11.xml: 
+Test Ran: 44	
+Passed   : 44
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries12.xml: 
+Test Ran: 253	[BUG]
+Passed   : 252
+Failed   : 1
+Timeout  : 0
+
+TestResult\out21_Queries12a.xml: 
+Test Ran: 5	
+Passed   : 5
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries13.xml: 
+Test Ran: 94	
+Passed   : 94
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries1Bonus.xml: 
+Test Ran: 6	
+Passed   : 6
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries21.xml: 
+Test Ran: 345	[BUG]
+Passed   : 292
+Failed   : 53
+Timeout  : 0
+
+TestResult\out21_Queries21a.xml: 
+Test Ran: 10	[BUG]
+Passed   : 7
+Failed   : 3
+Timeout  : 0
+
+TestResult\out21_QueriesAffects.xml: 
+Test Ran: 4	
+Passed   : 4
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesAffectsNextStarStressTest.xml: 
+Test Ran: 4	[BUG]
+Passed   : 0
+Failed   : 4
+Timeout  : 0
+
+TestResult\out21_QueriesAffectsStar.xml: 
+Test Ran: 4	
+Passed   : 4
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesAffectsStressTest.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesCalls.xml: 
+Test Ran: 6	
+Passed   : 6
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesIf.xml: 
+Test Ran: 1	
+Passed   : 1
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesMiniIter1.xml: 
+Test Ran: 78	
+Passed   : 78
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesMiniIter1NoWhile.xml: 
+Test Ran: 6	
+Passed   : 6
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesNextStar.xml: 
+Test Ran: 3	
+Passed   : 3
+Failed   : 0
 Timeout  : 0
 
 TestResult\out2_Query_Simple02.xml: 
