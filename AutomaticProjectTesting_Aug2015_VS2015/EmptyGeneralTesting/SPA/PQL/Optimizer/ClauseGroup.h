@@ -4,6 +4,7 @@
 #include <queue>
 #include <unordered_set>
 #include <unordered_map>
+#include <utility>
 
 #include "../Utilities/Clause.h"
 #include "../Utilities/ClauseResult.h"
@@ -29,15 +30,15 @@ public:
     bool pruneClauseResult(ClauseResult* crToPrune);
 
     /* Used for sorting clauses in clause group */
-    static bool compareClauseCost(ClausePtr clausePtr1, ClausePtr clausePtr2);
+    static bool compareClauseCost(pair<ClausePtr, int> c1, pair<ClausePtr, int> c2);
 
 private:
 
     unordered_set<string> _selectedSynonyms;
 
     void sortInitClauseVec();
-    vector<ClausePtr> _initClauseVec;
-    queue<ClausePtr> _clauseQueue;
+    vector<pair<ClausePtr, int>> _initClauseVec;   // Permanently stores all the clauses used to construct this ClauseGroup
+    queue<pair<ClausePtr, int>> _clauseQueue;   // Dynamic queue of clauses
     int _cost;
 
     // For pruning

@@ -106,9 +106,18 @@ namespace UnitTesting
             /***********
              * Testing *
              ***********/
-            Assert::IsTrue(ClauseGroup::compareClauseCost(select_a1.getSharedPtr(), uses_a1_v1.getSharedPtr()));
-            Assert::IsFalse(ClauseGroup::compareClauseCost(uses_a1_v1.getSharedPtr(), modifies_w1_v1.getSharedPtr()));
-            Assert::IsTrue(ClauseGroup::compareClauseCost(uses_10_ident.getSharedPtr(), select_a1.getSharedPtr()));
+            pair<ClausePtr, int> clauseCostPair1;
+            pair<ClausePtr, int> clauseCostPair2;
+
+            clauseCostPair1 = pair<ClausePtr, int>(select_a1.getSharedPtr(), ClauseCostCalculator::getCost(select_a1.getSharedPtr()));
+            clauseCostPair2 = pair<ClausePtr, int>(uses_a1_v1.getSharedPtr(), ClauseCostCalculator::getCost(uses_a1_v1.getSharedPtr()));
+            Assert::IsTrue(ClauseGroup::compareClauseCost(clauseCostPair1, clauseCostPair2));
+            clauseCostPair1 = pair<ClausePtr, int>(select_a1.getSharedPtr(), ClauseCostCalculator::getCost(select_a1.getSharedPtr()));
+            clauseCostPair2 = pair<ClausePtr, int>(modifies_w1_v1.getSharedPtr(), ClauseCostCalculator::getCost(modifies_w1_v1.getSharedPtr()));
+            Assert::IsTrue(ClauseGroup::compareClauseCost(clauseCostPair1, clauseCostPair2));
+            clauseCostPair1 = pair<ClausePtr, int>(uses_10_ident.getSharedPtr(), ClauseCostCalculator::getCost(uses_10_ident.getSharedPtr()));
+            clauseCostPair2 = pair<ClausePtr, int>(select_a1.getSharedPtr(), ClauseCostCalculator::getCost(select_a1.getSharedPtr()));
+            Assert::IsTrue(ClauseGroup::compareClauseCost(clauseCostPair1, clauseCostPair2));
         }
 
         TEST_METHOD(TestSortClauses) {

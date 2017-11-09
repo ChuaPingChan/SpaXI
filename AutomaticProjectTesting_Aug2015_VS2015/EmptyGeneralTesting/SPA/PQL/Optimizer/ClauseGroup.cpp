@@ -9,10 +9,16 @@ using namespace std;
 
 ClauseGroup::ClauseGroup(vector<ClausePtr> clauseGroup)
 {
-    _initClauseVec = clauseGroup;
+    for (ClausePtr clausePtr : clauseGroup) {
+        int clauseCost = ClauseCostCalculator::getCost(clausePtr);
+        _initClauseVec.push_back(pair<ClausePtr, int>(clausePtr, clauseCost));
+    }
+
     sortInitClauseVec();
 
-    for (ClausePtr clausePtr : _initClauseVec) {
+    for (pair<ClausePtr,int> clausePtrCostPair : _initClauseVec) {
+
+        ClausePtr clausePtr = clausePtrCostPair.first;
 
         // Data to facilitate pruning
         list<string> syns = clausePtr->getSynonyms();
@@ -21,7 +27,7 @@ ClauseGroup::ClauseGroup(vector<ClausePtr> clauseGroup)
             _synsInRemainingClauses.insert(syn);
         }
 
-        _clauseQueue.push(clausePtr);
+        _clauseQueue.push(clausePtrCostPair);
     }
 
     _cost = computeCost();
@@ -45,7 +51,7 @@ bool ClauseGroup::hasNextClause()
 
 ClausePtr& ClauseGroup::getNextClause()
 {
-    ClausePtr& clausePtr = _clauseQueue.front();
+    ClausePtr& clausePtr = _clauseQueue.front().first;
     _clauseQueue.pop();
 
     // Update DS for pruning
@@ -92,8 +98,8 @@ int ClauseGroup::computeCost()
 {
     int totalCost = 0;
 
-    for (ClausePtr clausePtr : _initClauseVec) {
-        totalCost += ClauseCostCalculator::getCost(clausePtr);
+    for (pair<ClausePtr,int> clausePtrCostPair : _initClauseVec) {
+        totalCost += clausePtrCostPair.second;
     }
     return totalCost;
 }
@@ -101,7 +107,7 @@ int ClauseGroup::computeCost()
 /*
     Returns true if the first clause should be ordered before the second clause
 */
-bool ClauseGroup::compareClauseCost(ClausePtr clausePtr1, ClausePtr clausePtr2)
+bool ClauseGroup::compareClauseCost(pair<ClausePtr,int> c1, pair<ClausePtr,int> c2)
 {
-    return ClauseCostCalculator::getCost(clausePtr1) < ClauseCostCalculator::getCost(clausePtr2);
+    return c1.second < c2.second;
 }
