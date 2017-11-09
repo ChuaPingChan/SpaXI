@@ -19,79 +19,88 @@ namespace UnitTesting
     TEST_CLASS(TestValidationPatternIf)
     {
     public:
+        QueryTree *qtPtr;
+        string str;
+
+        TEST_METHOD_INITIALIZE(Test_Initialisation)
+        {
+            qtPtr = new QueryTree;
+            str.clear();
+        }
+
+        TEST_METHOD_CLEANUP(Test_Cleanup)
+        {
+            delete qtPtr;
+            qtPtr = NULL;
+            str.clear();
+        }
+
         TEST_METHOD(TestValidity_Pattern_If_Variable_Underscore_Underscore_Valid)
         {
-            string str = "f(v, _, _)";
-            QueryTree qt;
-            qt.insertSynonym(IF, "f");
-            qt.insertSynonym(VARIABLE, "v");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "f(v, _, _)";
+            qtPtr->insertSynonym(IF, "f");
+            qtPtr->insertSynonym(VARIABLE, "v");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(IF_PATTERN, "f", VARIABLE, "v", UNDERSCORE, "_", UNDERSCORE, "_");
-            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseIfContent(expected, actual));
         }
 
         TEST_METHOD(TestValidity_Pattern_If_Underscore_Underscore_Underscore_Valid)
         {
-            string str = "f(_, _, _)";
-            QueryTree qt;
-            qt.insertSynonym(IF, "f");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "f(_, _, _)";
+            qtPtr->insertSynonym(IF, "f");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(IF_PATTERN, "f", UNDERSCORE, "_", UNDERSCORE, "_", UNDERSCORE, "_");
-            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseIfContent(expected, actual));
         }
 
         TEST_METHOD(TestValidity_Pattern_If_IdentWithQuotes_Underscore_Underscore_Valid)
         {
-            string str = "f(\"x\", _, _)";
-            QueryTree qt;
-            qt.insertSynonym(IF, "f");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "f(\"x\", _, _)";
+            qtPtr->insertSynonym(IF, "f");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(IF_PATTERN, "f", IDENT_WITHQUOTES, "x", UNDERSCORE, "_", UNDERSCORE, "_");
-            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseIfContent(expected, actual));
         }
 
         TEST_METHOD(TestValidity_Pattern_If_FirstArg_NotVariable_Invalid)
         {
-            string str = "f(a, _, _)";
-            QueryTree qt;
-            qt.insertSynonym(IF, "f");
-            qt.insertSynonym(ASSIGN, "a");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "f(a, _, _)";
+            qtPtr->insertSynonym(IF, "f");
+            qtPtr->insertSynonym(ASSIGN, "a");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
 
         TEST_METHOD(TestValidity_Pattern_If_SecondArg_NotUnderscore_Invalid)
         {
-            string str = "f(_, a, _)";
-            QueryTree qt;
-            qt.insertSynonym(IF, "f");
-            qt.insertSynonym(ASSIGN, "a");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "f(_, a, _)";
+            qtPtr->insertSynonym(IF, "f");
+            qtPtr->insertSynonym(ASSIGN, "a");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
 
         TEST_METHOD(TestValidity_Pattern_If_ThirdArg_NotVUnderscore_Invalid)
         {
-            string str = "f(_, _, a)";
-            QueryTree qt;
-            qt.insertSynonym(IF, "f");
-            qt.insertSynonym(ASSIGN, "a");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "f(_, _, a)";
+            qtPtr->insertSynonym(IF, "f");
+            qtPtr->insertSynonym(ASSIGN, "a");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
 
         TEST_METHOD(TestValidity_Pattern_While_TooLittleArguments_Invalid)
         {
-            string str = "f(_, _)";
-            QueryTree qt;
-            qt.insertSynonym(IF, "f");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "f(_, _)";
+            qtPtr->insertSynonym(IF, "f");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
     };
