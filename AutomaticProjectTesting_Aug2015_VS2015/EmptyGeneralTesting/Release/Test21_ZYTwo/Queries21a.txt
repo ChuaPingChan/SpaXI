@@ -1,0 +1,50 @@
+19 - Comment
+
+Select BOOLEAN such that Modifies(10, _)
+true
+5000
+20 - Comment
+
+Select BOOLEAN such that Modifies(10, "z")
+true
+5000
+21 - Comment
+
+Select BOOLEAN such that Modifies("delta", _)
+true
+5000
+146 - Comment
+procedure p; 
+Select p such that Modifies("alpha", _)
+alpha, beta, delta, gamma
+5000
+147 - Comment
+procedure p; variable v;
+Select p such that Modifies("beta", v)
+alpha, beta, delta, gamma
+5000
+148 - Comment
+procedure p; variable v;
+Select v such that Modifies("delta", v)
+x, y, z
+5000
+149 - Comment
+procedure p; 
+Select p such that Modifies(p, "i")
+none
+5000
+150 - Comment
+procedure p; 
+Select p such that Modifies(p, _)
+alpha, beta, delta, gamma
+5000
+151 - Comment
+procedure p; variable v;
+Select p such that Modifies(p, v)
+alpha, beta, delta, gamma
+5000
+152 - Comment
+procedure p; variable v;
+Select v such that Modifies(p, v)
+t, v, w, x, y, z
+5000

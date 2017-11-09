@@ -1,0 +1,800 @@
+1 - Follows(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows(17,20)
+true
+5000
+2 - Follows(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows(17,18)
+false
+5000
+3 - Follows(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows(5,13)
+true
+5000
+4 - Follows(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows(14,15)
+false
+5000
+5 - Follows(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows(a,10)
+9
+5000
+6 - Follows(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows(6,s)
+7
+5000
+7 - Follows(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows(ifs,46)
+
+5000
+8 - Follows(known ifs,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows(32,s)
+33
+5000
+9 - Follows(known ifs,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows(31,a)
+
+5000
+10 - Follows(known ifs,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows(31,ifs)
+
+5000
+11 - Follows(known ifs,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Follows(31,w)
+
+5000
+12 - Follows(known ifs,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows(31,c)
+
+5000
+13 - Follows(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Follows(w,11)
+8
+5000
+14 - Follows(known while,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows(17,s)
+20
+5000
+15 - Follows(known while,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows(17,a)
+20
+5000
+16 - Follows(known while,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows(17,ifs)
+
+5000
+17 - Follows(known while,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Follows(17,w)
+
+5000
+18 - Follows(known while,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows(33,c)
+
+5000
+19 - Follows(unknown call,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows(c,46)
+
+5000
+20 - Follows(known call,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows(3,s)
+4
+5000
+21 - Follows*(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows*(1,14)
+true
+5000
+22 - Follows*(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows*(14,27)
+false
+5000
+23 - Follows*(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows*(8,12)
+true
+5000
+24 - Follows*(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Follows*(5,21)
+false
+5000
+25 - Follows*(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows*(a,13)
+1,2,4
+5000
+26 - Follows*(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows*(27,s)
+28
+5000
+27 - Follows*(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows*(ifs,14)
+5
+5000
+28 - Follows*(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows*(1,s)
+2,3,4,5,13,14
+5000
+29 - Follows*(known assign,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Follows*(1,a)
+2,4,13
+5000
+30 - Follows*(known assign,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Follows*(1,ifs)
+5
+5000
+31 - Follows*(known assign,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Follows*(1,w)
+
+5000
+32 - Follows*(known assign,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows*(1,c)
+3,14
+5000
+33 - Follows*(unknown call,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Follows*(c,14)
+3
+5000
+34 - Follows*(known call,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Follows*(3,s)
+4,5,13,14
+5000
+1 - Parent(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent(45,48)
+true
+5000
+2 - Parent(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent(28,48)
+false
+5000
+3 - Parent(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent(5,6)
+true
+5000
+4 - Parent(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent(5,21)
+false
+5000
+5 - Parent(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent(a,10)
+
+5000
+6 - Parent(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent(6,s)
+
+5000
+7 - Parent(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent(ifs,46)
+45
+5000
+8 - Parent(known ifs,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent(31,s)
+32,33,36,37
+5000
+9 - Parent(known ifs,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent(31,a)
+32,36
+5000
+10 - Parent(known ifs,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent(31,ifs)
+37
+5000
+11 - Parent(known ifs,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent(31,w)
+33
+5000
+12 - Parent(known ifs,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent(31,c)
+
+5000
+13 - Parent(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent(w,46)
+
+5000
+14 - Parent(known while,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent(30,s)
+31
+5000
+15 - Parent(known while,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent(30,a)
+
+5000
+16 - Parent(known while,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent(30,ifs)
+31
+5000
+17 - Parent(known while,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent(30,w)
+
+5000
+18 - Parent(known while,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent(33,c)
+35
+5000
+19 - Parent(unknown call,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent(c,46)
+
+5000
+20 - Parent(known call,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent(3,s)
+
+5000
+21 - Parent*(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent*(28,48)
+true
+5000
+22 - Parent*(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent*(14,27)
+false
+5000
+23 - Parent*(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent*(5,6)
+true
+5000
+24 - Parent*(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent*(5,21)
+false
+5000
+25 - Parent*(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent*(a,10)
+
+5000
+26 - Parent*(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent*(6,s)
+
+5000
+27 - Parent*(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent*(ifs,46)
+28,44,45
+5000
+28 - Parent*(known ifs,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent*(31,s)
+32,33,34,35,36,37,38,39
+5000
+29 - Parent*(known ifs,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent*(31,a)
+32,34,36,38,39
+5000
+30 - Parent*(known ifs,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent*(31,ifs)
+37
+5000
+31 - Parent*(known ifs,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent*(31,w)
+33
+5000
+32 - Parent*(known ifs,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent*(31,c)
+35
+5000
+33 - Parent*(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent*(w,46)
+41,43
+5000
+34 - Parent*(known while,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent*(30,s)
+31,32,33,34,35,36,37,38,39
+5000
+35 - Parent*(known while,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent*(30,a)
+32,34,36,38,39
+5000
+36 - Parent*(known while,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent*(30,ifs)
+31,37
+5000
+37 - Parent*(known while,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent*(30,w)
+33
+5000
+38 - Parent*(known while,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent*(31,c)
+35
+5000
+39 - Parent*(unknown call,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent*(c,46)
+
+5000
+40 - Parent*(known call,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent*(3,s)
+
+5000
+1 - Calls(known,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Calls("A","C")
+true
+5000
+2 - Calls(known,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Calls("A","D")
+true
+5000
+3 - Calls*(known,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Calls*("A","D")
+true
+5000
+4 - Calls*(known,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Calls*("D","C")
+false
+5000
+5 - Calls(unknown,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select p such that Calls(p,"B")
+A,D
+5000
+6 - Calls(known,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select p such that Calls("A",p)
+B,C,D
+5000
+7 - Calls*(unknown,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select p such that Calls*(p,"B")
+A,C,D
+5000
+8 - Calls*(known,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select p such that Calls*("A",p)
+B,C,D
+5000
+9 - Calls(unknown,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select BOOLEAN such that Calls(p,q)
+true
+5000
+10 - Calls*(unknown,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select BOOLEAN such that Calls*(p,q)
+true
+5000
+1 - Modifies(known assign,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(42,"x")
+true
+5000
+2 - Modifies(known ifs,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(23,"q")
+true
+5000
+3 - Modifies(known while,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(33,"a")
+true
+5000
+4 - Modifies(known proc,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies("C","q")
+true
+5000
+5 - Modifies(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Modifies(a,"x")
+1,19,24,42
+5000
+6 - Modifies(known assign,unknown var)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies(48,v)
+s
+5000
+7 - Modifies(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Modifies(ifs,"x")
+5,23,28,31,44,45
+5000
+8 - Modifies(known ifs,unknown var)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies(31,v)
+a,p,q,x
+5000
+9 - Modifies(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select w such that Modifies(w,"x")
+17,30,33,41,43
+5000
+10 - Modifies(known while,unknown var) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies(30,v)
+a,p,q,x
+5000
+11 - Modifies(unknown proc,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select p such that Modifies(p,"s")
+A,C,D
+5000
+12 - Modifies(known proc,unknown var) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies("C",v)
+a,i,j,p,q,r,s,x,y
+5000
+13 - Modifies(unknown assign,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(a,v)
+true
+5000
+14 - Modifies(unknown if,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(ifs,v)
+true
+5000
+15 - Modifies(unknown while,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(w,v)
+true
+5000
+16 - Modifies(unknown proc,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(p,v)
+true
+5000
+17 - Modifies(known call,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(3,"p")
+true
+5000
+18 - Modifies(known call,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Modifies(3,v)
+a,p,q,x
+5000
+19 - Modifies(unknown call,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(c,"q")
+true
+5000
+20 - Modifies(unknown call,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Modifies(c,v)
+true
+5000
+1 - Uses(known assign,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Uses(42,"z")
+true
+5000
+2 - Uses(known ifs,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Uses(23,"q")
+true
+5000
+3 - Uses(known while,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Uses(33,"y")
+true
+5000
+4 - Uses(known proc,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Modifies("D","a")
+true
+5000
+5 - Uses(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select a such that Uses(a,"x")
+6,9,11,13,15,21,22,26,27,40,49
+5000
+6 - Uses(known assign,unknown var)
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select v such that Uses(49,v)
+x,y,z
+5000
+7 - Uses(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select ifs such that Uses(ifs,"x")
+5,23,28,31,44,45
+5000
+8 - Uses(known ifs,unknown var)
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select v such that Uses(31,v)
+i,p,r,x,y,q,j,z,t
+5000
+9 - Uses(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select w such that Uses(w,"x")
+8,30,33,41,43
+5000
+10 - Uses(known while,unknown var) 
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select v such that Uses(30,v)
+i,j,p,q,r,t,x,y,z
+5000
+11 - Uses(unknown proc,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select p such that Uses(p,"r")
+A,C,D
+5000
+12 - Uses(known proc,unknown var) 
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select v such that Uses("D",v)
+i,j,p,q,r,x,y,z,t
+5000
+13 - Uses(unknown assign,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Uses(a,v)
+true
+5000
+14 - Uses(unknown if,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Uses(ifs,v)
+true
+5000
+15 - Uses(unknown while,known var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Uses(w,v)
+true
+5000
+16 - Uses(unknown proc,known var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Uses(p,v)
+true
+5000
+17 - Uses(known call,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Uses(3,"p")
+true
+5000
+18 - Uses(known call,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select v such that Uses(3,v)
+p,t,x,y
+5000
+19 - Uses(unknown call,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Uses(c,"q")
+true
+5000
+20 - Uses(unknown call,unknown var) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Uses(c,v)
+true
+5000
+1 - All Clauses With actual value
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
+true
+5000
+2 - All Clauses With actual value 
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(1,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
+false
+5000
+3 - All Clauses With actual value 
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(1,20) and Modifies(42,"x") and Uses(42,"z") and Calls("A","C")
+false
+5000
+4 - All Clauses With actual value
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(2,"x") and Uses(42,"z") and Calls("A","C")
+false
+5000
+5 - All Clauses With actual value
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(1,"z") and Calls("A","C")
+false
+5000
+6 - All Clauses With actual value
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Parent(45,48) and Follows(17,20) and Modifies(42,"x") and Uses(42,"z") and Calls("B","C")
+false
+5000
+7 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select ifs such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+45
+5000
+8 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select a such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+9
+5000
+9 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select v such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+a,p,q,x
+5000
+10 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select p such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+A,C,D
+5000
+11 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select q such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+B,C,D
+5000
+13 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select a such that Parent(ifs,27) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+
+5000
+14 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select ifs such that Parent(ifs,46) and Follows(a,20) and Modifies(30,v) and Uses(p,"r") and Calls*("A",q)
+
+5000
+15 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select ifs such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"g") and Calls*("A",q)
+
+5000
+16 - All Clauses With One Synonyms
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select ifs such that Parent(ifs,46) and Follows(a,10) and Modifies(30,v) and Uses(p,"r") and Calls*("B",q)
+
+5000
+23 - All Clauses With TWO Synonyms
+assign a,a1,a2,a3; stmt s; while w; if ifs,ifs2; variable v,v2; procedure p,p1,q,q1; constant c;
+Select BOOLEAN such that Parent(ifs,ifs2) and Follows(a,a2) and Modifies(s,v) and Uses(p,v2) and Calls*(p1,q) with ifs.stmt#=c.value pattern a3("x",_) 
+false
+5000
+24 - All Clauses With TWO Synonyms
+assign a,a1,a2,a3; stmt s; while w1,w2; if ifs,ifs2; variable v,v2; procedure p,p1,q,q1; constant c;
+Select BOOLEAN such that Parent(ifs,ifs) and Follows(w1,w2) and Modifies(s,v) and Uses(p,v2) and Calls*(p1,q) with ifs.stmt#=c.value pattern a3("x",_)
+false
+5000
+25 - All Clauses with common synonyms in one group
+assign a1, a2, a3; stmt s1, s2, s3; variable v1, v2, v3;
+Select BOOLEAN such that Follows (3, 4) and Uses (5, "y")
+true
+5000
+1 - Next(known,known) -- true
+
+Select BOOLEAN such that Next(7,13)
+true
+5000
+2 - Next(known,known) -- false
+
+Select BOOLEAN such that Next(5,16)
+false
+5000
+3 - Next(known,n)
+prog_line n;
+Select n such that Next(43,n)
+41,44
+5000
+4 - Next(known,_)
+prog_line n;
+Select n such that Next(25,_)
+
+5000
+5 - Next(a,known)
+assign a;
+Select a such that Next(a,30)
+29,38,39
+5000
+6 - Next(c,known)
+call c;
+Select c such that Next(c,13)
+7,12
+5000
+7 - Next(s,w)
+stmt s; while w;
+Select s such that Next(s,w)
+5,10,16,19,29,32,33,35,38,39,40,42,43,47,48,49
+5000
+8 - Next*(known,known) -- true
+
+Select BOOLEAN such that Next*(39,32)
+true
+5000
+9 - Next*(known,known) -- false
+
+Select BOOLEAN such that Next*(31,48)
+false
+5000
+10 - Next*(known,n)
+prog_line n;
+Select n such that Next*(46,n)
+41,42,43,44,45,46,47,48,49
+5000
+11 - Next*(known,_)
+prog_line n;
+Select n such that Next*(14,_)
+
+5000
+12 - Next*(i,known)
+if i;
+Select i such that Next*(i,30)
+28,31,37
+5000
+13 - Next*(c,known)
+call c;
+Select c such that Next*(c,9)
+3
+5000
+14 - Next*(s,w)
+stmt s; while w;
+Select s such that Next*(s,w)
+1,2,3,4,5,8,9,10,15,16,17,18,19,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49
+5000
+15 - Next*(known,known) and Next(known,known) -- true
+
+Select BOOLEAN such that Next*(6,14) and Next(44,49)
+true
+5000
+16 - Next*(known,a) and Next*(known,a) -- common synonym
+assign a;
+Select a such that Next*(37,a) and Next*(28,a)
+32,34,36,38,39
+5000
+17 - Next*(s,s) and Next*(s,s) -- 2 common synonyms
+stmt s; while w;
+Select w such that Next*(w,w) and Next*(w,s)
+8,17,30,33,41,43
+5000
+18 - Next*(s,s) and Next*(s,s) -- common synonym
+stmt s1,s2; assign a;
+Select a such that Next*(s1,s2) and Next*(s2,a)
+4,6,9,10,11,13,18,19,20,24,26,29,32,34,36,38,39,40,42,46,48,49
+5000

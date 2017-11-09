@@ -1,0 +1,50 @@
+1 - Calls(known,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Calls("A","C")
+true
+5000
+2 - Calls(known,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Calls("A","D")
+true
+5000
+3 - Calls*(known,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Calls*("A","D")
+true
+5000
+4 - Calls*(known,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Calls*("D","C")
+false
+5000
+5 - Calls(unknown,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select p such that Calls(p,"B")
+A,D
+5000
+6 - Calls(known,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select p such that Calls("A",p)
+B,C,D
+5000
+7 - Calls*(unknown,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select p such that Calls*(p,"B")
+A,C,D
+5000
+8 - Calls*(known,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p;
+Select p such that Calls*("A",p)
+B,C,D
+5000
+9 - Calls(unknown,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select BOOLEAN such that Calls(p,q)
+true
+5000
+10 - Calls*(unknown,unknown) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p,q;
+Select BOOLEAN such that Calls*(p,q)
+true
+5000

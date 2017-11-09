@@ -1,0 +1,2660 @@
+1 - FOLLOWS
+stmt s1, s2;
+Select s1 such that Follows (s1, s2)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+2 - FOLLOWS
+stmt s1, s2;
+Select s2 such that Follows (s1, s2)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+3 - FOLLOWS
+stmt s1; assign a1;
+Select s1 such that Follows (s1, a1)
+1,10,14,15,16,19,21,22,25,26,28,3,30,33,34,35,39,4,41,42,44,6,7,8
+5000
+4 - FOLLOWS
+stmt s1; assign a1;
+Select a1 such that Follows (s1, a1)
+10,11,16,17,2,20,22,23,24,26,27,29,34,35,36,38,40,42,43,5,51,7,8,9
+5000
+5 - FOLLOWS
+stmt s1; while w1;
+Select s1 such that Follows (s1, w1)
+11,17,29
+5000
+6 - FOLLOWS
+stmt s1; while w1;
+Select w1 such that Follows (s1, w1)
+12,18,30
+5000
+7 - FOLLOWS
+stmt s1; if ifs1;
+Select s1 such that Follows (s1, ifs1)
+13,2,31,43
+5000
+8 - FOLLOWS
+stmt s1; if ifs1;
+Select ifs1 such that Follows (s1, ifs1)
+14,3,32,44
+5000
+9 - FOLLOWS
+stmt s1; prog_line pl1;
+Select s1 such that Follows (s1, pl1)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+10 - FOLLOWS
+stmt s1; prog_line pl1;
+Select pl1 such that Follows (s1, pl1)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+11 - FOLLOWS
+stmt s1; call c1;
+Select s1 such that Follows (s1, c1)
+12,38
+5000
+12 - FOLLOWS
+stmt s1; call c1;
+Select c1 such that Follows (s1, c1)
+25,39
+5000
+13 - FOLLOWS
+stmt s1;
+Select s1 such that Follows (s1, 13)
+
+5000
+14 - FOLLOWS
+stmt s1;
+Select s1 such that Follows (s1, _)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+15 - FOLLOWS
+while w1; stmt s1;
+Select w1 such that Follows (w1, s1)
+12,30
+5000
+16 - FOLLOWS
+while w1; stmt s1;
+Select s1 such that Follows (w1, s1)
+25,38
+5000
+17 - FOLLOWS
+while w1; assign a1;
+Select w1 such that Follows (w1, a1)
+30
+5000
+18 - FOLLOWS
+while w1; assign a1;
+Select a1 such that Follows (w1, a1)
+38
+5000
+19 - FOLLOWS
+while w1; prog_line pl1;
+Select w1 such that Follows (w1, pl1)
+12,30
+5000
+20 - FOLLOWS
+while w1; prog_line pl1;
+Select pl1 such that Follows (w1, pl1)
+25,38
+5000
+21 - FOLLOWS
+while w1; call c1;
+Select w1 such that Follows (w1, c1)
+12
+5000
+22 - FOLLOWS
+while w1; call c1;
+Select c1 such that Follows (w1, c1)
+25
+5000
+23 - FOLLOWS
+while w1;
+Select w1 such that Follows (w1, _)
+12,30
+5000
+24 - FOLLOWS
+if ifs1; stmt s1;
+Select ifs1 such that Follows (ifs1, s1)
+14,3,44
+5000
+25 - FOLLOWS
+if ifs1; stmt s1;
+Select s1 such that Follows (ifs1, s1)
+10,24,51
+5000
+26 - FOLLOWS
+if ifs1; assign a1;
+Select ifs1 such that Follows (ifs1, a1)
+14,3,44
+5000
+27 - FOLLOWS
+if ifs1; assign a1;
+Select a1 such that Follows (ifs1, a1)
+10,24,51
+5000
+28 - FOLLOWS
+if ifs1; while w1;
+Select ifs1 such that Follows (ifs1, w1)
+
+5000
+29 - FOLLOWS
+if ifs1; while w1;
+Select w1 such that Follows (ifs1, w1)
+
+5000
+30 - FOLLOWS
+if ifs1, ifs2;
+Select ifs1 such that Follows (ifs1, ifs2)
+
+5000
+31 - FOLLOWS
+if ifs1, ifs2;
+Select ifs2 such that Follows (ifs1, ifs2)
+
+5000
+32 - FOLLOWS
+if ifs1; prog_line pl1;
+Select ifs1 such that Follows (ifs1, pl1)
+14,3,44
+5000
+33 - FOLLOWS
+if ifs1; prog_line pl1;
+Select pl1 such that Follows (ifs1, pl1)
+10,24,51
+5000
+34 - FOLLOWS
+if ifs1;
+Select ifs1 such that Follows (ifs1, 51)
+44
+5000
+35 - FOLLOWS
+if ifs1;
+Select ifs1 such that Follows (ifs1, _)
+14,3,44
+5000
+36 - FOLLOWS
+stmt s1; prog_line pl1;
+Select pl1 such that Follows (pl1, s1)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+37 - FOLLOWS
+stmt s1; prog_line pl1;
+Select s1 such that Follows (pl1, s1)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+38 - FOLLOWS
+prog_line pl1; assign a1;
+Select pl1 such that Follows (pl1, a1)
+1,10,14,15,16,19,21,22,25,26,28,3,30,33,34,35,39,4,41,42,44,6,7,8
+5000
+39 - FOLLOWS
+prog_line pl1; assign a1;
+Select a1 such that Follows (pl1, a1)
+10,11,16,17,2,20,22,23,24,26,27,29,34,35,36,38,40,42,43,5,51,7,8,9
+5000
+40 - FOLLOWS
+prog_line pl1; while w1;
+Select pl1 such that Follows (pl1, w1)
+11,17,29
+5000
+41 - FOLLOWS
+prog_line pl1; while w1;
+Select w1 such that Follows (pl1, w1)
+12,18,30
+5000
+42 - FOLLOWS
+prog_line pl1; if ifs1;
+Select pl1 such that Follows (pl1, ifs1)
+13,2,31,43
+5000
+43 - FOLLOWS
+prog_line pl1; if ifs1;
+Select ifs1 such that Follows (pl1, ifs1)
+14,3,32,44
+5000
+44 - FOLLOWS
+prog_line pl1, pl2;
+Select pl1 such that Follows (pl1, pl2)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+45 - FOLLOWS
+prog_line pl1, pl2;
+Select pl2 such that Follows (pl1, pl2)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+46 - FOLLOWS
+prog_line pl1; call c1;
+Select pl1 such that Follows (pl1, c1)
+12,38
+5000
+47 - FOLLOWS
+prog_line pl1; call c1;
+Select c1 such that Follows (pl1, c1)
+25,39
+5000
+48 - FOLLOWS
+prog_line pl1;
+Select pl1 such that Follows (pl1, 14)
+13
+5000
+49 - FOLLOWS
+prog_line pl1;
+Select pl1 such that Follows (pl1, _)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+50 - FOLLOWS
+stmt s1;
+Select s1 such that Follows (11, s1)
+12
+5000
+51 - FOLLOWS
+assign a1;
+Select a1 such that Follows (34, a1)
+35
+5000
+52 - FOLLOWS
+while w1;
+Select w1 such that Follows (29, w1)
+30
+5000
+53 - FOLLOWS
+if ifs1;
+Select ifs1 such that Follows (13, ifs1)
+14
+5000
+54 - FOLLOWS
+prog_line pl1;
+Select pl1 such that Follows (25, pl1)
+26
+5000
+55 - FOLLOWS
+call c1;
+Select c1 such that Follows (38, c1)
+39
+5000
+56 - FOLLOWS
+
+Select BOOLEAN such that Follows (6, 7)
+true
+5000
+57 - FOLLOWS
+
+Select BOOLEAN such that Follows (15, _)
+true
+5000
+58 - FOLLOWS
+stmt s1;
+Select s1 such that Follows (_, s1)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+59 - FOLLOWS
+assign a1;
+Select a1 such that Follows (_, a1)
+10,11,16,17,2,20,22,23,24,26,27,29,34,35,36,38,40,42,43,5,51,7,8,9
+5000
+60 - FOLLOWS
+while w1;
+Select w1 such that Follows (_, w1)
+12,18,30
+5000
+61 - FOLLOWS
+if ifs1;
+Select ifs1 such that Follows (_, ifs1)
+14,3,32,44
+5000
+62 - FOLLOWS
+prog_line pl1;
+Select pl1 such that Follows (_, pl1)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+63 - FOLLOWS
+call c1;
+Select c1 such that Follows (_, c1)
+25,39
+5000
+64 - FOLLOWS
+
+Select BOOLEAN such that Follows (_, 9)
+true
+5000
+65 - FOLLOWS
+
+Select BOOLEAN such that Follows (_, _)
+true
+5000
+66 - FOLLOWS* 
+stmt s1, s2;
+Select s1 such that Follows* (s1, s2)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+67 - FOLLOWS* 
+stmt s1, s2;
+Select s2 such that Follows* (s1, s2)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+68 - FOLLOWS* 
+stmt s1; assign a1;
+Select s1 such that Follows* (s1, a1)
+1,10,11,12,13,14,15,16,19,2,21,22,25,26,28,29,3,30,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+69 - FOLLOWS* 
+stmt s1; assign a1;
+Select a1 such that Follows* (s1, a1)
+10,11,16,17,2,20,22,23,24,26,27,29,34,35,36,38,40,42,43,5,51,7,8,9
+5000
+70 - FOLLOWS* 
+stmt s1; while w1;
+Select s1 such that Follows* (s1, w1)
+1,10,11,15,16,17,2,28,29,3
+5000
+71 - FOLLOWS* 
+stmt s1; while w1;
+Select w1 such that Follows* (s1, w1)
+12,18,30
+5000
+72 - FOLLOWS* 
+stmt s1; if ifs1;
+Select s1 such that Follows* (s1, ifs1)
+1,13,2,31,41,42,43
+5000
+73 - FOLLOWS* 
+stmt s1; if ifs1;
+Select ifs1 such that Follows* (s1, ifs1)
+14,3,32,44
+5000
+74 - FOLLOWS* 
+stmt s1; prog_line pl1;
+Select s1 such that Follows* (s1, pl1)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+75 - FOLLOWS* 
+stmt s1; prog_line pl1;
+Select pl1 such that Follows* (s1, pl1)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+76 - FOLLOWS* 
+stmt s1; call c1;
+Select s1 such that Follows* (s1, c1)
+1,10,11,12,2,28,29,3,30,38
+5000
+77 - FOLLOWS* 
+stmt s1; call c1;
+Select c1 such that Follows* (s1, c1)
+25,39
+5000
+78 - FOLLOWS* 
+stmt s1;
+Select s1 such that Follows* (s1, 13)
+
+5000
+79 - FOLLOWS* 
+stmt s1;
+Select s1 such that Follows* (s1, _)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+80 - FOLLOWS* 
+while w1; stmt s1;
+Select w1 such that Follows* (w1, s1)
+12,30
+5000
+81 - FOLLOWS* 
+while w1; stmt s1;
+Select s1 such that Follows* (w1, s1)
+25,26,27,38,39,40
+5000
+82 - FOLLOWS* 
+while w1; assign a1;
+Select w1 such that Follows* (w1, a1)
+12,30
+5000
+83 - FOLLOWS* 
+while w1; prog_line pl1;
+Select w1 such that Follows* (w1, pl1)
+12,30
+5000
+84 - FOLLOWS* 
+while w1; prog_line pl1;
+Select pl1 such that Follows* (w1, pl1)
+25,26,27,38,39,40
+5000
+85 - FOLLOWS* 
+while w1; call c1;
+Select w1 such that Follows* (w1, c1)
+12,30
+5000
+86 - FOLLOWS* 
+while w1; call c1;
+Select c1 such that Follows* (w1, c1)
+25,39
+5000
+87 - FOLLOWS* 
+while w1;
+Select w1 such that Follows* (w1, 26)
+12
+5000
+88 - FOLLOWS* 
+while w1;
+Select w1 such that Follows* (w1, _)
+12,30
+5000
+89 - FOLLOWS* 
+if ifs1; stmt s1;
+Select ifs1 such that Follows* (ifs1, s1)
+14,3,44
+5000
+90 - FOLLOWS* 
+if ifs1; stmt s1;
+Select s1 such that Follows* (ifs1, s1)
+10,11,12,24,25,26,27,51
+5000
+91 - FOLLOWS* 
+if ifs1; assign a1;
+Select ifs1 such that Follows* (ifs1, a1)
+14,3,44
+5000
+92 - FOLLOWS* 
+if ifs1; assign a1;
+Select a1 such that Follows* (ifs1, a1)
+10,11,24,26,27,51
+5000
+93 - FOLLOWS* 
+if ifs1; while w1;
+Select ifs1 such that Follows* (ifs1, w1)
+3
+5000
+94 - FOLLOWS* 
+if ifs1; while w1;
+Select w1 such that Follows* (ifs1, w1)
+12
+5000
+95 - FOLLOWS* 
+if ifs1, ifs2;
+Select ifs1 such that Follows* (ifs1, ifs2)
+
+5000
+96 - FOLLOWS* 
+if ifs1, ifs2;
+Select ifs2 such that Follows* (ifs1, ifs2)
+
+5000
+97 - FOLLOWS* 
+if ifs1; prog_line pl1;
+Select ifs1 such that Follows* (ifs1, pl1)
+14,3,44
+5000
+98 - FOLLOWS* 
+if ifs1; prog_line pl1;
+Select pl1 such that Follows* (ifs1, pl1)
+10,11,12,24,25,26,27,51
+5000
+99 - FOLLOWS* 
+if ifs1; call c1;
+Select ifs1 such that Follows* (ifs1, c1)
+3
+5000
+100 - FOLLOWS* 
+if ifs1; call c1;
+Select c1 such that Follows* (ifs1, c1)
+25
+5000
+101 - FOLLOWS* 
+if ifs1;
+Select ifs1 such that Follows* (ifs1, 51)
+44
+5000
+102 - FOLLOWS* 
+if ifs1;
+Select ifs1 such that Follows* (ifs1, _)
+14,3,44
+5000
+103 - FOLLOWS* 
+stmt s1; prog_line pl1;
+Select pl1 such that Follows* (pl1, s1)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+104 - FOLLOWS* 
+stmt s1; prog_line pl1;
+Select s1 such that Follows* (pl1, s1)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+105 - FOLLOWS* 
+prog_line pl1; assign a1;
+Select pl1 such that Follows* (pl1, a1)
+1,10,11,12,13,14,15,16,19,2,21,22,25,26,28,29,3,30,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+106 - FOLLOWS* 
+prog_line pl1; assign a1;
+Select a1 such that Follows* (pl1, a1)
+10,11,16,17,2,20,22,23,24,26,27,29,34,35,36,38,40,42,43,5,51,7,8,9
+5000
+107 - FOLLOWS* 
+prog_line pl1; while w1;
+Select pl1 such that Follows* (pl1, w1)
+1,10,11,15,16,17,2,28,29,3
+5000
+108 - FOLLOWS* 
+prog_line pl1; while w1;
+Select w1 such that Follows* (pl1, w1)
+12,18,30
+5000
+109 - FOLLOWS* 
+prog_line pl1; if ifs1;
+Select pl1 such that Follows* (pl1, ifs1)
+1,13,2,31,41,42,43
+5000
+110 - FOLLOWS* 
+prog_line pl1; if ifs1;
+Select ifs1 such that Follows* (pl1, ifs1)
+14,3,32,44
+5000
+111 - FOLLOWS* 
+prog_line pl1, pl2;
+Select pl1 such that Follows* (pl1, pl2)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+112 - FOLLOWS* 
+prog_line pl1, pl2;
+Select pl2 such that Follows* (pl1, pl2)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+113 - FOLLOWS* 
+prog_line pl1; call c1;
+Select pl1 such that Follows* (pl1, c1)
+1,10,11,12,2,28,29,3,30,38
+5000
+114 - FOLLOWS* 
+prog_line pl1; call c1;
+Select c1 such that Follows* (pl1, c1)
+25,39
+5000
+115 - FOLLOWS* 
+
+Select BOOLEAN such that Follows* (15, _)
+true
+5000
+116 - FOLLOWS* 
+stmt s1;
+Select s1 such that Follows* (_, s1)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+117 - FOLLOWS* 
+assign a1;
+Select a1 such that Follows* (_, a1)
+10,11,16,17,2,20,22,23,24,26,27,29,34,35,36,38,40,42,43,5,51,7,8,9
+5000
+118 - FOLLOWS* 
+while w1;
+Select w1 such that Follows* (_, w1)
+12,18,30
+5000
+119 - FOLLOWS* 
+if ifs1;
+Select ifs1 such that Follows* (_, ifs1)
+14,3,32,44
+5000
+120 - FOLLOWS* 
+prog_line pl1;
+Select pl1 such that Follows* (_, pl1)
+10,11,12,14,16,17,18,2,20,22,23,24,25,26,27,29,3,30,32,34,35,36,38,39,40,42,43,44,5,51,7,8,9
+5000
+121 - FOLLOWS* 
+call c1;
+Select c1 such that Follows* (_, c1)
+25,39
+5000
+122 - FOLLOWS* 
+
+Select BOOLEAN such that Follows* (_, 9)
+true
+5000
+123 - FOLLOWS* 
+
+Select BOOLEAN such that Follows* (_, _)
+true
+5000
+124 - PARENT
+stmt s1, s2;
+Select s1 such that Parent (s1, s2)
+12,14,18,3,30,32,44,45,48
+5000
+125 - PARENT
+stmt s1, s2;
+Select s2 such that Parent (s1, s2)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+126 - PARENT
+stmt s1; assign a1;
+Select s1 such that Parent (s1, a1)
+12,14,18,3,30,32,45,48
+5000
+127 - PARENT
+stmt s1; assign a1;
+Select a1 such that Parent (s1, a1)
+13,15,16,17,19,20,21,22,23,24,31,33,34,35,36,37,46,47,49,5,50,6,7,8,9
+5000
+128 - PARENT
+stmt s1; while w1;
+Select s1 such that Parent (s1, w1)
+14
+5000
+129 - PARENT
+stmt s1; while w1;
+Select w1 such that Parent (s1, w1)
+18
+5000
+130 - PARENT
+stmt s1; if ifs1;
+Select s1 such that Parent (s1, ifs1)
+12,30,44
+5000
+131 - PARENT
+stmt s1; if ifs1;
+Select ifs1 such that Parent (s1, ifs1)
+14,32,45,48
+5000
+132 - PARENT
+stmt s1; prog_line pl1;
+Select s1 such that Parent (s1, pl1)
+12,14,18,3,30,32,44,45,48
+5000
+133 - PARENT
+stmt s1; prog_line pl1;
+Select pl1 such that Parent (s1, pl1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+134 - PARENT
+stmt s1; call c1;
+Select s1 such that Parent (s1, c1)
+3
+5000
+135 - PARENT
+stmt s1; call c1;
+Select c1 such that Parent (s1, c1)
+4
+5000
+136 - PARENT
+stmt s1;
+Select s1 such that Parent (s1, 13)
+12
+5000
+137 - PARENT
+stmt s1;
+Select s1 such that Parent (s1, _)
+12,14,18,3,30,32,44,45,48
+5000
+138 - PARENT
+while w1; stmt s1;
+Select w1 such that Parent (w1, s1)
+12,18,30
+5000
+139 - PARENT
+while w1; stmt s1;
+Select s1 such that Parent (w1, s1)
+13,14,19,20,24,31,32
+5000
+140 - PARENT
+while w1; assign a1;
+Select w1 such that Parent (w1, a1)
+12,18,30
+5000
+141 - PARENT
+while w1; assign a1;
+Select a1 such that Parent (w1, a1)
+13,19,20,24,31
+5000
+142 - PARENT
+while w1; if ifs1;
+Select w1 such that Parent (w1, ifs1)
+12,30
+5000
+143 - PARENT
+while w1; if ifs1;
+Select ifs1 such that Parent (w1, ifs1)
+14,32
+5000
+144 - PARENT
+while w1; prog_line pl1;
+Select w1 such that Parent (w1, pl1)
+12,18,30
+5000
+145 - PARENT
+while w1; prog_line pl1;
+Select pl1 such that Parent (w1, pl1)
+13,14,19,20,24,31,32
+5000
+146 - PARENT
+while w1;
+Select w1 such that Parent (w1, _)
+12,18,30
+5000
+147 - PARENT
+if ifs1; stmt s1;
+Select ifs1 such that Parent (ifs1, s1)
+14,3,32,44,45,48
+5000
+148 - PARENT
+if ifs1; stmt s1;
+Select s1 such that Parent (ifs1, s1)
+15,16,17,18,21,22,23,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+149 - PARENT
+if ifs1; assign a1;
+Select ifs1 such that Parent (ifs1, a1)
+14,3,32,45,48
+5000
+150 - PARENT
+if ifs1; assign a1;
+Select a1 such that Parent (ifs1, a1)
+15,16,17,21,22,23,33,34,35,36,37,46,47,49,5,50,6,7,8,9
+5000
+151 - PARENT
+if ifs1; while w1;
+Select ifs1 such that Parent (ifs1, w1)
+14
+5000
+152 - PARENT
+if ifs1; while w1;
+Select w1 such that Parent (ifs1, w1)
+18
+5000
+153 - PARENT
+if ifs1, ifs2;
+Select ifs1 such that Parent (ifs1, ifs2)
+44
+5000
+154 - PARENT
+if ifs1, ifs2;
+Select ifs2 such that Parent (ifs1, ifs2)
+45,48
+5000
+155 - PARENT
+if ifs1; prog_line pl1;
+Select ifs1 such that Parent (ifs1, pl1)
+14,3,32,44,45,48
+5000
+156 - PARENT
+if ifs1; prog_line pl1;
+Select pl1 such that Parent (ifs1, pl1)
+15,16,17,18,21,22,23,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+157 - PARENT
+if ifs1; call c1;
+Select ifs1 such that Parent (ifs1, c1)
+3
+5000
+158 - PARENT
+if ifs1; call c1;
+Select c1 such that Parent (ifs1, c1)
+4
+5000
+159 - PARENT
+if ifs1;
+Select ifs1 such that Parent (ifs1, _)
+14,3,32,44,45,48
+5000
+160 - PARENT
+stmt s1; prog_line pl1;
+Select pl1 such that Parent (pl1, s1)
+12,14,18,3,30,32,44,45,48
+5000
+161 - PARENT
+stmt s1; prog_line pl1;
+Select s1 such that Parent (pl1, s1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+162 - PARENT
+prog_line pl1; assign a1;
+Select pl1 such that Parent (pl1, a1)
+12,14,18,3,30,32,45,48
+5000
+163 - PARENT
+prog_line pl1; assign a1;
+Select a1 such that Parent (pl1, a1)
+13,15,16,17,19,20,21,22,23,24,31,33,34,35,36,37,46,47,49,5,50,6,7,8,9
+5000
+164 - PARENT
+prog_line pl1; while w1;
+Select pl1 such that Parent (pl1, w1)
+14
+5000
+165 - PARENT
+prog_line pl1; while w1;
+Select w1 such that Parent (pl1, w1)
+18
+5000
+166 - PARENT
+prog_line pl1; if ifs1;
+Select pl1 such that Parent (pl1, ifs1)
+12,30,44
+5000
+167 - PARENT
+prog_line pl1; if ifs1;
+Select ifs1 such that Parent (pl1, ifs1)
+14,32,45,48
+5000
+168 - PARENT
+prog_line pl1, pl2;
+Select pl1 such that Parent (pl1, pl2)
+12,14,18,3,30,32,44,45,48
+5000
+169 - PARENT
+prog_line pl1, pl2;
+Select pl2 such that Parent (pl1, pl2)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+170 - PARENT
+prog_line pl1; call c1;
+Select pl1 such that Parent (pl1, c1)
+3
+5000
+171 - PARENT
+prog_line pl1; call c1;
+Select c1 such that Parent (pl1, c1)
+4
+5000
+172 - PARENT
+prog_line pl1;
+Select pl1 such that Parent (pl1, 14)
+12
+5000
+173 - PARENT
+prog_line pl1;
+Select pl1 such that Parent (pl1, _)
+12,14,18,3,30,32,44,45,48
+5000
+174 - PARENT
+stmt s1;
+Select s1 such that Parent (11, s1)
+
+5000
+175 - PARENT
+stmt s1;
+Select s1 such that Parent (_, s1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+176 - PARENT
+assign a1;
+Select a1 such that Parent (_, a1)
+13,15,16,17,19,20,21,22,23,24,31,33,34,35,36,37,46,47,49,5,50,6,7,8,9
+5000
+177 - PARENT
+while w1;
+Select w1 such that Parent (_, w1)
+18
+5000
+178 - PARENT
+if ifs1;
+Select ifs1 such that Parent (_, ifs1)
+14,32,45,48
+5000
+179 - PARENT
+prog_line pl1;
+Select pl1 such that Parent (_, pl1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+180 - PARENT
+call c1;
+Select c1 such that Parent (_, c1)
+4
+5000
+181 - PARENT
+
+Select BOOLEAN such that Parent (_, _)
+true
+5000
+182 - PARENT*
+stmt s1, s2;
+Select s1 such that Parent* (s1, s2)
+12,14,18,3,30,32,44,45,48
+5000
+183 - PARENT*
+stmt s1, s2;
+Select s2 such that Parent* (s1, s2)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+184 - PARENT*
+stmt s1; assign a1;
+Select s1 such that Parent* (s1, a1)
+12,14,18,3,30,32,44,45,48
+5000
+185 - PARENT*
+stmt s1; assign a1;
+Select a1 such that Parent* (s1, a1)
+13,15,16,17,19,20,21,22,23,24,31,33,34,35,36,37,46,47,49,5,50,6,7,8,9
+5000
+186 - PARENT*
+stmt s1; while w1;
+Select s1 such that Parent* (s1, w1)
+12,14
+5000
+187 - PARENT*
+stmt s1; while w1;
+Select w1 such that Parent* (s1, w1)
+18
+5000
+188 - PARENT*
+stmt s1; if ifs1;
+Select s1 such that Parent* (s1, ifs1)
+12,30,44
+5000
+189 - PARENT*
+stmt s1; if ifs1;
+Select ifs1 such that Parent* (s1, ifs1)
+14,32,45,48
+5000
+190 - PARENT*
+stmt s1; prog_line pl1;
+Select s1 such that Parent* (s1, pl1)
+12,14,18,3,30,32,44,45,48
+5000
+191 - PARENT*
+stmt s1; prog_line pl1;
+Select pl1 such that Parent* (s1, pl1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+192 - PARENT*
+stmt s1; call c1;
+Select s1 such that Parent* (s1, c1)
+3
+5000
+193 - PARENT*
+stmt s1; call c1;
+Select c1 such that Parent* (s1, c1)
+4
+5000
+194 - PARENT*
+stmt s1;
+Select s1 such that Parent* (s1, _)
+12,14,18,3,30,32,44,45,48
+5000
+195 - PARENT*
+while w1; stmt s1;
+Select w1 such that Parent* (w1, s1)
+12,18,30
+5000
+196 - PARENT*
+while w1; stmt s1;
+Select s1 such that Parent* (w1, s1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37
+5000
+197 - PARENT*
+while w1; assign a1;
+Select w1 such that Parent* (w1, a1)
+12,18,30
+5000
+198 - PARENT*
+while w1; assign a1;
+Select a1 such that Parent* (w1, a1)
+13,15,16,17,19,20,21,22,23,24,31,33,34,35,36,37
+5000
+199 - PARENT*
+while w1, w2;
+Select w1 such that Parent* (w1, w2)
+12
+5000
+200 - PARENT*
+while w1, w2;
+Select w2 such that Parent* (w1, w2)
+18
+5000
+201 - PARENT*
+while w1; if ifs1;
+Select w1 such that Parent* (w1, ifs1)
+12, 30
+5000
+202 - PARENT*
+while w1; if ifs1;
+Select ifs1 such that Parent* (w1, ifs1)
+14,32
+5000
+203 - PARENT*
+while w1; prog_line pl1;
+Select w1 such that Parent* (w1, pl1)
+12,18,30
+5000
+204 - PARENT*
+while w1; prog_line pl1;
+Select pl1 such that Parent* (w1, pl1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37
+5000
+205 - PARENT*
+while w1;
+Select w1 such that Parent* (w1, _)
+12,18,30
+5000
+206 - PARENT*
+if ifs1; stmt s1;
+Select ifs1 such that Parent* (ifs1, s1)
+14,3,32,44,45,48
+5000
+207 - PARENT*
+if ifs1; stmt s1;
+Select s1 such that Parent* (ifs1, s1)
+15,16,17,18,19,20,21,22,23,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+208 - PARENT*
+if ifs1; assign a1;
+Select ifs1 such that Parent* (ifs1, a1)
+14,3,32,44,45,48
+5000
+209 - PARENT*
+if ifs1; assign a1;
+Select a1 such that Parent* (ifs1, a1)
+15,16,17,19,20,21,22,23,33,34,35,36,37,46,47,49,5,50,6,7,8,9
+5000
+210 - PARENT*
+if ifs1; while w1;
+Select ifs1 such that Parent* (ifs1, w1)
+14
+5000
+211 - PARENT*
+if ifs1; while w1;
+Select w1 such that Parent* (ifs1, w1)
+18
+5000
+212 - PARENT*
+if ifs1, ifs2;
+Select ifs1 such that Parent* (ifs1, ifs2)
+44
+5000
+213 - PARENT*
+if ifs1, ifs2;
+Select ifs2 such that Parent* (ifs1, ifs2)
+45,48
+5000
+214 - PARENT*
+if ifs1; prog_line pl1;
+Select ifs1 such that Parent* (ifs1, pl1)
+14,3,32,44,45,48
+5000
+215 - PARENT*
+if ifs1; prog_line pl1;
+Select pl1 such that Parent* (ifs1, pl1)
+15,16,17,18,19,20,21,22,23,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+216 - PARENT*
+if ifs1; call c1;
+Select ifs1 such that Parent* (ifs1, c1)
+3
+5000
+217 - PARENT*
+if ifs1; call c1;
+Select c1 such that Parent* (ifs1, c1)
+4
+5000
+218 - PARENT*
+if ifs1;
+Select ifs1 such that Parent* (ifs1, _)
+14,3,32,44,45,48
+5000
+219 - PARENT*
+stmt s1; prog_line pl1;
+Select pl1 such that Parent* (pl1, s1)
+12,14,18,3,30,32,44,45,48
+5000
+220 - PARENT*
+stmt s1; prog_line pl1;
+Select s1 such that Parent* (pl1, s1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+221 - PARENT*
+prog_line pl1; assign a1;
+Select pl1 such that Parent* (pl1, a1)
+12,14,18,3,30,32,44,45,48
+5000
+222 - PARENT*
+prog_line pl1; assign a1;
+Select a1 such that Parent* (pl1, a1)
+13,15,16,17,19,20,21,22,23,24,31,33,34,35,36,37,46,47,49,5,50,6,7,8,9
+5000
+223 - PARENT*
+prog_line pl1; while w1;
+Select pl1 such that Parent* (pl1, w1)
+12,14
+5000
+224 - PARENT*
+prog_line pl1; while w1;
+Select w1 such that Parent* (pl1, w1)
+18
+5000
+225 - PARENT*
+prog_line pl1; if ifs1;
+Select pl1 such that Parent* (pl1, ifs1)
+12,30,44
+5000
+226 - PARENT*
+prog_line pl1; if ifs1;
+Select ifs1 such that Parent* (pl1, ifs1)
+14,32,45,48
+5000
+227 - PARENT*
+prog_line pl1, pl2;
+Select pl1 such that Parent* (pl1, pl2)
+12,14,18,3,30,32,44,45,48
+5000
+228 - PARENT*
+prog_line pl1, pl2;
+Select pl2 such that Parent* (pl1, pl2)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+229 - PARENT*
+prog_line pl1; call c1;
+Select pl1 such that Parent* (pl1, c1)
+3
+5000
+230 - PARENT*
+prog_line pl1; call c1;
+Select c1 such that Parent* (pl1, c1)
+4
+5000
+231 - PARENT*
+prog_line pl1;
+Select pl1 such that Parent* (pl1, _)
+12,14,18,3,30,32,44,45,48
+5000
+232 - PARENT*
+stmt s1;
+Select s1 such that Parent* (_, s1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+233 - PARENT*
+assign a1;
+Select a1 such that Parent* (_, a1)
+13,15,16,17,19,20,21,22,23,24,31,33,34,35,36,37,46,47,49,5,50,6,7,8,9
+5000
+234 - PARENT*
+while w1;
+Select w1 such that Parent* (_, w1)
+18
+5000
+235 - PARENT*
+if ifs1;
+Select ifs1 such that Parent* (_, ifs1)
+14,32,45,48
+5000
+236 - PARENT*
+prog_line pl1;
+Select pl1 such that Parent* (_, pl1)
+13,14,15,16,17,18,19,20,21,22,23,24,31,32,33,34,35,36,37,4,45,46,47,48,49,5,50,6,7,8,9
+5000
+237 - PARENT*
+call c1;
+Select c1 such that Parent* (_, c1)
+4
+5000
+238 - PARENT*
+
+Select BOOLEAN such that Parent* (_, _)
+true
+5000
+239 - CALLS
+procedure p1, p2;
+Select p1 such that Calls (p1,p2)
+abc,bcd
+5000
+240 - CALLS
+procedure p1, p2;
+Select p2 such that Calls (p1,p2)
+bcd,hello
+5000
+241 - CALLS
+procedure p;
+Select p such that Calls (p,"hello")
+abc,bcd
+5000
+242 - CALLS
+procedure p1;
+Select p1 such that Calls (p1,_)
+abc,bcd
+5000
+243 - CALLS
+procedure p;
+Select p such that Calls ("abc",p)
+bcd,hello
+5000
+244 - CALLS
+procedure p1;
+Select p1 such that Calls (_, p1)
+bcd,hello
+5000
+245 - CALLS
+procedure p1, p2;
+Select BOOLEAN such that Calls(p1, p2)
+true
+5000
+246 - CALLS
+
+Select BOOLEAN such that Calls ("abc", "bcd")
+true
+5000
+247 - CALLS
+
+Select BOOLEAN such that Calls ("abc", _)
+true
+5000
+248 - CALLS
+
+Select BOOLEAN such that Calls (_, "hello")
+true
+5000
+249 - CALLS
+
+Select BOOLEAN such that Calls (_, _)
+true
+5000
+250 - CALLS
+procedure p1;
+Select p1 such that Calls (p1, "hello")
+abc,bcd
+5000
+251 - CALLS
+procedure p1;
+Select p1 such that Calls (p1, "bcd")
+abc
+5000
+252 - CALLS*
+procedure p1, p2;
+Select p1 such that Calls* (p1,p2)
+abc,bcd
+5000
+253 - CALLS*
+procedure p1, p2;
+Select p2 such that Calls* (p1,p2)
+bcd,hello
+5000
+254 - CALLS*
+procedure p1;
+Select p1 such that Calls* (p1,"hello")
+abc,bcd
+5000
+255 - CALLS*
+procedure p1;
+Select p1 such that Calls* (p1,_)
+abc,bcd
+5000
+256 - CALLS*
+procedure p1;
+Select p1 such that Calls* ("abc",p1)
+bcd,hello
+5000
+257 - CALLS*
+procedure p1;
+Select p1 such that Calls* (_, p1)
+bcd,hello
+5000
+258 - CALLS*
+procedure p1, p2;
+Select BOOLEAN such that Calls* (p1,p2)
+true
+5000
+259 - CALLS*
+
+Select BOOLEAN such that Calls* ("abc", "bcd")
+true
+5000
+260 - CALLS*
+
+Select BOOLEAN such that Calls* ("abc", _)
+true
+5000
+261 - CALLS*
+
+Select BOOLEAN such that Calls* (_, "hello")
+true
+5000
+262 - CALLS*
+
+Select BOOLEAN such that Calls* (_, _)
+true
+5000
+263 - MODIFIES
+stmt s1; variable v1;
+Select s1 such that Modifies (s1, v1)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+264 - MODIFIES
+stmt s1; variable v1;
+Select v1 such that Modifies (s1, v1)
+a,b,c,cat,coke,d,e,f,hi,i,j,k,lol,loop,one,stack,t,wow,wwe,x,z,zero
+5000
+265 - MODIFIES
+stmt s1;
+Select s1 such that Modifies (s1, "e")
+2,3,30,31,4,8
+5000
+266 - MODIFIES
+stmt s1;
+Select s1 such that Modifies (s1, _)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+267 - MODIFIES
+assign a1; variable v1;
+Select a1 such that Modifies (a1, v1)
+1,10,11,13,15,16,17,19,2,20,21,22,23,24,26,27,28,29,31,33,34,35,36,37,38,40,41,42,43,46,47,49,5,50,51,6,7,8,9
+5000
+268 - MODIFIES
+assign a1; variable v1;
+Select v1 such that Modifies (a1, v1)
+a,b,c,cat,coke,d,e,f,hi,i,j,k,lol,loop,one,stack,t,wow,wwe,x,z,zero
+5000
+269 - MODIFIES
+assign a1;
+Select a1 such that Modifies (a1, "x")
+19,23,9
+5000
+270 - MODIFIES
+assign a1;
+Select a1 such that Modifies (a1, _)
+1,10,11,13,15,16,17,19,2,20,21,22,23,24,26,27,28,29,31,33,34,35,36,37,38,40,41,42,43,46,47,49,5,50,51,6,7,8,9
+5000
+271 - MODIFIES
+while w1; variable v1;
+Select w1 such that Modifies (w1, v1)
+12,18,30
+5000
+272 - MODIFIES
+while w1; variable v1;
+Select v1 such that Modifies (w1, v1)
+a,cat,coke,e,f,one,t,wwe,x,zero
+5000
+273 - MODIFIES
+while w1;
+Select w1 such that Modifies (w1, "x")
+12,18
+5000
+274 - MODIFIES
+while w1;
+Select w1 such that Modifies (w1, _)
+12,18,30
+5000
+275 - MODIFIES
+if ifs; variable v1;
+Select ifs such that Modifies (ifs, v1)
+14,3,32,44,45,48
+5000
+276 - MODIFIES
+if ifs1; variable v1;
+Select v1 such that Modifies (ifs1, v1)
+a,b,c,cat,coke,d,e,f,hi,i,j,k,lol,loop,one,stack,t,wwe,x,zero
+5000
+277 - MODIFIES
+if ifs;
+Select ifs such that Modifies (ifs, "x")
+14,3
+5000
+278 - MODIFIES
+if ifs;
+Select ifs such that Modifies (ifs, _)
+14,3,32,44,45,48
+5000
+279 - MODIFIES
+prog_line pl1; variable v1;
+Select pl1 such that Modifies (pl1, v1)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+280 - MODIFIES
+prog_line pl1; variable v1;
+Select v1 such that Modifies (pl1, v1)
+a,b,c,cat,coke,d,e,f,hi,i,j,k,lol,loop,one,stack,t,wow,wwe,x,z,zero
+5000
+281 - MODIFIES
+prog_line pl1;
+Select pl1 such that Modifies (pl1, _)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+282 - MODIFIES
+call c1; variable v1;
+Select c1 such that Modifies (c1, v1)
+25,39,4
+5000
+283 - MODIFIES
+call c1; variable v1;
+Select v1 such that Modifies (c1, v1)
+c,coke,d,e,hi,i,j,k,lol,loop,one,stack,wwe,zero
+5000
+284 - MODIFIES
+call c1;
+Select c1 such that Modifies (c1, _)
+25,39,4
+5000
+285 - MODIFIES
+procedure p1; variable v1;
+Select p1 such that Modifies (p1, v1)
+abc,bcd,hello
+5000
+286 - MODIFIES
+procedure p1; variable v1;
+Select v1 such that Modifies (p1, v1)
+a,b,c,cat,coke,d,e,f,hi,i,j,k,lol,loop,one,stack,t,wow,wwe,x,z,zero
+5000
+287 - MODIFIES
+procedure p1;
+Select p1 such that Modifies (p1, "x")
+abc
+5000
+288 - MODIFIES
+procedure p1;
+Select p1 such that Modifies (p1, _)
+abc,bcd,hello
+5000
+289 - MODIFIES
+variable v1;
+Select v1 such that Modifies ("abc", v1)
+a,b,c,cat,coke,d,e,f,hi,i,j,k,lol,loop,one,stack,t,wow,wwe,x,z,zero
+5000
+290 - MODIFIES
+variable v1;
+Select BOOLEAN such that Modifies ("abc", v1)
+true
+5000
+291 - MODIFIES
+
+Select BOOLEAN such that Modifies ("abc", _)
+true
+5000
+292 - MODIFIES
+variable v1;
+Select BOOLEAN such that Modifies (_, v1)
+false
+5000
+293 - MODIFIES
+
+Select BOOLEAN such that Modifies (_, "x")
+false
+5000
+294 - MODIFIES
+
+Select BOOLEAN such that Modifies (_, _)
+false
+5000
+295 - MODIFIES
+variable v1;
+Select v1 such that Modifies (_, v1)
+
+5000
+296 - USES
+stmt s1; variable v1;
+Select s1 such that Uses (s1, v1)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+297 - USES
+stmt s1; variable v1;
+Select v1 such that Uses (s1, v1)
+a,b,ba,bb,c,coke,d,e,f,goto,hop,i,j,k,loop,n,one,pop,run,stack,t,ten,wwe,x,z,zero
+5000
+298 - USES
+stmt s1;
+Select s1 such that Uses (s1, "bb")
+11,12,14,18,20,3,4,40
+5000
+299 - USES
+stmt s1;
+Select s1 such that Uses (s1, _)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+300 - USES
+assign a1; variable v1;
+Select a1 such that Uses (a1, v1)
+1,10,11,13,15,16,17,19,2,20,21,22,23,24,26,27,28,29,31,33,34,35,36,37,38,40,41,42,43,46,47,49,5,50,51,6,7,8,9
+5000
+301 - USES
+assign a1; variable v1;
+Select v1 such that Uses (a1, v1)
+a,b,ba,bb,c,coke,d,e,f,goto,hop,i,j,k,loop,n,one,run,stack,t,ten,wwe,x,z,zero
+5000
+302 - USES
+assign a1;
+Select a1 such that Uses (a1, "x")
+16,26
+5000
+303 - USES
+assign a1;
+Select a1 such that Uses (a1, _)
+1,10,11,13,15,16,17,19,2,20,21,22,23,24,26,27,28,29,31,33,34,35,36,37,38,40,41,42,43,46,47,49,5,50,51,6,7,8,9
+5000
+304 - USES
+while w1; variable v1;
+Select w1 such that Uses (w1, v1)
+12,18,30
+5000
+305 - USES
+while w1; variable v1;
+Select v1 such that Uses (w1, v1)
+a,b,bb,c,coke,d,e,f,n,one,t,ten,wwe,x,z,zero
+5000
+306 - USES
+while w1;
+Select w1 such that Uses (w1, "x")
+12,30
+5000
+307 - USES
+while w1;
+Select w1 such that Uses (w1, _)
+12,18,30
+5000
+308 - USES
+if ifs1; variable v1;
+Select ifs1 such that Uses (ifs1, v1)
+14,3,32,44,45,48
+5000
+309 - USES
+if ifs1; variable v1;
+Select v1 such that Uses (ifs1, v1)
+a,b,ba,bb,c,coke,d,e,f,goto,hop,i,j,k,loop,n,one,pop,run,stack,t,ten,wwe,x,z,zero
+5000
+310 - USES
+if ifs1;
+Select ifs1 such that Uses (ifs1, "x")
+14,3,32
+5000
+311 - USES
+if ifs1;
+Select ifs1 such that Uses (ifs1, _)
+14,3,32,44,45,48
+5000
+312 - USES
+prog_line pl1; variable v1;
+Select pl1 such that Uses (pl1, v1)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+313 - USES
+prog_line pl1; variable v1;
+Select v1 such that Uses (pl1, v1)
+a,b,ba,bb,c,coke,d,e,f,goto,hop,i,j,k,loop,n,one,pop,run,stack,t,ten,wwe,x,z,zero
+5000
+314 - USES
+prog_line pl1;
+Select pl1 such that Uses (pl1, "x")
+12,14,16,26,3,30,32,4
+5000
+315 - USES
+prog_line pl1;
+Select pl1 such that Uses (pl1, _)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+316 - USES
+call c1; variable v1;
+Select c1 such that Uses (c1, v1)
+25,39,4
+5000
+317 - USES
+call c1; variable v1;
+Select v1 such that Uses (c1, v1)
+a,bb,coke,goto,hop,i,j,k,loop,one,pop,run,stack,ten,wwe,x,z,zero
+5000
+318 - USES
+call c1;
+Select c1 such that Uses (c1, "x")
+4
+5000
+319 - USES
+call c1;
+Select c1 such that Uses (c1, _)
+25,39,4
+5000
+320 - USES
+procedure p1; variable v1;
+Select p1 such that Uses (p1, v1)
+abc,bcd,hello
+5000
+321 - USES
+procedure p1; variable v1;
+Select v1 such that Uses (p1, v1)
+a,b,ba,bb,c,coke,d,e,f,goto,hop,i,j,k,loop,n,one,pop,run,stack,t,ten,wwe,x,z,zero
+5000
+322 - USES
+procedure p1;
+Select p1 such that Uses (p1, _)
+abc,bcd,hello
+5000
+323 - USES
+variable v1;
+Select v1 such that Uses ("bcd", v1)
+a,bb,coke,goto,hop,i,j,k,loop,one,pop,run,stack,ten,wwe,x,z,zero
+5000
+324 - USES
+variable v1;
+Select BOOLEAN such that Uses ("abc", v1)
+true
+5000
+325 - USES
+
+Select BOOLEAN such that Uses ("abc", "x")
+true
+5000
+326 - USES
+variable v1;
+Select BOOLEAN such that Uses (_, v1)
+false
+5000
+327 - USES
+
+Select BOOLEAN such that Uses (_, "x")
+false
+5000
+328 - USES
+
+Select BOOLEAN such that Uses (_, _)
+false
+5000
+329 - USES
+variable v1;
+Select v1 such that Uses (_, v1)
+
+5000
+330 - MULTIPLE SUCH THAT CLAUSE
+variable v; stmt s,s1,s2;
+Select s such that Follows(s, s1) such that Parent(s1,s2) and Uses(s2,v)
+11,13,17,2,29,31,43
+5000
+331 - MULTIPLE SUCH THAT CLAUSE
+variable v; stmt s,s1,s2; procedure p1,p2;
+Select p1 such that Calls(p1,p2) and Modifies(p2,v)
+abc,bcd
+5000
+332 - MULTIPLE SUCH THAT CLAUSE
+variable v; stmt s,s1,s2; procedure p1,p2;
+Select s1 such that Next(s1,s2) and Follows(s2,s1)
+
+5000
+333 - MULTIPLE SUCH THAT CLAUSE
+variable v; stmt s,s1,s2; procedure p1,p2;
+Select s1 such that Next(s1,s2) and Follows*(s2,s1)
+
+5000
+334 - MULTIPLE SUCH THAT CLAUSE
+variable v; stmt s,s1,s2; procedure p1,p2;
+Select s1 such that Next(s1,s2) and Parent*(s1,s2)
+12,14,18,3,30,32,44,45,48
+5000
+335 - MULTIPLE SUCH THAT CLAUSE
+stmt s, s1; variable v;
+Select v such that Follows* (s, 10) and Uses (s, v)
+a,ba,bb,c,coke,d,e,f,goto,hop,i,j,k,loop,one,pop,run,stack,ten,wwe,x,z,zero
+5000
+336 - MULTIPLE SUCH THAT CLAUSE
+stmt s, s1; variable v;
+Select s1 such that Follows (s1, s) and Uses (s, v)
+1,10,11,12,13,14,15,16,17,19,2,21,22,25,26,28,29,3,30,31,33,34,35,38,39,4,41,42,43,44,6,7,8
+5000
+337 - MULTIPLE SUCH THAT CLAUSE
+stmt s, s1; variable v;
+Select s1 such that Follows (s, 10) and Uses (s1, v)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,6,7,8,9
+5000
+338 - MULTIPLE SUCH THAT CLAUSE
+stmt s, s1; variable v;
+Select s such that Next (s, s1) and Modifies (s1, v)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,28,29,3,30,31,32,33,34,35,36,37,38,39,4,41,42,43,44,45,46,47,48,49,5,50,6,7,8,9
+5000
+339 - MULTIPLE SUCH THAT CLAUSE
+procedure p1, p2; variable v;
+Select p1 such that Calls* (p1, p2) and Modifies (p2, v)
+abc,bcd
+5000
+340 - MULTIPLE SUCH THAT CLAUSE
+procedure p1, p2; variable v;
+Select p1 such that Calls* (p1, p2) and Modifies (p2, v) and Uses (p2, v)
+abc,bcd
+5000
+341 - MULTIPLE SUCH THAT CLAUSE
+stmt s, s1; variable v; assign a,a1;
+Select a such that Follows(9,10) and Uses(s1,v) and Modifies(a,v) and Next*(s,10) and Parent*(s,a1)
+
+50000
+342 - MULTIPLE SUCH THAT CLAUSE
+stmt s, s1; variable v; while w; assign a;
+Select a such that Follows (s, a), and Uses (a, v) and Next* (s, a)
+
+5000
+343 - MULTIPLE SUCH THAT CLAUSE
+stmt s; variable v; while w; procedure p;
+Select v such that Modifies (p, v) and Uses (s, v) and Next* (w, s) and Parent* (w, s)
+a,b,c,coke,d,e,f,one,t,wwe,x,z,zero
+5000
+344 - MULTIPLE SUCH THAT CLAUSE
+stmt s; assign a; variable v; procedure p; while w;
+Select v such that Modifies (p, v) and Uses (a, v) and Next* (w, a)
+a,b,c,coke,d,e,f,one,t,wwe,x,z,zero
+5000
+345 - MULTIPLE SUCH THAT CLAUSE
+stmt s; if ifs; variable v;
+Select ifs such that Modifies (ifs, v) and Uses (s, v) and Next* (ifs, s) and Parent* (ifs, s)
+14,3,32
+5000
+346 - MULTIPLE SUCH THAT CLAUSE
+if ifs; assign a; variable v;
+Select ifs such that Next* (ifs, a) and Modifies (ifs, v) and Modifies (a, v)
+14,3,32,44,45,48
+5000
+347 - MULTIPLE SUCH THAT CLAUSE
+while w, w1; variable v; if ifs; assign a;
+Select w such that Parent* (w, w1) and Next* (w1, a) and Modifies (a, v)
+12
+5000
+348 - WITH
+assign a;
+Select a with a.stmt# = 1
+1
+5000
+349 - WITH
+assign a;
+Select a with a.stmt# = 5
+5
+5000
+350 - WITH
+assign a; while w;
+Select w with a.stmt# = 1
+12, 18, 30
+5000
+351 - WITH
+assign a,a1;
+Select a1 with a.stmt# = 2
+1,10,11,13,15,16,17,19,2,20,21,22,23,24,26,27,28,29,31,33,34,35,36,37,38,40,41,42,43,46,47,49,5,50,51,6,7,8,9
+5000
+352 - WITH
+procedure p;
+Select p with p.procName = "abc"
+abc
+5000
+353 - WITH
+assign a;
+Select BOOLEAN with a.stmt# = 1
+true
+5000
+354 - WITH
+assign a;
+Select BOOLEAN with a.stmt# = 4
+false
+5000
+355 - WITH
+stmt s; constant c;
+Select s with s.stmt# = c.value
+
+5000
+356 - WITH
+if i;
+Select i with i.stmt# = 3
+3
+5000
+357 - WITH
+assign a; stmt s;
+Select s with a.stmt#=s.stmt# and s.stmt#=2
+2
+5000
+358 - WITH
+assign a,a1;
+Select a1 with a.stmt# = 2
+1,10,11,13,15,16,17,19,2,20,21,22,23,24,26,27,28,29,31,33,34,35,36,37,38,40,41,42,43,46,47,49,5,50,51,6,7,8,9
+5000
+359 - WITH
+procedure p;
+Select p with p.procName = "hello"
+hello
+5000
+360 - PATTERN
+assign a;
+Select BOOLEAN pattern a("coke", _"zero"_)
+true
+5000
+361 - PATTERN
+assign a;
+Select BOOLEAN pattern a("a", _)
+true
+5000
+362 - PATTERN
+assign a;
+Select BOOLEAN pattern a(_, "e+z")
+false
+5000
+363 - PATTERN
+assign a;
+Select BOOLEAN pattern a(_, _"bo"_)
+false
+5000
+364 - PATTERN
+assign a; variable v;
+Select BOOLEAN pattern a(_, _)
+true
+5000
+365 - PATTERN
+assign a; variable v;
+Select BOOLEAN pattern a(v, "wwe")
+true
+5000
+366 - PATTERN
+assign a; variable v;
+Select BOOLEAN pattern a(v, _"bb"_)
+true
+5000
+367 - PATTERN
+assign a; variable v;
+Select BOOLEAN pattern a(v, _)
+true
+5000
+368 - PATTERN - WHILE
+while w;
+Select BOOLEAN pattern w("x", _)
+true
+5000
+369 - PATTERN - WHILE
+while w;
+Select BOOLEAN pattern w(_, _)
+true
+5000
+370 - PATTERN - WHILE
+while w; variable v;
+Select BOOLEAN pattern w(v, _)
+true
+5000
+371 - PATTERN - IF
+if ifs;
+Select BOOLEAN pattern ifs("x", _, _)
+true
+5000
+372 - PATTERN - IF
+if ifs;
+Select BOOLEAN pattern ifs(_, _, _)
+true
+5000
+373 - PATTERN - IF
+if ifs;  variable v;
+Select BOOLEAN pattern ifs(v, _, _)
+true
+5000
+374 - PATTERN
+assign a; variable v;
+Select a pattern a(_, _)
+1,10,11,13,15,16,17,19,2,20,21,22,23,24,26,27,28,29,31,33,34,35,36,37,38,40,41,42,43,46,47,49,5,50,51,6,7,8,9
+5000
+375 - PATTERN
+assign a; variable v;
+Select a pattern a(v, _"(ba + wwe)"_)
+9
+5000
+376 - PATTERN
+assign a; variable v;
+Select a pattern a(v, _)
+1,10,11,13,15,16,17,19,2,20,21,22,23,24,26,27,28,29,31,33,34,35,36,37,38,40,41,42,43,46,47,49,5,50,51,6,7,8,9
+5000
+377 - PATTERN - WHILE
+while w;
+Select w pattern w("x", _)
+12,30
+5000
+378 - NEXT-boolean
+
+Select BOOLEAN such that Next(20, 18)
+true
+5000
+379 - NEXT
+stmt s;
+Select s such that Next(14, 21)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+5000
+380 - NEXT-boolean
+
+Select BOOLEAN such that Next(36, 30)
+true
+5000
+381 - NEXT-boolean
+
+Select BOOLEAN such that Next(12, 25)
+true
+5000
+382 - NEXT-boolean
+
+Select BOOLEAN such that Next(44, 48)
+true
+5000
+383 - NEXT
+stmt s;
+Select s such that Next(46, 49)
+none
+5000
+384 - NEXT-tuple
+stmt s1, s2;
+Select <s1,s2> such that Next(s1, s2)
+1 2, 2 3, 3 4, 4 5, 3 6, 6 7, 7 8, 8 9, 5 10, 9 10, 10 11, 11 12, 12 13, 13 14, 14 15, 15 16, 16 17, 17 18, 18 19, 19 20, 20 18, 14 21, 21 22, 22 23, 18 24, 23 24, 24 12, 12 25, 25 26, 26 27, 28 29, 29 30, 30 31, 31 32, 32 33, 33 34, 34 35, 35 36, 36 30, 32 37, 37 30, 30 38, 38 39, 39 40, 41 42, 42 43, 43 44, 44 45, 45 46, 45 47, 44 48, 48 49, 48 50, 46 51, 47 51, 49 51, 50 51 
+5000
+385 - NEXT
+assign a1, a2;
+Select a1 such that Next(a1, a2)
+1, 5, 6, 7, 8, 9, 10, 15, 16, 19, 21, 22, 23, 26, 28, 33, 34, 35, 41, 42, 46, 47, 49, 50 
+5000
+386 - NEXT
+while w; if i;
+Select w such that Next(i, w)
+none
+5000
+387 - NEXT
+if i; stmt s;
+Select i such that Next(i, s)
+3, 14, 32, 44, 45, 48
+5000
+388 - NEXT
+call c; stmt s;
+Select c such that Next(c, s)
+4, 25, 39
+5000
+389 - NEXT-boolean
+
+Select BOOLEAN such that Next(_, _)
+true
+5000
+390 - NEXT
+stmt s;
+Select s such that Next(20, s)
+18
+5000
+391 - NEXT 
+assign a; while w;
+Select a such that Next(17, w)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 23, 24, 26, 27, 28, 29, 31, 33, 34, 35, 36, 37, 38, 40, 41, 42, 43, 46, 47, 49, 50, 51
+5000
+392 - NEXT
+while w; stmt s;
+Select w such that Next(27, s)
+none
+5000
+393 - NEXT
+stmt s;
+Select s such that Next(s, 24)
+18, 23
+5000
+394 - NEXT
+assign a;
+Select a such that Next(a, 47)
+none
+5000
+395 - NEXT
+while w;
+Select w such that Next(w, 25)
+12
+5000
+396 - NEXT
+if i;
+Select i such that Next(i, 49)
+48
+5000
+397 - NEXT
+call c;
+Select c such that Next(c, 5)
+4
+5000
+398 - NEXT
+
+Select BOOLEAN such that Next(20, _)
+true
+5000
+399 - NEXT
+
+Select BOOLEAN such that Next(_, 50)
+true
+5000
+400 - NEXT
+assign a;
+Select a such that Next(a, _)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 23, 24, 26, 28, 29, 31, 33, 34, 35, 36, 37, 38, 41, 42, 43, 46, 47, 49, 50
+5000
+401 - NEXT
+while w;
+Select w such that Next(w, _)
+12, 18, 30
+5000
+402 - NEXT
+if i;
+Select i such that Next(i, _)
+3, 14, 32, 44, 45, 48
+5000
+403 - NEXT
+call c;
+Select c such that Next(c, _)
+4, 25, 39
+5000
+404 - NEXT
+stmt s;
+Select s such that Next(_, s)
+2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+5000
+405 - NEXT
+while w;
+Select w such that Next(_, w)
+12, 30, 18
+5000
+406 - NEXT
+if i;
+Select i such that Next(_, i)
+3, 14, 32, 44, 45, 48
+5000
+407 - NEXT
+call c;
+Select c such that Next(_, c)
+4, 25, 39
+5000
+408 - NEXT
+assign a; while w;
+Select a such that Next(a, w)
+11, 17, 20, 24, 29, 36, 37
+5000
+409 - NEXT 
+while w; assign a;
+Select w such that Next(w, a) pattern a(_, _"a"_)
+12, 18, 30
+5000
+410 - NEXT
+assign a; if i;
+Select a such that Next(a, i)
+2, 13, 31, 43
+5000
+411 - NEXT
+if i1; if i2;
+Select i2 such that Next(i1, i2)
+45, 48
+5000
+412 - NEXT
+while w; stmt s;
+Select s such that Next(s, w) 
+11, 17, 20, 24, 29, 36, 37
+5000
+413 - NEXT
+stmt s;
+Select s such that Next(s, 51) 
+46, 47, 49, 50
+5000
+414 - NEXT
+stmt s;
+Select s such that Next(44, s)
+45, 48
+5000
+415 - NEXT
+assign a;
+Select a such that Next(30, a)
+31, 38
+5000
+416 - NEXT
+if i;
+Select i such that Next(i, w)
+none
+5000
+417 - NEXT
+stmt s;
+Select s such that Next(12, s)
+13, 25
+5000
+418 - NEXT
+stmt s;
+Select s such that Next(s, 12)
+11, 24
+5000
+419 - NEXT - BOOLEAN
+
+Select BOOLEAN such that Next(3, 4) and Next(20, 18)
+true
+5000
+420 - NEXT - TUPLE
+if i1; if i2; stmt s;
+Select <s, i1> such that Next(s, i2) and Next(i1, i2)
+44 44
+5000
+421 - NEXT
+stmt s;
+Select s such that Next(36, s) and Next(37, s)
+30
+5000
+422 - NEXT
+assign a; while w;
+Select a such that Next(a, 17) and Next (w, 13)
+16
+5000
+423 - NEXT
+
+Select BOOLEAN such that Next(27, _) and Next(40, _)
+false
+5000
+424 - NEXT
+stmt s; while w; call c;
+Select s such that Next(c, s) and Next(_, w)
+5, 26, 40
+5000
+425 - NEXT
+assign a; if i;
+Select i such that Next(a, _) and Next(i, _)
+3, 14, 32, 44, 45, 48
+5000
+426 - NEXT
+assign a; while w;
+Select w such that Next(_, a) and Next(_, w)
+12, 18, 30
+5000
+427 - NEXT
+stmt s;
+Select s such that Next(14, 21) and Next(32, s)
+33, 37
+5000
+428 - NEXT
+assign a; if i;
+Select a such that Next(i, a) and Next(44, i)
+46, 47, 49, 50
+5000
+429 - NEXT
+
+Select BOOLEAN such that Next(_, _) and Next(30, _)
+true
+5000
+430 - NEXT
+while w;
+Select w such that Next(36, w) and Next(_, w)
+30
+5000
+431 - NEXT
+stmt s;
+Select s such that Next(s, 30) and Next(s, _)
+29, 36, 37
+5000
+432 - NEXT
+assign a; if i;
+Select a such that Next(23, _) and Next(i, a)
+6, 15, 21, 33, 37, 46, 47, 49, 50
+5000
+433 - NEXT
+while w, if i;
+Select w such that Next(w, i) and Next(w, _)
+none
+5000
+434 - NEXT
+while w1; while w2;
+Select <w1,w2> such that Next(w1, _) and Next(_, w2)
+12 12, 12 18, 12 30, 18 12, 18 18, 18 30, 30 12, 30 18, 30 30 
+5000
+435 - NEXT
+stmt s;
+Select  such that Next(_, 28) and Next(_, s)
+none
+5000
+436 - NEXT
+assign a; if i;
+Select a.stmt# such that Next(a, i)
+2, 13, 31, 43
+5000
+437 - NEXT
+assign a; call c;
+Select c.stmt# such that Next(a, c)
+39 
+5000
+438 - NEXT
+while w1, w2;
+Select w1 such that Next(w1, w2)
+none
+5000
+439 - NEXT
+stmt s;
+Select s such that Next(s, s)
+none
+5000
+440 - NEXT
+prog_line n; if i;
+Select n such that Next(n, i)
+2, 13, 31, 43, 44
+5000
+441 - NEXT* - BOOLEAN
+
+Select BOOLEAN such that Next*(6, 9)
+true
+5000
+442 - NEXT*
+stmt s;
+Select s such that Next*(14, 23)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+5000
+443 - NEXT* - BOOLEAN
+
+Select BOOLEAN such that Next*(35, 32)
+true
+5000
+444 - NEXT* - BOOLEAN
+
+Select BOOLEAN such that Next*(30, 38)
+true
+5000
+445 - NEXT* - BOOLEAN
+
+Select BOOLEAN such that Next*(44, 48)
+true
+5000
+446 - NEXT*
+stmt s;
+Select s such that Next*(51, 49)
+none
+5000
+447 - NEXT* - TUPLE
+stmt s1, s2;
+Select <s1,s2> such that Next*(s1, s2)
+1 2, 1 3, 1 4, 1 5, 1 6, 1 7, 1 8, 1 9, 1 10, 1 11, 1 12, 1 13, 1 14, 1 15, 1 16, 1 17, 1 18, 1 19, 1 20, 1 21, 1 22, 1 23, 1 24, 1 25, 1 26, 1 27, 2 3, 2 4, 2 5, 2 6, 2 7, 2 8, 2 9, 2 10, 2 11, 2 12, 2 13, 2 14, 2 15, 2 16, 2 17, 2 18, 2 19, 2 20, 2 21, 2 22, 2 23, 2 24, 2 25, 2 26, 2 27, 3 4, 3 5, 3 6, 3 7, 3 8, 3 9, 3 10, 3 11, 3 12, 3 13, 3 14, 3 15, 3 16, 3 17, 3 18, 3 19, 3 20, 3 21, 3 22, 3 23, 3 24, 3 25, 3 26, 3 27, 4 5, 4 10, 4 11, 4 12, 4 13, 4 14, 4 15, 4 16, 4 17, 4 18, 4 19, 4 20, 4 21, 4 22, 4 23, 4 24, 4 25, 4 26, 4 27, 5 10, 5 11, 5 12, 5 13, 5 14, 5 15, 5 16, 5 17, 5 18, 5 19, 5 20, 5 21, 5 22, 5 23, 5 24, 5 25, 5 26, 5 27, 6 7, 6 8, 6 9, 6 10, 6 11, 6 12, 6 13, 6 14, 6 15, 6 16, 6 17, 6 18, 6 19, 6 20, 6 21, 6 22, 6 23, 6 24, 6 25, 6 26, 6 27, 7 8, 7 9, 7 10, 7 11, 7 12, 7 13, 7 14, 7 15, 7 16, 7 17, 7 18, 7 19, 7 20, 7 21, 7 22, 7 23, 7 24, 7 25, 7 26, 7 27, 8 9, 8 10, 8 11, 8 12, 8 13, 8 14, 8 15, 8 16, 8 17, 8 18, 8 19, 8 20, 8 21, 8 22, 8 23, 8 24, 8 25, 8 26, 8 27, 9 10, 9 11, 9 12, 9 13, 9 14, 9 15, 9 16, 9 17, 9 18, 9 19, 9 20, 9 21, 9 22, 9 23, 9 24, 9 25, 9 26, 9 27, 10 11, 10 12, 10 13, 10 14, 10 15, 10 16, 10 17, 10 18, 10 19, 10 20, 10 21, 10 22, 10 23, 10 24, 10 25, 10 26, 10 27, 11 12, 11 13, 11 14, 11 15, 11 16, 11 17, 11 18, 11 19, 11 20, 11 21, 11 22, 11 23, 11 24, 11 25, 11 26, 11 27, 12 12, 12 13, 12 14, 12 15, 12 16, 12 17, 12 18, 12 19, 12 20, 12 21, 12 22, 12 23, 12 24, 12 25, 12 26, 12 27, 13 12, 13 13, 13 14, 13 15, 13 16, 13 17, 13 18, 13 19, 13 20, 13 21, 13 22, 13 23, 13 24, 13 25, 13 26, 13 27, 14 12, 14 13, 14 14, 14 15, 14 16, 14 17, 14 18, 14 19, 14 20, 14 21, 14 22, 14 23, 14 24, 14 25, 14 26, 14 27, 15 12, 15 13, 15 14, 15 15, 15 16, 15 17, 15 18, 15 19, 15 20, 15 21, 15 22, 15 23, 15 24, 15 25, 15 26, 15 27, 16 12, 16 13, 16 14, 16 15, 16 16, 16 17, 16 18, 16 19, 16 20, 16 21, 16 22, 16 23, 16 24, 16 25, 16 26, 16 27, 17 12, 17 13, 17 14, 17 15, 17 16, 17 17, 17 18, 17 19, 17 20, 17 21, 17 22, 17 23, 17 24, 17 25, 17 26, 17 27, 18 12, 18 13, 18 14, 18 15, 18 16, 18 17, 18 18, 18 19, 18 20, 18 21, 18 22, 18 23, 18 24, 18 25, 18 26, 18 27, 19 12, 19 13, 19 14, 19 15, 19 16, 19 17, 19 18, 19 19, 19 20, 19 21, 19 22, 19 23, 19 24, 19 25, 19 26, 19 27, 20 12, 20 13, 20 14, 20 15, 20 16, 20 17, 20 18, 20 19, 20 20, 20 21, 20 22, 20 23, 20 24, 20 25, 20 26, 20 27, 21 12, 21 13, 21 14, 21 15, 21 16, 21 17, 21 18, 21 19, 21 20, 21 21, 21 22, 21 23, 21 24, 21 25, 21 26, 21 27, 22 12, 22 13, 22 14, 22 15, 22 16, 22 17, 22 18, 22 19, 22 20, 22 21, 22 22, 22 23, 22 24, 22 25, 22 26, 22 27, 23 12, 23 13, 23 14, 23 15, 23 16, 23 17, 23 18, 23 19, 23 20, 23 21, 23 22, 23 23, 23 24, 23 25, 23 26, 23 27, 24 12, 24 13, 24 14, 24 15, 24 16, 24 17, 24 18, 24 19, 24 20, 24 21, 24 22, 24 23, 24 24, 24 25, 24 26, 24 27, 25 26, 25 27, 26 27, 28 29, 28 30, 28 31, 28 32, 28 33, 28 34, 28 35, 28 36, 28 37, 28 38, 28 39, 28 40, 29 30, 29 31, 29 32, 29 33, 29 34, 29 35, 29 36, 29 37, 29 38, 29 39, 29 40, 30 30, 30 31, 30 32, 30 33, 30 34, 30 35, 30 36, 30 37, 30 38, 30 39, 30 40, 31 30, 31 31, 31 32, 31 33, 31 34, 31 35, 31 36, 31 37, 31 38, 31 39, 31 40, 32 30, 32 31, 32 32, 32 33, 32 34, 32 35, 32 36, 32 37, 32 38, 32 39, 32 40, 33 30, 33 31, 33 32, 33 33, 33 34, 33 35, 33 36, 33 37, 33 38, 33 39, 33 40, 34 30, 34 31, 34 32, 34 33, 34 34, 34 35, 34 36, 34 37, 34 38, 34 39, 34 40, 35 30, 35 31, 35 32, 35 33, 35 34, 35 35, 35 36, 35 37, 35 38, 35 39, 35 40, 36 30, 36 31, 36 32, 36 33, 36 34, 36 35, 36 36, 36 37, 36 38, 36 39, 36 40, 37 30, 37 31, 37 32, 37 33, 37 34, 37 35, 37 36, 37 37, 37 38, 37 39, 37 40, 38 39, 38 40, 39 40, 41 42, 41 43, 41 44, 41 45, 41 46, 41 47, 41 48, 41 49, 41 50, 41 51, 42 43, 42 44, 42 45, 42 46, 42 47, 42 48, 42 49, 42 50, 42 51, 43 44, 43 45, 43 46, 43 47, 43 48, 43 49, 43 50, 43 51, 44 45, 44 46, 44 47, 44 48, 44 49, 44 50, 44 51, 45 46, 45 47, 45 51, 46 51, 47 51, 48 49, 48 50, 48 51, 49 51, 50 51
+5000
+448 - NEXT*
+assign a1, a2;
+Select a1 such that Next*(a1, a2)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 23, 24, 26, 28, 29, 31, 33, 34, 35, 36, 37, 38, 41, 42, 43, 46, 47, 49, 50
+5000
+449 - NEXT*
+while w; if i;
+Select w such that Next*(i, w)
+12, 18, 30
+5000
+450 - NEXT* 
+if i; stmt s;
+Select i such that Next*(i, s)
+3, 14, 32, 44, 45, 48
+5000
+451 - NEXT* 
+call c; stmt s;
+Select c such that Next*(c, s)
+4, 25, 39
+5000
+452 - NEXT* - BOOLEAN
+
+Select BOOLEAN such that Next*(_, _)
+true
+5000
+453 - NEXT*
+stmt s;
+Select s such that Next*(20, s)
+12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27
+5000
+454 - NEXT*
+assign a; while w;
+Select a such that Next*(17, w)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 23, 24, 26, 27, 28, 29, 31, 33, 34, 35, 36, 37, 38, 40, 41, 42, 43, 46, 47, 49, 50, 51
+5000
+455 - NEXT*
+while w; stmt s;
+Select w such that Next*(27, s)
+none
+5000
+456 - NEXT*
+stmt s;
+Select s such that Next*(s, 24)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24
+5000
+457 - NEXT*
+assign a;
+Select a such that Next*(a, 41)
+none
+5000
+458 - NEXT*
+while w;
+Select w such that Next*(w, 25)
+12, 18
+5000
+459 - NEXT*
+if i;
+Select i such that Next*(i, 49)
+44, 48
+5000
+460 - NEXT*
+call c;
+Select c such that Next*(c, 5)
+4
+5000
+461 - NEXT* - BOOLEAN
+
+Select BOOLEAN such that Next*(20, _)
+true
+5000
+462 - NEXT* - BOOLEAN
+
+Select BOOLEAN such that Next*(_, 50)
+true
+5000
+463 - NEXT*
+assign a;
+Select a such that Next*(a, _)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 23, 24, 26, 28, 29, 31, 33, 34, 35, 36, 37, 38, 41, 42, 43, 46, 47, 49, 50
+5000
+464 - NEXT*
+while w;
+Select w such that Next*(w, _)
+12, 18, 30
+5000
+465 - NEXT*
+if i;
+Select i such that Next*(i, _)
+3, 14, 32, 44, 45, 48
+5000
+467 - NEXT*
+call c;
+Select c such that Next*(c, _)
+4, 25, 39
+5000
+468 - NEXT*
+stmt s;
+Select s such that Next*(_, s)
+2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+5000
+469 - NEXT*
+while w;
+Select w such that Next*(_, w)
+12, 30, 18
+5000
+470 - NEXT*
+if i;
+Select i such that Next*(_, i)
+3, 14, 32, 44, 45, 48
+5000
+471 - NEXT*
+call c;
+Select c such that Next*(_, c)
+4, 25, 39
+5000
+472 - NEXT*
+assign a; while w;
+Select a such that Next*(a, w)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 23, 24, 28, 29, 31, 33, 34, 35, 36, 37
+5000
+473 - AFFECTS - BOOLEAN
+
+Select BOOLEAN such that Affects(33, 36)
+true
+5000
+474 - AFFECTS
+stmt s;
+Select s such that Affects(27, 28)
+none
+5000
+475 - AFFECTS - BOOLEAN
+
+Select BOOLEAN such that Affects(8, 21)
+false
+5000
+476 - AFFECTS - BOOLEAN 
+
+Select BOOLEAN such that Affects(44, 45)
+false
+5000
+477 - AFFECTS
+assign a1, a2;
+Select <a1,a2> such that Affects(a1, a2)
+1 6, 1 11, 1 13, 2 7, 5 10, 5 16, 5 26, 6 10, 6 16, 6 26, 7 8, 7 17, 7 19, 7 22, 8 10, 8 17, 9 16, 9 26, 10 13, 10 27, 11 13, 11 17, 13 21, 15 15, 16 13, 16 24, 16 27, 17 20, 19 16, 19 26, 21 15, 22 13, 22 24, 22 27, 23 16, 23 26, 33 36, 34 33, 34 38, 35 34, 36 35, 37 33, 37 38, 41 42, 42 43, 46 51, 47 51, 49 51, 50 51
+5000
+478 - AFFECTS
+while w; assign a;
+Select a such that Affects(w, a)
+none
+5000
+479 - AFFECTS
+stmt s1, s2;
+Select s1 such that Affects(s1, s2)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 21, 22, 23, 33, 34, 35, 36, 37, 41, 42, 46, 47, 49, 50
+5000
+480 - AFFECTS 
+prog_line n1, n2;
+Select n2 such that Affects(n1, n2)
+6, 7, 8, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 24, 26, 27, 33, 34, 35, 36, 38, 42, 43, 51
+5000
+481 - AFFECTS - BOOLEAN
+
+Select BOOLEAN such that Affects(_, _)
+true
+5000
+482 - AFFECTS
+assign a;
+Select a such that Affects(22, a)
+13, 24, 27
+5000
+483 - AFFECTS
+stmt s;
+Select s such that Affects(9, s)
+16, 26
+5000
+484 - AFFECTS
+prog_line n;
+Select n such that Affects(16, n)
+13, 24, 27
+5000
+485 - AFFECTS - BOOLEAN
+if i;
+Select BOOLEAN such that Affects(31, i)
+false
+5000
+486 - AFFECTS 
+assign a;
+Select a such that Affects(a, 51)
+46, 47, 49, 50
+5000
+487 - AFFECTS
+stmt s;
+Select s such that Affects(s, 15)
+15, 21
+5000
+488 - AFFECTS
+prog_line n;
+Select n such that Affects(n, 26)
+5, 6, 9, 19, 23
+5000
+489 - AFFECTS - BOOLEAN
+while w;
+Select BOOLEAN such that Affects(w, 30)
+false
+5000
+490 - AFFECTS - BOOLEAN
+
+Select BOOLEAN such that Affects(1, _)
+true
+5000
+491 - AFFECTS-boolean: fixed-generic (non-assign stmt)
+
+Select BOOLEAN such that Affects(32, _)
+false
+5000
+492 - AFFECTS 
+assign a;
+Select a such that Affects(a, _)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 21, 22, 23, 33, 34, 35, 36, 37, 41, 42, 46, 47, 49, 50
+5000
+493 - AFFECTS 
+stmt s;
+Select s such that Affects(s, _)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 21, 22, 23, 33, 34, 35, 36, 37, 41, 42, 46, 47, 49, 50
+5000
+494 - AFFECTS 
+while w;
+Select w such that Affects(w, _)
+none
+5000
+495 - AFFECTS 
+if i;
+Select i such that Affects(i, _)
+none
+5000
+496 - AFFECTS 
+call c;
+Select c such that Affects(c, _)
+none
+5000
+497 - AFFECTS 
+assign a;
+Select a such that Affects(_, a)
+6, 7, 8, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 24, 26, 27, 33, 34, 35, 36, 38, 42, 43, 51
+5000
+498 - AFFECTS 
+stmt s;
+Select s such that Affects(_, s)
+6, 7, 8, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 24, 26, 27, 33, 34, 35, 36, 38, 42, 43, 51
+5000
+499 - AFFECTS 
+while w;
+Select w such that Affects(_, w)
+none
+5000
+500 - AFFECTS
+if i;
+Select i such that Affects(_, i)
+none
+5000
+501 - AFFECTS 
+call c;
+Select c such that Affects(_, c)
+none
+5000
+502 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(33, 38)
+true
+5000
+503 - AFFECTS* 
+stmt s;
+Select s such that Affects*(27, 28)
+none
+5000
+504 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(51, 50)
+false
+5000
+505 - AFFECTS* - TUPLE
+assign a1, a2;
+Select <a1,a2> such that Affects*(a1, a2)
+1 6, 1 10, 1 11, 1 13, 1 15, 1 16, 1 17, 1 20, 1 21, 1 24, 1 26, 1 27, 2 7, 2 8, 2 10, 2 13, 2 15, 2 16, 2 17, 2 19, 2 20, 2 21, 2 22, 2 24, 2 26, 2 27, 5 10, 5 13, 5 15, 5 16, 5 21, 5 24, 5 26, 5 27, 6 10, 6 13, 6 15, 6 16, 6 21, 6 24, 6 26, 6 27, 7 8, 7 10, 7 13, 7 15, 7 16, 7 17, 7 19, 7 20, 7 21, 7 22, 7 24, 7 26, 7 27, 8 10, 8 13, 8 15, 8 17, 8 20, 8 21, 8 27, 9 13, 9 15, 9 16, 9 21, 9 24, 9 26, 9 27, 10 13, 10 15, 10 21, 10 27, 11 13, 11 15, 11 17, 11 20, 11 21, 13 15, 13 21, 15 15, 16 13, 16 15, 16 21, 16 24, 16 27, 17 20, 19 13, 19 15, 19 16, 19 21, 19 24, 19 26, 19 27, 21 15, 22 13, 22 15, 22 21, 22 24, 22 27, 23 13, 23 15, 23 16, 23 21, 23 24, 23 26, 23 27, 33 33, 33 34, 33 35, 33 36, 33 38, 34 33, 34 34, 34 35, 34 36, 34 38, 35 33, 35 34, 35 35, 35 36, 35 38, 36 33, 36 34, 36 35, 36 36, 36 38, 37 33, 37 34, 37 35, 37 36, 37 38, 41 42, 41 43, 42 43, 46 51, 47 51, 49 51, 50 51
+5000
+506 - AFFECTS*
+while w; assign a;
+Select a such that Affects*(w, a)
+none
+5000
+507 - AFFECTS*
+stmt s1, s2;
+Select s1 such that Affects*(s1, s2)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 21, 22, 23, 33, 34, 35, 36, 37, 41, 42, 46, 47, 49, 50
+5000
+508 - AFFECTS*
+prog_line n1, n2;
+Select n2 such that Affects*(n1, n2)
+6, 7, 8, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 24, 26, 27, 33, 34, 35, 36, 38, 42, 43, 51
+5000
+509 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(_, _)
+true
+5000
+510 - AFFECTS*
+assign a;
+Select a such that Affects*(22, a)
+13, 15, 21, 24, 27
+5000
+511 - AFFECTS*
+stmt s;
+Select s such that Affects*(9, s)
+13, 15, 16, 21, 24, 26, 27
+5000
+512 - AFFECTS*
+prog_line n;
+Select n such that Affects*(16, n)
+13, 15, 21, 24, 27
+5000
+513 - AFFECTS* - BOOLEAN
+if i;
+Select BOOLEAN such that Affects*(30, i)
+false
+5000
+514 - AFFECTS*
+assign a;
+Select a such that Affects*(a, 51)
+46, 47, 49, 50
+5000
+515 - AFFECTS*
+stmt s;
+Select s such that Affects*(s, 15)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 19, 21, 22, 23
+5000
+516 - AFFECTS*
+prog_line n;
+Select n such that Affects*(n, 26)
+1, 2, 5, 6, 7, 9, 19, 23
+5000
+517 - AFFECTS* - BOOLEAN
+while w;
+Select BOOLEAN such that Affects*(w, 30)
+false
+5000
+518 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(1, _)
+true
+5000
+519 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(32, _)
+false
+5000
+520 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(51, _)
+false
+5000
+521 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(_, 26)
+true
+5000
+522 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(_, 18)
+false
+5000
+523 - AFFECTS* - BOOLEAN
+
+Select BOOLEAN such that Affects*(_, 37)
+false
+5000
+524 - AFFECTS*
+assign a;
+Select a such that Affects*(a, _)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 21, 22, 23, 33, 34, 35, 36, 37, 41, 42, 46, 47, 49, 50
+5000
+525 - AFFECTS*
+stmt s;
+Select s such that Affects*(s, _)
+1, 2, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 21, 22, 23, 33, 34, 35, 36, 37, 41, 42, 46, 47, 49, 50
+5000
+526 - AFFECTS*
+while w;
+Select w such that Affects*(w, _)
+none
+5000
+527 - AFFECTS*
+if i;
+Select i such that Affects*(i, _)
+none
+5000
+528 - AFFECTS*
+call c;
+Select c such that Affects*(c, _)
+none
+5000
+529 - AFFECTS*
+assign a;
+Select a such that Affects*(_, a)
+6, 7, 8, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 24, 26, 27, 33, 34, 35, 36, 38, 42, 43, 51
+5000
+530 - AFFECTS*
+stmt s;
+Select s such that Affects*(_, s)
+6, 7, 8, 10, 11, 13, 15, 16, 17, 19, 20, 21, 22, 24, 26, 27, 33, 34, 35, 36, 38, 42, 43, 51
+5000
+531 - AFFECTS*
+while w;
+Select w such that Affects*(_, w)
+none
+5000
+532 - AFFECTS*
+if i;
+Select i such that Affects*(_, i)
+none
+5000
+533 - AFFECTS*
+call c;
+Select c such that Affects*(_, c)
+none
+5000

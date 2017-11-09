@@ -1,0 +1,300 @@
+1 - get all variable
+variable v;
+Select v
+a,b,c,d,e,f,g
+5000
+2 - get all const
+constant c;
+Select c
+0,1,2,3,4,11
+5000
+3 - get all if
+if i;
+Select i
+3,6,9,19,22,26,33
+5000
+4 - get all assign
+assign a;
+Select a
+1,2,4,5,7,8,10,11,12,13,14,15,16,17,18,20,21,23,24,25,27,28,29,30,31,32,34,35,36,37
+5000
+5 - pattern i(known,_,_)
+if i;
+Select i pattern i("c",_,_)
+22,33
+5000
+6 - pattern i(v,_,_)
+if i; variable v;
+Select v pattern i(v,_,_)
+a,c,d,f
+5000
+7 - pattern i(_,_,_)
+if i;
+Select i pattern i(_,_,_)
+3,6,9,19,22,26,33
+5000
+8 - Modifies(known,known) -- true
+
+Select BOOLEAN such that Modifies(6,"d")
+true
+5000
+9 - Modifies(known,known) -- false
+
+Select BOOLEAN such that Modifies(3,"f")
+false
+5000
+10 - Modifies(known,v)
+variable v;
+Select v such that Modifies(9,v)
+a,b,d
+5000
+11 - Modifies(s,known)
+stmt s;
+Select s such that Modifies(s,"a")
+1,3,6,9,10,14,17,19,22,23,25,26,28,30,33,34,36
+5000
+12 - Modifies(i,v)
+if i; variable v;
+Select v such that Modifies(i,v)
+a,b,c,d,e,g
+5000
+13 - Uses(known,known) -- true
+
+Select BOOLEAN such that Uses(26,"f")
+true
+5000
+14 - Uses(known,known) -- false
+
+Select BOOLEAN such that Uses(9,"b")
+false
+5000
+15 - Uses(known,v)
+variable v;
+Select v such that Uses(22,v)
+c
+5000
+16 - Uses(i,known)
+if i;
+Select i such that Uses(i,"e")
+3,6,9,33
+5000
+17 - Uses(i,v)
+if i; variable v;
+Select v such that Uses(i,v)
+a,b,c,d,e,f
+5000
+18 - Parent(known,known)
+
+Select BOOLEAN such that Parent(3,25)
+true
+5000
+19 - Parent*(known,known)
+
+Select BOOLEAN such that Parent*(6,12)
+true
+5000
+20 - Parent(known,s)
+stmt s;
+Select s such that Parent(6,s)
+7,8,9,15,16,17
+5000
+21 - Parent*(known,a)
+assign a;
+Select a such that Parent*(6,a)
+7,8,10,11,12,13,14,15,16,17
+5000
+22 - Parent(i,known)
+if i;
+Select i such that Parent(i,15)
+6
+5000
+23 - Parent*(i,known)
+if i;
+Select i such that Parent*(i,24)
+3,19,22
+5000
+24 - Parent(i,i)
+if i1,i2;
+Select i1 such that Parent(i1,i2)
+3,6,19
+5000
+25 - Parent*(i,a)
+if i; assign a;
+Select a such that Parent*(i,a)
+4,5,7,8,10,11,12,13,14,15,16,17,18,20,21,23,24,25,27,28,29,30,34,35,36,37
+5000
+26 - Follows(known,known)
+
+Select BOOLEAN such that Follows(9,15)
+true
+5000
+27 - Follows*(known,known)
+
+Select BOOLEAN such that Follows*(1,31)
+true
+5000
+28 - Follows(known,s)
+if i;
+Select i such that Follows(5,i)
+6
+5000
+29 - Follows*(known,s)
+stmt s;
+Select s such that Follows*(4,s)
+5,6,18,19
+5000
+30 - Follows(i,known)
+if i;
+Select i such that Follows(i,22)
+
+5000
+31 - Follows*(i,known)
+if i;
+Select i such that Follows*(i,18)
+6,
+5000
+32 - Follows(i,i)
+if i1,i2;
+Select i2 such that Follows(i1,i2)
+
+5000
+33 - Follows*(i,a)
+if i; assign a;
+Select a such that Follows*(i,a)
+15,18,31,32
+5000
+34 - Next(known,known) -- true
+
+Select BOOLEAN such that Next(6,16)
+true
+5000
+35 - Next(known,known) -- false
+
+Select BOOLEAN such that Next(15,16)
+false
+5000
+36 - Next(known,n)
+prog_line n;
+Select n such that Next(3,n)
+4,25
+5000
+37 - Next(a,known)
+assign a;
+Select a such that Next(a,31)
+21,23,24,28,30
+5000
+38 - Next(i,a)
+if i; assign a;
+Select a such that Next(i,a)
+4,7,10,12,16,20,23,24,25,27,29,34,37
+5000
+39 - Next(known,known) and Follows*(s,s)
+stmt s1,s2;
+Select s1 such that Next(6,7) and Follows*(s1,s2)
+1,2,3,4,5,6,7,8,9,10,12,13,16,18,20,25,27,29,31,32,34,35
+5000
+40 - Next(i,known) and Parent*(known,i)
+if i;
+Select i such that Next(i,16) and Parent*(3,i)
+6
+5000
+41 - Next(known,a) and Modifies(a,known)
+assign a;
+Select a such that Next(24,a) and Modifies(a,"c")
+31
+5000
+42 - Next(i,i) and Uses(i,known)
+if i1,i2;
+Select i1 such that Next(i1,i2) and Uses(i2,"c")
+19
+5000
+43 - pattern i(v,_,_) and Uses(i,v) and Follows(i,a)
+assign a; if i; variable v;
+Select v pattern i(v,_,_) such that Uses(i,v) and Follows(i,a)
+a,d,f
+5000
+44 - with var and Parent(s,s) and Uses(s,v)
+stmt s1,s2; variable v;
+Select s2  with v.varName = "e" such that Parent(s1,s2) and Uses(s1,v)
+4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,25,26,34,35,36,37
+5000
+45 - Parent*(i,a) and Uses(a,v) and Modifies(i,v)
+if i; assign a; variable v;
+Select i such that Parent*(i,a) and Uses(a,v) and Modifies(i,v)
+3,6,9,19,26,33
+5000
+46 - Uses(a,v) pattern a(v,known) such that Next(a,_)
+assign a; variable v;
+Select a such that Uses(a,v) pattern a(v,_"c*b"_) such that Next(a,_)
+27
+5000
+47 - Follows*(i,a) pattern i(_,_,_) and pattern a(v,_) with var
+if i; assign a; variable v;
+Select i such that Follows*(i,a) pattern i(_,_,_) and a(v,_) with v.varName = "c"
+3,6
+5000
+48 - with stmt such that Next(s,s) and Modifies(s,v) and Parent(s,s)
+stmt s1,s2; variable v;
+Select s2 with s1.stmt# = 33 such that Next(s1,s2) and Modifies(s1,v) and Parent(s1,s2)
+34,37
+5000
+49 - Uses(i,v) and Parent*(s,i) and pattern i(v,_,_) with stmt and const
+variable v1,v2; if i; stmt s; constant c;
+Select i such that Uses(i,v2) and Parent*(s,i) pattern i(v1,_,_) with s.stmt# = c.value
+6,9,19,22,26
+5000
+50 - Parent*(i,a) and Follows*(a,a) and pattern a(_,known) and Uses(i,v)
+variable v; if i; assign a1,a2;
+Select a1 such that Parent*(i,a1) and Follows*(a1,a2) pattern a2(_,_"d-e"_) such that Uses(i,v)
+
+5000
+51 - Next*(known,known) -- true
+
+Select BOOLEAN such that Next*(9,35)
+true
+5000
+52 - Next*(known,known) -- false
+
+Select BOOLEAN such that Next*(20,22)
+false
+5000
+53 - Next*(known,n)
+prog_line n;
+Select n such that Next*(9,n)
+10,11,12,13,14,15,18,19,20,21,22,23,24,31,32,33,34,35,36,37
+5000
+54 - Next*(a,known)
+assign a;
+Select a such that Next*(a,26)
+1,2,25
+5000
+55 - Next*(a,i)
+if i; assign a;
+Select a such that Next*(a,i)
+1,2,4,5,7,8,10,11,12,13,14,15,16,17,18,20,21,23,24,25,27,28,29,30,31,32
+5000
+56 - Next*(s,s)
+stmt s;
+Select s such that Next*(s,s)
+
+5000
+57 - Next(a,a) and Next*(known,w)
+if i; assign a1,a2;
+Select i such that Next(a1,a2) and Next*(15,i)
+19,22,33
+5000
+58 - Next*(s,known) and Next*(known,s)
+stmt s;
+Select s such that Next*(s,25) and Next*(15,s)
+
+5000
+59 - Next*(i,s) and Next*(i,i)
+stmt s; if i1,i2;
+Select i1 such that Next*(i2,s) and Next*(i1,i2)
+3,6,9,19,22,26
+5000
+60 - Next*(s,s) and Next*(a,s) and Next*(a,a)
+assign a1,a2; stmt s1,s2;
+Select a1 such that Next*(s1,s2) and Next*(a1,s2) and Next*(a2,a1)
+2,4,5,7,8,10,11,12,13,14,15,16,17,18,20,21,23,24,25,27,28,29,30,31,32,34,35
+500000

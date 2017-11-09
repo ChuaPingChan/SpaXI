@@ -1,0 +1,15 @@
+1 - Calls(unknown,unknown) -- tuple
+procedure p1, p2;
+Select <p1,p2> such that Calls(p1,p2)
+A B, A C, C D, D B, D F, B E, E F
+5000
+2 - Calls*(unknown,unknown) -- tuple
+procedure p1, p2;
+Select <p1,p2> such that Calls*(p1,p2)
+A B, A C, C D, D B, D F, B E, E F, A D, A E, A F, B F, C B, C F, D E, C E
+5000
+3 - c.procName
+call c; prog_line n;
+Select BOOLEAN with c.procName = "E" and c.stmt# = 3
+true
+5000

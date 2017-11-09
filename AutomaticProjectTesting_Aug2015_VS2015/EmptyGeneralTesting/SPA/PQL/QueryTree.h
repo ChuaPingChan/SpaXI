@@ -36,6 +36,7 @@ public:
     unordered_set<string> getVars();
     unordered_set<string> getConsts();
     unordered_set<string> getProgLines();
+    unordered_set<string> getStmtList();
 
     SelectClause getSelectClause();
     vector<SuchThatClause> getSuchThatClauses();
@@ -56,6 +57,8 @@ private:
     unordered_set<string> _vars;
     unordered_set<string> _consts;
     unordered_set<string> _progLines;
+    unordered_set<string> _stmtList;
+
 
     SelectClause _selectClause;
     vector<SuchThatClause> _suchThatClauses;

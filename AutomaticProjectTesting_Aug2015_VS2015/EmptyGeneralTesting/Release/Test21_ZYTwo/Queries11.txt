@@ -1,0 +1,220 @@
+68 - all assign statements which are somewhat parent of some statement number
+assign a;
+Select a such that Parent* (a, 5)
+none
+5000
+203 - all variables
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a(_, _)
+i, v, x, y
+5000
+204 - all while statements
+while w; assign a; variable v;
+Select w such that Modifies(a, v) pattern a(_, _)
+2, 4
+5000
+205 - all variables modified by some assign statement
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a(_, _)
+i, v, x, y
+5000
+206 - all assign statements which modify some variable and have VAR_NAME on RHS
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a(_, _"i"_)
+3, 5, 6, 8
+5000
+207 - all variables modified by some assign statement which has VAR_NAME on RHS
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a(_, _"i"_)
+i, y
+5000
+208 - all assign statements which modify some variable and have CONST on RHS
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a(_, _"2"_)
+3, 8
+5000
+209 - all variables modified by some assign statement which has CONST on RHS
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a(_, _"5"_)
+v
+5000
+210 - all assign statements which modify some variable and have VAR_NAME on LHS
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a("y", _)
+3, 6
+5000
+211 - all variables modified by some assign statement which has VAR_NAME on LHS
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a("z", _)
+none
+5000
+212 - all assign statements which have VAR_NAME on LHS and RHS
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a("y", _"i"_)
+3, 6
+5000
+213 - all variables modified by some assign statement which has VAR_NAME on LHS and RHS
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a("y", _"i"_)
+y
+5000
+214 - all assign statements which modify some variable and have VAR_NAME on LHS and CONST on RHS
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a("v", _"5"_)
+7
+5000
+215 - all variables modified by some assign statement which has VAR_NAME on LHS and CONST on RHS
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a("i", _"2"_)
+i
+5000
+216 - all statements 
+stmt s; assign a, a1; variable v;
+Select s such that Modifies(a, v)
+1, 2, 3, 4, 5, 6, 7, 8
+5000
+217 - all assign statements 
+assign a, a1; variable v;
+Select a1 such that Modifies(a, v) pattern a1(_, _)
+1, 3, 5, 6, 7, 8
+5000
+218 - all variables modified by some assign statement 
+assign a, a1; variable v;
+Select v such that Modifies(a, v) pattern a1(_, _)
+i, v, x, y
+5000
+219 - invalid query
+assign a, a1; variable v;
+Select a such that Modifies(v, _) pattern a1(_, _)
+none
+5000
+220 - all assign statements which modify some variable and there's some assign statement with VAR_NAME on RHS
+assign a, a1; variable v;
+Select a such that Modifies(a, v) pattern a1(_, _"i"_)
+1, 3, 5, 6, 7, 8
+5000
+221 - all assign statements which have VAR_NAME on RHS
+assign a, a1; variable v;
+Select a1 such that Modifies(a, "z") pattern a1(_, _"x"_)
+none
+5000
+222 - all variables modified by some assign statement and there's some assign statement with VAR_NAME on RHS
+assign a, a1; variable v;
+Select v such that Modifies(a, v) pattern a1(_, _"x"_)
+i, v, x, y
+5000
+223 - all assign statements which use some variable and there's some assign statement with CONST on RHS
+assign a, a1; variable v;
+Select a such that Modifies(a, v) pattern a1(_, _"3"_)
+none
+5000
+224 - all assign statements with some variable on LHS and CONST on RHS and there's some assign statement modifying that variable
+assign a, a1; variable v;
+Select a1 such that Modifies(a, v) pattern a1(v, _"2"_)
+3, 8
+5000
+225 - all variables modified by some assign statement and modified by some assign statement with CONST on RHS
+assign a, a1; variable v;
+Select v such that Modifies(a, v) pattern a1(v, _"15"_)
+none
+5000
+226 - all assign statements modifying some variable and there's some assign statement with VAR_NAME on LHS
+assign a, a1; variable v;
+Select a such that Modifies(a, v) pattern a1("y", _)
+1, 3, 5, 6, 7, 8
+5000
+227 - all assign statements with VAR_NAME on LHS and there's some assign statement modifying some variable
+assign a, a1; variable v;
+Select a1 such that Modifies(a, v) pattern a1("v", _)
+7
+5000
+228 - all variables modified by some assign statement and there's some assign statement with VAR_NAME on LHS
+assign a, a1; variable v;
+Select v such that Modifies(a, v) pattern a1("i", _)
+i, v, x, y
+5000
+229 - all assign statements modifying some variable and there's some assign statement with VAR_NAME on LHS and RHS
+assign a, a1; variable v;
+Select a such that Modifies(a, v) pattern a1("i", _"i"_)
+1, 3, 5, 6, 7, 8
+5000
+230 - all assign statements with VAR_NAME on LHS and RHS and there's some assign statement modifying some variable
+assign a, a1; variable v;
+Select a1 such that Modifies(a, v) pattern a1("y", _"z"_)
+6
+5000
+231 - all variables modified by some assign statement and there's some assign statement with VAR_NAME on LHS and RHS
+assign a, a1; variable v;
+Select v such that Modifies(a, v) pattern a1("x", _"x"_)
+i, v, x, y
+5000
+232 - all assign statements modifying some variable and there's some assign statement with VAR_NAME on LHS and CONST on RHS
+assign a, a1; variable v;
+Select a such that Modifies(a, v) pattern a1("y", _"2"_)
+1, 3, 5, 6, 7, 8
+5000
+233 - all assign statements with VAR_NAME on LHS and CONST on RHS and there's some assign statement modifying some variable
+assign a, a1; variable v;
+Select a1 such that Modifies(a, v) pattern a1("i", _"2"_)
+8
+5000
+234 - all variables modified by some assign statement and there's some assign statement with VAR_NAME on LHS and CONST on RHS
+assign a, a1; variable v;
+Select v such that Modifies(a, v) pattern a1("i", _"5"_)
+none
+5000
+235 - all variables on LHS when there's while statement being followed by some statement
+assign a; while w; variable v;
+Select v such that Follows(w, _) pattern a(v, _)
+i, v, x, y
+5000
+236 - all assign statements following some while statement and with some variable on LHS and VAR_NAME on RHS
+assign a; while w; variable v;
+Select a such that Follows(w, a) pattern a(v, _"x"_)
+none
+5000
+237 - all variables on LHS when there's isFollowsStar(STMT_NUM, STMT_NUM)
+assign a; variable v;
+Select v such that Follows*(3, 6) pattern a(v, _)
+none
+5000
+238 - all statments somehow following some statement when there's some assign statement with VAR_NAME on LHS
+stmt s, s1; assign a;
+Select s1 such that Follows*(s, s1) pattern a("v", _)
+2, 4, 6, 7, 8
+5000
+239 - invalid query format on pattern RHS
+assign a; while w; variable v;
+Select v such that Parent(w, _) pattern a(v, "x")
+none
+5000
+240 - all while statements when there's some assign statement with some variable on LHS
+assign a; while w; variable v;
+Select w such that Parent(w, _) pattern a(v, _)
+2, 4
+5000
+241 - all while statements which are children of some while statement when there's some assign statement with VAR_NAME on LHS
+assign a; while w; variable v;
+Select w such that Parent(w, a) pattern a("i", _)
+4
+5000
+242 - invalid query (Using , instead of ;)
+assign a, while w, variable v;
+Select w such that Parent*(w, _) pattern a(v, _)
+none
+5000
+243 - invalid query (missing argument)
+assign a; while w; variable v;
+Select w such that Parent*(w) pattern a(v, _)
+none
+5000
+244 - invalid query (selecting tuple)
+assign a; while w; variable v;
+Select <a,w> such that Parent(w, _) pattern a(v, _)
+1 2,1 4,3 2,3 4,5 2,5 4,6 2,6 4,7 2,7 4,8 2,8 4
+5000
+245 - all assign statements which are somehow children of some while statement and with VAR_NAME on LHS
+assign a; while w; variable v;
+Select a such that Parent*(w, a) pattern a("i", _)
+5
+5000

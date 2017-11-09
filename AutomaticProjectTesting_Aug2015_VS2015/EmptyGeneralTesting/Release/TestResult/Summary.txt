@@ -1,7 +1,7 @@
-Overall Test Ran    : 10229
-Overall Test Passed : 10191
-Overall Test Failed : 37
-Overall Test Timeout: 1
+Overall Test Ran    : 19726
+Overall Test Passed : 19708
+Overall Test Failed : 12
+Overall Test Timeout: 6
 
 
 TestResult\out1.xml: 
@@ -116,6 +116,12 @@ TestResult\out13_Intense_Query3.xml:
 Test Ran: 35	
 Passed   : 35
 Failed   : 0
+Timeout  : 0
+
+TestResult\out13_Intense_Query4.xml: 
+Test Ran: 260	[BUG]
+Passed   : 259
+Failed   : 1
 Timeout  : 0
 
 TestResult\out13_Intense_Query5.xml: 
@@ -274,6 +280,12 @@ Passed   : 12
 Failed   : 0
 Timeout  : 0
 
+TestResult\out13_Two_QueryNextStar_Performance_UsingSource2.xml: 
+Test Ran: 5	[TIMEOUT]
+Passed   : 4
+Failed   : 0
+Timeout  : 1
+
 TestResult\out13_Two_QueryNextStar_UsingSourceNext.xml: 
 Test Ran: 25	
 Passed   : 25
@@ -352,6 +364,12 @@ Passed   : 33
 Failed   : 0
 Timeout  : 0
 
+TestResult\out14_Query3b.xml: 
+Test Ran: 50	
+Passed   : 50
+Failed   : 0
+Timeout  : 0
+
 TestResult\out14_Query4a.xml: 
 Test Ran: 15	
 Passed   : 15
@@ -359,9 +377,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query4b.xml: 
-Test Ran: 200	[BUG]
-Passed   : 199
-Failed   : 1
+Test Ran: 200	
+Passed   : 200
+Failed   : 0
 Timeout  : 0
 
 TestResult\out14_Query5b.xml: 
@@ -408,8 +426,8 @@ Timeout  : 0
 
 TestResult\out15_Acceptance_QueryStmtLst.xml: 
 Test Ran: 27	[BUG]
-Passed   : 0
-Failed   : 27
+Passed   : 26
+Failed   : 1
 Timeout  : 0
 
 TestResult\out15_Acceptance_Query_Test1.xml: 
@@ -455,15 +473,15 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out15_Regression_QueryModifies1_UsingSource1.xml: 
-Test Ran: 24	[BUG]
-Passed   : 23
-Failed   : 1
+Test Ran: 24	
+Passed   : 24
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_Regression_QueryUses1_UsingSource1.xml: 
-Test Ran: 24	[BUG]
-Passed   : 23
-Failed   : 1
+Test Ran: 24	
+Passed   : 24
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_Regression_QueryWith1_UsingSource1.xml: 
@@ -472,23 +490,239 @@ Passed   : 40
 Failed   : 0
 Timeout  : 0
 
-TestResult\out15_SystemAffects_QueryAffectsTest1.xml: 
-Test Ran: 68	[BUG]
-Passed   : 66
+TestResult\out15_StressCommonSynonym_QueryStressCommonSynonymTest1.xml: 
+Test Ran: 6	
+Passed   : 6
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_StressMultipleClauses_QueryStressMultipleClausesTest1.xml: 
+Test Ran: 13	
+Passed   : 13
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_StressNext_QueryStressNextTest1.xml: 
+Test Ran: 3	[BUG]
+Passed   : 1
 Failed   : 2
+Timeout  : 0
+
+TestResult\out15_SystemAffects_QueryAffectsTest1.xml: 
+Test Ran: 68	
+Passed   : 68
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemAffects_QueryAffectsTest2.xml: 
-Test Ran: 67	[BUG]
-Passed   : 65
-Failed   : 2
+Test Ran: 67	
+Passed   : 67
+Failed   : 0
 Timeout  : 0
 
 TestResult\out15_SystemAffects_QueryAffectsTest3.xml: 
-Test Ran: 84	[BUG]
-Passed   : 82
-Failed   : 2
+Test Ran: 84	
+Passed   : 84
+Failed   : 0
 Timeout  : 0
+
+TestResult\out15_SystemCalls_QueryCallsTest1.xml: 
+Test Ran: 58	
+Passed   : 58
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemCalls_QueryCallsTest2.xml: 
+Test Ran: 58	
+Passed   : 58
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemCalls_QueryCallsTest3.xml: 
+Test Ran: 58	
+Passed   : 58
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemCommonSynonym_QueryCommonSynonymTest1.xml: 
+Test Ran: 46	
+Passed   : 46
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemCommonSynonym_QueryCommonSynonymTest2.xml: 
+Test Ran: 46	
+Passed   : 46
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemFollows_QueryFollowsTest1.xml: 
+Test Ran: 78	
+Passed   : 78
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemFollows_QueryFollowsTest2.xml: 
+Test Ran: 78	
+Passed   : 78
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemFollows_QueryFollowsTest3.xml: 
+Test Ran: 78	
+Passed   : 78
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest1.xml: 
+Test Ran: 56	
+Passed   : 56
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest2.xml: 
+Test Ran: 56	
+Passed   : 56
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemModifiesUses_QueryModifiesUsesTest3.xml: 
+Test Ran: 56	
+Passed   : 56
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemMultipleClauses_QueryMultipleClausesTest1.xml: 
+Test Ran: 49	
+Passed   : 49
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemMultipleClauses_QueryMultipleClausesTest2.xml: 
+Test Ran: 49	
+Passed   : 49
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemMultipleClauses_QueryMultipleClausesTest3.xml: 
+Test Ran: 49	
+Passed   : 49
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemNext_QueryNextTest1.xml: 
+Test Ran: 54	
+Passed   : 54
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemNext_QueryNextTest2.xml: 
+Test Ran: 54	
+Passed   : 54
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemNext_QueryNextTest3.xml: 
+Test Ran: 54	
+Passed   : 54
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemParent_QueryParentTest1.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemParent_QueryParentTest2.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemParent_QueryParentTest3.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemPattern_QueryPatternTest1.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemPattern_QueryPatternTest2.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemPattern_QueryPatternTest3.xml: 
+Test Ran: 75	
+Passed   : 75
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemSelect_QuerySelectTest1.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemSelect_QuerySelectTest1_InvalidAttributes.xml: 
+Test Ran: 34	
+Passed   : 34
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemSelect_QuerySelectTest2.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemSelect_QuerySelectTest3.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemTuple_QueryTupleTest1.xml: 
+Test Ran: 91	
+Passed   : 91
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemWith_QueryWithTest1.xml: 
+Test Ran: 69	
+Passed   : 69
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemWith_QueryWithTest2.xml: 
+Test Ran: 69	
+Passed   : 69
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_SystemWith_QueryWithTest3.xml: 
+Test Ran: 69	
+Passed   : 69
+Failed   : 0
+Timeout  : 0
+
+TestResult\out15_Validation_QueryValidation.xml: 
+Test Ran: 40	[BUG]
+Passed   : 39
+Failed   : 1
+Timeout  : 0
+
+TestResult\out16_QueryStressNext.xml: 
+Test Ran: 24	[TIMEOUT]
+Passed   : 20
+Failed   : 0
+Timeout  : 4
 
 TestResult\out18_QueryValidation.xml: 
 Test Ran: 70	
@@ -521,14 +755,770 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out19_Query_std3_adv.xml: 
-Test Ran: 15	[BUG]
-Passed   : 14
-Failed   : 1
+Test Ran: 15	
+Passed   : 15
+Failed   : 0
 Timeout  : 0
 
 TestResult\out19_Query_std3_basic.xml: 
 Test Ran: 907	
 Passed   : 907
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries1.xml: 
+Test Ran: 38	
+Passed   : 38
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries2.xml: 
+Test Ran: 31	
+Passed   : 31
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries3.xml: 
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries4.xml: 
+Test Ran: 0	
+Passed   : 0
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries5.xml: 
+Test Ran: 0	
+Passed   : 0
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Grp_queries6.xml: 
+Test Ran: 0	
+Passed   : 0
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries1.xml: 
+Test Ran: 140	
+Passed   : 140
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries10.xml: 
+Test Ran: 47	
+Passed   : 47
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries2.xml: 
+Test Ran: 323	
+Passed   : 323
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries3.xml: 
+Test Ran: 35	
+Passed   : 35
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries4.xml: 
+Test Ran: 261	
+Passed   : 261
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries5.xml: 
+Test Ran: 19	
+Passed   : 19
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries6.xml: 
+Test Ran: 526	
+Passed   : 526
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries6b.xml: 
+Test Ran: 1	
+Passed   : 1
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries7.xml: 
+Test Ran: 309	
+Passed   : 309
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries7b.xml: 
+Test Ran: 1	
+Passed   : 1
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries8.xml: 
+Test Ran: 163	
+Passed   : 163
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Others_queries8b.xml: 
+Test Ran: 21	[BUG]
+Passed   : 20
+Failed   : 1
+Timeout  : 0
+
+TestResult\out20_Others_queries9.xml: 
+Test Ran: 85	
+Passed   : 85
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Relation_queriesCalls.xml: 
+Test Ran: 3	
+Passed   : 3
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Relation_queriesNext.xml: 
+Test Ran: 2	
+Passed   : 2
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries1.xml: 
+Test Ran: 50	
+Passed   : 50
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries2.xml: 
+Test Ran: 60	
+Passed   : 60
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries3.xml: 
+Test Ran: 60	
+Passed   : 60
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries4.xml: 
+Test Ran: 209	
+Passed   : 209
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries5.xml: 
+Test Ran: 60	
+Passed   : 60
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries6.xml: 
+Test Ran: 160	
+Passed   : 160
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries6_Affects.xml: 
+Test Ran: 15	
+Passed   : 15
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries6_Calls.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries6_Follows.xml: 
+Test Ran: 34	
+Passed   : 34
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries6_Modifies.xml: 
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries6_MultipleClause.xml: 
+Test Ran: 29	
+Passed   : 29
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries6_Parents.xml: 
+Test Ran: 40	
+Passed   : 40
+Failed   : 0
+Timeout  : 0
+
+TestResult\out20_Valid_queries6_Uses.xml: 
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries1.xml: 
+Test Ran: 68	
+Passed   : 68
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries11.xml: 
+Test Ran: 44	
+Passed   : 44
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries12.xml: 
+Test Ran: 253	[BUG]
+Passed   : 252
+Failed   : 1
+Timeout  : 0
+
+TestResult\out21_Queries12a.xml: 
+Test Ran: 5	
+Passed   : 5
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries13.xml: 
+Test Ran: 94	
+Passed   : 94
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries1Bonus.xml: 
+Test Ran: 6	
+Passed   : 6
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries21.xml: 
+Test Ran: 345	
+Passed   : 345
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_Queries21a.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesAffects.xml: 
+Test Ran: 4	
+Passed   : 4
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesAffectsNextStarStressTest.xml: 
+Test Ran: 4	
+Passed   : 4
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesAffectsStar.xml: 
+Test Ran: 4	
+Passed   : 4
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesAffectsStressTest.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesCalls.xml: 
+Test Ran: 6	
+Passed   : 6
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesIf.xml: 
+Test Ran: 1	
+Passed   : 1
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesMiniIter1.xml: 
+Test Ran: 78	
+Passed   : 78
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesMiniIter1NoWhile.xml: 
+Test Ran: 6	
+Passed   : 6
+Failed   : 0
+Timeout  : 0
+
+TestResult\out21_QueriesNextStar.xml: 
+Test Ran: 3	
+Passed   : 3
+Failed   : 0
+Timeout  : 0
+
+TestResult\out22_queries1.xml: 
+Test Ran: 72	
+Passed   : 72
+Failed   : 0
+Timeout  : 0
+
+TestResult\out22_queries2.xml: 
+Test Ran: 532	
+Passed   : 532
+Failed   : 0
+Timeout  : 0
+
+TestResult\out22_queries3.xml: 
+Test Ran: 234	
+Passed   : 234
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexAffects.xml: 
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexAffectsStar.xml: 
+Test Ran: 22	
+Passed   : 22
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexAll.xml: 
+Test Ran: 262	
+Passed   : 262
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexCalls.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexCallsStar.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexFollows.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexFollowsStar.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexModifies.xml: 
+Test Ran: 27	
+Passed   : 27
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexMultipleClauses.xml: 
+Test Ran: 23	
+Passed   : 23
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexNext.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexNextStar.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexNoClause.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexParent.xml: 
+Test Ran: 12	
+Passed   : 12
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexParentStar.xml: 
+Test Ran: 10	
+Passed   : 10
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexPattern.xml: 
+Test Ran: 15	
+Passed   : 15
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexTuple.xml: 
+Test Ran: 14	
+Passed   : 14
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexUses.xml: 
+Test Ran: 27	
+Passed   : 27
+Failed   : 0
+Timeout  : 0
+
+TestResult\out23_QueryComplexWith.xml: 
+Test Ran: 20	
+Passed   : 20
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryAffects.xml: 
+Test Ran: 8	
+Passed   : 8
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryAffectsStar.xml: 
+Test Ran: 7	
+Passed   : 7
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryAffectsStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryAffects_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryCalls.xml: 
+Test Ran: 9	
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryCallsStar.xml: 
+Test Ran: 7	
+Passed   : 7
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryCallsStar_Invalid.xml: 
+Test Ran: 36	
+Passed   : 36
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryCalls_Invalid.xml: 
+Test Ran: 36	
+Passed   : 36
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryFollows.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryFollowsStar.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryFollowsStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryFollows_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryModifies.xml: 
+Test Ran: 34	
+Passed   : 34
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryModifies_Invalid.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryMultipleClauses.xml: 
+Test Ran: 70	[BUG]
+Passed   : 68
+Failed   : 2
+Timeout  : 0
+
+TestResult\out24_First_QueryNext.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryNextStar.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryNextStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryNext_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryParent.xml: 
+Test Ran: 89	
+Passed   : 89
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryParentStar.xml: 
+Test Ran: 89	
+Passed   : 89
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryParentStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryParent_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryPattern.xml: 
+Test Ran: 9	
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryPattern_Invalid.xml: 
+Test Ran: 7	
+Passed   : 7
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryUses.xml: 
+Test Ran: 34	
+Passed   : 34
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_First_QueryUses_Invalid.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryAffects.xml: 
+Test Ran: 8	
+Passed   : 8
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryAffectsStar.xml: 
+Test Ran: 7	
+Passed   : 7
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryAffectsStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryAffects_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryCalls.xml: 
+Test Ran: 9	
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryCallsStar.xml: 
+Test Ran: 9	
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryCallsStar_Invalid.xml: 
+Test Ran: 36	
+Passed   : 36
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryCalls_Invalid.xml: 
+Test Ran: 36	
+Passed   : 36
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryFollows.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryFollowsStar.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryFollowsStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryFollows_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryModifies.xml: 
+Test Ran: 30	
+Passed   : 30
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryModifies_Invalid.xml: 
+Test Ran: 12	
+Passed   : 12
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryMultipleClauses.xml: 
+Test Ran: 70	[BUG]
+Passed   : 68
+Failed   : 2
+Timeout  : 0
+
+TestResult\out24_Third_QueryNext.xml: 
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryNextStar.xml: 
+Test Ran: 88	[BUG]
+Passed   : 87
+Failed   : 1
+Timeout  : 0
+
+TestResult\out24_Third_QueryNextStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryNext_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryParent.xml: 
+Test Ran: 89	
+Passed   : 89
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryParentStar.xml: 
+Test Ran: 89	
+Passed   : 89
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryParentStar_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryParent_Invalid.xml: 
+Test Ran: 37	
+Passed   : 37
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryPattern.xml: 
+Test Ran: 9	
+Passed   : 9
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryPattern_Invalid.xml: 
+Test Ran: 7	
+Passed   : 7
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryUses.xml: 
+Test Ran: 30	
+Passed   : 30
+Failed   : 0
+Timeout  : 0
+
+TestResult\out24_Third_QueryUses_Invalid.xml: 
+Test Ran: 12	
+Passed   : 12
 Failed   : 0
 Timeout  : 0
 

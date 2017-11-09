@@ -1,0 +1,3 @@
+procedure BONUS {
+	a = b * 22 + c * 333 + d + e * 5 + 44;
+}

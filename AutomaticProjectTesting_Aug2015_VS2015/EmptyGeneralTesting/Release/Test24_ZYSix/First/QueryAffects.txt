@@ -1,0 +1,40 @@
+1 - affects s1
+stmt s1, s2;
+Select s1 such that Affects(s1, s2)
+10,11,19,7
+5000
+2 - affects s2
+stmt s1, s2;
+Select s2 such that Affects(s1, s2)
+11,12,13,16,22
+5000
+3 - affects 1, s2
+stmt s2;
+Select s2 such that Affects(1, s2)
+none
+5000
+4 - affects 2, s2
+stmt s2;
+Select s2 such that Affects(2, s2)
+none
+5000
+5 - affects 3, s2
+stmt s2;
+Select s2 such that Affects(3, s2)
+none
+5000
+6 - affects 4, s2
+stmt s2;
+Select s2 such that Affects(4, s2)
+none
+5000
+7 - affects 5, s2
+stmt s2;
+Select s2 such that Affects(5, s2)
+none
+5000
+8 - affects 21, s2
+stmt s2;
+Select s2 such that Affects(21, s2)
+none
+5000

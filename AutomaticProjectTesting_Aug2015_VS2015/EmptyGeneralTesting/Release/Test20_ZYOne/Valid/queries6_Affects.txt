@@ -1,0 +1,75 @@
+1 - Affects(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Affects(10,13)
+true
+5000
+2 - Affects(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Affects(17,18)
+false
+5000
+3 - Affects(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Affects(10,10)
+true
+5000
+4 - Affects(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Affects(10,11)
+true
+5000
+5 - Affects(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Affects(a,11)
+2,4,9,10
+5000
+6 - Affects(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Affects(29,a)
+32,36,39
+5000
+14 - Affects(known while,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Affects(15,s)
+18,20
+5000
+15 - Affects(known while,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Affects(15,a)
+18,20
+5000
+21 - Affects*(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Affects*(4,11)
+true
+5000
+22 - Affects*(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Affects*(29,37)
+false
+5000
+23 - Affects*(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Affects*(29,38)
+true
+5000
+24 - Affects*(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Affects*(5,21)
+false
+5000
+25 - Affects*(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Affects*(a,38)
+36,29
+5000
+26 - Affects*(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Affects*(4,a)
+10,11,13
+5000
+27 - Affects*(unknown assign,unknown s)
+assign a1,a2; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select <a1,a2> such that Affects(a1,a2)
+2 4, 2 11, 4 10, 4 11, 6 13, 9 11, 10 11, 4 13, 10 10, 10 13, 15 18, 15 20, 21 26, 22 24, 27 40, 29 32, 29 36, 29 39, 32 34, 36 38, 42 49
+5000

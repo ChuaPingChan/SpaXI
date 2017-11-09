@@ -57,6 +57,11 @@ void QueryTree::insertSynonym(Entity type, string synonym)
         _consts.insert(synonym);
     }
 
+    else if (type == STMTLIST)
+    {
+        _stmtList.insert(synonym);
+    }
+
     else
     {
         cerr << "Type not recognised!";
@@ -133,6 +138,11 @@ unordered_set<string> QueryTree::getProgLines()
     return _progLines;
 }
 
+unordered_set<string> QueryTree::getStmtList()
+{
+    return _stmtList;
+}
+
 SelectClause QueryTree::getSelectClause()
 {
     return _selectClause;
@@ -180,7 +190,7 @@ bool QueryTree::isEntitySynonymExist(string synonym, Entity entityIdx)
         case CONSTANT:
             return (find(_consts.begin(), _consts.end(), synonym) != _consts.end());
         case STMTLIST:
-            return false;
+            return (find(_stmtList.begin(), _stmtList.end(), synonym) != _stmtList.end());
         default:
             return false;
     }

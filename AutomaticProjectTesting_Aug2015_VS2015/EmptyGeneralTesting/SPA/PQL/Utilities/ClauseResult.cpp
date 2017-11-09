@@ -3,6 +3,7 @@
 #include <set>
 
 #include "ClauseResult.h"
+#include "AbstractWrapper.h"
 
 using namespace std;
 
@@ -143,7 +144,6 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     // Add to _synToIdxMap
     _synToIdxMap.insert({ newSynName, newSynIdx });
 
-    // Update _result - Cartesian product
     if (_resultsPtr->empty()) {
         for (vector<int>::iterator newSynResPtr = newSynResults.begin();
             newSynResPtr != newSynResults.end();
@@ -156,6 +156,7 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
         return true;
     }
 
+    // Update _result - Cartesian product
     int repeatNumber = newSynResults.size();
     ResultsPtr outdatedResult = _resultsPtr;
     _resultsPtr = ResultsPtr(new Result());
@@ -165,6 +166,10 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
             vector<int> newComb = comb;
             newComb.push_back(newSynRes);
             _resultsPtr->push_back(newComb);
+
+            if (AbstractWrapper::GlobalStop) {  // TODO: Refactor method, reduce repetitive code
+                return true;    // Consider returning false, check the consequence.
+            }
         }
     }
 
@@ -218,6 +223,10 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
             vector<int> newSynsResVec = convertListToVector(newSynsResList);
             vector<int> newComb = joinTwoVectors(currComb, newSynsResVec);
             _resultsPtr->push_back(newComb);
+
+            if (AbstractWrapper::GlobalStop) {
+                return true;    // Consider returning false, check the consequence.
+            }
         }
     }
 
@@ -260,6 +269,10 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
             vector<int> newComb = existingComb;
             newComb = ClauseResult::joinTwoVectors(newComb, pairResult);
             updatedResultsPtr->push_back(newComb);
+
+            if (AbstractWrapper::GlobalStop) {
+                return true;    // Consider returning false, check the consequence.
+            }
         }
     }
     _resultsPtr = updatedResultsPtr;
@@ -334,6 +347,10 @@ bool ClauseResult::removeCombinations(string synName, int value)
     list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
     while (existingResultsIter != _resultsPtr->end())
     {
+        if (AbstractWrapper::GlobalStop) {
+            return true;    // Consider returning false, check the consequence.
+        }
+
         if ((*existingResultsIter).at(synIdx) == value)
             existingResultsIter = _resultsPtr->erase(existingResultsIter);
         else
@@ -357,6 +374,10 @@ bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn
     list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
     while (existingResultsIter != _resultsPtr->end())
     {
+        if (AbstractWrapper::GlobalStop) {
+            return true;    // Consider returning false, check the consequence.
+        }
+
         if (((*existingResultsIter).at(syn1Idx) == syn1Value) && ((*existingResultsIter).at(syn2Idx) == syn2Value))
             existingResultsIter = _resultsPtr->erase(existingResultsIter);
         else
@@ -434,6 +455,10 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
                 vector<int> newComb = existingCombination;
                 newComb.push_back(newSynResult);
                 updatedResultsPtr->push_back(newComb);
+
+                if (AbstractWrapper::GlobalStop) {
+                    return true;    // Consider returning false, check the consequence.
+                }
             }
         }
     }

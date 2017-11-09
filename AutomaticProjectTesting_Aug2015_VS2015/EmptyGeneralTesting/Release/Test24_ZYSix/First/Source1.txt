@@ -1,0 +1,156 @@
+procedure Black {
+    a = c + 1;
+    b = 2 * z + 5 * d;
+    call White;
+    e = 5 - o;
+    if q then {
+      if q then {
+        z = x + 24;
+        call White;
+     }
+     else {
+        while z {
+          y = x * q - 5;
+          z = z - 1;
+        }
+        y = x + y * z + p * q;
+        e = (c + u) - z * p;
+        call Blue;
+    } 
+    while x {
+      i = x + j + z;
+      call Yellow;
+      while k {
+        f = u + l;
+        c = 5 + 9 * k;
+        while g {
+          q = 9 - f * j;
+        }
+      }
+    }
+  } 
+  else {
+    n3 = 11;
+  }
+}
+
+procedure White {
+  e = t * 10;
+  s = d + s * 10;
+  while k {
+    s = 5 * t - 5 + 6 - d;
+    x = 1 + y * j;
+  }
+  e = t * 5;
+}
+
+procedure Blue {
+  t1 = k1 * 10;
+  s = g + o1 * 10;
+  if t1 then {
+    x1 = j1 + 2;
+  }
+  else {
+    y = i + x + y * z;
+    call Purple;
+  }
+}
+
+procedure Purple {
+  if j then {
+    t1 = k1 * 10;
+    s = g + o1 * 10;
+    if t1 then {
+      x1 = j1 + 2;
+      if u then {
+        k1 = u1 + j1;
+        j2 = h + 1 * 8;
+          if d1 then {
+            q1 = o3 * 9 - m1;
+            if t1 then {
+              a1 = b2 - 3;
+              e1 = l - n1 * y1;
+            } 
+            else {
+              v = j;
+            }
+          } 
+            else {
+              v1 = d1 - f1;
+          }
+      }
+      else {
+        o2 = u - 8 * k - n;
+        if c then {
+          i1 = g * 10;
+        } else {
+          s1 = o - 1;
+        }
+      }
+    }
+    else {
+      y = i + x + y * z;
+    }
+  } 
+  else {
+    q = x;
+    if o then {
+      y1 = x1 - c1;
+    } else {
+      h1 = k - 1;
+    }
+  }
+}
+
+procedure Yellow {
+  while i {
+    u1 = x2 * 1 - m1;
+    while q {
+      u2 = v1 + m1 - n3 * 6;
+      v3 = (v1 + m1 - n3) * 6;
+      v2 = 3;
+      while x {
+        n = 1;
+        while j {
+          x = e3 - b2 * k;
+          while o {
+            x = y + 7 - n1;
+            x = j2;
+          }
+          while q {
+            j = 1;
+            call Orange;
+          }
+        }
+      }
+      while u {
+        h3 = v1 * v5 - b2;
+        h3 = v1 + 4;
+      }
+    }
+  }
+}
+
+procedure Orange {
+	q = i * x * j + y + p * q;
+	c = m1 + m2 * m3;
+	c1 = (m1 + m2) * m3;
+	c3 = 2 + l * n;
+	v4 = (2 + 1) * n;
+	if x then {
+		n = m + 2;
+		while v {
+			d = e + 2;
+	 	}
+	}
+	else {
+		b = n1 - c2 + 9;
+		d = a3 - Black * s1;
+	 	call Pink;
+	}
+}
+
+procedure Pink {
+  g10 = d1 + 18;
+}
+

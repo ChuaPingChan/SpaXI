@@ -37,8 +37,8 @@ protected:
     Relationship rel;
     Entity argOneType;
     Entity argTwoType;
-    string argOne = "";
-    string argTwo = "";
+    string argOne;
+    string argTwo;
     bool validity = false;
 
     string extractArgOne(Relationship rel, string str);

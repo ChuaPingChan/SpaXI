@@ -1,0 +1,200 @@
+1 - Parent(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent(45,48)
+true
+5000
+2 - Parent(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent(28,48)
+false
+5000
+3 - Parent(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent(5,6)
+true
+5000
+4 - Parent(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent(5,21)
+false
+5000
+5 - Parent(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent(a,10)
+
+5000
+6 - Parent(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent(6,s)
+
+5000
+7 - Parent(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent(ifs,46)
+45
+5000
+8 - Parent(known ifs,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent(31,s)
+32,33,36,37
+5000
+9 - Parent(known ifs,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent(31,a)
+32,36
+5000
+10 - Parent(known ifs,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent(31,ifs)
+37
+5000
+11 - Parent(known ifs,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent(31,w)
+33
+5000
+12 - Parent(known ifs,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent(31,c)
+
+5000
+13 - Parent(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent(w,46)
+
+5000
+14 - Parent(known while,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent(30,s)
+31
+5000
+15 - Parent(known while,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent(30,a)
+
+5000
+16 - Parent(known while,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent(30,ifs)
+31
+5000
+17 - Parent(known while,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent(30,w)
+
+5000
+18 - Parent(known while,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent(33,c)
+35
+5000
+19 - Parent(unknown call,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent(c,46)
+
+5000
+20 - Parent(known call,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent(3,s)
+
+5000
+21 - Parent*(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent*(28,48)
+true
+5000
+22 - Parent*(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent*(14,27)
+false
+5000
+23 - Parent*(known ,known) -- true
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent*(5,6)
+true
+5000
+24 - Parent*(known ,known) -- false
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select BOOLEAN such that Parent*(5,21)
+false
+5000
+25 - Parent*(unknown assign,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent*(a,10)
+
+5000
+26 - Parent*(known assign,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent*(6,s)
+
+5000
+27 - Parent*(unknown ifs,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent*(ifs,46)
+28,44,45
+5000
+28 - Parent*(known ifs,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent*(31,s)
+32,33,34,35,36,37,38,39
+5000
+29 - Parent*(known ifs,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent*(31,a)
+32,34,36,38,39
+5000
+30 - Parent*(known ifs,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent*(31,ifs)
+37
+5000
+31 - Parent*(known ifs,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent*(31,w)
+33
+5000
+32 - Parent*(known ifs,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent*(31,c)
+35
+5000
+33 - Parent*(unknown while,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent*(w,46)
+41,43
+5000
+34 - Parent*(known while,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select s such that Parent*(30,s)
+31,32,33,34,35,36,37,38,39
+5000
+35 - Parent*(known while,unknown assign)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select a such that Parent*(30,a)
+32,34,36,38,39
+5000
+36 - Parent*(known while,unknown ifs)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select ifs such that Parent*(30,ifs)
+31,37
+5000
+37 - Parent*(known while,unknown while)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select w such that Parent*(30,w)
+33
+5000
+38 - Parent*(known while,unknown call)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent*(31,c)
+35
+5000
+39 - Parent*(unknown call,known) 
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent*(c,46)
+
+5000
+40 - Parent*(known call,unknown s)
+assign a; stmt s; while w; if ifs; variable v; procedure p; call c;
+Select c such that Parent*(3,s)
+
+5000

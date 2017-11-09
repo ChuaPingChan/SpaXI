@@ -15,7 +15,8 @@ bool entityIsSynonym(Entity entity) {
         Entity::CALL,
         Entity::PROCEDURE,
         Entity::VARIABLE,
-        Entity::CONSTANT
+        Entity::CONSTANT,
+        Entity::STMTLIST
     });
 
     return (synonymEntities.find(entity)) != synonymEntities.end();

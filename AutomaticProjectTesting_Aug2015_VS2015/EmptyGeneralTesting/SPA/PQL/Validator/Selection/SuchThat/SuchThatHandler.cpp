@@ -99,7 +99,7 @@ string SuchThatHandler::getSuchThatKeyWord(string str)
 * Returns the enum form of relationship
 * Throws RelationshipNotFoundException when suchthat relationship cannot be determined
 */
-int SuchThatHandler::getRelIndex(string rel)
+Relationship SuchThatHandler::getRelIndex(string rel)
 {
     if (rel == RELATIONSHIP_STRING_ARRAY[MODIFIES]) {
         return MODIFIES;
