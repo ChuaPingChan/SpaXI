@@ -828,7 +828,15 @@ goto :eof
 call :createCmdOutputFolder
 echo ===============================================================================
 echo Running AutoTester for test 16...
+echo Running AutoTester for QueryStressNext...
 AutoTester Test16_Stress\SourceStress.txt Test16_Stress\QueryStressNext.txt TestResult\out16_QueryStressNext.xml > TestResult\cmd\cmd16_QueryStressNext.txt
+echo Finish running AutoTester for QueryStressNext.
+echo Running AutoTester for QueryStressAffects...
+AutoTester Test16_Stress\SourceStress.txt Test16_Stress\QueryStressAffects.txt TestResult\out16_QueryStressAffects.xml > TestResult\cmd\cmd16_QueryStressAffects.txt
+echo Finish running AutoTester for QueryStressAffects.
+echo Running AutoTester for QueryStressMixed...
+AutoTester Test16_Stress\SourceStress.txt Test16_Stress\QueryStressMixed.txt TestResult\out16_QueryStressMixed.xml > TestResult\cmd\cmd16_QueryStressMixed.txt
+echo Finish running AutoTester for QueryStressMixed.
 echo Finish running AutoTester for test 16.
 call :getPauseAction
 goto :eof

@@ -20,20 +20,20 @@ namespace UnitTesting
     TEST_CLASS(TestValidationWith)
     {
     public:
-        QueryTree *qtPtr;
         string str;
+        QueryTree *qtPtr;
+        WithHandler wHandler = WithHandler(qtPtr);
 
         TEST_METHOD_INITIALIZE(Test_Initialisation) 
         {
             qtPtr = new QueryTree;
-            str.clear();
+            wHandler = WithHandler(qtPtr);
         }
 
         TEST_METHOD_CLEANUP(Test_Cleanup)
         {
             delete qtPtr;
             qtPtr = NULL;
-            str.clear();
         }
 
         TEST_METHOD(TestValidity_With_ProcedureProcName_ProcedureProcName_DiffSynonym_StrStr_Valid)
@@ -41,7 +41,6 @@ namespace UnitTesting
             str = "p1.procName=p2.procName";
             qtPtr->insertSynonym(PROCEDURE, "p1");
             qtPtr->insertSynonym(PROCEDURE, "p2");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p1", PROCEDURE, "p2");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -52,7 +51,6 @@ namespace UnitTesting
         {
             str = "p.procName=p.procName";
             qtPtr->insertSynonym(PROCEDURE, "p");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             Assert::IsTrue(UtilityQueryTree::isEmptyWithClauseVectorInTree(*qtPtr));
         }
@@ -62,7 +60,6 @@ namespace UnitTesting
             str = "p.procName=s.stmt#";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(STMT, "s");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -71,7 +68,6 @@ namespace UnitTesting
             str = "p.procName=a.stmt#";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(ASSIGN, "a");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -80,7 +76,6 @@ namespace UnitTesting
             str = "p.procName=cl.stmt#";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(CALL, "cl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -89,7 +84,6 @@ namespace UnitTesting
             str = "p.procName=cl.procName";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(CALL, "cl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", CALL, "cl");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -101,7 +95,6 @@ namespace UnitTesting
             str = "p.procName=w.stmt#";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(WHILE, "w");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -110,7 +103,6 @@ namespace UnitTesting
             str = "p.procName=f.stmt#";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(IF, "f");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -119,7 +111,6 @@ namespace UnitTesting
             str = "p.procName=v.varName";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(VARIABLE, "v");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", VARIABLE, "v");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -131,7 +122,6 @@ namespace UnitTesting
             str = "p.procName=c.value";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(CONSTANT, "c");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -139,7 +129,6 @@ namespace UnitTesting
         {
             str = "p.procName=\"Pikachu\"";
             qtPtr->insertSynonym(PROCEDURE, "p");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, PROCEDURE, "p", IDENT_WITHQUOTES, "Pikachu");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -150,7 +139,6 @@ namespace UnitTesting
         {
             str = "p.procName=12345";
             qtPtr->insertSynonym(PROCEDURE, "p");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -159,7 +147,6 @@ namespace UnitTesting
             str = "p.procName=pl";
             qtPtr->insertSynonym(PROCEDURE, "p");
             qtPtr->insertSynonym(PROG_LINE, "pl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -168,7 +155,6 @@ namespace UnitTesting
             str = "s.stmt#=p.procName";
             qtPtr->insertSynonym(STMT, "s");
             qtPtr->insertSynonym(PROCEDURE, "p");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -177,7 +163,6 @@ namespace UnitTesting
             str = "s1.stmt#=s2.stmt#";
             qtPtr->insertSynonym(STMT, "s1");
             qtPtr->insertSynonym(STMT, "s2");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, STMT, "s1", STMT, "s2");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -188,7 +173,6 @@ namespace UnitTesting
         {
             str = "s.stmt#=s.stmt#";
             qtPtr->insertSynonym(STMT, "s");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             Assert::IsTrue(UtilityQueryTree::isEmptyWithClauseVectorInTree(*qtPtr));
         }
@@ -198,7 +182,6 @@ namespace UnitTesting
             str = "s.stmt#=v.varName";
             qtPtr->insertSynonym(STMT, "s");
             qtPtr->insertSynonym(VARIABLE, "v");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -207,7 +190,6 @@ namespace UnitTesting
             str = "s.stmt#=c.value";
             qtPtr->insertSynonym(STMT, "s");
             qtPtr->insertSynonym(CONSTANT, "c");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, STMT, "s", CONSTANT, "c");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -218,7 +200,6 @@ namespace UnitTesting
         {
             str = "s.stmt#=\"Pikachu\"";
             qtPtr->insertSynonym(STMT, "s");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -226,7 +207,6 @@ namespace UnitTesting
         {
             str = "s.stmt#=12345";
             qtPtr->insertSynonym(STMT, "s");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, STMT, "s", INTEGER, "12345");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -238,7 +218,6 @@ namespace UnitTesting
             str = "s.stmt#=pl";
             qtPtr->insertSynonym(STMT, "s");
             qtPtr->insertSynonym(PROG_LINE, "pl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, STMT, "s", PROG_LINE, "pl");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -249,7 +228,6 @@ namespace UnitTesting
         {
             str = "\"Pikachu\" = pokemon.procName";
             qtPtr->insertSynonym(PROCEDURE, "pokemon");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, IDENT_WITHQUOTES, "Pikachu", PROCEDURE, "pokemon");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -261,7 +239,6 @@ namespace UnitTesting
             str = "\"Pikachu\" = s.stmt#";
             qtPtr->insertSynonym(PROCEDURE, "pokemon");
             qtPtr->insertSynonym(STMT, "s");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -269,7 +246,6 @@ namespace UnitTesting
         {
             str = "\"Pikachu\" = v.varName";
             qtPtr->insertSynonym(VARIABLE, "v");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(STRING_WITH, IDENT_WITHQUOTES, "Pikachu", VARIABLE, "v");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -281,21 +257,18 @@ namespace UnitTesting
             str = "\"Pikachu\" = c.value";
             qtPtr->insertSynonym(PROCEDURE, "pokemon");
             qtPtr->insertSynonym(CONSTANT, "v");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
         TEST_METHOD(TestValidity_With_IdentWithQuotes_IdentWithQuotes_DiffIdent_StrStr_Valid)
         {
             str = "\"Happy\" = \"Sad\"";
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
         TEST_METHOD(TestValidity_With_IdentWithQuotes_IdentWithQuotes_SameIdent_StrStr_Valid)
         {
             str = "\"Happiness\" = \"Happiness\"";
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             Assert::IsTrue(UtilityQueryTree::isEmptyWithClauseVectorInTree(*qtPtr));
         }
@@ -304,7 +277,6 @@ namespace UnitTesting
         {
             str = "\"Pikachu\" = 12345";
             qtPtr->insertSynonym(PROCEDURE, "pokemon");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -313,7 +285,6 @@ namespace UnitTesting
             str = "\"Pikachu\" = pl";
             qtPtr->insertSynonym(PROCEDURE, "pokemon");
             qtPtr->insertSynonym(PROG_LINE, "pl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -321,7 +292,6 @@ namespace UnitTesting
         {
             str = "12345=p.procName";
             qtPtr->insertSynonym(PROCEDURE, "p");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -329,7 +299,6 @@ namespace UnitTesting
         {
             str = "12345 = s.stmt#";
             qtPtr->insertSynonym(STMT, "s");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, INTEGER, "12345", STMT, "s");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -340,7 +309,6 @@ namespace UnitTesting
         {
             str = "12345=v.varName";
             qtPtr->insertSynonym(VARIABLE, "v");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -348,7 +316,6 @@ namespace UnitTesting
         {
             str = "12345 = c.value";
             qtPtr->insertSynonym(CONSTANT, "c");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, INTEGER, "12345", CONSTANT, "c");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -358,21 +325,18 @@ namespace UnitTesting
         TEST_METHOD(TestValidity_With_Integer_IdentQithQuotes_IntStr_Invalid)
         {
             str = "12345 = \"Pikechu\"";
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
         TEST_METHOD(TestValidity_With_Integer_Integer_DiffValue_IntInt_Invalid)
         {
             str = "12345 = 67890";
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
         TEST_METHOD(TestValidity_With_Integer_Integer_SameValue_IntInt_Valid)
         {
             str = "12345 = 12345";
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             Assert::IsTrue(UtilityQueryTree::isEmptyWithClauseVectorInTree(*qtPtr));
         }
@@ -381,7 +345,6 @@ namespace UnitTesting
         {
             str = "12345 = pl";
             qtPtr->insertSynonym(PROG_LINE, "pl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, INTEGER, "12345", PROG_LINE, "pl");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -393,7 +356,6 @@ namespace UnitTesting
             str = "pl = p.procName";
             qtPtr->insertSynonym(PROG_LINE, "pl");
             qtPtr->insertSynonym(PROCEDURE, "p");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -402,7 +364,6 @@ namespace UnitTesting
             str = "pl = cl.stmt#";
             qtPtr->insertSynonym(PROG_LINE, "pl");
             qtPtr->insertSynonym(CALL, "cl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, PROG_LINE, "pl", CALL, "cl");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -414,7 +375,6 @@ namespace UnitTesting
             str = "pl = v.varName";
             qtPtr->insertSynonym(PROG_LINE, "pl");
             qtPtr->insertSynonym(VARIABLE, "v");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -423,7 +383,6 @@ namespace UnitTesting
             str = "pl = c.value";
             qtPtr->insertSynonym(PROG_LINE, "pl");
             qtPtr->insertSynonym(CONSTANT, "c");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, PROG_LINE, "pl", CONSTANT, "c");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -434,7 +393,6 @@ namespace UnitTesting
         {
             str = "pl = \"Pikachu\"";
             qtPtr->insertSynonym(PROG_LINE, "pl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -442,7 +400,6 @@ namespace UnitTesting
         {
             str = "pl = 12";
             qtPtr->insertSynonym(PROG_LINE, "pl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, PROG_LINE, "pl", INTEGER, "12");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -454,7 +411,6 @@ namespace UnitTesting
             str = "pl1 = pl2";
             qtPtr->insertSynonym(PROG_LINE, "pl1");
             qtPtr->insertSynonym(PROG_LINE, "pl2");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             WithClause expected = UtilitySelection::makeWithClause(INTEGER_WITH, PROG_LINE, "pl1", PROG_LINE, "pl2");
             WithClause actual = UtilitySelection::getFirstWithClauseFromTree(*qtPtr);
@@ -465,7 +421,6 @@ namespace UnitTesting
         {
             str = "pl = pl";
             qtPtr->insertSynonym(PROG_LINE, "pl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsTrue(wHandler.isValidWith(str));
             Assert::IsTrue(UtilityQueryTree::isEmptyWithClauseVectorInTree(*qtPtr));
         }
@@ -474,7 +429,6 @@ namespace UnitTesting
         {
             str = "p.stmt# = 12345";
             qtPtr->insertSynonym(PROCEDURE, "p");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -482,7 +436,6 @@ namespace UnitTesting
         {
             str = "123 = v.value";
             qtPtr->insertSynonym(VARIABLE, "v");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -490,7 +443,6 @@ namespace UnitTesting
         {
             str = "pl.stmt# = 123";
             qtPtr->insertSynonym(PROG_LINE, "pl");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
@@ -498,14 +450,12 @@ namespace UnitTesting
         {
             str = "s.line# = 123";
             qtPtr->insertSynonym(STMT, "s");
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
 
         TEST_METHOD(TestValidity_With_SynonymNotDeclared_Invalid)
         {
             str = "s.stmt# = 123";
-            WithHandler wHandler = WithHandler(qtPtr);
             Assert::IsFalse(wHandler.isValidWith(str));
         }
     };
