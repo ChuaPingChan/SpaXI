@@ -33,6 +33,12 @@ namespace UnitTesting
             such that Modifies(w1, v1)
             such that Uses(a2, v2)
             such that Uses(10, "dummyVar")
+
+            Expected sorted order:
+            such that Uses(10, "dummyVar")
+            such that Modifies(w1, v1)
+            such that Uses(a1, v1)
+            such that Uses(a2, v2)
             */
 
             SelectClause select_a1 = SelectClause(SelectionType::SELECT_SINGLE, Entity::ASSIGN, "a1");
@@ -50,7 +56,6 @@ namespace UnitTesting
                 Entity::IDENT_WITHQUOTES, "dummyVar");
             
             vector<ClausePtr> rawClauseGroup;
-            rawClauseGroup.push_back(select_a1.getSharedPtr());
             rawClauseGroup.push_back(uses_a1_v1.getSharedPtr());
             rawClauseGroup.push_back(modifies_w1_v1.getSharedPtr());
             rawClauseGroup.push_back(uses_a2_v2.getSharedPtr());
@@ -61,12 +66,11 @@ namespace UnitTesting
              ***********/
             ClauseGroup clauseGroup(rawClauseGroup);
             int actualCost = clauseGroup.getCost();
-            int expectedCost = 
-                ClauseCostCalculator::ClauseCost::SELECT_1ARG
-                + ClauseCostCalculator::ClauseCost::USES_2ARGS
+            int expectedCost =
+                ClauseCostCalculator::ClauseCost::USES_BOOLEAN
                 + ClauseCostCalculator::ClauseCost::MODIFIES_2ARGS
                 + ClauseCostCalculator::ClauseCost::USES_2ARGS
-                + ClauseCostCalculator::ClauseCost::USES_BOOLEAN;
+                + ClauseCostCalculator::ClauseCost::USES_1ARG;
             Assert::IsTrue(actualCost == expectedCost);            
         }
 
@@ -154,7 +158,6 @@ namespace UnitTesting
                 Entity::IDENT_WITHQUOTES, "dummyVar");
 
             vector<ClausePtr> rawClauseGroup;
-            rawClauseGroup.push_back(select_a1.getSharedPtr());
             rawClauseGroup.push_back(uses_a1_v1.getSharedPtr());
             rawClauseGroup.push_back(modifies_w1_v1.getSharedPtr());
             rawClauseGroup.push_back(uses_a2_v2.getSharedPtr());
@@ -173,14 +176,15 @@ namespace UnitTesting
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgTwo() == "dummyVar");
 
             clausePtr = clauseGroup.getNextClause();
-            Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SELECT);
-            Assert::IsTrue(dynamic_pointer_cast<SelectClause>(clausePtr)->getSelectionType() == SelectionType::SELECT_SINGLE);
-            Assert::IsTrue(dynamic_pointer_cast<SelectClause>(clausePtr)->getSingleArg() == "a1");
-
-            clausePtr = clauseGroup.getNextClause();
             Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getRel() == Relationship::MODIFIES);
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgOne() == "w1");
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgTwo() == "v1");
+
+            clausePtr = clauseGroup.getNextClause();
+            Assert::IsTrue(clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT);
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getRel() == Relationship::USES);
+            Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgOne() == "a1");
             Assert::IsTrue(dynamic_pointer_cast<SuchThatClause>(clausePtr)->getArgTwo() == "v1");
         }
 

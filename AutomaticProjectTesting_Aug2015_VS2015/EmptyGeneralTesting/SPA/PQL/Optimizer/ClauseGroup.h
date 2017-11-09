@@ -36,7 +36,7 @@ private:
 
     unordered_set<string> _selectedSynonyms;
 
-    void sortInitClauseVec();
+    void sortClauseVec();
     vector<pair<ClausePtr, int>> _initClauseVec;   // Permanently stores all the clauses used to construct this ClauseGroup
     queue<pair<ClausePtr, int>> _clauseQueue;   // Dynamic queue of clauses
     int _cost;
@@ -46,4 +46,5 @@ private:
     unordered_map<string, int> _remainingSynsCount;
 
     int computeCost();
+    void relaxRemainingClauseCost(vector<pair<ClausePtr, int>>::iterator nextIter, unordered_set<string> evaluatedSyns);
 };
