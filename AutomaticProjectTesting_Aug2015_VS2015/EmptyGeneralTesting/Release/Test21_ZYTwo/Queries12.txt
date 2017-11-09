@@ -1256,7 +1256,7 @@ Select a such that Modifies(a, v) pattern a1(_, _"    a2	"_)
 254 - Try selecting BOOLEAN
 assign a;
 Select BOOLEAN such that Follows(1, 2)
-TRUE
+true
 5000
 255 - Try selecting attributes
 assign a;

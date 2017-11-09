@@ -37,6 +37,10 @@ void PKBMain::clearCache()
 }
 
 //Utility functions
+/*
+This method checks if the name of the entity given its index is the same as
+the other entity given its index
+*/
 bool PKBMain::isSameName(Entity type1, int idx1, Entity type2, int idx2) {
 	string arg1 = convertIdxToString(idx1, type1);
 	string arg2 = convertIdxToString(idx2, type2);
@@ -44,6 +48,9 @@ bool PKBMain::isSameName(Entity type1, int idx1, Entity type2, int idx2) {
 	return arg1 == arg2;
 }
 
+/*
+This method converts the index of the entity to its string name
+*/
 string PKBMain::convertIdxToString(int index, Entity type) {
 	string result;
 	if (type == PROCEDURE) {
@@ -61,6 +68,10 @@ string PKBMain::convertIdxToString(int index, Entity type) {
 	return result;
 }
 
+/*
+This method converst the list of index of a given entity to
+a list of string name
+*/
 list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 	list<string> resultList;
 	string result;
@@ -104,6 +115,10 @@ list<string> PKBMain::convertIdxToString(list<int> indexList, Entity type) {
 		return resultList;
 }
 
+/*
+This method converts a string of its given entity
+to its index
+*/
 int PKBMain::convertStringToIdx(string arg, Entity type) {
 	int result = -1;
 	if (type == PROCEDURE || type == CALL) {
@@ -117,6 +132,10 @@ int PKBMain::convertStringToIdx(string arg, Entity type) {
 	return result;
 }
 
+/*
+This method converts a list of string of a given entity
+to its list of indexes
+*/
 list<int> PKBMain::convertStringToIdx(list<string> stringList, Entity type) {
 	list<int> resultList;
 	int result;
@@ -145,6 +164,9 @@ list<int> PKBMain::convertStringToIdx(list<string> stringList, Entity type) {
 	return resultList;
 }
 
+/*
+This method returns the list of all entities of integer type
+*/
 list<int> PKBMain::getAllIntOfIntEntity(Entity type) {
 	if (type == STMT) {
 		return getAllStatements();
@@ -179,6 +201,9 @@ list<int> PKBMain::getAllIntOfIntEntity(Entity type) {
 	}
 }
 
+/*
+This method returns alls the index of string entities
+*/
 list<int> PKBMain::getAllIdxOfStringEntity(Entity type) {
 	if (type == PROCEDURE) {
 		return getAllProcedures();
@@ -197,6 +222,10 @@ list<int> PKBMain::getAllIdxOfStringEntity(Entity type) {
 	}
 }
 
+/*
+This method checks if the given arguments is of a
+certain entity type
+*/
 bool PKBMain::isInstanceOf(Entity type, int arg) {
 	if (type == STMT) {
 		return isStatement(arg);
@@ -231,6 +260,9 @@ bool PKBMain::isInstanceOf(Entity type, int arg) {
 	}
 }
 
+/*
+This method checks if the string is of a certain entity type
+*/
 bool PKBMain::isInstanceOf(Entity type, string arg) {
 	if (type == PROCEDURE) {
 		return isProcedure(arg);
@@ -248,7 +280,8 @@ bool PKBMain::isInstanceOf(Entity type, string arg) {
 		return false;
 	}
 }
-//GENERAL
+
+//STMTLST
 bool PKBMain::addStmtList(int stmt) {
 	return stmtTypeList.addToStmtList(stmt);
 }
@@ -258,17 +291,26 @@ list<int> PKBMain::getStmtList() {
 }
 
 //CALLS
+/*
+Returns names of called procedures
+*/
 list<string> PKBMain::getAllCalleeNames() {
 	return stmtTypeList.getAllCalleeNames();
 }
 
+/*
+Returns the call statement which calls the given procedure
+*/
 list<int> PKBMain::getStmtFromCallee(string callee) {
 	return stmtTypeList.getStmtFromCalleeProcName(callee);
 }
 
+/*
+Set the calls relation and populate PKB accordingly
+*/
 bool PKBMain::setCallsRel(int stmt, string callerProcName, string calleeProcName) {
 	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
-
+	calledProcedures.insert(calleeProcName);
 	if (procIdxTable.getIdxFromProc(calleeProcName) == -1) {
 		procIdxTable.addToProcIdxTable(calleeProcName);
 	}
@@ -278,6 +320,9 @@ bool PKBMain::setCallsRel(int stmt, string callerProcName, string calleeProcName
 	return callsTable.addCallsRel(callerProcIdx, calleeProcIdx) && callsTable.addCallsStmt(stmt, calleeProcIdx);
 }
 
+/*
+Checks if calls relationship is true
+*/
 bool PKBMain::isCalls(string callerProcName, string calleeProcName) {
 	int callerProcIdx = procIdxTable.getIdxFromProc(callerProcName);
 	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
@@ -289,6 +334,9 @@ bool PKBMain::isCalls(string callerProcName, string calleeProcName) {
 	return callsTable.isCalls(callerProcIdx, calleeProcIdx);
 }
 
+/*
+Checks if calls relationship is true given procedure index
+*/
 bool PKBMain::isCalls(int callerProcIdx, int calleeProcIdx) {
 	return callsTable.isCalls(callerProcIdx, calleeProcIdx);
 }
@@ -320,11 +368,17 @@ list<int> PKBMain::getAllCallees() {
 	return callsTable.getAllCallees();
 }
 
+/*
+Get callers of given procedure
+*/
 list<int> PKBMain::getCaller(string calleeProcName) {
 	int calleeProcIdx = procIdxTable.getIdxFromProc(calleeProcName);
 	return callsTable.getCaller(calleeProcIdx);
 }
 
+/*
+Get callers of given procedure index
+*/
 list<int> PKBMain::getCaller(int calleeProcIdx) {
 	return callsTable.getCaller(calleeProcIdx);
 }
@@ -333,6 +387,9 @@ list<int> PKBMain::getAllCallers() {
 	return callsTable.getAllCallers();
 }
 
+/*
+Returns a pair of list of calls relations
+*/
 pair<list<int>, list<int>> PKBMain::getAllCalls() {
 	return callsTable.getAllCalls();
 }
@@ -369,7 +426,11 @@ list<int> PKBMain::getCallerStar(int calleeProcIdx) {
 pair<list<int>, list<int>> PKBMain::getAllCallsStar() {
 	return callsStarTable.getAllCallsStar();
 }
+
 //PARENT
+/*
+Set the given parent child relationship
+*/
 bool PKBMain::setParentChildRel(int parentStmt, int childStmt) {
 	return (parentToChildTable.addParentChild(parentStmt, childStmt) && childToParentTable.addChildParent(childStmt, parentStmt));
 }
@@ -395,6 +456,9 @@ bool PKBMain::hasParentRel() {
 	return !parentToChildTable.empty();
 }
 
+/*
+Gets parent statements of specified entity type
+*/
 list<int> PKBMain::getParent(int childStmt, Entity type) {
 	list<int> resultList;
 	int parentStmt = childToParentTable.getParent(childStmt);
@@ -443,7 +507,6 @@ pair<list<int>, list<int>> PKBMain::getAllParentStarRel(Entity type1, Entity typ
 	return resultPair;
 }
 
-//
 //FOLLOWS
 pair<list<int>, list<int>> PKBMain::getAllFollows(Entity type1, Entity type2) {
 	pair<list<int>, list<int>> allFollows = followsTable.getAllFollows();
@@ -541,21 +604,45 @@ pair<list<int>, list<int>> PKBMain::getAllFollowsStar(Entity type1, Entity type2
 	return resultPair;
 }
 
+/*
+Processes the complex relations with help from design extractor
+*/
 bool PKBMain::startProcessComplexRelations() {
+	allCalledProceduresExist = checkAllCalledProceduresExist();
 	childToParentStarTable.setMap(de.computeChildToParentStarTable(childToParentTable));
 	parentToChildStarTable.setMap(de.computeParentToChildStarTable(parentToChildTable));
 	followsStarAfter.setMap(de.computeFollowsStarAfterTable(followsTable));
 	followsStarBefore.setMap(de.computeFollowsStarBeforeTable(followsTable));
 	callsStarTable.setCallsStarMap(de.computeCallsStarTable(callsTable));
+	hasRecursiveCalls = checkHasRecursiveCalls();
 	usesTableProcToVar.setMap(de.computeUsesTable(usesTableProcToVar, callsStarTable));
 	modTableProcToVar.setMap(de.computeModifiesTable(modTableProcToVar, callsStarTable));
-	//TODO test this
 	usesTableStmtToVar.setMap(de.computeUsesTable(usesTableStmtToVar, stmtTypeList, usesTableProcToVar, childToParentStarTable));
 	modTableStmtToVar.setMap(de.computeModifiesTable(modTableStmtToVar, stmtTypeList, modTableProcToVar, childToParentStarTable));
 	usesTableVar.setStmtMap(de.computeUsesTableStmt(usesTableStmtToVar));
 	usesTableVar.setProcMap(de.computeUsesTableProc(usesTableProcToVar));
 	modTableVar.setStmtMap(de.computeModTableStmt(modTableStmtToVar));
 	modTableVar.setProcMap(de.computeModTableProc(modTableProcToVar));
+	return true;
+}
+
+bool PKBMain::checkAllCalledProceduresExist() {
+	for (string callee : calledProcedures) {
+		if (existingProcedures.find(callee) == existingProcedures.end()) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool PKBMain::checkHasRecursiveCalls() {
+	list<int> callers = getAllCallers();
+	for (int caller : callers) {
+		if (isCallsStar(caller, caller)) {
+			return false;
+		}
+	}
+
 	return true;
 }
 
@@ -628,7 +715,7 @@ bool PKBMain::isNextStar(int befStmt, int aftStmt) {
 
 list<int> PKBMain::getExecutedAfterStar(int befStmt, Entity type) {
 	list<int> stmtList;
-	if (cache.containsAllNextStar(STMT, STMT)) {
+	if (cache.containsAllNextStar(STMT, STMT)) { // If all next* has been computed before
 		unordered_map<int, list<int>> nextStarMap = cache.getNextStarMap();
 		if (nextStarMap.find(befStmt) != nextStarMap.end()) {
 			stmtList = nextStarMap[befStmt];
@@ -684,6 +771,7 @@ pair<list<int>, list<int>> PKBMain::getAllNextStar(Entity type1, Entity type2) {
 	}
 
 	else {
+		// Compute all next star relations and store them in the cache
 		unordered_map<int, list<int>> nextStarMap;
 		unordered_map<int, list<int>> nextStarMapReverse;
 		unordered_map<int, unordered_set<int>> nextStarRelMap;
@@ -696,11 +784,17 @@ pair<list<int>, list<int>> PKBMain::getAllNextStar(Entity type1, Entity type2) {
 	}
 }
 
+/*
+Checks if var exists
+*/
 bool PKBMain::isPresent(string var)
 {
 	return varIdxTable.isVarPresent(var);
 }
 
+/*
+Checks if statement exists
+*/
 bool PKBMain::isPresent(int stmtNum)
 {
 	return stmtTypeList.isPresent(stmtNum);
@@ -785,6 +879,9 @@ list<int> PKBMain::getAllProcedures() {
 list<string> PKBMain::getAllProcNames() {
 	return procIdxTable.getAllProceduresName();
 }
+
+//USES AND MODIFIES
+
 bool PKBMain::setModTableStmtToVar(int stmt, string var)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
@@ -830,6 +927,9 @@ bool PKBMain::isUses(int stmt, int varIdx)
     return usesTableStmtToVar.isUses(stmt, varIdx);
 }
 
+/*
+Checks if procedure uses given variable
+*/
 bool PKBMain::isUsesProc(int procIdx, int varIdx) {
 	return usesTableProcToVar.isUses(procIdx, varIdx);
 }
@@ -857,6 +957,9 @@ bool PKBMain::isMod(int stmt, string var)
 	return modTableStmtToVar.isMod(stmt, varIdx);
 }
 
+/*
+Check if procedure modifies given variable
+*/
 bool PKBMain::isModProc(string procName, string varName) {
 	int procIdx = procIdxTable.getIdxFromProc(procName);
 	int varIdx = varIdxTable.getIdxFromVar(varName);
@@ -884,7 +987,7 @@ bool PKBMain::isUsingAnything(int stmt)
 
 bool PKBMain::isUsingAnythingProc(string procName) {
 	int procIdx = procIdxTable.getIdxFromProc(procName);
-	if (procIdx == -1) {
+	if (procIdx == -1) { //check if procedure exists
 		return false;
 	}
 
@@ -898,7 +1001,7 @@ bool PKBMain::isModifyingAnything(int stmt)
 
 bool PKBMain::isModifyingAnythingProc(string procName) {
 	int procIdx = procIdxTable.getIdxFromProc(procName);
-	if (procIdx == -1) {
+	if (procIdx == -1) { //check if procedure exists
 		return false;
 	}
 
@@ -1028,7 +1131,7 @@ list<int> PKBMain::getStmtThatModifiesAnything() {
 pair<list<int>, list<int>> PKBMain::getUsesPairs(Entity type)
 {
 	pair<list<int>, list<int>> usesPairs = usesTableStmtToVar.getUsesPair();
-	return stmtTypeList.getStmtType(usesPairs, type);
+	return stmtTypeList.getStmtType(usesPairs, type); //Sieve through
 }
 
 pair<list<int>, list<int>> PKBMain::getProcUsesPair() {
@@ -1039,13 +1142,15 @@ pair<list<int>, list<int>> PKBMain::getProcUsesPair() {
 pair<list<int>, list<int>> PKBMain::getModifiesPairs(Entity type)
 {
 	pair<list<int>, list<int>> modPairs = modTableStmtToVar.getModPair();
-	return stmtTypeList.getStmtType(modPairs, type);
+	return stmtTypeList.getStmtType(modPairs, type); //Sieve through
 }
 
 pair<list<int>, list<int>> PKBMain::getProcModifiesPair() {
 	pair<list<int>, list<int>> procModPair = modTableProcToVar.getProcPair();
 	return procModPair;
 }
+
+//PATTERN
 
 pair<list<int>, list<int>> PKBMain::getLeftVariables()
 {
@@ -1175,6 +1280,7 @@ bool PKBMain::addVariable(string var)
 bool PKBMain::addProcedure(string proc)
 {
 	bool added = procIdxTable.addToProcIdxTable(proc);
+	existingProcedures.insert(proc);
 	return added;
 }
 
