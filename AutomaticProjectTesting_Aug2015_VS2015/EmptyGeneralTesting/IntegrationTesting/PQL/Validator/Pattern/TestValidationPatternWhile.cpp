@@ -19,20 +19,20 @@ namespace UnitTesting
     TEST_CLASS(TestValidationPatternWhile)
     {
     public:
-        QueryTree *qtPtr;
         string str;
+        QueryTree *qtPtr;
+        PatternHandler pHandler = PatternHandler(qtPtr);
 
         TEST_METHOD_INITIALIZE(Test_Initialisation)
         {
             qtPtr = new QueryTree;
-            str.clear();
+            pHandler = PatternHandler(qtPtr);
         }
 
         TEST_METHOD_CLEANUP(Test_Cleanup)
         {
             delete qtPtr;
             qtPtr = NULL;
-            str.clear();
         }
 
         TEST_METHOD(TestValidity_Pattern_While_Synonym_Underscore_Valid)
@@ -40,7 +40,6 @@ namespace UnitTesting
             str = "w(v, _)";
             qtPtr->insertSynonym(WHILE, "w");
             qtPtr->insertSynonym(VARIABLE, "v");
-            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(WHILE_PATTERN, "w", VARIABLE, "v", UNDERSCORE, "_");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
@@ -51,7 +50,6 @@ namespace UnitTesting
         {
             str = "w(_, _)";
             qtPtr->insertSynonym(WHILE, "w");
-            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(WHILE_PATTERN, "w", UNDERSCORE, "_", UNDERSCORE, "_");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
@@ -62,7 +60,6 @@ namespace UnitTesting
         {
             str = "w(\"x\", _)";
             qtPtr->insertSynonym(WHILE, "w");
-            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(WHILE_PATTERN, "w", IDENT_WITHQUOTES, "x", UNDERSCORE, "_");
             PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
@@ -74,7 +71,6 @@ namespace UnitTesting
             str = "w(a, _)";
             qtPtr->insertSynonym(WHILE, "w");
             qtPtr->insertSynonym(ASSIGN, "a");
-            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
 
@@ -82,7 +78,6 @@ namespace UnitTesting
         {
             str = "w(_, _, _)";
             qtPtr->insertSynonym(WHILE, "w");
-            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
     };
