@@ -45,7 +45,7 @@ Select s1 such that Next*(_, s1) pattern a1("y", _"x + (y * z)"_)
 5000
 10 - Select v1 ifVar pattern and procedure - Blacks calls others
 variable v1; if if1;
-Select v1 pattern if1(v1, _, __) such that Calls*("Black", _)
+Select v1 pattern if1(v1, _, _) such that Calls*("Black", _)
 c,d1,j,o,q,t1,u,x
 5000
 11 - Select s1 assignVar pattern LHS - x RHS - y times z and Parent(_, s1)
@@ -200,7 +200,7 @@ Select <s1,a1> such that Next*(_, s1) pattern a1("y", _"x + (y * z)"_)
 5000
 41 - Select p1,v1 ifVar pattern and procedure - Blacks calls others
 stmt s1, s2, s3, s4; prog_line e1, e2, e3, e4; procedure p1, p2, p3, p4; assign a1, a2, a3, a4; if if1, if2, if3, if4; while w1, w2, w3, w4; call o1, o2, o3, o4; variable v1, v2, v3, v4; constant c1, c2, c3, c4;
-Select <p1,v1> pattern if1(v1, _, __) such that Calls*("Black", _)
+Select <p1,v1> pattern if1(v1, _, _) such that Calls*("Black", _)
 Black c,Black d1,Black j,Black o,Black q,Black t1,Black u,Black x,Blue c,Blue d1,Blue j,Blue o,Blue q,Blue t1,Blue u,Blue x,Orange c,Orange d1,Orange j,Orange o,Orange q,Orange t1,Orange u,Orange x,Pink c,Pink d1,Pink j,Pink o,Pink q,Pink t1,Pink u,Pink x,Purple c,Purple d1,Purple j,Purple o,Purple q,Purple t1,Purple u,Purple x,White c,White d1,White j,White o,White q,White t1,White u,White x,Yellow c,Yellow d1,Yellow j,Yellow o,Yellow q,Yellow t1,Yellow u,Yellow x
 5000
 42 - Select p1,s1 assignVar pattern LHS - x RHS - y times z and Parent(_, s1)

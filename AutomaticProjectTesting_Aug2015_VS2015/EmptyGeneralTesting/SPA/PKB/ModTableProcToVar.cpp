@@ -4,19 +4,13 @@ ModTableProcToVar::ModTableProcToVar() {
 
 }
 
+/*
+Adds the following relations to modified table
+*/
 bool ModTableProcToVar::addModProcToVarList(int procIdx, int varIdx) {
-    // if proc name does not exist as a key, create new list and insert data to hash map
-    if (modProcToVarMap.find(procIdx) == modProcToVarMap.end()) {
-        modProcToVarMap[procIdx] = list<int>();
-        modProcToVarMap[procIdx].push_back(varIdx);
-        return true;
-    }
-    else {
-        // else, expand the list of variables
-        modProcToVarMap[procIdx].push_back(varIdx);
-        return true;
-    }
-    return false;
+	modProcToVarMap[procIdx].push_back(varIdx);
+	modProcToVarRelMap[procIdx].insert(varIdx);
+    return true;
 }
 
 list<int> ModTableProcToVar::getModVariablesFromProc(int procIdx) {
@@ -36,6 +30,22 @@ bool ModTableProcToVar::isMod(int procIdx, int varIdx) {
 }
 
 bool ModTableProcToVar::setMap(unordered_map<int, list<int>> map) {
+	int key;
+	list<int> valueList;
+	for (auto it : map) {
+		key = it.first;
+		valueList = it.second;
+		for (int value : valueList) {
+			procIdxList.push_back(key);
+			varIdxList.push_back(value);
+			modProcToVarRelMap[key].insert(value);
+		}
+	}
+	modProcToVarPair = make_pair(procIdxList, varIdxList);
+	varIdxList.sort();
+	varIdxList.unique();
+	procIdxList.sort();
+	procIdxList.unique();
 	modProcToVarMap = map;
 	return true;
 }
@@ -45,30 +55,9 @@ bool ModTableProcToVar::isModifyingAnything(int procIdx) {
 }
 
 list<int> ModTableProcToVar::getProcThatModifies() {
-	list<int> procList;
-	for (unordered_map<int, list<int>>::iterator it = modProcToVarMap.begin(); it != modProcToVarMap.end(); ++it) {
-		int procIdx = (*it).first;
-		if ((*it).second.size() > 0) {
-			procList.push_back(procIdx);
-		}
-	}
-
-	return procList;
+	return procIdxList;
 }
 
 pair<list<int>, list<int>> ModTableProcToVar::getProcPair() {
-	list<int> procList;
-	list<int> varList;
-
-	for (unordered_map<int, list<int>>::iterator it = modProcToVarMap.begin(); it != modProcToVarMap.end(); ++it) {
-		int procIdx = (*it).first;
-		list<int> currList = (*it).second;
-
-		for (int var : currList) {
-			procList.push_back(procIdx);
-			varList.push_back(var);
-		}
-	}
-
-	return make_pair(procList, varList);
+	return modProcToVarPair;
 }

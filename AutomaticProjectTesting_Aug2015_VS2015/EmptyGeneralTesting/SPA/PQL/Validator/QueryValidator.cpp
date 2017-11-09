@@ -37,13 +37,19 @@ bool QueryValidator::isValidSelection(string str) {
 }
 
 vector<string> QueryValidator::tokenize(string query) {
-    char delimiter = ';';
-    stringstream ss(query);
-    vector<string> tokens;
-    string arguments;
+	vector<string> tokens;
 
-    while (getline(ss, arguments, delimiter)) {
-        tokens.push_back(arguments);
-    }
-    return tokens;
+	if (query.back() != ';')
+	{
+		char delimiter = ';';
+		stringstream ss(query);
+		string arguments;
+
+		while (getline(ss, arguments, delimiter))
+		{
+			tokens.push_back(arguments);
+		}
+
+	}
+	return tokens;
 }

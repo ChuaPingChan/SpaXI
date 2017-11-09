@@ -502,16 +502,7 @@ void Parser::parseAssignment() {
                 */
                 OutputDebugString("PKB: Add constant to PKB.\n");
                 OutputDebugString("PKB: Update uses relationship.\n");
-                _pkbMainPtr->addConstant(_currentStmtNumber, constant);
-                // TODO Refactoring: Extract method to achieve SLAP.
-                if (!_parentStack.empty()) {
-                    stack<int> parentStackCopy = _parentStack;
-                    while (!parentStackCopy.empty()) {
-                        int parentStmt = parentStackCopy.top();
-                        _pkbMainPtr->addConstant(parentStmt, constant);     // TODO: Check why parentStmt is needed as argument.
-                        parentStackCopy.pop();
-                    }
-                }
+                _pkbMainPtr->addConstant(constant);
             }
             incrCurrentTokenPtr();
         }

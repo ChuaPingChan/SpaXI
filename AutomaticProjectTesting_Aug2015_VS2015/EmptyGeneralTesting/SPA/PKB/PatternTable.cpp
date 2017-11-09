@@ -1,12 +1,99 @@
 #include "PatternTable.h"
 
-list<string> infixToPostfix(string infix);
-list<string> filterEmptyElement(list<string> inputlist);
-bool isOperator(string c);
-int getPrecedence(string sign);
+using namespace std;
 
 PatternTable::PatternTable() {
-    
+}
+
+/*
+Converts from infix to post fix
+*/
+list<string> PatternTable::infixToPostfix(string infix)
+{
+	stack<string> signStack = stack<string>();
+	list<string> postfix = list<string>();
+	string var = ""; // Takes into account constants as well, treat var and constants as var
+	for (int i = 0; i < infix.length(); i++) {
+		string current = "";
+		current += infix[i];
+		if (isalpha(infix[i]) || isdigit(infix[i])) { // Tracking of curr var
+			var += infix[i];
+		}
+		else {
+			if (!var.empty()) {
+				postfix.push_back(var);
+				var = "";
+			}
+			if (isOperator(current)) {
+				while (!signStack.empty()
+					&& signStack.top().compare("(") != 0
+					&& getPrecedence(current) <= getPrecedence(signStack.top())) {
+					postfix.push_back(signStack.top());
+					signStack.pop();
+				}
+				signStack.push(current);
+			}
+			else if (infix[i] == '(') {
+				signStack.push(current);
+			}
+			else if (infix[i] == ')') {
+				while (!signStack.empty() && signStack.top().compare("(") != 0) {
+					postfix.push_back(signStack.top());
+					signStack.pop();
+				}
+				signStack.pop();
+			}
+		}
+	}
+	postfix.push_back(var);
+	while (!signStack.empty()) {
+		if (signStack.top().compare("(") != 0 || signStack.top().compare(")") != 0) {
+			postfix.push_back(signStack.top());
+		}
+		signStack.pop();
+	}
+	return filterEmptyElement(postfix);
+}
+
+/*
+Removes empty string
+*/
+list<string> PatternTable::filterEmptyElement(list<string> inputlist)
+{
+	list<string> newList = list<string>();
+	for (list<string>::iterator it = inputlist.begin(); it != inputlist.end(); ++it)
+	{
+		string curr = *it;
+		if (curr.compare("") != 0)
+		{
+			newList.push_back(*it);
+		}
+	}
+	return newList;
+}
+
+/*
+Method to check if is an operator
+*/
+bool PatternTable::isOperator(string c)
+{
+	return (c.compare("+") == 0 ||
+		c.compare("-") == 0 ||
+		c.compare("*") == 0 ||
+		c.compare("/") == 0);
+}
+
+/*
+Get weighted precedence of operators
+*/
+int PatternTable::getPrecedence(string sign)
+{
+	int weight;
+	if (sign.compare("+") == 0 || sign.compare("-") == 0)
+		weight = 1;
+	else if (sign.compare("*") == 0 || sign.compare("/") == 0)
+		weight = 2;
+	return weight;
 }
 
 bool PatternTable::addWhile(int stmt, int varIdx) {
@@ -19,17 +106,17 @@ bool PatternTable::addWhile(int stmt, int varIdx) {
 		varToWhileMap[varIdx].unique();
 	}
 	whileToVarMap[stmt] = varIdx;
+	varToWhileRelMap[varIdx].insert(stmt);
 	whileVarList.push_back(varIdx);
 	whileList.push_back(stmt);
 	return true;
 }
 
 bool PatternTable::isWhileControlVar(int stmt, int varIdx) {
-	if (varToWhileMap.find(varIdx) == varToWhileMap.end()) {
-		return false;
+	if (whileToVarMap.find(stmt) != whileToVarMap.end()) {
+		return whileToVarMap[stmt] == varIdx;
 	}
-
-	return find(varToWhileMap[varIdx].begin(), varToWhileMap[varIdx].end(), stmt) != varToWhileMap[varIdx].end();
+	return false;
 }
 
 bool PatternTable::addIf(int stmt, int varIdx) {
@@ -42,17 +129,18 @@ bool PatternTable::addIf(int stmt, int varIdx) {
 		varToIfMap[varIdx].unique();
 	}
 	ifToVarMap[stmt] = varIdx;
+	varToIfRelMap[varIdx].insert(stmt);
 	ifVarList.push_back(varIdx);
 	ifList.push_back(stmt);
 	return true;
 }
 
 bool PatternTable::isIfControlVar(int stmt, int varIdx) {
-	if (varToIfMap.find(varIdx) == varToIfMap.end()) {
-		return false;
+	if (ifToVarMap.find(stmt) != ifToVarMap.end()) {
+		return ifToVarMap[stmt] == varIdx;
 	}
 
-	return find(varToIfMap[varIdx].begin(), varToWhileMap[varIdx].end(), stmt) != varToWhileMap[varIdx].end();
+	return false;
 }
 
 pair<list<int>, list<int>> PatternTable::getControlVariablesInWhile() {
@@ -319,86 +407,4 @@ bool PatternTable::hasPartialMatch(int stmtNumber, string expression) {
         subexp.begin(), subexp.end()
     );
     return listitr != exp.end();
-}
-
-/*
-    Pre-cond: infix is a valid expression
-*/
-list<string> infixToPostfix(string infix) {
-    stack<string> signStack = stack<string>();
-    list<string> postfix = list<string>();
-    string var = "";
-    for (int i = 0; i < infix.length(); i++) {
-        string current = "";
-        current += infix[i];
-        if (isalpha(infix[i]) || isdigit(infix[i])) {
-            var += infix[i];
-        }
-        else {
-            if (!var.empty()) {
-                postfix.push_back(var);
-                var = "";
-            }
-            if (isOperator(current)) {
-                while (!signStack.empty()
-                    && signStack.top().compare("(") != 0
-                    && getPrecedence(current) <= getPrecedence(signStack.top())) {
-                    postfix.push_back(signStack.top());
-                    signStack.pop();
-                }
-                signStack.push(current);
-            }
-            else if (infix[i] == '(') {
-                signStack.push(current);
-            }
-            else if (infix[i] == ')') {
-                while (!signStack.empty() && signStack.top().compare("(") != 0) {
-                    postfix.push_back(signStack.top());
-                    signStack.pop();
-                }
-                signStack.pop();
-            }
-        }
-    }
-    postfix.push_back(var);
-    while (!signStack.empty()) {
-        if (signStack.top().compare("(") != 0 || signStack.top().compare(")") != 0) {
-            postfix.push_back(signStack.top());
-        }
-        signStack.pop();
-    }
-    return filterEmptyElement(postfix);
-}
-
-bool isOperator(string c) {
-    return (c.compare("+") == 0 ||
-        c.compare("-") == 0 ||
-        c.compare("*") == 0 ||
-        c.compare("/") == 0);
-}
-
-/*
-    Pre-cond: sign takes only operators(+, -, *, /)
-*/
-int getPrecedence(string sign) {
-    int weight;
-    if (sign.compare("+") == 0 || sign.compare("-") == 0)
-        weight = 1;
-    else if (sign.compare("*") == 0 || sign.compare("/") == 0)
-        weight = 2;
-    return weight;
-}
-
-list<string> filterEmptyElement(list<string> inputlist)
-{
-    list<string> newList = list<string>();
-    for (list<string>::iterator it = inputlist.begin(); it != inputlist.end(); ++it)
-    {
-        string curr = *it;
-        if (curr.compare("") != 0)
-        {
-            newList.push_back(*it);
-        }
-    }
-    return newList;
 }

@@ -40,7 +40,7 @@ Select a pattern a("x",_)
 5000
 9 - pattern a(v,known) -- expr
 assign a; variable v;
-Select v pattern a(v,"(a+b)*aa+a-(b*x)+CD-(( 2 )-1)");
+Select v pattern a(v,"(a+b)*aa+a-(b*x)+CD-(( 2 )-1)")
 a
 5000
 10 - pattern a(v,known) -- subexpr

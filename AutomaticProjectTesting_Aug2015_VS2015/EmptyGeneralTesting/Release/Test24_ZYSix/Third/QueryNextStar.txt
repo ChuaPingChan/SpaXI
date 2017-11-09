@@ -241,7 +241,7 @@ true
 50 - Return boolean such that there exists proglines that is before 70
 stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 
 Select BOOLEAN such that Next(e1, 70)
-FASLE
+false
 5000
 51 - Return boolean such that there exists if statements that is after any statement
 stmt s1, s2; prog_line e1, e2; procedure p1, p2; assign a1, a2; if if1, if2; while w1, w2; call o1, o2; variable v1,v2; constant c1, c2; 

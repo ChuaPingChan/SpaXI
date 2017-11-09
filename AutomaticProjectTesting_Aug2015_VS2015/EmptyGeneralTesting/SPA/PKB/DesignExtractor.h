@@ -20,12 +20,13 @@ using namespace std;
 class DesignExtractor {
 	public:
 		DesignExtractor();
+		unordered_map<int, list<int>> computeTransitiveClosure(unordered_map<int, list<int>> initialMap);
+		unordered_map<int, list<int>> computeTransitiveClosure(unordered_map<int, int> initialMap);
 		unordered_map<int, list<int>> computeParentToChildStarTable(ParentToChildTable);
 		unordered_map<int, list<int>> computeChildToParentStarTable(ChildToParentTable);
 		unordered_map<int, list<int>> computeFollowsStarAfterTable(FollowsTable followsTable);
 		unordered_map<int, list<int>> computeFollowsStarBeforeTable(FollowsTable followsTable);
 		pair<unordered_map<int, list<int>>, unordered_map<int, list<int>>> computeCallsStarTable(CallsTable callsTable);
-		unordered_map<int, pair<int, int>> computeFollowsTable(unordered_map<int, int> followsBefore, unordered_map<int, int> followsAfter);
 		unordered_map<int, list<int>> computeUsesTable(UsesTableProcToVar usesTable, CallsStarTable callsStarTable);
 		void DFS(int curr, unordered_map<int, list<int>> &map, unordered_set<int> &visited, unordered_map<int, list<int>> &callsStarMap);
 		unordered_map<int, list<int>> computeModifiesTable(ModTableProcToVar modTable, CallsStarTable callsStarTable);

@@ -166,6 +166,7 @@
     <ClCompile Include="Exception\TestExceptionAttributeNotFound.cpp" />
     <ClCompile Include="Exception\TestExceptionSynonymNotFound.cpp" />
     <ClCompile Include="Parser\TestParsingSource.cpp" />
+    <ClCompile Include="PKB\TestCache.cpp" />
     <ClCompile Include="PQL\Optimizer\TestClauseCostCalculator.cpp" />
     <ClCompile Include="PQL\Optimizer\TestClauseGroup.cpp" />
     <ClCompile Include="PQL\Optimizer\TestClauseGroupManager.cpp" />

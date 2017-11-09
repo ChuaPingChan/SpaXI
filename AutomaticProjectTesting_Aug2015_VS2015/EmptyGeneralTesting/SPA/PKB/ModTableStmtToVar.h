@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 #include <utility>
 
@@ -24,4 +25,8 @@ public:
     
 private:
     unordered_map<int, list<int>>modStmtToVarMap;
+	unordered_map<int, unordered_set<int>> modStmtToVarRelMap;
+	pair<list<int>, list<int>> modStmtToVarPair;
+	list<int> modStmtList;
+	list<int> modVarList;
 };

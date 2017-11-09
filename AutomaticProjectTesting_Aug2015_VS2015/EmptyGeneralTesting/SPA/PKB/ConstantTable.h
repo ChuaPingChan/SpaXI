@@ -12,12 +12,10 @@ using namespace std;
 class ConstantTable {
 public:
     ConstantTable();
-    bool addConstantList(int stmtNumber, int constant);
-    list<int> getStmtConstants(int stmtNumber);
+    bool addConstantList(int constant);
 	list<int> getAllConstants();
-    bool hasConstants(int stmtNumber, int constant);
 	bool isConstant(int constant);
 private:
-    unordered_map<int, list<int>> constantTableMap;
 	unordered_set<int> constantSet;
+	list<int> constantList;
 };

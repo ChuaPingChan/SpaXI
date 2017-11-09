@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 #include <stack>
 #include <ctype.h>
@@ -15,6 +16,10 @@ using namespace std;
 class PatternTable {
 public:
     PatternTable();
+	list<string> infixToPostfix(string infix);
+	list<string> filterEmptyElement(list<string> inputlist);
+	bool isOperator(string c);
+	int getPrecedence(string sign);
 	bool addWhile(int stmt, int varIdx);
 	bool isWhileControlVar(int stmt, int varIdx);
 	bool addIf(int stmt, int varIdx);
@@ -49,7 +54,9 @@ private:
     unordered_map<int, pair<int,list<string>>> patternTableMap;
     stack<char> infixToPostfixStack;
 	unordered_map<int, list<int>> varToWhileMap;
+	unordered_map<int, unordered_set<int>> varToWhileRelMap;
 	unordered_map<int, list<int>> varToIfMap;
+	unordered_map<int, unordered_set<int>> varToIfRelMap;
 	list<int> whileVarList;
 	list<int> whileList;
 	list<int> ifVarList;

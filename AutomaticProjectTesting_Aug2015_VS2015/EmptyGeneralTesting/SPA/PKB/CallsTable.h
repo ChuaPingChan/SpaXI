@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 
 using namespace std;
@@ -30,7 +31,7 @@ private:
 	unordered_map<int, list<int>> callsProcMapReverse;
 	unordered_map<int, int> callsStmtToProcMap;
 	unordered_map<int, list<int>> callsProcToStmtMap;
-	unordered_map <string, bool> callsRelPairs;
+	unordered_map <int, unordered_set<int>> callsRelMap;
 	list<int> callees;
 	list<int> callers;
 	pair<list<int>, list<int>> allCalls;

@@ -6,21 +6,21 @@ NextTable::NextTable() {
 }
 
 bool NextTable::setNextRel(int stmt, int stmtNext) {
-	string nextRel = to_string(stmt) + "," + to_string(stmtNext);
-	if (allNextRel.find(nextRel) != allNextRel.end()) {
-		return true;
-	}
 	nextMap[stmt].push_back(stmtNext);
 	nextMapReverse[stmtNext].push_back(stmt);
 	prevList.push_back(stmt);
 	nextList.push_back(stmtNext);
-	allNextRel.insert(nextRel);
+	if (stmt != 0 || stmtNext != 0) {
+		nextRelMap[stmt].insert(stmtNext);
+	}
 	return true;
 }
 
 bool NextTable::isNext(int stmtBef, int stmtAft) {
-	string nextRel = to_string(stmtBef) + "," + to_string(stmtAft);
-	return allNextRel.find(nextRel) != allNextRel.end();
+	if (nextRelMap.find(stmtBef) != nextRelMap.end()) {
+		return nextRelMap[stmtBef].find(stmtAft) != nextRelMap[stmtBef].end();
+	}
+	return false;
 }
 
 bool NextTable::isExecutedBefore(int stmtBef) {
@@ -67,16 +67,19 @@ pair<list<int>, list<int>>  NextTable::getAllNext() {
 	return make_pair(prevList, nextList);
 }
 
+/*
+This method traverses through the next map to find
+if Next*(stmtBef, stmtAft) is true*/
 bool NextTable::isNextStar(int stmtBef, int stmtAft) {
 	unordered_set<int> visited;
 	queue<int> toVisit;
-	if (nextMap.find(stmtBef) == nextMap.end()) {
+	if (nextMap.find(stmtBef) == nextMap.end()) { //Early termination
 		return false;
 	}
 
 	list<int> afters = nextMap[stmtBef];
 	for (int i : afters) {
-		if (i == stmtAft) {
+		if (i == stmtAft) { //Once found, terminate
 			return true;
 		}
 		toVisit.push(i);
@@ -95,7 +98,7 @@ bool NextTable::isNextStar(int stmtBef, int stmtAft) {
 		if (nextMap.find(curr) != nextMap.end()) {
 			afters = nextMap[curr];
 			for (int i : afters) {
-				if (i == stmtAft) {
+				if (i == stmtAft) { //Once found, terminate
 					return true;
 				}
 				toVisit.push(i);
@@ -107,7 +110,9 @@ bool NextTable::isNextStar(int stmtBef, int stmtAft) {
 	return false;
 }
 
-//TODO implement cache
+/*
+This method gets all the statements executed after the statement
+*/
 list<int> NextTable::getExecutedAfterStar(int stmtBef) {
 	list<int> afterStar;
 	unordered_set<int> visited;
@@ -145,6 +150,10 @@ list<int> NextTable::getExecutedAfterStar(int stmtBef) {
 	return afterStar;
 }
 
+/*
+This method gets all the statements executed before the
+statement.
+*/
 list<int> NextTable::getExecutedBeforeStar(int stmtAft) {
 	list<int> beforeStar;
 	unordered_set<int> visited;
@@ -182,6 +191,10 @@ list<int> NextTable::getExecutedBeforeStar(int stmtAft) {
 	return beforeStar;
 }
 
+/*
+This method runs through the CFG for everynode and
+populates the respective nextStar relations
+*/
 pair<list<int>, list<int>> NextTable::getAllNextStar(unordered_map<int, list<int>> &nextStarMap, 
 	unordered_map<int, list<int>> &nextStarMapReverse, unordered_map<int, unordered_set<int>> &nextStarRelMap) {
 	list<int> befList;
@@ -190,7 +203,7 @@ pair<list<int>, list<int>> NextTable::getAllNextStar(unordered_map<int, list<int
 	int befStmt;
 	string currPair;
 	queue<int> toVisit;
-	for (unordered_map<int, list<int>>::iterator it = nextMap.begin(); it != nextMap.end(); ++it) {
+	for (unordered_map<int, list<int>>::iterator it = nextMap.begin(); it != nextMap.end(); ++it) { // Go through every node
 		unordered_set<int> visited;
 		befStmt = (*it).first;
 		afters = (*it).second;

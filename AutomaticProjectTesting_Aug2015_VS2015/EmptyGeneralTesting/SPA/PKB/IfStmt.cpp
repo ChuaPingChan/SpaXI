@@ -2,6 +2,10 @@
 
 using namespace std;
 
+/*
+Sets up the ifStmt object with its required details
+This IfStmt object is only used in the computation of affets and affects star
+*/
 IfStmt::IfStmt(int stmtNum, int branchIf, int endIf,
 	int branchElse, int endElse, bool visitedElse, int afterIf,
 	unordered_map<int, unordered_set<int>> ifLatestMod, unordered_map<int, unordered_set<int>> elseLatestMod) {
