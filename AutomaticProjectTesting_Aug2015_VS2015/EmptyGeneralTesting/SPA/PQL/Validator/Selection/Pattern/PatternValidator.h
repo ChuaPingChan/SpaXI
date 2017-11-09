@@ -27,7 +27,6 @@ public:
     string getArgThree();
 
 protected:
-    static const int UNKNOWN = -1;
     QueryTree *qtPtr;
     string paramStr;
 
@@ -35,10 +34,10 @@ protected:
     Entity argOneType;
     Entity argTwoType;
     Entity argThreeType;
-    string patternSyn = "";
-    string argOne = "";
-    string argTwo = "";
-    string argThree = "";
+    string patternSyn;
+    string argOne;
+    string argTwo;
+    string argThree;
 
     bool validity = false;
 };
