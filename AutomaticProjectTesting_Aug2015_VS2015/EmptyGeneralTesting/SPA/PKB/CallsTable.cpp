@@ -5,6 +5,9 @@ using namespace std;
 CallsTable::CallsTable() {
 }
 
+/*
+This method populates the necessary tables in PKB with regards to call
+*/
 bool CallsTable::addCallsRel(int caller, int callee) {
 	if (callsProcMap.find(caller) == callsProcMap.end()) {
 		callers.push_back(caller);
@@ -18,8 +21,7 @@ bool CallsTable::addCallsRel(int caller, int callee) {
 	allCalls.second.push_back(callee);
 	callsProcMap[caller].push_back(callee);
 	callsProcMapReverse[callee].push_back(caller);
-	string callsRel = to_string(caller) + "," + to_string(callee);
-	callsRelPairs[callsRel] = true;
+	callsRelMap[caller].insert(callee);
 	return true;
 }
 
@@ -63,8 +65,10 @@ list<int> CallsTable::getCaller(int callee) {
 }
 
 bool CallsTable::isCalls(int caller, int callee) {
-	string callsRel = to_string(caller) + "," + to_string(callee);
-	return (callsRelPairs.find(callsRel) != callsRelPairs.end());
+	if (callsRelMap.find(caller) == callsRelMap.end()) {
+		return false;
+	}
+	return (callsRelMap[caller].find(callee) != callsRelMap[caller].end());
 }
 
 bool CallsTable::hasCalls() {

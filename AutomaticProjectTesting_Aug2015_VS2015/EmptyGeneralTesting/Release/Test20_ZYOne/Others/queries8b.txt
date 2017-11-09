@@ -100,6 +100,6 @@ none
 5000
 21 - VALID: variable synonym same as souce procedure name
 variable hihi;
-Select hihi such that Uses("hihi", hihi);
+Select hihi such that Uses("hihi", hihi)
 a1,apple,b2,blah,bot,c3,car,choc,dark,dog,egg,fish,goat,hi,hot,lion,new,panda,rob,snake,throw,tomato,wee,xmen,zip
 5000

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 
 using namespace std;
@@ -15,8 +16,6 @@ public:
 
 	bool addParentChild(int parentStmt, int childStmt);
 
-	bool isParentStar(int parentStmt);
-
 	list<int> getChildren(int parentStmt);
 
 	void setMap(unordered_map<int, list<int>> target);
@@ -27,4 +26,8 @@ public:
 
 private:
 	unordered_map<int, list<int>> parentToChildStarMap;
+	unordered_map<int, unordered_set<int>> parentToChildStarRelMap;
+	list<int> parentList;
+	list<int> childList;
+	pair<list<int>, list<int>> parentToChildStarPair;
 };

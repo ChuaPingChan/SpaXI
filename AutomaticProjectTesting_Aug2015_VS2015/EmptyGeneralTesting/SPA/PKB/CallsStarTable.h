@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 
 using namespace std;
@@ -23,7 +24,7 @@ private:
 	unordered_map<int, list<int>> callsStarProcMapReverse;
 	unordered_map<int, int> callsStmtToProcMap;
 	unordered_map<int, list<int>> callsProcToStmtMap;
-	unordered_map <string, bool> callsStarRelPairs;
+	unordered_map <int, unordered_set<int>> callsStarRelMap;
 	list<int> callerList;
 	list<int> calleeList;
 	pair<list<int>, list<int>> allCallsStar;

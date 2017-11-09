@@ -24,4 +24,5 @@ public:
 
 private:
 	unordered_map<int, int> childToParentMap;
+	list<int> childList;
 };

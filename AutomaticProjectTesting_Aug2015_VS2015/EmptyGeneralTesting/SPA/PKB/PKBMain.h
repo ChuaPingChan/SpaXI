@@ -98,6 +98,10 @@ public:
     pair<list<int>, list<int>> getAllFollowsStar(Entity type1, Entity type2);
     bool startProcessComplexRelations();
 
+	bool checkAllCalledProceduresExist();
+
+	bool checkHasRecursiveCalls();
+
 	bool setNext(int stmt, int stmtNext);
 
 	bool isNext(int stmtBef, int stmtAft);
@@ -160,7 +164,7 @@ public:
     bool addAssignmentStmt(int stmt);
 	bool addWhileStmt(int stmt, string controlVar);
 	bool addIfStmt(int stmt, string controlVar);
-    bool addConstant(int stmt, int constant);
+	bool addConstant(int constant);
 	bool addStmtToProc(int stmt, string procName);
 	int getFirstStmtFromProc(int procIdx);
 	int getProcFromStmt(int stmt);
@@ -299,6 +303,10 @@ public:
 
 private:
     static PKBMain* singleton;
+	unordered_set<string> calledProcedures;
+	unordered_set<string> existingProcedures;
+	bool allCalledProceduresExist;
+	bool hasRecursiveCalls;
 
 	ChildToParentStarTable childToParentStarTable;
 	ChildToParentTable childToParentTable;
@@ -310,8 +318,6 @@ private:
 	unordered_map<int, int> followsBeforeMap;
 	unordered_map<int, int> followsAfterMap;
 	CallsTable callsTable;
-//	CallsStarTable callsStarTable;
-	
 	ConstantTable constantTable;
     ModTableProcToVar modTableProcToVar;
     ModTableStmtToVar modTableStmtToVar;

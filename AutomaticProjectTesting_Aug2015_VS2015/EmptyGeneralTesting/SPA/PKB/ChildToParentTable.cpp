@@ -12,6 +12,11 @@ bool ChildToParentTable::addChildParent(int childStmt, int parentStmt)
 		return true;
 	}
 
+	//add to list of all children
+	childList.push_back(childStmt);
+	childList.sort();
+	childList.unique();
+
 	//If parent doesnt exist in map, create new parent
 	if (childToParentMap.find(childStmt) == childToParentMap.end()) {
 		childToParentMap[childStmt] = parentStmt;
@@ -47,11 +52,5 @@ unordered_map<int, int> ChildToParentTable::getTable() {
 }
 
 list<int> ChildToParentTable::getAllChildren() {
-	list<int> stmtList;
-
-	for (std::unordered_map<int, int>::iterator it = childToParentMap.begin(); it != childToParentMap.end(); ++it) {
-		stmtList.push_back((*it).first);
-	}
-
-	return stmtList;
+	return childList;
 }

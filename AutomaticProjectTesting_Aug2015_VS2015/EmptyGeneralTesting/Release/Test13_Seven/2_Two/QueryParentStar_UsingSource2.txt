@@ -20,12 +20,12 @@ Select a1 such that Parent* (s1, a1)
 5000
 5 - Get all parent s1 of child w1
 stmt s1; while w1;
-Select s1 such that Parent* (s1, w1);
+Select s1 such that Parent* (s1, w1)
 5, 6, 11, 14, 34
 5000
 6 - Get all child w1 of parent s1
 stmt s1; while w1;
-Select w1 such that Parent* (s1, w1);
+Select w1 such that Parent* (s1, w1)
 6, 8, 11, 14, 15, 19, 38
 5000
 7 - Get all parent s1 of child ifs1
@@ -230,12 +230,12 @@ Select a1 such that Parent* (pl1, a1)
 5000
 47 - Get all parent pl1 of child w1
 prog_line pl1; while w1;
-Select pl1 such that Parent* (pl1, w1);
+Select pl1 such that Parent* (pl1, w1)
 5, 6, 11, 14, 34
 5000
 48 - Get all child w1 of parent pl1
 prog_line pl1; while w1;
-Select w1 such that Parent* (pl1, w1);
+Select w1 such that Parent* (pl1, w1)
 6, 8, 11, 14, 15, 19, 38
 5000
 49 - Get all parent pl1 of child ifs1
