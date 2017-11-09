@@ -1,6 +1,6 @@
-Overall Test Ran    : 19726
-Overall Test Passed : 19709
-Overall Test Failed : 11
+Overall Test Ran    : 19723
+Overall Test Passed : 19717
+Overall Test Failed : 0
 Overall Test Timeout: 6
 
 
@@ -119,9 +119,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query4.xml: 
-Test Ran: 260	[BUG]
-Passed   : 259
-Failed   : 1
+Test Ran: 260	
+Passed   : 260
+Failed   : 0
 Timeout  : 0
 
 TestResult\out13_Intense_Query5.xml: 
@@ -502,12 +502,6 @@ Passed   : 13
 Failed   : 0
 Timeout  : 0
 
-TestResult\out15_StressNext_QueryStressNextTest1.xml: 
-Test Ran: 3	[BUG]
-Passed   : 1
-Failed   : 2
-Timeout  : 0
-
 TestResult\out15_SystemAffects_QueryAffectsTest1.xml: 
 Test Ran: 68	
 Passed   : 68
@@ -713,9 +707,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out15_Validation_QueryValidation.xml: 
-Test Ran: 40	[BUG]
-Passed   : 39
-Failed   : 1
+Test Ran: 40	
+Passed   : 40
+Failed   : 0
 Timeout  : 0
 
 TestResult\out16_QueryStressNext.xml: 
@@ -869,9 +863,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries8b.xml: 
-Test Ran: 21	[BUG]
-Passed   : 20
-Failed   : 1
+Test Ran: 21	
+Passed   : 21
+Failed   : 0
 Timeout  : 0
 
 TestResult\out20_Others_queries9.xml: 
@@ -983,9 +977,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out21_Queries12.xml: 
-Test Ran: 253	[BUG]
-Passed   : 252
-Failed   : 1
+Test Ran: 253	
+Passed   : 253
+Failed   : 0
 Timeout  : 0
 
 TestResult\out21_Queries12a.xml: 
@@ -1283,9 +1277,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out24_First_QueryMultipleClauses.xml: 
-Test Ran: 70	[BUG]
-Passed   : 68
-Failed   : 2
+Test Ran: 70	
+Passed   : 70
+Failed   : 0
 Timeout  : 0
 
 TestResult\out24_First_QueryNext.xml: 
@@ -1445,9 +1439,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out24_Third_QueryMultipleClauses.xml: 
-Test Ran: 70	[BUG]
-Passed   : 68
-Failed   : 2
+Test Ran: 70	
+Passed   : 70
+Failed   : 0
 Timeout  : 0
 
 TestResult\out24_Third_QueryNext.xml: 
@@ -1457,9 +1451,9 @@ Failed   : 0
 Timeout  : 0
 
 TestResult\out24_Third_QueryNextStar.xml: 
-Test Ran: 88	[BUG]
-Passed   : 87
-Failed   : 1
+Test Ran: 88	
+Passed   : 88
+Failed   : 0
 Timeout  : 0
 
 TestResult\out24_Third_QueryNextStar_Invalid.xml: 
