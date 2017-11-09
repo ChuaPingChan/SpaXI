@@ -17,13 +17,13 @@ namespace UnitTesting
     public:
 
         const std::string dummySimpleSourcePath = "../UnitTesting/ParserTestDependencies/dummySimpleSource.txt";
-        PKBMain dummyPkbMain;   // Purposely construct new PKB (non-singleton)
-        PKBMain* dummyPkbMainPtr = &dummyPkbMain;
+        PKBMain pkb;   // Purposely construct new PKB (non-singleton)
+        PKBMain* pkbPtr = &pkb;
 
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_success)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -35,7 +35,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_equalSignMissing)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_missingEqual());
 
             Assert::IsFalse(parser.parse(dummySimpleSourcePath));
@@ -47,7 +47,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_missingSemicolon)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_missingSemicolon());
 
             Assert::IsFalse(parser.parse(dummySimpleSourcePath));
@@ -59,7 +59,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentsOnly_wrongProcName)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignmentsOnly_wrongProcName());
 
             Assert::IsFalse(parser.parse(dummySimpleSourcePath));
@@ -71,7 +71,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_whileOnly_success)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_whileOnly());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -87,32 +87,32 @@ namespace UnitTesting
             list<string> expectedStringResults;
             list<int> actualIntResults;
             list<int> expectedIntResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_nonNestedIfElse());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Test adding of if-else statements
-            actualIntResults = dummyPkbMain.getAllIfs();
+            actualIntResults = pkb.getAllIfs();
             expectedIntResults = list<int>{ 4, 10 };
             actualIntResults.sort();
             expectedIntResults.sort();
             Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Test if parents are updated correctly
-            actualIntResults = dummyPkbMain.getAllParents(Entity::STMT);
+            actualIntResults = pkb.getAllParents(Entity::STMT);
             expectedIntResults = list<int>{ 4, 10 };
             actualIntResults.sort();
             expectedIntResults.sort();
             Assert::IsTrue(actualIntResults == expectedIntResults);
 
-            actualIntResults = dummyPkbMain.getAllParents(Entity::IF);
+            actualIntResults = pkb.getAllParents(Entity::IF);
             expectedIntResults = list<int>{ 4, 10 };
             actualIntResults.sort();
             expectedIntResults.sort();
             Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Test if children are updated correctly
-            actualIntResults = dummyPkbMain.getAllChildren(Entity::STMT);
+            actualIntResults = pkb.getAllChildren(Entity::STMT);
             expectedIntResults = list<int>{ 5, 6, 7, 8, 11, 12, 13 };
             actualIntResults.sort();
             expectedIntResults.sort();
@@ -125,7 +125,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentAnd1LevelNestedWhile_success)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -137,7 +137,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentAnd1LevelNestedWhile2_success)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile2());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -149,7 +149,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentAnd1LevelNestedWhile_missingBoolVar)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_1LevelNestedWhile_missingBoolVar());
 
             Assert::IsFalse(parser.parse(dummySimpleSourcePath));
@@ -161,7 +161,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_assignmentAnd2LevelNestedWhile_success)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_assignments_2LevelNestedWhile());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -173,7 +173,7 @@ namespace UnitTesting
         TEST_METHOD(TestAddStmtsOfProc)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_iteration3complexity());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
@@ -182,31 +182,31 @@ namespace UnitTesting
             list<string> expectedStrResults;
 
             expectedStrResults = list<string>{ "ABC" };
-            actualIntResult = dummyPkbMain.getProcFromStmt(4);
-            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            actualIntResult = pkb.getProcFromStmt(4);
+            actualStrResults = pkb.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
             Assert::IsTrue(actualStrResults == expectedStrResults);
-            actualIntResult = dummyPkbMain.getProcFromStmt(10);
-            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            actualIntResult = pkb.getProcFromStmt(10);
+            actualStrResults = pkb.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
             Assert::IsTrue(actualStrResults == expectedStrResults);
-            actualIntResult = dummyPkbMain.getProcFromStmt(14);
-            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            actualIntResult = pkb.getProcFromStmt(14);
+            actualStrResults = pkb.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
             Assert::IsTrue(actualStrResults == expectedStrResults);
-            actualIntResult = dummyPkbMain.getProcFromStmt(20);
-            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            actualIntResult = pkb.getProcFromStmt(20);
+            actualStrResults = pkb.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
             Assert::IsTrue(actualStrResults == expectedStrResults);
 
             expectedStrResults = list<string>{ "GHI" };
-            actualIntResult = dummyPkbMain.getProcFromStmt(40);
-            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            actualIntResult = pkb.getProcFromStmt(40);
+            actualStrResults = pkb.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
             Assert::IsTrue(actualStrResults == expectedStrResults);
-            actualIntResult = dummyPkbMain.getProcFromStmt(61);
-            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            actualIntResult = pkb.getProcFromStmt(61);
+            actualStrResults = pkb.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
             Assert::IsTrue(actualStrResults == expectedStrResults);
-            actualIntResult = dummyPkbMain.getProcFromStmt(41);
-            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            actualIntResult = pkb.getProcFromStmt(41);
+            actualStrResults = pkb.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
             Assert::IsTrue(actualStrResults == expectedStrResults);
-            actualIntResult = dummyPkbMain.getProcFromStmt(52);
-            actualStrResults = dummyPkbMain.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
+            actualIntResult = pkb.getProcFromStmt(52);
+            actualStrResults = pkb.convertIdxToString(list<int>{actualIntResult}, Entity::PROCEDURE);
             Assert::IsTrue(actualStrResults == expectedStrResults);
 
             // Clean up
@@ -218,36 +218,36 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_simpleNextRelation1());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Test if all if-else statements are added correctly
-            actualResults = dummyPkbMain.getAllIfs();
+            actualResults = pkb.getAllIfs();
             expectedResults = list<int>{ 5 };
             actualResults.sort();
             expectedResults.sort();
             Assert::IsTrue(actualResults == expectedResults);
 
             // Test if all while statements are added correctly
-            actualResults = dummyPkbMain.getAllWhiles();
+            actualResults = pkb.getAllWhiles();
             expectedResults = list<int>{ 3 };
             actualResults.sort();
             expectedResults.sort();
             Assert::IsTrue(actualResults == expectedResults);
 
-            Assert::IsTrue(dummyPkbMain.isNext(1, 2));
-            Assert::IsTrue(dummyPkbMain.isNext(2, 3));
-            Assert::IsTrue(dummyPkbMain.isNext(3, 4));
-            Assert::IsTrue(dummyPkbMain.isNext(4, 5));
+            Assert::IsTrue(pkb.isNext(1, 2));
+            Assert::IsTrue(pkb.isNext(2, 3));
+            Assert::IsTrue(pkb.isNext(3, 4));
+            Assert::IsTrue(pkb.isNext(4, 5));
 
-            Assert::IsTrue(dummyPkbMain.isNext(5, 7));
-            Assert::IsTrue(dummyPkbMain.isNext(6, 8));
-            Assert::IsTrue(dummyPkbMain.isNext(7, 8));
-            Assert::IsTrue(dummyPkbMain.isNext(8, 3));
-            Assert::IsTrue(dummyPkbMain.isNext(3, 9));
+            Assert::IsTrue(pkb.isNext(5, 7));
+            Assert::IsTrue(pkb.isNext(6, 8));
+            Assert::IsTrue(pkb.isNext(7, 8));
+            Assert::IsTrue(pkb.isNext(8, 3));
+            Assert::IsTrue(pkb.isNext(3, 9));
 
-            Assert::IsFalse(dummyPkbMain.isNext(8, 9));
+            Assert::IsFalse(pkb.isNext(8, 9));
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -258,77 +258,77 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_comprehensiveNextRelations());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Simple Next relations
-            Assert::IsTrue(dummyPkbMain.isNext(1, 2));
-            Assert::IsTrue(dummyPkbMain.isNext(2, 3));
-            Assert::IsTrue(dummyPkbMain.isNext(7, 8));
-            Assert::IsTrue(dummyPkbMain.isNext(74, 75));
+            Assert::IsTrue(pkb.isNext(1, 2));
+            Assert::IsTrue(pkb.isNext(2, 3));
+            Assert::IsTrue(pkb.isNext(7, 8));
+            Assert::IsTrue(pkb.isNext(74, 75));
 
             // Next relations when entering if-block
-            Assert::IsTrue(dummyPkbMain.isNext(4, 5));
-            Assert::IsTrue(dummyPkbMain.isNext(16, 17));
-            Assert::IsTrue(dummyPkbMain.isNext(19, 20));
-            Assert::IsTrue(dummyPkbMain.isNext(67, 68));
+            Assert::IsTrue(pkb.isNext(4, 5));
+            Assert::IsTrue(pkb.isNext(16, 17));
+            Assert::IsTrue(pkb.isNext(19, 20));
+            Assert::IsTrue(pkb.isNext(67, 68));
 
             // Next relations when entering else-block
-            Assert::IsTrue(dummyPkbMain.isNext(4, 6));
-            Assert::IsTrue(dummyPkbMain.isNext(16, 18));
-            Assert::IsTrue(dummyPkbMain.isNext(19, 21));
+            Assert::IsTrue(pkb.isNext(4, 6));
+            Assert::IsTrue(pkb.isNext(16, 18));
+            Assert::IsTrue(pkb.isNext(19, 21));
 
             // Next relations when entering while-block
-            Assert::IsTrue(dummyPkbMain.isNext(3, 4));
-            Assert::IsTrue(dummyPkbMain.isNext(27, 28));
-            Assert::IsTrue(dummyPkbMain.isNext(45, 46));
+            Assert::IsTrue(pkb.isNext(3, 4));
+            Assert::IsTrue(pkb.isNext(27, 28));
+            Assert::IsTrue(pkb.isNext(45, 46));
 
             // Next relations across while-block
-            Assert::IsTrue(dummyPkbMain.isNext(8, 14));
-            Assert::IsTrue(dummyPkbMain.isNext(38, 41));
+            Assert::IsTrue(pkb.isNext(8, 14));
+            Assert::IsTrue(pkb.isNext(38, 41));
 
             // Next relations when exiting ifElse-block or while-block
-            Assert::IsTrue(dummyPkbMain.isNext(5, 3));
-            Assert::IsTrue(dummyPkbMain.isNext(6, 3));
-            Assert::IsTrue(dummyPkbMain.isNext(11, 13));
-            Assert::IsTrue(dummyPkbMain.isNext(12, 13));
-            Assert::IsTrue(dummyPkbMain.isNext(5, 3));
-            Assert::IsTrue(dummyPkbMain.isNext(17, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(20, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(21, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(24, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(27, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(58, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(59, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(62, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(63, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
-            Assert::IsTrue(dummyPkbMain.isNext(13, 8));     // Loop back (while)
-            Assert::IsTrue(dummyPkbMain.isNext(53, 51));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsTrue(dummyPkbMain.isNext(51, 50));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsTrue(dummyPkbMain.isNext(50, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(pkb.isNext(5, 3));
+            Assert::IsTrue(pkb.isNext(6, 3));
+            Assert::IsTrue(pkb.isNext(11, 13));
+            Assert::IsTrue(pkb.isNext(12, 13));
+            Assert::IsTrue(pkb.isNext(5, 3));
+            Assert::IsTrue(pkb.isNext(17, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(20, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(21, 15));    // Corner-case 1: Nested if-else in else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(24, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(27, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(58, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(59, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(62, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(63, 64));    // Corner-case 3: Nested if-else in if-block and else-block, immediate exit
+            Assert::IsTrue(pkb.isNext(13, 8));     // Loop back (while)
+            Assert::IsTrue(pkb.isNext(53, 51));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(pkb.isNext(51, 50));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsTrue(pkb.isNext(50, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
 
             // Test for false cases
-            Assert::IsFalse(dummyPkbMain.isNext(1, 3));
-            Assert::IsFalse(dummyPkbMain.isNext(5, 6));
-            Assert::IsFalse(dummyPkbMain.isNext(5, 7));
-            Assert::IsFalse(dummyPkbMain.isNext(6, 7));
-            Assert::IsFalse(dummyPkbMain.isNext(10, 13));
-            Assert::IsFalse(dummyPkbMain.isNext(13, 14));
-            Assert::IsFalse(dummyPkbMain.isNext(17, 22));
-            Assert::IsFalse(dummyPkbMain.isNext(20, 22));
-            Assert::IsFalse(dummyPkbMain.isNext(21, 22));
-            Assert::IsFalse(dummyPkbMain.isNext(26, 23));
-            Assert::IsFalse(dummyPkbMain.isNext(29, 23));
-            Assert::IsFalse(dummyPkbMain.isNext(26, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
-            Assert::IsFalse(dummyPkbMain.isNext(29, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
-            Assert::IsFalse(dummyPkbMain.isNext(35, 36));
-            Assert::IsFalse(dummyPkbMain.isNext(40, 41));
-            Assert::IsFalse(dummyPkbMain.isNext(48, 49));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsFalse(dummyPkbMain.isNext(51, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsFalse(dummyPkbMain.isNext(53, 50));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsFalse(dummyPkbMain.isNext(53, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
-            Assert::IsFalse(dummyPkbMain.isNext(55, 64));
+            Assert::IsFalse(pkb.isNext(1, 3));
+            Assert::IsFalse(pkb.isNext(5, 6));
+            Assert::IsFalse(pkb.isNext(5, 7));
+            Assert::IsFalse(pkb.isNext(6, 7));
+            Assert::IsFalse(pkb.isNext(10, 13));
+            Assert::IsFalse(pkb.isNext(13, 14));
+            Assert::IsFalse(pkb.isNext(17, 22));
+            Assert::IsFalse(pkb.isNext(20, 22));
+            Assert::IsFalse(pkb.isNext(21, 22));
+            Assert::IsFalse(pkb.isNext(26, 23));
+            Assert::IsFalse(pkb.isNext(29, 23));
+            Assert::IsFalse(pkb.isNext(26, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsFalse(pkb.isNext(29, 30));    // Corner-case 2: Nested while stmt in if-block and else-block, immediate exit
+            Assert::IsFalse(pkb.isNext(35, 36));
+            Assert::IsFalse(pkb.isNext(40, 41));
+            Assert::IsFalse(pkb.isNext(48, 49));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsFalse(pkb.isNext(51, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsFalse(pkb.isNext(53, 50));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsFalse(pkb.isNext(53, 54));    // Corner-case 4: Nested while stmt in while stmt, immediately exit
+            Assert::IsFalse(pkb.isNext(55, 64));
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -339,25 +339,25 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_affectsSource1());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
             // Test for affects
-            Assert::IsTrue(dummyPkbMain.isAffects(1, 3));
-            Assert::IsTrue(dummyPkbMain.isAffects(1, 7));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 3));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
-            Assert::IsTrue(dummyPkbMain.isAffects(5, 3));
-            Assert::IsTrue(dummyPkbMain.isAffects(5, 5));
-            Assert::IsTrue(dummyPkbMain.isAffects(5, 6));
-            Assert::IsTrue(dummyPkbMain.isAffects(5, 7));
-            Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
+            Assert::IsTrue(pkb.isAffects(1, 3));
+            Assert::IsTrue(pkb.isAffects(1, 7));
+            Assert::IsTrue(pkb.isAffects(3, 3));
+            Assert::IsTrue(pkb.isAffects(3, 5));
+            Assert::IsTrue(pkb.isAffects(3, 6));
+            Assert::IsTrue(pkb.isAffects(3, 7));
+            Assert::IsTrue(pkb.isAffects(5, 3));
+            Assert::IsTrue(pkb.isAffects(5, 5));
+            Assert::IsTrue(pkb.isAffects(5, 6));
+            Assert::IsTrue(pkb.isAffects(5, 7));
+            Assert::IsFalse(pkb.isAffects(1, 2));
 
-            Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 10);
+            Assert::IsTrue(pkb.getAllAffects().first.size() == 10);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -368,18 +368,18 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_affectsSource2());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
             // Test for affects
-            Assert::IsTrue(dummyPkbMain.isAffects(1, 8));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 5));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 7));
-            Assert::IsFalse(dummyPkbMain.isAffects(1, 2));
+            Assert::IsTrue(pkb.isAffects(1, 8));
+            Assert::IsTrue(pkb.isAffects(3, 5));
+            Assert::IsTrue(pkb.isAffects(3, 7));
+            Assert::IsFalse(pkb.isAffects(1, 2));
 
-            Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 3);
+            Assert::IsTrue(pkb.getAllAffects().first.size() == 3);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -390,23 +390,23 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_affectsSource3());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
             // Test for affects
-            Assert::IsTrue(dummyPkbMain.isAffects(2, 5));
-            Assert::IsTrue(dummyPkbMain.isAffects(5, 2));
-            Assert::IsTrue(dummyPkbMain.isAffects(7, 2));
-            Assert::IsTrue(dummyPkbMain.isAffects(7, 5));
-            Assert::IsTrue(dummyPkbMain.isAffects(7, 8));
-            Assert::IsTrue(dummyPkbMain.isAffects(8, 2));
-            Assert::IsTrue(dummyPkbMain.isAffects(8, 5));
-            Assert::IsTrue(dummyPkbMain.isAffects(8, 8));
-            Assert::IsFalse(dummyPkbMain.isAffects(7, 7));
+            Assert::IsTrue(pkb.isAffects(2, 5));
+            Assert::IsTrue(pkb.isAffects(5, 2));
+            Assert::IsTrue(pkb.isAffects(7, 2));
+            Assert::IsTrue(pkb.isAffects(7, 5));
+            Assert::IsTrue(pkb.isAffects(7, 8));
+            Assert::IsTrue(pkb.isAffects(8, 2));
+            Assert::IsTrue(pkb.isAffects(8, 5));
+            Assert::IsTrue(pkb.isAffects(8, 8));
+            Assert::IsFalse(pkb.isAffects(7, 7));
 
-            Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 8);
+            Assert::IsTrue(pkb.getAllAffects().first.size() == 8);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -417,23 +417,23 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_affectsSource4());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
             // Test for affects
-            Assert::IsTrue(dummyPkbMain.isAffects(1, 4));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 6));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 11));
-            Assert::IsTrue(dummyPkbMain.isAffects(3, 12));
-            Assert::IsTrue(dummyPkbMain.isAffects(6, 7));
-            Assert::IsTrue(dummyPkbMain.isAffects(14, 4));
-            Assert::IsTrue(dummyPkbMain.isAffects(14, 11));
-            Assert::IsTrue(dummyPkbMain.isFollows(5, 15));
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(15, 4));
+            Assert::IsTrue(pkb.isAffects(1, 4));
+            Assert::IsTrue(pkb.isAffects(3, 6));
+            Assert::IsTrue(pkb.isAffects(3, 11));
+            Assert::IsTrue(pkb.isAffects(3, 12));
+            Assert::IsTrue(pkb.isAffects(6, 7));
+            Assert::IsTrue(pkb.isAffects(14, 4));
+            Assert::IsTrue(pkb.isAffects(14, 11));
+            Assert::IsTrue(pkb.isFollows(5, 15));
+            Assert::IsTrue(pkb.isAffectsStar(15, 4));
 
-            Assert::IsTrue(dummyPkbMain.getAllAffects().first.size() == 14);
+            Assert::IsTrue(pkb.getAllAffects().first.size() == 14);
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -444,13 +444,13 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
             // Test for affects
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 3));
+            Assert::IsTrue(pkb.isAffectsStar(1, 3));
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -461,13 +461,13 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource2());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
             // Test for affects
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(9, 21));
+            Assert::IsTrue(pkb.isAffectsStar(9, 21));
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -478,23 +478,23 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_affectsStarSource3());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
 
             // Test for affects
-            Assert::IsFalse(dummyPkbMain.isAffectsStar(1, 16));
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(11, 19));
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(16, 16));
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(19, 19));
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(3, 19));
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(7, 19));
-            Assert::IsFalse(dummyPkbMain.isAffectsStar(9, 19));
-            Assert::IsFalse(dummyPkbMain.isAffectsStar(1, 16));
-            Assert::IsFalse(dummyPkbMain.isAffectsStar(6, 16));
-            Assert::IsFalse(dummyPkbMain.isAffectsStar(9, 16));
-            Assert::IsTrue(dummyPkbMain.isAffectsStar(1, 13));
+            Assert::IsFalse(pkb.isAffectsStar(1, 16));
+            Assert::IsTrue(pkb.isAffectsStar(11, 19));
+            Assert::IsTrue(pkb.isAffectsStar(16, 16));
+            Assert::IsTrue(pkb.isAffectsStar(19, 19));
+            Assert::IsTrue(pkb.isAffectsStar(3, 19));
+            Assert::IsTrue(pkb.isAffectsStar(7, 19));
+            Assert::IsFalse(pkb.isAffectsStar(9, 19));
+            Assert::IsFalse(pkb.isAffectsStar(1, 16));
+            Assert::IsFalse(pkb.isAffectsStar(6, 16));
+            Assert::IsFalse(pkb.isAffectsStar(9, 16));
+            Assert::IsTrue(pkb.isAffectsStar(1, 13));
 
             // Clean up
             Assert::IsTrue(deleteDummySimpleSourceFile());
@@ -505,12 +505,12 @@ namespace UnitTesting
             // Set up
             list<int> actualResults;
             list<int> expectedResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_iteration3complexity());
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Test for correct adding of stmtList in PKB
-            actualResults = dummyPkbMain.getStmtList();
+            actualResults = pkb.getStmtList();
             expectedResults = list<int>{
                 1, 7, 8, 10, 13, 17, 19, 31, 33, 36, 38, 40,
                 42, 45, 49, 52,54, 57, 62, 65, 69, 72 };
@@ -525,7 +525,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_prototypeStandard_success)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_prototypeStandard());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -537,7 +537,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_multiProcAssignmentsOnly_success)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_multiProcs_assignmentsOnly());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -549,7 +549,7 @@ namespace UnitTesting
         TEST_METHOD(testParsingSimpleSource_multiProcAssignmentsCalls_success)
         {
             // Set up
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_multiProcs_assignmentsAndCalls());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
@@ -565,13 +565,13 @@ namespace UnitTesting
             list<string> expectedStringResults;
             list<int> actualIntResults;
             list<int> expectedIntResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_SimpleTest2());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Check if all procedures added correctly
-            actualIntResults = dummyPkbMain.getAllProcedures();
+            actualIntResults = pkb.getAllProcedures();
             expectedIntResults = list<int>{ 0, 1, 2, 3, 4, 5, 6, 7, 8 };
             Assert::IsTrue(actualIntResults.size() == expectedIntResults.size());
             actualIntResults.sort();
@@ -589,13 +589,13 @@ namespace UnitTesting
             list<string> expectedStringResults;
             list<int> actualIntResults;
             list<int> expectedIntResults;
-            Parser parser(dummyPkbMainPtr);
+            Parser parser(pkbPtr);
             Assert::IsTrue(createDummySimpleSourceFile_iteration3complexity());
 
             Assert::IsTrue(parser.parse(dummySimpleSourcePath));
 
             // Check if all assignment statements are added correctly
-            actualIntResults = dummyPkbMain.getAllAssignments();
+            actualIntResults = pkb.getAllAssignments();
             expectedIntResults = list<int>{
                 1, 2, 3, 4, 5, 8, 10, 11, 12, 14, 15, 17, 19, 20, 21, 22, 23,
                 24, 26, 27, 28, 29, 31, 33, 34, 35, 36, 38, 39, 40, 42, 43, 45,
@@ -605,38 +605,38 @@ namespace UnitTesting
             Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Check if all if-else statements are added correctly
-            actualIntResults = dummyPkbMain.getAllIfs();
+            actualIntResults = pkb.getAllIfs();
             expectedIntResults = list<int>{ 9, 30, 48, 51 };
             Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Check if all while statements are added correctly
-            actualIntResults = dummyPkbMain.getAllWhiles();
+            actualIntResults = pkb.getAllWhiles();
             expectedIntResults = list<int>{ 6, 7, 16, 18, 32, 37, 41, 44, 64, 68 };
             Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Check if all call statements are added correctly
-            actualIntResults = dummyPkbMain.getAllCallsStmt();
+            actualIntResults = pkb.getAllCallsStmt();
             expectedIntResults = list<int>{ 13, 25, 60, 67 };
             Assert::IsTrue(actualIntResults == expectedIntResults);
 
             // Check if all parents are deduced correctly
-            actualIntResults = dummyPkbMain.getAllParents(Entity::STMT);   // Any statements
+            actualIntResults = pkb.getAllParents(Entity::STMT);   // Any statements
             expectedIntResults = list<int>{ 6, 7, 9, 16, 18, 30, 32, 37, 41, 44, 48, 51, 64, 68 };
 
             // Jump. Add more incremental test here.
 
             // Check if inter-procedural Uses and Modifies are set correctly.
-            int targetProcIdx = (dummyPkbMain.convertStringToIdx(list<string>{"GHI"}, Entity::PROCEDURE)).front();
-            actualIntResults = dummyPkbMain.getUsesFromProc(targetProcIdx);
-            actualStringResults = dummyPkbMain.convertIdxToString(actualIntResults, Entity::VARIABLE);
+            int targetProcIdx = (pkb.convertStringToIdx(list<string>{"GHI"}, Entity::PROCEDURE)).front();
+            actualIntResults = pkb.getUsesFromProc(targetProcIdx);
+            actualStringResults = pkb.convertIdxToString(actualIntResults, Entity::VARIABLE);
             expectedStringResults = list<string>{ "funnyVar", "laugh", "w", "a", "b", "tmp", "oSCar", "Romeo", "best", "supper" };
             actualStringResults.sort();
             expectedStringResults.sort();
             Assert::IsTrue(actualStringResults == expectedStringResults);
 
-            targetProcIdx = (dummyPkbMain.convertStringToIdx(list<string>{"GHI"}, Entity::PROCEDURE)).front();
-            actualIntResults = dummyPkbMain.getModifiesFromProc(targetProcIdx);
-            actualStringResults = dummyPkbMain.convertIdxToString(actualIntResults, Entity::VARIABLE);
+            targetProcIdx = (pkb.convertStringToIdx(list<string>{"GHI"}, Entity::PROCEDURE)).front();
+            actualIntResults = pkb.getModifiesFromProc(targetProcIdx);
+            actualStringResults = pkb.convertIdxToString(actualIntResults, Entity::VARIABLE);
             expectedStringResults = list<string>{ "funnyVar", "laugh", "a", "w", "b", "oSCar", "food", "best", "supper" };
             actualStringResults.sort();
             expectedStringResults.sort();

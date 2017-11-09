@@ -121,9 +121,9 @@ bool ClauseResult::synonymPresent(string synName)
 }
 
 /*
-Updates the result of a new or an existing synonym.
-Pre-condition: Ensure new synonym has non-empty results.
-Note: This may method involve computing Catesian product - computationally expensive.
+    Updates the result of a new or an existing synonym.
+    Pre-condition: Ensure new synonym has non-empty results.
+    Note: This may method involve computing Catesian product - computationally expensive.
 */
 bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsList)
 {
@@ -332,6 +332,11 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
     return true;
 }
 
+/*
+    Removes all result combinations that contains the given value for the given synonym.
+
+    Pre-condition: synName must be a synonym that is present in ClauseResult
+*/
 bool ClauseResult::removeCombinations(string synName, int value)
 {
     /*
