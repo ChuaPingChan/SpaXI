@@ -19,59 +19,70 @@ namespace UnitTesting
     TEST_CLASS(TestValidationPatternWhile)
     {
     public:
+        QueryTree *qtPtr;
+        string str;
+
+        TEST_METHOD_INITIALIZE(Test_Initialisation)
+        {
+            qtPtr = new QueryTree;
+            str.clear();
+        }
+
+        TEST_METHOD_CLEANUP(Test_Cleanup)
+        {
+            delete qtPtr;
+            qtPtr = NULL;
+            str.clear();
+        }
+
         TEST_METHOD(TestValidity_Pattern_While_Synonym_Underscore_Valid)
         {
-            string str = "w(v, _)";
-            QueryTree qt;
-            qt.insertSynonym(WHILE, "w");
-            qt.insertSynonym(VARIABLE, "v");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "w(v, _)";
+            qtPtr->insertSynonym(WHILE, "w");
+            qtPtr->insertSynonym(VARIABLE, "v");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(WHILE_PATTERN, "w", VARIABLE, "v", UNDERSCORE, "_");
-            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
 
         TEST_METHOD(TestValidity_Pattern_While_Underscore_Underscore_Valid)
         {
-            string str = "w(_, _)";
-            QueryTree qt;
-            qt.insertSynonym(WHILE, "w");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "w(_, _)";
+            qtPtr->insertSynonym(WHILE, "w");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(WHILE_PATTERN, "w", UNDERSCORE, "_", UNDERSCORE, "_");
-            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
 
         TEST_METHOD(TestValidity_Pattern_While_IdentWithQuotes_Underscore_Valid)
         {
-            string str = "w(\"x\", _)";
-            QueryTree qt;
-            qt.insertSynonym(WHILE, "w");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "w(\"x\", _)";
+            qtPtr->insertSynonym(WHILE, "w");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsTrue(pHandler.isValidPattern(str));
             PatternClause expected = UtilitySelection::makePatternClause(WHILE_PATTERN, "w", IDENT_WITHQUOTES, "x", UNDERSCORE, "_");
-            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(qt);
+            PatternClause actual = UtilitySelection::getFirstPatternClauseFromTree(*qtPtr);
             Assert::IsTrue(UtilitySelection::isSamePatternClauseAssignWhileContent(expected, actual));
         }
 
         TEST_METHOD(TestValidity_Pattern_While_FirstArg_NotVariable_Invalid)
         {
-            string str = "w(a, _)";
-            QueryTree qt;
-            qt.insertSynonym(WHILE, "w");
-            qt.insertSynonym(ASSIGN, "a");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "w(a, _)";
+            qtPtr->insertSynonym(WHILE, "w");
+            qtPtr->insertSynonym(ASSIGN, "a");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
 
         TEST_METHOD(TestValidity_Pattern_While_TooManyArguments_Invalid)
         {
-            string str = "w(_, _, _)";
-            QueryTree qt;
-            qt.insertSynonym(WHILE, "w");
-            PatternHandler pHandler = PatternHandler(&qt);
+            str = "w(_, _, _)";
+            qtPtr->insertSynonym(WHILE, "w");
+            PatternHandler pHandler = PatternHandler(qtPtr);
             Assert::IsFalse(pHandler.isValidPattern(str));
         }
     };
