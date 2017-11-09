@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 
 using namespace std;
@@ -31,4 +32,9 @@ public:
 
 private:
 	unordered_map<int, list<int>> parentToChildMap;
+	unordered_map<int, unordered_set<int>> parentToChildRelMap;
+	list<int> parentList;
+	list<int> uniqueParentList;
+	list<int> childList;
+
 };
