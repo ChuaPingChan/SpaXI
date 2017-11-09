@@ -86,7 +86,7 @@ bool DeclarationValidator::areValidSynonyms(Entity entity, string str)
             return false;
         }
     }
-    return "true";
+    return true;
 }
 
 bool DeclarationValidator::hasValidEntityAndSynonym(string str)

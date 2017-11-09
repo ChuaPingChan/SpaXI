@@ -34,7 +34,7 @@ private:
 
     string getSuchThatKeyWord(string str);
 
-    int getRelIndex(string rel);
+    Relationship getRelIndex(string rel);
 
     SuchThatClause makeSuchThatClause(SuchThatValidator stv);
     bool storeInQueryTree(SuchThatClause stc);
