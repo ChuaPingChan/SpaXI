@@ -790,14 +790,6 @@ bool PKBMain::setModTableStmtToVar(int stmt, string var)
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	bool added = modTableStmtToVar.addModStmtToVarList(stmt, varIdx);
 	added = modTableVar.addModVarToStmtList(varIdx, stmt);
-	if (stmtTypeList.isAssignStmt(stmt))
-	{
-		added = modTableVar.addModVarToAssignList(varIdx, stmt);
-	}
-	else if (stmtTypeList.isWhileStmt(stmt))
-	{
-		added = modTableVar.addModVarToWhileStmtList(varIdx, stmt);
-	}
 	return added;
 }
 
@@ -815,14 +807,6 @@ bool PKBMain::setUseTableStmtToVar(int stmt, string var)
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	bool added = usesTableStmtToVar.addUsesStmtToVarList(stmt, varIdx);
 	added = usesTableVar.addUsesVarToStmtList(varIdx, stmt);
-	if (stmtTypeList.isAssignStmt(stmt))
-	{
-		added = usesTableVar.addUsesVarToAssignList(varIdx, stmt);
-	}
-	else if (stmtTypeList.isWhileStmt(stmt))
-	{
-		added = usesTableVar.addUsesVarToWhileStmtList(varIdx, stmt);
-	}
 	return added;
 }
 

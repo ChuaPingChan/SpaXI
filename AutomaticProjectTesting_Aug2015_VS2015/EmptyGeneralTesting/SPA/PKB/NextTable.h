@@ -32,7 +32,8 @@ public:
 private:
 	unordered_map<int, list<int>> nextMap;
 	unordered_map<int, list<int>> nextMapReverse;
+	unordered_map<int, unordered_set<int>> nextRelMap;
 	list<int> prevList;
 	list<int> nextList;
-	unordered_set<string> allNextRel;
+	pair<list<int>, list<int>> allNextRelPair;
 };

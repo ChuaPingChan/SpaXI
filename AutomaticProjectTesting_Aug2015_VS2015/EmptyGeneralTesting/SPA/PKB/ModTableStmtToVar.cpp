@@ -11,6 +11,7 @@ This method adds the relation to the modifies table
 */
 bool ModTableStmtToVar::addModStmtToVarList(int stmtNumber, int varIdx) {
 	modStmtToVarMap[stmtNumber].push_back(varIdx);
+	modStmtToVarRelMap[stmtNumber].insert(varIdx);
     return true;
 }
 

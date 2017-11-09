@@ -9,6 +9,7 @@ Adds the following relations to modified table
 */
 bool ModTableProcToVar::addModProcToVarList(int procIdx, int varIdx) {
 	modProcToVarMap[procIdx].push_back(varIdx);
+	modProcToVarRelMap[procIdx].insert(varIdx);
     return true;
 }
 
