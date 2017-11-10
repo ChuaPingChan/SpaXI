@@ -1,0 +1,1290 @@
+Parameters : 3_FocusTest\2_Loop\SourceLoop.txt 3_FocusTest\2_Loop\QueryUses.txt TestResult\out_FocusTest_Loop_QueryUses.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Tests11
+Beginning to evaluate Query File.
+1 - Int Ident Linear
+
+Select BOOLEAN such that Uses(1, "sakura")
+true
+5000
+Evaluating query 1 - Int Ident Linear
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+2 - Int Ident WhileAssign 1Nesting
+
+Select BOOLEAN such that Uses(14, "attack")
+true
+5000
+Evaluating query 2 - Int Ident WhileAssign 1Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+3 - Int Ident WhileAssign 2Nesting
+
+Select BOOLEAN such that Uses(10, "naruto")
+true
+5000
+Evaluating query 3 - Int Ident WhileAssign 2Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+4 - Int Ident WhileAssign MultipleNesting
+
+Select BOOLEAN such that Uses(3, "love")
+true
+5000
+Evaluating query 4 - Int Ident WhileAssign MultipleNesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+5 - Int Ident WhileWhile 1Nesting
+
+Select BOOLEAN such that Uses(13, "inBattle")
+true
+5000
+Evaluating query 5 - Int Ident WhileWhile 1Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+6 - Int Ident WhileWhile 2Nesting
+
+Select BOOLEAN such that Uses(12, "sageMode")
+true
+5000
+Evaluating query 6 - Int Ident WhileWhile 2Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+7 - Int Ident WhileWhile MultipleNesting
+
+Select BOOLEAN such that Uses(6, "sasuke")
+true
+5000
+Evaluating query 7 - Int Ident WhileWhile MultipleNesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+8 - Int Ident WhileIf
+
+Select BOOLEAN such that Uses(57, "naruto")
+true
+5000
+Evaluating query 8 - Int Ident WhileIf
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+9 - Int Ident IfAssign IfStmtLst 1Nesting
+
+Select BOOLEAN such that Uses(51, "love")
+true
+5000
+Evaluating query 9 - Int Ident IfAssign IfStmtLst 1Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+10 - Int Ident IfAssign ElseStmtLst 1Nesting
+
+Select BOOLEAN such that Uses(51, "inBattle")
+true
+5000
+Evaluating query 10 - Int Ident IfAssign ElseStmtLst 1Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+11 - Int Ident IfAssign 2Nesting
+
+Select BOOLEAN such that Uses(30,  "attack")
+true
+5000
+Evaluating query 11 - Int Ident IfAssign 2Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+12 - Int Ident IfAssign MultipleNesting
+
+Select BOOLEAN such that Uses(23, "hinata")
+true
+5000
+Evaluating query 12 - Int Ident IfAssign MultipleNesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+13 - Int Ident IfIf 1Nesting
+
+Select BOOLEAN such that Uses(61, "sleep")
+true
+5000
+Evaluating query 13 - Int Ident IfIf 1Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+14 - Int Ident IfIf 2Nesting
+
+Select BOOLEAN such that Uses(30, "inBattle")
+true
+5000
+Evaluating query 14 - Int Ident IfIf 2Nesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+15 - Int Ident IfIf MultipleNesting
+
+Select BOOLEAN such that Uses(23, "sakura")
+true
+5000
+Evaluating query 15 - Int Ident IfIf MultipleNesting
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+16 - Int Ident IfWhile
+
+Select BOOLEAN such that Uses(64, "sleep")
+true
+5000
+Evaluating query 16 - Int Ident IfWhile
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+17 - Int Underscore AssignNvrUseAnyVariable
+
+Select BOOLEAN such that Uses(65, _)
+false
+5000
+Evaluating query 17 - Int Underscore AssignNvrUseAnyVariable
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+18 - Int Underscore Assign
+
+Select BOOLEAN such that Uses(67, _)
+true
+5000
+Evaluating query 18 - Int Underscore Assign
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+19 - Int Underscore While
+
+Select BOOLEAN such that Uses(70, _)
+true
+5000
+Evaluating query 19 - Int Underscore While
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+20 - Int Underscore If
+
+Select BOOLEAN such that Uses(64, _)
+true
+5000
+Evaluating query 20 - Int Underscore If
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+21 - Underscore Ident
+
+Select BOOLEAN such that Uses(_, "naruto")
+false
+5000
+Evaluating query 21 - Underscore Ident
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+22 - Underscore Underscore
+
+Select BOOLEAN such that Uses(_, _)
+false
+5000
+Evaluating query 22 - Underscore Underscore
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="2" Uses="1" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+23 - Underscore Variable
+variable v;
+Select BOOLEAN such that Uses(_, v)
+false
+5000
+Evaluating query 23 - Underscore Variable
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+24 - Ident(Procedure) Ident(Variable) Exist
+
+Select BOOLEAN such that Uses("IfMultiple", "naruto")
+true
+5000
+Evaluating query 24 - Ident(Procedure) Ident(Variable) Exist
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+25 - Ident(Procedure) Ident(Variable) DoNotExist
+
+Select BOOLEAN such that Uses("WhileIf", "jiraya")
+false
+5000
+Evaluating query 25 - Ident(Procedure) Ident(Variable) DoNotExist
+The final tag string is ReturnBoolean="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+26 - Ident Underscore
+
+Select BOOLEAN such that Uses("IfWhile", _)
+true
+5000
+Evaluating query 26 - Ident Underscore
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+27 - Ident Underscore (Procedure do not exist)
+
+Select BOOLEAN such that("AssignIf", _)
+false
+5000
+Evaluating query 27 - Ident Underscore (Procedure do not exist)
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" SuchThat="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+28 - Int Stmt
+stmt s;
+Select s such that Uses(1, s)
+none
+5000
+Evaluating query 28 - Int Stmt
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+29 - Int Assign
+assign a;
+Select a such that Uses(2, a)
+none
+5000
+Evaluating query 29 - Int Assign
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+30 - Int While
+while w;
+Select w such that Uses(6, w)
+none
+5000
+Evaluating query 30 - Int While
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+31 - Int If
+if f;
+Select f such that Uses(23, f)
+none
+5000
+Evaluating query 31 - Int If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+32 - Int ProgLine
+prog_line pl;
+Select pl such that Uses(2, pl)
+none
+5000
+Evaluating query 32 - Int ProgLine
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+33 - Int Procedure
+procedure p;
+Select p such that Uses(22, p)
+none
+5000
+Evaluating query 33 - Int Procedure
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+34 - Int Constant
+constant c;
+Select c such that Uses(9, c)
+none
+5000
+Evaluating query 34 - Int Constant
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+35 - Int(Assign) Variable
+variable v;
+Select v such that Uses(21, v)
+sleep, inBattle, love, naruto
+5000
+Evaluating query 35 - Int(Assign) Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: naruto love inBattle sleep 
+Correct answer: sleep inBattle love naruto 
+36 - Int(While) Variable 1Nesting
+variable v;
+Select v such that Uses(13, v)
+inBattle, attack, knowledge
+5000
+Evaluating query 36 - Int(While) Variable 1Nesting
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: attack inBattle knowledge 
+Correct answer: inBattle attack knowledge 
+37 - Int(While) Variable MultipleNesting
+variable v;
+Select v such that Uses(3, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke
+5000
+Evaluating query 37 - Int(While) Variable MultipleNesting
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: sasuke naruto kurama love attack kakashi sageMode inBattle jiraya knowledge 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke 
+38 - Int(While-If) Variable
+variable v;
+Select v such that Uses(57, v)
+attack,inBattle,knowledge,naruto,sageMode,shadowClone
+5000
+Evaluating query 38 - Int(While-If) Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: naruto attack shadowClone sageMode inBattle knowledge 
+Correct answer: attack inBattle knowledge naruto sageMode shadowClone 
+39 - Int(If) Variable 1Nesting
+variable v;
+Select v such that Uses(37, v)
+sakura, hinata, love, shadowClone
+5000
+Evaluating query 39 - Int(If) Variable 1Nesting
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: sakura love shadowClone hinata 
+Correct answer: sakura hinata love shadowClone 
+40 - Int(If) Variable MultipleNesting
+variable v;
+Select v such that Uses(23, v)
+attack,boruto,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 40 - Int(If) Variable MultipleNesting
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari 
+Correct answer: attack boruto himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+41 - Int(If-While) Variable
+variable v;
+Select v such that Uses(64, v)
+dream,knowledge,sleep
+5000
+Evaluating query 41 - Int(If-While) Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: knowledge sleep dream 
+Correct answer: dream knowledge sleep 
+42 - Stmt Ident(Variable)
+stmt s;
+Select s such that Uses(s, "naruto")
+10,11,16,17,21,22,23,26,3,30,32,33,34,35,56,57,58,6,60,61,62,63,8
+5000
+Evaluating query 42 - Stmt Ident(Variable)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 6 8 10 11 16 17 21 22 23 26 30 32 33 34 35 56 57 58 60 61 62 63 
+Correct answer: 10 11 16 17 21 22 23 26 3 30 32 33 34 35 56 57 58 6 60 61 62 63 8 
+43 - Stmt Ident(Procedure)
+stmt s;
+Select s such that Uses(s, "IfMultiple")
+none
+5000
+Evaluating query 43 - Stmt Ident(Procedure)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+44 - Stmt Ident(Integer)
+stmt s;
+Select s such that Uses(s, "100")
+none
+5000
+Evaluating query 44 - Stmt Ident(Integer)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+45 - Stmt Ident(Expr ExactMatch)
+stmt s;
+Select s such that Uses(s, "love+5")
+none
+5000
+Evaluating query 45 - Stmt Ident(Expr ExactMatch)
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+46 - Stmt Ident(Expr PartialMatch)
+stmt s;
+Select s such that Uses(s, _"knowledge+shadowClone"_)
+none
+5000
+Evaluating query 46 - Stmt Ident(Expr PartialMatch)
+_"knowledge+shadowClone"_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 
+Correct answer: 
+47 - Assign Variable
+assign a;
+Select a such that Uses(a, "love")
+19,20,21,27,29,31,33,34,36,38,5,52,7
+5000
+Evaluating query 47 - Assign Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 5 7 19 20 21 27 29 31 33 34 36 38 52 
+Correct answer: 19 20 21 27 29 31 33 34 36 38 5 52 7 
+48 - While Variable
+while w;
+Select w such that Uses(w, "inBattle")
+10,12,13,16,3,57,6
+5000
+Evaluating query 48 - While Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 6 10 12 13 16 57 
+Correct answer: 10 12 13 16 3 57 6 
+49 - If Variable
+if f;
+Select f such that Uses(f, "dream")
+64
+5000
+Evaluating query 49 - If Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 64 
+Correct answer: 64 
+50 - ProgLine Variable
+prog_line pl;
+Select pl such that Uses(pl, "hinata")
+22,23,26,30,32,34,35,37,38,61,62,63
+5000
+Evaluating query 50 - ProgLine Variable
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 22 23 26 30 32 34 35 37 38 61 62 63 
+Correct answer: 22 23 26 30 32 34 35 37 38 61 62 63 
+51 - Procedure Variable
+procedure p;
+Select p such that Uses(p, "boruto")
+IfMultiple,WhileIf
+5000
+Evaluating query 51 - Procedure Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: IfMultiple WhileIf 
+Correct answer: IfMultiple WhileIf 
+52 - Constant Variable
+constant c;
+Select c such that Uses(c, "sasuke")
+none
+5000
+Evaluating query 52 - Constant Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+53 - Variable Variable
+variable v;
+Select v such that Uses(v, "naruto")
+none
+5000
+Evaluating query 53 - Variable Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+54 - Stmt Underscore
+stmt s;
+Select s such that Uses(s, _)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,66,67,69,7,70,71,72,8
+5000
+Evaluating query 54 - Stmt Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 66 67 69 70 71 72 
+Correct answer: 1 10 11 12 13 14 15 16 17 18 19 2 20 21 22 23 24 25 26 27 28 29 3 30 31 32 33 34 35 36 37 38 39 4 40 41 42 43 44 45 46 47 48 49 5 50 51 52 53 54 55 56 57 58 59 6 60 61 62 63 64 66 67 69 7 70 71 72 8 
+55 - Assign Underscore
+assign a;
+Select a such that Uses(a, _)
+1,11,14,15,17,18,19,2,20,21,22,24,25,27,28,29,31,33,34,35,36,38,39,4,40,41,42,43,45,46,47,48,49,5,50,52,53,54,55,56,59,60,62,63,67,69,7,71,72,8
+5000
+Evaluating query 55 - Assign Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 4 5 7 8 11 14 15 17 18 19 20 21 22 24 25 27 28 29 31 33 34 35 36 38 39 40 41 42 43 45 46 47 48 49 50 52 53 54 55 56 59 60 62 63 67 69 71 72 
+Correct answer: 1 11 14 15 17 18 19 2 20 21 22 24 25 27 28 29 31 33 34 35 36 38 39 4 40 41 42 43 45 46 47 48 49 5 50 52 53 54 55 56 59 60 62 63 67 69 7 71 72 8 
+56 - While Underscore
+while w;
+Select w such that Uses(w, _)
+10,12,13,16,3,57,6,66,70
+5000
+Evaluating query 56 - While Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 10 12 13 16 3 57 6 66 70 
+57 - If Underscore
+if f;
+Select f such that Uses(f, _)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 57 - If Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+58 - Procedure Underscore
+procedure p;
+Select p such that Uses(p, _)
+IfMultiple,IfWhile,WhileIf,WhileMultiple
+5000
+Evaluating query 58 - Procedure Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Uses="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: WhileMultiple IfMultiple WhileIf IfWhile 
+Correct answer: IfMultiple IfWhile WhileIf WhileMultiple 
+59 - Stmt Variable
+stmt s; variable v;
+Select s such that Uses(s, v)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,66,67,69,7,70,71,72,8
+5000
+Evaluating query 59 - Stmt Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 66 67 69 70 71 72 
+Correct answer: 1 10 11 12 13 14 15 16 17 18 19 2 20 21 22 23 24 25 26 27 28 29 3 30 31 32 33 34 35 36 37 38 39 4 40 41 42 43 44 45 46 47 48 49 5 50 51 52 53 54 55 56 57 58 59 6 60 61 62 63 64 66 67 69 7 70 71 72 8 
+60 - Assign Variable
+assign a; variable v;
+Select a such that Uses(a, v)
+1,11,14,15,17,18,19,2,20,21,22,24,25,27,28,29,31,33,34,35,36,38,39,4,40,41,42,43,45,46,47,48,49,5,50,52,53,54,55,56,59,60,62,63,67,69,7,71,72,8
+5000
+Evaluating query 60 - Assign Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 4 5 7 8 11 14 15 17 18 19 20 21 22 24 25 27 28 29 31 33 34 35 36 38 39 40 41 42 43 45 46 47 48 49 50 52 53 54 55 56 59 60 62 63 67 69 71 72 
+Correct answer: 1 11 14 15 17 18 19 2 20 21 22 24 25 27 28 29 31 33 34 35 36 38 39 4 40 41 42 43 45 46 47 48 49 5 50 52 53 54 55 56 59 60 62 63 67 69 7 71 72 8 
+61 - While Variable
+while w; variable v;
+Select w such that Uses(w, v)
+10,12,13,16,3,57,6,66,70
+5000
+Evaluating query 61 - While Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 10 12 13 16 3 57 6 66 70 
+62 - If Variable
+if f; variable v;
+Select f such that Uses(f, v)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 62 - If Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+63 - Procedure Variable
+procedure p; variable v;
+Select p such that Uses(p, v)
+IfMultiple,IfWhile,WhileIf,WhileMultiple
+5000
+Evaluating query 63 - Procedure Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: WhileMultiple IfMultiple WhileIf IfWhile 
+Correct answer: IfMultiple IfWhile WhileIf WhileMultiple 
+64 - Ident Variable
+variable v;
+Select v such that Uses("IfMultiple", v)
+attack,boruto,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 64 - Ident Variable
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari 
+Correct answer: attack boruto himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+65 - No Common Synonym
+stmt s; assign a; variable v; while w;
+Select s such that Uses(a, v) and Uses(w, "naruto")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,8,9
+5000
+Evaluating query 65 - No Common Synonym
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 
+Correct answer: 1 10 11 12 13 14 15 16 17 18 19 2 20 21 22 23 24 25 26 27 28 29 3 30 31 32 33 34 35 36 37 38 39 4 40 41 42 43 44 45 46 47 48 49 5 50 51 52 53 54 55 56 57 58 59 6 60 61 62 63 64 65 66 67 68 69 7 70 71 72 8 9 
+66 - 2Clauses 1CommonSynonym BackSame
+variable v; stmt s1,s2;
+Select v such that Uses(s1, v) and Uses(s2, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 66 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+67 - 2Clauses 1CommonSynonym BackSame
+stmt s; variable v; assign a;
+Select v such that Uses(s, v) and Uses(a, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 67 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+68 - 2Clauses 1CommonSynonym BackSame
+variable v; stmt s; while w;
+Select v such that Uses(s, v) and Uses(w, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 68 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+69 - 2Clauses 1CommonSynonym BackSame
+variable v; stmt s; if f;
+Select v such that Uses(s, v) and Uses(f, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 69 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+70 - 2Clauses 1CommonSynonym BackSame
+variable v; stmt s; procedure p;
+Select v such that Uses(s, v) and Uses(p, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 70 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+71 - 2Clauses 1CommonSynonym BackSame
+variable v; assign a1,a2;
+Select v such that Uses(a1, v) and Uses(a2, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 71 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+72 - 2Clauses 1CommonSynonym BackSame
+variable v; assign a; while w;
+Select v such that Uses(a, v) and Uses(w, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 72 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+73 - 2Clauses 1CommonSynonym BackSame
+variable v; assign a; if f;
+Select v such that Uses(a, v) and Uses(f, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 73 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+74 - 2Clauses 1CommonSynonym BackSame
+variable v; assign a; procedure p;
+Select v such that Uses(a, v) and Uses(p,v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 74 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+75 - 2Clauses 1CommonSynonym BackSame
+variable v; while w1,w2;
+Select v such that Uses(w1, v) and Uses(w2, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 75 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+76 - 2Clauses 1CommonSynonym BackSame
+variable v; while w; if f;
+Select v such that Uses(w, v) and Uses(f, v)
+attack,inBattle,knowledge,love,naruto,sageMode,shadowClone,sleep
+5000
+Evaluating query 76 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: naruto love attack shadowClone sageMode inBattle knowledge sleep 
+Correct answer: attack inBattle knowledge love naruto sageMode shadowClone sleep 
+77 - 2Clauses 1CommonSynonym BackSame
+variable v; while w; procedure p;
+Select v such that Uses(w, v) and Uses(p, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 77 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+78 - 2Clauses 1CommonSynonym BackSame
+variable v; if f1,f2;
+Select v such that Uses(f1, v) and Uses(f2, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 78 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+79 - 2Clauses 1CommonSynonym BackSame
+variable v; if f; procedure p;
+Select v such that Uses(f, v) and Uses(p, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 79 - 2Clauses 1CommonSynonym BackSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+80 - 2Clauses 1CommonSynonym FrontSame
+variable v; procedure p1,p2;
+Select v such that Uses(p1, v) and Uses(p2, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 80 - 2Clauses 1CommonSynonym FrontSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+81 - 2Clauses 1CommonSynonym FrontSame
+variable v1,v2; stmt s;
+Select s such that Uses(s, v1) and Uses(s, v2)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,66,67,69,7,70,71,72,8
+5000
+Evaluating query 81 - 2Clauses 1CommonSynonym FrontSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 66 67 69 70 71 72 
+Correct answer: 1 10 11 12 13 14 15 16 17 18 19 2 20 21 22 23 24 25 26 27 28 29 3 30 31 32 33 34 35 36 37 38 39 4 40 41 42 43 44 45 46 47 48 49 5 50 51 52 53 54 55 56 57 58 59 6 60 61 62 63 64 66 67 69 7 70 71 72 8 
+82 - 2Clauses 1CommonSynonym FrontSame
+variable v1,v2; assign a;
+Select a such that Uses(a, v1) and Uses(a, v2)
+1,11,14,15,17,18,19,2,20,21,22,24,25,27,28,29,31,33,34,35,36,38,39,4,40,41,42,43,45,46,47,48,49,5,50,52,53,54,55,56,59,60,62,63,67,69,7,71,72,8
+5000
+Evaluating query 82 - 2Clauses 1CommonSynonym FrontSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 4 5 7 8 11 14 15 17 18 19 20 21 22 24 25 27 28 29 31 33 34 35 36 38 39 40 41 42 43 45 46 47 48 49 50 52 53 54 55 56 59 60 62 63 67 69 71 72 
+Correct answer: 1 11 14 15 17 18 19 2 20 21 22 24 25 27 28 29 31 33 34 35 36 38 39 4 40 41 42 43 45 46 47 48 49 5 50 52 53 54 55 56 59 60 62 63 67 69 7 71 72 8 
+83 - 2Clauses 1CommonSynonym FrontSame
+variable v1,v2; while w;
+Select w such that Uses(w,v1) and Uses(w, v2)
+10,12,13,16,3,57,6,66,70
+5000
+Evaluating query 83 - 2Clauses 1CommonSynonym FrontSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 10 12 13 16 3 57 6 66 70 
+84 - 2Clauses 1CommonSynonym FrontSame
+variable v1,v2; if f;
+Select f such that Uses(f,v1) and Uses(f,v2)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 84 - 2Clauses 1CommonSynonym FrontSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+85 - 2Clauses 1CommonSynonym FrontSame
+variable v1,v2; procedure p;
+Select p such that Uses(p, v1) and Uses(p,v2)
+IfMultiple,IfWhile,WhileIf,WhileMultiple
+5000
+Evaluating query 85 - 2Clauses 1CommonSynonym FrontSame
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: WhileMultiple IfMultiple WhileIf IfWhile 
+Correct answer: IfMultiple IfWhile WhileIf WhileMultiple 
+86 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s1, s2, s3;
+Select v such that Uses(s1,v) and Uses(s2,v) such that Uses(s3, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 86 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="2" CondNum="6" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+87 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s1,s2; assign a;
+Select v such that Uses(s1, v) and Uses(s2, v) and Uses(a, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 87 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+88 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s1,s2; while w;
+Select v such that Uses(s1, v) and Uses(s2, v) and Uses(w, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 88 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+89 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s1,s2; if f;
+Select v such that Uses(s1, v) and Uses(s2, v) and Uses(f, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 89 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+90 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s1,s2; procedure p;
+Select v such that Uses(s1, v) and Uses(s2, v) and Uses(p, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 90 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+91 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; assign a1, a2;
+Select v such that Uses(s, v) and Uses(a1, v) and Uses(a2, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 91 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+92 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; assign a; while w;
+Select v such that Uses(s, v) and Uses(a, v) and Uses(w, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 92 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+93 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; assign a; if f;
+Select v such that Uses(s, v) and Uses(a, v) and Uses(f, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 93 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+94 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; assign a; procedure p;
+Select v such that Uses(s, v) and Uses(a, v) and Uses(p, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 94 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+95 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; while w1, w2;
+Select v such that Uses(s, v) and Uses(w1, v) and Uses(w2, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 95 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+96 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; while w; if f;
+Select v such that Uses(s, v) and Uses(w, v) and Uses(f, v)
+attack,inBattle,knowledge,love,naruto,sageMode,shadowClone,sleep
+5000
+Evaluating query 96 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: naruto love attack shadowClone sageMode inBattle knowledge sleep 
+Correct answer: attack inBattle knowledge love naruto sageMode shadowClone sleep 
+97 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; while w; procedure p;
+Select v such that Uses(s, v) and Uses(w, v) and Uses(p, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 97 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+98 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; if f1, f2;
+Select v such that Uses(s, v) and Uses(f1, v) and Uses(f2, v) 
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 98 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+99 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; if f; procedure p;
+Select v such that Uses(s, v) and Uses(f, v) and Uses(p, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 99 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+100 - 3Clauses 1CommonSynonym BackSame
+variable v; stmt s; procedure p1, p2;
+Select v such that Uses(s, v) and Uses(p1, v) and Uses(p2, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 100 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+101 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a1, a2, a3;
+Select v such that Uses(a1, v) and Uses(a2, v) and Uses(a3, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 101 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+102 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a1, a2; while w;
+Select v such that Uses(a1, v) and Uses(a2, v) and Uses(w, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 102 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+103 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a1, a2; if f;
+Select v such that Uses(a1, v) and Uses(a2, v) and Uses(f, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 103 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+104 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a1, a2;  procedure p;
+Select v such that Uses(a1, v) and Uses(a2, v) and Uses(p, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 104 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+105 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a; while w1, w2;
+Select v such that Uses(a, v) and Uses(w1, v) and Uses(w2, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 105 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+106 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a; while w; if f;
+Select v such that Uses(a, v) and Uses(w, v) and Uses(f, v)
+attack,inBattle,knowledge,love,naruto,sageMode,shadowClone,sleep
+5000
+Evaluating query 106 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: naruto love attack shadowClone sageMode inBattle knowledge sleep 
+Correct answer: attack inBattle knowledge love naruto sageMode shadowClone sleep 
+107 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a; while w; procedure p;
+Select v such that Uses(a, v) and Uses(w, v) and Uses(p, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 107 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+108 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a; if f1, f2;
+Select v such that Uses(a, v) and Uses(f1, v) and Uses(f2, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 108 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+109 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a; if f; procedure p;
+Select v such that Uses(a, v) and Uses(f, v) and Uses(p, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 109 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+110 - 3Clauses 1CommonSynonym BackSame
+variable v; assign a; procedure p1, p2;
+Select v such that Uses(a, v) and Uses(p1, v) and Uses(p2, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 110 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+111 - 3Clauses 1CommonSynonym BackSame
+variable v; while w1,w2,w3;
+Select v such that Uses(w1, v) and Uses(w2, v) and Uses(w3, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 111 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+112 - 3Clauses 1CommonSynonym BackSame
+variable v; while w1,w2; if f;
+Select v such that Uses(w1, v) and Uses(w2, v) and Uses(f, v)
+attack,inBattle,knowledge,love,naruto,sageMode,shadowClone,sleep
+5000
+Evaluating query 112 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: naruto love attack shadowClone sageMode inBattle knowledge sleep 
+Correct answer: attack inBattle knowledge love naruto sageMode shadowClone sleep 
+113 - 3Clauses 1CommonSynonym BackSame
+variable v; while w1,w2; procedure p;
+Select v such that Uses(w1, v) and Uses(w2, v) and Uses(p, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 113 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+114 - 3Clauses 1CommonSynonym BackSame
+variable v; while w; if f1,f2;
+Select v such that Uses(w, v) and Uses(f1, v) and Uses(f2, v)
+attack,inBattle,knowledge,love,naruto,sageMode,shadowClone,sleep
+5000
+Evaluating query 114 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: naruto love attack shadowClone sageMode inBattle knowledge sleep 
+Correct answer: attack inBattle knowledge love naruto sageMode shadowClone sleep 
+115 - 3Clauses 1CommonSynonym BackSame
+variable v; while w; if f; procedure p;
+Select v such that Uses(w, v) and Uses(f, v) and Uses(p, v)
+attack,inBattle,knowledge,love,naruto,sageMode,shadowClone,sleep
+5000
+Evaluating query 115 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: naruto love attack shadowClone sageMode inBattle knowledge sleep 
+Correct answer: attack inBattle knowledge love naruto sageMode shadowClone sleep 
+116 - 3Clauses 1CommonSynonym BackSame
+variable v; while w; procedure p1,p2;
+Select v such that Uses(w, v) and Uses(p1, v) and Uses(p2, v)
+attack,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sasuke,shadowClone,sleep
+5000
+Evaluating query 116 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sasuke naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep 
+Correct answer: attack inBattle jiraya kakashi knowledge kurama love naruto sageMode sasuke shadowClone sleep 
+117 - 3Clauses 1CommonSynonym BackSame
+variable v; if f1,f2,f3;
+Select v such that Uses(f1, v) and Uses(f2, v) and Uses(f3, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 117 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+118 - 3Clauses 1CommonSynonym BackSame
+variable v; if f1,f2; procedure p;
+Select v such that Uses(f1, v) and Uses(f2, v) and Uses(p, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 118 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+119 - 3Clauses 1CommonSynonym BackSame
+variable v; if f; procedure p1,p2;
+Select v such that Uses(f, v) and Uses(p1, v) and Uses(p2, v)
+attack,boruto,dream,himawari,hinata,inBattle,knowledge,love,naruto,sageMode,sakura,sarada,shadowClone,sleep
+5000
+Evaluating query 119 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura naruto love attack shadowClone sageMode inBattle knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle knowledge love naruto sageMode sakura sarada shadowClone sleep 
+120 - 3Clauses 1CommonSynonym BackSame
+variable v; procedure p1,p2,p3;
+Select v such that Uses(p1, v) and Uses(p2, v) and Uses(p3, v)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 120 - 3Clauses 1CommonSynonym BackSame
+The happen is 2
+The happen is 3
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Uses="3" SuchThat="1" CondNum="5" RelNum="3" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+End of evaluating Query File.
+AutoTester Completed !
