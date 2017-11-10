@@ -4,22 +4,16 @@ UsesTableStmtToVar::UsesTableStmtToVar() {
 
 }
 
+/*
+Populate the required data structure
+*/
 bool UsesTableStmtToVar::addUsesStmtToVarList(int stmtNumber, int varIdx) 
 {
-    // if stmt number does not exist as a key, create new list and insert data to hash map
-    if (usesStmtToVarMap.find(stmtNumber) == usesStmtToVarMap.end()) {
-        usesStmtToVarMap[stmtNumber] = list<int>();
-        usesStmtToVarMap[stmtNumber].push_back(varIdx);
-        return true;
-    }
-    else {
-        // else, expand the list of variables
-        usesStmtToVarMap[stmtNumber].push_back(varIdx);
-		usesStmtToVarMap[stmtNumber].sort();
-		usesStmtToVarMap[stmtNumber].unique();
-        return true;
-    }
-    return false;
+	usesStmtToVarMap[stmtNumber].push_back(varIdx);
+	usesStmtToVarMap[stmtNumber].sort();
+	usesStmtToVarMap[stmtNumber].unique();
+	usesStmtToVarRelMap[stmtNumber].insert(varIdx);
+    return true;
 }
 
 list<int> UsesTableStmtToVar::getUsesVariablesFromStmt(int stmtNumber) 
@@ -33,41 +27,20 @@ list<int> UsesTableStmtToVar::getUsesVariablesFromStmt(int stmtNumber)
 
 list<int> UsesTableStmtToVar::getStmtThatUses()
 {
-    unordered_map<int, list<int>>::iterator itr;
-    list<int> listOfStmt = list<int>();
-    for (itr = usesStmtToVarMap.begin(); itr != usesStmtToVarMap.end(); ++itr)
-    {
-		if (itr->second.size() > 0) {
-			listOfStmt.push_back(itr->first);
-		}
-    }
-
-    return listOfStmt;
+	return usesStmtList;
 }
 
 pair<list<int>, list<int>> UsesTableStmtToVar::getUsesPair()
 {
-    unordered_map<int, list<int>>::iterator itr;
-    pair<list<int>, list<int>> pairOfList;
-
-    for (itr = usesStmtToVarMap.begin(); itr != usesStmtToVarMap.end(); ++itr)
-    {
-        int stmtNumber = itr->first;
-        list<int> usesVarList = itr->second;
-
-        list<int>::iterator listitr;
-        for (listitr = usesVarList.begin(); listitr != usesVarList.end(); ++listitr)
-        {
-            pairOfList.first.push_back(stmtNumber);
-            pairOfList.second.push_back(*listitr);
-        }
-    }
-    return pairOfList;
+	return usesStmtToVarPair;
 }
 
 bool UsesTableStmtToVar::isUses(int stmtNumber, int varIdx)
 {
-    return find(usesStmtToVarMap[stmtNumber].begin(), usesStmtToVarMap[stmtNumber].end(), varIdx) != usesStmtToVarMap[stmtNumber].end();
+	if (usesStmtToVarRelMap.find(stmtNumber) != usesStmtToVarRelMap.end()) {
+		return usesStmtToVarRelMap[stmtNumber].find(varIdx) != usesStmtToVarRelMap[stmtNumber].end();
+	}
+	return false;
 }
 
 bool UsesTableStmtToVar::isUsingAnything(int stmtNumber)
@@ -75,7 +48,26 @@ bool UsesTableStmtToVar::isUsingAnything(int stmtNumber)
     return usesStmtToVarMap.find(stmtNumber) != usesStmtToVarMap.end();
 }
 
+/*
+This method iterates through the new map and resets the tables
+*/
 bool UsesTableStmtToVar::setMap(unordered_map<int, list<int>> map) {
+	int key;
+	list<int> valueList;
+	for (auto it : map) {
+		key = it.first;
+		valueList = it.second;
+		for (int value : valueList) {
+			usesStmtList.push_back(key);
+			usesVarList.push_back(value);
+			usesStmtToVarRelMap[key].insert(value);
+		}
+	}
+	usesStmtToVarPair = make_pair(usesStmtList, usesVarList);
+	usesStmtList.sort();
+	usesStmtList.unique();
+	usesVarList.sort();
+	usesVarList.unique();
 	usesStmtToVarMap = map;
 	return true;
 }

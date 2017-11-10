@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 #include <utility>
 
@@ -24,4 +25,8 @@ public:
     pair<list<int>,list<int>> getUsesPair();
 private:
     unordered_map<int, list<int>>usesStmtToVarMap;
+	unordered_map<int, unordered_set<int>> usesStmtToVarRelMap;
+	list<int> usesStmtList;
+	list<int> usesVarList;
+	pair<list<int>, list<int>> usesStmtToVarPair;
 };

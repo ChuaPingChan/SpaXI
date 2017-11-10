@@ -4,8 +4,12 @@ StmtTypeList::StmtTypeList() {
 
 }
 
+/*
+Add to StmtLst, not to be confused with list of statements~
+*/
 bool StmtTypeList::addToStmtList(int stmt) {
 	stmtList.push_back(stmt);
+	stmtListSet.insert(stmt);
 	stmtList.sort();
 	stmtList.unique();
 	return true;
@@ -15,11 +19,16 @@ list<int> StmtTypeList::getStmtList() {
 	return stmtList;
 }
 
+/*
+Add to lsit of assignments
+*/
 bool StmtTypeList::addToAssignStmtList(int stmt) {
     // if stmt number does not exists in assignment list, add to list
-    if (find(assignStmtList.begin(), assignStmtList.end(), stmt) == assignStmtList.end()) {
+    if (assignStmtSet.find(stmt) == assignStmtSet.end()) {
         assignStmtList.push_back(stmt);
+		assignStmtSet.insert(stmt);
 		allStmtList.push_back(stmt);
+		stmtSet.insert(stmt);
         return true;
     }
     return false;
@@ -27,18 +36,22 @@ bool StmtTypeList::addToAssignStmtList(int stmt) {
 
 bool StmtTypeList::addToWhileStmtList(int stmt) {
     // if stmt number does not exists in assignment list, add to list
-    if (find(whileStmtList.begin(), whileStmtList.end(), stmt) == whileStmtList.end()) {
+    if (whileStmtSet.find(stmt) == whileStmtSet.end()) {
         whileStmtList.push_back(stmt);
+		whileStmtSet.insert(stmt);
 		allStmtList.push_back(stmt);
+		stmtSet.insert(stmt);
         return true;
     }
     return false;
 }
 
 bool StmtTypeList::addToCallsStmtList(int stmt, int calleeProcIdx, string calleeProcName) {
-	if (find(callsStmtList.begin(), callsStmtList.end(), stmt) == callsStmtList.end()) {
+	if (callsStmtSet.find(stmt) == callsStmtSet.end()) {
 		callsStmtList.push_back(stmt);
+		callsStmtSet.insert(stmt);
 		allStmtList.push_back(stmt);
+		stmtSet.insert(stmt);
 		allCalleeName.push_back(calleeProcName);
 		callToProcNameMap[stmt] = calleeProcName;
 		procNameToCallMap[calleeProcName].push_back(stmt);
@@ -86,7 +99,9 @@ bool StmtTypeList::addToIfStmtList(int stmt)
 {
     if (find(ifStmtList.begin(), ifStmtList.end(), stmt) == ifStmtList.end()) {
         ifStmtList.push_back(stmt);
+		ifStmtSet.insert(stmt);
         allStmtList.push_back(stmt);
+		stmtSet.insert(stmt);
         return true;
     }
     return false;
@@ -97,31 +112,32 @@ list<int> StmtTypeList::getAllStatements() {
 }
 
 bool StmtTypeList::isStatement(int stmt) {
-	return find(allStmtList.begin(), allStmtList.end(), stmt) != allStmtList.end();
+	return stmtSet.find(stmt) != stmtSet.end();
 }
+
 bool StmtTypeList::isAssignStmt(int stmt)
 {
-    return find(assignStmtList.begin(), assignStmtList.end(), stmt) != assignStmtList.end();
+    return assignStmtSet.find(stmt) != assignStmtSet.end();
 }
 
 bool StmtTypeList::isWhileStmt(int stmt)
 {
-    return find(whileStmtList.begin(), whileStmtList.end(), stmt) != whileStmtList.end();
+    return whileStmtSet.find(stmt) != whileStmtSet.end();
 }
 
 bool StmtTypeList::isCallsStmt(int stmt)
 {
-	return find(callsStmtList.begin(), callsStmtList.end(), stmt) != callsStmtList.end();
+	return callsStmtSet.find(stmt) != callsStmtSet.end();
 }
 
 bool StmtTypeList::isPresent(int stmt)
 {
-    return stmt <= assignStmtList.size() + whileStmtList.size() + callsStmtList.size() + ifStmtList.size();
+    return isStatement(stmt);
 }
 
 bool StmtTypeList::isIfStmt(int stmt)
 {
-    return find(ifStmtList.begin(), ifStmtList.end(), stmt) != ifStmtList.end();;
+	return ifStmtSet.find(stmt) != ifStmtSet.end();
 }
 
 list<int> StmtTypeList::getAssignStmtList()
@@ -192,6 +208,9 @@ list<int> StmtTypeList::getStmtType(list<int> stmtList, Entity type)
     return filteredList;
 }
 
+/*
+Sieve out pair of list given entity type
+*/
 pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> pairOfList, Entity type)
 {
     list<int> stmts = pairOfList.first;
@@ -248,6 +267,9 @@ pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> 
 	return resultPair;
 }
 
+/*
+Sieve out pair of list given two entity types
+*/
 pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> pairOfList, Entity type1, Entity type2) {
 	//process first entity
 	pair<list<int>, list<int>> firstResultPair = getStmtType(pairOfList, type1);
@@ -258,6 +280,9 @@ pair<list<int>, list<int>> StmtTypeList::getStmtType(pair<list<int>, list<int>> 
 	return secondResultPair;
 }
 
+/*
+Get stmt type of a single statement
+*/
 list<int> StmtTypeList::getStmtType(int stmt, Entity type) {
 	list<int> resultList;
 	if (type == ASSIGN)

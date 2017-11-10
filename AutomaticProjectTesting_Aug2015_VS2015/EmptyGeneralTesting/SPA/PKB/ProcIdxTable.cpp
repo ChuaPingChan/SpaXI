@@ -4,6 +4,9 @@ ProcIdxTable::ProcIdxTable() {
 
 }
 
+/*
+Adds given procedure to the procedure index table
+*/
 bool ProcIdxTable::addToProcIdxTable(string proc) {
     // if variable does not exist as a key, create new list and insert data to hash map
     if (procIdxMap.find(proc) == procIdxMap.end()) {
@@ -17,6 +20,10 @@ bool ProcIdxTable::addToProcIdxTable(string proc) {
     return false;
 }
 
+/*
+Gets the index of the procedure,,
+returns -1 if procedure does not exist
+*/
 int ProcIdxTable::getIdxFromProc(string proc) {
 	if (procIdxMap.find(proc) == procIdxMap.end()) {
 		return -1;
@@ -25,6 +32,10 @@ int ProcIdxTable::getIdxFromProc(string proc) {
     return procIdxMap[proc];
 }
 
+/*
+Gets procedure given index
+returns empty string if does not exist
+*/
 string ProcIdxTable::getProcFromIdx(int procIdx) {
 	if (procIdxToStringMap.find(procIdx) == procIdxToStringMap.end()) {
 		return "";
@@ -32,10 +43,17 @@ string ProcIdxTable::getProcFromIdx(int procIdx) {
 	
 	return procIdxToStringMap[procIdx];
 }
+
+/*
+Gets the index of all procedures
+*/
 list<int> ProcIdxTable::getAllProceduresIndex() {
 	return allProcIdx;
 }
 
+/*
+Gets the names of all procedures
+*/
 list<string> ProcIdxTable::getAllProceduresName() {
 	return allProcString;
 }

@@ -1151,26 +1151,46 @@ pair<list<int>, list<int>> PKBMain::getProcModifiesPair() {
 }
 
 //PATTERN
-
+/*
+This method gets variables that are on the left side of a pattern clause
+i.e.
+pattern a (v, _) this will get all v
+*/
 pair<list<int>, list<int>> PKBMain::getLeftVariables()
 {
 	return patternTable.getLeftVariables();
 }
 
+/*
+Returns the while statements with the given control variable
+Returns empty list of theres is no while with such control variable
+*/
 list<int> PKBMain::getWhilesWithControlVariable(string var) {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	return patternTable.getWhileWithControlVariable(varIdx);
 }
 
+/*
+Returns the if statements that has the given control var
+*/
 list<int> PKBMain::getIfsWithControlVariable(string var) {
 	int varIdx = varIdxTable.getIdxFromVar(var);
 	return patternTable.getIfWithControlVariable(varIdx);
 }
+
+/*
+Get variables on the left of pattern clause that match partially with the given
+substring expression
+*/
 pair<list<int>, list<int>> PKBMain::getLeftVariablesThatPartialMatchWith(string expression)
 {
 	return patternTable.getLeftVariableThatPartialMatchWithString(expression);
 }
 
+/*
+Get variables on the left of the pattern clause that match exactly with the given
+expression
+*/
 pair<list<int>, list<int>> PKBMain::getLeftVariablesThatExactMatchWith(string expression) {
 	return patternTable.getLeftVariableThatExactMatchWithString(expression);
 }
@@ -1183,6 +1203,9 @@ bool PKBMain::isIfControlVar(int stmt, int varIdx) {
 	return patternTable.isIfControlVar(stmt, varIdx);
 }
 
+/*
+Gets a pair of all while and their respective control variables
+*/
 pair<list<int>, list<int>> PKBMain::getControlVariablesInWhile() {
 	return patternTable.getControlVariablesInWhile();
 }
@@ -1195,6 +1218,9 @@ list<int> PKBMain::getControlVariablesInWhile(int stmt) {
 	return patternTable.getControlVariablesInWhile(stmt);
 }
 
+/*
+Gets a pair of all if and their respective control variables
+*/
 pair<list<int>, list<int>> PKBMain::getControlVariablesInIf() {
 	return patternTable.getControlVariablesInIf();
 }
@@ -1235,6 +1261,9 @@ list<int> PKBMain::getExactMatchStmt(string expression)
 	return patternTable.getExactMatchStmt(expression);
 }
 
+/*
+Gets all statements that exact match with the variable and the subtring expression
+*/
 list<int> PKBMain::getExactBothMatches(string var, string expression)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
@@ -1253,11 +1282,17 @@ bool PKBMain::isPartialMatch(int stmt, int varIdx, string expression) {
 	return patternTable.isPartialMatch(stmt, varIdx, expression);
 }
 
+/*
+Returns all assignment statements
+*/
 list<int> PKBMain::getAllAssignments()
 {
 	return stmtTypeList.getAssignStmtList();
 }
 
+/*
+Returns all assignment statements that modifies the given variable
+*/
 list<int> PKBMain::getAllAssignments(string var)
 {
 	int varIdx = varIdxTable.getIdxFromVar(var);
@@ -1265,22 +1300,31 @@ list<int> PKBMain::getAllAssignments(string var)
 	return stmtTypeList.getStmtType(stmtList, ASSIGN);
 }
 
+/*
+Returns all assignment statements taht modifies the given variable index
+*/
 list<int> PKBMain::getAllAssignments(int varIdx) {
 
 	list<int> stmtList = patternTable.getLeftVariableMatchingStmts(varIdx);
 	return stmtTypeList.getStmtType(stmtList, ASSIGN);
 }
 
+/*
+Add variable to PKB
+*/
 bool PKBMain::addVariable(string var)
 {
 	bool added = varIdxTable.addToVarIdxTable(var);
 	return added;
 }
 
+/*
+Add procedure to PKB
+*/
 bool PKBMain::addProcedure(string proc)
 {
 	bool added = procIdxTable.addToProcIdxTable(proc);
-	existingProcedures.insert(proc);
+	existingProcedures.insert(proc); // For use later to check that all called procedures exists
 	return added;
 }
 
@@ -1335,13 +1379,16 @@ int PKBMain::getProcFromStmt(int stmt) {
 	return procIdxTable.getProcIdxFromStmt(stmt);
 }
 
-//TODO AFFECTSSSSS OPTIMISE PLZ
+/*
+This method checks if the affects relation is true for two statements
+*/
 bool PKBMain::isAffects(int stmt1, int stmt2) {
 	// check if both are assignment first
 	if (!isAssignment(stmt1) || !isAssignment(stmt2)) {
 		return false;
 	}
 
+	// check if both in the same procedure
 	if (getProcFromStmt(stmt1) != getProcFromStmt(stmt2)) {
 		return false;
 	}
@@ -1363,7 +1410,7 @@ bool PKBMain::isAffects(int stmt1, int stmt2) {
 		int currStmt = path.front();
 		path.pop();
 
-		if (currStmt == stmt2 && visit[currStmt] != -1) {
+		if (currStmt == stmt2 && visit[currStmt] != -1) { //
 			return true;
 		}
 
@@ -1372,7 +1419,7 @@ bool PKBMain::isAffects(int stmt1, int stmt2) {
 			continue;
 		}
 
-		else if (isWhile(currStmt)) {
+		else if (isWhile(currStmt)) { // push nodes to visit from while loop
 			visit[currStmt] = 1;
 			list<int> currChildrenStar = getChildrenStar(currStmt, STMT);
 			currChildrenStar.sort();
@@ -1398,7 +1445,7 @@ bool PKBMain::isAffects(int stmt1, int stmt2) {
 		}
 
 		else {
-			list<int> currModifies = getModifiesFromStmt(currStmt);
+			list<int> currModifies = getModifiesFromStmt(currStmt); // check if statement modifies the var in our orig stmt
 			if (visit[currStmt] == -1 || find(currModifies.begin(), currModifies.end(), varMod) == currModifies.end()) {
 				list<int> currNext = getExecutedAfter(currStmt, STMT);
 				for (int tempNext : currNext) {
@@ -1413,6 +1460,9 @@ bool PKBMain::isAffects(int stmt1, int stmt2) {
 
 }
 
+/*
+Check if statement is one that affects a statement
+*/
 bool PKBMain::isAffector(int stmt1) {
 	list<int> nextStarList = getExecutedAfterStar(stmt1, STMT);
 	for (int next : nextStarList) {
@@ -1423,6 +1473,9 @@ bool PKBMain::isAffector(int stmt1) {
 	return false;
 }
 
+/*
+Gets all statement affected by given statement
+*/
 list<int> PKBMain::getAffectedOf(int stmt1) {
 	list<int> affectedList;
 	list<int> nextStarList = getExecutedAfterStar(stmt1, STMT);
@@ -1446,6 +1499,9 @@ bool PKBMain::isAffected(int stmt2) {
 	return false;
 }
 
+/*
+Checks if there exists any affects relation
+*/
 bool PKBMain::hasAffects() {
 	list<int> allStmts = getAllAssignments();
 	for (int stmt : allStmts) {
@@ -1459,6 +1515,9 @@ bool PKBMain::hasAffects() {
 	return false;
 }
 
+/*
+Get all statements that are somehow affected by given statement
+*/
 list<int> PKBMain::getAllAffected() {
 	list<int> affectedList;
 	list<int> allStmts = getAllAssignments();
@@ -1517,24 +1576,27 @@ list<int> PKBMain::getAllFirstStmtOfProc() {
 	return allFirstStmt;
 }
 
+/*
+Algorithm to extract all affects relation in a procedure given its first statement
+*/
 pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, unordered_set<int>> &affectsRelMap) {
-	int curr = stmt;
+	int curr = stmt; // Initialise curr as first statement
 	list<int> prevList;
 	list<int> nextList;
-	unordered_map<int, unordered_set<int>> latestMod; //varIdx to stmt
+	unordered_map<int, unordered_set<int>> latestMod; //varIdx to stmt where its directly modified
 	stack<pair<int, unordered_map<int, unordered_set<int>>>> whileMapStack;
 	stack<IfStmt> ifMapStack;
 	while (curr != 0) {
 		if (isAssignment(curr)) {
 			list<int> usedVarList = getUsesFromStmt(curr);
 			for (int usedVar : usedVarList) {
-				if (latestMod.find(usedVar) != latestMod.end()) {
+				if (latestMod.find(usedVar) != latestMod.end()) { // If the used variable has a statement that directly modifies it
 					unordered_set<int> lastModStmtSet = latestMod[usedVar];
 					for (auto &lastModStmt : lastModStmtSet) {
-						if (!isCall(lastModStmt)) {
+						if (!isCall(lastModStmt)) { // Make sure its not call statement as affects is only between assignments
 							if ((affectsRelMap.find(lastModStmt) != affectsRelMap.end() &&
 								affectsRelMap[lastModStmt].find(curr) == affectsRelMap[lastModStmt].end()) ||
-								affectsRelMap.find(lastModStmt) == affectsRelMap.end()) {
+								affectsRelMap.find(lastModStmt) == affectsRelMap.end()) { //Make sure relation is not already inside the map
 								prevList.push_back(lastModStmt);
 								nextList.push_back(curr);
 								affectsRelMap[lastModStmt].insert(curr);
@@ -1544,12 +1606,12 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				}
 			}
 
-			int modifiedVar = getModifiesFromStmt(curr).front();
-			latestMod[modifiedVar].clear();
-			latestMod[modifiedVar].insert(curr);
+			int modifiedVar = getModifiesFromStmt(curr).front(); // Get the modified variable in curr statement
+			latestMod[modifiedVar].clear(); // Clear the map from before as the current path does not allow this
+			latestMod[modifiedVar].insert(curr); // Reinsert current statement to the map
 			list<int> nextStmtList = getExecutedAfter(curr, STMT);
 
-			if (getParent(curr, IF).size() != 0) { //is in an if
+			if (getParent(curr, IF).size() != 0) { // If it is a child of an if statement
 				IfStmt ifStmt = ifMapStack.top();
 				if (ifStmt.isEndIf(curr)) {
 					curr = processBranchIf(ifMapStack, latestMod);
@@ -1566,8 +1628,8 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				}
 
 				else {
-					if (nextStmtList.size() == 0) {
-						curr = 0;
+					if (nextStmtList.size() == 0) { // If no other statements after
+						curr = 0; // Flag that curr = 0 to exit loop
 					}
 
 					else {
@@ -1576,7 +1638,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				}
 			}
 
-			else {
+			else { // If not a direct child of if statement, proceed as normal
 				if (nextStmtList.size() == 0) {
 					curr = 0;
 				}
@@ -1587,10 +1649,10 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			}
 		}
 
-		else if (isCall(curr)) {
+		else if (isCall(curr)) { //Call statement doesnt have to both with relation, but need clear modified map
 			list<int> modifiedVarList = getModifiesFromStmt(curr);
 			for (int modifiedVar : modifiedVarList) {
-				latestMod.erase(modifiedVar);
+				latestMod.erase(modifiedVar); // Erase modifies variable
 			}
 
 			list<int> nextStmtList = getExecutedAfter(curr, STMT);
@@ -1642,16 +1704,18 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 				afterLoop = nextStmtList.back();
 			}
 
+			// First time entering this while loop
 			if (whileMapStack.empty() || whileMapStack.top().first != curr) {
 				whileMapStack.push(make_pair(curr, latestMod));
 				curr = insideLoop;
 			}
 
+			// Else have to check if we need to reiterate the loop or not
 			else {
 				pair<int, unordered_map<int, unordered_set<int>>> oldWhileMap = whileMapStack.top();
 				int currWhile = oldWhileMap.first;
 				unordered_map<int, unordered_set<int>> oldMod = oldWhileMap.second;
-				if (oldMod == latestMod) {
+				if (oldMod == latestMod) { //If the modified maps are they same, means all relations have been captured
 					whileMapStack.pop();
 					// pop and merge
 					while (!whileMapStack.empty() && whileMapStack.top().first == currWhile) {
@@ -1665,7 +1729,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 					}
 
 					else {
-						if (ifMapStack.top().isEndIf(curr)) {
+						if (ifMapStack.top().isEndIf(curr)) { // Update if
 							curr = processBranchIf(ifMapStack, latestMod);
 						}
 
@@ -1730,6 +1794,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 			}
 
 			bool visitedElse = false;
+			// updates if stack with the given if statements which contains all the required information when we work with if statements later
 			IfStmt currIfStmt = IfStmt(curr, nextIf, endIf, nextElse, endElse, visitedElse, afterIf, latestMod, latestMod);
 			ifMapStack.push(currIfStmt);
 			curr = nextIf;
@@ -1737,10 +1802,12 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
 		
 	}
 
-
-
 	return make_pair(prevList, nextList);
 }
+
+/*
+This method returns the next statement required for us to enter when we are at end of an if block
+*/
 int PKBMain::processBranchIf(stack<IfStmt> &ifMapStack, unordered_map<int, unordered_set<int>> &latestMod) {
 	IfStmt ifStmt = ifMapStack.top();
 	ifMapStack.pop();
@@ -1752,6 +1819,10 @@ int PKBMain::processBranchIf(stack<IfStmt> &ifMapStack, unordered_map<int, unord
 	return curr;
 }
 
+/*
+This returns the next statement we have to go into when we are at the end of an else block
+with no next, such that its pointed to dummy node
+*/
 int PKBMain::processBranchElseWithNoNext(stack<IfStmt> &ifMapStack, unordered_map<int, unordered_set<int>> &latestMod) {
 	int curr;
 	IfStmt ifStmt = ifMapStack.top();
@@ -1764,6 +1835,7 @@ int PKBMain::processBranchElseWithNoNext(stack<IfStmt> &ifMapStack, unordered_ma
 	else {
 		IfStmt parentIf = ifMapStack.top();
 		if (parentIf.hasVisitedElse()) {
+			// continue processing until we are no longer at else with no next
 			curr = processBranchElseWithNoNext(ifMapStack, latestMod);
 		}
 
@@ -1775,6 +1847,10 @@ int PKBMain::processBranchElseWithNoNext(stack<IfStmt> &ifMapStack, unordered_ma
 	return curr;
 }
 
+/*
+This returns the next statement we hav to go into when we are at the end of an else block
+with next
+*/
 int PKBMain::processBranchElseWithNext(stack<IfStmt> &ifMapStack, unordered_map<int, unordered_set<int>> &latestMod, int next) {
 	IfStmt ifStmt = ifMapStack.top();
 	latestMod = joinMap(latestMod, ifStmt.getIfMap());
@@ -1817,6 +1893,9 @@ int PKBMain::processBranchElseWithNext(stack<IfStmt> &ifMapStack, unordered_map<
 	}
 }
 
+/*
+This joins two maps and their key/values together
+*/
 unordered_map<int, unordered_set<int>> PKBMain::joinMap(unordered_map<int, unordered_set<int>> firstMap,
 	unordered_map<int, unordered_set<int>> secondMap) {
 
@@ -1835,6 +1914,9 @@ unordered_map<int, unordered_set<int>> PKBMain::joinMap(unordered_map<int, unord
 	return firstMap;
 }
 
+/*
+Get all assignments that affects itself
+*/
 list<int> PKBMain::getAllAffectsSameSyn() {
 	list<int> result;
 	
@@ -1859,23 +1941,19 @@ list<int> PKBMain::getAllAffectsSameSyn() {
 	return result;
 }
 
+/*
+This method iterates through each procedure and extract all affects relations for each of them
+*/
 pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	list<int> prevList;
 	list<int> nextList;
 	unordered_map<int, unordered_set<int>> affectsRelMap;
-	//TODO OPTIMISE
-	//cout << "get all affects" << endl;
 	if (cache.containsAllAffects()) {
-		//cout << "hasAllAffects" << endl;
 		return cache.getAllAffects();
 	}
 
-	else {
-		//cout << "doesnt have all affects"  << endl;
-	}
-
 	list<int> allFirstStmt = getAllFirstStmtOfProc();
-	for (int stmt : allFirstStmt) {
+	for (int stmt : allFirstStmt) { // Run the algorithm for each procedure
 		pair<list<int>, list<int>> allPairsInStmtList = getAllAffects(stmt, affectsRelMap);
 		prevList.insert(prevList.end(), allPairsInStmtList.first.begin(), allPairsInStmtList.first.end());
 		nextList.insert(nextList.end(), allPairsInStmtList.second.begin(), allPairsInStmtList.second.end());
@@ -1886,15 +1964,14 @@ pair<list<int>, list<int>> PKBMain::getAllAffects() {
 	return make_pair(prevList, nextList);
 }
 
-
 bool PKBMain::isAffectsStar(int stmt1, int stmt2) {
-	if (!cache.containsAllAffectsStar()) {
+	if (!cache.containsAllAffectsStar()) { // Check if cache has already precomputed, if not precompute it now
 		getAllAffectsStar();
 	}
 
 	unordered_map<int, unordered_set<int>> affectsStarRelMap = cache.getAllAffectsStarRelMap();
 	if (affectsStarRelMap.find(stmt1) != affectsStarRelMap.end() && 
-		affectsStarRelMap[stmt1].find(stmt2) != affectsStarRelMap[stmt1].end()) {
+		affectsStarRelMap[stmt1].find(stmt2) != affectsStarRelMap[stmt1].end()) { // If affects relation exists
 		return true;
 	}
 
@@ -1903,7 +1980,7 @@ bool PKBMain::isAffectsStar(int stmt1, int stmt2) {
 
 list<int> PKBMain::getAffectedStarOf(int stmt1) {
 	if (!cache.containsAllAffectsStar()) {
-		getAllAffectsStar();
+		getAllAffectsStar(); //Precompute if not already cached
 	}
 
 	unordered_map<int, list<int>> affectsStarMap = cache.getAffectsStarMap();
@@ -1954,25 +2031,21 @@ list<int> PKBMain::getAllAffectsStarSameSyn() {
 	return result;
 }
 
+/*
+Extract all affects star relations given first statement of each procedure
+*/
 pair<list<int>, list<int>> PKBMain::getAllAffectsStar() {
 	list<int> prevList;
 	list<int> nextList;
 	unordered_map<int, unordered_set<int>> affectsStarRelMap;
 	unordered_map<int, list<int>> affectsStarMap;
 	unordered_map<int, list<int>> affectsStarMapReverse;
-	//TODO OPTIMISE
-	//cout << "get all affects" << endl;
 	if (cache.containsAllAffectsStar()) {
-		//cout << "hasAllAffects" << endl;
 		return cache.getAllAffectsStar();
 	}
 
-	else {
-		//cout << "doesnt have all affects"  << endl;
-	}
-
 	list<int> allFirstStmt = getAllFirstStmtOfProc();
-	for (int stmt : allFirstStmt) {
+	for (int stmt : allFirstStmt) { // Iterate through all procedures and get their affects* relation
 		pair<list<int>, list<int>> allPairsInStmtList = getAllAffectsStar(stmt, affectsStarRelMap, affectsStarMap, affectsStarMapReverse);
 		prevList.insert(prevList.end(), allPairsInStmtList.first.begin(), allPairsInStmtList.first.end());
 		nextList.insert(nextList.end(), allPairsInStmtList.second.begin(), allPairsInStmtList.second.end());
@@ -1983,23 +2056,30 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar() {
 	return make_pair(prevList, nextList);
 }
 
+/*
+Extracts all affects star relation in the procedure given its first statement
+*/
 pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<int, unordered_set<int>> &affectsStarRelMap,
 	unordered_map<int, list<int>> &affectsStarMap, unordered_map<int, list<int>> &affectsStarMapReverse) {
 	int curr = stmt;
 	list<int> prevList;
 	list<int> nextList;
-	unordered_map<int, unordered_set<int>> latestMod; //varIdx to stmt
+	unordered_map<int, unordered_set<int>> latestMod; //varIdx to stmt where it was indirectly/directly modified
 	stack<pair<int, unordered_map<int, unordered_set<int>>>> whileMapStack;
 	stack<IfStmt> ifMapStack;
 	while (curr != 0) {
 		if (isAssignment(curr)) {
 			list<int> usedVarList = getUsesFromStmt(curr);
-			int modifiedVar = getModifiesFromStmt(curr).front();
-			bool existedBefore = (latestMod.find(modifiedVar) != latestMod.end());
+			int modifiedVar = getModifiesFromStmt(curr).front(); // current modified variable in the statement
+			bool existedBefore = (latestMod.find(modifiedVar) != latestMod.end()); // If it exists in the graph before
 			if (find(usedVarList.begin(), usedVarList.end(), modifiedVar) == usedVarList.end() && existedBefore) {
+				// If it doesn't use itself, we have to clear its latestModifiedMap
 				latestMod[modifiedVar].clear();
 			}
 			
+			// Similar to extraction all affects relations
+			// Iterate through all the used variables and get the statements where they were
+			// indirectly/directly modified in to populate the affects* relations
 			for (int usedVar : usedVarList) {
 				if (latestMod.find(usedVar) != latestMod.end()) {
 					unordered_set<int> lastModStmtSet = latestMod[usedVar];
@@ -2026,13 +2106,13 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<in
 
 			list<int> nextStmtList = getExecutedAfter(curr, STMT);
 
-			if (getParent(curr, IF).size() != 0) { //is in an if
+			if (getParent(curr, IF).size() != 0) { // if is a child of if statement (means current if is the top of stack)
 				IfStmt ifStmt = ifMapStack.top();
-				if (ifStmt.isEndIf(curr)) {
+				if (ifStmt.isEndIf(curr)) { //If its the end of an if block
 					curr = processBranchIf(ifMapStack, latestMod);
 				}
 
-				else if (ifStmt.isEndElse(curr)) {
+				else if (ifStmt.isEndElse(curr)) { //If its the end of an else block
 					if (nextStmtList.size() == 0) { // no next after else i.e. pt to dummy
 						curr = processBranchElseWithNoNext(ifMapStack, latestMod);
 					}
@@ -2128,7 +2208,7 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<in
 				pair<int, unordered_map<int, unordered_set<int>>> oldWhileMap = whileMapStack.top();
 				int currWhile = oldWhileMap.first;
 				unordered_map<int, unordered_set<int>> oldMod = oldWhileMap.second;
-				if (oldMod == latestMod) {
+				if (oldMod == latestMod) { // If the maps are the same, means all affects* relations have been captured
 					whileMapStack.pop();
 					// pop and merge
 					while (!whileMapStack.empty() && whileMapStack.top().first == currWhile) {
