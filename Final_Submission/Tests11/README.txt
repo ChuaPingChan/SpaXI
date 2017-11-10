@@ -9,7 +9,7 @@ To receive a praise from me,
 
 To run all the tests that I owned,
 - enter [a]
-Sit back and watch the magic unfolds.
+Sit back and watch the magic unfold.
 All the results will be directed to [TestResult].
 Output from cmd will be directed to [TestResult\cmd]
 A summary will be generated at the end.
@@ -46,7 +46,7 @@ Should I fail to run as expected, try the following:
 3) Run AutoTester with ths command:
 	AutoTester [Source File] [Query File] [Output File]
 	
-If onstart up and a message occurs, it is probably because I had lost my voice (ate too much snacks), then:
+If a message occurs upon launching, it is probably because I have lost my voice (ate too many snacks), then:
 - Run SpaXI_Voiceless.bat instead.
 	
 I apologise for any inconvenience caused.
