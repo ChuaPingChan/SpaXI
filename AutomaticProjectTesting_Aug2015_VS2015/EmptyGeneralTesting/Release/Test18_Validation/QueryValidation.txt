@@ -295,7 +295,7 @@ false
 5000
 60 - Wrong Clause Argument
 stmt s;
-Select BOOLEAN pattern s.stmt# = 1;
+Select BOOLEAN pattern s.stmt# = 1
 false
 5000
 61 - Wrong Clause Argument

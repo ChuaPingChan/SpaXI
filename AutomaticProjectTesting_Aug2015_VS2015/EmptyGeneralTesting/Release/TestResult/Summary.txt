@@ -1,7 +1,7 @@
 Overall Test Ran    : 19781
-Overall Test Passed : 19753
-Overall Test Failed : 2
-Overall Test Timeout: 26
+Overall Test Passed : 19759
+Overall Test Failed : 1
+Overall Test Timeout: 21
 
 
 TestResult\out1.xml: 
@@ -714,9 +714,9 @@ Timeout  : 0
 
 TestResult\out16_QueryStressAffects.xml: 
 Test Ran: 33	[TIMEOUT]
-Passed   : 23
+Passed   : 25
 Failed   : 0
-Timeout  : 10
+Timeout  : 8
 
 TestResult\out16_QueryStressMixed.xml: 
 Test Ran: 17	[TIMEOUT]
@@ -726,14 +726,14 @@ Timeout  : 5
 
 TestResult\out16_QueryStressNext.xml: 
 Test Ran: 28	[TIMEOUT]
-Passed   : 21
+Passed   : 24
 Failed   : 0
-Timeout  : 7
+Timeout  : 4
 
 TestResult\out18_QueryValidation.xml: 
 Test Ran: 74	[BUG][TIMEOUT]
-Passed   : 71
-Failed   : 2
+Passed   : 72
+Failed   : 1
 Timeout  : 1
 
 TestResult\out19_Query_std1_adv.xml: 
