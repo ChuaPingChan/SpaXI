@@ -33,7 +33,7 @@ public:
     vector<string> getTupleArgs();
     string getTupleArgAt(int index);
 
-    bool isAttributeProcName;
+    bool isAttributeProcName = false;
     vector<bool> isAttributeProcNameForTuple;
 
 private:

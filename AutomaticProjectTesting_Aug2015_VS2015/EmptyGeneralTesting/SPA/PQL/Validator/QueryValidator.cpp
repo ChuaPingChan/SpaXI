@@ -39,8 +39,6 @@ bool QueryValidator::isValidSelection(string str) {
 vector<string> QueryValidator::tokenize(string query) {
 	vector<string> tokens;
 
-	if (query.back() != ';')
-	{
 		char delimiter = ';';
 		stringstream ss(query);
 		string arguments;
@@ -50,6 +48,13 @@ vector<string> QueryValidator::tokenize(string query) {
 			tokens.push_back(arguments);
 		}
 
-	}
+		if (query.back() == ';')
+		{
+			string last = tokens.back();
+			tokens.pop_back();
+			last.append(";");
+			tokens.push_back(last);
+		}
+	
 	return tokens;
 }

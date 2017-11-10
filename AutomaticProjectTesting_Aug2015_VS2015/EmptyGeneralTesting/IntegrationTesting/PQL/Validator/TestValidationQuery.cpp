@@ -13,6 +13,24 @@ namespace UnitTesting
     TEST_CLASS(TestValidationQuery)
     {
     public:
+
+		/**********************
+		* Empty Select Clause *
+		***********************/
+
+		TEST_METHOD(TestValidity_Query_NoSelect_ValidDeclaration_EmptySelection_Invalid)
+		{
+			string query;
+			query.append("stmt s;");
+			query.append("  ");
+			QueryTree qt;
+			qt.insertSynonym(STMT, "s");
+			FriendQueryValidator friendValidator = FriendQueryValidator(&qt);
+			Assert::IsFalse(friendValidator.isValidQuery(query));
+			Assert::IsTrue(friendValidator.getValidDeclarationFlag());
+			Assert::IsFalse(friendValidator.getValidSelectionFlag());
+		}
+
         /**************************
         * Select Clause - BOOLEAN *
         **************************/
@@ -30,6 +48,7 @@ namespace UnitTesting
             SelectClause expected = UtilitySelection::makeSelectClause(SELECT_BOOLEAN);
             Assert::IsTrue(UtilitySelection::isSameSelectClauseContent(expected, qt.getSelectClause()));
         }
+
 
         TEST_METHOD(TestValidity_Query_SelectBoolean_InvalidDeclaration_ExpectFalse_Invalid)
         {
