@@ -9,7 +9,7 @@ To receive a praise from me,
 
 To run all the tests that I owned,
 - enter [a]
-Sit back and watch the magic unfolds.
+Sit back and watch the magic unfold.
 All the results will be directed to [TestResult].
 Output from cmd will be directed to [TestResult\cmd]
 A summary will be generated at the end.
