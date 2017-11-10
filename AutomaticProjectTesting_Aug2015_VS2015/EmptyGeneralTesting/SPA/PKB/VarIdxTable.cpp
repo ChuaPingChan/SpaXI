@@ -42,7 +42,7 @@ bool VarIdxTable::isVarPresent(string var)
 }
 
 list<string> VarIdxTable::getAllVariables() {
-	allVarString;
+	return allVarString;
 }
 
 list<int> VarIdxTable::getAllVariablesIndex() {
