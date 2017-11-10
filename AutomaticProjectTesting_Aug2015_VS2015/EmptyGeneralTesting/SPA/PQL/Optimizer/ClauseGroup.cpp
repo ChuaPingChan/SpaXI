@@ -9,10 +9,16 @@ using namespace std;
 
 ClauseGroup::ClauseGroup(vector<ClausePtr> clauseGroup)
 {
-    _initClauseVec = clauseGroup;
-    sortInitClauseVec();
+    for (ClausePtr clausePtr : clauseGroup) {
+        int clauseCost = ClauseCostCalculator::getCost(clausePtr);
+        _initClauseVec.push_back(pair<ClausePtr, int>(clausePtr, clauseCost));
+    }
 
-    for (ClausePtr clausePtr : _initClauseVec) {
+    sortClauseVec();
+
+    for (pair<ClausePtr,int> clausePtrCostPair : _initClauseVec) {
+
+        ClausePtr clausePtr = clausePtrCostPair.first;
 
         // Data to facilitate pruning
         list<string> syns = clausePtr->getSynonyms();
@@ -21,7 +27,7 @@ ClauseGroup::ClauseGroup(vector<ClausePtr> clauseGroup)
             _synsInRemainingClauses.insert(syn);
         }
 
-        _clauseQueue.push(clausePtr);
+        _clauseQueue.push(clausePtrCostPair);
     }
 
     _cost = computeCost();
@@ -45,7 +51,7 @@ bool ClauseGroup::hasNextClause()
 
 ClausePtr& ClauseGroup::getNextClause()
 {
-    ClausePtr& clausePtr = _clauseQueue.front();
+    ClausePtr& clausePtr = _clauseQueue.front().first;
     _clauseQueue.pop();
 
     // Update DS for pruning
@@ -83,17 +89,51 @@ bool ClauseGroup::pruneClauseResult(ClauseResult* crToPrune)
     return crToPrune->pruneColumns(synsToRetain);
 }
 
-void ClauseGroup::sortInitClauseVec()
+void ClauseGroup::sortClauseVec()
 {
+    // Initial sorting of clauses with the cost calculated independent of other clauses
     sort(_initClauseVec.begin(), _initClauseVec.end(), ClauseGroup::compareClauseCost);
+
+    // Next, if there are more than 2 clauses,
+    // take into account the synonyms processed before a particular clause is processed
+    // and sort again. This is an O(N^2 log N) operation, where N is the number of clauses.
+    if (_initClauseVec.size() < 3)
+        return;
+
+    for (vector<pair<ClausePtr, int>>::iterator clausePtrCostPairIter = _initClauseVec.begin();
+        clausePtrCostPairIter != _initClauseVec.end();  // Do this only up to the second-last clause
+        clausePtrCostPairIter++)
+    {
+        list<string> syns = clausePtrCostPairIter->first->getSynonyms();
+        if (syns.empty())
+            continue;
+
+        relaxRemainingClauseCost(clausePtrCostPairIter, unordered_set<string>(syns.begin(), syns.end()));
+        
+        if ((_initClauseVec.end() - clausePtrCostPairIter) >= 2) {  // Sort only if there are > 1 remaining clauses
+            sort(clausePtrCostPairIter + 1, _initClauseVec.end(), ClauseGroup::compareClauseCost);
+        }
+    }
+}
+
+void ClauseGroup::relaxRemainingClauseCost(vector<pair<ClausePtr, int>>::iterator currIter,
+    unordered_set<string> evaluatedSyns)
+{
+    currIter++;
+    while (currIter != _initClauseVec.end()) {
+        ClausePtr clausePtr = currIter->first;
+        int updatedCost = ClauseCostCalculator::getRelaxedCost(clausePtr, evaluatedSyns);
+        currIter->second = updatedCost;
+        currIter++;
+    }
 }
 
 int ClauseGroup::computeCost()
 {
     int totalCost = 0;
 
-    for (ClausePtr clausePtr : _initClauseVec) {
-        totalCost += ClauseCostCalculator::getCost(clausePtr);
+    for (pair<ClausePtr,int> clausePtrCostPair : _initClauseVec) {
+        totalCost += clausePtrCostPair.second;
     }
     return totalCost;
 }
@@ -101,7 +141,7 @@ int ClauseGroup::computeCost()
 /*
     Returns true if the first clause should be ordered before the second clause
 */
-bool ClauseGroup::compareClauseCost(ClausePtr clausePtr1, ClausePtr clausePtr2)
+bool ClauseGroup::compareClauseCost(pair<ClausePtr,int> c1, pair<ClausePtr,int> c2)
 {
-    return ClauseCostCalculator::getCost(clausePtr1) < ClauseCostCalculator::getCost(clausePtr2);
+    return c1.second < c2.second;
 }
