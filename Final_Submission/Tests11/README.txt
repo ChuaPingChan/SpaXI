@@ -46,7 +46,7 @@ Should I fail to run as expected, try the following:
 3) Run AutoTester with ths command:
 	AutoTester [Source File] [Query File] [Output File]
 	
-If onstart up and a message occurs, it is probably because I had lost my voice (ate too much snacks), then:
+If a message occurs upon launching, it is probably because I have lost my voice (ate too many snacks), then:
 - Run SpaXI_Voiceless.bat instead.
 	
 I apologise for any inconvenience caused.
