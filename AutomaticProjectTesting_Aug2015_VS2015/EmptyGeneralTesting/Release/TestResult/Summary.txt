@@ -1,6 +1,6 @@
-Overall Test Ran    : 19777
-Overall Test Passed : 19751
-Overall Test Failed : 0
+Overall Test Ran    : 19781
+Overall Test Passed : 19753
+Overall Test Failed : 2
 Overall Test Timeout: 26
 
 
@@ -731,9 +731,9 @@ Failed   : 0
 Timeout  : 7
 
 TestResult\out18_QueryValidation.xml: 
-Test Ran: 70	[TIMEOUT]
-Passed   : 69
-Failed   : 0
+Test Ran: 74	[BUG][TIMEOUT]
+Passed   : 71
+Failed   : 2
 Timeout  : 1
 
 TestResult\out19_Query_std1_adv.xml: 
