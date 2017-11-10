@@ -9,6 +9,8 @@ Adds the following relations to modified table
 */
 bool ModTableProcToVar::addModProcToVarList(int procIdx, int varIdx) {
 	modProcToVarMap[procIdx].push_back(varIdx);
+	modProcToVarMap[procIdx].sort();
+	modProcToVarMap[procIdx].unique();
 	modProcToVarRelMap[procIdx].insert(varIdx);
     return true;
 }
@@ -26,9 +28,15 @@ unordered_map<int, list<int>> ModTableProcToVar::getMap() {
 }
 
 bool ModTableProcToVar::isMod(int procIdx, int varIdx) {
-	return find(modProcToVarMap[procIdx].begin(), modProcToVarMap[procIdx].end(), varIdx) != modProcToVarMap[procIdx].end();
+	if (modProcToVarRelMap.find(procIdx) != modProcToVarRelMap.end()) {
+		return modProcToVarRelMap[procIdx].find(varIdx) != modProcToVarRelMap[procIdx].end();
+	}
+	return false;
 }
 
+/*
+Iterate the new map and populate the required information for modifies table
+*/
 bool ModTableProcToVar::setMap(unordered_map<int, list<int>> map) {
 	int key;
 	list<int> valueList;

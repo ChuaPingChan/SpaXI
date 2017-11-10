@@ -6,6 +6,7 @@
 #include <vector>
 #include <list>
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
 #include "../Entity.h"
 
@@ -42,11 +43,17 @@ public:
 	list<int> getStmtType(int stmt, Entity type);
 private:
 	list<int> stmtList;
+	unordered_set<int> stmtListSet;
+	unordered_set<int> stmtSet;
 	list<int> allStmtList;
     list<int> assignStmtList;
+	unordered_set<int> assignStmtSet;
     list<int> whileStmtList;
+	unordered_set<int> whileStmtSet;
 	list<int> callsStmtList;
+	unordered_set<int> callsStmtSet;
     list<int> ifStmtList;
+	unordered_set<int> ifStmtSet;
 	list<string> allCalleeName;
 	unordered_map<int, string> callToProcNameMap;
 	unordered_map<string, list<int>> procNameToCallMap;

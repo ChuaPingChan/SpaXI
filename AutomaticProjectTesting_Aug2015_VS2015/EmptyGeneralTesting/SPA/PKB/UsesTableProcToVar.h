@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <list>
 
 using namespace std;
@@ -21,4 +22,8 @@ public:
 	pair<list<int>, list<int>> getProcPair();
 private:
     unordered_map<int, list<int>> usesProcToVarMap;
+	unordered_map<int, unordered_set<int>> usesProcToVarRelMap;
+	list<int> procIdxList;
+	list<int> varIdxList;
+	pair<list<int>, list<int>> usesProcToVarPair;
 };
