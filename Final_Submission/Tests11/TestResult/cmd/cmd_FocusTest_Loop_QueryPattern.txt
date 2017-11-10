@@ -1,0 +1,323 @@
+Parameters : 3_FocusTest\2_Loop\SourceLoop.txt 3_FocusTest\2_Loop\QueryPattern.txt TestResult\out_FocusTest_Loop_QueryPattern.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Tests11
+Beginning to evaluate Query File.
+1 - While Underscore Underscore
+while w;
+Select BOOLEAN pattern w(_, _)
+true
+5000
+Evaluating query 1 - While Underscore Underscore
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+2 - While Ident(ControlVarNature) Underscore
+while w;
+Select BOOLEAN pattern w("inBattle", _)
+true
+5000
+Evaluating query 2 - While Ident(ControlVarNature) Underscore
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+3 - While Ident(AssignVarNature) Underscore
+while w;
+Select BOOLEAN pattern w("jiraya", _)
+false
+5000
+Evaluating query 3 - While Ident(AssignVarNature) Underscore
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+4 - While Ident(ExprNature) Underscore
+while w;
+Select BOOLEAN pattern w("x+2", _)
+false
+5000
+Evaluating query 4 - While Ident(ExprNature) Underscore
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+5 - While Ident(ProcedureNature) Underscore
+while w;
+Select BOOLEAN pattern w("IfMultiple", _)
+false
+5000
+Evaluating query 5 - While Ident(ProcedureNature) Underscore
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+6 - While Variable Underscore
+while w; variable v;
+Select BOOLEAN pattern w(v, _)
+true
+5000
+Evaluating query 6 - While Variable Underscore
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+7 - While Variable ExprExactMatch
+while w; variable v;
+Select BOOLEAN pattern w(v, "attack+100")
+false
+5000
+Evaluating query 7 - While Variable ExprExactMatch
+The final tag string is ReturnBoolean="1" Pattern="1" CondNum="2" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+8 - While Variable PartialMatch
+while w; variable v;
+Select BOOLEAN pattern w(v, _"sageMode*love"_)
+false
+5000
+Evaluating query 8 - While Variable PartialMatch
+_"sageMode*love"_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+9 - While Variable Underscore Select-Variable
+while w; variable v;
+Select w pattern w(v, _)
+10,12,13,16,3,57,6,66,70
+5000
+Evaluating query 9 - While Variable Underscore Select-Variable
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 10 12 13 16 3 57 6 66 70 
+10 - While Variable Underscore Select-While
+while w; variable v;
+Select v pattern w(v, _)
+inBattle,kakashi,naruto,sageMode,sasuke,sleep
+5000
+Evaluating query 10 - While Variable Underscore Select-While
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: sasuke naruto kakashi sageMode inBattle sleep 
+Correct answer: inBattle kakashi naruto sageMode sasuke sleep 
+11 - Common Synonym
+while w1,w2; variable v1,v2;
+Select w1 pattern w1(v1, _) and w1(v2, _)
+10,12,13,16,3,57,6,66,70
+5000
+Evaluating query 11 - Common Synonym
+_ is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 10 12 13 16 3 57 6 66 70 
+12 - Common Synonym
+while w1,w2; variable v1,v2;
+Select v1 pattern w1(v1, _) and w2(v1, _)
+inBattle,kakashi,naruto,sageMode,sasuke,sleep
+5000
+Evaluating query 12 - Common Synonym
+_ is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: sasuke naruto kakashi sageMode inBattle sleep 
+Correct answer: inBattle kakashi naruto sageMode sasuke sleep 
+13 - If Underscore Underscore Underscore
+if f;
+Select BOOLEAN pattern f(_, _ , _)
+true
+5000
+Evaluating query 13 - If Underscore Underscore Underscore
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="3" Pattern="1" CondNum="5" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+14 - If TooLittleArg
+if f;
+Select BOOLEAN pattern f(_, _ )
+false
+5000
+Evaluating query 14 - If TooLittleArg
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+15 - If TooManyArg
+if f;
+Select BOOLEAN pattern f(_, _ , _,_)
+false
+5000
+Evaluating query 15 - If TooManyArg
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+_,_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="3" Pattern="1" CondNum="5" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+16 - If Ident(ControlVarNature) Underscore Underscore
+if f;
+Select BOOLEAN pattern f("inBattle", _,_)
+true
+5000
+Evaluating query 16 - If Ident(ControlVarNature) Underscore Underscore
+_,_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+17 - If Ident(AssignVarNature) Underscore Underscore
+if f;
+Select BOOLEAN pattern f("jiraya", _,_)
+false
+5000
+Evaluating query 17 - If Ident(AssignVarNature) Underscore Underscore
+_,_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+18 - If Ident(ExprNature) Underscore Underscore
+if f;
+Select BOOLEAN pattern f("x+2", _,_)
+false
+5000
+Evaluating query 18 - If Ident(ExprNature) Underscore Underscore
+_,_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+19 - If Ident(ProcedureNature) Underscore Underscore
+if f;
+Select BOOLEAN pattern f("IfMultiple", _,_)
+false
+5000
+Evaluating query 19 - If Ident(ProcedureNature) Underscore Underscore
+_,_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+20 - If Variable Underscore Underscore
+if f; variable v;
+Select BOOLEAN pattern f(v, _, _)
+true
+5000
+Evaluating query 20 - If Variable Underscore Underscore
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: true 
+Correct answer: true 
+21 - If Variable ExprExactMatch Underscore
+if f; variable v;
+Select BOOLEAN pattern f(v, "attack+100", _)
+false
+5000
+Evaluating query 21 - If Variable ExprExactMatch Underscore
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="1" Pattern="1" CondNum="3" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+22 - If Variable PartialMatch Underscore
+if f; variable v;
+Select BOOLEAN pattern f(v, _"sageMode*love"_, _)
+false
+5000
+Evaluating query 22 - If Variable PartialMatch Underscore
+_"sageMode*love"_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: false 
+Correct answer: false 
+23 - If Variable Underscore Underscore Select-Variable
+if f; variable v;
+Select f pattern f(v, _, _)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 23 - If Variable Underscore Underscore Select-Variable
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+24 - If Variable Underscore Underscore Select-If
+if f; variable v;
+Select v pattern f(v, _, _)
+dream,hinata,inBattle,love,naruto,sakura,sleep
+5000
+Evaluating query 24 - If Variable Underscore Underscore Select-If
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="2" Pattern="1" CondNum="4" RelNum="0" 
+Your answer: sakura naruto love inBattle sleep hinata dream 
+Correct answer: dream hinata inBattle love naruto sakura sleep 
+25 - 2Clauses NoCommonSynonym
+while w; if f;
+Select w pattern w(_, _) and f(_, _, _)
+10,12,13,16,3,57,6,66,70
+5000
+Evaluating query 25 - 2Clauses NoCommonSynonym
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+_, is an Unnamedvar 
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="5" Pattern="1" CondNum="7" RelNum="0" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 10 12 13 16 3 57 6 66 70 
+26 - 2Clauses 1CommonSynonym
+while w; if f; variable v;
+Select v pattern w(v, _) and f(v, _, _)
+inBattle,naruto,sleep
+5000
+Evaluating query 26 - 2Clauses 1CommonSynonym
+_ is an Unnamedvar 
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="3" Pattern="1" CondNum="5" RelNum="0" 
+Your answer: naruto inBattle sleep 
+Correct answer: inBattle naruto sleep 
+27 - 3Clauses 1CommonSynonym
+while w1, w2; if f; variable v;
+Select v pattern w1(v, _) and w2(v, _) pattern f(v,_,_)
+inBattle,naruto,sleep
+5000
+Evaluating query 27 - 3Clauses 1CommonSynonym
+_ is an Unnamedvar 
+_ is an Unnamedvar 
+The happen is 2
+v,_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="3" Pattern="2" CondNum="6" RelNum="0" 
+Your answer: naruto inBattle sleep 
+Correct answer: inBattle naruto sleep 
+28 - 4Clauses 1CommonSynonym PerPair
+while w1, w2; if f1, f2; variable v1, v2;
+Select v1 pattern w1(v1, _) pattern f1(v1, _,_) pattern w2(v2, _) pattern f2(v2, _,_)
+inBattle,naruto,sleep
+5000
+Evaluating query 28 - 4Clauses 1CommonSynonym PerPair
+_ is an Unnamedvar 
+The happen is 2
+_,_ is an Unnamedvar 
+The happen is 3
+_ is an Unnamedvar 
+The happen is 4
+_,_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" UnnamedVar="4" Pattern="4" CondNum="9" RelNum="0" 
+Your answer: naruto inBattle sleep 
+Correct answer: inBattle naruto sleep 
+End of evaluating Query File.
+AutoTester Completed !
