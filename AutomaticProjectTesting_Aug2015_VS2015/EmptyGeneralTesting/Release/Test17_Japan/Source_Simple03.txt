@@ -498,3 +498,181 @@ procedure Japan {
 	kanagawa = kanagawa;
 	kanagawa = iwate;
 }
+
+procedure Nihon {
+	osaka = tokyo + kanagawa * nara - okinawa * (fukuoka * fukuoka);
+	call Japan;
+	while kanagawa {
+		call Japan;
+		if shizuoka then {
+			osaka = okinawa * 122 + 99;
+			call Riben;
+			tokyo = osaka + akita * kochi - 77 * 60 + mie * miyagi;
+		} else {
+			call Japan;
+		}
+		call Riben;
+		if nara then {
+			akita = chiba * chiba + shizuoka - 88;
+		} else {
+			call Japan;
+			tokyo = osaka + fukuoka * yamaguchi - shizuoka * (Japan * Japan);
+		}
+		Japan = japan + Japan;
+		while Japan {
+			call Riben;
+		}
+		call Riben;
+		while aichi {
+			fukuoka = yamaguchi + kochi;
+			osaka = fukuoka * yamaguchi;
+			call Japan;
+			while osaka {
+				Japan = osaka + 18 * 18 -19;
+				yamaguchi = chiba * shizuoka - miyagi;
+				nara = Japan + shizuoka;
+			}
+			call Riben;
+			if chiba then {
+				iwate = shizuoka * yamaguchi * (chiba * akita + shizuoka) * 800 + 222;
+			} else {
+				gunma = 53 * (66 - 77) * 88;
+				akita = iwate * shizuoka;
+				call Japan;
+			}
+			while chiba {
+				akita = iwate * mie * miyagi + ishikawa;
+				iwate = akita * mie;
+				call Riben;
+			}
+			if akita then {
+				call Riben;
+				while akita {
+					ishikawa = miyagi * mie * iwate;
+				}
+				if gunma then {
+					ishikawa = 14 * (88 * 88);
+				} else {
+					shizuoka = kochi * yamaguchi + 16 * 77;
+				}
+				while miyagi {
+					kochi = kochi * kochi * yamaguchi * osaka;
+					osaka = 123 * 400;
+					osaka = kochi;
+				}
+			} else {
+				call Japan;
+			}
+			iwate = 55*77-38+89 - iwate * akita - miyagi;
+		}
+		call Japan;
+	}
+	osaka = Japan * shizuoka * (19 + 111);
+	call Riben;
+	if fukui then {
+		while fukui {
+			call Japan;
+			while fukui {
+				if fukui then {
+					call Riben;
+					saitama = saitama * 88 + 99 - hiroshima * yamaguchi;
+					saitama = okinawa * 88;
+					saitama = 89 * (saitama * saitama);
+				} else {
+					osaka = fukui * saitama;
+					yamaguchi = shizuoka + okinawa;
+				}
+				while shizuoka {
+					saitama = saitama;
+				}
+				Japan = tokyo * saitama - yamaguchi + 18 * 18;
+			}
+			ishikawa = Japan + (99*100) - 78 + miyagi;
+		}
+		fukui = tokyo * shizuoka + 88 - nara * shizuoka + yamaguchi;
+	} else {
+		call Riben;
+		while okinawa {
+			saitama = mie * fukui - saitama;
+			osaka = miyagi * nara - shizuoka;
+			saitama = okinawa;
+			while Japan {
+				kochi = 66 * 77 + 88 - 99 *( 18*18 * 100);
+				while Japan {
+					nara = tokyo * shizuoka * yamaguchi + ishikawa;
+					ishikawa = nara + 18*18*888;
+				}
+				call Japan;
+			}
+		}
+		nara = 123;
+	}
+	call Riben;
+	call Riben;
+	call Riben;
+	while Japan {
+		kochi = 123 * 444 * 800;
+	}
+	call Japan;
+}
+
+procedure Riben {
+	tokyo = osaka;
+	ishikawa = tokyo;
+	tokyo = fukui;
+	call Japan;
+	shizuoka = tokyo;
+	call Ilbon;
+	fukui = osaka;
+}
+
+procedure Ilbon {
+	fukui = tokyo;
+	while tokyo {
+		if fukui then {
+			while nara {
+				tottori = shizuoka * tokyo + 88 * 77 + 66;
+				shizuoka = tottori * yamaguchi + shizuoka;
+				tokyo = tokyo + nara;
+				tokyo = 444;
+			}
+			while nara {
+				shizuoka = 123 * 777;
+			}
+			while nara {
+				tottori = 222 * 333;
+			}
+			while nara {
+				tokyo = fukui * (nara * nara) - yamaguchi - tottori;
+			}
+			tokyo = nara * shizuoka * (yamaguchi + yamaguchi);
+		} else {
+			tottori = fukui * tokyo + 123;
+			fukui = yamaguchi + tokyo;
+		}
+		if tottori then {
+			nara = aomori * tottori;
+			shizuoka = yamaguchi + nara;
+			shizuoka = 234 * 777;
+			shizuoka = 66 + (88 * 77);
+			aomori = tottori;
+		} else {
+			shizuoka = 33 + 45 * 55;
+			aomori = tottori;
+			yamaguchi = aomori + tottori;
+			tottori = shizuoka * aomori;
+		}
+		if shizuoka then {
+			fukui = aomori * tottori;
+			yamaguchi = shizuoka;
+			fukui = tottori;
+			fukui = 66 * 123 + (fukui * shizuoka);
+		} else {
+			aomori = yamaguchi;
+			fukui = fukui;
+			fukui = fukui + yamaguchi + aomori;
+			shizuoka = yamaguchi;
+		}
+	}
+	tokyo = fukui;
+}
