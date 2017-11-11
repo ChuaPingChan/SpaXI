@@ -159,7 +159,7 @@ SpaxiSpeech\spaxi_AutotesterStart.vbs
 call :runSampleTest
 call :runSimple01
 call :runSimple02
-REM call :runSimple03
+call :runSimple03
 call :runSequential
 call :runLoop
 call :runValidation

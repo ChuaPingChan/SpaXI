@@ -102,7 +102,6 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
                 }
                 catch (SynonymNotFoundException& snfe)
                 {
-                    cerr << snfe.what() << endl;
                     return false;
                 }
             }
@@ -215,7 +214,6 @@ bool SelectValidator::isValidAttrRefForSynonym(string str)
          str = synonym;
     }
     catch (SynonymNotFoundException& snfe) {
-        cerr << snfe.what() << endl;
         return false;
     }
 
