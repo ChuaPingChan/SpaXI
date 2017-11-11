@@ -92,7 +92,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 int argOneVal = pair.first;
                 int argTwoVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isMod(argOneVal, argTwoVal)) 
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -130,8 +130,8 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
-                resultPairs.clear();
-
+                
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getModifiesFromStmt(existingSynVal);
@@ -156,6 +156,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getModifiesFromVar(existingSynVal, newSynType);
@@ -247,7 +248,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 int argOneVal = pair.first;
                 int argTwoVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isModProc(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -287,7 +288,8 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
-                resultPairs.clear();
+                
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getModifiesFromProc(existingSynVal);
@@ -313,6 +315,7 @@ bool ModifiesEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getProcModifiesFromVar(existingSynVal);

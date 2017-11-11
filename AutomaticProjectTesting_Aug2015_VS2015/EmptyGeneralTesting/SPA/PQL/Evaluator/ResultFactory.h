@@ -35,7 +35,7 @@ public:
     bool processClause(WithClause clause);
 
     ClauseResult makeClauseResult();
-    bool resetClauseResult();
+    void resetClauseResult();
 
 private:
 

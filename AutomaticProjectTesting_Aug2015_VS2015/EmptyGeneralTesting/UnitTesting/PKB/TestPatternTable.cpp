@@ -19,14 +19,6 @@ namespace UnitTesting {
 
             // check that the function rejects duplicated values
             Assert::IsFalse(pt.addToPatternTable(1, 1, "a+b"));
-            
-            // postfix test
-            /*
-            Assert::IsTrue(pt.getExpression(1).second.compare("ab+c-d+") == 0);
-            Assert::IsTrue(pt.getExpression(2).second.compare("abc*-d-") == 0);
-            Assert::IsTrue(pt.getExpression(3).second.compare("abcd+*+e-") == 0);
-            Assert::IsTrue(pt.getExpression(4).second.compare("a") == 0);
-            */
         }
 
         TEST_METHOD(TestMatchPatterns) {

@@ -109,6 +109,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
         bool argOneExists = clauseResult->synonymPresent(argOne);
         bool argTwoExists = clauseResult->synonymPresent(argTwo);
 
+        // Case when both synonyms are the same
         if (argOne == argTwo)
         {
             list<int> pkbResult = pkbInstance->getAllNextStarSameSyn(argOneType);
@@ -134,7 +135,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                     int argOneVal = pair.first;
                     int argTwoVal = pair.second;
 
-                    // Removes from clauseResult as it is no longer valid due to new relation
+                    // Removed from clauseResult as it is no longer valid due to new relation
                     if (!pkbInstance->isNextStar(argOneVal, argTwoVal))
                     {
                         clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -173,8 +174,8 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                     // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                     list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                     list<pair<int, int>> resultPairs;
-                    resultPairs.clear();
-
+                    
+                    // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                     for (int existingSynVal : existingSynVals)
                     {
                         list<int> newSynVals = pkbInstance->getExecutedAfterStar(existingSynVal, newSynType);
@@ -198,7 +199,8 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
                     // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                     list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                     list<pair<int, int>> resultPairs;
-                    resultPairs.clear();
+                    
+                    // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                     for (int existingSynVal : existingSynVals)
                     {
                         list<int> newSynVals = pkbInstance->getExecutedBeforeStar(existingSynVal, newSynType);
@@ -217,6 +219,7 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
 
 
     }
+
     else
     {
         throw UnrecognisedTypeException("in NextStarEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));

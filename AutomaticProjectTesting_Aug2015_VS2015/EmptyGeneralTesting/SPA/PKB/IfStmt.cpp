@@ -7,59 +7,59 @@ Sets up the ifStmt object with its required details
 This IfStmt object is only used in the computation of affets and affects star
 */
 IfStmt::IfStmt(int stmtNum, int branchIf, int endIf,
-	int branchElse, int endElse, bool visitedElse, int afterIf,
-	unordered_map<int, unordered_set<int>> ifLatestMod, unordered_map<int, unordered_set<int>> elseLatestMod) {
-	this->stmtNum = stmtNum;
-	this->branchIf = branchIf;
-	this->endIf = endIf;
-	this->branchElse = branchElse;
-	this->endElse = endElse;
-	this->visitedElse = visitedElse;
-	this->afterIf = afterIf;
-	this->ifLatestMod = ifLatestMod;
-	this->elseLatestMod = elseLatestMod;
+    int branchElse, int endElse, bool visitedElse, int afterIf,
+    unordered_map<int, unordered_set<int>> ifLatestMod, unordered_map<int, unordered_set<int>> elseLatestMod) {
+    this->stmtNum = stmtNum;
+    this->branchIf = branchIf;
+    this->endIf = endIf;
+    this->branchElse = branchElse;
+    this->endElse = endElse;
+    this->visitedElse = visitedElse;
+    this->afterIf = afterIf;
+    this->ifLatestMod = ifLatestMod;
+    this->elseLatestMod = elseLatestMod;
 }
 
 bool IfStmt::isEndIf(int target) {
-	return (target == endIf);
+    return (target == endIf);
 }
 
 bool IfStmt::isEndElse(int target) {
-	return (target == endElse);
+    return (target == endElse);
 }
 
 void IfStmt::setIfMap(unordered_map<int, unordered_set<int>> newMap) {
-	ifLatestMod = newMap;
+    ifLatestMod = newMap;
 }
 
 unordered_map<int, unordered_set<int>> IfStmt::getElseMap() {
-	return elseLatestMod;
+    return elseLatestMod;
 }
 
 unordered_map<int, unordered_set<int>> IfStmt::getIfMap() {
-	return ifLatestMod;
+    return ifLatestMod;
 }
 
 int IfStmt::getBranchElse() {
-	return branchElse;
+    return branchElse;
 }
 
 int IfStmt::getBranchIf() {
-	return branchIf;
+    return branchIf;
 }
 
 void IfStmt::visitElse() {
-	visitedElse = true;
+    visitedElse = true;
 }
 
 bool IfStmt::hasVisitedElse() {
-	return visitedElse;
+    return visitedElse;
 }
 
 int IfStmt::getAfterIf() {
-	return afterIf;
+    return afterIf;
 }
 
 int IfStmt::getStmtNum() {
-	return stmtNum;
+    return stmtNum;
 }
