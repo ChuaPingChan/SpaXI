@@ -1,4 +1,3 @@
-#include "../stdafx.h"
 #include "CppUnitTest.h"
 #include "../SPA/PKB/ParentToChildTable.h"
 #include "../SPA/PKB/ChildToParentTable.h"
