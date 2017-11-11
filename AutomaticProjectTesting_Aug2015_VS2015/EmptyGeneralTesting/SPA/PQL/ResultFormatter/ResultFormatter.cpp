@@ -18,9 +18,9 @@ ResultFormatter::ResultFormatter()
 //This method handles result formatter if the ClauseResult has result
 list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTree qt)
 {
-	SelectClause selectionByQuery = qt.getSelectClause();
-	list<string> selectSynonym;
-	list<string> result;
+    SelectClause selectionByQuery = qt.getSelectClause();
+    list<string> selectSynonym;
+    list<string> result;
 
     SelectionType selectedType = selectionByQuery.getSelectionType(); //Get Selection Type from the SelectClause
     
@@ -38,8 +38,8 @@ list<string> ResultFormatter::finalResultFromSelection(ClauseResult cr, QueryTre
     default:
         break;
     }
-	
-	return result;
+    
+    return result;
 }
 
 //This method handles result if evaluator has no result/query is invalid and Select type is BOOLEAN.

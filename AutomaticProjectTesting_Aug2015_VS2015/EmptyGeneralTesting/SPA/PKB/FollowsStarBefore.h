@@ -8,19 +8,19 @@ using namespace std;
 
 class FollowsStarBefore {
 public:
-	FollowsStarBefore();
+    FollowsStarBefore();
 
-	void setMap(unordered_map<int, list<int>> targetMap);
+    void setMap(unordered_map<int, list<int>> targetMap);
 
-	list<int> getBeforeStar(int stmt);
+    list<int> getBeforeStar(int stmt);
 
-	bool isBeforeStar(int stmtBefore, int stmtAfter);
+    bool isBeforeStar(int stmtBefore, int stmtAfter);
 
-	list<int> getAllBeforeStar();
+    list<int> getAllBeforeStar();
 
 private:
-	unordered_map<int, list<int>> followsStarBeforeMap;
-	list<int> beforeList;
-	list<int> afterList;
-	unordered_map<int, unordered_set<int>> followsStarBeforeRelMap;
+    unordered_map<int, list<int>> followsStarBeforeMap;
+    list<int> beforeList;
+    list<int> afterList;
+    unordered_map<int, unordered_set<int>> followsStarBeforeRelMap;
 };

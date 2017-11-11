@@ -13,9 +13,9 @@ class ConstantTable {
 public:
     ConstantTable();
     bool addConstantList(int constant);
-	list<int> getAllConstants();
-	bool isConstant(int constant);
+    list<int> getAllConstants();
+    bool isConstant(int constant);
 private:
-	unordered_set<int> constantSet;
-	list<int> constantList;
+    unordered_set<int> constantSet;
+    list<int> constantList;
 };

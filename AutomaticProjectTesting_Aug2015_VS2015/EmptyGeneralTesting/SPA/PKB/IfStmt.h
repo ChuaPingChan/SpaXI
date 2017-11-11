@@ -13,41 +13,41 @@ using namespace std;
 class IfStmt
 {
 public:
-	IfStmt(int stmtNum, int branchIf, int endIf,
-		int branchElse, int endElse, bool visitedElse, int afterIf,
-		unordered_map<int, unordered_set<int>> ifLatestMod, unordered_map<int, unordered_set<int>> elseLatestMod);
+    IfStmt(int stmtNum, int branchIf, int endIf,
+        int branchElse, int endElse, bool visitedElse, int afterIf,
+        unordered_map<int, unordered_set<int>> ifLatestMod, unordered_map<int, unordered_set<int>> elseLatestMod);
 
-	bool isEndIf(int target);
+    bool isEndIf(int target);
 
-	bool isEndElse(int target);
+    bool isEndElse(int target);
 
-	void setIfMap(unordered_map<int, unordered_set<int>> newMap);
+    void setIfMap(unordered_map<int, unordered_set<int>> newMap);
 
-	unordered_map<int, unordered_set<int>> getElseMap();
+    unordered_map<int, unordered_set<int>> getElseMap();
 
-	unordered_map<int, unordered_set<int>> getIfMap();
+    unordered_map<int, unordered_set<int>> getIfMap();
 
-	int getBranchElse();
+    int getBranchElse();
 
-	int getBranchIf();
+    int getBranchIf();
 
-	void visitElse();
+    void visitElse();
 
-	bool hasVisitedElse();
+    bool hasVisitedElse();
 
-	int getAfterIf();
+    int getAfterIf();
 
-	int getStmtNum();
+    int getStmtNum();
 
 
 private:
-	int stmtNum;
-	int branchIf;
-	int endIf;
-	int branchElse;
-	int endElse;
-	bool visitedElse;
-	int afterIf;
-	unordered_map<int, unordered_set<int>> ifLatestMod;
-	unordered_map<int, unordered_set<int>> elseLatestMod;
+    int stmtNum;
+    int branchIf;
+    int endIf;
+    int branchElse;
+    int endElse;
+    bool visitedElse;
+    int afterIf;
+    unordered_map<int, unordered_set<int>> ifLatestMod;
+    unordered_map<int, unordered_set<int>> elseLatestMod;
 };

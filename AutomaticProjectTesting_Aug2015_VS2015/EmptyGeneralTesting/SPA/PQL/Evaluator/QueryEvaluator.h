@@ -23,6 +23,6 @@ public:
 
 private:
     QueryTree* _qt;
-    bool hasResultEvaluator;
+    bool _hasResult;
 };
 

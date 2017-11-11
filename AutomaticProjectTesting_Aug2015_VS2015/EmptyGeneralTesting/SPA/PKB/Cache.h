@@ -14,73 +14,73 @@ using namespace std;
 class Cache
 {
 public:
-	Cache();
+    Cache();
 
-	bool putAllNextStar(pair<list<int>, list<int>> allNextStar, Entity type1, Entity type2);
+    bool putAllNextStar(pair<list<int>, list<int>> allNextStar, Entity type1, Entity type2);
 
-	bool putAllNextStar(unordered_map<int, list<int>> nextStarMap, unordered_map<int, list<int>> nextStarMapReverse, unordered_map<int, unordered_set<int>> nextStarRelMap);
+    bool putAllNextStar(unordered_map<int, list<int>> nextStarMap, unordered_map<int, list<int>> nextStarMapReverse, unordered_map<int, unordered_set<int>> nextStarRelMap);
 
-	unordered_map<int, list<int>> getNextStarMap();
+    unordered_map<int, list<int>> getNextStarMap();
 
-	unordered_map<int, list<int>> getNextStarMapReverse();
+    unordered_map<int, list<int>> getNextStarMapReverse();
 
-	unordered_map<int, unordered_set<int>> getNextStarRelMap();
+    unordered_map<int, unordered_set<int>> getNextStarRelMap();
 
-	bool containsAllNextStar(Entity type1, Entity type2);
+    bool containsAllNextStar(Entity type1, Entity type2);
 
-	pair<list<int>, list<int>> getAllNextStar(Entity type1, Entity type2);
+    pair<list<int>, list<int>> getAllNextStar(Entity type1, Entity type2);
 
-	bool putAllAffects(pair<list<int>, list<int>> allAffects, unordered_map<int, unordered_set<int>> affectsRelMap);
+    bool putAllAffects(pair<list<int>, list<int>> allAffects, unordered_map<int, unordered_set<int>> affectsRelMap);
 
-	bool containsAllAffects();
+    bool containsAllAffects();
 
-	pair<list<int>, list<int>> getAllAffects();
+    pair<list<int>, list<int>> getAllAffects();
 
-	bool putAllAffectsStar(pair<list<int>, list<int>> allAffectsStar, unordered_map<int, unordered_set<int>> affectsStarRelMap, unordered_map<int, list<int>> affectsStarMap, unordered_map<int, list<int>> affectsStarMapReverse);
+    bool putAllAffectsStar(pair<list<int>, list<int>> allAffectsStar, unordered_map<int, unordered_set<int>> affectsStarRelMap, unordered_map<int, list<int>> affectsStarMap, unordered_map<int, list<int>> affectsStarMapReverse);
 
-	unordered_map<int, list<int>> getAffectsStarMap();
+    unordered_map<int, list<int>> getAffectsStarMap();
 
-	unordered_map<int, list<int>> getAffectsStarMapReverse();
+    unordered_map<int, list<int>> getAffectsStarMapReverse();
 
-	bool putAllAffectsStar(pair<list<int>, list<int>> allAffectsStar, unordered_map<int, unordered_set<int>> affectsStarRelMap);
+    bool putAllAffectsStar(pair<list<int>, list<int>> allAffectsStar, unordered_map<int, unordered_set<int>> affectsStarRelMap);
 
-	bool containsAllAffectsStar();
+    bool containsAllAffectsStar();
 
-	pair<list<int>, list<int>> getAllAffectsStar();
+    pair<list<int>, list<int>> getAllAffectsStar();
 
-	unordered_map<int, unordered_set<int>> getAllAffectsStarRelMap();
+    unordered_map<int, unordered_set<int>> getAllAffectsStarRelMap();
 
-	unordered_map<int, unordered_set<int>> getAllAffectsRelMap();
+    unordered_map<int, unordered_set<int>> getAllAffectsRelMap();
 
-	bool putAllAffectsSameSyn(list<int> allAffectsSamSynList);
+    bool putAllAffectsSameSyn(list<int> allAffectsSamSynList);
 
-	bool containsAllAffectsSameSyn();
+    bool containsAllAffectsSameSyn();
 
-	list<int> getAllAffectsSameSyn();
+    list<int> getAllAffectsSameSyn();
 
-	bool putAllAffectsStarSameSyn(list<int> allAffectsStarSameSynList);
+    bool putAllAffectsStarSameSyn(list<int> allAffectsStarSameSynList);
 
-	bool containsAllAffectsStarSameSyn();
+    bool containsAllAffectsStarSameSyn();
 
-	list<int> getAllAffectsStarSameSyn();
+    list<int> getAllAffectsStarSameSyn();
 
 private:
-	pair<list<int>, list<int>> allNextStarPair;
-	bool hasAllNextStar = false;
-	unordered_map<int, list<int>> nextStarMap;
-	unordered_map<int, list<int>> nextStarMapReverse;
-	unordered_map<int, unordered_set<int>> nextStarRelMap;
-	pair<list<int>, list<int>> allAffectsPair;
-	pair<list<int>, list<int>> allAffectsStarPair;
-	unordered_map<int, unordered_set<int>> affectsRelMap;
-	bool hasAllAffects = false;
-	bool hasAllAffectsStar = false;
-	bool hasAllAffectsSameSyn = false;
-	bool hasAllAffectsStarSameSyn = false;
-	list<int> allAffectsSameSyn;
-	list<int> allAffectsStarSameSyn;
-	unordered_map<int, unordered_map<int, pair<list<int>, list<int>>>> allNextStarPairMap;
-	unordered_map<int, unordered_set<int>> affectsStarRelMap;
-	unordered_map<int, list<int>> affectsStarMap;
-	unordered_map<int, list<int>> affectsStarMapReverse;
+    pair<list<int>, list<int>> allNextStarPair;
+    bool hasAllNextStar = false;
+    unordered_map<int, list<int>> nextStarMap;
+    unordered_map<int, list<int>> nextStarMapReverse;
+    unordered_map<int, unordered_set<int>> nextStarRelMap;
+    pair<list<int>, list<int>> allAffectsPair;
+    pair<list<int>, list<int>> allAffectsStarPair;
+    unordered_map<int, unordered_set<int>> affectsRelMap;
+    bool hasAllAffects = false;
+    bool hasAllAffectsStar = false;
+    bool hasAllAffectsSameSyn = false;
+    bool hasAllAffectsStarSameSyn = false;
+    list<int> allAffectsSameSyn;
+    list<int> allAffectsStarSameSyn;
+    unordered_map<int, unordered_map<int, pair<list<int>, list<int>>>> allNextStarPairMap;
+    unordered_map<int, unordered_set<int>> affectsStarRelMap;
+    unordered_map<int, list<int>> affectsStarMap;
+    unordered_map<int, list<int>> affectsStarMapReverse;
 };

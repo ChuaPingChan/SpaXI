@@ -118,7 +118,7 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
                 int argOneVal = pair.first;
                 int argTwoVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isFollowsStar(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -156,7 +156,8 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
-                resultPairs.clear();
+                
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getAfterStar(existingSynVal, newSynType);
@@ -180,7 +181,8 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
                 // Create a list of pairs of <existing syn res, new syn result> and pass it to ClauseResult to merge
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
-                resultPairs.clear();
+                
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getBeforeStar(existingSynVal, newSynType);
@@ -196,6 +198,7 @@ bool FollowsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* claus
             }
         }
     }
+
     else
     {
         throw UnrecognisedTypeException("in FollowsStarEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
