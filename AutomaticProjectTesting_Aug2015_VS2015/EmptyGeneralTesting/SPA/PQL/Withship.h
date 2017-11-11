@@ -5,6 +5,6 @@ using namespace std;
 
 enum WithType
 {
-    INTEGER_WITH = 0,
+    INTEGER_WITH = 1,
     STRING_WITH
 };

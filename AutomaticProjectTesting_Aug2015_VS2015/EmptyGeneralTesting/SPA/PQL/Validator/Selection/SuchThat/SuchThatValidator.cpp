@@ -1,3 +1,4 @@
+#include <cassert>
 #include "SuchThatValidator.h"
 
 const string SuchThatValidator::UNDERSCORE_STRING = "_";
@@ -52,7 +53,8 @@ string SuchThatValidator::getArgTwo()
 
 string SuchThatValidator::extractArgOne(Relationship rel, string str)
 {
-    string relStr = RELATIONSHIP_STRING_ARRAY[rel];
+    assert(MAP_REL_TO_STR.find(rel) != MAP_REL_TO_STR.end());
+    string relStr = MAP_REL_TO_STR.at(rel);
     string delimFirst = relStr + "(";
     string delimSecond = ",";
 

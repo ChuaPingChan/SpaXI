@@ -4,7 +4,7 @@ using namespace std;
 
 enum Entity
 {
-    STMT = 0,
+    STMT = 1,
     ASSIGN,
     WHILE,
     IF,

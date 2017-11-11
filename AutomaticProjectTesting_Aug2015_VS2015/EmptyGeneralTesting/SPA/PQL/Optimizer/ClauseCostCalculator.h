@@ -26,6 +26,7 @@ public:
 
     // Select-clause will never have cost-relaxation
     static int getRelaxedCost(ClausePtr clausePtr, unordered_set<string> evaluatedSyns);
+    static int getRelaxedCost(SelectClausePtr selectClausePtr, unordered_set<string> evaluatedSyns);
     static int getRelaxedCost(SuchThatClausePtr suchThatClausePtr, unordered_set<string> evaluatedSyns);
     static int getRelaxedCost(PatternClausePtr patternClausePtr, unordered_set<string> evaluatedSyns);
     static int getRelaxedCost(WithClausePtr withClausePtr, unordered_set<string> evaluatedSyns);

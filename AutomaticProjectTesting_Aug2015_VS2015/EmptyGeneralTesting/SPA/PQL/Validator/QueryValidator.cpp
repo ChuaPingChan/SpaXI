@@ -9,6 +9,13 @@ QueryValidator::QueryValidator(QueryTree *qtNew) {
 QueryValidator::~QueryValidator() {}
 
 bool QueryValidator::isValidQuery(string query) {
+    /*
+        If query has excessive whitespaces, they are shortened to 2 spaces. They are
+        replaced with 2 whitespaces instead of 1 is so that "such    that" will still
+        be false.
+    */ 
+    query = regex_replace(query, regex("\\s\\s+"), "  ");
+
     vector<string> inputVector = tokenize(query);
 
     for (vector<string>::iterator iter = inputVector.begin(); iter != inputVector.end(); ++iter) {
@@ -38,7 +45,6 @@ bool QueryValidator::isValidSelection(string str) {
 
 vector<string> QueryValidator::tokenize(string query) 
 {
-     
         query = trim(query);
         vector<string> tokens;
 		
@@ -64,8 +70,5 @@ vector<string> QueryValidator::tokenize(string query)
 
 string QueryValidator::trim(string query)
 {
-    query.erase(query.begin(), std::find_if(query.begin(), query.end(), std::bind1st(std::not_equal_to<char>(), ' ')));
-    query.erase(std::find_if(query.rbegin(), query.rend(), std::bind1st(std::not_equal_to<char>(), ' ')).base(), query.end());
-
-    return query;
+    return regex_replace(query, regex("^ +| +$"), "");
 }
