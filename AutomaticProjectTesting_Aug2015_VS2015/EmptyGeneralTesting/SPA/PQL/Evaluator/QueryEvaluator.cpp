@@ -66,12 +66,7 @@ void QueryEvaluator::evaluate()
 
                 // Check for timeout
                 if (AbstractWrapper::GlobalStop) {
-
-                    if (_hasResult)
-                    {
-                        // Store result even if it's wrong.. Hope for partial marks ;O
-                        _qt->storeEvaluatorResult(clauseGroupManager.getMergedClauseResult());
-                    }
+                    _hasResult = false;
                     return;
                 }
 

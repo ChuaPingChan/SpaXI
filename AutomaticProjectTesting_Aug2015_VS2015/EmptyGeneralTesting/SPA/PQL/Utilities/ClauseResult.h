@@ -37,6 +37,7 @@ public:
 
 protected:
     unordered_map<string, int> _synToIdxMap;
+    unordered_set<string> _prunedSyns;
     vector<string> _synList;
     shared_ptr<list<vector<int>>> _resultsPtr;  // All results are stored as int (i.e. indices of entities in PKB)
     bool _isNew;    // Flag to indicate whether ClauseResult has been populated before

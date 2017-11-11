@@ -408,8 +408,11 @@ bool ClauseResult::pruneColumns(unordered_set<string> synsToRetain)
 {
     list<int> synsIdxToPrune;
     for (string syn : _synList) {
-        if (synsToRetain.find(syn) == synsToRetain.end()) {
+        if ((_prunedSyns.find(syn) == _prunedSyns.end())
+            && (synsToRetain.find(syn) == synsToRetain.end()))
+        {
             synsIdxToPrune.push_back(_synToIdxMap.at(syn));
+            _prunedSyns.insert(syn);
         }
     }
 
