@@ -206,7 +206,7 @@ Entity SelectValidator::getEntityOfSynonym(string syn)
 bool SelectValidator::isValidAttrRefForSynonym(string str)
 {
     string synonymWithAttribute = str;
-    synonymWithAttribute.erase(std::remove(synonymWithAttribute.begin(), synonymWithAttribute.end(), ' '), synonymWithAttribute.end()); //remove all whitespaces
+    synonymWithAttribute = regex_replace(synonymWithAttribute, regex("\\s+"), "");
     string synonym = Formatter::getStringBeforeDelim(synonymWithAttribute, ".");
     string attribute = Formatter::getStringAfterDelim(synonymWithAttribute, ".");
     Entity entity;
@@ -268,18 +268,14 @@ string SelectValidator::removeSelectKeyword(string str)
 
 string SelectValidator::removeSpecialCharactersFromTuple(string selectedStr)
 {
-    selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), '<'), selectedStr.end()); //remove < from tuple
-    selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), '>'), selectedStr.end()); //remove > from tuple
-    selectedStr.erase(std::remove(selectedStr.begin(), selectedStr.end(), ' '), selectedStr.end()); //remove all whitespaces for easier tokenizing
-
-    return selectedStr;
+    return regex_replace(selectedStr, regex("<|>|\\s+"), "");
 }
 
 vector<string> SelectValidator::splitSynonymProcName(string selectedStr)
 {
     vector<string> synonymWithProcName;
     string synonymWithAttribute = selectedStr;
-    synonymWithAttribute.erase(std::remove(synonymWithAttribute.begin(), synonymWithAttribute.end(), ' '), synonymWithAttribute.end()); //remove all whitespaces
+    synonymWithAttribute = regex_replace(synonymWithAttribute, regex("\\s+"), "");
     string synonym = Formatter::getStringBeforeDelim(synonymWithAttribute, ".");
     string attribute = Formatter::getStringAfterDelim(synonymWithAttribute, ".");
     
