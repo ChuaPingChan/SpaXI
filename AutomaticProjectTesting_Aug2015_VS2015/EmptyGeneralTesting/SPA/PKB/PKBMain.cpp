@@ -38,6 +38,19 @@ void PKBMain::clearCache()
 
 //Utility functions
 /*
+Return true if all procedured called exists
+*/
+bool PKBMain::calledProceduresExist() {
+	return allCalledProceduresExist;
+}
+
+/*
+Return true if the code has recursive calls
+*/
+bool PKBMain::hasRecursion() {
+	return hasRecursiveCalls;
+}
+/*
 This method checks if the name of the entity given its index is the same as
 the other entity given its index
 */
