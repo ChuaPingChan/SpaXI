@@ -1,4 +1,3 @@
-#include "../stdafx.h"
 #include "CppUnitTest.h"
 #include "..\SPA\PKB\PatternTable.h"
 #include "..\SPA\PKB\PatternTable.cpp"
