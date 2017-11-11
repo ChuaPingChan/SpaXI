@@ -16,6 +16,8 @@ Formatter::~Formatter()
 string Formatter::removeAllSpacesAndTabs(string str)
 {
     string query;
+    query.reserve(str.size());
+
     for (int i = 0; i<str.length(); i++)
     {
         char c = str[i];
