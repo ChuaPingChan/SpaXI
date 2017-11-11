@@ -1,3 +1,4 @@
+#include <unordered_set>
 #include "Formatter.h"
 
 using namespace std;
@@ -14,9 +15,16 @@ Formatter::~Formatter()
 /*--------------- Remove all spaces ---------------*/
 string Formatter::removeAllSpacesAndTabs(string str)
 {
-    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-    str.erase(std::remove(str.begin(), str.end(), '\t'), str.end());
-    return str;
+    string query;
+    for (int i = 0; i<str.length(); i++)
+    {
+        char c = str[i];
+        if (c != ' '&& c != '\t')
+        {
+            query += c;
+        }
+    }
+    return query;
 }
 
 string Formatter::removeAllQuotes(string str)
