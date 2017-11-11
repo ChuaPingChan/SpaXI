@@ -179,7 +179,7 @@
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatCalls.cpp" />
     <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternWhile.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatCallsStar.cpp" />
-    <ClCompile Include="PQL\Validator\SuchThat\TestValidationSUchThatNext.cpp" />
+    <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatNext.cpp" />
     <ClCompile Include="PQL\Validator\SuchThat\TestValidationSuchThatNextStar.cpp" />
     <ClCompile Include="PQL\Validator\TestValidationDeclarationAndTree.cpp" />
     <ClCompile Include="PQL\Validator\Pattern\TestValidationPatternAssign.cpp" />
