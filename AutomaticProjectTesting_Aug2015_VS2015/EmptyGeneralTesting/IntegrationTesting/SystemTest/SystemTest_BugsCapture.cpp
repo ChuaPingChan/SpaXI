@@ -98,7 +98,73 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
-        TEST_METHOD(bug7Test)
+        TEST_METHOD(bug4Test)
+        {
+            // Set up
+            PKBMain* pkbPtr = PKBMain::getInstance();
+            Parser parser(pkbPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_Test1());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+            list<string> actualResults;
+            list<string> expectedResults;
+
+            string query =
+                "stmt s1, s2, s3; Select s1 such that Parent(s1, s2) and Parent(s2, s3)";
+            PQLMain pql = PQLMain(query);
+            actualResults = pql.run();
+            expectedResults = list<string>();
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            query = "stmt s1, s2, s3; Select s2 such that Parent(s1, s2) and Parent(s2, s3)";
+            pql = PQLMain(query);
+            actualResults = pql.run();
+            expectedResults = list<string>();
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            query = "stmt s Select s";
+            pql = PQLMain(query);
+            actualResults = pql.run();
+            expectedResults = list<string>();
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Clean up
+            pkbPtr->deleteInstance();
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(bug5Test)
+        {
+            // Set up
+            PKBMain* pkbPtr = PKBMain::getInstance();
+            Parser parser(pkbPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_Test13_Source6());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+            list<string> actualResults;
+            list<string> expectedResults;
+
+            string query =
+                "assign a; variable v; "
+                "Select a such that Uses(14, v) pattern a(v, _)";
+            PQLMain pql = PQLMain(query);
+
+            actualResults = pql.run();
+            expectedResults = list<string>{ "2", "8", "11", "19" };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Clean up
+            pkbPtr->deleteInstance();
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
+        TEST_METHOD(bug6Test)
         {
             // Set up
             PKBMain* pkbPtr = PKBMain::getInstance();
@@ -433,6 +499,76 @@ namespace UnitTesting
                 "procedure Wifi { \n"
                 "	assignment = assignment + pattern + assign - and * 100 - 20 + 5 * 2; \n"
                 "	and = Uses; \n"
+                "}";
+            std::string newFilePath(dummySimpleSourcePath);
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a source file for Test 1.
+        */
+        bool createDummySimpleSourceFile_Test1() {
+            std::string content =
+                "procedure ABC { "
+                "i = j; "
+                "j = 3 + 5; "
+                "while a "
+                "{ "
+                "	a = 3; "
+                "   b = 2  ; "
+                "c = 4; "
+                "d = 5; "
+                "} "
+                "c = c + d; "
+                "}";
+            std::string newFilePath(dummySimpleSourcePath);
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a source file for Test 13 source6.
+        */
+        bool createDummySimpleSourceFile_Test13_Source6() {
+            std::string content =
+                "procedure pokemon { "
+                "	charmander = 5; "
+                "	squirtle = 5; "
+                "	bulbasaur = 5; "
+                "	firstStageEvolution = 11; "
+                "	while firstStageEvolution { "
+                "		charmander = charmander + 1; "
+                "		bulbasaur = bulbasaur + 1; "
+                "		squirtle = squirtle + 1; "
+                "	} "
+                "	charmeleon = charmander; "
+                "	wartortle = squirtle; "
+                "	ivysaur = bulbasaur; "
+                "	battle1 = charmeleon - wartortle; "
+                "	battle2 = ivysaur - charmeleon; "
+                "	battle3 = squirtle - ivysaur; "
+                "	while battle1 { "
+                "		charmeleon = wartortle + ivysaur; "
+                "		while battle2 { "
+                "			while battle3 { "
+                "				ivysaur = charmeleon + wartortle; "
+                "			} "
+                "			if wartortle then { "
+                "				wartortle = squirtle + 3; "
+                "			} "
+                "			else { "
+                "				wartortle = wartortle - 1; "
+                "			} "
+                "		} "
+                "		lastPokemon = 3; "
+                "	} "
                 "}";
             std::string newFilePath(dummySimpleSourcePath);
             std::ofstream outfile(newFilePath);
