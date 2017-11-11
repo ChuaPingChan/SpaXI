@@ -166,11 +166,11 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
             vector<int> newComb = comb;
             newComb.push_back(newSynRes);
             _resultsPtr->push_back(newComb);
-
-            if (AbstractWrapper::GlobalStop) {  // TODO: Refactor method, reduce repetitive code
-                return true;    // Consider returning false, check the consequence.
-            }
         }
+
+        if (AbstractWrapper::GlobalStop) {  // TODO: Refactor method, reduce repetitive code
+            return true;    // Consider returning false, check the consequence
+        }   // TODO: Do the above TODOs for all timeout checks in this class
     }
 
     return true;
@@ -223,11 +223,12 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
         for (list<int> newSynsResList : resultsToMerge) {
             vector<int> newSynsResVec = convertListToVector(newSynsResList);
             vector<int> newComb = joinTwoVectors(currComb, newSynsResVec);
-            _resultsPtr->push_back(newComb);
 
-            if (AbstractWrapper::GlobalStop) {
-                return true;    // Consider returning false, check the consequence.
-            }
+            _resultsPtr->push_back(newComb);
+        }
+
+        if (AbstractWrapper::GlobalStop) {
+            return true;
         }
     }
 
@@ -270,10 +271,10 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<v
             vector<int> newComb = existingComb;
             newComb = ClauseResult::joinTwoVectors(newComb, pairResult);
             updatedResultsPtr->push_back(newComb);
+        }
 
-            if (AbstractWrapper::GlobalStop) {
-                return true;    // Consider returning false, check the consequence.
-            }
+        if (AbstractWrapper::GlobalStop) {
+            return true;
         }
     }
     _resultsPtr = updatedResultsPtr;
@@ -288,12 +289,12 @@ bool ClauseResult::addNewSynPairResults(string syn1Name, list<int> syn1Results, 
 }
 
 /*
-Helper method:
-Converts two lists of results of two synonyms into a list of results pair. Each result pair
-is stored as a vector with 2 elements.
+    Helper method:
+    Converts two lists of results of two synonyms into a list of results pair. Each result pair
+    is stored as a vector with 2 elements.
 
-Pre-condition: The two lists given should be of the same length and each element of a list
-should form a pair of valid result with the element with the same order in the other list.
+    Pre-condition: The two lists given should be of the same length and each element of a list
+    should form a pair of valid result with the element with the same order in the other list.
 */
 list<vector<int>> ClauseResult::pairUpListsResults(list<int>& syn1Results, list<int>& syn2Results)
 {
@@ -328,6 +329,10 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
         if (resultsSetToOverlap.find(valueInComb) != resultsSetToOverlap.end()) {
             updatedResultsPtr->push_back(comb);
         }
+
+        if (AbstractWrapper::GlobalStop) {
+            return true;
+        }
     }
     _resultsPtr = updatedResultsPtr;
     return true;
@@ -354,7 +359,7 @@ bool ClauseResult::removeCombinations(string synName, int value)
     while (existingResultsIter != _resultsPtr->end())
     {
         if (AbstractWrapper::GlobalStop) {
-            return true;    // Consider returning false, check the consequence.
+            return true;
         }
 
         if ((*existingResultsIter).at(synIdx) == value)
@@ -381,7 +386,7 @@ bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn
     while (existingResultsIter != _resultsPtr->end())
     {
         if (AbstractWrapper::GlobalStop) {
-            return true;    // Consider returning false, check the consequence.
+            return true;
         }
 
         if (((*existingResultsIter).at(syn1Idx) == syn1Value) && ((*existingResultsIter).at(syn2Idx) == syn2Value))
@@ -415,6 +420,11 @@ bool ClauseResult::pruneColumns(unordered_set<string> synsToRetain)
             (*resIter)[synIdxToPrune] = ClauseResult::INT_PRUNED;
         }
     }
+
+    if (AbstractWrapper::GlobalStop) {
+        return true;
+    }
+
     _resultsPtr->sort();
     _resultsPtr->unique();
 
@@ -422,7 +432,7 @@ bool ClauseResult::pruneColumns(unordered_set<string> synsToRetain)
 }
 
 /*
-Merges the results of a new synonym to that of an existing synonym.
+    Merges the results of a new synonym to that of an existing synonym.
 */
 bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs)
 {
@@ -454,19 +464,17 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
     {
         const int oldSynVal = existingCombination[oldSynIdx];
         // TODO: Consider refactoring to avoid arrowhead code.
-        if (oldSynValToNewSynResultMap.find(oldSynVal) != oldSynValToNewSynResultMap.end())
-        {
+        if (oldSynValToNewSynResultMap.find(oldSynVal) != oldSynValToNewSynResultMap.end()) {
             vector<int> newSynResults = oldSynValToNewSynResultMap.at(oldSynVal);
-            for (int newSynResult : newSynResults)
-            {
+            for (int newSynResult : newSynResults) {
                 vector<int> newComb = existingCombination;
                 newComb.push_back(newSynResult);
                 updatedResultsPtr->push_back(newComb);
-
-                if (AbstractWrapper::GlobalStop) {
-                    return true;    // Consider returning false, check the consequence.
-                }
             }
+        }
+
+        if (AbstractWrapper::GlobalStop) {
+            return true;
         }
     }
     _resultsPtr = updatedResultsPtr;
