@@ -15,10 +15,10 @@ public:
 
     enum ClauseType
     {
-        SELECT = 0,
-        SUCH_THAT = 1,
-        PATTERN = 2,
-        WITH = 3
+        SELECT = 1,
+        SUCH_THAT = 2,
+        PATTERN = 3,
+        WITH = 4
     };
 
     Clause(ClauseType clauseType);

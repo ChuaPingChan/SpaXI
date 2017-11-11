@@ -140,7 +140,7 @@ int ClauseCostCalculator::getCost(SuchThatClausePtr suchThatClausePtr)
         } else if (synonyms.size() == 1) {
             return ClauseCostCalculator::ClauseCost::NEXT_STAR_1ARG;
         } else if (synonyms.size() == 2) {
-            return ClauseCostCalculator::ClauseCost::NEXT_2ARGS;
+            return ClauseCostCalculator::ClauseCost::NEXT_STAR_2ARGS;
         }
         break;
     case Relationship::AFFECTS:
@@ -197,18 +197,23 @@ int ClauseCostCalculator::getRelaxedCost(ClausePtr clausePtr, unordered_set<stri
     } else if (clauseType == Clause::ClauseType::PATTERN) {
         PatternClausePtr pcPtr;
         pcPtr = dynamic_pointer_cast<PatternClause>(clausePtr);
-        return getCost(pcPtr);          // With-clauses' costs need not be relaxed
+        return getRelaxedCost(pcPtr, evaluatedSyns);
     } else if (clauseType == Clause::ClauseType::WITH) {
         WithClausePtr wcPtr;
         wcPtr = dynamic_pointer_cast<WithClause>(clausePtr);
-        return getCost(wcPtr);          // With-clauses' costs need not be relaxed
+        return getRelaxedCost(wcPtr, evaluatedSyns);
     } else if (clauseType == Clause::ClauseType::SELECT) {
-        SelectClausePtr scPtr;          // Select-clauses' costs should never be relaxed
+        SelectClausePtr scPtr;
         scPtr = dynamic_pointer_cast<SelectClause>(clausePtr);
-        return getCost(scPtr);
+        return getRelaxedCost(scPtr, evaluatedSyns);
     } else {
         assert(false);  // Shouldn't reach here
     }
+}
+
+int ClauseCostCalculator::getRelaxedCost(SelectClausePtr selectClausePtr, unordered_set<string> evaluatedSyns)
+{
+    return getCost(selectClausePtr);    // Select-clause's cost cannot be relaxed
 }
 
 /*
@@ -332,4 +337,14 @@ int ClauseCostCalculator::getRelaxedCost(SuchThatClausePtr suchThatClausePtr, un
     default:
         assert(false);  // Shouldn't reach here
     }
+}
+
+int ClauseCostCalculator::getRelaxedCost(PatternClausePtr patternClausePtr, unordered_set<string> evaluatedSyns)
+{
+    return getCost(patternClausePtr);   // Pattern-clause's cost cannot be relaxed
+}
+
+int ClauseCostCalculator::getRelaxedCost(WithClausePtr withClausePtr, unordered_set<string> evaluatedSyns)
+{
+    return getCost(withClausePtr);  // With-clause's cost cannot be relaxed
 }
