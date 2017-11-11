@@ -16,8 +16,8 @@ public:
 
     list<int> getModStmtsFromVar(int varIdx);
     list<int> getModProcsFromVar(int varIdx);
-	bool setStmtMap(unordered_map<int, list<int>> map);
-	bool setProcMap(unordered_map<int, list<int>> map);
+    bool setStmtMap(unordered_map<int, list<int>> map);
+    bool setProcMap(unordered_map<int, list<int>> map);
 
 
 private:

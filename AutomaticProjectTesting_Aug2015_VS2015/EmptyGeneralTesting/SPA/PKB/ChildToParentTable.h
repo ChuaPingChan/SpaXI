@@ -10,19 +10,19 @@ using namespace std;
 class ChildToParentTable
 {
 public:
-	ChildToParentTable();
+    ChildToParentTable();
 
-	bool addChildParent(int childStmt, int parentStmt);
+    bool addChildParent(int childStmt, int parentStmt);
 
-	bool isChild(int childStmt);
+    bool isChild(int childStmt);
 
-	int getParent(int childStmt);
+    int getParent(int childStmt);
 
-	unordered_map<int, int> getTable();
+    unordered_map<int, int> getTable();
 
-	list<int> getAllChildren();
+    list<int> getAllChildren();
 
 private:
-	unordered_map<int, int> childToParentMap;
-	list<int> childList;
+    unordered_map<int, int> childToParentMap;
+    list<int> childList;
 };

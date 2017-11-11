@@ -17,16 +17,16 @@ public:
     //
     bool isUses(int stmtNumber, int varIdx);
     bool isUsingAnything(int stmtNumber);
-	bool setMap(unordered_map<int, list<int>> map);
-	unordered_map<int, list<int>> getMap();
+    bool setMap(unordered_map<int, list<int>> map);
+    unordered_map<int, list<int>> getMap();
     list<int> getUsesVariablesFromStmt(int stmtNumber);
     //
     list<int> getStmtThatUses();
-    pair<list<int>,list<int>> getUsesPair();
+    pair<list<int>, list<int>> getUsesPair();
 private:
     unordered_map<int, list<int>>usesStmtToVarMap;
-	unordered_map<int, unordered_set<int>> usesStmtToVarRelMap;
-	list<int> usesStmtList;
-	list<int> usesVarList;
-	pair<list<int>, list<int>> usesStmtToVarPair;
+    unordered_map<int, unordered_set<int>> usesStmtToVarRelMap;
+    list<int> usesStmtList;
+    list<int> usesVarList;
+    pair<list<int>, list<int>> usesStmtToVarPair;
 };

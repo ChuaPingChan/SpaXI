@@ -2,7 +2,7 @@
 
 using namespace std;
 
-FollowsTable::FollowsTable(){
+FollowsTable::FollowsTable() {
 }
 /*
 This method adds the follows relation ship
@@ -12,64 +12,64 @@ safety check :p)
 */
 bool FollowsTable::addFollows(int before, int after)
 {
-	if (before != 0 || after != 0) {
-		beforeList.push_back(before);
-		afterList.push_back(after);
-	}
-	followsBeforeMap[after] = before;
-	followsAfterMap[before] = after;
-	return true;
+    if (before != 0 || after != 0) {
+        beforeList.push_back(before);
+        afterList.push_back(after);
+    }
+    followsBeforeMap[after] = before;
+    followsAfterMap[before] = after;
+    return true;
 }
 
 int FollowsTable::getStmtBef(int after) {
-	if (followsBeforeMap.find(after) == followsBeforeMap.end()) {
-		return 0;
-	}
-	return followsBeforeMap[after];
+    if (followsBeforeMap.find(after) == followsBeforeMap.end()) {
+        return 0;
+    }
+    return followsBeforeMap[after];
 }
 
 int FollowsTable::getStmtAft(int before) {
-	if (followsAfterMap.find(before) == followsAfterMap.end()) {
-		return 0;
-	}
-	return followsAfterMap[before];
+    if (followsAfterMap.find(before) == followsAfterMap.end()) {
+        return 0;
+    }
+    return followsAfterMap[before];
 }
 
 bool FollowsTable::hasFollows() {
-	return !followsBeforeMap.empty();
+    return !followsBeforeMap.empty();
 }
 unordered_map<int, int> FollowsTable::getFollowsBeforeMap() {
-	return followsBeforeMap;
+    return followsBeforeMap;
 }
 
 unordered_map<int, int> FollowsTable::getFollowsAfterMap() {
-	return followsAfterMap;
+    return followsAfterMap;
 }
 
 bool FollowsTable::hasBefore(int afterStmt) {
-	return followsBeforeMap.find(afterStmt) != followsBeforeMap.end();
+    return followsBeforeMap.find(afterStmt) != followsBeforeMap.end();
 }
 
 bool FollowsTable::hasAfter(int beforeStmt) {
-	return followsAfterMap.find(beforeStmt) != followsAfterMap.end();
+    return followsAfterMap.find(beforeStmt) != followsAfterMap.end();
 }
 
 bool FollowsTable::isFollows(int beforeStmt, int afterStmt) {
-	if (followsAfterMap.find(beforeStmt) != followsAfterMap.end()) {
-		return followsAfterMap[beforeStmt] == afterStmt;
-	}
+    if (followsAfterMap.find(beforeStmt) != followsAfterMap.end()) {
+        return followsAfterMap[beforeStmt] == afterStmt;
+    }
 
-	return false;
+    return false;
 }
 
 list<int> FollowsTable::getAllBefore() {
-	return beforeList;
+    return beforeList;
 }
 
 list<int> FollowsTable::getAllAfter() {
-	return afterList;
+    return afterList;
 }
 
 pair<list<int>, list<int>> FollowsTable::getAllFollows() {
-	return make_pair(beforeList, afterList);
+    return make_pair(beforeList, afterList);
 }

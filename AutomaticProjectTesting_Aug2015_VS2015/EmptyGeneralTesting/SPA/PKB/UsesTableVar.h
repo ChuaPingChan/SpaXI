@@ -16,8 +16,8 @@ public:
 
     list<int> getUsesStmtsFromVar(int varIdx);
     list<int> getUsesProcsFromVar(int varIdx);
-	bool setStmtMap(unordered_map<int, list<int>> map);
-	bool setProcMap(unordered_map<int, list<int>> map);
+    bool setStmtMap(unordered_map<int, list<int>> map);
+    bool setProcMap(unordered_map<int, list<int>> map);
 
 private:
     unordered_map<int, list<int>> usesVarToStmtMap;

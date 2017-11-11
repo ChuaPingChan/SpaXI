@@ -12,15 +12,15 @@ using namespace std;
 class ChildToParentStarTable
 {
 public:
-	ChildToParentStarTable();
+    ChildToParentStarTable();
 
-	list<int> getParentStar(int childStmt);
+    list<int> getParentStar(int childStmt);
 
-	void setMap(unordered_map<int, list<int>> target);
+    void setMap(unordered_map<int, list<int>> target);
 
-	bool isParentStar(int parentStmt, int childStmt);
+    bool isParentStar(int parentStmt, int childStmt);
 
 private:
-	unordered_map<int, list<int>> childToParentStarMap;
-	unordered_map<int, unordered_set<int>> childToParentStarRel;
+    unordered_map<int, list<int>> childToParentStarMap;
+    unordered_map<int, unordered_set<int>> childToParentStarRel;
 };
