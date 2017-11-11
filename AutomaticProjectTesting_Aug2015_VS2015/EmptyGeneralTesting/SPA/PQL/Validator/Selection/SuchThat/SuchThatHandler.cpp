@@ -1,4 +1,5 @@
 #include "SuchThatHandler.h"
+#include <stdexcept>
 
 SuchThatHandler::SuchThatHandler(QueryTree *qtPtrNew)
 {
@@ -101,43 +102,9 @@ string SuchThatHandler::getSuchThatKeyWord(string str)
 */
 Relationship SuchThatHandler::getRelIndex(string rel)
 {
-    if (rel == RELATIONSHIP_STRING_ARRAY[MODIFIES]) {
-        return MODIFIES;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[USES]) {
-        return USES;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[PARENT]) {
-        return PARENT;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[PARENTSTAR]) {
-        return PARENTSTAR;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[FOLLOWS]) {
-        return FOLLOWS;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[FOLLOWSSTAR]) {
-        return FOLLOWSSTAR;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[CALLS]) {
-        return CALLS;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[CALLSSTAR]) {
-        return CALLSSTAR;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[NEXT]) {
-        return NEXT;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[NEXTSTAR]) {
-        return NEXTSTAR;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[AFFECTS]) {
-        return AFFECTS;
-    }
-    else if (rel == RELATIONSHIP_STRING_ARRAY[AFFECTSSTAR]) {
-        return AFFECTSSTAR;
-    }
-    else {
+    try {
+        return MAP_STR_TO_REL.at(rel);
+    } catch (out_of_range& oore) {
         throw RelationshipNotFoundException("In SuchThatHandler.getRelIndex(rel). Relationship do not match valid Relationship. Relationship cannot be assigned. Input String: " + rel);
     }
 }

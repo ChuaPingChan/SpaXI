@@ -1,5 +1,7 @@
 #include "SelectionValidator.h"
 
+using namespace std;
+
 SelectionValidator::SelectionValidator(QueryTree *qtPtrNew) {
     setQueryTree(qtPtrNew);
 }
@@ -69,19 +71,14 @@ bool SelectionValidator::areValidClauses(string str)
 
 bool SelectionValidator::isSuchThat(string str)
 {
-    if ((str.find(RELATIONSHIP_STRING_ARRAY[MODIFIES]) != std::string::npos) ||
-        (str.find(RELATIONSHIP_STRING_ARRAY[USES]) != std::string::npos) ||
-        (str.find(RELATIONSHIP_STRING_ARRAY[PARENT]) != std::string::npos) ||
-        (str.find(RELATIONSHIP_STRING_ARRAY[FOLLOWS]) != std::string::npos) ||
-        (str.find(RELATIONSHIP_STRING_ARRAY[CALLS]) != std::string::npos) ||
-        (str.find(RELATIONSHIP_STRING_ARRAY[NEXT]) != std::string::npos) ||
-        (str.find(RELATIONSHIP_STRING_ARRAY[AFFECTS]) != std::string::npos))
-    {
-        return true;
+    bool isValid = false;
+
+    for (pair<string, Relationship> relMap : MAP_STR_TO_REL) {
+        if (str.find(relMap.first) != string::npos) {
+            isValid = true;
+        }
     }
-    else {
-        return false;
-    }
+    return isValid;
 }
 
 bool SelectionValidator::isPattern(string str)
