@@ -191,6 +191,7 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
 
     // Get the results of only the synonyms to merge and remove duplicates
     list<list<int>> resultsToMerge = clauseResultToMerge.getSynonymResults(synsToMerge);
+    resultsToMerge.sort();
     resultsToMerge.unique();
 
     for (string newSynName : synsToMerge)
@@ -414,7 +415,7 @@ bool ClauseResult::pruneColumns(unordered_set<string> synsToRetain)
             (*resIter)[synIdxToPrune] = ClauseResult::INT_PRUNED;
         }
     }
-
+    _resultsPtr->sort();
     _resultsPtr->unique();
 
     return true;
@@ -439,6 +440,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
     unordered_map<int, vector<int>> oldSynValToNewSynResultMap;
 
     // Populate oldSynValToNewSynResultMap
+    resultPairs.sort();
     resultPairs.unique();
     for (pair<int, int> resultPair : resultPairs)
     {   // Convert pair to vector so that it can be appended to existing vector easily
