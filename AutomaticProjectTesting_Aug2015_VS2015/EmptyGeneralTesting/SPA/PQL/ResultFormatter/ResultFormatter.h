@@ -15,7 +15,7 @@ class ResultFormatter
 {
 
 public:
-	ResultFormatter();
+    ResultFormatter();
     static const string TRUE;
     static const string FALSE;
 
@@ -23,7 +23,7 @@ public:
     list<string> handleNoResult(QueryTree qt);
 
 protected:
-	list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
+    list<string> convertListOfIntsToListOfStrings(list<int> listOfInts);
     string convertListOfStringsToSingleString(list<string> singleSynResult);
     list<string> handleSelectBoolean(ClauseResult cr);
     list<string> handleSelectSynonym(ClauseResult cr, SelectClause sc);
