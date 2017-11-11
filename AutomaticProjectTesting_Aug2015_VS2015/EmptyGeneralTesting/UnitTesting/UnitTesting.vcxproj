@@ -202,7 +202,6 @@
     <ClCompile Include="PKB\TestModTableStmtToVar.cpp" />
     <ClCompile Include="PKB\TestParentToChildTable.cpp" />
     <ClCompile Include="Parser\TestParserBasic.cpp" />
-    <ClCompile Include="PKB\TestParserPKB.cpp" />
     <ClCompile Include="PKB\TestPatternTable.cpp" />
     <ClCompile Include="PKB\TestPKBMain.cpp" />
     <ClCompile Include="PQL\Regex\TestRegexCalls.cpp" />
