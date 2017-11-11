@@ -652,11 +652,11 @@ bool PKBMain::checkHasRecursiveCalls() {
     list<int> callers = getAllCallers();
     for (int caller : callers) {
         if (isCallsStar(caller, caller)) {
-            return false;
+            return true;
         }
     }
 
-    return true;
+    return false;
 }
 
 bool PKBMain::setNext(int stmt, int stmtNext) {
