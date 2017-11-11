@@ -220,7 +220,6 @@ bool PatternTable::addToPatternTable(int stmtNumber, int var, string expression)
 }
 
 pair<int, list<string>> PatternTable::getExpression(int stmtNumber) {
-    //TODO 1 Check if this adds bug
     if (patternTableMap.find(stmtNumber) == patternTableMap.end()) {
         return make_pair(0, list<string>());
     }
