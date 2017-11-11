@@ -99,10 +99,8 @@ false
 Evaluating query 10 - Select boolean in declaration have semi-colon
 No ReturnBoolean, ReturnTuple=1 
 The final tag string is ReturnTuple="1" CondNum="1" RelNum="0" 
-Your answer: 
+Your answer: false 
 Correct answer: false 
-Missing: false 
-Additional: 
 11 - End with semi-colon
 stmt s;
 Select BOOLEAN;
