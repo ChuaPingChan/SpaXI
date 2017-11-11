@@ -20,6 +20,7 @@ bool ResultFactory::processClause(SelectClause clause)
 bool ResultFactory::processClause(SuchThatClause clause)
 {
     Relationship rel = clause.getRel();
+
     try {
         if (rel == FOLLOWS)
         {
@@ -131,7 +132,7 @@ bool ResultFactory::processClause(PatternClause clause)
 
         else
         {
-            throw UnrecognisedTypeException("in ResultFactory.processClause(Pattern). rel: " + to_string(patternType));
+            throw UnrecognisedTypeException("in ResultFactory.processClause(Pattern). patternType: " + to_string(patternType));
         }
     }
     
@@ -160,7 +161,7 @@ bool ResultFactory::processClause(WithClause clause)
 
         else
         {
-            throw UnrecognisedTypeException("in ResultFactory.processClause(With). rel: " + to_string(withType));
+            throw UnrecognisedTypeException("in ResultFactory.processClause(With). WithType: " + to_string(withType));
         }
     }
 
@@ -175,10 +176,9 @@ ClauseResult ResultFactory::makeClauseResult()
     return _clauseResult;
 }
 
-bool ResultFactory::resetClauseResult()
+void ResultFactory::resetClauseResult()
 {
     _clauseResult = ClauseResult();
-    return true;
 }
 
 ClauseResult* ResultFactory::getClauseResultPtr()

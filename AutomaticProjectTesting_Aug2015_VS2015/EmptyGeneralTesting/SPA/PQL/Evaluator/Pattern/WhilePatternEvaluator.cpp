@@ -66,7 +66,7 @@ bool WhilePatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clau
                 int patternSynVal = pair.first;
                 int variableVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isWhileControlVar(patternSynVal, variableVal))
                 {
                     clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
@@ -105,9 +105,9 @@ bool WhilePatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clau
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
-                    //Get list of variables that are modified by the current assignment stmt (existingSynVal)
                     list<int> newSynVals = pkbInstance->getControlVariablesInWhile(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {
@@ -130,9 +130,9 @@ bool WhilePatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clau
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
-                    //Get list of variables that are modified by the current assignment stmt (existingSynVal)
                     list<int> newSynVals = pkbInstance->getWhileFromControlVar(existingSynVal);
                     for (int newSynVal : newSynVals)
                     {

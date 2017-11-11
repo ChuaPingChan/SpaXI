@@ -12,22 +12,22 @@ using namespace std;
 class ParentToChildStarTable
 {
 public:
-	ParentToChildStarTable();
+    ParentToChildStarTable();
 
-	bool addParentChild(int parentStmt, int childStmt);
+    bool addParentChild(int parentStmt, int childStmt);
 
-	list<int> getChildren(int parentStmt);
+    list<int> getChildren(int parentStmt);
 
-	void setMap(unordered_map<int, list<int>> target);
+    void setMap(unordered_map<int, list<int>> target);
 
-	bool isParentStarChild(int parentStmt, int childStmt);
+    bool isParentStarChild(int parentStmt, int childStmt);
 
-	pair<list<int>, list<int>> getAllParentStarRel();
+    pair<list<int>, list<int>> getAllParentStarRel();
 
 private:
-	unordered_map<int, list<int>> parentToChildStarMap;
-	unordered_map<int, unordered_set<int>> parentToChildStarRelMap;
-	list<int> parentList;
-	list<int> childList;
-	pair<list<int>, list<int>> parentToChildStarPair;
+    unordered_map<int, list<int>> parentToChildStarMap;
+    unordered_map<int, unordered_set<int>> parentToChildStarRelMap;
+    list<int> parentList;
+    list<int> childList;
+    pair<list<int>, list<int>> parentToChildStarPair;
 };

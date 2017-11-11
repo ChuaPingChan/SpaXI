@@ -93,7 +93,7 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
                 int leftHandSideVal = pair.first;
                 int rightHandSideVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isSameName(leftHandSideType, leftHandSideVal, rightHandSideType, rightHandSideVal))
                 {
                     clauseResult->removeCombinations(leftHandSide, leftHandSideVal, rightHandSide, rightHandSideVal);
@@ -110,6 +110,7 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
             list<int> leftNewResults;
             list<int> rightNewResults;
             
+            // Get the common values of the left and right hand side values
             for (int leftHandSideVal : leftHandSideVals)
             {
                 for (int rightHandSideVal : rightHandSideVals)
@@ -162,6 +163,7 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
             list<int> newSynVals = pkbInstance->getAllIdxOfStringEntity(newSynType);
             list<pair<int, int>> resultPairs;
 
+            // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
             for (int existingSynVal : existingSynVals)
             {
                 for (int newSynVal : newSynVals)

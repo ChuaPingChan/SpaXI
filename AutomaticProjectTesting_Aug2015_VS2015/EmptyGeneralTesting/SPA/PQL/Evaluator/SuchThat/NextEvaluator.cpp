@@ -119,7 +119,7 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
                 int argOneVal = pair.first;
                 int argTwoVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isNext(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -158,6 +158,7 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getExecutedAfter(existingSynVal, newSynType);
@@ -182,6 +183,7 @@ bool NextEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseResul
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getExecutedBefore(existingSynVal, newSynType);

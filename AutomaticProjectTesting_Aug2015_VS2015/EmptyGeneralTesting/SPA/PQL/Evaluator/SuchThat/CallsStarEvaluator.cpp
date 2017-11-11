@@ -118,7 +118,7 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
                 int argOneVal = pair.first;
                 int argTwoVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isCallsStar(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -156,6 +156,7 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getCalleeStar(existingSynVal);
@@ -179,6 +180,7 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getCallerStar(existingSynVal);
@@ -194,6 +196,7 @@ bool CallsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseR
             }
         }
     }
+
     else
     {
         throw UnrecognisedTypeException("in CallsStarEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));
