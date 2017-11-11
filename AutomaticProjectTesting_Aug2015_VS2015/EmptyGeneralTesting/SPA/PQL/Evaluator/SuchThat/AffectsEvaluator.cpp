@@ -110,9 +110,9 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
         bool argOneExists = clauseResult->synonymPresent(argOne);
         bool argTwoExists = clauseResult->synonymPresent(argTwo);
 
+        // Case when both synonyms are the same
         if (argOne == argTwo)
         {
-            // TODO: add new api for case when both synonym are same
             list<int> pkbResult = pkbInstance->getAllAffectsSameSyn();
             if (pkbResult.empty())
             {
@@ -136,7 +136,7 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
                     int argOneVal = pair.first;
                     int argTwoVal = pair.second;
 
-                    // Removes from clauseResult as it is no longer valid due to new relation
+                    // Removed from clauseResult as it is no longer valid due to new relation
                     if (!pkbInstance->isAffects(argOneVal, argTwoVal))
                     {
                         clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -174,6 +174,7 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
                     list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                     list<pair<int, int>> resultPairs;
 
+                    // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                     for (int existingSynVal : existingSynVals)
                     {
                         list<int> newSynVals = pkbInstance->getAffectedOf(existingSynVal);
@@ -197,6 +198,7 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
                     list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                     list<pair<int, int>> resultPairs;
 
+                    // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                     for (int existingSynVal : existingSynVals)
                     {
                         list<int> newSynVals = pkbInstance->getAffectorOf(existingSynVal);
@@ -213,6 +215,7 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
             }
         }
     }
+
     else
     {
         throw UnrecognisedTypeException("in AffectsEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));

@@ -126,7 +126,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 int patternSynVal = pair.first;
                 int variableVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isMod(patternSynVal, variableVal))
                 {
                     clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
@@ -166,6 +166,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     //Get list of variables that are modified by the current assignment stmt (existingSynVal)
@@ -191,6 +192,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getAllAssignments(existingSynVal);
@@ -224,7 +226,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 int patternSynVal = pair.first;
                 int variableVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isPartialMatch(patternSynVal, variableVal, argTwo))
                 {
                     clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
@@ -264,9 +266,9 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
-                    //Get list of variables that are modified by the current assignment stmt (existingSynVal)
                     list<int> newSynVals = pkbInstance->getPartialMatchVar(existingSynVal, argTwo);
                     for (int newSynVal : newSynVals)
                     {
@@ -288,6 +290,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getPartialBothMatches(existingSynVal, argTwo);
@@ -321,7 +324,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 int patternSynVal = pair.first;
                 int variableVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isExactMatch(patternSynVal, variableVal, argTwo))
                 {
                     clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
@@ -361,9 +364,9 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
-                    //Get list of variables that are modified by the current assignment stmt (existingSynVal)
                     list<int> newSynVals = pkbInstance->getExactMatchVar(existingSynVal, argTwo);
                     for (int newSynVal : newSynVals)
                     {
@@ -386,6 +389,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getExactBothMatches(existingSynVal, argTwo);

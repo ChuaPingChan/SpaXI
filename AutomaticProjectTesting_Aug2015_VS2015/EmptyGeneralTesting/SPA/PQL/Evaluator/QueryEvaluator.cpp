@@ -9,7 +9,7 @@
 QueryEvaluator::QueryEvaluator(QueryTree* qtPtr)
 {
     this->_qt = qtPtr;
-    hasResultEvaluator = true;
+    _hasResult = true;
 }
 
 QueryEvaluator::~QueryEvaluator()
@@ -18,62 +18,85 @@ QueryEvaluator::~QueryEvaluator()
 
 void QueryEvaluator::evaluate()
 {
-    ResultFactory factory = ResultFactory();
-    Optimizer optimizer(*_qt);
-    ClauseGroupManager clauseGroupManager = optimizer.getClauseGroupManager();
+    try {
+        ResultFactory factory = ResultFactory();
+        Optimizer optimizer(*_qt);
+        ClauseGroupManager clauseGroupManager = optimizer.getClauseGroupManager();
 
-    // For each clause groups..
-    while (hasResultEvaluator && clauseGroupManager.hasNextClauseGroup()) {
+        // For each clause groups..
+        while (_hasResult && clauseGroupManager.hasNextClauseGroup()) {
 
-        ClauseGroup clauseGroup = clauseGroupManager.getNextClauseGroup();
+            ClauseGroup clauseGroup = clauseGroupManager.getNextClauseGroup();
 
-        // For each clause in a clause group..
-        while (hasResultEvaluator && clauseGroup.hasNextClause()) {
-            
-            ClausePtr clausePtr = clauseGroup.getNextClause();
+            // For each clause in a clause group..
+            while (_hasResult && clauseGroup.hasNextClause()) {
 
-            // Checks for the actual type of clause and do type-conversion to use subclass's methods
-            if (clausePtr->getClauseType() == Clause::ClauseType::SUCH_THAT) {
-                SuchThatClausePtr stClausePtr = dynamic_pointer_cast<SuchThatClause>(clausePtr);
-                hasResultEvaluator = factory.processClause(*stClausePtr);
-            } else if (clausePtr->getClauseType() == Clause::ClauseType::PATTERN) {
-                PatternClausePtr pattClausePtr = dynamic_pointer_cast<PatternClause>(clausePtr);
-                hasResultEvaluator = factory.processClause(*pattClausePtr);
-            } else if (clausePtr->getClauseType() == Clause::ClauseType::WITH) {
-                WithClausePtr withClausePtr = dynamic_pointer_cast<WithClause>(clausePtr);
-                hasResultEvaluator = factory.processClause(*withClausePtr);
-            } else {
-                // This assertion might need to be changed if new clause types are introduced to SIMPLE
-                assert(clausePtr->getClauseType() == Clause::ClauseType::SELECT);
-                SelectClausePtr selectClausePtr = dynamic_pointer_cast<SelectClause>(clausePtr);
-                hasResultEvaluator = factory.processClause(*selectClausePtr);
+                ClausePtr clausePtr = clauseGroup.getNextClause();
+                Clause::ClauseType clauseType = clausePtr->getClauseType();
+
+                // Checks for the type of clause and perform downcasting to use methods of the child classes
+                if (clauseType == Clause::ClauseType::SUCH_THAT)
+                {
+                    SuchThatClausePtr stClausePtr = dynamic_pointer_cast<SuchThatClause>(clausePtr);
+                    _hasResult = factory.processClause(*stClausePtr);
+                }
+
+                else if (clauseType == Clause::ClauseType::PATTERN)
+                {
+                    PatternClausePtr pattClausePtr = dynamic_pointer_cast<PatternClause>(clausePtr);
+                    _hasResult = factory.processClause(*pattClausePtr);
+                }
+
+                else if (clauseType == Clause::ClauseType::WITH)
+                {
+                    WithClausePtr withClausePtr = dynamic_pointer_cast<WithClause>(clausePtr);
+                    _hasResult = factory.processClause(*withClausePtr);
+                }
+
+                else if (clauseType == Clause::ClauseType::SELECT)
+                {
+                    SelectClausePtr selectClausePtr = dynamic_pointer_cast<SelectClause>(clausePtr);
+                    _hasResult = factory.processClause(*selectClausePtr);
+                }
+
+                else
+                {
+                    throw UnrecognisedTypeException("in QueryEvaluator. ClauseType: " + to_string(clauseType));
+                }
+
+                // Check for timeout
+                if (AbstractWrapper::GlobalStop) {
+
+                    if (_hasResult)
+                    {
+                        // Store result even if it's wrong.. Hope for partial marks ;O
+                        _qt->storeEvaluatorResult(clauseGroupManager.getMergedClauseResult());
+                    }
+                    return;
+                }
+
+                clauseGroup.pruneClauseResult(factory.getClauseResultPtr());
             }
 
-            // Check for timeout
-            if (AbstractWrapper::GlobalStop) {
-                cout << "SpaXI timeouts... SpaXI sad :( ... Cleaning up..." << endl;    // TODO: Remove this before submission
-                if (hasResultEvaluator)
-                    _qt->storeEvaluatorResult(clauseGroupManager.getMergedClauseResult());  // Store result even if it's wrong.. Hope for partial marks ;O
-                return;
-            }
-
-            clauseGroup.pruneClauseResult(factory.getClauseResultPtr());
+            // Finished processing a clause group, pass the result of the clause group to ClauseGroupManager
+            ClauseResult clauseResult = factory.makeClauseResult();
+            clauseGroupManager.mergeClauseResult(clauseResult);
+            factory.resetClauseResult();
         }
-        
-        // Finished processing a clause group, pass the result of the clause group to ClauseGroupManager
-        ClauseResult clauseResult = factory.makeClauseResult();
-        clauseGroupManager.mergeClauseResult(clauseResult);
-        factory.resetClauseResult();
+
+        // Store result in query tree
+        if (_hasResult)
+        {
+            _qt->storeEvaluatorResult(clauseGroupManager.getMergedClauseResult());
+        }
     }
 
-    // Store result in query tree
-    if (hasResultEvaluator)
-    {
-        _qt->storeEvaluatorResult(clauseGroupManager.getMergedClauseResult());
+    catch (UnrecognisedTypeException& e) {
+        cerr << e.what() << endl;
     }
 }
 
 bool QueryEvaluator::hasResult()
 {
-    return hasResultEvaluator;
+    return _hasResult;
 }

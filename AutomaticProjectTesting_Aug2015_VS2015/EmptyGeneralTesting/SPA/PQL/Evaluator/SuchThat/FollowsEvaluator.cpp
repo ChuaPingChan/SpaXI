@@ -118,7 +118,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
                 int argOneVal = pair.first;
                 int argTwoVal = pair.second;
 
-                // Removes from clauseResult as it is no longer valid due to new relation
+                // Removed from clauseResult as it is no longer valid due to new relation
                 if (!pkbInstance->isFollows(argOneVal, argTwoVal))
                 {
                     clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -157,6 +157,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getAfter(existingSynVal, newSynType);
@@ -181,6 +182,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
                 list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                 list<pair<int, int>> resultPairs;
 
+                // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                 for (int existingSynVal : existingSynVals)
                 {
                     list<int> newSynVals = pkbInstance->getBefore(existingSynVal, newSynType);
@@ -196,6 +198,7 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
             }
         }
     }
+
     else
     {
         throw UnrecognisedTypeException("in FollowsEvaluator. argOneType: " + to_string(argOneType) + ", argTwoType: " + to_string(argTwoType));

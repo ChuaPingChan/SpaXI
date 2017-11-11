@@ -112,7 +112,7 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
 
         if (argOne == argTwo)
         {
-            // TODO: add new api for case when both synonym are same
+            // Case when both synonym are the same
             list<int> pkbResult = pkbInstance->getAllAffectsStarSameSyn();
             if (pkbResult.empty())
             {
@@ -136,7 +136,7 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
                     int argOneVal = pair.first;
                     int argTwoVal = pair.second;
 
-                    // Removes from clauseResult as it is no longer valid due to new relation
+                    // Removed from clauseResult as it is no longer valid due to new relation
                     if (!pkbInstance->isAffectsStar(argOneVal, argTwoVal))
                     {
                         clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
@@ -174,6 +174,7 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
                     list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                     list<pair<int, int>> resultPairs;
 
+                    // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                     for (int existingSynVal : existingSynVals)
                     {
                         list<int> newSynVals = pkbInstance->getAffectedStarOf(existingSynVal);
@@ -197,6 +198,7 @@ bool AffectsStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clau
                     list<int> existingSynVals = clauseResult->getSynonymResults(existingSyn);
                     list<pair<int, int>> resultPairs;
 
+                    // For every value of the existing synonym, get the values of the new synonym that satisfy the new relation
                     for (int existingSynVal : existingSynVals)
                     {
                         list<int> newSynVals = pkbInstance->getAffectorStarOf(existingSynVal);
