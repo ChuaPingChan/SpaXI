@@ -36,10 +36,13 @@ bool QueryValidator::isValidSelection(string str) {
     return sv.isValidSelection(str);
 }
 
-vector<string> QueryValidator::tokenize(string query) {
-	vector<string> tokens;
-
-		char delimiter = ';';
+vector<string> QueryValidator::tokenize(string query) 
+{
+     
+        query = trim(query);
+        vector<string> tokens;
+		
+        char delimiter = ';';
 		stringstream ss(query);
 		string arguments;
 
@@ -57,4 +60,12 @@ vector<string> QueryValidator::tokenize(string query) {
 		}
 	
 	return tokens;
+}
+
+string QueryValidator::trim(string query)
+{
+    query.erase(query.begin(), std::find_if(query.begin(), query.end(), std::bind1st(std::not_equal_to<char>(), ' ')));
+    query.erase(std::find_if(query.rbegin(), query.rend(), std::bind1st(std::not_equal_to<char>(), ' ')).base(), query.end());
+
+    return query;
 }

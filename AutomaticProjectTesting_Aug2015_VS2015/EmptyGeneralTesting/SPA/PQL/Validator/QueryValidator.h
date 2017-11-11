@@ -5,6 +5,7 @@
 #include <sstream>
 #include <regex>
 #include <algorithm>
+#include <functional>
 #include "Declaration\DeclarationValidator.h"
 #include "Selection\SelectionValidator.h"
 #include "..\QueryTree.h"
@@ -39,4 +40,5 @@ private:
     bool isValidSelection(string str);
 
     vector<string> tokenize(string query);                  // Tokenize with semi-colon as delimiter
+    string trim(string query);
 };
