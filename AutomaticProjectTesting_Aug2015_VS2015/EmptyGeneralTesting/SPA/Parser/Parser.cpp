@@ -16,6 +16,9 @@ const int Parser::INT_INITIAL_STMT_NUMBER = 0;
 const string Parser::STRING_EMPTY_STRING = "";
 const int Parser::INT_INITIAL_PROC_INDEX = 0;
 
+/*********
+ * REGEX *
+ *********/
 const regex Parser::REGEX_VALID_ENTITY_NAME = regex("\\s*\\b([A-Za-z][A-Za-z0-9]*)\\b\\s*");
 const regex Parser::REGEX_VALID_VAR_NAME = Parser::REGEX_VALID_ENTITY_NAME;
 const regex Parser::REGEX_VALID_PROC_NAME = Parser::REGEX_VALID_ENTITY_NAME;
@@ -40,16 +43,31 @@ const regex Parser::REGEX_MATCH_POSSIBLE_WHITESPACE = regex("\\s*");
 // Char sequence to match should be a statement up to but not including semicolon.
 // To extract contents within a wrapping outside bracket. Having outside bracket is assumed.
 const regex Parser::REGEX_EXTRACT_BRACKET_WRAPPED_CONTENT = regex("\\s*\\(([^()]+|[^()]*\\([^]+\\)[^()]*)\\)\\s*");
-
 const regex Parser::REGEX_MATCH_EQUAL = regex("\\s*=\\s*");
 const regex Parser::REGEX_MATCH_OPERATOR = regex("\\s*[+\\-*/]\\s*");
+
+/***********
+ * MESSAGE *
+ ***********/
+const string Parser::MESSAGE_INVALID_ENTITY_NAME = "Invalid entity name.";
+const string Parser::MESSAGE_MISSING_SEMICOLON = "Missing semicolon.";
+const string Parser::MESSAGE_INVALID_EXPRESSION = "Invalid expression.";
+const string Parser::MESSAGE_INVALID_PROCEDURE_NAME = "Invalid procedure name";
+const string Parser::MESSAGE_MISSING_OPEN_BRACE = "Missing open-brace.";
+const string Parser::MESSAGE_MISSING_CLOSE_BRACE = "Missing close-brace.";
+const string Parser::MESSAGE_MISSING_EQUAL_SIGN = "Assignment expected. Missing equal sign.";
+const string Parser::MESSAGE_MISSING_WHILE_KEYWORD = "While-statement expected. Missing 'while' keyword.";
+const string Parser::MESSAGE_MISSING_IF_KEYWORD = "If-statement expected. Missing 'if' keyword.";
+const string Parser::MESSAGE_MISSING_THEN_KEYWORD = "Missing 'then' keyword.";
+const string Parser::MESSAGE_MISSING_ELSE_KEYWORD = "Missing 'else' keyword.";
+const string Parser::MESSAGE_MISSING_CALL_KEYWORD = "Missing 'call' keyword.";
 
 Parser::Parser(PKBMain* pkbMainPtr)
 {
     _currentStmtNumber = Parser::INT_INITIAL_STMT_NUMBER;
     _concatenatedSourceCode = Parser::STRING_EMPTY_STRING;
     _currentTokenPtr = Parser::STRING_EMPTY_STRING;
-    _isValidSyntax = false;
+    _isValidSyntax = true;
     _parentStack = stack<int>();
     _pkbMainPtr = pkbMainPtr;
     _stackOfFollowsStacks = stack<stack<int>>();
@@ -196,8 +214,9 @@ string Parser::extractBackingStringUpToSemicolon() {
     if (regex_match(_concatenatedSourceCode, match, Parser::REGEX_EXTRACT_UP_TO_SEMICOLON) && match.size() > 1) {
         targetSubstring = match.str(1);
     } else {
+        cerr << "Line " << _currentStmtNumber << ": " << Parser::MESSAGE_MISSING_SEMICOLON;
+        exit(EXIT_SUCCESS);
         _isValidSyntax = false;
-        // TODO: Throw exception.
     }
     return targetSubstring;
 }
@@ -205,14 +224,15 @@ string Parser::extractBackingStringUpToSemicolon() {
 /*
 Asserts that the next token must match the given regex.
 If the match is successful, move current token pointer forward and return true.
-If match is unsuccessful, indicate syntax error.
+If match is unsuccessful, errMsg is printed and the system will be exited.
 */
-bool Parser::assertMatchAndIncrementToken(regex re) {
+bool Parser::assertMatchAndIncrementToken(regex re, string errMsg) {
     if (regex_match(_currentTokenPtr, re)) {
         incrCurrentTokenPtr();
         return true;
     } else {
-        // TODO: Throw exception.
+        cerr << "Line " << _currentStmtNumber << ": " << errMsg;
+        exit(EXIT_SUCCESS);
         _isValidSyntax = false;
         return false;
     }
@@ -221,12 +241,14 @@ bool Parser::assertMatchAndIncrementToken(regex re) {
 /*
 Asserts that the next token must match the given regex.
 Does not move the current token pointer forward.
+If match is unsuccessful, errMsg is printed and the system will be exited.
 */
-bool Parser::assertMatchWithoutIncrementToken(regex re) {
+bool Parser::assertMatchWithoutIncrementToken(regex re, string errMsg) {
     if (regex_match(_currentTokenPtr, re)) {
         return true;
     } else {
-        // TODO: Throw exception.
+        cerr << "Line " << _currentStmtNumber << ": " << errMsg;
+        exit(EXIT_SUCCESS);
         _isValidSyntax = false;
         return false;
     }
@@ -255,11 +277,12 @@ When this method ends, _currentTokenPtr will be one token past the close
 brace of the procedure.
 */
 void Parser::parseProcedure() {
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_PROCEDURE_KEYWORD, Parser::MESSAGE_INVALID_PROCEDURE_NAME);
 
     string procName;
     if (!(matchToken(Parser::REGEX_VALID_ENTITY_NAME))) {
-        //TODO: Throw exception
+        cerr << "Line " << _currentStmtNumber << ": " << Parser::MESSAGE_INVALID_ENTITY_NAME;
+        exit(EXIT_SUCCESS);
         _isValidSyntax = false;
         return;
     }
@@ -269,14 +292,14 @@ void Parser::parseProcedure() {
     _currentProcName = procName;
 
     incrCurrentTokenPtr();
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE, Parser::MESSAGE_MISSING_OPEN_BRACE);
     // Add new stmtList stack to follows stack
     stack<int>* newFollowsStack = new stack<int>();
     _stackOfFollowsStacks.push(*newFollowsStack);
 
     parseStmtList();
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE, Parser::MESSAGE_MISSING_CLOSE_BRACE);
     _prevReachableStmts.clear();    // NextGraph is not cross-procedure
     processAndPopTopFollowStack();
 }
@@ -323,7 +346,7 @@ void Parser::parseStmt() {
         parseIfElseStmt();
     } else {
         // assignment has to be at the last! If not, it'll wrongly capture while/Call/if keywords as variable names
-        assert(Parser::assignmentExpected());
+        // assert(Parser::assignmentExpected());    // Comment out for submission. For debugging only.
         parseAssignment();
     }
     setNextForUpcomingStmts();
@@ -383,7 +406,7 @@ void Parser::parseAssignment() {
     _pkbMainPtr->addAssignmentStmt(_currentStmtNumber);
 
     // Process LHS
-    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME, Parser::MESSAGE_INVALID_ENTITY_NAME);
     string lhsVar = _currentTokenPtr;
 
     /*
@@ -408,7 +431,7 @@ void Parser::parseAssignment() {
     _pkbMainPtr->setModTableProcToVar(_currentProcName, lhsVar);
 
     incrCurrentTokenPtr();
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_EQUAL);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_EQUAL, Parser::MESSAGE_MISSING_EQUAL_SIGN);
 
     // Process RHS
     string rhsExpression = extractBackingStringUpToSemicolon();
@@ -450,7 +473,7 @@ void Parser::parseAssignment() {
     // Update _prevReachableStmts
     assert(_prevReachableStmts.empty());
     _prevReachableStmts.insert(_currentStmtNumber);
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON, Parser::MESSAGE_MISSING_SEMICOLON);
 }
 
 /*
@@ -483,8 +506,9 @@ bool Parser::assertIsValidExpression(string expression) {
         leftExpression = lhsRhsExpr.first;
         rightExpression = lhsRhsExpr.second;
     } else {
+        cerr << "Line " << _currentStmtNumber << ": " << Parser::MESSAGE_INVALID_EXPRESSION;
+        exit(EXIT_SUCCESS);
         _isValidSyntax = false;
-        // TODO: Throw exception?
         return false;
     }
 
@@ -660,13 +684,13 @@ Parses a while statement. When this method ends,
 _currentTokenPtr will be advanced after '}'.
 */
 void Parser::parseWhileStmt() {
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_WHILE_KEYWORD, Parser::MESSAGE_MISSING_WHILE_KEYWORD);
 
     _parentStack.push(_currentStmtNumber);
     //_containerStack.push(_currentStmtNumber);
     int whileStmtNumber = _currentStmtNumber;   // For setting Next relation
 
-    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME, Parser::MESSAGE_INVALID_ENTITY_NAME);
 
     string whileVar = _currentTokenPtr;
 
@@ -693,9 +717,9 @@ void Parser::parseWhileStmt() {
     }
     _pkbMainPtr->setUseTableProcToVar(_currentProcName, whileVar);
 
-    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME, Parser::MESSAGE_INVALID_ENTITY_NAME);
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE, Parser::MESSAGE_MISSING_OPEN_BRACE);
     // Entering new statement list -> Add new stmtList stack to follows stack
     stack<int> newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
@@ -712,7 +736,7 @@ void Parser::parseWhileStmt() {
     // Store possible exit points of while statement
     _prevReachableStmts.insert(whileStmtNumber);
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE, Parser::MESSAGE_MISSING_CLOSE_BRACE);
     processAndPopTopFollowStack();
 
     _parentStack.pop();
@@ -724,12 +748,12 @@ _currentTokenPtr will be advanced after '}'.
 */
 void Parser::parseIfElseStmt()
 {
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_IF_KEYWORD, Parser::MESSAGE_MISSING_IF_KEYWORD);
 
     _parentStack.push(_currentStmtNumber);
     int ifElseStmtNum = _currentStmtNumber;     // Store for setting Next relation
 
-    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME, Parser::MESSAGE_INVALID_ENTITY_NAME);
 
     string ifVar = _currentTokenPtr;
 
@@ -756,10 +780,10 @@ void Parser::parseIfElseStmt()
     }
     _pkbMainPtr->setUseTableProcToVar(_currentProcName, ifVar);
 
-    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_THEN_KEYWORD);
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME, Parser::MESSAGE_INVALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_THEN_KEYWORD, Parser::MESSAGE_MISSING_THEN_KEYWORD);
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE, Parser::MESSAGE_MISSING_OPEN_BRACE);
     // Add new stmtList stack to follows stack
     stack<int> newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
@@ -774,12 +798,12 @@ void Parser::parseIfElseStmt()
     }
     _prevReachableStmts.clear();
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE, Parser::MESSAGE_MISSING_CLOSE_BRACE);
     processAndPopTopFollowStack();
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_ELSE_KEYWORD);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_ELSE_KEYWORD, Parser::MESSAGE_MISSING_ELSE_KEYWORD);
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_OPEN_BRACE, Parser::MESSAGE_MISSING_OPEN_BRACE);
     // Entering new statement list -> Add new stmtList stack to follows stack
     newFollowsStack = stack<int>();
     _stackOfFollowsStacks.push(newFollowsStack);
@@ -793,7 +817,7 @@ void Parser::parseIfElseStmt()
         _prevReachableStmts.insert(stmt);
     }
 
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CLOSE_BRACE, Parser::MESSAGE_MISSING_CLOSE_BRACE);
     processAndPopTopFollowStack();
 
     _parentStack.pop();
@@ -827,15 +851,15 @@ void Parser::processAndPopTopFollowStack()
 
 void Parser::parseCallStmt()
 {
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CALL_KEYWORD);
-    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_CALL_KEYWORD, Parser::MESSAGE_MISSING_CALL_KEYWORD);
+    assertMatchWithoutIncrementToken(Parser::REGEX_VALID_ENTITY_NAME, Parser::MESSAGE_INVALID_ENTITY_NAME);
     string calledProcName = _currentTokenPtr;
 
     //PKB: Add calls relation
     _pkbMainPtr->setCallsRel(_currentStmtNumber, _currentProcName, calledProcName);
 
-    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME);
-    assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON);
+    assertMatchAndIncrementToken(Parser::REGEX_VALID_ENTITY_NAME, Parser::MESSAGE_INVALID_ENTITY_NAME);
+    assertMatchAndIncrementToken(Parser::REGEX_MATCH_SEMICOLON, Parser::MESSAGE_MISSING_SEMICOLON);
 
     // Update _prevReachableStmt
     assert(_prevReachableStmts.empty());
