@@ -288,72 +288,6 @@ namespace UnitTesting
             Assert::IsTrue(actualResults == expectedResults);
         }
 
-        TEST_METHOD(TestRemoveCombinations_oneSynonymPartialRemoval_success)
-        {
-            ClauseResult cr;
-            Assert::IsTrue(cr.hasResults());
-            string syn1 = "a";
-            list<int> syn1Results{ 1, 2, 3 };
-            string syn2 = "b";
-            list<int> syn2Results{ 5, 6 };
-            string syn3 = "c";
-            list<int> syn3Results{ 7 };
-            cr.updateSynResults(syn1, syn1Results);
-            cr.updateSynResults(syn2, syn2Results);
-            cr.updateSynResults(syn3, syn3Results);
-
-            /********
-            a	b	c
-            ---------
-            1	5	7
-            1	6	7
-            2	5	7
-            2	6	7
-            3	5	7
-            3	6	7
-            *********/
-
-            cr.removeCombinations(syn2, 5);     // existing value
-            cr.removeCombinations(syn2, 100);   // non-existent value
-            list<list<int>> expectedResults{ {1, 6, 7}, {2, 6, 7}, {3, 6, 7} };
-            list<list<int>> actualResults = cr.getAllResults();
-            expectedResults.sort();
-            actualResults.sort();
-            Assert::IsTrue(actualResults == expectedResults);
-        }
-
-        TEST_METHOD(TestRemoveCombinations_oneSynonymRemoveUntilEmpty_success)
-        {
-            ClauseResult cr;
-            Assert::IsTrue(cr.hasResults());
-            string syn1 = "a";
-            list<int> syn1Results{ 1, 2, 3 };
-            string syn2 = "b";
-            list<int> syn2Results{ 5, 6 };
-            string syn3 = "c";
-            list<int> syn3Results{ 7 };
-            cr.updateSynResults(syn1, syn1Results);
-            cr.updateSynResults(syn2, syn2Results);
-            cr.updateSynResults(syn3, syn3Results);
-
-            /********
-            a	b	c
-            ---------
-            1	5	7
-            1	6	7
-            2	5	7
-            2	6	7
-            3	5	7
-            3	6	7
-            *********/
-
-            cr.removeCombinations(syn2, 5);
-            cr.removeCombinations(syn2, 6);
-            list<list<int>> expectedResults{};
-            list<list<int>> actualResults = cr.getAllResults();
-            Assert::IsTrue(actualResults == expectedResults);
-        }
-
         TEST_METHOD(TestRemoveCombinations_twoSynonymsExistingValues_success)
         {
             ClauseResult cr;
@@ -373,16 +307,14 @@ namespace UnitTesting
             ---------
             1	5	7   // remove
             1	6	7   // remove
-            2	5	7
+            2	5	7   // remove
             2	6	7   // remove
             3	5	7
             3	6	7
             *********/
 
-            cr.removeCombinations(syn1, 1, syn3, 7);    // existing values
-            cr.removeCombinations(syn1, 2, syn2, 6);    // existing values
-            cr.removeCombinations(syn1, 100, syn3, 100);    // non-existent values
-            list<list<int>> expectedResults{ { 2, 5, 7 }, { 3, 5, 7 }, { 3, 6, 7 } };
+            cr.updateSynPairResults(syn1, syn3, pair<list<int>,list<int>>(list<int>{3}, list<int>{7}));
+            list<list<int>> expectedResults{ { 3, 5, 7 }, { 3, 6, 7 } };
             list<list<int>> actualResults = cr.getAllResults();
             expectedResults.sort();
             actualResults.sort();
@@ -414,10 +346,8 @@ namespace UnitTesting
             3	6	7
             *********/
 
-            cr.removeCombinations(syn1, 1, syn3, 7);
-            cr.removeCombinations(syn2, 5, syn3, 7);
-            cr.removeCombinations(syn1, 2, syn2, 6);
-            cr.removeCombinations(syn1, 3, syn2, 6);
+            cr.updateSynPairResults(syn1, syn3, pair<list<int>, list<int>>(list<int>{1, 5}, list<int>{7, 7}));
+            cr.updateSynPairResults(syn1, syn2, pair<list<int>, list<int>>(list<int>{2, 3}, list<int>{6, 6}));
             list<list<int>> expectedResults{};
             list<list<int>> actualResults = cr.getAllResults();
             Assert::IsTrue(actualResults == expectedResults);

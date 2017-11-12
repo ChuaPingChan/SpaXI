@@ -111,21 +111,17 @@ bool FollowsEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRes
 
         if (argOneExists && argTwoExists)
         {
-            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(argOne, argTwo);
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getAllFollows(argOneType, argTwoType);
 
-            for (pair<int, int> pair : resultPairs)
+            if (pkbResult.first.empty() && pkbResult.second.empty())
             {
-                int argOneVal = pair.first;
-                int argTwoVal = pair.second;
-
-                // Removed from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isFollows(argOneVal, argTwoVal))
-                {
-                    clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
-                }
+                return false;
+            } else
+            {
+                // Merging with existing results
+                clauseResult->updateSynPairResults(argOne, argTwo, pkbResult);
+                return clauseResult->hasResults();
             }
-
-            return clauseResult->hasResults();
 
         }
 

@@ -59,21 +59,17 @@ bool WhilePatternEvaluator::evaluate(PatternClause ptClause, ClauseResult * clau
         //Case 3a
         if (patternSynExists && controlVarExists)
         {
-            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getControlVariablesInWhile();
 
-            for (pair<int, int> pair : resultPairs)
+            if (pkbResult.first.empty() && pkbResult.second.empty())
             {
-                int patternSynVal = pair.first;
-                int variableVal = pair.second;
-
-                // Removed from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isWhileControlVar(patternSynVal, variableVal))
-                {
-                    clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
-                }
+                return false;
+            } else
+            {
+                // Merging with existing results
+                clauseResult->updateSynPairResults(patternSyn, argOne, pkbResult);
+                return clauseResult->hasResults();
             }
-
-            return clauseResult->hasResults();
         }
 
         //Case 3b

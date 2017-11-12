@@ -343,18 +343,84 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
 
     Pre-condition: synName must be a synonym that is present in ClauseResult
 */
-bool ClauseResult::removeCombinations(string synName, int value)
+//bool ClauseResult::removeCombinations(string synName, int value)
+//{
+//    /*
+//        Note:
+//        There's no need to remove anything from _synList and _synToIdxMap
+//        because once a synonym is introduced into the intermetiate result,
+//        it MUST always have at least 1 possible result.
+//    */
+//
+//    assert(ClauseResult::synonymPresent(synName));
+//
+//    int synIdx = _synToIdxMap.at(synName);
+//    list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
+//    while (existingResultsIter != _resultsPtr->end())
+//    {
+//        if (AbstractWrapper::GlobalStop) {
+//            return true;
+//        }
+//
+//        if ((*existingResultsIter).at(synIdx) == value)
+//            existingResultsIter = _resultsPtr->erase(existingResultsIter);
+//        else
+//            existingResultsIter++;
+//    }
+//    return true;
+//}
+//
+//bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value)
+//{
+//    assert(ClauseResult::synonymPresent(syn1Name));
+//    assert(ClauseResult::synonymPresent(syn2Name));
+//
+//    if (syn1Name == syn2Name) {
+//        assert(syn1Value == syn2Value);
+//        return removeCombinations(syn1Name, syn1Value);
+//    }
+//
+//    int syn1Idx = _synToIdxMap.at(syn1Name);
+//    int syn2Idx = _synToIdxMap.at(syn2Name);
+//    list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
+//    while (existingResultsIter != _resultsPtr->end())
+//    {
+//        if (AbstractWrapper::GlobalStop) {
+//            return true;
+//        }
+//
+//        if (((*existingResultsIter).at(syn1Idx) == syn1Value) && ((*existingResultsIter).at(syn2Idx) == syn2Value))
+//            existingResultsIter = _resultsPtr->erase(existingResultsIter);
+//        else
+//            existingResultsIter++;
+//    }
+//    return true;
+//}
+
+bool ClauseResult::updateSynPairResults(string syn1, string syn2, pair<list<int>,list<int>> resultsToOverlap)
 {
-    /*
-        Note:
-        There's no need to remove anything from _synList and _synToIdxMap
-        because once a synonym is introduced into the intermetiate result,
-        it MUST always have at least 1 possible result.
-    */
+    assert(ClauseResult::synonymPresent(syn1));
+    assert(ClauseResult::synonymPresent(syn2));
+    assert(!_isNew);
 
-    assert(ClauseResult::synonymPresent(synName));
+    int syn1Idx = _synToIdxMap.at(syn1);
+    int syn2Idx = _synToIdxMap.at(syn2);
 
-    int synIdx = _synToIdxMap.at(synName);
+    // Create hash set to facilitate the removal of existing results
+    unordered_map<int, unordered_set<int>> syn1ToSyn2ValsMap;
+    list<int> syn1Results = resultsToOverlap.first;
+    list<int> syn2Results = resultsToOverlap.second;
+    assert(syn1Results.size() == syn2Results.size());
+    // Simulate zip iterator
+    list<int>::iterator iter1 = syn1Results.begin();
+    list<int>::iterator iter2 = syn2Results.begin();
+    for (; iter1 != syn1Results.end() && iter2 != syn2Results.end(); iter1++, iter2++) {
+        int val1 = *iter1;
+        int val2 = *iter2;
+        syn1ToSyn2ValsMap[val1].insert(val2);
+    }
+
+    // Removal of existing combinations
     list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
     while (existingResultsIter != _resultsPtr->end())
     {
@@ -362,37 +428,21 @@ bool ClauseResult::removeCombinations(string synName, int value)
             return true;
         }
 
-        if ((*existingResultsIter).at(synIdx) == value)
+        int syn1Val = existingResultsIter->at(syn1Idx);
+        int syn2Val = existingResultsIter->at(syn2Idx);
+
+        if (syn1ToSyn2ValsMap.find(syn1Val) == syn1ToSyn2ValsMap.end()) {
+            // If syn1 is not in the hashmap's key set, then erase
             existingResultsIter = _resultsPtr->erase(existingResultsIter);
-        else
-            existingResultsIter++;
-    }
-    return true;
-}
-
-bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value)
-{
-    assert(ClauseResult::synonymPresent(syn1Name));
-    assert(ClauseResult::synonymPresent(syn2Name));
-
-    if (syn1Name == syn2Name) {
-        assert(syn1Value == syn2Value);
-        return removeCombinations(syn1Name, syn1Value);
-    }
-
-    int syn1Idx = _synToIdxMap.at(syn1Name);
-    int syn2Idx = _synToIdxMap.at(syn2Name);
-    list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
-    while (existingResultsIter != _resultsPtr->end())
-    {
-        if (AbstractWrapper::GlobalStop) {
-            return true;
+        } else {
+            unordered_set<int> syn2ValsToOverlap = syn1ToSyn2ValsMap[syn1Val];
+            if (syn2ValsToOverlap.find(syn2Val) == syn2ValsToOverlap.end()) {
+                // syn1 is in the hashmap's key set but syn2 is not in the corresponding hash set, erase too
+                existingResultsIter = _resultsPtr->erase(existingResultsIter);
+            } else {
+                existingResultsIter++;
+            }
         }
-
-        if (((*existingResultsIter).at(syn1Idx) == syn1Value) && ((*existingResultsIter).at(syn2Idx) == syn2Value))
-            existingResultsIter = _resultsPtr->erase(existingResultsIter);
-        else
-            existingResultsIter++;
     }
     return true;
 }
