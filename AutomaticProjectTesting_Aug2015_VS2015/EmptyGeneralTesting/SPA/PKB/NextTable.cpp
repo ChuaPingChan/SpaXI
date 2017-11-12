@@ -204,7 +204,10 @@ pair<list<int>, list<int>> NextTable::getAllNextStar(unordered_map<int, list<int
     string currPair;
     queue<int> toVisit;
     for (unordered_map<int, list<int>>::iterator it = nextMap.begin(); it != nextMap.end(); ++it) { // Go through every node
-        unordered_set<int> visited;
+		if (AbstractWrapper::GlobalStop) { // If timeout
+			return make_pair(befList, aftList);
+		}
+		unordered_set<int> visited;
         befStmt = (*it).first;
         afters = (*it).second;
 

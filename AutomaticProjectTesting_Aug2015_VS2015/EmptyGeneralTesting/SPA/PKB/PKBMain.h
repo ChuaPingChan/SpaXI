@@ -30,6 +30,7 @@
 #include "IfStmt.h"
 #include <string>
 #include "../Entity.h"
+#include "AbstractWrapper.h"
 
 using namespace std;
 

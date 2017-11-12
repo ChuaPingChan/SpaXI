@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <list>
+#include "AbstractWrapper.h"
 #include "Cache.h"
 
 using namespace std;
