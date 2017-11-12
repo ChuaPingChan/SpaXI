@@ -37,6 +37,22 @@ public:
     static const std::regex REGEX_MATCH_ANYHING;
     static const std::regex REGEX_MATCH_POSSIBLE_WHITESPACE;
 
+    /***********
+     * MESSAGE *
+     ***********/
+    static const std::string MESSAGE_INVALID_ENTITY_NAME;
+    static const std::string MESSAGE_MISSING_SEMICOLON;
+    static const std::string MESSAGE_INVALID_EXPRESSION;
+    static const std::string MESSAGE_INVALID_PROCEDURE_NAME;
+    static const std::string MESSAGE_MISSING_OPEN_BRACE;
+    static const std::string MESSAGE_MISSING_CLOSE_BRACE;
+    static const std::string MESSAGE_MISSING_EQUAL_SIGN;
+    static const std::string MESSAGE_MISSING_WHILE_KEYWORD;
+    static const std::string MESSAGE_MISSING_IF_KEYWORD;
+    static const std::string MESSAGE_MISSING_THEN_KEYWORD;
+    static const std::string MESSAGE_MISSING_ELSE_KEYWORD;
+    static const std::string MESSAGE_MISSING_CALL_KEYWORD;
+
     Parser(PKBMain* pkbMainPtr);
 
     bool parse(std::string filename);
@@ -71,8 +87,8 @@ protected:
     bool concatenateLines(std::string filename);
     bool incrCurrentTokenPtr();
     bool matchToken(std::regex re);
-    bool assertMatchAndIncrementToken(std::regex re);
-    bool assertMatchWithoutIncrementToken(std::regex re);
+    bool assertMatchAndIncrementToken(std::regex re, std::string errorMsg);
+    bool assertMatchWithoutIncrementToken(std::regex re, std::string errorMsg);
     std::string extractBackingStringUpToSemicolon();
     void processAndPopTopFollowStack();
     static std::pair<string, string> splitExpressionLhsRhs(std::string expression);
