@@ -7,12 +7,6 @@
 
 #include "../PKB/PKBMain.h"
 
-/*
-This class's sole purpose in life is to allow unit testing
-for the private methods of the Parser class :O
-
-DO NOT use this class in the real SPA.
-*/
 class Parser
 {
 public:
@@ -56,11 +50,6 @@ protected:
     static const std::string STRING_EMPTY_STRING;
     static const int INT_INITIAL_PROC_INDEX;
 
-    /*****************
-     * REGEX STRINGS *
-     *****************/
-    // TODO: Create strings for unit regex to facilitate building
-
     /*********************
      * Member Attributes *
      *********************/
@@ -86,9 +75,10 @@ protected:
     bool assertMatchWithoutIncrementToken(std::regex re);
     std::string extractBackingStringUpToSemicolon();
     void processAndPopTopFollowStack();
-    static std::pair<string, string> splitExpressionLhsRhs(std::string expression);     // TODO: Remove if not used
+    static std::pair<string, string> splitExpressionLhsRhs(std::string expression);
     bool assertIsValidExpression(std::string expression);
     bool endOfSourceCodeReached();
+    void setNextForUpcomingStmts();
 
     // Predictive methods
     bool assignmentExpected();
@@ -111,7 +101,7 @@ protected:
     static std::vector<std::string> tokenizeString(std::string stringToTokenize);
     static std::string extractNextTokenAndShortenString(std::string &targetString);
     static std::string getFirstTokenInString(const std::string &targetString);
-    static std::string removeAllWhitespaces(std::string targetString);     // TOOD: Remove if not used
-    static bool isBracketedCorrectly(const std::string &expression);      // TODO: Remove if not used
+    static std::string removeAllWhitespaces(std::string targetString);
+    static bool isBracketedCorrectly(const std::string &expression);
     static std::string trimString(std::string targetString);
 };
