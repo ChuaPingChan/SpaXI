@@ -99,7 +99,7 @@ bool Parser::concatenateLines(string filename) {
         stringAccumulator += line;
     }
 
-    _concatenatedSourceCode = stringAccumulator;
+    _concatenatedSourceCode = regex_replace(stringAccumulator, regex("\\s\\s+"), " ");
     infile.close();
     return true;
 }
