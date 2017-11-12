@@ -12,6 +12,7 @@ SelectValidator::~SelectValidator()
 {
 }
 
+/* Checks validity of Select query */
 bool SelectValidator::isValid(string str)
 {
     if (str.empty())
@@ -23,6 +24,7 @@ bool SelectValidator::isValid(string str)
     return isValidSelectBoolean(processedStr) || isValidSelectSingle(processedStr) || isValidSelectTuple(processedStr);
 }
 
+/* Checks validity of Select BOOLEAN */
 bool SelectValidator::isValidSelectBoolean(string selectedStr)
 {
     if (RegexValidators::isValidBooleanRegex(selectedStr))
@@ -34,8 +36,10 @@ bool SelectValidator::isValidSelectBoolean(string selectedStr)
     return false;
 }
 
+/* Checks validity of Select synonym and synonym.attribute */
 bool SelectValidator::isValidSelectSingle(string selectedStr)
 {
+    /* Select synonym */
     if (RegexValidators::isValidSynonymRegex(selectedStr))
     {
         try 
@@ -52,17 +56,19 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
         
     }
 
+    /* Select synonym.attribute */
     else if (RegexValidators::isValidAttrRefRegex(selectedStr))
     {
 
         if (isValidAttrRefForSynonym(selectedStr))
         {
-            string synonym = splitSynonymProcName(selectedStr).at(0); //get synonym
-            bool hasProcName = (splitSynonymProcName(selectedStr).at(1) == RegexValidators::PROCNAME_STRING); //check if attribute is procName
+            string synonym = splitSynonymAttribute(selectedStr).at(0); //get synonym
+            bool hasProcName = (splitSynonymAttribute(selectedStr).at(1) == RegexValidators::PROCNAME_STRING); //check if attribute is procName
             Entity entity = getEntityOfSynonym(synonym);
             SelectClause sc = makeSelectClause(SELECT_SINGLE, entity, synonym);
 
-            //in case the attribute selected is procName and the entity is call, we change the flag for CallsSingleSynonym in SelectClause to true
+            /* In case the attribute selected is procName and the entity is call, 
+            we change the flag for CallsSingleSynonym in SelectClause to true */
             if (hasProcName && entity == CALL)
             {
                 sc.isAttributeProcName = true;
@@ -76,6 +82,7 @@ bool SelectValidator::isValidSelectSingle(string selectedStr)
         return false;
 }
 
+/*Checks validity of Select <tuple> and <tuple.attribute> */
 bool SelectValidator::isValidSelectTuple(string selectedStr)
 {
     if (RegexValidators::isValidTupleRegex(selectedStr))
@@ -86,11 +93,12 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
         vector<string> synonymList;
         vector<Entity> entityList;
 
-        string formattedStr = removeSpecialCharactersFromTuple(selectedStr); //remove <,> and comma(,)
-        extractedSynonyms = extractSynonymsFromTuple(formattedStr); //extract synonyms from tuple arguments
+        string formattedStr = removeSpecialCharactersFromTuple(selectedStr); //remove <,> 
+        extractedSynonyms = extractSynonymsFromTuple(formattedStr);
 
         for (string s : extractedSynonyms)
         {
+            /* Select <synonym>*/
             if (RegexValidators::isValidSynonymRegex(s))
             {
                 try
@@ -106,18 +114,19 @@ bool SelectValidator::isValidSelectTuple(string selectedStr)
                 }
             }
 
+            /* Select <synonym.attribute> */
             else if (RegexValidators::isValidAttrRefRegex(s))
             {
 
                 if (isValidAttrRefForSynonym(s))
                 {
-                    string synonym = splitSynonymProcName(s).at(0); //get synonym
-                    bool hasProcName = (splitSynonymProcName(s).at(1)==RegexValidators::PROCNAME_STRING); //check if attribute is procName
+                    string synonym = splitSynonymAttribute(s).at(0); //get synonym
+                    bool hasProcName = (splitSynonymAttribute(s).at(1)==RegexValidators::PROCNAME_STRING); //check if attribute is procName
                     Entity entity = getEntityOfSynonym(synonym);
                     synonymList.push_back(synonym);
                     entityList.push_back(entity);
-                    //in case the attribute selected is procName and the entity is call, we change the flag for CallsSingleSynonym in SelectClause to true
-                    if (hasProcName && entity == CALL)
+                    /* In case the attribute selected is procName and the entity is call,
+                    we change the flag for CallsSingleSynonym in SelectClause to true */                    if (hasProcName && entity == CALL)
                     {
                         flagForCallProcName.push_back(true);
                     }
@@ -255,6 +264,9 @@ bool SelectValidator::isValueAttribute(string attribute)
     return(attribute == RegexValidators::VALUE_STRING);
 }
 
+/******************
+* Helper methods *
+******************/
 
 string SelectValidator::removeSelectKeyword(string str)
 {
@@ -269,25 +281,25 @@ string SelectValidator::removeSpecialCharactersFromTuple(string selectedStr)
     return regex_replace(selectedStr, regex("<|>|\\s+"), "");
 }
 
-vector<string> SelectValidator::splitSynonymProcName(string selectedStr)
+vector<string> SelectValidator::splitSynonymAttribute(string selectedStr)
 {
-    vector<string> synonymWithProcName;
+    vector<string> splittedSynonymAttribute;
     string synonymWithAttribute = selectedStr;
     synonymWithAttribute = regex_replace(synonymWithAttribute, regex("\\s+"), "");
     string synonym = Formatter::getStringBeforeDelim(synonymWithAttribute, ".");
     string attribute = Formatter::getStringAfterDelim(synonymWithAttribute, ".");
     
-    synonymWithProcName.push_back(synonym); //store synonym at position 0
-    synonymWithProcName.push_back(attribute); //store attribute at position 1
+    splittedSynonymAttribute.push_back(synonym); //store synonym at position 0
+    splittedSynonymAttribute.push_back(attribute); //store attribute at position 1
 
-    return synonymWithProcName;
+    return splittedSynonymAttribute;
 }
 
 vector<string> SelectValidator::extractSynonymsFromTuple(string formattedStr)
 {
     vector<string> synonyms;
 
-    char delimiter = ','; //delimit characters using ,     
+    char delimiter = ','; //delimit arguments using (,) (comma)     
     stringstream ss(formattedStr);
     string arguments;
     while (getline(ss, arguments, delimiter))

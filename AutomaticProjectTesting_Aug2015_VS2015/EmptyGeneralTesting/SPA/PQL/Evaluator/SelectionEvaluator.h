@@ -1,6 +1,7 @@
 #pragma once
 #include "../Utilities/SelectClause.h"
 #include "../Utilities/ClauseResult.h"
+#include "../../Exceptions/UnrecognisedTypeException.h"
 #include "../../PKB/PKBMain.h"
 #include <stdio.h>
 

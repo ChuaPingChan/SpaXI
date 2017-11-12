@@ -126,6 +126,6 @@ list<int> SelectionEvaluator::evaluateSingleSynonymSelection(Entity argType, str
     }
     else
     {
-        cerr << "This is not a valid Entity!";
+        throw UnrecognisedTypeException("in SelectionEvalutor.argType: " + to_string(argType));
     }
 }
