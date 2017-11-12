@@ -21,7 +21,7 @@ class ClauseGroup
 public:
     ClauseGroup(vector<ClausePtr> clauseGroup);
 
-    bool setSelectedSynonyms(unordered_set<string> selectedSyns);   // TODO: Embed this in constructor
+    bool setSelectedSynonyms(unordered_set<string> selectedSyns);
     int getCost();
     bool hasNextClause();
     ClausePtr& getNextClause();

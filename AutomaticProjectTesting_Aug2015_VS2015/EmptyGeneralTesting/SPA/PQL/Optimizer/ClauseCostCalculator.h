@@ -33,7 +33,6 @@ public:
 
     enum ClauseCost
     {
-        // TODO: Consider calculating cost dynamically by querying PKB
         /*
             Static allocation of cost to different clause types
 
