@@ -41,14 +41,14 @@ void PKBMain::clearCache()
 Return true if all procedured called exists
 */
 bool PKBMain::calledProceduresExist() {
-	return allCalledProceduresExist;
+    return allCalledProceduresExist;
 }
 
 /*
 Return true if the code has recursive calls
 */
 bool PKBMain::hasRecursion() {
-	return hasRecursiveCalls;
+    return hasRecursiveCalls;
 }
 /*
 This method checks if the name of the entity given its index is the same as
@@ -1600,9 +1600,9 @@ pair<list<int>, list<int>> PKBMain::getAllAffects(int stmt, unordered_map<int, u
     stack<pair<int, unordered_map<int, unordered_set<int>>>> whileMapStack;
     stack<IfStmt> ifMapStack;
     while (curr != 0) {
-		if (AbstractWrapper::GlobalStop) {
-			break;
-		}
+        if (AbstractWrapper::GlobalStop) {
+            break;
+        }
         if (isAssignment(curr)) {
             list<int> usedVarList = getUsesFromStmt(curr);
             for (int usedVar : usedVarList) {
@@ -1970,9 +1970,9 @@ pair<list<int>, list<int>> PKBMain::getAllAffects() {
 
     list<int> allFirstStmt = getAllFirstStmtOfProc();
     for (int stmt : allFirstStmt) { // Run the algorithm for each procedure
-		if (AbstractWrapper::GlobalStop) {
-			return make_pair(prevList, nextList);
-		}
+        if (AbstractWrapper::GlobalStop) {
+            return make_pair(prevList, nextList);
+        }
         pair<list<int>, list<int>> allPairsInStmtList = getAllAffects(stmt, affectsRelMap);
         prevList.insert(prevList.end(), allPairsInStmtList.first.begin(), allPairsInStmtList.first.end());
         nextList.insert(nextList.end(), allPairsInStmtList.second.begin(), allPairsInStmtList.second.end());
@@ -2064,9 +2064,9 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar() {
 
     list<int> allFirstStmt = getAllFirstStmtOfProc();
     for (int stmt : allFirstStmt) { // Iterate through all procedures and get their affects* relation
-		if (AbstractWrapper::GlobalStop) { // In case times out
-			return make_pair(prevList, nextList);
-		}
+        if (AbstractWrapper::GlobalStop) { // In case times out
+            return make_pair(prevList, nextList);
+        }
         pair<list<int>, list<int>> allPairsInStmtList = getAllAffectsStar(stmt, affectsStarRelMap, affectsStarMap, affectsStarMapReverse);
         prevList.insert(prevList.end(), allPairsInStmtList.first.begin(), allPairsInStmtList.first.end());
         nextList.insert(nextList.end(), allPairsInStmtList.second.begin(), allPairsInStmtList.second.end());
@@ -2089,9 +2089,9 @@ pair<list<int>, list<int>> PKBMain::getAllAffectsStar(int stmt, unordered_map<in
     stack<pair<int, unordered_map<int, unordered_set<int>>>> whileMapStack;
     stack<IfStmt> ifMapStack;
     while (curr != 0) {
-		if (AbstractWrapper::GlobalStop) { // Check if timeout
-			break;
-		}
+        if (AbstractWrapper::GlobalStop) { // Check if timeout
+            break;
+        }
         if (isAssignment(curr)) {
             list<int> usedVarList = getUsesFromStmt(curr);
             int modifiedVar = getModifiesFromStmt(curr).front(); // current modified variable in the statement
