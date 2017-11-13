@@ -58,21 +58,30 @@ bool IntWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResult)
 
         if (leftHandSideExists && rightHandSideExists)
         {
-            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(leftHandSide, rightHandSide);
+            list<int> leftHandSideVals = pkbInstance->getAllIntOfIntEntity(leftHandSideType);
+            list<int> rightHandSideVals = pkbInstance->getAllIntOfIntEntity(rightHandSideType);
+            list<int> commonResult;
 
-            for (pair<int, int> pair : resultPairs)
+            // Get the common values of the left and right hand side values
+            unordered_set<int> rhsValsSet(rightHandSideVals.begin(), rightHandSideVals.end());
+            for (int leftHandSideVal : leftHandSideVals)
             {
-                int leftHandSideVal = pair.first;
-                int rightHandSideVal = pair.second;
-
-                // Removed from clauseResult as it is no longer valid due to new relation
-                if (leftHandSideVal != rightHandSideVal)
-                {
-                    clauseResult->removeCombinations(leftHandSide, leftHandSideVal, rightHandSide, rightHandSideVal);
+                if (rhsValsSet.find(leftHandSideVal) != rhsValsSet.end()) {
+                    commonResult.push_back(leftHandSideVal);
                 }
             }
 
-            return clauseResult->hasResults();
+            if (commonResult.empty())
+            {
+                return false;
+            }
+
+            else
+            {
+                // Both synonyms are new thus merging with existing results
+                clauseResult->updateSynPairResults(leftHandSide, rightHandSide, pair<list<int>, list<int>>(commonResult, commonResult));
+                return clauseResult->hasResults();
+            }
         }
 
         else if (!leftHandSideExists && !rightHandSideExists)
@@ -82,14 +91,11 @@ bool IntWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResult)
             list<int> commonResult;
 
             // Get the common values of the left and right hand side values
+            unordered_set<int> rhsValsSet(rightHandSideVals.begin(), rightHandSideVals.end());
             for (int leftHandSideVal : leftHandSideVals)
             {
-                for (int rightHandSideVal : rightHandSideVals)
-                {
-                    if (leftHandSideVal == rightHandSideVal)
-                    {
-                        commonResult.push_back(leftHandSideVal);
-                    }
+                if (rhsValsSet.find(leftHandSideVal) != rhsValsSet.end()) {
+                    commonResult.push_back(leftHandSideVal);
                 }
             }
 

@@ -119,21 +119,17 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
         //Case 7a
         if (patternSynExists && variableExists)
         {
-            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariables();
 
-            for (pair<int, int> pair : resultPairs)
+            if (pkbResult.first.empty() && pkbResult.second.empty())
             {
-                int patternSynVal = pair.first;
-                int variableVal = pair.second;
-
-                // Removed from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isMod(patternSynVal, variableVal))
-                {
-                    clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
-                }
+                return false;
+            } else
+            {
+                // Merging with existing results
+                clauseResult->updateSynPairResults(patternSyn, argOne, pkbResult);
+                return clauseResult->hasResults();
             }
-
-            return clauseResult->hasResults();
 
         }
         
@@ -219,21 +215,17 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
         //Case 8a
         if (patternSynExists && variableExists)
         {
-            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariablesThatPartialMatchWith(argTwo);
 
-            for (pair<int, int> pair : resultPairs)
+            if (pkbResult.first.empty() && pkbResult.second.empty())
             {
-                int patternSynVal = pair.first;
-                int variableVal = pair.second;
-
-                // Removed from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isPartialMatch(patternSynVal, variableVal, argTwo))
-                {
-                    clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
-                }
+                return false;
+            } else
+            {
+                // Merging with existing results
+                clauseResult->updateSynPairResults(patternSyn, argOne, pkbResult);
+                return clauseResult->hasResults();
             }
-
-            return clauseResult->hasResults();
 
         }
 
@@ -317,21 +309,17 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
         //Case 9a
         if (patternSynExists && variableExists)
         {
-            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(patternSyn, argOne);
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariablesThatExactMatchWith(argTwo);
 
-            for (pair<int, int> pair : resultPairs)
+            if (pkbResult.first.empty() && pkbResult.second.empty())
             {
-                int patternSynVal = pair.first;
-                int variableVal = pair.second;
-
-                // Removed from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isExactMatch(patternSynVal, variableVal, argTwo))
-                {
-                    clauseResult->removeCombinations(patternSyn, patternSynVal, argOne, variableVal);
-                }
+                return false;
+            } else
+            {
+                // Merging with existing results
+                clauseResult->updateSynPairResults(patternSyn, argOne, pkbResult);
+                return clauseResult->hasResults();
             }
-
-            return clauseResult->hasResults();
 
         }
 
