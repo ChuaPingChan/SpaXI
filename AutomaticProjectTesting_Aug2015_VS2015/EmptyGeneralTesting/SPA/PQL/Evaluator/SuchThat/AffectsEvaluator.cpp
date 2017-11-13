@@ -129,21 +129,17 @@ bool AffectsEvaluator::evaluate(SuchThatClause stClause, ClauseResult * clauseRe
         {
             if (argOneExists && argTwoExists)
             {
-                list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(argOne, argTwo);
+                pair<list<int>, list<int>> pkbResult = pkbInstance->getAllAffects();
 
-                for (pair<int, int> pair : resultPairs)
+                if (pkbResult.first.empty() && pkbResult.second.empty())
                 {
-                    int argOneVal = pair.first;
-                    int argTwoVal = pair.second;
-
-                    // Removed from clauseResult as it is no longer valid due to new relation
-                    if (!pkbInstance->isAffects(argOneVal, argTwoVal))
-                    {
-                        clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
-                    }
+                    return false;
+                } else
+                {
+                    // Both synonyms are new thus merging with existing results
+                    clauseResult->updateSynPairResults(argOne, argTwo, pkbResult);
+                    return clauseResult->hasResults();
                 }
-
-                return clauseResult->hasResults();
             }
 
             else if (!argOneExists && !argTwoExists)

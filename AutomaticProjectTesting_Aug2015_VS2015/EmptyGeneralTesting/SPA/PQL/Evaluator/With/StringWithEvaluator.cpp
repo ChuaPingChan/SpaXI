@@ -86,21 +86,33 @@ bool StringWithEvaluator::evaluate(WithClause wClause, ClauseResult * clauseResu
 
         if (leftHandSideExists && rightHandSideExists)
         {
-            list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(leftHandSide, rightHandSide);
+            list<int> leftHandSideVals = pkbInstance->getAllIdxOfStringEntity(leftHandSideType);
+            list<int> rightHandSideVals = pkbInstance->getAllIdxOfStringEntity(rightHandSideType);
+            list<int> leftNewResults;
+            list<int> rightNewResults;
 
-            for (pair<int, int> pair : resultPairs)
+            // Get the common values of the left and right hand side values
+            for (int leftHandSideVal : leftHandSideVals)
             {
-                int leftHandSideVal = pair.first;
-                int rightHandSideVal = pair.second;
-
-                // Removed from clauseResult as it is no longer valid due to new relation
-                if (!pkbInstance->isSameName(leftHandSideType, leftHandSideVal, rightHandSideType, rightHandSideVal))
+                for (int rightHandSideVal : rightHandSideVals)
                 {
-                    clauseResult->removeCombinations(leftHandSide, leftHandSideVal, rightHandSide, rightHandSideVal);
+                    if (pkbInstance->isSameName(leftHandSideType, leftHandSideVal, rightHandSideType, rightHandSideVal))
+                    {
+                        leftNewResults.push_back(leftHandSideVal);
+                        rightNewResults.push_back(rightHandSideVal);
+                    }
                 }
             }
 
-            return clauseResult->hasResults();
+            if (leftNewResults.empty() && rightNewResults.empty())
+            {
+                return false;
+            } else
+            {
+                // Both synonyms are new thus merging with existing results
+                clauseResult->updateSynPairResults(leftHandSide, rightHandSide, pair<list<int>,list<int>>(leftNewResults, rightNewResults));
+                return clauseResult->hasResults();
+            }
         }
 
         else if (!leftHandSideExists && !rightHandSideExists)

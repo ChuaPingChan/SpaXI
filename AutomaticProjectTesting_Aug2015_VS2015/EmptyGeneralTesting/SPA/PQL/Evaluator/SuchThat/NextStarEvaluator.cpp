@@ -128,21 +128,17 @@ bool NextStarEvaluator::evaluate(SuchThatClause stClause, ClauseResult* clauseRe
         {
             if (argOneExists && argTwoExists)
             {
-                list<pair<int, int>> resultPairs = clauseResult->getSynonymPairResults(argOne, argTwo);
+                pair<list<int>, list<int>> pkbResult = pkbInstance->getAllNextStar(argOneType, argTwoType);
 
-                for (pair<int, int> pair : resultPairs)
+                if (pkbResult.first.empty() && pkbResult.second.empty())
                 {
-                    int argOneVal = pair.first;
-                    int argTwoVal = pair.second;
-
-                    // Removed from clauseResult as it is no longer valid due to new relation
-                    if (!pkbInstance->isNextStar(argOneVal, argTwoVal))
-                    {
-                        clauseResult->removeCombinations(argOne, argOneVal, argTwo, argTwoVal);
-                    }
+                    return false;
+                } else
+                {
+                    // Both synonyms are new thus merging with existing results
+                    clauseResult->updateSynPairResults(argOne, argTwo, pkbResult);
+                    return clauseResult->hasResults();
                 }
-
-                return clauseResult->hasResults();
 
             }
 

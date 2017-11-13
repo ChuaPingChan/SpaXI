@@ -21,13 +21,13 @@ list<string> ClauseResult::getAllSynonyms()
 }
 
 /*
-Returns the possible results of the all synonyms that satisfy a PQL query
-in the same order.
-The inner list returned represents a combination of the synonyms given. For example,
-if the synonyms 'a', 'b' and 'c' are given as parameters, an inner list of {2, 3, 4}
-means {a=2, b=3, c=4}.
+    Returns the possible results of the all synonyms that satisfy a PQL query
+    in the same order.
+    The inner list returned represents a combination of the synonyms given. For example,
+    if the synonyms 'a', 'b' and 'c' are given as parameters, an inner list of {2, 3, 4}
+    means {a=2, b=3, c=4}.
 
-Pre-condition: The list of synonym names given cannot be empty.
+    Pre-condition: The list of synonym names given cannot be empty.
 */
 list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
 {
@@ -55,9 +55,9 @@ list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
 }
 
 /*
-Returns the possible results of the synonyms that satisfy a PQL query.
-If a synonym has no possible values that satisfies the query,
-an empty list will be returned.
+    Returns the possible results of the synonyms that satisfy a PQL query.
+    If a synonym has no possible values that satisfies the query,
+    an empty list will be returned.
 */
 list<int> ClauseResult::getSynonymResults(string synName)
 {
@@ -92,7 +92,6 @@ list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string
 
     list<pair<int, int>> synPairResult;
     // Convert inner lists to pairs
-    // TODO: Can consider refactoring, but not for now, not reused by others.
     for (list<list<int>>::iterator synPairResultInnerListPtr = synPairResultList.begin();
         synPairResultInnerListPtr != synPairResultList.end();
         synPairResultInnerListPtr++)
@@ -127,7 +126,7 @@ bool ClauseResult::synonymPresent(string synName)
 */
 bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsList)
 {
-    assert(newSynResultsList.size() > 0);       // TODO: Can consider clearing everything if this happens
+    //assert(newSynResultsList.size() > 0); // Comment out during release. For debugging only
 
     _isNew = false;
     if (_synToIdxMap.find(newSynName) != _synToIdxMap.end())
@@ -168,14 +167,18 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
             _resultsPtr->push_back(newComb);
         }
 
-        if (AbstractWrapper::GlobalStop) {  // TODO: Refactor method, reduce repetitive code
-            return true;    // Consider returning false, check the consequence
-        }   // TODO: Do the above TODOs for all timeout checks in this class
+        if (AbstractWrapper::GlobalStop) {
+            return true;
+        }
     }
 
     return true;
 }
 
+/*
+    Merges this ClauseResult with clauseResultToMerge. Only the selectedSyns
+    of clauseResultsToMerge will be extracted and merged into this.
+*/
 bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered_set<string> selectedSyns)
 {
     // Get all selected synonyms in the other clause result
@@ -235,6 +238,10 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
     return true;
 }
 
+/*
+    Adds the results of syn1Name and syn2Name to the intermediate result, where
+    both syn1Name and syn2Name are new (not existing in the ClauseResult yet).
+*/
 bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults)
 {
     assert(pairResults.size() > 0);
@@ -339,22 +346,33 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
 }
 
 /*
-    Removes all result combinations that contains the given value for the given synonym.
+    Updates the existing the results of syn1 and syn2 so that the intermediate
+    results satisfies those present in resultsToOverlap.
 
-    Pre-condition: synName must be a synonym that is present in ClauseResult
+    Pre-condition: Both syn1 and syn2 must be present in ClauseResult
 */
-bool ClauseResult::removeCombinations(string synName, int value)
+bool ClauseResult::updateSynPairResults(string syn1, string syn2, pair<list<int>,list<int>> resultsToOverlap)
 {
-    /*
-        Note:
-        There's no need to remove anything from _synList and _synToIdxMap
-        because once a synonym is introduced into the intermetiate result,
-        it MUST always have at least 1 possible result.
-    */
+    assert(ClauseResult::synonymPresent(syn1));
+    assert(ClauseResult::synonymPresent(syn2));
+    assert(!_isNew);
 
-    assert(ClauseResult::synonymPresent(synName));
+    int syn1Idx = _synToIdxMap.at(syn1);
+    int syn2Idx = _synToIdxMap.at(syn2);
 
-    int synIdx = _synToIdxMap.at(synName);
+    // Create hash set to facilitate the removal of existing results
+    unordered_map<int, unordered_set<int>> syn1ToSyn2ValsMap;
+    list<int> syn1ResultsToOverlap = resultsToOverlap.first;
+    list<int> syn2ResultsToOverLap = resultsToOverlap.second;
+    assert(syn1ResultsToOverlap.size() == syn2ResultsToOverLap.size());
+    // Simulate zip iterator
+    list<int>::iterator iter1 = syn1ResultsToOverlap.begin();
+    list<int>::iterator iter2 = syn2ResultsToOverLap.begin();
+    for (; iter1 != syn1ResultsToOverlap.end() && iter2 != syn2ResultsToOverLap.end(); iter1++, iter2++) {
+        syn1ToSyn2ValsMap[*iter1].insert(*iter2);
+    }
+
+    // Removal of existing combinations
     list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
     while (existingResultsIter != _resultsPtr->end())
     {
@@ -362,37 +380,21 @@ bool ClauseResult::removeCombinations(string synName, int value)
             return true;
         }
 
-        if ((*existingResultsIter).at(synIdx) == value)
+        int syn1Val = existingResultsIter->at(syn1Idx);
+        int syn2Val = existingResultsIter->at(syn2Idx);
+
+        if (syn1ToSyn2ValsMap.find(syn1Val) == syn1ToSyn2ValsMap.end()) {
+            // If syn1 is not in the hashmap's key set, then erase
             existingResultsIter = _resultsPtr->erase(existingResultsIter);
-        else
-            existingResultsIter++;
-    }
-    return true;
-}
-
-bool ClauseResult::removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value)
-{
-    assert(ClauseResult::synonymPresent(syn1Name));
-    assert(ClauseResult::synonymPresent(syn2Name));
-
-    if (syn1Name == syn2Name) {
-        assert(syn1Value == syn2Value);
-        return removeCombinations(syn1Name, syn1Value);
-    }
-
-    int syn1Idx = _synToIdxMap.at(syn1Name);
-    int syn2Idx = _synToIdxMap.at(syn2Name);
-    list<vector<int>>::iterator existingResultsIter = _resultsPtr->begin();
-    while (existingResultsIter != _resultsPtr->end())
-    {
-        if (AbstractWrapper::GlobalStop) {
-            return true;
+        } else {
+            unordered_set<int> syn2ValsToOverlap = syn1ToSyn2ValsMap[syn1Val];
+            if (syn2ValsToOverlap.find(syn2Val) == syn2ValsToOverlap.end()) {
+                // syn1 is in the hashmap's key set but syn2 is not in the corresponding hash set, erase too
+                existingResultsIter = _resultsPtr->erase(existingResultsIter);
+            } else {
+                existingResultsIter++;
+            }
         }
-
-        if (((*existingResultsIter).at(syn1Idx) == syn1Value) && ((*existingResultsIter).at(syn2Idx) == syn2Value))
-            existingResultsIter = _resultsPtr->erase(existingResultsIter);
-        else
-            existingResultsIter++;
     }
     return true;
 }
@@ -466,7 +468,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
     for (vector<int> existingCombination : *_resultsPtr)
     {
         const int oldSynVal = existingCombination[oldSynIdx];
-        // TODO: Consider refactoring to avoid arrowhead code.
+
         if (oldSynValToNewSynResultMap.find(oldSynVal) != oldSynValToNewSynResultMap.end()) {
             vector<int> newSynResults = oldSynValToNewSynResultMap.at(oldSynVal);
             for (int newSynResult : newSynResults) {
@@ -486,9 +488,9 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
 }
 
 /*
-Returns true if there are results in the ClauseResult Object.
-Also returns true if ClauseResult is new and have not been
-populated before.
+    Returns true if there are results in the ClauseResult Object.
+    Also returns true if ClauseResult is new and have not been
+    populated before.
 */
 bool ClauseResult::hasResults()
 {

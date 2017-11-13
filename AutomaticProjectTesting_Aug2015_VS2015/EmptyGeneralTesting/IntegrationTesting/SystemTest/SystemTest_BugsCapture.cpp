@@ -164,6 +164,31 @@ namespace UnitTesting
             Assert::IsTrue(deleteDummySimpleSourceFile());
         }
 
+        TEST_METHOD(bug6Test)
+        {
+            // Set up
+            PKBMain* pkbPtr = PKBMain::getInstance();
+            Parser parser(pkbPtr);
+            Assert::IsTrue(createDummySimpleSourceFile_Test15());
+            Assert::IsTrue(parser.parse(dummySimpleSourcePath));
+            list<string> actualResults;
+            list<string> expectedResults;
+
+            string query =
+                "stmt s; assign a; variable v; Select a such that Follows(2,7) pattern a(v, _) pattern a(v, \"y\")";
+            PQLMain pql = PQLMain(query);
+
+            actualResults = pql.run();
+            expectedResults = list<string>{ "3", "7", "10" };
+            actualResults.sort();
+            expectedResults.sort();
+            Assert::IsTrue(actualResults == expectedResults);
+
+            // Clean up
+            pkbPtr->deleteInstance();
+            Assert::IsTrue(deleteDummySimpleSourceFile());
+        }
+
         /*******************************
          * Utility Methods for Testing *
          *******************************/
@@ -949,6 +974,32 @@ namespace UnitTesting
                 "	ayam = broccoli * 9; "
                 "	pea = ginger + honey * 5; "
                 "	nutmeg = ayam + honey; "
+                "}";
+            std::string newFilePath(dummySimpleSourcePath);
+            std::ofstream outfile(newFilePath);
+            std::string inputString(content);
+            outfile << inputString;
+            outfile.close();
+            return true;
+        }
+
+        /*
+        This is a utility method to create a source file for Test15.
+        */
+        bool createDummySimpleSourceFile_Test15() {
+            std::string content =
+                "procedure main { "
+                "  x=y+z+2+x+23; "
+                "  while i { "
+                "    x=y; "
+                "    I = 0+ am + awesome + 32; "
+                "	while j { "
+                "	  a=b;}} "
+                "  z=y; "
+                "  c=v; "
+                "  while i { "
+                "    x=y; "
+                "    I = can+ do + it;} "
                 "}";
             std::string newFilePath(dummySimpleSourcePath);
             std::ofstream outfile(newFilePath);

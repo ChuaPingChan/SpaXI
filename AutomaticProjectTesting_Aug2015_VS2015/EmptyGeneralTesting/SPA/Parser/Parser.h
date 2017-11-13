@@ -7,12 +7,6 @@
 
 #include "../PKB/PKBMain.h"
 
-/*
-This class's sole purpose in life is to allow unit testing
-for the private methods of the Parser class :O
-
-DO NOT use this class in the real SPA.
-*/
 class Parser
 {
 public:
@@ -43,6 +37,22 @@ public:
     static const std::regex REGEX_MATCH_ANYHING;
     static const std::regex REGEX_MATCH_POSSIBLE_WHITESPACE;
 
+    /***********
+     * MESSAGE *
+     ***********/
+    static const std::string MESSAGE_INVALID_ENTITY_NAME;
+    static const std::string MESSAGE_MISSING_SEMICOLON;
+    static const std::string MESSAGE_INVALID_EXPRESSION;
+    static const std::string MESSAGE_INVALID_PROCEDURE_NAME;
+    static const std::string MESSAGE_MISSING_OPEN_BRACE;
+    static const std::string MESSAGE_MISSING_CLOSE_BRACE;
+    static const std::string MESSAGE_MISSING_EQUAL_SIGN;
+    static const std::string MESSAGE_MISSING_WHILE_KEYWORD;
+    static const std::string MESSAGE_MISSING_IF_KEYWORD;
+    static const std::string MESSAGE_MISSING_THEN_KEYWORD;
+    static const std::string MESSAGE_MISSING_ELSE_KEYWORD;
+    static const std::string MESSAGE_MISSING_CALL_KEYWORD;
+
     Parser(PKBMain* pkbMainPtr);
 
     bool parse(std::string filename);
@@ -55,11 +65,6 @@ protected:
     static const int INT_INITIAL_STMT_NUMBER;
     static const std::string STRING_EMPTY_STRING;
     static const int INT_INITIAL_PROC_INDEX;
-
-    /*****************
-     * REGEX STRINGS *
-     *****************/
-    // TODO: Create strings for unit regex to facilitate building
 
     /*********************
      * Member Attributes *
@@ -82,13 +87,14 @@ protected:
     bool concatenateLines(std::string filename);
     bool incrCurrentTokenPtr();
     bool matchToken(std::regex re);
-    bool assertMatchAndIncrementToken(std::regex re);
-    bool assertMatchWithoutIncrementToken(std::regex re);
+    bool assertMatchAndIncrementToken(std::regex re, std::string errorMsg);
+    bool assertMatchWithoutIncrementToken(std::regex re, std::string errorMsg);
     std::string extractBackingStringUpToSemicolon();
     void processAndPopTopFollowStack();
-    static std::pair<string, string> splitExpressionLhsRhs(std::string expression);     // TODO: Remove if not used
+    static std::pair<string, string> splitExpressionLhsRhs(std::string expression);
     bool assertIsValidExpression(std::string expression);
     bool endOfSourceCodeReached();
+    void setNextForUpcomingStmts();
 
     // Predictive methods
     bool assignmentExpected();
@@ -111,7 +117,7 @@ protected:
     static std::vector<std::string> tokenizeString(std::string stringToTokenize);
     static std::string extractNextTokenAndShortenString(std::string &targetString);
     static std::string getFirstTokenInString(const std::string &targetString);
-    static std::string removeAllWhitespaces(std::string targetString);     // TOOD: Remove if not used
-    static bool isBracketedCorrectly(const std::string &expression);      // TODO: Remove if not used
+    static std::string removeAllWhitespaces(std::string targetString);
+    static bool isBracketedCorrectly(const std::string &expression);
     static std::string trimString(std::string targetString);
 };

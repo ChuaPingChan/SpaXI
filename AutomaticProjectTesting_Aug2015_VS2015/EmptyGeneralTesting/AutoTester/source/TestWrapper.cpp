@@ -31,7 +31,10 @@ void TestWrapper::parse(std::string filename) {
 
     Parser parser (_pkbMain);
     bool isParsedSuccessfully = parser.parse(filename);
-    // TODO: exit if parsing failed.
+    if (!isParsedSuccessfully) {
+        cerr << "Syntax error detected in SIMPLE source." << endl;
+        exit(EXIT_SUCCESS);
+    }
 }
 
 // method to evaluating a query
