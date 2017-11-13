@@ -21,13 +21,13 @@ list<string> ClauseResult::getAllSynonyms()
 }
 
 /*
-Returns the possible results of the all synonyms that satisfy a PQL query
-in the same order.
-The inner list returned represents a combination of the synonyms given. For example,
-if the synonyms 'a', 'b' and 'c' are given as parameters, an inner list of {2, 3, 4}
-means {a=2, b=3, c=4}.
+    Returns the possible results of the all synonyms that satisfy a PQL query
+    in the same order.
+    The inner list returned represents a combination of the synonyms given. For example,
+    if the synonyms 'a', 'b' and 'c' are given as parameters, an inner list of {2, 3, 4}
+    means {a=2, b=3, c=4}.
 
-Pre-condition: The list of synonym names given cannot be empty.
+    Pre-condition: The list of synonym names given cannot be empty.
 */
 list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
 {
@@ -55,9 +55,9 @@ list<list<int>> ClauseResult::getSynonymResults(list<string> synNames)
 }
 
 /*
-Returns the possible results of the synonyms that satisfy a PQL query.
-If a synonym has no possible values that satisfies the query,
-an empty list will be returned.
+    Returns the possible results of the synonyms that satisfy a PQL query.
+    If a synonym has no possible values that satisfies the query,
+    an empty list will be returned.
 */
 list<int> ClauseResult::getSynonymResults(string synName)
 {
@@ -175,6 +175,10 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
     return true;
 }
 
+/*
+    Merges this ClauseResult with clauseResultToMerge. Only the selectedSyns
+    of clauseResultsToMerge will be extracted and merged into this.
+*/
 bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered_set<string> selectedSyns)
 {
     // Get all selected synonyms in the other clause result
@@ -234,6 +238,10 @@ bool ClauseResult::mergeClauseResult(ClauseResult clauseResultToMerge, unordered
     return true;
 }
 
+/*
+    Adds the results of syn1Name and syn2Name to the intermediate result, where
+    both syn1Name and syn2Name are new (not existing in the ClauseResult yet).
+*/
 bool ClauseResult::addNewSynPairResults(string syn1Name, string syn2Name, list<vector<int>> pairResults)
 {
     assert(pairResults.size() > 0);
@@ -338,7 +346,8 @@ bool ClauseResult::overlapExistingSynResults(string synName, list<int> synResult
 }
 
 /*
-    Merges the results of syn1 and syn2 when both exists in ClauseResult.
+    Updates the existing the results of syn1 and syn2 so that the intermediate
+    results satisfies those present in resultsToOverlap.
 
     Pre-condition: Both syn1 and syn2 must be present in ClauseResult
 */
@@ -479,9 +488,9 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
 }
 
 /*
-Returns true if there are results in the ClauseResult Object.
-Also returns true if ClauseResult is new and have not been
-populated before.
+    Returns true if there are results in the ClauseResult Object.
+    Also returns true if ClauseResult is new and have not been
+    populated before.
 */
 bool ClauseResult::hasResults()
 {
