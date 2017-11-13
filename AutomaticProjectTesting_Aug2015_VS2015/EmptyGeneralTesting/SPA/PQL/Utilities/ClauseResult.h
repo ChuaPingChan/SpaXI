@@ -29,8 +29,6 @@ public:
     bool updateSynResults(string synName, list<int> newSynResults);
     bool mergeClauseResult(ClauseResult clauseResultToMerge, unordered_set<string> selectedSyns);
     bool addNewSynPairResults(string syn1Name, list<int> syn1Results, string syn2Name, list<int> syn2Results);
-    //bool removeCombinations(string synName, int value);
-    //bool removeCombinations(string syn1Name, int syn1Value, string syn2Name, int syn2Value);
     bool updateSynPairResults(string syn1, string syn2, pair<list<int>, list<int>> resultsToOverlap);
     bool pruneColumns(unordered_set<string> synsToRetain);
     bool pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, int>> resultPairs);
