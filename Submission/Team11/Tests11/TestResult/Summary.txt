@@ -1,0 +1,132 @@
+Overall Test Ran    : 2663
+Overall Test Passed : 2658
+Overall Test Failed : 0
+Overall Test Timeout: 5
+
+
+TestResult\out_FocusTest_Loop_QueryAffects.xml: 
+Test Ran: 26	
+Passed   : 26
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Loop_QueryAffectsStar.xml: 
+Test Ran: 11	
+Passed   : 11
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Loop_QueryModifies.xml: 
+Test Ran: 47	
+Passed   : 47
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Loop_QueryNext.xml: 
+Test Ran: 129	
+Passed   : 129
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Loop_QueryNextStar.xml: 
+Test Ran: 131	
+Passed   : 131
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Loop_QueryParent.xml: 
+Test Ran: 97	
+Passed   : 97
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Loop_QueryParentStar.xml: 
+Test Ran: 102	
+Passed   : 102
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Loop_QueryPattern.xml: 
+Test Ran: 28	
+Passed   : 28
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Loop_QueryUses.xml: 
+Test Ran: 120	
+Passed   : 120
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Sequential_QueryFollows.xml: 
+Test Ran: 57	
+Passed   : 57
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Sequential_QueryFollowsStar.xml: 
+Test Ran: 43	
+Passed   : 43
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Sequential_QueryPatternAssign.xml: 
+Test Ran: 29	
+Passed   : 29
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_FocusTest_Sequential_QueryWith.xml: 
+Test Ran: 61	
+Passed   : 61
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_SampleTest_Sample-Queries.xml: 
+Test Ran: 25	
+Passed   : 25
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_SimpleTest_Query_Simple01.xml: 
+Test Ran: 249	
+Passed   : 249
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_SimpleTest_Query_Simple02.xml: 
+Test Ran: 336	
+Passed   : 336
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_SimpleTest_Query_Simple03.xml: 
+Test Ran: 1017	[TIMEOUT]
+Passed   : 1014
+Failed   : 0
+Timeout  : 3
+
+TestResult\out_Stress_QueryStressAffects.xml: 
+Test Ran: 33	[TIMEOUT]
+Passed   : 32
+Failed   : 0
+Timeout  : 1
+
+TestResult\out_Stress_QueryStressMixed.xml: 
+Test Ran: 17	
+Passed   : 17
+Failed   : 0
+Timeout  : 0
+
+TestResult\out_Stress_QueryStressNext.xml: 
+Test Ran: 28	[TIMEOUT]
+Passed   : 27
+Failed   : 0
+Timeout  : 1
+
+TestResult\out_Validation_QueryValidation.xml: 
+Test Ran: 77	
+Passed   : 77
+Failed   : 0
+Timeout  : 0
+

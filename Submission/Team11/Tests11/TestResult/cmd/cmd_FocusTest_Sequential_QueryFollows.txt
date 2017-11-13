@@ -1,0 +1,596 @@
+Parameters : 3_FocusTest\1_Sequential\SourceSequential.txt 3_FocusTest\1_Sequential\QueryFollows.txt TestResult\out_FocusTest_Sequential_QueryFollows.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Tests11
+Beginning to evaluate Query File.
+1 - Follows Int Int
+
+Select BOOLEAN such that Follows(1,2)
+true
+5000
+Evaluating query 1 - Follows Int Int
+The final tag string is ReturnBoolean="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+2 - Follows Underscore Int NoResult
+
+Select BOOLEAN such that Follows(_,1)
+false
+5000
+Evaluating query 2 - Follows Underscore Int NoResult
+_,1 is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+3 - Follows Underscore Int
+
+Select BOOLEAN such that Follows(_, 2)
+true
+5000
+Evaluating query 3 - Follows Underscore Int
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+4 - Follows Int Underscore
+
+Select BOOLEAN such that Follows(1,_)
+true
+5000
+Evaluating query 4 - Follows Int Underscore
+1,_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+5 - Follows Underscore Underscore
+
+Select BOOLEAN such that Follows(_,_)
+true
+5000
+Evaluating query 5 - Follows Underscore Underscore
+_,_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+6 - Follows Int Stmt
+stmt s;
+Select s such that Follows (1, s)
+2
+5000
+Evaluating query 6 - Follows Int Stmt
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 
+Correct answer: 2 
+7 - Follows Int Assign
+assign a;
+Select a such that Follows(1, a)
+2
+5000
+Evaluating query 7 - Follows Int Assign
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 
+Correct answer: 2 
+8 - Follows Int While
+while w;
+Select w such that Follows(13, w)
+14
+5000
+Evaluating query 8 - Follows Int While
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 14 
+Correct answer: 14 
+9 - Follows Int If
+if if;
+Select if such that Follows(18, if)
+19
+5000
+Evaluating query 9 - Follows Int If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 19 
+Correct answer: 19 
+10 - Follows Int ProgLine
+prog_line pl;
+Select pl such that Follows(3, pl)
+4
+5000
+Evaluating query 10 - Follows Int ProgLine
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 4 
+Correct answer: 4 
+11 - Follows Int Call
+call cl;
+Select cl such that Follows(24, cl)
+25
+5000
+Evaluating query 11 - Follows Int Call
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 25 
+Correct answer: 25 
+12 - Follows Int Procedure NoResult
+procedure p;
+Select p such that Follows(24, p)
+none
+5000
+Evaluating query 12 - Follows Int Procedure NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+13 - Follows Int Variable NoResult
+variable v;
+Select v such that Follows(1, v)
+none
+5000
+Evaluating query 13 - Follows Int Variable NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+14 - Follows Int Constant NoResult
+constant c;
+Select c such that Follows(1, c)
+none
+5000
+Evaluating query 14 - Follows Int Constant NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+15 - Follows Underscore Stmt
+stmt s;
+Select s such that Follows(_, s)
+2,3,4,5,6,7,8,9,10,11,12,14,16,17,19,22,23,25,26
+5000
+Evaluating query 15 - Follows Underscore Stmt
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 2 3 4 5 6 7 8 9 10 11 12 14 16 17 19 22 23 25 26 
+Correct answer: 2 3 4 5 6 7 8 9 10 11 12 14 16 17 19 22 23 25 26 
+16 - Follows Underscore Assign
+assign a;
+Select a such that Follows(_, a)
+2,3,4,5,6,7,8,9,10,11,12,16,17,22,23,26
+5000
+Evaluating query 16 - Follows Underscore Assign
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 2 3 4 5 6 7 8 9 10 11 12 16 17 22 23 26 
+Correct answer: 2 3 4 5 6 7 8 9 10 11 12 16 17 22 23 26 
+17 - Follows Underscore While
+while w;
+Select w such that Follows(_, w)
+14
+5000
+Evaluating query 17 - Follows Underscore While
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 14 
+Correct answer: 14 
+18 - Follows Underscore If
+if if;
+Select if such that Follows(_, if)
+19
+5000
+Evaluating query 18 - Follows Underscore If
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 19 
+Correct answer: 19 
+19 - Follows Underscore ProgLine
+prog_line pl;
+Select pl such that Follows(_, pl)
+2,3,4,5,6,7,8,9,10,11,12,14,16,17,19,22,23,25,26
+5000
+Evaluating query 19 - Follows Underscore ProgLine
+prog_line is an Unnamedvar 
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 2 3 4 5 6 7 8 9 10 11 12 14 16 17 19 22 23 25 26 
+Correct answer: 2 3 4 5 6 7 8 9 10 11 12 14 16 17 19 22 23 25 26 
+20 - Follows Underscore Call
+call cl;
+Select cl such that Follows(_, cl)
+25
+5000
+Evaluating query 20 - Follows Underscore Call
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 25 
+Correct answer: 25 
+21 - Follows Stmt Int 
+stmt s;
+Select s such that Follows(s, 2)
+1
+5000
+Evaluating query 21 - Follows Stmt Int 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+22 - Follows Assign Int
+assign a;
+Select a such that Follows(a, 2)
+1
+5000
+Evaluating query 22 - Follows Assign Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+23 - Follows While Int
+while w;
+Select w such that Follows (w, 16)
+14
+5000
+Evaluating query 23 - Follows While Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 14 
+Correct answer: 14 
+24 - Follows While Int NoResult
+while w;
+Select w such that Follows(w, 15)
+none
+5000
+Evaluating query 24 - Follows While Int NoResult
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+25 - Follows If Int
+if if;
+Select if such that Follows(if, 22)
+19
+5000
+Evaluating query 25 - Follows If Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 19 
+Correct answer: 19 
+26 - Follows If Int
+if if;
+Select if such that Follows(if, 20)
+none
+5000
+Evaluating query 26 - Follows If Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+27 - Follows If Int
+if if;
+Select if such that Follows(if, 21)
+none
+5000
+Evaluating query 27 - Follows If Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+28 - Follows ProgLine Int
+prog_line pl;
+Select pl such that Follows(pl, 2)
+1
+5000
+Evaluating query 28 - Follows ProgLine Int
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+29 - Follows Call Int
+call cl;
+Select cl such that Follows(cl, 26)
+25
+5000
+Evaluating query 29 - Follows Call Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 25 
+Correct answer: 25 
+30 - Follows Stmt Underscore
+stmt s;
+Select s such that Follows(s, _)
+1,2,3,4,5,6,7,8,9,10,11,13,14,16,18,19,22,24,25
+5000
+Evaluating query 30 - Follows Stmt Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 13 14 16 18 19 22 24 25 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 13 14 16 18 19 22 24 25 
+31 - Follows Assign Underscore
+assign a;
+Select a such that Follows(a, _)
+1,2,3,4,5,6,7,8,9,10,11,13,16,18,22,24
+5000
+Evaluating query 31 - Follows Assign Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 13 16 18 22 24 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 13 16 18 22 24 
+32 - Follows While Underscore
+while w;
+Select w such that Follows(w, _)
+14
+5000
+Evaluating query 32 - Follows While Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 14 
+Correct answer: 14 
+33 - Follows If Underscore
+if if;
+Select if such that Follows(if, _)
+19
+5000
+Evaluating query 33 - Follows If Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 19 
+Correct answer: 19 
+34 - Follows ProgLine Underscore
+prog_line pl;
+Select pl such that Follows(pl, _)
+1,2,3,4,5,6,7,8,9,10,11,13,14,16,18,19,22,24,25
+5000
+Evaluating query 34 - Follows ProgLine Underscore
+prog_line is an Unnamedvar 
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 13 14 16 18 19 22 24 25 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 13 14 16 18 19 22 24 25 
+35 - Follows Call Underscore
+call cl;
+Select cl such that Follows(cl, _)
+25
+5000
+Evaluating query 35 - Follows Call Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 25 
+Correct answer: 25 
+36 - Follows Stmt Stmt SameSynonym
+stmt s;
+Select s such that Follows(s, s)
+none
+5000
+Evaluating query 36 - Follows Stmt Stmt SameSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+37 - Follows Stmt Stmt DiffSynonym
+stmt s1, s2;
+Select s1 such that Follows(s1, s2)
+1,2,3,4,5,6,7,8,9,10,11,13,14,16,18,19,22,24,25
+5000
+Evaluating query 37 - Follows Stmt Stmt DiffSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 13 14 16 18 19 22 24 25 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 13 14 16 18 19 22 24 25 
+38 - Follows Stmt Assign
+stmt s; assign a;
+Select s such that Follows(s, a)
+1,2,3,4,5,6,7,8,9,10,11,14,16,19,22,25
+5000
+Evaluating query 38 - Follows Stmt Assign
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 14 16 19 22 25 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 14 16 19 22 25 
+39 - Follows Stmt While
+stmt s; while w;
+Select s such that Follows(s, w)
+13
+5000
+Evaluating query 39 - Follows Stmt While
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 13 
+Correct answer: 13 
+40 - Follows Stmt If
+stmt s; if if; 
+Select s such that Follows (s, if)
+18
+5000
+Evaluating query 40 - Follows Stmt If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 18 
+Correct answer: 18 
+41 - Follows Stmt ProgLine
+stmt s; prog_line pl;
+Select s such that Follows(s, pl)
+1,2,3,4,5,6,7,8,9,10,11,13,14,16,18,19,22,24,25
+5000
+Evaluating query 41 - Follows Stmt ProgLine
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 13 14 16 18 19 22 24 25 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 13 14 16 18 19 22 24 25 
+42 - Follows Stmt Call
+stmt s; call cl;
+Select s such that Follows(s, cl)
+24
+5000
+Evaluating query 42 - Follows Stmt Call
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 24 
+Correct answer: 24 
+43 - Follows Assign Assign SameSynonym
+assign a;
+Select a such that Follows(a, a)
+none
+5000
+Evaluating query 43 - Follows Assign Assign SameSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+44 - Follows Assign Assign DiffSynonym
+assign a1, a2;
+Select a1 such that Follows(a1, a2)
+1,2,3,4,5,6,7,8,9,10,11,16,22
+5000
+Evaluating query 44 - Follows Assign Assign DiffSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 16 22 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 16 22 
+45 - Follows Assign While
+assign a; while w;
+Select a such that Follows(a, w)
+13
+5000
+Evaluating query 45 - Follows Assign While
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 13 
+Correct answer: 13 
+46 - Follows Assign If
+assign a; if if;
+Select a such that Follows(a, if)
+18
+5000
+Evaluating query 46 - Follows Assign If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 18 
+Correct answer: 18 
+47 - Follows Assign ProgLine
+assign a; prog_line pl;
+Select a such that Follows(a, pl)
+1,2,3,4,5,6,7,8,9,10,11,13,16,18,22,24
+5000
+Evaluating query 47 - Follows Assign ProgLine
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 13 16 18 22 24 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 13 16 18 22 24 
+48 - Follows Assign Call
+assign a; call cl;
+Select a such that Follows(a, cl)
+24
+5000
+Evaluating query 48 - Follows Assign Call
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 24 
+Correct answer: 24 
+49 - Follows While While SameSynonym
+while w;
+Select w such that Follows(w, w)
+none
+5000
+Evaluating query 49 - Follows While While SameSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+50 - Follows While While DiffSynonym
+while w1, w2;
+Select w1 such that Follows(w1, w2)
+none
+5000
+Evaluating query 50 - Follows While While DiffSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+51 - Follows While If
+while w; if if;
+Select w such that Follows(w, if)
+none
+5000
+Evaluating query 51 - Follows While If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+52 - Follows While ProgLine
+while w; prog_line pl;
+Select w such that Follows(w, pl)
+14
+5000
+Evaluating query 52 - Follows While ProgLine
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 14 
+Correct answer: 14 
+53 - Follows While Call
+while w; call cl;
+Select w such that Follows(w, cl)
+none
+5000
+Evaluating query 53 - Follows While Call
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+54 - Follows If If SameSynonym
+if if;
+Select if such that Follows(if, if)
+none
+5000
+Evaluating query 54 - Follows If If SameSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+55 - Follows If If DiffSynonym
+if i1, i2;
+Select i1 such that Follows(i1, i2)
+none
+5000
+Evaluating query 55 - Follows If If DiffSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+56 - Follows If ProgLine
+if if; prog_line pl;
+Select if such that Follows(if, pl)
+19
+5000
+Evaluating query 56 - Follows If ProgLine
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 19 
+Correct answer: 19 
+57 - Follows If Call
+if if; call cl;
+Select if such that Follows(if, cl)
+none
+5000
+Evaluating query 57 - Follows If Call
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Follows="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

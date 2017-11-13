@@ -1,0 +1,1333 @@
+Parameters : 3_FocusTest\2_Loop\SourceLoop.txt 3_FocusTest\2_Loop\QueryNext.txt TestResult\out_FocusTest_Loop_QueryNext.xml
+Beginning to parse Simple Program.
+End of parsing Simple Program.
+Tests11
+Beginning to evaluate Query File.
+1 - Int Int DiffInt AssignToAssign
+
+Select BOOLEAN such that Next(1, 2)
+true
+5000
+Evaluating query 1 - Int Int DiffInt AssignToAssign
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+2 - Int Int SameInt
+
+Select BOOLEAN such that Next(1,1)
+false
+5000
+Evaluating query 2 - Int Int SameInt
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+3 - Int Int AssignToWhile GoDown
+
+Select BOOLEAN such that Next(2, 3)
+true
+5000
+Evaluating query 3 - Int Int AssignToWhile GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+4 - Int Int AssignToWhile GoUp
+
+Select BOOLEAN such that Next(18,16)
+true
+5000
+Evaluating query 4 - Int Int AssignToWhile GoUp
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+5 - Int Int AssignToIf
+
+Select BOOLEAN such that Next(22,23)
+true
+5000
+Evaluating query 5 - Int Int AssignToIf
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+6 - Int Int WhileToAssign Internally GoDown
+
+Select BOOLEAN such that Next(6, 7)
+true
+5000
+Evaluating query 6 - Int Int WhileToAssign Internally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+7 - Int Int WhileToAssign Internally GoUp - Impossible
+
+Select BOOLEAN such that Next(10,9)
+false
+5000
+Evaluating query 7 - Int Int WhileToAssign Internally GoUp - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+8 - Int Int WhileToAssign Externally GoDown
+
+Select BOOLEAN such that Next(10,19)
+true
+5000
+Evaluating query 8 - Int Int WhileToAssign Externally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+9 - Int Int WhileToAssign Externally GoUp - Impossible
+
+Select BOOLEAN such that Next(16, 11)
+false
+5000
+Evaluating query 9 - Int Int WhileToAssign Externally GoUp - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+10 - Int Int WhileToWhile Self - Impossible Because StmtLst NeverEmpty
+
+Select BOOLEAN such that Next(12, 12)
+false
+5000
+Evaluating query 10 - Int Int WhileToWhile Self - Impossible Because StmtLst NeverEmpty
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+11 - Int Int WhileToWhile Internally GoDown
+
+Select BOOLEAN such that Next(12,13)
+true
+5000
+Evaluating query 11 - Int Int WhileToWhile Internally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+12 - Int Int WhileToWhile Internally GoUp
+
+Select BOOLEAN such that Next(16,10)
+true
+5000
+Evaluating query 12 - Int Int WhileToWhile Internally GoUp
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+13 - Int Int WhileToWhile Externally GoDown
+
+Select BOOLEAN such that Next(12, 16)
+true
+5000
+Evaluating query 13 - Int Int WhileToWhile Externally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+14 - Int Int WhileToWhile Externally GoUp - Impossible
+
+Select BOOLEAN such that Next(16,12)
+false
+5000
+Evaluating query 14 - Int Int WhileToWhile Externally GoUp - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+15 - Int Int WhileToIf Internally GoDown
+
+Select BOOLEAN such that Next(57, 58)
+true
+5000
+Evaluating query 15 - Int Int WhileToIf Internally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+16 - Int Int WhileToIf Internally GoUp
+
+Select BOOLEAN such that Next(66,64)
+false
+5000
+Evaluating query 16 - Int Int WhileToIf Internally GoUp
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+17 - Int Int WhileToIf Externally GoDown
+
+Select BOOLEAN such that Next(57, 61)
+true
+5000
+Evaluating query 17 - Int Int WhileToIf Externally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+18 - Int Int WhileToIf Externally GoUp
+
+Select BOOLEAN such that Next(70, 64)
+false
+5000
+Evaluating query 18 - Int Int WhileToIf Externally GoUp
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+19 - Int Int IfToAssign Internally GoDown
+
+Select BOOLEAN such that Next (51, 52)
+true
+5000
+Evaluating query 19 - Int Int IfToAssign Internally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+20 - Int Int IfToAssign Internally GoUp - Impossible
+
+Select BOOLEAN such that Next (52, 51)
+false
+5000
+Evaluating query 20 - Int Int IfToAssign Internally GoUp - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+21 - Int Int IfToAssign Externally GoDown - Impossible
+
+Select BOOLEAN such that Next (37, 40)
+false
+5000
+Evaluating query 21 - Int Int IfToAssign Externally GoDown - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+22 - Int Int IfToAssign Externally GoUp - Impossible
+
+Select BOOLEAN such that Next(26,25)
+false
+5000
+Evaluating query 22 - Int Int IfToAssign Externally GoUp - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+23 - Int Int IfToWhile Internally GoDown
+
+Select BOOLEAN such that Next(64, 66)
+false
+5000
+Evaluating query 23 - Int Int IfToWhile Internally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+24 - Int Int IfToWhile Internally GoUp - Impossible
+
+Select BOOLEAN such that Next(58, 57)
+false
+5000
+Evaluating query 24 - Int Int IfToWhile Internally GoUp - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+25 - Int Int IfToWhile Externally GoDown - Impossible
+
+Select BOOLEAN such that Next(64, 70)
+false
+5000
+Evaluating query 25 - Int Int IfToWhile Externally GoDown - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+26 - Int Int IfToWhile Externally GoUp
+
+Select BOOLEAN such that Next(61, 57)
+false
+5000
+Evaluating query 26 - Int Int IfToWhile Externally GoUp
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+27 - Int Int IfToIf - Impossible
+
+Select BOOLEAN such that Next (58,58)
+false
+5000
+Evaluating query 27 - Int Int IfToIf - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+28 - Int Int IfToIf Internally GoDown
+
+Select BOOLEAN such that Next(30, 32)
+false
+5000
+Evaluating query 28 - Int Int IfToIf Internally GoDown
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+29 - Int Int IfToIf Internally GoUp - Impossible
+
+Select BOOLEAN such that Next(32, 30)
+false
+5000
+Evaluating query 29 - Int Int IfToIf Internally GoUp - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+30 - Int Int IfToIf Externally GoDown - Impossible
+
+Select BOOLEAN such that Next(30,37)
+false
+5000
+Evaluating query 30 - Int Int IfToIf Externally GoDown - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+31 - Int Int IfToIf Externally GoUp - Impossible
+
+Select BOOLEAN such that Next(37, 30)
+false
+5000
+Evaluating query 31 - Int Int IfToIf Externally GoUp - Impossible
+The final tag string is ReturnBoolean="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+32 - Int Underscore StartOfProgram
+
+Select BOOLEAN such that Next(1, _)
+true
+5000
+Evaluating query 32 - Int Underscore StartOfProgram
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+33 - Int Underscore EndOfProgram
+
+Select BOOLEAN such that Next(72, _)
+false
+5000
+Evaluating query 33 - Int Underscore EndOfProgram
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: false 
+Correct answer: false 
+34 - Underscore Int
+
+Select BOOLEAN such that Next(_, 15)
+true
+5000
+Evaluating query 34 - Underscore Int
+_, is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+35 - Underscore Underscore
+
+Select BOOLEAN such that Next(_, _)
+true
+5000
+Evaluating query 35 - Underscore Underscore
+_, is an Unnamedvar 
+_ is an Unnamedvar 
+The final tag string is ReturnBoolean="1" Next="1" UnnamedVar="2" SuchThat="1" CondNum="5" RelNum="1" 
+Your answer: true 
+Correct answer: true 
+36 - Int Stmt
+stmt s;
+Select s such that Next(64, s)
+65,69
+5000
+Evaluating query 36 - Int Stmt
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 65 69 
+Correct answer: 65 69 
+37 - Int Asssign
+assign a;
+Select a such that Next(27, a)
+28
+5000
+Evaluating query 37 - Int Asssign
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 28 
+Correct answer: 28 
+38 - Int While
+while w;
+Select w such that Next(12, w)
+13,16
+5000
+Evaluating query 38 - Int While
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 13 16 
+Correct answer: 13 16 
+39 - Int If
+if ifs;
+Select ifs such that Next(22, ifs)
+23
+5000
+Evaluating query 39 - Int If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 23 
+Correct answer: 23 
+40 - Int ProgLine
+prog_line pl;
+Select pl such that Next(17, pl)
+18
+5000
+Evaluating query 40 - Int ProgLine
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 18 
+Correct answer: 18 
+41 - Underscore Stmt
+stmt s;
+Select s such that Next(_, s)
+2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,57,58,59,60,61,62,63,65,66,67,68,69,70,71,72
+5000
+Evaluating query 41 - Underscore Stmt
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 57 58 59 60 61 62 63 65 66 67 68 69 70 71 72 
+Correct answer: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 57 58 59 60 61 62 63 65 66 67 68 69 70 71 72 
+42 - Underscore Assign 
+assign a;
+Select a such that Next(_, a)
+2,4,5,7,8,9,11,14,15,17,18,19,20,21,24,25,27,28,29,31,33,34,35,36,38,39,40,41,42,43,45,46,47,48,49,50,52,53,54,55,59,60,62,63,65,67,68,69,71,72
+5000
+Evaluating query 42 - Underscore Assign 
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 2 4 5 7 8 9 11 14 15 17 18 19 20 21 24 25 27 28 29 31 33 34 35 36 38 39 40 41 42 43 45 46 47 48 49 50 52 53 54 55 59 60 62 63 65 67 68 69 71 72 
+Correct answer: 2 4 5 7 8 9 11 14 15 17 18 19 20 21 24 25 27 28 29 31 33 34 35 36 38 39 40 41 42 43 45 46 47 48 49 50 52 53 54 55 59 60 62 63 65 67 68 69 71 72 
+43 - Underscore While
+while w;
+Select w such that Next(_, w)
+3,6,10,12,13,16,57,66,70
+5000
+Evaluating query 43 - Underscore While
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 3 6 10 12 13 16 57 66 70 
+44 - Underscore If
+if ifs;
+Select ifs such that Next(_, ifs)
+23,26,30,32,37,44,51,58,61
+5000
+Evaluating query 44 - Underscore If
+_, is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 23 26 30 32 37 44 51 58 61 
+Correct answer: 23 26 30 32 37 44 51 58 61 
+45 - Stmt Int
+stmt s;
+Select s such that Next(s, 2)
+1
+5000
+Evaluating query 45 - Stmt Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 
+Correct answer: 1 
+46 - Assign Int
+assign a;
+Select a such that Next(a, 9)
+8
+5000
+Evaluating query 46 - Assign Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 8 
+Correct answer: 8 
+47 - While Int
+while w;
+Select w such that Next(w, 7)
+6
+5000
+Evaluating query 47 - While Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 6 
+Correct answer: 6 
+48 - If Int
+if ifs;
+Select ifs such that Next(ifs, 24)
+23
+5000
+Evaluating query 48 - If Int
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 23 
+Correct answer: 23 
+49 - Stmt Underscore
+stmt s;
+Select s such that Next(s, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,41,43,44,45,46,47,48,49,50,51,52,54,56,57,58,59,60,61,64,65,66,67,68,69,70,71
+5000
+Evaluating query 49 - Stmt Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 41 43 44 45 46 47 48 49 50 51 52 54 56 57 58 59 60 61 64 65 66 67 68 69 70 71 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 41 43 44 45 46 47 48 49 50 51 52 54 56 57 58 59 60 61 64 65 66 67 68 69 70 71 
+50 - Assign Underscore
+assign a;
+Select a such that Next(a, _)
+1,2,4,5,7,8,9,11,14,15,17,18,19,20,22,24,25,27,28,29,31,33,34,35,36,38,39,41,43,45,46,47,48,49,50,52,54,56,59,60,65,67,68,69,71
+5000
+Evaluating query 50 - Assign Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 4 5 7 8 9 11 14 15 17 18 19 20 22 24 25 27 28 29 31 33 34 35 36 38 39 41 43 45 46 47 48 49 50 52 54 56 59 60 65 67 68 69 71 
+Correct answer: 1 2 4 5 7 8 9 11 14 15 17 18 19 20 22 24 25 27 28 29 31 33 34 35 36 38 39 41 43 45 46 47 48 49 50 52 54 56 59 60 65 67 68 69 71 
+51 - While Underscore
+while w;
+Select w such that Next(w, _)
+3,6,10,12,13,16,57,66,70
+5000
+Evaluating query 51 - While Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 3 6 10 12 13 16 57 66 70 
+52 - If Underscore
+if ifs;
+Select ifs such that Next(ifs, _)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 52 - If Underscore
+_ is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+53 - Stmt Stmt SameSynonym
+stmt s;
+Select s such that Next(s, s)
+none
+5000
+Evaluating query 53 - Stmt Stmt SameSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+54 - Stmt Stmt DiffSynonym
+stmt s1, s2;
+Select s1 such that Next(s1, s2)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,41,43,44,45,46,47,48,49,50,51,52,54,56,57,58,59,60,61,64,65,66,67,68,69,70,71
+5000
+Evaluating query 54 - Stmt Stmt DiffSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 41 43 44 45 46 47 48 49 50 51 52 54 56 57 58 59 60 61 64 65 66 67 68 69 70 71 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 41 43 44 45 46 47 48 49 50 51 52 54 56 57 58 59 60 61 64 65 66 67 68 69 70 71 
+55 - Stmt Assign
+stmt s; assign a;
+Select s such that Next(s, a)
+1,3,4,6,7,8,10,13,16,17,23,24,26,27,28,30,32,33,37,38,39,41,44,45,46,47,48,49,51,52,54,58,61,64,66,67,70
+5000
+Evaluating query 55 - Stmt Assign
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 3 4 6 7 8 10 13 16 17 23 24 26 27 28 30 32 33 37 38 39 41 44 45 46 47 48 49 51 52 54 58 61 64 66 67 70 
+Correct answer: 1 3 4 6 7 8 10 13 16 17 23 24 26 27 28 30 32 33 37 38 39 41 44 45 46 47 48 49 51 52 54 58 61 64 66 67 70 
+56 - Stmt While
+stmt s; while w;
+Select w such that Next(s, w)
+3,6,10,12,13,16,57,66,70
+5000
+Evaluating query 56 - Stmt While
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 3 6 10 12 13 16 57 66 70 
+57 - Stmt If
+stmt s; if f;
+Select f such that Next(s, f)
+23,26,30,32,37,44,51,58,61
+5000
+Evaluating query 57 - Stmt If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 23 26 30 32 37 44 51 58 61 
+Correct answer: 23 26 30 32 37 44 51 58 61 
+58 - Stmt ProgLine
+stmt s; prog_line pl;
+Select s such that Next(s, pl)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,41,43,44,45,46,47,48,49,50,51,52,54,56,57,58,59,60,61,64,65,66,67,68,69,70,71
+5000
+Evaluating query 58 - Stmt ProgLine
+prog_line is an Unnamedvar 
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" UnnamedVar="1" SuchThat="1" CondNum="4" RelNum="1" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 41 43 44 45 46 47 48 49 50 51 52 54 56 57 58 59 60 61 64 65 66 67 68 69 70 71 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 41 43 44 45 46 47 48 49 50 51 52 54 56 57 58 59 60 61 64 65 66 67 68 69 70 71 
+59 - Assign Assign SameSynonym
+assign a;
+Select a such that Next(a,a)
+none
+5000
+Evaluating query 59 - Assign Assign SameSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+60 - Assign Assign DiffSynonym
+assign a1, a2;
+Select a1 such that Next(a1, a2)
+1,4,7,8,17,24,27,28,33,38,39,41,45,46,47,48,49,52,54,67
+5000
+Evaluating query 60 - Assign Assign DiffSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 4 7 8 17 24 27 28 33 38 39 41 45 46 47 48 49 52 54 67 
+Correct answer: 1 4 7 8 17 24 27 28 33 38 39 41 45 46 47 48 49 52 54 67 
+61 - Assign While
+assign a; while w;
+Select a such that Next(a, w)
+2,5,9,11,14,15,18,19,20,56,59,60,65,68,69,71
+5000
+Evaluating query 61 - Assign While
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 2 5 9 11 14 15 18 19 20 56 59 60 65 68 69 71 
+Correct answer: 2 5 9 11 14 15 18 19 20 56 59 60 65 68 69 71 
+62 - Assign If
+assign a; if f;
+Select a such that Next(a, f)
+22,25,29,31,34,35,36,43,50
+5000
+Evaluating query 62 - Assign If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 22 25 29 31 34 35 36 43 50 
+Correct answer: 22 25 29 31 34 35 36 43 50 
+63 - While While SameSynonym
+while w;
+Select w such that Next(w, w)
+none
+5000
+Evaluating query 63 - While While SameSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+64 - While While DiffSynonym
+while w1, w2;
+Select w1 such that Next (w1, w2)
+12,16,66
+5000
+Evaluating query 64 - While While DiffSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 12 16 66 
+Correct answer: 12 16 66 
+65 - While If
+while w; if f;
+Select w such that Next(w, f)
+57
+5000
+Evaluating query 65 - While If
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 57 
+Correct answer: 57 
+66 - If If SameSynonym
+if ifs;
+Select ifs such that Next(ifs, ifs)
+none
+5000
+Evaluating query 66 - If If SameSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+67 - If If DiffSynonym
+if f1, f2;
+Select f1 such that Next(f1, f2)
+none
+5000
+Evaluating query 67 - If If DiffSynonym
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+68 - If While
+if f; while w;
+Select f such that Next(f, w)
+none
+5000
+Evaluating query 68 - If While
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 
+Correct answer: 
+69 - If Assign
+if f; assign a;
+Select f such that Next(f, a)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 69 - If Assign
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+70 - If Stmt
+if f; stmt s;
+Select f such that Next(f, s)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 70 - If Stmt
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+71 - While Assign
+while w; assign a;
+Select w such that Next(w, a)
+3,6,10,13,16,66,70
+5000
+Evaluating query 71 - While Assign
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 6 10 13 16 66 70 
+Correct answer: 3 6 10 13 16 66 70 
+72 - While Stmt
+while w; stmt s;
+Select w such that Next(w, s)
+3,6,10,12,13,16,57,66,70
+5000
+Evaluating query 72 - While Stmt
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 3 6 10 12 13 16 57 66 70 
+73 - Assign Stmt
+assign a; stmt s;
+Select a such that Next(a, s)
+1,2,4,5,7,8,9,11,14,15,17,18,19,20,22,24,25,27,28,29,31,33,34,35,36,38,39,41,43,45,46,47,48,49,50,52,54,56,59,60,65,67,68,69,71
+5000
+Evaluating query 73 - Assign Stmt
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="1" SuchThat="1" CondNum="3" RelNum="1" 
+Your answer: 1 2 4 5 7 8 9 11 14 15 17 18 19 20 22 24 25 27 28 29 31 33 34 35 36 38 39 41 43 45 46 47 48 49 50 52 54 56 59 60 65 67 68 69 71 
+Correct answer: 1 2 4 5 7 8 9 11 14 15 17 18 19 20 22 24 25 27 28 29 31 33 34 35 36 38 39 41 43 45 46 47 48 49 50 52 54 56 59 60 65 67 68 69 71 
+74 - 2Next NoCommonSynonym
+variable v;stmt s; assign a; while w; if f;
+Select v such that Next(s, a) and Next(w, f)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 74 - 2Next NoCommonSynonym
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+75 - 2Next NoCommonSynonym
+variable v;stmt s; assign a; while w; if f;
+Select v such that Next(a, s) and Next(f, w)
+none
+5000
+Evaluating query 75 - 2Next NoCommonSynonym
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+76 - 2Next NoCommonSynonym
+variable v;stmt s; assign a; while w; if f;
+Select v such that Next(f, a) and Next(a, w)
+attack,boruto,dream,himawari,hinata,inBattle,jiraya,kakashi,knowledge,kurama,love,naruto,sageMode,sakura,sarada,sasuke,shadowClone,shikamaru,sleep
+5000
+Evaluating query 76 - 2Next NoCommonSynonym
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: sarada sakura sasuke shikamaru naruto kurama love attack kakashi shadowClone sageMode inBattle jiraya knowledge sleep boruto hinata himawari dream 
+Correct answer: attack boruto dream himawari hinata inBattle jiraya kakashi knowledge kurama love naruto sageMode sakura sarada sasuke shadowClone shikamaru sleep 
+77 - 2Next 1CommonSynonym Stmt
+stmt s1,s2,s3;
+Select s1 such that Next(s1, s2) and Next(s1, s3)
+1,10,11,12,13,14,15,16,17,18,19,2,20,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,41,43,44,45,46,47,48,49,5,50,51,52,54,56,57,58,59,6,60,61,64,65,66,67,68,69,7,70,71,8,9
+5000
+Evaluating query 77 - 2Next 1CommonSynonym Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 41 43 44 45 46 47 48 49 50 51 52 54 56 57 58 59 60 61 64 65 66 67 68 69 70 71 
+Correct answer: 1 10 11 12 13 14 15 16 17 18 19 2 20 22 23 24 25 26 27 28 29 3 30 31 32 33 34 35 36 37 38 39 4 41 43 44 45 46 47 48 49 5 50 51 52 54 56 57 58 59 6 60 61 64 65 66 67 68 69 7 70 71 8 9 
+78 - 2Next 1CommonSynonym Stmt
+stmt s;assign a1,a2;
+Select s such that Next(s, a1) and Next(s,a2)
+1,10,13,16,17,23,24,26,27,28,3,30,32,33,37,38,39,4,41,44,45,46,47,48,49,51,52,54,58,6,61,64,66,67,7,70,8
+5000
+Evaluating query 78 - 2Next 1CommonSynonym Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 3 4 6 7 8 10 13 16 17 23 24 26 27 28 30 32 33 37 38 39 41 44 45 46 47 48 49 51 52 54 58 61 64 66 67 70 
+Correct answer: 1 10 13 16 17 23 24 26 27 28 3 30 32 33 37 38 39 4 41 44 45 46 47 48 49 51 52 54 58 6 61 64 66 67 7 70 8 
+79 - 2Next 1CommonSynonym Stmt
+stmt s; assign a; while w;
+Select s such that Next(s, a) and Next(s, w)
+16,66
+5000
+Evaluating query 79 - 2Next 1CommonSynonym Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 16 66 
+Correct answer: 16 66 
+80 - 2Next 1CommonSynonym Stmt
+stmt s; assign a; if f;
+Select s such that Next(s, a) and Next(s, f)
+none
+5000
+Evaluating query 80 - 2Next 1CommonSynonym Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+81 - 2Next 1CommonSynonym Stmt
+stmt s; while w1, w2;
+Select s such that Next(s, w1) and Next(s,w2)
+11,12,14,15,16,18,19,2,20,5,56,59,60,65,66,68,69,71,9
+5000
+Evaluating query 81 - 2Next 1CommonSynonym Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 5 9 11 12 14 15 16 18 19 20 56 59 60 65 66 68 69 71 
+Correct answer: 11 12 14 15 16 18 19 2 20 5 56 59 60 65 66 68 69 71 9 
+82 - 2Next 1CommonSynonym Stmt
+stmt s; while w; if f;
+Select s such that Next(s, w) and Next(s, f)
+none
+5000
+Evaluating query 82 - 2Next 1CommonSynonym Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+83 - 2Next 1CommonSynonym Stmt
+stmt s; if f1, f2;
+Select s such that Next(s, f1) and Next(s, f2)
+22,25,29,31,34,35,36,43,50,57
+5000
+Evaluating query 83 - 2Next 1CommonSynonym Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 22 25 29 31 34 35 36 43 50 57 
+Correct answer: 22 25 29 31 34 35 36 43 50 57 
+84 - 2Next 1CommonSynonym Assign
+assign a1,a2,a3;
+Select a1 such that Next(a1, a2) and Next(a1,a3)
+1,17,24,27,28,33,38,39,4,41,45,46,47,48,49,52,54,67,7,8
+5000
+Evaluating query 84 - 2Next 1CommonSynonym Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 4 7 8 17 24 27 28 33 38 39 41 45 46 47 48 49 52 54 67 
+Correct answer: 1 17 24 27 28 33 38 39 4 41 45 46 47 48 49 52 54 67 7 8 
+85 - 2Next 1CommonSynonym Assign
+assign a; stmt s1,s2;
+Select a such that Next(a, s1) and Next(a,s2)
+1,11,14,15,17,18,19,2,20,22,24,25,27,28,29,31,33,34,35,36,38,39,4,41,43,45,46,47,48,49,5,50,52,54,56,59,60,65,67,68,69,7,71,8,9
+5000
+Evaluating query 85 - 2Next 1CommonSynonym Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 4 5 7 8 9 11 14 15 17 18 19 20 22 24 25 27 28 29 31 33 34 35 36 38 39 41 43 45 46 47 48 49 50 52 54 56 59 60 65 67 68 69 71 
+Correct answer: 1 11 14 15 17 18 19 2 20 22 24 25 27 28 29 31 33 34 35 36 38 39 4 41 43 45 46 47 48 49 5 50 52 54 56 59 60 65 67 68 69 7 71 8 9 
+86 - 2Next 1CommonSynonym Assign
+assign a; stmt s;
+Select a such that Next(a,s) and Next(a,a)
+none
+5000
+Evaluating query 86 - 2Next 1CommonSynonym Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+87 - 2Next 1CommonSynonym Assign
+assign a; stmt s; while w;
+Select a such that Next(a, s) and Next(a,w)
+11,14,15,18,19,2,20,5,56,59,60,65,68,69,71,9
+5000
+Evaluating query 87 - 2Next 1CommonSynonym Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 5 9 11 14 15 18 19 20 56 59 60 65 68 69 71 
+Correct answer: 11 14 15 18 19 2 20 5 56 59 60 65 68 69 71 9 
+88 - 2Next 1CommonSynonym Assign
+assign a; stmt s; if f;
+Select a such that Next(a, s) and Next(a, f)
+22,25,29,31,34,35,36,43,50
+5000
+Evaluating query 88 - 2Next 1CommonSynonym Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 22 25 29 31 34 35 36 43 50 
+Correct answer: 22 25 29 31 34 35 36 43 50 
+89 - 2Next 1CommonSynonym Assign
+assign a; while w1,w2;
+Select a such that Next(a,w1) and Next(a,w2)
+11,14,15,18,19,2,20,5,56,59,60,65,68,69,71,9
+5000
+Evaluating query 89 - 2Next 1CommonSynonym Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 5 9 11 14 15 18 19 20 56 59 60 65 68 69 71 
+Correct answer: 11 14 15 18 19 2 20 5 56 59 60 65 68 69 71 9 
+90 - 2Next 1CommonSynonym Assign
+assign a; while w; if f;
+Select a such that Next(a, w) and Next(a, f)
+none
+5000
+Evaluating query 90 - 2Next 1CommonSynonym Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+91 - 2Next 1CommonSynonym Assign
+assign a; if f1, f2;
+Select a such that Next(a, f1) and Next(a,f2)
+22,25,29,31,34,35,36,43,50
+5000
+Evaluating query 91 - 2Next 1CommonSynonym Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 22 25 29 31 34 35 36 43 50 
+Correct answer: 22 25 29 31 34 35 36 43 50 
+92 - 2Next 1CommonSynonym While
+while w1,w2,w3;
+Select w such that Next(w1, w2) and Next(w2,w3)
+none
+5000
+Evaluating query 92 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+93 - 2Next 1CommonSynonym While
+while w; stmt s1,s2;
+Select w such that Next(w, s1) and Next(w,s2)
+10,12,13,16,3,57,6,66,70
+5000
+Evaluating query 93 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 6 10 12 13 16 57 66 70 
+Correct answer: 10 12 13 16 3 57 6 66 70 
+94 - 2Next 1CommonSynonym While
+while w; stmt s; assign a;
+Select w such that Next(w, s) and Next(w, a)
+10,13,16,3,6,66,70
+5000
+Evaluating query 94 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 6 10 13 16 66 70 
+Correct answer: 10 13 16 3 6 66 70 
+95 - 2Next 1CommonSynonym While
+while w; stmt s; while w;
+Select w such that Next(w,s) and Next(w,w)
+none
+5000
+Evaluating query 95 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+96 - 2Next 1CommonSynonym While
+while w; stmt s; if f;
+Select w such that Next(w, s) and Next(w, f)
+57
+5000
+Evaluating query 96 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 57 
+Correct answer: 57 
+97 - 2Next 1CommonSynonym While
+while w; assign a1,a2;
+Select w such that Next(w,a1) and Next(w,a2)
+10,13,16,3,6,66,70
+5000
+Evaluating query 97 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 3 6 10 13 16 66 70 
+Correct answer: 10 13 16 3 6 66 70 
+98 - 2Next 1CommonSynonym While
+while w; assign a;
+Select w such that Next(w,a) and Next(w,w)
+none
+5000
+Evaluating query 98 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+99 - 2Next 1CommonSynonym While
+while w; assign a; if f;
+Select w such that Next(w,a) and Next(w,f)
+none
+5000
+Evaluating query 99 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+100 - 2Next 1CommonSynonym While
+while w; if f1,f2;
+Select w such that Next(w, f1) and Next(w, f2)
+57
+5000
+Evaluating query 100 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 57 
+Correct answer: 57 
+101 - 2Next 1CommonSynonym While
+while w; if f;
+Select w such that Next(w, f) and Next(f,f)
+none
+5000
+Evaluating query 101 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+102 - 2Next 1CommonSynonym While
+while w; stmt s; if f;
+Select w such that Next(w,s) and Next(w,f)
+57
+5000
+Evaluating query 102 - 2Next 1CommonSynonym While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 57 
+Correct answer: 57 
+103 - 2Next 1CommonSynonym If
+if f1,f2,f3;
+Select f such that Next(f1,f2) and Next(f1,f3)
+none
+5000
+Evaluating query 103 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+104 - 2Next 1CommonSynonym If
+if f; stmt s1,s2;
+Select f such that Next(f, s1) and Next(f, s2)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 104 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+105 - 2Next 1CommonSynonym If
+if f; stmt s; assign a;
+Select f such that Next(f, s) and Next(f, a)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 105 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+106 - 2Next 1CommonSynonym If
+if f; stmt s; while w;
+Select f such that Next(f, s) and Next(f, w)
+none
+5000
+Evaluating query 106 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+107 - 2Next 1CommonSynonym If
+if f; stmt s;
+Select f such that Next(f, s) and Next(f,f)
+none
+5000
+Evaluating query 107 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+108 - 2Next 1CommonSynonym If
+if f; assign a1,a2;
+Select f such that Next(f, a1) and Next(f, a2)
+23,26,30,32,37,44,51,58,61,64
+5000
+Evaluating query 108 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 23 26 30 32 37 44 51 58 61 64 
+Correct answer: 23 26 30 32 37 44 51 58 61 64 
+109 - 2Next 1CommonSynonym If
+if f; assign a; while w;
+Select f such that Next(f, a) and Next(f, w)
+none
+5000
+Evaluating query 109 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+110 - 2Next 1CommonSynonym If
+if f; assign al if f;
+Select f such that Next(f, a) and Next(f, f)
+none
+5000
+Evaluating query 110 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+111 - 2Next 1CommonSynonym If
+if f; while w1, w2;
+Select f such that Next(f, w1) and Next(f, w2)
+none
+5000
+Evaluating query 111 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+112 - 2Next 1CommonSynonym If
+if f; while w;
+Select f such that Next(f, w) and Next(f, f)
+none
+5000
+Evaluating query 112 - 2Next 1CommonSynonym If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+113 - 2Next 1CommonSynPerPair Stmt
+stmt s1, s2, s3;
+Select s1 such that Next(s1, s2) and Next(s2, s3)
+1,10,11,12,13,14,15,16,17,18,19,2,20,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,4,43,44,45,46,47,48,49,5,50,51,56,57,58,59,6,60,64,65,66,67,68,69,7,70,71,8,9
+5000
+Evaluating query 113 - 2Next 1CommonSynPerPair Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 43 44 45 46 47 48 49 50 51 56 57 58 59 60 64 65 66 67 68 69 70 71 
+Correct answer: 1 10 11 12 13 14 15 16 17 18 19 2 20 22 23 24 25 26 27 28 29 3 30 31 32 33 34 35 36 37 4 43 44 45 46 47 48 49 5 50 51 56 57 58 59 6 60 64 65 66 67 68 69 7 70 71 8 9 
+114 - 2Next 1CommonSynPerPair Stmt, Assign
+stmt s1, s2; assign a;
+Select s1 such that Next(s1, a) and Next(a, s2)
+1,10,13,16,17,23,24,26,27,28,3,30,32,33,37,4,44,45,46,47,48,49,51,58,6,64,66,67,7,70,8
+5000
+Evaluating query 114 - 2Next 1CommonSynPerPair Stmt, Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 1 3 4 6 7 8 10 13 16 17 23 24 26 27 28 30 32 33 37 44 45 46 47 48 49 51 58 64 66 67 70 
+Correct answer: 1 10 13 16 17 23 24 26 27 28 3 30 32 33 37 4 44 45 46 47 48 49 51 58 6 64 66 67 7 70 8 
+115 - 2Next 1CommonSynPerPair Stmt, While
+stmt s1, s2; while w;
+Select s1 such that Next(s1, w) and Next(w, s2)
+11,12,14,15,16,18,19,2,20,5,56,59,60,65,66,68,69,71,9
+5000
+Evaluating query 115 - 2Next 1CommonSynPerPair Stmt, While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 5 9 11 12 14 15 16 18 19 20 56 59 60 65 66 68 69 71 
+Correct answer: 11 12 14 15 16 18 19 2 20 5 56 59 60 65 66 68 69 71 9 
+116 - 2Next 1CommonSynPerPair Stmt, While
+stmt s; while w;
+Select s such that Next(s, w) and Next(w, s)
+14,71
+5000
+Evaluating query 116 - 2Next 1CommonSynPerPair Stmt, While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 14 71 
+Correct answer: 14 71 
+117 - 2Next 1CommonSynPerPair Stmt, If
+stmt s1, s2; if f;
+Select s1 such that Next(s1, f) and Next(f, s2)
+22,25,29,31,34,35,36,43,50,57
+5000
+Evaluating query 117 - 2Next 1CommonSynPerPair Stmt, If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 22 25 29 31 34 35 36 43 50 57 
+Correct answer: 22 25 29 31 34 35 36 43 50 57 
+118 - 2Next 1CommonSynPerPair Assign
+assign a1,a2,a3;
+Select a1 such that Next(a1, a2) and Next(a2, a3)
+27,45,47,48,7
+5000
+Evaluating query 118 - 2Next 1CommonSynPerPair Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 7 27 45 47 48 
+Correct answer: 27 45 47 48 7 
+119 - 2Next 1CommonSynPerPair Assign Stmt
+assign a1, a2; stmt s;
+Select a1 such that Next(a1, s) and Next(s, a2)
+14,18,19,2,20,22,25,27,29,31,34,35,36,43,45,47,48,5,50,65,68,69,7,71,9
+5000
+Evaluating query 119 - 2Next 1CommonSynPerPair Assign Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 5 7 9 14 18 19 20 22 25 27 29 31 34 35 36 43 45 47 48 50 65 68 69 71 
+Correct answer: 14 18 19 2 20 22 25 27 29 31 34 35 36 43 45 47 48 5 50 65 68 69 7 71 9 
+120 - 2Next 1CommonSynPerPair Assign While
+assign a1,a2; while w;
+Select a1 such that Next(a1, w) and Next(w, a2)
+14,18,19,2,20,5,65,68,69,71,9
+5000
+Evaluating query 120 - 2Next 1CommonSynPerPair Assign While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 2 5 9 14 18 19 20 65 68 69 71 
+Correct answer: 14 18 19 2 20 5 65 68 69 71 9 
+121 - 2Next 1CommonSynPerPair Assign If
+assign a1,a2; if f;
+Select a1 such that Next(a1, f) and Next(f, a2)
+22,25,29,31,34,35,36,43,50
+5000
+Evaluating query 121 - 2Next 1CommonSynPerPair Assign If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 22 25 29 31 34 35 36 43 50 
+Correct answer: 22 25 29 31 34 35 36 43 50 
+122 - 2Next 1CommonSynPerPair While
+while w1,w2,w3;
+Select s1 such that Next(w1, w2) and Next(w2, w3)
+none
+5000
+Evaluating query 122 - 2Next 1CommonSynPerPair While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+123 - 2Next 1CommonSynPerPair While Stmt
+while w1,w2; stmt s;
+Select w1 such that Next(w1, s) and Next(s, w2)
+10,12,13,6,70
+5000
+Evaluating query 123 - 2Next 1CommonSynPerPair While Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 6 10 12 13 70 
+Correct answer: 10 12 13 6 70 
+124 - 2Next 1CommonSynPerPair While Assign
+while w1,w2; assign a;
+Select w1 such that Next(w1, a) and Next(a, w2)
+10,13,6,70
+5000
+Evaluating query 124 - 2Next 1CommonSynPerPair While Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 6 10 13 70 
+Correct answer: 10 13 6 70 
+125 - 2Next 1CommonSynPerPair While If
+while w1, w2; if f;
+Select w1 such that Next(w1, f) and  Next(f, w2)
+none
+5000
+Evaluating query 125 - 2Next 1CommonSynPerPair While If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+126 - 2Next 1CommonSynPerPair If
+if f1, f2, f3;
+Select f1 such that Next(f1, f2) and Next(f2, f3)
+none
+5000
+Evaluating query 126 - 2Next 1CommonSynPerPair If
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+127 - 2Next 1CommonSynPerPair If Stmt
+if f1, f2; stmt s;
+Select f1 such that Next(f1, s) and Next(s,f2)
+23,30,32
+5000
+Evaluating query 127 - 2Next 1CommonSynPerPair If Stmt
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 23 30 32 
+Correct answer: 23 30 32 
+128 - 2Next 1CommonSynPerPair If Assign
+if f1, f2; assign a;
+Select f1 such that Next(f1, a) and Next(a,f2)
+23,30,32
+5000
+Evaluating query 128 - 2Next 1CommonSynPerPair If Assign
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 23 30 32 
+Correct answer: 23 30 32 
+129 - 2Next 1CommonSynPerPair If While
+if f1,f2; while w;
+Select f1 such that Next(f1, w) and Next(w,f2)
+none
+5000
+Evaluating query 129 - 2Next 1CommonSynPerPair If While
+The happen is 2
+No ReturnBoolean, ReturnTuple=1 
+The final tag string is ReturnTuple="1" Next="2" SuchThat="1" CondNum="4" RelNum="2" 
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

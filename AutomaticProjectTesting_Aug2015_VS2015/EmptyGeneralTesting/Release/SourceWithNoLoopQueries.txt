@@ -1,5 +1,0 @@
-1 - Random
-stmt s;
-Select BOOLEAN
-true
-5000

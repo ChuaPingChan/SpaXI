@@ -1,5 +1,0 @@
-1 - temp
-assign a; while w; prog_line n;
-Select a such that Next(a,n) and Next*(n,n) with n=w.stmt#
-10,16,21,27,31,32
-5000

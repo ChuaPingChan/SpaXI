@@ -1,2 +1,0 @@
-Parameters : C:\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\Release\Test11_Sequential\Saaa.txt C:\CS3201\AutomaticProjectTesting_Aug2015_VS2015\EmptyGeneralTesting\Release\Test11_Sequential\QueryFollows.txt out.xml
-Beginning to parse Simple Program.
