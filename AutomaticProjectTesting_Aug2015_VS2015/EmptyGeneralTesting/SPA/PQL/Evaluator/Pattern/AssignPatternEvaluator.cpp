@@ -309,7 +309,7 @@ bool AssignPatternEvaluator::evaluate(PatternClause ptClause, ClauseResult* clau
         //Case 9a
         if (patternSynExists && variableExists)
         {
-            pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariablesThatPartialMatchWith(argTwo);
+            pair<list<int>, list<int>> pkbResult = pkbInstance->getLeftVariablesThatExactMatchWith(argTwo);
 
             if (pkbResult.first.empty() && pkbResult.second.empty())
             {

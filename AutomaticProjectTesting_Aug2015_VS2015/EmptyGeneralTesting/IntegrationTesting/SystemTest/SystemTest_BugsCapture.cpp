@@ -179,7 +179,7 @@ namespace UnitTesting
             PQLMain pql = PQLMain(query);
 
             actualResults = pql.run();
-            expectedResults = list<string>{ "1", "3", "7", "10" };
+            expectedResults = list<string>{ "3", "7", "10" };
             actualResults.sort();
             expectedResults.sort();
             Assert::IsTrue(actualResults == expectedResults);
