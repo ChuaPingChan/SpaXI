@@ -11,15 +11,15 @@ public:
 	SelectionEvaluator();
 	~SelectionEvaluator();
 
-	bool evaluate(SelectClause clause, ClauseResult* clauseResult); //To-Do: Integration Testing with ClauseResult
+	bool evaluate(SelectClause clause, ClauseResult* clauseResult);
 
 protected:
-	list<int> evaluateSingleSynonymSelection(Entity argType, string synonym); //To-Do: Integration Testing with PKB
+	list<int> evaluateSingleSynonymSelection(Entity argType, string synonym);
 	PKBMain* pkbInstance;
 
 private:
 	list<int> singleSynonymSelectionResult;
-	list<list<int>> tupleSelectionResults; //To-Do: Implement for Iteration 3
+	list<list<int>> tupleSelectionResults;
 	bool hasResultForSelection;
 
 };
