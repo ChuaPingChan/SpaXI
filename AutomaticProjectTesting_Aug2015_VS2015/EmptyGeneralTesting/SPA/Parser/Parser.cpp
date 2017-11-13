@@ -702,7 +702,7 @@ void Parser::parseWhileStmt() {
     _pkbMainPtr->addWhileStmt(_currentStmtNumber, whileVar);
 
     /*
-        PKB
+        PKB:
         Update VarToIdxMap
         Update UsesTableStmtToVar using currentStmtNumber
         Update UsesTableStmtToVar using parentStack
