@@ -313,8 +313,8 @@ namespace UnitTesting
             3	6	7
             *********/
 
-            cr.updateSynPairResults(syn1, syn3, pair<list<int>,list<int>>(list<int>{3}, list<int>{7}));
-            list<list<int>> expectedResults{ { 3, 5, 7 }, { 3, 6, 7 } };
+            cr.updateSynPairResults(syn1, syn3, pair<list<int>,list<int>>(list<int>{2, 3}, list<int>{7, 7}));
+            list<list<int>> expectedResults{ {2, 5, 7}, {2, 6, 7}, { 3, 5, 7 }, { 3, 6, 7 } };
             list<list<int>> actualResults = cr.getAllResults();
             expectedResults.sort();
             actualResults.sort();

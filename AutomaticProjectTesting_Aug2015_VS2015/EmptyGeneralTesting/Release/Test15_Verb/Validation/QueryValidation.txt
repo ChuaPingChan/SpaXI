@@ -26,7 +26,7 @@ Select a such that Follows(2,7) such that Follows(1,2) pattern a(v, "y")
 6 - Allow - More than one pattern clause
 stmt s; assign a; variable v;
 Select a such that Follows(2,7) pattern a(v, _) pattern a(v, "y")
-3,7,10
+1,3,7,10
 5000
 7 - Allow - More than one such that clause using and
 stmt s; assign a; variable v;
