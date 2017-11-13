@@ -43,7 +43,6 @@ int ClauseCostCalculator::getCost(SelectClausePtr selectClausePtr)
         return ClauseCostCalculator::SELECT_1ARG;
     else
         return ClauseCostCalculator::SELECT_TUPLE;
-    return 0;
 }
 
 int ClauseCostCalculator::getCost(SuchThatClausePtr suchThatClausePtr)
@@ -168,7 +167,15 @@ int ClauseCostCalculator::getCost(SuchThatClausePtr suchThatClausePtr)
 
 int ClauseCostCalculator::getCost(PatternClausePtr patternClausePtr)
 {
-    return ClauseCostCalculator::ClauseCost::PATTERN_ANY_ARGS;
+    // Pattern-clause always has at least 1 synonym
+    list<string> synonyms = patternClausePtr->getSynonyms();
+    assert(synonyms.size() > 0);
+
+    if (synonyms.size() == 1) {
+        return ClauseCostCalculator::PATTERN_1ARG;
+    } else {
+        return ClauseCostCalculator::PATTERN_2ARGS;
+    }
 }
 
 int ClauseCostCalculator::getCost(WithClausePtr withClausePtr)
@@ -188,6 +195,7 @@ int ClauseCostCalculator::getRelaxedCost(ClausePtr clausePtr, unordered_set<stri
     if ((clausePtr->getSynonyms()).empty())
         return getCost(clausePtr);
 
+    // Here on, it is known that the clause has at least 1 synonym
     Clause::ClauseType clauseType = clausePtr->getClauseType();
 
     if (clauseType == Clause::ClauseType::SUCH_THAT) {
@@ -341,7 +349,20 @@ int ClauseCostCalculator::getRelaxedCost(SuchThatClausePtr suchThatClausePtr, un
 
 int ClauseCostCalculator::getRelaxedCost(PatternClausePtr patternClausePtr, unordered_set<string> evaluatedSyns)
 {
-    return getCost(patternClausePtr);   // Pattern-clause's cost cannot be relaxed
+    list<string> synonyms = patternClausePtr->getSynonyms();
+    assert(!(synonyms.empty()));
+
+    int hitCount = 0;
+    for (string syn : synonyms) {
+        if (evaluatedSyns.find(syn) != evaluatedSyns.end())
+            hitCount++;
+    }
+
+    int originalCost = getCost(patternClausePtr);
+    if (hitCount == 0)
+        return originalCost;
+    else
+        return ClauseCost::PATTERN_1ARG;    // No matter how many synonyms, return Pattern(1arg) cost
 }
 
 int ClauseCostCalculator::getRelaxedCost(WithClausePtr withClausePtr, unordered_set<string> evaluatedSyns)

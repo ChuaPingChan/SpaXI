@@ -38,7 +38,7 @@ vector<string> ParserChildForTest::tokenizeString(string stringToTokenize)
 
 bool ParserChildForTest::assertMatchAndIncrementToken(std::regex re)
 {
-    return Parser::assertMatchAndIncrementToken(re);
+    return Parser::assertMatchAndIncrementToken(re, "");
 }
 
 bool ParserChildForTest::matchToken(std::regex re)

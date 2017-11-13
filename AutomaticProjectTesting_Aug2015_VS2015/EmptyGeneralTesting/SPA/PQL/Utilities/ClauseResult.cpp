@@ -92,7 +92,6 @@ list<pair<int, int>> ClauseResult::getSynonymPairResults(string syn1Name, string
 
     list<pair<int, int>> synPairResult;
     // Convert inner lists to pairs
-    // TODO: Can consider refactoring, but not for now, not reused by others.
     for (list<list<int>>::iterator synPairResultInnerListPtr = synPairResultList.begin();
         synPairResultInnerListPtr != synPairResultList.end();
         synPairResultInnerListPtr++)
@@ -127,7 +126,7 @@ bool ClauseResult::synonymPresent(string synName)
 */
 bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsList)
 {
-    assert(newSynResultsList.size() > 0);       // TODO: Can consider clearing everything if this happens
+    //assert(newSynResultsList.size() > 0); // Comment out during release. For debugging only
 
     _isNew = false;
     if (_synToIdxMap.find(newSynName) != _synToIdxMap.end())
@@ -168,9 +167,9 @@ bool ClauseResult::updateSynResults(string newSynName, list<int> newSynResultsLi
             _resultsPtr->push_back(newComb);
         }
 
-        if (AbstractWrapper::GlobalStop) {  // TODO: Refactor method, reduce repetitive code
-            return true;    // Consider returning false, check the consequence
-        }   // TODO: Do the above TODOs for all timeout checks in this class
+        if (AbstractWrapper::GlobalStop) {
+            return true;
+        }
     }
 
     return true;
@@ -460,7 +459,7 @@ bool ClauseResult::pairWithOldSyn(string oldSyn, string newSyn, list<pair<int, i
     for (vector<int> existingCombination : *_resultsPtr)
     {
         const int oldSynVal = existingCombination[oldSynIdx];
-        // TODO: Consider refactoring to avoid arrowhead code.
+
         if (oldSynValToNewSynResultMap.find(oldSynVal) != oldSynValToNewSynResultMap.end()) {
             vector<int> newSynResults = oldSynValToNewSynResultMap.at(oldSynVal);
             for (int newSynResult : newSynResults) {

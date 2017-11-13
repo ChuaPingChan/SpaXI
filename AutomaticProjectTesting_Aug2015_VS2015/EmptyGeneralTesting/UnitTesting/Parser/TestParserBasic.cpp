@@ -191,6 +191,11 @@ namespace UnitTesting
             Assert::IsTrue(actualString == expectedString);
         }
 
+        /*
+            The following code is commented out because the SPA is made to exit if syntax
+            error is detected. The methods below assumes these methods returns false.
+        */
+        /*
         TEST_METHOD(getNextTokenTest_matchTokenTest_assertMatchAndIncrTokenTest)
         {
             // Set up
@@ -353,6 +358,7 @@ namespace UnitTesting
             Assert::IsFalse(parser.assertIsValidExpression("b + (x+(3+b)) + a (("));
             Assert::IsFalse(parser.assertIsValidExpression("(x+a)(b+c)"));
         }
+        */
 
         TEST_METHOD(removeAllWhiteSpacesTest)
         {

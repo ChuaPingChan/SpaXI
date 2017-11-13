@@ -39,7 +39,6 @@ ClauseGroupManager Optimizer::getClauseGroupManager()
 */
 bool Optimizer::processQueryTree(QueryTree &queryTree)
 {
-    // TODO: Populate _clauseIdxToCost at the correct place
     _clauseGroupsManager.setSelectedSynonyms(queryTree.getSelectClause().getSynonyms());
 
     list<ClausePtr> allClauses = extractClausesFromQueryTree(queryTree);
@@ -156,7 +155,6 @@ list<ClausePtr> Optimizer::extractClausesFromQueryTree(QueryTree &queryTree)
 */
 void Optimizer::formClauseGroups()
 {
-    // TODO: Consider refactoring into helper methods to achieve SLA
     SynonymUFDS synUfds;
 
     vector<ClausePtr> clausesWithoutSynonym;
@@ -193,7 +191,6 @@ void Optimizer::formClauseGroups()
 
     list<list<int>> synGroups = synUfds.getSynonymGroups();
 
-    // TODO: Consider handling non-synonym clauses more consistently with the rest
     // Get clause groups from synonym groups
     if (!clausesWithoutSynonym.empty()) {
         _clauseGroupsVec.push_back(clausesWithoutSynonym);     // Clause group without synonym queue first
@@ -218,7 +215,7 @@ void Optimizer::formClauseGroups()
         }
 
         ClauseGroup clauseGroup = ClauseGroup(clauseGroupVec);
-        clauseGroup.setSelectedSynonyms(_selectedSynonyms); // TODO: Remove after setting selected syns is included in ClauseGroup's constructor
+        clauseGroup.setSelectedSynonyms(_selectedSynonyms);
         _clauseGroupsVec.push_back(clauseGroup);
     }
 }
