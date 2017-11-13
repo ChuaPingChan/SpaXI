@@ -1,7 +1,7 @@
 Overall Test Ran    : 2663
-Overall Test Passed : 2643
+Overall Test Passed : 2660
 Overall Test Failed : 0
-Overall Test Timeout: 20
+Overall Test Timeout: 3
 
 
 TestResult\out_FocusTest_Loop_QueryAffects.xml: 
@@ -102,21 +102,21 @@ Timeout  : 0
 
 TestResult\out_SimpleTest_Query_Simple03.xml: 
 Test Ran: 1017	[TIMEOUT]
-Passed   : 1005
-Failed   : 0
-Timeout  : 12
-
-TestResult\out_Stress_QueryStressAffects.xml: 
-Test Ran: 33	[TIMEOUT]
-Passed   : 31
+Passed   : 1015
 Failed   : 0
 Timeout  : 2
 
-TestResult\out_Stress_QueryStressMixed.xml: 
-Test Ran: 17	[TIMEOUT]
-Passed   : 12
+TestResult\out_Stress_QueryStressAffects.xml: 
+Test Ran: 33	
+Passed   : 33
 Failed   : 0
-Timeout  : 5
+Timeout  : 0
+
+TestResult\out_Stress_QueryStressMixed.xml: 
+Test Ran: 17	
+Passed   : 17
+Failed   : 0
+Timeout  : 0
 
 TestResult\out_Stress_QueryStressNext.xml: 
 Test Ran: 28	[TIMEOUT]
