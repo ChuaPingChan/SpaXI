@@ -21,8 +21,8 @@ namespace UnitTesting
         TEST_METHOD(TestAllMethods1) {
 
             /**********
-            * Set up *
-            **********/
+             * Set up *
+             **********/
             /*
             Query:
             assign a1, a2; stmt s1, s2;
@@ -70,8 +70,8 @@ namespace UnitTesting
             qTree.insertSuchThat(uses_10_ident);
 
             /***********
-            * Testing *
-            ***********/
+             * Testing *
+             ***********/
 
             // TODO: Change this unit test. Assertions will fail after intra-clause group sorting is implemented.
             Optimizer optimizer(qTree);
